@@ -13,7 +13,7 @@ def main():
         
         auth_request_data = AuthRequestsDto()
         auth_request_data.password = "11111111"
-        auth_request_data.user_name = "diana@mail.ru"
+        auth_request_data.user_name = "example@onlyoffice.com"
         
         try:
             auth_response = auth_instance.authenticate_me(auth_request_data)
