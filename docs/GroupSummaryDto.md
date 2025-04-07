@@ -1,0 +1,31 @@
+# GroupSummaryDto
+
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**id** | **str** | ID | [optional] 
+**name** | **str** | Name | [optional] 
+**manager** | **str** | Manager | [optional] 
+
+## Example
+
+```python
+from docspace.models.group_summary_dto import GroupSummaryDto
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of GroupSummaryDto from a JSON string
+group_summary_dto_instance = GroupSummaryDto.from_json(json)
+# print the JSON string representation of the object
+print(GroupSummaryDto.to_json())
+
+# convert the object into a dict
+group_summary_dto_dict = group_summary_dto_instance.to_dict()
+# create an instance of GroupSummaryDto from a dict
+group_summary_dto_from_dict = GroupSummaryDto.from_dict(group_summary_dto_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

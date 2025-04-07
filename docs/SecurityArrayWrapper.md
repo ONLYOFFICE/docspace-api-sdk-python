@@ -1,0 +1,33 @@
+# SecurityArrayWrapper
+
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**response** | [**List[SecurityDto]**](SecurityDto.md) |  | [optional] 
+**count** | **int** |  | [optional] 
+**links** | [**List[ActiveConnectionsWrapperLinksInner]**](ActiveConnectionsWrapperLinksInner.md) |  | [optional] 
+**status** | **int** |  | [optional] 
+**status_code** | **int** |  | [optional] 
+
+## Example
+
+```python
+from docspace.models.security_array_wrapper import SecurityArrayWrapper
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of SecurityArrayWrapper from a JSON string
+security_array_wrapper_instance = SecurityArrayWrapper.from_json(json)
+# print the JSON string representation of the object
+print(SecurityArrayWrapper.to_json())
+
+# convert the object into a dict
+security_array_wrapper_dict = security_array_wrapper_instance.to_dict()
+# create an instance of SecurityArrayWrapper from a dict
+security_array_wrapper_from_dict = SecurityArrayWrapper.from_dict(security_array_wrapper_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

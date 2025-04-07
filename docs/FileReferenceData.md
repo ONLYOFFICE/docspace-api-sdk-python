@@ -1,0 +1,30 @@
+# FileReferenceData
+
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**file_key** | **str** | File key | [optional] 
+**instance_id** | **str** | Instance ID | [optional] 
+
+## Example
+
+```python
+from docspace.models.file_reference_data import FileReferenceData
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of FileReferenceData from a JSON string
+file_reference_data_instance = FileReferenceData.from_json(json)
+# print the JSON string representation of the object
+print(FileReferenceData.to_json())
+
+# convert the object into a dict
+file_reference_data_dict = file_reference_data_instance.to_dict()
+# create an instance of FileReferenceData from a dict
+file_reference_data_from_dict = FileReferenceData.from_dict(file_reference_data_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

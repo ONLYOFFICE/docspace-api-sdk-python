@@ -1,0 +1,252 @@
+# docspace.SettingsQuotaApi
+
+All URIs are relative to *http://localhost:8092*
+
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**get_user_quota_settings**](SettingsQuotaApi.md#get_user_quota_settings) | **GET** /api/2.0/settings/userquotasettings | Gets user quota
+[**save_room_quota_settings**](SettingsQuotaApi.md#save_room_quota_settings) | **POST** /api/2.0/settings/roomquotasettings | Save the room quota settings
+[**set_tenant_quota_settings**](SettingsQuotaApi.md#set_tenant_quota_settings) | **PUT** /api/2.0/settings/tenantquotasettings | Save the tenant quota settings
+
+
+# **get_user_quota_settings**
+> TenantUserQuotaSettingsWrapper get_user_quota_settings()
+
+Gets user quota
+
+Gets user quota
+
+### Example
+
+* Api Key Authentication (asc_auth_key):
+
+```python
+import docspace
+from docspace.models.tenant_user_quota_settings_wrapper import TenantUserQuotaSettingsWrapper
+from docspace.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost:8092
+# See configuration.py for a list of all supported configuration parameters.
+configuration = docspace.Configuration(
+    host = "http://localhost:8092"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: asc_auth_key
+configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with docspace.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace.SettingsQuotaApi(api_client)
+
+    try:
+        # Gets user quota
+        api_response = api_instance.get_user_quota_settings()
+        print("The response of SettingsQuotaApi->get_user_quota_settings:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling SettingsQuotaApi->get_user_quota_settings: %s\n" % e)
+```
+
+
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**TenantUserQuotaSettingsWrapper**](TenantUserQuotaSettingsWrapper.md)
+
+### Authorization
+
+[asc_auth_key](../README.md#asc_auth_key)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Ok |  -  |
+**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **save_room_quota_settings**
+> TenantRoomQuotaSettingsWrapper save_room_quota_settings(quota_settings_requests_dto=quota_settings_requests_dto)
+
+Save the room quota settings
+
+Saves the room quota settings specified in the request to the current portal.
+
+### Example
+
+* Api Key Authentication (asc_auth_key):
+
+```python
+import docspace
+from docspace.models.quota_settings_requests_dto import QuotaSettingsRequestsDto
+from docspace.models.tenant_room_quota_settings_wrapper import TenantRoomQuotaSettingsWrapper
+from docspace.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost:8092
+# See configuration.py for a list of all supported configuration parameters.
+configuration = docspace.Configuration(
+    host = "http://localhost:8092"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: asc_auth_key
+configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with docspace.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace.SettingsQuotaApi(api_client)
+    quota_settings_requests_dto = docspace.QuotaSettingsRequestsDto() # QuotaSettingsRequestsDto |  (optional)
+
+    try:
+        # Save the room quota settings
+        api_response = api_instance.save_room_quota_settings(quota_settings_requests_dto=quota_settings_requests_dto)
+        print("The response of SettingsQuotaApi->save_room_quota_settings:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling SettingsQuotaApi->save_room_quota_settings: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **quota_settings_requests_dto** | [**QuotaSettingsRequestsDto**](QuotaSettingsRequestsDto.md)|  | [optional] 
+
+### Return type
+
+[**TenantRoomQuotaSettingsWrapper**](TenantRoomQuotaSettingsWrapper.md)
+
+### Authorization
+
+[asc_auth_key](../README.md#asc_auth_key)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Tenant room quota settings |  -  |
+**401** | Unauthorized |  -  |
+**402** | Your pricing plan does not support this option |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **set_tenant_quota_settings**
+> TenantQuotaSettingsWrapper set_tenant_quota_settings(tenant_quota_settings_requests_dto=tenant_quota_settings_requests_dto)
+
+Save the tenant quota settings
+
+Saves the tenant quota settings specified in the request to the current portal.
+
+### Example
+
+* Api Key Authentication (asc_auth_key):
+
+```python
+import docspace
+from docspace.models.tenant_quota_settings_requests_dto import TenantQuotaSettingsRequestsDto
+from docspace.models.tenant_quota_settings_wrapper import TenantQuotaSettingsWrapper
+from docspace.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost:8092
+# See configuration.py for a list of all supported configuration parameters.
+configuration = docspace.Configuration(
+    host = "http://localhost:8092"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: asc_auth_key
+configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with docspace.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace.SettingsQuotaApi(api_client)
+    tenant_quota_settings_requests_dto = docspace.TenantQuotaSettingsRequestsDto() # TenantQuotaSettingsRequestsDto |  (optional)
+
+    try:
+        # Save the tenant quota settings
+        api_response = api_instance.set_tenant_quota_settings(tenant_quota_settings_requests_dto=tenant_quota_settings_requests_dto)
+        print("The response of SettingsQuotaApi->set_tenant_quota_settings:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling SettingsQuotaApi->set_tenant_quota_settings: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **tenant_quota_settings_requests_dto** | [**TenantQuotaSettingsRequestsDto**](TenantQuotaSettingsRequestsDto.md)|  | [optional] 
+
+### Return type
+
+[**TenantQuotaSettingsWrapper**](TenantQuotaSettingsWrapper.md)
+
+### Authorization
+
+[asc_auth_key](../README.md#asc_auth_key)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Tenant quota settings |  -  |
+**401** | Unauthorized |  -  |
+**402** | Your pricing plan does not support this option |  -  |
+**405** | Not available |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+

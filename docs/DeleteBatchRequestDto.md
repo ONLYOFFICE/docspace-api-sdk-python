@@ -1,0 +1,33 @@
+# DeleteBatchRequestDto
+
+Request parameters for deleting files
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**folder_ids** | [**List[BaseBatchRequestDtoFolderIdsInner]**](BaseBatchRequestDtoFolderIdsInner.md) | List of folder IDs | [optional] 
+**file_ids** | [**List[BaseBatchRequestDtoFolderIdsInner]**](BaseBatchRequestDtoFolderIdsInner.md) | List of file IDs | [optional] 
+**delete_after** | **bool** | Specifies whether to delete a file after the editing session is finished or not | [optional] 
+**immediately** | **bool** | Specifies whether to move a file to the \\\&quot;Trash\\\&quot; folder or delete it immediately | [optional] 
+
+## Example
+
+```python
+from docspace.models.delete_batch_request_dto import DeleteBatchRequestDto
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of DeleteBatchRequestDto from a JSON string
+delete_batch_request_dto_instance = DeleteBatchRequestDto.from_json(json)
+# print the JSON string representation of the object
+print(DeleteBatchRequestDto.to_json())
+
+# convert the object into a dict
+delete_batch_request_dto_dict = delete_batch_request_dto_instance.to_dict()
+# create an instance of DeleteBatchRequestDto from a dict
+delete_batch_request_dto_from_dict = DeleteBatchRequestDto.from_dict(delete_batch_request_dto_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

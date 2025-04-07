@@ -1,0 +1,37 @@
+# SignupAccountRequestDto
+
+Request parameters for creating a third-party account
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**employee_type** | [**EmployeeType**](EmployeeType.md) |  | [optional] 
+**first_name** | **str** | First name | [optional] 
+**last_name** | **str** | Last name | [optional] 
+**email** | **str** | Email address | [optional] 
+**password_hash** | **str** | Password hash | [optional] 
+**key** | **str** | Link key | [optional] 
+**culture** | **str** | Culture | [optional] 
+**serialized_profile** | **str** | Third-party profile in the serialized format | [optional] 
+
+## Example
+
+```python
+from docspace.models.signup_account_request_dto import SignupAccountRequestDto
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of SignupAccountRequestDto from a JSON string
+signup_account_request_dto_instance = SignupAccountRequestDto.from_json(json)
+# print the JSON string representation of the object
+print(SignupAccountRequestDto.to_json())
+
+# convert the object into a dict
+signup_account_request_dto_dict = signup_account_request_dto_instance.to_dict()
+# create an instance of SignupAccountRequestDto from a dict
+signup_account_request_dto_from_dict = SignupAccountRequestDto.from_dict(signup_account_request_dto_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

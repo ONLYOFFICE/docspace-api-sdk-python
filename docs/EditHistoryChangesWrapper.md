@@ -1,0 +1,31 @@
+# EditHistoryChangesWrapper
+
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**user** | [**EditHistoryAuthor**](EditHistoryAuthor.md) |  | [optional] 
+**created** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] 
+**document_sha256** | **str** |  | [optional] 
+
+## Example
+
+```python
+from docspace.models.edit_history_changes_wrapper import EditHistoryChangesWrapper
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of EditHistoryChangesWrapper from a JSON string
+edit_history_changes_wrapper_instance = EditHistoryChangesWrapper.from_json(json)
+# print the JSON string representation of the object
+print(EditHistoryChangesWrapper.to_json())
+
+# convert the object into a dict
+edit_history_changes_wrapper_dict = edit_history_changes_wrapper_instance.to_dict()
+# create an instance of EditHistoryChangesWrapper from a dict
+edit_history_changes_wrapper_from_dict = EditHistoryChangesWrapper.from_dict(edit_history_changes_wrapper_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+
