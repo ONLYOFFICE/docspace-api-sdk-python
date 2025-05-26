@@ -1,16 +1,16 @@
 # BackupRestoreDto
 
-Restoring parameters
+The backup restoring parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**backup_id** | **str** | Backup ID | [optional] 
+**backup_id** | **str** | The backup ID. | [optional] 
 **storage_type** | [**BackupStorageType**](BackupStorageType.md) |  | [optional] 
-**storage_params** | [**List[ItemKeyValuePairObjectObject]**](ItemKeyValuePairObjectObject.md) | Storage parameters | [optional] 
-**notify** | **bool** | Notifies users about portal restoring process or not | [optional] 
-**dump** | **bool** | Expect  dump or not | [optional] 
+**storage_params** | [**List[ItemKeyValuePairObjectObject]**](ItemKeyValuePairObjectObject.md) | The backup storage parameters. | [optional] 
+**notify** | **bool** | Notifies users about the portal restoring process or not. | [optional] 
+**dump** | **bool** | Specifies if a dump will be created or not. | [optional] 
 
 ## Example
 

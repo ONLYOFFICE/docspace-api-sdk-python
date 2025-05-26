@@ -1,6 +1,6 @@
 # UpdateMembersQuotaRequestDtoQuota
 
-Quota
+The quota in JSON format.
 
 ## Properties
 

@@ -1,13 +1,13 @@
 # UpdateComment
 
-Parameters for updating a comment
+The parameters for updating a comment.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**version** | **int** | File version | [optional] 
-**comment** | **str** | Comment text | [optional] 
+**version** | **int** | The comment version. | 
+**comment** | **str** | The comment text. | [optional] 
 
 ## Example
 

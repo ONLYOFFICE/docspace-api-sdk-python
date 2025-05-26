@@ -1,20 +1,22 @@
 # DocumentConfigDto
 
+The document config parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**file_type** | **str** | File type | [optional] 
+**file_type** | **str** | The file type of the document. | [optional] 
 **info** | [**InfoConfigDto**](InfoConfigDto.md) |  | [optional] 
-**is_linked_for_me** | **bool** | Is linked for me | [optional] 
-**key** | **str** | Key | [optional] 
+**is_linked_for_me** | **bool** | Specifies if the documnet is linked for current user. | [optional] 
+**key** | **str** | The document key. | [optional] 
 **permissions** | [**PermissionsConfig**](PermissionsConfig.md) |  | [optional] 
-**shared_link_param** | **str** | Shared link param | [optional] 
-**shared_link_key** | **str** | Shared link key | [optional] 
+**shared_link_param** | **str** | The shared link parameter of the document. | [optional] 
+**shared_link_key** | **str** | The shared link key of the document. | [optional] 
 **reference_data** | [**FileReferenceData**](FileReferenceData.md) |  | [optional] 
-**title** | **str** | Title | [optional] 
-**url** | **str** | Url | [optional] 
+**title** | **str** | The document title. | [optional] 
+**url** | **str** | The document url. | [optional] 
+**is_form** | **bool** | Indicates whether this is a form. | [optional] 
 **options** | [**Options**](Options.md) |  | [optional] 
 
 ## Example

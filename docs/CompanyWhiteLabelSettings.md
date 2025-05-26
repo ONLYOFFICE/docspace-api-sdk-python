@@ -1,16 +1,18 @@
 # CompanyWhiteLabelSettings
 
+The company white label settings.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**company_name** | **str** | Company name | [optional] 
-**site** | **str** | Site | [optional] 
-**email** | **str** | Email address | [optional] 
-**address** | **str** | Address | [optional] 
-**phone** | **str** | Phone | [optional] 
-**is_licensor** | **bool** | Specifies if a company is a licensor or not | [optional] 
+**company_name** | **str** | The company name. | [optional] 
+**site** | **str** | The company site. | [optional] 
+**email** | **str** | The company email address. | [optional] 
+**address** | **str** | The company address. | [optional] 
+**phone** | **str** | The company phone number. | [optional] 
+**is_licensor** | **bool** | Specifies if a company is a licensor or not. | [optional] 
+**last_modified** | **datetime** |  | [optional] 
 
 ## Example
 

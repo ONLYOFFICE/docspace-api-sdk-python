@@ -1,12 +1,12 @@
 # OrderRequestDto
 
-Represents the parameters for ordering requests
+The parameters for ordering requests.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**order** | **int** | The order value | [optional] 
+**order** | **int** | The order value. | [optional] 
 
 ## Example
 

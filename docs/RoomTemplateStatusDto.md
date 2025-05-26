@@ -1,14 +1,15 @@
 # RoomTemplateStatusDto
 
+The room template status.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**template_id** | **int** | Template id | [optional] 
-**progress** | **float** | Progress | [optional] 
-**error** | **str** | Error | [optional] 
-**is_completed** | **bool** | IsCompleted | [optional] 
+**template_id** | **int** | The room template ID. | [optional] 
+**progress** | **float** | The progress of the room template creation process. | [optional] 
+**error** | **str** | The error message that is sent when the room template is not created successfully. | [optional] 
+**is_completed** | **bool** | Specifies whether the process of creating the room template is completed. | [optional] 
 
 ## Example
 

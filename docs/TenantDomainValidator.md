@@ -1,13 +1,14 @@
 # TenantDomainValidator
 
+The domain validator.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**regex** | **str** | Regex | [optional] [readonly] 
-**min_length** | **int** | Min length | [optional] [readonly] 
-**max_length** | **int** | Max length | [optional] [readonly] 
+**regex** | **str** | The regex string to validate a domain. | [optional] [readonly] 
+**min_length** | **int** | The minimum length of the valid domain. | [optional] [readonly] 
+**max_length** | **int** | The maximum length of the valid domain. | [optional] [readonly] 
 
 ## Example
 

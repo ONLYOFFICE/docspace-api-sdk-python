@@ -1,16 +1,17 @@
 # InfoConfigDto
 
+The information config parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**favorite** | **bool** | Favorite | [optional] 
-**folder** | **str** | Folder | [optional] 
-**owner** | **str** | Owner | [optional] 
-**sharing_settings** | [**List[AceShortWrapper]**](AceShortWrapper.md) | Sharing settings | [optional] 
+**favorite** | **bool** | Specifies if the file is favorite or not. | [optional] 
+**folder** | **str** | The folder of the file. | [optional] 
+**owner** | **str** | The file owner. | [optional] 
+**sharing_settings** | [**List[AceShortWrapper]**](AceShortWrapper.md) | The sharing settings of the file. | [optional] 
 **type** | [**EditorType**](EditorType.md) |  | [optional] 
-**uploaded** | **str** | Uploaded | [optional] 
+**uploaded** | **str** | The uploaded file. | [optional] 
 
 ## Example
 

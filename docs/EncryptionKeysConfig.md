@@ -1,13 +1,14 @@
 # EncryptionKeysConfig
 
+The encryption keys of the editor configuration.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**crypto_engine_id** | **str** | Crypto engine id | [optional] [readonly] 
-**private_key_enc** | **str** | Private key enc | [optional] 
-**public_key** | **str** | Public key | [optional] 
+**crypto_engine_id** | **str** | The crypto engine ID of the encryption key. | [optional] [readonly] 
+**private_key_enc** | **str** | The private key. | [optional] 
+**public_key** | **str** | The public key. | [optional] 
 
 ## Example
 

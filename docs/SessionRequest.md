@@ -1,17 +1,17 @@
 # SessionRequest
 
-Session parameters
+The session request parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**file_name** | **str** | File name | [optional] 
-**file_size** | **int** | File length in bytes | [optional] 
-**relative_path** | **str** | Relative path to the folder | [optional] 
+**file_name** | **str** | The file name. | 
+**file_size** | **int** | The file size. | [optional] 
+**relative_path** | **str** | The relative path to the file. | [optional] 
 **create_on** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] 
-**encrypted** | **bool** | Specifies whether to encrypt a file or not | [optional] 
-**create_new_if_exist** | **bool** | Create new if exists | [optional] 
+**encrypted** | **bool** | Specifies whether the file is encrypted or not. | [optional] 
+**create_new_if_exist** | **bool** | Specifies whether to create a new file if it already exists. | [optional] 
 
 ## Example
 

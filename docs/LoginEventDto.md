@@ -1,23 +1,24 @@
 # LoginEventDto
 
+The login event parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **int** | ID | [optional] 
+**id** | **int** | The login event ID. | [optional] 
 **var_date** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] 
-**user** | **str** | User | [optional] 
-**user_id** | **str** | User ID | [optional] 
-**login** | **str** | Login | [optional] 
-**action** | **str** | Action | [optional] 
+**user** | **str** | The user name of the login event. | [optional] 
+**user_id** | **str** | The user ID of the login event. | [optional] 
+**login** | **str** | The user login of the login event. | [optional] 
+**action** | **str** | The login event action. | [optional] 
 **action_id** | [**MessageAction**](MessageAction.md) |  | [optional] 
-**ip** | **str** | IP | [optional] 
-**country** | **str** | Country | [optional] 
-**city** | **str** | City | [optional] 
-**browser** | **str** | Browser | [optional] 
-**platform** | **str** | Platform | [optional] 
-**page** | **str** | Page | [optional] 
+**ip** | **str** | The login event IP. | [optional] 
+**country** | **str** | The login event country. | [optional] 
+**city** | **str** | The login event city. | [optional] 
+**browser** | **str** | The login event browser. | [optional] 
+**platform** | **str** | The login event platform. | [optional] 
+**page** | **str** | The login event page. | [optional] 
 
 ## Example
 

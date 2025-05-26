@@ -1,13 +1,13 @@
 # NotificationSettingsRequestsDto
 
-Notification settings request parameters
+The request parameters for configuring notification settings.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**type** | [**NotificationType**](NotificationType.md) |  | [optional] 
-**is_enabled** | **bool** | Specifies if the notification type is enabled or not | [optional] 
+**type** | [**NotificationType**](NotificationType.md) |  | 
+**is_enabled** | **bool** | Specifies if the specified notification type is enabled or not. | [optional] 
 
 ## Example
 

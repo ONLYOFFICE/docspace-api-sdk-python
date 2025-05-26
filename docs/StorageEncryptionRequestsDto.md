@@ -1,12 +1,12 @@
 # StorageEncryptionRequestsDto
 
-Storage encryption request parameters
+The request parameters for managing storage encryption operations and notifications.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**notify_users** | **bool** | Specifies if the users will be notified about the encryption process or note | [optional] 
+**notify_users** | **bool** | Specifies whether the users receive notifications about the storage encryption operations. | [optional] 
 
 ## Example
 

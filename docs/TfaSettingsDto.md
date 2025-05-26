@@ -1,17 +1,18 @@
 # TfaSettingsDto
 
+The parameters representing the Two-Factor Authentication (TFA) configuration settings.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** | ID | [optional] 
-**title** | **str** | Title | [optional] 
-**enabled** | **bool** | Specifies if the TFA settings are enabled or not | [optional] 
-**avaliable** | **bool** | Specifies if the TFA settings are available or not | [optional] 
-**trusted_ips** | **List[str]** | List of trusted IP addresses | [optional] 
-**mandatory_users** | **List[str]** | List of users who must use the TFA verification | [optional] 
-**mandatory_groups** | **List[str]** | List of groups who must use the TFA verification | [optional] 
+**id** | **str** | The ID of the TFA configuration. | [optional] 
+**title** | **str** | The display name or description of the TFA configuration. | [optional] 
+**enabled** | **bool** | Indicates whether the TFA configuration is currently active. | [optional] 
+**avaliable** | **bool** | Indicates whether the TFA configuration can be used. | [optional] 
+**trusted_ips** | **List[str]** | The list of IP addresses that are exempt from TFA requirements. | [optional] 
+**mandatory_users** | **List[str]** | The list of user IDs that are required to use TFA. | [optional] 
+**mandatory_groups** | **List[str]** | The list of group IDs whose members are required to use TFA. | [optional] 
 
 ## Example
 

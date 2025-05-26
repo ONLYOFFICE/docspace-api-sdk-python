@@ -1,12 +1,13 @@
 # FileShareParams
 
+The collection of file sharing parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**share_to** | **str** | ID of the user with whom we want to share a file | [optional] 
-**email** | **str** | User email address | [optional] 
+**share_to** | **str** | The ID of the user to whom the file will be shared. | [optional] 
+**email** | **str** | The user email address. | [optional] 
 **access** | [**FileShare**](FileShare.md) |  | [optional] 
 
 ## Example

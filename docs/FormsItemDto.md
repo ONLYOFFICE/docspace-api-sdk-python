@@ -1,5 +1,6 @@
 # FormsItemDto
 
+The forms item information.
 
 ## Properties
 

@@ -26,7 +26,11 @@ Adds a new group with the group manager, name, and members specified in the requ
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -46,11 +50,30 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
@@ -82,7 +105,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -107,7 +130,11 @@ Adds new group members to the group with the ID specified in the request.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -127,18 +154,37 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.GroupApi(api_client)
-    id = 'aae1e103-bca5-9fa1-ba8c-42058b4abf28' # str | Group ID
-    members_request = docspace.MembersRequest() # MembersRequest | Members (optional)
+    id = 'aae1e103-bca5-9fa1-ba8c-42058b4abf28' # str | The group ID.
+    members_request = docspace.MembersRequest() # MembersRequest | The member request. (optional)
 
     try:
         # Add group members
@@ -156,8 +202,8 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **str**| Group ID | 
- **members_request** | [**MembersRequest**](MembersRequest.md)| Members | [optional] 
+ **id** | **str**| The group ID. | 
+ **members_request** | [**MembersRequest**](MembersRequest.md)| The member request. | [optional] 
 
 ### Return type
 
@@ -165,7 +211,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -191,7 +237,11 @@ Deletes a group with the ID specified in the request from the list of groups on 
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -210,17 +260,36 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.GroupApi(api_client)
-    id = 'aae1e103-bca5-9fa1-ba8c-42058b4abf28' # str | Group ID
+    id = 'aae1e103-bca5-9fa1-ba8c-42058b4abf28' # str | The group ID.
 
     try:
         # Delete a group
@@ -238,7 +307,7 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **str**| Group ID | 
+ **id** | **str**| The group ID. | 
 
 ### Return type
 
@@ -246,7 +315,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -272,7 +341,11 @@ Returns a list of groups for the user with the ID specified in the request.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -291,17 +364,36 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.GroupApi(api_client)
-    userid = 'aae1e103-bca5-9fa1-ba8c-42058b4abf28' # str | User ID
+    userid = 'aae1e103-bca5-9fa1-ba8c-42058b4abf28' # str | The user ID.
 
     try:
         # Get user groups
@@ -319,7 +411,7 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **userid** | **str**| User ID | 
+ **userid** | **str**| The user ID. | 
 
 ### Return type
 
@@ -327,7 +419,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -352,7 +444,11 @@ Returns the detailed information about the selected group.   **Note**: This meth
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -371,18 +467,37 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.GroupApi(api_client)
-    id = 'aae1e103-bca5-9fa1-ba8c-42058b4abf28' # str | Group ID
-    include_members = true # bool | Include members (optional)
+    id = 'aae1e103-bca5-9fa1-ba8c-42058b4abf28' # str | The group ID.
+    include_members = true # bool | Specifies whether to include the group members or not. (optional)
 
     try:
         # Get a group
@@ -400,8 +515,8 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **str**| Group ID | 
- **include_members** | **bool**| Include members | [optional] 
+ **id** | **str**| The group ID. | 
+ **include_members** | **bool**| Specifies whether to include the group members or not. | [optional] 
 
 ### Return type
 
@@ -409,7 +524,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -435,7 +550,11 @@ Returns the general information about all the groups, such as group ID and group
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -454,18 +573,37 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.GroupApi(api_client)
-    user_id = 'aae1e103-bca5-9fa1-ba8c-42058b4abf28' # str | User ID (optional)
-    manager = true # bool | Specifies if the user is a manager or not (optional)
+    user_id = 'aae1e103-bca5-9fa1-ba8c-42058b4abf28' # str | The user ID. (optional)
+    manager = true # bool | Specifies if the user is a manager or not. (optional)
 
     try:
         # Get groups
@@ -483,8 +621,8 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **user_id** | **str**| User ID | [optional] 
- **manager** | **bool**| Specifies if the user is a manager or not | [optional] 
+ **user_id** | **str**| The user ID. | [optional] 
+ **manager** | **bool**| Specifies if the user is a manager or not. | [optional] 
 
 ### Return type
 
@@ -492,7 +630,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -517,7 +655,11 @@ Removes the group members specified in the request from the selected group.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -537,18 +679,37 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.GroupApi(api_client)
-    id = 'aae1e103-bca5-9fa1-ba8c-42058b4abf28' # str | Group ID
-    members_request = docspace.MembersRequest() # MembersRequest | Members (optional)
+    id = 'aae1e103-bca5-9fa1-ba8c-42058b4abf28' # str | The group ID.
+    members_request = docspace.MembersRequest() # MembersRequest | The member request. (optional)
 
     try:
         # Remove group members
@@ -566,8 +727,8 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **str**| Group ID | 
- **members_request** | [**MembersRequest**](MembersRequest.md)| Members | [optional] 
+ **id** | **str**| The group ID. | 
+ **members_request** | [**MembersRequest**](MembersRequest.md)| The member request. | [optional] 
 
 ### Return type
 
@@ -575,7 +736,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -601,7 +762,11 @@ Sets a user with the ID specified in the request as a group manager.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -621,18 +786,37 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.GroupApi(api_client)
-    id = 'aae1e103-bca5-9fa1-ba8c-42058b4abf28' # str | Group ID
-    set_manager_request = docspace.SetManagerRequest() # SetManagerRequest | Set manager (optional)
+    id = 'aae1e103-bca5-9fa1-ba8c-42058b4abf28' # str | The group ID.
+    set_manager_request = docspace.SetManagerRequest() # SetManagerRequest | The request for setting a group manager. (optional)
 
     try:
         # Set a group manager
@@ -650,8 +834,8 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **str**| Group ID | 
- **set_manager_request** | [**SetManagerRequest**](SetManagerRequest.md)| Set manager | [optional] 
+ **id** | **str**| The group ID. | 
+ **set_manager_request** | [**SetManagerRequest**](SetManagerRequest.md)| The request for setting a group manager. | [optional] 
 
 ### Return type
 
@@ -659,7 +843,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -685,7 +869,11 @@ Replaces the group members with those specified in the request.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -705,18 +893,37 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.GroupApi(api_client)
-    id = 'aae1e103-bca5-9fa1-ba8c-42058b4abf28' # str | Group ID
-    members_request = docspace.MembersRequest() # MembersRequest | Members (optional)
+    id = 'aae1e103-bca5-9fa1-ba8c-42058b4abf28' # str | The group ID.
+    members_request = docspace.MembersRequest() # MembersRequest | The member request. (optional)
 
     try:
         # Replace group members
@@ -734,8 +941,8 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **str**| Group ID | 
- **members_request** | [**MembersRequest**](MembersRequest.md)| Members | [optional] 
+ **id** | **str**| The group ID. | 
+ **members_request** | [**MembersRequest**](MembersRequest.md)| The member request. | [optional] 
 
 ### Return type
 
@@ -743,7 +950,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -768,7 +975,11 @@ Moves all the members from the selected group to another one specified in the re
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -787,18 +998,37 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.GroupApi(api_client)
-    from_id = '75a5f745-f697-4418-b38d-0fe0d277e258' # str | Group ID to move from
-    to_id = '75a5f745-f697-4418-b38d-0fe0d277e258' # str | Group ID to move to
+    from_id = '75a5f745-f697-4418-b38d-0fe0d277e258' # str | The group ID to move from.
+    to_id = '75a5f745-f697-4418-b38d-0fe0d277e258' # str | The group ID to move to.
 
     try:
         # Move group members
@@ -816,8 +1046,8 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **from_id** | **str**| Group ID to move from | 
- **to_id** | **str**| Group ID to move to | 
+ **from_id** | **str**| The group ID to move from. | 
+ **to_id** | **str**| The group ID to move to. | 
 
 ### Return type
 
@@ -825,7 +1055,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -851,7 +1081,11 @@ Updates the existing group changing the group manager, name, and/or members.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -871,18 +1105,37 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.GroupApi(api_client)
-    id = 'aae1e103-bca5-9fa1-ba8c-42058b4abf28' # str | Group ID
-    update_group_request = docspace.UpdateGroupRequest() # UpdateGroupRequest | Update group parameters (optional)
+    id = 'aae1e103-bca5-9fa1-ba8c-42058b4abf28' # str | The group ID.
+    update_group_request = docspace.UpdateGroupRequest() # UpdateGroupRequest | The request for updating a group. (optional)
 
     try:
         # Update a group
@@ -900,8 +1153,8 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **str**| Group ID | 
- **update_group_request** | [**UpdateGroupRequest**](UpdateGroupRequest.md)| Update group parameters | [optional] 
+ **id** | **str**| The group ID. | 
+ **update_group_request** | [**UpdateGroupRequest**](UpdateGroupRequest.md)| The request for updating a group. | [optional] 
 
 ### Return type
 
@@ -909,7 +1162,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 

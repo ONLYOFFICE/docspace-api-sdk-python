@@ -1,12 +1,12 @@
 # CreateFolder
 
-Parameters for creating a folder: Title (string) - new folder title
+The parameters for creating a folder.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**title** | **str** | Folder title | [optional] 
+**title** | **str** | The folder title to create. | 
 
 ## Example
 

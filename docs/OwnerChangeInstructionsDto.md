@@ -1,12 +1,13 @@
 # OwnerChangeInstructionsDto
 
+The owner change instructions parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**status** | **int** | Status | [optional] 
-**message** | **str** | Message | [optional] 
+**status** | **int** | The owner change instructions status. | [optional] 
+**message** | **str** | The owner change instructions message. | [optional] 
 
 ## Example
 

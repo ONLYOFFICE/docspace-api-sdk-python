@@ -1,13 +1,14 @@
 # FileLink
 
+The file link properties.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**filetype** | **str** | File type | [optional] 
-**token** | **str** | Token | [optional] 
-**url** | **str** | Url | [optional] 
+**filetype** | **str** | The type of the file for the source viewed or edited document. | [optional] 
+**token** | **str** | The encrypted signature added to the config in the form of a token. | [optional] 
+**url** | **str** | The absolute URL where the source viewed or edited document is stored. | [optional] 
 
 ## Example
 

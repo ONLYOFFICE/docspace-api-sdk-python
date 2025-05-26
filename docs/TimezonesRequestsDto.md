@@ -1,12 +1,13 @@
 # TimezonesRequestsDto
 
+The request parameters for managing the time zone configurations.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** | Time zone ID | [optional] 
-**display_name** | **str** | Time zone display name | [optional] 
+**id** | **str** | The IANA time zone identifier. | [optional] 
+**display_name** | **str** | The user-friendly name for the time zone. | [optional] 
 
 ## Example
 

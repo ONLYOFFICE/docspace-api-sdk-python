@@ -1,15 +1,15 @@
 # CheckFillFormDraft
 
-Parameters for checking a form draft
+The parameters for checking the form draft filling.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**version** | **int** | File version | [optional] 
-**action** | **str** | Action with a form | [optional] 
-**request_view** | **bool** | Specifies whether to request a form for viewing or not | [optional] [readonly] 
-**request_embedded** | **bool** | Specifies whether to request an embedded form or not | [optional] [readonly] 
+**version** | **int** | The file version of the form draft. | [optional] 
+**action** | **str** | The action with the form draft. | [optional] 
+**request_view** | **bool** | Specifies whether to request the form for viewing or not. | [optional] [readonly] 
+**request_embedded** | **bool** | Specifies whether to request an embedded form or not. | [optional] [readonly] 
 
 ## Example
 

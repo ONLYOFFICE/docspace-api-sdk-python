@@ -1,16 +1,16 @@
 # FileLinkRequest
 
-External link parameters
+The external link request parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**link_id** | **str** | Link ID | [optional] 
+**link_id** | **str** | The external link ID. | [optional] 
 **access** | [**FileShare**](FileShare.md) |  | [optional] 
 **expiration_date** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] 
-**internal** | **bool** | Link scope | [optional] 
-**primary** | **bool** | Primary link flag | [optional] 
+**internal** | **bool** | The link scope, whether it is internal or not. | [optional] 
+**primary** | **bool** | Specifies whether the file link is primary or not. | [optional] 
 
 ## Example
 

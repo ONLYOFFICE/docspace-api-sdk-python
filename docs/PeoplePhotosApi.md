@@ -16,11 +16,15 @@ Method | HTTP request | Description
 
 Create photo thumbnails
 
-Creates photo thumbnails by coordinates of the original image specified in the request.
+Creates the user photo thumbnails by coordinates of the original image specified in the request.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -40,18 +44,37 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.PeoplePhotosApi(api_client)
-    userid = '9846' # str | User ID
-    thumbnails_request = docspace.ThumbnailsRequest() # ThumbnailsRequest | Thumbnails (optional)
+    userid = '9846' # str | The user ID.
+    thumbnails_request = docspace.ThumbnailsRequest() # ThumbnailsRequest | The thumbnail request. (optional)
 
     try:
         # Create photo thumbnails
@@ -69,8 +92,8 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **userid** | **str**| User ID | 
- **thumbnails_request** | [**ThumbnailsRequest**](ThumbnailsRequest.md)| Thumbnails | [optional] 
+ **userid** | **str**| The user ID. | 
+ **thumbnails_request** | [**ThumbnailsRequest**](ThumbnailsRequest.md)| The thumbnail request. | [optional] 
 
 ### Return type
 
@@ -78,7 +101,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -105,7 +128,11 @@ Deletes a photo of the user with the ID specified in the request.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -124,17 +151,36 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.PeoplePhotosApi(api_client)
-    userid = '9846' # str | User ID
+    userid = '9846' # str | The user ID.
 
     try:
         # Delete a user photo
@@ -152,7 +198,7 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **userid** | **str**| User ID | 
+ **userid** | **str**| The user ID. | 
 
 ### Return type
 
@@ -160,7 +206,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -187,7 +233,11 @@ Returns a photo of the user with the ID specified in the request.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -206,17 +256,36 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.PeoplePhotosApi(api_client)
-    userid = '9846' # str | User ID
+    userid = '9846' # str | The user ID.
 
     try:
         # Get a user photo
@@ -234,7 +303,7 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **userid** | **str**| User ID | 
+ **userid** | **str**| The user ID. | 
 
 ### Return type
 
@@ -242,7 +311,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -269,7 +338,11 @@ Updates a photo of the user with the ID specified in the request.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -289,18 +362,37 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.PeoplePhotosApi(api_client)
-    userid = '9846' # str | User ID
-    update_photo_member_request = docspace.UpdatePhotoMemberRequest() # UpdatePhotoMemberRequest | Update photo (optional)
+    userid = '9846' # str | The user ID.
+    update_photo_member_request = docspace.UpdatePhotoMemberRequest() # UpdatePhotoMemberRequest | The request parameters for updating a photo. (optional)
 
     try:
         # Update a user photo
@@ -318,8 +410,8 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **userid** | **str**| User ID | 
- **update_photo_member_request** | [**UpdatePhotoMemberRequest**](UpdatePhotoMemberRequest.md)| Update photo | [optional] 
+ **userid** | **str**| The user ID. | 
+ **update_photo_member_request** | [**UpdatePhotoMemberRequest**](UpdatePhotoMemberRequest.md)| The request parameters for updating a photo. | [optional] 
 
 ### Return type
 
@@ -327,7 +419,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -346,7 +438,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **upload_member_photo**
-> FileUploadResultWrapper upload_member_photo(userid, form_collection=form_collection)
+> FileUploadResultWrapper upload_member_photo(userid, form_collection)
 
 Upload a user photo
 
@@ -354,7 +446,11 @@ Uploads a photo of the user with the ID specified in the request.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -374,22 +470,41 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.PeoplePhotosApi(api_client)
-    userid = '9846' # str | User ID
-    form_collection = [docspace.KeyValuePairStringStringValues()] # List[KeyValuePairStringStringValues] | Image data (optional)
+    userid = '9846' # str | The user ID.
+    form_collection = [docspace.KeyValuePairStringStringValues()] # List[KeyValuePairStringStringValues] | The image data.
 
     try:
         # Upload a user photo
-        api_response = api_instance.upload_member_photo(userid, form_collection=form_collection)
+        api_response = api_instance.upload_member_photo(userid, form_collection)
         print("The response of PeoplePhotosApi->upload_member_photo:\n")
         pprint(api_response)
     except Exception as e:
@@ -403,8 +518,8 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **userid** | **str**| User ID | 
- **form_collection** | [**List[KeyValuePairStringStringValues]**](KeyValuePairStringStringValues.md)| Image data | [optional] 
+ **userid** | **str**| The user ID. | 
+ **form_collection** | [**List[KeyValuePairStringStringValues]**](KeyValuePairStringStringValues.md)| The image data. | 
 
 ### Return type
 
@@ -412,7 +527,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -424,7 +539,11 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Result of file uploading |  -  |
+**400** | The uploaded file could not be found |  -  |
 **401** | Unauthorized |  -  |
+**403** | No permissions to perform this action |  -  |
+**413** | Image size is too large |  -  |
+**415** | Unknown image file type |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

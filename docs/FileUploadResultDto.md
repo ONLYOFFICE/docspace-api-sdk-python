@@ -1,14 +1,14 @@
 # FileUploadResultDto
 
-File upload result dto
+The file upload result.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**success** | **bool** | Specifies if the operation is successful or not | [optional] 
-**data** | **object** | Data | [optional] 
-**message** | **str** | Message | [optional] 
+**success** | **bool** | Specifies if the upload operation is successful or not. | [optional] 
+**data** | **object** | The file upload result data. | [optional] 
+**message** | **str** | The file upload result message. | [optional] 
 
 ## Example
 

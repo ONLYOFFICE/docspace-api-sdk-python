@@ -1,12 +1,12 @@
 # SsoSettingsRequestsDto
 
-SSO settings request parameters
+The request parameters for the Single Sign-On (SSO) configuration settings.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**serialize_settings** | **str** | Serialized SSO settings | [optional] 
+**serialize_settings** | **str** | The JSON-serialized SSO configuration settings. | 
 
 ## Example
 

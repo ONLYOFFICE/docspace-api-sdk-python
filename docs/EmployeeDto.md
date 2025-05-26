@@ -1,21 +1,22 @@
 # EmployeeDto
 
+The user parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** | ID | [optional] 
-**display_name** | **str** | Display name | [optional] 
-**title** | **str** | Title | [optional] 
-**avatar** | **str** | Avatar | [optional] 
-**avatar_original** | **str** | Original size avatar | [optional] 
-**avatar_max** | **str** | Maximum size avatar | [optional] 
-**avatar_medium** | **str** | Medium size avatar | [optional] 
-**avatar_small** | **str** | Small avatar | [optional] 
-**profile_url** | **str** | Profile URL | [optional] 
-**has_avatar** | **bool** | Specifies if the user has an avatar or not | [optional] 
-**is_anonim** | **bool** | Specifies if the user is an anonim or not | [optional] 
+**id** | **str** | The user ID. | [optional] 
+**display_name** | **str** | The user display name. | [optional] 
+**title** | **str** | The user title. | [optional] 
+**avatar** | **str** | The user avatar. | [optional] 
+**avatar_original** | **str** | The user original size avatar. | [optional] 
+**avatar_max** | **str** | The user maximum size avatar. | [optional] 
+**avatar_medium** | **str** | The user medium size avatar. | [optional] 
+**avatar_small** | **str** | The user small size avatar. | [optional] 
+**profile_url** | **str** | The user profile URL. | [optional] 
+**has_avatar** | **bool** | Specifies if the user has an avatar or not. | [optional] 
+**is_anonim** | **bool** | Specifies if the user is anonymous or not. | [optional] 
 
 ## Example
 

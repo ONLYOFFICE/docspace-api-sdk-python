@@ -1,16 +1,16 @@
 # BackupScheduleDto
 
-Backup schedule parameters
+The backup schedule parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **storage_type** | [**BackupStorageType**](BackupStorageType.md) |  | [optional] 
-**storage_params** | [**List[ItemKeyValuePairObjectObject]**](ItemKeyValuePairObjectObject.md) | Storage parameters | [optional] 
-**backups_stored** | **int** | Maximum number of the stored backup copies | [optional] 
+**storage_params** | [**List[ItemKeyValuePairObjectObject]**](ItemKeyValuePairObjectObject.md) | The backup storage parameters. | [optional] 
+**backups_stored** | **int** | The maximum number of the stored backup copies. | [optional] 
 **cron_params** | [**Cron**](Cron.md) |  | [optional] 
-**dump** | **bool** | Specifies if a dump will be created or not | [optional] 
+**dump** | **bool** | Specifies if a dump will be created or not. | [optional] 
 
 ## Example
 

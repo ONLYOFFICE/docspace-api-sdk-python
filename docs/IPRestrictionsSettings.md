@@ -6,6 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **enable** | **bool** |  | [optional] 
+**last_modified** | **datetime** |  | [optional] 
 
 ## Example
 

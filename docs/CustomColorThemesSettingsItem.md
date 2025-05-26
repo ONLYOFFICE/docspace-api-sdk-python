@@ -1,12 +1,13 @@
 # CustomColorThemesSettingsItem
 
+The custom color theme settings.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **int** | Theme ID | [optional] 
-**name** | **str** | Theme name | [optional] 
+**id** | **int** | The custom color theme ID. | [optional] 
+**name** | **str** | The custom color theme name. | [optional] 
 **main** | [**CustomColorThemesSettingsColorItem**](CustomColorThemesSettingsColorItem.md) |  | [optional] 
 **text** | [**CustomColorThemesSettingsColorItem**](CustomColorThemesSettingsColorItem.md) |  | [optional] 
 

@@ -1,12 +1,13 @@
 # RoomInvitation
 
+The room invitation parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**email** | **str** | Email address | [optional] 
-**id** | **str** | ID of the user with whom we want to share a room | [optional] 
+**email** | **str** | The email address. | [optional] 
+**id** | **str** | The ID of the user to share a room with. | [optional] 
 **access** | [**FileShare**](FileShare.md) |  | [optional] 
 
 ## Example

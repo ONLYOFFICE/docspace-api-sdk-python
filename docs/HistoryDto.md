@@ -1,5 +1,6 @@
 # HistoryDto
 
+The file history information.
 
 ## Properties
 
@@ -9,7 +10,7 @@ Name | Type | Description | Notes
 **initiator** | [**EmployeeDto**](EmployeeDto.md) |  | [optional] 
 **var_date** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] 
 **data** | [**HistoryData**](HistoryData.md) |  | [optional] 
-**related** | [**List[HistoryDto]**](HistoryDto.md) | Related | [optional] 
+**related** | [**List[HistoryDto]**](HistoryDto.md) | The list of related history. | [optional] 
 
 ## Example
 

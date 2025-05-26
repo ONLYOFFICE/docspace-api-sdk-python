@@ -4,63 +4,63 @@
 
 ## Enum
 
-* `NUMBER_0` (value: `0`)
+* `None` (value: `0`)
 
-* `NUMBER_1` (value: `1`)
+* `Files` (value: `1`)
 
-* `NUMBER_2` (value: `2`)
+* `Folders` (value: `2`)
 
-* `NUMBER_3` (value: `3`)
+* `DocumentsSettings` (value: `3`)
 
-* `NUMBER_4` (value: `4`)
+* `Companies` (value: `4`)
 
-* `NUMBER_5` (value: `5`)
+* `Persons` (value: `5`)
 
-* `NUMBER_6` (value: `6`)
+* `Contacts` (value: `6`)
 
-* `NUMBER_7` (value: `7`)
+* `CrmTasks` (value: `7`)
 
-* `NUMBER_8` (value: `8`)
+* `Opportunities` (value: `8`)
 
-* `NUMBER_9` (value: `9`)
+* `Invoices` (value: `9`)
 
-* `NUMBER_10` (value: `10`)
+* `Cases` (value: `10`)
 
-* `NUMBER_11` (value: `11`)
+* `CommonCrmSettings` (value: `11`)
 
-* `NUMBER_12` (value: `12`)
+* `ContactsSettings` (value: `12`)
 
-* `NUMBER_13` (value: `13`)
+* `ContactTypes` (value: `13`)
 
-* `NUMBER_14` (value: `14`)
+* `InvoiceSettings` (value: `14`)
 
-* `NUMBER_15` (value: `15`)
+* `OtherCrmSettings` (value: `15`)
 
-* `NUMBER_16` (value: `16`)
+* `Users` (value: `16`)
 
-* `NUMBER_17` (value: `17`)
+* `Groups` (value: `17`)
 
-* `NUMBER_18` (value: `18`)
+* `Projects` (value: `18`)
 
-* `NUMBER_19` (value: `19`)
+* `Milestones` (value: `19`)
 
-* `NUMBER_20` (value: `20`)
+* `Tasks` (value: `20`)
 
-* `NUMBER_21` (value: `21`)
+* `Discussions` (value: `21`)
 
-* `NUMBER_22` (value: `22`)
+* `TimeTracking` (value: `22`)
 
-* `NUMBER_23` (value: `23`)
+* `Reports` (value: `23`)
 
-* `NUMBER_24` (value: `24`)
+* `ProjectsSettings` (value: `24`)
 
-* `NUMBER_25` (value: `25`)
+* `General` (value: `25`)
 
-* `NUMBER_26` (value: `26`)
+* `Products` (value: `26`)
 
-* `NUMBER_27` (value: `27`)
+* `Rooms` (value: `27`)
 
-* `NUMBER_28` (value: `28`)
+* `OAuth` (value: `28`)
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

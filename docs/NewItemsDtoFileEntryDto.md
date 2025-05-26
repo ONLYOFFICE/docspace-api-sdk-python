@@ -1,12 +1,13 @@
 # NewItemsDtoFileEntryDto
 
+The new item parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **var_date** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] 
-**items** | [**List[FileEntryDto]**](FileEntryDto.md) | Items | [optional] 
+**items** | [**List[FileEntryDto]**](FileEntryDto.md) | The list of items. | [optional] 
 
 ## Example
 

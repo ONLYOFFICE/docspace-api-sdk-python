@@ -1,17 +1,17 @@
 # ThirdPartyBackupRequestDto
 
-Third-party backup request parameters
+The third-party backup request parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**url** | **str** | Connection URL for the sharepoint | [optional] 
-**login** | **str** | Login | [optional] 
-**password** | **str** | Password | [optional] 
-**token** | **str** | Authentication token | [optional] 
-**customer_title** | **str** | Customer title | [optional] 
-**provider_key** | **str** | Provider key | [optional] 
+**url** | **str** | The connection URL for the sharepoint. | [optional] 
+**login** | **str** | The login. | [optional] 
+**password** | **str** | The password. | [optional] 
+**token** | **str** | The authentication token. | [optional] 
+**customer_title** | **str** | The customer title. | [optional] 
+**provider_key** | **str** | The provider key. | [optional] 
 
 ## Example
 

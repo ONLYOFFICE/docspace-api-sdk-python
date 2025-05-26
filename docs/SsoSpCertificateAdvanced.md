@@ -1,17 +1,18 @@
 # SsoSpCertificateAdvanced
 
+The SP advanced certificate parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**signing_algorithm** | **str** | Signing algorithm | [optional] 
-**sign_auth_requests** | **bool** | Specifies if SP will sign the SAML authentication requests sent to IdP or not | [optional] 
-**sign_logout_requests** | **bool** | Specifies if SP will sign the SAML logout requests sent to IdP or not | [optional] 
-**sign_logout_responses** | **bool** | Specifies if sign the SAML logout responses sent to IdP or not | [optional] 
-**encrypt_algorithm** | **str** | Encryption algorithm | [optional] 
-**decrypt_algorithm** | **str** | Decryption algorithm | [optional] 
-**encrypt_assertions** | **bool** | Specifies if the assertions will be encrypted or not | [optional] 
+**signing_algorithm** | **str** | The certificate signing algorithm. | [optional] 
+**sign_auth_requests** | **bool** | Specifies if SP will sign the SAML authentication requests sent to IdP or not. | [optional] 
+**sign_logout_requests** | **bool** | Specifies if SP will sign the SAML logout requests sent to IdP or not. | [optional] 
+**sign_logout_responses** | **bool** | Specifies if SP will sign the SAML logout responses sent to IdP or not. | [optional] 
+**encrypt_algorithm** | **str** | The certificate encryption algorithm. | [optional] 
+**decrypt_algorithm** | **str** | The certificate decryption algorithm. | [optional] 
+**encrypt_assertions** | **bool** | Specifies if the assertions will be encrypted or not. | [optional] 
 
 ## Example
 

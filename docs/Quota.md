@@ -1,12 +1,16 @@
 # Quota
 
+The quota parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **int** | ID | [optional] 
-**quantity** | **int** | Quantity | [optional] 
+**id** | **int** | The quota ID. | [optional] 
+**quantity** | **int** | The quota quantity. | [optional] 
+**wallet** | **bool** | The quota applies to the wallet or not | [optional] 
+**due_date** | **datetime** | The quota due date. | [optional] 
+**next_quantity** | **int** | The quota next quantity. | [optional] 
 
 ## Example
 

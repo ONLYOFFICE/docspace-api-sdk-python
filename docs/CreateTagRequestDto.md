@@ -1,12 +1,12 @@
 # CreateTagRequestDto
 
-Request parameters for creating a tag
+The request parameters for creating a tag.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **str** | Tag name | [optional] 
+**name** | **str** | The tag name. | 
 
 ## Example
 

@@ -1,16 +1,17 @@
 # MentionWrapper
 
+The mention message parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **user** | [**UserInfo**](UserInfo.md) |  | [optional] 
-**email** | **str** | User email | [optional] [readonly] 
-**id** | **str** | User ID | [optional] [readonly] 
-**image** | **str** | User image | [optional] [readonly] 
-**has_access** | **bool** | Specifies if the user has the access to the file or not | [optional] [readonly] 
-**name** | **str** | User display name | [optional] [readonly] 
+**email** | **str** | The email address of the user. | [optional] [readonly] 
+**id** | **str** | The identification of the user. | [optional] [readonly] 
+**image** | **str** | The path to the user&#39;s avatar. | [optional] [readonly] 
+**has_access** | **bool** | Specifies if the user has the access to the file or not. | [optional] [readonly] 
+**name** | **str** | The full name of the user. | [optional] [readonly] 
 
 ## Example
 

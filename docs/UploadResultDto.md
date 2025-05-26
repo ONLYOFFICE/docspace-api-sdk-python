@@ -1,13 +1,14 @@
 # UploadResultDto
 
+The upload result parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**success** | **bool** | Specifies if the operation is successful or not | [optional] 
-**data** | **object** | Data | [optional] 
-**message** | **str** | Message | [optional] 
+**success** | **bool** | Specifies if the upload operation is successful or not. | [optional] 
+**data** | **object** | The uploaded data. | [optional] 
+**message** | **str** | The message sent after the successful upload operation. | [optional] 
 
 ## Example
 

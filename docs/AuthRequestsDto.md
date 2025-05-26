@@ -1,24 +1,24 @@
 # AuthRequestsDto
 
-Authentication request parameters
+The parameters required for the user authentication requests.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**user_name** | **str** | Username / email | [optional] 
-**password** | **str** | Password | [optional] 
-**password_hash** | **str** | Password hash | [optional] 
-**provider** | **str** | Provider type | [optional] 
-**access_token** | **str** | Provider access token | [optional] 
-**serialized_profile** | **str** | Serialized user profile | [optional] 
-**code** | **str** | Two-factor authentication code | [optional] 
-**code_o_auth** | **str** | Code for getting a token | [optional] 
-**session** | **bool** | Session based authentication or not | [optional] 
+**user_name** | **str** | The username or email used for authentication. | [optional] 
+**password** | **str** | The password in plain text for user authentication. | [optional] 
+**password_hash** | **str** | The hashed password for secure verification. | [optional] 
+**provider** | **str** | The type of authentication provider (e.g., internal, Google, Azure). | [optional] 
+**access_token** | **str** | The access token used for authentication with external providers. | [optional] 
+**serialized_profile** | **str** | The serialized user profile data, if applicable. | [optional] 
+**code** | **str** | The code for two-factor authentication. | [optional] 
+**code_o_auth** | **str** | The authorization code used for obtaining OAuth tokens. | [optional] 
+**session** | **bool** | Specifies whether the authentication is session-based. | [optional] 
 **confirm_data** | [**ConfirmData**](ConfirmData.md) |  | [optional] 
 **recaptcha_type** | [**RecaptchaType**](RecaptchaType.md) |  | [optional] 
-**recaptcha_response** | **str** | reCAPTCHA response | [optional] 
-**culture** | **str** | Culture | [optional] 
+**recaptcha_response** | **str** | The user&#39;s response to the CAPTCHA challenge. | [optional] 
+**culture** | **str** | The culture code for localization during authentication. | [optional] 
 
 ## Example
 

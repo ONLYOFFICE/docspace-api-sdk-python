@@ -1,6 +1,7 @@
 # flake8: noqa
 
 # import apis into api package
+from docspace.api.api_keys_api import ApiKeysApi
 from docspace.api.authentication_api import AuthenticationApi
 from docspace.api.backup_api import BackupApi
 from docspace.api.capabilities_api import CapabilitiesApi
@@ -8,13 +9,16 @@ from docspace.api.files_files_api import FilesFilesApi
 from docspace.api.files_folders_api import FilesFoldersApi
 from docspace.api.files_operations_api import FilesOperationsApi
 from docspace.api.files_quota_api import FilesQuotaApi
-from docspace.api.files_rooms_api import FilesRoomsApi
 from docspace.api.files_settings_api import FilesSettingsApi
+from docspace.api.files_sharing_api import FilesSharingApi
 from docspace.api.files_third_party_integration_api import FilesThirdPartyIntegrationApi
 from docspace.api.group_api import GroupApi
 from docspace.api.group_rooms_api import GroupRoomsApi
 from docspace.api.migration_api import MigrationApi
-from docspace.api.modules_api import ModulesApi
+from docspace.api.o_auth20_authorization_api import OAuth20AuthorizationApi
+from docspace.api.o_auth20_client_management_api import OAuth20ClientManagementApi
+from docspace.api.o_auth20_client_querying_api import OAuth20ClientQueryingApi
+from docspace.api.o_auth20_scope_management_api import OAuth20ScopeManagementApi
 from docspace.api.people_contacts_api import PeopleContactsApi
 from docspace.api.people_guests_api import PeopleGuestsApi
 from docspace.api.people_password_api import PeoplePasswordApi
@@ -27,15 +31,21 @@ from docspace.api.people_third_party_accounts_api import PeopleThirdPartyAccount
 from docspace.api.people_user_data_api import PeopleUserDataApi
 from docspace.api.people_user_status_api import PeopleUserStatusApi
 from docspace.api.people_user_type_api import PeopleUserTypeApi
+from docspace.api.portal_guests_api import PortalGuestsApi
+from docspace.api.portal_payment_api import PortalPaymentApi
 from docspace.api.portal_quota_api import PortalQuotaApi
 from docspace.api.portal_settings_api import PortalSettingsApi
 from docspace.api.portal_users_api import PortalUsersApi
+from docspace.api.rooms_api import RoomsApi
+from docspace.api.security_access_to_dev_tools_api import SecurityAccessToDevToolsApi
 from docspace.api.security_active_connections_api import SecurityActiveConnectionsApi
 from docspace.api.security_audit_trail_data_api import SecurityAuditTrailDataApi
 from docspace.api.security_csp_api import SecurityCSPApi
 from docspace.api.security_firebase_api import SecurityFirebaseApi
 from docspace.api.security_login_history_api import SecurityLoginHistoryApi
+from docspace.api.security_o_auth2_api import SecurityOAuth2Api
 from docspace.api.security_smtp_settings_api import SecuritySMTPSettingsApi
+from docspace.api.settings_access_to_dev_tools_api import SettingsAccessToDevToolsApi
 from docspace.api.settings_authorization_api import SettingsAuthorizationApi
 from docspace.api.settings_common_settings_api import SettingsCommonSettingsApi
 from docspace.api.settings_cookies_api import SettingsCookiesApi
@@ -55,8 +65,7 @@ from docspace.api.settings_security_api import SettingsSecurityApi
 from docspace.api.settings_statistics_api import SettingsStatisticsApi
 from docspace.api.settings_storage_api import SettingsStorageApi
 from docspace.api.settings_tfa_settings_api import SettingsTFASettingsApi
-from docspace.api.settings_team_templates_api import SettingsTeamTemplatesApi
-from docspace.api.settings_tips_api import SettingsTipsApi
 from docspace.api.settings_webhooks_api import SettingsWebhooksApi
 from docspace.api.settings_webplugins_api import SettingsWebpluginsApi
+from docspace.api.third_party_api import ThirdPartyApi
 

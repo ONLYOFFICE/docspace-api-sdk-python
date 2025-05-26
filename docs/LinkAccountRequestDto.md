@@ -1,12 +1,12 @@
 # LinkAccountRequestDto
 
-Request parameters for linking accounts
+The request parameters for linking accounts.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**serialized_profile** | **str** | Third-party profile in the serialized format | [optional] 
+**serialized_profile** | **str** | The third-party profile in the serialized format. | [optional] 
 
 ## Example
 

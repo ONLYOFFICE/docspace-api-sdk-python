@@ -1,13 +1,13 @@
 # QuotaSettingsRequestsDto
 
-Request parameters for the user quota settings
+The request parameters for managing the user storage quota configurations.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**enable_quota** | **bool** | Specifies if the quota settings are enabled or not | [optional] 
-**default_quota** | [**QuotaSettingsRequestsDtoDefaultQuota**](QuotaSettingsRequestsDtoDefaultQuota.md) |  | [optional] 
+**enable_quota** | **bool** | Specifies whether the storage quota restrictions are enabled. | [optional] 
+**default_quota** | [**QuotaSettingsRequestsDtoDefaultQuota**](QuotaSettingsRequestsDtoDefaultQuota.md) |  | 
 
 ## Example
 

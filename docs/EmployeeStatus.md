@@ -4,15 +4,15 @@
 
 ## Enum
 
-* `NUMBER_1` (value: `1`)
+* `Active` (value: `1`)
 
-* `NUMBER_2` (value: `2`)
+* `Terminated` (value: `2`)
 
-* `NUMBER_4` (value: `4`)
+* `Pending` (value: `4`)
 
-* `NUMBER_5` (value: `5`)
+* `Default` (value: `5`)
 
-* `NUMBER_7` (value: `7`)
+* `All` (value: `7`)
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

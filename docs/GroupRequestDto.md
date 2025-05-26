@@ -1,13 +1,13 @@
 # GroupRequestDto
 
-Group request parameters
+The group request parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**members** | **List[str]** | List of group member IDs | [optional] 
-**group_manager** | **str** | Group manager ID | [optional] 
+**members** | **List[str]** | The list of group member IDs. | [optional] 
+**group_manager** | **str** | Group manager ID | 
 **group_name** | **str** | Group name | [optional] 
 
 ## Example

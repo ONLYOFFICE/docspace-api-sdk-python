@@ -4,21 +4,21 @@
 
 ## Enum
 
-* `NUMBER_0` (value: `0`)
+* `Move` (value: `0`)
 
-* `NUMBER_1` (value: `1`)
+* `Copy` (value: `1`)
 
-* `NUMBER_2` (value: `2`)
+* `Delete` (value: `2`)
 
-* `NUMBER_3` (value: `3`)
+* `Download` (value: `3`)
 
-* `NUMBER_4` (value: `4`)
+* `MarkAsRead` (value: `4`)
 
-* `NUMBER_5` (value: `5`)
+* `Import` (value: `5`)
 
-* `NUMBER_6` (value: `6`)
+* `Convert` (value: `6`)
 
-* `NUMBER_7` (value: `7`)
+* `Duplicate` (value: `7`)
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

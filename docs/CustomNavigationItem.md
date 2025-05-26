@@ -1,18 +1,18 @@
 # CustomNavigationItem
 
-Custom navigation parameters
+The custom navigation item parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** | Id | [optional] 
-**label** | **str** | Label | [optional] 
-**url** | **str** | URL | [optional] 
-**big_img** | **str** | Big image | [optional] 
-**small_img** | **str** | Small image | [optional] 
-**show_in_menu** | **bool** | Show in menu or not | [optional] 
-**show_on_home_page** | **bool** | Show on home page or not | [optional] 
+**id** | **str** | The ID of the custom navigation item. | [optional] 
+**label** | **str** | The label of the custom navigation item. | [optional] 
+**url** | **str** | The URL of the custom navigation item. | [optional] 
+**big_img** | **str** | The big image of the custom navigation item. | [optional] 
+**small_img** | **str** | The small image of the custom navigation item. | [optional] 
+**show_in_menu** | **bool** | Specifies whether to show the custom navigation item in menu or not. | [optional] 
+**show_on_home_page** | **bool** | Specifies whether to show the custom navigation item on home page or not. | [optional] 
 
 ## Example
 

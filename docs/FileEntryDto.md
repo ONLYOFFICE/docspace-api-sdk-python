@@ -1,13 +1,14 @@
 # FileEntryDto
 
+The file entry information.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**title** | **str** | Title | [optional] 
+**title** | **str** | The file entry title. | [optional] 
 **access** | [**FileShare**](FileShare.md) |  | [optional] 
-**shared** | **bool** | Specifies if the file is shared or not | [optional] 
+**shared** | **bool** | Specifies if the file entry is shared or not. | [optional] 
 **created** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] 
 **created_by** | [**EmployeeDto**](EmployeeDto.md) |  | [optional] 
 **updated** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] 
@@ -15,10 +16,10 @@ Name | Type | Description | Notes
 **root_folder_type** | [**FolderType**](FolderType.md) |  | [optional] 
 **parent_room_type** | [**FolderType**](FolderType.md) |  | [optional] 
 **updated_by** | [**EmployeeDto**](EmployeeDto.md) |  | [optional] 
-**provider_item** | **bool** | Provider is specified or not | [optional] 
-**provider_key** | **str** | Provider key | [optional] 
-**provider_id** | **int** | Provider ID | [optional] 
-**order** | **str** | Order | [optional] 
+**provider_item** | **bool** | Specifies if the file entry provider is specified or not. | [optional] 
+**provider_key** | **str** | The provider key of the file entry. | [optional] 
+**provider_id** | **int** | The provider ID of the file entry. | [optional] 
+**order** | **str** | The order of the file entry. | [optional] 
 **file_entry_type** | [**FileEntryType**](FileEntryType.md) |  | [optional] 
 
 ## Example

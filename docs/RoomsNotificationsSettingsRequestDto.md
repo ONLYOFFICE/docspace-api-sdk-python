@@ -1,13 +1,13 @@
 # RoomsNotificationsSettingsRequestDto
 
-Request parameters for the room notification settings
+The request parameters for configuring notification settings for the chat or collaboration rooms.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**rooms_id** | **object** | Room ID | [optional] 
-**mute** | **bool** | Specifies if the room notifications are disabled or not | [optional] 
+**rooms_id** | **object** | The target room identifier. | [optional] 
+**mute** | **bool** | Specifies whether the notifications will be delivered to the specified room or not. | [optional] 
 
 ## Example
 

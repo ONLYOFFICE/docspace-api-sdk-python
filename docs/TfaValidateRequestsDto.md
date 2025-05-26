@@ -1,12 +1,12 @@
 # TfaValidateRequestsDto
 
-TFA validation request parameters
+The request parameters for validating the two-factor authentication codes.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**code** | **str** | TFA code | [optional] 
+**code** | **str** | The verification code provided by the user. | 
 
 ## Example
 

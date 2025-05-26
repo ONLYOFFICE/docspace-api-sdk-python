@@ -1,13 +1,14 @@
 # RecentConfig
 
+The presence or absence of the documents in the \"Open Recent...\" menu option.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**folder** | **str** | Folder | [optional] 
-**title** | **str** | Title | [optional] 
-**url** | **str** | Url | [optional] 
+**folder** | **str** | The folder where the document is stored. | [optional] 
+**title** | **str** | The document title that will be displayed in the Open Recent... menu option. | [optional] 
+**url** | **str** | The absolute URL to the document where it is stored. | [optional] 
 
 ## Example
 

@@ -1,13 +1,14 @@
 # LoginSettingsDto
 
+The login settings parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**attempt_count** | **int** | Maximum number of the user attempts to log in | [optional] 
-**block_time** | **int** | The time for which the user will be blocked after unsuccessful login attempts | [optional] 
-**check_period** | **int** | The time to wait for a response from the server | [optional] 
+**attempt_count** | **int** | The maximum number of consecutive failed login attempts allowed before triggering account suspension. | [optional] 
+**block_time** | **int** | The duration (in minutes) for which an account remains suspended after exceeding maximum login attempts. | [optional] 
+**check_period** | **int** | The maximum time (in seconds) allowed for server to process and respond to login requests. | [optional] 
 **is_default** | **bool** | Specifies if these settings are default or not | [optional] 
 
 ## Example

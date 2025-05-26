@@ -1,14 +1,14 @@
 # SecurityRequestsDto
 
-Security request parameters
+The request parameters for managing user security and access permissions.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**product_id** | **str** | Product ID | [optional] 
-**user_id** | **str** | User ID | [optional] 
-**administrator** | **bool** | Administrator or not | [optional] 
+**product_id** | **str** | The product ID for which permissions are being set. | 
+**user_id** | **str** | The ID of the user whose permissions are being configured. | 
+**administrator** | **bool** | Specifies whether the user has administrative privileges. | [optional] 
 
 ## Example
 

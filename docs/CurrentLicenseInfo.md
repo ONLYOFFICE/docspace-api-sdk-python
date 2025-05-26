@@ -1,12 +1,13 @@
 # CurrentLicenseInfo
 
+The current license information.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**trial** | **bool** | Indicates whether the license is a trial version | [optional] 
-**due_date** | **datetime** | Date when the license expires | [optional] 
+**trial** | **bool** | Specifies whether the license is trial or not. | [optional] 
+**due_date** | **datetime** | The date when the license expires. | [optional] 
 
 ## Example
 

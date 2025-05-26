@@ -1,11 +1,12 @@
 # FinishDto
 
+The parameters for terminating a process or operation.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**is_send_welcome_email** | **bool** | Is send welcome email | [optional] 
+**is_send_welcome_email** | **bool** | Specifies whether to send a welcome email or not. | [optional] 
 
 ## Example
 

@@ -1,12 +1,12 @@
 # TerminateRequestDto
 
-Request parameters for terminating the reassignment process
+The request parameters for terminating the reassignment/deletion process.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**user_id** | **str** | User ID whose data is reassigned/removed | [optional] 
+**user_id** | **str** | The user ID whose data is reassigned/removed. | 
 
 ## Example
 

@@ -1,12 +1,13 @@
 # CspDto
 
+The CSP (Content Security Policy) parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**domains** | **List[str]** | Domains | [optional] 
-**header** | **str** | Header | [optional] 
+**domains** | **List[str]** | The list of CSP domains. | [optional] 
+**header** | **str** | The CSP header. | [optional] 
 
 ## Example
 

@@ -1,16 +1,16 @@
 # GetReferenceDataDtoInteger
 
-Request parameters for getting reference data
+The request parameters for getting reference data.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**file_key** | **int** | The unique document identifier used by the service to get a link to the file | [optional] 
-**instance_id** | **str** | The unique system identifier | [optional] 
-**source_file_id** | **int** | Source file ID | [optional] 
-**path** | **str** | The file name or relative path for the formula editor | [optional] 
-**link** | **str** | Link to file | [optional] 
+**file_key** | **str** | The unique document identifier used by the service to get a link to the file. | 
+**instance_id** | **str** | The unique system identifier. | [optional] 
+**source_file_id** | **int** | The source file ID. | [optional] 
+**path** | **str** | The file name or relative path for the formula editor. | [optional] 
+**link** | **str** | The file link. | [optional] 
 
 ## Example
 

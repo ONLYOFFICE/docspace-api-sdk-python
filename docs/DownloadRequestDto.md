@@ -1,14 +1,14 @@
 # DownloadRequestDto
 
-Request parameters for downloading files
+The request parameters for downloading files.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**folder_ids** | [**List[BaseBatchRequestDtoFolderIdsInner]**](BaseBatchRequestDtoFolderIdsInner.md) | List of folder IDs | [optional] 
-**file_ids** | [**List[BaseBatchRequestDtoFolderIdsInner]**](BaseBatchRequestDtoFolderIdsInner.md) | List of file IDs | [optional] 
-**file_convert_ids** | [**List[DownloadRequestItemDto]**](DownloadRequestItemDto.md) | List of file IDs which will be converted | [optional] 
+**folder_ids** | [**List[BaseBatchRequestDtoFolderIdsInner]**](BaseBatchRequestDtoFolderIdsInner.md) | The list of folder IDs to be downloaded. | [optional] 
+**file_ids** | [**List[BaseBatchRequestDtoFolderIdsInner]**](BaseBatchRequestDtoFolderIdsInner.md) | The list of file IDs to be downloaded. | [optional] 
+**file_convert_ids** | [**List[DownloadRequestItemDto]**](DownloadRequestItemDto.md) | The list of file IDs which will be converted. | [optional] 
 
 ## Example
 

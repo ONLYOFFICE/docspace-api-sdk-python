@@ -1,17 +1,18 @@
 # SsoCertificate
 
+The SSO certificate parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**self_signed** | **bool** | Specifies if a certificate is self-signed or not | [optional] 
-**crt** | **str** | Certificate | [optional] 
-**key** | **str** | Key | [optional] 
-**action** | **str** | Action | [optional] 
-**domain_name** | **str** | Domain name | [optional] 
-**start_date** | **datetime** | Start date | [optional] 
-**expired_date** | **datetime** | Expiration date | [optional] 
+**self_signed** | **bool** | Specifies if a certificate is self-signed or not. | [optional] 
+**crt** | **str** | The CRT certificate file. | [optional] 
+**key** | **str** | The certificate key. | [optional] 
+**action** | **str** | The certificate action. | [optional] 
+**domain_name** | **str** | The certificate domain name. | [optional] 
+**start_date** | **datetime** | The certificate start date. | [optional] 
+**expired_date** | **datetime** | The certificate expiration date. | [optional] 
 
 ## Example
 

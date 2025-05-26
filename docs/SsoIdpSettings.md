@@ -1,16 +1,17 @@
 # SsoIdpSettings
 
+The SSO IdP settings.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**entity_id** | **str** | Entity ID | [optional] 
-**sso_url** | **str** | SSO URL | [optional] 
-**sso_binding** | **str** | SSO binding | [optional] 
-**slo_url** | **str** | SLO URL | [optional] 
-**slo_binding** | **str** | SLO binding | [optional] 
-**name_id_format** | **str** | Name ID format | [optional] 
+**entity_id** | **str** | The entity ID. | [optional] 
+**sso_url** | **str** | The SSO URL. | [optional] 
+**sso_binding** | **str** | The SSO binding. | [optional] 
+**slo_url** | **str** | The SLO URL. | [optional] 
+**slo_binding** | **str** | The SLO binding. | [optional] 
+**name_id_format** | **str** | The name ID format. | [optional] 
 
 ## Example
 

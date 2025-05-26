@@ -1,16 +1,17 @@
 # ThirdPartyParams
 
+The third-party account parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **auth_data** | [**AuthData**](AuthData.md) |  | [optional] 
-**corporate** | **bool** | Specifies if this is a corporate account or not | [optional] 
-**rooms_storage** | **bool** | Specifies if this is a room storage or not | [optional] 
-**customer_title** | **str** | Customer title | [optional] 
-**provider_id** | **int** | Provider ID | [optional] 
-**provider_key** | **str** | Provider key | [optional] 
+**corporate** | **bool** | Specifies if this is a corporate account or not. | [optional] 
+**rooms_storage** | **bool** | Specifies if this is a room storage or not. | [optional] 
+**customer_title** | **str** | The customer title. | [optional] 
+**provider_id** | **int** | The provider ID. | [optional] 
+**provider_key** | **str** | The provider key. | [optional] 
 
 ## Example
 

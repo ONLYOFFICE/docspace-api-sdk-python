@@ -1,14 +1,15 @@
 # DbTenantPartner
 
+The database tenant partner parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**tenant_id** | **int** | Tenant id | [optional] 
-**partner_id** | **str** | Partner id | [optional] 
-**affiliate_id** | **str** | Affiliate id | [optional] 
-**campaign** | **str** | Campaign | [optional] 
+**tenant_id** | **int** | The tenant ID. | [optional] 
+**partner_id** | **str** | The partner ID. | [optional] 
+**affiliate_id** | **str** | The affiliate ID. | [optional] 
+**campaign** | **str** | The tenant partner campaign. | [optional] 
 
 ## Example
 

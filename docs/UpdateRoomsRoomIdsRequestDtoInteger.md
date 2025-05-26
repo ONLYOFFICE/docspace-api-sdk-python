@@ -1,12 +1,12 @@
 # UpdateRoomsRoomIdsRequestDtoInteger
 
-Request parameters for updating room
+The request parameters for updating the room.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**room_ids** | [**List[BaseBatchRequestDtoFolderIdsInner]**](BaseBatchRequestDtoFolderIdsInner.md) | List of room IDs | [optional] 
+**room_ids** | [**List[BaseBatchRequestDtoFolderIdsInner]**](BaseBatchRequestDtoFolderIdsInner.md) | The list of room IDs. | [optional] 
 
 ## Example
 

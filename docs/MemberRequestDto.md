@@ -1,32 +1,32 @@
 # MemberRequestDto
 
-Member request parameters
+The user request parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**password** | **str** | Password | [optional] 
-**password_hash** | **str** | Password hash | [optional] 
-**email** | **str** | Email | [optional] 
+**password** | **str** | The user password. | [optional] 
+**password_hash** | **str** | The user password hash. | [optional] 
+**email** | **str** | The user email address. | [optional] 
 **type** | [**EmployeeType**](EmployeeType.md) |  | [optional] 
-**is_user** | **bool** | Specifies if this is a guest or a user | [optional] 
-**first_name** | **str** | First name | [optional] 
-**last_name** | **str** | Last name | [optional] 
-**department** | **List[str]** | List of user departments | [optional] 
-**title** | **str** | Title | [optional] 
-**location** | **str** | Location | [optional] 
+**is_user** | **bool** | Specifies if this is a guest or a user. | [optional] 
+**first_name** | **str** | The user first name. | [optional] 
+**last_name** | **str** | The user last name. | [optional] 
+**department** | **List[str]** | The list of the user departments IDs. | [optional] 
+**title** | **str** | The user title. | [optional] 
+**location** | **str** | The user location. | [optional] 
 **sex** | [**SexEnum**](SexEnum.md) |  | [optional] 
 **birthday** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] 
 **worksfrom** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] 
-**comment** | **str** | Comment | [optional] 
-**contacts** | [**List[Contact]**](Contact.md) | List of user contacts | [optional] 
-**files** | **str** | Avatar photo URL | [optional] 
-**from_invite_link** | **bool** | Specifies if the user is added via the invitation link or not | [optional] 
-**key** | **str** | Key | [optional] 
-**culture_name** | **str** | Language | [optional] 
-**target** | **str** | Target | [optional] 
-**spam** | **bool** | Spam | [optional] 
+**comment** | **str** | The user comment. | [optional] 
+**contacts** | [**List[Contact]**](Contact.md) | The list of the user contacts. | [optional] 
+**files** | **str** | The avatar photo URL. | [optional] 
+**from_invite_link** | **bool** | Specifies if the user is added via the invitation link or not. | [optional] 
+**key** | **str** | The user key. | [optional] 
+**culture_name** | **str** | The user culture code. | [optional] 
+**target** | **str** | The user target ID. | [optional] 
+**spam** | **bool** | Specifies if tips, updates and offers are allowed to be sent to the user or not. | [optional] 
 
 ## Example
 

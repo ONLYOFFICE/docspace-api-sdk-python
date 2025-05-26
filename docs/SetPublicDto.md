@@ -1,12 +1,13 @@
 # SetPublicDto
 
+The public settings of the room template to set.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **int** | Template id | [optional] 
-**public** | **bool** | Public settings | [optional] 
+**id** | **int** | The room template ID. | 
+**public** | **bool** | Specifies whether the room template is public or not. | [optional] 
 
 ## Example
 

@@ -1,13 +1,13 @@
 # AdminMessageSettingsRequestsDto
 
-Request parameters for administrator message settings
+The request parameters for configuring the administrator message content.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**message** | **str** | Message | [optional] 
-**email** | **str** | Email | [optional] 
+**message** | **str** | The content of the administrator message to be sent. | 
+**email** | **str** | Email | 
 **culture** | **str** | Culture | [optional] 
 
 ## Example

@@ -1,13 +1,13 @@
 # FirebaseRequestsDto
 
-Firebase request parameters
+The Firebase-related request parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**firebase_device_token** | **str** | Firebase device token | [optional] 
-**is_subscribed** | **bool** | Specifies if the user is subscribed to the push notification or not | [optional] 
+**firebase_device_token** | **str** | The Firebase device token. | [optional] 
+**is_subscribed** | **bool** | Specifies whether the user is subscribed to the push notifications or not. | [optional] 
 
 ## Example
 

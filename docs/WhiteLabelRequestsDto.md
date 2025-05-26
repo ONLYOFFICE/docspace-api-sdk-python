@@ -1,13 +1,13 @@
 # WhiteLabelRequestsDto
 
-Request parameters for white label settings
+The request parameters for configuring the white label branding settings.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**logo_text** | **str** | Logo text | [optional] 
-**logo** | [**List[ItemKeyValuePairStringLogoRequestsDto]**](ItemKeyValuePairStringLogoRequestsDto.md) | Tenant IDs with their logos (light or dark) | [optional] 
+**logo_text** | **str** | The text to display alongside or in place of the logo. | [optional] 
+**logo** | [**List[ItemKeyValuePairStringLogoRequestsDto]**](ItemKeyValuePairStringLogoRequestsDto.md) | The white label tenant IDs with their logos (light or dark). | [optional] 
 
 ## Example
 

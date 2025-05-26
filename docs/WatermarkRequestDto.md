@@ -1,19 +1,19 @@
 # WatermarkRequestDto
 
-Request parameters for adding watermarks
+The request parameters for adding watermarks.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**enabled** | **bool** | Specifies whether watermarks are on or off | [optional] 
+**enabled** | **bool** | Specifies whether watermarks are on or off. | [optional] 
 **additions** | [**WatermarkAdditions**](WatermarkAdditions.md) |  | [optional] 
-**text** | **str** | Watermark Text | [optional] 
-**rotate** | **int** | Watermark text and image rotate | [optional] 
-**image_scale** | **int** | Watermark image scale | [optional] 
-**image_url** | **str** | The path to the temporary image file | [optional] 
-**image_height** | **float** | Watermark image height | [optional] 
-**image_width** | **float** | Watermark image width | [optional] 
+**text** | **str** | The watermark text. | [optional] 
+**rotate** | **int** | The watermark text and image rotate angle. | [optional] 
+**image_scale** | **int** | The watermark image scale. | [optional] 
+**image_url** | **str** | The path to the temporary image file. | [optional] 
+**image_height** | **float** | The watermark image height. | [optional] 
+**image_width** | **float** | The watermark image width. | [optional] 
 
 ## Example
 

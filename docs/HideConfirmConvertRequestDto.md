@@ -1,12 +1,12 @@
 # HideConfirmConvertRequestDto
 
-Request parameters for hiding the confirmation dialog
+The request parameters for hiding the confirmation dialog when converting.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**save** | **bool** | Specifies whether to set the specified settings or not | [optional] 
+**save** | **bool** | Specifies whether to set the specified settings or not. | [optional] 
 
 ## Example
 

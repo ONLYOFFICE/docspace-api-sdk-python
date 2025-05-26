@@ -1,13 +1,13 @@
 # TenantQuotaSettingsRequestsDto
 
-Request parameters for the tenant quota settings
+The request parameters for managing the tenant storage quota settings in a multi-tenant system.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**tenant_id** | **int** | Tenant ID | [optional] 
-**quota** | **int** | Quota | [optional] 
+**tenant_id** | **int** | The ID of the tenant whose quota is being configured. | 
+**quota** | **int** | The storage quota limit in bytes allocated to the tenant. | [optional] 
 
 ## Example
 

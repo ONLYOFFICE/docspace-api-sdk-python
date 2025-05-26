@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **module** | **str** |  | [optional] 
 **props** | **Dict[str, Optional[str]]** |  | [optional] 
+**last_modified** | **datetime** |  | [optional] 
 
 ## Example
 

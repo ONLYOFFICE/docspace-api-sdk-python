@@ -1,15 +1,15 @@
 # DeleteBatchRequestDto
 
-Request parameters for deleting files
+The request parameters for deleting files.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**folder_ids** | [**List[BaseBatchRequestDtoFolderIdsInner]**](BaseBatchRequestDtoFolderIdsInner.md) | List of folder IDs | [optional] 
-**file_ids** | [**List[BaseBatchRequestDtoFolderIdsInner]**](BaseBatchRequestDtoFolderIdsInner.md) | List of file IDs | [optional] 
+**folder_ids** | [**List[BaseBatchRequestDtoFolderIdsInner]**](BaseBatchRequestDtoFolderIdsInner.md) | The list of folder IDs to be deleted. | [optional] 
+**file_ids** | [**List[BaseBatchRequestDtoFolderIdsInner]**](BaseBatchRequestDtoFolderIdsInner.md) | The list of file IDs to be deleted. | [optional] 
 **delete_after** | **bool** | Specifies whether to delete a file after the editing session is finished or not | [optional] 
-**immediately** | **bool** | Specifies whether to move a file to the \\\&quot;Trash\\\&quot; folder or delete it immediately | [optional] 
+**immediately** | **bool** | Specifies whether to move a file to the \\\&quot;Trash\\\&quot; folder or delete it immediately. | [optional] 
 
 ## Example
 

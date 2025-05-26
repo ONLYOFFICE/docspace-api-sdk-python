@@ -1,17 +1,18 @@
 # ProviderDto
 
+The provider information.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **str** | Provider name | [optional] 
-**key** | **str** | Provider key | [optional] 
-**connected** | **bool** | Connected flag | [optional] 
-**oauth** | **bool** | Oauth flag | [optional] 
-**redirect_url** | **str** | Redirect url | [optional] 
-**required_connection_url** | **bool** | Required connection url flag | [optional] 
-**client_id** | **str** | Oauth client id | [optional] 
+**name** | **str** | The provider name. | [optional] 
+**key** | **str** | The provider key. | [optional] 
+**connected** | **bool** | Specifies whether the provider is connected. | [optional] 
+**oauth** | **bool** | Specifies if the provider is OAuth. | [optional] 
+**redirect_url** | **str** | The provider redirect URL. | [optional] 
+**required_connection_url** | **bool** | The required connection URL flag. | [optional] 
+**client_id** | **str** | The provider OAuth client ID. | [optional] 
 
 ## Example
 

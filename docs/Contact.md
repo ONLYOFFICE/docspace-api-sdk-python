@@ -1,12 +1,13 @@
 # Contact
 
+The contact information.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**type** | **str** | Contact type | [optional] 
-**value** | **str** | Contact value | [optional] 
+**type** | **str** | The contact type. | [optional] 
+**value** | **str** | The contact value. | [optional] 
 
 ## Example
 

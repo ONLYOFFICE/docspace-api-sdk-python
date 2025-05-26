@@ -1,12 +1,13 @@
 # WebhooksConfigWithStatusDto
 
+The webhook configuration with its status.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **configs** | [**WebhooksConfigDto**](WebhooksConfigDto.md) |  | [optional] 
-**status** | **int** | Status | [optional] 
+**status** | **int** | The webhook status. | [optional] 
 
 ## Example
 

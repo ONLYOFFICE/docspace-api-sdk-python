@@ -1,15 +1,15 @@
 # PasswordSettingsRequestsDto
 
-Password settings
+The request parameters for configuring the password complexity requirements.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**min_length** | **int** | Minimum password length | [optional] 
-**upper_case** | **bool** | Specifies if the password must include the uppercase letters or not | [optional] 
-**digits** | **bool** | Specifies if the password must include the digits or not | [optional] 
-**spec_symbols** | **bool** | Specifies if the password must include the special symbols or not | [optional] 
+**min_length** | **int** | The minimum number of characters required for valid passwords. | [optional] 
+**upper_case** | **bool** | Specifies whether the password should contain the uppercase letters or not. | [optional] 
+**digits** | **bool** | Specifies whether the password should contain the digits or not. | [optional] 
+**spec_symbols** | **bool** | Specifies whether the password should contain the special symbols or not. | [optional] 
 
 ## Example
 

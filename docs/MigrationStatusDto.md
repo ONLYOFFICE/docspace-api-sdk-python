@@ -1,14 +1,15 @@
 # MigrationStatusDto
 
+The migration status parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**progress** | **float** | Migration progress | [optional] 
-**error** | **str** | Migration error | [optional] 
+**progress** | **float** | The migration progress. | [optional] 
+**error** | **str** | The migration error. | [optional] 
 **parse_result** | [**MigrationApiInfo**](MigrationApiInfo.md) |  | [optional] 
-**is_completed** | **bool** | Specifies whether the migration is completed | [optional] 
+**is_completed** | **bool** | Specifies whether the migration is completed or not. | [optional] 
 
 ## Example
 

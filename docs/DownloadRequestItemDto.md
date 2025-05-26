@@ -1,14 +1,14 @@
 # DownloadRequestItemDto
 
-Represents an item in the download request with conversion parameters and security settings
+The download request item with conversion parameters and security settings.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**key** | [**DownloadRequestItemDtoKey**](DownloadRequestItemDtoKey.md) |  | [optional] 
-**value** | **str** | The target format or conversion type for the file download | [optional] 
-**password** | **str** | Optional password for accessing protected files | [optional] 
+**key** | [**DownloadRequestItemDtoKey**](DownloadRequestItemDtoKey.md) |  | 
+**value** | **str** | The target format or conversion type for the file download. | 
+**password** | **str** | The optional password for accessing protected files. | [optional] 
 
 ## Example
 

@@ -1,12 +1,13 @@
 # ActiveConnectionsDto
 
+The active connections parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**login_event** | **int** | Login event | [optional] 
-**items** | [**List[ActiveConnectionsItemDto]**](ActiveConnectionsItemDto.md) | Items | [optional] 
+**login_event** | **int** | The login event. | [optional] 
+**items** | [**List[ActiveConnectionsItemDto]**](ActiveConnectionsItemDto.md) | The list of active connection items. | [optional] 
 
 ## Example
 

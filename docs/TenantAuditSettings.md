@@ -1,12 +1,14 @@
 # TenantAuditSettings
 
+The tenant audit settings parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**login_history_life_time** | **int** | Login history lifetime | [optional] 
-**audit_trail_life_time** | **int** | Audit trail lifetime | [optional] 
+**login_history_life_time** | **int** | The login history lifetime. | [optional] 
+**audit_trail_life_time** | **int** | The audit trail lifetime. | [optional] 
+**last_modified** | **datetime** |  | [optional] 
 
 ## Example
 

@@ -1,15 +1,16 @@
 # UsageSpaceStatItemDto
 
+The parameters of the usage space statistics item.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **str** | Name | [optional] 
-**icon** | **str** | Icon | [optional] 
-**disabled** | **bool** | Specifies if the module space is disabled or not | [optional] 
-**size** | **str** | Size | [optional] 
-**url** | **str** | URL | [optional] 
+**name** | **str** | The item name. | [optional] 
+**icon** | **str** | The item icon path. | [optional] 
+**disabled** | **bool** | Specifies if the item is disabled or not. | [optional] 
+**size** | **str** | The item used space. | [optional] 
+**url** | **str** | The item URL. | [optional] 
 
 ## Example
 

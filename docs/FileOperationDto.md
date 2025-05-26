@@ -1,19 +1,20 @@
 # FileOperationDto
 
+The file operation information.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** | Operation ID | [optional] 
+**id** | **str** | The file operation ID. | [optional] 
 **operation** | [**FileOperationType**](FileOperationType.md) |  | [optional] 
-**progress** | **int** | Operation progress | [optional] 
-**error** | **str** | Error | [optional] 
-**processed** | **str** | Processing status | [optional] 
-**finished** | **bool** | Specifies if the operation is finished or not | [optional] 
-**url** | **str** | URL | [optional] 
-**files** | [**List[FileEntryDto]**](FileEntryDto.md) | List of files | [optional] 
-**folders** | [**List[FileEntryDto]**](FileEntryDto.md) | List of folders | [optional] 
+**progress** | **int** | The file operation progress in percentage. | [optional] 
+**error** | **str** | The file operation error message. | [optional] 
+**processed** | **str** | The file operation processing status. | [optional] 
+**finished** | **bool** | Specifies if the file operation is finished or not. | [optional] 
+**url** | **str** | The file operation URL. | [optional] 
+**files** | [**List[FileEntryDto]**](FileEntryDto.md) | The list of files of the file operation. | [optional] 
+**folders** | [**List[FileEntryDto]**](FileEntryDto.md) | The list of folders of the file operation. | [optional] 
 
 ## Example
 

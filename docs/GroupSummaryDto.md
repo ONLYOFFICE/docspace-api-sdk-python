@@ -1,13 +1,14 @@
 # GroupSummaryDto
 
+The group summary parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** | ID | [optional] 
-**name** | **str** | Name | [optional] 
-**manager** | **str** | Manager | [optional] 
+**id** | **str** | The group ID. | [optional] 
+**name** | **str** | The group name. | [optional] 
+**manager** | **str** | The group manager. | [optional] 
 
 ## Example
 

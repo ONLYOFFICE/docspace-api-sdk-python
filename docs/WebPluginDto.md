@@ -1,25 +1,26 @@
 # WebPluginDto
 
+The web plugin information.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **str** | Name | [optional] 
-**version** | **str** | Version | [optional] 
-**description** | **str** | Description | [optional] 
-**license** | **str** | License | [optional] 
-**author** | **str** | Author | [optional] 
-**home_page** | **str** | Home page | [optional] 
-**plugin_name** | **str** | PluginName | [optional] 
-**scopes** | **str** | Scopes | [optional] 
-**image** | **str** | Image | [optional] 
+**name** | **str** | The web plugin name. | [optional] 
+**version** | **str** | The web plugin version. | [optional] 
+**description** | **str** | The web plugin description. | [optional] 
+**license** | **str** | The web plugin license. | [optional] 
+**author** | **str** | The web plugin author. | [optional] 
+**home_page** | **str** | The web plugin home page URL. | [optional] 
+**plugin_name** | **str** | The name by which the web plugin is registered in the window object. | [optional] 
+**scopes** | **str** | The web plugin scopes. | [optional] 
+**image** | **str** | The web plugin image. | [optional] 
 **create_by** | [**EmployeeDto**](EmployeeDto.md) |  | [optional] 
-**create_on** | **datetime** | Create on | [optional] 
-**enabled** | **bool** | Enabled | [optional] 
-**system** | **bool** | System | [optional] 
-**url** | **str** | Url | [optional] 
-**settings** | **str** | Settings | [optional] 
+**create_on** | **datetime** | The date and time when the web plugin was created. | [optional] 
+**enabled** | **bool** | Specifies if the web plugin is enabled or not. | [optional] 
+**system** | **bool** | Specifies if the web plugin is system or not. | [optional] 
+**url** | **str** | The web plugin URL. | [optional] 
+**settings** | **str** | The web plugin settings. | [optional] 
 
 ## Example
 

@@ -1,11 +1,12 @@
 # PluginsConfig
 
+The configuration settings to connect the special add-ons.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**plugins_data** | **List[str]** |  | [optional] [readonly] 
+**plugins_data** | **List[str]** | The array of absolute URLs to the plugin configuration files. | [optional] [readonly] 
 
 ## Example
 

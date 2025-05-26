@@ -1,17 +1,18 @@
 # FormGalleryDto
 
+The form gallery parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**path** | **str** | Path | [optional] 
-**domain** | **str** | Domain | [optional] 
-**ext** | **str** | Ext | [optional] 
-**upload_path** | **str** | Upload path | [optional] 
-**upload_domain** | **str** | Upload domain | [optional] 
-**upload_ext** | **str** | Upload ext | [optional] 
-**upload_dashboard** | **str** | Upload dashboard | [optional] 
+**path** | **str** | The form gallery path. | [optional] 
+**domain** | **str** | The form gallery domain. | [optional] 
+**ext** | **str** | The form gallery extension. | [optional] 
+**upload_path** | **str** | The form gallery upload path. | [optional] 
+**upload_domain** | **str** | The form gallery upload domain. | [optional] 
+**upload_ext** | **str** | The form gallery upload extension. | [optional] 
+**upload_dashboard** | **str** | The form gallery upload dashboard. | [optional] 
 
 ## Example
 

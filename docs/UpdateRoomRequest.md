@@ -1,21 +1,21 @@
 # UpdateRoomRequest
 
-Parameters for updating a room
+The request parameters for updating a room.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**title** | **str** | Room name | [optional] 
-**quota** | **int** | Room quota | [optional] 
-**indexing** | **bool** | Indexing | [optional] 
-**deny_download** | **bool** | Room quota | [optional] 
+**title** | **str** | The room title. | [optional] 
+**quota** | **int** | The room quota. | [optional] 
+**indexing** | **bool** | Specifies whether to create a third-party room with indexing. | [optional] 
+**deny_download** | **bool** | Specifies whether to deny downloads from the third-party room. | [optional] 
 **lifetime** | [**RoomDataLifetimeDto**](RoomDataLifetimeDto.md) |  | [optional] 
 **watermark** | [**WatermarkRequestDto**](WatermarkRequestDto.md) |  | [optional] 
 **logo** | [**LogoRequest**](LogoRequest.md) |  | [optional] 
-**tags** | **List[str]** | List of tags | [optional] 
-**color** | **str** | Color | [optional] 
-**cover** | **str** | Cover | [optional] 
+**tags** | **List[str]** | The list of tags. | [optional] 
+**color** | **str** | The room color. | [optional] 
+**cover** | **str** | The room cover. | [optional] 
 
 ## Example
 

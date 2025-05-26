@@ -1,18 +1,19 @@
 # PasswordSettingsDto
 
+The password settings parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**min_length** | **int** | Min length | [optional] 
-**upper_case** | **bool** | Upper case | [optional] 
-**digits** | **bool** | Digits | [optional] 
-**spec_symbols** | **bool** | Spec symbols | [optional] 
-**allowed_characters_regex_str** | **str** | Allowed characters regex str | [optional] 
-**digits_regex_str** | **str** | Digits regex str | [optional] 
-**upper_case_regex_str** | **str** | Upper case regex str | [optional] 
-**spec_symbols_regex_str** | **str** | Spec symbols regex str | [optional] 
+**min_length** | **int** | The minimum number of characters required for valid passwords. | [optional] 
+**upper_case** | **bool** | Specifies whether the password should contain the uppercase letters or not. | [optional] 
+**digits** | **bool** | Specifies whether the password should contain the digits or not. | [optional] 
+**spec_symbols** | **bool** | Specifies whether the password should contain the special symbols or not. | [optional] 
+**allowed_characters_regex_str** | **str** | The allowed password characters in the regex string format. | [optional] 
+**digits_regex_str** | **str** | The password digits in the regex string format. | [optional] 
+**upper_case_regex_str** | **str** | The password uppercase letters in the regex string format. | [optional] 
+**spec_symbols_regex_str** | **str** | The passaword special symbols in the regex string format. | [optional] 
 
 ## Example
 

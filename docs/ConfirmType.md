@@ -1,44 +1,46 @@
 # ConfirmType
 
-
+[0 - Emp invite, 1 - Link invite, 2 - Portal suspend, 3 - Portal continue, 4 - Portal remove, 5 - Dns change, 6 - Portal owner change, 7 - Activation, 8 - Email change, 9 - Email activation, 10 - Password change, 11 - Profile remove, 12 - Phone activation, 13 - Phone auth, 14 - Auth, 15 - Tfa activation, 16 - Tfa auth, 17 - Wizard, 18 - Guest share link]
 
 ## Enum
 
-* `NUMBER_0` (value: `0`)
+* `EmpInvite` (value: `0`)
 
-* `NUMBER_1` (value: `1`)
+* `LinkInvite` (value: `1`)
 
-* `NUMBER_2` (value: `2`)
+* `PortalSuspend` (value: `2`)
 
-* `NUMBER_3` (value: `3`)
+* `PortalContinue` (value: `3`)
 
-* `NUMBER_4` (value: `4`)
+* `PortalRemove` (value: `4`)
 
-* `NUMBER_5` (value: `5`)
+* `DnsChange` (value: `5`)
 
-* `NUMBER_6` (value: `6`)
+* `PortalOwnerChange` (value: `6`)
 
-* `NUMBER_7` (value: `7`)
+* `Activation` (value: `7`)
 
-* `NUMBER_8` (value: `8`)
+* `EmailChange` (value: `8`)
 
-* `NUMBER_9` (value: `9`)
+* `EmailActivation` (value: `9`)
 
-* `NUMBER_10` (value: `10`)
+* `PasswordChange` (value: `10`)
 
-* `NUMBER_11` (value: `11`)
+* `ProfileRemove` (value: `11`)
 
-* `NUMBER_12` (value: `12`)
+* `PhoneActivation` (value: `12`)
 
-* `NUMBER_13` (value: `13`)
+* `PhoneAuth` (value: `13`)
 
-* `NUMBER_14` (value: `14`)
+* `Auth` (value: `14`)
 
-* `NUMBER_15` (value: `15`)
+* `TfaActivation` (value: `15`)
 
-* `NUMBER_16` (value: `16`)
+* `TfaAuth` (value: `16`)
 
-* `NUMBER_17` (value: `17`)
+* `Wizard` (value: `17`)
+
+* `GuestShareLink` (value: `18`)
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

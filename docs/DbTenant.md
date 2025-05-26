@@ -1,30 +1,31 @@
 # DbTenant
 
+The database tenant parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **int** | Id | [optional] 
-**name** | **str** | Name | [optional] 
-**alias** | **str** | Alias | [optional] 
+**id** | **int** | The tenant ID. | [optional] 
+**name** | **str** | The tenant name. | [optional] 
+**alias** | **str** | The tenant alias. | [optional] 
 **mapped_domain** | **str** | Mapped domain | [optional] 
-**version** | **int** | Version | [optional] 
-**version_changed** | **datetime** | Version_changed | [optional] 
-**version_changed** | **datetime** | Version changed | [optional] 
-**language** | **str** | Language | [optional] 
-**time_zone** | **str** | Time zone | [optional] 
-**trusted_domains_raw** | **str** | Trusted domains raw | [optional] 
+**version** | **int** | The tenant version. | [optional] 
+**version_changed** | **datetime** | The Version_changed field. | [optional] 
+**version_changed** | **datetime** | The date and time when the version was changed. | [optional] 
+**language** | **str** | The tenant language. | [optional] 
+**time_zone** | **str** | The tenant time zone. | [optional] 
+**trusted_domains_raw** | **str** | The tenant trusted domains raw. | [optional] 
 **trusted_domains_enabled** | [**TenantTrustedDomainsType**](TenantTrustedDomainsType.md) |  | [optional] 
 **status** | [**TenantStatus**](TenantStatus.md) |  | [optional] 
-**status_changed** | **datetime** | Status changed | [optional] 
-**status_changed_hack** | **datetime** | Status changed hack | [optional] 
-**creation_date_time** | **datetime** | Creation date time | [optional] 
-**owner_id** | **str** | Owner id | [optional] 
-**payment_id** | **str** | Payment id | [optional] 
+**status_changed** | **datetime** | The date and time when the tenant status was changed. | [optional] 
+**status_changed_hack** | **datetime** | The hacked date and time when the tenant status was changed. | [optional] 
+**creation_date_time** | **datetime** | The tenant creation date. | [optional] 
+**owner_id** | **str** | The tenant owner ID. | [optional] 
+**payment_id** | **str** | The tenant payment ID. | [optional] 
 **industry** | [**TenantIndustry**](TenantIndustry.md) |  | [optional] 
-**last_modified** | **datetime** | Last modified | [optional] 
-**calls** | **bool** | Calls | [optional] 
+**last_modified** | **datetime** | The date and time when the tenant was last modified. | [optional] 
+**calls** | **bool** | Specifies if the calls are available for the current tenant or not. | [optional] 
 **partner** | [**DbTenantPartner**](DbTenantPartner.md) |  | [optional] 
 
 ## Example

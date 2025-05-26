@@ -1,14 +1,14 @@
 # BackupDto
 
-Backup parameters
+The backup parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **storage_type** | [**BackupStorageType**](BackupStorageType.md) |  | [optional] 
-**storage_params** | [**List[ItemKeyValuePairObjectObject]**](ItemKeyValuePairObjectObject.md) | Storage parameters | [optional] 
-**dump** | **bool** | Specifies if a dump will be created or not | [optional] 
+**storage_params** | [**List[ItemKeyValuePairObjectObject]**](ItemKeyValuePairObjectObject.md) | The backup storage parameters. | [optional] 
+**dump** | **bool** | Specifies if a dump will be created or not. | [optional] 
 
 ## Example
 

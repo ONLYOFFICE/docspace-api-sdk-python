@@ -1,13 +1,13 @@
 # UpdateFile
 
-Parameters for updating a file
+The parameters for updating a file.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**title** | **str** | File title | [optional] 
-**last_version** | **int** | Number of the latest file version | [optional] 
+**title** | **str** | The file title to update. | [optional] 
+**last_version** | **int** | The number of the latest file version. | [optional] 
 
 ## Example
 

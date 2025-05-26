@@ -1,16 +1,17 @@
 # CustomerConfigDto
 
+The customer config parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**address** | **str** | Address | [optional] 
-**logo** | **str** | Logo | [optional] 
-**logo_dark** | **str** | Dark logo | [optional] 
-**mail** | **str** | Mail | [optional] 
-**name** | **str** | Name | [optional] 
-**www** | **str** | Site | [optional] 
+**address** | **str** | The address of the customer configuration. | [optional] 
+**logo** | **str** | The logo of the customer configuration. | [optional] 
+**logo_dark** | **str** | The dark logo of the customer configuration. | [optional] 
+**mail** | **str** | The mail address of the customer configuration. | [optional] 
+**name** | **str** | The name of the customer configuration. | [optional] 
+**www** | **str** | The site web address of the customer configuration. | [optional] 
 
 ## Example
 

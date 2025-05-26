@@ -1,12 +1,12 @@
 # UpdateMembersQuotaRequestDto
 
-Request parameters for updating user information
+The request parameters for updating a user quota.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**user_ids** | **List[str]** | List of user IDs | [optional] 
+**user_ids** | **List[str]** | The list of user IDs. | [optional] 
 **quota** | [**UpdateMembersQuotaRequestDtoQuota**](UpdateMembersQuotaRequestDtoQuota.md) |  | [optional] 
 
 ## Example

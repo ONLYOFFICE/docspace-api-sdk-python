@@ -4,20 +4,24 @@ All URIs are relative to *http://localhost:8092*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**csp**](SecurityCSPApi.md#csp) | **POST** /api/2.0/security/csp | Csp
-[**get_csp**](SecurityCSPApi.md#get_csp) | **GET** /api/2.0/security/csp | Gets csp
+[**csp**](SecurityCSPApi.md#csp) | **POST** /api/2.0/security/csp | Configure CSP settings
+[**get_csp**](SecurityCSPApi.md#get_csp) | **GET** /api/2.0/security/csp | Get CSP settings
 
 
 # **csp**
 > CspWrapper csp(csp_requests_dto=csp_requests_dto)
 
-Csp
+Configure CSP settings
 
-Csp
+Configures the CSP (Content Security Policy) settings for the current portal.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -37,11 +41,30 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
@@ -50,7 +73,7 @@ with docspace.ApiClient(configuration) as api_client:
     csp_requests_dto = docspace.CspRequestsDto() # CspRequestsDto |  (optional)
 
     try:
-        # Csp
+        # Configure CSP settings
         api_response = api_instance.csp(csp_requests_dto=csp_requests_dto)
         print("The response of SecurityCSPApi->csp:\n")
         pprint(api_response)
@@ -73,7 +96,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -93,9 +116,9 @@ Name | Type | Description  | Notes
 # **get_csp**
 > CspWrapper get_csp()
 
-Gets csp
+Get CSP settings
 
-Gets csp
+Returns the CSP (Content Security Policy) settings for the current portal.
 
 ### Example
 
@@ -119,7 +142,7 @@ with docspace.ApiClient(configuration) as api_client:
     api_instance = docspace.SecurityCSPApi(api_client)
 
     try:
-        # Gets csp
+        # Get CSP settings
         api_response = api_instance.get_csp()
         print("The response of SecurityCSPApi->get_csp:\n")
         pprint(api_response)

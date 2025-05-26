@@ -1,12 +1,12 @@
 # TurnOnAdminMessageSettingsRequestDto
 
-Request parameters for administrator message settings
+The request parameters for enabling or disabling administrator messaging system.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**turn_on** | **bool** | Specifies if the administrator messages are enabled or not | [optional] 
+**turn_on** | **bool** | The global switch for the administrator messaging functionality. | [optional] 
 
 ## Example
 

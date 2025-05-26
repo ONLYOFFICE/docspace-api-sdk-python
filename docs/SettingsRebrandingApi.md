@@ -32,7 +32,11 @@ Deletes the additional white label settings.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -51,11 +55,30 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
@@ -83,7 +106,7 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -109,7 +132,11 @@ Deletes the company white label settings.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -128,11 +155,30 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
@@ -160,7 +206,7 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -186,7 +232,11 @@ Returns the additional white label settings.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -205,11 +255,30 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
@@ -237,7 +306,7 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -262,7 +331,11 @@ Returns the company white label settings.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -281,11 +354,30 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
@@ -313,7 +405,7 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -338,7 +430,11 @@ Checks if the white label is enabled or not.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -357,11 +453,30 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
@@ -389,7 +504,7 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -414,7 +529,11 @@ Specifies if the white label logo text are default or not.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -433,18 +552,37 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.SettingsRebrandingApi(api_client)
-    is_dark = true # bool | Specifies if the logo is for a dark theme or not (optional)
-    is_default = true # bool | Specifies if the logo is for a default tenant or not (optional)
+    is_dark = true # bool | Specifies if the white label logo is for the dark theme or not. (optional)
+    is_default = true # bool | Specifies if the logo is for a default tenant or not. (optional)
 
     try:
         # Check the default white label logo text
@@ -462,8 +600,8 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **is_dark** | **bool**| Specifies if the logo is for a dark theme or not | [optional] 
- **is_default** | **bool**| Specifies if the logo is for a default tenant or not | [optional] 
+ **is_dark** | **bool**| Specifies if the white label logo is for the dark theme or not. | [optional] 
+ **is_default** | **bool**| Specifies if the logo is for a default tenant or not. | [optional] 
 
 ### Return type
 
@@ -471,7 +609,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -496,7 +634,11 @@ Specifies if the white label logos are default or not.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -515,18 +657,37 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.SettingsRebrandingApi(api_client)
-    is_dark = true # bool | Specifies if the logo is for a dark theme or not (optional)
-    is_default = true # bool | Specifies if the logo is for a default tenant or not (optional)
+    is_dark = true # bool | Specifies if the white label logo is for the dark theme or not. (optional)
+    is_default = true # bool | Specifies if the logo is for a default tenant or not. (optional)
 
     try:
         # Check the default white label logos
@@ -544,8 +705,8 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **is_dark** | **bool**| Specifies if the logo is for a dark theme or not | [optional] 
- **is_default** | **bool**| Specifies if the logo is for a default tenant or not | [optional] 
+ **is_dark** | **bool**| Specifies if the white label logo is for the dark theme or not. | [optional] 
+ **is_default** | **bool**| Specifies if the logo is for a default tenant or not. | [optional] 
 
 ### Return type
 
@@ -553,7 +714,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -578,7 +739,11 @@ Returns the licensor data.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -597,11 +762,30 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
@@ -629,7 +813,7 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -654,7 +838,11 @@ Returns the white label logo text.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -673,18 +861,37 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.SettingsRebrandingApi(api_client)
-    is_dark = true # bool | Specifies if the logo is for a dark theme or not (optional)
-    is_default = true # bool | Specifies if the logo is for a default tenant or not (optional)
+    is_dark = true # bool | Specifies if the white label logo is for the dark theme or not. (optional)
+    is_default = true # bool | Specifies if the logo is for a default tenant or not. (optional)
 
     try:
         # Get the white label logo text
@@ -702,8 +909,8 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **is_dark** | **bool**| Specifies if the logo is for a dark theme or not | [optional] 
- **is_default** | **bool**| Specifies if the logo is for a default tenant or not | [optional] 
+ **is_dark** | **bool**| Specifies if the white label logo is for the dark theme or not. | [optional] 
+ **is_default** | **bool**| Specifies if the logo is for a default tenant or not. | [optional] 
 
 ### Return type
 
@@ -711,7 +918,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -754,8 +961,8 @@ configuration = docspace.Configuration(
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.SettingsRebrandingApi(api_client)
-    is_dark = true # bool | Specifies if the logo is for a dark theme or not (optional)
-    is_default = true # bool | Specifies if the logo is for a default tenant or not (optional)
+    is_dark = true # bool | Specifies if the white label logo is for the dark theme or not. (optional)
+    is_default = true # bool | Specifies if the logo is for a default tenant or not. (optional)
 
     try:
         # Get the white label logos
@@ -773,8 +980,8 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **is_dark** | **bool**| Specifies if the logo is for a dark theme or not | [optional] 
- **is_default** | **bool**| Specifies if the logo is for a default tenant or not | [optional] 
+ **is_dark** | **bool**| Specifies if the white label logo is for the dark theme or not. | [optional] 
+ **is_default** | **bool**| Specifies if the logo is for a default tenant or not. | [optional] 
 
 ### Return type
 
@@ -806,7 +1013,11 @@ Restores the white label logo text.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -825,18 +1036,37 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.SettingsRebrandingApi(api_client)
-    is_dark = true # bool | Specifies if the logo is for a dark theme or not (optional)
-    is_default = true # bool | Specifies if the logo is for a default tenant or not (optional)
+    is_dark = true # bool | Specifies if the white label logo is for the dark theme or not. (optional)
+    is_default = true # bool | Specifies if the logo is for a default tenant or not. (optional)
 
     try:
         # Restore the white label logo text
@@ -854,8 +1084,8 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **is_dark** | **bool**| Specifies if the logo is for a dark theme or not | [optional] 
- **is_default** | **bool**| Specifies if the logo is for a default tenant or not | [optional] 
+ **is_dark** | **bool**| Specifies if the white label logo is for the dark theme or not. | [optional] 
+ **is_default** | **bool**| Specifies if the logo is for a default tenant or not. | [optional] 
 
 ### Return type
 
@@ -863,7 +1093,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -889,7 +1119,11 @@ Restores the white label logos.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -908,18 +1142,37 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.SettingsRebrandingApi(api_client)
-    is_dark = true # bool | Specifies if the logo is for a dark theme or not (optional)
-    is_default = true # bool | Specifies if the logo is for a default tenant or not (optional)
+    is_dark = true # bool | Specifies if the white label logo is for the dark theme or not. (optional)
+    is_default = true # bool | Specifies if the logo is for a default tenant or not. (optional)
 
     try:
         # Restore the white label logos
@@ -937,8 +1190,8 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **is_dark** | **bool**| Specifies if the logo is for a dark theme or not | [optional] 
- **is_default** | **bool**| Specifies if the logo is for a default tenant or not | [optional] 
+ **is_dark** | **bool**| Specifies if the white label logo is for the dark theme or not. | [optional] 
+ **is_default** | **bool**| Specifies if the logo is for a default tenant or not. | [optional] 
 
 ### Return type
 
@@ -946,7 +1199,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -972,7 +1225,11 @@ Saves the additional white label settings specified in the request.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -992,11 +1249,30 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
@@ -1028,7 +1304,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -1055,7 +1331,11 @@ Saves the company white label settings specified in the request.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -1075,11 +1355,30 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
@@ -1111,7 +1410,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -1138,7 +1437,11 @@ Saves the white label logo text specified in the request.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -1158,18 +1461,37 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.SettingsRebrandingApi(api_client)
-    is_dark = true # bool | Specifies if the logo is for a dark theme or not (optional)
-    is_default = true # bool | Specifies if the logo is for a default tenant or not (optional)
+    is_dark = true # bool | Specifies if the white label logo is for the dark theme or not. (optional)
+    is_default = true # bool | Specifies if the logo is for a default tenant or not. (optional)
     white_label_requests_dto = docspace.WhiteLabelRequestsDto() # WhiteLabelRequestsDto |  (optional)
 
     try:
@@ -1188,8 +1510,8 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **is_dark** | **bool**| Specifies if the logo is for a dark theme or not | [optional] 
- **is_default** | **bool**| Specifies if the logo is for a default tenant or not | [optional] 
+ **is_dark** | **bool**| Specifies if the white label logo is for the dark theme or not. | [optional] 
+ **is_default** | **bool**| Specifies if the logo is for a default tenant or not. | [optional] 
  **white_label_requests_dto** | [**WhiteLabelRequestsDto**](WhiteLabelRequestsDto.md)|  | [optional] 
 
 ### Return type
@@ -1198,7 +1520,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -1224,7 +1546,11 @@ Saves the white label logos specified in the request.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -1244,18 +1570,37 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.SettingsRebrandingApi(api_client)
-    is_dark = true # bool | Specifies if the logo is for a dark theme or not (optional)
-    is_default = true # bool | Specifies if the logo is for a default tenant or not (optional)
+    is_dark = true # bool | Specifies if the white label logo is for the dark theme or not. (optional)
+    is_default = true # bool | Specifies if the logo is for a default tenant or not. (optional)
     white_label_requests_dto = docspace.WhiteLabelRequestsDto() # WhiteLabelRequestsDto |  (optional)
 
     try:
@@ -1274,8 +1619,8 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **is_dark** | **bool**| Specifies if the logo is for a dark theme or not | [optional] 
- **is_default** | **bool**| Specifies if the logo is for a default tenant or not | [optional] 
+ **is_dark** | **bool**| Specifies if the white label logo is for the dark theme or not. | [optional] 
+ **is_default** | **bool**| Specifies if the logo is for a default tenant or not. | [optional] 
  **white_label_requests_dto** | [**WhiteLabelRequestsDto**](WhiteLabelRequestsDto.md)|  | [optional] 
 
 ### Return type
@@ -1284,7 +1629,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -1310,7 +1655,11 @@ Saves the white label logos from files.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -1329,18 +1678,37 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.SettingsRebrandingApi(api_client)
-    is_dark = true # bool | Specifies if the logo is for a dark theme or not (optional)
-    is_default = true # bool | Specifies if the logo is for a default tenant or not (optional)
+    is_dark = true # bool | Specifies if the white label logo is for the dark theme or not. (optional)
+    is_default = true # bool | Specifies if the logo is for a default tenant or not. (optional)
 
     try:
         # Save the white label logos from files
@@ -1358,8 +1726,8 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **is_dark** | **bool**| Specifies if the logo is for a dark theme or not | [optional] 
- **is_default** | **bool**| Specifies if the logo is for a default tenant or not | [optional] 
+ **is_dark** | **bool**| Specifies if the white label logo is for the dark theme or not. | [optional] 
+ **is_default** | **bool**| Specifies if the logo is for a default tenant or not. | [optional] 
 
 ### Return type
 
@@ -1367,7 +1735,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 

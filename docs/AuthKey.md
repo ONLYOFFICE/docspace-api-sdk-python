@@ -1,13 +1,14 @@
 # AuthKey
 
+The authentication key parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **str** | Name | [optional] 
-**value** | **str** | Value | [optional] 
-**title** | **str** | Title | [optional] 
+**name** | **str** | The authentication key name. | [optional] 
+**value** | **str** | The authentication key value. | [optional] 
+**title** | **str** | The authentication key title. | [optional] 
 
 ## Example
 

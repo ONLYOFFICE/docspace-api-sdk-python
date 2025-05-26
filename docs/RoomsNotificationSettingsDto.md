@@ -1,11 +1,12 @@
 # RoomsNotificationSettingsDto
 
+The rooms notification settings.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**disabled_rooms** | **List[object]** | List of rooms with the disabled notifications | [optional] 
+**disabled_rooms** | **List[object]** | The list of rooms with the disabled notifications. | [optional] 
 
 ## Example
 

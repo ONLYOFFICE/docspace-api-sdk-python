@@ -1,14 +1,14 @@
 # MemberBaseRequestDto
 
-Request parameters for setting new password
+The request parameters for the user generic information.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**password** | **str** | Password | [optional] 
-**password_hash** | **str** | Password hash | [optional] 
-**email** | **str** | Email | [optional] 
+**password** | **str** | The user password. | [optional] 
+**password_hash** | **str** | The user password hash. | [optional] 
+**email** | **str** | The user email address. | [optional] 
 
 ## Example
 

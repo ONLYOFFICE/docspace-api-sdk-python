@@ -1,19 +1,20 @@
 # Module
 
+The module information.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** | ID | [optional] 
-**app_name** | **str** | Product class name | [optional] 
-**title** | **str** | Title | [optional] 
-**link** | **str** | Start link | [optional] 
-**icon_url** | **str** | Icon URL | [optional] 
-**image_url** | **str** | Large image URL | [optional] 
-**help_url** | **str** | Help URL | [optional] 
-**description** | **str** | Description | [optional] 
-**is_primary** | **bool** | Specifies if the module is primary or not | [optional] 
+**id** | **str** | The module ID. | [optional] 
+**app_name** | **str** | The module product class name. | [optional] 
+**title** | **str** | The module product class name. | [optional] 
+**link** | **str** | The URL to the module start page. | [optional] 
+**icon_url** | **str** | The module icon URL. | [optional] 
+**image_url** | **str** | The module large image URL. | [optional] 
+**help_url** | **str** | The module help URL. | [optional] 
+**description** | **str** | The module description. | [optional] 
+**is_primary** | **bool** | Specifies if the module is primary or not. | [optional] 
 
 ## Example
 

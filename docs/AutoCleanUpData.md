@@ -1,11 +1,12 @@
 # AutoCleanUpData
 
+The auto-clearing setting parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**is_auto_clean_up** | **bool** | Specifies if the auto-clearing setting is enabled or not | [optional] 
+**is_auto_clean_up** | **bool** | Specifies whether to permanently delete files in the Trash folder. | [optional] 
 **gap** | [**DateToAutoCleanUp**](DateToAutoCleanUp.md) |  | [optional] 
 
 ## Example

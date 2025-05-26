@@ -1,5 +1,6 @@
 # FilesStatisticsResultDto
 
+The file statistics result parameters.
 
 ## Properties
 

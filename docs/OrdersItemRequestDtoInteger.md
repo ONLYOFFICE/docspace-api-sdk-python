@@ -1,14 +1,14 @@
 # OrdersItemRequestDtoInteger
 
-Represents an item in the ordering request with its entry type and ID
+An item in the ordering request with its entry type and ID.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**entry_id** | **int** | The unique identifier of the entry (file or folder) | [optional] 
+**entry_id** | **int** | The entry unique identifier (file or folder). | [optional] 
 **entry_type** | [**FileEntryType**](FileEntryType.md) |  | [optional] 
-**order** | **int** | The order value | [optional] 
+**order** | **int** | The order value. | [optional] 
 
 ## Example
 

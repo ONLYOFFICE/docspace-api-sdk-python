@@ -1,5 +1,6 @@
 # Options
 
+The document options.
 
 ## Properties
 

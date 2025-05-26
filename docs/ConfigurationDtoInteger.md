@@ -1,21 +1,24 @@
 # ConfigurationDtoInteger
 
+The configuration parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **document** | [**DocumentConfigDto**](DocumentConfigDto.md) |  | [optional] 
-**document_type** | **str** | Document type | [optional] 
+**document_type** | **str** | The document type. | [optional] 
 **editor_config** | [**EditorConfigurationDto**](EditorConfigurationDto.md) |  | [optional] 
 **editor_type** | [**EditorType**](EditorType.md) |  | [optional] 
-**editor_url** | **str** | Editor URL | [optional] 
-**token** | **str** | Token | [optional] 
-**type** | **str** | Platform type | [optional] 
+**editor_url** | **str** | The editor URL. | [optional] 
+**token** | **str** | The token of the file configuration. | [optional] 
+**type** | **str** | The platform type. | [optional] 
 **file** | [**FileDtoInteger**](FileDtoInteger.md) |  | [optional] 
-**error_message** | **str** | Error message | [optional] 
-**start_filling** | **bool** | Specifies if the filling has started or not | [optional] 
-**filling_session_id** | **str** | Filling session Id | [optional] 
+**error_message** | **str** | The error message. | [optional] 
+**start_filling** | **bool** | Specifies if the file filling has started or not. | [optional] 
+**filling_status** | **bool** | The file filling status. | [optional] 
+**start_filling_mode** | [**StartFillingMode**](StartFillingMode.md) |  | [optional] 
+**filling_session_id** | **str** | The file filling session ID. | [optional] 
 
 ## Example
 

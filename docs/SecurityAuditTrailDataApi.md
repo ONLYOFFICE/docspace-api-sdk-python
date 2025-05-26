@@ -22,7 +22,11 @@ Generates the audit trail report.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -41,11 +45,30 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
@@ -73,7 +96,7 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -100,7 +123,11 @@ Returns a list of the audit events by the parameters specified in the request.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -125,25 +152,44 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.SecurityAuditTrailDataApi(api_client)
-    user_id = 'aae1e103-bca5-9fa1-ba8c-42058b4abf28' # str | User ID (optional)
-    product_type = docspace.ProductType() # ProductType | Product (optional)
-    module_type = docspace.ModuleType() # ModuleType | Module (optional)
-    action_type = docspace.ActionType() # ActionType | Action type (optional)
-    action = docspace.MessageAction() # MessageAction | Action (optional)
-    entry_type = docspace.EntryType() # EntryType | Entry (optional)
-    target = 'some text' # str | Target (optional)
-    var_from = docspace.ApiDateTime() # ApiDateTime | Start date (optional)
-    to = docspace.ApiDateTime() # ApiDateTime | End date (optional)
+    user_id = 'aae1e103-bca5-9fa1-ba8c-42058b4abf28' # str | The ID of the user who triggered the audit event. (optional)
+    product_type = docspace.ProductType() # ProductType | The type of product related to the audit event. (optional)
+    module_type = docspace.ModuleType() # ModuleType | The module within the product where the audit event occurred. (optional)
+    action_type = docspace.ActionType() # ActionType | The type of action performed in the audit event (e.g., Create, Update, Delete). (optional)
+    action = docspace.MessageAction() # MessageAction | The specific action that occurred within the audit event. (optional)
+    entry_type = docspace.EntryType() # EntryType | The type of audit entry (e.g., Folder, User, File). (optional)
+    target = 'some text' # str | The target object affected by the audit event (e.g., document ID, user account). (optional)
+    var_from = docspace.ApiDateTime() # ApiDateTime | The starting date and time for filtering audit events. (optional)
+    to = docspace.ApiDateTime() # ApiDateTime | The ending date and time for filtering audit events. (optional)
 
     try:
         # Get filtered audit trail data
@@ -161,15 +207,15 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **user_id** | **str**| User ID | [optional] 
- **product_type** | [**ProductType**](.md)| Product | [optional] 
- **module_type** | [**ModuleType**](.md)| Module | [optional] 
- **action_type** | [**ActionType**](.md)| Action type | [optional] 
- **action** | [**MessageAction**](.md)| Action | [optional] 
- **entry_type** | [**EntryType**](.md)| Entry | [optional] 
- **target** | **str**| Target | [optional] 
- **var_from** | [**ApiDateTime**](.md)| Start date | [optional] 
- **to** | [**ApiDateTime**](.md)| End date | [optional] 
+ **user_id** | **str**| The ID of the user who triggered the audit event. | [optional] 
+ **product_type** | [**ProductType**](.md)| The type of product related to the audit event. | [optional] 
+ **module_type** | [**ModuleType**](.md)| The module within the product where the audit event occurred. | [optional] 
+ **action_type** | [**ActionType**](.md)| The type of action performed in the audit event (e.g., Create, Update, Delete). | [optional] 
+ **action** | [**MessageAction**](.md)| The specific action that occurred within the audit event. | [optional] 
+ **entry_type** | [**EntryType**](.md)| The type of audit entry (e.g., Folder, User, File). | [optional] 
+ **target** | **str**| The target object affected by the audit event (e.g., document ID, user account). | [optional] 
+ **var_from** | [**ApiDateTime**](.md)| The starting date and time for filtering audit events. | [optional] 
+ **to** | [**ApiDateTime**](.md)| The ending date and time for filtering audit events. | [optional] 
 
 ### Return type
 
@@ -177,7 +223,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -203,7 +249,11 @@ Returns the audit trail settings.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -222,11 +272,30 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
@@ -254,7 +323,7 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -276,11 +345,15 @@ This endpoint does not need any parameter.
 
 Get audit trail data
 
-Returns a list of the latest changes (creation, modification, deletion, etc.) made by users to the entities (tasks, opportunities, files, etc.) on the portal.
+Returns a list of the latest changes (creation, modification, deletion, etc.) made by users to the entities on the portal.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -299,11 +372,30 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
@@ -331,7 +423,7 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -377,8 +469,8 @@ configuration = docspace.Configuration(
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.SecurityAuditTrailDataApi(api_client)
-    product_type = docspace.ProductType() # ProductType | Product (optional)
-    module_type = docspace.ModuleType() # ModuleType | Module (optional)
+    product_type = docspace.ProductType() # ProductType | The type of product related to the audit trail. (optional)
+    module_type = docspace.ModuleType() # ModuleType | The module within the product associated with the audit trail. (optional)
 
     try:
         # Get audit trail mappers
@@ -396,8 +488,8 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **product_type** | [**ProductType**](.md)| Product | [optional] 
- **module_type** | [**ModuleType**](.md)| Module | [optional] 
+ **product_type** | [**ProductType**](.md)| The type of product related to the audit trail. | [optional] 
+ **module_type** | [**ModuleType**](.md)| The module within the product associated with the audit trail. | [optional] 
 
 ### Return type
 
@@ -493,7 +585,11 @@ Sets the audit trail settings for the current portal.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -512,11 +608,30 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
@@ -548,7 +663,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 

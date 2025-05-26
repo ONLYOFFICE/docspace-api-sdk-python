@@ -1,12 +1,12 @@
 # WebItemsSecurityRequestsDto
 
-Module request parameters
+The request parameters for configuring security settings across multiple web modules.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**items** | [**List[ItemKeyValuePairStringBoolean]**](ItemKeyValuePairStringBoolean.md) | Products with security information | [optional] 
+**items** | [**List[ItemKeyValuePairStringBoolean]**](ItemKeyValuePairStringBoolean.md) | The list of module security configurations. | [optional] 
 
 ## Example
 

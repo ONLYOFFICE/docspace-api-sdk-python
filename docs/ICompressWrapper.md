@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**response** | **object** | Archiving Class Unification Interface | [optional] 
+**response** | **object** | The archiving class unification interface. | [optional] 
 **count** | **int** |  | [optional] 
 **links** | [**List[ActiveConnectionsWrapperLinksInner]**](ActiveConnectionsWrapperLinksInner.md) |  | [optional] 
 **status** | **int** |  | [optional] 

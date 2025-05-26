@@ -1,12 +1,13 @@
 # LogoCover
 
+The logo cover information.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** |  | [optional] 
-**data** | **str** |  | [optional] 
+**id** | **str** | The logo cover ID. | [optional] 
+**data** | **str** | The logo cover data. | [optional] 
 
 ## Example
 

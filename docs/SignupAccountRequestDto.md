@@ -1,18 +1,18 @@
 # SignupAccountRequestDto
 
-Request parameters for creating a third-party account
+The request parameters for creating a third-party account.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **employee_type** | [**EmployeeType**](EmployeeType.md) |  | [optional] 
-**first_name** | **str** | First name | [optional] 
-**last_name** | **str** | Last name | [optional] 
-**email** | **str** | Email address | [optional] 
-**password_hash** | **str** | Password hash | [optional] 
-**key** | **str** | Link key | [optional] 
-**culture** | **str** | Culture | [optional] 
+**first_name** | **str** | The user first name. | [optional] 
+**last_name** | **str** | The user last name. | [optional] 
+**email** | **str** | The user email address. | [optional] 
+**password_hash** | **str** | The user password hash. | [optional] 
+**key** | **str** | The user link key. | [optional] 
+**culture** | **str** | The user culture code. | [optional] 
 **serialized_profile** | **str** | Third-party profile in the serialized format | [optional] 
 
 ## Example

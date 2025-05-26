@@ -1,15 +1,16 @@
 # StorageDto
 
+The storage information.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** | ID | [optional] 
-**title** | **str** | Title | [optional] 
-**properties** | [**List[AuthKey]**](AuthKey.md) | List of authentication keys | [optional] 
-**current** | **bool** | Specifies if this is the current storage or not | [optional] 
-**is_set** | **bool** | Specifies if this storage can be set or not | [optional] 
+**id** | **str** | The storage ID. | [optional] 
+**title** | **str** | The storage title. | [optional] 
+**properties** | [**List[AuthKey]**](AuthKey.md) | The list of storage authentication keys. | [optional] 
+**current** | **bool** | Specifies if this is the current portal storage or not. | [optional] 
+**is_set** | **bool** | Specifies if this storage can be set or not. | [optional] 
 
 ## Example
 

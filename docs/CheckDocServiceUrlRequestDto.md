@@ -1,17 +1,17 @@
 # CheckDocServiceUrlRequestDto
 
-Request parameters for checking the document service location
+The request parameters for checking the document service location.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**doc_service_url** | **str** | The Document Server address | [optional] 
-**doc_service_url_internal** | **str** | The Document Server address in the local private network | [optional] 
-**doc_service_url_portal** | **str** | The Community Server address | [optional] 
-**doc_service_signature_secret** | **str** | Signature secret | [optional] 
-**doc_service_signature_header** | **str** | Signature header | [optional] 
-**doc_service_ssl_verification** | **bool** | Enable SSL verification | [optional] 
+**doc_service_url** | **str** | The ONLYOFFICE Docs URL address. | [optional] 
+**doc_service_url_internal** | **str** | The ONLYOFFICE Docs URL address in the local private network. | [optional] 
+**doc_service_url_portal** | **str** | The ONLYOFFICE Docs URL address. | [optional] 
+**doc_service_signature_secret** | **str** | The signature secret of the ONLYOFFICE Docs. | [optional] 
+**doc_service_signature_header** | **str** | The signature header of the ONLYOFFICE Docs. | [optional] 
+**doc_service_ssl_verification** | **bool** | Specifies if the SSL verification of the ONLYOFFICE Docs is enabled or not. | [optional] 
 
 ## Example
 

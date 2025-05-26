@@ -1,11 +1,12 @@
 # HistoryData
 
+The history data.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**initiator_name** | **str** |  | [optional] [readonly] 
+**initiator_name** | **str** | The name of the action initiator. | [optional] [readonly] 
 
 ## Example
 

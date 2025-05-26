@@ -1,12 +1,12 @@
 # WebhookRetryRequestsDto
 
-Request parameters to retry webhooks
+The request parameters for requesting the webhook delivery retries.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ids** | **List[int]** | List of webhook IDs | [optional] 
+**ids** | **List[int]** | The list of webhook delivery IDs to retry. | [optional] 
 
 ## Example
 

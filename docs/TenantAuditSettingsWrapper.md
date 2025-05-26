@@ -1,6 +1,6 @@
 # TenantAuditSettingsWrapper
 
-Audit trail settings
+The tenant audit settings wrapper.
 
 ## Properties
 

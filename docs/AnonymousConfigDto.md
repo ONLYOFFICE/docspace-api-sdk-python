@@ -1,11 +1,12 @@
 # AnonymousConfigDto
 
+The anonymous config parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**request** | **bool** | Request | [optional] 
+**request** | **bool** | Specifies if the anonymous is a request. | [optional] 
 
 ## Example
 

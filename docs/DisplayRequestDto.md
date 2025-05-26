@@ -1,12 +1,12 @@
 # DisplayRequestDto
 
-Settings request parameters
+The settings request parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**set** | **bool** | Specifies whether to set the specified settings or not | [optional] 
+**set** | **bool** | Specifies whether to set the specified settings or not. | [optional] 
 
 ## Example
 

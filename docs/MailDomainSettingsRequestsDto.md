@@ -1,14 +1,14 @@
 # MailDomainSettingsRequestsDto
 
-Request parameters for mail domain settings
+The request parameters for configuring trusted mail domains and visitor invitation settings.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**type** | [**TenantTrustedDomainsType**](TenantTrustedDomainsType.md) |  | [optional] 
-**domains** | **List[str]** | List of trusted domains | [optional] 
-**invite_users_as_visitors** | **bool** | Invites as a user or not | [optional] 
+**type** | [**TenantTrustedDomainsType**](TenantTrustedDomainsType.md) |  | 
+**domains** | **List[str]** | The list of authorized email domains that are considered trusted. | 
+**invite_users_as_visitors** | **bool** | Specifies the default permission level for the invited users (visitors or not). | [optional] 
 
 ## Example
 

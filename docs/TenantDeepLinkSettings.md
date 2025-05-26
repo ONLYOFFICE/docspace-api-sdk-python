@@ -1,11 +1,13 @@
 # TenantDeepLinkSettings
 
+The deep link settings.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **handling_mode** | [**DeepLinkHandlingMode**](DeepLinkHandlingMode.md) |  | [optional] 
+**last_modified** | **datetime** |  | [optional] 
 
 ## Example
 
