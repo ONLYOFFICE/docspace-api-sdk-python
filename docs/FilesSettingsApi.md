@@ -15,7 +15,6 @@ Method | HTTP request | Description
 [**external_share_social_media**](FilesSettingsApi.md#external_share_social_media) | **PUT** /api/2.0/files/settings/externalsocialmedia | Change the external sharing ability on social networks
 [**forcesave**](FilesSettingsApi.md#forcesave) | **PUT** /api/2.0/files/forcesave | Change the forcesaving ability
 [**get_automatically_clean_up**](FilesSettingsApi.md#get_automatically_clean_up) | **GET** /api/2.0/files/settings/autocleanup | Get the trash bin auto-clearing setting
-[**get_doc_service_url**](FilesSettingsApi.md#get_doc_service_url) | **GET** /api/2.0/files/docservice | Get the document service URL
 [**get_files_module**](FilesSettingsApi.md#get_files_module) | **GET** /api/2.0/files/info | Get the \&quot;Documents\&quot; information
 [**get_files_settings**](FilesSettingsApi.md#get_files_settings) | **GET** /api/2.0/files/settings | Get file settings
 [**hide_confirm_cancel_operation**](FilesSettingsApi.md#hide_confirm_cancel_operation) | **PUT** /api/2.0/files/hideconfirmcanceloperation | Hide confirmation dialog when canceling operations
@@ -1160,74 +1159,6 @@ This endpoint does not need any parameter.
 |-------------|-------------|------------------|
 **200** | The auto-clearing setting properties: auto-clearing or not, a time interval when the auto-clearing will be performed |  -  |
 **401** | Unauthorized |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **get_doc_service_url**
-> DocServiceUrlWrapper get_doc_service_url(version=version)
-
-Get the document service URL
-
-Returns the URL address of the connected editors.
-
-### Example
-
-
-```python
-import docspace
-from docspace.models.doc_service_url_wrapper import DocServiceUrlWrapper
-from docspace.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace.Configuration(
-    host = "http://localhost:8092"
-)
-
-
-# Enter a context with an instance of the API client
-with docspace.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace.FilesSettingsApi(api_client)
-    version = true # bool | Specifies whether to return the editor version or not. (optional)
-
-    try:
-        # Get the document service URL
-        api_response = api_instance.get_doc_service_url(version=version)
-        print("The response of FilesSettingsApi->get_doc_service_url:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling FilesSettingsApi->get_doc_service_url: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **version** | **bool**| Specifies whether to return the editor version or not. | [optional] 
-
-### Return type
-
-[**DocServiceUrlWrapper**](DocServiceUrlWrapper.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | The document service URL with the editor version specified |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

@@ -13,7 +13,6 @@ Method | HTTP request | Description
 [**get_settings**](SettingsCommonSettingsApi.md#get_settings) | **GET** /api/2.0/settings | Get the portal settings
 [**get_socket_settings**](SettingsCommonSettingsApi.md#get_socket_settings) | **GET** /api/2.0/settings/socket | Get the socket settings
 [**get_supported_cultures**](SettingsCommonSettingsApi.md#get_supported_cultures) | **GET** /api/2.0/settings/cultures | Get supported languages
-[**get_tenant_user_invitation_settings**](SettingsCommonSettingsApi.md#get_tenant_user_invitation_settings) | **GET** /api/2.0/settings/invitationsettings | Get the user invitation settings
 [**get_time_zones_async**](SettingsCommonSettingsApi.md#get_time_zones_async) | **GET** /api/2.0/settings/timezones | Get time zones
 [**gett_deep_link_settings**](SettingsCommonSettingsApi.md#gett_deep_link_settings) | **GET** /api/2.0/settings/deeplink | Get the deep link settings
 [**payment_settings**](SettingsCommonSettingsApi.md#payment_settings) | **GET** /api/2.0/settings/payment | Get the payment settings
@@ -22,7 +21,6 @@ Method | HTTP request | Description
 [**save_dns_settings**](SettingsCommonSettingsApi.md#save_dns_settings) | **PUT** /api/2.0/settings/dns | Save the DNS settings
 [**save_mail_domain_settings**](SettingsCommonSettingsApi.md#save_mail_domain_settings) | **POST** /api/2.0/settings/maildomainsettings | Save the mail domain settings
 [**update_email_activation_settings**](SettingsCommonSettingsApi.md#update_email_activation_settings) | **PUT** /api/2.0/settings/emailactivation | Update the email activation settings
-[**update_invitation_settings**](SettingsCommonSettingsApi.md#update_invitation_settings) | **PUT** /api/2.0/settings/invitationsettings | Update user invitation settings
 
 
 # **close_admin_helper**
@@ -821,70 +819,6 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | List of all the available portal languages |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **get_tenant_user_invitation_settings**
-> TenantUserInvitationSettingsWrapper get_tenant_user_invitation_settings()
-
-Get the user invitation settings
-
-Returns the portal user invitation settings.
-
-### Example
-
-
-```python
-import docspace
-from docspace.models.tenant_user_invitation_settings_wrapper import TenantUserInvitationSettingsWrapper
-from docspace.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace.Configuration(
-    host = "http://localhost:8092"
-)
-
-
-# Enter a context with an instance of the API client
-with docspace.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace.SettingsCommonSettingsApi(api_client)
-
-    try:
-        # Get the user invitation settings
-        api_response = api_instance.get_tenant_user_invitation_settings()
-        print("The response of SettingsCommonSettingsApi->get_tenant_user_invitation_settings:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling SettingsCommonSettingsApi->get_tenant_user_invitation_settings: %s\n" % e)
-```
-
-
-
-### Parameters
-
-This endpoint does not need any parameter.
-
-### Return type
-
-[**TenantUserInvitationSettingsWrapper**](TenantUserInvitationSettingsWrapper.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | portal user invitation settings |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1705,110 +1639,6 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Updated email activation settings |  -  |
-**401** | Unauthorized |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **update_invitation_settings**
-> TenantUserInvitationSettingsWrapper update_invitation_settings(tenant_user_invitation_settings_request_dto=tenant_user_invitation_settings_request_dto)
-
-Update user invitation settings
-
-Updates the portal user invitation settings.
-
-### Example
-
-* Basic Authentication (Basic):
-* OAuth Authentication (OAuth2):
-* Api Key Authentication (ApiKeyBearer):
-* Api Key Authentication (asc_auth_key):
-* Bearer (JWT) Authentication (Bearer):
-
-```python
-import docspace
-from docspace.models.tenant_user_invitation_settings_request_dto import TenantUserInvitationSettingsRequestDto
-from docspace.models.tenant_user_invitation_settings_wrapper import TenantUserInvitationSettingsWrapper
-from docspace.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace.Configuration(
-    host = "http://localhost:8092"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure HTTP basic authorization: Basic
-configuration = docspace.Configuration(
-    username = os.environ["USERNAME"],
-    password = os.environ["PASSWORD"]
-)
-
-configuration.access_token = os.environ["ACCESS_TOKEN"]
-
-# Configure API key authorization: ApiKeyBearer
-configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-
-# Enter a context with an instance of the API client
-with docspace.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace.SettingsCommonSettingsApi(api_client)
-    tenant_user_invitation_settings_request_dto = docspace.TenantUserInvitationSettingsRequestDto() # TenantUserInvitationSettingsRequestDto |  (optional)
-
-    try:
-        # Update user invitation settings
-        api_response = api_instance.update_invitation_settings(tenant_user_invitation_settings_request_dto=tenant_user_invitation_settings_request_dto)
-        print("The response of SettingsCommonSettingsApi->update_invitation_settings:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling SettingsCommonSettingsApi->update_invitation_settings: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **tenant_user_invitation_settings_request_dto** | [**TenantUserInvitationSettingsRequestDto**](TenantUserInvitationSettingsRequestDto.md)|  | [optional] 
-
-### Return type
-
-[**TenantUserInvitationSettingsWrapper**](TenantUserInvitationSettingsWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Updated user invitation settings |  -  |
 **401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

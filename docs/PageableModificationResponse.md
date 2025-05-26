@@ -1,14 +1,13 @@
 # PageableModificationResponse
 
-The response containing paginated modification information.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**data** | **object** | The paginated modification data. | [optional] 
-**limit** | **int** | The maximum number of results returned per page. | [optional] 
-**last_modified_on** | **datetime** | The date when the user consent was last modified. | [optional] 
+**data** | **object** |  | [optional] 
+**limit** | **int** |  | [optional] 
+**last_modified_on** | **datetime** |  | [optional] 
 
 ## Example
 

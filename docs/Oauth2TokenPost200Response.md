@@ -5,10 +5,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**access_token** | **str** | The access token issued by the authorization server. | [optional] 
-**token_type** | **str** | The type of token issued, typically &#39;Bearer&#39;. | [optional] 
-**expires_in** | **int** | The number of seconds until the access token expires. | [optional] 
-**refresh_token** | **str** | The token used to obtain a new access token when the current one expires. | [optional] 
+**access_token** | **str** |  | [optional] 
+**token_type** | **str** |  | [optional] 
+**expires_in** | **int** |  | [optional] 
+**refresh_token** | **str** |  | [optional] 
 
 ## Example
 

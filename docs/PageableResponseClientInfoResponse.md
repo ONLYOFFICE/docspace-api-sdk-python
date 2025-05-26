@@ -1,15 +1,14 @@
 # PageableResponseClientInfoResponse
 
-The response containing paginated client information.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**data** | **object** | The paginated client data. | [optional] 
-**limit** | **int** | The maximum number of results returned per page. | [optional] 
-**last_client_id** | **str** | The identifier of the last retrieved client. | [optional] 
-**last_created_on** | **datetime** | The creation date of the last retrieved client. | [optional] 
+**data** | **object** |  | [optional] 
+**limit** | **int** |  | [optional] 
+**last_client_id** | **str** |  | [optional] 
+**last_created_on** | **datetime** |  | [optional] 
 
 ## Example
 

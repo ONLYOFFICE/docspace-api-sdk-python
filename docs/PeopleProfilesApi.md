@@ -531,7 +531,7 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_by_email**
-> EmployeeFullWrapper get_by_email(email=email, culture=culture)
+> EmployeeFullWrapper get_by_email(email=email)
 
 Get a profile by user email
 
@@ -592,11 +592,10 @@ with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.PeopleProfilesApi(api_client)
     email = 'Sydney_Roberts4@hotmail.com' # str | The user email address. (optional)
-    culture = 'some text' # str | Culture (optional)
 
     try:
         # Get a profile by user email
-        api_response = api_instance.get_by_email(email=email, culture=culture)
+        api_response = api_instance.get_by_email(email=email)
         print("The response of PeopleProfilesApi->get_by_email:\n")
         pprint(api_response)
     except Exception as e:
@@ -611,7 +610,6 @@ with docspace.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **email** | **str**| The user email address. | [optional] 
- **culture** | **str**| Culture | [optional] 
 
 ### Return type
 

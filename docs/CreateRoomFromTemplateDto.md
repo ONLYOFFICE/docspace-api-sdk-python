@@ -13,12 +13,7 @@ Name | Type | Description | Notes
 **tags** | **List[str]** | The collection of tags. | [optional] 
 **color** | **str** | The color of the room to be created. | [optional] 
 **cover** | **str** | The cover of the room to be created. | [optional] 
-**quota** | **int** | The room quota. | [optional] 
-**indexing** | **bool** | Specifies whether to create a room with indexing. | [optional] 
-**deny_download** | **bool** | Specifies whether to deny downloads from the room. | [optional] 
-**lifetime** | [**RoomDataLifetimeDto**](RoomDataLifetimeDto.md) |  | [optional] 
-**watermark** | [**WatermarkRequestDto**](WatermarkRequestDto.md) |  | [optional] 
-**private** | **bool** | Specifies whether the room to be created is private or not. | [optional] 
+**quota** | **int** | Room quota | [optional] 
 
 ## Example
 

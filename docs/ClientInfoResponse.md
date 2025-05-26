@@ -1,25 +1,24 @@
 # ClientInfoResponse
 
-The response containing public client information.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **str** | The client name. | [optional] 
-**description** | **str** | The client description. | [optional] 
-**scopes** | **List[str]** | The client scopes. | [optional] 
-**client_id** | **str** | The client ID. | [optional] 
-**website_url** | **str** | The URL to the client&#39;s website | [optional] 
-**terms_url** | **str** | The URL to the client&#39;s terms of service. | [optional] 
-**policy_url** | **str** | The URL to the client&#39;s privacy policy. | [optional] 
-**logo** | **str** | The client logo in base64 format. | [optional] 
-**authentication_methods** | **List[str]** | The authentication methods supported by the client. | [optional] 
-**is_public** | **bool** | Indicates whether the client is accessible by third-party tenants. | [optional] 
-**created_on** | **datetime** | The date and time when the client was created. | [optional] 
-**created_by** | **str** | The user who created the client. | [optional] 
-**modified_on** | **datetime** | The date and time when the client was last modified. | [optional] 
-**modified_by** | **str** | The user who last modified the client. | [optional] 
+**name** | **str** |  | [optional] 
+**description** | **str** |  | [optional] 
+**scopes** | **List[str]** |  | [optional] 
+**client_id** | **str** |  | [optional] 
+**website_url** | **str** |  | [optional] 
+**terms_url** | **str** |  | [optional] 
+**policy_url** | **str** |  | [optional] 
+**logo** | **str** |  | [optional] 
+**authentication_methods** | **List[str]** |  | [optional] 
+**is_public** | **bool** |  | [optional] 
+**created_on** | **datetime** |  | [optional] 
+**created_by** | **str** |  | [optional] 
+**modified_on** | **datetime** |  | [optional] 
+**modified_by** | **str** |  | [optional] 
 
 ## Example
 

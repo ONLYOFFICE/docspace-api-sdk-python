@@ -7,7 +7,6 @@ Method | HTTP request | Description
 [**create_api_key**](ApiKeysApi.md#create_api_key) | **POST** /api/2.0/keys | Create a user API key
 [**delete_api_key**](ApiKeysApi.md#delete_api_key) | **DELETE** /api/2.0/keys/{keyId} | Delete a user API key
 [**get_all_permissions**](ApiKeysApi.md#get_all_permissions) | **GET** /api/2.0/keys/permissions | Get API key permissions
-[**get_api_key**](ApiKeysApi.md#get_api_key) | **GET** /api/2.0/keys/@self | Get user API key info
 [**get_api_keys**](ApiKeysApi.md#get_api_keys) | **GET** /api/2.0/keys | Get user API keys
 [**update_api_key**](ApiKeysApi.md#update_api_key) | **PUT** /api/2.0/keys/{keyId} | Update an API key
 
@@ -314,105 +313,6 @@ This endpoint does not need any parameter.
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | List of all available permissions for key |  -  |
-**401** | Unauthorized |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **get_api_key**
-> ApiKeyResponseWrapper get_api_key()
-
-Get user API key info
-
-Returns current user API key info.
-
-### Example
-
-* Basic Authentication (Basic):
-* OAuth Authentication (OAuth2):
-* Api Key Authentication (ApiKeyBearer):
-* Api Key Authentication (asc_auth_key):
-* Bearer (JWT) Authentication (Bearer):
-
-```python
-import docspace
-from docspace.models.api_key_response_wrapper import ApiKeyResponseWrapper
-from docspace.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace.Configuration(
-    host = "http://localhost:8092"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure HTTP basic authorization: Basic
-configuration = docspace.Configuration(
-    username = os.environ["USERNAME"],
-    password = os.environ["PASSWORD"]
-)
-
-configuration.access_token = os.environ["ACCESS_TOKEN"]
-
-# Configure API key authorization: ApiKeyBearer
-configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-
-# Enter a context with an instance of the API client
-with docspace.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace.ApiKeysApi(api_client)
-
-    try:
-        # Get user API key info
-        api_response = api_instance.get_api_key()
-        print("The response of ApiKeysApi->get_api_key:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling ApiKeysApi->get_api_key: %s\n" % e)
-```
-
-
-
-### Parameters
-
-This endpoint does not need any parameter.
-
-### Return type
-
-[**ApiKeyResponseWrapper**](ApiKeyResponseWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | List of api keys for user |  -  |
 **401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

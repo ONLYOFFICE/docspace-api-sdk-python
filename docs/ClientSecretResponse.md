@@ -1,12 +1,11 @@
 # ClientSecretResponse
 
-The response containing the regenerated client secret.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**client_secret** | **str** | The newly generated client secret. | [optional] 
+**client_secret** | **str** |  | [optional] 
 
 ## Example
 

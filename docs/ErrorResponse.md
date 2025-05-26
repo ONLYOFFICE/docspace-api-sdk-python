@@ -1,12 +1,12 @@
 # ErrorResponse
 
-The error response containing the human-readable error explanation.
+Error response containing a human-readable explanation of the error
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**reason** | **str** | The human-readable error explanation. | [optional] 
+**reason** | **str** |  | [optional] 
 
 ## Example
 

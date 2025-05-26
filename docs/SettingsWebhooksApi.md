@@ -16,7 +16,7 @@ Method | HTTP request | Description
 
 
 # **create_webhook**
-> WebhooksConfigWrapper create_webhook(create_webhooks_config_requests_dto=create_webhooks_config_requests_dto)
+> WebhooksConfigWrapper create_webhook(webhooks_config_requests_dto=webhooks_config_requests_dto)
 
 Create a webhook
 
@@ -32,7 +32,7 @@ Creates a new tenant webhook with the parameters specified in the request.
 
 ```python
 import docspace
-from docspace.models.create_webhooks_config_requests_dto import CreateWebhooksConfigRequestsDto
+from docspace.models.webhooks_config_requests_dto import WebhooksConfigRequestsDto
 from docspace.models.webhooks_config_wrapper import WebhooksConfigWrapper
 from docspace.rest import ApiException
 from pprint import pprint
@@ -77,11 +77,11 @@ configuration = docspace.Configuration(
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.SettingsWebhooksApi(api_client)
-    create_webhooks_config_requests_dto = docspace.CreateWebhooksConfigRequestsDto() # CreateWebhooksConfigRequestsDto |  (optional)
+    webhooks_config_requests_dto = docspace.WebhooksConfigRequestsDto() # WebhooksConfigRequestsDto |  (optional)
 
     try:
         # Create a webhook
-        api_response = api_instance.create_webhook(create_webhooks_config_requests_dto=create_webhooks_config_requests_dto)
+        api_response = api_instance.create_webhook(webhooks_config_requests_dto=webhooks_config_requests_dto)
         print("The response of SettingsWebhooksApi->create_webhook:\n")
         pprint(api_response)
     except Exception as e:
@@ -95,7 +95,7 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **create_webhooks_config_requests_dto** | [**CreateWebhooksConfigRequestsDto**](CreateWebhooksConfigRequestsDto.md)|  | [optional] 
+ **webhooks_config_requests_dto** | [**WebhooksConfigRequestsDto**](WebhooksConfigRequestsDto.md)|  | [optional] 
 
 ### Return type
 
@@ -120,7 +120,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **enable_webhook**
-> WebhooksConfigWrapper enable_webhook(update_webhooks_config_requests_dto=update_webhooks_config_requests_dto)
+> WebhooksConfigWrapper enable_webhook(webhooks_config_requests_dto=webhooks_config_requests_dto)
 
 Enable a webhook
 
@@ -136,7 +136,7 @@ Enables or disables a tenant webhook with the parameters specified in the reques
 
 ```python
 import docspace
-from docspace.models.update_webhooks_config_requests_dto import UpdateWebhooksConfigRequestsDto
+from docspace.models.webhooks_config_requests_dto import WebhooksConfigRequestsDto
 from docspace.models.webhooks_config_wrapper import WebhooksConfigWrapper
 from docspace.rest import ApiException
 from pprint import pprint
@@ -181,11 +181,11 @@ configuration = docspace.Configuration(
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.SettingsWebhooksApi(api_client)
-    update_webhooks_config_requests_dto = docspace.UpdateWebhooksConfigRequestsDto() # UpdateWebhooksConfigRequestsDto |  (optional)
+    webhooks_config_requests_dto = docspace.WebhooksConfigRequestsDto() # WebhooksConfigRequestsDto |  (optional)
 
     try:
         # Enable a webhook
-        api_response = api_instance.enable_webhook(update_webhooks_config_requests_dto=update_webhooks_config_requests_dto)
+        api_response = api_instance.enable_webhook(webhooks_config_requests_dto=webhooks_config_requests_dto)
         print("The response of SettingsWebhooksApi->enable_webhook:\n")
         pprint(api_response)
     except Exception as e:
@@ -199,7 +199,7 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **update_webhooks_config_requests_dto** | [**UpdateWebhooksConfigRequestsDto**](UpdateWebhooksConfigRequestsDto.md)|  | [optional] 
+ **webhooks_config_requests_dto** | [**WebhooksConfigRequestsDto**](WebhooksConfigRequestsDto.md)|  | [optional] 
 
 ### Return type
 
@@ -853,7 +853,7 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update_webhook**
-> WebhooksConfigWrapper update_webhook(update_webhooks_config_requests_dto=update_webhooks_config_requests_dto)
+> WebhooksConfigWrapper update_webhook(webhooks_config_requests_dto=webhooks_config_requests_dto)
 
 Update a webhook
 
@@ -869,7 +869,7 @@ Updates a tenant webhook with the parameters specified in the request.
 
 ```python
 import docspace
-from docspace.models.update_webhooks_config_requests_dto import UpdateWebhooksConfigRequestsDto
+from docspace.models.webhooks_config_requests_dto import WebhooksConfigRequestsDto
 from docspace.models.webhooks_config_wrapper import WebhooksConfigWrapper
 from docspace.rest import ApiException
 from pprint import pprint
@@ -914,11 +914,11 @@ configuration = docspace.Configuration(
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.SettingsWebhooksApi(api_client)
-    update_webhooks_config_requests_dto = docspace.UpdateWebhooksConfigRequestsDto() # UpdateWebhooksConfigRequestsDto |  (optional)
+    webhooks_config_requests_dto = docspace.WebhooksConfigRequestsDto() # WebhooksConfigRequestsDto |  (optional)
 
     try:
         # Update a webhook
-        api_response = api_instance.update_webhook(update_webhooks_config_requests_dto=update_webhooks_config_requests_dto)
+        api_response = api_instance.update_webhook(webhooks_config_requests_dto=webhooks_config_requests_dto)
         print("The response of SettingsWebhooksApi->update_webhook:\n")
         pprint(api_response)
     except Exception as e:
@@ -932,7 +932,7 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **update_webhooks_config_requests_dto** | [**UpdateWebhooksConfigRequestsDto**](UpdateWebhooksConfigRequestsDto.md)|  | [optional] 
+ **webhooks_config_requests_dto** | [**WebhooksConfigRequestsDto**](WebhooksConfigRequestsDto.md)|  | [optional] 
 
 ### Return type
 

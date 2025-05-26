@@ -1,14 +1,13 @@
 # ScopeResponse
 
-The response containing the scope information.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **str** | The scope name. | [optional] 
-**group** | **str** | The group the scope belongs to. | [optional] 
-**type** | **str** | The scope type. | [optional] 
+**name** | **str** |  | [optional] 
+**group** | **str** |  | [optional] 
+**type** | **str** |  | [optional] 
 
 ## Example
 
