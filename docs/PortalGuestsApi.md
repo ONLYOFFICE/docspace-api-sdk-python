@@ -1,14 +1,14 @@
 # docspace.PortalGuestsApi
 
-All URIs are relative to *http://localhost:8092*
+All URIs are relative to *http://http:*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get_guest_share_link**](PortalGuestsApi.md#get_guest_share_link) | **GET** /api/2.0/people/guests/{userid}/share | Get a guest sharing link
+[**get_guest_sharing_link**](PortalGuestsApi.md#get_guest_sharing_link) | **GET** /api/2.0/people/guests/{userid}/share | Get a guest sharing link
 
 
-# **get_guest_share_link**
-> StringWrapper get_guest_share_link(userid)
+# **get_guest_sharing_link**
+> StringWrapper get_guest_sharing_link(userid)
 
 Get a guest sharing link
 
@@ -28,10 +28,10 @@ from docspace.models.string_wrapper import StringWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -72,11 +72,11 @@ with docspace.ApiClient(configuration) as api_client:
 
     try:
         # Get a guest sharing link
-        api_response = api_instance.get_guest_share_link(userid)
-        print("The response of PortalGuestsApi->get_guest_share_link:\n")
+        api_response = api_instance.get_guest_sharing_link(userid)
+        print("The response of PortalGuestsApi->get_guest_sharing_link:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling PortalGuestsApi->get_guest_share_link: %s\n" % e)
+        print("Exception when calling PortalGuestsApi->get_guest_sharing_link: %s\n" % e)
 ```
 
 

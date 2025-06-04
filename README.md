@@ -55,10 +55,10 @@ import docspace
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -110,7 +110,7 @@ with docspace.ApiClient(configuration) as api_client:
 
 ## Documentation for API Endpoints
 
-All URIs are relative to *http://localhost:8092*
+All URIs are relative to *http://http:*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
@@ -139,17 +139,17 @@ Class | Method | HTTP request | Description
 *BackupApi* | [**start_backup_restore**](docs/BackupApi.md#start_backup_restore) | **POST** /api/2.0/backup/startrestore | Start the restoring process
 *CapabilitiesApi* | [**get_portal_capabilities**](docs/CapabilitiesApi.md#get_portal_capabilities) | **GET** /api/2.0/capabilities | Get portal capabilities
 *FilesFilesApi* | [**add_templates**](docs/FilesFilesApi.md#add_templates) | **POST** /api/2.0/files/templates | Add template files
-*FilesFilesApi* | [**change_history**](docs/FilesFilesApi.md#change_history) | **PUT** /api/2.0/files/file/{fileId}/history | Change version history
+*FilesFilesApi* | [**change_version_history**](docs/FilesFilesApi.md#change_version_history) | **PUT** /api/2.0/files/file/{fileId}/history | Change version history
 *FilesFilesApi* | [**check_fill_form_draft**](docs/FilesFilesApi.md#check_fill_form_draft) | **POST** /api/2.0/files/masterform/{fileId}/checkfillformdraft | Check the form draft filling
 *FilesFilesApi* | [**copy_file_as**](docs/FilesFilesApi.md#copy_file_as) | **POST** /api/2.0/files/file/{fileId}/copyas | Copy a file
 *FilesFilesApi* | [**create_edit_session**](docs/FilesFilesApi.md#create_edit_session) | **POST** /api/2.0/files/file/{fileId}/edit_session | Create the editing session
 *FilesFilesApi* | [**create_file**](docs/FilesFilesApi.md#create_file) | **POST** /api/2.0/files/{folderId}/file | Create a file
-*FilesFilesApi* | [**create_file_my_documents**](docs/FilesFilesApi.md#create_file_my_documents) | **POST** /api/2.0/files/@my/file | Create a file in the \&quot;My documents\&quot; section
+*FilesFilesApi* | [**create_file_in_my_documents**](docs/FilesFilesApi.md#create_file_in_my_documents) | **POST** /api/2.0/files/@my/file | Create a file in the \&quot;My documents\&quot; section
 *FilesFilesApi* | [**create_html_file**](docs/FilesFilesApi.md#create_html_file) | **POST** /api/2.0/files/{folderId}/html | Create an HTML file
-*FilesFilesApi* | [**create_html_file_in_my**](docs/FilesFilesApi.md#create_html_file_in_my) | **POST** /api/2.0/files/@my/html | Create an HTML file in the \&quot;My documents\&quot; section
+*FilesFilesApi* | [**create_html_file_in_my_documents**](docs/FilesFilesApi.md#create_html_file_in_my_documents) | **POST** /api/2.0/files/@my/html | Create an HTML file in the \&quot;My documents\&quot; section
 *FilesFilesApi* | [**create_primary_external_link**](docs/FilesFilesApi.md#create_primary_external_link) | **POST** /api/2.0/files/file/{id}/link | Create primary external link
 *FilesFilesApi* | [**create_text_file**](docs/FilesFilesApi.md#create_text_file) | **POST** /api/2.0/files/{folderId}/text | Create a text file
-*FilesFilesApi* | [**create_text_file_in_my**](docs/FilesFilesApi.md#create_text_file_in_my) | **POST** /api/2.0/files/@my/text | Create a text file in the \&quot;My documents\&quot; section
+*FilesFilesApi* | [**create_text_file_in_my_documents**](docs/FilesFilesApi.md#create_text_file_in_my_documents) | **POST** /api/2.0/files/@my/text | Create a text file in the \&quot;My documents\&quot; section
 *FilesFilesApi* | [**create_thumbnails**](docs/FilesFilesApi.md#create_thumbnails) | **POST** /api/2.0/files/thumbnails | Create file thumbnails
 *FilesFilesApi* | [**delete_file**](docs/FilesFilesApi.md#delete_file) | **DELETE** /api/2.0/files/file/{fileId} | Delete a file
 *FilesFilesApi* | [**delete_recent**](docs/FilesFilesApi.md#delete_recent) | **DELETE** /api/2.0/files/recent | Delete recent files
@@ -159,28 +159,28 @@ Class | Method | HTTP request | Description
 *FilesFilesApi* | [**get_edit_history**](docs/FilesFilesApi.md#get_edit_history) | **GET** /api/2.0/files/file/{fileId}/edit/history | Get version history
 *FilesFilesApi* | [**get_file_history**](docs/FilesFilesApi.md#get_file_history) | **GET** /api/2.0/files/file/{fileId}/log | Get file history
 *FilesFilesApi* | [**get_file_info**](docs/FilesFilesApi.md#get_file_info) | **GET** /api/2.0/files/file/{fileId} | Get file information
+*FilesFilesApi* | [**get_file_links**](docs/FilesFilesApi.md#get_file_links) | **GET** /api/2.0/files/file/{id}/links | Get file external links
 *FilesFilesApi* | [**get_file_primary_external_link**](docs/FilesFilesApi.md#get_file_primary_external_link) | **GET** /api/2.0/files/file/{id}/link | Get primary external link
 *FilesFilesApi* | [**get_file_version_info**](docs/FilesFilesApi.md#get_file_version_info) | **GET** /api/2.0/files/file/{fileId}/history | Get file versions
 *FilesFilesApi* | [**get_fill_result**](docs/FilesFilesApi.md#get_fill_result) | **GET** /api/2.0/files/file/fillresult | Get form-filling result
-*FilesFilesApi* | [**get_links**](docs/FilesFilesApi.md#get_links) | **GET** /api/2.0/files/file/{id}/links | Get file external links
 *FilesFilesApi* | [**get_presigned_file_uri**](docs/FilesFilesApi.md#get_presigned_file_uri) | **GET** /api/2.0/files/file/{fileId}/presigned | Get file download link asynchronously
 *FilesFilesApi* | [**get_presigned_uri**](docs/FilesFilesApi.md#get_presigned_uri) | **GET** /api/2.0/files/file/{fileId}/presigneduri | Get file download link
+*FilesFilesApi* | [**get_protected_file_users**](docs/FilesFilesApi.md#get_protected_file_users) | **GET** /api/2.0/files/file/{fileId}/protectusers | Get users access rights to the protected file
 *FilesFilesApi* | [**get_reference_data**](docs/FilesFilesApi.md#get_reference_data) | **POST** /api/2.0/files/file/referencedata | Get reference data
 *FilesFilesApi* | [**is_form_pdf**](docs/FilesFilesApi.md#is_form_pdf) | **GET** /api/2.0/files/file/{fileId}/isformpdf | Check the PDF file
 *FilesFilesApi* | [**lock_file**](docs/FilesFilesApi.md#lock_file) | **PUT** /api/2.0/files/file/{fileId}/lock | Lock a file
 *FilesFilesApi* | [**manage_form_filling**](docs/FilesFilesApi.md#manage_form_filling) | **PUT** /api/2.0/files/file/{fileId}/manageformfilling | Perform form filling action
-*FilesFilesApi* | [**open_edit**](docs/FilesFilesApi.md#open_edit) | **GET** /api/2.0/files/file/{fileId}/openedit | Open a file configuration
-*FilesFilesApi* | [**protect_users**](docs/FilesFilesApi.md#protect_users) | **GET** /api/2.0/files/file/{fileId}/protectusers | Get users access rights to the protected file
-*FilesFilesApi* | [**restore_version**](docs/FilesFilesApi.md#restore_version) | **GET** /api/2.0/files/file/{fileId}/restoreversion | Restore a file version
-*FilesFilesApi* | [**save_as_pdf**](docs/FilesFilesApi.md#save_as_pdf) | **POST** /api/2.0/files/file/{id}/saveaspdf | Save a file as PDF
-*FilesFilesApi* | [**save_editing_from_form**](docs/FilesFilesApi.md#save_editing_from_form) | **PUT** /api/2.0/files/file/{fileId}/saveediting | Save file edits
+*FilesFilesApi* | [**open_edit_file**](docs/FilesFilesApi.md#open_edit_file) | **GET** /api/2.0/files/file/{fileId}/openedit | Open a file configuration
+*FilesFilesApi* | [**restore_file_version**](docs/FilesFilesApi.md#restore_file_version) | **GET** /api/2.0/files/file/{fileId}/restoreversion | Restore a file version
+*FilesFilesApi* | [**save_editing_file_from_form**](docs/FilesFilesApi.md#save_editing_file_from_form) | **PUT** /api/2.0/files/file/{fileId}/saveediting | Save file edits
+*FilesFilesApi* | [**save_file_as_pdf**](docs/FilesFilesApi.md#save_file_as_pdf) | **POST** /api/2.0/files/file/{id}/saveaspdf | Save a file as PDF
 *FilesFilesApi* | [**save_form_role_mapping**](docs/FilesFilesApi.md#save_form_role_mapping) | **POST** /api/2.0/files/file/{fileId}/formrolemapping | Save form role mapping
 *FilesFilesApi* | [**set_custom_filter_tag**](docs/FilesFilesApi.md#set_custom_filter_tag) | **PUT** /api/2.0/files/file/{fileId}/customfilter | Set the Custom Filter editing mode
 *FilesFilesApi* | [**set_external_link**](docs/FilesFilesApi.md#set_external_link) | **PUT** /api/2.0/files/file/{id}/links | Set an external link
+*FilesFilesApi* | [**set_file_order**](docs/FilesFilesApi.md#set_file_order) | **PUT** /api/2.0/files/{fileId}/order | Set file order
 *FilesFilesApi* | [**set_files_order**](docs/FilesFilesApi.md#set_files_order) | **PUT** /api/2.0/files/order | Set order of files
-*FilesFilesApi* | [**set_order_file**](docs/FilesFilesApi.md#set_order_file) | **PUT** /api/2.0/files/{fileId}/order | Set file order
-*FilesFilesApi* | [**start_edit**](docs/FilesFilesApi.md#start_edit) | **POST** /api/2.0/files/file/{fileId}/startedit | Start file editing
-*FilesFilesApi* | [**start_filling**](docs/FilesFilesApi.md#start_filling) | **PUT** /api/2.0/files/file/{fileId}/startfilling | Start file filling
+*FilesFilesApi* | [**start_edit_file**](docs/FilesFilesApi.md#start_edit_file) | **POST** /api/2.0/files/file/{fileId}/startedit | Start file editing
+*FilesFilesApi* | [**start_filling_file**](docs/FilesFilesApi.md#start_filling_file) | **PUT** /api/2.0/files/file/{fileId}/startfilling | Start file filling
 *FilesFilesApi* | [**track_edit_file**](docs/FilesFilesApi.md#track_edit_file) | **GET** /api/2.0/files/file/{fileId}/trackeditfile | Track file editing
 *FilesFilesApi* | [**update_file**](docs/FilesFilesApi.md#update_file) | **PUT** /api/2.0/files/file/{fileId} | Update a file
 *FilesFoldersApi* | [**check_upload**](docs/FilesFoldersApi.md#check_upload) | **POST** /api/2.0/files/{folderId}/upload/check | Check file uploads
@@ -195,18 +195,20 @@ Class | Method | HTTP request | Description
 *FilesFoldersApi* | [**get_folder_primary_external_link**](docs/FilesFoldersApi.md#get_folder_primary_external_link) | **GET** /api/2.0/files/folder/{id}/link | Get primary external link
 *FilesFoldersApi* | [**get_folders**](docs/FilesFoldersApi.md#get_folders) | **GET** /api/2.0/files/{folderId}/subfolders | Get subfolders
 *FilesFoldersApi* | [**get_my_folder**](docs/FilesFoldersApi.md#get_my_folder) | **GET** /api/2.0/files/@my | Get the \&quot;My documents\&quot; section
-*FilesFoldersApi* | [**get_new_items**](docs/FilesFoldersApi.md#get_new_items) | **GET** /api/2.0/files/{folderId}/news | Get new folder items
+*FilesFoldersApi* | [**get_new_folder_items**](docs/FilesFoldersApi.md#get_new_folder_items) | **GET** /api/2.0/files/{folderId}/news | Get new folder items
 *FilesFoldersApi* | [**get_privacy_folder**](docs/FilesFoldersApi.md#get_privacy_folder) | **GET** /api/2.0/files/@privacy | Get the \&quot;Private Room\&quot; section
 *FilesFoldersApi* | [**get_root_folders**](docs/FilesFoldersApi.md#get_root_folders) | **GET** /api/2.0/files/@root | Get filtered sections
 *FilesFoldersApi* | [**get_trash_folder**](docs/FilesFoldersApi.md#get_trash_folder) | **GET** /api/2.0/files/@trash | Get the \&quot;Trash\&quot; section
 *FilesFoldersApi* | [**insert_file**](docs/FilesFoldersApi.md#insert_file) | **POST** /api/2.0/files/{folderId}/insert | Insert a file
 *FilesFoldersApi* | [**insert_file_to_my_from_body**](docs/FilesFoldersApi.md#insert_file_to_my_from_body) | **POST** /api/2.0/files/@my/insert | Insert a file to the \&quot;My documents\&quot; section
 *FilesFoldersApi* | [**rename_folder**](docs/FilesFoldersApi.md#rename_folder) | **PUT** /api/2.0/files/folder/{folderId} | Rename a folder
-*FilesFoldersApi* | [**set_file_order**](docs/FilesFoldersApi.md#set_file_order) | **PUT** /api/2.0/files/folder/{folderId}/order | Set file order
+*FilesFoldersApi* | [**set_folder_order**](docs/FilesFoldersApi.md#set_folder_order) | **PUT** /api/2.0/files/folder/{folderId}/order | Set folder order
 *FilesFoldersApi* | [**upload_file**](docs/FilesFoldersApi.md#upload_file) | **POST** /api/2.0/files/{folderId}/upload | Upload a file
 *FilesFoldersApi* | [**upload_file_to_my**](docs/FilesFoldersApi.md#upload_file_to_my) | **POST** /api/2.0/files/@my/upload | Upload a file to the \&quot;My documents\&quot; section
 *FilesOperationsApi* | [**bulk_download**](docs/FilesOperationsApi.md#bulk_download) | **PUT** /api/2.0/files/fileops/bulkdownload | Bulk download
-*FilesOperationsApi* | [**check_conversion**](docs/FilesOperationsApi.md#check_conversion) | **GET** /api/2.0/files/file/{fileId}/checkconversion | Get conversion status
+*FilesOperationsApi* | [**check_conversion_status**](docs/FilesOperationsApi.md#check_conversion_status) | **GET** /api/2.0/files/file/{fileId}/checkconversion | Get conversion status
+*FilesOperationsApi* | [**check_move_or_copy_batch_items**](docs/FilesOperationsApi.md#check_move_or_copy_batch_items) | **GET** /api/2.0/files/fileops/move | Check and move or copy to a folder
+*FilesOperationsApi* | [**check_move_or_copy_dest_folder**](docs/FilesOperationsApi.md#check_move_or_copy_dest_folder) | **GET** /api/2.0/files/fileops/checkdestfolder | Check for moving or copying to a folder
 *FilesOperationsApi* | [**copy_batch_items**](docs/FilesOperationsApi.md#copy_batch_items) | **PUT** /api/2.0/files/fileops/copy | Copy to the folder
 *FilesOperationsApi* | [**create_upload_session**](docs/FilesOperationsApi.md#create_upload_session) | **POST** /api/2.0/files/{folderId}/upload/create_session | Chunked upload
 *FilesOperationsApi* | [**delete_batch_items**](docs/FilesOperationsApi.md#delete_batch_items) | **PUT** /api/2.0/files/fileops/delete | Delete files and folders
@@ -217,11 +219,9 @@ Class | Method | HTTP request | Description
 *FilesOperationsApi* | [**get_operation_statuses_by_type**](docs/FilesOperationsApi.md#get_operation_statuses_by_type) | **GET** /api/2.0/files/fileops/{operationType} | Get file operation statuses
 *FilesOperationsApi* | [**mark_as_read**](docs/FilesOperationsApi.md#mark_as_read) | **PUT** /api/2.0/files/fileops/markasread | Mark as read
 *FilesOperationsApi* | [**move_batch_items**](docs/FilesOperationsApi.md#move_batch_items) | **PUT** /api/2.0/files/fileops/move | Move or copy to a folder
-*FilesOperationsApi* | [**move_or_copy_batch_check**](docs/FilesOperationsApi.md#move_or_copy_batch_check) | **GET** /api/2.0/files/fileops/move | Check and move or copy to a folder
-*FilesOperationsApi* | [**move_or_copy_dest_folder_check**](docs/FilesOperationsApi.md#move_or_copy_dest_folder_check) | **GET** /api/2.0/files/fileops/checkdestfolder | Check for moving or copying to a folder
-*FilesOperationsApi* | [**start_conversion**](docs/FilesOperationsApi.md#start_conversion) | **PUT** /api/2.0/files/file/{fileId}/checkconversion | Start file conversion
+*FilesOperationsApi* | [**start_file_conversion**](docs/FilesOperationsApi.md#start_file_conversion) | **PUT** /api/2.0/files/file/{fileId}/checkconversion | Start file conversion
 *FilesOperationsApi* | [**terminate_tasks**](docs/FilesOperationsApi.md#terminate_tasks) | **PUT** /api/2.0/files/fileops/terminate/{id} | Finish active operations
-*FilesOperationsApi* | [**update_comment**](docs/FilesOperationsApi.md#update_comment) | **PUT** /api/2.0/files/file/{fileId}/comment | Update a comment
+*FilesOperationsApi* | [**update_file_comment**](docs/FilesOperationsApi.md#update_file_comment) | **PUT** /api/2.0/files/file/{fileId}/comment | Update a comment
 *FilesQuotaApi* | [**reset_room_quota**](docs/FilesQuotaApi.md#reset_room_quota) | **PUT** /api/2.0/files/rooms/resetquota | Reset the room quota limit
 *FilesQuotaApi* | [**update_rooms_quota**](docs/FilesQuotaApi.md#update_rooms_quota) | **PUT** /api/2.0/files/rooms/roomquota | Change the room quota limit
 *FilesSettingsApi* | [**change_access_to_thirdparty**](docs/FilesSettingsApi.md#change_access_to_thirdparty) | **PUT** /api/2.0/files/thirdparty | Change the third-party settings access
@@ -246,16 +246,16 @@ Class | Method | HTTP request | Description
 *FilesSettingsApi* | [**set_open_editor_in_same_tab**](docs/FilesSettingsApi.md#set_open_editor_in_same_tab) | **PUT** /api/2.0/files/settings/openeditorinsametab | Open document in the same browser tab
 *FilesSettingsApi* | [**store_forcesave**](docs/FilesSettingsApi.md#store_forcesave) | **PUT** /api/2.0/files/storeforcesave | Change the ability to store the forcesaved files
 *FilesSettingsApi* | [**store_original**](docs/FilesSettingsApi.md#store_original) | **PUT** /api/2.0/files/storeoriginal | Change the ability to upload original formats
-*FilesSettingsApi* | [**update_if_exist**](docs/FilesSettingsApi.md#update_if_exist) | **PUT** /api/2.0/files/updateifexist | Update a file version if it exists
+*FilesSettingsApi* | [**update_file_if_exist**](docs/FilesSettingsApi.md#update_file_if_exist) | **PUT** /api/2.0/files/updateifexist | Update a file version if it exists
 *FilesSharingApi* | [**apply_external_share_password**](docs/FilesSharingApi.md#apply_external_share_password) | **POST** /api/2.0/files/share/{key}/password | Apply external data password
-*FilesSharingApi* | [**change_owner**](docs/FilesSharingApi.md#change_owner) | **POST** /api/2.0/files/owner | Change the file owner
+*FilesSharingApi* | [**change_file_owner**](docs/FilesSharingApi.md#change_file_owner) | **POST** /api/2.0/files/owner | Change the file owner
 *FilesSharingApi* | [**get_external_share_data**](docs/FilesSharingApi.md#get_external_share_data) | **GET** /api/2.0/files/share/{key} | Get the external data
+*FilesSharingApi* | [**get_shared_users**](docs/FilesSharingApi.md#get_shared_users) | **GET** /api/2.0/files/file/{fileId}/sharedusers | Get user access rights by file ID
 *FilesSharingApi* | [**send_editor_notify**](docs/FilesSharingApi.md#send_editor_notify) | **POST** /api/2.0/files/file/{fileId}/sendeditornotify | Send the mention message
-*FilesSharingApi* | [**shared_users**](docs/FilesSharingApi.md#shared_users) | **GET** /api/2.0/files/file/{fileId}/sharedusers | Get user access rights by file ID
-*FilesThirdPartyIntegrationApi* | [**capabilities**](docs/FilesThirdPartyIntegrationApi.md#capabilities) | **GET** /api/2.0/files/thirdparty/capabilities | Get providers
 *FilesThirdPartyIntegrationApi* | [**delete_third_party**](docs/FilesThirdPartyIntegrationApi.md#delete_third_party) | **DELETE** /api/2.0/files/thirdparty/{providerId} | Remove a third-party account
 *FilesThirdPartyIntegrationApi* | [**get_all_providers**](docs/FilesThirdPartyIntegrationApi.md#get_all_providers) | **GET** /api/2.0/files/thirdparty/providers | Get all providers
 *FilesThirdPartyIntegrationApi* | [**get_backup_third_party_account**](docs/FilesThirdPartyIntegrationApi.md#get_backup_third_party_account) | **GET** /api/2.0/files/thirdparty/backup | Get a third-party account backup
+*FilesThirdPartyIntegrationApi* | [**get_capabilities**](docs/FilesThirdPartyIntegrationApi.md#get_capabilities) | **GET** /api/2.0/files/thirdparty/capabilities | Get providers
 *FilesThirdPartyIntegrationApi* | [**get_common_third_party_folders**](docs/FilesThirdPartyIntegrationApi.md#get_common_third_party_folders) | **GET** /api/2.0/files/thirdparty/common | Get the common third-party services
 *FilesThirdPartyIntegrationApi* | [**get_third_party_accounts**](docs/FilesThirdPartyIntegrationApi.md#get_third_party_accounts) | **GET** /api/2.0/files/thirdparty | Get the third-party accounts
 *FilesThirdPartyIntegrationApi* | [**save_third_party**](docs/FilesThirdPartyIntegrationApi.md#save_third_party) | **POST** /api/2.0/files/thirdparty | Save a third-party account
@@ -263,23 +263,23 @@ Class | Method | HTTP request | Description
 *GroupApi* | [**add_group**](docs/GroupApi.md#add_group) | **POST** /api/2.0/group | Add a new group
 *GroupApi* | [**add_members_to**](docs/GroupApi.md#add_members_to) | **PUT** /api/2.0/group/{id}/members | Add group members
 *GroupApi* | [**delete_group**](docs/GroupApi.md#delete_group) | **DELETE** /api/2.0/group/{id} | Delete a group
-*GroupApi* | [**get_by_user_id**](docs/GroupApi.md#get_by_user_id) | **GET** /api/2.0/group/user/{userid} | Get user groups
 *GroupApi* | [**get_group**](docs/GroupApi.md#get_group) | **GET** /api/2.0/group/{id} | Get a group
+*GroupApi* | [**get_group_by_user_id**](docs/GroupApi.md#get_group_by_user_id) | **GET** /api/2.0/group/user/{userid} | Get user groups
 *GroupApi* | [**get_groups**](docs/GroupApi.md#get_groups) | **GET** /api/2.0/group | Get groups
+*GroupApi* | [**move_members_to**](docs/GroupApi.md#move_members_to) | **PUT** /api/2.0/group/{fromId}/members/{toId} | Move group members
 *GroupApi* | [**remove_members_from**](docs/GroupApi.md#remove_members_from) | **DELETE** /api/2.0/group/{id}/members | Remove group members
-*GroupApi* | [**set_manager**](docs/GroupApi.md#set_manager) | **PUT** /api/2.0/group/{id}/manager | Set a group manager
+*GroupApi* | [**set_group_manager**](docs/GroupApi.md#set_group_manager) | **PUT** /api/2.0/group/{id}/manager | Set a group manager
 *GroupApi* | [**set_members_to**](docs/GroupApi.md#set_members_to) | **POST** /api/2.0/group/{id}/members | Replace group members
-*GroupApi* | [**transfer_members_to**](docs/GroupApi.md#transfer_members_to) | **PUT** /api/2.0/group/{fromId}/members/{toId} | Move group members
 *GroupApi* | [**update_group**](docs/GroupApi.md#update_group) | **PUT** /api/2.0/group/{id} | Update a group
 *GroupRoomsApi* | [**get_groups_with_shared**](docs/GroupRoomsApi.md#get_groups_with_shared) | **GET** /api/2.0/group/room/{id} | Get groups with sharing settings
-*MigrationApi* | [**cancel**](docs/MigrationApi.md#cancel) | **POST** /api/2.0/migration/cancel | Cancel migration
-*MigrationApi* | [**clear**](docs/MigrationApi.md#clear) | **POST** /api/2.0/migration/clear | Clear migration
-*MigrationApi* | [**finish**](docs/MigrationApi.md#finish) | **POST** /api/2.0/migration/finish | Finish migration
-*MigrationApi* | [**list**](docs/MigrationApi.md#list) | **GET** /api/2.0/migration/list | Get migrations
-*MigrationApi* | [**logs**](docs/MigrationApi.md#logs) | **GET** /api/2.0/migration/logs | Get migration logs
-*MigrationApi* | [**migrate**](docs/MigrationApi.md#migrate) | **POST** /api/2.0/migration/migrate | Start migration
-*MigrationApi* | [**status**](docs/MigrationApi.md#status) | **GET** /api/2.0/migration/status | Get migration status
-*MigrationApi* | [**upload_and_init**](docs/MigrationApi.md#upload_and_init) | **POST** /api/2.0/migration/init/{migratorName} | Upload and initialize migration
+*MigrationApi* | [**cancel_migration**](docs/MigrationApi.md#cancel_migration) | **POST** /api/2.0/migration/cancel | Cancel migration
+*MigrationApi* | [**clear_migration**](docs/MigrationApi.md#clear_migration) | **POST** /api/2.0/migration/clear | Clear migration
+*MigrationApi* | [**finish_migration**](docs/MigrationApi.md#finish_migration) | **POST** /api/2.0/migration/finish | Finish migration
+*MigrationApi* | [**get_migration_logs**](docs/MigrationApi.md#get_migration_logs) | **GET** /api/2.0/migration/logs | Get migration logs
+*MigrationApi* | [**get_migration_status**](docs/MigrationApi.md#get_migration_status) | **GET** /api/2.0/migration/status | Get migration status
+*MigrationApi* | [**list_migrations**](docs/MigrationApi.md#list_migrations) | **GET** /api/2.0/migration/list | Get migrations
+*MigrationApi* | [**start_migration**](docs/MigrationApi.md#start_migration) | **POST** /api/2.0/migration/migrate | Start migration
+*MigrationApi* | [**upload_and_initialize_migration**](docs/MigrationApi.md#upload_and_initialize_migration) | **POST** /api/2.0/migration/init/{migratorName} | Upload and initialize migration
 *OAuth20AuthorizationApi* | [**oauth2_authorize_get**](docs/OAuth20AuthorizationApi.md#oauth2_authorize_get) | **GET** /oauth2/authorize | OAuth2 authorization endpoint
 *OAuth20AuthorizationApi* | [**oauth2_authorize_post**](docs/OAuth20AuthorizationApi.md#oauth2_authorize_post) | **POST** /oauth2/authorize | OAuth2 consent endpoint
 *OAuth20AuthorizationApi* | [**oauth2_token_post**](docs/OAuth20AuthorizationApi.md#oauth2_token_post) | **POST** /oauth2/token | OAuth2 token endpoint
@@ -309,13 +309,13 @@ Class | Method | HTTP request | Description
 *PeoplePhotosApi* | [**update_member_photo**](docs/PeoplePhotosApi.md#update_member_photo) | **PUT** /api/2.0/people/{userid}/photo | Update a user photo
 *PeoplePhotosApi* | [**upload_member_photo**](docs/PeoplePhotosApi.md#upload_member_photo) | **POST** /api/2.0/people/{userid}/photo | Upload a user photo
 *PeopleProfilesApi* | [**add_member**](docs/PeopleProfilesApi.md#add_member) | **POST** /api/2.0/people | Add a user
-*PeopleProfilesApi* | [**call_self**](docs/PeopleProfilesApi.md#call_self) | **GET** /api/2.0/people/@self | Get my profile
 *PeopleProfilesApi* | [**delete_member**](docs/PeopleProfilesApi.md#delete_member) | **DELETE** /api/2.0/people/{userid} | Delete a user
 *PeopleProfilesApi* | [**delete_profile**](docs/PeopleProfilesApi.md#delete_profile) | **DELETE** /api/2.0/people/@self | Delete my profile
 *PeopleProfilesApi* | [**get_all_profiles**](docs/PeopleProfilesApi.md#get_all_profiles) | **GET** /api/2.0/people | Get profiles
-*PeopleProfilesApi* | [**get_by_email**](docs/PeopleProfilesApi.md#get_by_email) | **GET** /api/2.0/people/email | Get a profile by user email
-*PeopleProfilesApi* | [**get_by_id**](docs/PeopleProfilesApi.md#get_by_id) | **GET** /api/2.0/people/{userid} | Get a profile by user name
 *PeopleProfilesApi* | [**get_claims**](docs/PeopleProfilesApi.md#get_claims) | **GET** /api/2.0/people/tokendiagnostics | Returns the user claims.
+*PeopleProfilesApi* | [**get_profile_by_email**](docs/PeopleProfilesApi.md#get_profile_by_email) | **GET** /api/2.0/people/email | Get a profile by user email
+*PeopleProfilesApi* | [**get_profile_by_user_id**](docs/PeopleProfilesApi.md#get_profile_by_user_id) | **GET** /api/2.0/people/{userid} | Get a profile by user name
+*PeopleProfilesApi* | [**get_self_profile**](docs/PeopleProfilesApi.md#get_self_profile) | **GET** /api/2.0/people/@self | Get my profile
 *PeopleProfilesApi* | [**invite_users**](docs/PeopleProfilesApi.md#invite_users) | **POST** /api/2.0/people/invite | Invite users
 *PeopleProfilesApi* | [**remove_users**](docs/PeopleProfilesApi.md#remove_users) | **PUT** /api/2.0/people/delete | Delete users
 *PeopleProfilesApi* | [**resend_user_invites**](docs/PeopleProfilesApi.md#resend_user_invites) | **PUT** /api/2.0/people/invite | Resend activation emails
@@ -325,18 +325,18 @@ Class | Method | HTTP request | Description
 *PeopleQuotaApi* | [**reset_users_quota**](docs/PeopleQuotaApi.md#reset_users_quota) | **PUT** /api/2.0/people/resetquota | Reset a user quota limit
 *PeopleQuotaApi* | [**update_user_quota**](docs/PeopleQuotaApi.md#update_user_quota) | **PUT** /api/2.0/people/userquota | Change a user quota limit
 *PeopleSearchApi* | [**get_accounts_entries_with_shared**](docs/PeopleSearchApi.md#get_accounts_entries_with_shared) | **GET** /api/2.0/accounts/room/{id}/search | Get account entries
-*PeopleSearchApi* | [**get_advanced**](docs/PeopleSearchApi.md#get_advanced) | **GET** /api/2.0/people/status/{status}/search | Search users by status filter
-*PeopleSearchApi* | [**get_full_by_filter**](docs/PeopleSearchApi.md#get_full_by_filter) | **GET** /api/2.0/people/filter | Search users with detaailed information by extended filter
-*PeopleSearchApi* | [**get_people_search**](docs/PeopleSearchApi.md#get_people_search) | **GET** /api/2.0/people/search | Search users (using query parameters)
 *PeopleSearchApi* | [**get_search**](docs/PeopleSearchApi.md#get_search) | **GET** /api/2.0/people/@search/{query} | Search users
 *PeopleSearchApi* | [**get_simple_by_filter**](docs/PeopleSearchApi.md#get_simple_by_filter) | **GET** /api/2.0/people/simple/filter | Search users by extended filter
 *PeopleSearchApi* | [**get_users_with_room_shared**](docs/PeopleSearchApi.md#get_users_with_room_shared) | **GET** /api/2.0/people/room/{id} | Get users with room sharing settings
-*PeopleThemeApi* | [**change_theme**](docs/PeopleThemeApi.md#change_theme) | **PUT** /api/2.0/people/theme | Change the portal theme
-*PeopleThemeApi* | [**get_theme**](docs/PeopleThemeApi.md#get_theme) | **GET** /api/2.0/people/theme | Get the portal theme
-*PeopleThirdPartyAccountsApi* | [**get_auth_providers**](docs/PeopleThirdPartyAccountsApi.md#get_auth_providers) | **GET** /api/2.0/people/thirdparty/providers | Get third-party accounts
-*PeopleThirdPartyAccountsApi* | [**link_account**](docs/PeopleThirdPartyAccountsApi.md#link_account) | **PUT** /api/2.0/people/thirdparty/linkaccount | Link a third-pary account
-*PeopleThirdPartyAccountsApi* | [**signup_account**](docs/PeopleThirdPartyAccountsApi.md#signup_account) | **POST** /api/2.0/people/thirdparty/signup | Create a third-pary account
-*PeopleThirdPartyAccountsApi* | [**unlink_account**](docs/PeopleThirdPartyAccountsApi.md#unlink_account) | **DELETE** /api/2.0/people/thirdparty/unlinkaccount | Unlink a third-pary account
+*PeopleSearchApi* | [**search_users_by_extended_filter**](docs/PeopleSearchApi.md#search_users_by_extended_filter) | **GET** /api/2.0/people/filter | Search users with detaailed information by extended filter
+*PeopleSearchApi* | [**search_users_by_query**](docs/PeopleSearchApi.md#search_users_by_query) | **GET** /api/2.0/people/search | Search users (using query parameters)
+*PeopleSearchApi* | [**search_users_by_status**](docs/PeopleSearchApi.md#search_users_by_status) | **GET** /api/2.0/people/status/{status}/search | Search users by status filter
+*PeopleThemeApi* | [**change_portal_theme**](docs/PeopleThemeApi.md#change_portal_theme) | **PUT** /api/2.0/people/theme | Change the portal theme
+*PeopleThemeApi* | [**get_portal_theme**](docs/PeopleThemeApi.md#get_portal_theme) | **GET** /api/2.0/people/theme | Get the portal theme
+*PeopleThirdPartyAccountsApi* | [**get_third_party_auth_providers**](docs/PeopleThirdPartyAccountsApi.md#get_third_party_auth_providers) | **GET** /api/2.0/people/thirdparty/providers | Get third-party accounts
+*PeopleThirdPartyAccountsApi* | [**link_third_party_account**](docs/PeopleThirdPartyAccountsApi.md#link_third_party_account) | **PUT** /api/2.0/people/thirdparty/linkaccount | Link a third-pary account
+*PeopleThirdPartyAccountsApi* | [**signup_third_party_account**](docs/PeopleThirdPartyAccountsApi.md#signup_third_party_account) | **POST** /api/2.0/people/thirdparty/signup | Create a third-pary account
+*PeopleThirdPartyAccountsApi* | [**unlink_third_party_account**](docs/PeopleThirdPartyAccountsApi.md#unlink_third_party_account) | **DELETE** /api/2.0/people/thirdparty/unlinkaccount | Unlink a third-pary account
 *PeopleUserDataApi* | [**get_delete_personal_folder_progress**](docs/PeopleUserDataApi.md#get_delete_personal_folder_progress) | **GET** /api/2.0/people/delete/personal/progress | Get the progress of deleting the personal folder
 *PeopleUserDataApi* | [**get_reassign_progress**](docs/PeopleUserDataApi.md#get_reassign_progress) | **GET** /api/2.0/people/reassign/progress/{userid} | Get the reassignment progress
 *PeopleUserDataApi* | [**get_remove_progress**](docs/PeopleUserDataApi.md#get_remove_progress) | **GET** /api/2.0/people/remove/progress/{userid} | Get the deletion progress
@@ -348,80 +348,81 @@ Class | Method | HTTP request | Description
 *PeopleUserDataApi* | [**terminate_reassign**](docs/PeopleUserDataApi.md#terminate_reassign) | **PUT** /api/2.0/people/reassign/terminate | Terminate the data reassignment
 *PeopleUserDataApi* | [**terminate_remove**](docs/PeopleUserDataApi.md#terminate_remove) | **PUT** /api/2.0/people/remove/terminate | Terminate the data deletion
 *PeopleUserStatusApi* | [**get_by_status**](docs/PeopleUserStatusApi.md#get_by_status) | **GET** /api/2.0/people/status/{status} | Get profiles by status
-*PeopleUserStatusApi* | [**update_employee_activation_status**](docs/PeopleUserStatusApi.md#update_employee_activation_status) | **PUT** /api/2.0/people/activationstatus/{activationstatus} | Set an activation status to the users
+*PeopleUserStatusApi* | [**update_user_activation_status**](docs/PeopleUserStatusApi.md#update_user_activation_status) | **PUT** /api/2.0/people/activationstatus/{activationstatus} | Set an activation status to the users
 *PeopleUserStatusApi* | [**update_user_status**](docs/PeopleUserStatusApi.md#update_user_status) | **PUT** /api/2.0/people/status/{status} | Change a user status
-*PeopleUserTypeApi* | [**get_change_type_progress**](docs/PeopleUserTypeApi.md#get_change_type_progress) | **GET** /api/2.0/people/type/progress/{userid} | Get the progress of updating user type
-*PeopleUserTypeApi* | [**start_update_user_type**](docs/PeopleUserTypeApi.md#start_update_user_type) | **POST** /api/2.0/people/type | Update user type
-*PeopleUserTypeApi* | [**terminate_change_type**](docs/PeopleUserTypeApi.md#terminate_change_type) | **PUT** /api/2.0/people/type/terminate | Terminate update user type
+*PeopleUserTypeApi* | [**get_user_type_update_progress**](docs/PeopleUserTypeApi.md#get_user_type_update_progress) | **GET** /api/2.0/people/type/progress/{userid} | Get the progress of updating user type
+*PeopleUserTypeApi* | [**star_user_typet_update**](docs/PeopleUserTypeApi.md#star_user_typet_update) | **POST** /api/2.0/people/type | Update user type
+*PeopleUserTypeApi* | [**terminate_user_type_update**](docs/PeopleUserTypeApi.md#terminate_user_type_update) | **PUT** /api/2.0/people/type/terminate | Terminate update user type
 *PeopleUserTypeApi* | [**update_user_type**](docs/PeopleUserTypeApi.md#update_user_type) | **PUT** /api/2.0/people/type/{type} | Change a user type
-*PortalGuestsApi* | [**get_guest_share_link**](docs/PortalGuestsApi.md#get_guest_share_link) | **GET** /api/2.0/people/guests/{userid}/share | Get a guest sharing link
+*PortalGuestsApi* | [**get_guest_sharing_link**](docs/PortalGuestsApi.md#get_guest_sharing_link) | **GET** /api/2.0/people/guests/{userid}/share | Get a guest sharing link
+*PortalPaymentApi* | [**calculate_wallet_payment**](docs/PortalPaymentApi.md#calculate_wallet_payment) | **PUT** /api/2.0/portal/payment/calculatewallet | Calculate amount of the wallet payment
 *PortalPaymentApi* | [**create_customer_operations_report**](docs/PortalPaymentApi.md#create_customer_operations_report) | **POST** /api/2.0/portal/payment/customer/operationsreport | Generate the customer operations report
 *PortalPaymentApi* | [**get_all_currencies**](docs/PortalPaymentApi.md#get_all_currencies) | **GET** /api/2.0/portal/payment/accounting/currencies | Get list of currencies
-*PortalPaymentApi* | [**get_chechout_setup_url**](docs/PortalPaymentApi.md#get_chechout_setup_url) | **GET** /api/2.0/portal/payment/chechoutsetupurl | Get the chechout setup page URL
-*PortalPaymentApi* | [**get_currencies**](docs/PortalPaymentApi.md#get_currencies) | **GET** /api/2.0/portal/payment/currencies | Get currencies
+*PortalPaymentApi* | [**get_checkout_setup_url**](docs/PortalPaymentApi.md#get_checkout_setup_url) | **GET** /api/2.0/portal/payment/chechoutsetupurl | Get the checkout setup page URL
 *PortalPaymentApi* | [**get_customer_balance**](docs/PortalPaymentApi.md#get_customer_balance) | **GET** /api/2.0/portal/payment/customer/balance | Get the customer balance
 *PortalPaymentApi* | [**get_customer_info**](docs/PortalPaymentApi.md#get_customer_info) | **GET** /api/2.0/portal/payment/customerinfo | Get the customer info
 *PortalPaymentApi* | [**get_customer_operations**](docs/PortalPaymentApi.md#get_customer_operations) | **GET** /api/2.0/portal/payment/customer/operations | Get the customer operations
 *PortalPaymentApi* | [**get_payment_account**](docs/PortalPaymentApi.md#get_payment_account) | **GET** /api/2.0/portal/payment/account | Get the payment account
+*PortalPaymentApi* | [**get_payment_currencies**](docs/PortalPaymentApi.md#get_payment_currencies) | **GET** /api/2.0/portal/payment/currencies | Get currencies
+*PortalPaymentApi* | [**get_payment_quotas**](docs/PortalPaymentApi.md#get_payment_quotas) | **GET** /api/2.0/portal/payment/quotas | Get quotas
 *PortalPaymentApi* | [**get_payment_url**](docs/PortalPaymentApi.md#get_payment_url) | **PUT** /api/2.0/portal/payment/url | Get the payment page URL
-*PortalPaymentApi* | [**get_prices**](docs/PortalPaymentApi.md#get_prices) | **GET** /api/2.0/portal/payment/prices | Get prices
-*PortalPaymentApi* | [**get_quota_information**](docs/PortalPaymentApi.md#get_quota_information) | **GET** /api/2.0/portal/payment/quota | Get quota payment information
-*PortalPaymentApi* | [**get_quotas**](docs/PortalPaymentApi.md#get_quotas) | **GET** /api/2.0/portal/payment/quotas | Get quotas
+*PortalPaymentApi* | [**get_portal_prices**](docs/PortalPaymentApi.md#get_portal_prices) | **GET** /api/2.0/portal/payment/prices | Get prices
+*PortalPaymentApi* | [**get_quota_payment_information**](docs/PortalPaymentApi.md#get_quota_payment_information) | **GET** /api/2.0/portal/payment/quota | Get quota payment information
 *PortalPaymentApi* | [**get_tenant_wallet_settings**](docs/PortalPaymentApi.md#get_tenant_wallet_settings) | **GET** /api/2.0/portal/payment/topupsettings | Get wallet auto top up settings
 *PortalPaymentApi* | [**open_customer_session**](docs/PortalPaymentApi.md#open_customer_session) | **POST** /api/2.0/portal/payment/customer/opensession | Open customer session
-*PortalPaymentApi* | [**payment_update**](docs/PortalPaymentApi.md#payment_update) | **PUT** /api/2.0/portal/payment/update | Update the payment quantity
-*PortalPaymentApi* | [**payment_update_wallet**](docs/PortalPaymentApi.md#payment_update_wallet) | **PUT** /api/2.0/portal/payment/updatewallet | Update the wallet payment quantity
 *PortalPaymentApi* | [**perform_customer_operation**](docs/PortalPaymentApi.md#perform_customer_operation) | **POST** /api/2.0/portal/payment/customer/performoperation | Perform customer operation
-*PortalPaymentApi* | [**send_sales_request**](docs/PortalPaymentApi.md#send_sales_request) | **POST** /api/2.0/portal/payment/request | Send a payment request
+*PortalPaymentApi* | [**send_payment_request**](docs/PortalPaymentApi.md#send_payment_request) | **POST** /api/2.0/portal/payment/request | Send a payment request
 *PortalPaymentApi* | [**set_tenant_wallet_settings**](docs/PortalPaymentApi.md#set_tenant_wallet_settings) | **POST** /api/2.0/portal/payment/topupsettings | Set wallet auto top up settings
 *PortalPaymentApi* | [**top_up_deposit**](docs/PortalPaymentApi.md#top_up_deposit) | **POST** /api/2.0/portal/payment/deposit | Put money on deposit
-*PortalQuotaApi* | [**get_quota**](docs/PortalQuotaApi.md#get_quota) | **GET** /api/2.0/portal/quota | Get a portal quota
+*PortalPaymentApi* | [**update_payment**](docs/PortalPaymentApi.md#update_payment) | **PUT** /api/2.0/portal/payment/update | Update the payment quantity
+*PortalPaymentApi* | [**update_wallet_payment**](docs/PortalPaymentApi.md#update_wallet_payment) | **PUT** /api/2.0/portal/payment/updatewallet | Update the wallet payment quantity
+*PortalQuotaApi* | [**get_portal_quota**](docs/PortalQuotaApi.md#get_portal_quota) | **GET** /api/2.0/portal/quota | Get a portal quota
+*PortalQuotaApi* | [**get_portal_tariff**](docs/PortalQuotaApi.md#get_portal_tariff) | **GET** /api/2.0/portal/tariff | Get a portal tariff
+*PortalQuotaApi* | [**get_portal_used_space**](docs/PortalQuotaApi.md#get_portal_used_space) | **GET** /api/2.0/portal/usedspace | Get the portal used space
 *PortalQuotaApi* | [**get_right_quota**](docs/PortalQuotaApi.md#get_right_quota) | **GET** /api/2.0/portal/quota/right | Get the recommended quota
-*PortalQuotaApi* | [**get_tariff**](docs/PortalQuotaApi.md#get_tariff) | **GET** /api/2.0/portal/tariff | Get a portal tariff
-*PortalQuotaApi* | [**get_used_space**](docs/PortalQuotaApi.md#get_used_space) | **GET** /api/2.0/portal/usedspace | Get the portal used space
 *PortalSettingsApi* | [**continue_portal**](docs/PortalSettingsApi.md#continue_portal) | **PUT** /api/2.0/portal/continue | Restore a portal
 *PortalSettingsApi* | [**delete_portal**](docs/PortalSettingsApi.md#delete_portal) | **DELETE** /api/2.0/portal/delete | Delete a portal
-*PortalSettingsApi* | [**get_full_absolute_path**](docs/PortalSettingsApi.md#get_full_absolute_path) | **GET** /api/2.0/portal/path | Get a path to the portal
 *PortalSettingsApi* | [**get_portal_information**](docs/PortalSettingsApi.md#get_portal_information) | **GET** /api/2.0/portal | Get a portal
+*PortalSettingsApi* | [**get_portal_path**](docs/PortalSettingsApi.md#get_portal_path) | **GET** /api/2.0/portal/path | Get a path to the portal
 *PortalSettingsApi* | [**send_delete_instructions**](docs/PortalSettingsApi.md#send_delete_instructions) | **POST** /api/2.0/portal/delete | Send removal instructions
 *PortalSettingsApi* | [**send_suspend_instructions**](docs/PortalSettingsApi.md#send_suspend_instructions) | **POST** /api/2.0/portal/suspend | Send suspension instructions
 *PortalSettingsApi* | [**suspend_portal**](docs/PortalSettingsApi.md#suspend_portal) | **PUT** /api/2.0/portal/suspend | Deactivate a portal
-*PortalUsersApi* | [**ge_invite_link**](docs/PortalUsersApi.md#ge_invite_link) | **GET** /api/2.0/portal/users/invite/{employeeType} | Get an invitation link
-*PortalUsersApi* | [**get_user**](docs/PortalUsersApi.md#get_user) | **GET** /api/2.0/portal/users/{userID} | Get a user by ID
-*PortalUsersApi* | [**get_users_count**](docs/PortalUsersApi.md#get_users_count) | **GET** /api/2.0/portal/userscount | Get a number of portal users
-*PortalUsersApi* | [**mark_present_as_readed**](docs/PortalUsersApi.md#mark_present_as_readed) | **POST** /api/2.0/portal/present/mark | Mark a gift message as read
+*PortalUsersApi* | [**get_invitation_link**](docs/PortalUsersApi.md#get_invitation_link) | **GET** /api/2.0/portal/users/invite/{employeeType} | Get an invitation link
+*PortalUsersApi* | [**get_portal_users_count**](docs/PortalUsersApi.md#get_portal_users_count) | **GET** /api/2.0/portal/userscount | Get a number of portal users
+*PortalUsersApi* | [**get_user_by_id**](docs/PortalUsersApi.md#get_user_by_id) | **GET** /api/2.0/portal/users/{userID} | Get a user by ID
+*PortalUsersApi* | [**mark_gift_message_as_read**](docs/PortalUsersApi.md#mark_gift_message_as_read) | **POST** /api/2.0/portal/present/mark | Mark a gift message as read
 *PortalUsersApi* | [**send_congratulations**](docs/PortalUsersApi.md#send_congratulations) | **POST** /api/2.0/portal/sendcongratulations | Send congratulations
-*RoomsApi* | [**add_tags**](docs/RoomsApi.md#add_tags) | **PUT** /api/2.0/files/rooms/{id}/tags | Add the room tags
+*RoomsApi* | [**add_room_tags**](docs/RoomsApi.md#add_room_tags) | **PUT** /api/2.0/files/rooms/{id}/tags | Add the room tags
 *RoomsApi* | [**archive_room**](docs/RoomsApi.md#archive_room) | **PUT** /api/2.0/files/rooms/{id}/archive | Archive a room
 *RoomsApi* | [**change_room_cover**](docs/RoomsApi.md#change_room_cover) | **POST** /api/2.0/files/rooms/{id}/cover | Change the room cover
 *RoomsApi* | [**create_room**](docs/RoomsApi.md#create_room) | **POST** /api/2.0/files/rooms | Create a room
 *RoomsApi* | [**create_room_from_template**](docs/RoomsApi.md#create_room_from_template) | **POST** /api/2.0/files/rooms/fromtemplate | Create a room from the template
 *RoomsApi* | [**create_room_logo**](docs/RoomsApi.md#create_room_logo) | **POST** /api/2.0/files/rooms/{id}/logo | Create a room logo
+*RoomsApi* | [**create_room_tag**](docs/RoomsApi.md#create_room_tag) | **POST** /api/2.0/files/tags | Create a tag
+*RoomsApi* | [**create_room_template**](docs/RoomsApi.md#create_room_template) | **POST** /api/2.0/files/roomtemplate | Start creating room template
 *RoomsApi* | [**create_room_third_party**](docs/RoomsApi.md#create_room_third_party) | **POST** /api/2.0/files/rooms/thirdparty/{id} | Create a third-party room
-*RoomsApi* | [**create_tag**](docs/RoomsApi.md#create_tag) | **POST** /api/2.0/files/tags | Create a tag
-*RoomsApi* | [**create_template**](docs/RoomsApi.md#create_template) | **POST** /api/2.0/files/roomtemplate | Start creating room template
 *RoomsApi* | [**delete_custom_tags**](docs/RoomsApi.md#delete_custom_tags) | **DELETE** /api/2.0/files/tags | Delete tags
 *RoomsApi* | [**delete_room**](docs/RoomsApi.md#delete_room) | **DELETE** /api/2.0/files/rooms/{id} | Remove a room
 *RoomsApi* | [**delete_room_logo**](docs/RoomsApi.md#delete_room_logo) | **DELETE** /api/2.0/files/rooms/{id}/logo | Remove a room logo
-*RoomsApi* | [**delete_tags**](docs/RoomsApi.md#delete_tags) | **DELETE** /api/2.0/files/rooms/{id}/tags | Remove the room tags
-*RoomsApi* | [**get_covers**](docs/RoomsApi.md#get_covers) | **GET** /api/2.0/files/rooms/covers | Get covers
+*RoomsApi* | [**delete_room_tags**](docs/RoomsApi.md#delete_room_tags) | **DELETE** /api/2.0/files/rooms/{id}/tags | Remove the room tags
 *RoomsApi* | [**get_new_room_items**](docs/RoomsApi.md#get_new_room_items) | **GET** /api/2.0/files/rooms/{id}/news | Get the new room items
+*RoomsApi* | [**get_public_settings**](docs/RoomsApi.md#get_public_settings) | **GET** /api/2.0/files/roomtemplate/{id}/public | Get public settings
+*RoomsApi* | [**get_room_covers**](docs/RoomsApi.md#get_room_covers) | **GET** /api/2.0/files/rooms/covers | Get covers
 *RoomsApi* | [**get_room_creating_status**](docs/RoomsApi.md#get_room_creating_status) | **GET** /api/2.0/files/rooms/fromtemplate/status | Get the room creation progress
 *RoomsApi* | [**get_room_index_export**](docs/RoomsApi.md#get_room_index_export) | **GET** /api/2.0/files/rooms/indexexport | Get the room index export
 *RoomsApi* | [**get_room_info**](docs/RoomsApi.md#get_room_info) | **GET** /api/2.0/files/rooms/{id} | Get room information
 *RoomsApi* | [**get_room_links**](docs/RoomsApi.md#get_room_links) | **GET** /api/2.0/files/rooms/{id}/links | Get the room links
 *RoomsApi* | [**get_room_security_info**](docs/RoomsApi.md#get_room_security_info) | **GET** /api/2.0/files/rooms/{id}/share | Get the room access rights
+*RoomsApi* | [**get_room_tags_info**](docs/RoomsApi.md#get_room_tags_info) | **GET** /api/2.0/files/tags | Get tags
+*RoomsApi* | [**get_room_template_creating_status**](docs/RoomsApi.md#get_room_template_creating_status) | **GET** /api/2.0/files/roomtemplate/status | Get status of room template creation
 *RoomsApi* | [**get_rooms_folder**](docs/RoomsApi.md#get_rooms_folder) | **GET** /api/2.0/files/rooms | Get rooms
 *RoomsApi* | [**get_rooms_new_items**](docs/RoomsApi.md#get_rooms_new_items) | **GET** /api/2.0/files/rooms/news | Get the room new items
 *RoomsApi* | [**get_rooms_primary_external_link**](docs/RoomsApi.md#get_rooms_primary_external_link) | **GET** /api/2.0/files/rooms/{id}/link | Get the room primary external link
-*RoomsApi* | [**get_tags_info**](docs/RoomsApi.md#get_tags_info) | **GET** /api/2.0/files/tags | Get tags
-*RoomsApi* | [**get_template_creating_status**](docs/RoomsApi.md#get_template_creating_status) | **GET** /api/2.0/files/roomtemplate/status | Get status of room template creation
-*RoomsApi* | [**is_public**](docs/RoomsApi.md#is_public) | **GET** /api/2.0/files/roomtemplate/{id}/public | Get public settings
 *RoomsApi* | [**pin_room**](docs/RoomsApi.md#pin_room) | **PUT** /api/2.0/files/rooms/{id}/pin | Pin a room
-*RoomsApi* | [**reorder**](docs/RoomsApi.md#reorder) | **PUT** /api/2.0/files/rooms/{id}/reorder | Reorder the room
+*RoomsApi* | [**reorder_room**](docs/RoomsApi.md#reorder_room) | **PUT** /api/2.0/files/rooms/{id}/reorder | Reorder the room
 *RoomsApi* | [**resend_email_invitations**](docs/RoomsApi.md#resend_email_invitations) | **POST** /api/2.0/files/rooms/{id}/resend | Resend the room invitations
-*RoomsApi* | [**set_link**](docs/RoomsApi.md#set_link) | **PUT** /api/2.0/files/rooms/{id}/links | Set the room external or invitation link
-*RoomsApi* | [**set_public**](docs/RoomsApi.md#set_public) | **PUT** /api/2.0/files/roomtemplate/public | Set public settings
+*RoomsApi* | [**set_public_settings**](docs/RoomsApi.md#set_public_settings) | **PUT** /api/2.0/files/roomtemplate/public | Set public settings
+*RoomsApi* | [**set_room_link**](docs/RoomsApi.md#set_room_link) | **PUT** /api/2.0/files/rooms/{id}/links | Set the room external or invitation link
 *RoomsApi* | [**set_room_security**](docs/RoomsApi.md#set_room_security) | **PUT** /api/2.0/files/rooms/{id}/share | Set the room access rights
 *RoomsApi* | [**start_room_index_export**](docs/RoomsApi.md#start_room_index_export) | **POST** /api/2.0/files/rooms/{id}/indexexport | Start the room index export
 *RoomsApi* | [**terminate_room_index_export**](docs/RoomsApi.md#terminate_room_index_export) | **DELETE** /api/2.0/files/rooms/indexexport | Terminate the room index export
@@ -438,12 +439,12 @@ Class | Method | HTTP request | Description
 *SecurityAuditTrailDataApi* | [**create_audit_trail_report**](docs/SecurityAuditTrailDataApi.md#create_audit_trail_report) | **POST** /api/2.0/security/audit/events/report | Generate the audit trail report
 *SecurityAuditTrailDataApi* | [**get_audit_events_by_filter**](docs/SecurityAuditTrailDataApi.md#get_audit_events_by_filter) | **GET** /api/2.0/security/audit/events/filter | Get filtered audit trail data
 *SecurityAuditTrailDataApi* | [**get_audit_settings**](docs/SecurityAuditTrailDataApi.md#get_audit_settings) | **GET** /api/2.0/security/audit/settings/lifetime | Get the audit trail settings
+*SecurityAuditTrailDataApi* | [**get_audit_trail_mappers**](docs/SecurityAuditTrailDataApi.md#get_audit_trail_mappers) | **GET** /api/2.0/security/audit/mappers | Get audit trail mappers
+*SecurityAuditTrailDataApi* | [**get_audit_trail_types**](docs/SecurityAuditTrailDataApi.md#get_audit_trail_types) | **GET** /api/2.0/security/audit/types | Get audit trail types
 *SecurityAuditTrailDataApi* | [**get_last_audit_events**](docs/SecurityAuditTrailDataApi.md#get_last_audit_events) | **GET** /api/2.0/security/audit/events/last | Get audit trail data
-*SecurityAuditTrailDataApi* | [**get_mappers**](docs/SecurityAuditTrailDataApi.md#get_mappers) | **GET** /api/2.0/security/audit/mappers | Get audit trail mappers
-*SecurityAuditTrailDataApi* | [**get_types**](docs/SecurityAuditTrailDataApi.md#get_types) | **GET** /api/2.0/security/audit/types | Get audit trail types
 *SecurityAuditTrailDataApi* | [**set_audit_settings**](docs/SecurityAuditTrailDataApi.md#set_audit_settings) | **POST** /api/2.0/security/audit/settings/lifetime | Set the audit trail settings
-*SecurityCSPApi* | [**csp**](docs/SecurityCSPApi.md#csp) | **POST** /api/2.0/security/csp | Configure CSP settings
-*SecurityCSPApi* | [**get_csp**](docs/SecurityCSPApi.md#get_csp) | **GET** /api/2.0/security/csp | Get CSP settings
+*SecurityCSPApi* | [**configure_csp**](docs/SecurityCSPApi.md#configure_csp) | **POST** /api/2.0/security/csp | Configure CSP settings
+*SecurityCSPApi* | [**get_csp_settings**](docs/SecurityCSPApi.md#get_csp_settings) | **GET** /api/2.0/security/csp | Get CSP settings
 *SecurityFirebaseApi* | [**doc_register_pusn_notification_device**](docs/SecurityFirebaseApi.md#doc_register_pusn_notification_device) | **POST** /api/2.0/settings/push/docregisterdevice | Save the Documents Firebase device token
 *SecurityFirebaseApi* | [**subscribe_documents_push_notification**](docs/SecurityFirebaseApi.md#subscribe_documents_push_notification) | **PUT** /api/2.0/settings/push/docsubscribe | Subscribe to Documents push notification
 *SecurityLoginHistoryApi* | [**create_login_history_report**](docs/SecurityLoginHistoryApi.md#create_login_history_report) | **POST** /api/2.0/security/audit/login/report | Generate the login history report
@@ -460,21 +461,21 @@ Class | Method | HTTP request | Description
 *SettingsAuthorizationApi* | [**save_auth_keys**](docs/SettingsAuthorizationApi.md#save_auth_keys) | **POST** /api/2.0/settings/authservice | Save the authorization keys
 *SettingsCommonSettingsApi* | [**close_admin_helper**](docs/SettingsCommonSettingsApi.md#close_admin_helper) | **PUT** /api/2.0/settings/closeadminhelper | Close the admin helper
 *SettingsCommonSettingsApi* | [**complete_wizard**](docs/SettingsCommonSettingsApi.md#complete_wizard) | **PUT** /api/2.0/settings/wizard/complete | Complete the Wizard settings
-*SettingsCommonSettingsApi* | [**delete_color_theme**](docs/SettingsCommonSettingsApi.md#delete_color_theme) | **DELETE** /api/2.0/settings/colortheme | Delete a color theme
-*SettingsCommonSettingsApi* | [**get_color_theme**](docs/SettingsCommonSettingsApi.md#get_color_theme) | **GET** /api/2.0/settings/colortheme | Get a color theme
-*SettingsCommonSettingsApi* | [**get_logo**](docs/SettingsCommonSettingsApi.md#get_logo) | **GET** /api/2.0/settings/logo | Get a portal logo
-*SettingsCommonSettingsApi* | [**get_machine_name**](docs/SettingsCommonSettingsApi.md#get_machine_name) | **GET** /api/2.0/settings/machine | Get hostname
-*SettingsCommonSettingsApi* | [**get_settings**](docs/SettingsCommonSettingsApi.md#get_settings) | **GET** /api/2.0/settings | Get the portal settings
+*SettingsCommonSettingsApi* | [**configure_deep_link**](docs/SettingsCommonSettingsApi.md#configure_deep_link) | **POST** /api/2.0/settings/deeplink | Configure the deep link settings
+*SettingsCommonSettingsApi* | [**delete_portal_color_theme**](docs/SettingsCommonSettingsApi.md#delete_portal_color_theme) | **DELETE** /api/2.0/settings/colortheme | Delete a color theme
+*SettingsCommonSettingsApi* | [**get_deep_link_settings**](docs/SettingsCommonSettingsApi.md#get_deep_link_settings) | **GET** /api/2.0/settings/deeplink | Get the deep link settings
+*SettingsCommonSettingsApi* | [**get_payment_settings**](docs/SettingsCommonSettingsApi.md#get_payment_settings) | **GET** /api/2.0/settings/payment | Get the payment settings
+*SettingsCommonSettingsApi* | [**get_portal_color_theme**](docs/SettingsCommonSettingsApi.md#get_portal_color_theme) | **GET** /api/2.0/settings/colortheme | Get a color theme
+*SettingsCommonSettingsApi* | [**get_portal_hostname**](docs/SettingsCommonSettingsApi.md#get_portal_hostname) | **GET** /api/2.0/settings/machine | Get hostname
+*SettingsCommonSettingsApi* | [**get_portal_logo**](docs/SettingsCommonSettingsApi.md#get_portal_logo) | **GET** /api/2.0/settings/logo | Get a portal logo
+*SettingsCommonSettingsApi* | [**get_portal_settings**](docs/SettingsCommonSettingsApi.md#get_portal_settings) | **GET** /api/2.0/settings | Get the portal settings
 *SettingsCommonSettingsApi* | [**get_socket_settings**](docs/SettingsCommonSettingsApi.md#get_socket_settings) | **GET** /api/2.0/settings/socket | Get the socket settings
 *SettingsCommonSettingsApi* | [**get_supported_cultures**](docs/SettingsCommonSettingsApi.md#get_supported_cultures) | **GET** /api/2.0/settings/cultures | Get supported languages
 *SettingsCommonSettingsApi* | [**get_tenant_user_invitation_settings**](docs/SettingsCommonSettingsApi.md#get_tenant_user_invitation_settings) | **GET** /api/2.0/settings/invitationsettings | Get the user invitation settings
-*SettingsCommonSettingsApi* | [**get_time_zones_async**](docs/SettingsCommonSettingsApi.md#get_time_zones_async) | **GET** /api/2.0/settings/timezones | Get time zones
-*SettingsCommonSettingsApi* | [**gett_deep_link_settings**](docs/SettingsCommonSettingsApi.md#gett_deep_link_settings) | **GET** /api/2.0/settings/deeplink | Get the deep link settings
-*SettingsCommonSettingsApi* | [**payment_settings**](docs/SettingsCommonSettingsApi.md#payment_settings) | **GET** /api/2.0/settings/payment | Get the payment settings
-*SettingsCommonSettingsApi* | [**save_color_theme**](docs/SettingsCommonSettingsApi.md#save_color_theme) | **PUT** /api/2.0/settings/colortheme | Save a color theme
-*SettingsCommonSettingsApi* | [**save_configure_deep_link**](docs/SettingsCommonSettingsApi.md#save_configure_deep_link) | **POST** /api/2.0/settings/deeplink | Configure the deep link settings
+*SettingsCommonSettingsApi* | [**get_time_zones**](docs/SettingsCommonSettingsApi.md#get_time_zones) | **GET** /api/2.0/settings/timezones | Get time zones
 *SettingsCommonSettingsApi* | [**save_dns_settings**](docs/SettingsCommonSettingsApi.md#save_dns_settings) | **PUT** /api/2.0/settings/dns | Save the DNS settings
 *SettingsCommonSettingsApi* | [**save_mail_domain_settings**](docs/SettingsCommonSettingsApi.md#save_mail_domain_settings) | **POST** /api/2.0/settings/maildomainsettings | Save the mail domain settings
+*SettingsCommonSettingsApi* | [**save_portal_color_theme**](docs/SettingsCommonSettingsApi.md#save_portal_color_theme) | **PUT** /api/2.0/settings/colortheme | Save a color theme
 *SettingsCommonSettingsApi* | [**update_email_activation_settings**](docs/SettingsCommonSettingsApi.md#update_email_activation_settings) | **PUT** /api/2.0/settings/emailactivation | Update the email activation settings
 *SettingsCommonSettingsApi* | [**update_invitation_settings**](docs/SettingsCommonSettingsApi.md#update_invitation_settings) | **PUT** /api/2.0/settings/invitationsettings | Update user invitation settings
 *SettingsCookiesApi* | [**get_cookie_settings**](docs/SettingsCookiesApi.md#get_cookie_settings) | **GET** /api/2.0/settings/cookiesettings | Get cookies lifetime
@@ -488,7 +489,7 @@ Class | Method | HTTP request | Description
 *SettingsEncryptionApi* | [**get_storage_encryption_settings**](docs/SettingsEncryptionApi.md#get_storage_encryption_settings) | **GET** /api/2.0/settings/encryption/settings | Get the storage encryption settings
 *SettingsEncryptionApi* | [**start_storage_encryption**](docs/SettingsEncryptionApi.md#start_storage_encryption) | **POST** /api/2.0/settings/encryption/start | Start the storage encryption process
 *SettingsGreetingSettingsApi* | [**get_greeting_settings**](docs/SettingsGreetingSettingsApi.md#get_greeting_settings) | **GET** /api/2.0/settings/greetingsettings | Get greeting settings
-*SettingsGreetingSettingsApi* | [**is_default**](docs/SettingsGreetingSettingsApi.md#is_default) | **GET** /api/2.0/settings/greetingsettings/isdefault | Check the default greeting settings
+*SettingsGreetingSettingsApi* | [**get_is_default_greeting_settings**](docs/SettingsGreetingSettingsApi.md#get_is_default_greeting_settings) | **GET** /api/2.0/settings/greetingsettings/isdefault | Check the default greeting settings
 *SettingsGreetingSettingsApi* | [**restore_greeting_settings**](docs/SettingsGreetingSettingsApi.md#restore_greeting_settings) | **POST** /api/2.0/settings/greetingsettings/restore | Restore the greeting settings
 *SettingsGreetingSettingsApi* | [**save_greeting_settings**](docs/SettingsGreetingSettingsApi.md#save_greeting_settings) | **POST** /api/2.0/settings/greetingsettings | Save the greeting settings
 *SettingsIPRestrictionsApi* | [**get_ip_restrictions**](docs/SettingsIPRestrictionsApi.md#get_ip_restrictions) | **GET** /api/2.0/settings/iprestrictions | Get the IP portal restrictions
@@ -496,21 +497,21 @@ Class | Method | HTTP request | Description
 *SettingsIPRestrictionsApi* | [**save_ip_restrictions**](docs/SettingsIPRestrictionsApi.md#save_ip_restrictions) | **PUT** /api/2.0/settings/iprestrictions | Update the IP restrictions
 *SettingsIPRestrictionsApi* | [**update_ip_restrictions_settings**](docs/SettingsIPRestrictionsApi.md#update_ip_restrictions_settings) | **PUT** /api/2.0/settings/iprestrictions/settings | Update the IP restriction settings
 *SettingsLicenseApi* | [**accept_license**](docs/SettingsLicenseApi.md#accept_license) | **POST** /api/2.0/settings/license/accept | Activate a license
+*SettingsLicenseApi* | [**get_is_license_required**](docs/SettingsLicenseApi.md#get_is_license_required) | **GET** /api/2.0/settings/license/required | Request a license
 *SettingsLicenseApi* | [**refresh_license**](docs/SettingsLicenseApi.md#refresh_license) | **GET** /api/2.0/settings/license/refresh | Refresh the license
-*SettingsLicenseApi* | [**request_license**](docs/SettingsLicenseApi.md#request_license) | **GET** /api/2.0/settings/license/required | Request a license
 *SettingsLicenseApi* | [**upload_license**](docs/SettingsLicenseApi.md#upload_license) | **POST** /api/2.0/settings/license | Upload a license
 *SettingsLoginSettingsApi* | [**get_login_settings**](docs/SettingsLoginSettingsApi.md#get_login_settings) | **GET** /api/2.0/settings/security/loginsettings | Get the login settings
 *SettingsLoginSettingsApi* | [**set_default_login_settings**](docs/SettingsLoginSettingsApi.md#set_default_login_settings) | **DELETE** /api/2.0/settings/security/loginsettings | Reset the login settings
 *SettingsLoginSettingsApi* | [**update_login_settings**](docs/SettingsLoginSettingsApi.md#update_login_settings) | **PUT** /api/2.0/settings/security/loginsettings | Update the login settings
 *SettingsMessagesApi* | [**enable_admin_message_settings**](docs/SettingsMessagesApi.md#enable_admin_message_settings) | **POST** /api/2.0/settings/messagesettings | Enable the administrator message settings
-*SettingsMessagesApi* | [**send_adm_mail**](docs/SettingsMessagesApi.md#send_adm_mail) | **POST** /api/2.0/settings/sendadmmail | Send a message to the administrator
+*SettingsMessagesApi* | [**send_admin_mail**](docs/SettingsMessagesApi.md#send_admin_mail) | **POST** /api/2.0/settings/sendadmmail | Send a message to the administrator
 *SettingsMessagesApi* | [**send_join_invite_mail**](docs/SettingsMessagesApi.md#send_join_invite_mail) | **POST** /api/2.0/settings/sendjoininvite | Sends an invitation email
 *SettingsNotificationsApi* | [**get_notification_settings**](docs/SettingsNotificationsApi.md#get_notification_settings) | **GET** /api/2.0/settings/notification/{type} | Check notification availability
 *SettingsNotificationsApi* | [**get_rooms_notification_settings**](docs/SettingsNotificationsApi.md#get_rooms_notification_settings) | **GET** /api/2.0/settings/notification/rooms | Get room notification settings
+*SettingsNotificationsApi* | [**set_notification_settings**](docs/SettingsNotificationsApi.md#set_notification_settings) | **POST** /api/2.0/settings/notification | Enable notifications
 *SettingsNotificationsApi* | [**set_rooms_notification_status**](docs/SettingsNotificationsApi.md#set_rooms_notification_status) | **POST** /api/2.0/settings/notification/rooms | Set room notification status
-*SettingsNotificationsApi* | [**set_settings**](docs/SettingsNotificationsApi.md#set_settings) | **POST** /api/2.0/settings/notification | Enable notifications
-*SettingsOwnerApi* | [**owner**](docs/SettingsOwnerApi.md#owner) | **PUT** /api/2.0/settings/owner | Update the portal owner
 *SettingsOwnerApi* | [**send_owner_change_instructions**](docs/SettingsOwnerApi.md#send_owner_change_instructions) | **POST** /api/2.0/settings/owner | Send the owner change instructions
+*SettingsOwnerApi* | [**update_portal_owner**](docs/SettingsOwnerApi.md#update_portal_owner) | **PUT** /api/2.0/settings/owner | Update the portal owner
 *SettingsQuotaApi* | [**get_user_quota_settings**](docs/SettingsQuotaApi.md#get_user_quota_settings) | **GET** /api/2.0/settings/userquotasettings | Get the user quota settings
 *SettingsQuotaApi* | [**save_room_quota_settings**](docs/SettingsQuotaApi.md#save_room_quota_settings) | **POST** /api/2.0/settings/roomquotasettings | Save the room quota settings
 *SettingsQuotaApi* | [**set_tenant_quota_settings**](docs/SettingsQuotaApi.md#set_tenant_quota_settings) | **PUT** /api/2.0/settings/tenantquotasettings | Save the tenant quota settings
@@ -537,11 +538,11 @@ Class | Method | HTTP request | Description
 *SettingsSSOApi* | [**reset_sso_settings_v2**](docs/SettingsSSOApi.md#reset_sso_settings_v2) | **DELETE** /api/2.0/settings/ssov2 | Reset the SSO settings
 *SettingsSSOApi* | [**save_sso_settings_v2**](docs/SettingsSSOApi.md#save_sso_settings_v2) | **POST** /api/2.0/settings/ssov2 | Save the SSO settings
 *SettingsSecurityApi* | [**get_enabled_modules**](docs/SettingsSecurityApi.md#get_enabled_modules) | **GET** /api/2.0/settings/security/modules | Get the enabled modules
+*SettingsSecurityApi* | [**get_is_product_administrator**](docs/SettingsSecurityApi.md#get_is_product_administrator) | **GET** /api/2.0/settings/security/administrator | Check a product administrator
 *SettingsSecurityApi* | [**get_password_settings**](docs/SettingsSecurityApi.md#get_password_settings) | **GET** /api/2.0/settings/security/password | Get the password settings
 *SettingsSecurityApi* | [**get_product_administrators**](docs/SettingsSecurityApi.md#get_product_administrators) | **GET** /api/2.0/settings/security/administrator/{productid} | Get the product administrators
 *SettingsSecurityApi* | [**get_web_item_security_info**](docs/SettingsSecurityApi.md#get_web_item_security_info) | **GET** /api/2.0/settings/security/{id} | Get the module availability
 *SettingsSecurityApi* | [**get_web_item_settings_security_info**](docs/SettingsSecurityApi.md#get_web_item_settings_security_info) | **GET** /api/2.0/settings/security | Get the security settings
-*SettingsSecurityApi* | [**is_product_administrator**](docs/SettingsSecurityApi.md#is_product_administrator) | **GET** /api/2.0/settings/security/administrator | Check a product administrator
 *SettingsSecurityApi* | [**set_access_to_web_items**](docs/SettingsSecurityApi.md#set_access_to_web_items) | **PUT** /api/2.0/settings/security/access | Set the security settings to modules
 *SettingsSecurityApi* | [**set_product_administrator**](docs/SettingsSecurityApi.md#set_product_administrator) | **PUT** /api/2.0/settings/security/administrator | Set a product administrator
 *SettingsSecurityApi* | [**set_web_item_security**](docs/SettingsSecurityApi.md#set_web_item_security) | **PUT** /api/2.0/settings/security | Set the module security settings
@@ -554,32 +555,32 @@ Class | Method | HTTP request | Description
 *SettingsStorageApi* | [**get_storage_progress**](docs/SettingsStorageApi.md#get_storage_progress) | **GET** /api/2.0/settings/storage/progress | Get the storage progress
 *SettingsStorageApi* | [**reset_cdn_to_default**](docs/SettingsStorageApi.md#reset_cdn_to_default) | **DELETE** /api/2.0/settings/storage/cdn | Reset the CDN storage settings
 *SettingsStorageApi* | [**reset_storage_to_default**](docs/SettingsStorageApi.md#reset_storage_to_default) | **DELETE** /api/2.0/settings/storage | Reset the storage settings
-*SettingsStorageApi* | [**update_cdn**](docs/SettingsStorageApi.md#update_cdn) | **PUT** /api/2.0/settings/storage/cdn | Update the CDN storage
+*SettingsStorageApi* | [**update_cdn_storage**](docs/SettingsStorageApi.md#update_cdn_storage) | **PUT** /api/2.0/settings/storage/cdn | Update the CDN storage
 *SettingsStorageApi* | [**update_storage**](docs/SettingsStorageApi.md#update_storage) | **PUT** /api/2.0/settings/storage | Update a storage
+*SettingsTFASettingsApi* | [**get_tfa_app_codes**](docs/SettingsTFASettingsApi.md#get_tfa_app_codes) | **GET** /api/2.0/settings/tfaappcodes | Get the TFA codes
+*SettingsTFASettingsApi* | [**get_tfa_confirm_url**](docs/SettingsTFASettingsApi.md#get_tfa_confirm_url) | **GET** /api/2.0/settings/tfaapp/confirm | Get confirmation email
 *SettingsTFASettingsApi* | [**get_tfa_settings**](docs/SettingsTFASettingsApi.md#get_tfa_settings) | **GET** /api/2.0/settings/tfaapp | Get the TFA settings
 *SettingsTFASettingsApi* | [**tfa_app_generate_setup_code**](docs/SettingsTFASettingsApi.md#tfa_app_generate_setup_code) | **GET** /api/2.0/settings/tfaapp/setup | Generate setup code
-*SettingsTFASettingsApi* | [**tfa_app_get_codes**](docs/SettingsTFASettingsApi.md#tfa_app_get_codes) | **GET** /api/2.0/settings/tfaappcodes | Get the TFA codes
-*SettingsTFASettingsApi* | [**tfa_app_new_app**](docs/SettingsTFASettingsApi.md#tfa_app_new_app) | **PUT** /api/2.0/settings/tfaappnewapp | Unlink the TFA application
-*SettingsTFASettingsApi* | [**tfa_app_request_new_codes**](docs/SettingsTFASettingsApi.md#tfa_app_request_new_codes) | **PUT** /api/2.0/settings/tfaappnewcodes | Update the TFA codes
-*SettingsTFASettingsApi* | [**tfa_confirm_url**](docs/SettingsTFASettingsApi.md#tfa_confirm_url) | **GET** /api/2.0/settings/tfaapp/confirm | Get confirmation email
-*SettingsTFASettingsApi* | [**tfa_settings**](docs/SettingsTFASettingsApi.md#tfa_settings) | **PUT** /api/2.0/settings/tfaapp | Update the TFA settings
-*SettingsTFASettingsApi* | [**tfa_settings_link**](docs/SettingsTFASettingsApi.md#tfa_settings_link) | **PUT** /api/2.0/settings/tfaappwithlink | Get confirmation email for updating TFA settings
 *SettingsTFASettingsApi* | [**tfa_validate_auth_code**](docs/SettingsTFASettingsApi.md#tfa_validate_auth_code) | **POST** /api/2.0/settings/tfaapp/validate | Validate the TFA code
+*SettingsTFASettingsApi* | [**unlink_tfa_app**](docs/SettingsTFASettingsApi.md#unlink_tfa_app) | **PUT** /api/2.0/settings/tfaappnewapp | Unlink the TFA application
+*SettingsTFASettingsApi* | [**update_tfa_app_codes**](docs/SettingsTFASettingsApi.md#update_tfa_app_codes) | **PUT** /api/2.0/settings/tfaappnewcodes | Update the TFA codes
+*SettingsTFASettingsApi* | [**update_tfa_settings**](docs/SettingsTFASettingsApi.md#update_tfa_settings) | **PUT** /api/2.0/settings/tfaapp | Update the TFA settings
+*SettingsTFASettingsApi* | [**update_tfa_settings_link**](docs/SettingsTFASettingsApi.md#update_tfa_settings_link) | **PUT** /api/2.0/settings/tfaappwithlink | Get confirmation email for updating TFA settings
 *SettingsWebhooksApi* | [**create_webhook**](docs/SettingsWebhooksApi.md#create_webhook) | **POST** /api/2.0/settings/webhook | Create a webhook
 *SettingsWebhooksApi* | [**enable_webhook**](docs/SettingsWebhooksApi.md#enable_webhook) | **PUT** /api/2.0/settings/webhook/enable | Enable a webhook
-*SettingsWebhooksApi* | [**get_journal**](docs/SettingsWebhooksApi.md#get_journal) | **GET** /api/2.0/settings/webhooks/log | Get webhook logs
 *SettingsWebhooksApi* | [**get_tenant_webhooks**](docs/SettingsWebhooksApi.md#get_tenant_webhooks) | **GET** /api/2.0/settings/webhook | Get webhooks
+*SettingsWebhooksApi* | [**get_webhook_triggers**](docs/SettingsWebhooksApi.md#get_webhook_triggers) | **GET** /api/2.0/settings/webhook/triggers | Get webhook triggers
+*SettingsWebhooksApi* | [**get_webhooks_logs**](docs/SettingsWebhooksApi.md#get_webhooks_logs) | **GET** /api/2.0/settings/webhooks/log | Get webhook logs
 *SettingsWebhooksApi* | [**remove_webhook**](docs/SettingsWebhooksApi.md#remove_webhook) | **DELETE** /api/2.0/settings/webhook/{id} | Remove a webhook
 *SettingsWebhooksApi* | [**retry_webhook**](docs/SettingsWebhooksApi.md#retry_webhook) | **PUT** /api/2.0/settings/webhook/{id}/retry | Retry a webhook
 *SettingsWebhooksApi* | [**retry_webhooks**](docs/SettingsWebhooksApi.md#retry_webhooks) | **PUT** /api/2.0/settings/webhook/retry | Retry webhooks
-*SettingsWebhooksApi* | [**triggers**](docs/SettingsWebhooksApi.md#triggers) | **GET** /api/2.0/settings/webhook/triggers | Get webhook triggers
 *SettingsWebhooksApi* | [**update_webhook**](docs/SettingsWebhooksApi.md#update_webhook) | **PUT** /api/2.0/settings/webhook | Update a webhook
 *SettingsWebpluginsApi* | [**add_web_plugin_from_file**](docs/SettingsWebpluginsApi.md#add_web_plugin_from_file) | **POST** /api/2.0/settings/webplugins | Add a web plugin
 *SettingsWebpluginsApi* | [**delete_web_plugin**](docs/SettingsWebpluginsApi.md#delete_web_plugin) | **DELETE** /api/2.0/settings/webplugins/{name} | Delete a web plugin
 *SettingsWebpluginsApi* | [**get_web_plugin**](docs/SettingsWebpluginsApi.md#get_web_plugin) | **GET** /api/2.0/settings/webplugins/{name} | Get a web plugin by name
 *SettingsWebpluginsApi* | [**get_web_plugins**](docs/SettingsWebpluginsApi.md#get_web_plugins) | **GET** /api/2.0/settings/webplugins | Get web plugins
 *SettingsWebpluginsApi* | [**update_web_plugin**](docs/SettingsWebpluginsApi.md#update_web_plugin) | **PUT** /api/2.0/settings/webplugins/{name} | Update a web plugin
-*ThirdPartyApi* | [**get**](docs/ThirdPartyApi.md#get) | **GET** /api/2.0/thirdparty/{provider} | Get the code request
+*ThirdPartyApi* | [**get_third_party_code**](docs/ThirdPartyApi.md#get_third_party_code) | **GET** /api/2.0/thirdparty/{provider} | Get the code request
 
 
 ## Documentation For Models
@@ -946,6 +947,8 @@ Class | Method | HTTP request | Description
  - [PasswordSettingsDto](docs/PasswordSettingsDto.md)
  - [PasswordSettingsRequestsDto](docs/PasswordSettingsRequestsDto.md)
  - [PasswordSettingsWrapper](docs/PasswordSettingsWrapper.md)
+ - [PaymentCalculation](docs/PaymentCalculation.md)
+ - [PaymentCalculationWrapper](docs/PaymentCalculationWrapper.md)
  - [PaymentMethodStatus](docs/PaymentMethodStatus.md)
  - [PaymentSettingsDto](docs/PaymentSettingsDto.md)
  - [PaymentSettingsWrapper](docs/PaymentSettingsWrapper.md)

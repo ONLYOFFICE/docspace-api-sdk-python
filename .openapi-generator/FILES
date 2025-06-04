@@ -384,6 +384,8 @@ docs/PasswordHasher.md
 docs/PasswordSettingsDto.md
 docs/PasswordSettingsRequestsDto.md
 docs/PasswordSettingsWrapper.md
+docs/PaymentCalculation.md
+docs/PaymentCalculationWrapper.md
 docs/PaymentMethodStatus.md
 docs/PaymentSettingsDto.md
 docs/PaymentSettingsWrapper.md
@@ -1080,6 +1082,8 @@ docspace/models/password_hasher.py
 docspace/models/password_settings_dto.py
 docspace/models/password_settings_requests_dto.py
 docspace/models/password_settings_wrapper.py
+docspace/models/payment_calculation.py
+docspace/models/payment_calculation_wrapper.py
 docspace/models/payment_method_status.py
 docspace/models/payment_settings_dto.py
 docspace/models/payment_settings_wrapper.py
@@ -1680,6 +1684,8 @@ test/test_password_hasher.py
 test/test_password_settings_dto.py
 test/test_password_settings_requests_dto.py
 test/test_password_settings_wrapper.py
+test/test_payment_calculation.py
+test/test_payment_calculation_wrapper.py
 test/test_payment_method_status.py
 test/test_payment_settings_dto.py
 test/test_payment_settings_wrapper.py

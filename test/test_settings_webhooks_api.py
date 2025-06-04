@@ -40,17 +40,24 @@ class TestSettingsWebhooksApi(unittest.TestCase):
         """
         pass
 
-    def test_get_journal(self) -> None:
-        """Test case for get_journal
-
-        Get webhook logs
-        """
-        pass
-
     def test_get_tenant_webhooks(self) -> None:
         """Test case for get_tenant_webhooks
 
         Get webhooks
+        """
+        pass
+
+    def test_get_webhook_triggers(self) -> None:
+        """Test case for get_webhook_triggers
+
+        Get webhook triggers
+        """
+        pass
+
+    def test_get_webhooks_logs(self) -> None:
+        """Test case for get_webhooks_logs
+
+        Get webhook logs
         """
         pass
 
@@ -72,13 +79,6 @@ class TestSettingsWebhooksApi(unittest.TestCase):
         """Test case for retry_webhooks
 
         Retry webhooks
-        """
-        pass
-
-    def test_triggers(self) -> None:
-        """Test case for triggers
-
-        Get webhook triggers
         """
         pass
 

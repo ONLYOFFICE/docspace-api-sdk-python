@@ -39,7 +39,7 @@ class PeopleThemeApi:
 
 
     @validate_call
-    def change_theme(
+    def change_portal_theme(
         self,
         dark_theme_settings_request_dto: Optional[DarkThemeSettingsRequestDto] = None,
         _request_timeout: Union[
@@ -83,7 +83,7 @@ class PeopleThemeApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._change_theme_serialize(
+        _param = self._change_portal_theme_serialize(
             dark_theme_settings_request_dto=dark_theme_settings_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -107,7 +107,7 @@ class PeopleThemeApi:
 
 
     @validate_call
-    def change_theme_with_http_info(
+    def change_portal_theme_with_http_info(
         self,
         dark_theme_settings_request_dto: Optional[DarkThemeSettingsRequestDto] = None,
         _request_timeout: Union[
@@ -151,7 +151,7 @@ class PeopleThemeApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._change_theme_serialize(
+        _param = self._change_portal_theme_serialize(
             dark_theme_settings_request_dto=dark_theme_settings_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -175,7 +175,7 @@ class PeopleThemeApi:
 
 
     @validate_call
-    def change_theme_without_preload_content(
+    def change_portal_theme_without_preload_content(
         self,
         dark_theme_settings_request_dto: Optional[DarkThemeSettingsRequestDto] = None,
         _request_timeout: Union[
@@ -219,7 +219,7 @@ class PeopleThemeApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._change_theme_serialize(
+        _param = self._change_portal_theme_serialize(
             dark_theme_settings_request_dto=dark_theme_settings_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -238,7 +238,7 @@ class PeopleThemeApi:
         return response_data.response
 
 
-    def _change_theme_serialize(
+    def _change_portal_theme_serialize(
         self,
         dark_theme_settings_request_dto,
         _request_auth,
@@ -321,7 +321,7 @@ class PeopleThemeApi:
 
 
     @validate_call
-    def get_theme(
+    def get_portal_theme(
         self,
         _request_timeout: Union[
             None,
@@ -362,7 +362,7 @@ class PeopleThemeApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_theme_serialize(
+        _param = self._get_portal_theme_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -385,7 +385,7 @@ class PeopleThemeApi:
 
 
     @validate_call
-    def get_theme_with_http_info(
+    def get_portal_theme_with_http_info(
         self,
         _request_timeout: Union[
             None,
@@ -426,7 +426,7 @@ class PeopleThemeApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_theme_serialize(
+        _param = self._get_portal_theme_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -449,7 +449,7 @@ class PeopleThemeApi:
 
 
     @validate_call
-    def get_theme_without_preload_content(
+    def get_portal_theme_without_preload_content(
         self,
         _request_timeout: Union[
             None,
@@ -490,7 +490,7 @@ class PeopleThemeApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_theme_serialize(
+        _param = self._get_portal_theme_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -508,7 +508,7 @@ class PeopleThemeApi:
         return response_data.response
 
 
-    def _get_theme_serialize(
+    def _get_portal_theme_serialize(
         self,
         _request_auth,
         _content_type,

@@ -26,8 +26,8 @@ class TestThirdPartyApi(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
-    def test_get(self) -> None:
-        """Test case for get
+    def test_get_third_party_code(self) -> None:
+        """Test case for get_third_party_code
 
         Get the code request
         """

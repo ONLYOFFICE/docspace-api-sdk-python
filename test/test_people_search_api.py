@@ -33,27 +33,6 @@ class TestPeopleSearchApi(unittest.TestCase):
         """
         pass
 
-    def test_get_advanced(self) -> None:
-        """Test case for get_advanced
-
-        Search users by status filter
-        """
-        pass
-
-    def test_get_full_by_filter(self) -> None:
-        """Test case for get_full_by_filter
-
-        Search users with detaailed information by extended filter
-        """
-        pass
-
-    def test_get_people_search(self) -> None:
-        """Test case for get_people_search
-
-        Search users (using query parameters)
-        """
-        pass
-
     def test_get_search(self) -> None:
         """Test case for get_search
 
@@ -72,6 +51,27 @@ class TestPeopleSearchApi(unittest.TestCase):
         """Test case for get_users_with_room_shared
 
         Get users with room sharing settings
+        """
+        pass
+
+    def test_search_users_by_extended_filter(self) -> None:
+        """Test case for search_users_by_extended_filter
+
+        Search users with detaailed information by extended filter
+        """
+        pass
+
+    def test_search_users_by_query(self) -> None:
+        """Test case for search_users_by_query
+
+        Search users (using query parameters)
+        """
+        pass
+
+    def test_search_users_by_status(self) -> None:
+        """Test case for search_users_by_status
+
+        Search users by status filter
         """
         pass
 

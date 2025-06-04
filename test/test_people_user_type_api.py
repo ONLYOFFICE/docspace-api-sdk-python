@@ -26,22 +26,22 @@ class TestPeopleUserTypeApi(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
-    def test_get_change_type_progress(self) -> None:
-        """Test case for get_change_type_progress
+    def test_get_user_type_update_progress(self) -> None:
+        """Test case for get_user_type_update_progress
 
         Get the progress of updating user type
         """
         pass
 
-    def test_start_update_user_type(self) -> None:
-        """Test case for start_update_user_type
+    def test_star_user_typet_update(self) -> None:
+        """Test case for star_user_typet_update
 
         Update user type
         """
         pass
 
-    def test_terminate_change_type(self) -> None:
-        """Test case for terminate_change_type
+    def test_terminate_user_type_update(self) -> None:
+        """Test case for terminate_user_type_update
 
         Terminate update user type
         """

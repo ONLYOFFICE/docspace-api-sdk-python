@@ -33,8 +33,8 @@ class TestPeopleUserStatusApi(unittest.TestCase):
         """
         pass
 
-    def test_update_employee_activation_status(self) -> None:
-        """Test case for update_employee_activation_status
+    def test_update_user_activation_status(self) -> None:
+        """Test case for update_user_activation_status
 
         Set an activation status to the users
         """

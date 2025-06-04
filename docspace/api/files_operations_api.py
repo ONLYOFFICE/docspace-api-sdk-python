@@ -332,7 +332,7 @@ class FilesOperationsApi:
 
 
     @validate_call
-    def check_conversion(
+    def check_conversion_status(
         self,
         file_id: Annotated[StrictInt, Field(description="The file ID to check conversion status.")],
         start: Annotated[Optional[StrictBool], Field(description="Specifies whether a conversion operation is started or not.")] = None,
@@ -379,7 +379,7 @@ class FilesOperationsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._check_conversion_serialize(
+        _param = self._check_conversion_status_serialize(
             file_id=file_id,
             start=start,
             _request_auth=_request_auth,
@@ -404,7 +404,7 @@ class FilesOperationsApi:
 
 
     @validate_call
-    def check_conversion_with_http_info(
+    def check_conversion_status_with_http_info(
         self,
         file_id: Annotated[StrictInt, Field(description="The file ID to check conversion status.")],
         start: Annotated[Optional[StrictBool], Field(description="Specifies whether a conversion operation is started or not.")] = None,
@@ -451,7 +451,7 @@ class FilesOperationsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._check_conversion_serialize(
+        _param = self._check_conversion_status_serialize(
             file_id=file_id,
             start=start,
             _request_auth=_request_auth,
@@ -476,7 +476,7 @@ class FilesOperationsApi:
 
 
     @validate_call
-    def check_conversion_without_preload_content(
+    def check_conversion_status_without_preload_content(
         self,
         file_id: Annotated[StrictInt, Field(description="The file ID to check conversion status.")],
         start: Annotated[Optional[StrictBool], Field(description="Specifies whether a conversion operation is started or not.")] = None,
@@ -523,7 +523,7 @@ class FilesOperationsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._check_conversion_serialize(
+        _param = self._check_conversion_status_serialize(
             file_id=file_id,
             start=start,
             _request_auth=_request_auth,
@@ -543,7 +543,7 @@ class FilesOperationsApi:
         return response_data.response
 
 
-    def _check_conversion_serialize(
+    def _check_conversion_status_serialize(
         self,
         file_id,
         start,
@@ -602,6 +602,554 @@ class FilesOperationsApi:
         return self.api_client.param_serialize(
             method='GET',
             resource_path='/api/2.0/files/file/{fileId}/checkconversion',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def check_move_or_copy_batch_items(
+        self,
+        in_dto: Annotated[Optional[BatchRequestDto], Field(description="The request parameters for copying/moving files.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> FileEntryArrayWrapper:
+        """Check and move or copy to a folder
+
+        Checks if files or folders can be moved or copied to the specified folder, moves or copies them, and returns their information.
+
+        :param in_dto: The request parameters for copying/moving files.
+        :type in_dto: BatchRequestDto
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._check_move_or_copy_batch_items_serialize(
+            in_dto=in_dto,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "FileEntryArrayWrapper",
+            '401': None,
+            '403': None,
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def check_move_or_copy_batch_items_with_http_info(
+        self,
+        in_dto: Annotated[Optional[BatchRequestDto], Field(description="The request parameters for copying/moving files.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[FileEntryArrayWrapper]:
+        """Check and move or copy to a folder
+
+        Checks if files or folders can be moved or copied to the specified folder, moves or copies them, and returns their information.
+
+        :param in_dto: The request parameters for copying/moving files.
+        :type in_dto: BatchRequestDto
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._check_move_or_copy_batch_items_serialize(
+            in_dto=in_dto,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "FileEntryArrayWrapper",
+            '401': None,
+            '403': None,
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def check_move_or_copy_batch_items_without_preload_content(
+        self,
+        in_dto: Annotated[Optional[BatchRequestDto], Field(description="The request parameters for copying/moving files.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Check and move or copy to a folder
+
+        Checks if files or folders can be moved or copied to the specified folder, moves or copies them, and returns their information.
+
+        :param in_dto: The request parameters for copying/moving files.
+        :type in_dto: BatchRequestDto
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._check_move_or_copy_batch_items_serialize(
+            in_dto=in_dto,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "FileEntryArrayWrapper",
+            '401': None,
+            '403': None,
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _check_move_or_copy_batch_items_serialize(
+        self,
+        in_dto,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        if in_dto is not None:
+            
+            _query_params.append(('inDto', in_dto))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
+        ]
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/api/2.0/files/fileops/move',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def check_move_or_copy_dest_folder(
+        self,
+        in_dto: Annotated[Optional[BatchRequestDto], Field(description="The request parameters for copying/moving files.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> CheckDestFolderWrapper:
+        """Check for moving or copying to a folder
+
+        Checks if files can be moved or copied to the specified folder.
+
+        :param in_dto: The request parameters for copying/moving files.
+        :type in_dto: BatchRequestDto
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._check_move_or_copy_dest_folder_serialize(
+            in_dto=in_dto,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "CheckDestFolderWrapper",
+            '401': None,
+            '403': None,
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def check_move_or_copy_dest_folder_with_http_info(
+        self,
+        in_dto: Annotated[Optional[BatchRequestDto], Field(description="The request parameters for copying/moving files.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[CheckDestFolderWrapper]:
+        """Check for moving or copying to a folder
+
+        Checks if files can be moved or copied to the specified folder.
+
+        :param in_dto: The request parameters for copying/moving files.
+        :type in_dto: BatchRequestDto
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._check_move_or_copy_dest_folder_serialize(
+            in_dto=in_dto,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "CheckDestFolderWrapper",
+            '401': None,
+            '403': None,
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def check_move_or_copy_dest_folder_without_preload_content(
+        self,
+        in_dto: Annotated[Optional[BatchRequestDto], Field(description="The request parameters for copying/moving files.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Check for moving or copying to a folder
+
+        Checks if files can be moved or copied to the specified folder.
+
+        :param in_dto: The request parameters for copying/moving files.
+        :type in_dto: BatchRequestDto
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._check_move_or_copy_dest_folder_serialize(
+            in_dto=in_dto,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "CheckDestFolderWrapper",
+            '401': None,
+            '403': None,
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _check_move_or_copy_dest_folder_serialize(
+        self,
+        in_dto,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        if in_dto is not None:
+            
+            _query_params.append(('inDto', in_dto))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
+        ]
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/api/2.0/files/fileops/checkdestfolder',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2057,6 +2605,7 @@ class FilesOperationsApi:
     @validate_call
     def empty_trash(
         self,
+        single: Annotated[Optional[StrictBool], Field(description="Specifies whether to return only the current operation")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2074,6 +2623,8 @@ class FilesOperationsApi:
 
         Deletes all the files and folders from the \"Trash\" folder.
 
+        :param single: Specifies whether to return only the current operation
+        :type single: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2097,6 +2648,7 @@ class FilesOperationsApi:
         """ # noqa: E501
 
         _param = self._empty_trash_serialize(
+            single=single,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2121,6 +2673,7 @@ class FilesOperationsApi:
     @validate_call
     def empty_trash_with_http_info(
         self,
+        single: Annotated[Optional[StrictBool], Field(description="Specifies whether to return only the current operation")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2138,6 +2691,8 @@ class FilesOperationsApi:
 
         Deletes all the files and folders from the \"Trash\" folder.
 
+        :param single: Specifies whether to return only the current operation
+        :type single: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2161,6 +2716,7 @@ class FilesOperationsApi:
         """ # noqa: E501
 
         _param = self._empty_trash_serialize(
+            single=single,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2185,6 +2741,7 @@ class FilesOperationsApi:
     @validate_call
     def empty_trash_without_preload_content(
         self,
+        single: Annotated[Optional[StrictBool], Field(description="Specifies whether to return only the current operation")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2202,6 +2759,8 @@ class FilesOperationsApi:
 
         Deletes all the files and folders from the \"Trash\" folder.
 
+        :param single: Specifies whether to return only the current operation
+        :type single: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2225,6 +2784,7 @@ class FilesOperationsApi:
         """ # noqa: E501
 
         _param = self._empty_trash_serialize(
+            single=single,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2244,6 +2804,7 @@ class FilesOperationsApi:
 
     def _empty_trash_serialize(
         self,
+        single,
         _request_auth,
         _content_type,
         _headers,
@@ -2266,6 +2827,10 @@ class FilesOperationsApi:
 
         # process the path parameters
         # process the query parameters
+        if single is not None:
+            
+            _query_params.append(('Single', single))
+            
         # process the header parameters
         # process the form parameters
         # process the body parameter
@@ -2311,6 +2876,7 @@ class FilesOperationsApi:
     @validate_call
     def get_operation_statuses(
         self,
+        id: Annotated[Optional[StrictStr], Field(description="The ID of the file operation.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2328,6 +2894,8 @@ class FilesOperationsApi:
 
         Returns a list of all the active file operations.
 
+        :param id: The ID of the file operation.
+        :type id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2351,6 +2919,7 @@ class FilesOperationsApi:
         """ # noqa: E501
 
         _param = self._get_operation_statuses_serialize(
+            id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2374,6 +2943,7 @@ class FilesOperationsApi:
     @validate_call
     def get_operation_statuses_with_http_info(
         self,
+        id: Annotated[Optional[StrictStr], Field(description="The ID of the file operation.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2391,6 +2961,8 @@ class FilesOperationsApi:
 
         Returns a list of all the active file operations.
 
+        :param id: The ID of the file operation.
+        :type id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2414,6 +2986,7 @@ class FilesOperationsApi:
         """ # noqa: E501
 
         _param = self._get_operation_statuses_serialize(
+            id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2437,6 +3010,7 @@ class FilesOperationsApi:
     @validate_call
     def get_operation_statuses_without_preload_content(
         self,
+        id: Annotated[Optional[StrictStr], Field(description="The ID of the file operation.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2454,6 +3028,8 @@ class FilesOperationsApi:
 
         Returns a list of all the active file operations.
 
+        :param id: The ID of the file operation.
+        :type id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2477,6 +3053,7 @@ class FilesOperationsApi:
         """ # noqa: E501
 
         _param = self._get_operation_statuses_serialize(
+            id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2495,6 +3072,7 @@ class FilesOperationsApi:
 
     def _get_operation_statuses_serialize(
         self,
+        id,
         _request_auth,
         _content_type,
         _headers,
@@ -2517,6 +3095,10 @@ class FilesOperationsApi:
 
         # process the path parameters
         # process the query parameters
+        if id is not None:
+            
+            _query_params.append(('id', id))
+            
         # process the header parameters
         # process the form parameters
         # process the body parameter
@@ -2557,6 +3139,7 @@ class FilesOperationsApi:
     def get_operation_statuses_by_type(
         self,
         operation_type: Annotated[FileOperationType, Field(description="Specifies the type of file operation to be retrieved.")],
+        id: Annotated[Optional[StrictStr], Field(description="The ID of the file operation.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2576,6 +3159,8 @@ class FilesOperationsApi:
 
         :param operation_type: Specifies the type of file operation to be retrieved. (required)
         :type operation_type: FileOperationType
+        :param id: The ID of the file operation.
+        :type id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2600,6 +3185,7 @@ class FilesOperationsApi:
 
         _param = self._get_operation_statuses_by_type_serialize(
             operation_type=operation_type,
+            id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2624,6 +3210,7 @@ class FilesOperationsApi:
     def get_operation_statuses_by_type_with_http_info(
         self,
         operation_type: Annotated[FileOperationType, Field(description="Specifies the type of file operation to be retrieved.")],
+        id: Annotated[Optional[StrictStr], Field(description="The ID of the file operation.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2643,6 +3230,8 @@ class FilesOperationsApi:
 
         :param operation_type: Specifies the type of file operation to be retrieved. (required)
         :type operation_type: FileOperationType
+        :param id: The ID of the file operation.
+        :type id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2667,6 +3256,7 @@ class FilesOperationsApi:
 
         _param = self._get_operation_statuses_by_type_serialize(
             operation_type=operation_type,
+            id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2691,6 +3281,7 @@ class FilesOperationsApi:
     def get_operation_statuses_by_type_without_preload_content(
         self,
         operation_type: Annotated[FileOperationType, Field(description="Specifies the type of file operation to be retrieved.")],
+        id: Annotated[Optional[StrictStr], Field(description="The ID of the file operation.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2710,6 +3301,8 @@ class FilesOperationsApi:
 
         :param operation_type: Specifies the type of file operation to be retrieved. (required)
         :type operation_type: FileOperationType
+        :param id: The ID of the file operation.
+        :type id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2734,6 +3327,7 @@ class FilesOperationsApi:
 
         _param = self._get_operation_statuses_by_type_serialize(
             operation_type=operation_type,
+            id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2753,6 +3347,7 @@ class FilesOperationsApi:
     def _get_operation_statuses_by_type_serialize(
         self,
         operation_type,
+        id,
         _request_auth,
         _content_type,
         _headers,
@@ -2777,6 +3372,10 @@ class FilesOperationsApi:
         if operation_type is not None:
             _path_params['operationType'] = operation_type.value
         # process the query parameters
+        if id is not None:
+            
+            _query_params.append(('id', id))
+            
         # process the header parameters
         # process the form parameters
         # process the body parameter
@@ -3381,555 +3980,7 @@ class FilesOperationsApi:
 
 
     @validate_call
-    def move_or_copy_batch_check(
-        self,
-        in_dto: Annotated[Optional[BatchRequestDto], Field(description="The request parameters for copying/moving files.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> FileEntryArrayWrapper:
-        """Check and move or copy to a folder
-
-        Checks if files or folders can be moved or copied to the specified folder, moves or copies them, and returns their information.
-
-        :param in_dto: The request parameters for copying/moving files.
-        :type in_dto: BatchRequestDto
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._move_or_copy_batch_check_serialize(
-            in_dto=in_dto,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FileEntryArrayWrapper",
-            '401': None,
-            '403': None,
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        ).data
-
-
-    @validate_call
-    def move_or_copy_batch_check_with_http_info(
-        self,
-        in_dto: Annotated[Optional[BatchRequestDto], Field(description="The request parameters for copying/moving files.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[FileEntryArrayWrapper]:
-        """Check and move or copy to a folder
-
-        Checks if files or folders can be moved or copied to the specified folder, moves or copies them, and returns their information.
-
-        :param in_dto: The request parameters for copying/moving files.
-        :type in_dto: BatchRequestDto
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._move_or_copy_batch_check_serialize(
-            in_dto=in_dto,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FileEntryArrayWrapper",
-            '401': None,
-            '403': None,
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        )
-
-
-    @validate_call
-    def move_or_copy_batch_check_without_preload_content(
-        self,
-        in_dto: Annotated[Optional[BatchRequestDto], Field(description="The request parameters for copying/moving files.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> RESTResponseType:
-        """Check and move or copy to a folder
-
-        Checks if files or folders can be moved or copied to the specified folder, moves or copies them, and returns their information.
-
-        :param in_dto: The request parameters for copying/moving files.
-        :type in_dto: BatchRequestDto
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._move_or_copy_batch_check_serialize(
-            in_dto=in_dto,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FileEntryArrayWrapper",
-            '401': None,
-            '403': None,
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        return response_data.response
-
-
-    def _move_or_copy_batch_check_serialize(
-        self,
-        in_dto,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
-    ) -> RequestSerialized:
-
-        _host = None
-
-        _collection_formats: Dict[str, str] = {
-        }
-
-        _path_params: Dict[str, str] = {}
-        _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
-        _form_params: List[Tuple[str, str]] = []
-        _files: Dict[
-            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
-        ] = {}
-        _body_params: Optional[bytes] = None
-
-        # process the path parameters
-        # process the query parameters
-        if in_dto is not None:
-            
-            _query_params.append(('inDto', in_dto))
-            
-        # process the header parameters
-        # process the form parameters
-        # process the body parameter
-
-
-        # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
-            _header_params['Accept'] = self.api_client.select_header_accept(
-                [
-                    'application/json'
-                ]
-            )
-
-
-        # authentication setting
-        _auth_settings: List[str] = [
-            'Basic', 
-            'OAuth2', 
-            'ApiKeyBearer', 
-            'asc_auth_key', 
-            'Bearer', 
-            'OpenId'
-        ]
-
-        return self.api_client.param_serialize(
-            method='GET',
-            resource_path='/api/2.0/files/fileops/move',
-            path_params=_path_params,
-            query_params=_query_params,
-            header_params=_header_params,
-            body=_body_params,
-            post_params=_form_params,
-            files=_files,
-            auth_settings=_auth_settings,
-            collection_formats=_collection_formats,
-            _host=_host,
-            _request_auth=_request_auth
-        )
-
-
-
-
-    @validate_call
-    def move_or_copy_dest_folder_check(
-        self,
-        in_dto: Annotated[Optional[BatchRequestDto], Field(description="The request parameters for copying/moving files.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> CheckDestFolderWrapper:
-        """Check for moving or copying to a folder
-
-        Checks if files can be moved or copied to the specified folder.
-
-        :param in_dto: The request parameters for copying/moving files.
-        :type in_dto: BatchRequestDto
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._move_or_copy_dest_folder_check_serialize(
-            in_dto=in_dto,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "CheckDestFolderWrapper",
-            '401': None,
-            '403': None,
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        ).data
-
-
-    @validate_call
-    def move_or_copy_dest_folder_check_with_http_info(
-        self,
-        in_dto: Annotated[Optional[BatchRequestDto], Field(description="The request parameters for copying/moving files.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[CheckDestFolderWrapper]:
-        """Check for moving or copying to a folder
-
-        Checks if files can be moved or copied to the specified folder.
-
-        :param in_dto: The request parameters for copying/moving files.
-        :type in_dto: BatchRequestDto
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._move_or_copy_dest_folder_check_serialize(
-            in_dto=in_dto,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "CheckDestFolderWrapper",
-            '401': None,
-            '403': None,
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        )
-
-
-    @validate_call
-    def move_or_copy_dest_folder_check_without_preload_content(
-        self,
-        in_dto: Annotated[Optional[BatchRequestDto], Field(description="The request parameters for copying/moving files.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> RESTResponseType:
-        """Check for moving or copying to a folder
-
-        Checks if files can be moved or copied to the specified folder.
-
-        :param in_dto: The request parameters for copying/moving files.
-        :type in_dto: BatchRequestDto
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._move_or_copy_dest_folder_check_serialize(
-            in_dto=in_dto,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "CheckDestFolderWrapper",
-            '401': None,
-            '403': None,
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        return response_data.response
-
-
-    def _move_or_copy_dest_folder_check_serialize(
-        self,
-        in_dto,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
-    ) -> RequestSerialized:
-
-        _host = None
-
-        _collection_formats: Dict[str, str] = {
-        }
-
-        _path_params: Dict[str, str] = {}
-        _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
-        _form_params: List[Tuple[str, str]] = []
-        _files: Dict[
-            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
-        ] = {}
-        _body_params: Optional[bytes] = None
-
-        # process the path parameters
-        # process the query parameters
-        if in_dto is not None:
-            
-            _query_params.append(('inDto', in_dto))
-            
-        # process the header parameters
-        # process the form parameters
-        # process the body parameter
-
-
-        # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
-            _header_params['Accept'] = self.api_client.select_header_accept(
-                [
-                    'application/json'
-                ]
-            )
-
-
-        # authentication setting
-        _auth_settings: List[str] = [
-            'Basic', 
-            'OAuth2', 
-            'ApiKeyBearer', 
-            'asc_auth_key', 
-            'Bearer', 
-            'OpenId'
-        ]
-
-        return self.api_client.param_serialize(
-            method='GET',
-            resource_path='/api/2.0/files/fileops/checkdestfolder',
-            path_params=_path_params,
-            query_params=_query_params,
-            header_params=_header_params,
-            body=_body_params,
-            post_params=_form_params,
-            files=_files,
-            auth_settings=_auth_settings,
-            collection_formats=_collection_formats,
-            _host=_host,
-            _request_auth=_request_auth
-        )
-
-
-
-
-    @validate_call
-    def start_conversion(
+    def start_file_conversion(
         self,
         file_id: Annotated[StrictInt, Field(description="The file ID to start conversion proccess.")],
         check_conversion_request_dto_integer: Annotated[Optional[CheckConversionRequestDtoInteger], Field(description="The parameters for checking file conversion.")] = None,
@@ -3976,7 +4027,7 @@ class FilesOperationsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._start_conversion_serialize(
+        _param = self._start_file_conversion_serialize(
             file_id=file_id,
             check_conversion_request_dto_integer=check_conversion_request_dto_integer,
             _request_auth=_request_auth,
@@ -4001,7 +4052,7 @@ class FilesOperationsApi:
 
 
     @validate_call
-    def start_conversion_with_http_info(
+    def start_file_conversion_with_http_info(
         self,
         file_id: Annotated[StrictInt, Field(description="The file ID to start conversion proccess.")],
         check_conversion_request_dto_integer: Annotated[Optional[CheckConversionRequestDtoInteger], Field(description="The parameters for checking file conversion.")] = None,
@@ -4048,7 +4099,7 @@ class FilesOperationsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._start_conversion_serialize(
+        _param = self._start_file_conversion_serialize(
             file_id=file_id,
             check_conversion_request_dto_integer=check_conversion_request_dto_integer,
             _request_auth=_request_auth,
@@ -4073,7 +4124,7 @@ class FilesOperationsApi:
 
 
     @validate_call
-    def start_conversion_without_preload_content(
+    def start_file_conversion_without_preload_content(
         self,
         file_id: Annotated[StrictInt, Field(description="The file ID to start conversion proccess.")],
         check_conversion_request_dto_integer: Annotated[Optional[CheckConversionRequestDtoInteger], Field(description="The parameters for checking file conversion.")] = None,
@@ -4120,7 +4171,7 @@ class FilesOperationsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._start_conversion_serialize(
+        _param = self._start_file_conversion_serialize(
             file_id=file_id,
             check_conversion_request_dto_integer=check_conversion_request_dto_integer,
             _request_auth=_request_auth,
@@ -4140,7 +4191,7 @@ class FilesOperationsApi:
         return response_data.response
 
 
-    def _start_conversion_serialize(
+    def _start_file_conversion_serialize(
         self,
         file_id,
         check_conversion_request_dto_integer,
@@ -4486,7 +4537,7 @@ class FilesOperationsApi:
 
 
     @validate_call
-    def update_comment(
+    def update_file_comment(
         self,
         file_id: Annotated[StrictInt, Field(description="The file ID where the comment is located.")],
         update_comment: Annotated[Optional[UpdateComment], Field(description="The parameters for updating a comment.")] = None,
@@ -4533,7 +4584,7 @@ class FilesOperationsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_comment_serialize(
+        _param = self._update_file_comment_serialize(
             file_id=file_id,
             update_comment=update_comment,
             _request_auth=_request_auth,
@@ -4558,7 +4609,7 @@ class FilesOperationsApi:
 
 
     @validate_call
-    def update_comment_with_http_info(
+    def update_file_comment_with_http_info(
         self,
         file_id: Annotated[StrictInt, Field(description="The file ID where the comment is located.")],
         update_comment: Annotated[Optional[UpdateComment], Field(description="The parameters for updating a comment.")] = None,
@@ -4605,7 +4656,7 @@ class FilesOperationsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_comment_serialize(
+        _param = self._update_file_comment_serialize(
             file_id=file_id,
             update_comment=update_comment,
             _request_auth=_request_auth,
@@ -4630,7 +4681,7 @@ class FilesOperationsApi:
 
 
     @validate_call
-    def update_comment_without_preload_content(
+    def update_file_comment_without_preload_content(
         self,
         file_id: Annotated[StrictInt, Field(description="The file ID where the comment is located.")],
         update_comment: Annotated[Optional[UpdateComment], Field(description="The parameters for updating a comment.")] = None,
@@ -4677,7 +4728,7 @@ class FilesOperationsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_comment_serialize(
+        _param = self._update_file_comment_serialize(
             file_id=file_id,
             update_comment=update_comment,
             _request_auth=_request_auth,
@@ -4697,7 +4748,7 @@ class FilesOperationsApi:
         return response_data.response
 
 
-    def _update_comment_serialize(
+    def _update_file_comment_serialize(
         self,
         file_id,
         update_comment,

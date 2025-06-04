@@ -27,11 +27,12 @@ class DeleteBatchRequestDto(BaseModel):
     """
     The request parameters for deleting files.
     """ # noqa: E501
+    return_single_operation: Optional[StrictBool] = Field(default=None, description="Specifies whether to return only the current operation", alias="returnSingleOperation")
     folder_ids: Optional[List[BaseBatchRequestDtoFolderIdsInner]] = Field(default=None, description="The list of folder IDs to be deleted.", alias="folderIds")
     file_ids: Optional[List[BaseBatchRequestDtoFolderIdsInner]] = Field(default=None, description="The list of file IDs to be deleted.", alias="fileIds")
     delete_after: Optional[StrictBool] = Field(default=None, description="Specifies whether to delete a file after the editing session is finished or not", alias="deleteAfter")
     immediately: Optional[StrictBool] = Field(default=None, description="Specifies whether to move a file to the \\\"Trash\\\" folder or delete it immediately.")
-    __properties: ClassVar[List[str]] = ["folderIds", "fileIds", "deleteAfter", "immediately"]
+    __properties: ClassVar[List[str]] = ["returnSingleOperation", "folderIds", "fileIds", "deleteAfter", "immediately"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -108,6 +109,7 @@ class DeleteBatchRequestDto(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "returnSingleOperation": obj.get("returnSingleOperation"),
             "folderIds": [BaseBatchRequestDtoFolderIdsInner.from_dict(_item) for _item in obj["folderIds"]] if obj.get("folderIds") is not None else None,
             "fileIds": [BaseBatchRequestDtoFolderIdsInner.from_dict(_item) for _item in obj["fileIds"]] if obj.get("fileIds") is not None else None,
             "deleteAfter": obj.get("deleteAfter"),

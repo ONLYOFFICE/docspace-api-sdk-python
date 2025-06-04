@@ -1,12 +1,12 @@
 # docspace.SettingsLicenseApi
 
-All URIs are relative to *http://localhost:8092*
+All URIs are relative to *http://http:*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**accept_license**](SettingsLicenseApi.md#accept_license) | **POST** /api/2.0/settings/license/accept | Activate a license
+[**get_is_license_required**](SettingsLicenseApi.md#get_is_license_required) | **GET** /api/2.0/settings/license/required | Request a license
 [**refresh_license**](SettingsLicenseApi.md#refresh_license) | **GET** /api/2.0/settings/license/refresh | Refresh the license
-[**request_license**](SettingsLicenseApi.md#request_license) | **GET** /api/2.0/settings/license/required | Request a license
 [**upload_license**](SettingsLicenseApi.md#upload_license) | **POST** /api/2.0/settings/license | Upload a license
 
 
@@ -31,10 +31,10 @@ from docspace.models.string_wrapper import StringWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -109,6 +109,70 @@ This endpoint does not need any parameter.
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **get_is_license_required**
+> BooleanWrapper get_is_license_required()
+
+Request a license
+
+Requests a portal license if necessary.
+
+### Example
+
+
+```python
+import docspace
+from docspace.models.boolean_wrapper import BooleanWrapper
+from docspace.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://http:
+# See configuration.py for a list of all supported configuration parameters.
+configuration = docspace.Configuration(
+    host = "http://http:"
+)
+
+
+# Enter a context with an instance of the API client
+with docspace.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace.SettingsLicenseApi(api_client)
+
+    try:
+        # Request a license
+        api_response = api_instance.get_is_license_required()
+        print("The response of SettingsLicenseApi->get_is_license_required:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling SettingsLicenseApi->get_is_license_required: %s\n" % e)
+```
+
+
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**BooleanWrapper**](BooleanWrapper.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Boolean value: true if the license is required |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **refresh_license**
 > BooleanWrapper refresh_license()
 
@@ -130,10 +194,10 @@ from docspace.models.boolean_wrapper import BooleanWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -208,70 +272,6 @@ This endpoint does not need any parameter.
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **request_license**
-> BooleanWrapper request_license()
-
-Request a license
-
-Requests a portal license if necessary.
-
-### Example
-
-
-```python
-import docspace
-from docspace.models.boolean_wrapper import BooleanWrapper
-from docspace.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace.Configuration(
-    host = "http://localhost:8092"
-)
-
-
-# Enter a context with an instance of the API client
-with docspace.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace.SettingsLicenseApi(api_client)
-
-    try:
-        # Request a license
-        api_response = api_instance.request_license()
-        print("The response of SettingsLicenseApi->request_license:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling SettingsLicenseApi->request_license: %s\n" % e)
-```
-
-
-
-### Parameters
-
-This endpoint does not need any parameter.
-
-### Return type
-
-[**BooleanWrapper**](BooleanWrapper.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Boolean value: true if the license is required |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **upload_license**
 > StringWrapper upload_license(files)
 
@@ -293,10 +293,10 @@ from docspace.models.string_wrapper import StringWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters

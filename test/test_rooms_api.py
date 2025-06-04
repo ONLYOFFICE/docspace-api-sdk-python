@@ -26,8 +26,8 @@ class TestRoomsApi(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
-    def test_add_tags(self) -> None:
-        """Test case for add_tags
+    def test_add_room_tags(self) -> None:
+        """Test case for add_room_tags
 
         Add the room tags
         """
@@ -68,24 +68,24 @@ class TestRoomsApi(unittest.TestCase):
         """
         pass
 
-    def test_create_room_third_party(self) -> None:
-        """Test case for create_room_third_party
-
-        Create a third-party room
-        """
-        pass
-
-    def test_create_tag(self) -> None:
-        """Test case for create_tag
+    def test_create_room_tag(self) -> None:
+        """Test case for create_room_tag
 
         Create a tag
         """
         pass
 
-    def test_create_template(self) -> None:
-        """Test case for create_template
+    def test_create_room_template(self) -> None:
+        """Test case for create_room_template
 
         Start creating room template
+        """
+        pass
+
+    def test_create_room_third_party(self) -> None:
+        """Test case for create_room_third_party
+
+        Create a third-party room
         """
         pass
 
@@ -110,17 +110,10 @@ class TestRoomsApi(unittest.TestCase):
         """
         pass
 
-    def test_delete_tags(self) -> None:
-        """Test case for delete_tags
+    def test_delete_room_tags(self) -> None:
+        """Test case for delete_room_tags
 
         Remove the room tags
-        """
-        pass
-
-    def test_get_covers(self) -> None:
-        """Test case for get_covers
-
-        Get covers
         """
         pass
 
@@ -128,6 +121,20 @@ class TestRoomsApi(unittest.TestCase):
         """Test case for get_new_room_items
 
         Get the new room items
+        """
+        pass
+
+    def test_get_public_settings(self) -> None:
+        """Test case for get_public_settings
+
+        Get public settings
+        """
+        pass
+
+    def test_get_room_covers(self) -> None:
+        """Test case for get_room_covers
+
+        Get covers
         """
         pass
 
@@ -166,6 +173,20 @@ class TestRoomsApi(unittest.TestCase):
         """
         pass
 
+    def test_get_room_tags_info(self) -> None:
+        """Test case for get_room_tags_info
+
+        Get tags
+        """
+        pass
+
+    def test_get_room_template_creating_status(self) -> None:
+        """Test case for get_room_template_creating_status
+
+        Get status of room template creation
+        """
+        pass
+
     def test_get_rooms_folder(self) -> None:
         """Test case for get_rooms_folder
 
@@ -187,27 +208,6 @@ class TestRoomsApi(unittest.TestCase):
         """
         pass
 
-    def test_get_tags_info(self) -> None:
-        """Test case for get_tags_info
-
-        Get tags
-        """
-        pass
-
-    def test_get_template_creating_status(self) -> None:
-        """Test case for get_template_creating_status
-
-        Get status of room template creation
-        """
-        pass
-
-    def test_is_public(self) -> None:
-        """Test case for is_public
-
-        Get public settings
-        """
-        pass
-
     def test_pin_room(self) -> None:
         """Test case for pin_room
 
@@ -215,8 +215,8 @@ class TestRoomsApi(unittest.TestCase):
         """
         pass
 
-    def test_reorder(self) -> None:
-        """Test case for reorder
+    def test_reorder_room(self) -> None:
+        """Test case for reorder_room
 
         Reorder the room
         """
@@ -229,17 +229,17 @@ class TestRoomsApi(unittest.TestCase):
         """
         pass
 
-    def test_set_link(self) -> None:
-        """Test case for set_link
+    def test_set_public_settings(self) -> None:
+        """Test case for set_public_settings
 
-        Set the room external or invitation link
+        Set public settings
         """
         pass
 
-    def test_set_public(self) -> None:
-        """Test case for set_public
+    def test_set_room_link(self) -> None:
+        """Test case for set_room_link
 
-        Set public settings
+        Set the room external or invitation link
         """
         pass
 

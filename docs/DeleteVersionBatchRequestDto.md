@@ -6,6 +6,7 @@ The request parameters for deleting file versions.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**return_single_operation** | **bool** | Specifies whether to return only the current operation | [optional] 
 **delete_after** | **bool** | Specifies whether to delete a file after the editing session is finished or not. | [optional] 
 **file_id** | **int** | The file ID to delete. | 
 **versions** | **List[int]** | The collection of file versions to be deleted. | 

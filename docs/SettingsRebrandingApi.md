@@ -1,6 +1,6 @@
 # docspace.SettingsRebrandingApi
 
-All URIs are relative to *http://localhost:8092*
+All URIs are relative to *http://http:*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -44,10 +44,10 @@ from docspace.models.additional_white_label_settings_wrapper import AdditionalWh
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -144,10 +144,10 @@ from docspace.models.company_white_label_settings_wrapper import CompanyWhiteLab
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -244,10 +244,10 @@ from docspace.models.additional_white_label_settings_wrapper import AdditionalWh
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -343,10 +343,10 @@ from docspace.models.company_white_label_settings_wrapper import CompanyWhiteLab
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -442,10 +442,10 @@ from docspace.models.boolean_wrapper import BooleanWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -541,10 +541,10 @@ from docspace.models.is_default_white_label_logos_wrapper import IsDefaultWhiteL
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -646,10 +646,10 @@ from docspace.models.is_default_white_label_logos_array_wrapper import IsDefault
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -751,10 +751,10 @@ from docspace.models.company_white_label_settings_array_wrapper import CompanyWh
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -850,10 +850,10 @@ from docspace.models.string_wrapper import StringWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -950,10 +950,10 @@ from docspace.models.white_label_item_array_wrapper import WhiteLabelItemArrayWr
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 
@@ -1025,10 +1025,10 @@ from docspace.models.boolean_wrapper import BooleanWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -1131,10 +1131,10 @@ from docspace.models.boolean_wrapper import BooleanWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -1238,10 +1238,10 @@ from docspace.models.boolean_wrapper import BooleanWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -1344,10 +1344,10 @@ from docspace.models.company_white_label_settings_wrapper import CompanyWhiteLab
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -1450,10 +1450,10 @@ from docspace.models.white_label_requests_dto import WhiteLabelRequestsDto
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -1559,10 +1559,10 @@ from docspace.models.white_label_requests_dto import WhiteLabelRequestsDto
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -1667,10 +1667,10 @@ from docspace.models.boolean_wrapper import BooleanWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters

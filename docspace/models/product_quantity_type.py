@@ -20,7 +20,7 @@ from typing_extensions import Self
 
 class ProductQuantityType(int, Enum):
     """
-    ProductQuantityType
+    The product quantity type.
     """
 
     """

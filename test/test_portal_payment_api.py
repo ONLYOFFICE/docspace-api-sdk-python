@@ -26,6 +26,13 @@ class TestPortalPaymentApi(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
+    def test_calculate_wallet_payment(self) -> None:
+        """Test case for calculate_wallet_payment
+
+        Calculate amount of the wallet payment
+        """
+        pass
+
     def test_create_customer_operations_report(self) -> None:
         """Test case for create_customer_operations_report
 
@@ -40,17 +47,10 @@ class TestPortalPaymentApi(unittest.TestCase):
         """
         pass
 
-    def test_get_chechout_setup_url(self) -> None:
-        """Test case for get_chechout_setup_url
+    def test_get_checkout_setup_url(self) -> None:
+        """Test case for get_checkout_setup_url
 
-        Get the chechout setup page URL
-        """
-        pass
-
-    def test_get_currencies(self) -> None:
-        """Test case for get_currencies
-
-        Get currencies
+        Get the checkout setup page URL
         """
         pass
 
@@ -82,6 +82,20 @@ class TestPortalPaymentApi(unittest.TestCase):
         """
         pass
 
+    def test_get_payment_currencies(self) -> None:
+        """Test case for get_payment_currencies
+
+        Get currencies
+        """
+        pass
+
+    def test_get_payment_quotas(self) -> None:
+        """Test case for get_payment_quotas
+
+        Get quotas
+        """
+        pass
+
     def test_get_payment_url(self) -> None:
         """Test case for get_payment_url
 
@@ -89,24 +103,17 @@ class TestPortalPaymentApi(unittest.TestCase):
         """
         pass
 
-    def test_get_prices(self) -> None:
-        """Test case for get_prices
+    def test_get_portal_prices(self) -> None:
+        """Test case for get_portal_prices
 
         Get prices
         """
         pass
 
-    def test_get_quota_information(self) -> None:
-        """Test case for get_quota_information
+    def test_get_quota_payment_information(self) -> None:
+        """Test case for get_quota_payment_information
 
         Get quota payment information
-        """
-        pass
-
-    def test_get_quotas(self) -> None:
-        """Test case for get_quotas
-
-        Get quotas
         """
         pass
 
@@ -124,20 +131,6 @@ class TestPortalPaymentApi(unittest.TestCase):
         """
         pass
 
-    def test_payment_update(self) -> None:
-        """Test case for payment_update
-
-        Update the payment quantity
-        """
-        pass
-
-    def test_payment_update_wallet(self) -> None:
-        """Test case for payment_update_wallet
-
-        Update the wallet payment quantity
-        """
-        pass
-
     def test_perform_customer_operation(self) -> None:
         """Test case for perform_customer_operation
 
@@ -145,8 +138,8 @@ class TestPortalPaymentApi(unittest.TestCase):
         """
         pass
 
-    def test_send_sales_request(self) -> None:
-        """Test case for send_sales_request
+    def test_send_payment_request(self) -> None:
+        """Test case for send_payment_request
 
         Send a payment request
         """
@@ -163,6 +156,20 @@ class TestPortalPaymentApi(unittest.TestCase):
         """Test case for top_up_deposit
 
         Put money on deposit
+        """
+        pass
+
+    def test_update_payment(self) -> None:
+        """Test case for update_payment
+
+        Update the payment quantity
+        """
+        pass
+
+    def test_update_wallet_payment(self) -> None:
+        """Test case for update_wallet_payment
+
+        Update the wallet payment quantity
         """
         pass
 

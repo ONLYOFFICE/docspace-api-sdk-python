@@ -42,7 +42,7 @@ class PeopleThirdPartyAccountsApi:
 
 
     @validate_call
-    def get_auth_providers(
+    def get_third_party_auth_providers(
         self,
         invite_view: Annotated[Optional[StrictBool], Field(description="Specifies whether to return providers that are available for invitation links, i.e. the user can login or register through these providers.")] = None,
         settings_view: Annotated[Optional[StrictBool], Field(description="Specifies whether to display the provider settings in a pop-up window (true) or redirect them to the desktop application (false).")] = None,
@@ -95,7 +95,7 @@ class PeopleThirdPartyAccountsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_auth_providers_serialize(
+        _param = self._get_third_party_auth_providers_serialize(
             invite_view=invite_view,
             settings_view=settings_view,
             client_callback=client_callback,
@@ -121,7 +121,7 @@ class PeopleThirdPartyAccountsApi:
 
 
     @validate_call
-    def get_auth_providers_with_http_info(
+    def get_third_party_auth_providers_with_http_info(
         self,
         invite_view: Annotated[Optional[StrictBool], Field(description="Specifies whether to return providers that are available for invitation links, i.e. the user can login or register through these providers.")] = None,
         settings_view: Annotated[Optional[StrictBool], Field(description="Specifies whether to display the provider settings in a pop-up window (true) or redirect them to the desktop application (false).")] = None,
@@ -174,7 +174,7 @@ class PeopleThirdPartyAccountsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_auth_providers_serialize(
+        _param = self._get_third_party_auth_providers_serialize(
             invite_view=invite_view,
             settings_view=settings_view,
             client_callback=client_callback,
@@ -200,7 +200,7 @@ class PeopleThirdPartyAccountsApi:
 
 
     @validate_call
-    def get_auth_providers_without_preload_content(
+    def get_third_party_auth_providers_without_preload_content(
         self,
         invite_view: Annotated[Optional[StrictBool], Field(description="Specifies whether to return providers that are available for invitation links, i.e. the user can login or register through these providers.")] = None,
         settings_view: Annotated[Optional[StrictBool], Field(description="Specifies whether to display the provider settings in a pop-up window (true) or redirect them to the desktop application (false).")] = None,
@@ -253,7 +253,7 @@ class PeopleThirdPartyAccountsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_auth_providers_serialize(
+        _param = self._get_third_party_auth_providers_serialize(
             invite_view=invite_view,
             settings_view=settings_view,
             client_callback=client_callback,
@@ -274,7 +274,7 @@ class PeopleThirdPartyAccountsApi:
         return response_data.response
 
 
-    def _get_auth_providers_serialize(
+    def _get_third_party_auth_providers_serialize(
         self,
         invite_view,
         settings_view,
@@ -355,7 +355,7 @@ class PeopleThirdPartyAccountsApi:
 
 
     @validate_call
-    def link_account(
+    def link_third_party_account(
         self,
         link_account_request_dto: Optional[LinkAccountRequestDto] = None,
         _request_timeout: Union[
@@ -399,7 +399,7 @@ class PeopleThirdPartyAccountsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._link_account_serialize(
+        _param = self._link_third_party_account_serialize(
             link_account_request_dto=link_account_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -424,7 +424,7 @@ class PeopleThirdPartyAccountsApi:
 
 
     @validate_call
-    def link_account_with_http_info(
+    def link_third_party_account_with_http_info(
         self,
         link_account_request_dto: Optional[LinkAccountRequestDto] = None,
         _request_timeout: Union[
@@ -468,7 +468,7 @@ class PeopleThirdPartyAccountsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._link_account_serialize(
+        _param = self._link_third_party_account_serialize(
             link_account_request_dto=link_account_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -493,7 +493,7 @@ class PeopleThirdPartyAccountsApi:
 
 
     @validate_call
-    def link_account_without_preload_content(
+    def link_third_party_account_without_preload_content(
         self,
         link_account_request_dto: Optional[LinkAccountRequestDto] = None,
         _request_timeout: Union[
@@ -537,7 +537,7 @@ class PeopleThirdPartyAccountsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._link_account_serialize(
+        _param = self._link_third_party_account_serialize(
             link_account_request_dto=link_account_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -557,7 +557,7 @@ class PeopleThirdPartyAccountsApi:
         return response_data.response
 
 
-    def _link_account_serialize(
+    def _link_third_party_account_serialize(
         self,
         link_account_request_dto,
         _request_auth,
@@ -633,7 +633,7 @@ class PeopleThirdPartyAccountsApi:
 
 
     @validate_call
-    def signup_account(
+    def signup_third_party_account(
         self,
         signup_account_request_dto: Optional[SignupAccountRequestDto] = None,
         _request_timeout: Union[
@@ -677,7 +677,7 @@ class PeopleThirdPartyAccountsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._signup_account_serialize(
+        _param = self._signup_third_party_account_serialize(
             signup_account_request_dto=signup_account_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -702,7 +702,7 @@ class PeopleThirdPartyAccountsApi:
 
 
     @validate_call
-    def signup_account_with_http_info(
+    def signup_third_party_account_with_http_info(
         self,
         signup_account_request_dto: Optional[SignupAccountRequestDto] = None,
         _request_timeout: Union[
@@ -746,7 +746,7 @@ class PeopleThirdPartyAccountsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._signup_account_serialize(
+        _param = self._signup_third_party_account_serialize(
             signup_account_request_dto=signup_account_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -771,7 +771,7 @@ class PeopleThirdPartyAccountsApi:
 
 
     @validate_call
-    def signup_account_without_preload_content(
+    def signup_third_party_account_without_preload_content(
         self,
         signup_account_request_dto: Optional[SignupAccountRequestDto] = None,
         _request_timeout: Union[
@@ -815,7 +815,7 @@ class PeopleThirdPartyAccountsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._signup_account_serialize(
+        _param = self._signup_third_party_account_serialize(
             signup_account_request_dto=signup_account_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -835,7 +835,7 @@ class PeopleThirdPartyAccountsApi:
         return response_data.response
 
 
-    def _signup_account_serialize(
+    def _signup_third_party_account_serialize(
         self,
         signup_account_request_dto,
         _request_auth,
@@ -905,7 +905,7 @@ class PeopleThirdPartyAccountsApi:
 
 
     @validate_call
-    def unlink_account(
+    def unlink_third_party_account(
         self,
         provider: Annotated[Optional[StrictStr], Field(description="The provider name.")] = None,
         _request_timeout: Union[
@@ -949,7 +949,7 @@ class PeopleThirdPartyAccountsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._unlink_account_serialize(
+        _param = self._unlink_third_party_account_serialize(
             provider=provider,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -973,7 +973,7 @@ class PeopleThirdPartyAccountsApi:
 
 
     @validate_call
-    def unlink_account_with_http_info(
+    def unlink_third_party_account_with_http_info(
         self,
         provider: Annotated[Optional[StrictStr], Field(description="The provider name.")] = None,
         _request_timeout: Union[
@@ -1017,7 +1017,7 @@ class PeopleThirdPartyAccountsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._unlink_account_serialize(
+        _param = self._unlink_third_party_account_serialize(
             provider=provider,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1041,7 +1041,7 @@ class PeopleThirdPartyAccountsApi:
 
 
     @validate_call
-    def unlink_account_without_preload_content(
+    def unlink_third_party_account_without_preload_content(
         self,
         provider: Annotated[Optional[StrictStr], Field(description="The provider name.")] = None,
         _request_timeout: Union[
@@ -1085,7 +1085,7 @@ class PeopleThirdPartyAccountsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._unlink_account_serialize(
+        _param = self._unlink_third_party_account_serialize(
             provider=provider,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1104,7 +1104,7 @@ class PeopleThirdPartyAccountsApi:
         return response_data.response
 
 
-    def _unlink_account_serialize(
+    def _unlink_third_party_account_serialize(
         self,
         provider,
         _request_auth,

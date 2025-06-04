@@ -1,17 +1,17 @@
 # docspace.PeopleProfilesApi
 
-All URIs are relative to *http://localhost:8092*
+All URIs are relative to *http://http:*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**add_member**](PeopleProfilesApi.md#add_member) | **POST** /api/2.0/people | Add a user
-[**call_self**](PeopleProfilesApi.md#call_self) | **GET** /api/2.0/people/@self | Get my profile
 [**delete_member**](PeopleProfilesApi.md#delete_member) | **DELETE** /api/2.0/people/{userid} | Delete a user
 [**delete_profile**](PeopleProfilesApi.md#delete_profile) | **DELETE** /api/2.0/people/@self | Delete my profile
 [**get_all_profiles**](PeopleProfilesApi.md#get_all_profiles) | **GET** /api/2.0/people | Get profiles
-[**get_by_email**](PeopleProfilesApi.md#get_by_email) | **GET** /api/2.0/people/email | Get a profile by user email
-[**get_by_id**](PeopleProfilesApi.md#get_by_id) | **GET** /api/2.0/people/{userid} | Get a profile by user name
 [**get_claims**](PeopleProfilesApi.md#get_claims) | **GET** /api/2.0/people/tokendiagnostics | Returns the user claims.
+[**get_profile_by_email**](PeopleProfilesApi.md#get_profile_by_email) | **GET** /api/2.0/people/email | Get a profile by user email
+[**get_profile_by_user_id**](PeopleProfilesApi.md#get_profile_by_user_id) | **GET** /api/2.0/people/{userid} | Get a profile by user name
+[**get_self_profile**](PeopleProfilesApi.md#get_self_profile) | **GET** /api/2.0/people/@self | Get my profile
 [**invite_users**](PeopleProfilesApi.md#invite_users) | **POST** /api/2.0/people/invite | Invite users
 [**remove_users**](PeopleProfilesApi.md#remove_users) | **PUT** /api/2.0/people/delete | Delete users
 [**resend_user_invites**](PeopleProfilesApi.md#resend_user_invites) | **PUT** /api/2.0/people/invite | Resend activation emails
@@ -42,10 +42,10 @@ from docspace.models.member_request_dto import MemberRequestDto
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -125,105 +125,6 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **call_self**
-> EmployeeFullWrapper call_self()
-
-Get my profile
-
-Returns the detailed information about the current user profile.
-
-### Example
-
-* Basic Authentication (Basic):
-* OAuth Authentication (OAuth2):
-* Api Key Authentication (ApiKeyBearer):
-* Api Key Authentication (asc_auth_key):
-* Bearer (JWT) Authentication (Bearer):
-
-```python
-import docspace
-from docspace.models.employee_full_wrapper import EmployeeFullWrapper
-from docspace.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace.Configuration(
-    host = "http://localhost:8092"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure HTTP basic authorization: Basic
-configuration = docspace.Configuration(
-    username = os.environ["USERNAME"],
-    password = os.environ["PASSWORD"]
-)
-
-configuration.access_token = os.environ["ACCESS_TOKEN"]
-
-# Configure API key authorization: ApiKeyBearer
-configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-
-# Enter a context with an instance of the API client
-with docspace.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace.PeopleProfilesApi(api_client)
-
-    try:
-        # Get my profile
-        api_response = api_instance.call_self()
-        print("The response of PeopleProfilesApi->call_self:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling PeopleProfilesApi->call_self: %s\n" % e)
-```
-
-
-
-### Parameters
-
-This endpoint does not need any parameter.
-
-### Return type
-
-[**EmployeeFullWrapper**](EmployeeFullWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Detailed information about my profile |  -  |
-**401** | Unauthorized |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **delete_member**
 > EmployeeFullWrapper delete_member(userid)
 
@@ -245,10 +146,10 @@ from docspace.models.employee_full_wrapper import EmployeeFullWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -351,10 +252,10 @@ from docspace.models.employee_full_wrapper import EmployeeFullWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -452,10 +353,10 @@ from docspace.models.employee_full_array_wrapper import EmployeeFullArrayWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -530,217 +431,6 @@ This endpoint does not need any parameter.
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **get_by_email**
-> EmployeeFullWrapper get_by_email(email=email, culture=culture)
-
-Get a profile by user email
-
-Returns the detailed information about a profile of the user with the email specified in the request.
-
-### Example
-
-* Basic Authentication (Basic):
-* OAuth Authentication (OAuth2):
-* Api Key Authentication (ApiKeyBearer):
-* Api Key Authentication (asc_auth_key):
-* Bearer (JWT) Authentication (Bearer):
-
-```python
-import docspace
-from docspace.models.employee_full_wrapper import EmployeeFullWrapper
-from docspace.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace.Configuration(
-    host = "http://localhost:8092"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure HTTP basic authorization: Basic
-configuration = docspace.Configuration(
-    username = os.environ["USERNAME"],
-    password = os.environ["PASSWORD"]
-)
-
-configuration.access_token = os.environ["ACCESS_TOKEN"]
-
-# Configure API key authorization: ApiKeyBearer
-configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-
-# Enter a context with an instance of the API client
-with docspace.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace.PeopleProfilesApi(api_client)
-    email = 'Sydney_Roberts4@hotmail.com' # str | The user email address. (optional)
-    culture = 'some text' # str | Culture (optional)
-
-    try:
-        # Get a profile by user email
-        api_response = api_instance.get_by_email(email=email, culture=culture)
-        print("The response of PeopleProfilesApi->get_by_email:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling PeopleProfilesApi->get_by_email: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **email** | **str**| The user email address. | [optional] 
- **culture** | **str**| Culture | [optional] 
-
-### Return type
-
-[**EmployeeFullWrapper**](EmployeeFullWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Detailed profile information |  -  |
-**401** | Unauthorized |  -  |
-**404** | User not found |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **get_by_id**
-> EmployeeFullWrapper get_by_id(userid)
-
-Get a profile by user name
-
-Returns the detailed information about a profile of the user with the name specified in the request.
-
-### Example
-
-* Basic Authentication (Basic):
-* OAuth Authentication (OAuth2):
-* Api Key Authentication (ApiKeyBearer):
-* Api Key Authentication (asc_auth_key):
-* Bearer (JWT) Authentication (Bearer):
-
-```python
-import docspace
-from docspace.models.employee_full_wrapper import EmployeeFullWrapper
-from docspace.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace.Configuration(
-    host = "http://localhost:8092"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure HTTP basic authorization: Basic
-configuration = docspace.Configuration(
-    username = os.environ["USERNAME"],
-    password = os.environ["PASSWORD"]
-)
-
-configuration.access_token = os.environ["ACCESS_TOKEN"]
-
-# Configure API key authorization: ApiKeyBearer
-configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-
-# Enter a context with an instance of the API client
-with docspace.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace.PeopleProfilesApi(api_client)
-    userid = '9846' # str | The user ID.
-
-    try:
-        # Get a profile by user name
-        api_response = api_instance.get_by_id(userid)
-        print("The response of PeopleProfilesApi->get_by_id:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling PeopleProfilesApi->get_by_id: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **userid** | **str**| The user ID. | 
-
-### Return type
-
-[**EmployeeFullWrapper**](EmployeeFullWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Detailed profile information |  -  |
-**400** | Incorect UserId |  -  |
-**401** | Unauthorized |  -  |
-**404** | User not found |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **get_claims**
 > ObjectWrapper get_claims()
 
@@ -762,10 +452,10 @@ from docspace.models.object_wrapper import ObjectWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -840,6 +530,316 @@ This endpoint does not need any parameter.
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **get_profile_by_email**
+> EmployeeFullWrapper get_profile_by_email(email=email, culture=culture)
+
+Get a profile by user email
+
+Returns the detailed information about a profile of the user with the email specified in the request.
+
+### Example
+
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
+* Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
+
+```python
+import docspace
+from docspace.models.employee_full_wrapper import EmployeeFullWrapper
+from docspace.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://http:
+# See configuration.py for a list of all supported configuration parameters.
+configuration = docspace.Configuration(
+    host = "http://http:"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
+# Configure API key authorization: asc_auth_key
+configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with docspace.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace.PeopleProfilesApi(api_client)
+    email = 'Sydney_Roberts4@hotmail.com' # str | The user email address. (optional)
+    culture = 'some text' # str | Culture (optional)
+
+    try:
+        # Get a profile by user email
+        api_response = api_instance.get_profile_by_email(email=email, culture=culture)
+        print("The response of PeopleProfilesApi->get_profile_by_email:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PeopleProfilesApi->get_profile_by_email: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **email** | **str**| The user email address. | [optional] 
+ **culture** | **str**| Culture | [optional] 
+
+### Return type
+
+[**EmployeeFullWrapper**](EmployeeFullWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Detailed profile information |  -  |
+**401** | Unauthorized |  -  |
+**404** | User not found |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_profile_by_user_id**
+> EmployeeFullWrapper get_profile_by_user_id(userid)
+
+Get a profile by user name
+
+Returns the detailed information about a profile of the user with the name specified in the request.
+
+### Example
+
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
+* Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
+
+```python
+import docspace
+from docspace.models.employee_full_wrapper import EmployeeFullWrapper
+from docspace.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://http:
+# See configuration.py for a list of all supported configuration parameters.
+configuration = docspace.Configuration(
+    host = "http://http:"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
+# Configure API key authorization: asc_auth_key
+configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with docspace.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace.PeopleProfilesApi(api_client)
+    userid = '9846' # str | The user ID.
+
+    try:
+        # Get a profile by user name
+        api_response = api_instance.get_profile_by_user_id(userid)
+        print("The response of PeopleProfilesApi->get_profile_by_user_id:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PeopleProfilesApi->get_profile_by_user_id: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **userid** | **str**| The user ID. | 
+
+### Return type
+
+[**EmployeeFullWrapper**](EmployeeFullWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Detailed profile information |  -  |
+**400** | Incorect UserId |  -  |
+**401** | Unauthorized |  -  |
+**404** | User not found |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_self_profile**
+> EmployeeFullWrapper get_self_profile()
+
+Get my profile
+
+Returns the detailed information about the current user profile.
+
+### Example
+
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
+* Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
+
+```python
+import docspace
+from docspace.models.employee_full_wrapper import EmployeeFullWrapper
+from docspace.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://http:
+# See configuration.py for a list of all supported configuration parameters.
+configuration = docspace.Configuration(
+    host = "http://http:"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
+# Configure API key authorization: asc_auth_key
+configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with docspace.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace.PeopleProfilesApi(api_client)
+
+    try:
+        # Get my profile
+        api_response = api_instance.get_self_profile()
+        print("The response of PeopleProfilesApi->get_self_profile:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PeopleProfilesApi->get_self_profile: %s\n" % e)
+```
+
+
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**EmployeeFullWrapper**](EmployeeFullWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Detailed information about my profile |  -  |
+**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **invite_users**
 > EmployeeArrayWrapper invite_users(invite_users_request_dto=invite_users_request_dto)
 
@@ -862,10 +862,10 @@ from docspace.models.invite_users_request_dto import InviteUsersRequestDto
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -967,10 +967,10 @@ from docspace.models.update_members_request_dto import UpdateMembersRequestDto
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -1072,10 +1072,10 @@ from docspace.models.update_members_request_dto import UpdateMembersRequestDto
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -1177,10 +1177,10 @@ from docspace.models.update_member_request_dto import UpdateMemberRequestDto
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -1284,10 +1284,10 @@ from docspace.models.update_member_request_dto import UpdateMemberRequestDto
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -1393,10 +1393,10 @@ from docspace.models.employee_full_wrapper import EmployeeFullWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters

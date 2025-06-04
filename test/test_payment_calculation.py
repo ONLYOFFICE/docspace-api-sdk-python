@@ -14,10 +14,10 @@
 
 import unittest
 
-from docspace.models.delete_batch_request_dto import DeleteBatchRequestDto
+from docspace.models.payment_calculation import PaymentCalculation
 
-class TestDeleteBatchRequestDto(unittest.TestCase):
-    """DeleteBatchRequestDto unit test stubs"""
+class TestPaymentCalculation(unittest.TestCase):
+    """PaymentCalculation unit test stubs"""
 
     def setUp(self):
         pass
@@ -25,33 +25,28 @@ class TestDeleteBatchRequestDto(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional) -> DeleteBatchRequestDto:
-        """Test DeleteBatchRequestDto
+    def make_instance(self, include_optional) -> PaymentCalculation:
+        """Test PaymentCalculation
             include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # uncomment below to create an instance of `DeleteBatchRequestDto`
+        # uncomment below to create an instance of `PaymentCalculation`
         """
-        model = DeleteBatchRequestDto()
+        model = PaymentCalculation()
         if include_optional:
-            return DeleteBatchRequestDto(
-                return_single_operation = True,
-                folder_ids = [
-                    null
-                    ],
-                file_ids = [
-                    null
-                    ],
-                delete_after = True,
-                immediately = True
+            return PaymentCalculation(
+                operation_id = 1234,
+                amount = 1.337,
+                currency = 'some text',
+                quantity = 1234
             )
         else:
-            return DeleteBatchRequestDto(
+            return PaymentCalculation(
         )
         """
 
-    def testDeleteBatchRequestDto(self):
-        """Test DeleteBatchRequestDto"""
+    def testPaymentCalculation(self):
+        """Test PaymentCalculation"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 

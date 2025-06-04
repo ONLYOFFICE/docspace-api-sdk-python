@@ -323,7 +323,7 @@ class SettingsMessagesApi:
 
 
     @validate_call
-    def send_adm_mail(
+    def send_admin_mail(
         self,
         admin_message_settings_requests_dto: Optional[AdminMessageSettingsRequestsDto] = None,
         _request_timeout: Union[
@@ -367,7 +367,7 @@ class SettingsMessagesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._send_adm_mail_serialize(
+        _param = self._send_admin_mail_serialize(
             admin_message_settings_requests_dto=admin_message_settings_requests_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -392,7 +392,7 @@ class SettingsMessagesApi:
 
 
     @validate_call
-    def send_adm_mail_with_http_info(
+    def send_admin_mail_with_http_info(
         self,
         admin_message_settings_requests_dto: Optional[AdminMessageSettingsRequestsDto] = None,
         _request_timeout: Union[
@@ -436,7 +436,7 @@ class SettingsMessagesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._send_adm_mail_serialize(
+        _param = self._send_admin_mail_serialize(
             admin_message_settings_requests_dto=admin_message_settings_requests_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -461,7 +461,7 @@ class SettingsMessagesApi:
 
 
     @validate_call
-    def send_adm_mail_without_preload_content(
+    def send_admin_mail_without_preload_content(
         self,
         admin_message_settings_requests_dto: Optional[AdminMessageSettingsRequestsDto] = None,
         _request_timeout: Union[
@@ -505,7 +505,7 @@ class SettingsMessagesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._send_adm_mail_serialize(
+        _param = self._send_admin_mail_serialize(
             admin_message_settings_requests_dto=admin_message_settings_requests_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -525,7 +525,7 @@ class SettingsMessagesApi:
         return response_data.response
 
 
-    def _send_adm_mail_serialize(
+    def _send_admin_mail_serialize(
         self,
         admin_message_settings_requests_dto,
         _request_auth,

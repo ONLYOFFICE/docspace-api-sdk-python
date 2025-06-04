@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, StrictBool
 from typing import Any, ClassVar, Dict, List, Optional
 from docspace.models.base_batch_request_dto_folder_ids_inner import BaseBatchRequestDtoFolderIdsInner
 from typing import Optional, Set
@@ -27,9 +27,10 @@ class DuplicateRequestDto(BaseModel):
     """
     The duplicate request parameters.
     """ # noqa: E501
+    return_single_operation: Optional[StrictBool] = Field(default=None, description="Specifies whether to return only the current operation", alias="returnSingleOperation")
     folder_ids: Optional[List[BaseBatchRequestDtoFolderIdsInner]] = Field(default=None, description="The list of folder IDs.", alias="folderIds")
     file_ids: Optional[List[BaseBatchRequestDtoFolderIdsInner]] = Field(default=None, description="The list of file IDs.", alias="fileIds")
-    __properties: ClassVar[List[str]] = ["folderIds", "fileIds"]
+    __properties: ClassVar[List[str]] = ["returnSingleOperation", "folderIds", "fileIds"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -106,6 +107,7 @@ class DuplicateRequestDto(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "returnSingleOperation": obj.get("returnSingleOperation"),
             "folderIds": [BaseBatchRequestDtoFolderIdsInner.from_dict(_item) for _item in obj["folderIds"]] if obj.get("folderIds") is not None else None,
             "fileIds": [BaseBatchRequestDtoFolderIdsInner.from_dict(_item) for _item in obj["fileIds"]] if obj.get("fileIds") is not None else None
         })

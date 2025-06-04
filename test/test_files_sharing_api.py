@@ -33,8 +33,8 @@ class TestFilesSharingApi(unittest.TestCase):
         """
         pass
 
-    def test_change_owner(self) -> None:
-        """Test case for change_owner
+    def test_change_file_owner(self) -> None:
+        """Test case for change_file_owner
 
         Change the file owner
         """
@@ -47,17 +47,17 @@ class TestFilesSharingApi(unittest.TestCase):
         """
         pass
 
+    def test_get_shared_users(self) -> None:
+        """Test case for get_shared_users
+
+        Get user access rights by file ID
+        """
+        pass
+
     def test_send_editor_notify(self) -> None:
         """Test case for send_editor_notify
 
         Send the mention message
-        """
-        pass
-
-    def test_shared_users(self) -> None:
-        """Test case for shared_users
-
-        Get user access rights by file ID
         """
         pass
 

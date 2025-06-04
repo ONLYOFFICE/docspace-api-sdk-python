@@ -33,10 +33,24 @@ class TestFilesOperationsApi(unittest.TestCase):
         """
         pass
 
-    def test_check_conversion(self) -> None:
-        """Test case for check_conversion
+    def test_check_conversion_status(self) -> None:
+        """Test case for check_conversion_status
 
         Get conversion status
+        """
+        pass
+
+    def test_check_move_or_copy_batch_items(self) -> None:
+        """Test case for check_move_or_copy_batch_items
+
+        Check and move or copy to a folder
+        """
+        pass
+
+    def test_check_move_or_copy_dest_folder(self) -> None:
+        """Test case for check_move_or_copy_dest_folder
+
+        Check for moving or copying to a folder
         """
         pass
 
@@ -110,22 +124,8 @@ class TestFilesOperationsApi(unittest.TestCase):
         """
         pass
 
-    def test_move_or_copy_batch_check(self) -> None:
-        """Test case for move_or_copy_batch_check
-
-        Check and move or copy to a folder
-        """
-        pass
-
-    def test_move_or_copy_dest_folder_check(self) -> None:
-        """Test case for move_or_copy_dest_folder_check
-
-        Check for moving or copying to a folder
-        """
-        pass
-
-    def test_start_conversion(self) -> None:
-        """Test case for start_conversion
+    def test_start_file_conversion(self) -> None:
+        """Test case for start_file_conversion
 
         Start file conversion
         """
@@ -138,8 +138,8 @@ class TestFilesOperationsApi(unittest.TestCase):
         """
         pass
 
-    def test_update_comment(self) -> None:
-        """Test case for update_comment
+    def test_update_file_comment(self) -> None:
+        """Test case for update_file_comment
 
         Update a comment
         """

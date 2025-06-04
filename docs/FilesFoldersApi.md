@@ -1,6 +1,6 @@
 # docspace.FilesFoldersApi
 
-All URIs are relative to *http://localhost:8092*
+All URIs are relative to *http://http:*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -16,14 +16,14 @@ Method | HTTP request | Description
 [**get_folder_primary_external_link**](FilesFoldersApi.md#get_folder_primary_external_link) | **GET** /api/2.0/files/folder/{id}/link | Get primary external link
 [**get_folders**](FilesFoldersApi.md#get_folders) | **GET** /api/2.0/files/{folderId}/subfolders | Get subfolders
 [**get_my_folder**](FilesFoldersApi.md#get_my_folder) | **GET** /api/2.0/files/@my | Get the \&quot;My documents\&quot; section
-[**get_new_items**](FilesFoldersApi.md#get_new_items) | **GET** /api/2.0/files/{folderId}/news | Get new folder items
+[**get_new_folder_items**](FilesFoldersApi.md#get_new_folder_items) | **GET** /api/2.0/files/{folderId}/news | Get new folder items
 [**get_privacy_folder**](FilesFoldersApi.md#get_privacy_folder) | **GET** /api/2.0/files/@privacy | Get the \&quot;Private Room\&quot; section
 [**get_root_folders**](FilesFoldersApi.md#get_root_folders) | **GET** /api/2.0/files/@root | Get filtered sections
 [**get_trash_folder**](FilesFoldersApi.md#get_trash_folder) | **GET** /api/2.0/files/@trash | Get the \&quot;Trash\&quot; section
 [**insert_file**](FilesFoldersApi.md#insert_file) | **POST** /api/2.0/files/{folderId}/insert | Insert a file
 [**insert_file_to_my_from_body**](FilesFoldersApi.md#insert_file_to_my_from_body) | **POST** /api/2.0/files/@my/insert | Insert a file to the \&quot;My documents\&quot; section
 [**rename_folder**](FilesFoldersApi.md#rename_folder) | **PUT** /api/2.0/files/folder/{folderId} | Rename a folder
-[**set_file_order**](FilesFoldersApi.md#set_file_order) | **PUT** /api/2.0/files/folder/{folderId}/order | Set file order
+[**set_folder_order**](FilesFoldersApi.md#set_folder_order) | **PUT** /api/2.0/files/folder/{folderId}/order | Set folder order
 [**upload_file**](FilesFoldersApi.md#upload_file) | **POST** /api/2.0/files/{folderId}/upload | Upload a file
 [**upload_file_to_my**](FilesFoldersApi.md#upload_file_to_my) | **POST** /api/2.0/files/@my/upload | Upload a file to the \&quot;My documents\&quot; section
 
@@ -50,10 +50,10 @@ from docspace.models.string_array_wrapper import STRINGArrayWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -156,10 +156,10 @@ from docspace.models.folder_integer_wrapper import FolderIntegerWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -262,10 +262,10 @@ from docspace.models.file_operation_array_wrapper import FileOperationArrayWrapp
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -367,10 +367,10 @@ from docspace.models.files_statistics_result_wrapper import FilesStatisticsResul
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -461,10 +461,10 @@ from docspace.models.forms_item_array_wrapper import FormsItemArrayWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 
@@ -532,10 +532,10 @@ from docspace.models.search_area import SearchArea
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 
@@ -626,10 +626,10 @@ from docspace.models.history_array_wrapper import HistoryArrayWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -730,10 +730,10 @@ from docspace.models.folder_integer_wrapper import FolderIntegerWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 
@@ -803,10 +803,10 @@ from docspace.models.file_entry_array_wrapper import FileEntryArrayWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -902,10 +902,10 @@ from docspace.models.file_share_wrapper import FileShareWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 
@@ -976,10 +976,10 @@ from docspace.models.file_entry_array_wrapper import FileEntryArrayWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -1082,10 +1082,10 @@ from docspace.models.folder_content_integer_wrapper import FolderContentIntegerW
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -1170,8 +1170,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **get_new_items**
-> FileEntryArrayWrapper get_new_items(folder_id)
+# **get_new_folder_items**
+> FileEntryArrayWrapper get_new_folder_items(folder_id)
 
 Get new folder items
 
@@ -1191,10 +1191,10 @@ from docspace.models.file_entry_array_wrapper import FileEntryArrayWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -1235,11 +1235,11 @@ with docspace.ApiClient(configuration) as api_client:
 
     try:
         # Get new folder items
-        api_response = api_instance.get_new_items(folder_id)
-        print("The response of FilesFoldersApi->get_new_items:\n")
+        api_response = api_instance.get_new_folder_items(folder_id)
+        print("The response of FilesFoldersApi->get_new_folder_items:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling FilesFoldersApi->get_new_items: %s\n" % e)
+        print("Exception when calling FilesFoldersApi->get_new_folder_items: %s\n" % e)
 ```
 
 
@@ -1296,10 +1296,10 @@ from docspace.models.folder_content_integer_wrapper import FolderContentIntegerW
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -1404,10 +1404,10 @@ from docspace.models.folder_content_integer_array_wrapper import FolderContentIn
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -1515,10 +1515,10 @@ from docspace.models.folder_content_integer_wrapper import FolderContentIntegerW
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -1624,10 +1624,10 @@ from docspace.models.file_integer_wrapper import FileIntegerWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -1753,10 +1753,10 @@ from docspace.models.file_integer_wrapper import FileIntegerWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -1881,10 +1881,10 @@ from docspace.models.folder_integer_wrapper import FolderIntegerWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -1966,10 +1966,10 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **set_file_order**
-> FolderIntegerWrapper set_file_order(folder_id, order_request_dto=order_request_dto)
+# **set_folder_order**
+> FolderIntegerWrapper set_folder_order(folder_id, order_request_dto=order_request_dto)
 
-Set file order
+Set folder order
 
 Sets the file order in the folder with ID specified in the request.
 
@@ -1988,10 +1988,10 @@ from docspace.models.order_request_dto import OrderRequestDto
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -2032,12 +2032,12 @@ with docspace.ApiClient(configuration) as api_client:
     order_request_dto = docspace.OrderRequestDto() # OrderRequestDto | The folder order information. (optional)
 
     try:
-        # Set file order
-        api_response = api_instance.set_file_order(folder_id, order_request_dto=order_request_dto)
-        print("The response of FilesFoldersApi->set_file_order:\n")
+        # Set folder order
+        api_response = api_instance.set_folder_order(folder_id, order_request_dto=order_request_dto)
+        print("The response of FilesFoldersApi->set_folder_order:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling FilesFoldersApi->set_file_order: %s\n" % e)
+        print("Exception when calling FilesFoldersApi->set_folder_order: %s\n" % e)
 ```
 
 
@@ -2094,10 +2094,10 @@ from docspace.models.upload_request_dto import UploadRequestDto
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -2202,10 +2202,10 @@ from docspace.models.upload_request_dto import UploadRequestDto
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters

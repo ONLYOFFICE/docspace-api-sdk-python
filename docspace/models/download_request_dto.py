@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, StrictBool
 from typing import Any, ClassVar, Dict, List, Optional
 from docspace.models.base_batch_request_dto_folder_ids_inner import BaseBatchRequestDtoFolderIdsInner
 from docspace.models.download_request_item_dto import DownloadRequestItemDto
@@ -28,10 +28,11 @@ class DownloadRequestDto(BaseModel):
     """
     The request parameters for downloading files.
     """ # noqa: E501
+    return_single_operation: Optional[StrictBool] = Field(default=None, description="Specifies whether to return only the current operation", alias="returnSingleOperation")
     folder_ids: Optional[List[BaseBatchRequestDtoFolderIdsInner]] = Field(default=None, description="The list of folder IDs to be downloaded.", alias="folderIds")
     file_ids: Optional[List[BaseBatchRequestDtoFolderIdsInner]] = Field(default=None, description="The list of file IDs to be downloaded.", alias="fileIds")
     file_convert_ids: Optional[List[DownloadRequestItemDto]] = Field(default=None, description="The list of file IDs which will be converted.", alias="fileConvertIds")
-    __properties: ClassVar[List[str]] = ["folderIds", "fileIds", "fileConvertIds"]
+    __properties: ClassVar[List[str]] = ["returnSingleOperation", "folderIds", "fileIds", "fileConvertIds"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -120,6 +121,7 @@ class DownloadRequestDto(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "returnSingleOperation": obj.get("returnSingleOperation"),
             "folderIds": [BaseBatchRequestDtoFolderIdsInner.from_dict(_item) for _item in obj["folderIds"]] if obj.get("folderIds") is not None else None,
             "fileIds": [BaseBatchRequestDtoFolderIdsInner.from_dict(_item) for _item in obj["fileIds"]] if obj.get("fileIds") is not None else None,
             "fileConvertIds": [DownloadRequestItemDto.from_dict(_item) for _item in obj["fileConvertIds"]] if obj.get("fileConvertIds") is not None else None

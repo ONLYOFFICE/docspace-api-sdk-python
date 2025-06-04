@@ -35,6 +35,7 @@ class TestBatchRequestDto(unittest.TestCase):
         model = BatchRequestDto()
         if include_optional:
             return BatchRequestDto(
+                return_single_operation = True,
                 folder_ids = [
                     null
                     ],

@@ -1,14 +1,14 @@
 # docspace.ThirdPartyApi
 
-All URIs are relative to *http://localhost:8092*
+All URIs are relative to *http://http:*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get**](ThirdPartyApi.md#get) | **GET** /api/2.0/thirdparty/{provider} | Get the code request
+[**get_third_party_code**](ThirdPartyApi.md#get_third_party_code) | **GET** /api/2.0/thirdparty/{provider} | Get the code request
 
 
-# **get**
-> ObjectWrapper get(provider)
+# **get_third_party_code**
+> ObjectWrapper get_third_party_code(provider)
 
 Get the code request
 
@@ -29,10 +29,10 @@ from docspace.models.object_wrapper import ObjectWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -73,11 +73,11 @@ with docspace.ApiClient(configuration) as api_client:
 
     try:
         # Get the code request
-        api_response = api_instance.get(provider)
-        print("The response of ThirdPartyApi->get:\n")
+        api_response = api_instance.get_third_party_code(provider)
+        print("The response of ThirdPartyApi->get_third_party_code:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling ThirdPartyApi->get: %s\n" % e)
+        print("Exception when calling ThirdPartyApi->get_third_party_code: %s\n" % e)
 ```
 
 

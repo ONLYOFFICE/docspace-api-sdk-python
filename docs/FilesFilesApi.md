@@ -1,21 +1,21 @@
 # docspace.FilesFilesApi
 
-All URIs are relative to *http://localhost:8092*
+All URIs are relative to *http://http:*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**add_templates**](FilesFilesApi.md#add_templates) | **POST** /api/2.0/files/templates | Add template files
-[**change_history**](FilesFilesApi.md#change_history) | **PUT** /api/2.0/files/file/{fileId}/history | Change version history
+[**change_version_history**](FilesFilesApi.md#change_version_history) | **PUT** /api/2.0/files/file/{fileId}/history | Change version history
 [**check_fill_form_draft**](FilesFilesApi.md#check_fill_form_draft) | **POST** /api/2.0/files/masterform/{fileId}/checkfillformdraft | Check the form draft filling
 [**copy_file_as**](FilesFilesApi.md#copy_file_as) | **POST** /api/2.0/files/file/{fileId}/copyas | Copy a file
 [**create_edit_session**](FilesFilesApi.md#create_edit_session) | **POST** /api/2.0/files/file/{fileId}/edit_session | Create the editing session
 [**create_file**](FilesFilesApi.md#create_file) | **POST** /api/2.0/files/{folderId}/file | Create a file
-[**create_file_my_documents**](FilesFilesApi.md#create_file_my_documents) | **POST** /api/2.0/files/@my/file | Create a file in the \&quot;My documents\&quot; section
+[**create_file_in_my_documents**](FilesFilesApi.md#create_file_in_my_documents) | **POST** /api/2.0/files/@my/file | Create a file in the \&quot;My documents\&quot; section
 [**create_html_file**](FilesFilesApi.md#create_html_file) | **POST** /api/2.0/files/{folderId}/html | Create an HTML file
-[**create_html_file_in_my**](FilesFilesApi.md#create_html_file_in_my) | **POST** /api/2.0/files/@my/html | Create an HTML file in the \&quot;My documents\&quot; section
+[**create_html_file_in_my_documents**](FilesFilesApi.md#create_html_file_in_my_documents) | **POST** /api/2.0/files/@my/html | Create an HTML file in the \&quot;My documents\&quot; section
 [**create_primary_external_link**](FilesFilesApi.md#create_primary_external_link) | **POST** /api/2.0/files/file/{id}/link | Create primary external link
 [**create_text_file**](FilesFilesApi.md#create_text_file) | **POST** /api/2.0/files/{folderId}/text | Create a text file
-[**create_text_file_in_my**](FilesFilesApi.md#create_text_file_in_my) | **POST** /api/2.0/files/@my/text | Create a text file in the \&quot;My documents\&quot; section
+[**create_text_file_in_my_documents**](FilesFilesApi.md#create_text_file_in_my_documents) | **POST** /api/2.0/files/@my/text | Create a text file in the \&quot;My documents\&quot; section
 [**create_thumbnails**](FilesFilesApi.md#create_thumbnails) | **POST** /api/2.0/files/thumbnails | Create file thumbnails
 [**delete_file**](FilesFilesApi.md#delete_file) | **DELETE** /api/2.0/files/file/{fileId} | Delete a file
 [**delete_recent**](FilesFilesApi.md#delete_recent) | **DELETE** /api/2.0/files/recent | Delete recent files
@@ -25,28 +25,28 @@ Method | HTTP request | Description
 [**get_edit_history**](FilesFilesApi.md#get_edit_history) | **GET** /api/2.0/files/file/{fileId}/edit/history | Get version history
 [**get_file_history**](FilesFilesApi.md#get_file_history) | **GET** /api/2.0/files/file/{fileId}/log | Get file history
 [**get_file_info**](FilesFilesApi.md#get_file_info) | **GET** /api/2.0/files/file/{fileId} | Get file information
+[**get_file_links**](FilesFilesApi.md#get_file_links) | **GET** /api/2.0/files/file/{id}/links | Get file external links
 [**get_file_primary_external_link**](FilesFilesApi.md#get_file_primary_external_link) | **GET** /api/2.0/files/file/{id}/link | Get primary external link
 [**get_file_version_info**](FilesFilesApi.md#get_file_version_info) | **GET** /api/2.0/files/file/{fileId}/history | Get file versions
 [**get_fill_result**](FilesFilesApi.md#get_fill_result) | **GET** /api/2.0/files/file/fillresult | Get form-filling result
-[**get_links**](FilesFilesApi.md#get_links) | **GET** /api/2.0/files/file/{id}/links | Get file external links
 [**get_presigned_file_uri**](FilesFilesApi.md#get_presigned_file_uri) | **GET** /api/2.0/files/file/{fileId}/presigned | Get file download link asynchronously
 [**get_presigned_uri**](FilesFilesApi.md#get_presigned_uri) | **GET** /api/2.0/files/file/{fileId}/presigneduri | Get file download link
+[**get_protected_file_users**](FilesFilesApi.md#get_protected_file_users) | **GET** /api/2.0/files/file/{fileId}/protectusers | Get users access rights to the protected file
 [**get_reference_data**](FilesFilesApi.md#get_reference_data) | **POST** /api/2.0/files/file/referencedata | Get reference data
 [**is_form_pdf**](FilesFilesApi.md#is_form_pdf) | **GET** /api/2.0/files/file/{fileId}/isformpdf | Check the PDF file
 [**lock_file**](FilesFilesApi.md#lock_file) | **PUT** /api/2.0/files/file/{fileId}/lock | Lock a file
 [**manage_form_filling**](FilesFilesApi.md#manage_form_filling) | **PUT** /api/2.0/files/file/{fileId}/manageformfilling | Perform form filling action
-[**open_edit**](FilesFilesApi.md#open_edit) | **GET** /api/2.0/files/file/{fileId}/openedit | Open a file configuration
-[**protect_users**](FilesFilesApi.md#protect_users) | **GET** /api/2.0/files/file/{fileId}/protectusers | Get users access rights to the protected file
-[**restore_version**](FilesFilesApi.md#restore_version) | **GET** /api/2.0/files/file/{fileId}/restoreversion | Restore a file version
-[**save_as_pdf**](FilesFilesApi.md#save_as_pdf) | **POST** /api/2.0/files/file/{id}/saveaspdf | Save a file as PDF
-[**save_editing_from_form**](FilesFilesApi.md#save_editing_from_form) | **PUT** /api/2.0/files/file/{fileId}/saveediting | Save file edits
+[**open_edit_file**](FilesFilesApi.md#open_edit_file) | **GET** /api/2.0/files/file/{fileId}/openedit | Open a file configuration
+[**restore_file_version**](FilesFilesApi.md#restore_file_version) | **GET** /api/2.0/files/file/{fileId}/restoreversion | Restore a file version
+[**save_editing_file_from_form**](FilesFilesApi.md#save_editing_file_from_form) | **PUT** /api/2.0/files/file/{fileId}/saveediting | Save file edits
+[**save_file_as_pdf**](FilesFilesApi.md#save_file_as_pdf) | **POST** /api/2.0/files/file/{id}/saveaspdf | Save a file as PDF
 [**save_form_role_mapping**](FilesFilesApi.md#save_form_role_mapping) | **POST** /api/2.0/files/file/{fileId}/formrolemapping | Save form role mapping
 [**set_custom_filter_tag**](FilesFilesApi.md#set_custom_filter_tag) | **PUT** /api/2.0/files/file/{fileId}/customfilter | Set the Custom Filter editing mode
 [**set_external_link**](FilesFilesApi.md#set_external_link) | **PUT** /api/2.0/files/file/{id}/links | Set an external link
+[**set_file_order**](FilesFilesApi.md#set_file_order) | **PUT** /api/2.0/files/{fileId}/order | Set file order
 [**set_files_order**](FilesFilesApi.md#set_files_order) | **PUT** /api/2.0/files/order | Set order of files
-[**set_order_file**](FilesFilesApi.md#set_order_file) | **PUT** /api/2.0/files/{fileId}/order | Set file order
-[**start_edit**](FilesFilesApi.md#start_edit) | **POST** /api/2.0/files/file/{fileId}/startedit | Start file editing
-[**start_filling**](FilesFilesApi.md#start_filling) | **PUT** /api/2.0/files/file/{fileId}/startfilling | Start file filling
+[**start_edit_file**](FilesFilesApi.md#start_edit_file) | **POST** /api/2.0/files/file/{fileId}/startedit | Start file editing
+[**start_filling_file**](FilesFilesApi.md#start_filling_file) | **PUT** /api/2.0/files/file/{fileId}/startfilling | Start file filling
 [**track_edit_file**](FilesFilesApi.md#track_edit_file) | **GET** /api/2.0/files/file/{fileId}/trackeditfile | Track file editing
 [**update_file**](FilesFilesApi.md#update_file) | **PUT** /api/2.0/files/file/{fileId} | Update a file
 
@@ -73,10 +73,10 @@ from docspace.models.templates_request_dto import TemplatesRequestDto
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -155,8 +155,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **change_history**
-> FileIntegerArrayWrapper change_history(file_id, change_history=change_history)
+# **change_version_history**
+> FileIntegerArrayWrapper change_version_history(file_id, change_history=change_history)
 
 Change version history
 
@@ -177,10 +177,10 @@ from docspace.models.file_integer_array_wrapper import FileIntegerArrayWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -222,11 +222,11 @@ with docspace.ApiClient(configuration) as api_client:
 
     try:
         # Change version history
-        api_response = api_instance.change_history(file_id, change_history=change_history)
-        print("The response of FilesFilesApi->change_history:\n")
+        api_response = api_instance.change_version_history(file_id, change_history=change_history)
+        print("The response of FilesFilesApi->change_version_history:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling FilesFilesApi->change_history: %s\n" % e)
+        print("Exception when calling FilesFilesApi->change_version_history: %s\n" % e)
 ```
 
 
@@ -279,10 +279,10 @@ from docspace.models.string_wrapper import StringWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 
@@ -356,10 +356,10 @@ from docspace.models.file_entry_wrapper import FileEntryWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -464,10 +464,10 @@ from docspace.models.object_wrapper import ObjectWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -571,10 +571,10 @@ from docspace.models.file_integer_wrapper import FileIntegerWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -655,8 +655,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **create_file_my_documents**
-> FileIntegerWrapper create_file_my_documents(create_file_json_element=create_file_json_element)
+# **create_file_in_my_documents**
+> FileIntegerWrapper create_file_in_my_documents(create_file_json_element=create_file_json_element)
 
 Create a file in the \"My documents\" section
 
@@ -677,10 +677,10 @@ from docspace.models.file_integer_wrapper import FileIntegerWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -721,11 +721,11 @@ with docspace.ApiClient(configuration) as api_client:
 
     try:
         # Create a file in the \"My documents\" section
-        api_response = api_instance.create_file_my_documents(create_file_json_element=create_file_json_element)
-        print("The response of FilesFilesApi->create_file_my_documents:\n")
+        api_response = api_instance.create_file_in_my_documents(create_file_json_element=create_file_json_element)
+        print("The response of FilesFilesApi->create_file_in_my_documents:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling FilesFilesApi->create_file_my_documents: %s\n" % e)
+        print("Exception when calling FilesFilesApi->create_file_in_my_documents: %s\n" % e)
 ```
 
 
@@ -781,10 +781,10 @@ from docspace.models.file_integer_wrapper import FileIntegerWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -866,8 +866,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **create_html_file_in_my**
-> FileIntegerWrapper create_html_file_in_my(create_text_or_html_file=create_text_or_html_file)
+# **create_html_file_in_my_documents**
+> FileIntegerWrapper create_html_file_in_my_documents(create_text_or_html_file=create_text_or_html_file)
 
 Create an HTML file in the \"My documents\" section
 
@@ -888,10 +888,10 @@ from docspace.models.file_integer_wrapper import FileIntegerWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -932,11 +932,11 @@ with docspace.ApiClient(configuration) as api_client:
 
     try:
         # Create an HTML file in the \"My documents\" section
-        api_response = api_instance.create_html_file_in_my(create_text_or_html_file=create_text_or_html_file)
-        print("The response of FilesFilesApi->create_html_file_in_my:\n")
+        api_response = api_instance.create_html_file_in_my_documents(create_text_or_html_file=create_text_or_html_file)
+        print("The response of FilesFilesApi->create_html_file_in_my_documents:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling FilesFilesApi->create_html_file_in_my: %s\n" % e)
+        print("Exception when calling FilesFilesApi->create_html_file_in_my_documents: %s\n" % e)
 ```
 
 
@@ -993,10 +993,10 @@ from docspace.models.file_share_wrapper import FileShareWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -1100,10 +1100,10 @@ from docspace.models.file_integer_wrapper import FileIntegerWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -1184,8 +1184,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **create_text_file_in_my**
-> FileIntegerWrapper create_text_file_in_my(create_text_or_html_file=create_text_or_html_file)
+# **create_text_file_in_my_documents**
+> FileIntegerWrapper create_text_file_in_my_documents(create_text_or_html_file=create_text_or_html_file)
 
 Create a text file in the \"My documents\" section
 
@@ -1206,10 +1206,10 @@ from docspace.models.file_integer_wrapper import FileIntegerWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -1250,11 +1250,11 @@ with docspace.ApiClient(configuration) as api_client:
 
     try:
         # Create a text file in the \"My documents\" section
-        api_response = api_instance.create_text_file_in_my(create_text_or_html_file=create_text_or_html_file)
-        print("The response of FilesFilesApi->create_text_file_in_my:\n")
+        api_response = api_instance.create_text_file_in_my_documents(create_text_or_html_file=create_text_or_html_file)
+        print("The response of FilesFilesApi->create_text_file_in_my_documents:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling FilesFilesApi->create_text_file_in_my: %s\n" % e)
+        print("Exception when calling FilesFilesApi->create_text_file_in_my_documents: %s\n" % e)
 ```
 
 
@@ -1305,10 +1305,10 @@ from docspace.models.object_array_wrapper import ObjectArrayWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 
@@ -1379,10 +1379,10 @@ from docspace.models.file_operation_array_wrapper import FileOperationArrayWrapp
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -1485,10 +1485,10 @@ from docspace.models.no_content_result_wrapper import NoContentResultWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -1588,10 +1588,10 @@ from docspace.models.boolean_wrapper import BooleanWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -1691,10 +1691,10 @@ from docspace.models.form_role_array_wrapper import FormRoleArrayWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -1790,10 +1790,10 @@ from docspace.models.edit_history_data_wrapper import EditHistoryDataWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 
@@ -1860,10 +1860,10 @@ from docspace.models.edit_history_array_wrapper import EditHistoryArrayWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 
@@ -1934,10 +1934,10 @@ from docspace.models.history_array_wrapper import HistoryArrayWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -2038,10 +2038,10 @@ from docspace.models.file_integer_wrapper import FileIntegerWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 
@@ -2092,6 +2092,109 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **get_file_links**
+> FileShareArrayWrapper get_file_links(id)
+
+Get file external links
+
+Returns the external links of a file with the ID specified in the request.
+
+### Example
+
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
+* Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
+
+```python
+import docspace
+from docspace.models.file_share_array_wrapper import FileShareArrayWrapper
+from docspace.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://http:
+# See configuration.py for a list of all supported configuration parameters.
+configuration = docspace.Configuration(
+    host = "http://http:"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
+# Configure API key authorization: asc_auth_key
+configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with docspace.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace.FilesFilesApi(api_client)
+    id = 9846 # int | The file ID of the request.
+
+    try:
+        # Get file external links
+        api_response = api_instance.get_file_links(id)
+        print("The response of FilesFilesApi->get_file_links:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling FilesFilesApi->get_file_links: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**| The file ID of the request. | 
+
+### Return type
+
+[**FileShareArrayWrapper**](FileShareArrayWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | File security information |  -  |
+**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **get_file_primary_external_link**
 > FileShareWrapper get_file_primary_external_link(id)
 
@@ -2108,10 +2211,10 @@ from docspace.models.file_share_wrapper import FileShareWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 
@@ -2177,10 +2280,10 @@ from docspace.models.file_integer_array_wrapper import FileIntegerArrayWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 
@@ -2245,10 +2348,10 @@ from docspace.models.filling_form_result_integer_wrapper import FillingFormResul
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 
@@ -2297,109 +2400,6 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **get_links**
-> FileShareArrayWrapper get_links(id)
-
-Get file external links
-
-Returns the external links of a file with the ID specified in the request.
-
-### Example
-
-* Basic Authentication (Basic):
-* OAuth Authentication (OAuth2):
-* Api Key Authentication (ApiKeyBearer):
-* Api Key Authentication (asc_auth_key):
-* Bearer (JWT) Authentication (Bearer):
-
-```python
-import docspace
-from docspace.models.file_share_array_wrapper import FileShareArrayWrapper
-from docspace.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace.Configuration(
-    host = "http://localhost:8092"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure HTTP basic authorization: Basic
-configuration = docspace.Configuration(
-    username = os.environ["USERNAME"],
-    password = os.environ["PASSWORD"]
-)
-
-configuration.access_token = os.environ["ACCESS_TOKEN"]
-
-# Configure API key authorization: ApiKeyBearer
-configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-
-# Enter a context with an instance of the API client
-with docspace.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace.FilesFilesApi(api_client)
-    id = 9846 # int | The file ID of the request.
-
-    try:
-        # Get file external links
-        api_response = api_instance.get_links(id)
-        print("The response of FilesFilesApi->get_links:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling FilesFilesApi->get_links: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **id** | **int**| The file ID of the request. | 
-
-### Return type
-
-[**FileShareArrayWrapper**](FileShareArrayWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | File security information |  -  |
-**401** | Unauthorized |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **get_presigned_file_uri**
 > FileLinkWrapper get_presigned_file_uri(file_id)
 
@@ -2421,10 +2421,10 @@ from docspace.models.file_link_wrapper import FileLinkWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -2524,10 +2524,10 @@ from docspace.models.string_wrapper import StringWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -2606,6 +2606,109 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **get_protected_file_users**
+> MentionWrapperArrayWrapper get_protected_file_users(file_id)
+
+Get users access rights to the protected file
+
+Returns a list of users with their access rights to the protected file with the ID specified in the request.
+
+### Example
+
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
+* Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
+
+```python
+import docspace
+from docspace.models.mention_wrapper_array_wrapper import MentionWrapperArrayWrapper
+from docspace.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://http:
+# See configuration.py for a list of all supported configuration parameters.
+configuration = docspace.Configuration(
+    host = "http://http:"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
+# Configure API key authorization: asc_auth_key
+configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with docspace.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace.FilesFilesApi(api_client)
+    file_id = 9846 # int | The file ID of the request.
+
+    try:
+        # Get users access rights to the protected file
+        api_response = api_instance.get_protected_file_users(file_id)
+        print("The response of FilesFilesApi->get_protected_file_users:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling FilesFilesApi->get_protected_file_users: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **file_id** | **int**| The file ID of the request. | 
+
+### Return type
+
+[**MentionWrapperArrayWrapper**](MentionWrapperArrayWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | List of users with their access rights to the protected file |  -  |
+**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **get_reference_data**
 > FileReferenceWrapper get_reference_data(get_reference_data_dto_integer=get_reference_data_dto_integer)
 
@@ -2628,10 +2731,10 @@ from docspace.models.get_reference_data_dto_integer import GetReferenceDataDtoIn
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -2731,10 +2834,10 @@ from docspace.models.boolean_wrapper import BooleanWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -2835,10 +2938,10 @@ from docspace.models.lock_file_parameters import LockFileParameters
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -2940,10 +3043,10 @@ from docspace.models.manage_form_filling_dto_integer import ManageFormFillingDto
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -3023,8 +3126,8 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **open_edit**
-> ConfigurationIntegerWrapper open_edit(file_id, version=version, view=view, editor_type=editor_type, edit=edit, fill=fill)
+# **open_edit_file**
+> ConfigurationIntegerWrapper open_edit_file(file_id, version=version, view=view, editor_type=editor_type, edit=edit, fill=fill)
 
 Open a file configuration
 
@@ -3040,10 +3143,10 @@ from docspace.models.editor_type import EditorType
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 
@@ -3060,11 +3163,11 @@ with docspace.ApiClient(configuration) as api_client:
 
     try:
         # Open a file configuration
-        api_response = api_instance.open_edit(file_id, version=version, view=view, editor_type=editor_type, edit=edit, fill=fill)
-        print("The response of FilesFilesApi->open_edit:\n")
+        api_response = api_instance.open_edit_file(file_id, version=version, view=view, editor_type=editor_type, edit=edit, fill=fill)
+        print("The response of FilesFilesApi->open_edit_file:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling FilesFilesApi->open_edit: %s\n" % e)
+        print("Exception when calling FilesFilesApi->open_edit_file: %s\n" % e)
 ```
 
 
@@ -3103,111 +3206,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **protect_users**
-> MentionWrapperArrayWrapper protect_users(file_id)
-
-Get users access rights to the protected file
-
-Returns a list of users with their access rights to the protected file with the ID specified in the request.
-
-### Example
-
-* Basic Authentication (Basic):
-* OAuth Authentication (OAuth2):
-* Api Key Authentication (ApiKeyBearer):
-* Api Key Authentication (asc_auth_key):
-* Bearer (JWT) Authentication (Bearer):
-
-```python
-import docspace
-from docspace.models.mention_wrapper_array_wrapper import MentionWrapperArrayWrapper
-from docspace.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace.Configuration(
-    host = "http://localhost:8092"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure HTTP basic authorization: Basic
-configuration = docspace.Configuration(
-    username = os.environ["USERNAME"],
-    password = os.environ["PASSWORD"]
-)
-
-configuration.access_token = os.environ["ACCESS_TOKEN"]
-
-# Configure API key authorization: ApiKeyBearer
-configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-
-# Enter a context with an instance of the API client
-with docspace.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace.FilesFilesApi(api_client)
-    file_id = 9846 # int | The file ID of the request.
-
-    try:
-        # Get users access rights to the protected file
-        api_response = api_instance.protect_users(file_id)
-        print("The response of FilesFilesApi->protect_users:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling FilesFilesApi->protect_users: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **file_id** | **int**| The file ID of the request. | 
-
-### Return type
-
-[**MentionWrapperArrayWrapper**](MentionWrapperArrayWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | List of users with their access rights to the protected file |  -  |
-**401** | Unauthorized |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **restore_version**
-> EditHistoryArrayWrapper restore_version(file_id, version=version, url=url)
+# **restore_file_version**
+> EditHistoryArrayWrapper restore_file_version(file_id, version=version, url=url)
 
 Restore a file version
 
@@ -3222,10 +3222,10 @@ from docspace.models.edit_history_array_wrapper import EditHistoryArrayWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 
@@ -3239,11 +3239,11 @@ with docspace.ApiClient(configuration) as api_client:
 
     try:
         # Restore a file version
-        api_response = api_instance.restore_version(file_id, version=version, url=url)
-        print("The response of FilesFilesApi->restore_version:\n")
+        api_response = api_instance.restore_file_version(file_id, version=version, url=url)
+        print("The response of FilesFilesApi->restore_file_version:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling FilesFilesApi->restore_version: %s\n" % e)
+        print("Exception when calling FilesFilesApi->restore_file_version: %s\n" % e)
 ```
 
 
@@ -3280,115 +3280,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **save_as_pdf**
-> FileIntegerWrapper save_as_pdf(id, save_as_pdf_integer=save_as_pdf_integer)
-
-Save a file as PDF
-
-Saves a file with the identifier specified in the request as a PDF document.
-
-### Example
-
-* Basic Authentication (Basic):
-* OAuth Authentication (OAuth2):
-* Api Key Authentication (ApiKeyBearer):
-* Api Key Authentication (asc_auth_key):
-* Bearer (JWT) Authentication (Bearer):
-
-```python
-import docspace
-from docspace.models.file_integer_wrapper import FileIntegerWrapper
-from docspace.models.save_as_pdf_integer import SaveAsPdfInteger
-from docspace.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace.Configuration(
-    host = "http://localhost:8092"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure HTTP basic authorization: Basic
-configuration = docspace.Configuration(
-    username = os.environ["USERNAME"],
-    password = os.environ["PASSWORD"]
-)
-
-configuration.access_token = os.environ["ACCESS_TOKEN"]
-
-# Configure API key authorization: ApiKeyBearer
-configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-
-# Enter a context with an instance of the API client
-with docspace.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace.FilesFilesApi(api_client)
-    id = 9846 # int | The file ID to save as PDF.
-    save_as_pdf_integer = docspace.SaveAsPdfInteger() # SaveAsPdfInteger | The parameters for saving file as PDF. (optional)
-
-    try:
-        # Save a file as PDF
-        api_response = api_instance.save_as_pdf(id, save_as_pdf_integer=save_as_pdf_integer)
-        print("The response of FilesFilesApi->save_as_pdf:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling FilesFilesApi->save_as_pdf: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **id** | **int**| The file ID to save as PDF. | 
- **save_as_pdf_integer** | [**SaveAsPdfInteger**](SaveAsPdfInteger.md)| The parameters for saving file as PDF. | [optional] 
-
-### Return type
-
-[**FileIntegerWrapper**](FileIntegerWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | New file information |  -  |
-**401** | Unauthorized |  -  |
-**404** | File not found |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **save_editing_from_form**
-> FileIntegerWrapper save_editing_from_form(file_id, file_extension=file_extension, download_uri=download_uri, file=file, forcesave=forcesave)
+# **save_editing_file_from_form**
+> FileIntegerWrapper save_editing_file_from_form(file_id, file_extension=file_extension, download_uri=download_uri, file=file, forcesave=forcesave)
 
 Save file edits
 
@@ -3408,10 +3301,10 @@ from docspace.models.file_integer_wrapper import FileIntegerWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -3456,11 +3349,11 @@ with docspace.ApiClient(configuration) as api_client:
 
     try:
         # Save file edits
-        api_response = api_instance.save_editing_from_form(file_id, file_extension=file_extension, download_uri=download_uri, file=file, forcesave=forcesave)
-        print("The response of FilesFilesApi->save_editing_from_form:\n")
+        api_response = api_instance.save_editing_file_from_form(file_id, file_extension=file_extension, download_uri=download_uri, file=file, forcesave=forcesave)
+        print("The response of FilesFilesApi->save_editing_file_from_form:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling FilesFilesApi->save_editing_from_form: %s\n" % e)
+        print("Exception when calling FilesFilesApi->save_editing_file_from_form: %s\n" % e)
 ```
 
 
@@ -3500,6 +3393,113 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **save_file_as_pdf**
+> FileIntegerWrapper save_file_as_pdf(id, save_as_pdf_integer=save_as_pdf_integer)
+
+Save a file as PDF
+
+Saves a file with the identifier specified in the request as a PDF document.
+
+### Example
+
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
+* Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
+
+```python
+import docspace
+from docspace.models.file_integer_wrapper import FileIntegerWrapper
+from docspace.models.save_as_pdf_integer import SaveAsPdfInteger
+from docspace.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://http:
+# See configuration.py for a list of all supported configuration parameters.
+configuration = docspace.Configuration(
+    host = "http://http:"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
+# Configure API key authorization: asc_auth_key
+configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with docspace.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace.FilesFilesApi(api_client)
+    id = 9846 # int | The file ID to save as PDF.
+    save_as_pdf_integer = docspace.SaveAsPdfInteger() # SaveAsPdfInteger | The parameters for saving file as PDF. (optional)
+
+    try:
+        # Save a file as PDF
+        api_response = api_instance.save_file_as_pdf(id, save_as_pdf_integer=save_as_pdf_integer)
+        print("The response of FilesFilesApi->save_file_as_pdf:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling FilesFilesApi->save_file_as_pdf: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**| The file ID to save as PDF. | 
+ **save_as_pdf_integer** | [**SaveAsPdfInteger**](SaveAsPdfInteger.md)| The parameters for saving file as PDF. | [optional] 
+
+### Return type
+
+[**FileIntegerWrapper**](FileIntegerWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | New file information |  -  |
+**401** | Unauthorized |  -  |
+**404** | File not found |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **save_form_role_mapping**
 > FormRoleWrapper save_form_role_mapping(file_id, save_form_role_mapping_dto_integer=save_form_role_mapping_dto_integer)
 
@@ -3522,10 +3522,10 @@ from docspace.models.save_form_role_mapping_dto_integer import SaveFormRoleMappi
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -3629,10 +3629,10 @@ from docspace.models.file_integer_wrapper import FileIntegerWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -3735,10 +3735,10 @@ from docspace.models.file_share_wrapper import FileShareWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -3819,6 +3819,114 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **set_file_order**
+> FileIntegerWrapper set_file_order(file_id, order_request_dto=order_request_dto)
+
+Set file order
+
+Sets order of the file with ID specified in the request.
+
+### Example
+
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
+* Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
+
+```python
+import docspace
+from docspace.models.file_integer_wrapper import FileIntegerWrapper
+from docspace.models.order_request_dto import OrderRequestDto
+from docspace.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://http:
+# See configuration.py for a list of all supported configuration parameters.
+configuration = docspace.Configuration(
+    host = "http://http:"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
+# Configure API key authorization: asc_auth_key
+configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with docspace.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace.FilesFilesApi(api_client)
+    file_id = 9846 # int | The file unique identifier.
+    order_request_dto = docspace.OrderRequestDto() # OrderRequestDto | The file order information. (optional)
+
+    try:
+        # Set file order
+        api_response = api_instance.set_file_order(file_id, order_request_dto=order_request_dto)
+        print("The response of FilesFilesApi->set_file_order:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling FilesFilesApi->set_file_order: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **file_id** | **int**| The file unique identifier. | 
+ **order_request_dto** | [**OrderRequestDto**](OrderRequestDto.md)| The file order information. | [optional] 
+
+### Return type
+
+[**FileIntegerWrapper**](FileIntegerWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Updated file information |  -  |
+**401** | Unauthorized |  -  |
+**403** | You don&#39;t have enough permission to perform the operation |  -  |
+**404** | Not Found |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **set_files_order**
 > FileIntegerArrayWrapper set_files_order(orders_request_dto_integer=orders_request_dto_integer)
 
@@ -3841,10 +3949,10 @@ from docspace.models.orders_request_dto_integer import OrdersRequestDtoInteger
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -3923,116 +4031,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **set_order_file**
-> FileIntegerWrapper set_order_file(file_id, order_request_dto=order_request_dto)
-
-Set file order
-
-Sets order of the file with ID specified in the request.
-
-### Example
-
-* Basic Authentication (Basic):
-* OAuth Authentication (OAuth2):
-* Api Key Authentication (ApiKeyBearer):
-* Api Key Authentication (asc_auth_key):
-* Bearer (JWT) Authentication (Bearer):
-
-```python
-import docspace
-from docspace.models.file_integer_wrapper import FileIntegerWrapper
-from docspace.models.order_request_dto import OrderRequestDto
-from docspace.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace.Configuration(
-    host = "http://localhost:8092"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure HTTP basic authorization: Basic
-configuration = docspace.Configuration(
-    username = os.environ["USERNAME"],
-    password = os.environ["PASSWORD"]
-)
-
-configuration.access_token = os.environ["ACCESS_TOKEN"]
-
-# Configure API key authorization: ApiKeyBearer
-configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-
-# Enter a context with an instance of the API client
-with docspace.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace.FilesFilesApi(api_client)
-    file_id = 9846 # int | The file unique identifier.
-    order_request_dto = docspace.OrderRequestDto() # OrderRequestDto | The file order information. (optional)
-
-    try:
-        # Set file order
-        api_response = api_instance.set_order_file(file_id, order_request_dto=order_request_dto)
-        print("The response of FilesFilesApi->set_order_file:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling FilesFilesApi->set_order_file: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **file_id** | **int**| The file unique identifier. | 
- **order_request_dto** | [**OrderRequestDto**](OrderRequestDto.md)| The file order information. | [optional] 
-
-### Return type
-
-[**FileIntegerWrapper**](FileIntegerWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Updated file information |  -  |
-**401** | Unauthorized |  -  |
-**403** | You don&#39;t have enough permission to perform the operation |  -  |
-**404** | Not Found |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **start_edit**
-> StringWrapper start_edit(file_id, start_edit=start_edit)
+# **start_edit_file**
+> StringWrapper start_edit_file(file_id, start_edit=start_edit)
 
 Start file editing
 
@@ -4048,10 +4048,10 @@ from docspace.models.string_wrapper import StringWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 
@@ -4064,11 +4064,11 @@ with docspace.ApiClient(configuration) as api_client:
 
     try:
         # Start file editing
-        api_response = api_instance.start_edit(file_id, start_edit=start_edit)
-        print("The response of FilesFilesApi->start_edit:\n")
+        api_response = api_instance.start_edit_file(file_id, start_edit=start_edit)
+        print("The response of FilesFilesApi->start_edit_file:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling FilesFilesApi->start_edit: %s\n" % e)
+        print("Exception when calling FilesFilesApi->start_edit_file: %s\n" % e)
 ```
 
 
@@ -4103,8 +4103,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **start_filling**
-> FileIntegerWrapper start_filling(file_id)
+# **start_filling_file**
+> FileIntegerWrapper start_filling_file(file_id)
 
 Start file filling
 
@@ -4124,10 +4124,10 @@ from docspace.models.file_integer_wrapper import FileIntegerWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -4168,11 +4168,11 @@ with docspace.ApiClient(configuration) as api_client:
 
     try:
         # Start file filling
-        api_response = api_instance.start_filling(file_id)
-        print("The response of FilesFilesApi->start_filling:\n")
+        api_response = api_instance.start_filling_file(file_id)
+        print("The response of FilesFilesApi->start_filling_file:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling FilesFilesApi->start_filling: %s\n" % e)
+        print("Exception when calling FilesFilesApi->start_filling_file: %s\n" % e)
 ```
 
 
@@ -4223,10 +4223,10 @@ from docspace.models.key_value_pair_boolean_string_wrapper import KeyValuePairBo
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 
@@ -4299,10 +4299,10 @@ from docspace.models.update_file import UpdateFile
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 

@@ -47,17 +47,17 @@ class TestGroupApi(unittest.TestCase):
         """
         pass
 
-    def test_get_by_user_id(self) -> None:
-        """Test case for get_by_user_id
-
-        Get user groups
-        """
-        pass
-
     def test_get_group(self) -> None:
         """Test case for get_group
 
         Get a group
+        """
+        pass
+
+    def test_get_group_by_user_id(self) -> None:
+        """Test case for get_group_by_user_id
+
+        Get user groups
         """
         pass
 
@@ -68,6 +68,13 @@ class TestGroupApi(unittest.TestCase):
         """
         pass
 
+    def test_move_members_to(self) -> None:
+        """Test case for move_members_to
+
+        Move group members
+        """
+        pass
+
     def test_remove_members_from(self) -> None:
         """Test case for remove_members_from
 
@@ -75,8 +82,8 @@ class TestGroupApi(unittest.TestCase):
         """
         pass
 
-    def test_set_manager(self) -> None:
-        """Test case for set_manager
+    def test_set_group_manager(self) -> None:
+        """Test case for set_group_manager
 
         Set a group manager
         """
@@ -86,13 +93,6 @@ class TestGroupApi(unittest.TestCase):
         """Test case for set_members_to
 
         Replace group members
-        """
-        pass
-
-    def test_transfer_members_to(self) -> None:
-        """Test case for transfer_members_to
-
-        Move group members
         """
         pass
 

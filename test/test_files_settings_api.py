@@ -180,8 +180,8 @@ class TestFilesSettingsApi(unittest.TestCase):
         """
         pass
 
-    def test_update_if_exist(self) -> None:
-        """Test case for update_if_exist
+    def test_update_file_if_exist(self) -> None:
+        """Test case for update_file_if_exist
 
         Update a file version if it exists
         """

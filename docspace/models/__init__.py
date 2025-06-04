@@ -376,6 +376,8 @@ from docspace.models.password_hasher import PasswordHasher
 from docspace.models.password_settings_dto import PasswordSettingsDto
 from docspace.models.password_settings_requests_dto import PasswordSettingsRequestsDto
 from docspace.models.password_settings_wrapper import PasswordSettingsWrapper
+from docspace.models.payment_calculation import PaymentCalculation
+from docspace.models.payment_calculation_wrapper import PaymentCalculationWrapper
 from docspace.models.payment_method_status import PaymentMethodStatus
 from docspace.models.payment_settings_dto import PaymentSettingsDto
 from docspace.models.payment_settings_wrapper import PaymentSettingsWrapper

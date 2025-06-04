@@ -1,11 +1,11 @@
 # docspace.SettingsGreetingSettingsApi
 
-All URIs are relative to *http://localhost:8092*
+All URIs are relative to *http://http:*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**get_greeting_settings**](SettingsGreetingSettingsApi.md#get_greeting_settings) | **GET** /api/2.0/settings/greetingsettings | Get greeting settings
-[**is_default**](SettingsGreetingSettingsApi.md#is_default) | **GET** /api/2.0/settings/greetingsettings/isdefault | Check the default greeting settings
+[**get_is_default_greeting_settings**](SettingsGreetingSettingsApi.md#get_is_default_greeting_settings) | **GET** /api/2.0/settings/greetingsettings/isdefault | Check the default greeting settings
 [**restore_greeting_settings**](SettingsGreetingSettingsApi.md#restore_greeting_settings) | **POST** /api/2.0/settings/greetingsettings/restore | Restore the greeting settings
 [**save_greeting_settings**](SettingsGreetingSettingsApi.md#save_greeting_settings) | **POST** /api/2.0/settings/greetingsettings | Save the greeting settings
 
@@ -31,10 +31,10 @@ from docspace.models.object_wrapper import ObjectWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -109,8 +109,8 @@ This endpoint does not need any parameter.
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **is_default**
-> BooleanWrapper is_default()
+# **get_is_default_greeting_settings**
+> BooleanWrapper get_is_default_greeting_settings()
 
 Check the default greeting settings
 
@@ -130,10 +130,10 @@ from docspace.models.boolean_wrapper import BooleanWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -173,11 +173,11 @@ with docspace.ApiClient(configuration) as api_client:
 
     try:
         # Check the default greeting settings
-        api_response = api_instance.is_default()
-        print("The response of SettingsGreetingSettingsApi->is_default:\n")
+        api_response = api_instance.get_is_default_greeting_settings()
+        print("The response of SettingsGreetingSettingsApi->get_is_default_greeting_settings:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling SettingsGreetingSettingsApi->is_default: %s\n" % e)
+        print("Exception when calling SettingsGreetingSettingsApi->get_is_default_greeting_settings: %s\n" % e)
 ```
 
 
@@ -229,10 +229,10 @@ from docspace.models.string_wrapper import StringWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -329,10 +329,10 @@ from docspace.models.string_wrapper import StringWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters

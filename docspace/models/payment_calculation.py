@@ -17,20 +17,20 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt
-from typing import Any, ClassVar, Dict, List, Optional
+from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing import Optional, Set
 from typing_extensions import Self
 
-class DeleteVersionBatchRequestDto(BaseModel):
+class PaymentCalculation(BaseModel):
     """
-    The request parameters for deleting file versions.
+    The payment calculation.
     """ # noqa: E501
-    return_single_operation: Optional[StrictBool] = Field(default=None, description="Specifies whether to return only the current operation", alias="returnSingleOperation")
-    delete_after: Optional[StrictBool] = Field(default=None, description="Specifies whether to delete a file after the editing session is finished or not.", alias="deleteAfter")
-    file_id: StrictInt = Field(description="The file ID to delete.", alias="fileId")
-    versions: Optional[List[StrictInt]] = Field(description="The collection of file versions to be deleted.")
-    __properties: ClassVar[List[str]] = ["returnSingleOperation", "deleteAfter", "fileId", "versions"]
+    operation_id: Optional[StrictInt] = Field(default=None, alias="operationId")
+    amount: Optional[Union[StrictFloat, StrictInt]] = None
+    currency: Optional[StrictStr] = None
+    quantity: Optional[StrictInt] = None
+    __properties: ClassVar[List[str]] = ["operationId", "amount", "currency", "quantity"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -50,7 +50,7 @@ class DeleteVersionBatchRequestDto(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of DeleteVersionBatchRequestDto from a JSON string"""
+        """Create an instance of PaymentCalculation from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -71,16 +71,16 @@ class DeleteVersionBatchRequestDto(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # set to None if versions (nullable) is None
+        # set to None if currency (nullable) is None
         # and model_fields_set contains the field
-        if self.versions is None and "versions" in self.model_fields_set:
-            _dict['versions'] = None
+        if self.currency is None and "currency" in self.model_fields_set:
+            _dict['currency'] = None
 
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of DeleteVersionBatchRequestDto from a dict"""
+        """Create an instance of PaymentCalculation from a dict"""
         if obj is None:
             return None
 
@@ -88,10 +88,10 @@ class DeleteVersionBatchRequestDto(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "returnSingleOperation": obj.get("returnSingleOperation"),
-            "deleteAfter": obj.get("deleteAfter"),
-            "fileId": obj.get("fileId"),
-            "versions": obj.get("versions")
+            "operationId": obj.get("operationId"),
+            "amount": obj.get("amount"),
+            "currency": obj.get("currency"),
+            "quantity": obj.get("quantity")
         })
         return _obj
 

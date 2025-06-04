@@ -1,15 +1,15 @@
 # docspace.SecurityAuditTrailDataApi
 
-All URIs are relative to *http://localhost:8092*
+All URIs are relative to *http://http:*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**create_audit_trail_report**](SecurityAuditTrailDataApi.md#create_audit_trail_report) | **POST** /api/2.0/security/audit/events/report | Generate the audit trail report
 [**get_audit_events_by_filter**](SecurityAuditTrailDataApi.md#get_audit_events_by_filter) | **GET** /api/2.0/security/audit/events/filter | Get filtered audit trail data
 [**get_audit_settings**](SecurityAuditTrailDataApi.md#get_audit_settings) | **GET** /api/2.0/security/audit/settings/lifetime | Get the audit trail settings
+[**get_audit_trail_mappers**](SecurityAuditTrailDataApi.md#get_audit_trail_mappers) | **GET** /api/2.0/security/audit/mappers | Get audit trail mappers
+[**get_audit_trail_types**](SecurityAuditTrailDataApi.md#get_audit_trail_types) | **GET** /api/2.0/security/audit/types | Get audit trail types
 [**get_last_audit_events**](SecurityAuditTrailDataApi.md#get_last_audit_events) | **GET** /api/2.0/security/audit/events/last | Get audit trail data
-[**get_mappers**](SecurityAuditTrailDataApi.md#get_mappers) | **GET** /api/2.0/security/audit/mappers | Get audit trail mappers
-[**get_types**](SecurityAuditTrailDataApi.md#get_types) | **GET** /api/2.0/security/audit/types | Get audit trail types
 [**set_audit_settings**](SecurityAuditTrailDataApi.md#set_audit_settings) | **POST** /api/2.0/security/audit/settings/lifetime | Set the audit trail settings
 
 
@@ -34,10 +34,10 @@ from docspace.models.string_wrapper import StringWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -141,10 +141,10 @@ from docspace.models.product_type import ProductType
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -261,10 +261,10 @@ from docspace.models.tenant_audit_settings_wrapper import TenantAuditSettingsWra
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -340,6 +340,142 @@ This endpoint does not need any parameter.
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **get_audit_trail_mappers**
+> ObjectWrapper get_audit_trail_mappers(product_type=product_type, module_type=module_type)
+
+Get audit trail mappers
+
+Returns the mappers for the audit trail types.
+
+### Example
+
+
+```python
+import docspace
+from docspace.models.module_type import ModuleType
+from docspace.models.object_wrapper import ObjectWrapper
+from docspace.models.product_type import ProductType
+from docspace.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://http:
+# See configuration.py for a list of all supported configuration parameters.
+configuration = docspace.Configuration(
+    host = "http://http:"
+)
+
+
+# Enter a context with an instance of the API client
+with docspace.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace.SecurityAuditTrailDataApi(api_client)
+    product_type = docspace.ProductType() # ProductType | The type of product related to the audit trail. (optional)
+    module_type = docspace.ModuleType() # ModuleType | The module within the product associated with the audit trail. (optional)
+
+    try:
+        # Get audit trail mappers
+        api_response = api_instance.get_audit_trail_mappers(product_type=product_type, module_type=module_type)
+        print("The response of SecurityAuditTrailDataApi->get_audit_trail_mappers:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling SecurityAuditTrailDataApi->get_audit_trail_mappers: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **product_type** | [**ProductType**](.md)| The type of product related to the audit trail. | [optional] 
+ **module_type** | [**ModuleType**](.md)| The module within the product associated with the audit trail. | [optional] 
+
+### Return type
+
+[**ObjectWrapper**](ObjectWrapper.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Audit trail mappers |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_audit_trail_types**
+> ObjectWrapper get_audit_trail_types()
+
+Get audit trail types
+
+Returns all the available audit trail types.
+
+### Example
+
+
+```python
+import docspace
+from docspace.models.object_wrapper import ObjectWrapper
+from docspace.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://http:
+# See configuration.py for a list of all supported configuration parameters.
+configuration = docspace.Configuration(
+    host = "http://http:"
+)
+
+
+# Enter a context with an instance of the API client
+with docspace.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace.SecurityAuditTrailDataApi(api_client)
+
+    try:
+        # Get audit trail types
+        api_response = api_instance.get_audit_trail_types()
+        print("The response of SecurityAuditTrailDataApi->get_audit_trail_types:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling SecurityAuditTrailDataApi->get_audit_trail_types: %s\n" % e)
+```
+
+
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**ObjectWrapper**](ObjectWrapper.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Audit trail types |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **get_last_audit_events**
 > AuditEventArrayWrapper get_last_audit_events()
 
@@ -361,10 +497,10 @@ from docspace.models.audit_event_array_wrapper import AuditEventArrayWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -440,142 +576,6 @@ This endpoint does not need any parameter.
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **get_mappers**
-> ObjectWrapper get_mappers(product_type=product_type, module_type=module_type)
-
-Get audit trail mappers
-
-Returns the mappers for the audit trail types.
-
-### Example
-
-
-```python
-import docspace
-from docspace.models.module_type import ModuleType
-from docspace.models.object_wrapper import ObjectWrapper
-from docspace.models.product_type import ProductType
-from docspace.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace.Configuration(
-    host = "http://localhost:8092"
-)
-
-
-# Enter a context with an instance of the API client
-with docspace.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace.SecurityAuditTrailDataApi(api_client)
-    product_type = docspace.ProductType() # ProductType | The type of product related to the audit trail. (optional)
-    module_type = docspace.ModuleType() # ModuleType | The module within the product associated with the audit trail. (optional)
-
-    try:
-        # Get audit trail mappers
-        api_response = api_instance.get_mappers(product_type=product_type, module_type=module_type)
-        print("The response of SecurityAuditTrailDataApi->get_mappers:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling SecurityAuditTrailDataApi->get_mappers: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **product_type** | [**ProductType**](.md)| The type of product related to the audit trail. | [optional] 
- **module_type** | [**ModuleType**](.md)| The module within the product associated with the audit trail. | [optional] 
-
-### Return type
-
-[**ObjectWrapper**](ObjectWrapper.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Audit trail mappers |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **get_types**
-> ObjectWrapper get_types()
-
-Get audit trail types
-
-Returns all the available audit trail types.
-
-### Example
-
-
-```python
-import docspace
-from docspace.models.object_wrapper import ObjectWrapper
-from docspace.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace.Configuration(
-    host = "http://localhost:8092"
-)
-
-
-# Enter a context with an instance of the API client
-with docspace.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace.SecurityAuditTrailDataApi(api_client)
-
-    try:
-        # Get audit trail types
-        api_response = api_instance.get_types()
-        print("The response of SecurityAuditTrailDataApi->get_types:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling SecurityAuditTrailDataApi->get_types: %s\n" % e)
-```
-
-
-
-### Parameters
-
-This endpoint does not need any parameter.
-
-### Return type
-
-[**ObjectWrapper**](ObjectWrapper.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Audit trail types |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **set_audit_settings**
 > TenantAuditSettingsWrapper set_audit_settings(tenant_audit_settings_wrapper=tenant_audit_settings_wrapper)
 
@@ -597,10 +597,10 @@ from docspace.models.tenant_audit_settings_wrapper import TenantAuditSettingsWra
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters

@@ -1,11 +1,11 @@
 # docspace.PeopleUserStatusApi
 
-All URIs are relative to *http://localhost:8092*
+All URIs are relative to *http://http:*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**get_by_status**](PeopleUserStatusApi.md#get_by_status) | **GET** /api/2.0/people/status/{status} | Get profiles by status
-[**update_employee_activation_status**](PeopleUserStatusApi.md#update_employee_activation_status) | **PUT** /api/2.0/people/activationstatus/{activationstatus} | Set an activation status to the users
+[**update_user_activation_status**](PeopleUserStatusApi.md#update_user_activation_status) | **PUT** /api/2.0/people/activationstatus/{activationstatus} | Set an activation status to the users
 [**update_user_status**](PeopleUserStatusApi.md#update_user_status) | **PUT** /api/2.0/people/status/{status} | Change a user status
 
 
@@ -31,10 +31,10 @@ from docspace.models.employee_status import EmployeeStatus
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -113,8 +113,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **update_employee_activation_status**
-> EmployeeFullArrayWrapper update_employee_activation_status(activationstatus, update_members_request_dto=update_members_request_dto)
+# **update_user_activation_status**
+> EmployeeFullArrayWrapper update_user_activation_status(activationstatus, update_members_request_dto=update_members_request_dto)
 
 Set an activation status to the users
 
@@ -136,10 +136,10 @@ from docspace.models.update_members_request_dto import UpdateMembersRequestDto
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -181,11 +181,11 @@ with docspace.ApiClient(configuration) as api_client:
 
     try:
         # Set an activation status to the users
-        api_response = api_instance.update_employee_activation_status(activationstatus, update_members_request_dto=update_members_request_dto)
-        print("The response of PeopleUserStatusApi->update_employee_activation_status:\n")
+        api_response = api_instance.update_user_activation_status(activationstatus, update_members_request_dto=update_members_request_dto)
+        print("The response of PeopleUserStatusApi->update_user_activation_status:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling PeopleUserStatusApi->update_employee_activation_status: %s\n" % e)
+        print("Exception when calling PeopleUserStatusApi->update_user_activation_status: %s\n" % e)
 ```
 
 
@@ -243,10 +243,10 @@ from docspace.models.update_members_request_dto import UpdateMembersRequestDto
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters

@@ -26,29 +26,29 @@ class TestPortalUsersApi(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
-    def test_ge_invite_link(self) -> None:
-        """Test case for ge_invite_link
+    def test_get_invitation_link(self) -> None:
+        """Test case for get_invitation_link
 
         Get an invitation link
         """
         pass
 
-    def test_get_user(self) -> None:
-        """Test case for get_user
-
-        Get a user by ID
-        """
-        pass
-
-    def test_get_users_count(self) -> None:
-        """Test case for get_users_count
+    def test_get_portal_users_count(self) -> None:
+        """Test case for get_portal_users_count
 
         Get a number of portal users
         """
         pass
 
-    def test_mark_present_as_readed(self) -> None:
-        """Test case for mark_present_as_readed
+    def test_get_user_by_id(self) -> None:
+        """Test case for get_user_by_id
+
+        Get a user by ID
+        """
+        pass
+
+    def test_mark_gift_message_as_read(self) -> None:
+        """Test case for mark_gift_message_as_read
 
         Mark a gift message as read
         """

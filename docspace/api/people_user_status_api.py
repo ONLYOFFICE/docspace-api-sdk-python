@@ -312,7 +312,7 @@ class PeopleUserStatusApi:
 
 
     @validate_call
-    def update_employee_activation_status(
+    def update_user_activation_status(
         self,
         activationstatus: Annotated[EmployeeActivationStatus, Field(description="The new user activation status.")],
         update_members_request_dto: Annotated[Optional[UpdateMembersRequestDto], Field(description="The request parameters for updating the user information.")] = None,
@@ -359,7 +359,7 @@ class PeopleUserStatusApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_employee_activation_status_serialize(
+        _param = self._update_user_activation_status_serialize(
             activationstatus=activationstatus,
             update_members_request_dto=update_members_request_dto,
             _request_auth=_request_auth,
@@ -384,7 +384,7 @@ class PeopleUserStatusApi:
 
 
     @validate_call
-    def update_employee_activation_status_with_http_info(
+    def update_user_activation_status_with_http_info(
         self,
         activationstatus: Annotated[EmployeeActivationStatus, Field(description="The new user activation status.")],
         update_members_request_dto: Annotated[Optional[UpdateMembersRequestDto], Field(description="The request parameters for updating the user information.")] = None,
@@ -431,7 +431,7 @@ class PeopleUserStatusApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_employee_activation_status_serialize(
+        _param = self._update_user_activation_status_serialize(
             activationstatus=activationstatus,
             update_members_request_dto=update_members_request_dto,
             _request_auth=_request_auth,
@@ -456,7 +456,7 @@ class PeopleUserStatusApi:
 
 
     @validate_call
-    def update_employee_activation_status_without_preload_content(
+    def update_user_activation_status_without_preload_content(
         self,
         activationstatus: Annotated[EmployeeActivationStatus, Field(description="The new user activation status.")],
         update_members_request_dto: Annotated[Optional[UpdateMembersRequestDto], Field(description="The request parameters for updating the user information.")] = None,
@@ -503,7 +503,7 @@ class PeopleUserStatusApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_employee_activation_status_serialize(
+        _param = self._update_user_activation_status_serialize(
             activationstatus=activationstatus,
             update_members_request_dto=update_members_request_dto,
             _request_auth=_request_auth,
@@ -523,7 +523,7 @@ class PeopleUserStatusApi:
         return response_data.response
 
 
-    def _update_employee_activation_status_serialize(
+    def _update_user_activation_status_serialize(
         self,
         activationstatus,
         update_members_request_dto,

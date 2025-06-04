@@ -33,13 +33,6 @@ class TestPeopleProfilesApi(unittest.TestCase):
         """
         pass
 
-    def test_call_self(self) -> None:
-        """Test case for call_self
-
-        Get my profile
-        """
-        pass
-
     def test_delete_member(self) -> None:
         """Test case for delete_member
 
@@ -61,24 +54,31 @@ class TestPeopleProfilesApi(unittest.TestCase):
         """
         pass
 
-    def test_get_by_email(self) -> None:
-        """Test case for get_by_email
+    def test_get_claims(self) -> None:
+        """Test case for get_claims
+
+        Returns the user claims.
+        """
+        pass
+
+    def test_get_profile_by_email(self) -> None:
+        """Test case for get_profile_by_email
 
         Get a profile by user email
         """
         pass
 
-    def test_get_by_id(self) -> None:
-        """Test case for get_by_id
+    def test_get_profile_by_user_id(self) -> None:
+        """Test case for get_profile_by_user_id
 
         Get a profile by user name
         """
         pass
 
-    def test_get_claims(self) -> None:
-        """Test case for get_claims
+    def test_get_self_profile(self) -> None:
+        """Test case for get_self_profile
 
-        Returns the user claims.
+        Get my profile
         """
         pass
 

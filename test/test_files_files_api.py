@@ -33,8 +33,8 @@ class TestFilesFilesApi(unittest.TestCase):
         """
         pass
 
-    def test_change_history(self) -> None:
-        """Test case for change_history
+    def test_change_version_history(self) -> None:
+        """Test case for change_version_history
 
         Change version history
         """
@@ -68,8 +68,8 @@ class TestFilesFilesApi(unittest.TestCase):
         """
         pass
 
-    def test_create_file_my_documents(self) -> None:
-        """Test case for create_file_my_documents
+    def test_create_file_in_my_documents(self) -> None:
+        """Test case for create_file_in_my_documents
 
         Create a file in the \"My documents\" section
         """
@@ -82,8 +82,8 @@ class TestFilesFilesApi(unittest.TestCase):
         """
         pass
 
-    def test_create_html_file_in_my(self) -> None:
-        """Test case for create_html_file_in_my
+    def test_create_html_file_in_my_documents(self) -> None:
+        """Test case for create_html_file_in_my_documents
 
         Create an HTML file in the \"My documents\" section
         """
@@ -103,8 +103,8 @@ class TestFilesFilesApi(unittest.TestCase):
         """
         pass
 
-    def test_create_text_file_in_my(self) -> None:
-        """Test case for create_text_file_in_my
+    def test_create_text_file_in_my_documents(self) -> None:
+        """Test case for create_text_file_in_my_documents
 
         Create a text file in the \"My documents\" section
         """
@@ -173,6 +173,13 @@ class TestFilesFilesApi(unittest.TestCase):
         """
         pass
 
+    def test_get_file_links(self) -> None:
+        """Test case for get_file_links
+
+        Get file external links
+        """
+        pass
+
     def test_get_file_primary_external_link(self) -> None:
         """Test case for get_file_primary_external_link
 
@@ -194,13 +201,6 @@ class TestFilesFilesApi(unittest.TestCase):
         """
         pass
 
-    def test_get_links(self) -> None:
-        """Test case for get_links
-
-        Get file external links
-        """
-        pass
-
     def test_get_presigned_file_uri(self) -> None:
         """Test case for get_presigned_file_uri
 
@@ -212,6 +212,13 @@ class TestFilesFilesApi(unittest.TestCase):
         """Test case for get_presigned_uri
 
         Get file download link
+        """
+        pass
+
+    def test_get_protected_file_users(self) -> None:
+        """Test case for get_protected_file_users
+
+        Get users access rights to the protected file
         """
         pass
 
@@ -243,38 +250,31 @@ class TestFilesFilesApi(unittest.TestCase):
         """
         pass
 
-    def test_open_edit(self) -> None:
-        """Test case for open_edit
+    def test_open_edit_file(self) -> None:
+        """Test case for open_edit_file
 
         Open a file configuration
         """
         pass
 
-    def test_protect_users(self) -> None:
-        """Test case for protect_users
-
-        Get users access rights to the protected file
-        """
-        pass
-
-    def test_restore_version(self) -> None:
-        """Test case for restore_version
+    def test_restore_file_version(self) -> None:
+        """Test case for restore_file_version
 
         Restore a file version
         """
         pass
 
-    def test_save_as_pdf(self) -> None:
-        """Test case for save_as_pdf
+    def test_save_editing_file_from_form(self) -> None:
+        """Test case for save_editing_file_from_form
 
-        Save a file as PDF
+        Save file edits
         """
         pass
 
-    def test_save_editing_from_form(self) -> None:
-        """Test case for save_editing_from_form
+    def test_save_file_as_pdf(self) -> None:
+        """Test case for save_file_as_pdf
 
-        Save file edits
+        Save a file as PDF
         """
         pass
 
@@ -299,6 +299,13 @@ class TestFilesFilesApi(unittest.TestCase):
         """
         pass
 
+    def test_set_file_order(self) -> None:
+        """Test case for set_file_order
+
+        Set file order
+        """
+        pass
+
     def test_set_files_order(self) -> None:
         """Test case for set_files_order
 
@@ -306,22 +313,15 @@ class TestFilesFilesApi(unittest.TestCase):
         """
         pass
 
-    def test_set_order_file(self) -> None:
-        """Test case for set_order_file
-
-        Set file order
-        """
-        pass
-
-    def test_start_edit(self) -> None:
-        """Test case for start_edit
+    def test_start_edit_file(self) -> None:
+        """Test case for start_edit_file
 
         Start file editing
         """
         pass
 
-    def test_start_filling(self) -> None:
-        """Test case for start_filling
+    def test_start_filling_file(self) -> None:
+        """Test case for start_filling_file
 
         Start file filling
         """

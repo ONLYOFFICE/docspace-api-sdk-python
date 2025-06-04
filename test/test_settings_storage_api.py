@@ -75,8 +75,8 @@ class TestSettingsStorageApi(unittest.TestCase):
         """
         pass
 
-    def test_update_cdn(self) -> None:
-        """Test case for update_cdn
+    def test_update_cdn_storage(self) -> None:
+        """Test case for update_cdn_storage
 
         Update the CDN storage
         """

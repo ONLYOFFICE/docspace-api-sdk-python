@@ -26,10 +26,24 @@ class TestPortalQuotaApi(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
-    def test_get_quota(self) -> None:
-        """Test case for get_quota
+    def test_get_portal_quota(self) -> None:
+        """Test case for get_portal_quota
 
         Get a portal quota
+        """
+        pass
+
+    def test_get_portal_tariff(self) -> None:
+        """Test case for get_portal_tariff
+
+        Get a portal tariff
+        """
+        pass
+
+    def test_get_portal_used_space(self) -> None:
+        """Test case for get_portal_used_space
+
+        Get the portal used space
         """
         pass
 
@@ -37,20 +51,6 @@ class TestPortalQuotaApi(unittest.TestCase):
         """Test case for get_right_quota
 
         Get the recommended quota
-        """
-        pass
-
-    def test_get_tariff(self) -> None:
-        """Test case for get_tariff
-
-        Get a portal tariff
-        """
-        pass
-
-    def test_get_used_space(self) -> None:
-        """Test case for get_used_space
-
-        Get the portal used space
         """
         pass
 

@@ -33,6 +33,13 @@ class TestSettingsSecurityApi(unittest.TestCase):
         """
         pass
 
+    def test_get_is_product_administrator(self) -> None:
+        """Test case for get_is_product_administrator
+
+        Check a product administrator
+        """
+        pass
+
     def test_get_password_settings(self) -> None:
         """Test case for get_password_settings
 
@@ -58,13 +65,6 @@ class TestSettingsSecurityApi(unittest.TestCase):
         """Test case for get_web_item_settings_security_info
 
         Get the security settings
-        """
-        pass
-
-    def test_is_product_administrator(self) -> None:
-        """Test case for is_product_administrator
-
-        Check a product administrator
         """
         pass
 

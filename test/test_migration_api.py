@@ -26,57 +26,57 @@ class TestMigrationApi(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
-    def test_cancel(self) -> None:
-        """Test case for cancel
+    def test_cancel_migration(self) -> None:
+        """Test case for cancel_migration
 
         Cancel migration
         """
         pass
 
-    def test_clear(self) -> None:
-        """Test case for clear
+    def test_clear_migration(self) -> None:
+        """Test case for clear_migration
 
         Clear migration
         """
         pass
 
-    def test_finish(self) -> None:
-        """Test case for finish
+    def test_finish_migration(self) -> None:
+        """Test case for finish_migration
 
         Finish migration
         """
         pass
 
-    def test_list(self) -> None:
-        """Test case for list
-
-        Get migrations
-        """
-        pass
-
-    def test_logs(self) -> None:
-        """Test case for logs
+    def test_get_migration_logs(self) -> None:
+        """Test case for get_migration_logs
 
         Get migration logs
         """
         pass
 
-    def test_migrate(self) -> None:
-        """Test case for migrate
-
-        Start migration
-        """
-        pass
-
-    def test_status(self) -> None:
-        """Test case for status
+    def test_get_migration_status(self) -> None:
+        """Test case for get_migration_status
 
         Get migration status
         """
         pass
 
-    def test_upload_and_init(self) -> None:
-        """Test case for upload_and_init
+    def test_list_migrations(self) -> None:
+        """Test case for list_migrations
+
+        Get migrations
+        """
+        pass
+
+    def test_start_migration(self) -> None:
+        """Test case for start_migration
+
+        Start migration
+        """
+        pass
+
+    def test_upload_and_initialize_migration(self) -> None:
+        """Test case for upload_and_initialize_migration
 
         Upload and initialize migration
         """

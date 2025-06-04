@@ -40,7 +40,7 @@ class ThirdPartyApi:
 
 
     @validate_call
-    def get(
+    def get_third_party_code(
         self,
         provider: Annotated[LoginProvider, Field(description="The identity provider used for authentication.")],
         _request_timeout: Union[
@@ -84,7 +84,7 @@ class ThirdPartyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_serialize(
+        _param = self._get_third_party_code_serialize(
             provider=provider,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -108,7 +108,7 @@ class ThirdPartyApi:
 
 
     @validate_call
-    def get_with_http_info(
+    def get_third_party_code_with_http_info(
         self,
         provider: Annotated[LoginProvider, Field(description="The identity provider used for authentication.")],
         _request_timeout: Union[
@@ -152,7 +152,7 @@ class ThirdPartyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_serialize(
+        _param = self._get_third_party_code_serialize(
             provider=provider,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -176,7 +176,7 @@ class ThirdPartyApi:
 
 
     @validate_call
-    def get_without_preload_content(
+    def get_third_party_code_without_preload_content(
         self,
         provider: Annotated[LoginProvider, Field(description="The identity provider used for authentication.")],
         _request_timeout: Union[
@@ -220,7 +220,7 @@ class ThirdPartyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_serialize(
+        _param = self._get_third_party_code_serialize(
             provider=provider,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -239,7 +239,7 @@ class ThirdPartyApi:
         return response_data.response
 
 
-    def _get_serialize(
+    def _get_third_party_code_serialize(
         self,
         provider,
         _request_auth,

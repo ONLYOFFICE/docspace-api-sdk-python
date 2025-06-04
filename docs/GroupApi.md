@@ -1,19 +1,19 @@
 # docspace.GroupApi
 
-All URIs are relative to *http://localhost:8092*
+All URIs are relative to *http://http:*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**add_group**](GroupApi.md#add_group) | **POST** /api/2.0/group | Add a new group
 [**add_members_to**](GroupApi.md#add_members_to) | **PUT** /api/2.0/group/{id}/members | Add group members
 [**delete_group**](GroupApi.md#delete_group) | **DELETE** /api/2.0/group/{id} | Delete a group
-[**get_by_user_id**](GroupApi.md#get_by_user_id) | **GET** /api/2.0/group/user/{userid} | Get user groups
 [**get_group**](GroupApi.md#get_group) | **GET** /api/2.0/group/{id} | Get a group
+[**get_group_by_user_id**](GroupApi.md#get_group_by_user_id) | **GET** /api/2.0/group/user/{userid} | Get user groups
 [**get_groups**](GroupApi.md#get_groups) | **GET** /api/2.0/group | Get groups
+[**move_members_to**](GroupApi.md#move_members_to) | **PUT** /api/2.0/group/{fromId}/members/{toId} | Move group members
 [**remove_members_from**](GroupApi.md#remove_members_from) | **DELETE** /api/2.0/group/{id}/members | Remove group members
-[**set_manager**](GroupApi.md#set_manager) | **PUT** /api/2.0/group/{id}/manager | Set a group manager
+[**set_group_manager**](GroupApi.md#set_group_manager) | **PUT** /api/2.0/group/{id}/manager | Set a group manager
 [**set_members_to**](GroupApi.md#set_members_to) | **POST** /api/2.0/group/{id}/members | Replace group members
-[**transfer_members_to**](GroupApi.md#transfer_members_to) | **PUT** /api/2.0/group/{fromId}/members/{toId} | Move group members
 [**update_group**](GroupApi.md#update_group) | **PUT** /api/2.0/group/{id} | Update a group
 
 
@@ -39,10 +39,10 @@ from docspace.models.group_wrapper import GroupWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -143,10 +143,10 @@ from docspace.models.members_request import MembersRequest
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -249,10 +249,10 @@ from docspace.models.no_content_result_wrapper import NoContentResultWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -332,109 +332,6 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **get_by_user_id**
-> GroupSummaryArrayWrapper get_by_user_id(userid)
-
-Get user groups
-
-Returns a list of groups for the user with the ID specified in the request.
-
-### Example
-
-* Basic Authentication (Basic):
-* OAuth Authentication (OAuth2):
-* Api Key Authentication (ApiKeyBearer):
-* Api Key Authentication (asc_auth_key):
-* Bearer (JWT) Authentication (Bearer):
-
-```python
-import docspace
-from docspace.models.group_summary_array_wrapper import GroupSummaryArrayWrapper
-from docspace.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace.Configuration(
-    host = "http://localhost:8092"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure HTTP basic authorization: Basic
-configuration = docspace.Configuration(
-    username = os.environ["USERNAME"],
-    password = os.environ["PASSWORD"]
-)
-
-configuration.access_token = os.environ["ACCESS_TOKEN"]
-
-# Configure API key authorization: ApiKeyBearer
-configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-
-# Enter a context with an instance of the API client
-with docspace.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace.GroupApi(api_client)
-    userid = 'aae1e103-bca5-9fa1-ba8c-42058b4abf28' # str | The user ID.
-
-    try:
-        # Get user groups
-        api_response = api_instance.get_by_user_id(userid)
-        print("The response of GroupApi->get_by_user_id:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling GroupApi->get_by_user_id: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **userid** | **str**| The user ID. | 
-
-### Return type
-
-[**GroupSummaryArrayWrapper**](GroupSummaryArrayWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | List of groups |  -  |
-**401** | Unauthorized |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **get_group**
 > GroupWrapper get_group(id, include_members=include_members)
 
@@ -456,10 +353,10 @@ from docspace.models.group_wrapper import GroupWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -541,6 +438,109 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **get_group_by_user_id**
+> GroupSummaryArrayWrapper get_group_by_user_id(userid)
+
+Get user groups
+
+Returns a list of groups for the user with the ID specified in the request.
+
+### Example
+
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
+* Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
+
+```python
+import docspace
+from docspace.models.group_summary_array_wrapper import GroupSummaryArrayWrapper
+from docspace.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://http:
+# See configuration.py for a list of all supported configuration parameters.
+configuration = docspace.Configuration(
+    host = "http://http:"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
+# Configure API key authorization: asc_auth_key
+configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with docspace.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace.GroupApi(api_client)
+    userid = 'aae1e103-bca5-9fa1-ba8c-42058b4abf28' # str | The user ID.
+
+    try:
+        # Get user groups
+        api_response = api_instance.get_group_by_user_id(userid)
+        print("The response of GroupApi->get_group_by_user_id:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling GroupApi->get_group_by_user_id: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **userid** | **str**| The user ID. | 
+
+### Return type
+
+[**GroupSummaryArrayWrapper**](GroupSummaryArrayWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | List of groups |  -  |
+**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **get_groups**
 > GroupArrayWrapper get_groups(user_id=user_id, manager=manager)
 
@@ -562,10 +562,10 @@ from docspace.models.group_array_wrapper import GroupArrayWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -646,6 +646,112 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **move_members_to**
+> GroupWrapper move_members_to(from_id, to_id)
+
+Move group members
+
+Moves all the members from the selected group to another one specified in the request.
+
+### Example
+
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
+* Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
+
+```python
+import docspace
+from docspace.models.group_wrapper import GroupWrapper
+from docspace.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://http:
+# See configuration.py for a list of all supported configuration parameters.
+configuration = docspace.Configuration(
+    host = "http://http:"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
+# Configure API key authorization: asc_auth_key
+configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with docspace.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace.GroupApi(api_client)
+    from_id = '75a5f745-f697-4418-b38d-0fe0d277e258' # str | The group ID to move from.
+    to_id = '75a5f745-f697-4418-b38d-0fe0d277e258' # str | The group ID to move to.
+
+    try:
+        # Move group members
+        api_response = api_instance.move_members_to(from_id, to_id)
+        print("The response of GroupApi->move_members_to:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling GroupApi->move_members_to: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **from_id** | **str**| The group ID to move from. | 
+ **to_id** | **str**| The group ID to move to. | 
+
+### Return type
+
+[**GroupWrapper**](GroupWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Group with the detailed information |  -  |
+**401** | Unauthorized |  -  |
+**404** | Group not found |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **remove_members_from**
 > GroupWrapper remove_members_from(id, members_request=members_request)
 
@@ -668,10 +774,10 @@ from docspace.models.members_request import MembersRequest
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -753,8 +859,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **set_manager**
-> GroupWrapper set_manager(id, set_manager_request=set_manager_request)
+# **set_group_manager**
+> GroupWrapper set_group_manager(id, set_manager_request=set_manager_request)
 
 Set a group manager
 
@@ -775,10 +881,10 @@ from docspace.models.set_manager_request import SetManagerRequest
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -820,11 +926,11 @@ with docspace.ApiClient(configuration) as api_client:
 
     try:
         # Set a group manager
-        api_response = api_instance.set_manager(id, set_manager_request=set_manager_request)
-        print("The response of GroupApi->set_manager:\n")
+        api_response = api_instance.set_group_manager(id, set_manager_request=set_manager_request)
+        print("The response of GroupApi->set_group_manager:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling GroupApi->set_manager: %s\n" % e)
+        print("Exception when calling GroupApi->set_group_manager: %s\n" % e)
 ```
 
 
@@ -882,10 +988,10 @@ from docspace.models.members_request import MembersRequest
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -966,112 +1072,6 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **transfer_members_to**
-> GroupWrapper transfer_members_to(from_id, to_id)
-
-Move group members
-
-Moves all the members from the selected group to another one specified in the request.
-
-### Example
-
-* Basic Authentication (Basic):
-* OAuth Authentication (OAuth2):
-* Api Key Authentication (ApiKeyBearer):
-* Api Key Authentication (asc_auth_key):
-* Bearer (JWT) Authentication (Bearer):
-
-```python
-import docspace
-from docspace.models.group_wrapper import GroupWrapper
-from docspace.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace.Configuration(
-    host = "http://localhost:8092"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure HTTP basic authorization: Basic
-configuration = docspace.Configuration(
-    username = os.environ["USERNAME"],
-    password = os.environ["PASSWORD"]
-)
-
-configuration.access_token = os.environ["ACCESS_TOKEN"]
-
-# Configure API key authorization: ApiKeyBearer
-configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-
-# Enter a context with an instance of the API client
-with docspace.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace.GroupApi(api_client)
-    from_id = '75a5f745-f697-4418-b38d-0fe0d277e258' # str | The group ID to move from.
-    to_id = '75a5f745-f697-4418-b38d-0fe0d277e258' # str | The group ID to move to.
-
-    try:
-        # Move group members
-        api_response = api_instance.transfer_members_to(from_id, to_id)
-        print("The response of GroupApi->transfer_members_to:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling GroupApi->transfer_members_to: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **from_id** | **str**| The group ID to move from. | 
- **to_id** | **str**| The group ID to move to. | 
-
-### Return type
-
-[**GroupWrapper**](GroupWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Group with the detailed information |  -  |
-**401** | Unauthorized |  -  |
-**404** | Group not found |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **update_group**
 > GroupWrapper update_group(id, update_group_request=update_group_request)
 
@@ -1094,10 +1094,10 @@ from docspace.models.update_group_request import UpdateGroupRequest
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters

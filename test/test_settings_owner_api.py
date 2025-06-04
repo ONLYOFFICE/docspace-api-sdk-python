@@ -26,17 +26,17 @@ class TestSettingsOwnerApi(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
-    def test_owner(self) -> None:
-        """Test case for owner
-
-        Update the portal owner
-        """
-        pass
-
     def test_send_owner_change_instructions(self) -> None:
         """Test case for send_owner_change_instructions
 
         Send the owner change instructions
+        """
+        pass
+
+    def test_update_portal_owner(self) -> None:
+        """Test case for update_portal_owner
+
+        Update the portal owner
         """
         pass
 

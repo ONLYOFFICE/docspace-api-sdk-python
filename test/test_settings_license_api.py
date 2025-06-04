@@ -33,17 +33,17 @@ class TestSettingsLicenseApi(unittest.TestCase):
         """
         pass
 
+    def test_get_is_license_required(self) -> None:
+        """Test case for get_is_license_required
+
+        Request a license
+        """
+        pass
+
     def test_refresh_license(self) -> None:
         """Test case for refresh_license
 
         Refresh the license
-        """
-        pass
-
-    def test_request_license(self) -> None:
-        """Test case for request_license
-
-        Request a license
         """
         pass
 

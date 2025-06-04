@@ -40,17 +40,17 @@ class TestSettingsNotificationsApi(unittest.TestCase):
         """
         pass
 
+    def test_set_notification_settings(self) -> None:
+        """Test case for set_notification_settings
+
+        Enable notifications
+        """
+        pass
+
     def test_set_rooms_notification_status(self) -> None:
         """Test case for set_rooms_notification_status
 
         Set room notification status
-        """
-        pass
-
-    def test_set_settings(self) -> None:
-        """Test case for set_settings
-
-        Enable notifications
         """
         pass
 

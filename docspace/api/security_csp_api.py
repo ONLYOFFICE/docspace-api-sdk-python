@@ -39,7 +39,7 @@ class SecurityCSPApi:
 
 
     @validate_call
-    def csp(
+    def configure_csp(
         self,
         csp_requests_dto: Optional[CspRequestsDto] = None,
         _request_timeout: Union[
@@ -83,7 +83,7 @@ class SecurityCSPApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._csp_serialize(
+        _param = self._configure_csp_serialize(
             csp_requests_dto=csp_requests_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -108,7 +108,7 @@ class SecurityCSPApi:
 
 
     @validate_call
-    def csp_with_http_info(
+    def configure_csp_with_http_info(
         self,
         csp_requests_dto: Optional[CspRequestsDto] = None,
         _request_timeout: Union[
@@ -152,7 +152,7 @@ class SecurityCSPApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._csp_serialize(
+        _param = self._configure_csp_serialize(
             csp_requests_dto=csp_requests_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -177,7 +177,7 @@ class SecurityCSPApi:
 
 
     @validate_call
-    def csp_without_preload_content(
+    def configure_csp_without_preload_content(
         self,
         csp_requests_dto: Optional[CspRequestsDto] = None,
         _request_timeout: Union[
@@ -221,7 +221,7 @@ class SecurityCSPApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._csp_serialize(
+        _param = self._configure_csp_serialize(
             csp_requests_dto=csp_requests_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -241,7 +241,7 @@ class SecurityCSPApi:
         return response_data.response
 
 
-    def _csp_serialize(
+    def _configure_csp_serialize(
         self,
         csp_requests_dto,
         _request_auth,
@@ -324,7 +324,7 @@ class SecurityCSPApi:
 
 
     @validate_call
-    def get_csp(
+    def get_csp_settings(
         self,
         _request_timeout: Union[
             None,
@@ -365,7 +365,7 @@ class SecurityCSPApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_csp_serialize(
+        _param = self._get_csp_settings_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -387,7 +387,7 @@ class SecurityCSPApi:
 
 
     @validate_call
-    def get_csp_with_http_info(
+    def get_csp_settings_with_http_info(
         self,
         _request_timeout: Union[
             None,
@@ -428,7 +428,7 @@ class SecurityCSPApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_csp_serialize(
+        _param = self._get_csp_settings_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -450,7 +450,7 @@ class SecurityCSPApi:
 
 
     @validate_call
-    def get_csp_without_preload_content(
+    def get_csp_settings_without_preload_content(
         self,
         _request_timeout: Union[
             None,
@@ -491,7 +491,7 @@ class SecurityCSPApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_csp_serialize(
+        _param = self._get_csp_settings_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -508,7 +508,7 @@ class SecurityCSPApi:
         return response_data.response
 
 
-    def _get_csp_serialize(
+    def _get_csp_settings_serialize(
         self,
         _request_auth,
         _content_type,

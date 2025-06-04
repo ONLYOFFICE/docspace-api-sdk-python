@@ -1,26 +1,26 @@
 # docspace.SettingsCommonSettingsApi
 
-All URIs are relative to *http://localhost:8092*
+All URIs are relative to *http://http:*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**close_admin_helper**](SettingsCommonSettingsApi.md#close_admin_helper) | **PUT** /api/2.0/settings/closeadminhelper | Close the admin helper
 [**complete_wizard**](SettingsCommonSettingsApi.md#complete_wizard) | **PUT** /api/2.0/settings/wizard/complete | Complete the Wizard settings
-[**delete_color_theme**](SettingsCommonSettingsApi.md#delete_color_theme) | **DELETE** /api/2.0/settings/colortheme | Delete a color theme
-[**get_color_theme**](SettingsCommonSettingsApi.md#get_color_theme) | **GET** /api/2.0/settings/colortheme | Get a color theme
-[**get_logo**](SettingsCommonSettingsApi.md#get_logo) | **GET** /api/2.0/settings/logo | Get a portal logo
-[**get_machine_name**](SettingsCommonSettingsApi.md#get_machine_name) | **GET** /api/2.0/settings/machine | Get hostname
-[**get_settings**](SettingsCommonSettingsApi.md#get_settings) | **GET** /api/2.0/settings | Get the portal settings
+[**configure_deep_link**](SettingsCommonSettingsApi.md#configure_deep_link) | **POST** /api/2.0/settings/deeplink | Configure the deep link settings
+[**delete_portal_color_theme**](SettingsCommonSettingsApi.md#delete_portal_color_theme) | **DELETE** /api/2.0/settings/colortheme | Delete a color theme
+[**get_deep_link_settings**](SettingsCommonSettingsApi.md#get_deep_link_settings) | **GET** /api/2.0/settings/deeplink | Get the deep link settings
+[**get_payment_settings**](SettingsCommonSettingsApi.md#get_payment_settings) | **GET** /api/2.0/settings/payment | Get the payment settings
+[**get_portal_color_theme**](SettingsCommonSettingsApi.md#get_portal_color_theme) | **GET** /api/2.0/settings/colortheme | Get a color theme
+[**get_portal_hostname**](SettingsCommonSettingsApi.md#get_portal_hostname) | **GET** /api/2.0/settings/machine | Get hostname
+[**get_portal_logo**](SettingsCommonSettingsApi.md#get_portal_logo) | **GET** /api/2.0/settings/logo | Get a portal logo
+[**get_portal_settings**](SettingsCommonSettingsApi.md#get_portal_settings) | **GET** /api/2.0/settings | Get the portal settings
 [**get_socket_settings**](SettingsCommonSettingsApi.md#get_socket_settings) | **GET** /api/2.0/settings/socket | Get the socket settings
 [**get_supported_cultures**](SettingsCommonSettingsApi.md#get_supported_cultures) | **GET** /api/2.0/settings/cultures | Get supported languages
 [**get_tenant_user_invitation_settings**](SettingsCommonSettingsApi.md#get_tenant_user_invitation_settings) | **GET** /api/2.0/settings/invitationsettings | Get the user invitation settings
-[**get_time_zones_async**](SettingsCommonSettingsApi.md#get_time_zones_async) | **GET** /api/2.0/settings/timezones | Get time zones
-[**gett_deep_link_settings**](SettingsCommonSettingsApi.md#gett_deep_link_settings) | **GET** /api/2.0/settings/deeplink | Get the deep link settings
-[**payment_settings**](SettingsCommonSettingsApi.md#payment_settings) | **GET** /api/2.0/settings/payment | Get the payment settings
-[**save_color_theme**](SettingsCommonSettingsApi.md#save_color_theme) | **PUT** /api/2.0/settings/colortheme | Save a color theme
-[**save_configure_deep_link**](SettingsCommonSettingsApi.md#save_configure_deep_link) | **POST** /api/2.0/settings/deeplink | Configure the deep link settings
+[**get_time_zones**](SettingsCommonSettingsApi.md#get_time_zones) | **GET** /api/2.0/settings/timezones | Get time zones
 [**save_dns_settings**](SettingsCommonSettingsApi.md#save_dns_settings) | **PUT** /api/2.0/settings/dns | Save the DNS settings
 [**save_mail_domain_settings**](SettingsCommonSettingsApi.md#save_mail_domain_settings) | **POST** /api/2.0/settings/maildomainsettings | Save the mail domain settings
+[**save_portal_color_theme**](SettingsCommonSettingsApi.md#save_portal_color_theme) | **PUT** /api/2.0/settings/colortheme | Save a color theme
 [**update_email_activation_settings**](SettingsCommonSettingsApi.md#update_email_activation_settings) | **PUT** /api/2.0/settings/emailactivation | Update the email activation settings
 [**update_invitation_settings**](SettingsCommonSettingsApi.md#update_invitation_settings) | **PUT** /api/2.0/settings/invitationsettings | Update user invitation settings
 
@@ -45,10 +45,10 @@ import docspace
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -144,10 +144,10 @@ from docspace.models.wizard_settings_wrapper import WizardSettingsWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -228,8 +228,113 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **delete_color_theme**
-> CustomColorThemesSettingsWrapper delete_color_theme(id=id)
+# **configure_deep_link**
+> TenantDeepLinkSettingsWrapper configure_deep_link(deep_link_configuration_requests_dto=deep_link_configuration_requests_dto)
+
+Configure the deep link settings
+
+Saves the deep link configuration settings for the portal.
+
+### Example
+
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
+* Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
+
+```python
+import docspace
+from docspace.models.deep_link_configuration_requests_dto import DeepLinkConfigurationRequestsDto
+from docspace.models.tenant_deep_link_settings_wrapper import TenantDeepLinkSettingsWrapper
+from docspace.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://http:
+# See configuration.py for a list of all supported configuration parameters.
+configuration = docspace.Configuration(
+    host = "http://http:"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
+# Configure API key authorization: asc_auth_key
+configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with docspace.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace.SettingsCommonSettingsApi(api_client)
+    deep_link_configuration_requests_dto = docspace.DeepLinkConfigurationRequestsDto() # DeepLinkConfigurationRequestsDto |  (optional)
+
+    try:
+        # Configure the deep link settings
+        api_response = api_instance.configure_deep_link(deep_link_configuration_requests_dto=deep_link_configuration_requests_dto)
+        print("The response of SettingsCommonSettingsApi->configure_deep_link:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling SettingsCommonSettingsApi->configure_deep_link: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **deep_link_configuration_requests_dto** | [**DeepLinkConfigurationRequestsDto**](DeepLinkConfigurationRequestsDto.md)|  | [optional] 
+
+### Return type
+
+[**TenantDeepLinkSettingsWrapper**](TenantDeepLinkSettingsWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Deep link configuration updated |  -  |
+**400** | Invalid deep link configuration |  -  |
+**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **delete_portal_color_theme**
+> CustomColorThemesSettingsWrapper delete_portal_color_theme(id=id)
 
 Delete a color theme
 
@@ -249,10 +354,10 @@ from docspace.models.custom_color_themes_settings_wrapper import CustomColorThem
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -293,11 +398,11 @@ with docspace.ApiClient(configuration) as api_client:
 
     try:
         # Delete a color theme
-        api_response = api_instance.delete_color_theme(id=id)
-        print("The response of SettingsCommonSettingsApi->delete_color_theme:\n")
+        api_response = api_instance.delete_portal_color_theme(id=id)
+        print("The response of SettingsCommonSettingsApi->delete_portal_color_theme:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling SettingsCommonSettingsApi->delete_color_theme: %s\n" % e)
+        print("Exception when calling SettingsCommonSettingsApi->delete_portal_color_theme: %s\n" % e)
 ```
 
 
@@ -331,76 +436,12 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **get_color_theme**
-> CustomColorThemesSettingsWrapper get_color_theme()
+# **get_deep_link_settings**
+> TenantDeepLinkSettingsWrapper get_deep_link_settings()
 
-Get a color theme
+Get the deep link settings
 
-Returns the portal color theme.
-
-### Example
-
-
-```python
-import docspace
-from docspace.models.custom_color_themes_settings_wrapper import CustomColorThemesSettingsWrapper
-from docspace.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace.Configuration(
-    host = "http://localhost:8092"
-)
-
-
-# Enter a context with an instance of the API client
-with docspace.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace.SettingsCommonSettingsApi(api_client)
-
-    try:
-        # Get a color theme
-        api_response = api_instance.get_color_theme()
-        print("The response of SettingsCommonSettingsApi->get_color_theme:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling SettingsCommonSettingsApi->get_color_theme: %s\n" % e)
-```
-
-
-
-### Parameters
-
-This endpoint does not need any parameter.
-
-### Return type
-
-[**CustomColorThemesSettingsWrapper**](CustomColorThemesSettingsWrapper.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Settings of the portal themes |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **get_logo**
-> StringWrapper get_logo()
-
-Get a portal logo
-
-Returns the portal logo image URL.
+Returns the deep link settings.
 
 ### Example
 
@@ -412,14 +453,14 @@ Returns the portal logo image URL.
 
 ```python
 import docspace
-from docspace.models.string_wrapper import StringWrapper
+from docspace.models.tenant_deep_link_settings_wrapper import TenantDeepLinkSettingsWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -458,12 +499,12 @@ with docspace.ApiClient(configuration) as api_client:
     api_instance = docspace.SettingsCommonSettingsApi(api_client)
 
     try:
-        # Get a portal logo
-        api_response = api_instance.get_logo()
-        print("The response of SettingsCommonSettingsApi->get_logo:\n")
+        # Get the deep link settings
+        api_response = api_instance.get_deep_link_settings()
+        print("The response of SettingsCommonSettingsApi->get_deep_link_settings:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling SettingsCommonSettingsApi->get_logo: %s\n" % e)
+        print("Exception when calling SettingsCommonSettingsApi->get_deep_link_settings: %s\n" % e)
 ```
 
 
@@ -474,7 +515,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**StringWrapper**](StringWrapper.md)
+[**TenantDeepLinkSettingsWrapper**](TenantDeepLinkSettingsWrapper.md)
 
 ### Authorization
 
@@ -489,13 +530,176 @@ This endpoint does not need any parameter.
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Portal logo image URL |  -  |
+**200** | Ok |  -  |
 **401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **get_machine_name**
-> ObjectWrapper get_machine_name()
+# **get_payment_settings**
+> PaymentSettingsWrapper get_payment_settings()
+
+Get the payment settings
+
+Returns the portal payment settings.
+
+### Example
+
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
+* Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
+
+```python
+import docspace
+from docspace.models.payment_settings_wrapper import PaymentSettingsWrapper
+from docspace.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://http:
+# See configuration.py for a list of all supported configuration parameters.
+configuration = docspace.Configuration(
+    host = "http://http:"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
+# Configure API key authorization: asc_auth_key
+configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with docspace.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace.SettingsCommonSettingsApi(api_client)
+
+    try:
+        # Get the payment settings
+        api_response = api_instance.get_payment_settings()
+        print("The response of SettingsCommonSettingsApi->get_payment_settings:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling SettingsCommonSettingsApi->get_payment_settings: %s\n" % e)
+```
+
+
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**PaymentSettingsWrapper**](PaymentSettingsWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Payment settings: sales email, feedback and support URL, link to pay for a portal, Standalone or not, current license, maximum quota quantity |  -  |
+**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_portal_color_theme**
+> CustomColorThemesSettingsWrapper get_portal_color_theme()
+
+Get a color theme
+
+Returns the portal color theme.
+
+### Example
+
+
+```python
+import docspace
+from docspace.models.custom_color_themes_settings_wrapper import CustomColorThemesSettingsWrapper
+from docspace.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://http:
+# See configuration.py for a list of all supported configuration parameters.
+configuration = docspace.Configuration(
+    host = "http://http:"
+)
+
+
+# Enter a context with an instance of the API client
+with docspace.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace.SettingsCommonSettingsApi(api_client)
+
+    try:
+        # Get a color theme
+        api_response = api_instance.get_portal_color_theme()
+        print("The response of SettingsCommonSettingsApi->get_portal_color_theme:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling SettingsCommonSettingsApi->get_portal_color_theme: %s\n" % e)
+```
+
+
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**CustomColorThemesSettingsWrapper**](CustomColorThemesSettingsWrapper.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Settings of the portal themes |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_portal_hostname**
+> ObjectWrapper get_portal_hostname()
 
 Get hostname
 
@@ -515,10 +719,10 @@ from docspace.models.object_wrapper import ObjectWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -558,11 +762,11 @@ with docspace.ApiClient(configuration) as api_client:
 
     try:
         # Get hostname
-        api_response = api_instance.get_machine_name()
-        print("The response of SettingsCommonSettingsApi->get_machine_name:\n")
+        api_response = api_instance.get_portal_hostname()
+        print("The response of SettingsCommonSettingsApi->get_portal_hostname:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling SettingsCommonSettingsApi->get_machine_name: %s\n" % e)
+        print("Exception when calling SettingsCommonSettingsApi->get_portal_hostname: %s\n" % e)
 ```
 
 
@@ -593,8 +797,107 @@ This endpoint does not need any parameter.
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **get_settings**
-> SettingsWrapper get_settings(withpassword=withpassword)
+# **get_portal_logo**
+> StringWrapper get_portal_logo()
+
+Get a portal logo
+
+Returns the portal logo image URL.
+
+### Example
+
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
+* Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
+
+```python
+import docspace
+from docspace.models.string_wrapper import StringWrapper
+from docspace.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://http:
+# See configuration.py for a list of all supported configuration parameters.
+configuration = docspace.Configuration(
+    host = "http://http:"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
+# Configure API key authorization: asc_auth_key
+configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with docspace.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace.SettingsCommonSettingsApi(api_client)
+
+    try:
+        # Get a portal logo
+        api_response = api_instance.get_portal_logo()
+        print("The response of SettingsCommonSettingsApi->get_portal_logo:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling SettingsCommonSettingsApi->get_portal_logo: %s\n" % e)
+```
+
+
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**StringWrapper**](StringWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Portal logo image URL |  -  |
+**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_portal_settings**
+> SettingsWrapper get_portal_settings(withpassword=withpassword)
 
 Get the portal settings
 
@@ -609,10 +912,10 @@ from docspace.models.settings_wrapper import SettingsWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 
@@ -624,11 +927,11 @@ with docspace.ApiClient(configuration) as api_client:
 
     try:
         # Get the portal settings
-        api_response = api_instance.get_settings(withpassword=withpassword)
-        print("The response of SettingsCommonSettingsApi->get_settings:\n")
+        api_response = api_instance.get_portal_settings(withpassword=withpassword)
+        print("The response of SettingsCommonSettingsApi->get_portal_settings:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling SettingsCommonSettingsApi->get_settings: %s\n" % e)
+        print("Exception when calling SettingsCommonSettingsApi->get_portal_settings: %s\n" % e)
 ```
 
 
@@ -682,10 +985,10 @@ from docspace.models.object_wrapper import ObjectWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -776,10 +1079,10 @@ from docspace.models.string_array_wrapper import STRINGArrayWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 
@@ -840,10 +1143,10 @@ from docspace.models.tenant_user_invitation_settings_wrapper import TenantUserIn
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 
@@ -888,8 +1191,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **get_time_zones_async**
-> TimezonesRequestsArrayWrapper get_time_zones_async()
+# **get_time_zones**
+> TimezonesRequestsArrayWrapper get_time_zones()
 
 Get time zones
 
@@ -909,10 +1212,10 @@ from docspace.models.timezones_requests_array_wrapper import TimezonesRequestsAr
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -952,11 +1255,11 @@ with docspace.ApiClient(configuration) as api_client:
 
     try:
         # Get time zones
-        api_response = api_instance.get_time_zones_async()
-        print("The response of SettingsCommonSettingsApi->get_time_zones_async:\n")
+        api_response = api_instance.get_time_zones()
+        print("The response of SettingsCommonSettingsApi->get_time_zones:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling SettingsCommonSettingsApi->get_time_zones_async: %s\n" % e)
+        print("Exception when calling SettingsCommonSettingsApi->get_time_zones: %s\n" % e)
 ```
 
 
@@ -987,413 +1290,6 @@ This endpoint does not need any parameter.
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **gett_deep_link_settings**
-> TenantDeepLinkSettingsWrapper gett_deep_link_settings()
-
-Get the deep link settings
-
-Returns the deep link settings.
-
-### Example
-
-* Basic Authentication (Basic):
-* OAuth Authentication (OAuth2):
-* Api Key Authentication (ApiKeyBearer):
-* Api Key Authentication (asc_auth_key):
-* Bearer (JWT) Authentication (Bearer):
-
-```python
-import docspace
-from docspace.models.tenant_deep_link_settings_wrapper import TenantDeepLinkSettingsWrapper
-from docspace.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace.Configuration(
-    host = "http://localhost:8092"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure HTTP basic authorization: Basic
-configuration = docspace.Configuration(
-    username = os.environ["USERNAME"],
-    password = os.environ["PASSWORD"]
-)
-
-configuration.access_token = os.environ["ACCESS_TOKEN"]
-
-# Configure API key authorization: ApiKeyBearer
-configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-
-# Enter a context with an instance of the API client
-with docspace.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace.SettingsCommonSettingsApi(api_client)
-
-    try:
-        # Get the deep link settings
-        api_response = api_instance.gett_deep_link_settings()
-        print("The response of SettingsCommonSettingsApi->gett_deep_link_settings:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling SettingsCommonSettingsApi->gett_deep_link_settings: %s\n" % e)
-```
-
-
-
-### Parameters
-
-This endpoint does not need any parameter.
-
-### Return type
-
-[**TenantDeepLinkSettingsWrapper**](TenantDeepLinkSettingsWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Ok |  -  |
-**401** | Unauthorized |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **payment_settings**
-> PaymentSettingsWrapper payment_settings()
-
-Get the payment settings
-
-Returns the portal payment settings.
-
-### Example
-
-* Basic Authentication (Basic):
-* OAuth Authentication (OAuth2):
-* Api Key Authentication (ApiKeyBearer):
-* Api Key Authentication (asc_auth_key):
-* Bearer (JWT) Authentication (Bearer):
-
-```python
-import docspace
-from docspace.models.payment_settings_wrapper import PaymentSettingsWrapper
-from docspace.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace.Configuration(
-    host = "http://localhost:8092"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure HTTP basic authorization: Basic
-configuration = docspace.Configuration(
-    username = os.environ["USERNAME"],
-    password = os.environ["PASSWORD"]
-)
-
-configuration.access_token = os.environ["ACCESS_TOKEN"]
-
-# Configure API key authorization: ApiKeyBearer
-configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-
-# Enter a context with an instance of the API client
-with docspace.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace.SettingsCommonSettingsApi(api_client)
-
-    try:
-        # Get the payment settings
-        api_response = api_instance.payment_settings()
-        print("The response of SettingsCommonSettingsApi->payment_settings:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling SettingsCommonSettingsApi->payment_settings: %s\n" % e)
-```
-
-
-
-### Parameters
-
-This endpoint does not need any parameter.
-
-### Return type
-
-[**PaymentSettingsWrapper**](PaymentSettingsWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Payment settings: sales email, feedback and support URL, link to pay for a portal, Standalone or not, current license, maximum quota quantity |  -  |
-**401** | Unauthorized |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **save_color_theme**
-> CustomColorThemesSettingsWrapper save_color_theme(custom_color_themes_settings_requests_dto=custom_color_themes_settings_requests_dto)
-
-Save a color theme
-
-Saves the portal color theme specified in the request.
-
-### Example
-
-* Basic Authentication (Basic):
-* OAuth Authentication (OAuth2):
-* Api Key Authentication (ApiKeyBearer):
-* Api Key Authentication (asc_auth_key):
-* Bearer (JWT) Authentication (Bearer):
-
-```python
-import docspace
-from docspace.models.custom_color_themes_settings_requests_dto import CustomColorThemesSettingsRequestsDto
-from docspace.models.custom_color_themes_settings_wrapper import CustomColorThemesSettingsWrapper
-from docspace.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace.Configuration(
-    host = "http://localhost:8092"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure HTTP basic authorization: Basic
-configuration = docspace.Configuration(
-    username = os.environ["USERNAME"],
-    password = os.environ["PASSWORD"]
-)
-
-configuration.access_token = os.environ["ACCESS_TOKEN"]
-
-# Configure API key authorization: ApiKeyBearer
-configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-
-# Enter a context with an instance of the API client
-with docspace.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace.SettingsCommonSettingsApi(api_client)
-    custom_color_themes_settings_requests_dto = docspace.CustomColorThemesSettingsRequestsDto() # CustomColorThemesSettingsRequestsDto |  (optional)
-
-    try:
-        # Save a color theme
-        api_response = api_instance.save_color_theme(custom_color_themes_settings_requests_dto=custom_color_themes_settings_requests_dto)
-        print("The response of SettingsCommonSettingsApi->save_color_theme:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling SettingsCommonSettingsApi->save_color_theme: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **custom_color_themes_settings_requests_dto** | [**CustomColorThemesSettingsRequestsDto**](CustomColorThemesSettingsRequestsDto.md)|  | [optional] 
-
-### Return type
-
-[**CustomColorThemesSettingsWrapper**](CustomColorThemesSettingsWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Portal theme settings |  -  |
-**401** | Unauthorized |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **save_configure_deep_link**
-> TenantDeepLinkSettingsWrapper save_configure_deep_link(deep_link_configuration_requests_dto=deep_link_configuration_requests_dto)
-
-Configure the deep link settings
-
-Saves the deep link configuration settings for the portal.
-
-### Example
-
-* Basic Authentication (Basic):
-* OAuth Authentication (OAuth2):
-* Api Key Authentication (ApiKeyBearer):
-* Api Key Authentication (asc_auth_key):
-* Bearer (JWT) Authentication (Bearer):
-
-```python
-import docspace
-from docspace.models.deep_link_configuration_requests_dto import DeepLinkConfigurationRequestsDto
-from docspace.models.tenant_deep_link_settings_wrapper import TenantDeepLinkSettingsWrapper
-from docspace.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace.Configuration(
-    host = "http://localhost:8092"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure HTTP basic authorization: Basic
-configuration = docspace.Configuration(
-    username = os.environ["USERNAME"],
-    password = os.environ["PASSWORD"]
-)
-
-configuration.access_token = os.environ["ACCESS_TOKEN"]
-
-# Configure API key authorization: ApiKeyBearer
-configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-
-# Enter a context with an instance of the API client
-with docspace.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace.SettingsCommonSettingsApi(api_client)
-    deep_link_configuration_requests_dto = docspace.DeepLinkConfigurationRequestsDto() # DeepLinkConfigurationRequestsDto |  (optional)
-
-    try:
-        # Configure the deep link settings
-        api_response = api_instance.save_configure_deep_link(deep_link_configuration_requests_dto=deep_link_configuration_requests_dto)
-        print("The response of SettingsCommonSettingsApi->save_configure_deep_link:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling SettingsCommonSettingsApi->save_configure_deep_link: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **deep_link_configuration_requests_dto** | [**DeepLinkConfigurationRequestsDto**](DeepLinkConfigurationRequestsDto.md)|  | [optional] 
-
-### Return type
-
-[**TenantDeepLinkSettingsWrapper**](TenantDeepLinkSettingsWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Deep link configuration updated |  -  |
-**400** | Invalid deep link configuration |  -  |
-**401** | Unauthorized |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **save_dns_settings**
 > StringWrapper save_dns_settings(dns_settings_requests_dto=dns_settings_requests_dto)
 
@@ -1416,10 +1312,10 @@ from docspace.models.string_wrapper import StringWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -1523,10 +1419,10 @@ from docspace.models.string_wrapper import StringWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -1605,6 +1501,110 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **save_portal_color_theme**
+> CustomColorThemesSettingsWrapper save_portal_color_theme(custom_color_themes_settings_requests_dto=custom_color_themes_settings_requests_dto)
+
+Save a color theme
+
+Saves the portal color theme specified in the request.
+
+### Example
+
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
+* Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
+
+```python
+import docspace
+from docspace.models.custom_color_themes_settings_requests_dto import CustomColorThemesSettingsRequestsDto
+from docspace.models.custom_color_themes_settings_wrapper import CustomColorThemesSettingsWrapper
+from docspace.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://http:
+# See configuration.py for a list of all supported configuration parameters.
+configuration = docspace.Configuration(
+    host = "http://http:"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
+# Configure API key authorization: asc_auth_key
+configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with docspace.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace.SettingsCommonSettingsApi(api_client)
+    custom_color_themes_settings_requests_dto = docspace.CustomColorThemesSettingsRequestsDto() # CustomColorThemesSettingsRequestsDto |  (optional)
+
+    try:
+        # Save a color theme
+        api_response = api_instance.save_portal_color_theme(custom_color_themes_settings_requests_dto=custom_color_themes_settings_requests_dto)
+        print("The response of SettingsCommonSettingsApi->save_portal_color_theme:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling SettingsCommonSettingsApi->save_portal_color_theme: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **custom_color_themes_settings_requests_dto** | [**CustomColorThemesSettingsRequestsDto**](CustomColorThemesSettingsRequestsDto.md)|  | [optional] 
+
+### Return type
+
+[**CustomColorThemesSettingsWrapper**](CustomColorThemesSettingsWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Portal theme settings |  -  |
+**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **update_email_activation_settings**
 > EmailActivationSettingsWrapper update_email_activation_settings(email_activation_settings=email_activation_settings)
 
@@ -1627,10 +1627,10 @@ from docspace.models.email_activation_settings_wrapper import EmailActivationSet
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -1731,10 +1731,10 @@ from docspace.models.tenant_user_invitation_settings_wrapper import TenantUserIn
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters

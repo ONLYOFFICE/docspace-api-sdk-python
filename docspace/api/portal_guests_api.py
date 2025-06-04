@@ -39,7 +39,7 @@ class PortalGuestsApi:
 
 
     @validate_call
-    def get_guest_share_link(
+    def get_guest_sharing_link(
         self,
         userid: Annotated[StrictStr, Field(description="The user ID.")],
         _request_timeout: Union[
@@ -83,7 +83,7 @@ class PortalGuestsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_guest_share_link_serialize(
+        _param = self._get_guest_sharing_link_serialize(
             userid=userid,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -109,7 +109,7 @@ class PortalGuestsApi:
 
 
     @validate_call
-    def get_guest_share_link_with_http_info(
+    def get_guest_sharing_link_with_http_info(
         self,
         userid: Annotated[StrictStr, Field(description="The user ID.")],
         _request_timeout: Union[
@@ -153,7 +153,7 @@ class PortalGuestsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_guest_share_link_serialize(
+        _param = self._get_guest_sharing_link_serialize(
             userid=userid,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -179,7 +179,7 @@ class PortalGuestsApi:
 
 
     @validate_call
-    def get_guest_share_link_without_preload_content(
+    def get_guest_sharing_link_without_preload_content(
         self,
         userid: Annotated[StrictStr, Field(description="The user ID.")],
         _request_timeout: Union[
@@ -223,7 +223,7 @@ class PortalGuestsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_guest_share_link_serialize(
+        _param = self._get_guest_sharing_link_serialize(
             userid=userid,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -244,7 +244,7 @@ class PortalGuestsApi:
         return response_data.response
 
 
-    def _get_guest_share_link_serialize(
+    def _get_guest_sharing_link_serialize(
         self,
         userid,
         _request_auth,

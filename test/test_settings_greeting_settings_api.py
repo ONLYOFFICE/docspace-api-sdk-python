@@ -33,8 +33,8 @@ class TestSettingsGreetingSettingsApi(unittest.TestCase):
         """
         pass
 
-    def test_is_default(self) -> None:
-        """Test case for is_default
+    def test_get_is_default_greeting_settings(self) -> None:
+        """Test case for get_is_default_greeting_settings
 
         Check the default greeting settings
         """

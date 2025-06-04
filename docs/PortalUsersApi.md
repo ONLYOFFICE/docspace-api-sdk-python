@@ -1,18 +1,18 @@
 # docspace.PortalUsersApi
 
-All URIs are relative to *http://localhost:8092*
+All URIs are relative to *http://http:*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**ge_invite_link**](PortalUsersApi.md#ge_invite_link) | **GET** /api/2.0/portal/users/invite/{employeeType} | Get an invitation link
-[**get_user**](PortalUsersApi.md#get_user) | **GET** /api/2.0/portal/users/{userID} | Get a user by ID
-[**get_users_count**](PortalUsersApi.md#get_users_count) | **GET** /api/2.0/portal/userscount | Get a number of portal users
-[**mark_present_as_readed**](PortalUsersApi.md#mark_present_as_readed) | **POST** /api/2.0/portal/present/mark | Mark a gift message as read
+[**get_invitation_link**](PortalUsersApi.md#get_invitation_link) | **GET** /api/2.0/portal/users/invite/{employeeType} | Get an invitation link
+[**get_portal_users_count**](PortalUsersApi.md#get_portal_users_count) | **GET** /api/2.0/portal/userscount | Get a number of portal users
+[**get_user_by_id**](PortalUsersApi.md#get_user_by_id) | **GET** /api/2.0/portal/users/{userID} | Get a user by ID
+[**mark_gift_message_as_read**](PortalUsersApi.md#mark_gift_message_as_read) | **POST** /api/2.0/portal/present/mark | Mark a gift message as read
 [**send_congratulations**](PortalUsersApi.md#send_congratulations) | **POST** /api/2.0/portal/sendcongratulations | Send congratulations
 
 
-# **ge_invite_link**
-> StringWrapper ge_invite_link(employee_type)
+# **get_invitation_link**
+> StringWrapper get_invitation_link(employee_type)
 
 Get an invitation link
 
@@ -33,10 +33,10 @@ from docspace.models.string_wrapper import StringWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -77,11 +77,11 @@ with docspace.ApiClient(configuration) as api_client:
 
     try:
         # Get an invitation link
-        api_response = api_instance.ge_invite_link(employee_type)
-        print("The response of PortalUsersApi->ge_invite_link:\n")
+        api_response = api_instance.get_invitation_link(employee_type)
+        print("The response of PortalUsersApi->get_invitation_link:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling PortalUsersApi->ge_invite_link: %s\n" % e)
+        print("Exception when calling PortalUsersApi->get_invitation_link: %s\n" % e)
 ```
 
 
@@ -115,8 +115,107 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **get_user**
-> UserInfoWrapper get_user(user_id)
+# **get_portal_users_count**
+> Int64Wrapper get_portal_users_count()
+
+Get a number of portal users
+
+Returns a number of portal users.
+
+### Example
+
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
+* Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
+
+```python
+import docspace
+from docspace.models.int64_wrapper import Int64Wrapper
+from docspace.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://http:
+# See configuration.py for a list of all supported configuration parameters.
+configuration = docspace.Configuration(
+    host = "http://http:"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
+# Configure API key authorization: asc_auth_key
+configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with docspace.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace.PortalUsersApi(api_client)
+
+    try:
+        # Get a number of portal users
+        api_response = api_instance.get_portal_users_count()
+        print("The response of PortalUsersApi->get_portal_users_count:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PortalUsersApi->get_portal_users_count: %s\n" % e)
+```
+
+
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**Int64Wrapper**](Int64Wrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Number of portal users |  -  |
+**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_user_by_id**
+> UserInfoWrapper get_user_by_id(user_id)
 
 Get a user by ID
 
@@ -136,10 +235,10 @@ from docspace.models.user_info_wrapper import UserInfoWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -180,11 +279,11 @@ with docspace.ApiClient(configuration) as api_client:
 
     try:
         # Get a user by ID
-        api_response = api_instance.get_user(user_id)
-        print("The response of PortalUsersApi->get_user:\n")
+        api_response = api_instance.get_user_by_id(user_id)
+        print("The response of PortalUsersApi->get_user_by_id:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling PortalUsersApi->get_user: %s\n" % e)
+        print("Exception when calling PortalUsersApi->get_user_by_id: %s\n" % e)
 ```
 
 
@@ -218,107 +317,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **get_users_count**
-> Int64Wrapper get_users_count()
-
-Get a number of portal users
-
-Returns a number of portal users.
-
-### Example
-
-* Basic Authentication (Basic):
-* OAuth Authentication (OAuth2):
-* Api Key Authentication (ApiKeyBearer):
-* Api Key Authentication (asc_auth_key):
-* Bearer (JWT) Authentication (Bearer):
-
-```python
-import docspace
-from docspace.models.int64_wrapper import Int64Wrapper
-from docspace.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace.Configuration(
-    host = "http://localhost:8092"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure HTTP basic authorization: Basic
-configuration = docspace.Configuration(
-    username = os.environ["USERNAME"],
-    password = os.environ["PASSWORD"]
-)
-
-configuration.access_token = os.environ["ACCESS_TOKEN"]
-
-# Configure API key authorization: ApiKeyBearer
-configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-
-# Enter a context with an instance of the API client
-with docspace.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace.PortalUsersApi(api_client)
-
-    try:
-        # Get a number of portal users
-        api_response = api_instance.get_users_count()
-        print("The response of PortalUsersApi->get_users_count:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling PortalUsersApi->get_users_count: %s\n" % e)
-```
-
-
-
-### Parameters
-
-This endpoint does not need any parameter.
-
-### Return type
-
-[**Int64Wrapper**](Int64Wrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Number of portal users |  -  |
-**401** | Unauthorized |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **mark_present_as_readed**
-> mark_present_as_readed()
+# **mark_gift_message_as_read**
+> mark_gift_message_as_read()
 
 Mark a gift message as read
 
@@ -337,10 +337,10 @@ import docspace
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -380,9 +380,9 @@ with docspace.ApiClient(configuration) as api_client:
 
     try:
         # Mark a gift message as read
-        api_instance.mark_present_as_readed()
+        api_instance.mark_gift_message_as_read()
     except Exception as e:
-        print("Exception when calling PortalUsersApi->mark_present_as_readed: %s\n" % e)
+        print("Exception when calling PortalUsersApi->mark_gift_message_as_read: %s\n" % e)
 ```
 
 
@@ -428,10 +428,10 @@ import docspace
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 

@@ -35,6 +35,7 @@ class TestDeleteVersionBatchRequestDto(unittest.TestCase):
         model = DeleteVersionBatchRequestDto()
         if include_optional:
             return DeleteVersionBatchRequestDto(
+                return_single_operation = True,
                 delete_after = True,
                 file_id = 9846,
                 versions = [1234]

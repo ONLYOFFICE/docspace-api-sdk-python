@@ -1,15 +1,15 @@
 # docspace.SecurityCSPApi
 
-All URIs are relative to *http://localhost:8092*
+All URIs are relative to *http://http:*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**csp**](SecurityCSPApi.md#csp) | **POST** /api/2.0/security/csp | Configure CSP settings
-[**get_csp**](SecurityCSPApi.md#get_csp) | **GET** /api/2.0/security/csp | Get CSP settings
+[**configure_csp**](SecurityCSPApi.md#configure_csp) | **POST** /api/2.0/security/csp | Configure CSP settings
+[**get_csp_settings**](SecurityCSPApi.md#get_csp_settings) | **GET** /api/2.0/security/csp | Get CSP settings
 
 
-# **csp**
-> CspWrapper csp(csp_requests_dto=csp_requests_dto)
+# **configure_csp**
+> CspWrapper configure_csp(csp_requests_dto=csp_requests_dto)
 
 Configure CSP settings
 
@@ -30,10 +30,10 @@ from docspace.models.csp_wrapper import CspWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -74,11 +74,11 @@ with docspace.ApiClient(configuration) as api_client:
 
     try:
         # Configure CSP settings
-        api_response = api_instance.csp(csp_requests_dto=csp_requests_dto)
-        print("The response of SecurityCSPApi->csp:\n")
+        api_response = api_instance.configure_csp(csp_requests_dto=csp_requests_dto)
+        print("The response of SecurityCSPApi->configure_csp:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling SecurityCSPApi->csp: %s\n" % e)
+        print("Exception when calling SecurityCSPApi->configure_csp: %s\n" % e)
 ```
 
 
@@ -113,8 +113,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **get_csp**
-> CspWrapper get_csp()
+# **get_csp_settings**
+> CspWrapper get_csp_settings()
 
 Get CSP settings
 
@@ -129,10 +129,10 @@ from docspace.models.csp_wrapper import CspWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 
@@ -143,11 +143,11 @@ with docspace.ApiClient(configuration) as api_client:
 
     try:
         # Get CSP settings
-        api_response = api_instance.get_csp()
-        print("The response of SecurityCSPApi->get_csp:\n")
+        api_response = api_instance.get_csp_settings()
+        print("The response of SecurityCSPApi->get_csp_settings:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling SecurityCSPApi->get_csp: %s\n" % e)
+        print("Exception when calling SecurityCSPApi->get_csp_settings: %s\n" % e)
 ```
 
 

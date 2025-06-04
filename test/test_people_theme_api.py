@@ -26,15 +26,15 @@ class TestPeopleThemeApi(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
-    def test_change_theme(self) -> None:
-        """Test case for change_theme
+    def test_change_portal_theme(self) -> None:
+        """Test case for change_portal_theme
 
         Change the portal theme
         """
         pass
 
-    def test_get_theme(self) -> None:
-        """Test case for get_theme
+    def test_get_portal_theme(self) -> None:
+        """Test case for get_portal_theme
 
         Get the portal theme
         """

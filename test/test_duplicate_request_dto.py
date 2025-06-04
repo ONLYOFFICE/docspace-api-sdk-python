@@ -35,6 +35,7 @@ class TestDuplicateRequestDto(unittest.TestCase):
         model = DuplicateRequestDto()
         if include_optional:
             return DuplicateRequestDto(
+                return_single_operation = True,
                 folder_ids = [
                     null
                     ],

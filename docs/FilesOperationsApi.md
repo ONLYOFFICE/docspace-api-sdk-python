@@ -1,11 +1,13 @@
 # docspace.FilesOperationsApi
 
-All URIs are relative to *http://localhost:8092*
+All URIs are relative to *http://http:*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**bulk_download**](FilesOperationsApi.md#bulk_download) | **PUT** /api/2.0/files/fileops/bulkdownload | Bulk download
-[**check_conversion**](FilesOperationsApi.md#check_conversion) | **GET** /api/2.0/files/file/{fileId}/checkconversion | Get conversion status
+[**check_conversion_status**](FilesOperationsApi.md#check_conversion_status) | **GET** /api/2.0/files/file/{fileId}/checkconversion | Get conversion status
+[**check_move_or_copy_batch_items**](FilesOperationsApi.md#check_move_or_copy_batch_items) | **GET** /api/2.0/files/fileops/move | Check and move or copy to a folder
+[**check_move_or_copy_dest_folder**](FilesOperationsApi.md#check_move_or_copy_dest_folder) | **GET** /api/2.0/files/fileops/checkdestfolder | Check for moving or copying to a folder
 [**copy_batch_items**](FilesOperationsApi.md#copy_batch_items) | **PUT** /api/2.0/files/fileops/copy | Copy to the folder
 [**create_upload_session**](FilesOperationsApi.md#create_upload_session) | **POST** /api/2.0/files/{folderId}/upload/create_session | Chunked upload
 [**delete_batch_items**](FilesOperationsApi.md#delete_batch_items) | **PUT** /api/2.0/files/fileops/delete | Delete files and folders
@@ -16,11 +18,9 @@ Method | HTTP request | Description
 [**get_operation_statuses_by_type**](FilesOperationsApi.md#get_operation_statuses_by_type) | **GET** /api/2.0/files/fileops/{operationType} | Get file operation statuses
 [**mark_as_read**](FilesOperationsApi.md#mark_as_read) | **PUT** /api/2.0/files/fileops/markasread | Mark as read
 [**move_batch_items**](FilesOperationsApi.md#move_batch_items) | **PUT** /api/2.0/files/fileops/move | Move or copy to a folder
-[**move_or_copy_batch_check**](FilesOperationsApi.md#move_or_copy_batch_check) | **GET** /api/2.0/files/fileops/move | Check and move or copy to a folder
-[**move_or_copy_dest_folder_check**](FilesOperationsApi.md#move_or_copy_dest_folder_check) | **GET** /api/2.0/files/fileops/checkdestfolder | Check for moving or copying to a folder
-[**start_conversion**](FilesOperationsApi.md#start_conversion) | **PUT** /api/2.0/files/file/{fileId}/checkconversion | Start file conversion
+[**start_file_conversion**](FilesOperationsApi.md#start_file_conversion) | **PUT** /api/2.0/files/file/{fileId}/checkconversion | Start file conversion
 [**terminate_tasks**](FilesOperationsApi.md#terminate_tasks) | **PUT** /api/2.0/files/fileops/terminate/{id} | Finish active operations
-[**update_comment**](FilesOperationsApi.md#update_comment) | **PUT** /api/2.0/files/file/{fileId}/comment | Update a comment
+[**update_file_comment**](FilesOperationsApi.md#update_file_comment) | **PUT** /api/2.0/files/file/{fileId}/comment | Update a comment
 
 
 # **bulk_download**
@@ -40,10 +40,10 @@ from docspace.models.file_operation_array_wrapper import FileOperationArrayWrapp
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 
@@ -93,8 +93,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **check_conversion**
-> ConversationResultArrayWrapper check_conversion(file_id, start=start)
+# **check_conversion_status**
+> ConversationResultArrayWrapper check_conversion_status(file_id, start=start)
 
 Get conversion status
 
@@ -114,10 +114,10 @@ from docspace.models.conversation_result_array_wrapper import ConversationResult
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -159,11 +159,11 @@ with docspace.ApiClient(configuration) as api_client:
 
     try:
         # Get conversion status
-        api_response = api_instance.check_conversion(file_id, start=start)
-        print("The response of FilesOperationsApi->check_conversion:\n")
+        api_response = api_instance.check_conversion_status(file_id, start=start)
+        print("The response of FilesOperationsApi->check_conversion_status:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling FilesOperationsApi->check_conversion: %s\n" % e)
+        print("Exception when calling FilesOperationsApi->check_conversion_status: %s\n" % e)
 ```
 
 
@@ -198,6 +198,216 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **check_move_or_copy_batch_items**
+> FileEntryArrayWrapper check_move_or_copy_batch_items(in_dto=in_dto)
+
+Check and move or copy to a folder
+
+Checks if files or folders can be moved or copied to the specified folder, moves or copies them, and returns their information.
+
+### Example
+
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
+* Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
+
+```python
+import docspace
+from docspace.models.batch_request_dto import BatchRequestDto
+from docspace.models.file_entry_array_wrapper import FileEntryArrayWrapper
+from docspace.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://http:
+# See configuration.py for a list of all supported configuration parameters.
+configuration = docspace.Configuration(
+    host = "http://http:"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
+# Configure API key authorization: asc_auth_key
+configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with docspace.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace.FilesOperationsApi(api_client)
+    in_dto = docspace.BatchRequestDto() # BatchRequestDto | The request parameters for copying/moving files. (optional)
+
+    try:
+        # Check and move or copy to a folder
+        api_response = api_instance.check_move_or_copy_batch_items(in_dto=in_dto)
+        print("The response of FilesOperationsApi->check_move_or_copy_batch_items:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling FilesOperationsApi->check_move_or_copy_batch_items: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **in_dto** | [**BatchRequestDto**](.md)| The request parameters for copying/moving files. | [optional] 
+
+### Return type
+
+[**FileEntryArrayWrapper**](FileEntryArrayWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | List of file entry information |  -  |
+**401** | Unauthorized |  -  |
+**403** | You don&#39;t have enough permission to create |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **check_move_or_copy_dest_folder**
+> CheckDestFolderWrapper check_move_or_copy_dest_folder(in_dto=in_dto)
+
+Check for moving or copying to a folder
+
+Checks if files can be moved or copied to the specified folder.
+
+### Example
+
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
+* Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
+
+```python
+import docspace
+from docspace.models.batch_request_dto import BatchRequestDto
+from docspace.models.check_dest_folder_wrapper import CheckDestFolderWrapper
+from docspace.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://http:
+# See configuration.py for a list of all supported configuration parameters.
+configuration = docspace.Configuration(
+    host = "http://http:"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
+# Configure API key authorization: asc_auth_key
+configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with docspace.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace.FilesOperationsApi(api_client)
+    in_dto = docspace.BatchRequestDto() # BatchRequestDto | The request parameters for copying/moving files. (optional)
+
+    try:
+        # Check for moving or copying to a folder
+        api_response = api_instance.check_move_or_copy_dest_folder(in_dto=in_dto)
+        print("The response of FilesOperationsApi->check_move_or_copy_dest_folder:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling FilesOperationsApi->check_move_or_copy_dest_folder: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **in_dto** | [**BatchRequestDto**](.md)| The request parameters for copying/moving files. | [optional] 
+
+### Return type
+
+[**CheckDestFolderWrapper**](CheckDestFolderWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Result |  -  |
+**401** | Unauthorized |  -  |
+**403** | You don&#39;t have enough permission to create |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **copy_batch_items**
 > FileOperationArrayWrapper copy_batch_items(batch_request_dto=batch_request_dto)
 
@@ -220,10 +430,10 @@ from docspace.models.file_operation_array_wrapper import FileOperationArrayWrapp
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -325,10 +535,10 @@ from docspace.models.session_request import SessionRequest
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -432,10 +642,10 @@ from docspace.models.file_operation_array_wrapper import FileOperationArrayWrapp
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -537,10 +747,10 @@ from docspace.models.file_operation_wrapper import FileOperationWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -641,10 +851,10 @@ from docspace.models.file_operation_array_wrapper import FileOperationArrayWrapp
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -725,7 +935,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **empty_trash**
-> FileOperationArrayWrapper empty_trash()
+> FileOperationArrayWrapper empty_trash(single=single)
 
 Empty the \"Trash\" folder
 
@@ -745,10 +955,10 @@ from docspace.models.file_operation_array_wrapper import FileOperationArrayWrapp
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -785,10 +995,11 @@ configuration = docspace.Configuration(
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.FilesOperationsApi(api_client)
+    single = true # bool | Specifies whether to return only the current operation (optional)
 
     try:
         # Empty the \"Trash\" folder
-        api_response = api_instance.empty_trash()
+        api_response = api_instance.empty_trash(single=single)
         print("The response of FilesOperationsApi->empty_trash:\n")
         pprint(api_response)
     except Exception as e:
@@ -799,7 +1010,10 @@ with docspace.ApiClient(configuration) as api_client:
 
 ### Parameters
 
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **single** | **bool**| Specifies whether to return only the current operation | [optional] 
 
 ### Return type
 
@@ -824,7 +1038,7 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_operation_statuses**
-> FileOperationArrayWrapper get_operation_statuses()
+> FileOperationArrayWrapper get_operation_statuses(id=id)
 
 Get active file operations
 
@@ -839,10 +1053,10 @@ from docspace.models.file_operation_array_wrapper import FileOperationArrayWrapp
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 
@@ -850,10 +1064,11 @@ configuration = docspace.Configuration(
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.FilesOperationsApi(api_client)
+    id = '9846' # str | The ID of the file operation. (optional)
 
     try:
         # Get active file operations
-        api_response = api_instance.get_operation_statuses()
+        api_response = api_instance.get_operation_statuses(id=id)
         print("The response of FilesOperationsApi->get_operation_statuses:\n")
         pprint(api_response)
     except Exception as e:
@@ -864,7 +1079,10 @@ with docspace.ApiClient(configuration) as api_client:
 
 ### Parameters
 
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **str**| The ID of the file operation. | [optional] 
 
 ### Return type
 
@@ -888,7 +1106,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_operation_statuses_by_type**
-> FileOperationArrayWrapper get_operation_statuses_by_type(operation_type)
+> FileOperationArrayWrapper get_operation_statuses_by_type(operation_type, id=id)
 
 Get file operation statuses
 
@@ -904,10 +1122,10 @@ from docspace.models.file_operation_type import FileOperationType
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 
@@ -916,10 +1134,11 @@ with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.FilesOperationsApi(api_client)
     operation_type = docspace.FileOperationType() # FileOperationType | Specifies the type of file operation to be retrieved.
+    id = '9846' # str | The ID of the file operation. (optional)
 
     try:
         # Get file operation statuses
-        api_response = api_instance.get_operation_statuses_by_type(operation_type)
+        api_response = api_instance.get_operation_statuses_by_type(operation_type, id=id)
         print("The response of FilesOperationsApi->get_operation_statuses_by_type:\n")
         pprint(api_response)
     except Exception as e:
@@ -934,6 +1153,7 @@ with docspace.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **operation_type** | [**FileOperationType**](.md)| Specifies the type of file operation to be retrieved. | 
+ **id** | **str**| The ID of the file operation. | [optional] 
 
 ### Return type
 
@@ -978,10 +1198,10 @@ from docspace.models.file_operation_array_wrapper import FileOperationArrayWrapp
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -1082,10 +1302,10 @@ from docspace.models.file_operation_array_wrapper import FileOperationArrayWrapp
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -1165,218 +1385,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **move_or_copy_batch_check**
-> FileEntryArrayWrapper move_or_copy_batch_check(in_dto=in_dto)
-
-Check and move or copy to a folder
-
-Checks if files or folders can be moved or copied to the specified folder, moves or copies them, and returns their information.
-
-### Example
-
-* Basic Authentication (Basic):
-* OAuth Authentication (OAuth2):
-* Api Key Authentication (ApiKeyBearer):
-* Api Key Authentication (asc_auth_key):
-* Bearer (JWT) Authentication (Bearer):
-
-```python
-import docspace
-from docspace.models.batch_request_dto import BatchRequestDto
-from docspace.models.file_entry_array_wrapper import FileEntryArrayWrapper
-from docspace.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace.Configuration(
-    host = "http://localhost:8092"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure HTTP basic authorization: Basic
-configuration = docspace.Configuration(
-    username = os.environ["USERNAME"],
-    password = os.environ["PASSWORD"]
-)
-
-configuration.access_token = os.environ["ACCESS_TOKEN"]
-
-# Configure API key authorization: ApiKeyBearer
-configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-
-# Enter a context with an instance of the API client
-with docspace.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace.FilesOperationsApi(api_client)
-    in_dto = docspace.BatchRequestDto() # BatchRequestDto | The request parameters for copying/moving files. (optional)
-
-    try:
-        # Check and move or copy to a folder
-        api_response = api_instance.move_or_copy_batch_check(in_dto=in_dto)
-        print("The response of FilesOperationsApi->move_or_copy_batch_check:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling FilesOperationsApi->move_or_copy_batch_check: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **in_dto** | [**BatchRequestDto**](.md)| The request parameters for copying/moving files. | [optional] 
-
-### Return type
-
-[**FileEntryArrayWrapper**](FileEntryArrayWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | List of file entry information |  -  |
-**401** | Unauthorized |  -  |
-**403** | You don&#39;t have enough permission to create |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **move_or_copy_dest_folder_check**
-> CheckDestFolderWrapper move_or_copy_dest_folder_check(in_dto=in_dto)
-
-Check for moving or copying to a folder
-
-Checks if files can be moved or copied to the specified folder.
-
-### Example
-
-* Basic Authentication (Basic):
-* OAuth Authentication (OAuth2):
-* Api Key Authentication (ApiKeyBearer):
-* Api Key Authentication (asc_auth_key):
-* Bearer (JWT) Authentication (Bearer):
-
-```python
-import docspace
-from docspace.models.batch_request_dto import BatchRequestDto
-from docspace.models.check_dest_folder_wrapper import CheckDestFolderWrapper
-from docspace.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace.Configuration(
-    host = "http://localhost:8092"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure HTTP basic authorization: Basic
-configuration = docspace.Configuration(
-    username = os.environ["USERNAME"],
-    password = os.environ["PASSWORD"]
-)
-
-configuration.access_token = os.environ["ACCESS_TOKEN"]
-
-# Configure API key authorization: ApiKeyBearer
-configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-
-# Enter a context with an instance of the API client
-with docspace.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace.FilesOperationsApi(api_client)
-    in_dto = docspace.BatchRequestDto() # BatchRequestDto | The request parameters for copying/moving files. (optional)
-
-    try:
-        # Check for moving or copying to a folder
-        api_response = api_instance.move_or_copy_dest_folder_check(in_dto=in_dto)
-        print("The response of FilesOperationsApi->move_or_copy_dest_folder_check:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling FilesOperationsApi->move_or_copy_dest_folder_check: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **in_dto** | [**BatchRequestDto**](.md)| The request parameters for copying/moving files. | [optional] 
-
-### Return type
-
-[**CheckDestFolderWrapper**](CheckDestFolderWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Result |  -  |
-**401** | Unauthorized |  -  |
-**403** | You don&#39;t have enough permission to create |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **start_conversion**
-> ConversationResultArrayWrapper start_conversion(file_id, check_conversion_request_dto_integer=check_conversion_request_dto_integer)
+# **start_file_conversion**
+> ConversationResultArrayWrapper start_file_conversion(file_id, check_conversion_request_dto_integer=check_conversion_request_dto_integer)
 
 Start file conversion
 
@@ -1397,10 +1407,10 @@ from docspace.models.conversation_result_array_wrapper import ConversationResult
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -1442,11 +1452,11 @@ with docspace.ApiClient(configuration) as api_client:
 
     try:
         # Start file conversion
-        api_response = api_instance.start_conversion(file_id, check_conversion_request_dto_integer=check_conversion_request_dto_integer)
-        print("The response of FilesOperationsApi->start_conversion:\n")
+        api_response = api_instance.start_file_conversion(file_id, check_conversion_request_dto_integer=check_conversion_request_dto_integer)
+        print("The response of FilesOperationsApi->start_file_conversion:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling FilesOperationsApi->start_conversion: %s\n" % e)
+        print("Exception when calling FilesOperationsApi->start_file_conversion: %s\n" % e)
 ```
 
 
@@ -1497,10 +1507,10 @@ from docspace.models.file_operation_array_wrapper import FileOperationArrayWrapp
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 
@@ -1549,8 +1559,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **update_comment**
-> StringWrapper update_comment(file_id, update_comment=update_comment)
+# **update_file_comment**
+> StringWrapper update_file_comment(file_id, update_comment=update_comment)
 
 Update a comment
 
@@ -1571,10 +1581,10 @@ from docspace.models.update_comment import UpdateComment
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -1616,11 +1626,11 @@ with docspace.ApiClient(configuration) as api_client:
 
     try:
         # Update a comment
-        api_response = api_instance.update_comment(file_id, update_comment=update_comment)
-        print("The response of FilesOperationsApi->update_comment:\n")
+        api_response = api_instance.update_file_comment(file_id, update_comment=update_comment)
+        print("The response of FilesOperationsApi->update_file_comment:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling FilesOperationsApi->update_comment: %s\n" % e)
+        print("Exception when calling FilesOperationsApi->update_file_comment: %s\n" % e)
 ```
 
 

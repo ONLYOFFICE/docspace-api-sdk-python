@@ -26,13 +26,6 @@ class TestFilesThirdPartyIntegrationApi(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
-    def test_capabilities(self) -> None:
-        """Test case for capabilities
-
-        Get providers
-        """
-        pass
-
     def test_delete_third_party(self) -> None:
         """Test case for delete_third_party
 
@@ -51,6 +44,13 @@ class TestFilesThirdPartyIntegrationApi(unittest.TestCase):
         """Test case for get_backup_third_party_account
 
         Get a third-party account backup
+        """
+        pass
+
+    def test_get_capabilities(self) -> None:
+        """Test case for get_capabilities
+
+        Get providers
         """
         pass
 

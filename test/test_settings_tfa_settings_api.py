@@ -26,6 +26,20 @@ class TestSettingsTFASettingsApi(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
+    def test_get_tfa_app_codes(self) -> None:
+        """Test case for get_tfa_app_codes
+
+        Get the TFA codes
+        """
+        pass
+
+    def test_get_tfa_confirm_url(self) -> None:
+        """Test case for get_tfa_confirm_url
+
+        Get confirmation email
+        """
+        pass
+
     def test_get_tfa_settings(self) -> None:
         """Test case for get_tfa_settings
 
@@ -40,52 +54,38 @@ class TestSettingsTFASettingsApi(unittest.TestCase):
         """
         pass
 
-    def test_tfa_app_get_codes(self) -> None:
-        """Test case for tfa_app_get_codes
+    def test_tfa_validate_auth_code(self) -> None:
+        """Test case for tfa_validate_auth_code
 
-        Get the TFA codes
+        Validate the TFA code
         """
         pass
 
-    def test_tfa_app_new_app(self) -> None:
-        """Test case for tfa_app_new_app
+    def test_unlink_tfa_app(self) -> None:
+        """Test case for unlink_tfa_app
 
         Unlink the TFA application
         """
         pass
 
-    def test_tfa_app_request_new_codes(self) -> None:
-        """Test case for tfa_app_request_new_codes
+    def test_update_tfa_app_codes(self) -> None:
+        """Test case for update_tfa_app_codes
 
         Update the TFA codes
         """
         pass
 
-    def test_tfa_confirm_url(self) -> None:
-        """Test case for tfa_confirm_url
-
-        Get confirmation email
-        """
-        pass
-
-    def test_tfa_settings(self) -> None:
-        """Test case for tfa_settings
+    def test_update_tfa_settings(self) -> None:
+        """Test case for update_tfa_settings
 
         Update the TFA settings
         """
         pass
 
-    def test_tfa_settings_link(self) -> None:
-        """Test case for tfa_settings_link
+    def test_update_tfa_settings_link(self) -> None:
+        """Test case for update_tfa_settings_link
 
         Get confirmation email for updating TFA settings
-        """
-        pass
-
-    def test_tfa_validate_auth_code(self) -> None:
-        """Test case for tfa_validate_auth_code
-
-        Validate the TFA code
         """
         pass
 

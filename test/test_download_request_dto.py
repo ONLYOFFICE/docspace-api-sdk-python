@@ -35,6 +35,7 @@ class TestDownloadRequestDto(unittest.TestCase):
         model = DownloadRequestDto()
         if include_optional:
             return DownloadRequestDto(
+                return_single_operation = True,
                 folder_ids = [
                     null
                     ],

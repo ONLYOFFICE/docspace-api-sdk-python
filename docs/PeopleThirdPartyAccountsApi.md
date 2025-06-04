@@ -1,17 +1,17 @@
 # docspace.PeopleThirdPartyAccountsApi
 
-All URIs are relative to *http://localhost:8092*
+All URIs are relative to *http://http:*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get_auth_providers**](PeopleThirdPartyAccountsApi.md#get_auth_providers) | **GET** /api/2.0/people/thirdparty/providers | Get third-party accounts
-[**link_account**](PeopleThirdPartyAccountsApi.md#link_account) | **PUT** /api/2.0/people/thirdparty/linkaccount | Link a third-pary account
-[**signup_account**](PeopleThirdPartyAccountsApi.md#signup_account) | **POST** /api/2.0/people/thirdparty/signup | Create a third-pary account
-[**unlink_account**](PeopleThirdPartyAccountsApi.md#unlink_account) | **DELETE** /api/2.0/people/thirdparty/unlinkaccount | Unlink a third-pary account
+[**get_third_party_auth_providers**](PeopleThirdPartyAccountsApi.md#get_third_party_auth_providers) | **GET** /api/2.0/people/thirdparty/providers | Get third-party accounts
+[**link_third_party_account**](PeopleThirdPartyAccountsApi.md#link_third_party_account) | **PUT** /api/2.0/people/thirdparty/linkaccount | Link a third-pary account
+[**signup_third_party_account**](PeopleThirdPartyAccountsApi.md#signup_third_party_account) | **POST** /api/2.0/people/thirdparty/signup | Create a third-pary account
+[**unlink_third_party_account**](PeopleThirdPartyAccountsApi.md#unlink_third_party_account) | **DELETE** /api/2.0/people/thirdparty/unlinkaccount | Unlink a third-pary account
 
 
-# **get_auth_providers**
-> AccountInfoArrayWrapper get_auth_providers(invite_view=invite_view, settings_view=settings_view, client_callback=client_callback, from_only=from_only)
+# **get_third_party_auth_providers**
+> AccountInfoArrayWrapper get_third_party_auth_providers(invite_view=invite_view, settings_view=settings_view, client_callback=client_callback, from_only=from_only)
 
 Get third-party accounts
 
@@ -26,10 +26,10 @@ from docspace.models.account_info_array_wrapper import AccountInfoArrayWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 
@@ -44,11 +44,11 @@ with docspace.ApiClient(configuration) as api_client:
 
     try:
         # Get third-party accounts
-        api_response = api_instance.get_auth_providers(invite_view=invite_view, settings_view=settings_view, client_callback=client_callback, from_only=from_only)
-        print("The response of PeopleThirdPartyAccountsApi->get_auth_providers:\n")
+        api_response = api_instance.get_third_party_auth_providers(invite_view=invite_view, settings_view=settings_view, client_callback=client_callback, from_only=from_only)
+        print("The response of PeopleThirdPartyAccountsApi->get_third_party_auth_providers:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling PeopleThirdPartyAccountsApi->get_auth_providers: %s\n" % e)
+        print("Exception when calling PeopleThirdPartyAccountsApi->get_third_party_auth_providers: %s\n" % e)
 ```
 
 
@@ -84,8 +84,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **link_account**
-> link_account(link_account_request_dto=link_account_request_dto)
+# **link_third_party_account**
+> link_third_party_account(link_account_request_dto=link_account_request_dto)
 
 Link a third-pary account
 
@@ -105,10 +105,10 @@ from docspace.models.link_account_request_dto import LinkAccountRequestDto
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -149,9 +149,9 @@ with docspace.ApiClient(configuration) as api_client:
 
     try:
         # Link a third-pary account
-        api_instance.link_account(link_account_request_dto=link_account_request_dto)
+        api_instance.link_third_party_account(link_account_request_dto=link_account_request_dto)
     except Exception as e:
-        print("Exception when calling PeopleThirdPartyAccountsApi->link_account: %s\n" % e)
+        print("Exception when calling PeopleThirdPartyAccountsApi->link_third_party_account: %s\n" % e)
 ```
 
 
@@ -186,8 +186,8 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **signup_account**
-> signup_account(signup_account_request_dto=signup_account_request_dto)
+# **signup_third_party_account**
+> signup_third_party_account(signup_account_request_dto=signup_account_request_dto)
 
 Create a third-pary account
 
@@ -202,10 +202,10 @@ from docspace.models.signup_account_request_dto import SignupAccountRequestDto
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 
@@ -217,9 +217,9 @@ with docspace.ApiClient(configuration) as api_client:
 
     try:
         # Create a third-pary account
-        api_instance.signup_account(signup_account_request_dto=signup_account_request_dto)
+        api_instance.signup_third_party_account(signup_account_request_dto=signup_account_request_dto)
     except Exception as e:
-        print("Exception when calling PeopleThirdPartyAccountsApi->signup_account: %s\n" % e)
+        print("Exception when calling PeopleThirdPartyAccountsApi->signup_third_party_account: %s\n" % e)
 ```
 
 
@@ -254,8 +254,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **unlink_account**
-> unlink_account(provider=provider)
+# **unlink_third_party_account**
+> unlink_third_party_account(provider=provider)
 
 Unlink a third-pary account
 
@@ -274,10 +274,10 @@ import docspace
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -318,9 +318,9 @@ with docspace.ApiClient(configuration) as api_client:
 
     try:
         # Unlink a third-pary account
-        api_instance.unlink_account(provider=provider)
+        api_instance.unlink_third_party_account(provider=provider)
     except Exception as e:
-        print("Exception when calling PeopleThirdPartyAccountsApi->unlink_account: %s\n" % e)
+        print("Exception when calling PeopleThirdPartyAccountsApi->unlink_third_party_account: %s\n" % e)
 ```
 
 

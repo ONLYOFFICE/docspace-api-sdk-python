@@ -113,7 +113,7 @@ conf = docspace.Configuration(
                  ) -> None:
         """Constructor
         """
-        self._base_path = "http://localhost:8092" if host is None else host
+        self._base_path = "http://http:" if host is None else host
         """Default Base url
         """
         self.server_index = 0 if server_index is None and host is None else server_index
@@ -484,7 +484,7 @@ conf = docspace.Configuration(
                 'variables': {
                     'baseUrl': {
                         'description': "Default URL",
-                        'default_value': "http://localhost:8092",
+                        'default_value': "",
                         }
                     }
             }

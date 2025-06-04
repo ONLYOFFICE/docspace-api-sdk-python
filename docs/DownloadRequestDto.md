@@ -6,6 +6,7 @@ The request parameters for downloading files.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**return_single_operation** | **bool** | Specifies whether to return only the current operation | [optional] 
 **folder_ids** | [**List[BaseBatchRequestDtoFolderIdsInner]**](BaseBatchRequestDtoFolderIdsInner.md) | The list of folder IDs to be downloaded. | [optional] 
 **file_ids** | [**List[BaseBatchRequestDtoFolderIdsInner]**](BaseBatchRequestDtoFolderIdsInner.md) | The list of file IDs to be downloaded. | [optional] 
 **file_convert_ids** | [**List[DownloadRequestItemDto]**](DownloadRequestItemDto.md) | The list of file IDs which will be converted. | [optional] 

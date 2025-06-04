@@ -1840,7 +1840,7 @@ class SettingsStorageApi:
 
 
     @validate_call
-    def update_cdn(
+    def update_cdn_storage(
         self,
         storage_requests_dto: Optional[StorageRequestsDto] = None,
         _request_timeout: Union[
@@ -1884,7 +1884,7 @@ class SettingsStorageApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_cdn_serialize(
+        _param = self._update_cdn_storage_serialize(
             storage_requests_dto=storage_requests_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1910,7 +1910,7 @@ class SettingsStorageApi:
 
 
     @validate_call
-    def update_cdn_with_http_info(
+    def update_cdn_storage_with_http_info(
         self,
         storage_requests_dto: Optional[StorageRequestsDto] = None,
         _request_timeout: Union[
@@ -1954,7 +1954,7 @@ class SettingsStorageApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_cdn_serialize(
+        _param = self._update_cdn_storage_serialize(
             storage_requests_dto=storage_requests_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1980,7 +1980,7 @@ class SettingsStorageApi:
 
 
     @validate_call
-    def update_cdn_without_preload_content(
+    def update_cdn_storage_without_preload_content(
         self,
         storage_requests_dto: Optional[StorageRequestsDto] = None,
         _request_timeout: Union[
@@ -2024,7 +2024,7 @@ class SettingsStorageApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_cdn_serialize(
+        _param = self._update_cdn_storage_serialize(
             storage_requests_dto=storage_requests_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -2045,7 +2045,7 @@ class SettingsStorageApi:
         return response_data.response
 
 
-    def _update_cdn_serialize(
+    def _update_cdn_storage_serialize(
         self,
         storage_requests_dto,
         _request_auth,

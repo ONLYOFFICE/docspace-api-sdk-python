@@ -458,1062 +458,6 @@ class PeopleSearchApi:
 
 
     @validate_call
-    def get_advanced(
-        self,
-        status: Annotated[EmployeeStatus, Field(description="The user status.")],
-        query: Annotated[Optional[StrictStr], Field(description="The advanced search query.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> EmployeeFullArrayWrapper:
-        """Search users by status filter
-
-        Returns a list of users matching the status filter and search query.
-
-        :param status: The user status. (required)
-        :type status: EmployeeStatus
-        :param query: The advanced search query.
-        :type query: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._get_advanced_serialize(
-            status=status,
-            query=query,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "EmployeeFullArrayWrapper",
-            '401': None,
-            '403': None,
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        ).data
-
-
-    @validate_call
-    def get_advanced_with_http_info(
-        self,
-        status: Annotated[EmployeeStatus, Field(description="The user status.")],
-        query: Annotated[Optional[StrictStr], Field(description="The advanced search query.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[EmployeeFullArrayWrapper]:
-        """Search users by status filter
-
-        Returns a list of users matching the status filter and search query.
-
-        :param status: The user status. (required)
-        :type status: EmployeeStatus
-        :param query: The advanced search query.
-        :type query: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._get_advanced_serialize(
-            status=status,
-            query=query,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "EmployeeFullArrayWrapper",
-            '401': None,
-            '403': None,
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        )
-
-
-    @validate_call
-    def get_advanced_without_preload_content(
-        self,
-        status: Annotated[EmployeeStatus, Field(description="The user status.")],
-        query: Annotated[Optional[StrictStr], Field(description="The advanced search query.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> RESTResponseType:
-        """Search users by status filter
-
-        Returns a list of users matching the status filter and search query.
-
-        :param status: The user status. (required)
-        :type status: EmployeeStatus
-        :param query: The advanced search query.
-        :type query: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._get_advanced_serialize(
-            status=status,
-            query=query,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "EmployeeFullArrayWrapper",
-            '401': None,
-            '403': None,
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        return response_data.response
-
-
-    def _get_advanced_serialize(
-        self,
-        status,
-        query,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
-    ) -> RequestSerialized:
-
-        _host = None
-
-        _collection_formats: Dict[str, str] = {
-        }
-
-        _path_params: Dict[str, str] = {}
-        _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
-        _form_params: List[Tuple[str, str]] = []
-        _files: Dict[
-            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
-        ] = {}
-        _body_params: Optional[bytes] = None
-
-        # process the path parameters
-        if status is not None:
-            _path_params['status'] = status.value
-        # process the query parameters
-        if query is not None:
-            
-            _query_params.append(('query', query))
-            
-        # process the header parameters
-        # process the form parameters
-        # process the body parameter
-
-
-        # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
-            _header_params['Accept'] = self.api_client.select_header_accept(
-                [
-                    'application/json'
-                ]
-            )
-
-
-        # authentication setting
-        _auth_settings: List[str] = [
-            'Basic', 
-            'OAuth2', 
-            'ApiKeyBearer', 
-            'asc_auth_key', 
-            'Bearer', 
-            'OpenId'
-        ]
-
-        return self.api_client.param_serialize(
-            method='GET',
-            resource_path='/api/2.0/people/status/{status}/search',
-            path_params=_path_params,
-            query_params=_query_params,
-            header_params=_header_params,
-            body=_body_params,
-            post_params=_form_params,
-            files=_files,
-            auth_settings=_auth_settings,
-            collection_formats=_collection_formats,
-            _host=_host,
-            _request_auth=_request_auth
-        )
-
-
-
-
-    @validate_call
-    def get_full_by_filter(
-        self,
-        employee_status: Annotated[Optional[EmployeeStatus], Field(description="The user status.")] = None,
-        group_id: Annotated[Optional[StrictStr], Field(description="The group ID.")] = None,
-        activation_status: Annotated[Optional[EmployeeActivationStatus], Field(description="The user activation status.")] = None,
-        employee_type: Annotated[Optional[EmployeeType], Field(description="The user type.")] = None,
-        employee_types: Annotated[Optional[List[List[StrictInt]]], Field(description="The list of user types.")] = None,
-        is_administrator: Annotated[Optional[StrictBool], Field(description="Specifies if the user is an administrator or not.")] = None,
-        payments: Annotated[Optional[Payments], Field(description="The user payment status.")] = None,
-        account_login_type: Annotated[Optional[AccountLoginType], Field(description="The account login type.")] = None,
-        quota_filter: Annotated[Optional[QuotaFilter], Field(description="The quota filter (All - 0, Default - 1, Custom - 2).")] = None,
-        without_group: Annotated[Optional[StrictBool], Field(description="Specifies whether the user should be a member of a group or not.")] = None,
-        exclude_group: Annotated[Optional[StrictBool], Field(description="Specifies whether the user should be a member of the group with the specified ID.")] = None,
-        invited_by_me: Annotated[Optional[StrictBool], Field(description="Specifies whether the user is invited by the current user or not.")] = None,
-        inviter_id: Annotated[Optional[StrictStr], Field(description="The inviter ID.")] = None,
-        area: Annotated[Optional[Area], Field(description="The filter area.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> EmployeeFullArrayWrapper:
-        """Search users with detaailed information by extended filter
-
-        Returns a list of users with full information about them matching the parameters specified in the request.
-
-        :param employee_status: The user status.
-        :type employee_status: EmployeeStatus
-        :param group_id: The group ID.
-        :type group_id: str
-        :param activation_status: The user activation status.
-        :type activation_status: EmployeeActivationStatus
-        :param employee_type: The user type.
-        :type employee_type: EmployeeType
-        :param employee_types: The list of user types.
-        :type employee_types: List[int]
-        :param is_administrator: Specifies if the user is an administrator or not.
-        :type is_administrator: bool
-        :param payments: The user payment status.
-        :type payments: Payments
-        :param account_login_type: The account login type.
-        :type account_login_type: AccountLoginType
-        :param quota_filter: The quota filter (All - 0, Default - 1, Custom - 2).
-        :type quota_filter: QuotaFilter
-        :param without_group: Specifies whether the user should be a member of a group or not.
-        :type without_group: bool
-        :param exclude_group: Specifies whether the user should be a member of the group with the specified ID.
-        :type exclude_group: bool
-        :param invited_by_me: Specifies whether the user is invited by the current user or not.
-        :type invited_by_me: bool
-        :param inviter_id: The inviter ID.
-        :type inviter_id: str
-        :param area: The filter area.
-        :type area: Area
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._get_full_by_filter_serialize(
-            employee_status=employee_status,
-            group_id=group_id,
-            activation_status=activation_status,
-            employee_type=employee_type,
-            employee_types=employee_types,
-            is_administrator=is_administrator,
-            payments=payments,
-            account_login_type=account_login_type,
-            quota_filter=quota_filter,
-            without_group=without_group,
-            exclude_group=exclude_group,
-            invited_by_me=invited_by_me,
-            inviter_id=inviter_id,
-            area=area,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "EmployeeFullArrayWrapper",
-            '401': None,
-            '403': None,
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        ).data
-
-
-    @validate_call
-    def get_full_by_filter_with_http_info(
-        self,
-        employee_status: Annotated[Optional[EmployeeStatus], Field(description="The user status.")] = None,
-        group_id: Annotated[Optional[StrictStr], Field(description="The group ID.")] = None,
-        activation_status: Annotated[Optional[EmployeeActivationStatus], Field(description="The user activation status.")] = None,
-        employee_type: Annotated[Optional[EmployeeType], Field(description="The user type.")] = None,
-        employee_types: Annotated[Optional[List[List[StrictInt]]], Field(description="The list of user types.")] = None,
-        is_administrator: Annotated[Optional[StrictBool], Field(description="Specifies if the user is an administrator or not.")] = None,
-        payments: Annotated[Optional[Payments], Field(description="The user payment status.")] = None,
-        account_login_type: Annotated[Optional[AccountLoginType], Field(description="The account login type.")] = None,
-        quota_filter: Annotated[Optional[QuotaFilter], Field(description="The quota filter (All - 0, Default - 1, Custom - 2).")] = None,
-        without_group: Annotated[Optional[StrictBool], Field(description="Specifies whether the user should be a member of a group or not.")] = None,
-        exclude_group: Annotated[Optional[StrictBool], Field(description="Specifies whether the user should be a member of the group with the specified ID.")] = None,
-        invited_by_me: Annotated[Optional[StrictBool], Field(description="Specifies whether the user is invited by the current user or not.")] = None,
-        inviter_id: Annotated[Optional[StrictStr], Field(description="The inviter ID.")] = None,
-        area: Annotated[Optional[Area], Field(description="The filter area.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[EmployeeFullArrayWrapper]:
-        """Search users with detaailed information by extended filter
-
-        Returns a list of users with full information about them matching the parameters specified in the request.
-
-        :param employee_status: The user status.
-        :type employee_status: EmployeeStatus
-        :param group_id: The group ID.
-        :type group_id: str
-        :param activation_status: The user activation status.
-        :type activation_status: EmployeeActivationStatus
-        :param employee_type: The user type.
-        :type employee_type: EmployeeType
-        :param employee_types: The list of user types.
-        :type employee_types: List[int]
-        :param is_administrator: Specifies if the user is an administrator or not.
-        :type is_administrator: bool
-        :param payments: The user payment status.
-        :type payments: Payments
-        :param account_login_type: The account login type.
-        :type account_login_type: AccountLoginType
-        :param quota_filter: The quota filter (All - 0, Default - 1, Custom - 2).
-        :type quota_filter: QuotaFilter
-        :param without_group: Specifies whether the user should be a member of a group or not.
-        :type without_group: bool
-        :param exclude_group: Specifies whether the user should be a member of the group with the specified ID.
-        :type exclude_group: bool
-        :param invited_by_me: Specifies whether the user is invited by the current user or not.
-        :type invited_by_me: bool
-        :param inviter_id: The inviter ID.
-        :type inviter_id: str
-        :param area: The filter area.
-        :type area: Area
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._get_full_by_filter_serialize(
-            employee_status=employee_status,
-            group_id=group_id,
-            activation_status=activation_status,
-            employee_type=employee_type,
-            employee_types=employee_types,
-            is_administrator=is_administrator,
-            payments=payments,
-            account_login_type=account_login_type,
-            quota_filter=quota_filter,
-            without_group=without_group,
-            exclude_group=exclude_group,
-            invited_by_me=invited_by_me,
-            inviter_id=inviter_id,
-            area=area,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "EmployeeFullArrayWrapper",
-            '401': None,
-            '403': None,
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        )
-
-
-    @validate_call
-    def get_full_by_filter_without_preload_content(
-        self,
-        employee_status: Annotated[Optional[EmployeeStatus], Field(description="The user status.")] = None,
-        group_id: Annotated[Optional[StrictStr], Field(description="The group ID.")] = None,
-        activation_status: Annotated[Optional[EmployeeActivationStatus], Field(description="The user activation status.")] = None,
-        employee_type: Annotated[Optional[EmployeeType], Field(description="The user type.")] = None,
-        employee_types: Annotated[Optional[List[List[StrictInt]]], Field(description="The list of user types.")] = None,
-        is_administrator: Annotated[Optional[StrictBool], Field(description="Specifies if the user is an administrator or not.")] = None,
-        payments: Annotated[Optional[Payments], Field(description="The user payment status.")] = None,
-        account_login_type: Annotated[Optional[AccountLoginType], Field(description="The account login type.")] = None,
-        quota_filter: Annotated[Optional[QuotaFilter], Field(description="The quota filter (All - 0, Default - 1, Custom - 2).")] = None,
-        without_group: Annotated[Optional[StrictBool], Field(description="Specifies whether the user should be a member of a group or not.")] = None,
-        exclude_group: Annotated[Optional[StrictBool], Field(description="Specifies whether the user should be a member of the group with the specified ID.")] = None,
-        invited_by_me: Annotated[Optional[StrictBool], Field(description="Specifies whether the user is invited by the current user or not.")] = None,
-        inviter_id: Annotated[Optional[StrictStr], Field(description="The inviter ID.")] = None,
-        area: Annotated[Optional[Area], Field(description="The filter area.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> RESTResponseType:
-        """Search users with detaailed information by extended filter
-
-        Returns a list of users with full information about them matching the parameters specified in the request.
-
-        :param employee_status: The user status.
-        :type employee_status: EmployeeStatus
-        :param group_id: The group ID.
-        :type group_id: str
-        :param activation_status: The user activation status.
-        :type activation_status: EmployeeActivationStatus
-        :param employee_type: The user type.
-        :type employee_type: EmployeeType
-        :param employee_types: The list of user types.
-        :type employee_types: List[int]
-        :param is_administrator: Specifies if the user is an administrator or not.
-        :type is_administrator: bool
-        :param payments: The user payment status.
-        :type payments: Payments
-        :param account_login_type: The account login type.
-        :type account_login_type: AccountLoginType
-        :param quota_filter: The quota filter (All - 0, Default - 1, Custom - 2).
-        :type quota_filter: QuotaFilter
-        :param without_group: Specifies whether the user should be a member of a group or not.
-        :type without_group: bool
-        :param exclude_group: Specifies whether the user should be a member of the group with the specified ID.
-        :type exclude_group: bool
-        :param invited_by_me: Specifies whether the user is invited by the current user or not.
-        :type invited_by_me: bool
-        :param inviter_id: The inviter ID.
-        :type inviter_id: str
-        :param area: The filter area.
-        :type area: Area
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._get_full_by_filter_serialize(
-            employee_status=employee_status,
-            group_id=group_id,
-            activation_status=activation_status,
-            employee_type=employee_type,
-            employee_types=employee_types,
-            is_administrator=is_administrator,
-            payments=payments,
-            account_login_type=account_login_type,
-            quota_filter=quota_filter,
-            without_group=without_group,
-            exclude_group=exclude_group,
-            invited_by_me=invited_by_me,
-            inviter_id=inviter_id,
-            area=area,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "EmployeeFullArrayWrapper",
-            '401': None,
-            '403': None,
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        return response_data.response
-
-
-    def _get_full_by_filter_serialize(
-        self,
-        employee_status,
-        group_id,
-        activation_status,
-        employee_type,
-        employee_types,
-        is_administrator,
-        payments,
-        account_login_type,
-        quota_filter,
-        without_group,
-        exclude_group,
-        invited_by_me,
-        inviter_id,
-        area,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
-    ) -> RequestSerialized:
-
-        _host = None
-
-        _collection_formats: Dict[str, str] = {
-            'employeeTypes': 'csv',
-        }
-
-        _path_params: Dict[str, str] = {}
-        _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
-        _form_params: List[Tuple[str, str]] = []
-        _files: Dict[
-            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
-        ] = {}
-        _body_params: Optional[bytes] = None
-
-        # process the path parameters
-        # process the query parameters
-        if employee_status is not None:
-            
-            _query_params.append(('employeeStatus', employee_status.value))
-            
-        if group_id is not None:
-            
-            _query_params.append(('groupId', group_id))
-            
-        if activation_status is not None:
-            
-            _query_params.append(('activationStatus', activation_status.value))
-            
-        if employee_type is not None:
-            
-            _query_params.append(('employeeType', employee_type.value))
-            
-        if employee_types is not None:
-            
-            _query_params.append(('employeeTypes', employee_types))
-            
-        if is_administrator is not None:
-            
-            _query_params.append(('isAdministrator', is_administrator))
-            
-        if payments is not None:
-            
-            _query_params.append(('payments', payments.value))
-            
-        if account_login_type is not None:
-            
-            _query_params.append(('accountLoginType', account_login_type.value))
-            
-        if quota_filter is not None:
-            
-            _query_params.append(('quotaFilter', quota_filter.value))
-            
-        if without_group is not None:
-            
-            _query_params.append(('withoutGroup', without_group))
-            
-        if exclude_group is not None:
-            
-            _query_params.append(('excludeGroup', exclude_group))
-            
-        if invited_by_me is not None:
-            
-            _query_params.append(('invitedByMe', invited_by_me))
-            
-        if inviter_id is not None:
-            
-            _query_params.append(('inviterId', inviter_id))
-            
-        if area is not None:
-            
-            _query_params.append(('area', area.value))
-            
-        # process the header parameters
-        # process the form parameters
-        # process the body parameter
-
-
-        # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
-            _header_params['Accept'] = self.api_client.select_header_accept(
-                [
-                    'application/json'
-                ]
-            )
-
-
-        # authentication setting
-        _auth_settings: List[str] = [
-            'Basic', 
-            'OAuth2', 
-            'ApiKeyBearer', 
-            'asc_auth_key', 
-            'Bearer', 
-            'OpenId'
-        ]
-
-        return self.api_client.param_serialize(
-            method='GET',
-            resource_path='/api/2.0/people/filter',
-            path_params=_path_params,
-            query_params=_query_params,
-            header_params=_header_params,
-            body=_body_params,
-            post_params=_form_params,
-            files=_files,
-            auth_settings=_auth_settings,
-            collection_formats=_collection_formats,
-            _host=_host,
-            _request_auth=_request_auth
-        )
-
-
-
-
-    @validate_call
-    def get_people_search(
-        self,
-        query: Annotated[Optional[StrictStr], Field(description="The search query.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> EmployeeArrayWrapper:
-        """Search users (using query parameters)
-
-        Returns a list of users matching the search query. This method uses the query parameters.
-
-        :param query: The search query.
-        :type query: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._get_people_search_serialize(
-            query=query,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "EmployeeArrayWrapper",
-            '401': None,
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        ).data
-
-
-    @validate_call
-    def get_people_search_with_http_info(
-        self,
-        query: Annotated[Optional[StrictStr], Field(description="The search query.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[EmployeeArrayWrapper]:
-        """Search users (using query parameters)
-
-        Returns a list of users matching the search query. This method uses the query parameters.
-
-        :param query: The search query.
-        :type query: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._get_people_search_serialize(
-            query=query,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "EmployeeArrayWrapper",
-            '401': None,
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        )
-
-
-    @validate_call
-    def get_people_search_without_preload_content(
-        self,
-        query: Annotated[Optional[StrictStr], Field(description="The search query.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> RESTResponseType:
-        """Search users (using query parameters)
-
-        Returns a list of users matching the search query. This method uses the query parameters.
-
-        :param query: The search query.
-        :type query: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._get_people_search_serialize(
-            query=query,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "EmployeeArrayWrapper",
-            '401': None,
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        return response_data.response
-
-
-    def _get_people_search_serialize(
-        self,
-        query,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
-    ) -> RequestSerialized:
-
-        _host = None
-
-        _collection_formats: Dict[str, str] = {
-        }
-
-        _path_params: Dict[str, str] = {}
-        _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
-        _form_params: List[Tuple[str, str]] = []
-        _files: Dict[
-            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
-        ] = {}
-        _body_params: Optional[bytes] = None
-
-        # process the path parameters
-        # process the query parameters
-        if query is not None:
-            
-            _query_params.append(('query', query))
-            
-        # process the header parameters
-        # process the form parameters
-        # process the body parameter
-
-
-        # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
-            _header_params['Accept'] = self.api_client.select_header_accept(
-                [
-                    'application/json'
-                ]
-            )
-
-
-        # authentication setting
-        _auth_settings: List[str] = [
-            'Basic', 
-            'OAuth2', 
-            'ApiKeyBearer', 
-            'asc_auth_key', 
-            'Bearer', 
-            'OpenId'
-        ]
-
-        return self.api_client.param_serialize(
-            method='GET',
-            resource_path='/api/2.0/people/search',
-            path_params=_path_params,
-            query_params=_query_params,
-            header_params=_header_params,
-            body=_body_params,
-            post_params=_form_params,
-            files=_files,
-            auth_settings=_auth_settings,
-            collection_formats=_collection_formats,
-            _host=_host,
-            _request_auth=_request_auth
-        )
-
-
-
-
-    @validate_call
     def get_search(
         self,
         query: Annotated[StrictStr, Field(description="The search query.")],
@@ -2675,6 +1619,1062 @@ class PeopleSearchApi:
         return self.api_client.param_serialize(
             method='GET',
             resource_path='/api/2.0/people/room/{id}',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def search_users_by_extended_filter(
+        self,
+        employee_status: Annotated[Optional[EmployeeStatus], Field(description="The user status.")] = None,
+        group_id: Annotated[Optional[StrictStr], Field(description="The group ID.")] = None,
+        activation_status: Annotated[Optional[EmployeeActivationStatus], Field(description="The user activation status.")] = None,
+        employee_type: Annotated[Optional[EmployeeType], Field(description="The user type.")] = None,
+        employee_types: Annotated[Optional[List[List[StrictInt]]], Field(description="The list of user types.")] = None,
+        is_administrator: Annotated[Optional[StrictBool], Field(description="Specifies if the user is an administrator or not.")] = None,
+        payments: Annotated[Optional[Payments], Field(description="The user payment status.")] = None,
+        account_login_type: Annotated[Optional[AccountLoginType], Field(description="The account login type.")] = None,
+        quota_filter: Annotated[Optional[QuotaFilter], Field(description="The quota filter (All - 0, Default - 1, Custom - 2).")] = None,
+        without_group: Annotated[Optional[StrictBool], Field(description="Specifies whether the user should be a member of a group or not.")] = None,
+        exclude_group: Annotated[Optional[StrictBool], Field(description="Specifies whether the user should be a member of the group with the specified ID.")] = None,
+        invited_by_me: Annotated[Optional[StrictBool], Field(description="Specifies whether the user is invited by the current user or not.")] = None,
+        inviter_id: Annotated[Optional[StrictStr], Field(description="The inviter ID.")] = None,
+        area: Annotated[Optional[Area], Field(description="The filter area.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> EmployeeFullArrayWrapper:
+        """Search users with detaailed information by extended filter
+
+        Returns a list of users with full information about them matching the parameters specified in the request.
+
+        :param employee_status: The user status.
+        :type employee_status: EmployeeStatus
+        :param group_id: The group ID.
+        :type group_id: str
+        :param activation_status: The user activation status.
+        :type activation_status: EmployeeActivationStatus
+        :param employee_type: The user type.
+        :type employee_type: EmployeeType
+        :param employee_types: The list of user types.
+        :type employee_types: List[int]
+        :param is_administrator: Specifies if the user is an administrator or not.
+        :type is_administrator: bool
+        :param payments: The user payment status.
+        :type payments: Payments
+        :param account_login_type: The account login type.
+        :type account_login_type: AccountLoginType
+        :param quota_filter: The quota filter (All - 0, Default - 1, Custom - 2).
+        :type quota_filter: QuotaFilter
+        :param without_group: Specifies whether the user should be a member of a group or not.
+        :type without_group: bool
+        :param exclude_group: Specifies whether the user should be a member of the group with the specified ID.
+        :type exclude_group: bool
+        :param invited_by_me: Specifies whether the user is invited by the current user or not.
+        :type invited_by_me: bool
+        :param inviter_id: The inviter ID.
+        :type inviter_id: str
+        :param area: The filter area.
+        :type area: Area
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._search_users_by_extended_filter_serialize(
+            employee_status=employee_status,
+            group_id=group_id,
+            activation_status=activation_status,
+            employee_type=employee_type,
+            employee_types=employee_types,
+            is_administrator=is_administrator,
+            payments=payments,
+            account_login_type=account_login_type,
+            quota_filter=quota_filter,
+            without_group=without_group,
+            exclude_group=exclude_group,
+            invited_by_me=invited_by_me,
+            inviter_id=inviter_id,
+            area=area,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "EmployeeFullArrayWrapper",
+            '401': None,
+            '403': None,
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def search_users_by_extended_filter_with_http_info(
+        self,
+        employee_status: Annotated[Optional[EmployeeStatus], Field(description="The user status.")] = None,
+        group_id: Annotated[Optional[StrictStr], Field(description="The group ID.")] = None,
+        activation_status: Annotated[Optional[EmployeeActivationStatus], Field(description="The user activation status.")] = None,
+        employee_type: Annotated[Optional[EmployeeType], Field(description="The user type.")] = None,
+        employee_types: Annotated[Optional[List[List[StrictInt]]], Field(description="The list of user types.")] = None,
+        is_administrator: Annotated[Optional[StrictBool], Field(description="Specifies if the user is an administrator or not.")] = None,
+        payments: Annotated[Optional[Payments], Field(description="The user payment status.")] = None,
+        account_login_type: Annotated[Optional[AccountLoginType], Field(description="The account login type.")] = None,
+        quota_filter: Annotated[Optional[QuotaFilter], Field(description="The quota filter (All - 0, Default - 1, Custom - 2).")] = None,
+        without_group: Annotated[Optional[StrictBool], Field(description="Specifies whether the user should be a member of a group or not.")] = None,
+        exclude_group: Annotated[Optional[StrictBool], Field(description="Specifies whether the user should be a member of the group with the specified ID.")] = None,
+        invited_by_me: Annotated[Optional[StrictBool], Field(description="Specifies whether the user is invited by the current user or not.")] = None,
+        inviter_id: Annotated[Optional[StrictStr], Field(description="The inviter ID.")] = None,
+        area: Annotated[Optional[Area], Field(description="The filter area.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[EmployeeFullArrayWrapper]:
+        """Search users with detaailed information by extended filter
+
+        Returns a list of users with full information about them matching the parameters specified in the request.
+
+        :param employee_status: The user status.
+        :type employee_status: EmployeeStatus
+        :param group_id: The group ID.
+        :type group_id: str
+        :param activation_status: The user activation status.
+        :type activation_status: EmployeeActivationStatus
+        :param employee_type: The user type.
+        :type employee_type: EmployeeType
+        :param employee_types: The list of user types.
+        :type employee_types: List[int]
+        :param is_administrator: Specifies if the user is an administrator or not.
+        :type is_administrator: bool
+        :param payments: The user payment status.
+        :type payments: Payments
+        :param account_login_type: The account login type.
+        :type account_login_type: AccountLoginType
+        :param quota_filter: The quota filter (All - 0, Default - 1, Custom - 2).
+        :type quota_filter: QuotaFilter
+        :param without_group: Specifies whether the user should be a member of a group or not.
+        :type without_group: bool
+        :param exclude_group: Specifies whether the user should be a member of the group with the specified ID.
+        :type exclude_group: bool
+        :param invited_by_me: Specifies whether the user is invited by the current user or not.
+        :type invited_by_me: bool
+        :param inviter_id: The inviter ID.
+        :type inviter_id: str
+        :param area: The filter area.
+        :type area: Area
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._search_users_by_extended_filter_serialize(
+            employee_status=employee_status,
+            group_id=group_id,
+            activation_status=activation_status,
+            employee_type=employee_type,
+            employee_types=employee_types,
+            is_administrator=is_administrator,
+            payments=payments,
+            account_login_type=account_login_type,
+            quota_filter=quota_filter,
+            without_group=without_group,
+            exclude_group=exclude_group,
+            invited_by_me=invited_by_me,
+            inviter_id=inviter_id,
+            area=area,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "EmployeeFullArrayWrapper",
+            '401': None,
+            '403': None,
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def search_users_by_extended_filter_without_preload_content(
+        self,
+        employee_status: Annotated[Optional[EmployeeStatus], Field(description="The user status.")] = None,
+        group_id: Annotated[Optional[StrictStr], Field(description="The group ID.")] = None,
+        activation_status: Annotated[Optional[EmployeeActivationStatus], Field(description="The user activation status.")] = None,
+        employee_type: Annotated[Optional[EmployeeType], Field(description="The user type.")] = None,
+        employee_types: Annotated[Optional[List[List[StrictInt]]], Field(description="The list of user types.")] = None,
+        is_administrator: Annotated[Optional[StrictBool], Field(description="Specifies if the user is an administrator or not.")] = None,
+        payments: Annotated[Optional[Payments], Field(description="The user payment status.")] = None,
+        account_login_type: Annotated[Optional[AccountLoginType], Field(description="The account login type.")] = None,
+        quota_filter: Annotated[Optional[QuotaFilter], Field(description="The quota filter (All - 0, Default - 1, Custom - 2).")] = None,
+        without_group: Annotated[Optional[StrictBool], Field(description="Specifies whether the user should be a member of a group or not.")] = None,
+        exclude_group: Annotated[Optional[StrictBool], Field(description="Specifies whether the user should be a member of the group with the specified ID.")] = None,
+        invited_by_me: Annotated[Optional[StrictBool], Field(description="Specifies whether the user is invited by the current user or not.")] = None,
+        inviter_id: Annotated[Optional[StrictStr], Field(description="The inviter ID.")] = None,
+        area: Annotated[Optional[Area], Field(description="The filter area.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Search users with detaailed information by extended filter
+
+        Returns a list of users with full information about them matching the parameters specified in the request.
+
+        :param employee_status: The user status.
+        :type employee_status: EmployeeStatus
+        :param group_id: The group ID.
+        :type group_id: str
+        :param activation_status: The user activation status.
+        :type activation_status: EmployeeActivationStatus
+        :param employee_type: The user type.
+        :type employee_type: EmployeeType
+        :param employee_types: The list of user types.
+        :type employee_types: List[int]
+        :param is_administrator: Specifies if the user is an administrator or not.
+        :type is_administrator: bool
+        :param payments: The user payment status.
+        :type payments: Payments
+        :param account_login_type: The account login type.
+        :type account_login_type: AccountLoginType
+        :param quota_filter: The quota filter (All - 0, Default - 1, Custom - 2).
+        :type quota_filter: QuotaFilter
+        :param without_group: Specifies whether the user should be a member of a group or not.
+        :type without_group: bool
+        :param exclude_group: Specifies whether the user should be a member of the group with the specified ID.
+        :type exclude_group: bool
+        :param invited_by_me: Specifies whether the user is invited by the current user or not.
+        :type invited_by_me: bool
+        :param inviter_id: The inviter ID.
+        :type inviter_id: str
+        :param area: The filter area.
+        :type area: Area
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._search_users_by_extended_filter_serialize(
+            employee_status=employee_status,
+            group_id=group_id,
+            activation_status=activation_status,
+            employee_type=employee_type,
+            employee_types=employee_types,
+            is_administrator=is_administrator,
+            payments=payments,
+            account_login_type=account_login_type,
+            quota_filter=quota_filter,
+            without_group=without_group,
+            exclude_group=exclude_group,
+            invited_by_me=invited_by_me,
+            inviter_id=inviter_id,
+            area=area,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "EmployeeFullArrayWrapper",
+            '401': None,
+            '403': None,
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _search_users_by_extended_filter_serialize(
+        self,
+        employee_status,
+        group_id,
+        activation_status,
+        employee_type,
+        employee_types,
+        is_administrator,
+        payments,
+        account_login_type,
+        quota_filter,
+        without_group,
+        exclude_group,
+        invited_by_me,
+        inviter_id,
+        area,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+            'employeeTypes': 'csv',
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        if employee_status is not None:
+            
+            _query_params.append(('employeeStatus', employee_status.value))
+            
+        if group_id is not None:
+            
+            _query_params.append(('groupId', group_id))
+            
+        if activation_status is not None:
+            
+            _query_params.append(('activationStatus', activation_status.value))
+            
+        if employee_type is not None:
+            
+            _query_params.append(('employeeType', employee_type.value))
+            
+        if employee_types is not None:
+            
+            _query_params.append(('employeeTypes', employee_types))
+            
+        if is_administrator is not None:
+            
+            _query_params.append(('isAdministrator', is_administrator))
+            
+        if payments is not None:
+            
+            _query_params.append(('payments', payments.value))
+            
+        if account_login_type is not None:
+            
+            _query_params.append(('accountLoginType', account_login_type.value))
+            
+        if quota_filter is not None:
+            
+            _query_params.append(('quotaFilter', quota_filter.value))
+            
+        if without_group is not None:
+            
+            _query_params.append(('withoutGroup', without_group))
+            
+        if exclude_group is not None:
+            
+            _query_params.append(('excludeGroup', exclude_group))
+            
+        if invited_by_me is not None:
+            
+            _query_params.append(('invitedByMe', invited_by_me))
+            
+        if inviter_id is not None:
+            
+            _query_params.append(('inviterId', inviter_id))
+            
+        if area is not None:
+            
+            _query_params.append(('area', area.value))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
+        ]
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/api/2.0/people/filter',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def search_users_by_query(
+        self,
+        query: Annotated[Optional[StrictStr], Field(description="The search query.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> EmployeeArrayWrapper:
+        """Search users (using query parameters)
+
+        Returns a list of users matching the search query. This method uses the query parameters.
+
+        :param query: The search query.
+        :type query: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._search_users_by_query_serialize(
+            query=query,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "EmployeeArrayWrapper",
+            '401': None,
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def search_users_by_query_with_http_info(
+        self,
+        query: Annotated[Optional[StrictStr], Field(description="The search query.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[EmployeeArrayWrapper]:
+        """Search users (using query parameters)
+
+        Returns a list of users matching the search query. This method uses the query parameters.
+
+        :param query: The search query.
+        :type query: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._search_users_by_query_serialize(
+            query=query,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "EmployeeArrayWrapper",
+            '401': None,
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def search_users_by_query_without_preload_content(
+        self,
+        query: Annotated[Optional[StrictStr], Field(description="The search query.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Search users (using query parameters)
+
+        Returns a list of users matching the search query. This method uses the query parameters.
+
+        :param query: The search query.
+        :type query: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._search_users_by_query_serialize(
+            query=query,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "EmployeeArrayWrapper",
+            '401': None,
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _search_users_by_query_serialize(
+        self,
+        query,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        if query is not None:
+            
+            _query_params.append(('query', query))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
+        ]
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/api/2.0/people/search',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def search_users_by_status(
+        self,
+        status: Annotated[EmployeeStatus, Field(description="The user status.")],
+        query: Annotated[Optional[StrictStr], Field(description="The advanced search query.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> EmployeeFullArrayWrapper:
+        """Search users by status filter
+
+        Returns a list of users matching the status filter and search query.
+
+        :param status: The user status. (required)
+        :type status: EmployeeStatus
+        :param query: The advanced search query.
+        :type query: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._search_users_by_status_serialize(
+            status=status,
+            query=query,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "EmployeeFullArrayWrapper",
+            '401': None,
+            '403': None,
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def search_users_by_status_with_http_info(
+        self,
+        status: Annotated[EmployeeStatus, Field(description="The user status.")],
+        query: Annotated[Optional[StrictStr], Field(description="The advanced search query.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[EmployeeFullArrayWrapper]:
+        """Search users by status filter
+
+        Returns a list of users matching the status filter and search query.
+
+        :param status: The user status. (required)
+        :type status: EmployeeStatus
+        :param query: The advanced search query.
+        :type query: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._search_users_by_status_serialize(
+            status=status,
+            query=query,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "EmployeeFullArrayWrapper",
+            '401': None,
+            '403': None,
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def search_users_by_status_without_preload_content(
+        self,
+        status: Annotated[EmployeeStatus, Field(description="The user status.")],
+        query: Annotated[Optional[StrictStr], Field(description="The advanced search query.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Search users by status filter
+
+        Returns a list of users matching the status filter and search query.
+
+        :param status: The user status. (required)
+        :type status: EmployeeStatus
+        :param query: The advanced search query.
+        :type query: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._search_users_by_status_serialize(
+            status=status,
+            query=query,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "EmployeeFullArrayWrapper",
+            '401': None,
+            '403': None,
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _search_users_by_status_serialize(
+        self,
+        status,
+        query,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if status is not None:
+            _path_params['status'] = status.value
+        # process the query parameters
+        if query is not None:
+            
+            _query_params.append(('query', query))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
+        ]
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/api/2.0/people/status/{status}/search',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

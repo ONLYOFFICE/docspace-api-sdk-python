@@ -40,36 +40,57 @@ class TestSettingsCommonSettingsApi(unittest.TestCase):
         """
         pass
 
-    def test_delete_color_theme(self) -> None:
-        """Test case for delete_color_theme
+    def test_configure_deep_link(self) -> None:
+        """Test case for configure_deep_link
+
+        Configure the deep link settings
+        """
+        pass
+
+    def test_delete_portal_color_theme(self) -> None:
+        """Test case for delete_portal_color_theme
 
         Delete a color theme
         """
         pass
 
-    def test_get_color_theme(self) -> None:
-        """Test case for get_color_theme
+    def test_get_deep_link_settings(self) -> None:
+        """Test case for get_deep_link_settings
+
+        Get the deep link settings
+        """
+        pass
+
+    def test_get_payment_settings(self) -> None:
+        """Test case for get_payment_settings
+
+        Get the payment settings
+        """
+        pass
+
+    def test_get_portal_color_theme(self) -> None:
+        """Test case for get_portal_color_theme
 
         Get a color theme
         """
         pass
 
-    def test_get_logo(self) -> None:
-        """Test case for get_logo
-
-        Get a portal logo
-        """
-        pass
-
-    def test_get_machine_name(self) -> None:
-        """Test case for get_machine_name
+    def test_get_portal_hostname(self) -> None:
+        """Test case for get_portal_hostname
 
         Get hostname
         """
         pass
 
-    def test_get_settings(self) -> None:
-        """Test case for get_settings
+    def test_get_portal_logo(self) -> None:
+        """Test case for get_portal_logo
+
+        Get a portal logo
+        """
+        pass
+
+    def test_get_portal_settings(self) -> None:
+        """Test case for get_portal_settings
 
         Get the portal settings
         """
@@ -96,38 +117,10 @@ class TestSettingsCommonSettingsApi(unittest.TestCase):
         """
         pass
 
-    def test_get_time_zones_async(self) -> None:
-        """Test case for get_time_zones_async
+    def test_get_time_zones(self) -> None:
+        """Test case for get_time_zones
 
         Get time zones
-        """
-        pass
-
-    def test_gett_deep_link_settings(self) -> None:
-        """Test case for gett_deep_link_settings
-
-        Get the deep link settings
-        """
-        pass
-
-    def test_payment_settings(self) -> None:
-        """Test case for payment_settings
-
-        Get the payment settings
-        """
-        pass
-
-    def test_save_color_theme(self) -> None:
-        """Test case for save_color_theme
-
-        Save a color theme
-        """
-        pass
-
-    def test_save_configure_deep_link(self) -> None:
-        """Test case for save_configure_deep_link
-
-        Configure the deep link settings
         """
         pass
 
@@ -142,6 +135,13 @@ class TestSettingsCommonSettingsApi(unittest.TestCase):
         """Test case for save_mail_domain_settings
 
         Save the mail domain settings
+        """
+        pass
+
+    def test_save_portal_color_theme(self) -> None:
+        """Test case for save_portal_color_theme
+
+        Save a color theme
         """
         pass
 

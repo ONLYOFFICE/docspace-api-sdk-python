@@ -26,15 +26,15 @@ class TestSecurityCSPApi(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
-    def test_csp(self) -> None:
-        """Test case for csp
+    def test_configure_csp(self) -> None:
+        """Test case for configure_csp
 
         Configure CSP settings
         """
         pass
 
-    def test_get_csp(self) -> None:
-        """Test case for get_csp
+    def test_get_csp_settings(self) -> None:
+        """Test case for get_csp_settings
 
         Get CSP settings
         """

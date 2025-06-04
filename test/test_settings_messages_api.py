@@ -33,8 +33,8 @@ class TestSettingsMessagesApi(unittest.TestCase):
         """
         pass
 
-    def test_send_adm_mail(self) -> None:
-        """Test case for send_adm_mail
+    def test_send_admin_mail(self) -> None:
+        """Test case for send_admin_mail
 
         Send a message to the administrator
         """

@@ -1,6 +1,6 @@
 # docspace.SettingsStorageApi
 
-All URIs are relative to *http://localhost:8092*
+All URIs are relative to *http://http:*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -11,7 +11,7 @@ Method | HTTP request | Description
 [**get_storage_progress**](SettingsStorageApi.md#get_storage_progress) | **GET** /api/2.0/settings/storage/progress | Get the storage progress
 [**reset_cdn_to_default**](SettingsStorageApi.md#reset_cdn_to_default) | **DELETE** /api/2.0/settings/storage/cdn | Reset the CDN storage settings
 [**reset_storage_to_default**](SettingsStorageApi.md#reset_storage_to_default) | **DELETE** /api/2.0/settings/storage | Reset the storage settings
-[**update_cdn**](SettingsStorageApi.md#update_cdn) | **PUT** /api/2.0/settings/storage/cdn | Update the CDN storage
+[**update_cdn_storage**](SettingsStorageApi.md#update_cdn_storage) | **PUT** /api/2.0/settings/storage/cdn | Update the CDN storage
 [**update_storage**](SettingsStorageApi.md#update_storage) | **PUT** /api/2.0/settings/storage | Update a storage
 
 
@@ -36,10 +36,10 @@ from docspace.models.storage_array_wrapper import StorageArrayWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -140,10 +140,10 @@ from docspace.models.storage_array_wrapper import StorageArrayWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -240,10 +240,10 @@ from docspace.models.storage_array_wrapper import StorageArrayWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -340,10 +340,10 @@ from docspace.models.object_wrapper import ObjectWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -439,10 +439,10 @@ from docspace.models.double_wrapper import DoubleWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -537,10 +537,10 @@ import docspace
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -634,10 +634,10 @@ import docspace
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -711,8 +711,8 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **update_cdn**
-> CdnStorageSettingsWrapper update_cdn(storage_requests_dto=storage_requests_dto)
+# **update_cdn_storage**
+> CdnStorageSettingsWrapper update_cdn_storage(storage_requests_dto=storage_requests_dto)
 
 Update the CDN storage
 
@@ -733,10 +733,10 @@ from docspace.models.storage_requests_dto import StorageRequestsDto
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -777,11 +777,11 @@ with docspace.ApiClient(configuration) as api_client:
 
     try:
         # Update the CDN storage
-        api_response = api_instance.update_cdn(storage_requests_dto=storage_requests_dto)
-        print("The response of SettingsStorageApi->update_cdn:\n")
+        api_response = api_instance.update_cdn_storage(storage_requests_dto=storage_requests_dto)
+        print("The response of SettingsStorageApi->update_cdn_storage:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling SettingsStorageApi->update_cdn: %s\n" % e)
+        print("Exception when calling SettingsStorageApi->update_cdn_storage: %s\n" % e)
 ```
 
 
@@ -839,10 +839,10 @@ from docspace.models.storage_settings_wrapper import StorageSettingsWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters

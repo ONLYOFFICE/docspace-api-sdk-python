@@ -1,15 +1,15 @@
 # docspace.PeopleThemeApi
 
-All URIs are relative to *http://localhost:8092*
+All URIs are relative to *http://http:*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**change_theme**](PeopleThemeApi.md#change_theme) | **PUT** /api/2.0/people/theme | Change the portal theme
-[**get_theme**](PeopleThemeApi.md#get_theme) | **GET** /api/2.0/people/theme | Get the portal theme
+[**change_portal_theme**](PeopleThemeApi.md#change_portal_theme) | **PUT** /api/2.0/people/theme | Change the portal theme
+[**get_portal_theme**](PeopleThemeApi.md#get_portal_theme) | **GET** /api/2.0/people/theme | Get the portal theme
 
 
-# **change_theme**
-> DarkThemeSettingsWrapper change_theme(dark_theme_settings_request_dto=dark_theme_settings_request_dto)
+# **change_portal_theme**
+> DarkThemeSettingsWrapper change_portal_theme(dark_theme_settings_request_dto=dark_theme_settings_request_dto)
 
 Change the portal theme
 
@@ -30,10 +30,10 @@ from docspace.models.dark_theme_settings_wrapper import DarkThemeSettingsWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -74,11 +74,11 @@ with docspace.ApiClient(configuration) as api_client:
 
     try:
         # Change the portal theme
-        api_response = api_instance.change_theme(dark_theme_settings_request_dto=dark_theme_settings_request_dto)
-        print("The response of PeopleThemeApi->change_theme:\n")
+        api_response = api_instance.change_portal_theme(dark_theme_settings_request_dto=dark_theme_settings_request_dto)
+        print("The response of PeopleThemeApi->change_portal_theme:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling PeopleThemeApi->change_theme: %s\n" % e)
+        print("Exception when calling PeopleThemeApi->change_portal_theme: %s\n" % e)
 ```
 
 
@@ -112,8 +112,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **get_theme**
-> DarkThemeSettingsWrapper get_theme()
+# **get_portal_theme**
+> DarkThemeSettingsWrapper get_portal_theme()
 
 Get the portal theme
 
@@ -133,10 +133,10 @@ from docspace.models.dark_theme_settings_wrapper import DarkThemeSettingsWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -176,11 +176,11 @@ with docspace.ApiClient(configuration) as api_client:
 
     try:
         # Get the portal theme
-        api_response = api_instance.get_theme()
-        print("The response of PeopleThemeApi->get_theme:\n")
+        api_response = api_instance.get_portal_theme()
+        print("The response of PeopleThemeApi->get_portal_theme:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling PeopleThemeApi->get_theme: %s\n" % e)
+        print("Exception when calling PeopleThemeApi->get_portal_theme: %s\n" % e)
 ```
 
 

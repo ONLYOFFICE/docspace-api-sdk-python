@@ -47,24 +47,24 @@ class TestSecurityAuditTrailDataApi(unittest.TestCase):
         """
         pass
 
-    def test_get_last_audit_events(self) -> None:
-        """Test case for get_last_audit_events
-
-        Get audit trail data
-        """
-        pass
-
-    def test_get_mappers(self) -> None:
-        """Test case for get_mappers
+    def test_get_audit_trail_mappers(self) -> None:
+        """Test case for get_audit_trail_mappers
 
         Get audit trail mappers
         """
         pass
 
-    def test_get_types(self) -> None:
-        """Test case for get_types
+    def test_get_audit_trail_types(self) -> None:
+        """Test case for get_audit_trail_types
 
         Get audit trail types
+        """
+        pass
+
+    def test_get_last_audit_events(self) -> None:
+        """Test case for get_last_audit_events
+
+        Get audit trail data
         """
         pass
 

@@ -45,7 +45,7 @@ class PeopleUserTypeApi:
 
 
     @validate_call
-    def get_change_type_progress(
+    def get_user_type_update_progress(
         self,
         userid: Annotated[StrictStr, Field(description="The user ID.")],
         _request_timeout: Union[
@@ -89,7 +89,7 @@ class PeopleUserTypeApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_change_type_progress_serialize(
+        _param = self._get_user_type_update_progress_serialize(
             userid=userid,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -113,7 +113,7 @@ class PeopleUserTypeApi:
 
 
     @validate_call
-    def get_change_type_progress_with_http_info(
+    def get_user_type_update_progress_with_http_info(
         self,
         userid: Annotated[StrictStr, Field(description="The user ID.")],
         _request_timeout: Union[
@@ -157,7 +157,7 @@ class PeopleUserTypeApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_change_type_progress_serialize(
+        _param = self._get_user_type_update_progress_serialize(
             userid=userid,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -181,7 +181,7 @@ class PeopleUserTypeApi:
 
 
     @validate_call
-    def get_change_type_progress_without_preload_content(
+    def get_user_type_update_progress_without_preload_content(
         self,
         userid: Annotated[StrictStr, Field(description="The user ID.")],
         _request_timeout: Union[
@@ -225,7 +225,7 @@ class PeopleUserTypeApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_change_type_progress_serialize(
+        _param = self._get_user_type_update_progress_serialize(
             userid=userid,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -244,7 +244,7 @@ class PeopleUserTypeApi:
         return response_data.response
 
 
-    def _get_change_type_progress_serialize(
+    def _get_user_type_update_progress_serialize(
         self,
         userid,
         _request_auth,
@@ -314,7 +314,7 @@ class PeopleUserTypeApi:
 
 
     @validate_call
-    def start_update_user_type(
+    def star_user_typet_update(
         self,
         start_update_user_type_dto: Optional[StartUpdateUserTypeDto] = None,
         _request_timeout: Union[
@@ -358,7 +358,7 @@ class PeopleUserTypeApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._start_update_user_type_serialize(
+        _param = self._star_user_typet_update_serialize(
             start_update_user_type_dto=start_update_user_type_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -383,7 +383,7 @@ class PeopleUserTypeApi:
 
 
     @validate_call
-    def start_update_user_type_with_http_info(
+    def star_user_typet_update_with_http_info(
         self,
         start_update_user_type_dto: Optional[StartUpdateUserTypeDto] = None,
         _request_timeout: Union[
@@ -427,7 +427,7 @@ class PeopleUserTypeApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._start_update_user_type_serialize(
+        _param = self._star_user_typet_update_serialize(
             start_update_user_type_dto=start_update_user_type_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -452,7 +452,7 @@ class PeopleUserTypeApi:
 
 
     @validate_call
-    def start_update_user_type_without_preload_content(
+    def star_user_typet_update_without_preload_content(
         self,
         start_update_user_type_dto: Optional[StartUpdateUserTypeDto] = None,
         _request_timeout: Union[
@@ -496,7 +496,7 @@ class PeopleUserTypeApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._start_update_user_type_serialize(
+        _param = self._star_user_typet_update_serialize(
             start_update_user_type_dto=start_update_user_type_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -516,7 +516,7 @@ class PeopleUserTypeApi:
         return response_data.response
 
 
-    def _start_update_user_type_serialize(
+    def _star_user_typet_update_serialize(
         self,
         start_update_user_type_dto,
         _request_auth,
@@ -599,7 +599,7 @@ class PeopleUserTypeApi:
 
 
     @validate_call
-    def terminate_change_type(
+    def terminate_user_type_update(
         self,
         terminate_request_dto: Optional[TerminateRequestDto] = None,
         _request_timeout: Union[
@@ -643,7 +643,7 @@ class PeopleUserTypeApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._terminate_change_type_serialize(
+        _param = self._terminate_user_type_update_serialize(
             terminate_request_dto=terminate_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -667,7 +667,7 @@ class PeopleUserTypeApi:
 
 
     @validate_call
-    def terminate_change_type_with_http_info(
+    def terminate_user_type_update_with_http_info(
         self,
         terminate_request_dto: Optional[TerminateRequestDto] = None,
         _request_timeout: Union[
@@ -711,7 +711,7 @@ class PeopleUserTypeApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._terminate_change_type_serialize(
+        _param = self._terminate_user_type_update_serialize(
             terminate_request_dto=terminate_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -735,7 +735,7 @@ class PeopleUserTypeApi:
 
 
     @validate_call
-    def terminate_change_type_without_preload_content(
+    def terminate_user_type_update_without_preload_content(
         self,
         terminate_request_dto: Optional[TerminateRequestDto] = None,
         _request_timeout: Union[
@@ -779,7 +779,7 @@ class PeopleUserTypeApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._terminate_change_type_serialize(
+        _param = self._terminate_user_type_update_serialize(
             terminate_request_dto=terminate_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -798,7 +798,7 @@ class PeopleUserTypeApi:
         return response_data.response
 
 
-    def _terminate_change_type_serialize(
+    def _terminate_user_type_update_serialize(
         self,
         terminate_request_dto,
         _request_auth,

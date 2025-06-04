@@ -29,6 +29,7 @@ class BatchRequestDto(BaseModel):
     """
     The request parameters for copying/moving files.
     """ # noqa: E501
+    return_single_operation: Optional[StrictBool] = Field(default=None, description="Specifies whether to return only the current operation", alias="returnSingleOperation")
     folder_ids: Optional[List[BaseBatchRequestDtoFolderIdsInner]] = Field(default=None, description="The list of folder IDs to be copied/moved.", alias="folderIds")
     file_ids: Optional[List[BaseBatchRequestDtoFolderIdsInner]] = Field(default=None, description="The list of file IDs to be copied/moved.", alias="fileIds")
     dest_folder_id: Optional[BatchRequestDtoDestFolderId] = Field(default=None, alias="destFolderId")
@@ -36,7 +37,7 @@ class BatchRequestDto(BaseModel):
     delete_after: Optional[StrictBool] = Field(default=None, description="Specifies whether to delete the source files/folders after they are moved or copied to the destination folder.", alias="deleteAfter")
     content: Optional[StrictBool] = Field(default=None, description="Specifies whether to copy or move the folder content or not.")
     to_fill_out: Optional[StrictBool] = Field(default=None, description="Specifies whether the file is copied for filling out", alias="toFillOut")
-    __properties: ClassVar[List[str]] = ["folderIds", "fileIds", "destFolderId", "conflictResolveType", "deleteAfter", "content", "toFillOut"]
+    __properties: ClassVar[List[str]] = ["returnSingleOperation", "folderIds", "fileIds", "destFolderId", "conflictResolveType", "deleteAfter", "content", "toFillOut"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -116,6 +117,7 @@ class BatchRequestDto(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "returnSingleOperation": obj.get("returnSingleOperation"),
             "folderIds": [BaseBatchRequestDtoFolderIdsInner.from_dict(_item) for _item in obj["folderIds"]] if obj.get("folderIds") is not None else None,
             "fileIds": [BaseBatchRequestDtoFolderIdsInner.from_dict(_item) for _item in obj["fileIds"]] if obj.get("fileIds") is not None else None,
             "destFolderId": BatchRequestDtoDestFolderId.from_dict(obj["destFolderId"]) if obj.get("destFolderId") is not None else None,

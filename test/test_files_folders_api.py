@@ -110,8 +110,8 @@ class TestFilesFoldersApi(unittest.TestCase):
         """
         pass
 
-    def test_get_new_items(self) -> None:
-        """Test case for get_new_items
+    def test_get_new_folder_items(self) -> None:
+        """Test case for get_new_folder_items
 
         Get new folder items
         """
@@ -159,10 +159,10 @@ class TestFilesFoldersApi(unittest.TestCase):
         """
         pass
 
-    def test_set_file_order(self) -> None:
-        """Test case for set_file_order
+    def test_set_folder_order(self) -> None:
+        """Test case for set_folder_order
 
-        Set file order
+        Set folder order
         """
         pass
 

@@ -1,17 +1,17 @@
 # docspace.PeopleUserTypeApi
 
-All URIs are relative to *http://localhost:8092*
+All URIs are relative to *http://http:*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get_change_type_progress**](PeopleUserTypeApi.md#get_change_type_progress) | **GET** /api/2.0/people/type/progress/{userid} | Get the progress of updating user type
-[**start_update_user_type**](PeopleUserTypeApi.md#start_update_user_type) | **POST** /api/2.0/people/type | Update user type
-[**terminate_change_type**](PeopleUserTypeApi.md#terminate_change_type) | **PUT** /api/2.0/people/type/terminate | Terminate update user type
+[**get_user_type_update_progress**](PeopleUserTypeApi.md#get_user_type_update_progress) | **GET** /api/2.0/people/type/progress/{userid} | Get the progress of updating user type
+[**star_user_typet_update**](PeopleUserTypeApi.md#star_user_typet_update) | **POST** /api/2.0/people/type | Update user type
+[**terminate_user_type_update**](PeopleUserTypeApi.md#terminate_user_type_update) | **PUT** /api/2.0/people/type/terminate | Terminate update user type
 [**update_user_type**](PeopleUserTypeApi.md#update_user_type) | **PUT** /api/2.0/people/type/{type} | Change a user type
 
 
-# **get_change_type_progress**
-> TaskProgressResponseWrapper get_change_type_progress(userid)
+# **get_user_type_update_progress**
+> TaskProgressResponseWrapper get_user_type_update_progress(userid)
 
 Get the progress of updating user type
 
@@ -31,10 +31,10 @@ from docspace.models.task_progress_response_wrapper import TaskProgressResponseW
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -75,11 +75,11 @@ with docspace.ApiClient(configuration) as api_client:
 
     try:
         # Get the progress of updating user type
-        api_response = api_instance.get_change_type_progress(userid)
-        print("The response of PeopleUserTypeApi->get_change_type_progress:\n")
+        api_response = api_instance.get_user_type_update_progress(userid)
+        print("The response of PeopleUserTypeApi->get_user_type_update_progress:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling PeopleUserTypeApi->get_change_type_progress: %s\n" % e)
+        print("Exception when calling PeopleUserTypeApi->get_user_type_update_progress: %s\n" % e)
 ```
 
 
@@ -113,8 +113,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **start_update_user_type**
-> TaskProgressResponseWrapper start_update_user_type(start_update_user_type_dto=start_update_user_type_dto)
+# **star_user_typet_update**
+> TaskProgressResponseWrapper star_user_typet_update(start_update_user_type_dto=start_update_user_type_dto)
 
 Update user type
 
@@ -135,10 +135,10 @@ from docspace.models.task_progress_response_wrapper import TaskProgressResponseW
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -179,11 +179,11 @@ with docspace.ApiClient(configuration) as api_client:
 
     try:
         # Update user type
-        api_response = api_instance.start_update_user_type(start_update_user_type_dto=start_update_user_type_dto)
-        print("The response of PeopleUserTypeApi->start_update_user_type:\n")
+        api_response = api_instance.star_user_typet_update(start_update_user_type_dto=start_update_user_type_dto)
+        print("The response of PeopleUserTypeApi->star_user_typet_update:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling PeopleUserTypeApi->start_update_user_type: %s\n" % e)
+        print("Exception when calling PeopleUserTypeApi->star_user_typet_update: %s\n" % e)
 ```
 
 
@@ -218,8 +218,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **terminate_change_type**
-> TaskProgressResponseWrapper terminate_change_type(terminate_request_dto=terminate_request_dto)
+# **terminate_user_type_update**
+> TaskProgressResponseWrapper terminate_user_type_update(terminate_request_dto=terminate_request_dto)
 
 Terminate update user type
 
@@ -240,10 +240,10 @@ from docspace.models.terminate_request_dto import TerminateRequestDto
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -284,11 +284,11 @@ with docspace.ApiClient(configuration) as api_client:
 
     try:
         # Terminate update user type
-        api_response = api_instance.terminate_change_type(terminate_request_dto=terminate_request_dto)
-        print("The response of PeopleUserTypeApi->terminate_change_type:\n")
+        api_response = api_instance.terminate_user_type_update(terminate_request_dto=terminate_request_dto)
+        print("The response of PeopleUserTypeApi->terminate_user_type_update:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling PeopleUserTypeApi->terminate_change_type: %s\n" % e)
+        print("Exception when calling PeopleUserTypeApi->terminate_user_type_update: %s\n" % e)
 ```
 
 
@@ -345,10 +345,10 @@ from docspace.models.update_members_request_dto import UpdateMembersRequestDto
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters

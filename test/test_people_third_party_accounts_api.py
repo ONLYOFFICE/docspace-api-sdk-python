@@ -26,29 +26,29 @@ class TestPeopleThirdPartyAccountsApi(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
-    def test_get_auth_providers(self) -> None:
-        """Test case for get_auth_providers
+    def test_get_third_party_auth_providers(self) -> None:
+        """Test case for get_third_party_auth_providers
 
         Get third-party accounts
         """
         pass
 
-    def test_link_account(self) -> None:
-        """Test case for link_account
+    def test_link_third_party_account(self) -> None:
+        """Test case for link_third_party_account
 
         Link a third-pary account
         """
         pass
 
-    def test_signup_account(self) -> None:
-        """Test case for signup_account
+    def test_signup_third_party_account(self) -> None:
+        """Test case for signup_third_party_account
 
         Create a third-pary account
         """
         pass
 
-    def test_unlink_account(self) -> None:
-        """Test case for unlink_account
+    def test_unlink_third_party_account(self) -> None:
+        """Test case for unlink_third_party_account
 
         Unlink a third-pary account
         """

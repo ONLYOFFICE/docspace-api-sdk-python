@@ -295,7 +295,7 @@ class SettingsGreetingSettingsApi:
 
 
     @validate_call
-    def is_default(
+    def get_is_default_greeting_settings(
         self,
         _request_timeout: Union[
             None,
@@ -336,7 +336,7 @@ class SettingsGreetingSettingsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._is_default_serialize(
+        _param = self._get_is_default_greeting_settings_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -359,7 +359,7 @@ class SettingsGreetingSettingsApi:
 
 
     @validate_call
-    def is_default_with_http_info(
+    def get_is_default_greeting_settings_with_http_info(
         self,
         _request_timeout: Union[
             None,
@@ -400,7 +400,7 @@ class SettingsGreetingSettingsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._is_default_serialize(
+        _param = self._get_is_default_greeting_settings_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -423,7 +423,7 @@ class SettingsGreetingSettingsApi:
 
 
     @validate_call
-    def is_default_without_preload_content(
+    def get_is_default_greeting_settings_without_preload_content(
         self,
         _request_timeout: Union[
             None,
@@ -464,7 +464,7 @@ class SettingsGreetingSettingsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._is_default_serialize(
+        _param = self._get_is_default_greeting_settings_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -482,7 +482,7 @@ class SettingsGreetingSettingsApi:
         return response_data.response
 
 
-    def _is_default_serialize(
+    def _get_is_default_greeting_settings_serialize(
         self,
         _request_auth,
         _content_type,

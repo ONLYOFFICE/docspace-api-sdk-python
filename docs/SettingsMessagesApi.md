@@ -1,11 +1,11 @@
 # docspace.SettingsMessagesApi
 
-All URIs are relative to *http://localhost:8092*
+All URIs are relative to *http://http:*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**enable_admin_message_settings**](SettingsMessagesApi.md#enable_admin_message_settings) | **POST** /api/2.0/settings/messagesettings | Enable the administrator message settings
-[**send_adm_mail**](SettingsMessagesApi.md#send_adm_mail) | **POST** /api/2.0/settings/sendadmmail | Send a message to the administrator
+[**send_admin_mail**](SettingsMessagesApi.md#send_admin_mail) | **POST** /api/2.0/settings/sendadmmail | Send a message to the administrator
 [**send_join_invite_mail**](SettingsMessagesApi.md#send_join_invite_mail) | **POST** /api/2.0/settings/sendjoininvite | Sends an invitation email
 
 
@@ -31,10 +31,10 @@ from docspace.models.turn_on_admin_message_settings_request_dto import TurnOnAdm
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -113,8 +113,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **send_adm_mail**
-> StringWrapper send_adm_mail(admin_message_settings_requests_dto=admin_message_settings_requests_dto)
+# **send_admin_mail**
+> StringWrapper send_admin_mail(admin_message_settings_requests_dto=admin_message_settings_requests_dto)
 
 Send a message to the administrator
 
@@ -130,10 +130,10 @@ from docspace.models.string_wrapper import StringWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 
@@ -145,11 +145,11 @@ with docspace.ApiClient(configuration) as api_client:
 
     try:
         # Send a message to the administrator
-        api_response = api_instance.send_adm_mail(admin_message_settings_requests_dto=admin_message_settings_requests_dto)
-        print("The response of SettingsMessagesApi->send_adm_mail:\n")
+        api_response = api_instance.send_admin_mail(admin_message_settings_requests_dto=admin_message_settings_requests_dto)
+        print("The response of SettingsMessagesApi->send_admin_mail:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling SettingsMessagesApi->send_adm_mail: %s\n" % e)
+        print("Exception when calling SettingsMessagesApi->send_admin_mail: %s\n" % e)
 ```
 
 
@@ -201,10 +201,10 @@ from docspace.models.string_wrapper import StringWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
+# Defining the host is optional and defaults to http://http:
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://localhost:8092"
+    host = "http://http:"
 )
 
 

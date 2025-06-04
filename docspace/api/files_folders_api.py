@@ -3571,7 +3571,7 @@ class FilesFoldersApi:
 
 
     @validate_call
-    def get_new_items(
+    def get_new_folder_items(
         self,
         folder_id: Annotated[StrictInt, Field(description="The request folder ID.")],
         _request_timeout: Union[
@@ -3615,7 +3615,7 @@ class FilesFoldersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_new_items_serialize(
+        _param = self._get_new_folder_items_serialize(
             folder_id=folder_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -3640,7 +3640,7 @@ class FilesFoldersApi:
 
 
     @validate_call
-    def get_new_items_with_http_info(
+    def get_new_folder_items_with_http_info(
         self,
         folder_id: Annotated[StrictInt, Field(description="The request folder ID.")],
         _request_timeout: Union[
@@ -3684,7 +3684,7 @@ class FilesFoldersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_new_items_serialize(
+        _param = self._get_new_folder_items_serialize(
             folder_id=folder_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -3709,7 +3709,7 @@ class FilesFoldersApi:
 
 
     @validate_call
-    def get_new_items_without_preload_content(
+    def get_new_folder_items_without_preload_content(
         self,
         folder_id: Annotated[StrictInt, Field(description="The request folder ID.")],
         _request_timeout: Union[
@@ -3753,7 +3753,7 @@ class FilesFoldersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_new_items_serialize(
+        _param = self._get_new_folder_items_serialize(
             folder_id=folder_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -3773,7 +3773,7 @@ class FilesFoldersApi:
         return response_data.response
 
 
-    def _get_new_items_serialize(
+    def _get_new_folder_items_serialize(
         self,
         folder_id,
         _request_auth,
@@ -5980,7 +5980,7 @@ class FilesFoldersApi:
 
 
     @validate_call
-    def set_file_order(
+    def set_folder_order(
         self,
         folder_id: Annotated[StrictInt, Field(description="The folder unique identifier.")],
         order_request_dto: Annotated[Optional[OrderRequestDto], Field(description="The folder order information.")] = None,
@@ -5997,7 +5997,7 @@ class FilesFoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FolderIntegerWrapper:
-        """Set file order
+        """Set folder order
 
         Sets the file order in the folder with ID specified in the request.
 
@@ -6027,7 +6027,7 @@ class FilesFoldersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._set_file_order_serialize(
+        _param = self._set_folder_order_serialize(
             folder_id=folder_id,
             order_request_dto=order_request_dto,
             _request_auth=_request_auth,
@@ -6052,7 +6052,7 @@ class FilesFoldersApi:
 
 
     @validate_call
-    def set_file_order_with_http_info(
+    def set_folder_order_with_http_info(
         self,
         folder_id: Annotated[StrictInt, Field(description="The folder unique identifier.")],
         order_request_dto: Annotated[Optional[OrderRequestDto], Field(description="The folder order information.")] = None,
@@ -6069,7 +6069,7 @@ class FilesFoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FolderIntegerWrapper]:
-        """Set file order
+        """Set folder order
 
         Sets the file order in the folder with ID specified in the request.
 
@@ -6099,7 +6099,7 @@ class FilesFoldersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._set_file_order_serialize(
+        _param = self._set_folder_order_serialize(
             folder_id=folder_id,
             order_request_dto=order_request_dto,
             _request_auth=_request_auth,
@@ -6124,7 +6124,7 @@ class FilesFoldersApi:
 
 
     @validate_call
-    def set_file_order_without_preload_content(
+    def set_folder_order_without_preload_content(
         self,
         folder_id: Annotated[StrictInt, Field(description="The folder unique identifier.")],
         order_request_dto: Annotated[Optional[OrderRequestDto], Field(description="The folder order information.")] = None,
@@ -6141,7 +6141,7 @@ class FilesFoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Set file order
+        """Set folder order
 
         Sets the file order in the folder with ID specified in the request.
 
@@ -6171,7 +6171,7 @@ class FilesFoldersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._set_file_order_serialize(
+        _param = self._set_folder_order_serialize(
             folder_id=folder_id,
             order_request_dto=order_request_dto,
             _request_auth=_request_auth,
@@ -6191,7 +6191,7 @@ class FilesFoldersApi:
         return response_data.response
 
 
-    def _set_file_order_serialize(
+    def _set_folder_order_serialize(
         self,
         folder_id,
         order_request_dto,

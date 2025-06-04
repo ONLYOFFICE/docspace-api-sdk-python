@@ -40,17 +40,17 @@ class TestPortalSettingsApi(unittest.TestCase):
         """
         pass
 
-    def test_get_full_absolute_path(self) -> None:
-        """Test case for get_full_absolute_path
-
-        Get a path to the portal
-        """
-        pass
-
     def test_get_portal_information(self) -> None:
         """Test case for get_portal_information
 
         Get a portal
+        """
+        pass
+
+    def test_get_portal_path(self) -> None:
+        """Test case for get_portal_path
+
+        Get a path to the portal
         """
         pass
 

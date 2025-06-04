@@ -17,20 +17,23 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt
+from pydantic import BaseModel, ConfigDict, Field, StrictInt
 from typing import Any, ClassVar, Dict, List, Optional
+from docspace.models.active_connections_wrapper_links_inner import ActiveConnectionsWrapperLinksInner
+from docspace.models.payment_calculation import PaymentCalculation
 from typing import Optional, Set
 from typing_extensions import Self
 
-class DeleteVersionBatchRequestDto(BaseModel):
+class PaymentCalculationWrapper(BaseModel):
     """
-    The request parameters for deleting file versions.
+    PaymentCalculationWrapper
     """ # noqa: E501
-    return_single_operation: Optional[StrictBool] = Field(default=None, description="Specifies whether to return only the current operation", alias="returnSingleOperation")
-    delete_after: Optional[StrictBool] = Field(default=None, description="Specifies whether to delete a file after the editing session is finished or not.", alias="deleteAfter")
-    file_id: StrictInt = Field(description="The file ID to delete.", alias="fileId")
-    versions: Optional[List[StrictInt]] = Field(description="The collection of file versions to be deleted.")
-    __properties: ClassVar[List[str]] = ["returnSingleOperation", "deleteAfter", "fileId", "versions"]
+    response: Optional[PaymentCalculation] = None
+    count: Optional[StrictInt] = None
+    links: Optional[List[ActiveConnectionsWrapperLinksInner]] = None
+    status: Optional[StrictInt] = None
+    status_code: Optional[StrictInt] = Field(default=None, alias="statusCode")
+    __properties: ClassVar[List[str]] = ["response", "count", "links", "status", "statusCode"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -50,7 +53,7 @@ class DeleteVersionBatchRequestDto(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of DeleteVersionBatchRequestDto from a JSON string"""
+        """Create an instance of PaymentCalculationWrapper from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -71,16 +74,21 @@ class DeleteVersionBatchRequestDto(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # set to None if versions (nullable) is None
-        # and model_fields_set contains the field
-        if self.versions is None and "versions" in self.model_fields_set:
-            _dict['versions'] = None
-
+        # override the default output from pydantic by calling `to_dict()` of response
+        if self.response:
+            _dict['response'] = self.response.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in links (list)
+        _items = []
+        if self.links:
+            for _item_links in self.links:
+                if _item_links:
+                    _items.append(_item_links.to_dict())
+            _dict['links'] = _items
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of DeleteVersionBatchRequestDto from a dict"""
+        """Create an instance of PaymentCalculationWrapper from a dict"""
         if obj is None:
             return None
 
@@ -88,10 +96,11 @@ class DeleteVersionBatchRequestDto(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "returnSingleOperation": obj.get("returnSingleOperation"),
-            "deleteAfter": obj.get("deleteAfter"),
-            "fileId": obj.get("fileId"),
-            "versions": obj.get("versions")
+            "response": PaymentCalculation.from_dict(obj["response"]) if obj.get("response") is not None else None,
+            "count": obj.get("count"),
+            "links": [ActiveConnectionsWrapperLinksInner.from_dict(_item) for _item in obj["links"]] if obj.get("links") is not None else None,
+            "status": obj.get("status"),
+            "statusCode": obj.get("statusCode")
         })
         return _obj
 

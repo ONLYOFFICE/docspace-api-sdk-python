@@ -6062,7 +6062,7 @@ class FilesSettingsApi:
 
 
     @validate_call
-    def update_if_exist(
+    def update_file_if_exist(
         self,
         settings_request_dto: Optional[SettingsRequestDto] = None,
         _request_timeout: Union[
@@ -6106,7 +6106,7 @@ class FilesSettingsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_if_exist_serialize(
+        _param = self._update_file_if_exist_serialize(
             settings_request_dto=settings_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -6130,7 +6130,7 @@ class FilesSettingsApi:
 
 
     @validate_call
-    def update_if_exist_with_http_info(
+    def update_file_if_exist_with_http_info(
         self,
         settings_request_dto: Optional[SettingsRequestDto] = None,
         _request_timeout: Union[
@@ -6174,7 +6174,7 @@ class FilesSettingsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_if_exist_serialize(
+        _param = self._update_file_if_exist_serialize(
             settings_request_dto=settings_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -6198,7 +6198,7 @@ class FilesSettingsApi:
 
 
     @validate_call
-    def update_if_exist_without_preload_content(
+    def update_file_if_exist_without_preload_content(
         self,
         settings_request_dto: Optional[SettingsRequestDto] = None,
         _request_timeout: Union[
@@ -6242,7 +6242,7 @@ class FilesSettingsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_if_exist_serialize(
+        _param = self._update_file_if_exist_serialize(
             settings_request_dto=settings_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -6261,7 +6261,7 @@ class FilesSettingsApi:
         return response_data.response
 
 
-    def _update_if_exist_serialize(
+    def _update_file_if_exist_serialize(
         self,
         settings_request_dto,
         _request_auth,

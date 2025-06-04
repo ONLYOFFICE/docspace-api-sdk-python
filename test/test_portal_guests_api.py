@@ -26,8 +26,8 @@ class TestPortalGuestsApi(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
-    def test_get_guest_share_link(self) -> None:
-        """Test case for get_guest_share_link
+    def test_get_guest_sharing_link(self) -> None:
+        """Test case for get_guest_sharing_link
 
         Get a guest sharing link
         """
