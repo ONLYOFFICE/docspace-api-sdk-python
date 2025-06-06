@@ -510,6 +510,7 @@ docs/SmtpOperationStatusRequestsDto.md
 docs/SmtpOperationStatusRequestsWrapper.md
 docs/SmtpSettingsDto.md
 docs/SmtpSettingsWrapper.md
+docs/SortOrder.md
 docs/SortedByType.md
 docs/SsoCertificate.md
 docs/SsoFieldMapping.md
@@ -1159,6 +1160,7 @@ docspace/models/smtp_operation_status_requests_dto.py
 docspace/models/smtp_operation_status_requests_wrapper.py
 docspace/models/smtp_settings_dto.py
 docspace/models/smtp_settings_wrapper.py
+docspace/models/sort_order.py
 docspace/models/sorted_by_type.py
 docspace/models/sso_certificate.py
 docspace/models/sso_field_mapping.py
@@ -1809,6 +1811,7 @@ test/test_smtp_operation_status_requests_dto.py
 test/test_smtp_operation_status_requests_wrapper.py
 test/test_smtp_settings_dto.py
 test/test_smtp_settings_wrapper.py
+test/test_sort_order.py
 test/test_sorted_by_type.py
 test/test_sso_certificate.py
 test/test_sso_field_mapping.py

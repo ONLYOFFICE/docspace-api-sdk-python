@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **get_groups_with_shared**
-> GroupArrayWrapper get_groups_with_shared(id, exclude_shared=exclude_shared)
+> GroupArrayWrapper get_groups_with_shared(id, exclude_shared=exclude_shared, count=count, start_index=start_index, filter_value=filter_value)
 
 Get groups with sharing settings
 
@@ -70,10 +70,13 @@ with docspace.ApiClient(configuration) as api_client:
     api_instance = docspace.GroupRoomsApi(api_client)
     id = 9846 # int | The group ID.
     exclude_shared = true # bool | Specifies whether to exclude the group sharing settings from the response. (optional)
+    count = 1234 # int | The number of groups to retrieve in the request. (optional)
+    start_index = 1234 # int | The starting index from which to begin retrieving groups with their sharing settings. (optional)
+    filter_value = 'some text' # str | The text used as a filter for retrieving groups with their sharing settings. (optional)
 
     try:
         # Get groups with sharing settings
-        api_response = api_instance.get_groups_with_shared(id, exclude_shared=exclude_shared)
+        api_response = api_instance.get_groups_with_shared(id, exclude_shared=exclude_shared, count=count, start_index=start_index, filter_value=filter_value)
         print("The response of GroupRoomsApi->get_groups_with_shared:\n")
         pprint(api_response)
     except Exception as e:
@@ -89,6 +92,9 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **int**| The group ID. | 
  **exclude_shared** | **bool**| Specifies whether to exclude the group sharing settings from the response. | [optional] 
+ **count** | **int**| The number of groups to retrieve in the request. | [optional] 
+ **start_index** | **int**| The starting index from which to begin retrieving groups with their sharing settings. | [optional] 
+ **filter_value** | **str**| The text used as a filter for retrieving groups with their sharing settings. | [optional] 
 
 ### Return type
 

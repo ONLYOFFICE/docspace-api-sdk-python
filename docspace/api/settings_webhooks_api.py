@@ -1132,6 +1132,8 @@ class SettingsWebhooksApi:
         group_status: Annotated[Optional[WebhookGroupStatus], Field(description="The status of the webhook delivery group.")] = None,
         user_id: Annotated[Optional[StrictStr], Field(description="The identifier of the user associated with the webhook event.")] = None,
         trigger: Annotated[Optional[WebhookTrigger], Field(description="The type of event that triggered the webhook.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]], Field(description="The maximum number of webhook log records to return in the query response.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="Specifies the starting index for retrieving webhook logs.  Used for pagination in the webhook delivery log queries.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1165,6 +1167,10 @@ class SettingsWebhooksApi:
         :type user_id: str
         :param trigger: The type of event that triggered the webhook.
         :type trigger: WebhookTrigger
+        :param count: The maximum number of webhook log records to return in the query response.
+        :type count: int
+        :param start_index: Specifies the starting index for retrieving webhook logs.  Used for pagination in the webhook delivery log queries.
+        :type start_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1196,6 +1202,8 @@ class SettingsWebhooksApi:
             group_status=group_status,
             user_id=user_id,
             trigger=trigger,
+            count=count,
+            start_index=start_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1228,6 +1236,8 @@ class SettingsWebhooksApi:
         group_status: Annotated[Optional[WebhookGroupStatus], Field(description="The status of the webhook delivery group.")] = None,
         user_id: Annotated[Optional[StrictStr], Field(description="The identifier of the user associated with the webhook event.")] = None,
         trigger: Annotated[Optional[WebhookTrigger], Field(description="The type of event that triggered the webhook.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]], Field(description="The maximum number of webhook log records to return in the query response.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="Specifies the starting index for retrieving webhook logs.  Used for pagination in the webhook delivery log queries.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1261,6 +1271,10 @@ class SettingsWebhooksApi:
         :type user_id: str
         :param trigger: The type of event that triggered the webhook.
         :type trigger: WebhookTrigger
+        :param count: The maximum number of webhook log records to return in the query response.
+        :type count: int
+        :param start_index: Specifies the starting index for retrieving webhook logs.  Used for pagination in the webhook delivery log queries.
+        :type start_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1292,6 +1306,8 @@ class SettingsWebhooksApi:
             group_status=group_status,
             user_id=user_id,
             trigger=trigger,
+            count=count,
+            start_index=start_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1324,6 +1340,8 @@ class SettingsWebhooksApi:
         group_status: Annotated[Optional[WebhookGroupStatus], Field(description="The status of the webhook delivery group.")] = None,
         user_id: Annotated[Optional[StrictStr], Field(description="The identifier of the user associated with the webhook event.")] = None,
         trigger: Annotated[Optional[WebhookTrigger], Field(description="The type of event that triggered the webhook.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]], Field(description="The maximum number of webhook log records to return in the query response.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="Specifies the starting index for retrieving webhook logs.  Used for pagination in the webhook delivery log queries.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1357,6 +1375,10 @@ class SettingsWebhooksApi:
         :type user_id: str
         :param trigger: The type of event that triggered the webhook.
         :type trigger: WebhookTrigger
+        :param count: The maximum number of webhook log records to return in the query response.
+        :type count: int
+        :param start_index: Specifies the starting index for retrieving webhook logs.  Used for pagination in the webhook delivery log queries.
+        :type start_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1388,6 +1410,8 @@ class SettingsWebhooksApi:
             group_status=group_status,
             user_id=user_id,
             trigger=trigger,
+            count=count,
+            start_index=start_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1415,6 +1439,8 @@ class SettingsWebhooksApi:
         group_status,
         user_id,
         trigger,
+        count,
+        start_index,
         _request_auth,
         _content_type,
         _headers,
@@ -1486,6 +1512,14 @@ class SettingsWebhooksApi:
         if trigger is not None:
             
             _query_params.append(('trigger', trigger.value))
+            
+        if count is not None:
+            
+            _query_params.append(('count', count))
+            
+        if start_index is not None:
+            
+            _query_params.append(('startIndex', start_index))
             
         # process the header parameters
         # process the form parameters

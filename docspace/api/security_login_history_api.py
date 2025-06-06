@@ -16,7 +16,7 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictStr
+from pydantic import Field, StrictInt, StrictStr
 from typing import Optional
 from typing_extensions import Annotated
 from docspace.models.api_date_time import ApiDateTime
@@ -563,6 +563,8 @@ class SecurityLoginHistoryApi:
         action: Annotated[Optional[MessageAction], Field(description="The login-related action to filter events by.")] = None,
         var_from: Annotated[Optional[ApiDateTime], Field(description="The starting date and time for filtering login events.")] = None,
         to: Annotated[Optional[ApiDateTime], Field(description="The ending date and time for filtering login events.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]], Field(description="The number of login events to retrieve in the query.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The starting index for fetching a subset of login events from the query results.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -588,6 +590,10 @@ class SecurityLoginHistoryApi:
         :type var_from: ApiDateTime
         :param to: The ending date and time for filtering login events.
         :type to: ApiDateTime
+        :param count: The number of login events to retrieve in the query.
+        :type count: int
+        :param start_index: The starting index for fetching a subset of login events from the query results.
+        :type start_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -615,6 +621,8 @@ class SecurityLoginHistoryApi:
             action=action,
             var_from=var_from,
             to=to,
+            count=count,
+            start_index=start_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -644,6 +652,8 @@ class SecurityLoginHistoryApi:
         action: Annotated[Optional[MessageAction], Field(description="The login-related action to filter events by.")] = None,
         var_from: Annotated[Optional[ApiDateTime], Field(description="The starting date and time for filtering login events.")] = None,
         to: Annotated[Optional[ApiDateTime], Field(description="The ending date and time for filtering login events.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]], Field(description="The number of login events to retrieve in the query.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The starting index for fetching a subset of login events from the query results.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -669,6 +679,10 @@ class SecurityLoginHistoryApi:
         :type var_from: ApiDateTime
         :param to: The ending date and time for filtering login events.
         :type to: ApiDateTime
+        :param count: The number of login events to retrieve in the query.
+        :type count: int
+        :param start_index: The starting index for fetching a subset of login events from the query results.
+        :type start_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -696,6 +710,8 @@ class SecurityLoginHistoryApi:
             action=action,
             var_from=var_from,
             to=to,
+            count=count,
+            start_index=start_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -725,6 +741,8 @@ class SecurityLoginHistoryApi:
         action: Annotated[Optional[MessageAction], Field(description="The login-related action to filter events by.")] = None,
         var_from: Annotated[Optional[ApiDateTime], Field(description="The starting date and time for filtering login events.")] = None,
         to: Annotated[Optional[ApiDateTime], Field(description="The ending date and time for filtering login events.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]], Field(description="The number of login events to retrieve in the query.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The starting index for fetching a subset of login events from the query results.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -750,6 +768,10 @@ class SecurityLoginHistoryApi:
         :type var_from: ApiDateTime
         :param to: The ending date and time for filtering login events.
         :type to: ApiDateTime
+        :param count: The number of login events to retrieve in the query.
+        :type count: int
+        :param start_index: The starting index for fetching a subset of login events from the query results.
+        :type start_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -777,6 +799,8 @@ class SecurityLoginHistoryApi:
             action=action,
             var_from=var_from,
             to=to,
+            count=count,
+            start_index=start_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -801,6 +825,8 @@ class SecurityLoginHistoryApi:
         action,
         var_from,
         to,
+        count,
+        start_index,
         _request_auth,
         _content_type,
         _headers,
@@ -838,6 +864,14 @@ class SecurityLoginHistoryApi:
         if to is not None:
             
             _query_params.append(('to', to))
+            
+        if count is not None:
+            
+            _query_params.append(('count', count))
+            
+        if start_index is not None:
+            
+            _query_params.append(('startIndex', start_index))
             
         # process the header parameters
         # process the form parameters

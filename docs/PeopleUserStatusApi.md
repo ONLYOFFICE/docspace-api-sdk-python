@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 
 # **get_by_status**
-> EmployeeFullArrayWrapper get_by_status(status)
+> EmployeeFullArrayWrapper get_by_status(status, filter_by=filter_by, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_separator=filter_separator, filter_value=filter_value)
 
 Get profiles by status
 
@@ -28,6 +28,7 @@ Returns a list of profiles filtered by the user status.
 import docspace
 from docspace.models.employee_full_array_wrapper import EmployeeFullArrayWrapper
 from docspace.models.employee_status import EmployeeStatus
+from docspace.models.sort_order import SortOrder
 from docspace.rest import ApiException
 from pprint import pprint
 
@@ -72,10 +73,17 @@ with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.PeopleUserStatusApi(api_client)
     status = docspace.EmployeeStatus() # EmployeeStatus | The user status.
+    filter_by = 'some text' # str | Specifies the criteria used to filter the profiles in the request. (optional)
+    count = 1234 # int | The maximum number of user profiles to retrieve. (optional)
+    start_index = 1234 # int | The starting index for retrieving data in a paginated request. (optional)
+    sort_by = 'some text' # str | Specifies the property or field name by which the results should be sorted. (optional)
+    sort_order = docspace.SortOrder() # SortOrder | The order in which the results are sorted. (optional)
+    filter_separator = 'some text' # str | Represents the separator used to split multiple filter criteria in a query string. (optional)
+    filter_value = 'some text' # str | A string value representing additional filter criteria used in query parameters. (optional)
 
     try:
         # Get profiles by status
-        api_response = api_instance.get_by_status(status)
+        api_response = api_instance.get_by_status(status, filter_by=filter_by, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_separator=filter_separator, filter_value=filter_value)
         print("The response of PeopleUserStatusApi->get_by_status:\n")
         pprint(api_response)
     except Exception as e:
@@ -90,6 +98,13 @@ with docspace.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **status** | [**EmployeeStatus**](.md)| The user status. | 
+ **filter_by** | **str**| Specifies the criteria used to filter the profiles in the request. | [optional] 
+ **count** | **int**| The maximum number of user profiles to retrieve. | [optional] 
+ **start_index** | **int**| The starting index for retrieving data in a paginated request. | [optional] 
+ **sort_by** | **str**| Specifies the property or field name by which the results should be sorted. | [optional] 
+ **sort_order** | [**SortOrder**](.md)| The order in which the results are sorted. | [optional] 
+ **filter_separator** | **str**| Represents the separator used to split multiple filter criteria in a query string. | [optional] 
+ **filter_value** | **str**| A string value representing additional filter criteria used in query parameters. | [optional] 
 
 ### Return type
 

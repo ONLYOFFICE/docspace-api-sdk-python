@@ -422,7 +422,7 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_webhooks_logs**
-> WebhooksLogArrayWrapper get_webhooks_logs(delivery_from=delivery_from, delivery_to=delivery_to, hook_uri=hook_uri, config_id=config_id, event_id=event_id, group_status=group_status, user_id=user_id, trigger=trigger)
+> WebhooksLogArrayWrapper get_webhooks_logs(delivery_from=delivery_from, delivery_to=delivery_to, hook_uri=hook_uri, config_id=config_id, event_id=event_id, group_status=group_status, user_id=user_id, trigger=trigger, count=count, start_index=start_index)
 
 Get webhook logs
 
@@ -492,10 +492,12 @@ with docspace.ApiClient(configuration) as api_client:
     group_status = docspace.WebhookGroupStatus() # WebhookGroupStatus | The status of the webhook delivery group. (optional)
     user_id = 'aae1e103-bca5-9fa1-ba8c-42058b4abf28' # str | The identifier of the user associated with the webhook event. (optional)
     trigger = docspace.WebhookTrigger() # WebhookTrigger | The type of event that triggered the webhook. (optional)
+    count = 1234 # int | The maximum number of webhook log records to return in the query response. (optional)
+    start_index = 1234 # int | Specifies the starting index for retrieving webhook logs.  Used for pagination in the webhook delivery log queries. (optional)
 
     try:
         # Get webhook logs
-        api_response = api_instance.get_webhooks_logs(delivery_from=delivery_from, delivery_to=delivery_to, hook_uri=hook_uri, config_id=config_id, event_id=event_id, group_status=group_status, user_id=user_id, trigger=trigger)
+        api_response = api_instance.get_webhooks_logs(delivery_from=delivery_from, delivery_to=delivery_to, hook_uri=hook_uri, config_id=config_id, event_id=event_id, group_status=group_status, user_id=user_id, trigger=trigger, count=count, start_index=start_index)
         print("The response of SettingsWebhooksApi->get_webhooks_logs:\n")
         pprint(api_response)
     except Exception as e:
@@ -517,6 +519,8 @@ Name | Type | Description  | Notes
  **group_status** | [**WebhookGroupStatus**](.md)| The status of the webhook delivery group. | [optional] 
  **user_id** | **str**| The identifier of the user associated with the webhook event. | [optional] 
  **trigger** | [**WebhookTrigger**](.md)| The type of event that triggered the webhook. | [optional] 
+ **count** | **int**| The maximum number of webhook log records to return in the query response. | [optional] 
+ **start_index** | **int**| Specifies the starting index for retrieving webhook logs.  Used for pagination in the webhook delivery log queries. | [optional] 
 
 ### Return type
 

@@ -333,7 +333,7 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_all_profiles**
-> EmployeeFullArrayWrapper get_all_profiles()
+> EmployeeFullArrayWrapper get_all_profiles(count=count, start_index=start_index, filter_by=filter_by, sort_by=sort_by, sort_order=sort_order, filter_separator=filter_separator, filter_value=filter_value)
 
 Get profiles
 
@@ -350,6 +350,7 @@ Returns a list of profiles for all the portal users.
 ```python
 import docspace
 from docspace.models.employee_full_array_wrapper import EmployeeFullArrayWrapper
+from docspace.models.sort_order import SortOrder
 from docspace.rest import ApiException
 from pprint import pprint
 
@@ -393,10 +394,17 @@ configuration = docspace.Configuration(
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.PeopleProfilesApi(api_client)
+    count = 1234 # int | The maximum number of items to be retrieved in the response. (optional)
+    start_index = 1234 # int | The zero-based index of the first item to be retrieved in a filtered result set. (optional)
+    filter_by = 'some text' # str | Specifies the filter criteria for user-related queries. (optional)
+    sort_by = 'some text' # str | Specifies the property or field name by which the results should be sorted. (optional)
+    sort_order = docspace.SortOrder() # SortOrder | The order in which the results are sorted. (optional)
+    filter_separator = 'some text' # str | The character or string used to separate multiple filter values in a filtering query. (optional)
+    filter_value = 'some text' # str | The text value used as an additional filter criterion for profiles retrieval. (optional)
 
     try:
         # Get profiles
-        api_response = api_instance.get_all_profiles()
+        api_response = api_instance.get_all_profiles(count=count, start_index=start_index, filter_by=filter_by, sort_by=sort_by, sort_order=sort_order, filter_separator=filter_separator, filter_value=filter_value)
         print("The response of PeopleProfilesApi->get_all_profiles:\n")
         pprint(api_response)
     except Exception as e:
@@ -407,7 +415,16 @@ with docspace.ApiClient(configuration) as api_client:
 
 ### Parameters
 
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **count** | **int**| The maximum number of items to be retrieved in the response. | [optional] 
+ **start_index** | **int**| The zero-based index of the first item to be retrieved in a filtered result set. | [optional] 
+ **filter_by** | **str**| Specifies the filter criteria for user-related queries. | [optional] 
+ **sort_by** | **str**| Specifies the property or field name by which the results should be sorted. | [optional] 
+ **sort_order** | [**SortOrder**](.md)| The order in which the results are sorted. | [optional] 
+ **filter_separator** | **str**| The character or string used to separate multiple filter values in a filtering query. | [optional] 
+ **filter_value** | **str**| The text value used as an additional filter criterion for profiles retrieval. | [optional] 
 
 ### Return type
 

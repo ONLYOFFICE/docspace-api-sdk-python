@@ -16,7 +16,7 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictBool, StrictStr
+from pydantic import Field, StrictBool, StrictInt, StrictStr
 from typing import Optional
 from typing_extensions import Annotated
 from docspace.models.group_array_wrapper import GroupArrayWrapper
@@ -26,6 +26,7 @@ from docspace.models.group_wrapper import GroupWrapper
 from docspace.models.members_request import MembersRequest
 from docspace.models.no_content_result_wrapper import NoContentResultWrapper
 from docspace.models.set_manager_request import SetManagerRequest
+from docspace.models.sort_order import SortOrder
 from docspace.models.update_group_request import UpdateGroupRequest
 
 from docspace.api_client import ApiClient, RequestSerialized
@@ -1463,6 +1464,11 @@ class GroupApi:
         self,
         user_id: Annotated[Optional[StrictStr], Field(description="The user ID.")] = None,
         manager: Annotated[Optional[StrictBool], Field(description="Specifies if the user is a manager or not.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]], Field(description="The number of records to retrieve.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The starting index for paginated results.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="Specifies the property used to sort the query results.")] = None,
+        sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The text used for filtering or searching group data.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1484,6 +1490,16 @@ class GroupApi:
         :type user_id: str
         :param manager: Specifies if the user is a manager or not.
         :type manager: bool
+        :param count: The number of records to retrieve.
+        :type count: int
+        :param start_index: The starting index for paginated results.
+        :type start_index: int
+        :param sort_by: Specifies the property used to sort the query results.
+        :type sort_by: str
+        :param sort_order: The order in which the results are sorted.
+        :type sort_order: SortOrder
+        :param filter_value: The text used for filtering or searching group data.
+        :type filter_value: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1509,6 +1525,11 @@ class GroupApi:
         _param = self._get_groups_serialize(
             user_id=user_id,
             manager=manager,
+            count=count,
+            start_index=start_index,
+            sort_by=sort_by,
+            sort_order=sort_order,
+            filter_value=filter_value,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1535,6 +1556,11 @@ class GroupApi:
         self,
         user_id: Annotated[Optional[StrictStr], Field(description="The user ID.")] = None,
         manager: Annotated[Optional[StrictBool], Field(description="Specifies if the user is a manager or not.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]], Field(description="The number of records to retrieve.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The starting index for paginated results.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="Specifies the property used to sort the query results.")] = None,
+        sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The text used for filtering or searching group data.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1556,6 +1582,16 @@ class GroupApi:
         :type user_id: str
         :param manager: Specifies if the user is a manager or not.
         :type manager: bool
+        :param count: The number of records to retrieve.
+        :type count: int
+        :param start_index: The starting index for paginated results.
+        :type start_index: int
+        :param sort_by: Specifies the property used to sort the query results.
+        :type sort_by: str
+        :param sort_order: The order in which the results are sorted.
+        :type sort_order: SortOrder
+        :param filter_value: The text used for filtering or searching group data.
+        :type filter_value: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1581,6 +1617,11 @@ class GroupApi:
         _param = self._get_groups_serialize(
             user_id=user_id,
             manager=manager,
+            count=count,
+            start_index=start_index,
+            sort_by=sort_by,
+            sort_order=sort_order,
+            filter_value=filter_value,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1607,6 +1648,11 @@ class GroupApi:
         self,
         user_id: Annotated[Optional[StrictStr], Field(description="The user ID.")] = None,
         manager: Annotated[Optional[StrictBool], Field(description="Specifies if the user is a manager or not.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]], Field(description="The number of records to retrieve.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The starting index for paginated results.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="Specifies the property used to sort the query results.")] = None,
+        sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The text used for filtering or searching group data.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1628,6 +1674,16 @@ class GroupApi:
         :type user_id: str
         :param manager: Specifies if the user is a manager or not.
         :type manager: bool
+        :param count: The number of records to retrieve.
+        :type count: int
+        :param start_index: The starting index for paginated results.
+        :type start_index: int
+        :param sort_by: Specifies the property used to sort the query results.
+        :type sort_by: str
+        :param sort_order: The order in which the results are sorted.
+        :type sort_order: SortOrder
+        :param filter_value: The text used for filtering or searching group data.
+        :type filter_value: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1653,6 +1709,11 @@ class GroupApi:
         _param = self._get_groups_serialize(
             user_id=user_id,
             manager=manager,
+            count=count,
+            start_index=start_index,
+            sort_by=sort_by,
+            sort_order=sort_order,
+            filter_value=filter_value,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1674,6 +1735,11 @@ class GroupApi:
         self,
         user_id,
         manager,
+        count,
+        start_index,
+        sort_by,
+        sort_order,
+        filter_value,
         _request_auth,
         _content_type,
         _headers,
@@ -1703,6 +1769,26 @@ class GroupApi:
         if manager is not None:
             
             _query_params.append(('manager', manager))
+            
+        if count is not None:
+            
+            _query_params.append(('count', count))
+            
+        if start_index is not None:
+            
+            _query_params.append(('startIndex', start_index))
+            
+        if sort_by is not None:
+            
+            _query_params.append(('sortBy', sort_by))
+            
+        if sort_order is not None:
+            
+            _query_params.append(('sortOrder', sort_order.value))
+            
+        if filter_value is not None:
+            
+            _query_params.append(('filterValue', filter_value))
             
         # process the header parameters
         # process the form parameters

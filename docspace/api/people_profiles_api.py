@@ -16,7 +16,7 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictStr
+from pydantic import Field, StrictInt, StrictStr
 from typing import Optional
 from typing_extensions import Annotated
 from docspace.models.culture import Culture
@@ -26,6 +26,7 @@ from docspace.models.employee_full_wrapper import EmployeeFullWrapper
 from docspace.models.invite_users_request_dto import InviteUsersRequestDto
 from docspace.models.member_request_dto import MemberRequestDto
 from docspace.models.object_wrapper import ObjectWrapper
+from docspace.models.sort_order import SortOrder
 from docspace.models.string_wrapper import StringWrapper
 from docspace.models.update_member_request_dto import UpdateMemberRequestDto
 from docspace.models.update_members_request_dto import UpdateMembersRequestDto
@@ -874,6 +875,13 @@ class PeopleProfilesApi:
     @validate_call
     def get_all_profiles(
         self,
+        count: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]], Field(description="The maximum number of items to be retrieved in the response.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The zero-based index of the first item to be retrieved in a filtered result set.")] = None,
+        filter_by: Annotated[Optional[StrictStr], Field(description="Specifies the filter criteria for user-related queries.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="Specifies the property or field name by which the results should be sorted.")] = None,
+        sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
+        filter_separator: Annotated[Optional[StrictStr], Field(description="The character or string used to separate multiple filter values in a filtering query.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The text value used as an additional filter criterion for profiles retrieval.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -891,6 +899,20 @@ class PeopleProfilesApi:
 
         Returns a list of profiles for all the portal users.
 
+        :param count: The maximum number of items to be retrieved in the response.
+        :type count: int
+        :param start_index: The zero-based index of the first item to be retrieved in a filtered result set.
+        :type start_index: int
+        :param filter_by: Specifies the filter criteria for user-related queries.
+        :type filter_by: str
+        :param sort_by: Specifies the property or field name by which the results should be sorted.
+        :type sort_by: str
+        :param sort_order: The order in which the results are sorted.
+        :type sort_order: SortOrder
+        :param filter_separator: The character or string used to separate multiple filter values in a filtering query.
+        :type filter_separator: str
+        :param filter_value: The text value used as an additional filter criterion for profiles retrieval.
+        :type filter_value: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -914,6 +936,13 @@ class PeopleProfilesApi:
         """ # noqa: E501
 
         _param = self._get_all_profiles_serialize(
+            count=count,
+            start_index=start_index,
+            filter_by=filter_by,
+            sort_by=sort_by,
+            sort_order=sort_order,
+            filter_separator=filter_separator,
+            filter_value=filter_value,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -938,6 +967,13 @@ class PeopleProfilesApi:
     @validate_call
     def get_all_profiles_with_http_info(
         self,
+        count: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]], Field(description="The maximum number of items to be retrieved in the response.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The zero-based index of the first item to be retrieved in a filtered result set.")] = None,
+        filter_by: Annotated[Optional[StrictStr], Field(description="Specifies the filter criteria for user-related queries.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="Specifies the property or field name by which the results should be sorted.")] = None,
+        sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
+        filter_separator: Annotated[Optional[StrictStr], Field(description="The character or string used to separate multiple filter values in a filtering query.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The text value used as an additional filter criterion for profiles retrieval.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -955,6 +991,20 @@ class PeopleProfilesApi:
 
         Returns a list of profiles for all the portal users.
 
+        :param count: The maximum number of items to be retrieved in the response.
+        :type count: int
+        :param start_index: The zero-based index of the first item to be retrieved in a filtered result set.
+        :type start_index: int
+        :param filter_by: Specifies the filter criteria for user-related queries.
+        :type filter_by: str
+        :param sort_by: Specifies the property or field name by which the results should be sorted.
+        :type sort_by: str
+        :param sort_order: The order in which the results are sorted.
+        :type sort_order: SortOrder
+        :param filter_separator: The character or string used to separate multiple filter values in a filtering query.
+        :type filter_separator: str
+        :param filter_value: The text value used as an additional filter criterion for profiles retrieval.
+        :type filter_value: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -978,6 +1028,13 @@ class PeopleProfilesApi:
         """ # noqa: E501
 
         _param = self._get_all_profiles_serialize(
+            count=count,
+            start_index=start_index,
+            filter_by=filter_by,
+            sort_by=sort_by,
+            sort_order=sort_order,
+            filter_separator=filter_separator,
+            filter_value=filter_value,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1002,6 +1059,13 @@ class PeopleProfilesApi:
     @validate_call
     def get_all_profiles_without_preload_content(
         self,
+        count: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]], Field(description="The maximum number of items to be retrieved in the response.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The zero-based index of the first item to be retrieved in a filtered result set.")] = None,
+        filter_by: Annotated[Optional[StrictStr], Field(description="Specifies the filter criteria for user-related queries.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="Specifies the property or field name by which the results should be sorted.")] = None,
+        sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
+        filter_separator: Annotated[Optional[StrictStr], Field(description="The character or string used to separate multiple filter values in a filtering query.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The text value used as an additional filter criterion for profiles retrieval.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1019,6 +1083,20 @@ class PeopleProfilesApi:
 
         Returns a list of profiles for all the portal users.
 
+        :param count: The maximum number of items to be retrieved in the response.
+        :type count: int
+        :param start_index: The zero-based index of the first item to be retrieved in a filtered result set.
+        :type start_index: int
+        :param filter_by: Specifies the filter criteria for user-related queries.
+        :type filter_by: str
+        :param sort_by: Specifies the property or field name by which the results should be sorted.
+        :type sort_by: str
+        :param sort_order: The order in which the results are sorted.
+        :type sort_order: SortOrder
+        :param filter_separator: The character or string used to separate multiple filter values in a filtering query.
+        :type filter_separator: str
+        :param filter_value: The text value used as an additional filter criterion for profiles retrieval.
+        :type filter_value: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1042,6 +1120,13 @@ class PeopleProfilesApi:
         """ # noqa: E501
 
         _param = self._get_all_profiles_serialize(
+            count=count,
+            start_index=start_index,
+            filter_by=filter_by,
+            sort_by=sort_by,
+            sort_order=sort_order,
+            filter_separator=filter_separator,
+            filter_value=filter_value,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1061,6 +1146,13 @@ class PeopleProfilesApi:
 
     def _get_all_profiles_serialize(
         self,
+        count,
+        start_index,
+        filter_by,
+        sort_by,
+        sort_order,
+        filter_separator,
+        filter_value,
         _request_auth,
         _content_type,
         _headers,
@@ -1083,6 +1175,34 @@ class PeopleProfilesApi:
 
         # process the path parameters
         # process the query parameters
+        if count is not None:
+            
+            _query_params.append(('count', count))
+            
+        if start_index is not None:
+            
+            _query_params.append(('startIndex', start_index))
+            
+        if filter_by is not None:
+            
+            _query_params.append(('filterBy', filter_by))
+            
+        if sort_by is not None:
+            
+            _query_params.append(('sortBy', sort_by))
+            
+        if sort_order is not None:
+            
+            _query_params.append(('sortOrder', sort_order.value))
+            
+        if filter_separator is not None:
+            
+            _query_params.append(('filterSeparator', filter_separator))
+            
+        if filter_value is not None:
+            
+            _query_params.append(('filterValue', filter_value))
+            
         # process the header parameters
         # process the form parameters
         # process the body parameter

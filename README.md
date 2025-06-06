@@ -1025,6 +1025,7 @@ Class | Method | HTTP request | Description
  - [SmtpOperationStatusRequestsWrapper](docs/SmtpOperationStatusRequestsWrapper.md)
  - [SmtpSettingsDto](docs/SmtpSettingsDto.md)
  - [SmtpSettingsWrapper](docs/SmtpSettingsWrapper.md)
+ - [SortOrder](docs/SortOrder.md)
  - [SortedByType](docs/SortedByType.md)
  - [SsoCertificate](docs/SsoCertificate.md)
  - [SsoFieldMapping](docs/SsoFieldMapping.md)

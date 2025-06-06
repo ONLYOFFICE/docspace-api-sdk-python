@@ -115,7 +115,7 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_audit_events_by_filter**
-> AuditEventArrayWrapper get_audit_events_by_filter(user_id=user_id, product_type=product_type, module_type=module_type, action_type=action_type, action=action, entry_type=entry_type, target=target, var_from=var_from, to=to)
+> AuditEventArrayWrapper get_audit_events_by_filter(user_id=user_id, product_type=product_type, module_type=module_type, action_type=action_type, action=action, entry_type=entry_type, target=target, var_from=var_from, to=to, count=count, start_index=start_index)
 
 Get filtered audit trail data
 
@@ -190,10 +190,12 @@ with docspace.ApiClient(configuration) as api_client:
     target = 'some text' # str | The target object affected by the audit event (e.g., document ID, user account). (optional)
     var_from = docspace.ApiDateTime() # ApiDateTime | The starting date and time for filtering audit events. (optional)
     to = docspace.ApiDateTime() # ApiDateTime | The ending date and time for filtering audit events. (optional)
+    count = 1234 # int | The maximum number of audit event records to retrieve. (optional)
+    start_index = 1234 # int | The index of the first audit event record to retrieve in a paged query. (optional)
 
     try:
         # Get filtered audit trail data
-        api_response = api_instance.get_audit_events_by_filter(user_id=user_id, product_type=product_type, module_type=module_type, action_type=action_type, action=action, entry_type=entry_type, target=target, var_from=var_from, to=to)
+        api_response = api_instance.get_audit_events_by_filter(user_id=user_id, product_type=product_type, module_type=module_type, action_type=action_type, action=action, entry_type=entry_type, target=target, var_from=var_from, to=to, count=count, start_index=start_index)
         print("The response of SecurityAuditTrailDataApi->get_audit_events_by_filter:\n")
         pprint(api_response)
     except Exception as e:
@@ -216,6 +218,8 @@ Name | Type | Description  | Notes
  **target** | **str**| The target object affected by the audit event (e.g., document ID, user account). | [optional] 
  **var_from** | [**ApiDateTime**](.md)| The starting date and time for filtering audit events. | [optional] 
  **to** | [**ApiDateTime**](.md)| The ending date and time for filtering audit events. | [optional] 
+ **count** | **int**| The maximum number of audit event records to retrieve. | [optional] 
+ **start_index** | **int**| The index of the first audit event record to retrieve in a paged query. | [optional] 
 
 ### Return type
 

@@ -16,12 +16,13 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field
+from pydantic import Field, StrictInt, StrictStr
 from typing import Optional
 from typing_extensions import Annotated
 from docspace.models.employee_activation_status import EmployeeActivationStatus
 from docspace.models.employee_full_array_wrapper import EmployeeFullArrayWrapper
 from docspace.models.employee_status import EmployeeStatus
+from docspace.models.sort_order import SortOrder
 from docspace.models.update_members_request_dto import UpdateMembersRequestDto
 
 from docspace.api_client import ApiClient, RequestSerialized
@@ -46,6 +47,13 @@ class PeopleUserStatusApi:
     def get_by_status(
         self,
         status: Annotated[EmployeeStatus, Field(description="The user status.")],
+        filter_by: Annotated[Optional[StrictStr], Field(description="Specifies the criteria used to filter the profiles in the request.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]], Field(description="The maximum number of user profiles to retrieve.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The starting index for retrieving data in a paginated request.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="Specifies the property or field name by which the results should be sorted.")] = None,
+        sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
+        filter_separator: Annotated[Optional[StrictStr], Field(description="Represents the separator used to split multiple filter criteria in a query string.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="A string value representing additional filter criteria used in query parameters.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -65,6 +73,20 @@ class PeopleUserStatusApi:
 
         :param status: The user status. (required)
         :type status: EmployeeStatus
+        :param filter_by: Specifies the criteria used to filter the profiles in the request.
+        :type filter_by: str
+        :param count: The maximum number of user profiles to retrieve.
+        :type count: int
+        :param start_index: The starting index for retrieving data in a paginated request.
+        :type start_index: int
+        :param sort_by: Specifies the property or field name by which the results should be sorted.
+        :type sort_by: str
+        :param sort_order: The order in which the results are sorted.
+        :type sort_order: SortOrder
+        :param filter_separator: Represents the separator used to split multiple filter criteria in a query string.
+        :type filter_separator: str
+        :param filter_value: A string value representing additional filter criteria used in query parameters.
+        :type filter_value: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -89,6 +111,13 @@ class PeopleUserStatusApi:
 
         _param = self._get_by_status_serialize(
             status=status,
+            filter_by=filter_by,
+            count=count,
+            start_index=start_index,
+            sort_by=sort_by,
+            sort_order=sort_order,
+            filter_separator=filter_separator,
+            filter_value=filter_value,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -114,6 +143,13 @@ class PeopleUserStatusApi:
     def get_by_status_with_http_info(
         self,
         status: Annotated[EmployeeStatus, Field(description="The user status.")],
+        filter_by: Annotated[Optional[StrictStr], Field(description="Specifies the criteria used to filter the profiles in the request.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]], Field(description="The maximum number of user profiles to retrieve.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The starting index for retrieving data in a paginated request.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="Specifies the property or field name by which the results should be sorted.")] = None,
+        sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
+        filter_separator: Annotated[Optional[StrictStr], Field(description="Represents the separator used to split multiple filter criteria in a query string.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="A string value representing additional filter criteria used in query parameters.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -133,6 +169,20 @@ class PeopleUserStatusApi:
 
         :param status: The user status. (required)
         :type status: EmployeeStatus
+        :param filter_by: Specifies the criteria used to filter the profiles in the request.
+        :type filter_by: str
+        :param count: The maximum number of user profiles to retrieve.
+        :type count: int
+        :param start_index: The starting index for retrieving data in a paginated request.
+        :type start_index: int
+        :param sort_by: Specifies the property or field name by which the results should be sorted.
+        :type sort_by: str
+        :param sort_order: The order in which the results are sorted.
+        :type sort_order: SortOrder
+        :param filter_separator: Represents the separator used to split multiple filter criteria in a query string.
+        :type filter_separator: str
+        :param filter_value: A string value representing additional filter criteria used in query parameters.
+        :type filter_value: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -157,6 +207,13 @@ class PeopleUserStatusApi:
 
         _param = self._get_by_status_serialize(
             status=status,
+            filter_by=filter_by,
+            count=count,
+            start_index=start_index,
+            sort_by=sort_by,
+            sort_order=sort_order,
+            filter_separator=filter_separator,
+            filter_value=filter_value,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -182,6 +239,13 @@ class PeopleUserStatusApi:
     def get_by_status_without_preload_content(
         self,
         status: Annotated[EmployeeStatus, Field(description="The user status.")],
+        filter_by: Annotated[Optional[StrictStr], Field(description="Specifies the criteria used to filter the profiles in the request.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]], Field(description="The maximum number of user profiles to retrieve.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The starting index for retrieving data in a paginated request.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="Specifies the property or field name by which the results should be sorted.")] = None,
+        sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
+        filter_separator: Annotated[Optional[StrictStr], Field(description="Represents the separator used to split multiple filter criteria in a query string.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="A string value representing additional filter criteria used in query parameters.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -201,6 +265,20 @@ class PeopleUserStatusApi:
 
         :param status: The user status. (required)
         :type status: EmployeeStatus
+        :param filter_by: Specifies the criteria used to filter the profiles in the request.
+        :type filter_by: str
+        :param count: The maximum number of user profiles to retrieve.
+        :type count: int
+        :param start_index: The starting index for retrieving data in a paginated request.
+        :type start_index: int
+        :param sort_by: Specifies the property or field name by which the results should be sorted.
+        :type sort_by: str
+        :param sort_order: The order in which the results are sorted.
+        :type sort_order: SortOrder
+        :param filter_separator: Represents the separator used to split multiple filter criteria in a query string.
+        :type filter_separator: str
+        :param filter_value: A string value representing additional filter criteria used in query parameters.
+        :type filter_value: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -225,6 +303,13 @@ class PeopleUserStatusApi:
 
         _param = self._get_by_status_serialize(
             status=status,
+            filter_by=filter_by,
+            count=count,
+            start_index=start_index,
+            sort_by=sort_by,
+            sort_order=sort_order,
+            filter_separator=filter_separator,
+            filter_value=filter_value,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -245,6 +330,13 @@ class PeopleUserStatusApi:
     def _get_by_status_serialize(
         self,
         status,
+        filter_by,
+        count,
+        start_index,
+        sort_by,
+        sort_order,
+        filter_separator,
+        filter_value,
         _request_auth,
         _content_type,
         _headers,
@@ -269,6 +361,34 @@ class PeopleUserStatusApi:
         if status is not None:
             _path_params['status'] = status.value
         # process the query parameters
+        if filter_by is not None:
+            
+            _query_params.append(('filterBy', filter_by))
+            
+        if count is not None:
+            
+            _query_params.append(('count', count))
+            
+        if start_index is not None:
+            
+            _query_params.append(('startIndex', start_index))
+            
+        if sort_by is not None:
+            
+            _query_params.append(('sortBy', sort_by))
+            
+        if sort_order is not None:
+            
+            _query_params.append(('sortOrder', sort_order.value))
+            
+        if filter_separator is not None:
+            
+            _query_params.append(('filterSeparator', filter_separator))
+            
+        if filter_value is not None:
+            
+            _query_params.append(('filterValue', filter_value))
+            
         # process the header parameters
         # process the form parameters
         # process the body parameter

@@ -210,7 +210,7 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_login_events_by_filter**
-> LoginEventArrayWrapper get_login_events_by_filter(user_id=user_id, action=action, var_from=var_from, to=to)
+> LoginEventArrayWrapper get_login_events_by_filter(user_id=user_id, action=action, var_from=var_from, to=to, count=count, start_index=start_index)
 
 Get filtered login events
 
@@ -276,10 +276,12 @@ with docspace.ApiClient(configuration) as api_client:
     action = docspace.MessageAction() # MessageAction | The login-related action to filter events by. (optional)
     var_from = docspace.ApiDateTime() # ApiDateTime | The starting date and time for filtering login events. (optional)
     to = docspace.ApiDateTime() # ApiDateTime | The ending date and time for filtering login events. (optional)
+    count = 1234 # int | The number of login events to retrieve in the query. (optional)
+    start_index = 1234 # int | The starting index for fetching a subset of login events from the query results. (optional)
 
     try:
         # Get filtered login events
-        api_response = api_instance.get_login_events_by_filter(user_id=user_id, action=action, var_from=var_from, to=to)
+        api_response = api_instance.get_login_events_by_filter(user_id=user_id, action=action, var_from=var_from, to=to, count=count, start_index=start_index)
         print("The response of SecurityLoginHistoryApi->get_login_events_by_filter:\n")
         pprint(api_response)
     except Exception as e:
@@ -297,6 +299,8 @@ Name | Type | Description  | Notes
  **action** | [**MessageAction**](.md)| The login-related action to filter events by. | [optional] 
  **var_from** | [**ApiDateTime**](.md)| The starting date and time for filtering login events. | [optional] 
  **to** | [**ApiDateTime**](.md)| The ending date and time for filtering login events. | [optional] 
+ **count** | **int**| The number of login events to retrieve in the query. | [optional] 
+ **start_index** | **int**| The starting index for fetching a subset of login events from the query results. | [optional] 
 
 ### Return type
 

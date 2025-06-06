@@ -16,7 +16,7 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictBool, StrictInt
+from pydantic import Field, StrictBool, StrictInt, StrictStr
 from typing import Optional
 from typing_extensions import Annotated
 from docspace.models.group_array_wrapper import GroupArrayWrapper
@@ -44,6 +44,9 @@ class GroupRoomsApi:
         self,
         id: Annotated[StrictInt, Field(description="The group ID.")],
         exclude_shared: Annotated[Optional[StrictBool], Field(description="Specifies whether to exclude the group sharing settings from the response.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]], Field(description="The number of groups to retrieve in the request.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The starting index from which to begin retrieving groups with their sharing settings.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The text used as a filter for retrieving groups with their sharing settings.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -65,6 +68,12 @@ class GroupRoomsApi:
         :type id: int
         :param exclude_shared: Specifies whether to exclude the group sharing settings from the response.
         :type exclude_shared: bool
+        :param count: The number of groups to retrieve in the request.
+        :type count: int
+        :param start_index: The starting index from which to begin retrieving groups with their sharing settings.
+        :type start_index: int
+        :param filter_value: The text used as a filter for retrieving groups with their sharing settings.
+        :type filter_value: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -90,6 +99,9 @@ class GroupRoomsApi:
         _param = self._get_groups_with_shared_serialize(
             id=id,
             exclude_shared=exclude_shared,
+            count=count,
+            start_index=start_index,
+            filter_value=filter_value,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -117,6 +129,9 @@ class GroupRoomsApi:
         self,
         id: Annotated[StrictInt, Field(description="The group ID.")],
         exclude_shared: Annotated[Optional[StrictBool], Field(description="Specifies whether to exclude the group sharing settings from the response.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]], Field(description="The number of groups to retrieve in the request.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The starting index from which to begin retrieving groups with their sharing settings.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The text used as a filter for retrieving groups with their sharing settings.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -138,6 +153,12 @@ class GroupRoomsApi:
         :type id: int
         :param exclude_shared: Specifies whether to exclude the group sharing settings from the response.
         :type exclude_shared: bool
+        :param count: The number of groups to retrieve in the request.
+        :type count: int
+        :param start_index: The starting index from which to begin retrieving groups with their sharing settings.
+        :type start_index: int
+        :param filter_value: The text used as a filter for retrieving groups with their sharing settings.
+        :type filter_value: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -163,6 +184,9 @@ class GroupRoomsApi:
         _param = self._get_groups_with_shared_serialize(
             id=id,
             exclude_shared=exclude_shared,
+            count=count,
+            start_index=start_index,
+            filter_value=filter_value,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -190,6 +214,9 @@ class GroupRoomsApi:
         self,
         id: Annotated[StrictInt, Field(description="The group ID.")],
         exclude_shared: Annotated[Optional[StrictBool], Field(description="Specifies whether to exclude the group sharing settings from the response.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]], Field(description="The number of groups to retrieve in the request.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The starting index from which to begin retrieving groups with their sharing settings.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The text used as a filter for retrieving groups with their sharing settings.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -211,6 +238,12 @@ class GroupRoomsApi:
         :type id: int
         :param exclude_shared: Specifies whether to exclude the group sharing settings from the response.
         :type exclude_shared: bool
+        :param count: The number of groups to retrieve in the request.
+        :type count: int
+        :param start_index: The starting index from which to begin retrieving groups with their sharing settings.
+        :type start_index: int
+        :param filter_value: The text used as a filter for retrieving groups with their sharing settings.
+        :type filter_value: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -236,6 +269,9 @@ class GroupRoomsApi:
         _param = self._get_groups_with_shared_serialize(
             id=id,
             exclude_shared=exclude_shared,
+            count=count,
+            start_index=start_index,
+            filter_value=filter_value,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -258,6 +294,9 @@ class GroupRoomsApi:
         self,
         id,
         exclude_shared,
+        count,
+        start_index,
+        filter_value,
         _request_auth,
         _content_type,
         _headers,
@@ -285,6 +324,18 @@ class GroupRoomsApi:
         if exclude_shared is not None:
             
             _query_params.append(('excludeShared', exclude_shared))
+            
+        if count is not None:
+            
+            _query_params.append(('count', count))
+            
+        if start_index is not None:
+            
+            _query_params.append(('startIndex', start_index))
+            
+        if filter_value is not None:
+            
+            _query_params.append(('filterValue', filter_value))
             
         # process the header parameters
         # process the form parameters

@@ -454,6 +454,7 @@ from docspace.models.smtp_operation_status_requests_dto import SmtpOperationStat
 from docspace.models.smtp_operation_status_requests_wrapper import SmtpOperationStatusRequestsWrapper
 from docspace.models.smtp_settings_dto import SmtpSettingsDto
 from docspace.models.smtp_settings_wrapper import SmtpSettingsWrapper
+from docspace.models.sort_order import SortOrder
 from docspace.models.sorted_by_type import SortedByType
 from docspace.models.sso_certificate import SsoCertificate
 from docspace.models.sso_field_mapping import SsoFieldMapping

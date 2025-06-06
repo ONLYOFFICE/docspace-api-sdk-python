@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 
 # **get_accounts_entries_with_shared**
-> ObjectArrayWrapper get_accounts_entries_with_shared(id, employee_status=employee_status, activation_status=activation_status, exclude_shared=exclude_shared, include_shared=include_shared, invited_by_me=invited_by_me, inviter_id=inviter_id, area=area, employee_types=employee_types)
+> ObjectArrayWrapper get_accounts_entries_with_shared(id, employee_status=employee_status, activation_status=activation_status, exclude_shared=exclude_shared, include_shared=include_shared, invited_by_me=invited_by_me, inviter_id=inviter_id, area=area, employee_types=employee_types, count=count, start_index=start_index, filter_separator=filter_separator, filter_value=filter_value)
 
 Get account entries
 
@@ -87,10 +87,14 @@ with docspace.ApiClient(configuration) as api_client:
     inviter_id = '75a5f745-f697-4418-b38d-0fe0d277e258' # str | The inviter ID. (optional)
     area = docspace.Area() # Area | The area of the account entries. (optional)
     employee_types = [docspace.EmployeeType()] # List[EmployeeType] | The list of the user types. (optional)
+    count = 1234 # int | The number of items to retrieve in a request. (optional)
+    start_index = 1234 # int | The starting index for the query results. (optional)
+    filter_separator = 'some text' # str | Specifies the separator used in filter expressions. (optional)
+    filter_value = 'some text' # str | The text filter applied to the accounts search query. (optional)
 
     try:
         # Get account entries
-        api_response = api_instance.get_accounts_entries_with_shared(id, employee_status=employee_status, activation_status=activation_status, exclude_shared=exclude_shared, include_shared=include_shared, invited_by_me=invited_by_me, inviter_id=inviter_id, area=area, employee_types=employee_types)
+        api_response = api_instance.get_accounts_entries_with_shared(id, employee_status=employee_status, activation_status=activation_status, exclude_shared=exclude_shared, include_shared=include_shared, invited_by_me=invited_by_me, inviter_id=inviter_id, area=area, employee_types=employee_types, count=count, start_index=start_index, filter_separator=filter_separator, filter_value=filter_value)
         print("The response of PeopleSearchApi->get_accounts_entries_with_shared:\n")
         pprint(api_response)
     except Exception as e:
@@ -113,6 +117,10 @@ Name | Type | Description  | Notes
  **inviter_id** | **str**| The inviter ID. | [optional] 
  **area** | [**Area**](.md)| The area of the account entries. | [optional] 
  **employee_types** | [**List[EmployeeType]**](EmployeeType.md)| The list of the user types. | [optional] 
+ **count** | **int**| The number of items to retrieve in a request. | [optional] 
+ **start_index** | **int**| The starting index for the query results. | [optional] 
+ **filter_separator** | **str**| Specifies the separator used in filter expressions. | [optional] 
+ **filter_value** | **str**| The text filter applied to the accounts search query. | [optional] 
 
 ### Return type
 
@@ -138,7 +146,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_search**
-> EmployeeFullArrayWrapper get_search(query)
+> EmployeeFullArrayWrapper get_search(query, filter_by=filter_by, filter_value=filter_value)
 
 Search users
 
@@ -199,10 +207,12 @@ with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.PeopleSearchApi(api_client)
     query = 'some text' # str | The search query.
+    filter_by = 'some text' # str | Specifies a filter criteria for the user search query. (optional)
+    filter_value = 'some text' # str | The value used for filtering users, allowing additional constraints for the query. (optional)
 
     try:
         # Search users
-        api_response = api_instance.get_search(query)
+        api_response = api_instance.get_search(query, filter_by=filter_by, filter_value=filter_value)
         print("The response of PeopleSearchApi->get_search:\n")
         pprint(api_response)
     except Exception as e:
@@ -217,6 +227,8 @@ with docspace.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **query** | **str**| The search query. | 
+ **filter_by** | **str**| Specifies a filter criteria for the user search query. | [optional] 
+ **filter_value** | **str**| The value used for filtering users, allowing additional constraints for the query. | [optional] 
 
 ### Return type
 
@@ -242,7 +254,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_simple_by_filter**
-> EmployeeArrayWrapper get_simple_by_filter(employee_status=employee_status, group_id=group_id, activation_status=activation_status, employee_type=employee_type, employee_types=employee_types, is_administrator=is_administrator, payments=payments, account_login_type=account_login_type, quota_filter=quota_filter, without_group=without_group, exclude_group=exclude_group, invited_by_me=invited_by_me, inviter_id=inviter_id, area=area)
+> EmployeeArrayWrapper get_simple_by_filter(employee_status=employee_status, group_id=group_id, activation_status=activation_status, employee_type=employee_type, employee_types=employee_types, is_administrator=is_administrator, payments=payments, account_login_type=account_login_type, quota_filter=quota_filter, without_group=without_group, exclude_group=exclude_group, invited_by_me=invited_by_me, inviter_id=inviter_id, area=area, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_separator=filter_separator, filter_value=filter_value)
 
 Search users by extended filter
 
@@ -266,6 +278,7 @@ from docspace.models.employee_status import EmployeeStatus
 from docspace.models.employee_type import EmployeeType
 from docspace.models.payments import Payments
 from docspace.models.quota_filter import QuotaFilter
+from docspace.models.sort_order import SortOrder
 from docspace.rest import ApiException
 from pprint import pprint
 
@@ -323,10 +336,16 @@ with docspace.ApiClient(configuration) as api_client:
     invited_by_me = true # bool | Specifies whether the user is invited by the current user or not. (optional)
     inviter_id = '75a5f745-f697-4418-b38d-0fe0d277e258' # str | The inviter ID. (optional)
     area = docspace.Area() # Area | The filter area. (optional)
+    count = 1234 # int | The maximum number of items to be retrieved in the response. (optional)
+    start_index = 1234 # int | The zero-based index of the first item to be retrieved in a filtered result set. (optional)
+    sort_by = 'some text' # str | Specifies the property or field name by which the results should be sorted. (optional)
+    sort_order = docspace.SortOrder() # SortOrder | The order in which the results are sorted. (optional)
+    filter_separator = 'some text' # str | Represents the separator used to split filter criteria in query parameters. (optional)
+    filter_value = 'some text' # str | The search text used to filter results based on user input. (optional)
 
     try:
         # Search users by extended filter
-        api_response = api_instance.get_simple_by_filter(employee_status=employee_status, group_id=group_id, activation_status=activation_status, employee_type=employee_type, employee_types=employee_types, is_administrator=is_administrator, payments=payments, account_login_type=account_login_type, quota_filter=quota_filter, without_group=without_group, exclude_group=exclude_group, invited_by_me=invited_by_me, inviter_id=inviter_id, area=area)
+        api_response = api_instance.get_simple_by_filter(employee_status=employee_status, group_id=group_id, activation_status=activation_status, employee_type=employee_type, employee_types=employee_types, is_administrator=is_administrator, payments=payments, account_login_type=account_login_type, quota_filter=quota_filter, without_group=without_group, exclude_group=exclude_group, invited_by_me=invited_by_me, inviter_id=inviter_id, area=area, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_separator=filter_separator, filter_value=filter_value)
         print("The response of PeopleSearchApi->get_simple_by_filter:\n")
         pprint(api_response)
     except Exception as e:
@@ -354,6 +373,12 @@ Name | Type | Description  | Notes
  **invited_by_me** | **bool**| Specifies whether the user is invited by the current user or not. | [optional] 
  **inviter_id** | **str**| The inviter ID. | [optional] 
  **area** | [**Area**](.md)| The filter area. | [optional] 
+ **count** | **int**| The maximum number of items to be retrieved in the response. | [optional] 
+ **start_index** | **int**| The zero-based index of the first item to be retrieved in a filtered result set. | [optional] 
+ **sort_by** | **str**| Specifies the property or field name by which the results should be sorted. | [optional] 
+ **sort_order** | [**SortOrder**](.md)| The order in which the results are sorted. | [optional] 
+ **filter_separator** | **str**| Represents the separator used to split filter criteria in query parameters. | [optional] 
+ **filter_value** | **str**| The search text used to filter results based on user input. | [optional] 
 
 ### Return type
 
@@ -379,7 +404,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_users_with_room_shared**
-> EmployeeFullArrayWrapper get_users_with_room_shared(id, employee_status=employee_status, activation_status=activation_status, exclude_shared=exclude_shared, include_shared=include_shared, invited_by_me=invited_by_me, inviter_id=inviter_id, area=area, employee_types=employee_types)
+> EmployeeFullArrayWrapper get_users_with_room_shared(id, employee_status=employee_status, activation_status=activation_status, exclude_shared=exclude_shared, include_shared=include_shared, invited_by_me=invited_by_me, inviter_id=inviter_id, area=area, employee_types=employee_types, count=count, start_index=start_index, filter_separator=filter_separator, filter_value=filter_value)
 
 Get users with room sharing settings
 
@@ -452,10 +477,14 @@ with docspace.ApiClient(configuration) as api_client:
     inviter_id = '75a5f745-f697-4418-b38d-0fe0d277e258' # str | The inviter ID. (optional)
     area = docspace.Area() # Area | The user area. (optional)
     employee_types = [docspace.EmployeeType()] # List[EmployeeType] | The list of user types. (optional)
+    count = 1234 # int | The maximum number of users to be retrieved in the request. (optional)
+    start_index = 1234 # int | The zero-based index of the first record to retrieve in a paged query. (optional)
+    filter_separator = 'some text' # str | The character or string used to separate multiple filter values in a filtering query. (optional)
+    filter_value = 'some text' # str | The filter text value used for searching or filtering user results. (optional)
 
     try:
         # Get users with room sharing settings
-        api_response = api_instance.get_users_with_room_shared(id, employee_status=employee_status, activation_status=activation_status, exclude_shared=exclude_shared, include_shared=include_shared, invited_by_me=invited_by_me, inviter_id=inviter_id, area=area, employee_types=employee_types)
+        api_response = api_instance.get_users_with_room_shared(id, employee_status=employee_status, activation_status=activation_status, exclude_shared=exclude_shared, include_shared=include_shared, invited_by_me=invited_by_me, inviter_id=inviter_id, area=area, employee_types=employee_types, count=count, start_index=start_index, filter_separator=filter_separator, filter_value=filter_value)
         print("The response of PeopleSearchApi->get_users_with_room_shared:\n")
         pprint(api_response)
     except Exception as e:
@@ -478,6 +507,10 @@ Name | Type | Description  | Notes
  **inviter_id** | **str**| The inviter ID. | [optional] 
  **area** | [**Area**](.md)| The user area. | [optional] 
  **employee_types** | [**List[EmployeeType]**](EmployeeType.md)| The list of user types. | [optional] 
+ **count** | **int**| The maximum number of users to be retrieved in the request. | [optional] 
+ **start_index** | **int**| The zero-based index of the first record to retrieve in a paged query. | [optional] 
+ **filter_separator** | **str**| The character or string used to separate multiple filter values in a filtering query. | [optional] 
+ **filter_value** | **str**| The filter text value used for searching or filtering user results. | [optional] 
 
 ### Return type
 
@@ -503,7 +536,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **search_users_by_extended_filter**
-> EmployeeFullArrayWrapper search_users_by_extended_filter(employee_status=employee_status, group_id=group_id, activation_status=activation_status, employee_type=employee_type, employee_types=employee_types, is_administrator=is_administrator, payments=payments, account_login_type=account_login_type, quota_filter=quota_filter, without_group=without_group, exclude_group=exclude_group, invited_by_me=invited_by_me, inviter_id=inviter_id, area=area)
+> EmployeeFullArrayWrapper search_users_by_extended_filter(employee_status=employee_status, group_id=group_id, activation_status=activation_status, employee_type=employee_type, employee_types=employee_types, is_administrator=is_administrator, payments=payments, account_login_type=account_login_type, quota_filter=quota_filter, without_group=without_group, exclude_group=exclude_group, invited_by_me=invited_by_me, inviter_id=inviter_id, area=area, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_separator=filter_separator, filter_value=filter_value)
 
 Search users with detaailed information by extended filter
 
@@ -527,6 +560,7 @@ from docspace.models.employee_status import EmployeeStatus
 from docspace.models.employee_type import EmployeeType
 from docspace.models.payments import Payments
 from docspace.models.quota_filter import QuotaFilter
+from docspace.models.sort_order import SortOrder
 from docspace.rest import ApiException
 from pprint import pprint
 
@@ -584,10 +618,16 @@ with docspace.ApiClient(configuration) as api_client:
     invited_by_me = true # bool | Specifies whether the user is invited by the current user or not. (optional)
     inviter_id = '75a5f745-f697-4418-b38d-0fe0d277e258' # str | The inviter ID. (optional)
     area = docspace.Area() # Area | The filter area. (optional)
+    count = 1234 # int | The maximum number of items to be retrieved in the response. (optional)
+    start_index = 1234 # int | The zero-based index of the first item to be retrieved in a filtered result set. (optional)
+    sort_by = 'some text' # str | Specifies the property or field name by which the results should be sorted. (optional)
+    sort_order = docspace.SortOrder() # SortOrder | The order in which the results are sorted. (optional)
+    filter_separator = 'some text' # str | Represents the separator used to split filter criteria in query parameters. (optional)
+    filter_value = 'some text' # str | The search text used to filter results based on user input. (optional)
 
     try:
         # Search users with detaailed information by extended filter
-        api_response = api_instance.search_users_by_extended_filter(employee_status=employee_status, group_id=group_id, activation_status=activation_status, employee_type=employee_type, employee_types=employee_types, is_administrator=is_administrator, payments=payments, account_login_type=account_login_type, quota_filter=quota_filter, without_group=without_group, exclude_group=exclude_group, invited_by_me=invited_by_me, inviter_id=inviter_id, area=area)
+        api_response = api_instance.search_users_by_extended_filter(employee_status=employee_status, group_id=group_id, activation_status=activation_status, employee_type=employee_type, employee_types=employee_types, is_administrator=is_administrator, payments=payments, account_login_type=account_login_type, quota_filter=quota_filter, without_group=without_group, exclude_group=exclude_group, invited_by_me=invited_by_me, inviter_id=inviter_id, area=area, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_separator=filter_separator, filter_value=filter_value)
         print("The response of PeopleSearchApi->search_users_by_extended_filter:\n")
         pprint(api_response)
     except Exception as e:
@@ -615,6 +655,12 @@ Name | Type | Description  | Notes
  **invited_by_me** | **bool**| Specifies whether the user is invited by the current user or not. | [optional] 
  **inviter_id** | **str**| The inviter ID. | [optional] 
  **area** | [**Area**](.md)| The filter area. | [optional] 
+ **count** | **int**| The maximum number of items to be retrieved in the response. | [optional] 
+ **start_index** | **int**| The zero-based index of the first item to be retrieved in a filtered result set. | [optional] 
+ **sort_by** | **str**| Specifies the property or field name by which the results should be sorted. | [optional] 
+ **sort_order** | [**SortOrder**](.md)| The order in which the results are sorted. | [optional] 
+ **filter_separator** | **str**| Represents the separator used to split filter criteria in query parameters. | [optional] 
+ **filter_value** | **str**| The search text used to filter results based on user input. | [optional] 
 
 ### Return type
 
@@ -743,7 +789,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **search_users_by_status**
-> EmployeeFullArrayWrapper search_users_by_status(status, query=query)
+> EmployeeFullArrayWrapper search_users_by_status(status, query=query, filter_by=filter_by, filter_value=filter_value)
 
 Search users by status filter
 
@@ -806,10 +852,12 @@ with docspace.ApiClient(configuration) as api_client:
     api_instance = docspace.PeopleSearchApi(api_client)
     status = docspace.EmployeeStatus() # EmployeeStatus | The user status.
     query = 'some text' # str | The advanced search query. (optional)
+    filter_by = 'some text' # str | Specifies the criteria used to filter search results in advanced queries. (optional)
+    filter_value = 'some text' # str | The value used to filter the search query. (optional)
 
     try:
         # Search users by status filter
-        api_response = api_instance.search_users_by_status(status, query=query)
+        api_response = api_instance.search_users_by_status(status, query=query, filter_by=filter_by, filter_value=filter_value)
         print("The response of PeopleSearchApi->search_users_by_status:\n")
         pprint(api_response)
     except Exception as e:
@@ -825,6 +873,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **status** | [**EmployeeStatus**](.md)| The user status. | 
  **query** | **str**| The advanced search query. | [optional] 
+ **filter_by** | **str**| Specifies the criteria used to filter search results in advanced queries. | [optional] 
+ **filter_value** | **str**| The value used to filter the search query. | [optional] 
 
 ### Return type
 

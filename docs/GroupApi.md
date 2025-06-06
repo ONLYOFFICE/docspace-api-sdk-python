@@ -542,7 +542,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_groups**
-> GroupArrayWrapper get_groups(user_id=user_id, manager=manager)
+> GroupArrayWrapper get_groups(user_id=user_id, manager=manager, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value)
 
 Get groups
 
@@ -559,6 +559,7 @@ Returns the general information about all the groups, such as group ID and group
 ```python
 import docspace
 from docspace.models.group_array_wrapper import GroupArrayWrapper
+from docspace.models.sort_order import SortOrder
 from docspace.rest import ApiException
 from pprint import pprint
 
@@ -604,10 +605,15 @@ with docspace.ApiClient(configuration) as api_client:
     api_instance = docspace.GroupApi(api_client)
     user_id = 'aae1e103-bca5-9fa1-ba8c-42058b4abf28' # str | The user ID. (optional)
     manager = true # bool | Specifies if the user is a manager or not. (optional)
+    count = 1234 # int | The number of records to retrieve. (optional)
+    start_index = 1234 # int | The starting index for paginated results. (optional)
+    sort_by = 'some text' # str | Specifies the property used to sort the query results. (optional)
+    sort_order = docspace.SortOrder() # SortOrder | The order in which the results are sorted. (optional)
+    filter_value = 'some text' # str | The text used for filtering or searching group data. (optional)
 
     try:
         # Get groups
-        api_response = api_instance.get_groups(user_id=user_id, manager=manager)
+        api_response = api_instance.get_groups(user_id=user_id, manager=manager, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value)
         print("The response of GroupApi->get_groups:\n")
         pprint(api_response)
     except Exception as e:
@@ -623,6 +629,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **user_id** | **str**| The user ID. | [optional] 
  **manager** | **bool**| Specifies if the user is a manager or not. | [optional] 
+ **count** | **int**| The number of records to retrieve. | [optional] 
+ **start_index** | **int**| The starting index for paginated results. | [optional] 
+ **sort_by** | **str**| Specifies the property used to sort the query results. | [optional] 
+ **sort_order** | [**SortOrder**](.md)| The order in which the results are sorted. | [optional] 
+ **filter_value** | **str**| The text used for filtering or searching group data. | [optional] 
 
 ### Return type
 

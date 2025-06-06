@@ -16,7 +16,7 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictStr
+from pydantic import Field, StrictInt, StrictStr
 from typing import Optional
 from typing_extensions import Annotated
 from docspace.models.action_type import ActionType
@@ -320,6 +320,8 @@ class SecurityAuditTrailDataApi:
         target: Annotated[Optional[StrictStr], Field(description="The target object affected by the audit event (e.g., document ID, user account).")] = None,
         var_from: Annotated[Optional[ApiDateTime], Field(description="The starting date and time for filtering audit events.")] = None,
         to: Annotated[Optional[ApiDateTime], Field(description="The ending date and time for filtering audit events.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]], Field(description="The maximum number of audit event records to retrieve.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The index of the first audit event record to retrieve in a paged query.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -355,6 +357,10 @@ class SecurityAuditTrailDataApi:
         :type var_from: ApiDateTime
         :param to: The ending date and time for filtering audit events.
         :type to: ApiDateTime
+        :param count: The maximum number of audit event records to retrieve.
+        :type count: int
+        :param start_index: The index of the first audit event record to retrieve in a paged query.
+        :type start_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -387,6 +393,8 @@ class SecurityAuditTrailDataApi:
             target=target,
             var_from=var_from,
             to=to,
+            count=count,
+            start_index=start_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -421,6 +429,8 @@ class SecurityAuditTrailDataApi:
         target: Annotated[Optional[StrictStr], Field(description="The target object affected by the audit event (e.g., document ID, user account).")] = None,
         var_from: Annotated[Optional[ApiDateTime], Field(description="The starting date and time for filtering audit events.")] = None,
         to: Annotated[Optional[ApiDateTime], Field(description="The ending date and time for filtering audit events.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]], Field(description="The maximum number of audit event records to retrieve.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The index of the first audit event record to retrieve in a paged query.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -456,6 +466,10 @@ class SecurityAuditTrailDataApi:
         :type var_from: ApiDateTime
         :param to: The ending date and time for filtering audit events.
         :type to: ApiDateTime
+        :param count: The maximum number of audit event records to retrieve.
+        :type count: int
+        :param start_index: The index of the first audit event record to retrieve in a paged query.
+        :type start_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -488,6 +502,8 @@ class SecurityAuditTrailDataApi:
             target=target,
             var_from=var_from,
             to=to,
+            count=count,
+            start_index=start_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -522,6 +538,8 @@ class SecurityAuditTrailDataApi:
         target: Annotated[Optional[StrictStr], Field(description="The target object affected by the audit event (e.g., document ID, user account).")] = None,
         var_from: Annotated[Optional[ApiDateTime], Field(description="The starting date and time for filtering audit events.")] = None,
         to: Annotated[Optional[ApiDateTime], Field(description="The ending date and time for filtering audit events.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]], Field(description="The maximum number of audit event records to retrieve.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The index of the first audit event record to retrieve in a paged query.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -557,6 +575,10 @@ class SecurityAuditTrailDataApi:
         :type var_from: ApiDateTime
         :param to: The ending date and time for filtering audit events.
         :type to: ApiDateTime
+        :param count: The maximum number of audit event records to retrieve.
+        :type count: int
+        :param start_index: The index of the first audit event record to retrieve in a paged query.
+        :type start_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -589,6 +611,8 @@ class SecurityAuditTrailDataApi:
             target=target,
             var_from=var_from,
             to=to,
+            count=count,
+            start_index=start_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -618,6 +642,8 @@ class SecurityAuditTrailDataApi:
         target,
         var_from,
         to,
+        count,
+        start_index,
         _request_auth,
         _content_type,
         _headers,
@@ -675,6 +701,14 @@ class SecurityAuditTrailDataApi:
         if to is not None:
             
             _query_params.append(('to', to))
+            
+        if count is not None:
+            
+            _query_params.append(('count', count))
+            
+        if start_index is not None:
+            
+            _query_params.append(('startIndex', start_index))
             
         # process the header parameters
         # process the form parameters

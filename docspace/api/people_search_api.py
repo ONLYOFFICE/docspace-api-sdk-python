@@ -29,6 +29,7 @@ from docspace.models.employee_type import EmployeeType
 from docspace.models.object_array_wrapper import ObjectArrayWrapper
 from docspace.models.payments import Payments
 from docspace.models.quota_filter import QuotaFilter
+from docspace.models.sort_order import SortOrder
 
 from docspace.api_client import ApiClient, RequestSerialized
 from docspace.api_response import ApiResponse
@@ -60,6 +61,10 @@ class PeopleSearchApi:
         inviter_id: Annotated[Optional[StrictStr], Field(description="The inviter ID.")] = None,
         area: Annotated[Optional[Area], Field(description="The area of the account entries.")] = None,
         employee_types: Annotated[Optional[List[List[EmployeeType]]], Field(description="The list of the user types.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]], Field(description="The number of items to retrieve in a request.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The starting index for the query results.")] = None,
+        filter_separator: Annotated[Optional[StrictStr], Field(description="Specifies the separator used in filter expressions.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The text filter applied to the accounts search query.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -95,6 +100,14 @@ class PeopleSearchApi:
         :type area: Area
         :param employee_types: The list of the user types.
         :type employee_types: List[EmployeeType]
+        :param count: The number of items to retrieve in a request.
+        :type count: int
+        :param start_index: The starting index for the query results.
+        :type start_index: int
+        :param filter_separator: Specifies the separator used in filter expressions.
+        :type filter_separator: str
+        :param filter_value: The text filter applied to the accounts search query.
+        :type filter_value: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -127,6 +140,10 @@ class PeopleSearchApi:
             inviter_id=inviter_id,
             area=area,
             employee_types=employee_types,
+            count=count,
+            start_index=start_index,
+            filter_separator=filter_separator,
+            filter_value=filter_value,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -161,6 +178,10 @@ class PeopleSearchApi:
         inviter_id: Annotated[Optional[StrictStr], Field(description="The inviter ID.")] = None,
         area: Annotated[Optional[Area], Field(description="The area of the account entries.")] = None,
         employee_types: Annotated[Optional[List[List[EmployeeType]]], Field(description="The list of the user types.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]], Field(description="The number of items to retrieve in a request.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The starting index for the query results.")] = None,
+        filter_separator: Annotated[Optional[StrictStr], Field(description="Specifies the separator used in filter expressions.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The text filter applied to the accounts search query.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -196,6 +217,14 @@ class PeopleSearchApi:
         :type area: Area
         :param employee_types: The list of the user types.
         :type employee_types: List[EmployeeType]
+        :param count: The number of items to retrieve in a request.
+        :type count: int
+        :param start_index: The starting index for the query results.
+        :type start_index: int
+        :param filter_separator: Specifies the separator used in filter expressions.
+        :type filter_separator: str
+        :param filter_value: The text filter applied to the accounts search query.
+        :type filter_value: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -228,6 +257,10 @@ class PeopleSearchApi:
             inviter_id=inviter_id,
             area=area,
             employee_types=employee_types,
+            count=count,
+            start_index=start_index,
+            filter_separator=filter_separator,
+            filter_value=filter_value,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -262,6 +295,10 @@ class PeopleSearchApi:
         inviter_id: Annotated[Optional[StrictStr], Field(description="The inviter ID.")] = None,
         area: Annotated[Optional[Area], Field(description="The area of the account entries.")] = None,
         employee_types: Annotated[Optional[List[List[EmployeeType]]], Field(description="The list of the user types.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]], Field(description="The number of items to retrieve in a request.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The starting index for the query results.")] = None,
+        filter_separator: Annotated[Optional[StrictStr], Field(description="Specifies the separator used in filter expressions.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The text filter applied to the accounts search query.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -297,6 +334,14 @@ class PeopleSearchApi:
         :type area: Area
         :param employee_types: The list of the user types.
         :type employee_types: List[EmployeeType]
+        :param count: The number of items to retrieve in a request.
+        :type count: int
+        :param start_index: The starting index for the query results.
+        :type start_index: int
+        :param filter_separator: Specifies the separator used in filter expressions.
+        :type filter_separator: str
+        :param filter_value: The text filter applied to the accounts search query.
+        :type filter_value: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -329,6 +374,10 @@ class PeopleSearchApi:
             inviter_id=inviter_id,
             area=area,
             employee_types=employee_types,
+            count=count,
+            start_index=start_index,
+            filter_separator=filter_separator,
+            filter_value=filter_value,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -358,6 +407,10 @@ class PeopleSearchApi:
         inviter_id,
         area,
         employee_types,
+        count,
+        start_index,
+        filter_separator,
+        filter_value,
         _request_auth,
         _content_type,
         _headers,
@@ -415,6 +468,22 @@ class PeopleSearchApi:
             
             _query_params.append(('employeeTypes', employee_types))
             
+        if count is not None:
+            
+            _query_params.append(('count', count))
+            
+        if start_index is not None:
+            
+            _query_params.append(('startIndex', start_index))
+            
+        if filter_separator is not None:
+            
+            _query_params.append(('filterSeparator', filter_separator))
+            
+        if filter_value is not None:
+            
+            _query_params.append(('filterValue', filter_value))
+            
         # process the header parameters
         # process the form parameters
         # process the body parameter
@@ -461,6 +530,8 @@ class PeopleSearchApi:
     def get_search(
         self,
         query: Annotated[StrictStr, Field(description="The search query.")],
+        filter_by: Annotated[Optional[StrictStr], Field(description="Specifies a filter criteria for the user search query.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The value used for filtering users, allowing additional constraints for the query.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -480,6 +551,10 @@ class PeopleSearchApi:
 
         :param query: The search query. (required)
         :type query: str
+        :param filter_by: Specifies a filter criteria for the user search query.
+        :type filter_by: str
+        :param filter_value: The value used for filtering users, allowing additional constraints for the query.
+        :type filter_value: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -504,6 +579,8 @@ class PeopleSearchApi:
 
         _param = self._get_search_serialize(
             query=query,
+            filter_by=filter_by,
+            filter_value=filter_value,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -530,6 +607,8 @@ class PeopleSearchApi:
     def get_search_with_http_info(
         self,
         query: Annotated[StrictStr, Field(description="The search query.")],
+        filter_by: Annotated[Optional[StrictStr], Field(description="Specifies a filter criteria for the user search query.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The value used for filtering users, allowing additional constraints for the query.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -549,6 +628,10 @@ class PeopleSearchApi:
 
         :param query: The search query. (required)
         :type query: str
+        :param filter_by: Specifies a filter criteria for the user search query.
+        :type filter_by: str
+        :param filter_value: The value used for filtering users, allowing additional constraints for the query.
+        :type filter_value: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -573,6 +656,8 @@ class PeopleSearchApi:
 
         _param = self._get_search_serialize(
             query=query,
+            filter_by=filter_by,
+            filter_value=filter_value,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -599,6 +684,8 @@ class PeopleSearchApi:
     def get_search_without_preload_content(
         self,
         query: Annotated[StrictStr, Field(description="The search query.")],
+        filter_by: Annotated[Optional[StrictStr], Field(description="Specifies a filter criteria for the user search query.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The value used for filtering users, allowing additional constraints for the query.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -618,6 +705,10 @@ class PeopleSearchApi:
 
         :param query: The search query. (required)
         :type query: str
+        :param filter_by: Specifies a filter criteria for the user search query.
+        :type filter_by: str
+        :param filter_value: The value used for filtering users, allowing additional constraints for the query.
+        :type filter_value: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -642,6 +733,8 @@ class PeopleSearchApi:
 
         _param = self._get_search_serialize(
             query=query,
+            filter_by=filter_by,
+            filter_value=filter_value,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -663,6 +756,8 @@ class PeopleSearchApi:
     def _get_search_serialize(
         self,
         query,
+        filter_by,
+        filter_value,
         _request_auth,
         _content_type,
         _headers,
@@ -687,6 +782,14 @@ class PeopleSearchApi:
         if query is not None:
             _path_params['query'] = query
         # process the query parameters
+        if filter_by is not None:
+            
+            _query_params.append(('filterBy', filter_by))
+            
+        if filter_value is not None:
+            
+            _query_params.append(('filterValue', filter_value))
+            
         # process the header parameters
         # process the form parameters
         # process the body parameter
@@ -746,6 +849,12 @@ class PeopleSearchApi:
         invited_by_me: Annotated[Optional[StrictBool], Field(description="Specifies whether the user is invited by the current user or not.")] = None,
         inviter_id: Annotated[Optional[StrictStr], Field(description="The inviter ID.")] = None,
         area: Annotated[Optional[Area], Field(description="The filter area.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]], Field(description="The maximum number of items to be retrieved in the response.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The zero-based index of the first item to be retrieved in a filtered result set.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="Specifies the property or field name by which the results should be sorted.")] = None,
+        sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
+        filter_separator: Annotated[Optional[StrictStr], Field(description="Represents the separator used to split filter criteria in query parameters.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The search text used to filter results based on user input.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -791,6 +900,18 @@ class PeopleSearchApi:
         :type inviter_id: str
         :param area: The filter area.
         :type area: Area
+        :param count: The maximum number of items to be retrieved in the response.
+        :type count: int
+        :param start_index: The zero-based index of the first item to be retrieved in a filtered result set.
+        :type start_index: int
+        :param sort_by: Specifies the property or field name by which the results should be sorted.
+        :type sort_by: str
+        :param sort_order: The order in which the results are sorted.
+        :type sort_order: SortOrder
+        :param filter_separator: Represents the separator used to split filter criteria in query parameters.
+        :type filter_separator: str
+        :param filter_value: The search text used to filter results based on user input.
+        :type filter_value: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -828,6 +949,12 @@ class PeopleSearchApi:
             invited_by_me=invited_by_me,
             inviter_id=inviter_id,
             area=area,
+            count=count,
+            start_index=start_index,
+            sort_by=sort_by,
+            sort_order=sort_order,
+            filter_separator=filter_separator,
+            filter_value=filter_value,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -867,6 +994,12 @@ class PeopleSearchApi:
         invited_by_me: Annotated[Optional[StrictBool], Field(description="Specifies whether the user is invited by the current user or not.")] = None,
         inviter_id: Annotated[Optional[StrictStr], Field(description="The inviter ID.")] = None,
         area: Annotated[Optional[Area], Field(description="The filter area.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]], Field(description="The maximum number of items to be retrieved in the response.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The zero-based index of the first item to be retrieved in a filtered result set.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="Specifies the property or field name by which the results should be sorted.")] = None,
+        sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
+        filter_separator: Annotated[Optional[StrictStr], Field(description="Represents the separator used to split filter criteria in query parameters.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The search text used to filter results based on user input.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -912,6 +1045,18 @@ class PeopleSearchApi:
         :type inviter_id: str
         :param area: The filter area.
         :type area: Area
+        :param count: The maximum number of items to be retrieved in the response.
+        :type count: int
+        :param start_index: The zero-based index of the first item to be retrieved in a filtered result set.
+        :type start_index: int
+        :param sort_by: Specifies the property or field name by which the results should be sorted.
+        :type sort_by: str
+        :param sort_order: The order in which the results are sorted.
+        :type sort_order: SortOrder
+        :param filter_separator: Represents the separator used to split filter criteria in query parameters.
+        :type filter_separator: str
+        :param filter_value: The search text used to filter results based on user input.
+        :type filter_value: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -949,6 +1094,12 @@ class PeopleSearchApi:
             invited_by_me=invited_by_me,
             inviter_id=inviter_id,
             area=area,
+            count=count,
+            start_index=start_index,
+            sort_by=sort_by,
+            sort_order=sort_order,
+            filter_separator=filter_separator,
+            filter_value=filter_value,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -988,6 +1139,12 @@ class PeopleSearchApi:
         invited_by_me: Annotated[Optional[StrictBool], Field(description="Specifies whether the user is invited by the current user or not.")] = None,
         inviter_id: Annotated[Optional[StrictStr], Field(description="The inviter ID.")] = None,
         area: Annotated[Optional[Area], Field(description="The filter area.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]], Field(description="The maximum number of items to be retrieved in the response.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The zero-based index of the first item to be retrieved in a filtered result set.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="Specifies the property or field name by which the results should be sorted.")] = None,
+        sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
+        filter_separator: Annotated[Optional[StrictStr], Field(description="Represents the separator used to split filter criteria in query parameters.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The search text used to filter results based on user input.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1033,6 +1190,18 @@ class PeopleSearchApi:
         :type inviter_id: str
         :param area: The filter area.
         :type area: Area
+        :param count: The maximum number of items to be retrieved in the response.
+        :type count: int
+        :param start_index: The zero-based index of the first item to be retrieved in a filtered result set.
+        :type start_index: int
+        :param sort_by: Specifies the property or field name by which the results should be sorted.
+        :type sort_by: str
+        :param sort_order: The order in which the results are sorted.
+        :type sort_order: SortOrder
+        :param filter_separator: Represents the separator used to split filter criteria in query parameters.
+        :type filter_separator: str
+        :param filter_value: The search text used to filter results based on user input.
+        :type filter_value: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1070,6 +1239,12 @@ class PeopleSearchApi:
             invited_by_me=invited_by_me,
             inviter_id=inviter_id,
             area=area,
+            count=count,
+            start_index=start_index,
+            sort_by=sort_by,
+            sort_order=sort_order,
+            filter_separator=filter_separator,
+            filter_value=filter_value,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1104,6 +1279,12 @@ class PeopleSearchApi:
         invited_by_me,
         inviter_id,
         area,
+        count,
+        start_index,
+        sort_by,
+        sort_order,
+        filter_separator,
+        filter_value,
         _request_auth,
         _content_type,
         _headers,
@@ -1183,6 +1364,30 @@ class PeopleSearchApi:
             
             _query_params.append(('area', area.value))
             
+        if count is not None:
+            
+            _query_params.append(('count', count))
+            
+        if start_index is not None:
+            
+            _query_params.append(('startIndex', start_index))
+            
+        if sort_by is not None:
+            
+            _query_params.append(('sortBy', sort_by))
+            
+        if sort_order is not None:
+            
+            _query_params.append(('sortOrder', sort_order.value))
+            
+        if filter_separator is not None:
+            
+            _query_params.append(('filterSeparator', filter_separator))
+            
+        if filter_value is not None:
+            
+            _query_params.append(('filterValue', filter_value))
+            
         # process the header parameters
         # process the form parameters
         # process the body parameter
@@ -1237,6 +1442,10 @@ class PeopleSearchApi:
         inviter_id: Annotated[Optional[StrictStr], Field(description="The inviter ID.")] = None,
         area: Annotated[Optional[Area], Field(description="The user area.")] = None,
         employee_types: Annotated[Optional[List[List[EmployeeType]]], Field(description="The list of user types.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]], Field(description="The maximum number of users to be retrieved in the request.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The zero-based index of the first record to retrieve in a paged query.")] = None,
+        filter_separator: Annotated[Optional[StrictStr], Field(description="The character or string used to separate multiple filter values in a filtering query.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The filter text value used for searching or filtering user results.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1272,6 +1481,14 @@ class PeopleSearchApi:
         :type area: Area
         :param employee_types: The list of user types.
         :type employee_types: List[EmployeeType]
+        :param count: The maximum number of users to be retrieved in the request.
+        :type count: int
+        :param start_index: The zero-based index of the first record to retrieve in a paged query.
+        :type start_index: int
+        :param filter_separator: The character or string used to separate multiple filter values in a filtering query.
+        :type filter_separator: str
+        :param filter_value: The filter text value used for searching or filtering user results.
+        :type filter_value: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1304,6 +1521,10 @@ class PeopleSearchApi:
             inviter_id=inviter_id,
             area=area,
             employee_types=employee_types,
+            count=count,
+            start_index=start_index,
+            filter_separator=filter_separator,
+            filter_value=filter_value,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1338,6 +1559,10 @@ class PeopleSearchApi:
         inviter_id: Annotated[Optional[StrictStr], Field(description="The inviter ID.")] = None,
         area: Annotated[Optional[Area], Field(description="The user area.")] = None,
         employee_types: Annotated[Optional[List[List[EmployeeType]]], Field(description="The list of user types.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]], Field(description="The maximum number of users to be retrieved in the request.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The zero-based index of the first record to retrieve in a paged query.")] = None,
+        filter_separator: Annotated[Optional[StrictStr], Field(description="The character or string used to separate multiple filter values in a filtering query.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The filter text value used for searching or filtering user results.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1373,6 +1598,14 @@ class PeopleSearchApi:
         :type area: Area
         :param employee_types: The list of user types.
         :type employee_types: List[EmployeeType]
+        :param count: The maximum number of users to be retrieved in the request.
+        :type count: int
+        :param start_index: The zero-based index of the first record to retrieve in a paged query.
+        :type start_index: int
+        :param filter_separator: The character or string used to separate multiple filter values in a filtering query.
+        :type filter_separator: str
+        :param filter_value: The filter text value used for searching or filtering user results.
+        :type filter_value: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1405,6 +1638,10 @@ class PeopleSearchApi:
             inviter_id=inviter_id,
             area=area,
             employee_types=employee_types,
+            count=count,
+            start_index=start_index,
+            filter_separator=filter_separator,
+            filter_value=filter_value,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1439,6 +1676,10 @@ class PeopleSearchApi:
         inviter_id: Annotated[Optional[StrictStr], Field(description="The inviter ID.")] = None,
         area: Annotated[Optional[Area], Field(description="The user area.")] = None,
         employee_types: Annotated[Optional[List[List[EmployeeType]]], Field(description="The list of user types.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]], Field(description="The maximum number of users to be retrieved in the request.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The zero-based index of the first record to retrieve in a paged query.")] = None,
+        filter_separator: Annotated[Optional[StrictStr], Field(description="The character or string used to separate multiple filter values in a filtering query.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The filter text value used for searching or filtering user results.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1474,6 +1715,14 @@ class PeopleSearchApi:
         :type area: Area
         :param employee_types: The list of user types.
         :type employee_types: List[EmployeeType]
+        :param count: The maximum number of users to be retrieved in the request.
+        :type count: int
+        :param start_index: The zero-based index of the first record to retrieve in a paged query.
+        :type start_index: int
+        :param filter_separator: The character or string used to separate multiple filter values in a filtering query.
+        :type filter_separator: str
+        :param filter_value: The filter text value used for searching or filtering user results.
+        :type filter_value: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1506,6 +1755,10 @@ class PeopleSearchApi:
             inviter_id=inviter_id,
             area=area,
             employee_types=employee_types,
+            count=count,
+            start_index=start_index,
+            filter_separator=filter_separator,
+            filter_value=filter_value,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1535,6 +1788,10 @@ class PeopleSearchApi:
         inviter_id,
         area,
         employee_types,
+        count,
+        start_index,
+        filter_separator,
+        filter_value,
         _request_auth,
         _content_type,
         _headers,
@@ -1591,6 +1848,22 @@ class PeopleSearchApi:
         if employee_types is not None:
             
             _query_params.append(('employeeTypes', employee_types))
+            
+        if count is not None:
+            
+            _query_params.append(('count', count))
+            
+        if start_index is not None:
+            
+            _query_params.append(('startIndex', start_index))
+            
+        if filter_separator is not None:
+            
+            _query_params.append(('filterSeparator', filter_separator))
+            
+        if filter_value is not None:
+            
+            _query_params.append(('filterValue', filter_value))
             
         # process the header parameters
         # process the form parameters
@@ -1651,6 +1924,12 @@ class PeopleSearchApi:
         invited_by_me: Annotated[Optional[StrictBool], Field(description="Specifies whether the user is invited by the current user or not.")] = None,
         inviter_id: Annotated[Optional[StrictStr], Field(description="The inviter ID.")] = None,
         area: Annotated[Optional[Area], Field(description="The filter area.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]], Field(description="The maximum number of items to be retrieved in the response.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The zero-based index of the first item to be retrieved in a filtered result set.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="Specifies the property or field name by which the results should be sorted.")] = None,
+        sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
+        filter_separator: Annotated[Optional[StrictStr], Field(description="Represents the separator used to split filter criteria in query parameters.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The search text used to filter results based on user input.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1696,6 +1975,18 @@ class PeopleSearchApi:
         :type inviter_id: str
         :param area: The filter area.
         :type area: Area
+        :param count: The maximum number of items to be retrieved in the response.
+        :type count: int
+        :param start_index: The zero-based index of the first item to be retrieved in a filtered result set.
+        :type start_index: int
+        :param sort_by: Specifies the property or field name by which the results should be sorted.
+        :type sort_by: str
+        :param sort_order: The order in which the results are sorted.
+        :type sort_order: SortOrder
+        :param filter_separator: Represents the separator used to split filter criteria in query parameters.
+        :type filter_separator: str
+        :param filter_value: The search text used to filter results based on user input.
+        :type filter_value: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1733,6 +2024,12 @@ class PeopleSearchApi:
             invited_by_me=invited_by_me,
             inviter_id=inviter_id,
             area=area,
+            count=count,
+            start_index=start_index,
+            sort_by=sort_by,
+            sort_order=sort_order,
+            filter_separator=filter_separator,
+            filter_value=filter_value,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1772,6 +2069,12 @@ class PeopleSearchApi:
         invited_by_me: Annotated[Optional[StrictBool], Field(description="Specifies whether the user is invited by the current user or not.")] = None,
         inviter_id: Annotated[Optional[StrictStr], Field(description="The inviter ID.")] = None,
         area: Annotated[Optional[Area], Field(description="The filter area.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]], Field(description="The maximum number of items to be retrieved in the response.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The zero-based index of the first item to be retrieved in a filtered result set.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="Specifies the property or field name by which the results should be sorted.")] = None,
+        sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
+        filter_separator: Annotated[Optional[StrictStr], Field(description="Represents the separator used to split filter criteria in query parameters.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The search text used to filter results based on user input.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1817,6 +2120,18 @@ class PeopleSearchApi:
         :type inviter_id: str
         :param area: The filter area.
         :type area: Area
+        :param count: The maximum number of items to be retrieved in the response.
+        :type count: int
+        :param start_index: The zero-based index of the first item to be retrieved in a filtered result set.
+        :type start_index: int
+        :param sort_by: Specifies the property or field name by which the results should be sorted.
+        :type sort_by: str
+        :param sort_order: The order in which the results are sorted.
+        :type sort_order: SortOrder
+        :param filter_separator: Represents the separator used to split filter criteria in query parameters.
+        :type filter_separator: str
+        :param filter_value: The search text used to filter results based on user input.
+        :type filter_value: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1854,6 +2169,12 @@ class PeopleSearchApi:
             invited_by_me=invited_by_me,
             inviter_id=inviter_id,
             area=area,
+            count=count,
+            start_index=start_index,
+            sort_by=sort_by,
+            sort_order=sort_order,
+            filter_separator=filter_separator,
+            filter_value=filter_value,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1893,6 +2214,12 @@ class PeopleSearchApi:
         invited_by_me: Annotated[Optional[StrictBool], Field(description="Specifies whether the user is invited by the current user or not.")] = None,
         inviter_id: Annotated[Optional[StrictStr], Field(description="The inviter ID.")] = None,
         area: Annotated[Optional[Area], Field(description="The filter area.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]], Field(description="The maximum number of items to be retrieved in the response.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The zero-based index of the first item to be retrieved in a filtered result set.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="Specifies the property or field name by which the results should be sorted.")] = None,
+        sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
+        filter_separator: Annotated[Optional[StrictStr], Field(description="Represents the separator used to split filter criteria in query parameters.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The search text used to filter results based on user input.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1938,6 +2265,18 @@ class PeopleSearchApi:
         :type inviter_id: str
         :param area: The filter area.
         :type area: Area
+        :param count: The maximum number of items to be retrieved in the response.
+        :type count: int
+        :param start_index: The zero-based index of the first item to be retrieved in a filtered result set.
+        :type start_index: int
+        :param sort_by: Specifies the property or field name by which the results should be sorted.
+        :type sort_by: str
+        :param sort_order: The order in which the results are sorted.
+        :type sort_order: SortOrder
+        :param filter_separator: Represents the separator used to split filter criteria in query parameters.
+        :type filter_separator: str
+        :param filter_value: The search text used to filter results based on user input.
+        :type filter_value: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1975,6 +2314,12 @@ class PeopleSearchApi:
             invited_by_me=invited_by_me,
             inviter_id=inviter_id,
             area=area,
+            count=count,
+            start_index=start_index,
+            sort_by=sort_by,
+            sort_order=sort_order,
+            filter_separator=filter_separator,
+            filter_value=filter_value,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2009,6 +2354,12 @@ class PeopleSearchApi:
         invited_by_me,
         inviter_id,
         area,
+        count,
+        start_index,
+        sort_by,
+        sort_order,
+        filter_separator,
+        filter_value,
         _request_auth,
         _content_type,
         _headers,
@@ -2087,6 +2438,30 @@ class PeopleSearchApi:
         if area is not None:
             
             _query_params.append(('area', area.value))
+            
+        if count is not None:
+            
+            _query_params.append(('count', count))
+            
+        if start_index is not None:
+            
+            _query_params.append(('startIndex', start_index))
+            
+        if sort_by is not None:
+            
+            _query_params.append(('sortBy', sort_by))
+            
+        if sort_order is not None:
+            
+            _query_params.append(('sortOrder', sort_order.value))
+            
+        if filter_separator is not None:
+            
+            _query_params.append(('filterSeparator', filter_separator))
+            
+        if filter_value is not None:
+            
+            _query_params.append(('filterValue', filter_value))
             
         # process the header parameters
         # process the form parameters
@@ -2406,6 +2781,8 @@ class PeopleSearchApi:
         self,
         status: Annotated[EmployeeStatus, Field(description="The user status.")],
         query: Annotated[Optional[StrictStr], Field(description="The advanced search query.")] = None,
+        filter_by: Annotated[Optional[StrictStr], Field(description="Specifies the criteria used to filter search results in advanced queries.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The value used to filter the search query.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2427,6 +2804,10 @@ class PeopleSearchApi:
         :type status: EmployeeStatus
         :param query: The advanced search query.
         :type query: str
+        :param filter_by: Specifies the criteria used to filter search results in advanced queries.
+        :type filter_by: str
+        :param filter_value: The value used to filter the search query.
+        :type filter_value: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2452,6 +2833,8 @@ class PeopleSearchApi:
         _param = self._search_users_by_status_serialize(
             status=status,
             query=query,
+            filter_by=filter_by,
+            filter_value=filter_value,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2479,6 +2862,8 @@ class PeopleSearchApi:
         self,
         status: Annotated[EmployeeStatus, Field(description="The user status.")],
         query: Annotated[Optional[StrictStr], Field(description="The advanced search query.")] = None,
+        filter_by: Annotated[Optional[StrictStr], Field(description="Specifies the criteria used to filter search results in advanced queries.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The value used to filter the search query.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2500,6 +2885,10 @@ class PeopleSearchApi:
         :type status: EmployeeStatus
         :param query: The advanced search query.
         :type query: str
+        :param filter_by: Specifies the criteria used to filter search results in advanced queries.
+        :type filter_by: str
+        :param filter_value: The value used to filter the search query.
+        :type filter_value: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2525,6 +2914,8 @@ class PeopleSearchApi:
         _param = self._search_users_by_status_serialize(
             status=status,
             query=query,
+            filter_by=filter_by,
+            filter_value=filter_value,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2552,6 +2943,8 @@ class PeopleSearchApi:
         self,
         status: Annotated[EmployeeStatus, Field(description="The user status.")],
         query: Annotated[Optional[StrictStr], Field(description="The advanced search query.")] = None,
+        filter_by: Annotated[Optional[StrictStr], Field(description="Specifies the criteria used to filter search results in advanced queries.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The value used to filter the search query.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2573,6 +2966,10 @@ class PeopleSearchApi:
         :type status: EmployeeStatus
         :param query: The advanced search query.
         :type query: str
+        :param filter_by: Specifies the criteria used to filter search results in advanced queries.
+        :type filter_by: str
+        :param filter_value: The value used to filter the search query.
+        :type filter_value: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2598,6 +2995,8 @@ class PeopleSearchApi:
         _param = self._search_users_by_status_serialize(
             status=status,
             query=query,
+            filter_by=filter_by,
+            filter_value=filter_value,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2620,6 +3019,8 @@ class PeopleSearchApi:
         self,
         status,
         query,
+        filter_by,
+        filter_value,
         _request_auth,
         _content_type,
         _headers,
@@ -2647,6 +3048,14 @@ class PeopleSearchApi:
         if query is not None:
             
             _query_params.append(('query', query))
+            
+        if filter_by is not None:
+            
+            _query_params.append(('filterBy', filter_by))
+            
+        if filter_value is not None:
+            
+            _query_params.append(('filterValue', filter_value))
             
         # process the header parameters
         # process the form parameters
