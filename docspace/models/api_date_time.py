@@ -82,6 +82,9 @@ class ApiDateTime(BaseModel):
         if obj is None:
             return None
 
+        if isinstance(obj, str):
+            obj = {"utcTime": obj}
+           
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
