@@ -40,8 +40,8 @@ class TestPortalPaymentApi(unittest.TestCase):
         """
         pass
 
-    def test_get_all_currencies(self) -> None:
-        """Test case for get_all_currencies
+    def test_get_accounting_currencies(self) -> None:
+        """Test case for get_accounting_currencies
 
         Get list of currencies
         """

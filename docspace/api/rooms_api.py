@@ -55,6 +55,7 @@ from docspace.models.room_type import RoomType
 from docspace.models.search_area import SearchArea
 from docspace.models.set_public_dto import SetPublicDto
 from docspace.models.share_filter_type import ShareFilterType
+from docspace.models.sort_order import SortOrder
 from docspace.models.storage_filter import StorageFilter
 from docspace.models.subject_filter import SubjectFilter
 from docspace.models.update_room_request import UpdateRoomRequest
@@ -5702,6 +5703,9 @@ class RoomsApi:
         self,
         id: Annotated[StrictInt, Field(description="The room ID.")],
         filter_type: Annotated[Optional[ShareFilterType], Field(description="The filter type of the access rights.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]], Field(description="The number of items to be retrieved or processed.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The starting index of the items to retrieve in a paginated request.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The text filter value used for filtering room security information.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5723,6 +5727,12 @@ class RoomsApi:
         :type id: int
         :param filter_type: The filter type of the access rights.
         :type filter_type: ShareFilterType
+        :param count: The number of items to be retrieved or processed.
+        :type count: int
+        :param start_index: The starting index of the items to retrieve in a paginated request.
+        :type start_index: int
+        :param filter_value: The text filter value used for filtering room security information.
+        :type filter_value: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5748,6 +5758,9 @@ class RoomsApi:
         _param = self._get_room_security_info_serialize(
             id=id,
             filter_type=filter_type,
+            count=count,
+            start_index=start_index,
+            filter_value=filter_value,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -5774,6 +5787,9 @@ class RoomsApi:
         self,
         id: Annotated[StrictInt, Field(description="The room ID.")],
         filter_type: Annotated[Optional[ShareFilterType], Field(description="The filter type of the access rights.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]], Field(description="The number of items to be retrieved or processed.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The starting index of the items to retrieve in a paginated request.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The text filter value used for filtering room security information.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5795,6 +5811,12 @@ class RoomsApi:
         :type id: int
         :param filter_type: The filter type of the access rights.
         :type filter_type: ShareFilterType
+        :param count: The number of items to be retrieved or processed.
+        :type count: int
+        :param start_index: The starting index of the items to retrieve in a paginated request.
+        :type start_index: int
+        :param filter_value: The text filter value used for filtering room security information.
+        :type filter_value: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5820,6 +5842,9 @@ class RoomsApi:
         _param = self._get_room_security_info_serialize(
             id=id,
             filter_type=filter_type,
+            count=count,
+            start_index=start_index,
+            filter_value=filter_value,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -5846,6 +5871,9 @@ class RoomsApi:
         self,
         id: Annotated[StrictInt, Field(description="The room ID.")],
         filter_type: Annotated[Optional[ShareFilterType], Field(description="The filter type of the access rights.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]], Field(description="The number of items to be retrieved or processed.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The starting index of the items to retrieve in a paginated request.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The text filter value used for filtering room security information.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5867,6 +5895,12 @@ class RoomsApi:
         :type id: int
         :param filter_type: The filter type of the access rights.
         :type filter_type: ShareFilterType
+        :param count: The number of items to be retrieved or processed.
+        :type count: int
+        :param start_index: The starting index of the items to retrieve in a paginated request.
+        :type start_index: int
+        :param filter_value: The text filter value used for filtering room security information.
+        :type filter_value: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5892,6 +5926,9 @@ class RoomsApi:
         _param = self._get_room_security_info_serialize(
             id=id,
             filter_type=filter_type,
+            count=count,
+            start_index=start_index,
+            filter_value=filter_value,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -5913,6 +5950,9 @@ class RoomsApi:
         self,
         id,
         filter_type,
+        count,
+        start_index,
+        filter_value,
         _request_auth,
         _content_type,
         _headers,
@@ -5940,6 +5980,18 @@ class RoomsApi:
         if filter_type is not None:
             
             _query_params.append(('filterType', filter_type.value))
+            
+        if count is not None:
+            
+            _query_params.append(('count', count))
+            
+        if start_index is not None:
+            
+            _query_params.append(('startIndex', start_index))
+            
+        if filter_value is not None:
+            
+            _query_params.append(('filterValue', filter_value))
             
         # process the header parameters
         # process the form parameters
@@ -5986,6 +6038,9 @@ class RoomsApi:
     @validate_call
     def get_room_tags_info(
         self,
+        count: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]], Field(description="Gets or sets the number of tag results to retrieve.  This property specifies the maximum amount of tag data to be included in the result set.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="Represents the starting index from which the tags' information will be retrieved.  This property is used to define the offset for pagination when retrieving a list of tags. It determines  the point in the data set from which the retrieval begins.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="Gets or sets the text value used for searching tags.  This property is typically used as a filter value when retrieving tag information.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6003,6 +6058,12 @@ class RoomsApi:
 
         Returns a list of custom tags.
 
+        :param count: Gets or sets the number of tag results to retrieve.  This property specifies the maximum amount of tag data to be included in the result set.
+        :type count: int
+        :param start_index: Represents the starting index from which the tags' information will be retrieved.  This property is used to define the offset for pagination when retrieving a list of tags. It determines  the point in the data set from which the retrieval begins.
+        :type start_index: int
+        :param filter_value: Gets or sets the text value used for searching tags.  This property is typically used as a filter value when retrieving tag information.
+        :type filter_value: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -6026,6 +6087,9 @@ class RoomsApi:
         """ # noqa: E501
 
         _param = self._get_room_tags_info_serialize(
+            count=count,
+            start_index=start_index,
+            filter_value=filter_value,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -6050,6 +6114,9 @@ class RoomsApi:
     @validate_call
     def get_room_tags_info_with_http_info(
         self,
+        count: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]], Field(description="Gets or sets the number of tag results to retrieve.  This property specifies the maximum amount of tag data to be included in the result set.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="Represents the starting index from which the tags' information will be retrieved.  This property is used to define the offset for pagination when retrieving a list of tags. It determines  the point in the data set from which the retrieval begins.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="Gets or sets the text value used for searching tags.  This property is typically used as a filter value when retrieving tag information.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6067,6 +6134,12 @@ class RoomsApi:
 
         Returns a list of custom tags.
 
+        :param count: Gets or sets the number of tag results to retrieve.  This property specifies the maximum amount of tag data to be included in the result set.
+        :type count: int
+        :param start_index: Represents the starting index from which the tags' information will be retrieved.  This property is used to define the offset for pagination when retrieving a list of tags. It determines  the point in the data set from which the retrieval begins.
+        :type start_index: int
+        :param filter_value: Gets or sets the text value used for searching tags.  This property is typically used as a filter value when retrieving tag information.
+        :type filter_value: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -6090,6 +6163,9 @@ class RoomsApi:
         """ # noqa: E501
 
         _param = self._get_room_tags_info_serialize(
+            count=count,
+            start_index=start_index,
+            filter_value=filter_value,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -6114,6 +6190,9 @@ class RoomsApi:
     @validate_call
     def get_room_tags_info_without_preload_content(
         self,
+        count: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]], Field(description="Gets or sets the number of tag results to retrieve.  This property specifies the maximum amount of tag data to be included in the result set.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="Represents the starting index from which the tags' information will be retrieved.  This property is used to define the offset for pagination when retrieving a list of tags. It determines  the point in the data set from which the retrieval begins.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="Gets or sets the text value used for searching tags.  This property is typically used as a filter value when retrieving tag information.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6131,6 +6210,12 @@ class RoomsApi:
 
         Returns a list of custom tags.
 
+        :param count: Gets or sets the number of tag results to retrieve.  This property specifies the maximum amount of tag data to be included in the result set.
+        :type count: int
+        :param start_index: Represents the starting index from which the tags' information will be retrieved.  This property is used to define the offset for pagination when retrieving a list of tags. It determines  the point in the data set from which the retrieval begins.
+        :type start_index: int
+        :param filter_value: Gets or sets the text value used for searching tags.  This property is typically used as a filter value when retrieving tag information.
+        :type filter_value: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -6154,6 +6239,9 @@ class RoomsApi:
         """ # noqa: E501
 
         _param = self._get_room_tags_info_serialize(
+            count=count,
+            start_index=start_index,
+            filter_value=filter_value,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -6173,6 +6261,9 @@ class RoomsApi:
 
     def _get_room_tags_info_serialize(
         self,
+        count,
+        start_index,
+        filter_value,
         _request_auth,
         _content_type,
         _headers,
@@ -6195,6 +6286,18 @@ class RoomsApi:
 
         # process the path parameters
         # process the query parameters
+        if count is not None:
+            
+            _query_params.append(('count', count))
+            
+        if start_index is not None:
+            
+            _query_params.append(('startIndex', start_index))
+            
+        if filter_value is not None:
+            
+            _query_params.append(('filterValue', filter_value))
+            
         # process the header parameters
         # process the form parameters
         # process the body parameter
@@ -6504,6 +6607,11 @@ class RoomsApi:
         subject_filter: Annotated[Optional[SubjectFilter], Field(description="The filter by user (Owner - 0, Member - 1).")] = None,
         quota_filter: Annotated[Optional[QuotaFilter], Field(description="The filter by quota (All - 0, Default - 1, Custom - 2).")] = None,
         storage_filter: Annotated[Optional[StorageFilter], Field(description="The filter by storage (None - 0, Internal - 1, ThirdParty - 2).")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]], Field(description="Specifies the maximum number of items to retrieve.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The index from which to start retrieving the room content.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="Specifies the field by which the room content should be sorted.")] = None,
+        sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The text filter value used to refine search or query operations.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6541,6 +6649,16 @@ class RoomsApi:
         :type quota_filter: QuotaFilter
         :param storage_filter: The filter by storage (None - 0, Internal - 1, ThirdParty - 2).
         :type storage_filter: StorageFilter
+        :param count: Specifies the maximum number of items to retrieve.
+        :type count: int
+        :param start_index: The index from which to start retrieving the room content.
+        :type start_index: int
+        :param sort_by: Specifies the field by which the room content should be sorted.
+        :type sort_by: str
+        :param sort_order: The order in which the results are sorted.
+        :type sort_order: SortOrder
+        :param filter_value: The text filter value used to refine search or query operations.
+        :type filter_value: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -6574,6 +6692,11 @@ class RoomsApi:
             subject_filter=subject_filter,
             quota_filter=quota_filter,
             storage_filter=storage_filter,
+            count=count,
+            start_index=start_index,
+            sort_by=sort_by,
+            sort_order=sort_order,
+            filter_value=filter_value,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -6609,6 +6732,11 @@ class RoomsApi:
         subject_filter: Annotated[Optional[SubjectFilter], Field(description="The filter by user (Owner - 0, Member - 1).")] = None,
         quota_filter: Annotated[Optional[QuotaFilter], Field(description="The filter by quota (All - 0, Default - 1, Custom - 2).")] = None,
         storage_filter: Annotated[Optional[StorageFilter], Field(description="The filter by storage (None - 0, Internal - 1, ThirdParty - 2).")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]], Field(description="Specifies the maximum number of items to retrieve.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The index from which to start retrieving the room content.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="Specifies the field by which the room content should be sorted.")] = None,
+        sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The text filter value used to refine search or query operations.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6646,6 +6774,16 @@ class RoomsApi:
         :type quota_filter: QuotaFilter
         :param storage_filter: The filter by storage (None - 0, Internal - 1, ThirdParty - 2).
         :type storage_filter: StorageFilter
+        :param count: Specifies the maximum number of items to retrieve.
+        :type count: int
+        :param start_index: The index from which to start retrieving the room content.
+        :type start_index: int
+        :param sort_by: Specifies the field by which the room content should be sorted.
+        :type sort_by: str
+        :param sort_order: The order in which the results are sorted.
+        :type sort_order: SortOrder
+        :param filter_value: The text filter value used to refine search or query operations.
+        :type filter_value: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -6679,6 +6817,11 @@ class RoomsApi:
             subject_filter=subject_filter,
             quota_filter=quota_filter,
             storage_filter=storage_filter,
+            count=count,
+            start_index=start_index,
+            sort_by=sort_by,
+            sort_order=sort_order,
+            filter_value=filter_value,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -6714,6 +6857,11 @@ class RoomsApi:
         subject_filter: Annotated[Optional[SubjectFilter], Field(description="The filter by user (Owner - 0, Member - 1).")] = None,
         quota_filter: Annotated[Optional[QuotaFilter], Field(description="The filter by quota (All - 0, Default - 1, Custom - 2).")] = None,
         storage_filter: Annotated[Optional[StorageFilter], Field(description="The filter by storage (None - 0, Internal - 1, ThirdParty - 2).")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]], Field(description="Specifies the maximum number of items to retrieve.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The index from which to start retrieving the room content.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="Specifies the field by which the room content should be sorted.")] = None,
+        sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The text filter value used to refine search or query operations.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6751,6 +6899,16 @@ class RoomsApi:
         :type quota_filter: QuotaFilter
         :param storage_filter: The filter by storage (None - 0, Internal - 1, ThirdParty - 2).
         :type storage_filter: StorageFilter
+        :param count: Specifies the maximum number of items to retrieve.
+        :type count: int
+        :param start_index: The index from which to start retrieving the room content.
+        :type start_index: int
+        :param sort_by: Specifies the field by which the room content should be sorted.
+        :type sort_by: str
+        :param sort_order: The order in which the results are sorted.
+        :type sort_order: SortOrder
+        :param filter_value: The text filter value used to refine search or query operations.
+        :type filter_value: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -6784,6 +6942,11 @@ class RoomsApi:
             subject_filter=subject_filter,
             quota_filter=quota_filter,
             storage_filter=storage_filter,
+            count=count,
+            start_index=start_index,
+            sort_by=sort_by,
+            sort_order=sort_order,
+            filter_value=filter_value,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -6814,6 +6977,11 @@ class RoomsApi:
         subject_filter,
         quota_filter,
         storage_filter,
+        count,
+        start_index,
+        sort_by,
+        sort_order,
+        filter_value,
         _request_auth,
         _content_type,
         _headers,
@@ -6876,6 +7044,26 @@ class RoomsApi:
         if storage_filter is not None:
             
             _query_params.append(('storageFilter', storage_filter.value))
+            
+        if count is not None:
+            
+            _query_params.append(('count', count))
+            
+        if start_index is not None:
+            
+            _query_params.append(('startIndex', start_index))
+            
+        if sort_by is not None:
+            
+            _query_params.append(('sortBy', sort_by))
+            
+        if sort_order is not None:
+            
+            _query_params.append(('sortOrder', sort_order.value))
+            
+        if filter_value is not None:
+            
+            _query_params.append(('filterValue', filter_value))
             
         # process the header parameters
         # process the form parameters

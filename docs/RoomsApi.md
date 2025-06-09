@@ -2091,7 +2091,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_room_security_info**
-> FileShareArrayWrapper get_room_security_info(id, filter_type=filter_type)
+> FileShareArrayWrapper get_room_security_info(id, filter_type=filter_type, count=count, start_index=start_index, filter_value=filter_value)
 
 Get the room access rights
 
@@ -2154,10 +2154,13 @@ with docspace.ApiClient(configuration) as api_client:
     api_instance = docspace.RoomsApi(api_client)
     id = 9846 # int | The room ID.
     filter_type = docspace.ShareFilterType() # ShareFilterType | The filter type of the access rights. (optional)
+    count = 1234 # int | The number of items to be retrieved or processed. (optional)
+    start_index = 1234 # int | The starting index of the items to retrieve in a paginated request. (optional)
+    filter_value = 'some text' # str | The text filter value used for filtering room security information. (optional)
 
     try:
         # Get the room access rights
-        api_response = api_instance.get_room_security_info(id, filter_type=filter_type)
+        api_response = api_instance.get_room_security_info(id, filter_type=filter_type, count=count, start_index=start_index, filter_value=filter_value)
         print("The response of RoomsApi->get_room_security_info:\n")
         pprint(api_response)
     except Exception as e:
@@ -2173,6 +2176,9 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **int**| The room ID. | 
  **filter_type** | [**ShareFilterType**](.md)| The filter type of the access rights. | [optional] 
+ **count** | **int**| The number of items to be retrieved or processed. | [optional] 
+ **start_index** | **int**| The starting index of the items to retrieve in a paginated request. | [optional] 
+ **filter_value** | **str**| The text filter value used for filtering room security information. | [optional] 
 
 ### Return type
 
@@ -2197,7 +2203,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_room_tags_info**
-> ObjectArrayWrapper get_room_tags_info()
+> ObjectArrayWrapper get_room_tags_info(count=count, start_index=start_index, filter_value=filter_value)
 
 Get tags
 
@@ -2257,10 +2263,13 @@ configuration = docspace.Configuration(
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.RoomsApi(api_client)
+    count = 1234 # int | Gets or sets the number of tag results to retrieve.  This property specifies the maximum amount of tag data to be included in the result set. (optional)
+    start_index = 1234 # int | Represents the starting index from which the tags' information will be retrieved.  This property is used to define the offset for pagination when retrieving a list of tags. It determines  the point in the data set from which the retrieval begins. (optional)
+    filter_value = 'some text' # str | Gets or sets the text value used for searching tags.  This property is typically used as a filter value when retrieving tag information. (optional)
 
     try:
         # Get tags
-        api_response = api_instance.get_room_tags_info()
+        api_response = api_instance.get_room_tags_info(count=count, start_index=start_index, filter_value=filter_value)
         print("The response of RoomsApi->get_room_tags_info:\n")
         pprint(api_response)
     except Exception as e:
@@ -2271,7 +2280,12 @@ with docspace.ApiClient(configuration) as api_client:
 
 ### Parameters
 
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **count** | **int**| Gets or sets the number of tag results to retrieve.  This property specifies the maximum amount of tag data to be included in the result set. | [optional] 
+ **start_index** | **int**| Represents the starting index from which the tags&#39; information will be retrieved.  This property is used to define the offset for pagination when retrieving a list of tags. It determines  the point in the data set from which the retrieval begins. | [optional] 
+ **filter_value** | **str**| Gets or sets the text value used for searching tags.  This property is typically used as a filter value when retrieving tag information. | [optional] 
 
 ### Return type
 
@@ -2395,7 +2409,7 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_rooms_folder**
-> FolderContentIntegerWrapper get_rooms_folder(type=type, subject_id=subject_id, search_area=search_area, without_tags=without_tags, tags=tags, exclude_subject=exclude_subject, provider=provider, subject_filter=subject_filter, quota_filter=quota_filter, storage_filter=storage_filter)
+> FolderContentIntegerWrapper get_rooms_folder(type=type, subject_id=subject_id, search_area=search_area, without_tags=without_tags, tags=tags, exclude_subject=exclude_subject, provider=provider, subject_filter=subject_filter, quota_filter=quota_filter, storage_filter=storage_filter, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value)
 
 Get rooms
 
@@ -2416,6 +2430,7 @@ from docspace.models.provider_filter import ProviderFilter
 from docspace.models.quota_filter import QuotaFilter
 from docspace.models.room_type import RoomType
 from docspace.models.search_area import SearchArea
+from docspace.models.sort_order import SortOrder
 from docspace.models.storage_filter import StorageFilter
 from docspace.models.subject_filter import SubjectFilter
 from docspace.rest import ApiException
@@ -2471,10 +2486,15 @@ with docspace.ApiClient(configuration) as api_client:
     subject_filter = docspace.SubjectFilter() # SubjectFilter | The filter by user (Owner - 0, Member - 1). (optional)
     quota_filter = docspace.QuotaFilter() # QuotaFilter | The filter by quota (All - 0, Default - 1, Custom - 2). (optional)
     storage_filter = docspace.StorageFilter() # StorageFilter | The filter by storage (None - 0, Internal - 1, ThirdParty - 2). (optional)
+    count = 1234 # int | Specifies the maximum number of items to retrieve. (optional)
+    start_index = 1234 # int | The index from which to start retrieving the room content. (optional)
+    sort_by = 'some text' # str | Specifies the field by which the room content should be sorted. (optional)
+    sort_order = docspace.SortOrder() # SortOrder | The order in which the results are sorted. (optional)
+    filter_value = 'some text' # str | The text filter value used to refine search or query operations. (optional)
 
     try:
         # Get rooms
-        api_response = api_instance.get_rooms_folder(type=type, subject_id=subject_id, search_area=search_area, without_tags=without_tags, tags=tags, exclude_subject=exclude_subject, provider=provider, subject_filter=subject_filter, quota_filter=quota_filter, storage_filter=storage_filter)
+        api_response = api_instance.get_rooms_folder(type=type, subject_id=subject_id, search_area=search_area, without_tags=without_tags, tags=tags, exclude_subject=exclude_subject, provider=provider, subject_filter=subject_filter, quota_filter=quota_filter, storage_filter=storage_filter, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value)
         print("The response of RoomsApi->get_rooms_folder:\n")
         pprint(api_response)
     except Exception as e:
@@ -2498,6 +2518,11 @@ Name | Type | Description  | Notes
  **subject_filter** | [**SubjectFilter**](.md)| The filter by user (Owner - 0, Member - 1). | [optional] 
  **quota_filter** | [**QuotaFilter**](.md)| The filter by quota (All - 0, Default - 1, Custom - 2). | [optional] 
  **storage_filter** | [**StorageFilter**](.md)| The filter by storage (None - 0, Internal - 1, ThirdParty - 2). | [optional] 
+ **count** | **int**| Specifies the maximum number of items to retrieve. | [optional] 
+ **start_index** | **int**| The index from which to start retrieving the room content. | [optional] 
+ **sort_by** | **str**| Specifies the field by which the room content should be sorted. | [optional] 
+ **sort_order** | [**SortOrder**](.md)| The order in which the results are sorted. | [optional] 
+ **filter_value** | **str**| The text filter value used to refine search or query operations. | [optional] 
 
 ### Return type
 

@@ -6,7 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**calculate_wallet_payment**](PortalPaymentApi.md#calculate_wallet_payment) | **PUT** /api/2.0/portal/payment/calculatewallet | Calculate amount of the wallet payment
 [**create_customer_operations_report**](PortalPaymentApi.md#create_customer_operations_report) | **POST** /api/2.0/portal/payment/customer/operationsreport | Generate the customer operations report
-[**get_all_currencies**](PortalPaymentApi.md#get_all_currencies) | **GET** /api/2.0/portal/payment/accounting/currencies | Get list of currencies
+[**get_accounting_currencies**](PortalPaymentApi.md#get_accounting_currencies) | **GET** /api/2.0/portal/payment/accounting/currencies | Get list of currencies
 [**get_checkout_setup_url**](PortalPaymentApi.md#get_checkout_setup_url) | **GET** /api/2.0/portal/payment/chechoutsetupurl | Get the checkout setup page URL
 [**get_customer_balance**](PortalPaymentApi.md#get_customer_balance) | **GET** /api/2.0/portal/payment/customer/balance | Get the customer balance
 [**get_customer_info**](PortalPaymentApi.md#get_customer_info) | **GET** /api/2.0/portal/payment/customerinfo | Get the customer info
@@ -236,8 +236,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **get_all_currencies**
-> CurrencyArrayWrapper get_all_currencies()
+# **get_accounting_currencies**
+> CurrencyArrayWrapper get_accounting_currencies()
 
 Get list of currencies
 
@@ -300,11 +300,11 @@ with docspace.ApiClient(configuration) as api_client:
 
     try:
         # Get list of currencies
-        api_response = api_instance.get_all_currencies()
-        print("The response of PortalPaymentApi->get_all_currencies:\n")
+        api_response = api_instance.get_accounting_currencies()
+        print("The response of PortalPaymentApi->get_accounting_currencies:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling PortalPaymentApi->get_all_currencies: %s\n" % e)
+        print("Exception when calling PortalPaymentApi->get_accounting_currencies: %s\n" % e)
 ```
 
 

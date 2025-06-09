@@ -35,7 +35,7 @@ class TestTopUpDepositRequestDto(unittest.TestCase):
         model = TopUpDepositRequestDto()
         if include_optional:
             return TopUpDepositRequestDto(
-                amount = 1.337,
+                amount = 1234,
                 currency = 'some text'
             )
         else:

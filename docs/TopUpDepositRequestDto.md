@@ -6,8 +6,8 @@ Put money on deposit request parameters
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**amount** | **float** | Amount | [optional] 
-**currency** | **str** | Currency | [optional] 
+**amount** | **int** | Amount | [optional] 
+**currency** | **str** | The three-character ISO 4217 currency symbol | [optional] 
 
 ## Example
 

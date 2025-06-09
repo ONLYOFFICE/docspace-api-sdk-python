@@ -39,6 +39,7 @@ from docspace.models.object_wrapper import ObjectWrapper
 from docspace.models.order_request_dto import OrderRequestDto
 from docspace.models.string_array_wrapper import STRINGArrayWrapper
 from docspace.models.search_area import SearchArea
+from docspace.models.sort_order import SortOrder
 from docspace.models.upload_request_dto import UploadRequestDto
 
 from docspace.api_client import ApiClient, RequestSerialized
@@ -1477,6 +1478,11 @@ class FilesFoldersApi:
         search_area: Annotated[Optional[SearchArea], Field(description="The search area.")] = None,
         forms_item_key: Annotated[Optional[StrictStr], Field(description="The forms item key.")] = None,
         forms_item_type: Annotated[Optional[StrictStr], Field(description="The forms item type.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]], Field(description="The maximum number of items to retrieve in the request.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The zero-based index of the first item to retrieve in a paginated request.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="Specifies the property used for sorting the folder request results.")] = None,
+        sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The text value used as a filter parameter for folder content queries.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1514,6 +1520,16 @@ class FilesFoldersApi:
         :type forms_item_key: str
         :param forms_item_type: The forms item type.
         :type forms_item_type: str
+        :param count: The maximum number of items to retrieve in the request.
+        :type count: int
+        :param start_index: The zero-based index of the first item to retrieve in a paginated request.
+        :type start_index: int
+        :param sort_by: Specifies the property used for sorting the folder request results.
+        :type sort_by: str
+        :param sort_order: The order in which the results are sorted.
+        :type sort_order: SortOrder
+        :param filter_value: The text value used as a filter parameter for folder content queries.
+        :type filter_value: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1547,6 +1563,11 @@ class FilesFoldersApi:
             search_area=search_area,
             forms_item_key=forms_item_key,
             forms_item_type=forms_item_type,
+            count=count,
+            start_index=start_index,
+            sort_by=sort_by,
+            sort_order=sort_order,
+            filter_value=filter_value,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1582,6 +1603,11 @@ class FilesFoldersApi:
         search_area: Annotated[Optional[SearchArea], Field(description="The search area.")] = None,
         forms_item_key: Annotated[Optional[StrictStr], Field(description="The forms item key.")] = None,
         forms_item_type: Annotated[Optional[StrictStr], Field(description="The forms item type.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]], Field(description="The maximum number of items to retrieve in the request.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The zero-based index of the first item to retrieve in a paginated request.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="Specifies the property used for sorting the folder request results.")] = None,
+        sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The text value used as a filter parameter for folder content queries.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1619,6 +1645,16 @@ class FilesFoldersApi:
         :type forms_item_key: str
         :param forms_item_type: The forms item type.
         :type forms_item_type: str
+        :param count: The maximum number of items to retrieve in the request.
+        :type count: int
+        :param start_index: The zero-based index of the first item to retrieve in a paginated request.
+        :type start_index: int
+        :param sort_by: Specifies the property used for sorting the folder request results.
+        :type sort_by: str
+        :param sort_order: The order in which the results are sorted.
+        :type sort_order: SortOrder
+        :param filter_value: The text value used as a filter parameter for folder content queries.
+        :type filter_value: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1652,6 +1688,11 @@ class FilesFoldersApi:
             search_area=search_area,
             forms_item_key=forms_item_key,
             forms_item_type=forms_item_type,
+            count=count,
+            start_index=start_index,
+            sort_by=sort_by,
+            sort_order=sort_order,
+            filter_value=filter_value,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1687,6 +1728,11 @@ class FilesFoldersApi:
         search_area: Annotated[Optional[SearchArea], Field(description="The search area.")] = None,
         forms_item_key: Annotated[Optional[StrictStr], Field(description="The forms item key.")] = None,
         forms_item_type: Annotated[Optional[StrictStr], Field(description="The forms item type.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]], Field(description="The maximum number of items to retrieve in the request.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The zero-based index of the first item to retrieve in a paginated request.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="Specifies the property used for sorting the folder request results.")] = None,
+        sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The text value used as a filter parameter for folder content queries.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1724,6 +1770,16 @@ class FilesFoldersApi:
         :type forms_item_key: str
         :param forms_item_type: The forms item type.
         :type forms_item_type: str
+        :param count: The maximum number of items to retrieve in the request.
+        :type count: int
+        :param start_index: The zero-based index of the first item to retrieve in a paginated request.
+        :type start_index: int
+        :param sort_by: Specifies the property used for sorting the folder request results.
+        :type sort_by: str
+        :param sort_order: The order in which the results are sorted.
+        :type sort_order: SortOrder
+        :param filter_value: The text value used as a filter parameter for folder content queries.
+        :type filter_value: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1757,6 +1813,11 @@ class FilesFoldersApi:
             search_area=search_area,
             forms_item_key=forms_item_key,
             forms_item_type=forms_item_type,
+            count=count,
+            start_index=start_index,
+            sort_by=sort_by,
+            sort_order=sort_order,
+            filter_value=filter_value,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1787,6 +1848,11 @@ class FilesFoldersApi:
         search_area,
         forms_item_key,
         forms_item_type,
+        count,
+        start_index,
+        sort_by,
+        sort_order,
+        filter_value,
         _request_auth,
         _content_type,
         _headers,
@@ -1847,6 +1913,26 @@ class FilesFoldersApi:
             
             _query_params.append(('formsItemType', forms_item_type))
             
+        if count is not None:
+            
+            _query_params.append(('count', count))
+            
+        if start_index is not None:
+            
+            _query_params.append(('startIndex', start_index))
+            
+        if sort_by is not None:
+            
+            _query_params.append(('sortBy', sort_by))
+            
+        if sort_order is not None:
+            
+            _query_params.append(('sortOrder', sort_order.value))
+            
+        if filter_value is not None:
+            
+            _query_params.append(('filterValue', filter_value))
+            
         # process the header parameters
         # process the form parameters
         # process the body parameter
@@ -1889,6 +1975,8 @@ class FilesFoldersApi:
         folder_id: Annotated[StrictInt, Field(description="The folder ID of the history request.")],
         from_date: Annotated[Optional[ApiDateTime], Field(description="The start date of the history request.")] = None,
         to_date: Annotated[Optional[ApiDateTime], Field(description="The end date of the history request.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]], Field(description="The number of records to retrieve for the folder history.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The starting index from which the history records are retrieved in the request.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1912,6 +2000,10 @@ class FilesFoldersApi:
         :type from_date: ApiDateTime
         :param to_date: The end date of the history request.
         :type to_date: ApiDateTime
+        :param count: The number of records to retrieve for the folder history.
+        :type count: int
+        :param start_index: The starting index from which the history records are retrieved in the request.
+        :type start_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1938,6 +2030,8 @@ class FilesFoldersApi:
             folder_id=folder_id,
             from_date=from_date,
             to_date=to_date,
+            count=count,
+            start_index=start_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1967,6 +2061,8 @@ class FilesFoldersApi:
         folder_id: Annotated[StrictInt, Field(description="The folder ID of the history request.")],
         from_date: Annotated[Optional[ApiDateTime], Field(description="The start date of the history request.")] = None,
         to_date: Annotated[Optional[ApiDateTime], Field(description="The end date of the history request.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]], Field(description="The number of records to retrieve for the folder history.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The starting index from which the history records are retrieved in the request.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1990,6 +2086,10 @@ class FilesFoldersApi:
         :type from_date: ApiDateTime
         :param to_date: The end date of the history request.
         :type to_date: ApiDateTime
+        :param count: The number of records to retrieve for the folder history.
+        :type count: int
+        :param start_index: The starting index from which the history records are retrieved in the request.
+        :type start_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2016,6 +2116,8 @@ class FilesFoldersApi:
             folder_id=folder_id,
             from_date=from_date,
             to_date=to_date,
+            count=count,
+            start_index=start_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2045,6 +2147,8 @@ class FilesFoldersApi:
         folder_id: Annotated[StrictInt, Field(description="The folder ID of the history request.")],
         from_date: Annotated[Optional[ApiDateTime], Field(description="The start date of the history request.")] = None,
         to_date: Annotated[Optional[ApiDateTime], Field(description="The end date of the history request.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]], Field(description="The number of records to retrieve for the folder history.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The starting index from which the history records are retrieved in the request.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2068,6 +2172,10 @@ class FilesFoldersApi:
         :type from_date: ApiDateTime
         :param to_date: The end date of the history request.
         :type to_date: ApiDateTime
+        :param count: The number of records to retrieve for the folder history.
+        :type count: int
+        :param start_index: The starting index from which the history records are retrieved in the request.
+        :type start_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2094,6 +2202,8 @@ class FilesFoldersApi:
             folder_id=folder_id,
             from_date=from_date,
             to_date=to_date,
+            count=count,
+            start_index=start_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2118,6 +2228,8 @@ class FilesFoldersApi:
         folder_id,
         from_date,
         to_date,
+        count,
+        start_index,
         _request_auth,
         _content_type,
         _headers,
@@ -2149,6 +2261,14 @@ class FilesFoldersApi:
         if to_date is not None:
             
             _query_params.append(('toDate', to_date))
+            
+        if count is not None:
+            
+            _query_params.append(('count', count))
+            
+        if start_index is not None:
+            
+            _query_params.append(('startIndex', start_index))
             
         # process the header parameters
         # process the form parameters
@@ -3265,6 +3385,11 @@ class FilesFoldersApi:
         user_id_or_group_id: Annotated[Optional[StrictStr], Field(description="The user or group ID.")] = None,
         filter_type: Annotated[Optional[FilterType], Field(description="The filter type.")] = None,
         apply_filter_option: Annotated[Optional[ApplyFilterOption], Field(description="Specifies whether to return only files, only folders or all elements.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]], Field(description="The maximum number of items to retrieve in the response.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The starting position of the items to be retrieved.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="The property used to specify the sorting criteria for folder contents.")] = None,
+        sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The text used for filtering or searching folder contents.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3288,6 +3413,16 @@ class FilesFoldersApi:
         :type filter_type: FilterType
         :param apply_filter_option: Specifies whether to return only files, only folders or all elements.
         :type apply_filter_option: ApplyFilterOption
+        :param count: The maximum number of items to retrieve in the response.
+        :type count: int
+        :param start_index: The starting position of the items to be retrieved.
+        :type start_index: int
+        :param sort_by: The property used to specify the sorting criteria for folder contents.
+        :type sort_by: str
+        :param sort_order: The order in which the results are sorted.
+        :type sort_order: SortOrder
+        :param filter_value: The text used for filtering or searching folder contents.
+        :type filter_value: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3314,6 +3449,11 @@ class FilesFoldersApi:
             user_id_or_group_id=user_id_or_group_id,
             filter_type=filter_type,
             apply_filter_option=apply_filter_option,
+            count=count,
+            start_index=start_index,
+            sort_by=sort_by,
+            sort_order=sort_order,
+            filter_value=filter_value,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3343,6 +3483,11 @@ class FilesFoldersApi:
         user_id_or_group_id: Annotated[Optional[StrictStr], Field(description="The user or group ID.")] = None,
         filter_type: Annotated[Optional[FilterType], Field(description="The filter type.")] = None,
         apply_filter_option: Annotated[Optional[ApplyFilterOption], Field(description="Specifies whether to return only files, only folders or all elements.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]], Field(description="The maximum number of items to retrieve in the response.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The starting position of the items to be retrieved.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="The property used to specify the sorting criteria for folder contents.")] = None,
+        sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The text used for filtering or searching folder contents.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3366,6 +3511,16 @@ class FilesFoldersApi:
         :type filter_type: FilterType
         :param apply_filter_option: Specifies whether to return only files, only folders or all elements.
         :type apply_filter_option: ApplyFilterOption
+        :param count: The maximum number of items to retrieve in the response.
+        :type count: int
+        :param start_index: The starting position of the items to be retrieved.
+        :type start_index: int
+        :param sort_by: The property used to specify the sorting criteria for folder contents.
+        :type sort_by: str
+        :param sort_order: The order in which the results are sorted.
+        :type sort_order: SortOrder
+        :param filter_value: The text used for filtering or searching folder contents.
+        :type filter_value: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3392,6 +3547,11 @@ class FilesFoldersApi:
             user_id_or_group_id=user_id_or_group_id,
             filter_type=filter_type,
             apply_filter_option=apply_filter_option,
+            count=count,
+            start_index=start_index,
+            sort_by=sort_by,
+            sort_order=sort_order,
+            filter_value=filter_value,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3421,6 +3581,11 @@ class FilesFoldersApi:
         user_id_or_group_id: Annotated[Optional[StrictStr], Field(description="The user or group ID.")] = None,
         filter_type: Annotated[Optional[FilterType], Field(description="The filter type.")] = None,
         apply_filter_option: Annotated[Optional[ApplyFilterOption], Field(description="Specifies whether to return only files, only folders or all elements.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]], Field(description="The maximum number of items to retrieve in the response.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The starting position of the items to be retrieved.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="The property used to specify the sorting criteria for folder contents.")] = None,
+        sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The text used for filtering or searching folder contents.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3444,6 +3609,16 @@ class FilesFoldersApi:
         :type filter_type: FilterType
         :param apply_filter_option: Specifies whether to return only files, only folders or all elements.
         :type apply_filter_option: ApplyFilterOption
+        :param count: The maximum number of items to retrieve in the response.
+        :type count: int
+        :param start_index: The starting position of the items to be retrieved.
+        :type start_index: int
+        :param sort_by: The property used to specify the sorting criteria for folder contents.
+        :type sort_by: str
+        :param sort_order: The order in which the results are sorted.
+        :type sort_order: SortOrder
+        :param filter_value: The text used for filtering or searching folder contents.
+        :type filter_value: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3470,6 +3645,11 @@ class FilesFoldersApi:
             user_id_or_group_id=user_id_or_group_id,
             filter_type=filter_type,
             apply_filter_option=apply_filter_option,
+            count=count,
+            start_index=start_index,
+            sort_by=sort_by,
+            sort_order=sort_order,
+            filter_value=filter_value,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3494,6 +3674,11 @@ class FilesFoldersApi:
         user_id_or_group_id,
         filter_type,
         apply_filter_option,
+        count,
+        start_index,
+        sort_by,
+        sort_order,
+        filter_value,
         _request_auth,
         _content_type,
         _headers,
@@ -3527,6 +3712,26 @@ class FilesFoldersApi:
         if apply_filter_option is not None:
             
             _query_params.append(('applyFilterOption', apply_filter_option.value))
+            
+        if count is not None:
+            
+            _query_params.append(('count', count))
+            
+        if start_index is not None:
+            
+            _query_params.append(('startIndex', start_index))
+            
+        if sort_by is not None:
+            
+            _query_params.append(('sortBy', sort_by))
+            
+        if sort_order is not None:
+            
+            _query_params.append(('sortOrder', sort_order.value))
+            
+        if filter_value is not None:
+            
+            _query_params.append(('filterValue', filter_value))
             
         # process the header parameters
         # process the form parameters
@@ -3847,6 +4052,11 @@ class FilesFoldersApi:
         self,
         user_id_or_group_id: Annotated[Optional[StrictStr], Field(description="The user or group ID.")] = None,
         filter_type: Annotated[Optional[FilterType], Field(description="The filter type.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]], Field(description="The maximum number of items to retrieve in the request.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The zero-based index of the first item to retrieve in a paginated list.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="Specifies the field by which the folder content should be sorted.")] = None,
+        sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The text used as a filter or search criterion for folder content queries.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3868,6 +4078,16 @@ class FilesFoldersApi:
         :type user_id_or_group_id: str
         :param filter_type: The filter type.
         :type filter_type: FilterType
+        :param count: The maximum number of items to retrieve in the request.
+        :type count: int
+        :param start_index: The zero-based index of the first item to retrieve in a paginated list.
+        :type start_index: int
+        :param sort_by: Specifies the field by which the folder content should be sorted.
+        :type sort_by: str
+        :param sort_order: The order in which the results are sorted.
+        :type sort_order: SortOrder
+        :param filter_value: The text used as a filter or search criterion for folder content queries.
+        :type filter_value: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3893,6 +4113,11 @@ class FilesFoldersApi:
         _param = self._get_privacy_folder_serialize(
             user_id_or_group_id=user_id_or_group_id,
             filter_type=filter_type,
+            count=count,
+            start_index=start_index,
+            sort_by=sort_by,
+            sort_order=sort_order,
+            filter_value=filter_value,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3921,6 +4146,11 @@ class FilesFoldersApi:
         self,
         user_id_or_group_id: Annotated[Optional[StrictStr], Field(description="The user or group ID.")] = None,
         filter_type: Annotated[Optional[FilterType], Field(description="The filter type.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]], Field(description="The maximum number of items to retrieve in the request.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The zero-based index of the first item to retrieve in a paginated list.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="Specifies the field by which the folder content should be sorted.")] = None,
+        sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The text used as a filter or search criterion for folder content queries.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3942,6 +4172,16 @@ class FilesFoldersApi:
         :type user_id_or_group_id: str
         :param filter_type: The filter type.
         :type filter_type: FilterType
+        :param count: The maximum number of items to retrieve in the request.
+        :type count: int
+        :param start_index: The zero-based index of the first item to retrieve in a paginated list.
+        :type start_index: int
+        :param sort_by: Specifies the field by which the folder content should be sorted.
+        :type sort_by: str
+        :param sort_order: The order in which the results are sorted.
+        :type sort_order: SortOrder
+        :param filter_value: The text used as a filter or search criterion for folder content queries.
+        :type filter_value: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3967,6 +4207,11 @@ class FilesFoldersApi:
         _param = self._get_privacy_folder_serialize(
             user_id_or_group_id=user_id_or_group_id,
             filter_type=filter_type,
+            count=count,
+            start_index=start_index,
+            sort_by=sort_by,
+            sort_order=sort_order,
+            filter_value=filter_value,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3995,6 +4240,11 @@ class FilesFoldersApi:
         self,
         user_id_or_group_id: Annotated[Optional[StrictStr], Field(description="The user or group ID.")] = None,
         filter_type: Annotated[Optional[FilterType], Field(description="The filter type.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]], Field(description="The maximum number of items to retrieve in the request.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The zero-based index of the first item to retrieve in a paginated list.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="Specifies the field by which the folder content should be sorted.")] = None,
+        sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The text used as a filter or search criterion for folder content queries.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4016,6 +4266,16 @@ class FilesFoldersApi:
         :type user_id_or_group_id: str
         :param filter_type: The filter type.
         :type filter_type: FilterType
+        :param count: The maximum number of items to retrieve in the request.
+        :type count: int
+        :param start_index: The zero-based index of the first item to retrieve in a paginated list.
+        :type start_index: int
+        :param sort_by: Specifies the field by which the folder content should be sorted.
+        :type sort_by: str
+        :param sort_order: The order in which the results are sorted.
+        :type sort_order: SortOrder
+        :param filter_value: The text used as a filter or search criterion for folder content queries.
+        :type filter_value: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4041,6 +4301,11 @@ class FilesFoldersApi:
         _param = self._get_privacy_folder_serialize(
             user_id_or_group_id=user_id_or_group_id,
             filter_type=filter_type,
+            count=count,
+            start_index=start_index,
+            sort_by=sort_by,
+            sort_order=sort_order,
+            filter_value=filter_value,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -4064,6 +4329,11 @@ class FilesFoldersApi:
         self,
         user_id_or_group_id,
         filter_type,
+        count,
+        start_index,
+        sort_by,
+        sort_order,
+        filter_value,
         _request_auth,
         _content_type,
         _headers,
@@ -4093,6 +4363,26 @@ class FilesFoldersApi:
         if filter_type is not None:
             
             _query_params.append(('filterType', filter_type.value))
+            
+        if count is not None:
+            
+            _query_params.append(('count', count))
+            
+        if start_index is not None:
+            
+            _query_params.append(('startIndex', start_index))
+            
+        if sort_by is not None:
+            
+            _query_params.append(('sortBy', sort_by))
+            
+        if sort_order is not None:
+            
+            _query_params.append(('sortOrder', sort_order.value))
+            
+        if filter_value is not None:
+            
+            _query_params.append(('filterValue', filter_value))
             
         # process the header parameters
         # process the form parameters
@@ -4142,6 +4432,11 @@ class FilesFoldersApi:
         user_id_or_group_id: Annotated[Optional[StrictStr], Field(description="The user or group ID.")] = None,
         filter_type: Annotated[Optional[FilterType], Field(description="The filter type.")] = None,
         without_trash: Annotated[Optional[StrictBool], Field(description="Specifies whether to return the \"Trash\" section or not.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]], Field(description="The maximum number of items to retrieve in the response.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The starting position of the items to be retrieved.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="Specifies the field by which the folder content should be sorted.")] = None,
+        sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The text used as a filter for searching or retrieving folder contents.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4165,6 +4460,16 @@ class FilesFoldersApi:
         :type filter_type: FilterType
         :param without_trash: Specifies whether to return the \"Trash\" section or not.
         :type without_trash: bool
+        :param count: The maximum number of items to retrieve in the response.
+        :type count: int
+        :param start_index: The starting position of the items to be retrieved.
+        :type start_index: int
+        :param sort_by: Specifies the field by which the folder content should be sorted.
+        :type sort_by: str
+        :param sort_order: The order in which the results are sorted.
+        :type sort_order: SortOrder
+        :param filter_value: The text used as a filter for searching or retrieving folder contents.
+        :type filter_value: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4191,6 +4496,11 @@ class FilesFoldersApi:
             user_id_or_group_id=user_id_or_group_id,
             filter_type=filter_type,
             without_trash=without_trash,
+            count=count,
+            start_index=start_index,
+            sort_by=sort_by,
+            sort_order=sort_order,
+            filter_value=filter_value,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -4220,6 +4530,11 @@ class FilesFoldersApi:
         user_id_or_group_id: Annotated[Optional[StrictStr], Field(description="The user or group ID.")] = None,
         filter_type: Annotated[Optional[FilterType], Field(description="The filter type.")] = None,
         without_trash: Annotated[Optional[StrictBool], Field(description="Specifies whether to return the \"Trash\" section or not.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]], Field(description="The maximum number of items to retrieve in the response.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The starting position of the items to be retrieved.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="Specifies the field by which the folder content should be sorted.")] = None,
+        sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The text used as a filter for searching or retrieving folder contents.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4243,6 +4558,16 @@ class FilesFoldersApi:
         :type filter_type: FilterType
         :param without_trash: Specifies whether to return the \"Trash\" section or not.
         :type without_trash: bool
+        :param count: The maximum number of items to retrieve in the response.
+        :type count: int
+        :param start_index: The starting position of the items to be retrieved.
+        :type start_index: int
+        :param sort_by: Specifies the field by which the folder content should be sorted.
+        :type sort_by: str
+        :param sort_order: The order in which the results are sorted.
+        :type sort_order: SortOrder
+        :param filter_value: The text used as a filter for searching or retrieving folder contents.
+        :type filter_value: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4269,6 +4594,11 @@ class FilesFoldersApi:
             user_id_or_group_id=user_id_or_group_id,
             filter_type=filter_type,
             without_trash=without_trash,
+            count=count,
+            start_index=start_index,
+            sort_by=sort_by,
+            sort_order=sort_order,
+            filter_value=filter_value,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -4298,6 +4628,11 @@ class FilesFoldersApi:
         user_id_or_group_id: Annotated[Optional[StrictStr], Field(description="The user or group ID.")] = None,
         filter_type: Annotated[Optional[FilterType], Field(description="The filter type.")] = None,
         without_trash: Annotated[Optional[StrictBool], Field(description="Specifies whether to return the \"Trash\" section or not.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]], Field(description="The maximum number of items to retrieve in the response.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The starting position of the items to be retrieved.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="Specifies the field by which the folder content should be sorted.")] = None,
+        sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The text used as a filter for searching or retrieving folder contents.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4321,6 +4656,16 @@ class FilesFoldersApi:
         :type filter_type: FilterType
         :param without_trash: Specifies whether to return the \"Trash\" section or not.
         :type without_trash: bool
+        :param count: The maximum number of items to retrieve in the response.
+        :type count: int
+        :param start_index: The starting position of the items to be retrieved.
+        :type start_index: int
+        :param sort_by: Specifies the field by which the folder content should be sorted.
+        :type sort_by: str
+        :param sort_order: The order in which the results are sorted.
+        :type sort_order: SortOrder
+        :param filter_value: The text used as a filter for searching or retrieving folder contents.
+        :type filter_value: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4347,6 +4692,11 @@ class FilesFoldersApi:
             user_id_or_group_id=user_id_or_group_id,
             filter_type=filter_type,
             without_trash=without_trash,
+            count=count,
+            start_index=start_index,
+            sort_by=sort_by,
+            sort_order=sort_order,
+            filter_value=filter_value,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -4371,6 +4721,11 @@ class FilesFoldersApi:
         user_id_or_group_id,
         filter_type,
         without_trash,
+        count,
+        start_index,
+        sort_by,
+        sort_order,
+        filter_value,
         _request_auth,
         _content_type,
         _headers,
@@ -4404,6 +4759,26 @@ class FilesFoldersApi:
         if without_trash is not None:
             
             _query_params.append(('withoutTrash', without_trash))
+            
+        if count is not None:
+            
+            _query_params.append(('count', count))
+            
+        if start_index is not None:
+            
+            _query_params.append(('startIndex', start_index))
+            
+        if sort_by is not None:
+            
+            _query_params.append(('sortBy', sort_by))
+            
+        if sort_order is not None:
+            
+            _query_params.append(('sortOrder', sort_order.value))
+            
+        if filter_value is not None:
+            
+            _query_params.append(('filterValue', filter_value))
             
         # process the header parameters
         # process the form parameters
@@ -4453,6 +4828,11 @@ class FilesFoldersApi:
         user_id_or_group_id: Annotated[Optional[StrictStr], Field(description="The user or group ID.")] = None,
         filter_type: Annotated[Optional[FilterType], Field(description="The filter type.")] = None,
         apply_filter_option: Annotated[Optional[ApplyFilterOption], Field(description="Specifies whether to return only files, only folders or all elements.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]], Field(description="The maximum number of items to retrieve in the response.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The starting position of the items to be retrieved.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="The property used to specify the sorting criteria for folder contents.")] = None,
+        sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The text used for filtering or searching folder contents.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4476,6 +4856,16 @@ class FilesFoldersApi:
         :type filter_type: FilterType
         :param apply_filter_option: Specifies whether to return only files, only folders or all elements.
         :type apply_filter_option: ApplyFilterOption
+        :param count: The maximum number of items to retrieve in the response.
+        :type count: int
+        :param start_index: The starting position of the items to be retrieved.
+        :type start_index: int
+        :param sort_by: The property used to specify the sorting criteria for folder contents.
+        :type sort_by: str
+        :param sort_order: The order in which the results are sorted.
+        :type sort_order: SortOrder
+        :param filter_value: The text used for filtering or searching folder contents.
+        :type filter_value: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4502,6 +4892,11 @@ class FilesFoldersApi:
             user_id_or_group_id=user_id_or_group_id,
             filter_type=filter_type,
             apply_filter_option=apply_filter_option,
+            count=count,
+            start_index=start_index,
+            sort_by=sort_by,
+            sort_order=sort_order,
+            filter_value=filter_value,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -4531,6 +4926,11 @@ class FilesFoldersApi:
         user_id_or_group_id: Annotated[Optional[StrictStr], Field(description="The user or group ID.")] = None,
         filter_type: Annotated[Optional[FilterType], Field(description="The filter type.")] = None,
         apply_filter_option: Annotated[Optional[ApplyFilterOption], Field(description="Specifies whether to return only files, only folders or all elements.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]], Field(description="The maximum number of items to retrieve in the response.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The starting position of the items to be retrieved.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="The property used to specify the sorting criteria for folder contents.")] = None,
+        sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The text used for filtering or searching folder contents.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4554,6 +4954,16 @@ class FilesFoldersApi:
         :type filter_type: FilterType
         :param apply_filter_option: Specifies whether to return only files, only folders or all elements.
         :type apply_filter_option: ApplyFilterOption
+        :param count: The maximum number of items to retrieve in the response.
+        :type count: int
+        :param start_index: The starting position of the items to be retrieved.
+        :type start_index: int
+        :param sort_by: The property used to specify the sorting criteria for folder contents.
+        :type sort_by: str
+        :param sort_order: The order in which the results are sorted.
+        :type sort_order: SortOrder
+        :param filter_value: The text used for filtering or searching folder contents.
+        :type filter_value: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4580,6 +4990,11 @@ class FilesFoldersApi:
             user_id_or_group_id=user_id_or_group_id,
             filter_type=filter_type,
             apply_filter_option=apply_filter_option,
+            count=count,
+            start_index=start_index,
+            sort_by=sort_by,
+            sort_order=sort_order,
+            filter_value=filter_value,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -4609,6 +5024,11 @@ class FilesFoldersApi:
         user_id_or_group_id: Annotated[Optional[StrictStr], Field(description="The user or group ID.")] = None,
         filter_type: Annotated[Optional[FilterType], Field(description="The filter type.")] = None,
         apply_filter_option: Annotated[Optional[ApplyFilterOption], Field(description="Specifies whether to return only files, only folders or all elements.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]], Field(description="The maximum number of items to retrieve in the response.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The starting position of the items to be retrieved.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="The property used to specify the sorting criteria for folder contents.")] = None,
+        sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The text used for filtering or searching folder contents.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4632,6 +5052,16 @@ class FilesFoldersApi:
         :type filter_type: FilterType
         :param apply_filter_option: Specifies whether to return only files, only folders or all elements.
         :type apply_filter_option: ApplyFilterOption
+        :param count: The maximum number of items to retrieve in the response.
+        :type count: int
+        :param start_index: The starting position of the items to be retrieved.
+        :type start_index: int
+        :param sort_by: The property used to specify the sorting criteria for folder contents.
+        :type sort_by: str
+        :param sort_order: The order in which the results are sorted.
+        :type sort_order: SortOrder
+        :param filter_value: The text used for filtering or searching folder contents.
+        :type filter_value: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4658,6 +5088,11 @@ class FilesFoldersApi:
             user_id_or_group_id=user_id_or_group_id,
             filter_type=filter_type,
             apply_filter_option=apply_filter_option,
+            count=count,
+            start_index=start_index,
+            sort_by=sort_by,
+            sort_order=sort_order,
+            filter_value=filter_value,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -4682,6 +5117,11 @@ class FilesFoldersApi:
         user_id_or_group_id,
         filter_type,
         apply_filter_option,
+        count,
+        start_index,
+        sort_by,
+        sort_order,
+        filter_value,
         _request_auth,
         _content_type,
         _headers,
@@ -4715,6 +5155,26 @@ class FilesFoldersApi:
         if apply_filter_option is not None:
             
             _query_params.append(('applyFilterOption', apply_filter_option.value))
+            
+        if count is not None:
+            
+            _query_params.append(('count', count))
+            
+        if start_index is not None:
+            
+            _query_params.append(('startIndex', start_index))
+            
+        if sort_by is not None:
+            
+            _query_params.append(('sortBy', sort_by))
+            
+        if sort_order is not None:
+            
+            _query_params.append(('sortOrder', sort_order.value))
+            
+        if filter_value is not None:
+            
+            _query_params.append(('filterValue', filter_value))
             
         # process the header parameters
         # process the form parameters

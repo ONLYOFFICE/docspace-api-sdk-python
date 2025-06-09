@@ -1913,7 +1913,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_file_history**
-> HistoryArrayWrapper get_file_history(file_id, from_date=from_date, to_date=to_date)
+> HistoryArrayWrapper get_file_history(file_id, from_date=from_date, to_date=to_date, count=count, start_index=start_index)
 
 Get file history
 
@@ -1977,10 +1977,12 @@ with docspace.ApiClient(configuration) as api_client:
     file_id = 9846 # int | The file ID of the history request.
     from_date = docspace.ApiDateTime() # ApiDateTime | The start date of the history. (optional)
     to_date = docspace.ApiDateTime() # ApiDateTime | The end date of the history. (optional)
+    count = 1234 # int | The number of history entries to retrieve for the file log. (optional)
+    start_index = 1234 # int | The starting index for retrieving a subset of file history entries. (optional)
 
     try:
         # Get file history
-        api_response = api_instance.get_file_history(file_id, from_date=from_date, to_date=to_date)
+        api_response = api_instance.get_file_history(file_id, from_date=from_date, to_date=to_date, count=count, start_index=start_index)
         print("The response of FilesFilesApi->get_file_history:\n")
         pprint(api_response)
     except Exception as e:
@@ -1997,6 +1999,8 @@ Name | Type | Description  | Notes
  **file_id** | **int**| The file ID of the history request. | 
  **from_date** | [**ApiDateTime**](.md)| The start date of the history. | [optional] 
  **to_date** | [**ApiDateTime**](.md)| The end date of the history. | [optional] 
+ **count** | **int**| The number of history entries to retrieve for the file log. | [optional] 
+ **start_index** | **int**| The starting index for retrieving a subset of file history entries. | [optional] 
 
 ### Return type
 
@@ -2093,7 +2097,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_file_links**
-> FileShareArrayWrapper get_file_links(id)
+> FileShareArrayWrapper get_file_links(id, count=count, start_index=start_index)
 
 Get file external links
 
@@ -2154,10 +2158,12 @@ with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.FilesFilesApi(api_client)
     id = 9846 # int | The file ID of the request.
+    count = 1234 # int | The number of items to retrieve in the request. (optional)
+    start_index = 1234 # int | The starting index for the query results. (optional)
 
     try:
         # Get file external links
-        api_response = api_instance.get_file_links(id)
+        api_response = api_instance.get_file_links(id, count=count, start_index=start_index)
         print("The response of FilesFilesApi->get_file_links:\n")
         pprint(api_response)
     except Exception as e:
@@ -2172,6 +2178,8 @@ with docspace.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **int**| The file ID of the request. | 
+ **count** | **int**| The number of items to retrieve in the request. | [optional] 
+ **start_index** | **int**| The starting index for the query results. | [optional] 
 
 ### Return type
 
@@ -2196,7 +2204,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_file_primary_external_link**
-> FileShareWrapper get_file_primary_external_link(id)
+> FileShareWrapper get_file_primary_external_link(id, count=count, start_index=start_index)
 
 Get primary external link
 
@@ -2223,10 +2231,12 @@ with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.FilesFilesApi(api_client)
     id = 9846 # int | The file ID of the request.
+    count = 1234 # int | The number of items to retrieve in the request. (optional)
+    start_index = 1234 # int | The starting index for the query results. (optional)
 
     try:
         # Get primary external link
-        api_response = api_instance.get_file_primary_external_link(id)
+        api_response = api_instance.get_file_primary_external_link(id, count=count, start_index=start_index)
         print("The response of FilesFilesApi->get_file_primary_external_link:\n")
         pprint(api_response)
     except Exception as e:
@@ -2241,6 +2251,8 @@ with docspace.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **int**| The file ID of the request. | 
+ **count** | **int**| The number of items to retrieve in the request. | [optional] 
+ **start_index** | **int**| The starting index for the query results. | [optional] 
 
 ### Return type
 

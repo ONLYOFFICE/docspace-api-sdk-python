@@ -5542,6 +5542,8 @@ class FilesFilesApi:
         file_id: Annotated[StrictInt, Field(description="The file ID of the history request.")],
         from_date: Annotated[Optional[ApiDateTime], Field(description="The start date of the history.")] = None,
         to_date: Annotated[Optional[ApiDateTime], Field(description="The end date of the history.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]], Field(description="The number of history entries to retrieve for the file log.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The starting index for retrieving a subset of file history entries.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5565,6 +5567,10 @@ class FilesFilesApi:
         :type from_date: ApiDateTime
         :param to_date: The end date of the history.
         :type to_date: ApiDateTime
+        :param count: The number of history entries to retrieve for the file log.
+        :type count: int
+        :param start_index: The starting index for retrieving a subset of file history entries.
+        :type start_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5591,6 +5597,8 @@ class FilesFilesApi:
             file_id=file_id,
             from_date=from_date,
             to_date=to_date,
+            count=count,
+            start_index=start_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -5620,6 +5628,8 @@ class FilesFilesApi:
         file_id: Annotated[StrictInt, Field(description="The file ID of the history request.")],
         from_date: Annotated[Optional[ApiDateTime], Field(description="The start date of the history.")] = None,
         to_date: Annotated[Optional[ApiDateTime], Field(description="The end date of the history.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]], Field(description="The number of history entries to retrieve for the file log.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The starting index for retrieving a subset of file history entries.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5643,6 +5653,10 @@ class FilesFilesApi:
         :type from_date: ApiDateTime
         :param to_date: The end date of the history.
         :type to_date: ApiDateTime
+        :param count: The number of history entries to retrieve for the file log.
+        :type count: int
+        :param start_index: The starting index for retrieving a subset of file history entries.
+        :type start_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5669,6 +5683,8 @@ class FilesFilesApi:
             file_id=file_id,
             from_date=from_date,
             to_date=to_date,
+            count=count,
+            start_index=start_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -5698,6 +5714,8 @@ class FilesFilesApi:
         file_id: Annotated[StrictInt, Field(description="The file ID of the history request.")],
         from_date: Annotated[Optional[ApiDateTime], Field(description="The start date of the history.")] = None,
         to_date: Annotated[Optional[ApiDateTime], Field(description="The end date of the history.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]], Field(description="The number of history entries to retrieve for the file log.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The starting index for retrieving a subset of file history entries.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5721,6 +5739,10 @@ class FilesFilesApi:
         :type from_date: ApiDateTime
         :param to_date: The end date of the history.
         :type to_date: ApiDateTime
+        :param count: The number of history entries to retrieve for the file log.
+        :type count: int
+        :param start_index: The starting index for retrieving a subset of file history entries.
+        :type start_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5747,6 +5769,8 @@ class FilesFilesApi:
             file_id=file_id,
             from_date=from_date,
             to_date=to_date,
+            count=count,
+            start_index=start_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -5771,6 +5795,8 @@ class FilesFilesApi:
         file_id,
         from_date,
         to_date,
+        count,
+        start_index,
         _request_auth,
         _content_type,
         _headers,
@@ -5802,6 +5828,14 @@ class FilesFilesApi:
         if to_date is not None:
             
             _query_params.append(('toDate', to_date))
+            
+        if count is not None:
+            
+            _query_params.append(('count', count))
+            
+        if start_index is not None:
+            
+            _query_params.append(('startIndex', start_index))
             
         # process the header parameters
         # process the form parameters
@@ -6126,6 +6160,8 @@ class FilesFilesApi:
     def get_file_links(
         self,
         id: Annotated[StrictInt, Field(description="The file ID of the request.")],
+        count: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]], Field(description="The number of items to retrieve in the request.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The starting index for the query results.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6145,6 +6181,10 @@ class FilesFilesApi:
 
         :param id: The file ID of the request. (required)
         :type id: int
+        :param count: The number of items to retrieve in the request.
+        :type count: int
+        :param start_index: The starting index for the query results.
+        :type start_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -6169,6 +6209,8 @@ class FilesFilesApi:
 
         _param = self._get_file_links_serialize(
             id=id,
+            count=count,
+            start_index=start_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -6194,6 +6236,8 @@ class FilesFilesApi:
     def get_file_links_with_http_info(
         self,
         id: Annotated[StrictInt, Field(description="The file ID of the request.")],
+        count: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]], Field(description="The number of items to retrieve in the request.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The starting index for the query results.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6213,6 +6257,10 @@ class FilesFilesApi:
 
         :param id: The file ID of the request. (required)
         :type id: int
+        :param count: The number of items to retrieve in the request.
+        :type count: int
+        :param start_index: The starting index for the query results.
+        :type start_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -6237,6 +6285,8 @@ class FilesFilesApi:
 
         _param = self._get_file_links_serialize(
             id=id,
+            count=count,
+            start_index=start_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -6262,6 +6312,8 @@ class FilesFilesApi:
     def get_file_links_without_preload_content(
         self,
         id: Annotated[StrictInt, Field(description="The file ID of the request.")],
+        count: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]], Field(description="The number of items to retrieve in the request.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The starting index for the query results.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6281,6 +6333,10 @@ class FilesFilesApi:
 
         :param id: The file ID of the request. (required)
         :type id: int
+        :param count: The number of items to retrieve in the request.
+        :type count: int
+        :param start_index: The starting index for the query results.
+        :type start_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -6305,6 +6361,8 @@ class FilesFilesApi:
 
         _param = self._get_file_links_serialize(
             id=id,
+            count=count,
+            start_index=start_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -6325,6 +6383,8 @@ class FilesFilesApi:
     def _get_file_links_serialize(
         self,
         id,
+        count,
+        start_index,
         _request_auth,
         _content_type,
         _headers,
@@ -6349,6 +6409,14 @@ class FilesFilesApi:
         if id is not None:
             _path_params['id'] = id
         # process the query parameters
+        if count is not None:
+            
+            _query_params.append(('count', count))
+            
+        if start_index is not None:
+            
+            _query_params.append(('startIndex', start_index))
+            
         # process the header parameters
         # process the form parameters
         # process the body parameter
@@ -6395,6 +6463,8 @@ class FilesFilesApi:
     def get_file_primary_external_link(
         self,
         id: Annotated[StrictInt, Field(description="The file ID of the request.")],
+        count: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]], Field(description="The number of items to retrieve in the request.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The starting index for the query results.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6414,6 +6484,10 @@ class FilesFilesApi:
 
         :param id: The file ID of the request. (required)
         :type id: int
+        :param count: The number of items to retrieve in the request.
+        :type count: int
+        :param start_index: The starting index for the query results.
+        :type start_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -6438,6 +6512,8 @@ class FilesFilesApi:
 
         _param = self._get_file_primary_external_link_serialize(
             id=id,
+            count=count,
+            start_index=start_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -6463,6 +6539,8 @@ class FilesFilesApi:
     def get_file_primary_external_link_with_http_info(
         self,
         id: Annotated[StrictInt, Field(description="The file ID of the request.")],
+        count: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]], Field(description="The number of items to retrieve in the request.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The starting index for the query results.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6482,6 +6560,10 @@ class FilesFilesApi:
 
         :param id: The file ID of the request. (required)
         :type id: int
+        :param count: The number of items to retrieve in the request.
+        :type count: int
+        :param start_index: The starting index for the query results.
+        :type start_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -6506,6 +6588,8 @@ class FilesFilesApi:
 
         _param = self._get_file_primary_external_link_serialize(
             id=id,
+            count=count,
+            start_index=start_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -6531,6 +6615,8 @@ class FilesFilesApi:
     def get_file_primary_external_link_without_preload_content(
         self,
         id: Annotated[StrictInt, Field(description="The file ID of the request.")],
+        count: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]], Field(description="The number of items to retrieve in the request.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The starting index for the query results.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6550,6 +6636,10 @@ class FilesFilesApi:
 
         :param id: The file ID of the request. (required)
         :type id: int
+        :param count: The number of items to retrieve in the request.
+        :type count: int
+        :param start_index: The starting index for the query results.
+        :type start_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -6574,6 +6664,8 @@ class FilesFilesApi:
 
         _param = self._get_file_primary_external_link_serialize(
             id=id,
+            count=count,
+            start_index=start_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -6594,6 +6686,8 @@ class FilesFilesApi:
     def _get_file_primary_external_link_serialize(
         self,
         id,
+        count,
+        start_index,
         _request_auth,
         _content_type,
         _headers,
@@ -6618,6 +6712,14 @@ class FilesFilesApi:
         if id is not None:
             _path_params['id'] = id
         # process the query parameters
+        if count is not None:
+            
+            _query_params.append(('count', count))
+            
+        if start_index is not None:
+            
+            _query_params.append(('startIndex', start_index))
+            
         # process the header parameters
         # process the form parameters
         # process the body parameter

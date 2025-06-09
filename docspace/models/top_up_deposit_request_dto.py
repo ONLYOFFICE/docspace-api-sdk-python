@@ -17,8 +17,9 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional, Union
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -26,8 +27,8 @@ class TopUpDepositRequestDto(BaseModel):
     """
     Put money on deposit request parameters
     """ # noqa: E501
-    amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Amount")
-    currency: Optional[StrictStr] = Field(default=None, description="Currency")
+    amount: Optional[Annotated[int, Field(le=999999, strict=True, ge=1)]] = Field(default=None, description="Amount")
+    currency: Optional[StrictStr] = Field(default=None, description="The three-character ISO 4217 currency symbol")
     __properties: ClassVar[List[str]] = ["amount", "currency"]
 
     model_config = ConfigDict(

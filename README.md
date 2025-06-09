@@ -357,7 +357,7 @@ Class | Method | HTTP request | Description
 *PortalGuestsApi* | [**get_guest_sharing_link**](docs/PortalGuestsApi.md#get_guest_sharing_link) | **GET** /api/2.0/people/guests/{userid}/share | Get a guest sharing link
 *PortalPaymentApi* | [**calculate_wallet_payment**](docs/PortalPaymentApi.md#calculate_wallet_payment) | **PUT** /api/2.0/portal/payment/calculatewallet | Calculate amount of the wallet payment
 *PortalPaymentApi* | [**create_customer_operations_report**](docs/PortalPaymentApi.md#create_customer_operations_report) | **POST** /api/2.0/portal/payment/customer/operationsreport | Generate the customer operations report
-*PortalPaymentApi* | [**get_all_currencies**](docs/PortalPaymentApi.md#get_all_currencies) | **GET** /api/2.0/portal/payment/accounting/currencies | Get list of currencies
+*PortalPaymentApi* | [**get_accounting_currencies**](docs/PortalPaymentApi.md#get_accounting_currencies) | **GET** /api/2.0/portal/payment/accounting/currencies | Get list of currencies
 *PortalPaymentApi* | [**get_checkout_setup_url**](docs/PortalPaymentApi.md#get_checkout_setup_url) | **GET** /api/2.0/portal/payment/chechoutsetupurl | Get the checkout setup page URL
 *PortalPaymentApi* | [**get_customer_balance**](docs/PortalPaymentApi.md#get_customer_balance) | **GET** /api/2.0/portal/payment/customer/balance | Get the customer balance
 *PortalPaymentApi* | [**get_customer_info**](docs/PortalPaymentApi.md#get_customer_info) | **GET** /api/2.0/portal/payment/customerinfo | Get the customer info
