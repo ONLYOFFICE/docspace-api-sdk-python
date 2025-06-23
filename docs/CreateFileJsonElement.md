@@ -1,15 +1,15 @@
 # CreateFileJsonElement
 
-Parameters for creating a file
+The parameters for creating a file.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**title** | **str** | File title | [optional] 
+**title** | **str** | The file title for creation. | 
 **template_id** | [**CreateFileJsonElementTemplateId**](CreateFileJsonElementTemplateId.md) |  | [optional] 
-**enable_external_ext** | **bool** | Specifies whether to allow the creation of external extension files or not | [optional] 
-**form_id** | **int** | Form ID | [optional] 
+**enable_external_ext** | **bool** | Specifies whether to allow creating a file of an external extension or not. | [optional] 
+**form_id** | **int** | The form ID for creation. | [optional] 
 
 ## Example
 

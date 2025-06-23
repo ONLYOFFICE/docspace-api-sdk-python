@@ -1,12 +1,12 @@
 # MobileRequestsDto
 
-Mobile phone request parameters
+The parameters required for the mobile phone verification.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**mobile_phone** | **str** | Mobile phone | [optional] 
+**mobile_phone** | **str** | The user&#39;s mobile phone number. | [optional] 
 
 ## Example
 

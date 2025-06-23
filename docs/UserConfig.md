@@ -1,13 +1,15 @@
 # UserConfig
 
+The configuration parameters of the user currently viewing or editing the document.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** | Id | [optional] 
-**name** | **str** | Name | [optional] 
-**image** | **str** | Image | [optional] 
+**id** | **str** | The user ID. | [optional] 
+**name** | **str** | The full name of the user. | [optional] 
+**image** | **str** | The path to the user&#39;s avatar. | [optional] 
+**roles** | **List[str]** | Roles | [optional] 
 
 ## Example
 

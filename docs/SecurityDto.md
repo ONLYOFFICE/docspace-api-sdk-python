@@ -1,15 +1,16 @@
 # SecurityDto
 
+The security information.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**web_item_id** | **str** | Module ID | [optional] 
-**users** | [**List[EmployeeDto]**](EmployeeDto.md) | List of users with the access to the module | [optional] 
-**groups** | [**List[GroupSummaryDto]**](GroupSummaryDto.md) | List of groups with the access to the module | [optional] 
-**enabled** | **bool** | Specifies if the security settings are enabled or not | [optional] 
-**is_sub_item** | **bool** | Specifies if this module is a subitem or not | [optional] 
+**web_item_id** | **str** | The module ID. | [optional] 
+**users** | [**List[EmployeeDto]**](EmployeeDto.md) | The list of users with the access to the module. | [optional] 
+**groups** | [**List[GroupSummaryDto]**](GroupSummaryDto.md) | The list of groups with the access to the module. | [optional] 
+**enabled** | **bool** | Specifies if the security settings are enabled or not. | [optional] 
+**is_sub_item** | **bool** | Specifies if the module is a subitem or not. | [optional] 
 
 ## Example
 

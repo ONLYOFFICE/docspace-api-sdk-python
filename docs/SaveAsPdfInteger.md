@@ -1,13 +1,13 @@
 # SaveAsPdfInteger
 
-Parameters for saving file as pdf
+The parameters for saving the file as PDF.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**folder_id** | **int** | Folder ID | [optional] 
-**title** | **str** | File title | [optional] 
+**folder_id** | **int** | The folder ID to save the file as PDF. | 
+**title** | **str** | The file title to save as PDF. | 
 
 ## Example
 

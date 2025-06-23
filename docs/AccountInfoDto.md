@@ -1,13 +1,14 @@
 # AccountInfoDto
 
+The account information parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**provider** | **str** | Provider | [optional] 
-**url** | **str** | URL | [optional] 
-**linked** | **bool** | Specifies if an account is linked or not | [optional] 
+**provider** | **str** | The account provider. | [optional] 
+**url** | **str** | The account URL. | [optional] 
+**linked** | **bool** | Specifies if an account is linked with other profiles or not. | [optional] 
 
 ## Example
 

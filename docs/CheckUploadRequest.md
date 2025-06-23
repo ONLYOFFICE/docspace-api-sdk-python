@@ -1,12 +1,12 @@
 # CheckUploadRequest
 
-Parameters for checking files uploading
+The request parameters for checking file uploads.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**files_title** | **List[str]** | File title | [optional] 
+**files_title** | **List[str]** | The list of file titles. | [optional] 
 
 ## Example
 

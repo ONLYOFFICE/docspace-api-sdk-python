@@ -1,21 +1,23 @@
 # WebhooksLogDto
 
+The webhook log parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **int** | ID | [optional] 
-**config_name** | **str** | Config name | [optional] 
-**creation_time** | **datetime** | Creation time | [optional] 
-**method** | **str** | Method | [optional] 
-**route** | **str** | Route | [optional] 
-**request_headers** | **str** | Request headers | [optional] 
-**request_payload** | **str** | Request payload | [optional] 
-**response_headers** | **str** | Response headers | [optional] 
-**response_payload** | **str** | Response payload | [optional] 
-**status** | **int** | Status | [optional] 
-**delivery** | **datetime** | Delivery time | [optional] 
+**id** | **int** | The webhook log ID. | [optional] 
+**config_name** | **str** | The webhook configuration name. | [optional] 
+**trigger** | [**WebhookTrigger**](WebhookTrigger.md) |  | [optional] 
+**creation_time** | **datetime** | The webhook creation time. | [optional] 
+**method** | **str** | The webhook method. | [optional] 
+**route** | **str** | The webhook route. | [optional] 
+**request_headers** | **str** | The webhook request headers. | [optional] 
+**request_payload** | **str** | The webhook request payload. | [optional] 
+**response_headers** | **str** | The webhook response headers. | [optional] 
+**response_payload** | **str** | The webhook response payload. | [optional] 
+**status** | **int** | The webhook status. | [optional] 
+**delivery** | **datetime** | The webhook delivery time. | [optional] 
 
 ## Example
 

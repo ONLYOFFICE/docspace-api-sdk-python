@@ -1,16 +1,17 @@
 # SsoFieldMapping
 
+The SSO field mapping.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**first_name** | **str** | First name | [optional] 
-**last_name** | **str** | Last name | [optional] 
-**email** | **str** | Email | [optional] 
-**title** | **str** | Title | [optional] 
-**location** | **str** | Location | [optional] 
-**phone** | **str** | Phone | [optional] 
+**first_name** | **str** | The first name. | [optional] 
+**last_name** | **str** | The last name. | [optional] 
+**email** | **str** | The email address. | [optional] 
+**title** | **str** | The title. | [optional] 
+**location** | **str** | The location. | [optional] 
+**phone** | **str** | The phone number. | [optional] 
 
 ## Example
 

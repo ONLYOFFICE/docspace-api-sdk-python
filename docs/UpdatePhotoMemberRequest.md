@@ -1,12 +1,12 @@
 # UpdatePhotoMemberRequest
 
-Request parameters for updating user photo
+The request parameters for updating a photo.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**files** | **str** | Avatar photo URL | [optional] 
+**files** | **str** | The avatar photo URL. | [optional] 
 
 ## Example
 

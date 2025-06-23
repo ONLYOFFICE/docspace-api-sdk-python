@@ -1,12 +1,12 @@
 # BatchTagsRequestDto
 
-Request parameters for adding tags
+The parameters for adding tags.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**names** | **List[str]** | Tag names | [optional] 
+**names** | **List[str]** | The list of tag names. | [optional] 
 
 ## Example
 

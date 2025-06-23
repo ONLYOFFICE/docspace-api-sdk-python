@@ -1,13 +1,14 @@
 # Run
 
+The text run parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**fill** | **List[int]** |  | [optional] 
-**text** | **str** |  | [optional] 
-**font_size** | **str** |  | [optional] 
+**fill** | **List[int]** | The fill color of the text run in RGB format. | [optional] 
+**text** | **str** | The run text. | [optional] 
+**font_size** | **str** | The font size of the text run in points. | [optional] 
 
 ## Example
 

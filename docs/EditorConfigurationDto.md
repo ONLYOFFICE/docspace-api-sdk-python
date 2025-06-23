@@ -1,22 +1,23 @@
 # EditorConfigurationDto
 
+The editor configuration parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**callback_url** | **str** | Callback url | [optional] 
+**callback_url** | **str** | The callback URL of the editor. | [optional] 
 **co_editing** | [**CoEditingConfig**](CoEditingConfig.md) |  | [optional] 
-**create_url** | **str** | Create url | [optional] 
+**create_url** | **str** | The creation URL of the editor. | [optional] 
 **customization** | [**CustomizationConfigDto**](CustomizationConfigDto.md) |  | [optional] 
 **embedded** | [**EmbeddedConfig**](EmbeddedConfig.md) |  | [optional] 
 **encryption_keys** | [**EncryptionKeysConfig**](EncryptionKeysConfig.md) |  | [optional] 
-**lang** | **str** | Lang | [optional] 
-**mode** | **str** | Mode | [optional] 
-**mode_write** | **bool** | Mode write | [optional] 
+**lang** | **str** | The language of the editor configuration. | [optional] 
+**mode** | **str** | The mode of the editor configuration. | [optional] 
+**mode_write** | **bool** | Specifies if the mode is write of the editor configuration. | [optional] 
 **plugins** | [**PluginsConfig**](PluginsConfig.md) |  | [optional] 
-**recent** | [**List[RecentConfig]**](RecentConfig.md) | Recent | [optional] 
-**templates** | [**List[TemplatesConfig]**](TemplatesConfig.md) | Templates | [optional] 
+**recent** | [**List[RecentConfig]**](RecentConfig.md) | The recent configuration of the editor. | [optional] 
+**templates** | [**List[TemplatesConfig]**](TemplatesConfig.md) | The templates of the editor configuration. | [optional] 
 **user** | [**UserConfig**](UserConfig.md) |  | [optional] 
 
 ## Example

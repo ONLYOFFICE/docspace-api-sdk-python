@@ -1,17 +1,18 @@
 # Tariff
 
+The tariff parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **int** | ID | [optional] 
+**id** | **int** | The tariff ID. | [optional] 
 **state** | [**TariffState**](TariffState.md) |  | [optional] 
-**due_date** | **datetime** | Due date | [optional] 
-**delay_due_date** | **datetime** | Delay due date | [optional] 
-**license_date** | **datetime** | License date | [optional] 
-**customer_id** | **str** | Customer ID | [optional] 
-**quotas** | [**List[Quota]**](Quota.md) | List of quotas | [optional] 
+**due_date** | **datetime** | The tariff due date. | [optional] 
+**delay_due_date** | **datetime** | The tariff delay due date. | [optional] 
+**license_date** | **datetime** | The tariff license date. | [optional] 
+**customer_id** | **str** | The tariff customer ID. | [optional] 
+**quotas** | [**List[Quota]**](Quota.md) | The list of tariff quotas. | [optional] 
 
 ## Example
 

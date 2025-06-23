@@ -1,13 +1,13 @@
 # WebPluginRequests
 
-
+The configuration settings for the web plugin instance.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**enabled** | **bool** | Enabled | [optional] 
-**settings** | **str** | Settings | [optional] 
+**enabled** | **bool** | Controls whether the web plugin is active and operational. | [optional] 
+**settings** | **str** | The JSON-formatted configuration settings for the web plugin. | [optional] 
 
 ## Example
 

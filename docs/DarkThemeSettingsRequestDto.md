@@ -1,6 +1,6 @@
 # DarkThemeSettingsRequestDto
 
-Theme settings request parameters
+The theme settings request parameters.
 
 ## Properties
 

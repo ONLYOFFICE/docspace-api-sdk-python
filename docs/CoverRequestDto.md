@@ -1,13 +1,13 @@
 # CoverRequestDto
 
-Parameters to change the room cover
+The request parameters to change the room cover.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**color** | **str** | Color | [optional] 
-**cover** | **str** | Cover | [optional] 
+**color** | **str** | The cover color. | [optional] 
+**cover** | **str** | The cover name. | [optional] 
 
 ## Example
 

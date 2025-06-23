@@ -4,7 +4,7 @@ All URIs are relative to *http://localhost:8092*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**check_upload**](FilesFoldersApi.md#check_upload) | **POST** /api/2.0/files/{folderId}/upload/check | Checks upload
+[**check_upload**](FilesFoldersApi.md#check_upload) | **POST** /api/2.0/files/{folderId}/upload/check | Check file uploads
 [**create_folder**](FilesFoldersApi.md#create_folder) | **POST** /api/2.0/files/folder/{folderId} | Create a folder
 [**delete_folder**](FilesFoldersApi.md#delete_folder) | **DELETE** /api/2.0/files/folder/{folderId} | Delete a folder
 [**get_files_used_space**](FilesFoldersApi.md#get_files_used_space) | **GET** /api/2.0/files/filesusedspace | Get used space of files
@@ -23,7 +23,7 @@ Method | HTTP request | Description
 [**insert_file**](FilesFoldersApi.md#insert_file) | **POST** /api/2.0/files/{folderId}/insert | Insert a file
 [**insert_file_to_my_from_body**](FilesFoldersApi.md#insert_file_to_my_from_body) | **POST** /api/2.0/files/@my/insert | Insert a file to the \&quot;My documents\&quot; section
 [**rename_folder**](FilesFoldersApi.md#rename_folder) | **PUT** /api/2.0/files/folder/{folderId} | Rename a folder
-[**set_file_order**](FilesFoldersApi.md#set_file_order) | **PUT** /api/2.0/files/folder/{folderId}/order | Sets file order in the folder with ID specified in the request
+[**set_file_order**](FilesFoldersApi.md#set_file_order) | **PUT** /api/2.0/files/folder/{folderId}/order | Set file order
 [**upload_file**](FilesFoldersApi.md#upload_file) | **POST** /api/2.0/files/{folderId}/upload | Upload a file
 [**upload_file_to_my**](FilesFoldersApi.md#upload_file_to_my) | **POST** /api/2.0/files/@my/upload | Upload a file to the \&quot;My documents\&quot; section
 
@@ -31,13 +31,17 @@ Method | HTTP request | Description
 # **check_upload**
 > STRINGArrayWrapper check_upload(folder_id, check_upload_request=check_upload_request)
 
-Checks upload
+Check file uploads
 
-Checks upload
+Checks the file uploads to the folder with the ID specified in the request.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -57,21 +61,40 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.FilesFoldersApi(api_client)
-    folder_id = 9846 # int | Folder ID
-    check_upload_request = docspace.CheckUploadRequest() # CheckUploadRequest | Parameters for checking files uploading (optional)
+    folder_id = 9846 # int | The folder ID.
+    check_upload_request = docspace.CheckUploadRequest() # CheckUploadRequest | The request parameters for checking file uploads. (optional)
 
     try:
-        # Checks upload
+        # Check file uploads
         api_response = api_instance.check_upload(folder_id, check_upload_request=check_upload_request)
         print("The response of FilesFoldersApi->check_upload:\n")
         pprint(api_response)
@@ -86,8 +109,8 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **folder_id** | **int**| Folder ID | 
- **check_upload_request** | [**CheckUploadRequest**](CheckUploadRequest.md)| Parameters for checking files uploading | [optional] 
+ **folder_id** | **int**| The folder ID. | 
+ **check_upload_request** | [**CheckUploadRequest**](CheckUploadRequest.md)| The request parameters for checking file uploads. | [optional] 
 
 ### Return type
 
@@ -95,7 +118,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -120,7 +143,11 @@ Creates a new folder with the title specified in the request. The parent folder 
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -140,18 +167,37 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.FilesFoldersApi(api_client)
-    folder_id = 9846 # int | Folder ID
-    create_folder = docspace.CreateFolder() # CreateFolder | Folder (optional)
+    folder_id = 9846 # int | The folder ID for the folder creation.
+    create_folder = docspace.CreateFolder() # CreateFolder | The parameters for creating a folder. (optional)
 
     try:
         # Create a folder
@@ -169,8 +215,8 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **folder_id** | **int**| Folder ID | 
- **create_folder** | [**CreateFolder**](CreateFolder.md)| Folder | [optional] 
+ **folder_id** | **int**| The folder ID for the folder creation. | 
+ **create_folder** | [**CreateFolder**](CreateFolder.md)| The parameters for creating a folder. | [optional] 
 
 ### Return type
 
@@ -178,7 +224,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -203,7 +249,11 @@ Deletes a folder with the ID specified in the request.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -223,18 +273,37 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.FilesFoldersApi(api_client)
-    folder_id = 9846 # int | Folder ID
-    delete_folder = docspace.DeleteFolder() # DeleteFolder | Parameters for deleting a folder (optional)
+    folder_id = 9846 # int | The folder ID to delete.
+    delete_folder = docspace.DeleteFolder() # DeleteFolder | The parameters for deleting a folder. (optional)
 
     try:
         # Delete a folder
@@ -252,8 +321,8 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **folder_id** | **int**| Folder ID | 
- **delete_folder** | [**DeleteFolder**](DeleteFolder.md)| Parameters for deleting a folder | [optional] 
+ **folder_id** | **int**| The folder ID to delete. | 
+ **delete_folder** | [**DeleteFolder**](DeleteFolder.md)| The parameters for deleting a folder. | [optional] 
 
 ### Return type
 
@@ -261,7 +330,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -286,7 +355,11 @@ Returns the used space of files in the root folders.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -305,11 +378,30 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
@@ -337,7 +429,7 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -358,7 +450,7 @@ This endpoint does not need any parameter.
 
 Get folder form filter
 
-Get form filter of a folder with id specified in request
+Returns the form filter of a folder with the ID specified in the request.
 
 ### Example
 
@@ -380,7 +472,7 @@ configuration = docspace.Configuration(
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.FilesFoldersApi(api_client)
-    folder_id = 9846 # int | Folder ID
+    folder_id = 9846 # int | The request folder ID.
 
     try:
         # Get folder form filter
@@ -398,7 +490,7 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **folder_id** | **int**| Folder ID | 
+ **folder_id** | **int**| The request folder ID. | 
 
 ### Return type
 
@@ -451,16 +543,16 @@ configuration = docspace.Configuration(
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.FilesFoldersApi(api_client)
-    folder_id = 9846 # int | Folder ID
-    user_id_or_group_id = '75a5f745-f697-4418-b38d-0fe0d277e258' # str | User or group ID (optional)
-    filter_type = docspace.FilterType() # FilterType | Filter type (optional)
-    room_id = 9846 # int | Room ID (optional)
-    exclude_subject = true # bool | Specifies whether to exclude a subject or not (optional)
-    apply_filter_option = docspace.ApplyFilterOption() # ApplyFilterOption | Specifies whether to return only files, only folders or all elements from the specified folder (optional)
-    extension = '.txt' # str | Specifies whether to search for a specific file extension (optional)
-    search_area = docspace.SearchArea() # SearchArea | Search area (optional)
-    forms_item_key = 'some text' # str |  (optional)
-    forms_item_type = 'some text' # str |  (optional)
+    folder_id = 9846 # int | The folder ID of the request.
+    user_id_or_group_id = '75a5f745-f697-4418-b38d-0fe0d277e258' # str | The user or group ID. (optional)
+    filter_type = docspace.FilterType() # FilterType | The filter type. (optional)
+    room_id = 9846 # int | The room ID. (optional)
+    exclude_subject = true # bool | Specifies whether to exclude search by user or group ID. (optional)
+    apply_filter_option = docspace.ApplyFilterOption() # ApplyFilterOption | Specifies whether to return only files, only folders or all elements from the specified folder. (optional)
+    extension = '.txt' # str | Specifies whether to search for the specific file extension. (optional)
+    search_area = docspace.SearchArea() # SearchArea | The search area. (optional)
+    forms_item_key = 'some text' # str | The forms item key. (optional)
+    forms_item_type = 'some text' # str | The forms item type. (optional)
 
     try:
         # Get a folder by ID
@@ -478,16 +570,16 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **folder_id** | **int**| Folder ID | 
- **user_id_or_group_id** | **str**| User or group ID | [optional] 
- **filter_type** | [**FilterType**](.md)| Filter type | [optional] 
- **room_id** | **int**| Room ID | [optional] 
- **exclude_subject** | **bool**| Specifies whether to exclude a subject or not | [optional] 
- **apply_filter_option** | [**ApplyFilterOption**](.md)| Specifies whether to return only files, only folders or all elements from the specified folder | [optional] 
- **extension** | **str**| Specifies whether to search for a specific file extension | [optional] 
- **search_area** | [**SearchArea**](.md)| Search area | [optional] 
- **forms_item_key** | **str**|  | [optional] 
- **forms_item_type** | **str**|  | [optional] 
+ **folder_id** | **int**| The folder ID of the request. | 
+ **user_id_or_group_id** | **str**| The user or group ID. | [optional] 
+ **filter_type** | [**FilterType**](.md)| The filter type. | [optional] 
+ **room_id** | **int**| The room ID. | [optional] 
+ **exclude_subject** | **bool**| Specifies whether to exclude search by user or group ID. | [optional] 
+ **apply_filter_option** | [**ApplyFilterOption**](.md)| Specifies whether to return only files, only folders or all elements from the specified folder. | [optional] 
+ **extension** | **str**| Specifies whether to search for the specific file extension. | [optional] 
+ **search_area** | [**SearchArea**](.md)| The search area. | [optional] 
+ **forms_item_key** | **str**| The forms item key. | [optional] 
+ **forms_item_type** | **str**| The forms item type. | [optional] 
 
 ### Return type
 
@@ -517,11 +609,15 @@ No authorization required
 
 Get folder history
 
-Get the activity history of a folder with a specified identifier
+Returns the activity history of a folder with a specified identifier.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -541,19 +637,38 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.FilesFoldersApi(api_client)
-    folder_id = 9846 # int | File ID
-    from_date = docspace.ApiDateTime() # ApiDateTime | Start date (optional)
-    to_date = docspace.ApiDateTime() # ApiDateTime | End date (optional)
+    folder_id = 9846 # int | The folder ID of the history request.
+    from_date = docspace.ApiDateTime() # ApiDateTime | The start date of the history request. (optional)
+    to_date = docspace.ApiDateTime() # ApiDateTime | The end date of the history request. (optional)
 
     try:
         # Get folder history
@@ -571,9 +686,9 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **folder_id** | **int**| File ID | 
- **from_date** | [**ApiDateTime**](.md)| Start date | [optional] 
- **to_date** | [**ApiDateTime**](.md)| End date | [optional] 
+ **folder_id** | **int**| The folder ID of the history request. | 
+ **from_date** | [**ApiDateTime**](.md)| The start date of the history request. | [optional] 
+ **to_date** | [**ApiDateTime**](.md)| The end date of the history request. | [optional] 
 
 ### Return type
 
@@ -581,7 +696,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -626,7 +741,7 @@ configuration = docspace.Configuration(
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.FilesFoldersApi(api_client)
-    folder_id = 9846 # int | Folder ID
+    folder_id = 9846 # int | The request folder ID.
 
     try:
         # Get folder information
@@ -644,7 +759,7 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **folder_id** | **int**| Folder ID | 
+ **folder_id** | **int**| The request folder ID. | 
 
 ### Return type
 
@@ -676,7 +791,11 @@ Returns a path to the folder with the ID specified in the request.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -695,17 +814,36 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.FilesFoldersApi(api_client)
-    folder_id = 9846 # int | Folder ID
+    folder_id = 9846 # int | The request folder ID.
 
     try:
         # Get the folder path
@@ -723,7 +861,7 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **folder_id** | **int**| Folder ID | 
+ **folder_id** | **int**| The request folder ID. | 
 
 ### Return type
 
@@ -731,7 +869,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -775,7 +913,7 @@ configuration = docspace.Configuration(
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.FilesFoldersApi(api_client)
-    id = 9846 # int | Folder Id
+    id = 9846 # int | The request folder ID.
 
     try:
         # Get primary external link
@@ -793,7 +931,7 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**| Folder Id | 
+ **id** | **int**| The request folder ID. | 
 
 ### Return type
 
@@ -826,7 +964,11 @@ Returns a list of all the subfolders from a folder with the ID specified in the 
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -845,17 +987,36 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.FilesFoldersApi(api_client)
-    folder_id = 9846 # int | Folder ID
+    folder_id = 9846 # int | The request folder ID.
 
     try:
         # Get subfolders
@@ -873,7 +1034,7 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **folder_id** | **int**| Folder ID | 
+ **folder_id** | **int**| The request folder ID. | 
 
 ### Return type
 
@@ -881,7 +1042,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -907,7 +1068,11 @@ Returns the detailed list of files and folders located in the \"My documents\" s
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -928,19 +1093,38 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.FilesFoldersApi(api_client)
-    user_id_or_group_id = '75a5f745-f697-4418-b38d-0fe0d277e258' # str | User or group ID (optional)
-    filter_type = docspace.FilterType() # FilterType | Filter type (optional)
-    apply_filter_option = docspace.ApplyFilterOption() # ApplyFilterOption | Specifies whether to return only files, only folders or all elements from the specified folder (optional)
+    user_id_or_group_id = '75a5f745-f697-4418-b38d-0fe0d277e258' # str | The user or group ID. (optional)
+    filter_type = docspace.FilterType() # FilterType | The filter type. (optional)
+    apply_filter_option = docspace.ApplyFilterOption() # ApplyFilterOption | Specifies whether to return only files, only folders or all elements. (optional)
 
     try:
         # Get the \"My documents\" section
@@ -958,9 +1142,9 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **user_id_or_group_id** | **str**| User or group ID | [optional] 
- **filter_type** | [**FilterType**](.md)| Filter type | [optional] 
- **apply_filter_option** | [**ApplyFilterOption**](.md)| Specifies whether to return only files, only folders or all elements from the specified folder | [optional] 
+ **user_id_or_group_id** | **str**| The user or group ID. | [optional] 
+ **filter_type** | [**FilterType**](.md)| The filter type. | [optional] 
+ **apply_filter_option** | [**ApplyFilterOption**](.md)| Specifies whether to return only files, only folders or all elements. | [optional] 
 
 ### Return type
 
@@ -968,7 +1152,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -995,7 +1179,11 @@ Returns a list of all the new items from a folder with the ID specified in the r
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -1014,17 +1202,36 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.FilesFoldersApi(api_client)
-    folder_id = 9846 # int | Folder ID
+    folder_id = 9846 # int | The request folder ID.
 
     try:
         # Get new folder items
@@ -1042,7 +1249,7 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **folder_id** | **int**| Folder ID | 
+ **folder_id** | **int**| The request folder ID. | 
 
 ### Return type
 
@@ -1050,7 +1257,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -1076,7 +1283,11 @@ Returns the detailed list of files and folders located in the \"Private Room\" s
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -1096,18 +1307,37 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.FilesFoldersApi(api_client)
-    user_id_or_group_id = '75a5f745-f697-4418-b38d-0fe0d277e258' # str | User or group ID (optional)
-    filter_type = docspace.FilterType() # FilterType | Filter type (optional)
+    user_id_or_group_id = '75a5f745-f697-4418-b38d-0fe0d277e258' # str | The user or group ID. (optional)
+    filter_type = docspace.FilterType() # FilterType | The filter type. (optional)
 
     try:
         # Get the \"Private Room\" section
@@ -1125,8 +1355,8 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **user_id_or_group_id** | **str**| User or group ID | [optional] 
- **filter_type** | [**FilterType**](.md)| Filter type | [optional] 
+ **user_id_or_group_id** | **str**| The user or group ID. | [optional] 
+ **filter_type** | [**FilterType**](.md)| The filter type. | [optional] 
 
 ### Return type
 
@@ -1134,7 +1364,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -1161,7 +1391,11 @@ Returns all the sections matching the parameters specified in the request.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -1181,19 +1415,38 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.FilesFoldersApi(api_client)
-    user_id_or_group_id = '75a5f745-f697-4418-b38d-0fe0d277e258' # str | User or group ID (optional)
-    filter_type = docspace.FilterType() # FilterType | Filter type (optional)
-    without_trash = true # bool | Specifies whether to return the \"Trash\" section or not (optional)
+    user_id_or_group_id = '75a5f745-f697-4418-b38d-0fe0d277e258' # str | The user or group ID. (optional)
+    filter_type = docspace.FilterType() # FilterType | The filter type. (optional)
+    without_trash = true # bool | Specifies whether to return the \"Trash\" section or not. (optional)
 
     try:
         # Get filtered sections
@@ -1211,9 +1464,9 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **user_id_or_group_id** | **str**| User or group ID | [optional] 
- **filter_type** | [**FilterType**](.md)| Filter type | [optional] 
- **without_trash** | **bool**| Specifies whether to return the \&quot;Trash\&quot; section or not | [optional] 
+ **user_id_or_group_id** | **str**| The user or group ID. | [optional] 
+ **filter_type** | [**FilterType**](.md)| The filter type. | [optional] 
+ **without_trash** | **bool**| Specifies whether to return the \&quot;Trash\&quot; section or not. | [optional] 
 
 ### Return type
 
@@ -1221,7 +1474,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -1248,7 +1501,11 @@ Returns the detailed list of files and folders located in the \"Trash\" section.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -1269,19 +1526,38 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.FilesFoldersApi(api_client)
-    user_id_or_group_id = '75a5f745-f697-4418-b38d-0fe0d277e258' # str | User or group ID (optional)
-    filter_type = docspace.FilterType() # FilterType | Filter type (optional)
-    apply_filter_option = docspace.ApplyFilterOption() # ApplyFilterOption | Specifies whether to return only files, only folders or all elements from the specified folder (optional)
+    user_id_or_group_id = '75a5f745-f697-4418-b38d-0fe0d277e258' # str | The user or group ID. (optional)
+    filter_type = docspace.FilterType() # FilterType | The filter type. (optional)
+    apply_filter_option = docspace.ApplyFilterOption() # ApplyFilterOption | Specifies whether to return only files, only folders or all elements. (optional)
 
     try:
         # Get the \"Trash\" section
@@ -1299,9 +1575,9 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **user_id_or_group_id** | **str**| User or group ID | [optional] 
- **filter_type** | [**FilterType**](.md)| Filter type | [optional] 
- **apply_filter_option** | [**ApplyFilterOption**](.md)| Specifies whether to return only files, only folders or all elements from the specified folder | [optional] 
+ **user_id_or_group_id** | **str**| The user or group ID. | [optional] 
+ **filter_type** | [**FilterType**](.md)| The filter type. | [optional] 
+ **apply_filter_option** | [**ApplyFilterOption**](.md)| Specifies whether to return only files, only folders or all elements. | [optional] 
 
 ### Return type
 
@@ -1309,7 +1585,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -1336,7 +1612,11 @@ Inserts a file specified in the request to the selected folder by single file up
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -1355,21 +1635,40 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.FilesFoldersApi(api_client)
-    folder_id = 9846 # int | Folder ID
-    insert_file_file = None # bytearray | File (optional)
-    insert_file_title = 'insert_file_title_example' # str | File name (optional)
-    insert_file_create_new_if_exist = True # bool | Specifies whether to create a new file if it already exists or not (optional)
-    insert_file_keep_convert_status = True # bool | Specifies whether to keep the file converting status or not (optional)
+    folder_id = 9846 # int | The folder ID for inserting a file.
+    insert_file_file = None # bytearray | The file to be inserted. (optional)
+    insert_file_title = 'insert_file_title_example' # str | The file title to be inserted. (optional)
+    insert_file_create_new_if_exist = True # bool | Specifies whether to create a new file if it already exists or not. (optional)
+    insert_file_keep_convert_status = True # bool | Specifies whether to keep the file converting status or not. (optional)
     insert_file_stream_can_read = True # bool |  (optional)
     insert_file_stream_can_write = True # bool |  (optional)
     insert_file_stream_can_seek = True # bool |  (optional)
@@ -1395,11 +1694,11 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **folder_id** | **int**| Folder ID | 
- **insert_file_file** | **bytearray**| File | [optional] 
- **insert_file_title** | **str**| File name | [optional] 
- **insert_file_create_new_if_exist** | **bool**| Specifies whether to create a new file if it already exists or not | [optional] 
- **insert_file_keep_convert_status** | **bool**| Specifies whether to keep the file converting status or not | [optional] 
+ **folder_id** | **int**| The folder ID for inserting a file. | 
+ **insert_file_file** | **bytearray**| The file to be inserted. | [optional] 
+ **insert_file_title** | **str**| The file title to be inserted. | [optional] 
+ **insert_file_create_new_if_exist** | **bool**| Specifies whether to create a new file if it already exists or not. | [optional] 
+ **insert_file_keep_convert_status** | **bool**| Specifies whether to keep the file converting status or not. | [optional] 
  **insert_file_stream_can_read** | **bool**|  | [optional] 
  **insert_file_stream_can_write** | **bool**|  | [optional] 
  **insert_file_stream_can_seek** | **bool**|  | [optional] 
@@ -1415,7 +1714,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -1442,7 +1741,11 @@ Inserts a file specified in the request to the \"My documents\" section by singl
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -1461,20 +1764,39 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.FilesFoldersApi(api_client)
-    file = None # bytearray | File (optional)
-    title = 'title_example' # str | File name (optional)
-    create_new_if_exist = True # bool | Specifies whether to create a new file if it already exists or not (optional)
-    keep_convert_status = True # bool | Specifies whether to keep the file converting status or not (optional)
+    file = None # bytearray | The file to be inserted. (optional)
+    title = 'title_example' # str | The file title to be inserted. (optional)
+    create_new_if_exist = True # bool | Specifies whether to create a new file if it already exists or not. (optional)
+    keep_convert_status = True # bool | Specifies whether to keep the file converting status or not. (optional)
     stream_can_read = True # bool |  (optional)
     stream_can_write = True # bool |  (optional)
     stream_can_seek = True # bool |  (optional)
@@ -1500,10 +1822,10 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **file** | **bytearray**| File | [optional] 
- **title** | **str**| File name | [optional] 
- **create_new_if_exist** | **bool**| Specifies whether to create a new file if it already exists or not | [optional] 
- **keep_convert_status** | **bool**| Specifies whether to keep the file converting status or not | [optional] 
+ **file** | **bytearray**| The file to be inserted. | [optional] 
+ **title** | **str**| The file title to be inserted. | [optional] 
+ **create_new_if_exist** | **bool**| Specifies whether to create a new file if it already exists or not. | [optional] 
+ **keep_convert_status** | **bool**| Specifies whether to keep the file converting status or not. | [optional] 
  **stream_can_read** | **bool**|  | [optional] 
  **stream_can_write** | **bool**|  | [optional] 
  **stream_can_seek** | **bool**|  | [optional] 
@@ -1519,7 +1841,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -1546,7 +1868,11 @@ Renames the selected folder with a new title specified in the request.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -1566,18 +1892,37 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.FilesFoldersApi(api_client)
-    folder_id = 9846 # int | Folder ID
-    create_folder = docspace.CreateFolder() # CreateFolder | Folder (optional)
+    folder_id = 9846 # int | The folder ID for the folder creation.
+    create_folder = docspace.CreateFolder() # CreateFolder | The parameters for creating a folder. (optional)
 
     try:
         # Rename a folder
@@ -1595,8 +1940,8 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **folder_id** | **int**| Folder ID | 
- **create_folder** | [**CreateFolder**](CreateFolder.md)| Folder | [optional] 
+ **folder_id** | **int**| The folder ID for the folder creation. | 
+ **create_folder** | [**CreateFolder**](CreateFolder.md)| The parameters for creating a folder. | [optional] 
 
 ### Return type
 
@@ -1604,7 +1949,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -1622,18 +1967,23 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **set_file_order**
-> set_file_order(folder_id, order_request_dto=order_request_dto)
+> FolderIntegerWrapper set_file_order(folder_id, order_request_dto=order_request_dto)
 
-Sets file order in the folder with ID specified in the request
+Set file order
 
-Sets file order in the folder with ID specified in the request
+Sets the file order in the folder with ID specified in the request.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
+from docspace.models.folder_integer_wrapper import FolderIntegerWrapper
 from docspace.models.order_request_dto import OrderRequestDto
 from docspace.rest import ApiException
 from pprint import pprint
@@ -1649,22 +1999,43 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.FilesFoldersApi(api_client)
-    folder_id = 9846 # int | The unique identifier of the folder
-    order_request_dto = docspace.OrderRequestDto() # OrderRequestDto | Order information for the folder (optional)
+    folder_id = 9846 # int | The folder unique identifier.
+    order_request_dto = docspace.OrderRequestDto() # OrderRequestDto | The folder order information. (optional)
 
     try:
-        # Sets file order in the folder with ID specified in the request
-        api_instance.set_file_order(folder_id, order_request_dto=order_request_dto)
+        # Set file order
+        api_response = api_instance.set_file_order(folder_id, order_request_dto=order_request_dto)
+        print("The response of FilesFoldersApi->set_file_order:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling FilesFoldersApi->set_file_order: %s\n" % e)
 ```
@@ -1676,21 +2047,21 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **folder_id** | **int**| The unique identifier of the folder | 
- **order_request_dto** | [**OrderRequestDto**](OrderRequestDto.md)| Order information for the folder | [optional] 
+ **folder_id** | **int**| The folder unique identifier. | 
+ **order_request_dto** | [**OrderRequestDto**](OrderRequestDto.md)| The folder order information. | [optional] 
 
 ### Return type
 
-void (empty response body)
+[**FolderIntegerWrapper**](FolderIntegerWrapper.md)
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
@@ -1710,7 +2081,11 @@ Uploads a file specified in the request to the selected folder by single file up
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -1730,18 +2105,37 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.FilesFoldersApi(api_client)
-    folder_id = 9846 # int | Folder ID
-    upload_request_dto = docspace.UploadRequestDto() # UploadRequestDto | Upload data (optional)
+    folder_id = 9846 # int | The folder ID to upload a file.
+    upload_request_dto = docspace.UploadRequestDto() # UploadRequestDto | The request parameters for uploading a file. (optional)
 
     try:
         # Upload a file
@@ -1759,8 +2153,8 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **folder_id** | **int**| Folder ID | 
- **upload_request_dto** | [**UploadRequestDto**](UploadRequestDto.md)| Upload data | [optional] 
+ **folder_id** | **int**| The folder ID to upload a file. | 
+ **upload_request_dto** | [**UploadRequestDto**](UploadRequestDto.md)| The request parameters for uploading a file. | [optional] 
 
 ### Return type
 
@@ -1768,7 +2162,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -1795,7 +2189,11 @@ Uploads a file specified in the request to the \"My documents\" section by singl
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -1815,17 +2213,36 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.FilesFoldersApi(api_client)
-    in_dto = docspace.UploadRequestDto() # UploadRequestDto | Request parameters for uploading a file (optional)
+    in_dto = docspace.UploadRequestDto() # UploadRequestDto | The request parameters for uploading a file. (optional)
 
     try:
         # Upload a file to the \"My documents\" section
@@ -1843,7 +2260,7 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **in_dto** | [**UploadRequestDto**](.md)| Request parameters for uploading a file | [optional] 
+ **in_dto** | [**UploadRequestDto**](.md)| The request parameters for uploading a file. | [optional] 
 
 ### Return type
 
@@ -1851,7 +2268,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 

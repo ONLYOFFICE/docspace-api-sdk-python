@@ -1,12 +1,14 @@
 # RoomSecurityDto
 
+The room security parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**members** | [**List[FileShareDto]**](FileShareDto.md) | List of room members | [optional] 
-**warning** | **str** | Warning | [optional] 
+**members** | [**List[FileShareDto]**](FileShareDto.md) | The list of room members. | [optional] 
+**warning** | **str** | The warning message. | [optional] 
+**error** | [**RoomSecurityError**](RoomSecurityError.md) |  | [optional] 
 
 ## Example
 

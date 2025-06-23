@@ -1,13 +1,13 @@
 # DnsSettingsRequestsDto
 
-DNS settings request parameters
+The request parameters for managing the DNS (Domain Name System) settings.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**dns_name** | **str** | DNS | [optional] 
-**enable** | **bool** | Enabled or not | [optional] 
+**dns_name** | **str** | The DNS (Domain Name System) configuration name. | [optional] 
+**enable** | **bool** | Specifies whether the DNS settings are enabled. | [optional] 
 
 ## Example
 

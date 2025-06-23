@@ -1,13 +1,14 @@
 # ConfirmDto
 
+The confirmation parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **result** | [**ValidationResult**](ValidationResult.md) |  | [optional] 
-**room_id** | **str** | Room id | [optional] 
-**title** | **str** | Title | [optional] 
+**room_id** | **str** | The confirmation room ID. | [optional] 
+**title** | **str** | The confirmation title. | [optional] 
 
 ## Example
 

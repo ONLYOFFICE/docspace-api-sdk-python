@@ -1,13 +1,14 @@
 # TemplatesConfig
 
+The presence or absence of the templates in the \"Create New...\" menu option.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**image** | **str** | Image | [optional] 
-**title** | **str** | Title | [optional] 
-**url** | **str** | Url | [optional] 
+**image** | **str** | The absolute URL to the image for template. | [optional] 
+**title** | **str** | The template title that will be displayed in the \&quot;Create New...\&quot; menu option. | [optional] 
+**url** | **str** | The absolute URL to the document where it will be created and available after creation. | [optional] 
 
 ## Example
 

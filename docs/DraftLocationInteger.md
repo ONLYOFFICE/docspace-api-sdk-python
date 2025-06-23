@@ -1,14 +1,15 @@
 # DraftLocationInteger
 
+The file draft parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**folder_id** | **int** | InProcess folder ID | [optional] 
-**folder_title** | **str** | InProcess folder title | [optional] 
-**file_id** | **int** | Draft ID | [optional] 
-**file_title** | **str** | Draft title | [optional] 
+**folder_id** | **int** | The InProcess folder ID of the draft. | [optional] 
+**folder_title** | **str** | The InProcess folder title of the draft. | [optional] 
+**file_id** | **int** | The draft ID. | [optional] 
+**file_title** | **str** | The draft title. | [optional] 
 
 ## Example
 

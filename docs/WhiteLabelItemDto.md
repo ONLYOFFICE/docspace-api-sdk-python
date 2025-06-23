@@ -1,11 +1,12 @@
 # WhiteLabelItemDto
 
+The white label item parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **str** | File name | [optional] 
+**name** | **str** | The white label file name. | [optional] 
 **size** | [**IMagickGeometry**](IMagickGeometry.md) |  | [optional] 
 **path** | [**WhiteLabelItemPathDto**](WhiteLabelItemPathDto.md) |  | [optional] 
 

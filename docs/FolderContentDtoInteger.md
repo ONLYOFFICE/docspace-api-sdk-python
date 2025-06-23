@@ -1,18 +1,19 @@
 # FolderContentDtoInteger
 
+The folder content information.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**files** | [**List[FileEntryDto]**](FileEntryDto.md) | List of files | [optional] 
-**folders** | [**List[FileEntryDto]**](FileEntryDto.md) | List of folders | [optional] 
+**files** | [**List[FileEntryDto]**](FileEntryDto.md) | The list of files in the folder. | [optional] 
+**folders** | [**List[FileEntryDto]**](FileEntryDto.md) | The list of folders in the folder. | [optional] 
 **current** | [**FolderDtoInteger**](FolderDtoInteger.md) |  | [optional] 
-**path_parts** | **object** | Folder path | [optional] 
-**start_index** | **int** | Folder start index | [optional] 
-**count** | **int** | Number of folder elements | [optional] 
-**total** | **int** | Total number of elements in the folder | [optional] 
-**new** | **int** | New element index | [optional] 
+**path_parts** | **object** | The folder path. | [optional] 
+**start_index** | **int** | The folder start index. | [optional] 
+**count** | **int** | The number of folder elements. | [optional] 
+**total** | **int** | The total number of elements in the folder. | [optional] 
+**new** | **int** | The new element index in the folder. | [optional] 
 
 ## Example
 

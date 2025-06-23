@@ -1,28 +1,27 @@
 # UpdateMemberRequestDto
 
-Request parameters for updating user information
+The request parameters for updating the user information.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**user_id** | **str** | User ID | [optional] 
-**disable** | **bool** | Specifies whether to disable a user or not | [optional] 
-**email** | **str** | Email | [optional] 
-**is_user** | **bool** | Specifies if this is a guest or a user | [optional] 
-**first_name** | **str** | First name | [optional] 
-**last_name** | **str** | Last name | [optional] 
-**department** | **List[str]** | List of user departments | [optional] 
-**title** | **str** | Title | [optional] 
-**location** | **str** | Location | [optional] 
+**user_id** | **str** | The user ID. | [optional] 
+**disable** | **bool** | Specifies whether to disable a user or not. | [optional] 
+**email** | **str** | The user email address. | [optional] 
+**is_user** | **bool** | Specifies if this is a guest or a user. | [optional] 
+**first_name** | **str** | The user first name. | [optional] 
+**last_name** | **str** | The user last name. | [optional] 
+**department** | **List[str]** | The list of the user departments. | [optional] 
+**title** | **str** | The user title. | [optional] 
+**location** | **str** | The user location. | [optional] 
 **sex** | [**SexEnum**](SexEnum.md) |  | [optional] 
 **birthday** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] 
 **worksfrom** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] 
-**comment** | **str** | Comment | [optional] 
-**contacts** | [**List[Contact]**](Contact.md) | List of user contacts | [optional] 
-**files** | **str** | Avatar photo URL | [optional] 
-**culture_name** | **str** | Language | [optional] 
-**spam** | **bool** | Spam | [optional] 
+**comment** | **str** | The user comment. | [optional] 
+**contacts** | [**List[Contact]**](Contact.md) | The list of the user contacts. | [optional] 
+**files** | **str** | The user avatar photo URL. | [optional] 
+**spam** | **bool** | Specifies if tips, updates and offers are allowed to be sent to the user or not. | [optional] 
 
 ## Example
 

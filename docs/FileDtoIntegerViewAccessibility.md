@@ -1,6 +1,6 @@
 # FileDtoIntegerViewAccessibility
 
-File accessibility
+The file accessibility.
 
 ## Properties
 

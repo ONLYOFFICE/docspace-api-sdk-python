@@ -1,12 +1,13 @@
 # EmailActivationSettings
 
-Email activation settings
+The email activation settings.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**show** | **bool** | Shown or hidden | [optional] 
+**show** | **bool** | Specifies whether the email activation settings is shown or hidden. | [optional] 
+**last_modified** | **datetime** |  | [optional] 
 
 ## Example
 

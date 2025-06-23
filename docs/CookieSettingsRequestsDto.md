@@ -1,13 +1,13 @@
 # CookieSettingsRequestsDto
 
-Cookies settings request parameters
+The request parameters for managing cookie settings.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**life_time** | **int** | Lifetime value in minutes | [optional] 
-**enabled** | **bool** | Specifies if the cookie settings are enabled or not | [optional] 
+**life_time** | **int** | The cookie lifetime in minutes. | [optional] 
+**enabled** | **bool** | Specifies whether the cookie settings are enabled or disabled. | [optional] 
 
 ## Example
 

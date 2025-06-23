@@ -1,12 +1,12 @@
 # ArchiveRoomRequest
 
-Parameters for archiving a room
+The parameters for archiving a room.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**delete_after** | **bool** | Specifies whether to archive a room after the editing session is finished or not | [optional] 
+**delete_after** | **bool** | Specifies whether to archive a room after the editing session is finished or not. | [optional] 
 
 ## Example
 

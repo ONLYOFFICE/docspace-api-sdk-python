@@ -1,17 +1,17 @@
 # AuthServiceRequestsDto
 
-Request parameters for authorization service
+The request parameters for handling the authorization service.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **str** | Name | [optional] 
-**title** | **str** | Title | [optional] 
-**description** | **str** | Description | [optional] 
-**instruction** | **str** | Instruction | [optional] 
-**can_set** | **bool** | Specifies if the authentication service can be set or not | [optional] 
-**props** | [**List[AuthKey]**](AuthKey.md) | List of authorization keys | [optional] 
+**name** | **str** | The name of the authentication service. | [optional] 
+**title** | **str** | The user-friendly display title of the authentication service. | [optional] 
+**description** | **str** | The brief description of the authentication service. | [optional] 
+**instruction** | **str** | The detailed instructions for configuring or using the authentication service. | [optional] 
+**can_set** | **bool** | Specifies whether the authentication service can be configured by the user. | [optional] 
+**props** | [**List[AuthKey]**](AuthKey.md) | The collection of authorization keys associated with the authentication service. | [optional] 
 
 ## Example
 

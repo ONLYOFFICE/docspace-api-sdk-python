@@ -1,12 +1,12 @@
 # SetManagerRequest
 
-Request parameters for setting a group manager
+The request for setting a group manager.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**user_id** | **str** | User ID | [optional] 
+**user_id** | **str** | The user ID. | 
 
 ## Example
 

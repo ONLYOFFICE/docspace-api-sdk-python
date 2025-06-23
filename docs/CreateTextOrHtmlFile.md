@@ -1,14 +1,14 @@
 # CreateTextOrHtmlFile
 
-Parameters for creating an HTML file
+The parameters for creating an HTML or text file.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**title** | **str** | File title | 
-**content** | **str** | File contents | [optional] 
-**create_new_if_exist** | **bool** | Create new if exist | [optional] 
+**title** | **str** | The file title for text or HTML file. | 
+**content** | **str** | The text or HTML file contents. | [optional] 
+**create_new_if_exist** | **bool** | Specifies whether to create a new text or HTML file if it exists or not. | [optional] 
 
 ## Example
 

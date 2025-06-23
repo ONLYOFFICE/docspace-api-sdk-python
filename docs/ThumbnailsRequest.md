@@ -1,16 +1,16 @@
 # ThumbnailsRequest
 
-Thumbnail request parameters
+The thumbnail request.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**tmp_file** | **str** | Path to the temporary file | [optional] 
-**x** | **int** | Horizontal coordinate | [optional] 
-**y** | **int** | Vertical coordinate | [optional] 
-**width** | **int** | Thumbnail width | [optional] 
-**height** | **int** | Thumbnail height | [optional] 
+**tmp_file** | **str** | The path to the temporary thumbnail file. | [optional] 
+**x** | **int** | The thumbnail horizontal coordinate. | [optional] 
+**y** | **int** | The thumbnail vertical coordinate. | [optional] 
+**width** | **int** | The thumbnail width. | [optional] 
+**height** | **int** | The thumbnail height. | [optional] 
 
 ## Example
 

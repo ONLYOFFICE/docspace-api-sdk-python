@@ -1,16 +1,16 @@
 # TfaRequestsDto
 
-TFA settings request parameters
+The request parameters for configuring the Two-Factor Authentication (TFA) settings.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **type** | [**TfaRequestsDtoType**](TfaRequestsDtoType.md) |  | [optional] 
-**id** | **str** | User ID | [optional] 
-**trusted_ips** | **List[str]** | List of trusted IP addresses | [optional] 
-**mandatory_users** | **List[str]** | List of users who must use the TFA verification | [optional] 
-**mandatory_groups** | **List[str]** | List of groups who must use the TFA verification | [optional] 
+**id** | **str** | The ID of the user for whom the TFA settings are being configured. | [optional] 
+**trusted_ips** | **List[str]** | The list of IP addresses that bypass TFA verification. | [optional] 
+**mandatory_users** | **List[str]** | The list of user IDs for whom TFA is mandatory. | [optional] 
+**mandatory_groups** | **List[str]** | The list group IDs whose members must use TFA. | [optional] 
 
 ## Example
 

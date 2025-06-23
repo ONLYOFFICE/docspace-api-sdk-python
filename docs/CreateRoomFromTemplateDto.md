@@ -1,17 +1,19 @@
 # CreateRoomFromTemplateDto
 
+The parameters for creating a room from a template.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**template_id** | **int** | Template id | [optional] 
-**title** | **str** | Title | [optional] 
+**template_id** | **int** | The template ID from which the room to be created. | 
+**title** | **str** | The room title. | 
 **logo** | [**LogoRequest**](LogoRequest.md) |  | [optional] 
-**copy_logo** | **bool** | Copy logo | [optional] 
-**tags** | **List[str]** | Collection of tags | [optional] 
-**color** | **str** | Color | [optional] 
-**cover** | **str** | Cover | [optional] 
+**copy_logo** | **bool** | Specifies whether to copy a logo or not. | [optional] 
+**tags** | **List[str]** | The collection of tags. | [optional] 
+**color** | **str** | The color of the room to be created. | [optional] 
+**cover** | **str** | The cover of the room to be created. | [optional] 
+**quota** | **int** | Room quota | [optional] 
 
 ## Example
 

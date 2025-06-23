@@ -1,16 +1,16 @@
 # CopyAsJsonElement
 
-Parameters for copying a file
+The parameters for copying a file.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**dest_title** | **str** | Destination file title | [optional] 
-**dest_folder_id** | [**BatchRequestDtoDestFolderId**](BatchRequestDtoDestFolderId.md) |  | [optional] 
-**enable_external_ext** | **bool** | Specifies whether to allow the creation of external extension files or not | [optional] 
-**password** | **str** | Password | [optional] 
-**to_form** | **bool** | Convert to form | [optional] 
+**dest_title** | **str** | The copied file name. | 
+**dest_folder_id** | [**CopyAsJsonElementDestFolderId**](CopyAsJsonElementDestFolderId.md) |  | 
+**enable_external_ext** | **bool** | Specifies whether to allow creating the copied file of an external extension or not. | [optional] 
+**password** | **str** | The copied file password. | [optional] 
+**to_form** | **bool** | Specifies whether to convert the file to form or not. | [optional] 
 
 ## Example
 

@@ -1,15 +1,16 @@
 # LogoConfigDto
 
+The logo config parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**image** | **str** | Image | [optional] 
-**image_dark** | **str** | Image dark | [optional] 
-**image_embedded** | **str** | Image embedded | [optional] 
-**url** | **str** | Url | [optional] 
-**visible** | **bool** | Visible | [optional] 
+**image** | **str** | The image of the logo. | [optional] 
+**image_dark** | **str** | The dark image of the logo. | [optional] 
+**image_embedded** | **str** | The embedded image of the logo. | [optional] 
+**url** | **str** | The url link of the logo. | [optional] 
+**visible** | **bool** | Specifies if the logo is visible. | [optional] 
 
 ## Example
 

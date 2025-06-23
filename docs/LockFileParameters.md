@@ -1,12 +1,12 @@
 # LockFileParameters
 
-Parameters for locking a file
+The parameters for locking a file.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**lock_file** | **bool** | Specifies whether to lock a file or not | [optional] 
+**lock_file** | **bool** | Specifies whether to lock a file or not. | [optional] 
 
 ## Example
 

@@ -1,15 +1,16 @@
 # SmtpOperationStatusRequestsDto
 
+The request parameters for tracking SMTP (Simple Mail Transfer Protocol) operation status.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**completed** | **bool** | Specifies if the SMTP operation is completed or not | [optional] 
-**id** | **str** | SMTP operation ID | [optional] 
-**error** | **str** | SMTP operation error | [optional] 
-**status** | **str** | SMTP operation status | [optional] 
-**percents** | **int** | Percentage of SMTP operation completion | [optional] 
+**completed** | **bool** | Specifies whether the SMTP operation has finished processing. | [optional] 
+**id** | **str** | The unique identifier for tracking the SMTP operation. | [optional] 
+**error** | **str** | The error message if the SMTP operation encountered issues. | [optional] 
+**status** | **str** | The current state of the SMTP operation. | [optional] 
+**percents** | **int** | The progress indicator showing completion percentage of the operation. | [optional] 
 
 ## Example
 

@@ -1,15 +1,16 @@
 # AuthData
 
+The authentication data.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**login** | **str** | Login | [optional] 
-**password** | **str** | Password | [optional] 
-**raw_token** | **str** | Raw token | [optional] 
-**url** | **str** | Url | [optional] 
-**provider** | **str** | Provider | [optional] 
+**login** | **str** | The authentication login. | [optional] 
+**password** | **str** | The authentication password. | [optional] 
+**raw_token** | **str** | The authentication raw token. | [optional] 
+**url** | **str** | The authentication URL. | [optional] 
+**provider** | **str** | The authentication provider. | [optional] 
 **token** | [**OAuth20Token**](OAuth20Token.md) |  | [optional] 
 
 ## Example

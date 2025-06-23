@@ -1,12 +1,13 @@
 # WhiteLabelItemPathDto
 
+The white label item path parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**light** | **str** | Path to the light theme logo | [optional] 
-**dark** | **str** | Path to the dark theme logo | [optional] 
+**light** | **str** | The path to the light theme logo. | [optional] 
+**dark** | **str** | The path to the dark theme logo. | [optional] 
 
 ## Example
 

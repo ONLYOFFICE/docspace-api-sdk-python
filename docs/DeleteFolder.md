@@ -1,13 +1,13 @@
 # DeleteFolder
 
-Parameters for deleting a folder
+The parameters for deleting a folder.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**delete_after** | **bool** | Specifies whether to delete a folder after the editing session is finished or not | [optional] 
-**immediately** | **bool** | Specifies whether to move a folder to the \\\&quot;Trash\\\&quot; folder or delete it immediately | [optional] 
+**delete_after** | **bool** | Specifies whether to delete a folder after the editing session is finished or not. | [optional] 
+**immediately** | **bool** | Specifies whether to move a folder to the \\\&quot;Trash\\\&quot; folder or delete it immediately. | [optional] 
 
 ## Example
 

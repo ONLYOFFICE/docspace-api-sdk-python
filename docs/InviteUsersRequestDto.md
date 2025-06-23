@@ -1,13 +1,13 @@
 # InviteUsersRequestDto
 
-Request parameters for inviting users
+The request parameters for inviting users.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**invitations** | [**List[UserInvitationRequestDto]**](UserInvitationRequestDto.md) | List of user invitations | 
-**culture** | **str** | Culture | [optional] 
+**invitations** | [**List[UserInvitationRequestDto]**](UserInvitationRequestDto.md) | The list of user invitations. | 
+**culture** | **str** | The culture code of invitations. | [optional] 
 
 ## Example
 

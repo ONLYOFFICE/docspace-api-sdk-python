@@ -1,12 +1,13 @@
 # EditHistoryAuthor
 
+The information about the file editing history author.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** | Id | [optional] 
-**name** | **str** | Name | [optional] 
+**id** | **str** | The author ID. | [optional] 
+**name** | **str** | The author name. | [optional] 
 
 ## Example
 

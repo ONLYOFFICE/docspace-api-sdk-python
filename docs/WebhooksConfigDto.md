@@ -1,16 +1,25 @@
 # WebhooksConfigDto
 
+The webhook configuration parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **int** | ID | [optional] 
-**name** | **str** | Name | [optional] 
-**uri** | **str** | URI | [optional] 
-**secret_key** | **str** | Secret key | [optional] 
-**enabled** | **bool** | Specifies if the webhooks are enabled or not | [optional] 
-**ssl** | **bool** | SSL | [optional] 
+**id** | **int** | The webhook ID. | [optional] 
+**name** | **str** | The webhook name. | [optional] 
+**uri** | **str** | The webhook URI. | [optional] 
+**enabled** | **bool** | Specifies if the webhooks are enabled or not. | [optional] 
+**ssl** | **bool** | The webhook SSL verification (enabled or not). | [optional] 
+**triggers** | [**WebhookTrigger**](WebhookTrigger.md) |  | [optional] 
+**target_id** | **str** | The webhook target ID. | [optional] 
+**created_by** | [**EmployeeDto**](EmployeeDto.md) |  | [optional] 
+**created_on** | **datetime** | The date and time when the webhook was created. | [optional] 
+**modified_by** | [**EmployeeDto**](EmployeeDto.md) |  | [optional] 
+**modified_on** | **datetime** | The date and time when the webhook was modified. | [optional] 
+**last_failure_on** | **datetime** | The date and time of the webhook last failure. | [optional] 
+**last_failure_content** | **str** | The webhook last failure content. | [optional] 
+**last_success_on** | **datetime** | The date and time of the webhook last success. | [optional] 
 
 ## Example
 

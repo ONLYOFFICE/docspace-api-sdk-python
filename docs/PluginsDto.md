@@ -1,13 +1,14 @@
 # PluginsDto
 
+The plugins parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**enabled** | **bool** | Specifies if the plugins are enabled or not | [optional] 
-**upload** | **bool** | Specifies if the plugins can be uploaded or not | [optional] 
-**delete** | **bool** | Specifies if the plugins can be deleted or not | [optional] 
+**enabled** | **bool** | Specifies if the plugins are enabled or not. | [optional] 
+**upload** | **bool** | Specifies if the plugins can be uploaded or not. | [optional] 
+**delete** | **bool** | Specifies if the plugins can be deleted or not. | [optional] 
 
 ## Example
 

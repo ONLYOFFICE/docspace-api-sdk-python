@@ -1,11 +1,12 @@
 # CspRequestsDto
 
+The request parameters for configuring the Content Security Policy (CSP) settings.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**domains** | **List[str]** | Domains | [optional] 
+**domains** | **List[str]** | The collection of allowed domains in the Content Security Policy (CSP). | [optional] 
 
 ## Example
 

@@ -1,15 +1,15 @@
 # UpdateGroupRequest
 
-Group request parameters
+The request for updating a group.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**members_to_add** | **List[str]** | List of user IDs to add to the group | [optional] 
-**members_to_remove** | **List[str]** | List of user IDs to remove from the group | [optional] 
-**group_manager** | **str** | Group manager ID | [optional] 
-**group_name** | **str** | Group name | [optional] 
+**members_to_add** | **List[str]** | The list of user IDs to add to the group. | [optional] 
+**members_to_remove** | **List[str]** | The list of user IDs to remove from the group. | [optional] 
+**group_manager** | **str** | The group manager ID. | [optional] 
+**group_name** | **str** | The group name. | [optional] 
 
 ## Example
 

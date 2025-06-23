@@ -1,12 +1,12 @@
 # StartEdit
 
-Parameters for starting file editing
+The parameters for starting file editing.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**editing_alone** | **bool** | Specifies whether to share a file with other users for editing or not | [optional] 
+**editing_alone** | **bool** | Specifies whether to share the file with other users for editing or not. | [optional] 
 
 ## Example
 

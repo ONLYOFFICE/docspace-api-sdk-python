@@ -1,6 +1,6 @@
 # FileDtoIntegerSecurity
 
-Security
+The actions that can be perforrmed with the file entry.
 
 ## Properties
 
@@ -39,6 +39,11 @@ Name | Type | Description | Notes
 **embed** | **bool** |  | [optional] 
 **change_owner** | **bool** |  | [optional] 
 **index_export** | **bool** |  | [optional] 
+**start_filling** | **bool** |  | [optional] 
+**filling_status** | **bool** |  | [optional] 
+**reset_filling** | **bool** |  | [optional] 
+**stop_filling** | **bool** |  | [optional] 
+**open_form** | **bool** |  | [optional] 
 
 ## Example
 

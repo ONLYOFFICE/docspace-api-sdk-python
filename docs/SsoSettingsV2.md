@@ -1,21 +1,23 @@
 # SsoSettingsV2
 
+The SSO portal settings.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**enable_sso** | **bool** | Specifies if SSO is enabled or not | [optional] 
+**last_modified** | **datetime** |  | [optional] 
+**enable_sso** | **bool** | Specifies if the SSO settings are enabled or not. | [optional] 
 **idp_settings** | [**SsoIdpSettings**](SsoIdpSettings.md) |  | [optional] 
-**idp_certificates** | [**List[SsoCertificate]**](SsoCertificate.md) | List of IDP certificates | [optional] 
+**idp_certificates** | [**List[SsoCertificate]**](SsoCertificate.md) | The list of the IdP certificates. | [optional] 
 **idp_certificate_advanced** | [**SsoIdpCertificateAdvanced**](SsoIdpCertificateAdvanced.md) |  | [optional] 
-**sp_login_label** | **str** | SP login label | [optional] 
-**sp_certificates** | [**List[SsoCertificate]**](SsoCertificate.md) | List of SP certificates | [optional] 
+**sp_login_label** | **str** | The SP login label. | [optional] 
+**sp_certificates** | [**List[SsoCertificate]**](SsoCertificate.md) | The list of the SP certificates. | [optional] 
 **sp_certificate_advanced** | [**SsoSpCertificateAdvanced**](SsoSpCertificateAdvanced.md) |  | [optional] 
 **field_mapping** | [**SsoFieldMapping**](SsoFieldMapping.md) |  | [optional] 
-**hide_auth_page** | **bool** | Specifies if the authentication page will be hidden or not | [optional] 
-**users_type** | **int** | Users type | [optional] 
-**disable_email_verification** | **bool** | Specifies if the email verification is disabled or not | [optional] 
+**hide_auth_page** | **bool** | Specifies if the authentication page will be hidden or not. | [optional] 
+**users_type** | **int** | The user type. | [optional] 
+**disable_email_verification** | **bool** | Specifies if the email verification is disabled or not. | [optional] 
 
 ## Example
 

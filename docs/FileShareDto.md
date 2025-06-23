@@ -1,16 +1,16 @@
 # FileShareDto
 
-Represents file sharing information and access rights
+The file sharing information and access rights.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **access** | [**FileShare**](FileShare.md) |  | [optional] 
-**shared_to** | **object** | A user who has the access to the specified file | [optional] 
-**is_locked** | **bool** | Specifies if the file is locked by this user or not | [optional] 
-**is_owner** | **bool** | Specifies if this user is an owner of the specified file or not | [optional] 
-**can_edit_access** | **bool** | Spceifies if this user can edit the access to the specified file or not | [optional] 
+**shared_to** | **object** | The user who has the access to the specified file. | [optional] 
+**is_locked** | **bool** | Specifies if the access right is locked or not. | [optional] 
+**is_owner** | **bool** | Specifies if the user is an owner of the specified file or not. | [optional] 
+**can_edit_access** | **bool** | Specifies if the user can edit the access to the specified file or not. | [optional] 
 **subject_type** | [**SubjectType**](SubjectType.md) |  | [optional] 
 
 ## Example

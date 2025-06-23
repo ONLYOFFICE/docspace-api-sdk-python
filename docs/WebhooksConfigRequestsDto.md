@@ -1,17 +1,19 @@
 # WebhooksConfigRequestsDto
 
-Webhook request parameters
+The request parameters for creating or updating the webhook configuration.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **int** | ID | [optional] 
-**name** | **str** | Name | 
-**uri** | **str** | URI | 
-**secret_key** | **str** | Secret key | [optional] 
-**enabled** | **bool** | Enabled or not | [optional] 
-**ssl** | **bool** | SSL | [optional] 
+**id** | **int** | The webhook configuration ID. | [optional] 
+**name** | **str** | The human-readable name of the webhook configuration. | 
+**uri** | **str** | The destination URL where the webhook events will be sent. | 
+**secret_key** | **str** | The webhook secret key used to sign the webhook payloads for the security verification. | [optional] 
+**enabled** | **bool** | Specifies whether the webhook configuration is active or not. | [optional] 
+**ssl** | **bool** | Specifies whether the SSL certificate verification is required or not. | [optional] 
+**triggers** | [**WebhookTrigger**](WebhookTrigger.md) |  | [optional] 
+**target_id** | **str** | Target ID | [optional] 
 
 ## Example
 

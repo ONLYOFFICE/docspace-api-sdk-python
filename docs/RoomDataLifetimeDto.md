@@ -1,15 +1,15 @@
 # RoomDataLifetimeDto
 
-
+The room data lifetime information.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**delete_permanently** | **bool** | Specifies action | [optional] 
+**delete_permanently** | **bool** | Specifies whether to permanently delete the room data or not. | [optional] 
 **period** | [**RoomDataLifetimePeriod**](RoomDataLifetimePeriod.md) |  | [optional] 
-**value** | **int** | Specifies time period value | [optional] 
-**enabled** | **bool** | Enabled | [optional] 
+**value** | **int** | Specifies the time period value of the room data lifetime. | [optional] 
+**enabled** | **bool** | Specifies whether the room data lifetime setting is enabled or not. | [optional] 
 
 ## Example
 

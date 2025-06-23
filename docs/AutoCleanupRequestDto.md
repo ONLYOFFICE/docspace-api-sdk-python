@@ -1,12 +1,12 @@
 # AutoCleanupRequestDto
 
-Auto-clearing request parameters
+The auto-clearing request parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**set** | **bool** | Enables the auto-clearing or not | [optional] 
+**set** | **bool** | Specifies whether to enable the auto-clearing or not. | [optional] 
 **gap** | [**DateToAutoCleanUp**](DateToAutoCleanUp.md) |  | [optional] 
 
 ## Example

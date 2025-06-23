@@ -1,12 +1,13 @@
 # Quota
 
+The quota parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **int** | ID | [optional] 
-**quantity** | **int** | Quantity | [optional] 
+**id** | **int** | The quota ID. | [optional] 
+**quantity** | **int** | The quota quantity. | [optional] 
 
 ## Example
 

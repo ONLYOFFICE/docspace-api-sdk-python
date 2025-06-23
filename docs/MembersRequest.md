@@ -1,12 +1,12 @@
 # MembersRequest
 
-Group request parameters
+The member request.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**members** | **List[str]** | List of group member IDs | [optional] 
+**members** | **List[str]** | The list of group member IDs. | [optional] 
 
 ## Example
 

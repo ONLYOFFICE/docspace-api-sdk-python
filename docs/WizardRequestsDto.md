@@ -1,17 +1,17 @@
 # WizardRequestsDto
 
-Wizard settings request parameters
+The request parameters for initial configuration of the setup wizard.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**email** | **str** | Email | [optional] 
-**password_hash** | **str** | Password hash | [optional] 
-**lng** | **str** | Language | [optional] 
-**time_zone** | **str** | Time zone | [optional] 
-**ami_id** | **str** | AMI ID | [optional] 
-**subscribe_from_site** | **bool** | Subscribed from the site or not | [optional] 
+**email** | **str** | The user&#39;s email address for authentication and communication. | 
+**password_hash** | **str** | The hashed representation of the user&#39;s password. | 
+**lng** | **str** | The user&#39;s preferred interface language code. | [optional] 
+**time_zone** | **str** | The user&#39;s time zone identifier. | [optional] 
+**ami_id** | **str** | The Amazon Machine Image (AMI) identifier. | [optional] 
+**subscribe_from_site** | **bool** | Specifies whether the user opted in for site communications. | [optional] 
 
 ## Example
 

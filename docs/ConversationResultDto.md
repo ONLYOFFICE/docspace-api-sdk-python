@@ -1,18 +1,18 @@
 # ConversationResultDto
 
-Result of file conversation operation.
+The result of file convertion operation.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** | Operation ID | [optional] 
+**id** | **str** | The conversion operation ID. | [optional] 
 **operation** | [**FileOperationType**](FileOperationType.md) |  | [optional] 
-**progress** | **int** | Operation progress | [optional] 
-**source** | **str** | Source file | [optional] 
-**result** | **object** | Resulting file | [optional] 
-**error** | **str** | Error | [optional] 
-**processed** | **str** | Specifies if the operation is processed or not | [optional] 
+**progress** | **int** | The conversion operation progress. | [optional] 
+**source** | **str** | The source file for the conversion. | [optional] 
+**result** | **object** | The resulting file after the conversion. | [optional] 
+**error** | **str** | The conversion operation error message. | [optional] 
+**processed** | **str** | Specifies if the conversion operation is processed or not. | [optional] 
 
 ## Example
 

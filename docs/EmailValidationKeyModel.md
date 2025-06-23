@@ -1,18 +1,18 @@
 # EmailValidationKeyModel
 
-Confirmation email parameters
+The confirmation email parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**key** | **str** | Key | [optional] 
+**key** | **str** | The email validation key. | [optional] 
 **empl_type** | [**EmployeeType**](EmployeeType.md) |  | [optional] 
-**email** | **str** | Email | [optional] 
-**ui_d** | **str** | User ID | [optional] 
+**email** | **str** | The email address. | [optional] 
+**ui_d** | **str** | The user ID. | [optional] 
 **type** | [**ConfirmType**](ConfirmType.md) |  | [optional] 
-**first** | **str** | Access an account for the first time or not | [optional] 
-**room_id** | **str** | Room ID | [optional] 
+**first** | **str** | Specifies whether it is the first time account access or not. | [optional] 
+**room_id** | **str** | The room ID. | [optional] 
 
 ## Example
 

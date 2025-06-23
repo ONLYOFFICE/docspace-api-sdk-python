@@ -1,12 +1,13 @@
 # CultureSpecificExternalResource
 
+The external resource parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**domain** | **str** |  | [optional] 
-**entries** | **Dict[str, Optional[str]]** |  | [optional] 
+**domain** | **str** | The external resource domain. | [optional] 
+**entries** | **Dict[str, Optional[str]]** | The external resource entries. | [optional] 
 
 ## Example
 

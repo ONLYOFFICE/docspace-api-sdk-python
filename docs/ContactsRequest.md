@@ -1,12 +1,12 @@
 # ContactsRequest
 
-Parameters for updating user contacts
+The contacts request.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**contacts** | [**List[Contact]**](Contact.md) | List of user contacts | [optional] 
+**contacts** | [**List[Contact]**](Contact.md) | The list of user contacts. | [optional] 
 
 ## Example
 

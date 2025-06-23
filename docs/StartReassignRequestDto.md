@@ -1,14 +1,14 @@
 # StartReassignRequestDto
 
-Request parameters for starting the reassignment process
+The request parameters for starting the reassignment process.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**from_user_id** | **str** | User ID whose data will be reassigned to another user | [optional] 
-**to_user_id** | **str** | User ID to whom all the data will be reassigned | [optional] 
-**delete_profile** | **bool** | Specifies whether to delete a profile when the data reassignment will be finished or not | [optional] 
+**from_user_id** | **str** | The user ID whose data will be reassigned to another user. | 
+**to_user_id** | **str** | The user ID to whom all the data will be reassigned. | 
+**delete_profile** | **bool** | Specifies whether to delete a profile when the data reassignment will be finished or not. | [optional] 
 
 ## Example
 

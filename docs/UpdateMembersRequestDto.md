@@ -1,13 +1,13 @@
 # UpdateMembersRequestDto
 
-Request parameters for updating user information
+The request parameters for updating the user information.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**user_ids** | **List[str]** | List of user IDs | [optional] 
-**resend_all** | **bool** | Specifies whether to resend invitation letters to all the users or not | [optional] 
+**user_ids** | **List[str]** | The list of user IDs. | [optional] 
+**resend_all** | **bool** | Specifies whether to resend invitation letters to all the users or not. | [optional] 
 
 ## Example
 

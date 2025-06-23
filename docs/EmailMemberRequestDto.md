@@ -1,12 +1,12 @@
 # EmailMemberRequestDto
 
-Member request parameters
+The request parameters for the user email.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**email** | **str** | Email | [optional] 
+**email** | **str** | The user email address. | 
 
 ## Example
 

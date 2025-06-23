@@ -1,12 +1,13 @@
 # Paragraph
 
+The paragraph parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**align** | **int** |  | [optional] 
-**runs** | [**List[Run]**](Run.md) |  | [optional] 
+**align** | **int** | The paragraph align. | [optional] 
+**runs** | [**List[Run]**](Run.md) | The list of text runs from the paragraph. | [optional] 
 
 ## Example
 

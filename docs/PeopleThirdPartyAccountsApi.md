@@ -37,10 +37,10 @@ configuration = docspace.Configuration(
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.PeopleThirdPartyAccountsApi(api_client)
-    invite_view = true # bool | Specifies whether to return providers that are available for invitation links, i.e. the user can login or register through these providers (optional)
-    settings_view = true # bool | Specifies whether to return URLs in the format that is used on the Settings page (optional)
-    client_callback = 'some text' # str | Method that is called after authorization (optional)
-    from_only = 'some text' # str | Provider name if the response only from this provider is needed (optional)
+    invite_view = true # bool | Specifies whether to return providers that are available for invitation links, i.e. the user can login or register through these providers. (optional)
+    settings_view = true # bool | Specifies whether to display the provider settings in a pop-up window (true) or redirect them to the desktop application (false). (optional)
+    client_callback = 'some text' # str | The method that is called after authentication. (optional)
+    from_only = 'some text' # str | The provider name if a response is required only from this provider. (optional)
 
     try:
         # Get third-party accounts
@@ -58,10 +58,10 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **invite_view** | **bool**| Specifies whether to return providers that are available for invitation links, i.e. the user can login or register through these providers | [optional] 
- **settings_view** | **bool**| Specifies whether to return URLs in the format that is used on the Settings page | [optional] 
- **client_callback** | **str**| Method that is called after authorization | [optional] 
- **from_only** | **str**| Provider name if the response only from this provider is needed | [optional] 
+ **invite_view** | **bool**| Specifies whether to return providers that are available for invitation links, i.e. the user can login or register through these providers. | [optional] 
+ **settings_view** | **bool**| Specifies whether to display the provider settings in a pop-up window (true) or redirect them to the desktop application (false). | [optional] 
+ **client_callback** | **str**| The method that is called after authentication. | [optional] 
+ **from_only** | **str**| The provider name if a response is required only from this provider. | [optional] 
 
 ### Return type
 
@@ -93,7 +93,11 @@ Links a third-party account specified in the request to the user profile.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -112,11 +116,30 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
@@ -146,7 +169,7 @@ void (empty response body)
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -240,7 +263,11 @@ Unlinks a third-party account specified in the request from the user profile.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -258,17 +285,36 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.PeopleThirdPartyAccountsApi(api_client)
-    provider = 'some text' # str | Provider name (optional)
+    provider = 'some text' # str | The provider name. (optional)
 
     try:
         # Unlink a third-pary account
@@ -284,7 +330,7 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **provider** | **str**| Provider name | [optional] 
+ **provider** | **str**| The provider name. | [optional] 
 
 ### Return type
 
@@ -292,7 +338,7 @@ void (empty response body)
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 

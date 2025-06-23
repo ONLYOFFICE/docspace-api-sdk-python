@@ -1,13 +1,14 @@
 # AceShortWrapper
 
+The information about the settings which allow to share the document with other users.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**user** | **str** | User | [optional] 
-**permissions** | **str** | User access rights to the file | [optional] 
-**is_link** | **bool** | Is link | [optional] 
+**user** | **str** | The name of the user the document will be shared with. | [optional] 
+**permissions** | **str** | The access rights for the user with the name above.  Can be \&quot;Full Access\&quot;, \&quot;Read Only\&quot;, or \&quot;Deny Access\&quot;. | [optional] 
+**is_link** | **bool** | Specifies whether to change the user icon to the link icon. | [optional] 
 
 ## Example
 

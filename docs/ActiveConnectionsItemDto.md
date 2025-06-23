@@ -1,21 +1,22 @@
 # ActiveConnectionsItemDto
 
+The active connection item parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **int** | Id | [optional] 
-**tenant_id** | **int** | Tenant id | [optional] 
-**user_id** | **str** | User id | [optional] 
-**mobile** | **bool** | Mobile | [optional] 
-**ip** | **str** | Ip | [optional] 
-**country** | **str** | Country | [optional] 
-**city** | **str** | City | [optional] 
-**browser** | **str** | Browser | [optional] 
-**platform** | **str** | Platform | [optional] 
+**id** | **int** | The active connection ID. | [optional] 
+**tenant_id** | **int** | The tenant ID. | [optional] 
+**user_id** | **str** | The user ID. | [optional] 
+**mobile** | **bool** | Specifies if the active connection has a mobile phone or not. | [optional] 
+**ip** | **str** | The IP address of the active connection. | [optional] 
+**country** | **str** | The active connection country. | [optional] 
+**city** | **str** | The active connection city. | [optional] 
+**browser** | **str** | The active connection browser. | [optional] 
+**platform** | **str** | The active connection platform. | [optional] 
 **var_date** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] 
-**page** | **str** | Page | [optional] 
+**page** | **str** | The active connection page. | [optional] 
 
 ## Example
 

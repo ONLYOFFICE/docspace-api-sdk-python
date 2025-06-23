@@ -1,13 +1,13 @@
 # ChangeHistory
 
-Parameters for changing version history
+The parameters for changing version history.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**version** | **int** | File version | [optional] 
-**continue_version** | **bool** | Marks as a version or revision | [optional] 
+**version** | **int** | The file version of the change history. | 
+**continue_version** | **bool** | Specifies whether to start a new version or continue revision of the change history. | [optional] 
 
 ## Example
 

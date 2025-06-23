@@ -1,14 +1,14 @@
 # Cron
 
-Cron parameters
+The backup cron parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **period** | [**BackupPeriod**](BackupPeriod.md) |  | [optional] 
-**hour** | **int** | Hour | [optional] 
-**day** | **int** | Day | [optional] 
+**hour** | **int** | The time of the day to start the backup process. | [optional] 
+**day** | **int** | The day of the week to start the backup process. | [optional] 
 
 ## Example
 

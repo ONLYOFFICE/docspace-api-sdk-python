@@ -1,13 +1,14 @@
 # ProductAdministratorDto
 
+The product administrator parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**product_id** | **str** | Unique identifier of the product | [optional] 
-**user_id** | **str** | Unique identifier of the user | [optional] 
-**administrator** | **bool** | Indicates whether the user has administrator privileges for the product | [optional] 
+**product_id** | **str** | The product ID. | [optional] 
+**user_id** | **str** | The user unique identifier. | [optional] 
+**administrator** | **bool** | Indicates whether the user has administrator privileges for the product. | [optional] 
 
 ## Example
 

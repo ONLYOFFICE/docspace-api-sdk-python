@@ -1,12 +1,13 @@
 # CustomColorThemesSettingsColorItem
 
+The custom color theme color parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**accent** | **str** | Accent color | [optional] 
-**buttons** | **str** | Button color | [optional] 
+**accent** | **str** | The accent color. | [optional] 
+**buttons** | **str** | The button color. | [optional] 
 
 ## Example
 

@@ -1,12 +1,13 @@
 # NewItemsDtoRoomNewItemsDto
 
+The new item parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **var_date** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] 
-**items** | [**List[RoomNewItemsDto]**](RoomNewItemsDto.md) | Items | [optional] 
+**items** | [**List[RoomNewItemsDto]**](RoomNewItemsDto.md) | The list of items. | [optional] 
 
 ## Example
 

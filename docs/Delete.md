@@ -1,13 +1,13 @@
 # Delete
 
-Parameters for deleting a file
+The parameters for deleting a file.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**delete_after** | **bool** | Specifies whether to delete a file after the editing session is finished or not | [optional] 
-**immediately** | **bool** | Specifies whether to move a file to the \\\&quot;Trash\\\&quot; folder or delete it immediately | [optional] 
+**delete_after** | **bool** | Specifies whether to delete a file after the editing session is finished or not. | [optional] 
+**immediately** | **bool** | Specifies whether to move a file to the \\\&quot;Trash\\\&quot; folder or delete it immediately. | [optional] 
 
 ## Example
 

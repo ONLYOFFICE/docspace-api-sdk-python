@@ -1,12 +1,13 @@
 # FeedbackConfig
 
+The settings for the \"Feedback & Support\" menu button.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**url** | **str** | Url | [optional] 
-**visible** | **bool** | Visible | [optional] [readonly] 
+**url** | **str** | The absolute URL to the website address which will be opened when clicking the \&quot;Feedback &amp; Support\&quot; menu button. | [optional] 
+**visible** | **bool** | Shows or hides the \&quot;Feedback &amp; Support\&quot; menu button. | [optional] [readonly] 
 
 ## Example
 

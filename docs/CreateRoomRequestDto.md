@@ -1,24 +1,24 @@
 # CreateRoomRequestDto
 
-Request parameters for creating a room
+The request parameters for creating a room.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**title** | **str** | Room name | [optional] 
-**quota** | **int** | Room quota | [optional] 
-**indexing** | **bool** | Indexing | [optional] 
-**deny_download** | **bool** | Room quota | [optional] 
+**title** | **str** | The room name. | 
+**quota** | **int** | The room quota. | [optional] 
+**indexing** | **bool** | Specifies whether to create a room with indexing. | [optional] 
+**deny_download** | **bool** | Specifies whether to deny downloads from the room. | [optional] 
 **lifetime** | [**RoomDataLifetimeDto**](RoomDataLifetimeDto.md) |  | [optional] 
 **watermark** | [**WatermarkRequestDto**](WatermarkRequestDto.md) |  | [optional] 
 **logo** | [**LogoRequest**](LogoRequest.md) |  | [optional] 
-**tags** | **List[str]** | List of tags | [optional] 
-**color** | **str** | Color | [optional] 
-**cover** | **str** | Cover | [optional] 
-**room_type** | [**RoomType**](RoomType.md) |  | [optional] 
-**private** | **bool** | Private | [optional] 
-**share** | [**List[FileShareParams]**](FileShareParams.md) | Collection of sharing parameters | [optional] 
+**tags** | **List[str]** | The list of tags. | [optional] 
+**color** | **str** | The room color. | [optional] 
+**cover** | **str** | The room cover. | [optional] 
+**room_type** | [**RoomType**](RoomType.md) |  | 
+**private** | **bool** | Specifies whether the room to be created is private or not. | [optional] 
+**share** | [**List[FileShareParams]**](FileShareParams.md) | The collection of sharing parameters. | [optional] 
 
 ## Example
 

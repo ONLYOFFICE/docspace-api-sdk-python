@@ -1,12 +1,12 @@
 # TemplatesRequestDto
 
-Request parameters for adding files to the template list
+The request parameters for adding files to the template list.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**file_ids** | **List[int]** | List of file IDs | [optional] 
+**file_ids** | **List[int]** | The list of file IDs. | [optional] 
 
 ## Example
 

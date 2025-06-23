@@ -4,15 +4,15 @@
 
 ## Enum
 
-* `NUMBER_1` (value: `1`)
+* `FillingFormsRoom` (value: `1`)
 
-* `NUMBER_2` (value: `2`)
+* `EditingRoom` (value: `2`)
 
-* `NUMBER_5` (value: `5`)
+* `CustomRoom` (value: `5`)
 
-* `NUMBER_6` (value: `6`)
+* `PublicRoom` (value: `6`)
 
-* `NUMBER_8` (value: `8`)
+* `VirtualDataRoom` (value: `8`)
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

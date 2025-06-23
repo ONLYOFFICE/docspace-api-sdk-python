@@ -1,13 +1,14 @@
 # ConfirmData
 
+The additional confirmation data required for authentication.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**email** | **str** | Email address | [optional] 
-**first** | **bool** | Access an account for the first time or not | [optional] 
-**key** | **str** | Key | [optional] 
+**email** | **str** | The email address to confirm the user&#39;s identity. | [optional] 
+**first** | **bool** | Specifies whether this is the first access to the user&#39;s account. | [optional] 
+**key** | **str** | The unique confirmation key for validating user identity. | [optional] 
 
 ## Example
 

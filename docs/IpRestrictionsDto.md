@@ -1,13 +1,13 @@
 # IpRestrictionsDto
 
-New IP restriction settings
+The parameters for configuring new IP restriction settings.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ip_restrictions** | [**List[IpRestrictionBase]**](IpRestrictionBase.md) | List of IP addresses | [optional] 
-**enable** | **bool** | Enables IP restrictions or not | [optional] 
+**ip_restrictions** | [**List[IpRestrictionBase]**](IpRestrictionBase.md) | The list of IP restriction addresses. | [optional] 
+**enable** | **bool** | Specifies whether to enable IP restrictions or not. | [optional] 
 
 ## Example
 

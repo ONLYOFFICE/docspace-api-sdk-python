@@ -1,18 +1,19 @@
 # DocServiceUrlDto
 
+The document service URL parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**version** | **str** | Version | 
-**doc_service_url_api** | **str** | Doc service url api | 
-**doc_service_url** | **str** | Doc service url | 
-**doc_service_url_internal** | **str** | Doc service url internal | 
-**doc_service_portal_url** | **str** | Doc service portal url | 
-**doc_service_signature_header** | **str** | Doc service signature header | [optional] 
-**doc_service_ssl_verification** | **bool** | Enable SSL verification | [optional] 
-**is_default** | **bool** | Is default | 
+**version** | **str** | The version of the document service. | 
+**doc_service_url_api** | **str** | The document service URL API. | 
+**doc_service_url** | **str** | The document service URL. | 
+**doc_service_url_internal** | **str** | The internal document service URL. | 
+**doc_service_portal_url** | **str** | The document service portal URL. | 
+**doc_service_signature_header** | **str** | The document service signature header. | [optional] 
+**doc_service_ssl_verification** | **bool** | Specifies if the document service SSL verification is enabled. | [optional] 
+**is_default** | **bool** | Specifies if the document service is default. | 
 
 ## Example
 

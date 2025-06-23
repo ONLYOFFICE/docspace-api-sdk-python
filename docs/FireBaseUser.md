@@ -1,16 +1,17 @@
 # FireBaseUser
 
+The Firebase user parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **int** | ID | [optional] 
-**user_id** | **str** | User ID | [optional] 
-**tenant_id** | **int** | Tenant ID | [optional] 
-**firebase_device_token** | **str** | Firebase device token | [optional] 
-**application** | **str** | Application | [optional] 
-**is_subscribed** | **bool** | Specifies if the user is subscribed to the push notifications or not | [optional] 
+**id** | **int** | The Firebase user ID. | [optional] 
+**user_id** | **str** | The user ID. | [optional] 
+**tenant_id** | **int** | The tenant ID. | [optional] 
+**firebase_device_token** | **str** | The Firebase device token. | [optional] 
+**application** | **str** | The Firebase application. | [optional] 
+**is_subscribed** | **bool** | Specifies if the user is subscribed to the push notifications or not. | [optional] 
 **tenant** | [**DbTenant**](DbTenant.md) |  | [optional] 
 
 ## Example

@@ -1,14 +1,15 @@
 # TaskProgressResponseDto
 
+The task progress response parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** | ID | [optional] 
-**error** | **str** | Error | [optional] 
-**percentage** | **int** | Percentage | [optional] 
-**is_completed** | **bool** | IsCompleted | [optional] 
+**id** | **str** | The task progress ID. | [optional] 
+**error** | **str** | The task progress error message. | [optional] 
+**percentage** | **int** | The percentage of the task progress. | [optional] 
+**is_completed** | **bool** | Specifies if the task peogress is completed or not. | [optional] 
 **status** | [**DistributedTaskStatus**](DistributedTaskStatus.md) |  | [optional] 
 
 ## Example

@@ -1,12 +1,13 @@
 # CheckDestFolderDto
 
+The destination folder checking information.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **result** | [**CheckDestFolderResult**](CheckDestFolderResult.md) |  | [optional] 
-**files** | [**List[FileEntryDto]**](FileEntryDto.md) | Files | [optional] 
+**files** | [**List[FileEntryDto]**](FileEntryDto.md) | The list of files of the destination folder. | [optional] 
 
 ## Example
 

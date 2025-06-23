@@ -1,19 +1,20 @@
 # EditHistoryDto
 
+The file editing history parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **int** | File ID | [optional] 
-**key** | **str** | Key | [optional] 
-**version** | **int** | File version | [optional] 
-**version_group** | **int** | Version group | [optional] 
+**id** | **int** | The document ID. | [optional] 
+**key** | **str** | The document identifier used to unambiguously identify the document file. | [optional] 
+**version** | **int** | The document version number. | [optional] 
+**version_group** | **int** | The document version group. | [optional] 
 **user** | [**EditHistoryAuthor**](EditHistoryAuthor.md) |  | [optional] 
 **created** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] 
-**changes_history** | **str** | History changes in the string format | [optional] 
-**changes** | [**List[EditHistoryChangesWrapper]**](EditHistoryChangesWrapper.md) | List of history changes | [optional] 
-**server_version** | **str** | Server version | [optional] 
+**changes_history** | **str** | The file history changes in the string format. | [optional] 
+**changes** | [**List[EditHistoryChangesWrapper]**](EditHistoryChangesWrapper.md) | The list of file history changes. | [optional] 
+**server_version** | **str** | The current server version number. | [optional] 
 
 ## Example
 

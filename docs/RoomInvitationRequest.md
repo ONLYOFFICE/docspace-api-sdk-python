@@ -1,15 +1,16 @@
 # RoomInvitationRequest
 
-Request parameters for inviting users to a room
+The request parameters for inviting users to the room.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**invitations** | [**List[RoomInvitation]**](RoomInvitation.md) | Collection of invitation parameters | [optional] 
-**notify** | **bool** | Notifies users about the shared room or not | [optional] 
-**message** | **str** | Message to send when notifying about the shared room | [optional] 
-**culture** | **str** | Culture | [optional] 
+**invitations** | [**List[RoomInvitation]**](RoomInvitation.md) | The collection of invitation parameters. | [optional] 
+**notify** | **bool** | Specifies whether to notify users about the shared room or not. | [optional] 
+**message** | **str** | The message to send when notifying about the shared room. | [optional] 
+**culture** | **str** | The language of the room invitation. | [optional] 
+**force** | **bool** | Specifies whether to forcibly delete a user with form roles from the room. | [optional] 
 
 ## Example
 

@@ -1,15 +1,16 @@
 # Logo
 
+The room logo information.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**original** | **str** | Original | [optional] 
-**large** | **str** | Large | [optional] 
-**medium** | **str** | Medium | [optional] 
-**small** | **str** | Small | [optional] 
-**color** | **str** | Color | [optional] 
+**original** | **str** | The original logo. | [optional] 
+**large** | **str** | The large logo. | [optional] 
+**medium** | **str** | The medium logo. | [optional] 
+**small** | **str** | The small logo. | [optional] 
+**color** | **str** | The logo color. | [optional] 
 **cover** | [**LogoCover**](LogoCover.md) |  | [optional] 
 
 ## Example

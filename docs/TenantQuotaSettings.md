@@ -1,13 +1,15 @@
 # TenantQuotaSettings
 
+The tenant quota settings.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**enable_quota** | **bool** | Specifies if the quota is enabled or not | [optional] 
-**quota** | **int** | Quota | [optional] 
-**last_recalculate_date** | **datetime** | Date of the last quota recalculation | [optional] 
+**enable_quota** | **bool** | Specifies if the tenant quota is enabled or not. | [optional] 
+**quota** | **int** | The tenant quota. | [optional] 
+**last_recalculate_date** | **datetime** | The date of the last tenant quota recalculation. | [optional] 
+**last_modified** | **datetime** |  | [optional] 
 
 ## Example
 

@@ -1,12 +1,12 @@
 # GreetingSettingsRequestsDto
 
-Greeting settings
+The request parameters for managing the greeting settings.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**title** | **str** | Tenant name | [optional] 
+**title** | **str** | The title of the tenant greeting settings. | 
 
 ## Example
 

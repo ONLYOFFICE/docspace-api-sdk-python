@@ -1,16 +1,17 @@
 # ThumbnailsDataDto
 
+The thumbnails data parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**original** | **str** | Original photo | [optional] 
-**retina** | **str** | Retina | [optional] 
-**max** | **str** | Maximum size | [optional] 
-**big** | **str** | Big | [optional] 
-**medium** | **str** | Medium | [optional] 
-**small** | **str** | Small | [optional] 
+**original** | **str** | The thumbnail original photo. | [optional] 
+**retina** | **str** | The thumbnail retina. | [optional] 
+**max** | **str** | The thumbnail maximum size photo. | [optional] 
+**big** | **str** | The thumbnail big size photo. | [optional] 
+**medium** | **str** | The thumbnail medium size photo. | [optional] 
+**small** | **str** | The thumbnail small size photo. | [optional] 
 
 ## Example
 

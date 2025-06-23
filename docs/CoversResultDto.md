@@ -1,13 +1,13 @@
 # CoversResultDto
 
-Represents the result of a covers request containing cover image data
+The result of the cover request containing the cover image data.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** | The unique identifier of the cover | [optional] 
-**data** | **str** | The cover image data | [optional] 
+**id** | **str** | The cover unique identifier. | [optional] 
+**data** | **str** | The cover image data. | [optional] 
 
 ## Example
 

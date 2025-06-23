@@ -1,17 +1,18 @@
 # AuthenticationTokenDto
 
+The authentication token parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**token** | **str** | Authentication token | [optional] 
-**expires** | **datetime** | Token expiration time | [optional] 
-**sms** | **bool** | Specifies if the authentication code is sent by SMS or not | [optional] 
-**phone_noise** | **str** | Phone number | [optional] 
-**tfa** | **bool** | Specifies if the two-factor application is used or not | [optional] 
-**tfa_key** | **str** | Two-factor authentication key | [optional] 
-**confirm_url** | **str** | Confirmation email URL | [optional] 
+**token** | **str** | The authentication token. | [optional] 
+**expires** | **datetime** | The token expiration time. | [optional] 
+**sms** | **bool** | Specifies if the authentication code is sent by SMS or not. | [optional] 
+**phone_noise** | **str** | The phone number. | [optional] 
+**tfa** | **bool** | Specifies if the two-factor application is used or not. | [optional] 
+**tfa_key** | **str** | The two-factor authentication key. | [optional] 
+**confirm_url** | **str** | The confirmation email URL. | [optional] 
 
 ## Example
 

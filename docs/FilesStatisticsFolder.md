@@ -1,12 +1,13 @@
 # FilesStatisticsFolder
 
+The file statictics folder parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**title** | **str** | Folder title | [optional] 
-**used_space** | **int** | Used space | [optional] 
+**title** | **str** | The folder title. | [optional] 
+**used_space** | **int** | The used space in the folder. | [optional] 
 
 ## Example
 

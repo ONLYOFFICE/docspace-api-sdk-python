@@ -1,6 +1,6 @@
 # FilesSettingsDtoInternalFormats
 
-Internal formats
+The internal file formats.
 
 ## Properties
 

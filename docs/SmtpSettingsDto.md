@@ -1,21 +1,21 @@
 # SmtpSettingsDto
 
-SMTP settings
+The SMTP settings parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**host** | **str** | Host | [optional] 
-**port** | **int** | Port | [optional] 
-**sender_address** | **str** | Sender address | [optional] 
-**sender_display_name** | **str** | Sender display name | [optional] 
-**credentials_user_name** | **str** | Credentials username | [optional] 
-**credentials_user_password** | **str** | Credentials user password | [optional] 
-**enable_ssl** | **bool** | Enables SSL or not | [optional] 
-**enable_auth** | **bool** | Enables authentication or not | [optional] 
-**use_ntlm** | **bool** | Specifies whether to use NTLM or not | [optional] 
-**is_default_settings** | **bool** | Specifies if the current settings are default or not | [optional] 
+**host** | **str** | The SMTP host. | [optional] 
+**port** | **int** | The SMTP port. | [optional] 
+**sender_address** | **str** | The sender address. | [optional] 
+**sender_display_name** | **str** | The sender display name. | [optional] 
+**credentials_user_name** | **str** | The credentials username. | [optional] 
+**credentials_user_password** | **str** | The credentials user password. | [optional] 
+**enable_ssl** | **bool** | Specifies whether the SSL is enabled or not. | [optional] 
+**enable_auth** | **bool** | Specifies whether the authentication is enabled or not. | [optional] 
+**use_ntlm** | **bool** | Specifies whether to use NTLM or not. | [optional] 
+**is_default_settings** | **bool** | Specifies if the current settings are default or not. | [optional] 
 
 ## Example
 

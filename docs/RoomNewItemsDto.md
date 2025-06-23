@@ -1,12 +1,13 @@
 # RoomNewItemsDto
 
+The room new items information.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **room** | [**FileEntryDto**](FileEntryDto.md) |  | [optional] 
-**items** | [**List[FileEntryDto]**](FileEntryDto.md) | Items | [optional] 
+**items** | [**List[FileEntryDto]**](FileEntryDto.md) | The list of file entry items. | [optional] 
 
 ## Example
 

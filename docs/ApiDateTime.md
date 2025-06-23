@@ -1,12 +1,13 @@
 # ApiDateTime
 
+The API date and time parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**utc_time** | **datetime** | UtcTime | [optional] [readonly] 
-**time_zone_offset** | **str** | TimeZoneOffset | [optional] [readonly] 
+**utc_time** | **datetime** | The time in UTC format. | [optional] [readonly] 
+**time_zone_offset** | **str** | The time zone offset. | [optional] [readonly] 
 
 ## Example
 

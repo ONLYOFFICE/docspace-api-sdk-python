@@ -1,15 +1,16 @@
 # EmbeddedConfig
 
+The configuration parameters for the embedded document type.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**embed_url** | **str** | Embed url | [optional] [readonly] 
-**save_url** | **str** | Save url | [optional] [readonly] 
-**share_link_param** | **str** | Share link param | [optional] 
-**share_url** | **str** | Share url | [optional] [readonly] 
-**toolbar_docked** | **str** | Toolbar docked | [optional] [readonly] 
+**embed_url** | **str** | The absolute URL to the document serving as a source file for the document embedded into the web page. | [optional] [readonly] 
+**save_url** | **str** | The absolute URL that will allow the document to be saved onto the user personal computer. | [optional] [readonly] 
+**share_link_param** | **str** | The shared URL parameter. | [optional] 
+**share_url** | **str** | The absolute URL that will allow other users to share this document. | [optional] [readonly] 
+**toolbar_docked** | **str** | The place for the embedded viewer toolbar, can be either \&quot;top\&quot; or \&quot;bottom\&quot;. | [optional] [readonly] 
 
 ## Example
 

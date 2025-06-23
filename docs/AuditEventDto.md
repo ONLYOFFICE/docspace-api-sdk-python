@@ -1,28 +1,29 @@
 # AuditEventDto
 
+The audit event parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **int** | ID | [optional] 
+**id** | **int** | The audit event ID. | [optional] 
 **var_date** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] 
-**user** | **str** | User | [optional] 
-**user_id** | **str** | User ID | [optional] 
-**action** | **str** | Action | [optional] 
+**user** | **str** | The name of the user who triggered the audit event. | [optional] 
+**user_id** | **str** | The ID of the user who triggered the audit event. | [optional] 
+**action** | **str** | The audit event action. | [optional] 
 **action_id** | [**MessageAction**](MessageAction.md) |  | [optional] 
-**ip** | **str** | IP | [optional] 
-**country** | **str** | Country | [optional] 
-**city** | **str** | City | [optional] 
-**browser** | **str** | Browser | [optional] 
-**platform** | **str** | Platform | [optional] 
-**page** | **str** | Page | [optional] 
+**ip** | **str** | The audit event IP. | [optional] 
+**country** | **str** | The audit event country. | [optional] 
+**city** | **str** | The audit event city. | [optional] 
+**browser** | **str** | The audit event browser. | [optional] 
+**platform** | **str** | The audit event platform. | [optional] 
+**page** | **str** | The audit event page. | [optional] 
 **action_type** | [**ActionType**](ActionType.md) |  | [optional] 
 **product** | [**ProductType**](ProductType.md) |  | [optional] 
 **module** | [**ModuleType**](ModuleType.md) |  | [optional] 
-**target** | **List[str]** | List of targets | [optional] 
-**entries** | [**List[EntryType]**](EntryType.md) | List of entry types | [optional] 
-**context** | **str** | Context | [optional] 
+**target** | **List[str]** | The list of target objects affected by the audit event (e.g., document ID, user account). | [optional] 
+**entries** | [**List[EntryType]**](EntryType.md) | The list of audit entry types (e.g., Folder, User, File). | [optional] 
+**context** | **str** | The audit event context. | [optional] 
 
 ## Example
 

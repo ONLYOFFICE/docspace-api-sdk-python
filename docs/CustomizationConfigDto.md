@@ -1,20 +1,22 @@
 # CustomizationConfigDto
 
+The customization config parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**about** | **bool** | About | [optional] 
+**about** | **bool** | Specifies if the customization is about. | [optional] 
 **customer** | [**CustomerConfigDto**](CustomerConfigDto.md) |  | [optional] 
 **anonymous** | [**AnonymousConfigDto**](AnonymousConfigDto.md) |  | [optional] 
 **feedback** | [**FeedbackConfig**](FeedbackConfig.md) |  | [optional] 
-**forcesave** | **bool** | Forcesave | [optional] 
+**forcesave** | **bool** | Specifies if the customization should be force saved. | [optional] 
 **goback** | [**GobackConfig**](GobackConfig.md) |  | [optional] 
 **logo** | [**LogoConfigDto**](LogoConfigDto.md) |  | [optional] 
-**mention_share** | **bool** | MentionShare | [optional] 
-**review_display** | **str** | Review display | [optional] 
-**submit_form** | **bool** | Submit form | [optional] 
+**mention_share** | **bool** | Specifies if the share should be mentioned. | [optional] 
+**review_display** | **str** | The review display of the customization. | [optional] 
+**submit_form** | [**SubmitForm**](SubmitForm.md) |  | [optional] 
+**start_filling_form** | [**StartFillingForm**](StartFillingForm.md) |  | [optional] 
 
 ## Example
 

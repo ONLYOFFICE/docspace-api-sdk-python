@@ -4,56 +4,60 @@ All URIs are relative to *http://localhost:8092*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**add_tags**](FilesRoomsApi.md#add_tags) | **PUT** /api/2.0/files/rooms/{id}/tags | Add room tags
+[**add_tags**](FilesRoomsApi.md#add_tags) | **PUT** /api/2.0/files/rooms/{id}/tags | Add the room tags
 [**archive_room**](FilesRoomsApi.md#archive_room) | **PUT** /api/2.0/files/rooms/{id}/archive | Archive a room
-[**change_room_cover**](FilesRoomsApi.md#change_room_cover) | **POST** /api/2.0/files/rooms/{id}/cover | Changes room cover
+[**change_room_cover**](FilesRoomsApi.md#change_room_cover) | **POST** /api/2.0/files/rooms/{id}/cover | Change the room cover
 [**create_room**](FilesRoomsApi.md#create_room) | **POST** /api/2.0/files/rooms | Create a room
-[**create_room_from_template**](FilesRoomsApi.md#create_room_from_template) | **POST** /api/2.0/files/rooms/fromtemplate | Start create a room based on a template
+[**create_room_from_template**](FilesRoomsApi.md#create_room_from_template) | **POST** /api/2.0/files/rooms/fromtemplate | Create a room from the template
 [**create_room_logo**](FilesRoomsApi.md#create_room_logo) | **POST** /api/2.0/files/rooms/{id}/logo | Create a room logo
 [**create_room_third_party**](FilesRoomsApi.md#create_room_third_party) | **POST** /api/2.0/files/rooms/thirdparty/{id} | Create a third-party room
 [**create_tag**](FilesRoomsApi.md#create_tag) | **POST** /api/2.0/files/tags | Create a tag
-[**create_template**](FilesRoomsApi.md#create_template) | **POST** /api/2.0/files/roomtemplate | Start create room template
+[**create_template**](FilesRoomsApi.md#create_template) | **POST** /api/2.0/files/roomtemplate | Start creating room template
 [**delete_custom_tags**](FilesRoomsApi.md#delete_custom_tags) | **DELETE** /api/2.0/files/tags | Delete tags
 [**delete_room**](FilesRoomsApi.md#delete_room) | **DELETE** /api/2.0/files/rooms/{id} | Remove a room
 [**delete_room_logo**](FilesRoomsApi.md#delete_room_logo) | **DELETE** /api/2.0/files/rooms/{id}/logo | Remove a room logo
-[**delete_tags**](FilesRoomsApi.md#delete_tags) | **DELETE** /api/2.0/files/rooms/{id}/tags | Remove room tags
-[**get_covers**](FilesRoomsApi.md#get_covers) | **GET** /api/2.0/files/rooms/covers | Gets covers
-[**get_new_room_items**](FilesRoomsApi.md#get_new_room_items) | **GET** /api/2.0/files/rooms/{id}/news | Get new room items
-[**get_room_creating_status**](FilesRoomsApi.md#get_room_creating_status) | **GET** /api/2.0/files/rooms/fromtemplate/status | Get progress creating room
-[**get_room_index_export**](FilesRoomsApi.md#get_room_index_export) | **GET** /api/2.0/files/rooms/indexexport | Gets room index export
+[**delete_tags**](FilesRoomsApi.md#delete_tags) | **DELETE** /api/2.0/files/rooms/{id}/tags | Remove the room tags
+[**get_covers**](FilesRoomsApi.md#get_covers) | **GET** /api/2.0/files/rooms/covers | Get covers
+[**get_new_room_items**](FilesRoomsApi.md#get_new_room_items) | **GET** /api/2.0/files/rooms/{id}/news | Get the new room items
+[**get_room_creating_status**](FilesRoomsApi.md#get_room_creating_status) | **GET** /api/2.0/files/rooms/fromtemplate/status | Get the room creation progress
+[**get_room_index_export**](FilesRoomsApi.md#get_room_index_export) | **GET** /api/2.0/files/rooms/indexexport | Get the room index export
 [**get_room_info**](FilesRoomsApi.md#get_room_info) | **GET** /api/2.0/files/rooms/{id} | Get room information
-[**get_room_links**](FilesRoomsApi.md#get_room_links) | **GET** /api/2.0/files/rooms/{id}/links | Get room links
-[**get_room_security_info**](FilesRoomsApi.md#get_room_security_info) | **GET** /api/2.0/files/rooms/{id}/share | Get room access rights
+[**get_room_links**](FilesRoomsApi.md#get_room_links) | **GET** /api/2.0/files/rooms/{id}/links | Get the room links
+[**get_room_security_info**](FilesRoomsApi.md#get_room_security_info) | **GET** /api/2.0/files/rooms/{id}/share | Get the room access rights
 [**get_rooms_folder**](FilesRoomsApi.md#get_rooms_folder) | **GET** /api/2.0/files/rooms | Get rooms
-[**get_rooms_new_items**](FilesRoomsApi.md#get_rooms_new_items) | **GET** /api/2.0/files/rooms/news | Gets room new items
-[**get_rooms_primary_external_link**](FilesRoomsApi.md#get_rooms_primary_external_link) | **GET** /api/2.0/files/rooms/{id}/link | Get primary external link
+[**get_rooms_new_items**](FilesRoomsApi.md#get_rooms_new_items) | **GET** /api/2.0/files/rooms/news | Get the room new items
+[**get_rooms_primary_external_link**](FilesRoomsApi.md#get_rooms_primary_external_link) | **GET** /api/2.0/files/rooms/{id}/link | Get the room primary external link
 [**get_tags_info**](FilesRoomsApi.md#get_tags_info) | **GET** /api/2.0/files/tags | Get tags
-[**get_template_creating_status**](FilesRoomsApi.md#get_template_creating_status) | **GET** /api/2.0/files/roomtemplate/status | Get progress creating room template
-[**is_public**](FilesRoomsApi.md#is_public) | **GET** /api/2.0/files/roomtemplate/{id}/public | Get public
+[**get_template_creating_status**](FilesRoomsApi.md#get_template_creating_status) | **GET** /api/2.0/files/roomtemplate/status | Get status of room template creation
+[**is_public**](FilesRoomsApi.md#is_public) | **GET** /api/2.0/files/roomtemplate/{id}/public | Get public settings
 [**pin_room**](FilesRoomsApi.md#pin_room) | **PUT** /api/2.0/files/rooms/{id}/pin | Pin a room
-[**reorder**](FilesRoomsApi.md#reorder) | **PUT** /api/2.0/files/rooms/{id}/reorder | Reorders to a room with ID specified in the request
-[**resend_email_invitations**](FilesRoomsApi.md#resend_email_invitations) | **POST** /api/2.0/files/rooms/{id}/resend | Resend room invitations
-[**set_link**](FilesRoomsApi.md#set_link) | **PUT** /api/2.0/files/rooms/{id}/links | Set an external or invitation link
-[**set_public**](FilesRoomsApi.md#set_public) | **PUT** /api/2.0/files/roomtemplate/public | Set public
-[**set_room_security**](FilesRoomsApi.md#set_room_security) | **PUT** /api/2.0/files/rooms/{id}/share | Set room access rights
-[**start_room_index_export**](FilesRoomsApi.md#start_room_index_export) | **POST** /api/2.0/files/rooms/{id}/indexexport | Starts room index export
-[**terminate_room_index_export**](FilesRoomsApi.md#terminate_room_index_export) | **DELETE** /api/2.0/files/rooms/indexexport | Terminates room index export
+[**reorder**](FilesRoomsApi.md#reorder) | **PUT** /api/2.0/files/rooms/{id}/reorder | Reorder the room
+[**resend_email_invitations**](FilesRoomsApi.md#resend_email_invitations) | **POST** /api/2.0/files/rooms/{id}/resend | Resend the room invitations
+[**set_link**](FilesRoomsApi.md#set_link) | **PUT** /api/2.0/files/rooms/{id}/links | Set the room external or invitation link
+[**set_public**](FilesRoomsApi.md#set_public) | **PUT** /api/2.0/files/roomtemplate/public | Set public settings
+[**set_room_security**](FilesRoomsApi.md#set_room_security) | **PUT** /api/2.0/files/rooms/{id}/share | Set the room access rights
+[**start_room_index_export**](FilesRoomsApi.md#start_room_index_export) | **POST** /api/2.0/files/rooms/{id}/indexexport | Start the room index export
+[**terminate_room_index_export**](FilesRoomsApi.md#terminate_room_index_export) | **DELETE** /api/2.0/files/rooms/indexexport | Terminate the room index export
 [**unarchive_room**](FilesRoomsApi.md#unarchive_room) | **PUT** /api/2.0/files/rooms/{id}/unarchive | Unarchive a room
 [**unpin_room**](FilesRoomsApi.md#unpin_room) | **PUT** /api/2.0/files/rooms/{id}/unpin | Unpin a room
-[**update_room**](FilesRoomsApi.md#update_room) | **PUT** /api/2.0/files/rooms/{id} | Rename a room
-[**upload_room_logo**](FilesRoomsApi.md#upload_room_logo) | **POST** /api/2.0/files/logos | Upload an image for room logo
+[**update_room**](FilesRoomsApi.md#update_room) | **PUT** /api/2.0/files/rooms/{id} | Update a room
+[**upload_room_logo**](FilesRoomsApi.md#upload_room_logo) | **POST** /api/2.0/files/logos | Upload a room logo image
 
 
 # **add_tags**
 > FolderIntegerWrapper add_tags(id, batch_tags_request_dto=batch_tags_request_dto)
 
-Add room tags
+Add the room tags
 
 Adds the tags to a room with the ID specified in the request.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -73,21 +77,40 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.FilesRoomsApi(api_client)
-    id = 9846 # int | Room Id
-    batch_tags_request_dto = docspace.BatchTagsRequestDto() # BatchTagsRequestDto | Batch tags (optional)
+    id = 9846 # int | The room Id.
+    batch_tags_request_dto = docspace.BatchTagsRequestDto() # BatchTagsRequestDto | The parameters for adding tags. (optional)
 
     try:
-        # Add room tags
+        # Add the room tags
         api_response = api_instance.add_tags(id, batch_tags_request_dto=batch_tags_request_dto)
         print("The response of FilesRoomsApi->add_tags:\n")
         pprint(api_response)
@@ -102,8 +125,8 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**| Room Id | 
- **batch_tags_request_dto** | [**BatchTagsRequestDto**](BatchTagsRequestDto.md)| Batch tags | [optional] 
+ **id** | **int**| The room Id. | 
+ **batch_tags_request_dto** | [**BatchTagsRequestDto**](BatchTagsRequestDto.md)| The parameters for adding tags. | [optional] 
 
 ### Return type
 
@@ -111,7 +134,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -137,7 +160,11 @@ Moves a room with the ID specified in the request to the \"Archive\" section.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -157,18 +184,37 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.FilesRoomsApi(api_client)
-    id = 9846 # int | Room ID
-    archive_room_request = docspace.ArchiveRoomRequest() # ArchiveRoomRequest | Parameters for archiving a room (optional)
+    id = 9846 # int | The room ID.
+    archive_room_request = docspace.ArchiveRoomRequest() # ArchiveRoomRequest | The parameters for archiving a room. (optional)
 
     try:
         # Archive a room
@@ -186,8 +232,8 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**| Room ID | 
- **archive_room_request** | [**ArchiveRoomRequest**](ArchiveRoomRequest.md)| Parameters for archiving a room | [optional] 
+ **id** | **int**| The room ID. | 
+ **archive_room_request** | [**ArchiveRoomRequest**](ArchiveRoomRequest.md)| The parameters for archiving a room. | [optional] 
 
 ### Return type
 
@@ -195,7 +241,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -214,13 +260,17 @@ Name | Type | Description  | Notes
 # **change_room_cover**
 > FolderIntegerWrapper change_room_cover(id, cover_request_dto=cover_request_dto)
 
-Changes room cover
+Change the room cover
 
-Changes room cover
+Changes a cover of a room with the ID specified in the request.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -240,21 +290,40 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.FilesRoomsApi(api_client)
-    id = 9846 # int | Room ID
-    cover_request_dto = docspace.CoverRequestDto() # CoverRequestDto | Parameters to change the room cover (optional)
+    id = 9846 # int | The room ID.
+    cover_request_dto = docspace.CoverRequestDto() # CoverRequestDto | The request parameters to change the room cover. (optional)
 
     try:
-        # Changes room cover
+        # Change the room cover
         api_response = api_instance.change_room_cover(id, cover_request_dto=cover_request_dto)
         print("The response of FilesRoomsApi->change_room_cover:\n")
         pprint(api_response)
@@ -269,8 +338,8 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**| Room ID | 
- **cover_request_dto** | [**CoverRequestDto**](CoverRequestDto.md)| Parameters to change the room cover | [optional] 
+ **id** | **int**| The room ID. | 
+ **cover_request_dto** | [**CoverRequestDto**](CoverRequestDto.md)| The request parameters to change the room cover. | [optional] 
 
 ### Return type
 
@@ -278,7 +347,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -305,7 +374,11 @@ Creates a room in the \"Rooms\" section.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -325,11 +398,30 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
@@ -361,7 +453,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -380,13 +472,17 @@ Name | Type | Description  | Notes
 # **create_room_from_template**
 > RoomFromTemplateStatusWrapper create_room_from_template(create_room_from_template_dto=create_room_from_template_dto)
 
-Start create a room based on a template
+Create a room from the template
 
-Start create a room in the \"Rooms\" section based on a template.
+Creates a room in the \"Rooms\" section based on the template.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -406,11 +502,30 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
@@ -419,7 +534,7 @@ with docspace.ApiClient(configuration) as api_client:
     create_room_from_template_dto = docspace.CreateRoomFromTemplateDto() # CreateRoomFromTemplateDto |  (optional)
 
     try:
-        # Start create a room based on a template
+        # Create a room from the template
         api_response = api_instance.create_room_from_template(create_room_from_template_dto=create_room_from_template_dto)
         print("The response of FilesRoomsApi->create_room_from_template:\n")
         pprint(api_response)
@@ -442,7 +557,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -467,7 +582,11 @@ Creates a logo for a room with the ID specified in the request.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -487,18 +606,37 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.FilesRoomsApi(api_client)
-    id = 9846 # int | Room Id
-    logo_request = docspace.LogoRequest() # LogoRequest | Logo (optional)
+    id = 9846 # int | The room ID.
+    logo_request = docspace.LogoRequest() # LogoRequest | The logo request parameters. (optional)
 
     try:
         # Create a room logo
@@ -516,8 +654,8 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**| Room Id | 
- **logo_request** | [**LogoRequest**](LogoRequest.md)| Logo | [optional] 
+ **id** | **int**| The room ID. | 
+ **logo_request** | [**LogoRequest**](LogoRequest.md)| The logo request parameters. | [optional] 
 
 ### Return type
 
@@ -525,7 +663,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -551,7 +689,11 @@ Creates a room in the \"Rooms\" section stored in a third-party storage.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -571,18 +713,37 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.FilesRoomsApi(api_client)
-    id = '9846' # str | ID of the folder in the third-party storage in which the contents of the room will be stored
-    create_third_party_room = docspace.CreateThirdPartyRoom() # CreateThirdPartyRoom | ThirdParty room (optional)
+    id = '9846' # str | The ID of the folder in the third-party storage in which the contents of the room will be stored.
+    create_third_party_room = docspace.CreateThirdPartyRoom() # CreateThirdPartyRoom | The third-party room information. (optional)
 
     try:
         # Create a third-party room
@@ -600,8 +761,8 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **str**| ID of the folder in the third-party storage in which the contents of the room will be stored | 
- **create_third_party_room** | [**CreateThirdPartyRoom**](CreateThirdPartyRoom.md)| ThirdParty room | [optional] 
+ **id** | **str**| The ID of the folder in the third-party storage in which the contents of the room will be stored. | 
+ **create_third_party_room** | [**CreateThirdPartyRoom**](CreateThirdPartyRoom.md)| The third-party room information. | [optional] 
 
 ### Return type
 
@@ -609,7 +770,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -634,7 +795,11 @@ Creates a custom tag with the parameters specified in the request.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -654,11 +819,30 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
@@ -690,7 +874,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -710,13 +894,17 @@ Name | Type | Description  | Notes
 # **create_template**
 > RoomTemplateStatusWrapper create_template(room_template_dto=room_template_dto)
 
-Start create room template
+Start creating room template
 
-Start create room template
+Starts creating the room template.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -736,11 +924,30 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
@@ -749,7 +956,7 @@ with docspace.ApiClient(configuration) as api_client:
     room_template_dto = docspace.RoomTemplateDto() # RoomTemplateDto |  (optional)
 
     try:
-        # Start create room template
+        # Start creating room template
         api_response = api_instance.create_template(room_template_dto=room_template_dto)
         print("The response of FilesRoomsApi->create_template:\n")
         pprint(api_response)
@@ -772,7 +979,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -797,7 +1004,11 @@ Deletes a bunch of custom tags specified in the request.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -816,11 +1027,30 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
@@ -850,7 +1080,7 @@ void (empty response body)
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -876,7 +1106,11 @@ Removes a room with the ID specified in the request.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -896,18 +1130,37 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.FilesRoomsApi(api_client)
-    id = 9846 # int | Room ID
-    delete_room_request = docspace.DeleteRoomRequest() # DeleteRoomRequest | Parameters for deleting a room (optional)
+    id = 9846 # int | The room ID.
+    delete_room_request = docspace.DeleteRoomRequest() # DeleteRoomRequest | The parameters for deleting a room. (optional)
 
     try:
         # Remove a room
@@ -925,8 +1178,8 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**| Room ID | 
- **delete_room_request** | [**DeleteRoomRequest**](DeleteRoomRequest.md)| Parameters for deleting a room | [optional] 
+ **id** | **int**| The room ID. | 
+ **delete_room_request** | [**DeleteRoomRequest**](DeleteRoomRequest.md)| The parameters for deleting a room. | [optional] 
 
 ### Return type
 
@@ -934,7 +1187,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -959,7 +1212,11 @@ Removes a logo from a room with the ID specified in the request.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -978,17 +1235,36 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.FilesRoomsApi(api_client)
-    id = 9846 # int | Room Id
+    id = 9846 # int | The room ID of the request.
 
     try:
         # Remove a room logo
@@ -1006,7 +1282,7 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**| Room Id | 
+ **id** | **int**| The room ID of the request. | 
 
 ### Return type
 
@@ -1014,7 +1290,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -1033,13 +1309,17 @@ Name | Type | Description  | Notes
 # **delete_tags**
 > FolderIntegerWrapper delete_tags(id, batch_tags_request_dto=batch_tags_request_dto)
 
-Remove room tags
+Remove the room tags
 
 Removes the tags from a room with the ID specified in the request.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -1059,21 +1339,40 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.FilesRoomsApi(api_client)
-    id = 9846 # int | Room Id
-    batch_tags_request_dto = docspace.BatchTagsRequestDto() # BatchTagsRequestDto | Batch tags (optional)
+    id = 9846 # int | The room Id.
+    batch_tags_request_dto = docspace.BatchTagsRequestDto() # BatchTagsRequestDto | The parameters for adding tags. (optional)
 
     try:
-        # Remove room tags
+        # Remove the room tags
         api_response = api_instance.delete_tags(id, batch_tags_request_dto=batch_tags_request_dto)
         print("The response of FilesRoomsApi->delete_tags:\n")
         pprint(api_response)
@@ -1088,8 +1387,8 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**| Room Id | 
- **batch_tags_request_dto** | [**BatchTagsRequestDto**](BatchTagsRequestDto.md)| Batch tags | [optional] 
+ **id** | **int**| The room Id. | 
+ **batch_tags_request_dto** | [**BatchTagsRequestDto**](BatchTagsRequestDto.md)| The parameters for adding tags. | [optional] 
 
 ### Return type
 
@@ -1097,7 +1396,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -1117,13 +1416,17 @@ Name | Type | Description  | Notes
 # **get_covers**
 > CoversResultArrayWrapper get_covers()
 
-Gets covers
+Get covers
 
-Gets covers
+Returns a list of all covers.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -1142,11 +1445,30 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
@@ -1154,7 +1476,7 @@ with docspace.ApiClient(configuration) as api_client:
     api_instance = docspace.FilesRoomsApi(api_client)
 
     try:
-        # Gets covers
+        # Get covers
         api_response = api_instance.get_covers()
         print("The response of FilesRoomsApi->get_covers:\n")
         pprint(api_response)
@@ -1174,7 +1496,7 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -1193,13 +1515,17 @@ This endpoint does not need any parameter.
 # **get_new_room_items**
 > NewItemsFileEntryArrayWrapper get_new_room_items(id)
 
-Get new room items
+Get the new room items
 
 Returns a list of all the new items from a room with the ID specified in the request.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -1218,20 +1544,39 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.FilesRoomsApi(api_client)
-    id = 9846 # int | Room Id
+    id = 9846 # int | The room ID of the request.
 
     try:
-        # Get new room items
+        # Get the new room items
         api_response = api_instance.get_new_room_items(id)
         print("The response of FilesRoomsApi->get_new_room_items:\n")
         pprint(api_response)
@@ -1246,7 +1591,7 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**| Room Id | 
+ **id** | **int**| The room ID of the request. | 
 
 ### Return type
 
@@ -1254,7 +1599,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -1273,13 +1618,17 @@ Name | Type | Description  | Notes
 # **get_room_creating_status**
 > RoomFromTemplateStatusWrapper get_room_creating_status()
 
-Get progress creating room
+Get the room creation progress
 
-Get progress creating room based a template
+Returns the progress of creating a room from the template.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -1298,11 +1647,30 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
@@ -1310,7 +1678,7 @@ with docspace.ApiClient(configuration) as api_client:
     api_instance = docspace.FilesRoomsApi(api_client)
 
     try:
-        # Get progress creating room
+        # Get the room creation progress
         api_response = api_instance.get_room_creating_status()
         print("The response of FilesRoomsApi->get_room_creating_status:\n")
         pprint(api_response)
@@ -1330,7 +1698,7 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -1349,13 +1717,17 @@ This endpoint does not need any parameter.
 # **get_room_index_export**
 > DocumentBuilderTaskWrapper get_room_index_export()
 
-Gets room index export
+Get the room index export
 
-Gets room index export
+Returns the room index export.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -1374,11 +1746,30 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
@@ -1386,7 +1777,7 @@ with docspace.ApiClient(configuration) as api_client:
     api_instance = docspace.FilesRoomsApi(api_client)
 
     try:
-        # Gets room index export
+        # Get the room index export
         api_response = api_instance.get_room_index_export()
         print("The response of FilesRoomsApi->get_room_index_export:\n")
         pprint(api_response)
@@ -1406,7 +1797,7 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -1449,7 +1840,7 @@ configuration = docspace.Configuration(
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.FilesRoomsApi(api_client)
-    id = 9846 # int | Room Id
+    id = 9846 # int | The room ID of the request.
 
     try:
         # Get room information
@@ -1467,7 +1858,7 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**| Room Id | 
+ **id** | **int**| The room ID of the request. | 
 
 ### Return type
 
@@ -1493,13 +1884,17 @@ No authorization required
 # **get_room_links**
 > FileShareArrayWrapper get_room_links(id, type=type)
 
-Get room links
+Get the room links
 
-Returns the links of a room with the ID specified in the request.
+Returns the links of the room with the ID specified in the request.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -1519,21 +1914,40 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.FilesRoomsApi(api_client)
-    id = 9846 # int | Room ID
-    type = docspace.LinkType() # LinkType | Link type (optional)
+    id = 9846 # int | The room ID.
+    type = docspace.LinkType() # LinkType | The link type. (optional)
 
     try:
-        # Get room links
+        # Get the room links
         api_response = api_instance.get_room_links(id, type=type)
         print("The response of FilesRoomsApi->get_room_links:\n")
         pprint(api_response)
@@ -1548,8 +1962,8 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**| Room ID | 
- **type** | [**LinkType**](.md)| Link type | [optional] 
+ **id** | **int**| The room ID. | 
+ **type** | [**LinkType**](.md)| The link type. | [optional] 
 
 ### Return type
 
@@ -1557,7 +1971,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -1576,13 +1990,17 @@ Name | Type | Description  | Notes
 # **get_room_security_info**
 > FileShareArrayWrapper get_room_security_info(id, filter_type=filter_type)
 
-Get room access rights
+Get the room access rights
 
 Returns the access rights of a room with the ID specified in the request.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -1602,21 +2020,40 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.FilesRoomsApi(api_client)
-    id = 9846 # int | Room ID
-    filter_type = docspace.ShareFilterType() # ShareFilterType | Share filter type (optional)
+    id = 9846 # int | The room ID.
+    filter_type = docspace.ShareFilterType() # ShareFilterType | The filter type of the access rights. (optional)
 
     try:
-        # Get room access rights
+        # Get the room access rights
         api_response = api_instance.get_room_security_info(id, filter_type=filter_type)
         print("The response of FilesRoomsApi->get_room_security_info:\n")
         pprint(api_response)
@@ -1631,8 +2068,8 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**| Room ID | 
- **filter_type** | [**ShareFilterType**](.md)| Share filter type | [optional] 
+ **id** | **int**| The room ID. | 
+ **filter_type** | [**ShareFilterType**](.md)| The filter type of the access rights. | [optional] 
 
 ### Return type
 
@@ -1640,7 +2077,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -1665,7 +2102,11 @@ Returns the contents of the \"Rooms\" section by the parameters specified in the
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -1690,26 +2131,45 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.FilesRoomsApi(api_client)
-    type = [docspace.RoomType()] # List[RoomType] | Filter by room type (optional)
-    subject_id = 'some text' # str | Filter by user ID (optional)
-    search_area = docspace.SearchArea() # SearchArea | Room search area (Active, Archive, Any, Recent by links) (optional)
-    without_tags = true # bool | Specifies whether to search by tags or not (optional)
-    tags = 'some text' # str | Tags in the serialized format (optional)
-    exclude_subject = true # bool | Specifies whether to exclude a subject or not (optional)
-    provider = docspace.ProviderFilter() # ProviderFilter | Filter by provider name (None, Box, DropBox, GoogleDrive, kDrive, OneDrive, SharePoint, WebDav, Yandex, Storage) (optional)
-    subject_filter = docspace.SubjectFilter() # SubjectFilter | Filter by subject (Owner - 0, Member - 1) (optional)
-    quota_filter = docspace.QuotaFilter() # QuotaFilter | Filter by quota (All - 0, Default - 1, Custom - 2) (optional)
-    storage_filter = docspace.StorageFilter() # StorageFilter | Filter by storage (None - 0, Internal - 1, ThirdParty - 2) (optional)
+    type = [docspace.RoomType()] # List[RoomType] | The filter by room type. (optional)
+    subject_id = 'some text' # str | The filter by user ID. (optional)
+    search_area = docspace.SearchArea() # SearchArea | The room search area (Active, Archive, Any, Recent by links). (optional)
+    without_tags = true # bool | Specifies whether to search by tags or not. (optional)
+    tags = 'some text' # str | The tags in the serialized format. (optional)
+    exclude_subject = true # bool | Specifies whether to exclude search by user or group ID. (optional)
+    provider = docspace.ProviderFilter() # ProviderFilter | The filter by provider name (None, Box, DropBox, GoogleDrive, kDrive, OneDrive, SharePoint, WebDav, Yandex, Storage). (optional)
+    subject_filter = docspace.SubjectFilter() # SubjectFilter | The filter by user (Owner - 0, Member - 1). (optional)
+    quota_filter = docspace.QuotaFilter() # QuotaFilter | The filter by quota (All - 0, Default - 1, Custom - 2). (optional)
+    storage_filter = docspace.StorageFilter() # StorageFilter | The filter by storage (None - 0, Internal - 1, ThirdParty - 2). (optional)
 
     try:
         # Get rooms
@@ -1727,16 +2187,16 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **type** | [**List[RoomType]**](RoomType.md)| Filter by room type | [optional] 
- **subject_id** | **str**| Filter by user ID | [optional] 
- **search_area** | [**SearchArea**](.md)| Room search area (Active, Archive, Any, Recent by links) | [optional] 
- **without_tags** | **bool**| Specifies whether to search by tags or not | [optional] 
- **tags** | **str**| Tags in the serialized format | [optional] 
- **exclude_subject** | **bool**| Specifies whether to exclude a subject or not | [optional] 
- **provider** | [**ProviderFilter**](.md)| Filter by provider name (None, Box, DropBox, GoogleDrive, kDrive, OneDrive, SharePoint, WebDav, Yandex, Storage) | [optional] 
- **subject_filter** | [**SubjectFilter**](.md)| Filter by subject (Owner - 0, Member - 1) | [optional] 
- **quota_filter** | [**QuotaFilter**](.md)| Filter by quota (All - 0, Default - 1, Custom - 2) | [optional] 
- **storage_filter** | [**StorageFilter**](.md)| Filter by storage (None - 0, Internal - 1, ThirdParty - 2) | [optional] 
+ **type** | [**List[RoomType]**](RoomType.md)| The filter by room type. | [optional] 
+ **subject_id** | **str**| The filter by user ID. | [optional] 
+ **search_area** | [**SearchArea**](.md)| The room search area (Active, Archive, Any, Recent by links). | [optional] 
+ **without_tags** | **bool**| Specifies whether to search by tags or not. | [optional] 
+ **tags** | **str**| The tags in the serialized format. | [optional] 
+ **exclude_subject** | **bool**| Specifies whether to exclude search by user or group ID. | [optional] 
+ **provider** | [**ProviderFilter**](.md)| The filter by provider name (None, Box, DropBox, GoogleDrive, kDrive, OneDrive, SharePoint, WebDav, Yandex, Storage). | [optional] 
+ **subject_filter** | [**SubjectFilter**](.md)| The filter by user (Owner - 0, Member - 1). | [optional] 
+ **quota_filter** | [**QuotaFilter**](.md)| The filter by quota (All - 0, Default - 1, Custom - 2). | [optional] 
+ **storage_filter** | [**StorageFilter**](.md)| The filter by storage (None - 0, Internal - 1, ThirdParty - 2). | [optional] 
 
 ### Return type
 
@@ -1744,7 +2204,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -1764,13 +2224,17 @@ Name | Type | Description  | Notes
 # **get_rooms_new_items**
 > NewItemsRoomNewItemsArrayWrapper get_rooms_new_items()
 
-Gets room new items
+Get the room new items
 
-Gets room new items
+Returns the room new items.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -1789,11 +2253,30 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
@@ -1801,7 +2284,7 @@ with docspace.ApiClient(configuration) as api_client:
     api_instance = docspace.FilesRoomsApi(api_client)
 
     try:
-        # Gets room new items
+        # Get the room new items
         api_response = api_instance.get_rooms_new_items()
         print("The response of FilesRoomsApi->get_rooms_new_items:\n")
         pprint(api_response)
@@ -1821,7 +2304,7 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -1840,13 +2323,17 @@ This endpoint does not need any parameter.
 # **get_rooms_primary_external_link**
 > FileShareWrapper get_rooms_primary_external_link(id)
 
-Get primary external link
+Get the room primary external link
 
-Returns the primary external link of a room with the ID specified in the request.
+Returns the primary external link of the room with the ID specified in the request.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -1865,20 +2352,39 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.FilesRoomsApi(api_client)
-    id = 9846 # int | Room Id
+    id = 9846 # int | The room ID of the request.
 
     try:
-        # Get primary external link
+        # Get the room primary external link
         api_response = api_instance.get_rooms_primary_external_link(id)
         print("The response of FilesRoomsApi->get_rooms_primary_external_link:\n")
         pprint(api_response)
@@ -1893,7 +2399,7 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**| Room Id | 
+ **id** | **int**| The room ID of the request. | 
 
 ### Return type
 
@@ -1901,7 +2407,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -1927,7 +2433,11 @@ Returns a list of custom tags.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -1946,11 +2456,30 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
@@ -1978,7 +2507,7 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -1997,13 +2526,17 @@ This endpoint does not need any parameter.
 # **get_template_creating_status**
 > RoomTemplateStatusWrapper get_template_creating_status()
 
-Get progress creating room template
+Get status of room template creation
 
-Get progress creating room template
+Returns the progress status of the room template creation process.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -2022,11 +2555,30 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
@@ -2034,7 +2586,7 @@ with docspace.ApiClient(configuration) as api_client:
     api_instance = docspace.FilesRoomsApi(api_client)
 
     try:
-        # Get progress creating room template
+        # Get status of room template creation
         api_response = api_instance.get_template_creating_status()
         print("The response of FilesRoomsApi->get_template_creating_status:\n")
         pprint(api_response)
@@ -2054,7 +2606,7 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -2073,13 +2625,17 @@ This endpoint does not need any parameter.
 # **is_public**
 > BooleanWrapper is_public(id)
 
-Get public
-
 Get public settings
+
+Returns the public settings of the room template with the ID specified in the request.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -2098,20 +2654,39 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.FilesRoomsApi(api_client)
-    id = 9846 # int | Template id
+    id = 9846 # int | The room template ID.
 
     try:
-        # Get public
+        # Get public settings
         api_response = api_instance.is_public(id)
         print("The response of FilesRoomsApi->is_public:\n")
         pprint(api_response)
@@ -2126,7 +2701,7 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**| Template id | 
+ **id** | **int**| The room template ID. | 
 
 ### Return type
 
@@ -2134,7 +2709,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -2159,7 +2734,11 @@ Pins a room with the ID specified in the request to the top of the list.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -2178,17 +2757,36 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.FilesRoomsApi(api_client)
-    id = 9846 # int | Room Id
+    id = 9846 # int | The room ID of the request.
 
     try:
         # Pin a room
@@ -2206,7 +2804,7 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**| Room Id | 
+ **id** | **int**| The room ID of the request. | 
 
 ### Return type
 
@@ -2214,7 +2812,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -2233,13 +2831,17 @@ Name | Type | Description  | Notes
 # **reorder**
 > FolderIntegerWrapper reorder(id)
 
-Reorders to a room with ID specified in the request
+Reorder the room
 
-Reorders to a room with ID specified in the request
+Reorders the room with ID specified in the request.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -2258,20 +2860,39 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.FilesRoomsApi(api_client)
-    id = 9846 # int | Room Id
+    id = 9846 # int | The room ID of the request.
 
     try:
-        # Reorders to a room with ID specified in the request
+        # Reorder the room
         api_response = api_instance.reorder(id)
         print("The response of FilesRoomsApi->reorder:\n")
         pprint(api_response)
@@ -2286,7 +2907,7 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**| Room Id | 
+ **id** | **int**| The room ID of the request. | 
 
 ### Return type
 
@@ -2294,7 +2915,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -2313,13 +2934,17 @@ Name | Type | Description  | Notes
 # **resend_email_invitations**
 > resend_email_invitations(id, user_invitation=user_invitation)
 
-Resend room invitations
+Resend the room invitations
 
 Resends the email invitations to a room with the ID specified in the request to the selected users.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -2338,21 +2963,40 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.FilesRoomsApi(api_client)
-    id = 9846 # int | Room Id
-    user_invitation = docspace.UserInvitation() # UserInvitation | User invitation (optional)
+    id = 9846 # int | The room ID.
+    user_invitation = docspace.UserInvitation() # UserInvitation | The user invitation parameters. (optional)
 
     try:
-        # Resend room invitations
+        # Resend the room invitations
         api_instance.resend_email_invitations(id, user_invitation=user_invitation)
     except Exception as e:
         print("Exception when calling FilesRoomsApi->resend_email_invitations: %s\n" % e)
@@ -2365,8 +3009,8 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**| Room Id | 
- **user_invitation** | [**UserInvitation**](UserInvitation.md)| User invitation | [optional] 
+ **id** | **int**| The room ID. | 
+ **user_invitation** | [**UserInvitation**](UserInvitation.md)| The user invitation parameters. | [optional] 
 
 ### Return type
 
@@ -2374,7 +3018,7 @@ void (empty response body)
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -2393,13 +3037,17 @@ void (empty response body)
 # **set_link**
 > FileShareWrapper set_link(id, room_link_request=room_link_request)
 
-Set an external or invitation link
+Set the room external or invitation link
 
-Sets an external or invitation link with the ID specified in the request.
+Sets the room external or invitation link with the ID specified in the request.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -2419,21 +3067,40 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.FilesRoomsApi(api_client)
-    id = 9846 # int | Room ID
-    room_link_request = docspace.RoomLinkRequest() # RoomLinkRequest | Room link (optional)
+    id = 9846 # int | The room ID.
+    room_link_request = docspace.RoomLinkRequest() # RoomLinkRequest | The room link parameters. (optional)
 
     try:
-        # Set an external or invitation link
+        # Set the room external or invitation link
         api_response = api_instance.set_link(id, room_link_request=room_link_request)
         print("The response of FilesRoomsApi->set_link:\n")
         pprint(api_response)
@@ -2448,8 +3115,8 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**| Room ID | 
- **room_link_request** | [**RoomLinkRequest**](RoomLinkRequest.md)| Room link | [optional] 
+ **id** | **int**| The room ID. | 
+ **room_link_request** | [**RoomLinkRequest**](RoomLinkRequest.md)| The room link parameters. | [optional] 
 
 ### Return type
 
@@ -2457,7 +3124,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -2476,13 +3143,17 @@ Name | Type | Description  | Notes
 # **set_public**
 > set_public(set_public_dto=set_public_dto)
 
-Set public
-
 Set public settings
+
+Sets the public settings for the room template with the ID specified in the request.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -2501,11 +3172,30 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
@@ -2514,7 +3204,7 @@ with docspace.ApiClient(configuration) as api_client:
     set_public_dto = docspace.SetPublicDto() # SetPublicDto |  (optional)
 
     try:
-        # Set public
+        # Set public settings
         api_instance.set_public(set_public_dto=set_public_dto)
     except Exception as e:
         print("Exception when calling FilesRoomsApi->set_public: %s\n" % e)
@@ -2535,7 +3225,7 @@ void (empty response body)
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -2554,13 +3244,17 @@ void (empty response body)
 # **set_room_security**
 > RoomSecurityWrapper set_room_security(id, room_invitation_request=room_invitation_request)
 
-Set room access rights
+Set the room access rights
 
-Sets the access rights to a room with the ID specified in the request.
+Sets the access rights to the room with the ID specified in the request.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -2580,21 +3274,40 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.FilesRoomsApi(api_client)
-    id = 9846 # int | Room ID
-    room_invitation_request = docspace.RoomInvitationRequest() # RoomInvitationRequest | Room invitation (optional)
+    id = 9846 # int | The room ID.
+    room_invitation_request = docspace.RoomInvitationRequest() # RoomInvitationRequest | The room invitation request. (optional)
 
     try:
-        # Set room access rights
+        # Set the room access rights
         api_response = api_instance.set_room_security(id, room_invitation_request=room_invitation_request)
         print("The response of FilesRoomsApi->set_room_security:\n")
         pprint(api_response)
@@ -2609,8 +3322,8 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**| Room ID | 
- **room_invitation_request** | [**RoomInvitationRequest**](RoomInvitationRequest.md)| Room invitation | [optional] 
+ **id** | **int**| The room ID. | 
+ **room_invitation_request** | [**RoomInvitationRequest**](RoomInvitationRequest.md)| The room invitation request. | [optional] 
 
 ### Return type
 
@@ -2618,7 +3331,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -2637,13 +3350,17 @@ Name | Type | Description  | Notes
 # **start_room_index_export**
 > DocumentBuilderTaskWrapper start_room_index_export(id)
 
-Starts room index export
+Start the room index export
 
-Starts room index export
+Starts the index export of a room with the ID specified in the request.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -2662,20 +3379,39 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.FilesRoomsApi(api_client)
-    id = 9846 # int | Room Id
+    id = 9846 # int | The room ID of the request.
 
     try:
-        # Starts room index export
+        # Start the room index export
         api_response = api_instance.start_room_index_export(id)
         print("The response of FilesRoomsApi->start_room_index_export:\n")
         pprint(api_response)
@@ -2690,7 +3426,7 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**| Room Id | 
+ **id** | **int**| The room ID of the request. | 
 
 ### Return type
 
@@ -2698,7 +3434,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -2718,13 +3454,17 @@ Name | Type | Description  | Notes
 # **terminate_room_index_export**
 > terminate_room_index_export()
 
-Terminates room index export
+Terminate the room index export
 
-Terminates room index export
+Terminates the room index export.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -2742,11 +3482,30 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
@@ -2754,7 +3513,7 @@ with docspace.ApiClient(configuration) as api_client:
     api_instance = docspace.FilesRoomsApi(api_client)
 
     try:
-        # Terminates room index export
+        # Terminate the room index export
         api_instance.terminate_room_index_export()
     except Exception as e:
         print("Exception when calling FilesRoomsApi->terminate_room_index_export: %s\n" % e)
@@ -2772,7 +3531,7 @@ void (empty response body)
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -2797,7 +3556,11 @@ Moves a room with the ID specified in the request from the \"Archive\" section t
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -2817,18 +3580,37 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.FilesRoomsApi(api_client)
-    id = 9846 # int | Room ID
-    archive_room_request = docspace.ArchiveRoomRequest() # ArchiveRoomRequest | Parameters for archiving a room (optional)
+    id = 9846 # int | The room ID.
+    archive_room_request = docspace.ArchiveRoomRequest() # ArchiveRoomRequest | The parameters for archiving a room. (optional)
 
     try:
         # Unarchive a room
@@ -2846,8 +3628,8 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**| Room ID | 
- **archive_room_request** | [**ArchiveRoomRequest**](ArchiveRoomRequest.md)| Parameters for archiving a room | [optional] 
+ **id** | **int**| The room ID. | 
+ **archive_room_request** | [**ArchiveRoomRequest**](ArchiveRoomRequest.md)| The parameters for archiving a room. | [optional] 
 
 ### Return type
 
@@ -2855,7 +3637,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -2880,7 +3662,11 @@ Unpins a room with the ID specified in the request from the top of the list.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -2899,17 +3685,36 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.FilesRoomsApi(api_client)
-    id = 9846 # int | Room Id
+    id = 9846 # int | The room ID of the request.
 
     try:
         # Unpin a room
@@ -2927,7 +3732,7 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**| Room Id | 
+ **id** | **int**| The room ID of the request. | 
 
 ### Return type
 
@@ -2935,7 +3740,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -2954,13 +3759,17 @@ Name | Type | Description  | Notes
 # **update_room**
 > FolderIntegerWrapper update_room(id, update_room_request=update_room_request)
 
-Rename a room
+Update a room
 
-Renames a room with the ID specified in  the request.
+Updates a room with the ID specified in the request.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -2980,21 +3789,40 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.FilesRoomsApi(api_client)
-    id = 9846 # int | Room ID
-    update_room_request = docspace.UpdateRoomRequest() # UpdateRoomRequest | Update room (optional)
+    id = 9846 # int | The room ID.
+    update_room_request = docspace.UpdateRoomRequest() # UpdateRoomRequest | The request parameters for updating a room. (optional)
 
     try:
-        # Rename a room
+        # Update a room
         api_response = api_instance.update_room(id, update_room_request=update_room_request)
         print("The response of FilesRoomsApi->update_room:\n")
         pprint(api_response)
@@ -3009,8 +3837,8 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**| Room ID | 
- **update_room_request** | [**UpdateRoomRequest**](UpdateRoomRequest.md)| Update room | [optional] 
+ **id** | **int**| The room ID. | 
+ **update_room_request** | [**UpdateRoomRequest**](UpdateRoomRequest.md)| The request parameters for updating a room. | [optional] 
 
 ### Return type
 
@@ -3018,7 +3846,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -3037,13 +3865,17 @@ Name | Type | Description  | Notes
 # **upload_room_logo**
 > UploadResultWrapper upload_room_logo(form_collection=form_collection)
 
-Upload an image for room logo
+Upload a room logo image
 
 Uploads a temporary image to create a room logo.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -3063,20 +3895,39 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.FilesRoomsApi(api_client)
-    form_collection = [docspace.KeyValuePairStringStringValues()] # List[KeyValuePairStringStringValues] | Image data (optional)
+    form_collection = [docspace.KeyValuePairStringStringValues()] # List[KeyValuePairStringStringValues] | The image data. (optional)
 
     try:
-        # Upload an image for room logo
+        # Upload a room logo image
         api_response = api_instance.upload_room_logo(form_collection=form_collection)
         print("The response of FilesRoomsApi->upload_room_logo:\n")
         pprint(api_response)
@@ -3091,7 +3942,7 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **form_collection** | [**List[KeyValuePairStringStringValues]**](KeyValuePairStringStringValues.md)| Image data | [optional] 
+ **form_collection** | [**List[KeyValuePairStringStringValues]**](KeyValuePairStringStringValues.md)| The image data. | [optional] 
 
 ### Return type
 
@@ -3099,7 +3950,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 

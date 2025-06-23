@@ -6,7 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**add_templates**](FilesFilesApi.md#add_templates) | **POST** /api/2.0/files/templates | Add template files
 [**change_history**](FilesFilesApi.md#change_history) | **PUT** /api/2.0/files/file/{fileId}/history | Change version history
-[**check_fill_form_draft**](FilesFilesApi.md#check_fill_form_draft) | **POST** /api/2.0/files/masterform/{fileId}/checkfillformdraft | Check the form draft
+[**check_fill_form_draft**](FilesFilesApi.md#check_fill_form_draft) | **POST** /api/2.0/files/masterform/{fileId}/checkfillformdraft | Check the form draft filling
 [**copy_file_as**](FilesFilesApi.md#copy_file_as) | **POST** /api/2.0/files/file/{fileId}/copyas | Copy a file
 [**create_edit_session**](FilesFilesApi.md#create_edit_session) | **POST** /api/2.0/files/file/{fileId}/edit_session | Create the editing session
 [**create_file**](FilesFilesApi.md#create_file) | **POST** /api/2.0/files/{folderId}/file | Create a file
@@ -14,35 +14,39 @@ Method | HTTP request | Description
 [**create_html_file**](FilesFilesApi.md#create_html_file) | **POST** /api/2.0/files/{folderId}/html | Create an HTML file
 [**create_html_file_in_my**](FilesFilesApi.md#create_html_file_in_my) | **POST** /api/2.0/files/@my/html | Create an HTML file in the \&quot;My documents\&quot; section
 [**create_primary_external_link**](FilesFilesApi.md#create_primary_external_link) | **POST** /api/2.0/files/file/{id}/link | Create primary external link
-[**create_text_file**](FilesFilesApi.md#create_text_file) | **POST** /api/2.0/files/{folderId}/text | Create a txt file
+[**create_text_file**](FilesFilesApi.md#create_text_file) | **POST** /api/2.0/files/{folderId}/text | Create a text file
 [**create_text_file_in_my**](FilesFilesApi.md#create_text_file_in_my) | **POST** /api/2.0/files/@my/text | Create a text file in the \&quot;My documents\&quot; section
-[**create_thumbnails**](FilesFilesApi.md#create_thumbnails) | **POST** /api/2.0/files/thumbnails | Create thumbnails
+[**create_thumbnails**](FilesFilesApi.md#create_thumbnails) | **POST** /api/2.0/files/thumbnails | Create file thumbnails
 [**delete_file**](FilesFilesApi.md#delete_file) | **DELETE** /api/2.0/files/file/{fileId} | Delete a file
 [**delete_recent**](FilesFilesApi.md#delete_recent) | **DELETE** /api/2.0/files/recent | Delete recent files
 [**delete_templates**](FilesFilesApi.md#delete_templates) | **DELETE** /api/2.0/files/templates | Delete template files
+[**get_all_form_roles**](FilesFilesApi.md#get_all_form_roles) | **GET** /api/2.0/files/file/{fileId}/formroles | Get form roles
 [**get_edit_diff_url**](FilesFilesApi.md#get_edit_diff_url) | **GET** /api/2.0/files/file/{fileId}/edit/diff | Get changes URL
 [**get_edit_history**](FilesFilesApi.md#get_edit_history) | **GET** /api/2.0/files/file/{fileId}/edit/history | Get version history
 [**get_file_history**](FilesFilesApi.md#get_file_history) | **GET** /api/2.0/files/file/{fileId}/log | Get file history
 [**get_file_info**](FilesFilesApi.md#get_file_info) | **GET** /api/2.0/files/file/{fileId} | Get file information
 [**get_file_primary_external_link**](FilesFilesApi.md#get_file_primary_external_link) | **GET** /api/2.0/files/file/{id}/link | Get primary external link
 [**get_file_version_info**](FilesFilesApi.md#get_file_version_info) | **GET** /api/2.0/files/file/{fileId}/history | Get file versions
-[**get_fill_result**](FilesFilesApi.md#get_fill_result) | **GET** /api/2.0/files/file/fillresult | Gets fill result
+[**get_fill_result**](FilesFilesApi.md#get_fill_result) | **GET** /api/2.0/files/file/fillresult | Get form-filling result
 [**get_links**](FilesFilesApi.md#get_links) | **GET** /api/2.0/files/file/{id}/links | Get file external links
 [**get_presigned_file_uri**](FilesFilesApi.md#get_presigned_file_uri) | **GET** /api/2.0/files/file/{fileId}/presigned | Get file download link asynchronously
 [**get_presigned_uri**](FilesFilesApi.md#get_presigned_uri) | **GET** /api/2.0/files/file/{fileId}/presigneduri | Get file download link
 [**get_reference_data**](FilesFilesApi.md#get_reference_data) | **POST** /api/2.0/files/file/referencedata | Get reference data
 [**is_form_pdf**](FilesFilesApi.md#is_form_pdf) | **GET** /api/2.0/files/file/{fileId}/isformpdf | Check the PDF file
 [**lock_file**](FilesFilesApi.md#lock_file) | **PUT** /api/2.0/files/file/{fileId}/lock | Lock a file
-[**open_edit**](FilesFilesApi.md#open_edit) | **GET** /api/2.0/files/file/{fileId}/openedit | Open a file
-[**protect_users**](FilesFilesApi.md#protect_users) | **GET** /api/2.0/files/file/{fileId}/protectusers | Get users with the access to the protected file
+[**manage_form_filling**](FilesFilesApi.md#manage_form_filling) | **PUT** /api/2.0/files/file/{fileId}/manageformfilling | Perform form filling action
+[**open_edit**](FilesFilesApi.md#open_edit) | **GET** /api/2.0/files/file/{fileId}/openedit | Open a file configuration
+[**protect_users**](FilesFilesApi.md#protect_users) | **GET** /api/2.0/files/file/{fileId}/protectusers | Get users access rights to the protected file
 [**restore_version**](FilesFilesApi.md#restore_version) | **GET** /api/2.0/files/file/{fileId}/restoreversion | Restore a file version
-[**save_as_pdf**](FilesFilesApi.md#save_as_pdf) | **POST** /api/2.0/files/file/{id}/saveaspdf | Save as pdf
+[**save_as_pdf**](FilesFilesApi.md#save_as_pdf) | **POST** /api/2.0/files/file/{id}/saveaspdf | Save a file as PDF
 [**save_editing_from_form**](FilesFilesApi.md#save_editing_from_form) | **PUT** /api/2.0/files/file/{fileId}/saveediting | Save file edits
+[**save_form_role_mapping**](FilesFilesApi.md#save_form_role_mapping) | **POST** /api/2.0/files/file/{fileId}/formrolemapping | Save form role mapping
+[**set_custom_filter_tag**](FilesFilesApi.md#set_custom_filter_tag) | **PUT** /api/2.0/files/file/{fileId}/customfilter | Set the Custom Filter editing mode
 [**set_external_link**](FilesFilesApi.md#set_external_link) | **PUT** /api/2.0/files/file/{id}/links | Set an external link
-[**set_files_order**](FilesFilesApi.md#set_files_order) | **PUT** /api/2.0/files/order | Sets order
-[**set_order_file**](FilesFilesApi.md#set_order_file) | **PUT** /api/2.0/files/{fileId}/order | Sets order of a file with ID specified in the request
+[**set_files_order**](FilesFilesApi.md#set_files_order) | **PUT** /api/2.0/files/order | Set order of files
+[**set_order_file**](FilesFilesApi.md#set_order_file) | **PUT** /api/2.0/files/{fileId}/order | Set file order
 [**start_edit**](FilesFilesApi.md#start_edit) | **POST** /api/2.0/files/file/{fileId}/startedit | Start file editing
-[**start_filling**](FilesFilesApi.md#start_filling) | **PUT** /api/2.0/files/file/{fileId}/startfilling | Starts filling
+[**start_filling**](FilesFilesApi.md#start_filling) | **PUT** /api/2.0/files/file/{fileId}/startfilling | Start file filling
 [**track_edit_file**](FilesFilesApi.md#track_edit_file) | **GET** /api/2.0/files/file/{fileId}/trackeditfile | Track file editing
 [**update_file**](FilesFilesApi.md#update_file) | **PUT** /api/2.0/files/file/{fileId} | Update a file
 
@@ -56,7 +60,11 @@ Adds files with the IDs specified in the request to the template list.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -76,11 +84,30 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
@@ -112,7 +139,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -137,7 +164,11 @@ Changes the version history of a file with the ID specified in the request.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -157,18 +188,37 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.FilesFilesApi(api_client)
-    file_id = 9846 # int | File Id
-    change_history = docspace.ChangeHistory() # ChangeHistory | File (optional)
+    file_id = 9846 # int | The file Id to change its version history.
+    change_history = docspace.ChangeHistory() # ChangeHistory | The parameters for changing version history. (optional)
 
     try:
         # Change version history
@@ -186,8 +236,8 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **file_id** | **int**| File Id | 
- **change_history** | [**ChangeHistory**](ChangeHistory.md)| File | [optional] 
+ **file_id** | **int**| The file Id to change its version history. | 
+ **change_history** | [**ChangeHistory**](ChangeHistory.md)| The parameters for changing version history. | [optional] 
 
 ### Return type
 
@@ -195,7 +245,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -215,7 +265,7 @@ Name | Type | Description  | Notes
 # **check_fill_form_draft**
 > StringWrapper check_fill_form_draft(file_id, check_fill_form_draft=check_fill_form_draft)
 
-Check the form draft
+Check the form draft filling
 
 Checks if the current file is a form draft which can be filled out.
 
@@ -240,11 +290,11 @@ configuration = docspace.Configuration(
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.FilesFilesApi(api_client)
-    file_id = 9846 # int | File ID
-    check_fill_form_draft = docspace.CheckFillFormDraft() # CheckFillFormDraft | File (optional)
+    file_id = 9846 # int | The file ID of the form draft.
+    check_fill_form_draft = docspace.CheckFillFormDraft() # CheckFillFormDraft | The parameters for checking the form draft filling. (optional)
 
     try:
-        # Check the form draft
+        # Check the form draft filling
         api_response = api_instance.check_fill_form_draft(file_id, check_fill_form_draft=check_fill_form_draft)
         print("The response of FilesFilesApi->check_fill_form_draft:\n")
         pprint(api_response)
@@ -259,8 +309,8 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **file_id** | **int**| File ID | 
- **check_fill_form_draft** | [**CheckFillFormDraft**](CheckFillFormDraft.md)| File | [optional] 
+ **file_id** | **int**| The file ID of the form draft. | 
+ **check_fill_form_draft** | [**CheckFillFormDraft**](CheckFillFormDraft.md)| The parameters for checking the form draft filling. | [optional] 
 
 ### Return type
 
@@ -293,7 +343,11 @@ Copies (and converts if possible) an existing file to the specified folder.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -313,18 +367,37 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.FilesFilesApi(api_client)
-    file_id = 9846 # int | File id
-    copy_as_json_element = docspace.CopyAsJsonElement() # CopyAsJsonElement | File (optional)
+    file_id = 9846 # int | The file ID to copy.
+    copy_as_json_element = docspace.CopyAsJsonElement() # CopyAsJsonElement | The parameters for copying a file. (optional)
 
     try:
         # Copy a file
@@ -342,8 +415,8 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **file_id** | **int**| File id | 
- **copy_as_json_element** | [**CopyAsJsonElement**](CopyAsJsonElement.md)| File | [optional] 
+ **file_id** | **int**| The file ID to copy. | 
+ **copy_as_json_element** | [**CopyAsJsonElement**](CopyAsJsonElement.md)| The parameters for copying a file. | [optional] 
 
 ### Return type
 
@@ -351,7 +424,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -375,11 +448,15 @@ Name | Type | Description  | Notes
 
 Create the editing session
 
-Creates a session to edit the existing file with multiple chunks (needed for WebDAV).
+Creates a session to edit the existing file with multiple chunks (needed for WebDAV).   **Note**: Information about created session which includes:  <ul>  <li><b>id:</b> unique ID of this upload session,</li>  <li><b>created:</b> UTC time when the session was created,</li>  <li><b>expired:</b> UTC time when the session will expire if no chunks are sent before that time,</li>  <li><b>location:</b> URL where you should send your next chunk,</li>  <li><b>bytes_uploaded:</b> number of bytes uploaded for the specific upload ID,</li>  <li><b>bytes_total:</b> total number of bytes which will be uploaded.</li>  </ul>
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -398,18 +475,37 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.FilesFilesApi(api_client)
-    file_id = 9846 # int | File ID
-    file_size = 1234 # int | File size in bytes (optional)
+    file_id = 9846 # int | The file ID.
+    file_size = 1234 # int | The file size in bytes. (optional)
 
     try:
         # Create the editing session
@@ -427,8 +523,8 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **file_id** | **int**| File ID | 
- **file_size** | **int**| File size in bytes | [optional] 
+ **file_id** | **int**| The file ID. | 
+ **file_size** | **int**| The file size in bytes. | [optional] 
 
 ### Return type
 
@@ -436,7 +532,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -462,7 +558,11 @@ Creates a new file in the specified folder with the title specified in the reque
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -482,18 +582,37 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.FilesFilesApi(api_client)
-    folder_id = 9846 # int | Folder ID
-    create_file_json_element = docspace.CreateFileJsonElement() # CreateFileJsonElement | File (optional)
+    folder_id = 9846 # int | The folder ID for the file creation.
+    create_file_json_element = docspace.CreateFileJsonElement() # CreateFileJsonElement | The parameters for creating a file. (optional)
 
     try:
         # Create a file
@@ -511,8 +630,8 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **folder_id** | **int**| Folder ID | 
- **create_file_json_element** | [**CreateFileJsonElement**](CreateFileJsonElement.md)| File | [optional] 
+ **folder_id** | **int**| The folder ID for the file creation. | 
+ **create_file_json_element** | [**CreateFileJsonElement**](CreateFileJsonElement.md)| The parameters for creating a file. | [optional] 
 
 ### Return type
 
@@ -520,7 +639,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -545,7 +664,11 @@ Creates a new file in the \"My documents\" section with the title specified in t
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -565,11 +688,30 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
@@ -601,7 +743,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -626,7 +768,11 @@ Creates an HTML (.html) file in the selected folder with the title and contents 
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -646,18 +792,37 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.FilesFilesApi(api_client)
-    folder_id = 9846 # int | Folder ID
-    create_text_or_html_file = docspace.CreateTextOrHtmlFile() # CreateTextOrHtmlFile | File (optional)
+    folder_id = 9846 # int | The folder ID to create the text or HTML file.
+    create_text_or_html_file = docspace.CreateTextOrHtmlFile() # CreateTextOrHtmlFile | The parameters for creating an HTML or text file. (optional)
 
     try:
         # Create an HTML file
@@ -675,8 +840,8 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **folder_id** | **int**| Folder ID | 
- **create_text_or_html_file** | [**CreateTextOrHtmlFile**](CreateTextOrHtmlFile.md)| File | [optional] 
+ **folder_id** | **int**| The folder ID to create the text or HTML file. | 
+ **create_text_or_html_file** | [**CreateTextOrHtmlFile**](CreateTextOrHtmlFile.md)| The parameters for creating an HTML or text file. | [optional] 
 
 ### Return type
 
@@ -684,7 +849,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -710,7 +875,11 @@ Creates an HTML (.html) file in the \"My documents\" section with the title and 
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -730,11 +899,30 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
@@ -766,7 +954,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -792,7 +980,11 @@ Creates a primary external link by the identifier specified in the request.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -812,18 +1004,37 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.FilesFilesApi(api_client)
-    id = 9846 # int | File ID
-    file_link_request = docspace.FileLinkRequest() # FileLinkRequest | External link parameters (optional)
+    id = 9846 # int | The file ID.
+    file_link_request = docspace.FileLinkRequest() # FileLinkRequest | The file external link parameters. (optional)
 
     try:
         # Create primary external link
@@ -841,8 +1052,8 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**| File ID | 
- **file_link_request** | [**FileLinkRequest**](FileLinkRequest.md)| External link parameters | [optional] 
+ **id** | **int**| The file ID. | 
+ **file_link_request** | [**FileLinkRequest**](FileLinkRequest.md)| The file external link parameters. | [optional] 
 
 ### Return type
 
@@ -850,7 +1061,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -870,13 +1081,17 @@ Name | Type | Description  | Notes
 # **create_text_file**
 > FileIntegerWrapper create_text_file(folder_id, create_text_or_html_file=create_text_or_html_file)
 
-Create a txt file
+Create a text file
 
 Creates a text (.txt) file in the selected folder with the title and contents specified in the request.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -896,21 +1111,40 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.FilesFilesApi(api_client)
-    folder_id = 9846 # int | Folder ID
-    create_text_or_html_file = docspace.CreateTextOrHtmlFile() # CreateTextOrHtmlFile | File (optional)
+    folder_id = 9846 # int | The folder ID to create the text or HTML file.
+    create_text_or_html_file = docspace.CreateTextOrHtmlFile() # CreateTextOrHtmlFile | The parameters for creating an HTML or text file. (optional)
 
     try:
-        # Create a txt file
+        # Create a text file
         api_response = api_instance.create_text_file(folder_id, create_text_or_html_file=create_text_or_html_file)
         print("The response of FilesFilesApi->create_text_file:\n")
         pprint(api_response)
@@ -925,8 +1159,8 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **folder_id** | **int**| Folder ID | 
- **create_text_or_html_file** | [**CreateTextOrHtmlFile**](CreateTextOrHtmlFile.md)| File | [optional] 
+ **folder_id** | **int**| The folder ID to create the text or HTML file. | 
+ **create_text_or_html_file** | [**CreateTextOrHtmlFile**](CreateTextOrHtmlFile.md)| The parameters for creating an HTML or text file. | [optional] 
 
 ### Return type
 
@@ -934,7 +1168,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -959,7 +1193,11 @@ Creates a text (.txt) file in the \"My documents\" section with the title and co
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -979,11 +1217,30 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
@@ -1015,7 +1272,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -1034,7 +1291,7 @@ Name | Type | Description  | Notes
 # **create_thumbnails**
 > ObjectArrayWrapper create_thumbnails(base_batch_request_dto=base_batch_request_dto)
 
-Create thumbnails
+Create file thumbnails
 
 Creates thumbnails for the files with the IDs specified in the request.
 
@@ -1062,7 +1319,7 @@ with docspace.ApiClient(configuration) as api_client:
     base_batch_request_dto = docspace.BaseBatchRequestDto() # BaseBatchRequestDto |  (optional)
 
     try:
-        # Create thumbnails
+        # Create file thumbnails
         api_response = api_instance.create_thumbnails(base_batch_request_dto=base_batch_request_dto)
         print("The response of FilesFilesApi->create_thumbnails:\n")
         pprint(api_response)
@@ -1101,7 +1358,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_file**
-> FileOperationArrayWrapper delete_file(file_id, delete=delete)
+> FileOperationArrayWrapper delete_file(file_id, delete)
 
 Delete a file
 
@@ -1109,7 +1366,11 @@ Deletes a file with the ID specified in the request.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -1129,22 +1390,41 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.FilesFilesApi(api_client)
-    file_id = 9846 # int | File ID
-    delete = docspace.Delete() # Delete | File (optional)
+    file_id = 9846 # int | The file ID to delete.
+    delete = docspace.Delete() # Delete | The parameters for deleting a file.
 
     try:
         # Delete a file
-        api_response = api_instance.delete_file(file_id, delete=delete)
+        api_response = api_instance.delete_file(file_id, delete)
         print("The response of FilesFilesApi->delete_file:\n")
         pprint(api_response)
     except Exception as e:
@@ -1158,8 +1438,8 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **file_id** | **int**| File ID | 
- **delete** | [**Delete**](Delete.md)| File | [optional] 
+ **file_id** | **int**| The file ID to delete. | 
+ **delete** | [**Delete**](Delete.md)| The parameters for deleting a file. | 
 
 ### Return type
 
@@ -1167,7 +1447,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -1192,7 +1472,11 @@ Removes files with the IDs specified in the request from the \"Recent\" section.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -1212,11 +1496,30 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
@@ -1248,7 +1551,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -1273,7 +1576,11 @@ Removes files with the IDs specified in the request from the template list.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -1292,17 +1599,36 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.FilesFilesApi(api_client)
-    request_body = [56] # List[int] | File IDs (optional)
+    request_body = [56] # List[int] | The file IDs. (optional)
 
     try:
         # Delete template files
@@ -1320,7 +1646,7 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **request_body** | [**List[int]**](int.md)| File IDs | [optional] 
+ **request_body** | [**List[int]**](int.md)| The file IDs. | [optional] 
 
 ### Return type
 
@@ -1328,7 +1654,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -1341,6 +1667,110 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Boolean value: true if the operation is successful |  -  |
 **401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_all_form_roles**
+> FormRoleArrayWrapper get_all_form_roles(file_id)
+
+Get form roles
+
+Returns all roles for the specified form.
+
+### Example
+
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
+* Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
+
+```python
+import docspace
+from docspace.models.form_role_array_wrapper import FormRoleArrayWrapper
+from docspace.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost:8092
+# See configuration.py for a list of all supported configuration parameters.
+configuration = docspace.Configuration(
+    host = "http://localhost:8092"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
+# Configure API key authorization: asc_auth_key
+configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with docspace.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace.FilesFilesApi(api_client)
+    file_id = 9846 # int | The file ID of the request.
+
+    try:
+        # Get form roles
+        api_response = api_instance.get_all_form_roles(file_id)
+        print("The response of FilesFilesApi->get_all_form_roles:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling FilesFilesApi->get_all_form_roles: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **file_id** | **int**| The file ID of the request. | 
+
+### Return type
+
+[**FormRoleArrayWrapper**](FormRoleArrayWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successfully retrieved all roles for the form |  -  |
+**401** | Unauthorized |  -  |
+**403** | You do not have enough permissions to view the form roles |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1371,8 +1801,8 @@ configuration = docspace.Configuration(
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.FilesFilesApi(api_client)
-    file_id = 9846 # int | File ID
-    version = 1234 # int | File version (optional)
+    file_id = 9846 # int | The file ID.
+    version = 1234 # int | The file version. (optional)
 
     try:
         # Get changes URL
@@ -1390,8 +1820,8 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **file_id** | **int**| File ID | 
- **version** | **int**| File version | [optional] 
+ **file_id** | **int**| The file ID. | 
+ **version** | **int**| The file version. | [optional] 
 
 ### Return type
 
@@ -1441,7 +1871,7 @@ configuration = docspace.Configuration(
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.FilesFilesApi(api_client)
-    file_id = 9846 # int | File ID
+    file_id = 9846 # int | The file ID of the request.
 
     try:
         # Get version history
@@ -1459,7 +1889,7 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **file_id** | **int**| File ID | 
+ **file_id** | **int**| The file ID of the request. | 
 
 ### Return type
 
@@ -1487,11 +1917,15 @@ No authorization required
 
 Get file history
 
-Get the list of actions performed on the file with the specified identifier
+Returns the list of actions performed on the file with the specified identifier.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -1511,19 +1945,38 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.FilesFilesApi(api_client)
-    file_id = 9846 # int | File ID
-    from_date = docspace.ApiDateTime() # ApiDateTime | Start date (optional)
-    to_date = docspace.ApiDateTime() # ApiDateTime | End date (optional)
+    file_id = 9846 # int | The file ID of the history request.
+    from_date = docspace.ApiDateTime() # ApiDateTime | The start date of the history. (optional)
+    to_date = docspace.ApiDateTime() # ApiDateTime | The end date of the history. (optional)
 
     try:
         # Get file history
@@ -1541,9 +1994,9 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **file_id** | **int**| File ID | 
- **from_date** | [**ApiDateTime**](.md)| Start date | [optional] 
- **to_date** | [**ApiDateTime**](.md)| End date | [optional] 
+ **file_id** | **int**| The file ID of the history request. | 
+ **from_date** | [**ApiDateTime**](.md)| The start date of the history. | [optional] 
+ **to_date** | [**ApiDateTime**](.md)| The end date of the history. | [optional] 
 
 ### Return type
 
@@ -1551,7 +2004,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -1596,8 +2049,8 @@ configuration = docspace.Configuration(
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.FilesFilesApi(api_client)
-    file_id = 9846 # int | File ID
-    version = 1234 # int | File version (optional)
+    file_id = 9846 # int | The file ID.
+    version = 1234 # int | The file version. (optional)
 
     try:
         # Get file information
@@ -1615,8 +2068,8 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **file_id** | **int**| File ID | 
- **version** | **int**| File version | [optional] 
+ **file_id** | **int**| The file ID. | 
+ **version** | **int**| The file version. | [optional] 
 
 ### Return type
 
@@ -1666,7 +2119,7 @@ configuration = docspace.Configuration(
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.FilesFilesApi(api_client)
-    id = 9846 # int | File ID
+    id = 9846 # int | The file ID of the request.
 
     try:
         # Get primary external link
@@ -1684,7 +2137,7 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**| File ID | 
+ **id** | **int**| The file ID of the request. | 
 
 ### Return type
 
@@ -1735,7 +2188,7 @@ configuration = docspace.Configuration(
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.FilesFilesApi(api_client)
-    file_id = 9846 # int | File ID
+    file_id = 9846 # int | The file ID of the request.
 
     try:
         # Get file versions
@@ -1753,7 +2206,7 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **file_id** | **int**| File ID | 
+ **file_id** | **int**| The file ID of the request. | 
 
 ### Return type
 
@@ -1779,9 +2232,9 @@ No authorization required
 # **get_fill_result**
 > FillingFormResultIntegerWrapper get_fill_result(filling_session_id=filling_session_id)
 
-Gets fill result
+Get form-filling result
 
-Gets fill result
+Retrieves the result of a form-filling session.
 
 ### Example
 
@@ -1803,10 +2256,10 @@ configuration = docspace.Configuration(
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.FilesFilesApi(api_client)
-    filling_session_id = 'some text' # str | Filling session id (optional)
+    filling_session_id = 'some text' # str | The form-filling session ID. (optional)
 
     try:
-        # Gets fill result
+        # Get form-filling result
         api_response = api_instance.get_fill_result(filling_session_id=filling_session_id)
         print("The response of FilesFilesApi->get_fill_result:\n")
         pprint(api_response)
@@ -1821,7 +2274,7 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **filling_session_id** | **str**| Filling session id | [optional] 
+ **filling_session_id** | **str**| The form-filling session ID. | [optional] 
 
 ### Return type
 
@@ -1853,7 +2306,11 @@ Returns the external links of a file with the ID specified in the request.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -1872,17 +2329,36 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.FilesFilesApi(api_client)
-    id = 9846 # int | File ID
+    id = 9846 # int | The file ID of the request.
 
     try:
         # Get file external links
@@ -1900,7 +2376,7 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**| File ID | 
+ **id** | **int**| The file ID of the request. | 
 
 ### Return type
 
@@ -1908,7 +2384,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -1933,7 +2409,11 @@ Returns a link to download a file with the ID specified in the request asynchron
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -1952,17 +2432,36 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.FilesFilesApi(api_client)
-    file_id = 9846 # int | File ID
+    file_id = 9846 # int | The file ID of the request.
 
     try:
         # Get file download link asynchronously
@@ -1980,7 +2479,7 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **file_id** | **int**| File ID | 
+ **file_id** | **int**| The file ID of the request. | 
 
 ### Return type
 
@@ -1988,7 +2487,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -2009,11 +2508,15 @@ Name | Type | Description  | Notes
 
 Get file download link
 
-Returns a link to download a file with the ID specified in the request.
+Returns a pre-signed URL to download a file with the specified ID.  This temporary link provides secure access to the file.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -2032,17 +2535,36 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.FilesFilesApi(api_client)
-    file_id = 9846 # int | File ID
+    file_id = 9846 # int | The file ID of the request.
 
     try:
         # Get file download link
@@ -2060,7 +2582,7 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **file_id** | **int**| File ID | 
+ **file_id** | **int**| The file ID of the request. | 
 
 ### Return type
 
@@ -2068,7 +2590,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -2093,7 +2615,11 @@ Returns the reference data to uniquely identify a file in its system and check t
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -2113,11 +2639,30 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
@@ -2149,7 +2694,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -2170,11 +2715,15 @@ Name | Type | Description  | Notes
 
 Check the PDF file
 
-Checks if the PDF file is form or not.
+Checks if the PDF file is a form or not.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -2193,17 +2742,36 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.FilesFilesApi(api_client)
-    file_id = 9846 # int | File ID
+    file_id = 9846 # int | The file ID of the request.
 
     try:
         # Check the PDF file
@@ -2221,7 +2789,7 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **file_id** | **int**| File ID | 
+ **file_id** | **int**| The file ID of the request. | 
 
 ### Return type
 
@@ -2229,7 +2797,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -2254,7 +2822,11 @@ Locks a file with the ID specified in the request.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -2274,18 +2846,37 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.FilesFilesApi(api_client)
-    file_id = 9846 # int | File ID
-    lock_file_parameters = docspace.LockFileParameters() # LockFileParameters | Parameters for locking a file (optional)
+    file_id = 9846 # int | The file ID for locking.
+    lock_file_parameters = docspace.LockFileParameters() # LockFileParameters | The parameters for locking a file. (optional)
 
     try:
         # Lock a file
@@ -2303,8 +2894,8 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **file_id** | **int**| File ID | 
- **lock_file_parameters** | [**LockFileParameters**](LockFileParameters.md)| Parameters for locking a file | [optional] 
+ **file_id** | **int**| The file ID for locking. | 
+ **lock_file_parameters** | [**LockFileParameters**](LockFileParameters.md)| The parameters for locking a file. | [optional] 
 
 ### Return type
 
@@ -2312,7 +2903,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -2328,10 +2919,114 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **manage_form_filling**
+> manage_form_filling(file_id, manage_form_filling_dto_integer=manage_form_filling_dto_integer)
+
+Perform form filling action
+
+Performs the specified form filling action.
+
+### Example
+
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
+* Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
+
+```python
+import docspace
+from docspace.models.manage_form_filling_dto_integer import ManageFormFillingDtoInteger
+from docspace.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost:8092
+# See configuration.py for a list of all supported configuration parameters.
+configuration = docspace.Configuration(
+    host = "http://localhost:8092"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
+# Configure API key authorization: asc_auth_key
+configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with docspace.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace.FilesFilesApi(api_client)
+    file_id = 'file_id_example' # str | 
+    manage_form_filling_dto_integer = docspace.ManageFormFillingDtoInteger() # ManageFormFillingDtoInteger |  (optional)
+
+    try:
+        # Perform form filling action
+        api_instance.manage_form_filling(file_id, manage_form_filling_dto_integer=manage_form_filling_dto_integer)
+    except Exception as e:
+        print("Exception when calling FilesFilesApi->manage_form_filling: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **file_id** | **str**|  | 
+ **manage_form_filling_dto_integer** | [**ManageFormFillingDtoInteger**](ManageFormFillingDtoInteger.md)|  | [optional] 
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: Not defined
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successfully processed the form filling action |  -  |
+**401** | Unauthorized |  -  |
+**403** | You do not have enough permissions to perform this action |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **open_edit**
 > ConfigurationIntegerWrapper open_edit(file_id, version=version, view=view, editor_type=editor_type, edit=edit, fill=fill)
 
-Open a file
+Open a file configuration
 
 Returns the initialization configuration of a file to open it in the editor.
 
@@ -2356,15 +3051,15 @@ configuration = docspace.Configuration(
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.FilesFilesApi(api_client)
-    file_id = 9846 # int | File ID
-    version = 1234 # int | File version (optional)
-    view = true # bool | Specifies if a document will be opened for viewing only or not (optional)
-    editor_type = docspace.EditorType() # EditorType | Editor type (optional)
-    edit = true # bool | Edit (optional)
-    fill = true # bool | Fill (optional)
+    file_id = 9846 # int | The file ID to open.
+    version = 1234 # int | The file version to open. (optional)
+    view = true # bool | Specifies if the document will be opened for viewing only or not. (optional)
+    editor_type = docspace.EditorType() # EditorType | The editor type to open the file. (optional)
+    edit = true # bool | Specifies if the document is opened in the editing mode or not. (optional)
+    fill = true # bool | Specifies if the document is opened in the form-filling mode or not. (optional)
 
     try:
-        # Open a file
+        # Open a file configuration
         api_response = api_instance.open_edit(file_id, version=version, view=view, editor_type=editor_type, edit=edit, fill=fill)
         print("The response of FilesFilesApi->open_edit:\n")
         pprint(api_response)
@@ -2379,12 +3074,12 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **file_id** | **int**| File ID | 
- **version** | **int**| File version | [optional] 
- **view** | **bool**| Specifies if a document will be opened for viewing only or not | [optional] 
- **editor_type** | [**EditorType**](.md)| Editor type | [optional] 
- **edit** | **bool**| Edit | [optional] 
- **fill** | **bool**| Fill | [optional] 
+ **file_id** | **int**| The file ID to open. | 
+ **version** | **int**| The file version to open. | [optional] 
+ **view** | **bool**| Specifies if the document will be opened for viewing only or not. | [optional] 
+ **editor_type** | [**EditorType**](.md)| The editor type to open the file. | [optional] 
+ **edit** | **bool**| Specifies if the document is opened in the editing mode or not. | [optional] 
+ **fill** | **bool**| Specifies if the document is opened in the form-filling mode or not. | [optional] 
 
 ### Return type
 
@@ -2411,13 +3106,17 @@ No authorization required
 # **protect_users**
 > MentionWrapperArrayWrapper protect_users(file_id)
 
-Get users with the access to the protected file
+Get users access rights to the protected file
 
 Returns a list of users with their access rights to the protected file with the ID specified in the request.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -2436,20 +3135,39 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.FilesFilesApi(api_client)
-    file_id = 9846 # int | File ID
+    file_id = 9846 # int | The file ID of the request.
 
     try:
-        # Get users with the access to the protected file
+        # Get users access rights to the protected file
         api_response = api_instance.protect_users(file_id)
         print("The response of FilesFilesApi->protect_users:\n")
         pprint(api_response)
@@ -2464,7 +3182,7 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **file_id** | **int**| File ID | 
+ **file_id** | **int**| The file ID of the request. | 
 
 ### Return type
 
@@ -2472,7 +3190,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -2515,9 +3233,9 @@ configuration = docspace.Configuration(
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.FilesFilesApi(api_client)
-    file_id = 9846 # int | File ID
-    version = 1234 # int | File version (optional)
-    url = 'some text' # str | File version URL (optional)
+    file_id = 9846 # int | The file ID of the restore version.
+    version = 1234 # int | The file version of the restore. (optional)
+    url = 'some text' # str | The file version URL of the restore. (optional)
 
     try:
         # Restore a file version
@@ -2535,9 +3253,9 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **file_id** | **int**| File ID | 
- **version** | **int**| File version | [optional] 
- **url** | **str**| File version URL | [optional] 
+ **file_id** | **int**| The file ID of the restore version. | 
+ **version** | **int**| The file version of the restore. | [optional] 
+ **url** | **str**| The file version URL of the restore. | [optional] 
 
 ### Return type
 
@@ -2565,13 +3283,17 @@ No authorization required
 # **save_as_pdf**
 > FileIntegerWrapper save_as_pdf(id, save_as_pdf_integer=save_as_pdf_integer)
 
-Save as pdf
+Save a file as PDF
 
-Saves a file with the identifier specified in the request as a PDF document
+Saves a file with the identifier specified in the request as a PDF document.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -2591,21 +3313,40 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.FilesFilesApi(api_client)
-    id = 9846 # int | File ID
-    save_as_pdf_integer = docspace.SaveAsPdfInteger() # SaveAsPdfInteger | Parameters for saving file as pdf (optional)
+    id = 9846 # int | The file ID to save as PDF.
+    save_as_pdf_integer = docspace.SaveAsPdfInteger() # SaveAsPdfInteger | The parameters for saving file as PDF. (optional)
 
     try:
-        # Save as pdf
+        # Save a file as PDF
         api_response = api_instance.save_as_pdf(id, save_as_pdf_integer=save_as_pdf_integer)
         print("The response of FilesFilesApi->save_as_pdf:\n")
         pprint(api_response)
@@ -2620,8 +3361,8 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**| File ID | 
- **save_as_pdf_integer** | [**SaveAsPdfInteger**](SaveAsPdfInteger.md)| Parameters for saving file as pdf | [optional] 
+ **id** | **int**| The file ID to save as PDF. | 
+ **save_as_pdf_integer** | [**SaveAsPdfInteger**](SaveAsPdfInteger.md)| The parameters for saving file as PDF. | [optional] 
 
 ### Return type
 
@@ -2629,7 +3370,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -2655,7 +3396,11 @@ Saves edits to a file with the ID specified in the request.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -2674,21 +3419,40 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.FilesFilesApi(api_client)
-    file_id = 9846 # int | File ID
-    file_extension = 'file_extension_example' # str | File extension (optional)
-    download_uri = 'download_uri_example' # str | URI to download a file (optional)
-    file = None # bytearray | Request file stream (optional)
-    forcesave = True # bool | Specifies whether to force save a file or not (optional)
+    file_id = 9846 # int | The editing file ID from the request.
+    file_extension = 'file_extension_example' # str | The editing file extension from the request. (optional)
+    download_uri = 'download_uri_example' # str | The URI to download the editing file. (optional)
+    file = None # bytearray | The request file stream. (optional)
+    forcesave = True # bool | Specifies whether to force save the file or not. (optional)
 
     try:
         # Save file edits
@@ -2706,11 +3470,11 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **file_id** | **int**| File ID | 
- **file_extension** | **str**| File extension | [optional] 
- **download_uri** | **str**| URI to download a file | [optional] 
- **file** | **bytearray**| Request file stream | [optional] 
- **forcesave** | **bool**| Specifies whether to force save a file or not | [optional] 
+ **file_id** | **int**| The editing file ID from the request. | 
+ **file_extension** | **str**| The editing file extension from the request. | [optional] 
+ **download_uri** | **str**| The URI to download the editing file. | [optional] 
+ **file** | **bytearray**| The request file stream. | [optional] 
+ **forcesave** | **bool**| Specifies whether to force save the file or not. | [optional] 
 
 ### Return type
 
@@ -2718,7 +3482,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -2736,6 +3500,219 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **save_form_role_mapping**
+> FormRoleWrapper save_form_role_mapping(file_id, save_form_role_mapping_dto_integer=save_form_role_mapping_dto_integer)
+
+Save form role mapping
+
+Saves the form role mapping.
+
+### Example
+
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
+* Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
+
+```python
+import docspace
+from docspace.models.form_role_wrapper import FormRoleWrapper
+from docspace.models.save_form_role_mapping_dto_integer import SaveFormRoleMappingDtoInteger
+from docspace.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost:8092
+# See configuration.py for a list of all supported configuration parameters.
+configuration = docspace.Configuration(
+    host = "http://localhost:8092"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
+# Configure API key authorization: asc_auth_key
+configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with docspace.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace.FilesFilesApi(api_client)
+    file_id = 'file_id_example' # str | 
+    save_form_role_mapping_dto_integer = docspace.SaveFormRoleMappingDtoInteger() # SaveFormRoleMappingDtoInteger |  (optional)
+
+    try:
+        # Save form role mapping
+        api_response = api_instance.save_form_role_mapping(file_id, save_form_role_mapping_dto_integer=save_form_role_mapping_dto_integer)
+        print("The response of FilesFilesApi->save_form_role_mapping:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling FilesFilesApi->save_form_role_mapping: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **file_id** | **str**|  | 
+ **save_form_role_mapping_dto_integer** | [**SaveFormRoleMappingDtoInteger**](SaveFormRoleMappingDtoInteger.md)|  | [optional] 
+
+### Return type
+
+[**FormRoleWrapper**](FormRoleWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Updated information about form role mappings |  -  |
+**401** | Unauthorized |  -  |
+**403** | You do not have enough permissions to edit the file |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **set_custom_filter_tag**
+> FileIntegerWrapper set_custom_filter_tag(file_id, custom_filter_parameters=custom_filter_parameters)
+
+Set the Custom Filter editing mode
+
+Sets the Custom Filter editing mode to a file with the ID specified in the request.
+
+### Example
+
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
+* Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
+
+```python
+import docspace
+from docspace.models.custom_filter_parameters import CustomFilterParameters
+from docspace.models.file_integer_wrapper import FileIntegerWrapper
+from docspace.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost:8092
+# See configuration.py for a list of all supported configuration parameters.
+configuration = docspace.Configuration(
+    host = "http://localhost:8092"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
+# Configure API key authorization: asc_auth_key
+configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with docspace.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace.FilesFilesApi(api_client)
+    file_id = 9846 # int | The file ID.
+    custom_filter_parameters = docspace.CustomFilterParameters() # CustomFilterParameters | The parameters for setting the Custom Filter editing mode. (optional)
+
+    try:
+        # Set the Custom Filter editing mode
+        api_response = api_instance.set_custom_filter_tag(file_id, custom_filter_parameters=custom_filter_parameters)
+        print("The response of FilesFilesApi->set_custom_filter_tag:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling FilesFilesApi->set_custom_filter_tag: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **file_id** | **int**| The file ID. | 
+ **custom_filter_parameters** | [**CustomFilterParameters**](CustomFilterParameters.md)| The parameters for setting the Custom Filter editing mode. | [optional] 
+
+### Return type
+
+[**FileIntegerWrapper**](FileIntegerWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | File information |  -  |
+**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **set_external_link**
 > FileShareWrapper set_external_link(id, file_link_request=file_link_request)
 
@@ -2745,7 +3722,11 @@ Sets an external link to a file with the ID specified in the request.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
@@ -2765,18 +3746,37 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.FilesFilesApi(api_client)
-    id = 9846 # int | File ID
-    file_link_request = docspace.FileLinkRequest() # FileLinkRequest | External link parameters (optional)
+    id = 9846 # int | The file ID.
+    file_link_request = docspace.FileLinkRequest() # FileLinkRequest | The file external link parameters. (optional)
 
     try:
         # Set an external link
@@ -2794,8 +3794,8 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**| File ID | 
- **file_link_request** | [**FileLinkRequest**](FileLinkRequest.md)| External link parameters | [optional] 
+ **id** | **int**| The file ID. | 
+ **file_link_request** | [**FileLinkRequest**](FileLinkRequest.md)| The file external link parameters. | [optional] 
 
 ### Return type
 
@@ -2803,7 +3803,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -2820,18 +3820,23 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **set_files_order**
-> set_files_order(orders_request_dto_integer=orders_request_dto_integer)
+> FileIntegerArrayWrapper set_files_order(orders_request_dto_integer=orders_request_dto_integer)
 
-Sets order
+Set order of files
 
-Sets order
+Sets order of the files.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
+from docspace.models.file_integer_array_wrapper import FileIntegerArrayWrapper
 from docspace.models.orders_request_dto_integer import OrdersRequestDtoInteger
 from docspace.rest import ApiException
 from pprint import pprint
@@ -2847,11 +3852,30 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
@@ -2860,8 +3884,10 @@ with docspace.ApiClient(configuration) as api_client:
     orders_request_dto_integer = docspace.OrdersRequestDtoInteger() # OrdersRequestDtoInteger |  (optional)
 
     try:
-        # Sets order
-        api_instance.set_files_order(orders_request_dto_integer=orders_request_dto_integer)
+        # Set order of files
+        api_response = api_instance.set_files_order(orders_request_dto_integer=orders_request_dto_integer)
+        print("The response of FilesFilesApi->set_files_order:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling FilesFilesApi->set_files_order: %s\n" % e)
 ```
@@ -2877,39 +3903,44 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**FileIntegerArrayWrapper**](FileIntegerArrayWrapper.md)
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Order is set |  -  |
+**200** | Updated file entries information |  -  |
 **401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **set_order_file**
-> set_order_file(file_id, order_request_dto=order_request_dto)
+> FileIntegerWrapper set_order_file(file_id, order_request_dto=order_request_dto)
 
-Sets order of a file with ID specified in the request
+Set file order
 
-Sets order of a file with ID specified in the request
+Sets order of the file with ID specified in the request.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
+from docspace.models.file_integer_wrapper import FileIntegerWrapper
 from docspace.models.order_request_dto import OrderRequestDto
 from docspace.rest import ApiException
 from pprint import pprint
@@ -2925,22 +3956,43 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.FilesFilesApi(api_client)
-    file_id = 9846 # int | The unique identifier of the file
-    order_request_dto = docspace.OrderRequestDto() # OrderRequestDto | Order information for the file (optional)
+    file_id = 9846 # int | The file unique identifier.
+    order_request_dto = docspace.OrderRequestDto() # OrderRequestDto | The file order information. (optional)
 
     try:
-        # Sets order of a file with ID specified in the request
-        api_instance.set_order_file(file_id, order_request_dto=order_request_dto)
+        # Set file order
+        api_response = api_instance.set_order_file(file_id, order_request_dto=order_request_dto)
+        print("The response of FilesFilesApi->set_order_file:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling FilesFilesApi->set_order_file: %s\n" % e)
 ```
@@ -2952,27 +4004,27 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **file_id** | **int**| The unique identifier of the file | 
- **order_request_dto** | [**OrderRequestDto**](OrderRequestDto.md)| Order information for the file | [optional] 
+ **file_id** | **int**| The file unique identifier. | 
+ **order_request_dto** | [**OrderRequestDto**](OrderRequestDto.md)| The file order information. | [optional] 
 
 ### Return type
 
-void (empty response body)
+[**FileIntegerWrapper**](FileIntegerWrapper.md)
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Order is set |  -  |
+**200** | Updated file information |  -  |
 **401** | Unauthorized |  -  |
 **403** | You don&#39;t have enough permission to perform the operation |  -  |
 **404** | Not Found |  -  |
@@ -3007,8 +4059,8 @@ configuration = docspace.Configuration(
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.FilesFilesApi(api_client)
-    file_id = 9846 # int | File ID
-    start_edit = docspace.StartEdit() # StartEdit | Parameters for starting file editing (optional)
+    file_id = 9846 # int | The file ID to start editing.
+    start_edit = docspace.StartEdit() # StartEdit | The file parameters to start editing. (optional)
 
     try:
         # Start file editing
@@ -3026,8 +4078,8 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **file_id** | **int**| File ID | 
- **start_edit** | [**StartEdit**](StartEdit.md)| Parameters for starting file editing | [optional] 
+ **file_id** | **int**| The file ID to start editing. | 
+ **start_edit** | [**StartEdit**](StartEdit.md)| The file parameters to start editing. | [optional] 
 
 ### Return type
 
@@ -3052,18 +4104,23 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **start_filling**
-> start_filling(file_id)
+> FileIntegerWrapper start_filling(file_id)
 
-Starts filling
+Start file filling
 
 Starts filling a file with the ID specified in the request.
 
 ### Example
 
+* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (ApiKeyBearer):
 * Api Key Authentication (asc_auth_key):
+* Bearer (JWT) Authentication (Bearer):
 
 ```python
 import docspace
+from docspace.models.file_integer_wrapper import FileIntegerWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
@@ -3078,21 +4135,42 @@ configuration = docspace.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
+# Configure HTTP basic authorization: Basic
+configuration = docspace.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
 # Configure API key authorization: asc_auth_key
 configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.FilesFilesApi(api_client)
-    file_id = 9846 # int | File ID
+    file_id = 9846 # int | The file ID to start filling.
 
     try:
-        # Starts filling
-        api_instance.start_filling(file_id)
+        # Start file filling
+        api_response = api_instance.start_filling(file_id)
+        print("The response of FilesFilesApi->start_filling:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling FilesFilesApi->start_filling: %s\n" % e)
 ```
@@ -3104,26 +4182,26 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **file_id** | **int**| File ID | 
+ **file_id** | **int**| The file ID to start filling. | 
 
 ### Return type
 
-void (empty response body)
+[**FileIntegerWrapper**](FileIntegerWrapper.md)
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Ok |  -  |
+**200** | File information |  -  |
 **401** | Unauthorized |  -  |
 **403** | You do not have enough permissions to edit the file |  -  |
 
@@ -3156,10 +4234,10 @@ configuration = docspace.Configuration(
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.FilesFilesApi(api_client)
-    file_id = 9846 # int | File ID
-    tab_id = '75a5f745-f697-4418-b38d-0fe0d277e258' # str | Tab ID (optional)
-    doc_key_for_track = 'some text' # str | Document key for tracking (optional)
-    is_finish = true # bool | Specifies whether to finish file tracking or not (optional)
+    file_id = 9846 # int | The file ID to track editing changes.
+    tab_id = '75a5f745-f697-4418-b38d-0fe0d277e258' # str | The tab ID to track editing changes. (optional)
+    doc_key_for_track = 'some text' # str | The document key for tracking changes. (optional)
+    is_finish = true # bool | Specifies whether to finish file tracking or not. (optional)
 
     try:
         # Track file editing
@@ -3177,10 +4255,10 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **file_id** | **int**| File ID | 
- **tab_id** | **str**| Tab ID | [optional] 
- **doc_key_for_track** | **str**| Document key for tracking | [optional] 
- **is_finish** | **bool**| Specifies whether to finish file tracking or not | [optional] 
+ **file_id** | **int**| The file ID to track editing changes. | 
+ **tab_id** | **str**| The tab ID to track editing changes. | [optional] 
+ **doc_key_for_track** | **str**| The document key for tracking changes. | [optional] 
+ **is_finish** | **bool**| Specifies whether to finish file tracking or not. | [optional] 
 
 ### Return type
 
@@ -3232,8 +4310,8 @@ configuration = docspace.Configuration(
 with docspace.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace.FilesFilesApi(api_client)
-    file_id = 9846 # int | File ID
-    update_file = docspace.UpdateFile() # UpdateFile | File (optional)
+    file_id = 9846 # int | The file ID to update.
+    update_file = docspace.UpdateFile() # UpdateFile | The parameters for updating a file. (optional)
 
     try:
         # Update a file
@@ -3251,8 +4329,8 @@ with docspace.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **file_id** | **int**| File ID | 
- **update_file** | [**UpdateFile**](UpdateFile.md)| File | [optional] 
+ **file_id** | **int**| The file ID to update. | 
+ **update_file** | [**UpdateFile**](UpdateFile.md)| The parameters for updating a file. | [optional] 
 
 ### Return type
 

@@ -1,16 +1,17 @@
 # FillingFormResultDtoInteger
 
+The parameters of the form filling result.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**form_number** | **int** | Form number | [optional] 
+**form_number** | **int** | The filling form number. | [optional] 
 **completed_form** | [**FileDtoInteger**](FileDtoInteger.md) |  | [optional] 
 **original_form** | [**FileDtoInteger**](FileDtoInteger.md) |  | [optional] 
 **manager** | [**EmployeeFullDto**](EmployeeFullDto.md) |  | [optional] 
-**room_id** | **int** | Room Id | [optional] 
-**is_room_member** | **bool** | Is room member | [optional] 
+**room_id** | **int** | The room ID where filling the form. | [optional] 
+**is_room_member** | **bool** | Specifies if the manager who fills the form is a room member or not. | [optional] 
 
 ## Example
 

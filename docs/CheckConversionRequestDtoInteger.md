@@ -1,18 +1,18 @@
 # CheckConversionRequestDtoInteger
 
-Request parameters for starting file conversion
+The parameters for checking file conversion.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**file_id** | **int** | File ID | [optional] 
-**sync** | **bool** | Specifies if the conversion process is synchronous or not | [optional] 
-**start_convert** | **bool** | Specifies whether to start a conversion process or not | [optional] 
-**version** | **int** | File version | [optional] 
-**password** | **str** | Password | [optional] 
-**output_type** | **str** | Output type | [optional] 
-**create_new_if_exist** | **bool** | Create new if exists | [optional] 
+**file_id** | **int** | The file ID to check conversion proccess. | [optional] 
+**sync** | **bool** | Specifies if the conversion process is synchronous or not. | [optional] 
+**start_convert** | **bool** | Specifies whether to start a conversion process or not. | [optional] 
+**version** | **int** | The file version that is converted. | [optional] 
+**password** | **str** | The password of the converted file. | [optional] 
+**output_type** | **str** | The conversion output type. | [optional] 
+**create_new_if_exist** | **bool** | Specifies whether to create a new file if it exists or not. | [optional] 
 
 ## Example
 

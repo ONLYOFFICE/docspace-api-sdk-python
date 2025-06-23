@@ -1,18 +1,19 @@
 # FirebaseDto
 
+The Firebase parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**api_key** | **str** | API key | [optional] 
-**auth_domain** | **str** | Authentication domain | [optional] 
-**project_id** | **str** | Project ID | [optional] 
-**storage_bucket** | **str** | Storage bucket | [optional] 
-**messaging_sender_id** | **str** | Message sender ID | [optional] 
-**app_id** | **str** | Application ID | [optional] 
-**measurement_id** | **str** | Measurement ID | [optional] 
-**database_url** | **str** | Database URL | [optional] 
+**api_key** | **str** | The Firebase API key. | [optional] 
+**auth_domain** | **str** | The Firebase authentication domain. | [optional] 
+**project_id** | **str** | The Firebase project ID. | [optional] 
+**storage_bucket** | **str** | The Firebase storage bucket. | [optional] 
+**messaging_sender_id** | **str** | The Firebase messaging sender ID. | [optional] 
+**app_id** | **str** | The Firebase application ID. | [optional] 
+**measurement_id** | **str** | The Firebase measurement ID. | [optional] 
+**database_url** | **str** | The Firebase database URL. | [optional] 
 
 ## Example
 

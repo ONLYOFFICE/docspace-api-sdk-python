@@ -1,13 +1,14 @@
 # EditHistoryUrl
 
+The file editing history URL parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**key** | **str** | Key | [optional] 
-**url** | **str** | Url | [optional] 
-**file_type** | **str** | File type | [optional] 
+**key** | **str** | The document identifier of the previous version of the document. | [optional] 
+**url** | **str** | The url address of the previous version of the document. | [optional] 
+**file_type** | **str** | The document extension. | [optional] 
 
 ## Example
 

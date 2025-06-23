@@ -1,12 +1,13 @@
 # UserInvitationRequestDto
 
+The user invitation parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **type** | [**EmployeeType**](EmployeeType.md) |  | [optional] 
-**email** | **str** | Email address | [optional] 
+**email** | **str** | The user email address. | [optional] 
 
 ## Example
 

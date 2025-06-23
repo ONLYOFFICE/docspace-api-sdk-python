@@ -1,13 +1,13 @@
 # UpdateRoomsQuotaRequestDtoInteger
 
-Request parameters for updating room
+The request parameters for updating the room quota.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**room_ids** | [**List[BaseBatchRequestDtoFolderIdsInner]**](BaseBatchRequestDtoFolderIdsInner.md) | List of room IDs | [optional] 
-**quota** | **int** | Room quota | [optional] 
+**room_ids** | [**List[BaseBatchRequestDtoFolderIdsInner]**](BaseBatchRequestDtoFolderIdsInner.md) | The list of room IDs. | [optional] 
+**quota** | **int** | The room quota. | [optional] 
 
 ## Example
 

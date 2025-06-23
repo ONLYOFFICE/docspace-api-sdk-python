@@ -1,14 +1,14 @@
 # WebItemSecurityRequestsDto
 
-Module request parameters
+The request parameters for configuring security settings of a single web module.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** | Module ID | [optional] 
-**enabled** | **bool** | Specifies if the module security settings are enabled or not | [optional] 
-**subjects** | **List[str]** | List of user/group IDs with the access to the module | [optional] 
+**id** | **str** | The module ID. | 
+**enabled** | **bool** | Controls whether the security restrictions are enforced for this module. | [optional] 
+**subjects** | **List[str]** | The collection of user and group identifiers granted access to the module. | [optional] 
 
 ## Example
 

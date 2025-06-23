@@ -1,13 +1,14 @@
 # CustomColorThemesSettingsDto
 
+The custom color themes settings.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**themes** | [**List[CustomColorThemesSettingsItem]**](CustomColorThemesSettingsItem.md) | Themes | [optional] 
-**selected** | **int** | Selected | [optional] 
-**limit** | **int** | Limit | [optional] 
+**themes** | [**List[CustomColorThemesSettingsItem]**](CustomColorThemesSettingsItem.md) | The list of the custom color themes. | [optional] 
+**selected** | **int** | Specifies whether the custom color theme is selected. | [optional] 
+**limit** | **int** | The maximum number of the custom color themes. | [optional] 
 
 ## Example
 

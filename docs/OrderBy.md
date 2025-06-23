@@ -1,11 +1,12 @@
 # OrderBy
 
+The sorting parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**is_asc** | **bool** | Is asc | [optional] 
+**is_asc** | **bool** | Specifies if the order is ascending. | [optional] 
 **var_property** | [**SortedByType**](SortedByType.md) |  | [optional] 
 
 ## Example

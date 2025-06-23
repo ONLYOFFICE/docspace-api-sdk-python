@@ -1,18 +1,19 @@
 # FileReference
 
+The file reference parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **reference_data** | [**FileReferenceData**](FileReferenceData.md) |  | [optional] 
-**error** | **str** | Error | [optional] 
-**path** | **str** | Path | [optional] 
-**url** | **str** | URL | [optional] 
-**file_type** | **str** | File type | [optional] 
-**key** | **str** | Key | [optional] 
-**link** | **str** | Link | [optional] 
-**token** | **str** | Token | [optional] 
+**error** | **str** | The error message text. | [optional] 
+**path** | **str** | The file name or relative path for the formula editor. | [optional] 
+**url** | **str** | The URL address to download the current file. | [optional] 
+**file_type** | **str** | An extension of the document specified with the url parameter. | [optional] 
+**key** | **str** | The unique document identifier used by the service to take the data from the co-editing session. | [optional] 
+**link** | **str** | The file URL. | [optional] 
+**token** | **str** | The encrypted signature added to the parameter in the form of a token. | [optional] 
 
 ## Example
 
