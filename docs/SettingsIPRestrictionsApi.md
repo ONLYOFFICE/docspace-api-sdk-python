@@ -1,6 +1,6 @@
 # docspace.SettingsIPRestrictionsApi
 
-All URIs are relative to *http://http:*
+All URIs are relative to *http://localhost:8092*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -31,10 +31,10 @@ from docspace.models.ip_restriction_array_wrapper import IPRestrictionArrayWrapp
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://http:
+# Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://http:"
+    host = "http://localhost:8092"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -130,10 +130,10 @@ from docspace.models.ip_restrictions_settings_wrapper import IPRestrictionsSetti
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://http:
+# Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://http:"
+    host = "http://localhost:8092"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -230,10 +230,10 @@ from docspace.models.ip_restrictions_wrapper import IpRestrictionsWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://http:
+# Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://http:"
+    host = "http://localhost:8092"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -334,10 +334,10 @@ from docspace.models.ip_restrictions_wrapper import IpRestrictionsWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://http:
+# Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://http:"
+    host = "http://localhost:8092"
 )
 
 # The client must configure the authentication and authorization parameters

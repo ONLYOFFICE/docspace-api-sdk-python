@@ -1,6 +1,6 @@
 # docspace.SettingsTFASettingsApi
 
-All URIs are relative to *http://http:*
+All URIs are relative to *http://localhost:8092*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -12,7 +12,7 @@ Method | HTTP request | Description
 [**unlink_tfa_app**](SettingsTFASettingsApi.md#unlink_tfa_app) | **PUT** /api/2.0/settings/tfaappnewapp | Unlink the TFA application
 [**update_tfa_app_codes**](SettingsTFASettingsApi.md#update_tfa_app_codes) | **PUT** /api/2.0/settings/tfaappnewcodes | Update the TFA codes
 [**update_tfa_settings**](SettingsTFASettingsApi.md#update_tfa_settings) | **PUT** /api/2.0/settings/tfaapp | Update the TFA settings
-[**update_tfa_settings_link**](SettingsTFASettingsApi.md#update_tfa_settings_link) | **PUT** /api/2.0/settings/tfaappwithlink | Get confirmation email for updating TFA settings
+[**update_tfa_settings_link**](SettingsTFASettingsApi.md#update_tfa_settings_link) | **PUT** /api/2.0/settings/tfaappwithlink | Get a confirmation email for updating TFA settings
 
 
 # **get_tfa_app_codes**
@@ -36,10 +36,10 @@ from docspace.models.object_array_wrapper import ObjectArrayWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://http:
+# Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://http:"
+    host = "http://localhost:8092"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -136,10 +136,10 @@ from docspace.models.string_wrapper import StringWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://http:
+# Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://http:"
+    host = "http://localhost:8092"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -235,10 +235,10 @@ from docspace.models.tfa_settings_array_wrapper import TfaSettingsArrayWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://http:
+# Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://http:"
+    host = "http://localhost:8092"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -334,10 +334,10 @@ from docspace.models.setup_code_wrapper import SetupCodeWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://http:
+# Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://http:"
+    host = "http://localhost:8092"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -435,10 +435,10 @@ from docspace.models.tfa_validate_requests_dto import TfaValidateRequestsDto
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://http:
+# Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://http:"
+    host = "http://localhost:8092"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -539,10 +539,10 @@ from docspace.models.tfa_requests_dto import TfaRequestsDto
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://http:
+# Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://http:"
+    host = "http://localhost:8092"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -644,10 +644,10 @@ from docspace.models.object_array_wrapper import ObjectArrayWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://http:
+# Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://http:"
+    host = "http://localhost:8092"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -745,10 +745,10 @@ from docspace.models.tfa_requests_dto import TfaRequestsDto
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://http:
+# Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://http:"
+    host = "http://localhost:8092"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -831,7 +831,7 @@ Name | Type | Description  | Notes
 # **update_tfa_settings_link**
 > StringWrapper update_tfa_settings_link(tfa_requests_dto=tfa_requests_dto)
 
-Get confirmation email for updating TFA settings
+Get a confirmation email for updating TFA settings
 
 Returns the confirmation email URL for updating TFA settings.
 
@@ -850,10 +850,10 @@ from docspace.models.tfa_requests_dto import TfaRequestsDto
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://http:
+# Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://http:"
+    host = "http://localhost:8092"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -893,7 +893,7 @@ with docspace.ApiClient(configuration) as api_client:
     tfa_requests_dto = docspace.TfaRequestsDto() # TfaRequestsDto |  (optional)
 
     try:
-        # Get confirmation email for updating TFA settings
+        # Get a confirmation email for updating TFA settings
         api_response = api_instance.update_tfa_settings_link(tfa_requests_dto=tfa_requests_dto)
         print("The response of SettingsTFASettingsApi->update_tfa_settings_link:\n")
         pprint(api_response)
@@ -929,6 +929,8 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Confirmation email URL |  -  |
 **401** | Unauthorized |  -  |
+**403** | No permissions to perform this action |  -  |
+**405** | SMS settings are not available/TFA application settings are not available |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

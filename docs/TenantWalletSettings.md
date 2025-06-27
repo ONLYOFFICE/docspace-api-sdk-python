@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **enabled** | **bool** | Enabled | [optional] 
 **min_balance** | **int** | Minimun balance | [optional] 
 **up_to_balance** | **int** | Up to balance | [optional] 
-**currency** | **str** | Currency | [optional] 
+**currency** | **str** | The three-character ISO 4217 currency symbol. | [optional] 
 **last_modified** | **datetime** |  | [optional] 
 
 ## Example

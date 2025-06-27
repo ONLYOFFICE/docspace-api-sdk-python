@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **license_date** | **datetime** | The tariff license date. | [optional] 
 **customer_id** | **str** | The tariff customer ID. | [optional] 
 **quotas** | [**List[Quota]**](Quota.md) | The list of tariff quotas. | [optional] 
+**overdue_quotas** | [**List[Quota]**](Quota.md) | The list of overdue tariff quotas. | [optional] 
 
 ## Example
 

@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **image** | **str** | The image of the logo. | [optional] 
 **image_dark** | **str** | The dark image of the logo. | [optional] 
+**image_light** | **str** | The light image of the logo. | [optional] 
 **image_embedded** | **str** | The embedded image of the logo. | [optional] 
 **url** | **str** | The url link of the logo. | [optional] 
 **visible** | **bool** | Specifies if the logo is visible. | [optional] 

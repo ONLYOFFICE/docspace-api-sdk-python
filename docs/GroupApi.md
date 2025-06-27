@@ -1,6 +1,6 @@
 # docspace.GroupApi
 
-All URIs are relative to *http://http:*
+All URIs are relative to *http://localhost:8092*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -39,10 +39,10 @@ from docspace.models.group_wrapper import GroupWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://http:
+# Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://http:"
+    host = "http://localhost:8092"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -143,10 +143,10 @@ from docspace.models.members_request import MembersRequest
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://http:
+# Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://http:"
+    host = "http://localhost:8092"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -249,10 +249,10 @@ from docspace.models.no_content_result_wrapper import NoContentResultWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://http:
+# Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://http:"
+    host = "http://localhost:8092"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -337,7 +337,9 @@ Name | Type | Description  | Notes
 
 Get a group
 
-Returns the detailed information about the selected group.   **Note**: This method returns full group information.
+Returns the detailed information about the selected group.
+
+ **Note**: This method returns full group information.
 
 ### Example
 
@@ -353,10 +355,10 @@ from docspace.models.group_wrapper import GroupWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://http:
+# Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://http:"
+    host = "http://localhost:8092"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -459,10 +461,10 @@ from docspace.models.group_summary_array_wrapper import GroupSummaryArrayWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://http:
+# Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://http:"
+    host = "http://localhost:8092"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -546,7 +548,9 @@ Name | Type | Description  | Notes
 
 Get groups
 
-Returns the general information about all the groups, such as group ID and group manager.   **Note**: This method returns partial group information.
+Returns the general information about all the groups, such as group ID and group manager.
+
+ **Note**: This method returns partial group information.
 
 ### Example
 
@@ -563,10 +567,10 @@ from docspace.models.sort_order import SortOrder
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://http:
+# Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://http:"
+    host = "http://localhost:8092"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -678,10 +682,10 @@ from docspace.models.group_wrapper import GroupWrapper
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://http:
+# Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://http:"
+    host = "http://localhost:8092"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -785,10 +789,10 @@ from docspace.models.members_request import MembersRequest
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://http:
+# Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://http:"
+    host = "http://localhost:8092"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -892,10 +896,10 @@ from docspace.models.set_manager_request import SetManagerRequest
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://http:
+# Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://http:"
+    host = "http://localhost:8092"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -999,10 +1003,10 @@ from docspace.models.members_request import MembersRequest
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://http:
+# Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://http:"
+    host = "http://localhost:8092"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -1105,10 +1109,10 @@ from docspace.models.update_group_request import UpdateGroupRequest
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://http:
+# Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://http:"
+    host = "http://localhost:8092"
 )
 
 # The client must configure the authentication and authorization parameters

@@ -1,13 +1,14 @@
 # CustomerInfo
 
+The customer information.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**portal_id** | **str** |  | [optional] 
+**portal_id** | **str** | The portal ID. | [optional] 
 **payment_method_status** | [**PaymentMethodStatus**](PaymentMethodStatus.md) |  | [optional] 
-**email** | **str** |  | [optional] 
+**email** | **str** | The email address of the customer. | [optional] 
 
 ## Example
 

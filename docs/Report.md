@@ -1,16 +1,17 @@
 # Report
 
+Represents a report containing a collection of operations.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**collection** | [**List[Operation]**](Operation.md) |  | [optional] 
-**offset** | **int** |  | [optional] 
-**limit** | **int** |  | [optional] 
-**total_quantity** | **int** |  | [optional] 
-**total_page** | **int** |  | [optional] 
-**current_page** | **int** |  | [optional] 
+**collection** | [**List[Operation]**](Operation.md) | Collection of operations. | [optional] 
+**offset** | **int** | Offset of the report data. | [optional] 
+**limit** | **int** | Limit of the report data. | [optional] 
+**total_quantity** | **int** | Total quantity of operations in the report. | [optional] 
+**total_page** | **int** | Total number of pages in the report. | [optional] 
+**current_page** | **int** | Current page number of the report. | [optional] 
 
 ## Example
 

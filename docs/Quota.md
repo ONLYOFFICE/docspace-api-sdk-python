@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **wallet** | **bool** | The quota applies to the wallet or not | [optional] 
 **due_date** | **datetime** | The quota due date. | [optional] 
 **next_quantity** | **int** | The quota next quantity. | [optional] 
+**state** | [**QuotaState**](QuotaState.md) |  | [optional] 
 
 ## Example
 

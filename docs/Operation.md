@@ -1,17 +1,19 @@
 # Operation
 
+Represents an operation.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**var_date** | **datetime** |  | [optional] 
-**service** | **str** |  | [optional] 
-**service_unit** | **str** |  | [optional] 
-**quantity** | **int** |  | [optional] 
-**currency** | **str** |  | [optional] 
-**credit** | **float** |  | [optional] 
-**withdrawal** | **float** |  | [optional] 
+**var_date** | **datetime** | Date of the operation. | [optional] 
+**service** | **str** | Service related to the operation. | [optional] 
+**description** | **str** | Brief description of the operation. | [optional] 
+**service_unit** | **str** | Unit of the service. | [optional] 
+**quantity** | **int** | Quantity of the service used. | [optional] 
+**currency** | **str** | The three-character ISO 4217 currency symbol of the operation. | [optional] 
+**credit** | **float** | Credit amount of the operation. | [optional] 
+**withdrawal** | **float** | Withdrawal amount of the operation. | [optional] 
 
 ## Example
 

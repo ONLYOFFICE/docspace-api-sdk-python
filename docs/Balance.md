@@ -1,12 +1,13 @@
 # Balance
 
+Represents a balance with an account number and a list of sub-accounts.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**account_number** | **int** |  | [optional] 
-**sub_accounts** | [**List[SubAccount]**](SubAccount.md) |  | [optional] 
+**account_number** | **int** | The account number. | [optional] 
+**sub_accounts** | [**List[SubAccount]**](SubAccount.md) | A list of sub-accounts. | [optional] 
 
 ## Example
 

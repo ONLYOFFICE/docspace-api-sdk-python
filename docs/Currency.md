@@ -1,12 +1,13 @@
 # Currency
 
+Represents a currency.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **int** |  | [optional] 
-**code** | **str** |  | [optional] 
+**id** | **int** | Unique identifier of the currency. | [optional] 
+**code** | **str** | The three-character ISO 4217 currency symbol. | [optional] 
 
 ## Example
 

@@ -1,16 +1,16 @@
 # docspace.OAuth20AuthorizationApi
 
-All URIs are relative to *http://http:*
+All URIs are relative to *http://localhost:8092*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**oauth2_authorize_get**](OAuth20AuthorizationApi.md#oauth2_authorize_get) | **GET** /oauth2/authorize | OAuth2 authorization endpoint
-[**oauth2_authorize_post**](OAuth20AuthorizationApi.md#oauth2_authorize_post) | **POST** /oauth2/authorize | OAuth2 consent endpoint
-[**oauth2_token_post**](OAuth20AuthorizationApi.md#oauth2_token_post) | **POST** /oauth2/token | OAuth2 token endpoint
+[**authorize_o_auth**](OAuth20AuthorizationApi.md#authorize_o_auth) | **GET** /oauth2/authorize | OAuth2 authorization endpoint
+[**exchange_token**](OAuth20AuthorizationApi.md#exchange_token) | **POST** /oauth2/token | OAuth2 token endpoint
+[**submit_consent**](OAuth20AuthorizationApi.md#submit_consent) | **POST** /oauth2/authorize | OAuth2 consent endpoint
 
 
-# **oauth2_authorize_get**
-> oauth2_authorize_get(response_type, client_id, redirect_uri, scope)
+# **authorize_o_auth**
+> authorize_o_auth(response_type, client_id, redirect_uri, scope)
 
 OAuth2 authorization endpoint
 
@@ -25,10 +25,10 @@ import docspace
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://http:
+# Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://http:"
+    host = "http://localhost:8092"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -53,9 +53,9 @@ with docspace.ApiClient(configuration) as api_client:
 
     try:
         # OAuth2 authorization endpoint
-        api_instance.oauth2_authorize_get(response_type, client_id, redirect_uri, scope)
+        api_instance.authorize_o_auth(response_type, client_id, redirect_uri, scope)
     except Exception as e:
-        print("Exception when calling OAuth20AuthorizationApi->oauth2_authorize_get: %s\n" % e)
+        print("Exception when calling OAuth20AuthorizationApi->authorize_o_auth: %s\n" % e)
 ```
 
 
@@ -92,8 +92,85 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **oauth2_authorize_post**
-> oauth2_authorize_post(client_id=client_id, state=state, scope=scope)
+# **exchange_token**
+> ExchangeToken200Response exchange_token(grant_type=grant_type, code=code, redirect_uri=redirect_uri, client_id=client_id, client_secret=client_secret)
+
+OAuth2 token endpoint
+
+Exchanges an authorization code specified in the request for the access token.
+
+### Example
+
+
+```python
+import docspace
+from docspace.models.exchange_token200_response import ExchangeToken200Response
+from docspace.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost:8092
+# See configuration.py for a list of all supported configuration parameters.
+configuration = docspace.Configuration(
+    host = "http://localhost:8092"
+)
+
+
+# Enter a context with an instance of the API client
+with docspace.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace.OAuth20AuthorizationApi(api_client)
+    grant_type = 'grant_type_example' # str | The OAuth2 grant type, must be 'authorization_code' for the authorization code flow. (optional)
+    code = 'code_example' # str | A temporary authorization code that is sent to the client to be exchanged for a token. (optional)
+    redirect_uri = 'redirect_uri_example' # str | The URL where the user will be redirected after successful or unsuccessful authentication. (optional)
+    client_id = 'client_id_example' # str | The client identifier issued to the client during registration. (optional)
+    client_secret = 'client_secret_example' # str | The client secret issued to the client during registration. (optional)
+
+    try:
+        # OAuth2 token endpoint
+        api_response = api_instance.exchange_token(grant_type=grant_type, code=code, redirect_uri=redirect_uri, client_id=client_id, client_secret=client_secret)
+        print("The response of OAuth20AuthorizationApi->exchange_token:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling OAuth20AuthorizationApi->exchange_token: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **grant_type** | **str**| The OAuth2 grant type, must be &#39;authorization_code&#39; for the authorization code flow. | [optional] 
+ **code** | **str**| A temporary authorization code that is sent to the client to be exchanged for a token. | [optional] 
+ **redirect_uri** | **str**| The URL where the user will be redirected after successful or unsuccessful authentication. | [optional] 
+ **client_id** | **str**| The client identifier issued to the client during registration. | [optional] 
+ **client_secret** | **str**| The client secret issued to the client during registration. | [optional] 
+
+### Return type
+
+[**ExchangeToken200Response**](ExchangeToken200Response.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/x-www-form-urlencoded
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The authorization code was successfully exchanged for the access token |  -  |
+**400** | Invalid request parameters |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **submit_consent**
+> submit_consent(client_id=client_id, state=state, scope=scope)
 
 OAuth2 consent endpoint
 
@@ -108,10 +185,10 @@ import docspace
 from docspace.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://http:
+# Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
 configuration = docspace.Configuration(
-    host = "http://http:"
+    host = "http://localhost:8092"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -135,9 +212,9 @@ with docspace.ApiClient(configuration) as api_client:
 
     try:
         # OAuth2 consent endpoint
-        api_instance.oauth2_authorize_post(client_id=client_id, state=state, scope=scope)
+        api_instance.submit_consent(client_id=client_id, state=state, scope=scope)
     except Exception as e:
-        print("Exception when calling OAuth20AuthorizationApi->oauth2_authorize_post: %s\n" % e)
+        print("Exception when calling OAuth20AuthorizationApi->submit_consent: %s\n" % e)
 ```
 
 
@@ -169,83 +246,6 @@ void (empty response body)
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **302** | Redirect to the client&#39;s redirect URI with authorization code |  -  |
-**400** | Invalid request parameters |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **oauth2_token_post**
-> Oauth2TokenPost200Response oauth2_token_post(grant_type=grant_type, code=code, redirect_uri=redirect_uri, client_id=client_id, client_secret=client_secret)
-
-OAuth2 token endpoint
-
-Exchanges an authorization code specified in the request for the access token.
-
-### Example
-
-
-```python
-import docspace
-from docspace.models.oauth2_token_post200_response import Oauth2TokenPost200Response
-from docspace.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://http:
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace.Configuration(
-    host = "http://http:"
-)
-
-
-# Enter a context with an instance of the API client
-with docspace.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace.OAuth20AuthorizationApi(api_client)
-    grant_type = 'grant_type_example' # str | The OAuth2 grant type, must be 'authorization_code' for the authorization code flow. (optional)
-    code = 'code_example' # str | A temporary authorization code that is sent to the client to be exchanged for a token. (optional)
-    redirect_uri = 'redirect_uri_example' # str | The URL where the user will be redirected after successful or unsuccessful authentication. (optional)
-    client_id = 'client_id_example' # str | The client identifier issued to the client during registration. (optional)
-    client_secret = 'client_secret_example' # str | The client secret issued to the client during registration. (optional)
-
-    try:
-        # OAuth2 token endpoint
-        api_response = api_instance.oauth2_token_post(grant_type=grant_type, code=code, redirect_uri=redirect_uri, client_id=client_id, client_secret=client_secret)
-        print("The response of OAuth20AuthorizationApi->oauth2_token_post:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling OAuth20AuthorizationApi->oauth2_token_post: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **grant_type** | **str**| The OAuth2 grant type, must be &#39;authorization_code&#39; for the authorization code flow. | [optional] 
- **code** | **str**| A temporary authorization code that is sent to the client to be exchanged for a token. | [optional] 
- **redirect_uri** | **str**| The URL where the user will be redirected after successful or unsuccessful authentication. | [optional] 
- **client_id** | **str**| The client identifier issued to the client during registration. | [optional] 
- **client_secret** | **str**| The client secret issued to the client during registration. | [optional] 
-
-### Return type
-
-[**Oauth2TokenPost200Response**](Oauth2TokenPost200Response.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: application/x-www-form-urlencoded
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | The authorization code was successfully exchanged for the access token |  -  |
 **400** | Invalid request parameters |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
