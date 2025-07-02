@@ -1,6 +1,5 @@
 # BaseBatchRequestDtoFolderIdsInner
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -9,7 +8,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.base_batch_request_dto_folder_ids_inner import BaseBatchRequestDtoFolderIdsInner
+from docspace-api-python.models.base_batch_request_dto_folder_ids_inner import BaseBatchRequestDtoFolderIdsInner
 
 # TODO update the JSON string below
 json = "{}"

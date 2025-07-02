@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.auth_key import AuthKey
+from docspace-api-python.models.auth_key import AuthKey
 
 class TestAuthKey(unittest.TestCase):
     """AuthKey unit test stubs"""

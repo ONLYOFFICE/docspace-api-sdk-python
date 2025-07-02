@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.archive_room_request import ArchiveRoomRequest
+from docspace-api-python.models.archive_room_request import ArchiveRoomRequest
 
 class TestArchiveRoomRequest(unittest.TestCase):
     """ArchiveRoomRequest unit test stubs"""

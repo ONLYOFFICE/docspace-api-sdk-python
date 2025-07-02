@@ -1,5 +1,4 @@
 # DeleteBatchRequestDto
-
 The request parameters for deleting files.
 
 ## Properties
@@ -15,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.delete_batch_request_dto import DeleteBatchRequestDto
+from docspace-api-python.models.delete_batch_request_dto import DeleteBatchRequestDto
 
 # TODO update the JSON string below
 json = "{}"

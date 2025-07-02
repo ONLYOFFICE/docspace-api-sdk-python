@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.file_link import FileLink
+from docspace-api-python.models.file_link import FileLink
 
 class TestFileLink(unittest.TestCase):
     """FileLink unit test stubs"""

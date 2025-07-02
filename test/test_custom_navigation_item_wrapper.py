@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.custom_navigation_item_wrapper import CustomNavigationItemWrapper
+from docspace-api-python.models.custom_navigation_item_wrapper import CustomNavigationItemWrapper
 
 class TestCustomNavigationItemWrapper(unittest.TestCase):
     """CustomNavigationItemWrapper unit test stubs"""
@@ -49,7 +49,7 @@ class TestCustomNavigationItemWrapper(unittest.TestCase):
         model = CustomNavigationItemWrapper()
         if include_optional:
             return CustomNavigationItemWrapper(
-                response = docspace.models.custom_navigation_item.CustomNavigationItem(
+                response = docspace-api-python.models.custom_navigation_item.CustomNavigationItem(
                     id = 'aae1e103-bca5-9fa1-ba8c-42058b4abf28', 
                     label = 'Label', 
                     url = 'Url', 
@@ -59,7 +59,7 @@ class TestCustomNavigationItemWrapper(unittest.TestCase):
                     show_on_home_page = True, ),
                 count = 56,
                 links = [
-                    docspace.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

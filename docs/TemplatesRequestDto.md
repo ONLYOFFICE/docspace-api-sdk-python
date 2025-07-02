@@ -1,5 +1,4 @@
 # TemplatesRequestDto
-
 The request parameters for adding files to the template list.
 
 ## Properties
@@ -11,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.templates_request_dto import TemplatesRequestDto
+from docspace-api-python.models.templates_request_dto import TemplatesRequestDto
 
 # TODO update the JSON string below
 json = "{}"

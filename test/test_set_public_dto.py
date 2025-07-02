@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.set_public_dto import SetPublicDto
+from docspace-api-python.models.set_public_dto import SetPublicDto
 
 class TestSetPublicDto(unittest.TestCase):
     """SetPublicDto unit test stubs"""

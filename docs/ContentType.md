@@ -1,6 +1,5 @@
 # ContentType
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.content_type import ContentType
+from docspace-api-python.models.content_type import ContentType
 
 # TODO update the JSON string below
 json = "{}"

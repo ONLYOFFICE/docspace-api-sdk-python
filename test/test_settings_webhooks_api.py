@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.api.settings_webhooks_api import SettingsWebhooksApi
+from docspace-api-python.api.settings_webhooks_api import SettingsWebhooksApi
 
 
 class TestSettingsWebhooksApi(unittest.TestCase):

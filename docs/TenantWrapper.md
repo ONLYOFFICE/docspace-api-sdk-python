@@ -1,6 +1,5 @@
 # TenantWrapper
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.tenant_wrapper import TenantWrapper
+from docspace-api-python.models.tenant_wrapper import TenantWrapper
 
 # TODO update the JSON string below
 json = "{}"

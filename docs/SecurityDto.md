@@ -1,5 +1,4 @@
 # SecurityDto
-
 The security information.
 
 ## Properties
@@ -15,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.security_dto import SecurityDto
+from docspace-api-python.models.security_dto import SecurityDto
 
 # TODO update the JSON string below
 json = "{}"

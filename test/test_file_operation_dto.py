@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.file_operation_dto import FileOperationDto
+from docspace-api-python.models.file_operation_dto import FileOperationDto
 
 class TestFileOperationDto(unittest.TestCase):
     """FileOperationDto unit test stubs"""
@@ -57,14 +57,14 @@ class TestFileOperationDto(unittest.TestCase):
                 finished = True,
                 url = 'some text',
                 files = [
-                    docspace.models.file_entry_dto.FileEntryDto(
+                    docspace-api-python.models.file_entry_dto.FileEntryDto(
                         title = 'Some titile.txt/ Some title', 
                         access = 0, 
                         shared = False, 
-                        created = docspace.models.api_date_time.ApiDateTime(
+                        created = docspace-api-python.models.api_date_time.ApiDateTime(
                             utc_time = '2008-04-10T06:30+04:00', 
                             time_zone_offset = '00:00:00', ), 
-                        created_by = docspace.models.employee_dto.EmployeeDto(
+                        created_by = docspace-api-python.models.employee_dto.EmployeeDto(
                             id = '', 
                             display_name = 'Mike Zanyatski', 
                             title = 'Manager', 
@@ -76,13 +76,13 @@ class TestFileOperationDto(unittest.TestCase):
                             profile_url = 'some text', 
                             has_avatar = True, 
                             is_anonim = True, ), 
-                        updated = docspace.models.api_date_time.ApiDateTime(
+                        updated = docspace-api-python.models.api_date_time.ApiDateTime(
                             utc_time = '2008-04-10T06:30+04:00', 
                             time_zone_offset = '00:00:00', ), 
                         auto_delete = , 
                         root_folder_type = 0, 
                         parent_room_type = 0, 
-                        updated_by = docspace.models.employee_dto.EmployeeDto(
+                        updated_by = docspace-api-python.models.employee_dto.EmployeeDto(
                             id = '', 
                             display_name = 'Mike Zanyatski', 
                             title = 'Manager', 
@@ -101,14 +101,14 @@ class TestFileOperationDto(unittest.TestCase):
                         file_entry_type = 1, )
                     ],
                 folders = [
-                    docspace.models.file_entry_dto.FileEntryDto(
+                    docspace-api-python.models.file_entry_dto.FileEntryDto(
                         title = 'Some titile.txt/ Some title', 
                         access = 0, 
                         shared = False, 
-                        created = docspace.models.api_date_time.ApiDateTime(
+                        created = docspace-api-python.models.api_date_time.ApiDateTime(
                             utc_time = '2008-04-10T06:30+04:00', 
                             time_zone_offset = '00:00:00', ), 
-                        created_by = docspace.models.employee_dto.EmployeeDto(
+                        created_by = docspace-api-python.models.employee_dto.EmployeeDto(
                             id = '', 
                             display_name = 'Mike Zanyatski', 
                             title = 'Manager', 
@@ -120,13 +120,13 @@ class TestFileOperationDto(unittest.TestCase):
                             profile_url = 'some text', 
                             has_avatar = True, 
                             is_anonim = True, ), 
-                        updated = docspace.models.api_date_time.ApiDateTime(
+                        updated = docspace-api-python.models.api_date_time.ApiDateTime(
                             utc_time = '2008-04-10T06:30+04:00', 
                             time_zone_offset = '00:00:00', ), 
                         auto_delete = , 
                         root_folder_type = 0, 
                         parent_room_type = 0, 
-                        updated_by = docspace.models.employee_dto.EmployeeDto(
+                        updated_by = docspace-api-python.models.employee_dto.EmployeeDto(
                             id = '', 
                             display_name = 'Mike Zanyatski', 
                             title = 'Manager', 

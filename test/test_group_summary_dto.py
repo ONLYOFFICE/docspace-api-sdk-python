@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.group_summary_dto import GroupSummaryDto
+from docspace-api-python.models.group_summary_dto import GroupSummaryDto
 
 class TestGroupSummaryDto(unittest.TestCase):
     """GroupSummaryDto unit test stubs"""

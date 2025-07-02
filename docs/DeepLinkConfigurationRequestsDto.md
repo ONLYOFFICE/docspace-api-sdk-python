@@ -1,5 +1,4 @@
 # DeepLinkConfigurationRequestsDto
-
 The request parameters for managing the deep link configuration.
 
 ## Properties
@@ -11,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.deep_link_configuration_requests_dto import DeepLinkConfigurationRequestsDto
+from docspace-api-python.models.deep_link_configuration_requests_dto import DeepLinkConfigurationRequestsDto
 
 # TODO update the JSON string below
 json = "{}"

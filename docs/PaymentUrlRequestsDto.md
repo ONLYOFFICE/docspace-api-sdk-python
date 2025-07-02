@@ -1,5 +1,4 @@
 # PaymentUrlRequestsDto
-
 The request parameters for the payment URL configuration with quantity information.
 
 ## Properties
@@ -12,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.payment_url_requests_dto import PaymentUrlRequestsDto
+from docspace-api-python.models.payment_url_requests_dto import PaymentUrlRequestsDto
 
 # TODO update the JSON string below
 json = "{}"

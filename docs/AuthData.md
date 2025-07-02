@@ -1,5 +1,4 @@
 # AuthData
-
 The authentication data.
 
 ## Properties
@@ -16,7 +15,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.auth_data import AuthData
+from docspace-api-python.models.auth_data import AuthData
 
 # TODO update the JSON string below
 json = "{}"

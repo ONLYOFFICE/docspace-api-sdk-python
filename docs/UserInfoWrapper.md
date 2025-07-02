@@ -1,6 +1,5 @@
 # UserInfoWrapper
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.user_info_wrapper import UserInfoWrapper
+from docspace-api-python.models.user_info_wrapper import UserInfoWrapper
 
 # TODO update the JSON string below
 json = "{}"

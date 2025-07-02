@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.third_party_backup_request_dto import ThirdPartyBackupRequestDto
+from docspace-api-python.models.third_party_backup_request_dto import ThirdPartyBackupRequestDto
 
 class TestThirdPartyBackupRequestDto(unittest.TestCase):
     """ThirdPartyBackupRequestDto unit test stubs"""

@@ -1,6 +1,5 @@
 # ObjectWrapper
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.object_wrapper import ObjectWrapper
+from docspace-api-python.models.object_wrapper import ObjectWrapper
 
 # TODO update the JSON string below
 json = "{}"

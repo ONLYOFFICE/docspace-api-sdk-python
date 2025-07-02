@@ -1,5 +1,4 @@
 # IpRestrictionsDto
-
 The parameters for configuring new IP restriction settings.
 
 ## Properties
@@ -12,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.ip_restrictions_dto import IpRestrictionsDto
+from docspace-api-python.models.ip_restrictions_dto import IpRestrictionsDto
 
 # TODO update the JSON string below
 json = "{}"

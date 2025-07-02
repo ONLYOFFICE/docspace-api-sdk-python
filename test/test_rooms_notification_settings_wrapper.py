@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.rooms_notification_settings_wrapper import RoomsNotificationSettingsWrapper
+from docspace-api-python.models.rooms_notification_settings_wrapper import RoomsNotificationSettingsWrapper
 
 class TestRoomsNotificationSettingsWrapper(unittest.TestCase):
     """RoomsNotificationSettingsWrapper unit test stubs"""
@@ -49,11 +49,11 @@ class TestRoomsNotificationSettingsWrapper(unittest.TestCase):
         model = RoomsNotificationSettingsWrapper()
         if include_optional:
             return RoomsNotificationSettingsWrapper(
-                response = docspace.models.rooms_notification_settings_dto.RoomsNotificationSettingsDto(
+                response = docspace-api-python.models.rooms_notification_settings_dto.RoomsNotificationSettingsDto(
                     disabled_rooms = [{"int":1234,"string":"some text","boolean":true}], ),
                 count = 56,
                 links = [
-                    docspace.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

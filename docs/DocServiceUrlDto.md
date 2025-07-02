@@ -1,5 +1,4 @@
 # DocServiceUrlDto
-
 The document service URL parameters.
 
 ## Properties
@@ -18,7 +17,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.doc_service_url_dto import DocServiceUrlDto
+from docspace-api-python.models.doc_service_url_dto import DocServiceUrlDto
 
 # TODO update the JSON string below
 json = "{}"

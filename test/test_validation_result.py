@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.validation_result import ValidationResult
+from docspace-api-python.models.validation_result import ValidationResult
 
 class TestValidationResult(unittest.TestCase):
     """ValidationResult unit test stubs"""

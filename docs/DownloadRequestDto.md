@@ -1,5 +1,4 @@
 # DownloadRequestDto
-
 The request parameters for downloading files.
 
 ## Properties
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.download_request_dto import DownloadRequestDto
+from docspace-api-python.models.download_request_dto import DownloadRequestDto
 
 # TODO update the JSON string below
 json = "{}"

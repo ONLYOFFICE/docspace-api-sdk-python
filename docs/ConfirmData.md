@@ -1,5 +1,4 @@
 # ConfirmData
-
 The additional confirmation data required for authentication.
 
 ## Properties
@@ -13,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.confirm_data import ConfirmData
+from docspace-api-python.models.confirm_data import ConfirmData
 
 # TODO update the JSON string below
 json = "{}"

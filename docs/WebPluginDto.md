@@ -1,5 +1,4 @@
 # WebPluginDto
-
 The web plugin information.
 
 ## Properties
@@ -25,7 +24,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.web_plugin_dto import WebPluginDto
+from docspace-api-python.models.web_plugin_dto import WebPluginDto
 
 # TODO update the JSON string below
 json = "{}"

@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.thumbnails_data_dto import ThumbnailsDataDto
+from docspace-api-python.models.thumbnails_data_dto import ThumbnailsDataDto
 
 class TestThumbnailsDataDto(unittest.TestCase):
     """ThumbnailsDataDto unit test stubs"""

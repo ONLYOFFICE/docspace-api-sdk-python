@@ -1,5 +1,4 @@
 # CheckDestFolderDto
-
 The destination folder checking information.
 
 ## Properties
@@ -12,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.check_dest_folder_dto import CheckDestFolderDto
+from docspace-api-python.models.check_dest_folder_dto import CheckDestFolderDto
 
 # TODO update the JSON string below
 json = "{}"

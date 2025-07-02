@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.report import Report
+from docspace-api-python.models.report import Report
 
 class TestReport(unittest.TestCase):
     """Report unit test stubs"""
@@ -50,7 +50,7 @@ class TestReport(unittest.TestCase):
         if include_optional:
             return Report(
                 collection = [
-                    docspace.models.operation.Operation(
+                    docspace-api-python.models.operation.Operation(
                         date = '2008-04-10T06:30+04:00', 
                         service = 'some text', 
                         description = 'some text', 

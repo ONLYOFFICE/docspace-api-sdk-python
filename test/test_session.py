@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.session import Session
+from docspace-api-python.models.session import Session
 
 class TestSession(unittest.TestCase):
     """Session unit test stubs"""

@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.api.security_active_connections_api import SecurityActiveConnectionsApi
+from docspace-api-python.api.security_active_connections_api import SecurityActiveConnectionsApi
 
 
 class TestSecurityActiveConnectionsApi(unittest.TestCase):

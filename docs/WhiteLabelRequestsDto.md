@@ -1,5 +1,4 @@
 # WhiteLabelRequestsDto
-
 The request parameters for configuring the white label branding settings.
 
 ## Properties
@@ -12,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.white_label_requests_dto import WhiteLabelRequestsDto
+from docspace-api-python.models.white_label_requests_dto import WhiteLabelRequestsDto
 
 # TODO update the JSON string below
 json = "{}"

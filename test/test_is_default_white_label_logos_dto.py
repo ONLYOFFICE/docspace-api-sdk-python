@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.is_default_white_label_logos_dto import IsDefaultWhiteLabelLogosDto
+from docspace-api-python.models.is_default_white_label_logos_dto import IsDefaultWhiteLabelLogosDto
 
 class TestIsDefaultWhiteLabelLogosDto(unittest.TestCase):
     """IsDefaultWhiteLabelLogosDto unit test stubs"""

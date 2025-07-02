@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.api.security_access_to_dev_tools_api import SecurityAccessToDevToolsApi
+from docspace-api-python.api.security_access_to_dev_tools_api import SecurityAccessToDevToolsApi
 
 
 class TestSecurityAccessToDevToolsApi(unittest.TestCase):

@@ -1,5 +1,4 @@
 # WebhooksConfigDto
-
 The webhook configuration parameters.
 
 ## Properties
@@ -24,7 +23,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.webhooks_config_dto import WebhooksConfigDto
+from docspace-api-python.models.webhooks_config_dto import WebhooksConfigDto
 
 # TODO update the JSON string below
 json = "{}"

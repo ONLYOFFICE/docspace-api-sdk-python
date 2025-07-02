@@ -1,5 +1,4 @@
 # LinkAccountRequestDto
-
 The request parameters for linking accounts.
 
 ## Properties
@@ -11,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.link_account_request_dto import LinkAccountRequestDto
+from docspace-api-python.models.link_account_request_dto import LinkAccountRequestDto
 
 # TODO update the JSON string below
 json = "{}"

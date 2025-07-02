@@ -1,5 +1,4 @@
 # BackupDto
-
 The backup parameters.
 
 ## Properties
@@ -13,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.backup_dto import BackupDto
+from docspace-api-python.models.backup_dto import BackupDto
 
 # TODO update the JSON string below
 json = "{}"

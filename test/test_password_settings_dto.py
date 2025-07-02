@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.password_settings_dto import PasswordSettingsDto
+from docspace-api-python.models.password_settings_dto import PasswordSettingsDto
 
 class TestPasswordSettingsDto(unittest.TestCase):
     """PasswordSettingsDto unit test stubs"""

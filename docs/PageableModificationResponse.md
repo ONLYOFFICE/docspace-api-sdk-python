@@ -1,5 +1,4 @@
 # PageableModificationResponse
-
 The response containing paginated modification information.
 
 ## Properties
@@ -13,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.pageable_modification_response import PageableModificationResponse
+from docspace-api-python.models.pageable_modification_response import PageableModificationResponse
 
 # TODO update the JSON string below
 json = "{}"

@@ -1,5 +1,4 @@
 # TenantDomainValidator
-
 The domain validator.
 
 ## Properties
@@ -13,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.tenant_domain_validator import TenantDomainValidator
+from docspace-api-python.models.tenant_domain_validator import TenantDomainValidator
 
 # TODO update the JSON string below
 json = "{}"

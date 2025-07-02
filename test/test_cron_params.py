@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.cron_params import CronParams
+from docspace-api-python.models.cron_params import CronParams
 
 class TestCronParams(unittest.TestCase):
     """CronParams unit test stubs"""

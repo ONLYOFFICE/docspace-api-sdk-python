@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.action_config import ActionConfig
+from docspace-api-python.models.action_config import ActionConfig
 
 class TestActionConfig(unittest.TestCase):
     """ActionConfig unit test stubs"""

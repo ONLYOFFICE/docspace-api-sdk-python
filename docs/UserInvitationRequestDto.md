@@ -1,5 +1,4 @@
 # UserInvitationRequestDto
-
 The user invitation parameters.
 
 ## Properties
@@ -12,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.user_invitation_request_dto import UserInvitationRequestDto
+from docspace-api-python.models.user_invitation_request_dto import UserInvitationRequestDto
 
 # TODO update the JSON string below
 json = "{}"

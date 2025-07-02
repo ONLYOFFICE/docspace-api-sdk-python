@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.update_api_key_request import UpdateApiKeyRequest
+from docspace-api-python.models.update_api_key_request import UpdateApiKeyRequest
 
 class TestUpdateApiKeyRequest(unittest.TestCase):
     """UpdateApiKeyRequest unit test stubs"""

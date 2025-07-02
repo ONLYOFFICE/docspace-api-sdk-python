@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.paragraph import Paragraph
+from docspace-api-python.models.paragraph import Paragraph
 
 class TestParagraph(unittest.TestCase):
     """Paragraph unit test stubs"""
@@ -51,7 +51,7 @@ class TestParagraph(unittest.TestCase):
             return Paragraph(
                 align = 1234,
                 runs = [
-                    docspace.models.run.Run(
+                    docspace-api-python.models.run.Run(
                         fill = [1234], 
                         text = 'some text', 
                         font_size = 'some text', )

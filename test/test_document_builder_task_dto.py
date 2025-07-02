@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.document_builder_task_dto import DocumentBuilderTaskDto
+from docspace-api-python.models.document_builder_task_dto import DocumentBuilderTaskDto
 
 class TestDocumentBuilderTaskDto(unittest.TestCase):
     """DocumentBuilderTaskDto unit test stubs"""

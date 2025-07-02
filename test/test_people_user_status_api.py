@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.api.people_user_status_api import PeopleUserStatusApi
+from docspace-api-python.api.people_user_status_api import PeopleUserStatusApi
 
 
 class TestPeopleUserStatusApi(unittest.TestCase):

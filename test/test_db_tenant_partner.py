@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.db_tenant_partner import DbTenantPartner
+from docspace-api-python.models.db_tenant_partner import DbTenantPartner
 
 class TestDbTenantPartner(unittest.TestCase):
     """DbTenantPartner unit test stubs"""

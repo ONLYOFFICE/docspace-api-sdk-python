@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.document_builder_task_wrapper import DocumentBuilderTaskWrapper
+from docspace-api-python.models.document_builder_task_wrapper import DocumentBuilderTaskWrapper
 
 class TestDocumentBuilderTaskWrapper(unittest.TestCase):
     """DocumentBuilderTaskWrapper unit test stubs"""
@@ -49,7 +49,7 @@ class TestDocumentBuilderTaskWrapper(unittest.TestCase):
         model = DocumentBuilderTaskWrapper()
         if include_optional:
             return DocumentBuilderTaskWrapper(
-                response = docspace.models.document_builder_task_dto.DocumentBuilderTaskDto(
+                response = docspace-api-python.models.document_builder_task_dto.DocumentBuilderTaskDto(
                     id = '9846', 
                     error = 'some text', 
                     percentage = 1234, 
@@ -60,7 +60,7 @@ class TestDocumentBuilderTaskWrapper(unittest.TestCase):
                     result_file_url = 'some text', ),
                 count = 56,
                 links = [
-                    docspace.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

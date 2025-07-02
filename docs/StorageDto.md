@@ -1,5 +1,4 @@
 # StorageDto
-
 The storage information.
 
 ## Properties
@@ -15,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.storage_dto import StorageDto
+from docspace-api-python.models.storage_dto import StorageDto
 
 # TODO update the JSON string below
 json = "{}"

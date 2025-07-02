@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.login_event_array_wrapper import LoginEventArrayWrapper
+from docspace-api-python.models.login_event_array_wrapper import LoginEventArrayWrapper
 
 class TestLoginEventArrayWrapper(unittest.TestCase):
     """LoginEventArrayWrapper unit test stubs"""
@@ -50,9 +50,9 @@ class TestLoginEventArrayWrapper(unittest.TestCase):
         if include_optional:
             return LoginEventArrayWrapper(
                 response = [
-                    docspace.models.login_event_dto.LoginEventDto(
+                    docspace-api-python.models.login_event_dto.LoginEventDto(
                         id = 9846, 
-                        date = docspace.models.api_date_time.ApiDateTime(
+                        date = docspace-api-python.models.api_date_time.ApiDateTime(
                             utc_time = '2008-04-10T06:30+04:00', 
                             time_zone_offset = '00:00:00', ), 
                         user = 'some text', 
@@ -69,7 +69,7 @@ class TestLoginEventArrayWrapper(unittest.TestCase):
                     ],
                 count = 56,
                 links = [
-                    docspace.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

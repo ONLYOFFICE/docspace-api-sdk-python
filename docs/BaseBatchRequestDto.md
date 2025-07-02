@@ -1,5 +1,4 @@
 # BaseBatchRequestDto
-
 The base batch request parameters.
 
 ## Properties
@@ -13,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.base_batch_request_dto import BaseBatchRequestDto
+from docspace-api-python.models.base_batch_request_dto import BaseBatchRequestDto
 
 # TODO update the JSON string below
 json = "{}"

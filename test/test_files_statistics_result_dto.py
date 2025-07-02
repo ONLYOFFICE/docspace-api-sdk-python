@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.files_statistics_result_dto import FilesStatisticsResultDto
+from docspace-api-python.models.files_statistics_result_dto import FilesStatisticsResultDto
 
 class TestFilesStatisticsResultDto(unittest.TestCase):
     """FilesStatisticsResultDto unit test stubs"""
@@ -49,16 +49,16 @@ class TestFilesStatisticsResultDto(unittest.TestCase):
         model = FilesStatisticsResultDto()
         if include_optional:
             return FilesStatisticsResultDto(
-                my_documents_used_space = docspace.models.files_statistics_folder.FilesStatisticsFolder(
+                my_documents_used_space = docspace-api-python.models.files_statistics_folder.FilesStatisticsFolder(
                     title = 'legacy_1080p_small_wooden_mouse', 
                     used_space = 1234, ),
-                trash_used_space = docspace.models.files_statistics_folder.FilesStatisticsFolder(
+                trash_used_space = docspace-api-python.models.files_statistics_folder.FilesStatisticsFolder(
                     title = 'legacy_1080p_small_wooden_mouse', 
                     used_space = 1234, ),
-                archive_used_space = docspace.models.files_statistics_folder.FilesStatisticsFolder(
+                archive_used_space = docspace-api-python.models.files_statistics_folder.FilesStatisticsFolder(
                     title = 'legacy_1080p_small_wooden_mouse', 
                     used_space = 1234, ),
-                rooms_used_space = docspace.models.files_statistics_folder.FilesStatisticsFolder(
+                rooms_used_space = docspace-api-python.models.files_statistics_folder.FilesStatisticsFolder(
                     title = 'legacy_1080p_small_wooden_mouse', 
                     used_space = 1234, )
             )

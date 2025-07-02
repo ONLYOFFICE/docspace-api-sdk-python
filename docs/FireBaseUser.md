@@ -1,5 +1,4 @@
 # FireBaseUser
-
 The Firebase user parameters.
 
 ## Properties
@@ -17,7 +16,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.fire_base_user import FireBaseUser
+from docspace-api-python.models.fire_base_user import FireBaseUser
 
 # TODO update the JSON string below
 json = "{}"

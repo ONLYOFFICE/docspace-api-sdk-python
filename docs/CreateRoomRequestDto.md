@@ -1,5 +1,4 @@
 # CreateRoomRequestDto
-
 The request parameters for creating a room.
 
 ## Properties
@@ -23,7 +22,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.create_room_request_dto import CreateRoomRequestDto
+from docspace-api-python.models.create_room_request_dto import CreateRoomRequestDto
 
 # TODO update the JSON string below
 json = "{}"

@@ -1,5 +1,4 @@
 # AutoCleanupRequestDto
-
 The auto-clearing request parameters.
 
 ## Properties
@@ -12,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.auto_cleanup_request_dto import AutoCleanupRequestDto
+from docspace-api-python.models.auto_cleanup_request_dto import AutoCleanupRequestDto
 
 # TODO update the JSON string below
 json = "{}"

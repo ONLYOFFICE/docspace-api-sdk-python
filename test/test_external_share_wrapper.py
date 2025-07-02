@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.external_share_wrapper import ExternalShareWrapper
+from docspace-api-python.models.external_share_wrapper import ExternalShareWrapper
 
 class TestExternalShareWrapper(unittest.TestCase):
     """ExternalShareWrapper unit test stubs"""
@@ -49,7 +49,7 @@ class TestExternalShareWrapper(unittest.TestCase):
         model = ExternalShareWrapper()
         if include_optional:
             return ExternalShareWrapper(
-                response = docspace.models.external_share_dto.ExternalShareDto(
+                response = docspace-api-python.models.external_share_dto.ExternalShareDto(
                     status = 0, 
                     id = '9846', 
                     title = 'legacy_1080p_small_wooden_mouse', 
@@ -61,7 +61,7 @@ class TestExternalShareWrapper(unittest.TestCase):
                     is_authenticated = True, ),
                 count = 56,
                 links = [
-                    docspace.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

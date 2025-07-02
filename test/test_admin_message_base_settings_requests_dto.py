@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.admin_message_base_settings_requests_dto import AdminMessageBaseSettingsRequestsDto
+from docspace-api-python.models.admin_message_base_settings_requests_dto import AdminMessageBaseSettingsRequestsDto
 
 class TestAdminMessageBaseSettingsRequestsDto(unittest.TestCase):
     """AdminMessageBaseSettingsRequestsDto unit test stubs"""

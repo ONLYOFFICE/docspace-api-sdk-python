@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.api.settings_storage_api import SettingsStorageApi
+from docspace-api-python.api.settings_storage_api import SettingsStorageApi
 
 
 class TestSettingsStorageApi(unittest.TestCase):

@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.sso_settings_v2_wrapper import SsoSettingsV2Wrapper
+from docspace-api-python.models.sso_settings_v2_wrapper import SsoSettingsV2Wrapper
 
 class TestSsoSettingsV2Wrapper(unittest.TestCase):
     """SsoSettingsV2Wrapper unit test stubs"""
@@ -49,10 +49,10 @@ class TestSsoSettingsV2Wrapper(unittest.TestCase):
         model = SsoSettingsV2Wrapper()
         if include_optional:
             return SsoSettingsV2Wrapper(
-                response = docspace.models.sso_settings_v2.SsoSettingsV2(
+                response = docspace-api-python.models.sso_settings_v2.SsoSettingsV2(
                     last_modified = '2008-04-10T06:30+04:00', 
                     enable_sso = True, 
-                    idp_settings = docspace.models.sso_idp_settings.SsoIdpSettings(
+                    idp_settings = docspace-api-python.models.sso_idp_settings.SsoIdpSettings(
                         entity_id = 'some text', 
                         sso_url = 'some text', 
                         sso_binding = 'some text', 
@@ -60,7 +60,7 @@ class TestSsoSettingsV2Wrapper(unittest.TestCase):
                         slo_binding = 'some text', 
                         name_id_format = 'some text', ), 
                     idp_certificates = [
-                        docspace.models.sso_certificate.SsoCertificate(
+                        docspace-api-python.models.sso_certificate.SsoCertificate(
                             self_signed = True, 
                             crt = 'some text', 
                             key = 'some text', 
@@ -69,7 +69,7 @@ class TestSsoSettingsV2Wrapper(unittest.TestCase):
                             start_date = '2008-04-10T06:30+04:00', 
                             expired_date = '2008-04-10T06:30+04:00', )
                         ], 
-                    idp_certificate_advanced = docspace.models.sso_idp_certificate_advanced.SsoIdpCertificateAdvanced(
+                    idp_certificate_advanced = docspace-api-python.models.sso_idp_certificate_advanced.SsoIdpCertificateAdvanced(
                         verify_algorithm = 'some text', 
                         verify_auth_responses_sign = True, 
                         verify_logout_requests_sign = True, 
@@ -78,7 +78,7 @@ class TestSsoSettingsV2Wrapper(unittest.TestCase):
                         decrypt_assertions = True, ), 
                     sp_login_label = 'some text', 
                     sp_certificates = [
-                        docspace.models.sso_certificate.SsoCertificate(
+                        docspace-api-python.models.sso_certificate.SsoCertificate(
                             self_signed = True, 
                             crt = 'some text', 
                             key = 'some text', 
@@ -87,7 +87,7 @@ class TestSsoSettingsV2Wrapper(unittest.TestCase):
                             start_date = '2008-04-10T06:30+04:00', 
                             expired_date = '2008-04-10T06:30+04:00', )
                         ], 
-                    sp_certificate_advanced = docspace.models.sso_sp_certificate_advanced.SsoSpCertificateAdvanced(
+                    sp_certificate_advanced = docspace-api-python.models.sso_sp_certificate_advanced.SsoSpCertificateAdvanced(
                         signing_algorithm = 'some text', 
                         sign_auth_requests = True, 
                         sign_logout_requests = True, 
@@ -95,7 +95,7 @@ class TestSsoSettingsV2Wrapper(unittest.TestCase):
                         encrypt_algorithm = 'some text', 
                         decrypt_algorithm = 'some text', 
                         encrypt_assertions = True, ), 
-                    field_mapping = docspace.models.sso_field_mapping.SsoFieldMapping(
+                    field_mapping = docspace-api-python.models.sso_field_mapping.SsoFieldMapping(
                         first_name = 'Winfield', 
                         last_name = 'Wyman', 
                         email = 'Sydney_Roberts4@hotmail.com', 
@@ -107,7 +107,7 @@ class TestSsoSettingsV2Wrapper(unittest.TestCase):
                     disable_email_verification = True, ),
                 count = 56,
                 links = [
-                    docspace.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

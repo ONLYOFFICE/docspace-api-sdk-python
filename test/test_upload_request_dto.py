@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.upload_request_dto import UploadRequestDto
+from docspace-api-python.models.upload_request_dto import UploadRequestDto
 
 class TestUploadRequestDto(unittest.TestCase):
     """UploadRequestDto unit test stubs"""
@@ -50,7 +50,7 @@ class TestUploadRequestDto(unittest.TestCase):
         if include_optional:
             return UploadRequestDto(
                 file = bytes(b'blah'),
-                content_type = docspace.models.content_type.ContentType(
+                content_type = docspace-api-python.models.content_type.ContentType(
                     boundary = 'some text', 
                     char_set = 'some text', 
                     media_type = 'some text', 
@@ -58,7 +58,7 @@ class TestUploadRequestDto(unittest.TestCase):
                     parameters = [
                         null
                         ], ),
-                content_disposition = docspace.models.content_disposition.ContentDisposition(
+                content_disposition = docspace-api-python.models.content_disposition.ContentDisposition(
                     disposition_type = 'some text', 
                     parameters = [
                         null

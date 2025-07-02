@@ -1,5 +1,4 @@
 # PerformCustomerOperationRequestDto
-
 Parameters for performing a customer operation
 
 ## Properties
@@ -13,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.perform_customer_operation_request_dto import PerformCustomerOperationRequestDto
+from docspace-api-python.models.perform_customer_operation_request_dto import PerformCustomerOperationRequestDto
 
 # TODO update the JSON string below
 json = "{}"

@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.watermark_additions import WatermarkAdditions
+from docspace-api-python.models.watermark_additions import WatermarkAdditions
 
 class TestWatermarkAdditions(unittest.TestCase):
     """WatermarkAdditions unit test stubs"""

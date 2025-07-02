@@ -1,5 +1,4 @@
 # EditHistoryAuthor
-
 The information about the file editing history author.
 
 ## Properties
@@ -12,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.edit_history_author import EditHistoryAuthor
+from docspace-api-python.models.edit_history_author import EditHistoryAuthor
 
 # TODO update the JSON string below
 json = "{}"

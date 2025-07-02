@@ -1,6 +1,5 @@
 # ProviderArrayWrapper
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.provider_array_wrapper import ProviderArrayWrapper
+from docspace-api-python.models.provider_array_wrapper import ProviderArrayWrapper
 
 # TODO update the JSON string below
 json = "{}"

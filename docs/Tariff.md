@@ -1,5 +1,4 @@
 # Tariff
-
 The tariff parameters.
 
 ## Properties
@@ -18,7 +17,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.tariff import Tariff
+from docspace-api-python.models.tariff import Tariff
 
 # TODO update the JSON string below
 json = "{}"

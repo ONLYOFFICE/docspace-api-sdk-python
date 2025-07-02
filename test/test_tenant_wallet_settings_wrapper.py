@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.tenant_wallet_settings_wrapper import TenantWalletSettingsWrapper
+from docspace-api-python.models.tenant_wallet_settings_wrapper import TenantWalletSettingsWrapper
 
 class TestTenantWalletSettingsWrapper(unittest.TestCase):
     """TenantWalletSettingsWrapper unit test stubs"""
@@ -49,7 +49,7 @@ class TestTenantWalletSettingsWrapper(unittest.TestCase):
         model = TenantWalletSettingsWrapper()
         if include_optional:
             return TenantWalletSettingsWrapper(
-                settings = docspace.models.tenant_wallet_settings.TenantWalletSettings(
+                settings = docspace-api-python.models.tenant_wallet_settings.TenantWalletSettings(
                     enabled = True, 
                     min_balance = 1234, 
                     up_to_balance = 1234, 

@@ -1,5 +1,4 @@
 # PasswordSettingsRequestsDto
-
 The request parameters for configuring the password complexity requirements.
 
 ## Properties
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.password_settings_requests_dto import PasswordSettingsRequestsDto
+from docspace-api-python.models.password_settings_requests_dto import PasswordSettingsRequestsDto
 
 # TODO update the JSON string below
 json = "{}"

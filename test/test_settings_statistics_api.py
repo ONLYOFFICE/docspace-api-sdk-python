@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.api.settings_statistics_api import SettingsStatisticsApi
+from docspace-api-python.api.settings_statistics_api import SettingsStatisticsApi
 
 
 class TestSettingsStatisticsApi(unittest.TestCase):

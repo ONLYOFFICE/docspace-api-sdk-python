@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.module_type import ModuleType
+from docspace-api-python.models.module_type import ModuleType
 
 class TestModuleType(unittest.TestCase):
     """ModuleType unit test stubs"""

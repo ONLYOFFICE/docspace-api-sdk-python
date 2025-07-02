@@ -1,5 +1,4 @@
 # Delete
-
 The parameters for deleting a file.
 
 ## Properties
@@ -12,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.delete import Delete
+from docspace-api-python.models.delete import Delete
 
 # TODO update the JSON string below
 json = "{}"

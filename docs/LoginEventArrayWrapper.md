@@ -1,6 +1,5 @@
 # LoginEventArrayWrapper
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.login_event_array_wrapper import LoginEventArrayWrapper
+from docspace-api-python.models.login_event_array_wrapper import LoginEventArrayWrapper
 
 # TODO update the JSON string below
 json = "{}"

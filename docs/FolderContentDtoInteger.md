@@ -1,5 +1,4 @@
 # FolderContentDtoInteger
-
 The folder content information.
 
 ## Properties
@@ -18,7 +17,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.folder_content_dto_integer import FolderContentDtoInteger
+from docspace-api-python.models.folder_content_dto_integer import FolderContentDtoInteger
 
 # TODO update the JSON string below
 json = "{}"

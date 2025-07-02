@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.templates_request_dto import TemplatesRequestDto
+from docspace-api-python.models.templates_request_dto import TemplatesRequestDto
 
 class TestTemplatesRequestDto(unittest.TestCase):
     """TemplatesRequestDto unit test stubs"""

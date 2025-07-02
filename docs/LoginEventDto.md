@@ -1,5 +1,4 @@
 # LoginEventDto
-
 The login event parameters.
 
 ## Properties
@@ -23,7 +22,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.login_event_dto import LoginEventDto
+from docspace-api-python.models.login_event_dto import LoginEventDto
 
 # TODO update the JSON string below
 json = "{}"

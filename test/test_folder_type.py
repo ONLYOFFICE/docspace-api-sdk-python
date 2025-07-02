@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.folder_type import FolderType
+from docspace-api-python.models.folder_type import FolderType
 
 class TestFolderType(unittest.TestCase):
     """FolderType unit test stubs"""

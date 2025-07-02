@@ -1,5 +1,4 @@
 # Paragraph
-
 The paragraph parameters.
 
 ## Properties
@@ -12,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.paragraph import Paragraph
+from docspace-api-python.models.paragraph import Paragraph
 
 # TODO update the JSON string below
 json = "{}"

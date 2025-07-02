@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.settings_dto import SettingsDto
+from docspace-api-python.models.settings_dto import SettingsDto
 
 class TestSettingsDto(unittest.TestCase):
     """SettingsDto unit test stubs"""
@@ -66,11 +66,11 @@ class TestSettingsDto(unittest.TestCase):
                 is_ami = True,
                 base_domain = 'some text',
                 wizard_token = 'some text',
-                password_hash = docspace.models.password_hasher.PasswordHasher(
+                password_hash = docspace-api-python.models.password_hasher.PasswordHasher(
                     size = 1234, 
                     iterations = 1234, 
                     salt = 'some text', ),
-                firebase = docspace.models.firebase_dto.FirebaseDto(
+                firebase = docspace-api-python.models.firebase_dto.FirebaseDto(
                     api_key = 'some text', 
                     auth_domain = 'some text', 
                     project_id = 'some text', 
@@ -87,7 +87,7 @@ class TestSettingsDto(unittest.TestCase):
                 tenant_status = 0,
                 tenant_alias = 'some text',
                 display_about = True,
-                domain_validator = docspace.models.tenant_domain_validator.TenantDomainValidator(
+                domain_validator = docspace-api-python.models.tenant_domain_validator.TenantDomainValidator(
                     regex = 'some text', 
                     min_length = 1234, 
                     max_length = 63, ),
@@ -98,15 +98,15 @@ class TestSettingsDto(unittest.TestCase):
                 limited_access_dev_tools_for_users = True,
                 user_name_regex = 'some text',
                 invitation_limit = 1234,
-                plugins = docspace.models.plugins_dto.PluginsDto(
+                plugins = docspace-api-python.models.plugins_dto.PluginsDto(
                     enabled = True, 
                     upload = True, 
                     delete = True, ),
-                deep_link = docspace.models.deep_link_dto.DeepLinkDto(
+                deep_link = docspace-api-python.models.deep_link_dto.DeepLinkDto(
                     android_package_name = 'some text', 
                     url = 'some text', 
                     ios_package_id = 'some text', ),
-                form_gallery = docspace.models.form_gallery_dto.FormGalleryDto(
+                form_gallery = docspace-api-python.models.form_gallery_dto.FormGalleryDto(
                     path = 'some text', 
                     domain = 'some text', 
                     ext = '.txt', 
@@ -116,11 +116,11 @@ class TestSettingsDto(unittest.TestCase):
                     upload_dashboard = 'some text', ),
                 max_image_upload_size = 1234,
                 logo_text = 'some text',
-                external_resources = docspace.models.culture_specific_external_resources.CultureSpecificExternalResources(
-                    api = docspace.models.culture_specific_external_resource.CultureSpecificExternalResource(
+                external_resources = docspace-api-python.models.culture_specific_external_resources.CultureSpecificExternalResources(
+                    api = docspace-api-python.models.culture_specific_external_resource.CultureSpecificExternalResource(
                         domain = 'some text', 
                         entries = [{"key":"some text","value":"some text"}], ), 
-                    common = docspace.models.culture_specific_external_resource.CultureSpecificExternalResource(
+                    common = docspace-api-python.models.culture_specific_external_resource.CultureSpecificExternalResource(
                         domain = 'some text', 
                         entries = [{"key":"some text","value":"some text"}], ), 
                     forum = , 

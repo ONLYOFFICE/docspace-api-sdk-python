@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.link_type import LinkType
+from docspace-api-python.models.link_type import LinkType
 
 class TestLinkType(unittest.TestCase):
     """LinkType unit test stubs"""

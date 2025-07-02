@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.scope_response import ScopeResponse
+from docspace-api-python.models.scope_response import ScopeResponse
 
 class TestScopeResponse(unittest.TestCase):
     """ScopeResponse unit test stubs"""

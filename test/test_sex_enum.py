@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.sex_enum import SexEnum
+from docspace-api-python.models.sex_enum import SexEnum
 
 class TestSexEnum(unittest.TestCase):
     """SexEnum unit test stubs"""

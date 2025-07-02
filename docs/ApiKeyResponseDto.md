@@ -1,5 +1,4 @@
 # ApiKeyResponseDto
-
 The response data for the API key operations.
 
 ## Properties
@@ -20,7 +19,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.api_key_response_dto import ApiKeyResponseDto
+from docspace-api-python.models.api_key_response_dto import ApiKeyResponseDto
 
 # TODO update the JSON string below
 json = "{}"

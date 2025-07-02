@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.backup_storage_type import BackupStorageType
+from docspace-api-python.models.backup_storage_type import BackupStorageType
 
 class TestBackupStorageType(unittest.TestCase):
     """BackupStorageType unit test stubs"""

@@ -1,5 +1,4 @@
 # GobackConfig
-
 The settings for the \"Open file location\" menu button and upper right corner button.
 
 ## Properties
@@ -11,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.goback_config import GobackConfig
+from docspace-api-python.models.goback_config import GobackConfig
 
 # TODO update the JSON string below
 json = "{}"

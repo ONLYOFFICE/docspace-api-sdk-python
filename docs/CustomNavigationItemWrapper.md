@@ -1,6 +1,5 @@
 # CustomNavigationItemWrapper
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.custom_navigation_item_wrapper import CustomNavigationItemWrapper
+from docspace-api-python.models.custom_navigation_item_wrapper import CustomNavigationItemWrapper
 
 # TODO update the JSON string below
 json = "{}"

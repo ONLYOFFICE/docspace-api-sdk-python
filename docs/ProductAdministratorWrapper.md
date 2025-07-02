@@ -1,6 +1,5 @@
 # ProductAdministratorWrapper
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.product_administrator_wrapper import ProductAdministratorWrapper
+from docspace-api-python.models.product_administrator_wrapper import ProductAdministratorWrapper
 
 # TODO update the JSON string below
 json = "{}"

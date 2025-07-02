@@ -1,5 +1,4 @@
 # SsoCertificate
-
 The SSO certificate parameters.
 
 ## Properties
@@ -17,7 +16,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.sso_certificate import SsoCertificate
+from docspace-api-python.models.sso_certificate import SsoCertificate
 
 # TODO update the JSON string below
 json = "{}"

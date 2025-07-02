@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.display_request_dto import DisplayRequestDto
+from docspace-api-python.models.display_request_dto import DisplayRequestDto
 
 class TestDisplayRequestDto(unittest.TestCase):
     """DisplayRequestDto unit test stubs"""

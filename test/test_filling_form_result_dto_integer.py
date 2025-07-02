@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.filling_form_result_dto_integer import FillingFormResultDtoInteger
+from docspace-api-python.models.filling_form_result_dto_integer import FillingFormResultDtoInteger
 
 class TestFillingFormResultDtoInteger(unittest.TestCase):
     """FillingFormResultDtoInteger unit test stubs"""
@@ -50,14 +50,14 @@ class TestFillingFormResultDtoInteger(unittest.TestCase):
         if include_optional:
             return FillingFormResultDtoInteger(
                 form_number = 1234,
-                completed_form = docspace.models.file_dto_integer.FileDtoInteger(
+                completed_form = docspace-api-python.models.file_dto_integer.FileDtoInteger(
                     title = 'Some titile.txt/ Some title', 
                     access = 0, 
                     shared = False, 
-                    created = docspace.models.api_date_time.ApiDateTime(
+                    created = docspace-api-python.models.api_date_time.ApiDateTime(
                         utc_time = '2008-04-10T06:30+04:00', 
                         time_zone_offset = '00:00:00', ), 
-                    created_by = docspace.models.employee_dto.EmployeeDto(
+                    created_by = docspace-api-python.models.employee_dto.EmployeeDto(
                         id = '', 
                         display_name = 'Mike Zanyatski', 
                         title = 'Manager', 
@@ -69,13 +69,13 @@ class TestFillingFormResultDtoInteger(unittest.TestCase):
                         profile_url = 'some text', 
                         has_avatar = True, 
                         is_anonim = True, ), 
-                    updated = docspace.models.api_date_time.ApiDateTime(
+                    updated = docspace-api-python.models.api_date_time.ApiDateTime(
                         utc_time = '2008-04-10T06:30+04:00', 
                         time_zone_offset = '00:00:00', ), 
                     auto_delete = , 
                     root_folder_type = 0, 
                     parent_room_type = 0, 
-                    updated_by = docspace.models.employee_dto.EmployeeDto(
+                    updated_by = docspace-api-python.models.employee_dto.EmployeeDto(
                         id = '', 
                         display_name = 'Mike Zanyatski', 
                         title = 'Manager', 
@@ -126,7 +126,7 @@ class TestFillingFormResultDtoInteger(unittest.TestCase):
                     start_filling = False, 
                     in_process_folder_id = 1234, 
                     in_process_folder_title = 'some text', 
-                    draft_location = docspace.models.draft_location_integer.DraftLocationInteger(
+                    draft_location = docspace-api-python.models.draft_location_integer.DraftLocationInteger(
                         folder_id = 9846, 
                         folder_title = 'some text', 
                         file_id = 9846, 
@@ -136,14 +136,14 @@ class TestFillingFormResultDtoInteger(unittest.TestCase):
                     last_opened = , 
                     expired = , 
                     file_entry_type = 1, ),
-                original_form = docspace.models.file_dto_integer.FileDtoInteger(
+                original_form = docspace-api-python.models.file_dto_integer.FileDtoInteger(
                     title = 'Some titile.txt/ Some title', 
                     access = 0, 
                     shared = False, 
-                    created = docspace.models.api_date_time.ApiDateTime(
+                    created = docspace-api-python.models.api_date_time.ApiDateTime(
                         utc_time = '2008-04-10T06:30+04:00', 
                         time_zone_offset = '00:00:00', ), 
-                    created_by = docspace.models.employee_dto.EmployeeDto(
+                    created_by = docspace-api-python.models.employee_dto.EmployeeDto(
                         id = '', 
                         display_name = 'Mike Zanyatski', 
                         title = 'Manager', 
@@ -155,13 +155,13 @@ class TestFillingFormResultDtoInteger(unittest.TestCase):
                         profile_url = 'some text', 
                         has_avatar = True, 
                         is_anonim = True, ), 
-                    updated = docspace.models.api_date_time.ApiDateTime(
+                    updated = docspace-api-python.models.api_date_time.ApiDateTime(
                         utc_time = '2008-04-10T06:30+04:00', 
                         time_zone_offset = '00:00:00', ), 
                     auto_delete = , 
                     root_folder_type = 0, 
                     parent_room_type = 0, 
-                    updated_by = docspace.models.employee_dto.EmployeeDto(
+                    updated_by = docspace-api-python.models.employee_dto.EmployeeDto(
                         id = '', 
                         display_name = 'Mike Zanyatski', 
                         title = 'Manager', 
@@ -212,7 +212,7 @@ class TestFillingFormResultDtoInteger(unittest.TestCase):
                     start_filling = False, 
                     in_process_folder_id = 1234, 
                     in_process_folder_title = 'some text', 
-                    draft_location = docspace.models.draft_location_integer.DraftLocationInteger(
+                    draft_location = docspace-api-python.models.draft_location_integer.DraftLocationInteger(
                         folder_id = 9846, 
                         folder_title = 'some text', 
                         file_id = 9846, 
@@ -222,7 +222,7 @@ class TestFillingFormResultDtoInteger(unittest.TestCase):
                     last_opened = , 
                     expired = , 
                     file_entry_type = 1, ),
-                manager = docspace.models.employee_full_dto.EmployeeFullDto(
+                manager = docspace-api-python.models.employee_full_dto.EmployeeFullDto(
                     id = '', 
                     display_name = 'Mike Zanyatski', 
                     title = 'Manager', 
@@ -239,23 +239,23 @@ class TestFillingFormResultDtoInteger(unittest.TestCase):
                     user_name = 'Mike.Zanyatski', 
                     email = 'my@gmail.com', 
                     contacts = [
-                        docspace.models.contact.Contact(
+                        docspace-api-python.models.contact.Contact(
                             type = 'GTalk', 
                             value = 'my@gmail.com', )
                         ], 
-                    birthday = docspace.models.api_date_time.ApiDateTime(
+                    birthday = docspace-api-python.models.api_date_time.ApiDateTime(
                         utc_time = '2008-04-10T06:30+04:00', 
                         time_zone_offset = '00:00:00', ), 
                     sex = 'male', 
                     status = 1, 
                     activation_status = 0, 
-                    terminated = docspace.models.api_date_time.ApiDateTime(
+                    terminated = docspace-api-python.models.api_date_time.ApiDateTime(
                         utc_time = '2008-04-10T06:30+04:00', 
                         time_zone_offset = '00:00:00', ), 
                     department = 'Marketing', 
                     work_from = , 
                     groups = [
-                        docspace.models.group_summary_dto.GroupSummaryDto(
+                        docspace-api-python.models.group_summary_dto.GroupSummaryDto(
                             id = '', 
                             name = 'Group Name', 
                             manager = 'Jake.Zazhitski', )
@@ -279,7 +279,7 @@ class TestFillingFormResultDtoInteger(unittest.TestCase):
                     shared = True, 
                     is_custom_quota = True, 
                     login_event_id = 1234, 
-                    created_by = docspace.models.employee_dto.EmployeeDto(
+                    created_by = docspace-api-python.models.employee_dto.EmployeeDto(
                         id = '', 
                         display_name = 'Mike Zanyatski', 
                         title = 'Manager', 

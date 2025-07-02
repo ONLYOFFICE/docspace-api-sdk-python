@@ -1,5 +1,4 @@
 # UpdateRoomRequest
-
 The request parameters for updating a room.
 
 ## Properties
@@ -20,7 +19,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.update_room_request import UpdateRoomRequest
+from docspace-api-python.models.update_room_request import UpdateRoomRequest
 
 # TODO update the JSON string below
 json = "{}"

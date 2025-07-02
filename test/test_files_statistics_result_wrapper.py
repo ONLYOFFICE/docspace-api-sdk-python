@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.files_statistics_result_wrapper import FilesStatisticsResultWrapper
+from docspace-api-python.models.files_statistics_result_wrapper import FilesStatisticsResultWrapper
 
 class TestFilesStatisticsResultWrapper(unittest.TestCase):
     """FilesStatisticsResultWrapper unit test stubs"""
@@ -49,18 +49,18 @@ class TestFilesStatisticsResultWrapper(unittest.TestCase):
         model = FilesStatisticsResultWrapper()
         if include_optional:
             return FilesStatisticsResultWrapper(
-                response = docspace.models.files_statistics_result_dto.FilesStatisticsResultDto(
-                    my_documents_used_space = docspace.models.files_statistics_folder.FilesStatisticsFolder(
+                response = docspace-api-python.models.files_statistics_result_dto.FilesStatisticsResultDto(
+                    my_documents_used_space = docspace-api-python.models.files_statistics_folder.FilesStatisticsFolder(
                         title = 'legacy_1080p_small_wooden_mouse', 
                         used_space = 1234, ), 
-                    trash_used_space = docspace.models.files_statistics_folder.FilesStatisticsFolder(
+                    trash_used_space = docspace-api-python.models.files_statistics_folder.FilesStatisticsFolder(
                         title = 'legacy_1080p_small_wooden_mouse', 
                         used_space = 1234, ), 
                     archive_used_space = , 
                     rooms_used_space = , ),
                 count = 56,
                 links = [
-                    docspace.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

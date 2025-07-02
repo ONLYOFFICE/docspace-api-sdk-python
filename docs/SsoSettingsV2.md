@@ -1,5 +1,4 @@
 # SsoSettingsV2
-
 The SSO portal settings.
 
 ## Properties
@@ -22,7 +21,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.sso_settings_v2 import SsoSettingsV2
+from docspace-api-python.models.sso_settings_v2 import SsoSettingsV2
 
 # TODO update the JSON string below
 json = "{}"

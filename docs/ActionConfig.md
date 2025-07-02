@@ -1,5 +1,4 @@
 # ActionConfig
-
 The information about the action in the document that will be scrolled to.
 
 ## Properties
@@ -12,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.action_config import ActionConfig
+from docspace-api-python.models.action_config import ActionConfig
 
 # TODO update the JSON string below
 json = "{}"

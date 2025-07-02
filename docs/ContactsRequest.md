@@ -1,5 +1,4 @@
 # ContactsRequest
-
 The contacts request.
 
 ## Properties
@@ -11,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.contacts_request import ContactsRequest
+from docspace-api-python.models.contacts_request import ContactsRequest
 
 # TODO update the JSON string below
 json = "{}"

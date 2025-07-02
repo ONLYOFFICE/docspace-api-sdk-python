@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.white_label_item_path_dto import WhiteLabelItemPathDto
+from docspace-api-python.models.white_label_item_path_dto import WhiteLabelItemPathDto
 
 class TestWhiteLabelItemPathDto(unittest.TestCase):
     """WhiteLabelItemPathDto unit test stubs"""

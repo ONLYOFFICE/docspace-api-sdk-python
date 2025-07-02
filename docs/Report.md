@@ -1,5 +1,4 @@
 # Report
-
 Represents a report containing a collection of operations.
 
 ## Properties
@@ -16,7 +15,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.report import Report
+from docspace-api-python.models.report import Report
 
 # TODO update the JSON string below
 json = "{}"

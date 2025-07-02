@@ -1,5 +1,4 @@
 # RoomDataLifetimeDto
-
 The room data lifetime information.
 
 ## Properties
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.room_data_lifetime_dto import RoomDataLifetimeDto
+from docspace-api-python.models.room_data_lifetime_dto import RoomDataLifetimeDto
 
 # TODO update the JSON string below
 json = "{}"

@@ -1,5 +1,4 @@
 # CoEditingConfig
-
 The co-editing configuration parameters.
 
 ## Properties
@@ -13,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.co_editing_config import CoEditingConfig
+from docspace-api-python.models.co_editing_config import CoEditingConfig
 
 # TODO update the JSON string below
 json = "{}"

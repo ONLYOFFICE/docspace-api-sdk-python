@@ -1,5 +1,4 @@
 # RoomsNotificationsSettingsRequestDto
-
 The request parameters for configuring notification settings for the chat or collaboration rooms.
 
 ## Properties
@@ -12,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.rooms_notifications_settings_request_dto import RoomsNotificationsSettingsRequestDto
+from docspace-api-python.models.rooms_notifications_settings_request_dto import RoomsNotificationsSettingsRequestDto
 
 # TODO update the JSON string below
 json = "{}"

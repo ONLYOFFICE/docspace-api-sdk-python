@@ -1,5 +1,4 @@
 # DeepLinkHandlingMode
-
 The deep link handling mode.
 
 ## Enum

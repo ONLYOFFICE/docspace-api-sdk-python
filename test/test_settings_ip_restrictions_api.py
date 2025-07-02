@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.api.settings_ip_restrictions_api import SettingsIPRestrictionsApi
+from docspace-api-python.api.settings_ip_restrictions_api import SettingsIPRestrictionsApi
 
 
 class TestSettingsIPRestrictionsApi(unittest.TestCase):

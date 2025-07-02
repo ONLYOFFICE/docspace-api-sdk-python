@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.covers_result_dto import CoversResultDto
+from docspace-api-python.models.covers_result_dto import CoversResultDto
 
 class TestCoversResultDto(unittest.TestCase):
     """CoversResultDto unit test stubs"""

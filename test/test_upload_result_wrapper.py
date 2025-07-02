@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.upload_result_wrapper import UploadResultWrapper
+from docspace-api-python.models.upload_result_wrapper import UploadResultWrapper
 
 class TestUploadResultWrapper(unittest.TestCase):
     """UploadResultWrapper unit test stubs"""
@@ -49,13 +49,13 @@ class TestUploadResultWrapper(unittest.TestCase):
         model = UploadResultWrapper()
         if include_optional:
             return UploadResultWrapper(
-                response = docspace.models.upload_result_dto.UploadResultDto(
+                response = docspace-api-python.models.upload_result_dto.UploadResultDto(
                     success = True, 
                     data = {"int":1234,"string":"some text","boolean":true}, 
                     message = 'some text', ),
                 count = 56,
                 links = [
-                    docspace.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

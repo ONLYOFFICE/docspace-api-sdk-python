@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.customization_config_dto import CustomizationConfigDto
+from docspace-api-python.models.customization_config_dto import CustomizationConfigDto
 
 class TestCustomizationConfigDto(unittest.TestCase):
     """CustomizationConfigDto unit test stubs"""
@@ -50,22 +50,22 @@ class TestCustomizationConfigDto(unittest.TestCase):
         if include_optional:
             return CustomizationConfigDto(
                 about = True,
-                customer = docspace.models.customer_config_dto.CustomerConfigDto(
+                customer = docspace-api-python.models.customer_config_dto.CustomerConfigDto(
                     address = 'some text', 
                     logo = 'some text', 
                     logo_dark = 'some text', 
                     mail = 'some text', 
                     name = 'Winfield Upton', 
                     www = 'some text', ),
-                anonymous = docspace.models.anonymous_config_dto.AnonymousConfigDto(
+                anonymous = docspace-api-python.models.anonymous_config_dto.AnonymousConfigDto(
                     request = True, ),
-                feedback = docspace.models.feedback_config.FeedbackConfig(
+                feedback = docspace-api-python.models.feedback_config.FeedbackConfig(
                     url = 'some text', 
                     visible = True, ),
                 forcesave = True,
-                goback = docspace.models.goback_config.GobackConfig(
+                goback = docspace-api-python.models.goback_config.GobackConfig(
                     url = 'some text', ),
-                logo = docspace.models.logo_config_dto.LogoConfigDto(
+                logo = docspace-api-python.models.logo_config_dto.LogoConfigDto(
                     image = 'some text', 
                     image_dark = 'some text', 
                     image_light = 'some text', 
@@ -74,10 +74,10 @@ class TestCustomizationConfigDto(unittest.TestCase):
                     visible = True, ),
                 mention_share = True,
                 review_display = 'some text',
-                submit_form = docspace.models.submit_form.SubmitForm(
+                submit_form = docspace-api-python.models.submit_form.SubmitForm(
                     visible = True, 
                     result_message = 'some text', ),
-                start_filling_form = docspace.models.start_filling_form.StartFillingForm(
+                start_filling_form = docspace-api-python.models.start_filling_form.StartFillingForm(
                     text = 'some text', )
             )
         else:

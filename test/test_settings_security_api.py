@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.api.settings_security_api import SettingsSecurityApi
+from docspace-api-python.api.settings_security_api import SettingsSecurityApi
 
 
 class TestSettingsSecurityApi(unittest.TestCase):

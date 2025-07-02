@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.smtp_settings_dto import SmtpSettingsDto
+from docspace-api-python.models.smtp_settings_dto import SmtpSettingsDto
 
 class TestSmtpSettingsDto(unittest.TestCase):
     """SmtpSettingsDto unit test stubs"""

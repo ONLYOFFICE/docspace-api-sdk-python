@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.webhooks_log_dto import WebhooksLogDto
+from docspace-api-python.models.webhooks_log_dto import WebhooksLogDto
 
 class TestWebhooksLogDto(unittest.TestCase):
     """WebhooksLogDto unit test stubs"""

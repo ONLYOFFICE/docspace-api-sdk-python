@@ -1,6 +1,5 @@
 # AuthenticationTokenWrapper
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.authentication_token_wrapper import AuthenticationTokenWrapper
+from docspace-api-python.models.authentication_token_wrapper import AuthenticationTokenWrapper
 
 # TODO update the JSON string below
 json = "{}"

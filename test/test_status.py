@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.status import Status
+from docspace-api-python.models.status import Status
 
 class TestStatus(unittest.TestCase):
     """Status unit test stubs"""

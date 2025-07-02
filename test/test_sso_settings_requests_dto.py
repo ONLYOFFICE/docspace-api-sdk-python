@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.sso_settings_requests_dto import SsoSettingsRequestsDto
+from docspace-api-python.models.sso_settings_requests_dto import SsoSettingsRequestsDto
 
 class TestSsoSettingsRequestsDto(unittest.TestCase):
     """SsoSettingsRequestsDto unit test stubs"""

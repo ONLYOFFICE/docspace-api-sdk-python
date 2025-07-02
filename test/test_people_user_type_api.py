@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.api.people_user_type_api import PeopleUserTypeApi
+from docspace-api-python.api.people_user_type_api import PeopleUserTypeApi
 
 
 class TestPeopleUserTypeApi(unittest.TestCase):

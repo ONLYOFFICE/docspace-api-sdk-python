@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.quota_array_wrapper import QuotaArrayWrapper
+from docspace-api-python.models.quota_array_wrapper import QuotaArrayWrapper
 
 class TestQuotaArrayWrapper(unittest.TestCase):
     """QuotaArrayWrapper unit test stubs"""
@@ -50,10 +50,10 @@ class TestQuotaArrayWrapper(unittest.TestCase):
         if include_optional:
             return QuotaArrayWrapper(
                 response = [
-                    docspace.models.quota_dto.QuotaDto(
+                    docspace-api-python.models.quota_dto.QuotaDto(
                         id = 9846, 
                         title = 'legacy_1080p_small_wooden_mouse', 
-                        price = docspace.models.price_dto.PriceDto(
+                        price = docspace-api-python.models.price_dto.PriceDto(
                             value = 10, 
                             currency_symbol = 'some text', 
                             iso_currency_symbol = 'some text', ), 
@@ -61,26 +61,26 @@ class TestQuotaArrayWrapper(unittest.TestCase):
                         free = True, 
                         trial = True, 
                         features = [
-                            docspace.models.tenant_quota_feature_dto.TenantQuotaFeatureDto(
+                            docspace-api-python.models.tenant_quota_feature_dto.TenantQuotaFeatureDto(
                                 id = '9846', 
                                 title = 'legacy_1080p_small_wooden_mouse', 
                                 image = 'some text', 
                                 value = {"int":1234,"string":"some text","boolean":true}, 
                                 type = 'some text', 
-                                used = docspace.models.feature_used_dto.FeatureUsedDto(
+                                used = docspace-api-python.models.feature_used_dto.FeatureUsedDto(
                                     value = {"int":1234,"string":"some text","boolean":true}, 
                                     title = 'legacy_1080p_small_wooden_mouse', ), 
                                 price_title = 'some text', )
                             ], 
-                        users_quota = docspace.models.tenant_entity_quota_settings.TenantEntityQuotaSettings(
+                        users_quota = docspace-api-python.models.tenant_entity_quota_settings.TenantEntityQuotaSettings(
                             enable_quota = True, 
                             default_quota = 1234, 
                             last_recalculate_date = '2008-04-10T06:30+04:00', ), 
-                        rooms_quota = docspace.models.tenant_entity_quota_settings.TenantEntityQuotaSettings(
+                        rooms_quota = docspace-api-python.models.tenant_entity_quota_settings.TenantEntityQuotaSettings(
                             enable_quota = True, 
                             default_quota = 1234, 
                             last_recalculate_date = '2008-04-10T06:30+04:00', ), 
-                        tenant_custom_quota = docspace.models.tenant_quota_settings.TenantQuotaSettings(
+                        tenant_custom_quota = docspace-api-python.models.tenant_quota_settings.TenantQuotaSettings(
                             enable_quota = True, 
                             quota = 1234, 
                             last_recalculate_date = '2008-04-10T06:30+04:00', 
@@ -89,7 +89,7 @@ class TestQuotaArrayWrapper(unittest.TestCase):
                     ],
                 count = 56,
                 links = [
-                    docspace.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

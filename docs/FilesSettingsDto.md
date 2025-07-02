@@ -1,5 +1,4 @@
 # FilesSettingsDto
-
 The file settings parameters.
 
 ## Properties
@@ -67,7 +66,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.files_settings_dto import FilesSettingsDto
+from docspace-api-python.models.files_settings_dto import FilesSettingsDto
 
 # TODO update the JSON string below
 json = "{}"

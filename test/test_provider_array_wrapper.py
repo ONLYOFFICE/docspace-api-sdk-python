@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.provider_array_wrapper import ProviderArrayWrapper
+from docspace-api-python.models.provider_array_wrapper import ProviderArrayWrapper
 
 class TestProviderArrayWrapper(unittest.TestCase):
     """ProviderArrayWrapper unit test stubs"""
@@ -50,7 +50,7 @@ class TestProviderArrayWrapper(unittest.TestCase):
         if include_optional:
             return ProviderArrayWrapper(
                 response = [
-                    docspace.models.provider_dto.ProviderDto(
+                    docspace-api-python.models.provider_dto.ProviderDto(
                         name = 'Winfield Upton', 
                         key = 'some text', 
                         connected = True, 
@@ -61,7 +61,7 @@ class TestProviderArrayWrapper(unittest.TestCase):
                     ],
                 count = 56,
                 links = [
-                    docspace.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

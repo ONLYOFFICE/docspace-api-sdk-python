@@ -1,5 +1,4 @@
 # EditHistoryChangesWrapper
-
 The parameters of the file editing history.
 
 ## Properties
@@ -13,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.edit_history_changes_wrapper import EditHistoryChangesWrapper
+from docspace-api-python.models.edit_history_changes_wrapper import EditHistoryChangesWrapper
 
 # TODO update the JSON string below
 json = "{}"

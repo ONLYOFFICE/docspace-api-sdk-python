@@ -1,6 +1,5 @@
 # OwnerChangeInstructionsWrapper
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.owner_change_instructions_wrapper import OwnerChangeInstructionsWrapper
+from docspace-api-python.models.owner_change_instructions_wrapper import OwnerChangeInstructionsWrapper
 
 # TODO update the JSON string below
 json = "{}"

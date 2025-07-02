@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.check_upload_request import CheckUploadRequest
+from docspace-api-python.models.check_upload_request import CheckUploadRequest
 
 class TestCheckUploadRequest(unittest.TestCase):
     """CheckUploadRequest unit test stubs"""

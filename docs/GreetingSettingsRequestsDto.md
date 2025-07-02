@@ -1,5 +1,4 @@
 # GreetingSettingsRequestsDto
-
 The request parameters for managing the greeting settings.
 
 ## Properties
@@ -11,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.greeting_settings_requests_dto import GreetingSettingsRequestsDto
+from docspace-api-python.models.greeting_settings_requests_dto import GreetingSettingsRequestsDto
 
 # TODO update the JSON string below
 json = "{}"

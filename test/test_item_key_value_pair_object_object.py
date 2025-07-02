@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.item_key_value_pair_object_object import ItemKeyValuePairObjectObject
+from docspace-api-python.models.item_key_value_pair_object_object import ItemKeyValuePairObjectObject
 
 class TestItemKeyValuePairObjectObject(unittest.TestCase):
     """ItemKeyValuePairObjectObject unit test stubs"""

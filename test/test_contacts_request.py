@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.contacts_request import ContactsRequest
+from docspace-api-python.models.contacts_request import ContactsRequest
 
 class TestContactsRequest(unittest.TestCase):
     """ContactsRequest unit test stubs"""
@@ -50,7 +50,7 @@ class TestContactsRequest(unittest.TestCase):
         if include_optional:
             return ContactsRequest(
                 contacts = [
-                    docspace.models.contact.Contact(
+                    docspace-api-python.models.contact.Contact(
                         type = 'GTalk', 
                         value = 'my@gmail.com', )
                     ]

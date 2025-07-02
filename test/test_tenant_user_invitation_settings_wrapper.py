@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.tenant_user_invitation_settings_wrapper import TenantUserInvitationSettingsWrapper
+from docspace-api-python.models.tenant_user_invitation_settings_wrapper import TenantUserInvitationSettingsWrapper
 
 class TestTenantUserInvitationSettingsWrapper(unittest.TestCase):
     """TenantUserInvitationSettingsWrapper unit test stubs"""
@@ -49,12 +49,12 @@ class TestTenantUserInvitationSettingsWrapper(unittest.TestCase):
         model = TenantUserInvitationSettingsWrapper()
         if include_optional:
             return TenantUserInvitationSettingsWrapper(
-                response = docspace.models.tenant_user_invitation_settings_dto.TenantUserInvitationSettingsDto(
+                response = docspace-api-python.models.tenant_user_invitation_settings_dto.TenantUserInvitationSettingsDto(
                     allow_inviting_members = True, 
                     allow_inviting_guests = True, ),
                 count = 56,
                 links = [
-                    docspace.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

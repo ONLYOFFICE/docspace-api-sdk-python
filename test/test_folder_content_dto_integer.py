@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.folder_content_dto_integer import FolderContentDtoInteger
+from docspace-api-python.models.folder_content_dto_integer import FolderContentDtoInteger
 
 class TestFolderContentDtoInteger(unittest.TestCase):
     """FolderContentDtoInteger unit test stubs"""
@@ -50,14 +50,14 @@ class TestFolderContentDtoInteger(unittest.TestCase):
         if include_optional:
             return FolderContentDtoInteger(
                 files = [
-                    docspace.models.file_entry_dto.FileEntryDto(
+                    docspace-api-python.models.file_entry_dto.FileEntryDto(
                         title = 'Some titile.txt/ Some title', 
                         access = 0, 
                         shared = False, 
-                        created = docspace.models.api_date_time.ApiDateTime(
+                        created = docspace-api-python.models.api_date_time.ApiDateTime(
                             utc_time = '2008-04-10T06:30+04:00', 
                             time_zone_offset = '00:00:00', ), 
-                        created_by = docspace.models.employee_dto.EmployeeDto(
+                        created_by = docspace-api-python.models.employee_dto.EmployeeDto(
                             id = '', 
                             display_name = 'Mike Zanyatski', 
                             title = 'Manager', 
@@ -69,13 +69,13 @@ class TestFolderContentDtoInteger(unittest.TestCase):
                             profile_url = 'some text', 
                             has_avatar = True, 
                             is_anonim = True, ), 
-                        updated = docspace.models.api_date_time.ApiDateTime(
+                        updated = docspace-api-python.models.api_date_time.ApiDateTime(
                             utc_time = '2008-04-10T06:30+04:00', 
                             time_zone_offset = '00:00:00', ), 
                         auto_delete = , 
                         root_folder_type = 0, 
                         parent_room_type = 0, 
-                        updated_by = docspace.models.employee_dto.EmployeeDto(
+                        updated_by = docspace-api-python.models.employee_dto.EmployeeDto(
                             id = '', 
                             display_name = 'Mike Zanyatski', 
                             title = 'Manager', 
@@ -94,14 +94,14 @@ class TestFolderContentDtoInteger(unittest.TestCase):
                         file_entry_type = 1, )
                     ],
                 folders = [
-                    docspace.models.file_entry_dto.FileEntryDto(
+                    docspace-api-python.models.file_entry_dto.FileEntryDto(
                         title = 'Some titile.txt/ Some title', 
                         access = 0, 
                         shared = False, 
-                        created = docspace.models.api_date_time.ApiDateTime(
+                        created = docspace-api-python.models.api_date_time.ApiDateTime(
                             utc_time = '2008-04-10T06:30+04:00', 
                             time_zone_offset = '00:00:00', ), 
-                        created_by = docspace.models.employee_dto.EmployeeDto(
+                        created_by = docspace-api-python.models.employee_dto.EmployeeDto(
                             id = '', 
                             display_name = 'Mike Zanyatski', 
                             title = 'Manager', 
@@ -113,13 +113,13 @@ class TestFolderContentDtoInteger(unittest.TestCase):
                             profile_url = 'some text', 
                             has_avatar = True, 
                             is_anonim = True, ), 
-                        updated = docspace.models.api_date_time.ApiDateTime(
+                        updated = docspace-api-python.models.api_date_time.ApiDateTime(
                             utc_time = '2008-04-10T06:30+04:00', 
                             time_zone_offset = '00:00:00', ), 
                         auto_delete = , 
                         root_folder_type = 0, 
                         parent_room_type = 0, 
-                        updated_by = docspace.models.employee_dto.EmployeeDto(
+                        updated_by = docspace-api-python.models.employee_dto.EmployeeDto(
                             id = '', 
                             display_name = 'Mike Zanyatski', 
                             title = 'Manager', 
@@ -137,14 +137,14 @@ class TestFolderContentDtoInteger(unittest.TestCase):
                         order = 'some text', 
                         file_entry_type = 1, )
                     ],
-                current = docspace.models.folder_dto_integer.FolderDtoInteger(
+                current = docspace-api-python.models.folder_dto_integer.FolderDtoInteger(
                     title = 'Some titile.txt/ Some title', 
                     access = 0, 
                     shared = False, 
-                    created = docspace.models.api_date_time.ApiDateTime(
+                    created = docspace-api-python.models.api_date_time.ApiDateTime(
                         utc_time = '2008-04-10T06:30+04:00', 
                         time_zone_offset = '00:00:00', ), 
-                    created_by = docspace.models.employee_dto.EmployeeDto(
+                    created_by = docspace-api-python.models.employee_dto.EmployeeDto(
                         id = '', 
                         display_name = 'Mike Zanyatski', 
                         title = 'Manager', 
@@ -156,13 +156,13 @@ class TestFolderContentDtoInteger(unittest.TestCase):
                         profile_url = 'some text', 
                         has_avatar = True, 
                         is_anonim = True, ), 
-                    updated = docspace.models.api_date_time.ApiDateTime(
+                    updated = docspace-api-python.models.api_date_time.ApiDateTime(
                         utc_time = '2008-04-10T06:30+04:00', 
                         time_zone_offset = '00:00:00', ), 
                     auto_delete = , 
                     root_folder_type = 0, 
                     parent_room_type = 0, 
-                    updated_by = docspace.models.employee_dto.EmployeeDto(
+                    updated_by = docspace-api-python.models.employee_dto.EmployeeDto(
                         id = '', 
                         display_name = 'Mike Zanyatski', 
                         title = 'Manager', 
@@ -195,13 +195,13 @@ class TestFolderContentDtoInteger(unittest.TestCase):
                     new = 1234, 
                     mute = True, 
                     tags = ["some text"], 
-                    logo = docspace.models.logo.Logo(
+                    logo = docspace-api-python.models.logo.Logo(
                         original = 'some text', 
                         large = 'some text', 
                         medium = 'some text', 
                         small = 'some text', 
                         color = 'some text', 
-                        cover = docspace.models.logo_cover.LogoCover(
+                        cover = docspace-api-python.models.logo_cover.LogoCover(
                             id = '9846', 
                             data = 'some text', ), ), 
                     pinned = True, 
@@ -209,12 +209,12 @@ class TestFolderContentDtoInteger(unittest.TestCase):
                     private = True, 
                     indexing = True, 
                     deny_download = True, 
-                    lifetime = docspace.models.room_data_lifetime_dto.RoomDataLifetimeDto(
+                    lifetime = docspace-api-python.models.room_data_lifetime_dto.RoomDataLifetimeDto(
                         delete_permanently = True, 
                         period = 0, 
                         value = 1234, 
                         enabled = True, ), 
-                    watermark = docspace.models.watermark_dto.WatermarkDto(
+                    watermark = docspace-api-python.models.watermark_dto.WatermarkDto(
                         additions = 1, 
                         text = 'some text', 
                         rotate = 1234, 

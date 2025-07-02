@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.provider_dto import ProviderDto
+from docspace-api-python.models.provider_dto import ProviderDto
 
 class TestProviderDto(unittest.TestCase):
     """ProviderDto unit test stubs"""

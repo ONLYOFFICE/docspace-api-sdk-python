@@ -1,5 +1,4 @@
 # Balance
-
 Represents a balance with an account number and a list of sub-accounts.
 
 ## Properties
@@ -12,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.balance import Balance
+from docspace-api-python.models.balance import Balance
 
 # TODO update the JSON string below
 json = "{}"

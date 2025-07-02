@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.api.migration_api import MigrationApi
+from docspace-api-python.api.migration_api import MigrationApi
 
 
 class TestMigrationApi(unittest.TestCase):

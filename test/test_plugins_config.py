@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.plugins_config import PluginsConfig
+from docspace-api-python.models.plugins_config import PluginsConfig
 
 class TestPluginsConfig(unittest.TestCase):
     """PluginsConfig unit test stubs"""

@@ -1,5 +1,4 @@
 # CoversResultDto
-
 The result of the cover request containing the cover image data.
 
 ## Properties
@@ -12,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.covers_result_dto import CoversResultDto
+from docspace-api-python.models.covers_result_dto import CoversResultDto
 
 # TODO update the JSON string below
 json = "{}"

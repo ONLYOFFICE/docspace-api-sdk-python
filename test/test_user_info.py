@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.user_info import UserInfo
+from docspace-api-python.models.user_info import UserInfo
 
 class TestUserInfo(unittest.TestCase):
     """UserInfo unit test stubs"""

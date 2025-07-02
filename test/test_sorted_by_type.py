@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.sorted_by_type import SortedByType
+from docspace-api-python.models.sorted_by_type import SortedByType
 
 class TestSortedByType(unittest.TestCase):
     """SortedByType unit test stubs"""

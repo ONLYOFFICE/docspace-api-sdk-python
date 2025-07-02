@@ -1,5 +1,4 @@
 # LoginSettingsDto
-
 The login settings parameters.
 
 ## Properties
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.login_settings_dto import LoginSettingsDto
+from docspace-api-python.models.login_settings_dto import LoginSettingsDto
 
 # TODO update the JSON string below
 json = "{}"

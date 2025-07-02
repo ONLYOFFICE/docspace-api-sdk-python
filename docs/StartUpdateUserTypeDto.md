@@ -1,5 +1,4 @@
 # StartUpdateUserTypeDto
-
 The parameters for updating the type of the user or guest when reassigning rooms and shared files.
 
 ## Properties
@@ -13,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.start_update_user_type_dto import StartUpdateUserTypeDto
+from docspace-api-python.models.start_update_user_type_dto import StartUpdateUserTypeDto
 
 # TODO update the JSON string below
 json = "{}"

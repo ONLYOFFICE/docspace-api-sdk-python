@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.setup_code_wrapper import SetupCodeWrapper
+from docspace-api-python.models.setup_code_wrapper import SetupCodeWrapper
 
 class TestSetupCodeWrapper(unittest.TestCase):
     """SetupCodeWrapper unit test stubs"""
@@ -49,13 +49,13 @@ class TestSetupCodeWrapper(unittest.TestCase):
         model = SetupCodeWrapper()
         if include_optional:
             return SetupCodeWrapper(
-                response = docspace.models.setup_code.SetupCode(
+                response = docspace-api-python.models.setup_code.SetupCode(
                     account = 'some text', 
                     manual_entry_key = 'some text', 
                     qr_code_setup_image_url = 'some text', ),
                 count = 56,
                 links = [
-                    docspace.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

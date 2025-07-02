@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.api.people_password_api import PeoplePasswordApi
+from docspace-api-python.api.people_password_api import PeoplePasswordApi
 
 
 class TestPeoplePasswordApi(unittest.TestCase):

@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.employee_full_wrapper import EmployeeFullWrapper
+from docspace-api-python.models.employee_full_wrapper import EmployeeFullWrapper
 
 class TestEmployeeFullWrapper(unittest.TestCase):
     """EmployeeFullWrapper unit test stubs"""
@@ -49,7 +49,7 @@ class TestEmployeeFullWrapper(unittest.TestCase):
         model = EmployeeFullWrapper()
         if include_optional:
             return EmployeeFullWrapper(
-                response = docspace.models.employee_full_dto.EmployeeFullDto(
+                response = docspace-api-python.models.employee_full_dto.EmployeeFullDto(
                     id = '', 
                     display_name = 'Mike Zanyatski', 
                     title = 'Manager', 
@@ -66,23 +66,23 @@ class TestEmployeeFullWrapper(unittest.TestCase):
                     user_name = 'Mike.Zanyatski', 
                     email = 'my@gmail.com', 
                     contacts = [
-                        docspace.models.contact.Contact(
+                        docspace-api-python.models.contact.Contact(
                             type = 'GTalk', 
                             value = 'my@gmail.com', )
                         ], 
-                    birthday = docspace.models.api_date_time.ApiDateTime(
+                    birthday = docspace-api-python.models.api_date_time.ApiDateTime(
                         utc_time = '2008-04-10T06:30+04:00', 
                         time_zone_offset = '00:00:00', ), 
                     sex = 'male', 
                     status = 1, 
                     activation_status = 0, 
-                    terminated = docspace.models.api_date_time.ApiDateTime(
+                    terminated = docspace-api-python.models.api_date_time.ApiDateTime(
                         utc_time = '2008-04-10T06:30+04:00', 
                         time_zone_offset = '00:00:00', ), 
                     department = 'Marketing', 
                     work_from = , 
                     groups = [
-                        docspace.models.group_summary_dto.GroupSummaryDto(
+                        docspace-api-python.models.group_summary_dto.GroupSummaryDto(
                             id = '', 
                             name = 'Group Name', 
                             manager = 'Jake.Zazhitski', )
@@ -106,7 +106,7 @@ class TestEmployeeFullWrapper(unittest.TestCase):
                     shared = True, 
                     is_custom_quota = True, 
                     login_event_id = 1234, 
-                    created_by = docspace.models.employee_dto.EmployeeDto(
+                    created_by = docspace-api-python.models.employee_dto.EmployeeDto(
                         id = '', 
                         display_name = 'Mike Zanyatski', 
                         title = 'Manager', 
@@ -123,7 +123,7 @@ class TestEmployeeFullWrapper(unittest.TestCase):
                     tfa_app_enabled = True, ),
                 count = 56,
                 links = [
-                    docspace.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

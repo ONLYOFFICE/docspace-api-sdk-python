@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.custom_color_themes_settings_item import CustomColorThemesSettingsItem
+from docspace-api-python.models.custom_color_themes_settings_item import CustomColorThemesSettingsItem
 
 class TestCustomColorThemesSettingsItem(unittest.TestCase):
     """CustomColorThemesSettingsItem unit test stubs"""
@@ -51,10 +51,10 @@ class TestCustomColorThemesSettingsItem(unittest.TestCase):
             return CustomColorThemesSettingsItem(
                 id = 1,
                 name = 'blue',
-                main = docspace.models.custom_color_themes_settings_color_item.CustomColorThemesSettingsColorItem(
+                main = docspace-api-python.models.custom_color_themes_settings_color_item.CustomColorThemesSettingsColorItem(
                     accent = '#4781D1', 
                     buttons = '#5299E0', ),
-                text = docspace.models.custom_color_themes_settings_color_item.CustomColorThemesSettingsColorItem(
+                text = docspace-api-python.models.custom_color_themes_settings_color_item.CustomColorThemesSettingsColorItem(
                     accent = '#4781D1', 
                     buttons = '#5299E0', )
             )

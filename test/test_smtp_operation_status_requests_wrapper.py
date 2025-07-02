@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.smtp_operation_status_requests_wrapper import SmtpOperationStatusRequestsWrapper
+from docspace-api-python.models.smtp_operation_status_requests_wrapper import SmtpOperationStatusRequestsWrapper
 
 class TestSmtpOperationStatusRequestsWrapper(unittest.TestCase):
     """SmtpOperationStatusRequestsWrapper unit test stubs"""
@@ -49,7 +49,7 @@ class TestSmtpOperationStatusRequestsWrapper(unittest.TestCase):
         model = SmtpOperationStatusRequestsWrapper()
         if include_optional:
             return SmtpOperationStatusRequestsWrapper(
-                response = docspace.models.smtp_operation_status_requests_dto.SmtpOperationStatusRequestsDto(
+                response = docspace-api-python.models.smtp_operation_status_requests_dto.SmtpOperationStatusRequestsDto(
                     completed = True, 
                     id = '{some-random-guid}', 
                     error = '', 
@@ -57,7 +57,7 @@ class TestSmtpOperationStatusRequestsWrapper(unittest.TestCase):
                     percents = 0, ),
                 count = 56,
                 links = [
-                    docspace.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

@@ -1,5 +1,4 @@
 # NotificationSettingsDto
-
 The notification settings parameters.
 
 ## Properties
@@ -12,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.notification_settings_dto import NotificationSettingsDto
+from docspace-api-python.models.notification_settings_dto import NotificationSettingsDto
 
 # TODO update the JSON string below
 json = "{}"

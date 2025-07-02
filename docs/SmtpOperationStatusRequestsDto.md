@@ -1,5 +1,4 @@
 # SmtpOperationStatusRequestsDto
-
 The request parameters for tracking SMTP (Simple Mail Transfer Protocol) operation status.
 
 ## Properties
@@ -15,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.smtp_operation_status_requests_dto import SmtpOperationStatusRequestsDto
+from docspace-api-python.models.smtp_operation_status_requests_dto import SmtpOperationStatusRequestsDto
 
 # TODO update the JSON string below
 json = "{}"

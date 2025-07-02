@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.wizard_requests_dto import WizardRequestsDto
+from docspace-api-python.models.wizard_requests_dto import WizardRequestsDto
 
 class TestWizardRequestsDto(unittest.TestCase):
     """WizardRequestsDto unit test stubs"""

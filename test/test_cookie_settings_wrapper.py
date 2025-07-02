@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.cookie_settings_wrapper import CookieSettingsWrapper
+from docspace-api-python.models.cookie_settings_wrapper import CookieSettingsWrapper
 
 class TestCookieSettingsWrapper(unittest.TestCase):
     """CookieSettingsWrapper unit test stubs"""
@@ -49,12 +49,12 @@ class TestCookieSettingsWrapper(unittest.TestCase):
         model = CookieSettingsWrapper()
         if include_optional:
             return CookieSettingsWrapper(
-                response = docspace.models.cookie_settings_dto.CookieSettingsDto(
+                response = docspace-api-python.models.cookie_settings_dto.CookieSettingsDto(
                     life_time = 1234, 
                     enabled = True, ),
                 count = 56,
                 links = [
-                    docspace.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

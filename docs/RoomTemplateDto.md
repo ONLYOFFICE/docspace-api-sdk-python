@@ -1,5 +1,4 @@
 # RoomTemplateDto
-
 The room template parameters.
 
 ## Properties
@@ -21,7 +20,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.room_template_dto import RoomTemplateDto
+from docspace-api-python.models.room_template_dto import RoomTemplateDto
 
 # TODO update the JSON string below
 json = "{}"

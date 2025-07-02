@@ -1,5 +1,4 @@
 # ProductAdministratorDto
-
 The product administrator parameters.
 
 ## Properties
@@ -13,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.product_administrator_dto import ProductAdministratorDto
+from docspace-api-python.models.product_administrator_dto import ProductAdministratorDto
 
 # TODO update the JSON string below
 json = "{}"

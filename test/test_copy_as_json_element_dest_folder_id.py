@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.copy_as_json_element_dest_folder_id import CopyAsJsonElementDestFolderId
+from docspace-api-python.models.copy_as_json_element_dest_folder_id import CopyAsJsonElementDestFolderId
 
 class TestCopyAsJsonElementDestFolderId(unittest.TestCase):
     """CopyAsJsonElementDestFolderId unit test stubs"""

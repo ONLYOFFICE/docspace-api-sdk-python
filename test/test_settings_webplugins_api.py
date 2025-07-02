@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.api.settings_webplugins_api import SettingsWebpluginsApi
+from docspace-api-python.api.settings_webplugins_api import SettingsWebpluginsApi
 
 
 class TestSettingsWebpluginsApi(unittest.TestCase):

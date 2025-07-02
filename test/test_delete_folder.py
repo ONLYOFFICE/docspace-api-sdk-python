@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.delete_folder import DeleteFolder
+from docspace-api-python.models.delete_folder import DeleteFolder
 
 class TestDeleteFolder(unittest.TestCase):
     """DeleteFolder unit test stubs"""

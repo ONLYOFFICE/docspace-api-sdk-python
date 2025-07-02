@@ -1,5 +1,4 @@
 # QuotaState
-
 [0 - Active, 1 - Overdue]
 
 ## Enum

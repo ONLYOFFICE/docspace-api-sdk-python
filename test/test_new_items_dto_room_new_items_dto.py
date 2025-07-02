@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.new_items_dto_room_new_items_dto import NewItemsDtoRoomNewItemsDto
+from docspace-api-python.models.new_items_dto_room_new_items_dto import NewItemsDtoRoomNewItemsDto
 
 class TestNewItemsDtoRoomNewItemsDto(unittest.TestCase):
     """NewItemsDtoRoomNewItemsDto unit test stubs"""
@@ -49,19 +49,19 @@ class TestNewItemsDtoRoomNewItemsDto(unittest.TestCase):
         model = NewItemsDtoRoomNewItemsDto()
         if include_optional:
             return NewItemsDtoRoomNewItemsDto(
-                var_date = docspace.models.api_date_time.ApiDateTime(
+                var_date = docspace-api-python.models.api_date_time.ApiDateTime(
                     utc_time = '2008-04-10T06:30+04:00', 
                     time_zone_offset = '00:00:00', ),
                 items = [
-                    docspace.models.room_new_items_dto.RoomNewItemsDto(
-                        room = docspace.models.file_entry_dto.FileEntryDto(
+                    docspace-api-python.models.room_new_items_dto.RoomNewItemsDto(
+                        room = docspace-api-python.models.file_entry_dto.FileEntryDto(
                             title = 'Some titile.txt/ Some title', 
                             access = 0, 
                             shared = False, 
-                            created = docspace.models.api_date_time.ApiDateTime(
+                            created = docspace-api-python.models.api_date_time.ApiDateTime(
                                 utc_time = '2008-04-10T06:30+04:00', 
                                 time_zone_offset = '00:00:00', ), 
-                            created_by = docspace.models.employee_dto.EmployeeDto(
+                            created_by = docspace-api-python.models.employee_dto.EmployeeDto(
                                 id = '', 
                                 display_name = 'Mike Zanyatski', 
                                 title = 'Manager', 
@@ -73,13 +73,13 @@ class TestNewItemsDtoRoomNewItemsDto(unittest.TestCase):
                                 profile_url = 'some text', 
                                 has_avatar = True, 
                                 is_anonim = True, ), 
-                            updated = docspace.models.api_date_time.ApiDateTime(
+                            updated = docspace-api-python.models.api_date_time.ApiDateTime(
                                 utc_time = '2008-04-10T06:30+04:00', 
                                 time_zone_offset = '00:00:00', ), 
                             auto_delete = , 
                             root_folder_type = 0, 
                             parent_room_type = 0, 
-                            updated_by = docspace.models.employee_dto.EmployeeDto(
+                            updated_by = docspace-api-python.models.employee_dto.EmployeeDto(
                                 id = '', 
                                 display_name = 'Mike Zanyatski', 
                                 title = 'Manager', 
@@ -97,7 +97,7 @@ class TestNewItemsDtoRoomNewItemsDto(unittest.TestCase):
                             order = 'some text', 
                             file_entry_type = 1, ), 
                         items = [
-                            docspace.models.file_entry_dto.FileEntryDto(
+                            docspace-api-python.models.file_entry_dto.FileEntryDto(
                                 title = 'Some titile.txt/ Some title', 
                                 shared = False, 
                                 provider_item = True, 

@@ -1,6 +1,5 @@
 # ItemKeyValuePairObjectObject
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -11,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.item_key_value_pair_object_object import ItemKeyValuePairObjectObject
+from docspace-api-python.models.item_key_value_pair_object_object import ItemKeyValuePairObjectObject
 
 # TODO update the JSON string below
 json = "{}"

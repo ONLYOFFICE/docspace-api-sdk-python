@@ -1,6 +1,5 @@
 # FillingFormResultIntegerWrapper
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.filling_form_result_integer_wrapper import FillingFormResultIntegerWrapper
+from docspace-api-python.models.filling_form_result_integer_wrapper import FillingFormResultIntegerWrapper
 
 # TODO update the JSON string below
 json = "{}"

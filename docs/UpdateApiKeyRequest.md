@@ -1,5 +1,4 @@
 # UpdateApiKeyRequest
-
 The request parameters for updating an existing API key.
 
 ## Properties
@@ -13,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.update_api_key_request import UpdateApiKeyRequest
+from docspace-api-python.models.update_api_key_request import UpdateApiKeyRequest
 
 # TODO update the JSON string below
 json = "{}"

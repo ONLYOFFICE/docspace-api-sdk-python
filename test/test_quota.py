@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.quota import Quota
+from docspace-api-python.models.quota import Quota
 
 class TestQuota(unittest.TestCase):
     """Quota unit test stubs"""

@@ -1,5 +1,4 @@
 # DraftLocationInteger
-
 The file draft parameters.
 
 ## Properties
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.draft_location_integer import DraftLocationInteger
+from docspace-api-python.models.draft_location_integer import DraftLocationInteger
 
 # TODO update the JSON string below
 json = "{}"

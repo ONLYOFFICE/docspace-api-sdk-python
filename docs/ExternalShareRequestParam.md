@@ -1,5 +1,4 @@
 # ExternalShareRequestParam
-
 The external data parameters.
 
 ## Properties
@@ -11,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.external_share_request_param import ExternalShareRequestParam
+from docspace-api-python.models.external_share_request_param import ExternalShareRequestParam
 
 # TODO update the JSON string below
 json = "{}"

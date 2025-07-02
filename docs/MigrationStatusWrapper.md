@@ -1,6 +1,5 @@
 # MigrationStatusWrapper
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.migration_status_wrapper import MigrationStatusWrapper
+from docspace-api-python.models.migration_status_wrapper import MigrationStatusWrapper
 
 # TODO update the JSON string below
 json = "{}"

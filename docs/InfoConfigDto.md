@@ -1,5 +1,4 @@
 # InfoConfigDto
-
 The information config parameters.
 
 ## Properties
@@ -16,7 +15,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.info_config_dto import InfoConfigDto
+from docspace-api-python.models.info_config_dto import InfoConfigDto
 
 # TODO update the JSON string below
 json = "{}"

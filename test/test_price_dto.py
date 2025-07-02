@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.price_dto import PriceDto
+from docspace-api-python.models.price_dto import PriceDto
 
 class TestPriceDto(unittest.TestCase):
     """PriceDto unit test stubs"""

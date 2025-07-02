@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.custom_color_themes_settings_wrapper import CustomColorThemesSettingsWrapper
+from docspace-api-python.models.custom_color_themes_settings_wrapper import CustomColorThemesSettingsWrapper
 
 class TestCustomColorThemesSettingsWrapper(unittest.TestCase):
     """CustomColorThemesSettingsWrapper unit test stubs"""
@@ -49,15 +49,15 @@ class TestCustomColorThemesSettingsWrapper(unittest.TestCase):
         model = CustomColorThemesSettingsWrapper()
         if include_optional:
             return CustomColorThemesSettingsWrapper(
-                response = docspace.models.custom_color_themes_settings_dto.CustomColorThemesSettingsDto(
+                response = docspace-api-python.models.custom_color_themes_settings_dto.CustomColorThemesSettingsDto(
                     themes = [
-                        docspace.models.custom_color_themes_settings_item.CustomColorThemesSettingsItem(
+                        docspace-api-python.models.custom_color_themes_settings_item.CustomColorThemesSettingsItem(
                             id = 1, 
                             name = 'blue', 
-                            main = docspace.models.custom_color_themes_settings_color_item.CustomColorThemesSettingsColorItem(
+                            main = docspace-api-python.models.custom_color_themes_settings_color_item.CustomColorThemesSettingsColorItem(
                                 accent = '#4781D1', 
                                 buttons = '#5299E0', ), 
-                            text = docspace.models.custom_color_themes_settings_color_item.CustomColorThemesSettingsColorItem(
+                            text = docspace-api-python.models.custom_color_themes_settings_color_item.CustomColorThemesSettingsColorItem(
                                 accent = '#4781D1', 
                                 buttons = '#5299E0', ), )
                         ], 
@@ -65,7 +65,7 @@ class TestCustomColorThemesSettingsWrapper(unittest.TestCase):
                     limit = 1234, ),
                 count = 56,
                 links = [
-                    docspace.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

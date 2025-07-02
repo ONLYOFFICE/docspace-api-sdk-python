@@ -1,5 +1,4 @@
 # GroupSummaryDto
-
 The group summary parameters.
 
 ## Properties
@@ -13,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.group_summary_dto import GroupSummaryDto
+from docspace-api-python.models.group_summary_dto import GroupSummaryDto
 
 # TODO update the JSON string below
 json = "{}"

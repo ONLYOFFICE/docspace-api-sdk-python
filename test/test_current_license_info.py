@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.current_license_info import CurrentLicenseInfo
+from docspace-api-python.models.current_license_info import CurrentLicenseInfo
 
 class TestCurrentLicenseInfo(unittest.TestCase):
     """CurrentLicenseInfo unit test stubs"""

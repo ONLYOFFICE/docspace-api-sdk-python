@@ -1,5 +1,4 @@
 # PriceDto
-
 The price parameters.
 
 ## Properties
@@ -13,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.price_dto import PriceDto
+from docspace-api-python.models.price_dto import PriceDto
 
 # TODO update the JSON string below
 json = "{}"

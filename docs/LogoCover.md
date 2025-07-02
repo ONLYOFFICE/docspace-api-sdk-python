@@ -1,5 +1,4 @@
 # LogoCover
-
 The logo cover information.
 
 ## Properties
@@ -12,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.logo_cover import LogoCover
+from docspace-api-python.models.logo_cover import LogoCover
 
 # TODO update the JSON string below
 json = "{}"

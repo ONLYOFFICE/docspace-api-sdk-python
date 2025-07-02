@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.form_role import FormRole
+from docspace-api-python.models.form_role import FormRole
 
 class TestFormRole(unittest.TestCase):
     """FormRole unit test stubs"""

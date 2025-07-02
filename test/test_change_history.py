@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.change_history import ChangeHistory
+from docspace-api-python.models.change_history import ChangeHistory
 
 class TestChangeHistory(unittest.TestCase):
     """ChangeHistory unit test stubs"""

@@ -1,5 +1,4 @@
 # TenantEntityQuotaSettings
-
 The tenant entity quota settings.
 
 ## Properties
@@ -13,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.tenant_entity_quota_settings import TenantEntityQuotaSettings
+from docspace-api-python.models.tenant_entity_quota_settings import TenantEntityQuotaSettings
 
 # TODO update the JSON string below
 json = "{}"

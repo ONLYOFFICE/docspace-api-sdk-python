@@ -1,5 +1,4 @@
 # CreateThirdPartyRoom
-
 The parameters for creating a third-party room.
 
 ## Properties
@@ -20,7 +19,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.create_third_party_room import CreateThirdPartyRoom
+from docspace-api-python.models.create_third_party_room import CreateThirdPartyRoom
 
 # TODO update the JSON string below
 json = "{}"

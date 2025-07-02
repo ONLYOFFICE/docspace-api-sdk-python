@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.orders_item_request_dto_integer import OrdersItemRequestDtoInteger
+from docspace-api-python.models.orders_item_request_dto_integer import OrdersItemRequestDtoInteger
 
 class TestOrdersItemRequestDtoInteger(unittest.TestCase):
     """OrdersItemRequestDtoInteger unit test stubs"""

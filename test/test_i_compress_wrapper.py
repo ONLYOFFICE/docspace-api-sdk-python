@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.i_compress_wrapper import ICompressWrapper
+from docspace-api-python.models.i_compress_wrapper import ICompressWrapper
 
 class TestICompressWrapper(unittest.TestCase):
     """ICompressWrapper unit test stubs"""
@@ -52,7 +52,7 @@ class TestICompressWrapper(unittest.TestCase):
                 response = None,
                 count = 56,
                 links = [
-                    docspace.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

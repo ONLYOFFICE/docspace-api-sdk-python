@@ -1,5 +1,4 @@
 # CultureSpecificExternalResource
-
 The external resource parameters.
 
 ## Properties
@@ -12,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.culture_specific_external_resource import CultureSpecificExternalResource
+from docspace-api-python.models.culture_specific_external_resource import CultureSpecificExternalResource
 
 # TODO update the JSON string below
 json = "{}"

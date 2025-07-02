@@ -1,106 +1,38 @@
-# docspace.PortalPaymentApi
+# docspace-api-python.PortalPaymentApi
 
 All URIs are relative to *http://localhost:8092*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**calculate_wallet_payment**](PortalPaymentApi.md#calculate_wallet_payment) | **PUT** /api/2.0/portal/payment/calculatewallet | Calculate amount of the wallet payment
-[**create_customer_operations_report**](PortalPaymentApi.md#create_customer_operations_report) | **POST** /api/2.0/portal/payment/customer/operationsreport | Generate the customer operations report
-[**get_accounting_currencies**](PortalPaymentApi.md#get_accounting_currencies) | **GET** /api/2.0/portal/payment/accounting/currencies | Get list of currencies
-[**get_checkout_setup_url**](PortalPaymentApi.md#get_checkout_setup_url) | **GET** /api/2.0/portal/payment/chechoutsetupurl | Get the checkout setup page URL
-[**get_customer_balance**](PortalPaymentApi.md#get_customer_balance) | **GET** /api/2.0/portal/payment/customer/balance | Get the customer balance
-[**get_customer_info**](PortalPaymentApi.md#get_customer_info) | **GET** /api/2.0/portal/payment/customerinfo | Get the customer info
-[**get_customer_operations**](PortalPaymentApi.md#get_customer_operations) | **GET** /api/2.0/portal/payment/customer/operations | Get the customer operations
-[**get_payment_account**](PortalPaymentApi.md#get_payment_account) | **GET** /api/2.0/portal/payment/account | Get the payment account
-[**get_payment_currencies**](PortalPaymentApi.md#get_payment_currencies) | **GET** /api/2.0/portal/payment/currencies | Get currencies
-[**get_payment_quotas**](PortalPaymentApi.md#get_payment_quotas) | **GET** /api/2.0/portal/payment/quotas | Get quotas
-[**get_payment_url**](PortalPaymentApi.md#get_payment_url) | **PUT** /api/2.0/portal/payment/url | Get the payment page URL
-[**get_portal_prices**](PortalPaymentApi.md#get_portal_prices) | **GET** /api/2.0/portal/payment/prices | Get prices
-[**get_quota_payment_information**](PortalPaymentApi.md#get_quota_payment_information) | **GET** /api/2.0/portal/payment/quota | Get quota payment information
-[**get_tenant_wallet_settings**](PortalPaymentApi.md#get_tenant_wallet_settings) | **GET** /api/2.0/portal/payment/topupsettings | Get wallet auto top up settings
-[**open_customer_session**](PortalPaymentApi.md#open_customer_session) | **POST** /api/2.0/portal/payment/customer/opensession | Open customer session
-[**perform_customer_operation**](PortalPaymentApi.md#perform_customer_operation) | **POST** /api/2.0/portal/payment/customer/performoperation | Perform customer operation
-[**send_payment_request**](PortalPaymentApi.md#send_payment_request) | **POST** /api/2.0/portal/payment/request | Send a payment request
-[**set_tenant_wallet_settings**](PortalPaymentApi.md#set_tenant_wallet_settings) | **POST** /api/2.0/portal/payment/topupsettings | Set wallet auto top up settings
-[**top_up_deposit**](PortalPaymentApi.md#top_up_deposit) | **POST** /api/2.0/portal/payment/deposit | Put money on deposit
-[**update_payment**](PortalPaymentApi.md#update_payment) | **PUT** /api/2.0/portal/payment/update | Update the payment quantity
-[**update_wallet_payment**](PortalPaymentApi.md#update_wallet_payment) | **PUT** /api/2.0/portal/payment/updatewallet | Update the wallet payment quantity
+[**calculate_wallet_payment**](#calculate_wallet_payment) | **PUT** /api/2.0/portal/payment/calculatewallet | Calculate amount of the wallet payment
+[**create_customer_operations_report**](#create_customer_operations_report) | **POST** /api/2.0/portal/payment/customer/operationsreport | Generate the customer operations report
+[**get_accounting_currencies**](#get_accounting_currencies) | **GET** /api/2.0/portal/payment/accounting/currencies | Get list of currencies
+[**get_checkout_setup_url**](#get_checkout_setup_url) | **GET** /api/2.0/portal/payment/chechoutsetupurl | Get the checkout setup page URL
+[**get_customer_balance**](#get_customer_balance) | **GET** /api/2.0/portal/payment/customer/balance | Get the customer balance
+[**get_customer_info**](#get_customer_info) | **GET** /api/2.0/portal/payment/customerinfo | Get the customer info
+[**get_customer_operations**](#get_customer_operations) | **GET** /api/2.0/portal/payment/customer/operations | Get the customer operations
+[**get_payment_account**](#get_payment_account) | **GET** /api/2.0/portal/payment/account | Get the payment account
+[**get_payment_currencies**](#get_payment_currencies) | **GET** /api/2.0/portal/payment/currencies | Get currencies
+[**get_payment_quotas**](#get_payment_quotas) | **GET** /api/2.0/portal/payment/quotas | Get quotas
+[**get_payment_url**](#get_payment_url) | **PUT** /api/2.0/portal/payment/url | Get the payment page URL
+[**get_portal_prices**](#get_portal_prices) | **GET** /api/2.0/portal/payment/prices | Get prices
+[**get_quota_payment_information**](#get_quota_payment_information) | **GET** /api/2.0/portal/payment/quota | Get quota payment information
+[**get_tenant_wallet_settings**](#get_tenant_wallet_settings) | **GET** /api/2.0/portal/payment/topupsettings | Get wallet auto top up settings
+[**open_customer_session**](#open_customer_session) | **POST** /api/2.0/portal/payment/customer/opensession | Open customer session
+[**perform_customer_operation**](#perform_customer_operation) | **POST** /api/2.0/portal/payment/customer/performoperation | Perform customer operation
+[**send_payment_request**](#send_payment_request) | **POST** /api/2.0/portal/payment/request | Send a payment request
+[**set_tenant_wallet_settings**](#set_tenant_wallet_settings) | **POST** /api/2.0/portal/payment/topupsettings | Set wallet auto top up settings
+[**top_up_deposit**](#top_up_deposit) | **POST** /api/2.0/portal/payment/deposit | Put money on deposit
+[**update_payment**](#update_payment) | **PUT** /api/2.0/portal/payment/update | Update the payment quantity
+[**update_wallet_payment**](#update_wallet_payment) | **PUT** /api/2.0/portal/payment/updatewallet | Update the wallet payment quantity
 
 
 # **calculate_wallet_payment**
 > PaymentCalculationWrapper calculate_wallet_payment(wallet_quantity_request_dto=wallet_quantity_request_dto)
 
-Calculate amount of the wallet payment
-
 Calculate amount of the wallet payment with the parameters specified in the request.
 
-### Example
-
-* Basic Authentication (Basic):
-* OAuth Authentication (OAuth2):
-* Api Key Authentication (ApiKeyBearer):
-* Api Key Authentication (asc_auth_key):
-* Bearer (JWT) Authentication (Bearer):
-
-```python
-import docspace
-from docspace.models.payment_calculation_wrapper import PaymentCalculationWrapper
-from docspace.models.wallet_quantity_request_dto import WalletQuantityRequestDto
-from docspace.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace.Configuration(
-    host = "http://localhost:8092"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure HTTP basic authorization: Basic
-configuration = docspace.Configuration(
-    username = os.environ["USERNAME"],
-    password = os.environ["PASSWORD"]
-)
-
-configuration.access_token = os.environ["ACCESS_TOKEN"]
-
-# Configure API key authorization: ApiKeyBearer
-configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-
-# Enter a context with an instance of the API client
-with docspace.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace.PortalPaymentApi(api_client)
-    wallet_quantity_request_dto = docspace.WalletQuantityRequestDto() # WalletQuantityRequestDto |  (optional)
-
-    try:
-        # Calculate amount of the wallet payment
-        api_response = api_instance.calculate_wallet_payment(wallet_quantity_request_dto=wallet_quantity_request_dto)
-        print("The response of PortalPaymentApi->calculate_wallet_payment:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling PortalPaymentApi->calculate_wallet_payment: %s\n" % e)
-```
-
-
+For more information, see [api.onlyoffice.com]().
 
 ### Parameters
 
@@ -117,46 +49,19 @@ Name | Type | Description  | Notes
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Payment calculation |  -  |
-**401** | Unauthorized |  -  |
-**403** | No permissions to perform this action |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **create_customer_operations_report**
-> StringWrapper create_customer_operations_report(customer_operations_report_request_dto=customer_operations_report_request_dto)
-
-Generate the customer operations report
-
-Generates the customer operations report as csv file and save in Documents.
-
 ### Example
 
-* Basic Authentication (Basic):
-* OAuth Authentication (OAuth2):
-* Api Key Authentication (ApiKeyBearer):
-* Api Key Authentication (asc_auth_key):
-* Bearer (JWT) Authentication (Bearer):
 
 ```python
-import docspace
-from docspace.models.customer_operations_report_request_dto import CustomerOperationsReportRequestDto
-from docspace.models.string_wrapper import StringWrapper
-from docspace.rest import ApiException
+import docspace-api-python
+from docspace-api-python.models.payment_calculation_wrapper import PaymentCalculationWrapper
+from docspace-api-python.models.wallet_quantity_request_dto import WalletQuantityRequestDto
+from docspace-api-python.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace.Configuration(
+configuration = docspace-api-python.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -166,7 +71,7 @@ configuration = docspace.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = docspace.Configuration(
+configuration = docspace-api-python.Configuration(
     username = os.environ["USERNAME"],
     password = os.environ["PASSWORD"]
 )
@@ -186,26 +91,49 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace.Configuration(
+configuration = docspace-api-python.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace.ApiClient(configuration) as api_client:
+with docspace-api-python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace.PortalPaymentApi(api_client)
-    customer_operations_report_request_dto = docspace.CustomerOperationsReportRequestDto() # CustomerOperationsReportRequestDto |  (optional)
+    api_instance = docspace-api-python.PortalPaymentApi(api_client)
+    wallet_quantity_request_dto = docspace-api-python.WalletQuantityRequestDto() # WalletQuantityRequestDto |  (optional)
 
     try:
-        # Generate the customer operations report
-        api_response = api_instance.create_customer_operations_report(customer_operations_report_request_dto=customer_operations_report_request_dto)
-        print("The response of PortalPaymentApi->create_customer_operations_report:\n")
+        # Calculate amount of the wallet payment
+        api_response = api_instance.calculate_wallet_payment(wallet_quantity_request_dto=wallet_quantity_request_dto)
+        print("The response of PortalPaymentApi->calculate_wallet_payment:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling PortalPaymentApi->create_customer_operations_report: %s\n" % e)
+        print("Exception when calling PortalPaymentApi->calculate_wallet_payment: %s\n" % e)
 ```
 
 
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Payment calculation |  -  |
+**401** | Unauthorized |  -  |
+**403** | No permissions to perform this action |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **create_customer_operations_report**
+> StringWrapper create_customer_operations_report(customer_operations_report_request_dto=customer_operations_report_request_dto)
+
+Generates the customer operations report as csv file and save in Documents.
+
+For more information, see [api.onlyoffice.com]().
 
 ### Parameters
 
@@ -222,44 +150,19 @@ Name | Type | Description  | Notes
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | URL to the csv report file |  -  |
-**401** | Unauthorized |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **get_accounting_currencies**
-> CurrencyArrayWrapper get_accounting_currencies()
-
-Get list of currencies
-
-Returns the list of currencies from accounting service.
-
 ### Example
 
-* Basic Authentication (Basic):
-* OAuth Authentication (OAuth2):
-* Api Key Authentication (ApiKeyBearer):
-* Api Key Authentication (asc_auth_key):
-* Bearer (JWT) Authentication (Bearer):
 
 ```python
-import docspace
-from docspace.models.currency_array_wrapper import CurrencyArrayWrapper
-from docspace.rest import ApiException
+import docspace-api-python
+from docspace-api-python.models.customer_operations_report_request_dto import CustomerOperationsReportRequestDto
+from docspace-api-python.models.string_wrapper import StringWrapper
+from docspace-api-python.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace.Configuration(
+configuration = docspace-api-python.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -269,7 +172,7 @@ configuration = docspace.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = docspace.Configuration(
+configuration = docspace-api-python.Configuration(
     username = os.environ["USERNAME"],
     password = os.environ["PASSWORD"]
 )
@@ -289,25 +192,48 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace.Configuration(
+configuration = docspace-api-python.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace.ApiClient(configuration) as api_client:
+with docspace-api-python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace.PortalPaymentApi(api_client)
+    api_instance = docspace-api-python.PortalPaymentApi(api_client)
+    customer_operations_report_request_dto = docspace-api-python.CustomerOperationsReportRequestDto() # CustomerOperationsReportRequestDto |  (optional)
 
     try:
-        # Get list of currencies
-        api_response = api_instance.get_accounting_currencies()
-        print("The response of PortalPaymentApi->get_accounting_currencies:\n")
+        # Generate the customer operations report
+        api_response = api_instance.create_customer_operations_report(customer_operations_report_request_dto=customer_operations_report_request_dto)
+        print("The response of PortalPaymentApi->create_customer_operations_report:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling PortalPaymentApi->get_accounting_currencies: %s\n" % e)
+        print("Exception when calling PortalPaymentApi->create_customer_operations_report: %s\n" % e)
 ```
 
 
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | URL to the csv report file |  -  |
+**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_accounting_currencies**
+> CurrencyArrayWrapper get_accounting_currencies()
+
+Returns the list of currencies from accounting service.
+
+For more information, see [api.onlyoffice.com]().
 
 ### Parameters
 
@@ -321,10 +247,72 @@ This endpoint does not need any parameter.
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
+### Example
+
+
+```python
+import docspace-api-python
+from docspace-api-python.models.currency_array_wrapper import CurrencyArrayWrapper
+from docspace-api-python.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost:8092
+# See configuration.py for a list of all supported configuration parameters.
+configuration = docspace-api-python.Configuration(
+    host = "http://localhost:8092"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure HTTP basic authorization: Basic
+configuration = docspace-api-python.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
+# Configure API key authorization: asc_auth_key
+configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace-api-python.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with docspace-api-python.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace-api-python.PortalPaymentApi(api_client)
+
+    try:
+        # Get list of currencies
+        api_response = api_instance.get_accounting_currencies()
+        print("The response of PortalPaymentApi->get_accounting_currencies:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PortalPaymentApi->get_accounting_currencies: %s\n" % e)
+```
+
+
+
 ### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
+
 
 ### HTTP response details
 
@@ -339,76 +327,9 @@ This endpoint does not need any parameter.
 # **get_checkout_setup_url**
 > StringWrapper get_checkout_setup_url(back_url=back_url)
 
-Get the checkout setup page URL
-
 Returns the URL to the checkout setup page.
 
-### Example
-
-* Basic Authentication (Basic):
-* OAuth Authentication (OAuth2):
-* Api Key Authentication (ApiKeyBearer):
-* Api Key Authentication (asc_auth_key):
-* Bearer (JWT) Authentication (Bearer):
-
-```python
-import docspace
-from docspace.models.string_wrapper import StringWrapper
-from docspace.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace.Configuration(
-    host = "http://localhost:8092"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure HTTP basic authorization: Basic
-configuration = docspace.Configuration(
-    username = os.environ["USERNAME"],
-    password = os.environ["PASSWORD"]
-)
-
-configuration.access_token = os.environ["ACCESS_TOKEN"]
-
-# Configure API key authorization: ApiKeyBearer
-configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-
-# Enter a context with an instance of the API client
-with docspace.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace.PortalPaymentApi(api_client)
-    back_url = 'some text' # str | Back URL (optional)
-
-    try:
-        # Get the checkout setup page URL
-        api_response = api_instance.get_checkout_setup_url(back_url=back_url)
-        print("The response of PortalPaymentApi->get_checkout_setup_url:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling PortalPaymentApi->get_checkout_setup_url: %s\n" % e)
-```
-
-
+For more information, see [api.onlyoffice.com]().
 
 ### Parameters
 
@@ -425,45 +346,18 @@ Name | Type | Description  | Notes
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | The URL to the checkout setup page |  -  |
-**401** | Unauthorized |  -  |
-**403** | No permissions to perform this action |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **get_customer_balance**
-> BalanceWrapper get_customer_balance(refresh=refresh)
-
-Get the customer balance
-
-Returns the customer balance from the accounting service.
-
 ### Example
 
-* Basic Authentication (Basic):
-* OAuth Authentication (OAuth2):
-* Api Key Authentication (ApiKeyBearer):
-* Api Key Authentication (asc_auth_key):
-* Bearer (JWT) Authentication (Bearer):
 
 ```python
-import docspace
-from docspace.models.balance_wrapper import BalanceWrapper
-from docspace.rest import ApiException
+import docspace-api-python
+from docspace-api-python.models.string_wrapper import StringWrapper
+from docspace-api-python.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace.Configuration(
+configuration = docspace-api-python.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -473,7 +367,7 @@ configuration = docspace.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = docspace.Configuration(
+configuration = docspace-api-python.Configuration(
     username = os.environ["USERNAME"],
     password = os.environ["PASSWORD"]
 )
@@ -493,26 +387,49 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace.Configuration(
+configuration = docspace-api-python.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace.ApiClient(configuration) as api_client:
+with docspace-api-python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace.PortalPaymentApi(api_client)
-    refresh = true # bool | Specifies whether to refresh the payment information cache or not. (optional)
+    api_instance = docspace-api-python.PortalPaymentApi(api_client)
+    back_url = 'some text' # str | Back URL (optional)
 
     try:
-        # Get the customer balance
-        api_response = api_instance.get_customer_balance(refresh=refresh)
-        print("The response of PortalPaymentApi->get_customer_balance:\n")
+        # Get the checkout setup page URL
+        api_response = api_instance.get_checkout_setup_url(back_url=back_url)
+        print("The response of PortalPaymentApi->get_checkout_setup_url:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling PortalPaymentApi->get_customer_balance: %s\n" % e)
+        print("Exception when calling PortalPaymentApi->get_checkout_setup_url: %s\n" % e)
 ```
 
 
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The URL to the checkout setup page |  -  |
+**401** | Unauthorized |  -  |
+**403** | No permissions to perform this action |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_customer_balance**
+> BalanceWrapper get_customer_balance(refresh=refresh)
+
+Returns the customer balance from the accounting service.
+
+For more information, see [api.onlyoffice.com]().
 
 ### Parameters
 
@@ -529,45 +446,18 @@ Name | Type | Description  | Notes
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | The customer balance |  -  |
-**401** | Unauthorized |  -  |
-**403** | No permissions to perform this action |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **get_customer_info**
-> CustomerInfoWrapper get_customer_info(refresh=refresh)
-
-Get the customer info
-
-Returns the customer info.
-
 ### Example
 
-* Basic Authentication (Basic):
-* OAuth Authentication (OAuth2):
-* Api Key Authentication (ApiKeyBearer):
-* Api Key Authentication (asc_auth_key):
-* Bearer (JWT) Authentication (Bearer):
 
 ```python
-import docspace
-from docspace.models.customer_info_wrapper import CustomerInfoWrapper
-from docspace.rest import ApiException
+import docspace-api-python
+from docspace-api-python.models.balance_wrapper import BalanceWrapper
+from docspace-api-python.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace.Configuration(
+configuration = docspace-api-python.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -577,7 +467,7 @@ configuration = docspace.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = docspace.Configuration(
+configuration = docspace-api-python.Configuration(
     username = os.environ["USERNAME"],
     password = os.environ["PASSWORD"]
 )
@@ -597,26 +487,49 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace.Configuration(
+configuration = docspace-api-python.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace.ApiClient(configuration) as api_client:
+with docspace-api-python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace.PortalPaymentApi(api_client)
+    api_instance = docspace-api-python.PortalPaymentApi(api_client)
     refresh = true # bool | Specifies whether to refresh the payment information cache or not. (optional)
 
     try:
-        # Get the customer info
-        api_response = api_instance.get_customer_info(refresh=refresh)
-        print("The response of PortalPaymentApi->get_customer_info:\n")
+        # Get the customer balance
+        api_response = api_instance.get_customer_balance(refresh=refresh)
+        print("The response of PortalPaymentApi->get_customer_balance:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling PortalPaymentApi->get_customer_info: %s\n" % e)
+        print("Exception when calling PortalPaymentApi->get_customer_balance: %s\n" % e)
 ```
 
 
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The customer balance |  -  |
+**401** | Unauthorized |  -  |
+**403** | No permissions to perform this action |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_customer_info**
+> CustomerInfoWrapper get_customer_info(refresh=refresh)
+
+Returns the customer info.
+
+For more information, see [api.onlyoffice.com]().
 
 ### Parameters
 
@@ -633,45 +546,18 @@ Name | Type | Description  | Notes
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | The customer info |  -  |
-**401** | Unauthorized |  -  |
-**403** | No permissions to perform this action |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **get_customer_operations**
-> ReportWrapper get_customer_operations(start_date=start_date, end_date=end_date, credit=credit, withdrawal=withdrawal, offset=offset, limit=limit)
-
-Get the customer operations
-
-Returns the report of customer operations from the accounting service.
-
 ### Example
 
-* Basic Authentication (Basic):
-* OAuth Authentication (OAuth2):
-* Api Key Authentication (ApiKeyBearer):
-* Api Key Authentication (asc_auth_key):
-* Bearer (JWT) Authentication (Bearer):
 
 ```python
-import docspace
-from docspace.models.report_wrapper import ReportWrapper
-from docspace.rest import ApiException
+import docspace-api-python
+from docspace-api-python.models.customer_info_wrapper import CustomerInfoWrapper
+from docspace-api-python.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace.Configuration(
+configuration = docspace-api-python.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -681,7 +567,7 @@ configuration = docspace.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = docspace.Configuration(
+configuration = docspace-api-python.Configuration(
     username = os.environ["USERNAME"],
     password = os.environ["PASSWORD"]
 )
@@ -701,31 +587,49 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace.Configuration(
+configuration = docspace-api-python.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace.ApiClient(configuration) as api_client:
+with docspace-api-python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace.PortalPaymentApi(api_client)
-    start_date = '2008-04-10T06:30+04:00' # datetime | Start date (optional)
-    end_date = '2008-04-10T06:30+04:00' # datetime | End date (optional)
-    credit = true # bool | Include credit operations (true by default) (optional)
-    withdrawal = true # bool | Include withdrawal operations (true by default) (optional)
-    offset = 1234 # int | Offset (0 by default) (optional)
-    limit = 1234 # int | Limit (25 by default) (optional)
+    api_instance = docspace-api-python.PortalPaymentApi(api_client)
+    refresh = true # bool | Specifies whether to refresh the payment information cache or not. (optional)
 
     try:
-        # Get the customer operations
-        api_response = api_instance.get_customer_operations(start_date=start_date, end_date=end_date, credit=credit, withdrawal=withdrawal, offset=offset, limit=limit)
-        print("The response of PortalPaymentApi->get_customer_operations:\n")
+        # Get the customer info
+        api_response = api_instance.get_customer_info(refresh=refresh)
+        print("The response of PortalPaymentApi->get_customer_info:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling PortalPaymentApi->get_customer_operations: %s\n" % e)
+        print("Exception when calling PortalPaymentApi->get_customer_info: %s\n" % e)
 ```
 
 
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The customer info |  -  |
+**401** | Unauthorized |  -  |
+**403** | No permissions to perform this action |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_customer_operations**
+> ReportWrapper get_customer_operations(start_date=start_date, end_date=end_date, credit=credit, withdrawal=withdrawal, offset=offset, limit=limit)
+
+Returns the report of customer operations from the accounting service.
+
+For more information, see [api.onlyoffice.com]().
 
 ### Parameters
 
@@ -747,45 +651,18 @@ Name | Type | Description  | Notes
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | The customer operations |  -  |
-**401** | Unauthorized |  -  |
-**403** | No permissions to perform this action |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **get_payment_account**
-> StringWrapper get_payment_account(back_url=back_url)
-
-Get the payment account
-
-Returns the URL to the payment account.
-
 ### Example
 
-* Basic Authentication (Basic):
-* OAuth Authentication (OAuth2):
-* Api Key Authentication (ApiKeyBearer):
-* Api Key Authentication (asc_auth_key):
-* Bearer (JWT) Authentication (Bearer):
 
 ```python
-import docspace
-from docspace.models.string_wrapper import StringWrapper
-from docspace.rest import ApiException
+import docspace-api-python
+from docspace-api-python.models.report_wrapper import ReportWrapper
+from docspace-api-python.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace.Configuration(
+configuration = docspace-api-python.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -795,7 +672,7 @@ configuration = docspace.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = docspace.Configuration(
+configuration = docspace-api-python.Configuration(
     username = os.environ["USERNAME"],
     password = os.environ["PASSWORD"]
 )
@@ -815,26 +692,54 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace.Configuration(
+configuration = docspace-api-python.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace.ApiClient(configuration) as api_client:
+with docspace-api-python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace.PortalPaymentApi(api_client)
-    back_url = 'some text' # str | The URL where the user will be redirected after payment processing. (optional)
+    api_instance = docspace-api-python.PortalPaymentApi(api_client)
+    start_date = '2008-04-10T06:30+04:00' # datetime | Start date (optional)
+    end_date = '2008-04-10T06:30+04:00' # datetime | End date (optional)
+    credit = true # bool | Include credit operations (true by default) (optional)
+    withdrawal = true # bool | Include withdrawal operations (true by default) (optional)
+    offset = 1234 # int | Offset (0 by default) (optional)
+    limit = 1234 # int | Limit (25 by default) (optional)
 
     try:
-        # Get the payment account
-        api_response = api_instance.get_payment_account(back_url=back_url)
-        print("The response of PortalPaymentApi->get_payment_account:\n")
+        # Get the customer operations
+        api_response = api_instance.get_customer_operations(start_date=start_date, end_date=end_date, credit=credit, withdrawal=withdrawal, offset=offset, limit=limit)
+        print("The response of PortalPaymentApi->get_customer_operations:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling PortalPaymentApi->get_payment_account: %s\n" % e)
+        print("Exception when calling PortalPaymentApi->get_customer_operations: %s\n" % e)
 ```
 
 
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The customer operations |  -  |
+**401** | Unauthorized |  -  |
+**403** | No permissions to perform this action |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_payment_account**
+> StringWrapper get_payment_account(back_url=back_url)
+
+Returns the URL to the payment account.
+
+For more information, see [api.onlyoffice.com]().
 
 ### Parameters
 
@@ -851,10 +756,73 @@ Name | Type | Description  | Notes
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
+### Example
+
+
+```python
+import docspace-api-python
+from docspace-api-python.models.string_wrapper import StringWrapper
+from docspace-api-python.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost:8092
+# See configuration.py for a list of all supported configuration parameters.
+configuration = docspace-api-python.Configuration(
+    host = "http://localhost:8092"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure HTTP basic authorization: Basic
+configuration = docspace-api-python.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
+# Configure API key authorization: asc_auth_key
+configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace-api-python.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with docspace-api-python.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace-api-python.PortalPaymentApi(api_client)
+    back_url = 'some text' # str | The URL where the user will be redirected after payment processing. (optional)
+
+    try:
+        # Get the payment account
+        api_response = api_instance.get_payment_account(back_url=back_url)
+        print("The response of PortalPaymentApi->get_payment_account:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PortalPaymentApi->get_payment_account: %s\n" % e)
+```
+
+
+
 ### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
+
 
 ### HTTP response details
 
@@ -869,75 +837,9 @@ Name | Type | Description  | Notes
 # **get_payment_currencies**
 > CurrenciesArrayWrapper get_payment_currencies()
 
-Get currencies
-
 Returns the available portal currencies.
 
-### Example
-
-* Basic Authentication (Basic):
-* OAuth Authentication (OAuth2):
-* Api Key Authentication (ApiKeyBearer):
-* Api Key Authentication (asc_auth_key):
-* Bearer (JWT) Authentication (Bearer):
-
-```python
-import docspace
-from docspace.models.currencies_array_wrapper import CurrenciesArrayWrapper
-from docspace.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace.Configuration(
-    host = "http://localhost:8092"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure HTTP basic authorization: Basic
-configuration = docspace.Configuration(
-    username = os.environ["USERNAME"],
-    password = os.environ["PASSWORD"]
-)
-
-configuration.access_token = os.environ["ACCESS_TOKEN"]
-
-# Configure API key authorization: ApiKeyBearer
-configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-
-# Enter a context with an instance of the API client
-with docspace.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace.PortalPaymentApi(api_client)
-
-    try:
-        # Get currencies
-        api_response = api_instance.get_payment_currencies()
-        print("The response of PortalPaymentApi->get_payment_currencies:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling PortalPaymentApi->get_payment_currencies: %s\n" % e)
-```
-
-
+For more information, see [api.onlyoffice.com]().
 
 ### Parameters
 
@@ -951,44 +853,18 @@ This endpoint does not need any parameter.
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | List of available portal currencies |  -  |
-**401** | Unauthorized |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **get_payment_quotas**
-> QuotaArrayWrapper get_payment_quotas(wallet=wallet)
-
-Get quotas
-
-Returns the available portal quotas.
-
 ### Example
 
-* Basic Authentication (Basic):
-* OAuth Authentication (OAuth2):
-* Api Key Authentication (ApiKeyBearer):
-* Api Key Authentication (asc_auth_key):
-* Bearer (JWT) Authentication (Bearer):
 
 ```python
-import docspace
-from docspace.models.quota_array_wrapper import QuotaArrayWrapper
-from docspace.rest import ApiException
+import docspace-api-python
+from docspace-api-python.models.currencies_array_wrapper import CurrenciesArrayWrapper
+from docspace-api-python.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace.Configuration(
+configuration = docspace-api-python.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -998,7 +874,7 @@ configuration = docspace.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = docspace.Configuration(
+configuration = docspace-api-python.Configuration(
     username = os.environ["USERNAME"],
     password = os.environ["PASSWORD"]
 )
@@ -1018,26 +894,47 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace.Configuration(
+configuration = docspace-api-python.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace.ApiClient(configuration) as api_client:
+with docspace-api-python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace.PortalPaymentApi(api_client)
-    wallet = true # bool | Get wallet quotas only (optional)
+    api_instance = docspace-api-python.PortalPaymentApi(api_client)
 
     try:
-        # Get quotas
-        api_response = api_instance.get_payment_quotas(wallet=wallet)
-        print("The response of PortalPaymentApi->get_payment_quotas:\n")
+        # Get currencies
+        api_response = api_instance.get_payment_currencies()
+        print("The response of PortalPaymentApi->get_payment_currencies:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling PortalPaymentApi->get_payment_quotas: %s\n" % e)
+        print("Exception when calling PortalPaymentApi->get_payment_currencies: %s\n" % e)
 ```
 
 
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | List of available portal currencies |  -  |
+**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_payment_quotas**
+> QuotaArrayWrapper get_payment_quotas(wallet=wallet)
+
+Returns the available portal quotas.
+
+For more information, see [api.onlyoffice.com]().
 
 ### Parameters
 
@@ -1054,45 +951,18 @@ Name | Type | Description  | Notes
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | List of available portal quotas |  -  |
-**401** | Unauthorized |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **get_payment_url**
-> StringWrapper get_payment_url(payment_url_requests_dto=payment_url_requests_dto)
-
-Get the payment page URL
-
-Returns the URL to the payment page.
-
 ### Example
 
-* Basic Authentication (Basic):
-* OAuth Authentication (OAuth2):
-* Api Key Authentication (ApiKeyBearer):
-* Api Key Authentication (asc_auth_key):
-* Bearer (JWT) Authentication (Bearer):
 
 ```python
-import docspace
-from docspace.models.payment_url_requests_dto import PaymentUrlRequestsDto
-from docspace.models.string_wrapper import StringWrapper
-from docspace.rest import ApiException
+import docspace-api-python
+from docspace-api-python.models.quota_array_wrapper import QuotaArrayWrapper
+from docspace-api-python.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace.Configuration(
+configuration = docspace-api-python.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -1102,7 +972,7 @@ configuration = docspace.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = docspace.Configuration(
+configuration = docspace-api-python.Configuration(
     username = os.environ["USERNAME"],
     password = os.environ["PASSWORD"]
 )
@@ -1122,26 +992,48 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace.Configuration(
+configuration = docspace-api-python.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace.ApiClient(configuration) as api_client:
+with docspace-api-python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace.PortalPaymentApi(api_client)
-    payment_url_requests_dto = docspace.PaymentUrlRequestsDto() # PaymentUrlRequestsDto |  (optional)
+    api_instance = docspace-api-python.PortalPaymentApi(api_client)
+    wallet = true # bool | Get wallet quotas only (optional)
 
     try:
-        # Get the payment page URL
-        api_response = api_instance.get_payment_url(payment_url_requests_dto=payment_url_requests_dto)
-        print("The response of PortalPaymentApi->get_payment_url:\n")
+        # Get quotas
+        api_response = api_instance.get_payment_quotas(wallet=wallet)
+        print("The response of PortalPaymentApi->get_payment_quotas:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling PortalPaymentApi->get_payment_url: %s\n" % e)
+        print("Exception when calling PortalPaymentApi->get_payment_quotas: %s\n" % e)
 ```
 
 
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | List of available portal quotas |  -  |
+**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_payment_url**
+> StringWrapper get_payment_url(payment_url_requests_dto=payment_url_requests_dto)
+
+Returns the URL to the payment page.
+
+For more information, see [api.onlyoffice.com]().
 
 ### Parameters
 
@@ -1158,10 +1050,74 @@ Name | Type | Description  | Notes
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
+### Example
+
+
+```python
+import docspace-api-python
+from docspace-api-python.models.payment_url_requests_dto import PaymentUrlRequestsDto
+from docspace-api-python.models.string_wrapper import StringWrapper
+from docspace-api-python.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost:8092
+# See configuration.py for a list of all supported configuration parameters.
+configuration = docspace-api-python.Configuration(
+    host = "http://localhost:8092"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure HTTP basic authorization: Basic
+configuration = docspace-api-python.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
+# Configure API key authorization: asc_auth_key
+configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace-api-python.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with docspace-api-python.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace-api-python.PortalPaymentApi(api_client)
+    payment_url_requests_dto = docspace-api-python.PaymentUrlRequestsDto() # PaymentUrlRequestsDto |  (optional)
+
+    try:
+        # Get the payment page URL
+        api_response = api_instance.get_payment_url(payment_url_requests_dto=payment_url_requests_dto)
+        print("The response of PortalPaymentApi->get_payment_url:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PortalPaymentApi->get_payment_url: %s\n" % e)
+```
+
+
+
 ### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json
+
 
 ### HTTP response details
 
@@ -1176,75 +1132,9 @@ Name | Type | Description  | Notes
 # **get_portal_prices**
 > ObjectWrapper get_portal_prices()
 
-Get prices
-
 Returns the available portal prices.
 
-### Example
-
-* Basic Authentication (Basic):
-* OAuth Authentication (OAuth2):
-* Api Key Authentication (ApiKeyBearer):
-* Api Key Authentication (asc_auth_key):
-* Bearer (JWT) Authentication (Bearer):
-
-```python
-import docspace
-from docspace.models.object_wrapper import ObjectWrapper
-from docspace.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace.Configuration(
-    host = "http://localhost:8092"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure HTTP basic authorization: Basic
-configuration = docspace.Configuration(
-    username = os.environ["USERNAME"],
-    password = os.environ["PASSWORD"]
-)
-
-configuration.access_token = os.environ["ACCESS_TOKEN"]
-
-# Configure API key authorization: ApiKeyBearer
-configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-
-# Enter a context with an instance of the API client
-with docspace.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace.PortalPaymentApi(api_client)
-
-    try:
-        # Get prices
-        api_response = api_instance.get_portal_prices()
-        print("The response of PortalPaymentApi->get_portal_prices:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling PortalPaymentApi->get_portal_prices: %s\n" % e)
-```
-
-
+For more information, see [api.onlyoffice.com]().
 
 ### Parameters
 
@@ -1258,44 +1148,18 @@ This endpoint does not need any parameter.
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | List of available portal prices |  -  |
-**401** | Unauthorized |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **get_quota_payment_information**
-> QuotaWrapper get_quota_payment_information(refresh=refresh)
-
-Get quota payment information
-
-Returns the payment information about the current portal quota.
-
 ### Example
 
-* Basic Authentication (Basic):
-* OAuth Authentication (OAuth2):
-* Api Key Authentication (ApiKeyBearer):
-* Api Key Authentication (asc_auth_key):
-* Bearer (JWT) Authentication (Bearer):
 
 ```python
-import docspace
-from docspace.models.quota_wrapper import QuotaWrapper
-from docspace.rest import ApiException
+import docspace-api-python
+from docspace-api-python.models.object_wrapper import ObjectWrapper
+from docspace-api-python.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace.Configuration(
+configuration = docspace-api-python.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -1305,7 +1169,7 @@ configuration = docspace.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = docspace.Configuration(
+configuration = docspace-api-python.Configuration(
     username = os.environ["USERNAME"],
     password = os.environ["PASSWORD"]
 )
@@ -1325,26 +1189,47 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace.Configuration(
+configuration = docspace-api-python.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace.ApiClient(configuration) as api_client:
+with docspace-api-python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace.PortalPaymentApi(api_client)
-    refresh = true # bool | Specifies whether to refresh the payment information cache or not. (optional)
+    api_instance = docspace-api-python.PortalPaymentApi(api_client)
 
     try:
-        # Get quota payment information
-        api_response = api_instance.get_quota_payment_information(refresh=refresh)
-        print("The response of PortalPaymentApi->get_quota_payment_information:\n")
+        # Get prices
+        api_response = api_instance.get_portal_prices()
+        print("The response of PortalPaymentApi->get_portal_prices:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling PortalPaymentApi->get_quota_payment_information: %s\n" % e)
+        print("Exception when calling PortalPaymentApi->get_portal_prices: %s\n" % e)
 ```
 
 
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | List of available portal prices |  -  |
+**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_quota_payment_information**
+> QuotaWrapper get_quota_payment_information(refresh=refresh)
+
+Returns the payment information about the current portal quota.
+
+For more information, see [api.onlyoffice.com]().
 
 ### Parameters
 
@@ -1361,10 +1246,73 @@ Name | Type | Description  | Notes
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
+### Example
+
+
+```python
+import docspace-api-python
+from docspace-api-python.models.quota_wrapper import QuotaWrapper
+from docspace-api-python.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost:8092
+# See configuration.py for a list of all supported configuration parameters.
+configuration = docspace-api-python.Configuration(
+    host = "http://localhost:8092"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure HTTP basic authorization: Basic
+configuration = docspace-api-python.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
+# Configure API key authorization: asc_auth_key
+configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace-api-python.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with docspace-api-python.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace-api-python.PortalPaymentApi(api_client)
+    refresh = true # bool | Specifies whether to refresh the payment information cache or not. (optional)
+
+    try:
+        # Get quota payment information
+        api_response = api_instance.get_quota_payment_information(refresh=refresh)
+        print("The response of PortalPaymentApi->get_quota_payment_information:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PortalPaymentApi->get_quota_payment_information: %s\n" % e)
+```
+
+
+
 ### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
+
 
 ### HTTP response details
 
@@ -1379,27 +1327,34 @@ Name | Type | Description  | Notes
 # **get_tenant_wallet_settings**
 > TenantWalletSettingsWrapper get_tenant_wallet_settings()
 
-Get wallet auto top up settings
-
 Returns the wallet auto top up settings.
+
+For more information, see [api.onlyoffice.com]().
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**TenantWalletSettingsWrapper**](TenantWalletSettingsWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
-* Basic Authentication (Basic):
-* OAuth Authentication (OAuth2):
-* Api Key Authentication (ApiKeyBearer):
-* Api Key Authentication (asc_auth_key):
-* Bearer (JWT) Authentication (Bearer):
 
 ```python
-import docspace
-from docspace.models.tenant_wallet_settings_wrapper import TenantWalletSettingsWrapper
-from docspace.rest import ApiException
+import docspace-api-python
+from docspace-api-python.models.tenant_wallet_settings_wrapper import TenantWalletSettingsWrapper
+from docspace-api-python.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace.Configuration(
+configuration = docspace-api-python.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -1409,7 +1364,7 @@ configuration = docspace.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = docspace.Configuration(
+configuration = docspace-api-python.Configuration(
     username = os.environ["USERNAME"],
     password = os.environ["PASSWORD"]
 )
@@ -1429,14 +1384,14 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace.Configuration(
+configuration = docspace-api-python.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace.ApiClient(configuration) as api_client:
+with docspace-api-python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace.PortalPaymentApi(api_client)
+    api_instance = docspace-api-python.PortalPaymentApi(api_client)
 
     try:
         # Get wallet auto top up settings
@@ -1449,22 +1404,11 @@ with docspace.ApiClient(configuration) as api_client:
 
 
 
-### Parameters
-
-This endpoint does not need any parameter.
-
-### Return type
-
-[**TenantWalletSettingsWrapper**](TenantWalletSettingsWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
+
 
 ### HTTP response details
 
@@ -1479,77 +1423,9 @@ This endpoint does not need any parameter.
 # **open_customer_session**
 > SessionWrapper open_customer_session(open_customer_session_request_dto=open_customer_session_request_dto)
 
-Open customer session
-
 Trying to open a customer session and block amount money on the balance.
 
-### Example
-
-* Basic Authentication (Basic):
-* OAuth Authentication (OAuth2):
-* Api Key Authentication (ApiKeyBearer):
-* Api Key Authentication (asc_auth_key):
-* Bearer (JWT) Authentication (Bearer):
-
-```python
-import docspace
-from docspace.models.open_customer_session_request_dto import OpenCustomerSessionRequestDto
-from docspace.models.session_wrapper import SessionWrapper
-from docspace.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace.Configuration(
-    host = "http://localhost:8092"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure HTTP basic authorization: Basic
-configuration = docspace.Configuration(
-    username = os.environ["USERNAME"],
-    password = os.environ["PASSWORD"]
-)
-
-configuration.access_token = os.environ["ACCESS_TOKEN"]
-
-# Configure API key authorization: ApiKeyBearer
-configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-
-# Enter a context with an instance of the API client
-with docspace.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace.PortalPaymentApi(api_client)
-    open_customer_session_request_dto = docspace.OpenCustomerSessionRequestDto() # OpenCustomerSessionRequestDto |  (optional)
-
-    try:
-        # Open customer session
-        api_response = api_instance.open_customer_session(open_customer_session_request_dto=open_customer_session_request_dto)
-        print("The response of PortalPaymentApi->open_customer_session:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling PortalPaymentApi->open_customer_session: %s\n" % e)
-```
-
-
+For more information, see [api.onlyoffice.com]().
 
 ### Parameters
 
@@ -1566,46 +1442,19 @@ Name | Type | Description  | Notes
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | The customer session |  -  |
-**401** | Unauthorized |  -  |
-**403** | No permissions to perform this action |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **perform_customer_operation**
-> BooleanWrapper perform_customer_operation(perform_customer_operation_request_dto=perform_customer_operation_request_dto)
-
-Perform customer operation
-
-Perform customer operation and return true if the operation is succesfully provided.
-
 ### Example
 
-* Basic Authentication (Basic):
-* OAuth Authentication (OAuth2):
-* Api Key Authentication (ApiKeyBearer):
-* Api Key Authentication (asc_auth_key):
-* Bearer (JWT) Authentication (Bearer):
 
 ```python
-import docspace
-from docspace.models.boolean_wrapper import BooleanWrapper
-from docspace.models.perform_customer_operation_request_dto import PerformCustomerOperationRequestDto
-from docspace.rest import ApiException
+import docspace-api-python
+from docspace-api-python.models.open_customer_session_request_dto import OpenCustomerSessionRequestDto
+from docspace-api-python.models.session_wrapper import SessionWrapper
+from docspace-api-python.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace.Configuration(
+configuration = docspace-api-python.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -1615,7 +1464,7 @@ configuration = docspace.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = docspace.Configuration(
+configuration = docspace-api-python.Configuration(
     username = os.environ["USERNAME"],
     password = os.environ["PASSWORD"]
 )
@@ -1635,26 +1484,49 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace.Configuration(
+configuration = docspace-api-python.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace.ApiClient(configuration) as api_client:
+with docspace-api-python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace.PortalPaymentApi(api_client)
-    perform_customer_operation_request_dto = docspace.PerformCustomerOperationRequestDto() # PerformCustomerOperationRequestDto |  (optional)
+    api_instance = docspace-api-python.PortalPaymentApi(api_client)
+    open_customer_session_request_dto = docspace-api-python.OpenCustomerSessionRequestDto() # OpenCustomerSessionRequestDto |  (optional)
 
     try:
-        # Perform customer operation
-        api_response = api_instance.perform_customer_operation(perform_customer_operation_request_dto=perform_customer_operation_request_dto)
-        print("The response of PortalPaymentApi->perform_customer_operation:\n")
+        # Open customer session
+        api_response = api_instance.open_customer_session(open_customer_session_request_dto=open_customer_session_request_dto)
+        print("The response of PortalPaymentApi->open_customer_session:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling PortalPaymentApi->perform_customer_operation: %s\n" % e)
+        print("Exception when calling PortalPaymentApi->open_customer_session: %s\n" % e)
 ```
 
 
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The customer session |  -  |
+**401** | Unauthorized |  -  |
+**403** | No permissions to perform this action |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **perform_customer_operation**
+> BooleanWrapper perform_customer_operation(perform_customer_operation_request_dto=perform_customer_operation_request_dto)
+
+Perform customer operation and return true if the operation is succesfully provided.
+
+For more information, see [api.onlyoffice.com]().
 
 ### Parameters
 
@@ -1671,45 +1543,19 @@ Name | Type | Description  | Notes
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Boolean value: true if the operation is succesfully provided |  -  |
-**401** | Unauthorized |  -  |
-**403** | No permissions to perform this action |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **send_payment_request**
-> send_payment_request(sales_requests_dto=sales_requests_dto)
-
-Send a payment request
-
-Sends a request for the portal payment.
-
 ### Example
 
-* Basic Authentication (Basic):
-* OAuth Authentication (OAuth2):
-* Api Key Authentication (ApiKeyBearer):
-* Api Key Authentication (asc_auth_key):
-* Bearer (JWT) Authentication (Bearer):
 
 ```python
-import docspace
-from docspace.models.sales_requests_dto import SalesRequestsDto
-from docspace.rest import ApiException
+import docspace-api-python
+from docspace-api-python.models.boolean_wrapper import BooleanWrapper
+from docspace-api-python.models.perform_customer_operation_request_dto import PerformCustomerOperationRequestDto
+from docspace-api-python.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace.Configuration(
+configuration = docspace-api-python.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -1719,7 +1565,7 @@ configuration = docspace.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = docspace.Configuration(
+configuration = docspace-api-python.Configuration(
     username = os.environ["USERNAME"],
     password = os.environ["PASSWORD"]
 )
@@ -1739,24 +1585,49 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace.Configuration(
+configuration = docspace-api-python.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace.ApiClient(configuration) as api_client:
+with docspace-api-python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace.PortalPaymentApi(api_client)
-    sales_requests_dto = docspace.SalesRequestsDto() # SalesRequestsDto |  (optional)
+    api_instance = docspace-api-python.PortalPaymentApi(api_client)
+    perform_customer_operation_request_dto = docspace-api-python.PerformCustomerOperationRequestDto() # PerformCustomerOperationRequestDto |  (optional)
 
     try:
-        # Send a payment request
-        api_instance.send_payment_request(sales_requests_dto=sales_requests_dto)
+        # Perform customer operation
+        api_response = api_instance.perform_customer_operation(perform_customer_operation_request_dto=perform_customer_operation_request_dto)
+        print("The response of PortalPaymentApi->perform_customer_operation:\n")
+        pprint(api_response)
     except Exception as e:
-        print("Exception when calling PortalPaymentApi->send_payment_request: %s\n" % e)
+        print("Exception when calling PortalPaymentApi->perform_customer_operation: %s\n" % e)
 ```
 
 
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Boolean value: true if the operation is succesfully provided |  -  |
+**401** | Unauthorized |  -  |
+**403** | No permissions to perform this action |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **send_payment_request**
+> send_payment_request(sales_requests_dto=sales_requests_dto)
+
+Sends a request for the portal payment.
+
+For more information, see [api.onlyoffice.com]().
 
 ### Parameters
 
@@ -1773,46 +1644,18 @@ void (empty response body)
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: Not defined
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Ok |  -  |
-**400** | Incorrect email or message text is empty |  -  |
-**401** | Unauthorized |  -  |
-**429** | Request limit is exceeded |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **set_tenant_wallet_settings**
-> TenantWalletSettingsWrapper set_tenant_wallet_settings(tenant_wallet_settings_wrapper=tenant_wallet_settings_wrapper)
-
-Set wallet auto top up settings
-
-Set the wallet auto top up settings.
-
 ### Example
 
-* Basic Authentication (Basic):
-* OAuth Authentication (OAuth2):
-* Api Key Authentication (ApiKeyBearer):
-* Api Key Authentication (asc_auth_key):
-* Bearer (JWT) Authentication (Bearer):
 
 ```python
-import docspace
-from docspace.models.tenant_wallet_settings_wrapper import TenantWalletSettingsWrapper
-from docspace.rest import ApiException
+import docspace-api-python
+from docspace-api-python.models.sales_requests_dto import SalesRequestsDto
+from docspace-api-python.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace.Configuration(
+configuration = docspace-api-python.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -1822,7 +1665,7 @@ configuration = docspace.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = docspace.Configuration(
+configuration = docspace-api-python.Configuration(
     username = os.environ["USERNAME"],
     password = os.environ["PASSWORD"]
 )
@@ -1842,26 +1685,48 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace.Configuration(
+configuration = docspace-api-python.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace.ApiClient(configuration) as api_client:
+with docspace-api-python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace.PortalPaymentApi(api_client)
-    tenant_wallet_settings_wrapper = docspace.TenantWalletSettingsWrapper() # TenantWalletSettingsWrapper |  (optional)
+    api_instance = docspace-api-python.PortalPaymentApi(api_client)
+    sales_requests_dto = docspace-api-python.SalesRequestsDto() # SalesRequestsDto |  (optional)
 
     try:
-        # Set wallet auto top up settings
-        api_response = api_instance.set_tenant_wallet_settings(tenant_wallet_settings_wrapper=tenant_wallet_settings_wrapper)
-        print("The response of PortalPaymentApi->set_tenant_wallet_settings:\n")
-        pprint(api_response)
+        # Send a payment request
+        api_instance.send_payment_request(sales_requests_dto=sales_requests_dto)
     except Exception as e:
-        print("Exception when calling PortalPaymentApi->set_tenant_wallet_settings: %s\n" % e)
+        print("Exception when calling PortalPaymentApi->send_payment_request: %s\n" % e)
 ```
 
 
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: Not defined
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Ok |  -  |
+**400** | Incorrect email or message text is empty |  -  |
+**401** | Unauthorized |  -  |
+**429** | Request limit is exceeded |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **set_tenant_wallet_settings**
+> TenantWalletSettingsWrapper set_tenant_wallet_settings(tenant_wallet_settings_wrapper=tenant_wallet_settings_wrapper)
+
+Set the wallet auto top up settings.
+
+For more information, see [api.onlyoffice.com]().
 
 ### Parameters
 
@@ -1878,46 +1743,18 @@ Name | Type | Description  | Notes
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | The wallet auto top up settings |  -  |
-**401** | Unauthorized |  -  |
-**403** | No permissions to perform this action |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **top_up_deposit**
-> BooleanWrapper top_up_deposit(top_up_deposit_request_dto=top_up_deposit_request_dto)
-
-Put money on deposit
-
-Returns result of putting money on deposit.
-
 ### Example
 
-* Basic Authentication (Basic):
-* OAuth Authentication (OAuth2):
-* Api Key Authentication (ApiKeyBearer):
-* Api Key Authentication (asc_auth_key):
-* Bearer (JWT) Authentication (Bearer):
 
 ```python
-import docspace
-from docspace.models.boolean_wrapper import BooleanWrapper
-from docspace.models.top_up_deposit_request_dto import TopUpDepositRequestDto
-from docspace.rest import ApiException
+import docspace-api-python
+from docspace-api-python.models.tenant_wallet_settings_wrapper import TenantWalletSettingsWrapper
+from docspace-api-python.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace.Configuration(
+configuration = docspace-api-python.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -1927,7 +1764,7 @@ configuration = docspace.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = docspace.Configuration(
+configuration = docspace-api-python.Configuration(
     username = os.environ["USERNAME"],
     password = os.environ["PASSWORD"]
 )
@@ -1947,26 +1784,49 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace.Configuration(
+configuration = docspace-api-python.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace.ApiClient(configuration) as api_client:
+with docspace-api-python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace.PortalPaymentApi(api_client)
-    top_up_deposit_request_dto = docspace.TopUpDepositRequestDto() # TopUpDepositRequestDto |  (optional)
+    api_instance = docspace-api-python.PortalPaymentApi(api_client)
+    tenant_wallet_settings_wrapper = docspace-api-python.TenantWalletSettingsWrapper() # TenantWalletSettingsWrapper |  (optional)
 
     try:
-        # Put money on deposit
-        api_response = api_instance.top_up_deposit(top_up_deposit_request_dto=top_up_deposit_request_dto)
-        print("The response of PortalPaymentApi->top_up_deposit:\n")
+        # Set wallet auto top up settings
+        api_response = api_instance.set_tenant_wallet_settings(tenant_wallet_settings_wrapper=tenant_wallet_settings_wrapper)
+        print("The response of PortalPaymentApi->set_tenant_wallet_settings:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling PortalPaymentApi->top_up_deposit: %s\n" % e)
+        print("Exception when calling PortalPaymentApi->set_tenant_wallet_settings: %s\n" % e)
 ```
 
 
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The wallet auto top up settings |  -  |
+**401** | Unauthorized |  -  |
+**403** | No permissions to perform this action |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **top_up_deposit**
+> BooleanWrapper top_up_deposit(top_up_deposit_request_dto=top_up_deposit_request_dto)
+
+Returns result of putting money on deposit.
+
+For more information, see [api.onlyoffice.com]().
 
 ### Parameters
 
@@ -1983,46 +1843,19 @@ Name | Type | Description  | Notes
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Boolean value: true if the operation is successful |  -  |
-**401** | Unauthorized |  -  |
-**403** | No permissions to perform this action |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **update_payment**
-> BooleanWrapper update_payment(quantity_request_dto=quantity_request_dto)
-
-Update the payment quantity
-
-Updates the payment quantity with the parameters specified in the request.
-
 ### Example
 
-* Basic Authentication (Basic):
-* OAuth Authentication (OAuth2):
-* Api Key Authentication (ApiKeyBearer):
-* Api Key Authentication (asc_auth_key):
-* Bearer (JWT) Authentication (Bearer):
 
 ```python
-import docspace
-from docspace.models.boolean_wrapper import BooleanWrapper
-from docspace.models.quantity_request_dto import QuantityRequestDto
-from docspace.rest import ApiException
+import docspace-api-python
+from docspace-api-python.models.boolean_wrapper import BooleanWrapper
+from docspace-api-python.models.top_up_deposit_request_dto import TopUpDepositRequestDto
+from docspace-api-python.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace.Configuration(
+configuration = docspace-api-python.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -2032,7 +1865,7 @@ configuration = docspace.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = docspace.Configuration(
+configuration = docspace-api-python.Configuration(
     username = os.environ["USERNAME"],
     password = os.environ["PASSWORD"]
 )
@@ -2052,26 +1885,49 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace.Configuration(
+configuration = docspace-api-python.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace.ApiClient(configuration) as api_client:
+with docspace-api-python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace.PortalPaymentApi(api_client)
-    quantity_request_dto = docspace.QuantityRequestDto() # QuantityRequestDto |  (optional)
+    api_instance = docspace-api-python.PortalPaymentApi(api_client)
+    top_up_deposit_request_dto = docspace-api-python.TopUpDepositRequestDto() # TopUpDepositRequestDto |  (optional)
 
     try:
-        # Update the payment quantity
-        api_response = api_instance.update_payment(quantity_request_dto=quantity_request_dto)
-        print("The response of PortalPaymentApi->update_payment:\n")
+        # Put money on deposit
+        api_response = api_instance.top_up_deposit(top_up_deposit_request_dto=top_up_deposit_request_dto)
+        print("The response of PortalPaymentApi->top_up_deposit:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling PortalPaymentApi->update_payment: %s\n" % e)
+        print("Exception when calling PortalPaymentApi->top_up_deposit: %s\n" % e)
 ```
 
 
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Boolean value: true if the operation is successful |  -  |
+**401** | Unauthorized |  -  |
+**403** | No permissions to perform this action |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **update_payment**
+> BooleanWrapper update_payment(quantity_request_dto=quantity_request_dto)
+
+Updates the payment quantity with the parameters specified in the request.
+
+For more information, see [api.onlyoffice.com]().
 
 ### Parameters
 
@@ -2088,46 +1944,19 @@ Name | Type | Description  | Notes
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Boolean value: true if the operation is successful |  -  |
-**401** | Unauthorized |  -  |
-**403** | No permissions to perform this action |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **update_wallet_payment**
-> BooleanWrapper update_wallet_payment(wallet_quantity_request_dto=wallet_quantity_request_dto)
-
-Update the wallet payment quantity
-
-Updates the wallet payment quantity with the parameters specified in the request.
-
 ### Example
 
-* Basic Authentication (Basic):
-* OAuth Authentication (OAuth2):
-* Api Key Authentication (ApiKeyBearer):
-* Api Key Authentication (asc_auth_key):
-* Bearer (JWT) Authentication (Bearer):
 
 ```python
-import docspace
-from docspace.models.boolean_wrapper import BooleanWrapper
-from docspace.models.wallet_quantity_request_dto import WalletQuantityRequestDto
-from docspace.rest import ApiException
+import docspace-api-python
+from docspace-api-python.models.boolean_wrapper import BooleanWrapper
+from docspace-api-python.models.quantity_request_dto import QuantityRequestDto
+from docspace-api-python.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace.Configuration(
+configuration = docspace-api-python.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -2137,7 +1966,7 @@ configuration = docspace.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = docspace.Configuration(
+configuration = docspace-api-python.Configuration(
     username = os.environ["USERNAME"],
     password = os.environ["PASSWORD"]
 )
@@ -2157,26 +1986,49 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace.Configuration(
+configuration = docspace-api-python.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace.ApiClient(configuration) as api_client:
+with docspace-api-python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace.PortalPaymentApi(api_client)
-    wallet_quantity_request_dto = docspace.WalletQuantityRequestDto() # WalletQuantityRequestDto |  (optional)
+    api_instance = docspace-api-python.PortalPaymentApi(api_client)
+    quantity_request_dto = docspace-api-python.QuantityRequestDto() # QuantityRequestDto |  (optional)
 
     try:
-        # Update the wallet payment quantity
-        api_response = api_instance.update_wallet_payment(wallet_quantity_request_dto=wallet_quantity_request_dto)
-        print("The response of PortalPaymentApi->update_wallet_payment:\n")
+        # Update the payment quantity
+        api_response = api_instance.update_payment(quantity_request_dto=quantity_request_dto)
+        print("The response of PortalPaymentApi->update_payment:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling PortalPaymentApi->update_wallet_payment: %s\n" % e)
+        print("Exception when calling PortalPaymentApi->update_payment: %s\n" % e)
 ```
 
 
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Boolean value: true if the operation is successful |  -  |
+**401** | Unauthorized |  -  |
+**403** | No permissions to perform this action |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **update_wallet_payment**
+> BooleanWrapper update_wallet_payment(wallet_quantity_request_dto=wallet_quantity_request_dto)
+
+Updates the wallet payment quantity with the parameters specified in the request.
+
+For more information, see [api.onlyoffice.com]().
 
 ### Parameters
 
@@ -2193,10 +2045,74 @@ Name | Type | Description  | Notes
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
+### Example
+
+
+```python
+import docspace-api-python
+from docspace-api-python.models.boolean_wrapper import BooleanWrapper
+from docspace-api-python.models.wallet_quantity_request_dto import WalletQuantityRequestDto
+from docspace-api-python.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost:8092
+# See configuration.py for a list of all supported configuration parameters.
+configuration = docspace-api-python.Configuration(
+    host = "http://localhost:8092"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure HTTP basic authorization: Basic
+configuration = docspace-api-python.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure API key authorization: ApiKeyBearer
+configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
+# Configure API key authorization: asc_auth_key
+configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace-api-python.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with docspace-api-python.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace-api-python.PortalPaymentApi(api_client)
+    wallet_quantity_request_dto = docspace-api-python.WalletQuantityRequestDto() # WalletQuantityRequestDto |  (optional)
+
+    try:
+        # Update the wallet payment quantity
+        api_response = api_instance.update_wallet_payment(wallet_quantity_request_dto=wallet_quantity_request_dto)
+        print("The response of PortalPaymentApi->update_wallet_payment:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PortalPaymentApi->update_wallet_payment: %s\n" % e)
+```
+
+
+
 ### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json
+
 
 ### HTTP response details
 

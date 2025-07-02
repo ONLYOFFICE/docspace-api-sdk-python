@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.backup_progress import BackupProgress
+from docspace-api-python.models.backup_progress import BackupProgress
 
 class TestBackupProgress(unittest.TestCase):
     """BackupProgress unit test stubs"""

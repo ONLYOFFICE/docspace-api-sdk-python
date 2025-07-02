@@ -1,5 +1,4 @@
 # CopyAsJsonElementDestFolderId
-
 The destination folder ID of the copied file.
 
 ## Properties
@@ -10,7 +9,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.copy_as_json_element_dest_folder_id import CopyAsJsonElementDestFolderId
+from docspace-api-python.models.copy_as_json_element_dest_folder_id import CopyAsJsonElementDestFolderId
 
 # TODO update the JSON string below
 json = "{}"

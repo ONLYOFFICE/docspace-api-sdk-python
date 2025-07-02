@@ -1,6 +1,5 @@
 # QuotaWrapper
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.quota_wrapper import QuotaWrapper
+from docspace-api-python.models.quota_wrapper import QuotaWrapper
 
 # TODO update the JSON string below
 json = "{}"

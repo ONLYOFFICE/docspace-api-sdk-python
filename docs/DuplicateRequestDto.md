@@ -1,5 +1,4 @@
 # DuplicateRequestDto
-
 The duplicate request parameters.
 
 ## Properties
@@ -13,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.duplicate_request_dto import DuplicateRequestDto
+from docspace-api-python.models.duplicate_request_dto import DuplicateRequestDto
 
 # TODO update the JSON string below
 json = "{}"

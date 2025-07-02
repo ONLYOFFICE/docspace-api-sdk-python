@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.operation import Operation
+from docspace-api-python.models.operation import Operation
 
 class TestOperation(unittest.TestCase):
     """Operation unit test stubs"""

@@ -1,6 +1,5 @@
 # CronParams
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -12,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.cron_params import CronParams
+from docspace-api-python.models.cron_params import CronParams
 
 # TODO update the JSON string below
 json = "{}"

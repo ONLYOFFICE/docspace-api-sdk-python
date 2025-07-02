@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.file_reference_data import FileReferenceData
+from docspace-api-python.models.file_reference_data import FileReferenceData
 
 class TestFileReferenceData(unittest.TestCase):
     """FileReferenceData unit test stubs"""

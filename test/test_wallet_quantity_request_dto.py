@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.wallet_quantity_request_dto import WalletQuantityRequestDto
+from docspace-api-python.models.wallet_quantity_request_dto import WalletQuantityRequestDto
 
 class TestWalletQuantityRequestDto(unittest.TestCase):
     """WalletQuantityRequestDto unit test stubs"""

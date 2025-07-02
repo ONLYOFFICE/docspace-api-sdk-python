@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.create_room_from_template_dto import CreateRoomFromTemplateDto
+from docspace-api-python.models.create_room_from_template_dto import CreateRoomFromTemplateDto
 
 class TestCreateRoomFromTemplateDto(unittest.TestCase):
     """CreateRoomFromTemplateDto unit test stubs"""
@@ -51,7 +51,7 @@ class TestCreateRoomFromTemplateDto(unittest.TestCase):
             return CreateRoomFromTemplateDto(
                 template_id = 1234,
                 title = 'legacy_1080p_small_wooden_mouse',
-                logo = docspace.models.logo_request.LogoRequest(
+                logo = docspace-api-python.models.logo_request.LogoRequest(
                     tmp_file = 'some text', 
                     x = 1234, 
                     y = 1234, 
@@ -64,12 +64,12 @@ class TestCreateRoomFromTemplateDto(unittest.TestCase):
                 quota = 1234,
                 indexing = True,
                 deny_download = True,
-                lifetime = docspace.models.room_data_lifetime_dto.RoomDataLifetimeDto(
+                lifetime = docspace-api-python.models.room_data_lifetime_dto.RoomDataLifetimeDto(
                     delete_permanently = True, 
                     period = 0, 
                     value = 1234, 
                     enabled = True, ),
-                watermark = docspace.models.watermark_request_dto.WatermarkRequestDto(
+                watermark = docspace-api-python.models.watermark_request_dto.WatermarkRequestDto(
                     enabled = True, 
                     additions = 1, 
                     text = 'some text', 

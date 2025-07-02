@@ -1,5 +1,4 @@
 # AccountInfoDto
-
 The account information parameters.
 
 ## Properties
@@ -13,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.account_info_dto import AccountInfoDto
+from docspace-api-python.models.account_info_dto import AccountInfoDto
 
 # TODO update the JSON string below
 json = "{}"

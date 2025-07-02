@@ -1,5 +1,4 @@
 # DarkThemeSettingsRequestDto
-
 The theme settings request parameters.
 
 ## Properties
@@ -11,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.dark_theme_settings_request_dto import DarkThemeSettingsRequestDto
+from docspace-api-python.models.dark_theme_settings_request_dto import DarkThemeSettingsRequestDto
 
 # TODO update the JSON string below
 json = "{}"

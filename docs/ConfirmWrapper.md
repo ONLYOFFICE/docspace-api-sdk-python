@@ -1,6 +1,5 @@
 # ConfirmWrapper
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.confirm_wrapper import ConfirmWrapper
+from docspace-api-python.models.confirm_wrapper import ConfirmWrapper
 
 # TODO update the JSON string below
 json = "{}"

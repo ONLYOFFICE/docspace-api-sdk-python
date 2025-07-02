@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.user_invitation_request_dto import UserInvitationRequestDto
+from docspace-api-python.models.user_invitation_request_dto import UserInvitationRequestDto
 
 class TestUserInvitationRequestDto(unittest.TestCase):
     """UserInvitationRequestDto unit test stubs"""

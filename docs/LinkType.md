@@ -1,5 +1,4 @@
 # LinkType
-
 [0 - Invitation, 1 - External]
 
 ## Enum

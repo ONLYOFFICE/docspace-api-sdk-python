@@ -1,5 +1,4 @@
 # QuantityRequestDto
-
 The request parameters for the payment quantity specifications.
 
 ## Properties
@@ -11,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.quantity_request_dto import QuantityRequestDto
+from docspace-api-python.models.quantity_request_dto import QuantityRequestDto
 
 # TODO update the JSON string below
 json = "{}"

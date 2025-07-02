@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.auth_service_requests_array_wrapper import AuthServiceRequestsArrayWrapper
+from docspace-api-python.models.auth_service_requests_array_wrapper import AuthServiceRequestsArrayWrapper
 
 class TestAuthServiceRequestsArrayWrapper(unittest.TestCase):
     """AuthServiceRequestsArrayWrapper unit test stubs"""
@@ -50,14 +50,14 @@ class TestAuthServiceRequestsArrayWrapper(unittest.TestCase):
         if include_optional:
             return AuthServiceRequestsArrayWrapper(
                 response = [
-                    docspace.models.auth_service_requests_dto.AuthServiceRequestsDto(
+                    docspace-api-python.models.auth_service_requests_dto.AuthServiceRequestsDto(
                         name = 'Winfield Upton', 
                         title = 'legacy_1080p_small_wooden_mouse', 
                         description = 'some text', 
                         instruction = 'some text', 
                         can_set = True, 
                         props = [
-                            docspace.models.auth_key.AuthKey(
+                            docspace-api-python.models.auth_key.AuthKey(
                                 name = 'Winfield Upton', 
                                 value = 'some text', 
                                 title = 'legacy_1080p_small_wooden_mouse', )
@@ -65,7 +65,7 @@ class TestAuthServiceRequestsArrayWrapper(unittest.TestCase):
                     ],
                 count = 56,
                 links = [
-                    docspace.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

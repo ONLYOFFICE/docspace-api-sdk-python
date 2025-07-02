@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.user_info_wrapper import UserInfoWrapper
+from docspace-api-python.models.user_info_wrapper import UserInfoWrapper
 
 class TestUserInfoWrapper(unittest.TestCase):
     """UserInfoWrapper unit test stubs"""
@@ -49,7 +49,7 @@ class TestUserInfoWrapper(unittest.TestCase):
         model = UserInfoWrapper()
         if include_optional:
             return UserInfoWrapper(
-                response = docspace.models.user_info.UserInfo(
+                response = docspace-api-python.models.user_info.UserInfo(
                     id = 'aae1e103-bca5-9fa1-ba8c-42058b4abf28', 
                     first_name = 'Winfield', 
                     last_name = 'Wyman', 
@@ -83,7 +83,7 @@ class TestUserInfoWrapper(unittest.TestCase):
                     check_activation = True, ),
                 count = 56,
                 links = [
-                    docspace.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

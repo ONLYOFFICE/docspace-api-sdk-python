@@ -1,5 +1,4 @@
 # Cron
-
 The backup cron parameters.
 
 ## Properties
@@ -13,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.cron import Cron
+from docspace-api-python.models.cron import Cron
 
 # TODO update the JSON string below
 json = "{}"

@@ -1,5 +1,4 @@
 # CheckUploadRequest
-
 The request parameters for checking file uploads.
 
 ## Properties
@@ -11,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.check_upload_request import CheckUploadRequest
+from docspace-api-python.models.check_upload_request import CheckUploadRequest
 
 # TODO update the JSON string below
 json = "{}"

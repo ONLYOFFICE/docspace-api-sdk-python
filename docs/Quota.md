@@ -1,5 +1,4 @@
 # Quota
-
 The quota parameters.
 
 ## Properties
@@ -16,7 +15,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.quota import Quota
+from docspace-api-python.models.quota import Quota
 
 # TODO update the JSON string below
 json = "{}"

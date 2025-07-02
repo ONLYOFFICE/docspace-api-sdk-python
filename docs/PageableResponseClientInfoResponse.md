@@ -1,5 +1,4 @@
 # PageableResponseClientInfoResponse
-
 The response containing paginated client information.
 
 ## Properties
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.pageable_response_client_info_response import PageableResponseClientInfoResponse
+from docspace-api-python.models.pageable_response_client_info_response import PageableResponseClientInfoResponse
 
 # TODO update the JSON string below
 json = "{}"

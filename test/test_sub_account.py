@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.sub_account import SubAccount
+from docspace-api-python.models.sub_account import SubAccount
 
 class TestSubAccount(unittest.TestCase):
     """SubAccount unit test stubs"""

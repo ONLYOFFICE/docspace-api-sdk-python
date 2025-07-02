@@ -1,5 +1,4 @@
 # EncryptionSettings
-
 The encryption settings.
 
 ## Properties
@@ -13,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.encryption_settings import EncryptionSettings
+from docspace-api-python.models.encryption_settings import EncryptionSettings
 
 # TODO update the JSON string below
 json = "{}"

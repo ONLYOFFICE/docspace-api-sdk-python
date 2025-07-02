@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.api.settings_common_settings_api import SettingsCommonSettingsApi
+from docspace-api-python.api.settings_common_settings_api import SettingsCommonSettingsApi
 
 
 class TestSettingsCommonSettingsApi(unittest.TestCase):

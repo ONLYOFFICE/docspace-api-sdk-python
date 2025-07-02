@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.create_file_json_element_template_id import CreateFileJsonElementTemplateId
+from docspace-api-python.models.create_file_json_element_template_id import CreateFileJsonElementTemplateId
 
 class TestCreateFileJsonElementTemplateId(unittest.TestCase):
     """CreateFileJsonElementTemplateId unit test stubs"""

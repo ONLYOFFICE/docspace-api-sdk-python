@@ -1,5 +1,4 @@
 # RecentConfig
-
 The presence or absence of the documents in the \"Open Recent...\" menu option.
 
 ## Properties
@@ -13,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.recent_config import RecentConfig
+from docspace-api-python.models.recent_config import RecentConfig
 
 # TODO update the JSON string below
 json = "{}"

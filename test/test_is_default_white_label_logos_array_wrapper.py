@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.is_default_white_label_logos_array_wrapper import IsDefaultWhiteLabelLogosArrayWrapper
+from docspace-api-python.models.is_default_white_label_logos_array_wrapper import IsDefaultWhiteLabelLogosArrayWrapper
 
 class TestIsDefaultWhiteLabelLogosArrayWrapper(unittest.TestCase):
     """IsDefaultWhiteLabelLogosArrayWrapper unit test stubs"""
@@ -50,13 +50,13 @@ class TestIsDefaultWhiteLabelLogosArrayWrapper(unittest.TestCase):
         if include_optional:
             return IsDefaultWhiteLabelLogosArrayWrapper(
                 response = [
-                    docspace.models.is_default_white_label_logos_dto.IsDefaultWhiteLabelLogosDto(
+                    docspace-api-python.models.is_default_white_label_logos_dto.IsDefaultWhiteLabelLogosDto(
                         name = 'Winfield Upton', 
                         default = True, )
                     ],
                 count = 56,
                 links = [
-                    docspace.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

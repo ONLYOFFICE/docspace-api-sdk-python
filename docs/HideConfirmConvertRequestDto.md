@@ -1,5 +1,4 @@
 # HideConfirmConvertRequestDto
-
 The request parameters for hiding the confirmation dialog when converting.
 
 ## Properties
@@ -11,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.hide_confirm_convert_request_dto import HideConfirmConvertRequestDto
+from docspace-api-python.models.hide_confirm_convert_request_dto import HideConfirmConvertRequestDto
 
 # TODO update the JSON string below
 json = "{}"

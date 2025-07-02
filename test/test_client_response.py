@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.client_response import ClientResponse
+from docspace-api-python.models.client_response import ClientResponse
 
 class TestClientResponse(unittest.TestCase):
     """ClientResponse unit test stubs"""

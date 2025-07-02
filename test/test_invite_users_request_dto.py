@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.invite_users_request_dto import InviteUsersRequestDto
+from docspace-api-python.models.invite_users_request_dto import InviteUsersRequestDto
 
 class TestInviteUsersRequestDto(unittest.TestCase):
     """InviteUsersRequestDto unit test stubs"""
@@ -50,7 +50,7 @@ class TestInviteUsersRequestDto(unittest.TestCase):
         if include_optional:
             return InviteUsersRequestDto(
                 invitations = [
-                    docspace.models.user_invitation_request_dto.UserInvitationRequestDto(
+                    docspace-api-python.models.user_invitation_request_dto.UserInvitationRequestDto(
                         type = 0, 
                         email = 'Sydney_Roberts4@hotmail.com', )
                     ],
@@ -59,7 +59,7 @@ class TestInviteUsersRequestDto(unittest.TestCase):
         else:
             return InviteUsersRequestDto(
                 invitations = [
-                    docspace.models.user_invitation_request_dto.UserInvitationRequestDto(
+                    docspace-api-python.models.user_invitation_request_dto.UserInvitationRequestDto(
                         type = 0, 
                         email = 'Sydney_Roberts4@hotmail.com', )
                     ],

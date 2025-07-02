@@ -1,5 +1,4 @@
 # CopyAsJsonElement
-
 The parameters for copying a file.
 
 ## Properties
@@ -15,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.copy_as_json_element import CopyAsJsonElement
+from docspace-api-python.models.copy_as_json_element import CopyAsJsonElement
 
 # TODO update the JSON string below
 json = "{}"

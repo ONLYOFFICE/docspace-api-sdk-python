@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.covers_result_array_wrapper import CoversResultArrayWrapper
+from docspace-api-python.models.covers_result_array_wrapper import CoversResultArrayWrapper
 
 class TestCoversResultArrayWrapper(unittest.TestCase):
     """CoversResultArrayWrapper unit test stubs"""
@@ -50,13 +50,13 @@ class TestCoversResultArrayWrapper(unittest.TestCase):
         if include_optional:
             return CoversResultArrayWrapper(
                 response = [
-                    docspace.models.covers_result_dto.CoversResultDto(
+                    docspace-api-python.models.covers_result_dto.CoversResultDto(
                         id = '9846', 
                         data = 'some text', )
                     ],
                 count = 56,
                 links = [
-                    docspace.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

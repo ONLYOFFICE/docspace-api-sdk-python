@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.double_wrapper import DoubleWrapper
+from docspace-api-python.models.double_wrapper import DoubleWrapper
 
 class TestDoubleWrapper(unittest.TestCase):
     """DoubleWrapper unit test stubs"""
@@ -52,7 +52,7 @@ class TestDoubleWrapper(unittest.TestCase):
                 response = 1.337,
                 count = 56,
                 links = [
-                    docspace.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

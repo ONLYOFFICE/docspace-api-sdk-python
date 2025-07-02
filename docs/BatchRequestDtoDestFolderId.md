@@ -1,5 +1,4 @@
 # BatchRequestDtoDestFolderId
-
 The destination folder ID.
 
 ## Properties
@@ -10,7 +9,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.batch_request_dto_dest_folder_id import BatchRequestDtoDestFolderId
+from docspace-api-python.models.batch_request_dto_dest_folder_id import BatchRequestDtoDestFolderId
 
 # TODO update the JSON string below
 json = "{}"

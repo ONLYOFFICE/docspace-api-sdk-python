@@ -1,5 +1,4 @@
 # UsageSpaceStatItemDto
-
 The parameters of the usage space statistics item.
 
 ## Properties
@@ -15,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.usage_space_stat_item_dto import UsageSpaceStatItemDto
+from docspace-api-python.models.usage_space_stat_item_dto import UsageSpaceStatItemDto
 
 # TODO update the JSON string below
 json = "{}"

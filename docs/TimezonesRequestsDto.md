@@ -1,5 +1,4 @@
 # TimezonesRequestsDto
-
 The request parameters for managing the time zone configurations.
 
 ## Properties
@@ -12,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.timezones_requests_dto import TimezonesRequestsDto
+from docspace-api-python.models.timezones_requests_dto import TimezonesRequestsDto
 
 # TODO update the JSON string below
 json = "{}"

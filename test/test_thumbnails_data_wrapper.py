@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.thumbnails_data_wrapper import ThumbnailsDataWrapper
+from docspace-api-python.models.thumbnails_data_wrapper import ThumbnailsDataWrapper
 
 class TestThumbnailsDataWrapper(unittest.TestCase):
     """ThumbnailsDataWrapper unit test stubs"""
@@ -49,7 +49,7 @@ class TestThumbnailsDataWrapper(unittest.TestCase):
         model = ThumbnailsDataWrapper()
         if include_optional:
             return ThumbnailsDataWrapper(
-                response = docspace.models.thumbnails_data_dto.ThumbnailsDataDto(
+                response = docspace-api-python.models.thumbnails_data_dto.ThumbnailsDataDto(
                     original = 'default_user_photo_size_1280-1280.png', 
                     retina = 'default_user_photo_size_360-360.png', 
                     max = 'default_user_photo_size_200-200.png', 
@@ -58,7 +58,7 @@ class TestThumbnailsDataWrapper(unittest.TestCase):
                     small = 'default_user_photo_size_32-32.png', ),
                 count = 56,
                 links = [
-                    docspace.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

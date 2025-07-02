@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.fire_base_user import FireBaseUser
+from docspace-api-python.models.fire_base_user import FireBaseUser
 
 class TestFireBaseUser(unittest.TestCase):
     """FireBaseUser unit test stubs"""
@@ -55,7 +55,7 @@ class TestFireBaseUser(unittest.TestCase):
                 firebase_device_token = 'some text',
                 application = 'some text',
                 is_subscribed = True,
-                tenant = docspace.models.db_tenant.DbTenant(
+                tenant = docspace-api-python.models.db_tenant.DbTenant(
                     id = 9846, 
                     name = 'Winfield Upton', 
                     alias = 'some text', 
@@ -76,7 +76,7 @@ class TestFireBaseUser(unittest.TestCase):
                     industry = 0, 
                     last_modified = '2008-04-10T06:30+04:00', 
                     calls = True, 
-                    partner = docspace.models.db_tenant_partner.DbTenantPartner(
+                    partner = docspace-api-python.models.db_tenant_partner.DbTenantPartner(
                         tenant_id = 1234, 
                         partner_id = 'some text', 
                         affiliate_id = 'some text', 

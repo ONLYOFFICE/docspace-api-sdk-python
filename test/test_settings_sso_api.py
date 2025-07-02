@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.api.settings_sso_api import SettingsSSOApi
+from docspace-api-python.api.settings_sso_api import SettingsSSOApi
 
 
 class TestSettingsSSOApi(unittest.TestCase):

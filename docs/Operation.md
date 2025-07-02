@@ -1,5 +1,4 @@
 # Operation
-
 Represents an operation.
 
 ## Properties
@@ -18,7 +17,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.operation import Operation
+from docspace-api-python.models.operation import Operation
 
 # TODO update the JSON string below
 json = "{}"

@@ -1,6 +1,5 @@
 # SetupCodeWrapper
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.setup_code_wrapper import SetupCodeWrapper
+from docspace-api-python.models.setup_code_wrapper import SetupCodeWrapper
 
 # TODO update the JSON string below
 json = "{}"

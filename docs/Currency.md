@@ -1,5 +1,4 @@
 # Currency
-
 Represents a currency.
 
 ## Properties
@@ -12,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.currency import Currency
+from docspace-api-python.models.currency import Currency
 
 # TODO update the JSON string below
 json = "{}"

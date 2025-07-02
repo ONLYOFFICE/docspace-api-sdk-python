@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.tenant_domain_validator import TenantDomainValidator
+from docspace-api-python.models.tenant_domain_validator import TenantDomainValidator
 
 class TestTenantDomainValidator(unittest.TestCase):
     """TenantDomainValidator unit test stubs"""

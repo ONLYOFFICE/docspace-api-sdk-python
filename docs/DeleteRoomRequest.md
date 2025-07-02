@@ -1,5 +1,4 @@
 # DeleteRoomRequest
-
 The parameters for deleting a room.
 
 ## Properties
@@ -11,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.delete_room_request import DeleteRoomRequest
+from docspace-api-python.models.delete_room_request import DeleteRoomRequest
 
 # TODO update the JSON string below
 json = "{}"

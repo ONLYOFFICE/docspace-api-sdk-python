@@ -1,5 +1,4 @@
 # RoomFromTemplateStatusDto
-
 The progress parameters of creating a room from the template.
 
 ## Properties
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.room_from_template_status_dto import RoomFromTemplateStatusDto
+from docspace-api-python.models.room_from_template_status_dto import RoomFromTemplateStatusDto
 
 # TODO update the JSON string below
 json = "{}"

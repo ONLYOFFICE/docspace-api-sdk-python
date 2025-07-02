@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.api.o_auth20_client_querying_api import OAuth20ClientQueryingApi
+from docspace-api-python.api.o_auth20_client_querying_api import OAuth20ClientQueryingApi
 
 
 class TestOAuth20ClientQueryingApi(unittest.TestCase):

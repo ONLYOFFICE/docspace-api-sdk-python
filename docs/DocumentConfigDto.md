@@ -1,5 +1,4 @@
 # DocumentConfigDto
-
 The document config parameters.
 
 ## Properties
@@ -22,7 +21,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.document_config_dto import DocumentConfigDto
+from docspace-api-python.models.document_config_dto import DocumentConfigDto
 
 # TODO update the JSON string below
 json = "{}"

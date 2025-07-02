@@ -1,6 +1,5 @@
 # StorageSettingsWrapper
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.storage_settings_wrapper import StorageSettingsWrapper
+from docspace-api-python.models.storage_settings_wrapper import StorageSettingsWrapper
 
 # TODO update the JSON string below
 json = "{}"

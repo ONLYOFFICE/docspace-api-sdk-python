@@ -1,5 +1,4 @@
 # CreateWebhooksConfigRequestsDto
-
 The request parameters for creating the webhook configuration.
 
 ## Properties
@@ -17,7 +16,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.create_webhooks_config_requests_dto import CreateWebhooksConfigRequestsDto
+from docspace-api-python.models.create_webhooks_config_requests_dto import CreateWebhooksConfigRequestsDto
 
 # TODO update the JSON string below
 json = "{}"

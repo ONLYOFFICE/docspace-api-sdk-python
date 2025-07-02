@@ -1,5 +1,4 @@
 # CspDto
-
 The CSP (Content Security Policy) parameters.
 
 ## Properties
@@ -12,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.csp_dto import CspDto
+from docspace-api-python.models.csp_dto import CspDto
 
 # TODO update the JSON string below
 json = "{}"

@@ -1,5 +1,4 @@
 # DateToAutoCleanUp
-
 [1 - One week, 2 - Two weeks, 3 - One month, 4 - Thirty days, 5 - Two months, 6 - Three months]
 
 ## Enum

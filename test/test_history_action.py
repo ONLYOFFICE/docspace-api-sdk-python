@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.history_action import HistoryAction
+from docspace-api-python.models.history_action import HistoryAction
 
 class TestHistoryAction(unittest.TestCase):
     """HistoryAction unit test stubs"""

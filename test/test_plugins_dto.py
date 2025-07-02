@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.plugins_dto import PluginsDto
+from docspace-api-python.models.plugins_dto import PluginsDto
 
 class TestPluginsDto(unittest.TestCase):
     """PluginsDto unit test stubs"""

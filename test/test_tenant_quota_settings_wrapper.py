@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.tenant_quota_settings_wrapper import TenantQuotaSettingsWrapper
+from docspace-api-python.models.tenant_quota_settings_wrapper import TenantQuotaSettingsWrapper
 
 class TestTenantQuotaSettingsWrapper(unittest.TestCase):
     """TenantQuotaSettingsWrapper unit test stubs"""
@@ -49,14 +49,14 @@ class TestTenantQuotaSettingsWrapper(unittest.TestCase):
         model = TenantQuotaSettingsWrapper()
         if include_optional:
             return TenantQuotaSettingsWrapper(
-                response = docspace.models.tenant_quota_settings.TenantQuotaSettings(
+                response = docspace-api-python.models.tenant_quota_settings.TenantQuotaSettings(
                     enable_quota = True, 
                     quota = 1234, 
                     last_recalculate_date = '2008-04-10T06:30+04:00', 
                     last_modified = '2008-04-10T06:30+04:00', ),
                 count = 56,
                 links = [
-                    docspace.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

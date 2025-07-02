@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.sso_sp_certificate_advanced import SsoSpCertificateAdvanced
+from docspace-api-python.models.sso_sp_certificate_advanced import SsoSpCertificateAdvanced
 
 class TestSsoSpCertificateAdvanced(unittest.TestCase):
     """SsoSpCertificateAdvanced unit test stubs"""

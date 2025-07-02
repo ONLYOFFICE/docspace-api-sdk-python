@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.distributed_task_status import DistributedTaskStatus
+from docspace-api-python.models.distributed_task_status import DistributedTaskStatus
 
 class TestDistributedTaskStatus(unittest.TestCase):
     """DistributedTaskStatus unit test stubs"""

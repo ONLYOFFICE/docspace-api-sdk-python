@@ -1,5 +1,4 @@
 # WatermarkOnDraw
-
 The document watermark parameters.
 
 ## Properties
@@ -17,7 +16,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.watermark_on_draw import WatermarkOnDraw
+from docspace-api-python.models.watermark_on_draw import WatermarkOnDraw
 
 # TODO update the JSON string below
 json = "{}"

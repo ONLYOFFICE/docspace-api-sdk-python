@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.tenant_audit_settings import TenantAuditSettings
+from docspace-api-python.models.tenant_audit_settings import TenantAuditSettings
 
 class TestTenantAuditSettings(unittest.TestCase):
     """TenantAuditSettings unit test stubs"""

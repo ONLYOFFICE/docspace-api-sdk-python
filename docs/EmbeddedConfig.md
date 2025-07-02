@@ -1,5 +1,4 @@
 # EmbeddedConfig
-
 The configuration parameters for the embedded document type.
 
 ## Properties
@@ -15,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.embedded_config import EmbeddedConfig
+from docspace-api-python.models.embedded_config import EmbeddedConfig
 
 # TODO update the JSON string below
 json = "{}"

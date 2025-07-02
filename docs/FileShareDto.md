@@ -1,5 +1,4 @@
 # FileShareDto
-
 The file sharing information and access rights.
 
 ## Properties
@@ -16,7 +15,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.file_share_dto import FileShareDto
+from docspace-api-python.models.file_share_dto import FileShareDto
 
 # TODO update the JSON string below
 json = "{}"

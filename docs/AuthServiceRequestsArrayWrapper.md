@@ -1,6 +1,5 @@
 # AuthServiceRequestsArrayWrapper
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.auth_service_requests_array_wrapper import AuthServiceRequestsArrayWrapper
+from docspace-api-python.models.auth_service_requests_array_wrapper import AuthServiceRequestsArrayWrapper
 
 # TODO update the JSON string below
 json = "{}"

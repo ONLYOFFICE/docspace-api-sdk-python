@@ -1,6 +1,5 @@
 # IPRestrictionArrayWrapper
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.ip_restriction_array_wrapper import IPRestrictionArrayWrapper
+from docspace-api-python.models.ip_restriction_array_wrapper import IPRestrictionArrayWrapper
 
 # TODO update the JSON string below
 json = "{}"

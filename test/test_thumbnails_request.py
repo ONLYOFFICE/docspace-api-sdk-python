@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.thumbnails_request import ThumbnailsRequest
+from docspace-api-python.models.thumbnails_request import ThumbnailsRequest
 
 class TestThumbnailsRequest(unittest.TestCase):
     """ThumbnailsRequest unit test stubs"""

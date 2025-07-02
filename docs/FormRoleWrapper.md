@@ -1,6 +1,5 @@
 # FormRoleWrapper
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.form_role_wrapper import FormRoleWrapper
+from docspace-api-python.models.form_role_wrapper import FormRoleWrapper
 
 # TODO update the JSON string below
 json = "{}"

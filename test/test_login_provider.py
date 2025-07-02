@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.login_provider import LoginProvider
+from docspace-api-python.models.login_provider import LoginProvider
 
 class TestLoginProvider(unittest.TestCase):
     """LoginProvider unit test stubs"""

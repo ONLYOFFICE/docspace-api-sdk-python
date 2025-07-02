@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.api.o_auth20_client_management_api import OAuth20ClientManagementApi
+from docspace-api-python.api.o_auth20_client_management_api import OAuth20ClientManagementApi
 
 
 class TestOAuth20ClientManagementApi(unittest.TestCase):

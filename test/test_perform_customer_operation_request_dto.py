@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.perform_customer_operation_request_dto import PerformCustomerOperationRequestDto
+from docspace-api-python.models.perform_customer_operation_request_dto import PerformCustomerOperationRequestDto
 
 class TestPerformCustomerOperationRequestDto(unittest.TestCase):
     """PerformCustomerOperationRequestDto unit test stubs"""

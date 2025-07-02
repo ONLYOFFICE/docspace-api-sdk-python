@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.currencies_dto import CurrenciesDto
+from docspace-api-python.models.currencies_dto import CurrenciesDto
 
 class TestCurrenciesDto(unittest.TestCase):
     """CurrenciesDto unit test stubs"""

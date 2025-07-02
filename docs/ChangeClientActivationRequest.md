@@ -1,5 +1,4 @@
 # ChangeClientActivationRequest
-
 The request parameters for changing the client activation status.
 
 ## Properties
@@ -11,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.change_client_activation_request import ChangeClientActivationRequest
+from docspace-api-python.models.change_client_activation_request import ChangeClientActivationRequest
 
 # TODO update the JSON string below
 json = "{}"

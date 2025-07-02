@@ -1,39 +1,49 @@
-# docspace.SettingsMessagesApi
+# docspace-api-python.SettingsMessagesApi
 
 All URIs are relative to *http://localhost:8092*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**enable_admin_message_settings**](SettingsMessagesApi.md#enable_admin_message_settings) | **POST** /api/2.0/settings/messagesettings | Enable the administrator message settings
-[**send_admin_mail**](SettingsMessagesApi.md#send_admin_mail) | **POST** /api/2.0/settings/sendadmmail | Send a message to the administrator
-[**send_join_invite_mail**](SettingsMessagesApi.md#send_join_invite_mail) | **POST** /api/2.0/settings/sendjoininvite | Sends an invitation email
+[**enable_admin_message_settings**](#enable_admin_message_settings) | **POST** /api/2.0/settings/messagesettings | Enable the administrator message settings
+[**send_admin_mail**](#send_admin_mail) | **POST** /api/2.0/settings/sendadmmail | Send a message to the administrator
+[**send_join_invite_mail**](#send_join_invite_mail) | **POST** /api/2.0/settings/sendjoininvite | Sends an invitation email
 
 
 # **enable_admin_message_settings**
 > StringWrapper enable_admin_message_settings(turn_on_admin_message_settings_request_dto=turn_on_admin_message_settings_request_dto)
 
-Enable the administrator message settings
-
 Displays the contact form on the "Sign In" page, allowing users to send a message to the DocSpace administrator in case they encounter any issues while accessing DocSpace.
+
+For more information, see [api.onlyoffice.com]().
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **turn_on_admin_message_settings_request_dto** | [**TurnOnAdminMessageSettingsRequestDto**](TurnOnAdminMessageSettingsRequestDto.md)|  | [optional] 
+
+### Return type
+
+[**StringWrapper**](StringWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
-* Basic Authentication (Basic):
-* OAuth Authentication (OAuth2):
-* Api Key Authentication (ApiKeyBearer):
-* Api Key Authentication (asc_auth_key):
-* Bearer (JWT) Authentication (Bearer):
 
 ```python
-import docspace
-from docspace.models.string_wrapper import StringWrapper
-from docspace.models.turn_on_admin_message_settings_request_dto import TurnOnAdminMessageSettingsRequestDto
-from docspace.rest import ApiException
+import docspace-api-python
+from docspace-api-python.models.string_wrapper import StringWrapper
+from docspace-api-python.models.turn_on_admin_message_settings_request_dto import TurnOnAdminMessageSettingsRequestDto
+from docspace-api-python.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace.Configuration(
+configuration = docspace-api-python.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -43,7 +53,7 @@ configuration = docspace.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = docspace.Configuration(
+configuration = docspace-api-python.Configuration(
     username = os.environ["USERNAME"],
     password = os.environ["PASSWORD"]
 )
@@ -63,15 +73,15 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace.Configuration(
+configuration = docspace-api-python.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace.ApiClient(configuration) as api_client:
+with docspace-api-python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace.SettingsMessagesApi(api_client)
-    turn_on_admin_message_settings_request_dto = docspace.TurnOnAdminMessageSettingsRequestDto() # TurnOnAdminMessageSettingsRequestDto |  (optional)
+    api_instance = docspace-api-python.SettingsMessagesApi(api_client)
+    turn_on_admin_message_settings_request_dto = docspace-api-python.TurnOnAdminMessageSettingsRequestDto() # TurnOnAdminMessageSettingsRequestDto |  (optional)
 
     try:
         # Enable the administrator message settings
@@ -84,25 +94,11 @@ with docspace.ApiClient(configuration) as api_client:
 
 
 
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **turn_on_admin_message_settings_request_dto** | [**TurnOnAdminMessageSettingsRequestDto**](TurnOnAdminMessageSettingsRequestDto.md)|  | [optional] 
-
-### Return type
-
-[**StringWrapper**](StringWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
 ### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json
+
 
 ### HTTP response details
 
@@ -116,43 +112,9 @@ Name | Type | Description  | Notes
 # **send_admin_mail**
 > StringWrapper send_admin_mail(admin_message_settings_requests_dto=admin_message_settings_requests_dto)
 
-Send a message to the administrator
-
 Sends a message to the administrator email when unauthorized users encounter issues accessing DocSpace.
 
-### Example
-
-
-```python
-import docspace
-from docspace.models.admin_message_settings_requests_dto import AdminMessageSettingsRequestsDto
-from docspace.models.string_wrapper import StringWrapper
-from docspace.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace.Configuration(
-    host = "http://localhost:8092"
-)
-
-
-# Enter a context with an instance of the API client
-with docspace.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace.SettingsMessagesApi(api_client)
-    admin_message_settings_requests_dto = docspace.AdminMessageSettingsRequestsDto() # AdminMessageSettingsRequestsDto |  (optional)
-
-    try:
-        # Send a message to the administrator
-        api_response = api_instance.send_admin_mail(admin_message_settings_requests_dto=admin_message_settings_requests_dto)
-        print("The response of SettingsMessagesApi->send_admin_mail:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling SettingsMessagesApi->send_admin_mail: %s\n" % e)
-```
-
-
+For more information, see [api.onlyoffice.com]().
 
 ### Parameters
 
@@ -169,10 +131,45 @@ Name | Type | Description  | Notes
 
 No authorization required
 
+### Example
+
+
+```python
+import docspace-api-python
+from docspace-api-python.models.admin_message_settings_requests_dto import AdminMessageSettingsRequestsDto
+from docspace-api-python.models.string_wrapper import StringWrapper
+from docspace-api-python.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost:8092
+# See configuration.py for a list of all supported configuration parameters.
+configuration = docspace-api-python.Configuration(
+    host = "http://localhost:8092"
+)
+
+
+# Enter a context with an instance of the API client
+with docspace-api-python.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace-api-python.SettingsMessagesApi(api_client)
+    admin_message_settings_requests_dto = docspace-api-python.AdminMessageSettingsRequestsDto() # AdminMessageSettingsRequestsDto |  (optional)
+
+    try:
+        # Send a message to the administrator
+        api_response = api_instance.send_admin_mail(admin_message_settings_requests_dto=admin_message_settings_requests_dto)
+        print("The response of SettingsMessagesApi->send_admin_mail:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling SettingsMessagesApi->send_admin_mail: %s\n" % e)
+```
+
+
+
 ### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json
+
 
 ### HTTP response details
 
@@ -187,43 +184,9 @@ No authorization required
 # **send_join_invite_mail**
 > StringWrapper send_join_invite_mail(admin_message_base_settings_requests_dto=admin_message_base_settings_requests_dto)
 
-Sends an invitation email
-
 Sends an invitation email with a link to the DocSpace.
 
-### Example
-
-
-```python
-import docspace
-from docspace.models.admin_message_base_settings_requests_dto import AdminMessageBaseSettingsRequestsDto
-from docspace.models.string_wrapper import StringWrapper
-from docspace.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace.Configuration(
-    host = "http://localhost:8092"
-)
-
-
-# Enter a context with an instance of the API client
-with docspace.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace.SettingsMessagesApi(api_client)
-    admin_message_base_settings_requests_dto = docspace.AdminMessageBaseSettingsRequestsDto() # AdminMessageBaseSettingsRequestsDto |  (optional)
-
-    try:
-        # Sends an invitation email
-        api_response = api_instance.send_join_invite_mail(admin_message_base_settings_requests_dto=admin_message_base_settings_requests_dto)
-        print("The response of SettingsMessagesApi->send_join_invite_mail:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling SettingsMessagesApi->send_join_invite_mail: %s\n" % e)
-```
-
-
+For more information, see [api.onlyoffice.com]().
 
 ### Parameters
 
@@ -240,10 +203,45 @@ Name | Type | Description  | Notes
 
 No authorization required
 
+### Example
+
+
+```python
+import docspace-api-python
+from docspace-api-python.models.admin_message_base_settings_requests_dto import AdminMessageBaseSettingsRequestsDto
+from docspace-api-python.models.string_wrapper import StringWrapper
+from docspace-api-python.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost:8092
+# See configuration.py for a list of all supported configuration parameters.
+configuration = docspace-api-python.Configuration(
+    host = "http://localhost:8092"
+)
+
+
+# Enter a context with an instance of the API client
+with docspace-api-python.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace-api-python.SettingsMessagesApi(api_client)
+    admin_message_base_settings_requests_dto = docspace-api-python.AdminMessageBaseSettingsRequestsDto() # AdminMessageBaseSettingsRequestsDto |  (optional)
+
+    try:
+        # Sends an invitation email
+        api_response = api_instance.send_join_invite_mail(admin_message_base_settings_requests_dto=admin_message_base_settings_requests_dto)
+        print("The response of SettingsMessagesApi->send_join_invite_mail:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling SettingsMessagesApi->send_join_invite_mail: %s\n" % e)
+```
+
+
+
 ### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json
+
 
 ### HTTP response details
 

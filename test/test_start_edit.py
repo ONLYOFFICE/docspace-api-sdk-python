@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.start_edit import StartEdit
+from docspace-api-python.models.start_edit import StartEdit
 
 class TestStartEdit(unittest.TestCase):
     """StartEdit unit test stubs"""

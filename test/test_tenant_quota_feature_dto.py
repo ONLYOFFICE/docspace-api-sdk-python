@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.tenant_quota_feature_dto import TenantQuotaFeatureDto
+from docspace-api-python.models.tenant_quota_feature_dto import TenantQuotaFeatureDto
 
 class TestTenantQuotaFeatureDto(unittest.TestCase):
     """TenantQuotaFeatureDto unit test stubs"""
@@ -54,7 +54,7 @@ class TestTenantQuotaFeatureDto(unittest.TestCase):
                 image = 'some text',
                 value = {"int":1234,"string":"some text","boolean":true},
                 type = 'some text',
-                used = docspace.models.feature_used_dto.FeatureUsedDto(
+                used = docspace-api-python.models.feature_used_dto.FeatureUsedDto(
                     value = {"int":1234,"string":"some text","boolean":true}, 
                     title = 'legacy_1080p_small_wooden_mouse', ),
                 price_title = 'some text'

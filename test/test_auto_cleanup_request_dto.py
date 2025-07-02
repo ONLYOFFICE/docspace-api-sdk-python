@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.auto_cleanup_request_dto import AutoCleanupRequestDto
+from docspace-api-python.models.auto_cleanup_request_dto import AutoCleanupRequestDto
 
 class TestAutoCleanupRequestDto(unittest.TestCase):
     """AutoCleanupRequestDto unit test stubs"""

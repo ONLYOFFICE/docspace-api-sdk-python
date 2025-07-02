@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.check_dest_folder_result import CheckDestFolderResult
+from docspace-api-python.models.check_dest_folder_result import CheckDestFolderResult
 
 class TestCheckDestFolderResult(unittest.TestCase):
     """CheckDestFolderResult unit test stubs"""

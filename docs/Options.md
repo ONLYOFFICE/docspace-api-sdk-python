@@ -1,5 +1,4 @@
 # Options
-
 The document options.
 
 ## Properties
@@ -11,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.options import Options
+from docspace-api-python.models.options import Options
 
 # TODO update the JSON string below
 json = "{}"

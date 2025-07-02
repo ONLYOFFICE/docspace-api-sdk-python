@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.account_login_type import AccountLoginType
+from docspace-api-python.models.account_login_type import AccountLoginType
 
 class TestAccountLoginType(unittest.TestCase):
     """AccountLoginType unit test stubs"""

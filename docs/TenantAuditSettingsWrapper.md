@@ -1,5 +1,4 @@
 # TenantAuditSettingsWrapper
-
 The tenant audit settings wrapper.
 
 ## Properties
@@ -11,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.tenant_audit_settings_wrapper import TenantAuditSettingsWrapper
+from docspace-api-python.models.tenant_audit_settings_wrapper import TenantAuditSettingsWrapper
 
 # TODO update the JSON string below
 json = "{}"

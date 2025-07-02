@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.notification_settings_requests_dto import NotificationSettingsRequestsDto
+from docspace-api-python.models.notification_settings_requests_dto import NotificationSettingsRequestsDto
 
 class TestNotificationSettingsRequestsDto(unittest.TestCase):
     """NotificationSettingsRequestsDto unit test stubs"""

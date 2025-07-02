@@ -1,5 +1,4 @@
 # GroupDto
-
 The group parameters.
 
 ## Properties
@@ -19,7 +18,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.group_dto import GroupDto
+from docspace-api-python.models.group_dto import GroupDto
 
 # TODO update the JSON string below
 json = "{}"

@@ -1,5 +1,4 @@
 # WebPluginRequests
-
 The configuration settings for the web plugin instance.
 
 ## Properties
@@ -12,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.web_plugin_requests import WebPluginRequests
+from docspace-api-python.models.web_plugin_requests import WebPluginRequests
 
 # TODO update the JSON string below
 json = "{}"

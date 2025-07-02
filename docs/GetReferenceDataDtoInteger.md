@@ -1,5 +1,4 @@
 # GetReferenceDataDtoInteger
-
 The request parameters for getting reference data.
 
 ## Properties
@@ -15,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.get_reference_data_dto_integer import GetReferenceDataDtoInteger
+from docspace-api-python.models.get_reference_data_dto_integer import GetReferenceDataDtoInteger
 
 # TODO update the JSON string below
 json = "{}"

@@ -1,5 +1,4 @@
 # AdditionalWhiteLabelSettingsDto
-
 The additional white label settings parameters.
 
 ## Properties
@@ -17,7 +16,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.additional_white_label_settings_dto import AdditionalWhiteLabelSettingsDto
+from docspace-api-python.models.additional_white_label_settings_dto import AdditionalWhiteLabelSettingsDto
 
 # TODO update the JSON string below
 json = "{}"

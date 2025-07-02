@@ -1,5 +1,4 @@
 # FolderDtoString
-
 The folder parameters.
 
 ## Properties
@@ -58,7 +57,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.folder_dto_string import FolderDtoString
+from docspace-api-python.models.folder_dto_string import FolderDtoString
 
 # TODO update the JSON string below
 json = "{}"

@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.download_request_item_dto import DownloadRequestItemDto
+from docspace-api-python.models.download_request_item_dto import DownloadRequestItemDto
 
 class TestDownloadRequestItemDto(unittest.TestCase):
     """DownloadRequestItemDto unit test stubs"""

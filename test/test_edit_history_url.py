@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.edit_history_url import EditHistoryUrl
+from docspace-api-python.models.edit_history_url import EditHistoryUrl
 
 class TestEditHistoryUrl(unittest.TestCase):
     """EditHistoryUrl unit test stubs"""

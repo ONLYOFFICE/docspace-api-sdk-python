@@ -1,6 +1,5 @@
 # BooleanWrapper
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.boolean_wrapper import BooleanWrapper
+from docspace-api-python.models.boolean_wrapper import BooleanWrapper
 
 # TODO update the JSON string below
 json = "{}"

@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.logo import Logo
+from docspace-api-python.models.logo import Logo
 
 class TestLogo(unittest.TestCase):
     """Logo unit test stubs"""
@@ -54,7 +54,7 @@ class TestLogo(unittest.TestCase):
                 medium = 'some text',
                 small = 'some text',
                 color = 'some text',
-                cover = docspace.models.logo_cover.LogoCover(
+                cover = docspace-api-python.models.logo_cover.LogoCover(
                     id = '9846', 
                     data = 'some text', )
             )

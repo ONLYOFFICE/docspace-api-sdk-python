@@ -1,6 +1,5 @@
 # KeyValuePairStringStringValues
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -11,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.key_value_pair_string_string_values import KeyValuePairStringStringValues
+from docspace-api-python.models.key_value_pair_string_string_values import KeyValuePairStringStringValues
 
 # TODO update the JSON string below
 json = "{}"

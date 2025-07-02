@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.api.o_auth20_authorization_api import OAuth20AuthorizationApi
+from docspace-api-python.api.o_auth20_authorization_api import OAuth20AuthorizationApi
 
 
 class TestOAuth20AuthorizationApi(unittest.TestCase):

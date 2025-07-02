@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.int64_wrapper import Int64Wrapper
+from docspace-api-python.models.int64_wrapper import Int64Wrapper
 
 class TestInt64Wrapper(unittest.TestCase):
     """Int64Wrapper unit test stubs"""
@@ -52,7 +52,7 @@ class TestInt64Wrapper(unittest.TestCase):
                 response = 56,
                 count = 56,
                 links = [
-                    docspace.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

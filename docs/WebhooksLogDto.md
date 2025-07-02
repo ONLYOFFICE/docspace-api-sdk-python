@@ -1,5 +1,4 @@
 # WebhooksLogDto
-
 The webhook log parameters.
 
 ## Properties
@@ -22,7 +21,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.webhooks_log_dto import WebhooksLogDto
+from docspace-api-python.models.webhooks_log_dto import WebhooksLogDto
 
 # TODO update the JSON string below
 json = "{}"

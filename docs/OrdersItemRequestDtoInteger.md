@@ -1,5 +1,4 @@
 # OrdersItemRequestDtoInteger
-
 An item in the ordering request with its entry type and ID.
 
 ## Properties
@@ -13,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.orders_item_request_dto_integer import OrdersItemRequestDtoInteger
+from docspace-api-python.models.orders_item_request_dto_integer import OrdersItemRequestDtoInteger
 
 # TODO update the JSON string below
 json = "{}"

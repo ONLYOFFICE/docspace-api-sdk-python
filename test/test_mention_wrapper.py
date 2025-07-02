@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.mention_wrapper import MentionWrapper
+from docspace-api-python.models.mention_wrapper import MentionWrapper
 
 class TestMentionWrapper(unittest.TestCase):
     """MentionWrapper unit test stubs"""
@@ -49,7 +49,7 @@ class TestMentionWrapper(unittest.TestCase):
         model = MentionWrapper()
         if include_optional:
             return MentionWrapper(
-                user = docspace.models.user_info.UserInfo(
+                user = docspace-api-python.models.user_info.UserInfo(
                     id = 'aae1e103-bca5-9fa1-ba8c-42058b4abf28', 
                     first_name = 'Winfield', 
                     last_name = 'Wyman', 

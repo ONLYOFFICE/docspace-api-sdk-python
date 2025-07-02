@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.api.portal_guests_api import PortalGuestsApi
+from docspace-api-python.api.portal_guests_api import PortalGuestsApi
 
 
 class TestPortalGuestsApi(unittest.TestCase):

@@ -1,5 +1,4 @@
 # AceShortWrapper
-
 The information about the settings which allow to share the document with other users.
 
 ## Properties
@@ -13,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.ace_short_wrapper import AceShortWrapper
+from docspace-api-python.models.ace_short_wrapper import AceShortWrapper
 
 # TODO update the JSON string below
 json = "{}"

@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.form_filling_manage_action import FormFillingManageAction
+from docspace-api-python.models.form_filling_manage_action import FormFillingManageAction
 
 class TestFormFillingManageAction(unittest.TestCase):
     """FormFillingManageAction unit test stubs"""

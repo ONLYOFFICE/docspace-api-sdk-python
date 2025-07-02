@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.api.third_party_api import ThirdPartyApi
+from docspace-api-python.api.third_party_api import ThirdPartyApi
 
 
 class TestThirdPartyApi(unittest.TestCase):

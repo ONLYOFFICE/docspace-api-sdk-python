@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.edit_history_data_dto import EditHistoryDataDto
+from docspace-api-python.models.edit_history_data_dto import EditHistoryDataDto
 
 class TestEditHistoryDataDto(unittest.TestCase):
     """EditHistoryDataDto unit test stubs"""
@@ -51,7 +51,7 @@ class TestEditHistoryDataDto(unittest.TestCase):
             return EditHistoryDataDto(
                 changes_url = 'some text',
                 key = 'some text',
-                previous = docspace.models.edit_history_url.EditHistoryUrl(
+                previous = docspace-api-python.models.edit_history_url.EditHistoryUrl(
                     key = 'some text', 
                     url = 'some text', 
                     file_type = 'some text', ),

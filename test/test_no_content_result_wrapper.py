@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.no_content_result_wrapper import NoContentResultWrapper
+from docspace-api-python.models.no_content_result_wrapper import NoContentResultWrapper
 
 class TestNoContentResultWrapper(unittest.TestCase):
     """NoContentResultWrapper unit test stubs"""
@@ -49,11 +49,11 @@ class TestNoContentResultWrapper(unittest.TestCase):
         model = NoContentResultWrapper()
         if include_optional:
             return NoContentResultWrapper(
-                response = docspace.models.no_content_result.NoContentResult(
+                response = docspace-api-python.models.no_content_result.NoContentResult(
                     status_code = 1234, ),
                 count = 56,
                 links = [
-                    docspace.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

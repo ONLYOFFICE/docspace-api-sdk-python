@@ -1,5 +1,4 @@
 # NewItemsDtoRoomNewItemsDto
-
 The new item parameters.
 
 ## Properties
@@ -12,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.new_items_dto_room_new_items_dto import NewItemsDtoRoomNewItemsDto
+from docspace-api-python.models.new_items_dto_room_new_items_dto import NewItemsDtoRoomNewItemsDto
 
 # TODO update the JSON string below
 json = "{}"

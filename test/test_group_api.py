@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.api.group_api import GroupApi
+from docspace-api-python.api.group_api import GroupApi
 
 
 class TestGroupApi(unittest.TestCase):

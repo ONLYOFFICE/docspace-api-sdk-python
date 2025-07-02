@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.api.portal_payment_api import PortalPaymentApi
+from docspace-api-python.api.portal_payment_api import PortalPaymentApi
 
 
 class TestPortalPaymentApi(unittest.TestCase):

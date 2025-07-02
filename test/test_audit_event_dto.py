@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.audit_event_dto import AuditEventDto
+from docspace-api-python.models.audit_event_dto import AuditEventDto
 
 class TestAuditEventDto(unittest.TestCase):
     """AuditEventDto unit test stubs"""
@@ -50,7 +50,7 @@ class TestAuditEventDto(unittest.TestCase):
         if include_optional:
             return AuditEventDto(
                 id = 9846,
-                var_date = docspace.models.api_date_time.ApiDateTime(
+                var_date = docspace-api-python.models.api_date_time.ApiDateTime(
                     utc_time = '2008-04-10T06:30+04:00', 
                     time_zone_offset = '00:00:00', ),
                 user = 'some text',

@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.file_conflict_resolve_type import FileConflictResolveType
+from docspace-api-python.models.file_conflict_resolve_type import FileConflictResolveType
 
 class TestFileConflictResolveType(unittest.TestCase):
     """FileConflictResolveType unit test stubs"""

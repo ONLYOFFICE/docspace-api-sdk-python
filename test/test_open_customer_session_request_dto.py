@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.open_customer_session_request_dto import OpenCustomerSessionRequestDto
+from docspace-api-python.models.open_customer_session_request_dto import OpenCustomerSessionRequestDto
 
 class TestOpenCustomerSessionRequestDto(unittest.TestCase):
     """OpenCustomerSessionRequestDto unit test stubs"""

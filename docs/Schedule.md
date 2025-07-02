@@ -1,6 +1,5 @@
 # Schedule
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -15,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.schedule import Schedule
+from docspace-api-python.models.schedule import Schedule
 
 # TODO update the JSON string below
 json = "{}"

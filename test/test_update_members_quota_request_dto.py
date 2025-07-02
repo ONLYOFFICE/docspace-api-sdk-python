@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.update_members_quota_request_dto import UpdateMembersQuotaRequestDto
+from docspace-api-python.models.update_members_quota_request_dto import UpdateMembersQuotaRequestDto
 
 class TestUpdateMembersQuotaRequestDto(unittest.TestCase):
     """UpdateMembersQuotaRequestDto unit test stubs"""

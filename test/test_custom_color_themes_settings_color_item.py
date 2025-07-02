@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.custom_color_themes_settings_color_item import CustomColorThemesSettingsColorItem
+from docspace-api-python.models.custom_color_themes_settings_color_item import CustomColorThemesSettingsColorItem
 
 class TestCustomColorThemesSettingsColorItem(unittest.TestCase):
     """CustomColorThemesSettingsColorItem unit test stubs"""

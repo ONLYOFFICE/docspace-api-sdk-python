@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.manage_form_filling_dto_integer import ManageFormFillingDtoInteger
+from docspace-api-python.models.manage_form_filling_dto_integer import ManageFormFillingDtoInteger
 
 class TestManageFormFillingDtoInteger(unittest.TestCase):
     """ManageFormFillingDtoInteger unit test stubs"""

@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.report_wrapper import ReportWrapper
+from docspace-api-python.models.report_wrapper import ReportWrapper
 
 class TestReportWrapper(unittest.TestCase):
     """ReportWrapper unit test stubs"""
@@ -49,9 +49,9 @@ class TestReportWrapper(unittest.TestCase):
         model = ReportWrapper()
         if include_optional:
             return ReportWrapper(
-                response = docspace.models.report.Report(
+                response = docspace-api-python.models.report.Report(
                     collection = [
-                        docspace.models.operation.Operation(
+                        docspace-api-python.models.operation.Operation(
                             date = '2008-04-10T06:30+04:00', 
                             service = 'some text', 
                             description = 'some text', 
@@ -68,7 +68,7 @@ class TestReportWrapper(unittest.TestCase):
                     current_page = 1234, ),
                 count = 56,
                 links = [
-                    docspace.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

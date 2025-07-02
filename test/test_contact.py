@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.contact import Contact
+from docspace-api-python.models.contact import Contact
 
 class TestContact(unittest.TestCase):
     """Contact unit test stubs"""

@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.dns_settings_requests_dto import DnsSettingsRequestsDto
+from docspace-api-python.models.dns_settings_requests_dto import DnsSettingsRequestsDto
 
 class TestDnsSettingsRequestsDto(unittest.TestCase):
     """DnsSettingsRequestsDto unit test stubs"""

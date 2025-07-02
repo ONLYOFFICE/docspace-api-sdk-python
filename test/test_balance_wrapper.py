@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.balance_wrapper import BalanceWrapper
+from docspace-api-python.models.balance_wrapper import BalanceWrapper
 
 class TestBalanceWrapper(unittest.TestCase):
     """BalanceWrapper unit test stubs"""
@@ -49,16 +49,16 @@ class TestBalanceWrapper(unittest.TestCase):
         model = BalanceWrapper()
         if include_optional:
             return BalanceWrapper(
-                response = docspace.models.balance.Balance(
+                response = docspace-api-python.models.balance.Balance(
                     account_number = 1234, 
                     sub_accounts = [
-                        docspace.models.sub_account.SubAccount(
+                        docspace-api-python.models.sub_account.SubAccount(
                             currency = 'some text', 
                             amount = 1.337, )
                         ], ),
                 count = 56,
                 links = [
-                    docspace.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

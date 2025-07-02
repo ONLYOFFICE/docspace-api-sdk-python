@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.new_items_file_entry_array_wrapper import NewItemsFileEntryArrayWrapper
+from docspace-api-python.models.new_items_file_entry_array_wrapper import NewItemsFileEntryArrayWrapper
 
 class TestNewItemsFileEntryArrayWrapper(unittest.TestCase):
     """NewItemsFileEntryArrayWrapper unit test stubs"""
@@ -50,19 +50,19 @@ class TestNewItemsFileEntryArrayWrapper(unittest.TestCase):
         if include_optional:
             return NewItemsFileEntryArrayWrapper(
                 response = [
-                    docspace.models.new_items_dto_file_entry_dto.NewItemsDtoFileEntryDto(
-                        date = docspace.models.api_date_time.ApiDateTime(
+                    docspace-api-python.models.new_items_dto_file_entry_dto.NewItemsDtoFileEntryDto(
+                        date = docspace-api-python.models.api_date_time.ApiDateTime(
                             utc_time = '2008-04-10T06:30+04:00', 
                             time_zone_offset = '00:00:00', ), 
                         items = [
-                            docspace.models.file_entry_dto.FileEntryDto(
+                            docspace-api-python.models.file_entry_dto.FileEntryDto(
                                 title = 'Some titile.txt/ Some title', 
                                 access = 0, 
                                 shared = False, 
-                                created = docspace.models.api_date_time.ApiDateTime(
+                                created = docspace-api-python.models.api_date_time.ApiDateTime(
                                     utc_time = '2008-04-10T06:30+04:00', 
                                     time_zone_offset = '00:00:00', ), 
-                                created_by = docspace.models.employee_dto.EmployeeDto(
+                                created_by = docspace-api-python.models.employee_dto.EmployeeDto(
                                     id = '', 
                                     display_name = 'Mike Zanyatski', 
                                     title = 'Manager', 
@@ -78,7 +78,7 @@ class TestNewItemsFileEntryArrayWrapper(unittest.TestCase):
                                 auto_delete = , 
                                 root_folder_type = 0, 
                                 parent_room_type = 0, 
-                                updated_by = docspace.models.employee_dto.EmployeeDto(
+                                updated_by = docspace-api-python.models.employee_dto.EmployeeDto(
                                     id = '', 
                                     display_name = 'Mike Zanyatski', 
                                     title = 'Manager', 
@@ -99,7 +99,7 @@ class TestNewItemsFileEntryArrayWrapper(unittest.TestCase):
                     ],
                 count = 56,
                 links = [
-                    docspace.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

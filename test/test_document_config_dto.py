@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.document_config_dto import DocumentConfigDto
+from docspace-api-python.models.document_config_dto import DocumentConfigDto
 
 class TestDocumentConfigDto(unittest.TestCase):
     """DocumentConfigDto unit test stubs"""
@@ -50,12 +50,12 @@ class TestDocumentConfigDto(unittest.TestCase):
         if include_optional:
             return DocumentConfigDto(
                 file_type = 'some text',
-                info = docspace.models.info_config_dto.InfoConfigDto(
+                info = docspace-api-python.models.info_config_dto.InfoConfigDto(
                     favorite = True, 
                     folder = 'some text', 
                     owner = 'some text', 
                     sharing_settings = [
-                        docspace.models.ace_short_wrapper.AceShortWrapper(
+                        docspace-api-python.models.ace_short_wrapper.AceShortWrapper(
                             user = 'some text', 
                             permissions = 'some text', 
                             is_link = True, )
@@ -64,7 +64,7 @@ class TestDocumentConfigDto(unittest.TestCase):
                     uploaded = 'some text', ),
                 is_linked_for_me = True,
                 key = 'some text',
-                permissions = docspace.models.permissions_config.PermissionsConfig(
+                permissions = docspace-api-python.models.permissions_config.PermissionsConfig(
                     change_history = True, 
                     comment = True, 
                     chat = True, 
@@ -79,15 +79,15 @@ class TestDocumentConfigDto(unittest.TestCase):
                     copy = True, ),
                 shared_link_param = 'some text',
                 shared_link_key = 'some text',
-                reference_data = docspace.models.file_reference_data.FileReferenceData(
+                reference_data = docspace-api-python.models.file_reference_data.FileReferenceData(
                     file_key = 'some text', 
                     instance_id = '9846', 
                     room_id = '9846', ),
                 title = 'legacy_1080p_small_wooden_mouse',
                 url = 'some text',
                 is_form = True,
-                options = docspace.models.options.Options(
-                    watermark_on_draw = docspace.models.watermark_on_draw.WatermarkOnDraw(
+                options = docspace-api-python.models.options.Options(
+                    watermark_on_draw = docspace-api-python.models.watermark_on_draw.WatermarkOnDraw(
                         width = -8.5, 
                         height = -8.5, 
                         margins = [1234], 
@@ -95,10 +95,10 @@ class TestDocumentConfigDto(unittest.TestCase):
                         rotate = 1234, 
                         transparent = -8.5, 
                         paragraphs = [
-                            docspace.models.paragraph.Paragraph(
+                            docspace-api-python.models.paragraph.Paragraph(
                                 align = 1234, 
                                 runs = [
-                                    docspace.models.run.Run(
+                                    docspace-api-python.models.run.Run(
                                         fill = [1234], 
                                         text = 'some text', 
                                         font_size = 'some text', )

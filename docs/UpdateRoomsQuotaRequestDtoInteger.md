@@ -1,5 +1,4 @@
 # UpdateRoomsQuotaRequestDtoInteger
-
 The request parameters for updating the room quota.
 
 ## Properties
@@ -12,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.update_rooms_quota_request_dto_integer import UpdateRoomsQuotaRequestDtoInteger
+from docspace-api-python.models.update_rooms_quota_request_dto_integer import UpdateRoomsQuotaRequestDtoInteger
 
 # TODO update the JSON string below
 json = "{}"

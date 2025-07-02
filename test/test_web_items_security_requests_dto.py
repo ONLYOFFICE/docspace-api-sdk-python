@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.web_items_security_requests_dto import WebItemsSecurityRequestsDto
+from docspace-api-python.models.web_items_security_requests_dto import WebItemsSecurityRequestsDto
 
 class TestWebItemsSecurityRequestsDto(unittest.TestCase):
     """WebItemsSecurityRequestsDto unit test stubs"""
@@ -50,7 +50,7 @@ class TestWebItemsSecurityRequestsDto(unittest.TestCase):
         if include_optional:
             return WebItemsSecurityRequestsDto(
                 items = [
-                    docspace.models.item_key_value_pair_string_boolean.ItemKeyValuePairStringBoolean(
+                    docspace-api-python.models.item_key_value_pair_string_boolean.ItemKeyValuePairStringBoolean(
                         key = 'some text', 
                         value = True, )
                     ]

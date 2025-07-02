@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.schedule import Schedule
+from docspace-api-python.models.schedule import Schedule
 
 class TestSchedule(unittest.TestCase):
     """Schedule unit test stubs"""
@@ -51,7 +51,7 @@ class TestSchedule(unittest.TestCase):
             return Schedule(
                 storage_type = 0,
                 storage_params = [{"key":"some text","value":"some text"}],
-                cron_params = docspace.models.cron_params.CronParams(
+                cron_params = docspace-api-python.models.cron_params.CronParams(
                     period = 0, 
                     hour = 1234, 
                     day = 1234, ),

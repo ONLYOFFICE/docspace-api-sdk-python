@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.forms_item_dto import FormsItemDto
+from docspace-api-python.models.forms_item_dto import FormsItemDto
 
 class TestFormsItemDto(unittest.TestCase):
     """FormsItemDto unit test stubs"""

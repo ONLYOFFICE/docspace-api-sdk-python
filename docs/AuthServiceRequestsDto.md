@@ -1,5 +1,4 @@
 # AuthServiceRequestsDto
-
 The request parameters for handling the authorization service.
 
 ## Properties
@@ -16,7 +15,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.auth_service_requests_dto import AuthServiceRequestsDto
+from docspace-api-python.models.auth_service_requests_dto import AuthServiceRequestsDto
 
 # TODO update the JSON string below
 json = "{}"

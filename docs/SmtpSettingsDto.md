@@ -1,5 +1,4 @@
 # SmtpSettingsDto
-
 The SMTP settings parameters.
 
 ## Properties
@@ -20,7 +19,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.smtp_settings_dto import SmtpSettingsDto
+from docspace-api-python.models.smtp_settings_dto import SmtpSettingsDto
 
 # TODO update the JSON string below
 json = "{}"

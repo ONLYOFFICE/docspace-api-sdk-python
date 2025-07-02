@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.update_webhooks_config_requests_dto import UpdateWebhooksConfigRequestsDto
+from docspace-api-python.models.update_webhooks_config_requests_dto import UpdateWebhooksConfigRequestsDto
 
 class TestUpdateWebhooksConfigRequestsDto(unittest.TestCase):
     """UpdateWebhooksConfigRequestsDto unit test stubs"""

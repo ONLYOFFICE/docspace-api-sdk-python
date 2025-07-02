@@ -1,5 +1,4 @@
 # FileLink
-
 The file link properties.
 
 ## Properties
@@ -13,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.file_link import FileLink
+from docspace-api-python.models.file_link import FileLink
 
 # TODO update the JSON string below
 json = "{}"

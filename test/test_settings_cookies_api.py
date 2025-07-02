@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.api.settings_cookies_api import SettingsCookiesApi
+from docspace-api-python.api.settings_cookies_api import SettingsCookiesApi
 
 
 class TestSettingsCookiesApi(unittest.TestCase):

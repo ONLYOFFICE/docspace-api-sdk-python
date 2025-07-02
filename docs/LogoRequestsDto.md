@@ -1,5 +1,4 @@
 # LogoRequestsDto
-
 The request parameters for the theme-specific logo configurations.
 
 ## Properties
@@ -12,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.logo_requests_dto import LogoRequestsDto
+from docspace-api-python.models.logo_requests_dto import LogoRequestsDto
 
 # TODO update the JSON string below
 json = "{}"

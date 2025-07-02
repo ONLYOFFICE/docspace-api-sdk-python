@@ -1,6 +1,5 @@
 # FileUploadResultWrapper
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.file_upload_result_wrapper import FileUploadResultWrapper
+from docspace-api-python.models.file_upload_result_wrapper import FileUploadResultWrapper
 
 # TODO update the JSON string below
 json = "{}"

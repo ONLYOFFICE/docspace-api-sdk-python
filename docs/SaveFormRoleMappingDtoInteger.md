@@ -1,5 +1,4 @@
 # SaveFormRoleMappingDtoInteger
-
 The parameters for saving form role mapping.
 
 ## Properties
@@ -12,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.save_form_role_mapping_dto_integer import SaveFormRoleMappingDtoInteger
+from docspace-api-python.models.save_form_role_mapping_dto_integer import SaveFormRoleMappingDtoInteger
 
 # TODO update the JSON string below
 json = "{}"

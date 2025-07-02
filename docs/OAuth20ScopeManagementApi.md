@@ -1,32 +1,43 @@
-# docspace.OAuth20ScopeManagementApi
+# docspace-api-python.OAuth20ScopeManagementApi
 
 All URIs are relative to *http://localhost:8092*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get_scopes**](OAuth20ScopeManagementApi.md#get_scopes) | **GET** /api/2.0/scopes | Get available OAuth2 scopes
+[**get_scopes**](#get_scopes) | **GET** /api/2.0/scopes | Get available OAuth2 scopes
 
 
 # **get_scopes**
 > ScopeResponse get_scopes()
 
-Get available OAuth2 scopes
-
 Retrieves a list of all available OAuth2 scopes for the specified tenant. The scopes define the permissions that can be requested by OAuth2 clients. The list is ordered alphabetically, with the 'openid' scope always appearing first.
+
+For more information, see [api.onlyoffice.com]().
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**ScopeResponse**](ScopeResponse.md)
+
+### Authorization
+
+[asc_auth_key](../README.md#asc_auth_key)
 
 ### Example
 
-* Api Key Authentication (asc_auth_key):
 
 ```python
-import docspace
-from docspace.models.scope_response import ScopeResponse
-from docspace.rest import ApiException
+import docspace-api-python
+from docspace-api-python.models.scope_response import ScopeResponse
+from docspace-api-python.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace.Configuration(
+configuration = docspace-api-python.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -42,9 +53,9 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with docspace.ApiClient(configuration) as api_client:
+with docspace-api-python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace.OAuth20ScopeManagementApi(api_client)
+    api_instance = docspace-api-python.OAuth20ScopeManagementApi(api_client)
 
     try:
         # Get available OAuth2 scopes
@@ -57,22 +68,11 @@ with docspace.ApiClient(configuration) as api_client:
 
 
 
-### Parameters
-
-This endpoint does not need any parameter.
-
-### Return type
-
-[**ScopeResponse**](ScopeResponse.md)
-
-### Authorization
-
-[asc_auth_key](../README.md#asc_auth_key)
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
+
 
 ### HTTP response details
 

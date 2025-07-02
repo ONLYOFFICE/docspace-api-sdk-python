@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.search_area import SearchArea
+from docspace-api-python.models.search_area import SearchArea
 
 class TestSearchArea(unittest.TestCase):
     """SearchArea unit test stubs"""

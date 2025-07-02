@@ -1,39 +1,50 @@
-# docspace.PeopleContactsApi
+# docspace-api-python.PeopleContactsApi
 
 All URIs are relative to *http://localhost:8092*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**delete_member_contacts**](PeopleContactsApi.md#delete_member_contacts) | **DELETE** /api/2.0/people/{userid}/contacts | Delete user contacts
-[**set_member_contacts**](PeopleContactsApi.md#set_member_contacts) | **POST** /api/2.0/people/{userid}/contacts | Set user contacts
-[**update_member_contacts**](PeopleContactsApi.md#update_member_contacts) | **PUT** /api/2.0/people/{userid}/contacts | Update user contacts
+[**delete_member_contacts**](#delete_member_contacts) | **DELETE** /api/2.0/people/{userid}/contacts | Delete user contacts
+[**set_member_contacts**](#set_member_contacts) | **POST** /api/2.0/people/{userid}/contacts | Set user contacts
+[**update_member_contacts**](#update_member_contacts) | **PUT** /api/2.0/people/{userid}/contacts | Update user contacts
 
 
 # **delete_member_contacts**
 > EmployeeFullWrapper delete_member_contacts(userid, contacts_request=contacts_request)
 
-Delete user contacts
-
 Deletes the contacts of the user with the ID specified in the request from the portal.
+
+For more information, see [api.onlyoffice.com]().
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **userid** | **str**| The user ID. | 
+ **contacts_request** | [**ContactsRequest**](ContactsRequest.md)| The contacts request. | [optional] 
+
+### Return type
+
+[**EmployeeFullWrapper**](EmployeeFullWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
-* Basic Authentication (Basic):
-* OAuth Authentication (OAuth2):
-* Api Key Authentication (ApiKeyBearer):
-* Api Key Authentication (asc_auth_key):
-* Bearer (JWT) Authentication (Bearer):
 
 ```python
-import docspace
-from docspace.models.contacts_request import ContactsRequest
-from docspace.models.employee_full_wrapper import EmployeeFullWrapper
-from docspace.rest import ApiException
+import docspace-api-python
+from docspace-api-python.models.contacts_request import ContactsRequest
+from docspace-api-python.models.employee_full_wrapper import EmployeeFullWrapper
+from docspace-api-python.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace.Configuration(
+configuration = docspace-api-python.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -43,7 +54,7 @@ configuration = docspace.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = docspace.Configuration(
+configuration = docspace-api-python.Configuration(
     username = os.environ["USERNAME"],
     password = os.environ["PASSWORD"]
 )
@@ -63,16 +74,16 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace.Configuration(
+configuration = docspace-api-python.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace.ApiClient(configuration) as api_client:
+with docspace-api-python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace.PeopleContactsApi(api_client)
+    api_instance = docspace-api-python.PeopleContactsApi(api_client)
     userid = '9846' # str | The user ID.
-    contacts_request = docspace.ContactsRequest() # ContactsRequest | The contacts request. (optional)
+    contacts_request = docspace-api-python.ContactsRequest() # ContactsRequest | The contacts request. (optional)
 
     try:
         # Delete user contacts
@@ -85,26 +96,11 @@ with docspace.ApiClient(configuration) as api_client:
 
 
 
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **userid** | **str**| The user ID. | 
- **contacts_request** | [**ContactsRequest**](ContactsRequest.md)| The contacts request. | [optional] 
-
-### Return type
-
-[**EmployeeFullWrapper**](EmployeeFullWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
 ### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json
+
 
 ### HTTP response details
 
@@ -120,28 +116,39 @@ Name | Type | Description  | Notes
 # **set_member_contacts**
 > EmployeeFullWrapper set_member_contacts(userid, contacts_request=contacts_request)
 
-Set user contacts
-
 Sets the contacts of the user with the ID specified in the request replacing the current portal data with the new data.
+
+For more information, see [api.onlyoffice.com]().
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **userid** | **str**| The user ID. | 
+ **contacts_request** | [**ContactsRequest**](ContactsRequest.md)| The contacts request. | [optional] 
+
+### Return type
+
+[**EmployeeFullWrapper**](EmployeeFullWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
-* Basic Authentication (Basic):
-* OAuth Authentication (OAuth2):
-* Api Key Authentication (ApiKeyBearer):
-* Api Key Authentication (asc_auth_key):
-* Bearer (JWT) Authentication (Bearer):
 
 ```python
-import docspace
-from docspace.models.contacts_request import ContactsRequest
-from docspace.models.employee_full_wrapper import EmployeeFullWrapper
-from docspace.rest import ApiException
+import docspace-api-python
+from docspace-api-python.models.contacts_request import ContactsRequest
+from docspace-api-python.models.employee_full_wrapper import EmployeeFullWrapper
+from docspace-api-python.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace.Configuration(
+configuration = docspace-api-python.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -151,7 +158,7 @@ configuration = docspace.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = docspace.Configuration(
+configuration = docspace-api-python.Configuration(
     username = os.environ["USERNAME"],
     password = os.environ["PASSWORD"]
 )
@@ -171,16 +178,16 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace.Configuration(
+configuration = docspace-api-python.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace.ApiClient(configuration) as api_client:
+with docspace-api-python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace.PeopleContactsApi(api_client)
+    api_instance = docspace-api-python.PeopleContactsApi(api_client)
     userid = '9846' # str | The user ID.
-    contacts_request = docspace.ContactsRequest() # ContactsRequest | The contacts request. (optional)
+    contacts_request = docspace-api-python.ContactsRequest() # ContactsRequest | The contacts request. (optional)
 
     try:
         # Set user contacts
@@ -193,26 +200,11 @@ with docspace.ApiClient(configuration) as api_client:
 
 
 
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **userid** | **str**| The user ID. | 
- **contacts_request** | [**ContactsRequest**](ContactsRequest.md)| The contacts request. | [optional] 
-
-### Return type
-
-[**EmployeeFullWrapper**](EmployeeFullWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
 ### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json
+
 
 ### HTTP response details
 
@@ -228,28 +220,39 @@ Name | Type | Description  | Notes
 # **update_member_contacts**
 > EmployeeFullWrapper update_member_contacts(userid, contacts_request=contacts_request)
 
-Update user contacts
-
 Updates the contact information of the user with the ID specified in the request merging the new data into the current portal data.
+
+For more information, see [api.onlyoffice.com]().
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **userid** | **str**| The user ID. | 
+ **contacts_request** | [**ContactsRequest**](ContactsRequest.md)| The contacts request. | [optional] 
+
+### Return type
+
+[**EmployeeFullWrapper**](EmployeeFullWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
-* Basic Authentication (Basic):
-* OAuth Authentication (OAuth2):
-* Api Key Authentication (ApiKeyBearer):
-* Api Key Authentication (asc_auth_key):
-* Bearer (JWT) Authentication (Bearer):
 
 ```python
-import docspace
-from docspace.models.contacts_request import ContactsRequest
-from docspace.models.employee_full_wrapper import EmployeeFullWrapper
-from docspace.rest import ApiException
+import docspace-api-python
+from docspace-api-python.models.contacts_request import ContactsRequest
+from docspace-api-python.models.employee_full_wrapper import EmployeeFullWrapper
+from docspace-api-python.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace.Configuration(
+configuration = docspace-api-python.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -259,7 +262,7 @@ configuration = docspace.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = docspace.Configuration(
+configuration = docspace-api-python.Configuration(
     username = os.environ["USERNAME"],
     password = os.environ["PASSWORD"]
 )
@@ -279,16 +282,16 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace.Configuration(
+configuration = docspace-api-python.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace.ApiClient(configuration) as api_client:
+with docspace-api-python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace.PeopleContactsApi(api_client)
+    api_instance = docspace-api-python.PeopleContactsApi(api_client)
     userid = '9846' # str | The user ID.
-    contacts_request = docspace.ContactsRequest() # ContactsRequest | The contacts request. (optional)
+    contacts_request = docspace-api-python.ContactsRequest() # ContactsRequest | The contacts request. (optional)
 
     try:
         # Update user contacts
@@ -301,26 +304,11 @@ with docspace.ApiClient(configuration) as api_client:
 
 
 
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **userid** | **str**| The user ID. | 
- **contacts_request** | [**ContactsRequest**](ContactsRequest.md)| The contacts request. | [optional] 
-
-### Return type
-
-[**EmployeeFullWrapper**](EmployeeFullWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
 ### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json
+
 
 ### HTTP response details
 

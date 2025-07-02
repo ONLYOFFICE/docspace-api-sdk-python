@@ -1,5 +1,4 @@
 # TenantQuotaSettingsRequestsDto
-
 The request parameters for managing the tenant storage quota settings in a multi-tenant system.
 
 ## Properties
@@ -12,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.tenant_quota_settings_requests_dto import TenantQuotaSettingsRequestsDto
+from docspace-api-python.models.tenant_quota_settings_requests_dto import TenantQuotaSettingsRequestsDto
 
 # TODO update the JSON string below
 json = "{}"

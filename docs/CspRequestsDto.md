@@ -1,5 +1,4 @@
 # CspRequestsDto
-
 The request parameters for configuring the Content Security Policy (CSP) settings.
 
 ## Properties
@@ -11,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.csp_requests_dto import CspRequestsDto
+from docspace-api-python.models.csp_requests_dto import CspRequestsDto
 
 # TODO update the JSON string below
 json = "{}"

@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.tenant_dev_tools_access_settings_wrapper import TenantDevToolsAccessSettingsWrapper
+from docspace-api-python.models.tenant_dev_tools_access_settings_wrapper import TenantDevToolsAccessSettingsWrapper
 
 class TestTenantDevToolsAccessSettingsWrapper(unittest.TestCase):
     """TenantDevToolsAccessSettingsWrapper unit test stubs"""
@@ -49,12 +49,12 @@ class TestTenantDevToolsAccessSettingsWrapper(unittest.TestCase):
         model = TenantDevToolsAccessSettingsWrapper()
         if include_optional:
             return TenantDevToolsAccessSettingsWrapper(
-                response = docspace.models.tenant_dev_tools_access_settings.TenantDevToolsAccessSettings(
+                response = docspace-api-python.models.tenant_dev_tools_access_settings.TenantDevToolsAccessSettings(
                     limited_access_for_users = True, 
                     last_modified = '2008-04-10T06:30+04:00', ),
                 count = 56,
                 links = [
-                    docspace.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

@@ -1,6 +1,5 @@
 # FireBaseUserWrapper
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.fire_base_user_wrapper import FireBaseUserWrapper
+from docspace-api-python.models.fire_base_user_wrapper import FireBaseUserWrapper
 
 # TODO update the JSON string below
 json = "{}"

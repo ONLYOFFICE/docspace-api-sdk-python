@@ -1,5 +1,4 @@
 # AdminMessageBaseSettingsRequestsDto
-
 The request parameters for the administrator message configuration.
 
 ## Properties
@@ -12,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.admin_message_base_settings_requests_dto import AdminMessageBaseSettingsRequestsDto
+from docspace-api-python.models.admin_message_base_settings_requests_dto import AdminMessageBaseSettingsRequestsDto
 
 # TODO update the JSON string below
 json = "{}"

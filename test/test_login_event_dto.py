@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.login_event_dto import LoginEventDto
+from docspace-api-python.models.login_event_dto import LoginEventDto
 
 class TestLoginEventDto(unittest.TestCase):
     """LoginEventDto unit test stubs"""
@@ -50,7 +50,7 @@ class TestLoginEventDto(unittest.TestCase):
         if include_optional:
             return LoginEventDto(
                 id = 9846,
-                var_date = docspace.models.api_date_time.ApiDateTime(
+                var_date = docspace-api-python.models.api_date_time.ApiDateTime(
                     utc_time = '2008-04-10T06:30+04:00', 
                     time_zone_offset = '00:00:00', ),
                 user = 'some text',

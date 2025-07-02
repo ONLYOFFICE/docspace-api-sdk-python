@@ -1,5 +1,4 @@
 # ConfirmDto
-
 The confirmation parameters.
 
 ## Properties
@@ -13,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.confirm_dto import ConfirmDto
+from docspace-api-python.models.confirm_dto import ConfirmDto
 
 # TODO update the JSON string below
 json = "{}"

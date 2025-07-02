@@ -1,6 +1,5 @@
 # AceShortWrapperArrayWrapper
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.ace_short_wrapper_array_wrapper import AceShortWrapperArrayWrapper
+from docspace-api-python.models.ace_short_wrapper_array_wrapper import AceShortWrapperArrayWrapper
 
 # TODO update the JSON string below
 json = "{}"

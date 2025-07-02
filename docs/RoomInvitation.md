@@ -1,5 +1,4 @@
 # RoomInvitation
-
 The room invitation parameters.
 
 ## Properties
@@ -13,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.room_invitation import RoomInvitation
+from docspace-api-python.models.room_invitation import RoomInvitation
 
 # TODO update the JSON string below
 json = "{}"

@@ -1,5 +1,4 @@
 # WalletQuantityRequestDto
-
 The request parameters for the wallet payment quantity specifications.
 
 ## Properties
@@ -12,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.wallet_quantity_request_dto import WalletQuantityRequestDto
+from docspace-api-python.models.wallet_quantity_request_dto import WalletQuantityRequestDto
 
 # TODO update the JSON string below
 json = "{}"

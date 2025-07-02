@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.storage_encryption_requests_dto import StorageEncryptionRequestsDto
+from docspace-api-python.models.storage_encryption_requests_dto import StorageEncryptionRequestsDto
 
 class TestStorageEncryptionRequestsDto(unittest.TestCase):
     """StorageEncryptionRequestsDto unit test stubs"""

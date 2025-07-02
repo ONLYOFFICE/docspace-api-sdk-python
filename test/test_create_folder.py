@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.create_folder import CreateFolder
+from docspace-api-python.models.create_folder import CreateFolder
 
 class TestCreateFolder(unittest.TestCase):
     """CreateFolder unit test stubs"""

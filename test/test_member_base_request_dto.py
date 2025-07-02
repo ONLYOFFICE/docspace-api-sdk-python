@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.member_base_request_dto import MemberBaseRequestDto
+from docspace-api-python.models.member_base_request_dto import MemberBaseRequestDto
 
 class TestMemberBaseRequestDto(unittest.TestCase):
     """MemberBaseRequestDto unit test stubs"""

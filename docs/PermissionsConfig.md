@@ -1,5 +1,4 @@
 # PermissionsConfig
-
 The permissions configuration parameters.
 
 ## Properties
@@ -22,7 +21,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.permissions_config import PermissionsConfig
+from docspace-api-python.models.permissions_config import PermissionsConfig
 
 # TODO update the JSON string below
 json = "{}"

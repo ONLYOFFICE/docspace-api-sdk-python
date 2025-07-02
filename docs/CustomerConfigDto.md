@@ -1,5 +1,4 @@
 # CustomerConfigDto
-
 The customer config parameters.
 
 ## Properties
@@ -16,7 +15,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.customer_config_dto import CustomerConfigDto
+from docspace-api-python.models.customer_config_dto import CustomerConfigDto
 
 # TODO update the JSON string below
 json = "{}"

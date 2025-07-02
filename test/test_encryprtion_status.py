@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.encryprtion_status import EncryprtionStatus
+from docspace-api-python.models.encryprtion_status import EncryprtionStatus
 
 class TestEncryprtionStatus(unittest.TestCase):
     """EncryprtionStatus unit test stubs"""

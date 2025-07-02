@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.api.backup_api import BackupApi
+from docspace-api-python.api.backup_api import BackupApi
 
 
 class TestBackupApi(unittest.TestCase):

@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.api.settings_custom_navigation_api import SettingsCustomNavigationApi
+from docspace-api-python.api.settings_custom_navigation_api import SettingsCustomNavigationApi
 
 
 class TestSettingsCustomNavigationApi(unittest.TestCase):

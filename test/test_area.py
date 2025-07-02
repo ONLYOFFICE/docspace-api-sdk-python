@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.area import Area
+from docspace-api-python.models.area import Area
 
 class TestArea(unittest.TestCase):
     """Area unit test stubs"""

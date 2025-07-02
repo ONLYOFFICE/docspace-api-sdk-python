@@ -1,5 +1,4 @@
 # QuotaFilter
-
 [0 - All, 1 - Default, 2 - Custom]
 
 ## Enum

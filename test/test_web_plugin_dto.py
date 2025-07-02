@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.web_plugin_dto import WebPluginDto
+from docspace-api-python.models.web_plugin_dto import WebPluginDto
 
 class TestWebPluginDto(unittest.TestCase):
     """WebPluginDto unit test stubs"""
@@ -58,7 +58,7 @@ class TestWebPluginDto(unittest.TestCase):
                 plugin_name = 'some text',
                 scopes = 'some text',
                 image = 'some text',
-                create_by = docspace.models.employee_dto.EmployeeDto(
+                create_by = docspace-api-python.models.employee_dto.EmployeeDto(
                     id = '', 
                     display_name = 'Mike Zanyatski', 
                     title = 'Manager', 

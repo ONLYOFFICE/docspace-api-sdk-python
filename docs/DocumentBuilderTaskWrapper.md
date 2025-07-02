@@ -1,6 +1,5 @@
 # DocumentBuilderTaskWrapper
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.document_builder_task_wrapper import DocumentBuilderTaskWrapper
+from docspace-api-python.models.document_builder_task_wrapper import DocumentBuilderTaskWrapper
 
 # TODO update the JSON string below
 json = "{}"

@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.file_share_dto import FileShareDto
+from docspace-api-python.models.file_share_dto import FileShareDto
 
 class TestFileShareDto(unittest.TestCase):
     """FileShareDto unit test stubs"""

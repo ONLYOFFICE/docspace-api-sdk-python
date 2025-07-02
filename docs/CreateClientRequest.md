@@ -1,5 +1,4 @@
 # CreateClientRequest
-
 The request parameters for creating a client.
 
 ## Properties
@@ -22,7 +21,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.create_client_request import CreateClientRequest
+from docspace-api-python.models.create_client_request import CreateClientRequest
 
 # TODO update the JSON string below
 json = "{}"

@@ -1,5 +1,4 @@
 # CurrenciesDto
-
 The currencies parameters.
 
 ## Properties
@@ -13,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.currencies_dto import CurrenciesDto
+from docspace-api-python.models.currencies_dto import CurrenciesDto
 
 # TODO update the JSON string below
 json = "{}"

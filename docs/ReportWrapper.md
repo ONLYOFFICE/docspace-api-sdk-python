@@ -1,6 +1,5 @@
 # ReportWrapper
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.report_wrapper import ReportWrapper
+from docspace-api-python.models.report_wrapper import ReportWrapper
 
 # TODO update the JSON string below
 json = "{}"

@@ -1,5 +1,4 @@
 # MentionWrapper
-
 The mention message parameters.
 
 ## Properties
@@ -16,7 +15,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.mention_wrapper import MentionWrapper
+from docspace-api-python.models.mention_wrapper import MentionWrapper
 
 # TODO update the JSON string below
 json = "{}"

@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.api.settings_greeting_settings_api import SettingsGreetingSettingsApi
+from docspace-api-python.api.settings_greeting_settings_api import SettingsGreetingSettingsApi
 
 
 class TestSettingsGreetingSettingsApi(unittest.TestCase):

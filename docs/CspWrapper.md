@@ -1,6 +1,5 @@
 # CspWrapper
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.csp_wrapper import CspWrapper
+from docspace-api-python.models.csp_wrapper import CspWrapper
 
 # TODO update the JSON string below
 json = "{}"

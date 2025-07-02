@@ -1,5 +1,4 @@
 # CompanyWhiteLabelSettingsWrapper
-
 The company white label settings wrapper.
 
 ## Properties
@@ -11,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.company_white_label_settings_wrapper import CompanyWhiteLabelSettingsWrapper
+from docspace-api-python.models.company_white_label_settings_wrapper import CompanyWhiteLabelSettingsWrapper
 
 # TODO update the JSON string below
 json = "{}"

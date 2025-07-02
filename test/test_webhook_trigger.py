@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.webhook_trigger import WebhookTrigger
+from docspace-api-python.models.webhook_trigger import WebhookTrigger
 
 class TestWebhookTrigger(unittest.TestCase):
     """WebhookTrigger unit test stubs"""

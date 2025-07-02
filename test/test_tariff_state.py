@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.tariff_state import TariffState
+from docspace-api-python.models.tariff_state import TariffState
 
 class TestTariffState(unittest.TestCase):
     """TariffState unit test stubs"""

@@ -1,5 +1,4 @@
 # ConfigurationDtoInteger
-
 The configuration parameters.
 
 ## Properties
@@ -23,7 +22,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.configuration_dto_integer import ConfigurationDtoInteger
+from docspace-api-python.models.configuration_dto_integer import ConfigurationDtoInteger
 
 # TODO update the JSON string below
 json = "{}"

@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "docspace"
+name = "docspace-api-python"
 version = "1.0.0"
 description = "Api"
 authors = ["API Support <support@onlyoffice.com>"]
@@ -7,7 +7,7 @@ license = "NoLicense"
 readme = "README.md"
 repository = "https://github.com/GIT_USER_ID/GIT_REPO_ID"
 keywords = ["OpenAPI", "OpenAPI-Generator", "Api"]
-include = ["docspace/py.typed"]
+include = ["docspace-api-python/py.typed"]
 
 [tool.poetry.dependencies]
 python = "^3.9"
@@ -35,7 +35,7 @@ extension-pkg-whitelist = "pydantic"
 
 [tool.mypy]
 files = [
-  "docspace",
+  "docspace-api-python",
   #"test",  # auto-generated tests
   "tests", # hand-written tests
 ]
@@ -73,7 +73,7 @@ disallow_any_generics = true
 
 [[tool.mypy.overrides]]
 module = [
-  "docspace.configuration",
+  "docspace-api-python.configuration",
 ]
 warn_unused_ignores = true
 strict_equality = true

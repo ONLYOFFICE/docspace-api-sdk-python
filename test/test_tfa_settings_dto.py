@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.tfa_settings_dto import TfaSettingsDto
+from docspace-api-python.models.tfa_settings_dto import TfaSettingsDto
 
 class TestTfaSettingsDto(unittest.TestCase):
     """TfaSettingsDto unit test stubs"""

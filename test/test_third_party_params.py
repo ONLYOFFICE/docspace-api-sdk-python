@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.third_party_params import ThirdPartyParams
+from docspace-api-python.models.third_party_params import ThirdPartyParams
 
 class TestThirdPartyParams(unittest.TestCase):
     """ThirdPartyParams unit test stubs"""
@@ -49,13 +49,13 @@ class TestThirdPartyParams(unittest.TestCase):
         model = ThirdPartyParams()
         if include_optional:
             return ThirdPartyParams(
-                auth_data = docspace.models.auth_data.AuthData(
+                auth_data = docspace-api-python.models.auth_data.AuthData(
                     login = 'some text', 
                     password = 'vfmf2vO1Kp', 
                     raw_token = 'some text', 
                     url = 'some text', 
                     provider = 'some text', 
-                    token = docspace.models.o_auth20_token.OAuth20Token(
+                    token = docspace-api-python.models.o_auth20_token.OAuth20Token(
                         access_token = 'some text', 
                         refresh_token = 'some text', 
                         expires_in = 1234, 

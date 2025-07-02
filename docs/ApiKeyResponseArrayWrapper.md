@@ -1,6 +1,5 @@
 # ApiKeyResponseArrayWrapper
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.api_key_response_array_wrapper import ApiKeyResponseArrayWrapper
+from docspace-api-python.models.api_key_response_array_wrapper import ApiKeyResponseArrayWrapper
 
 # TODO update the JSON string below
 json = "{}"

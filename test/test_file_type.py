@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.file_type import FileType
+from docspace-api-python.models.file_type import FileType
 
 class TestFileType(unittest.TestCase):
     """FileType unit test stubs"""

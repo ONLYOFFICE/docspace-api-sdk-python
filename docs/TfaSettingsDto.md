@@ -1,5 +1,4 @@
 # TfaSettingsDto
-
 The parameters representing the Two-Factor Authentication (TFA) configuration settings.
 
 ## Properties
@@ -17,7 +16,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.tfa_settings_dto import TfaSettingsDto
+from docspace-api-python.models.tfa_settings_dto import TfaSettingsDto
 
 # TODO update the JSON string below
 json = "{}"

@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.room_from_template_status_wrapper import RoomFromTemplateStatusWrapper
+from docspace-api-python.models.room_from_template_status_wrapper import RoomFromTemplateStatusWrapper
 
 class TestRoomFromTemplateStatusWrapper(unittest.TestCase):
     """RoomFromTemplateStatusWrapper unit test stubs"""
@@ -49,14 +49,14 @@ class TestRoomFromTemplateStatusWrapper(unittest.TestCase):
         model = RoomFromTemplateStatusWrapper()
         if include_optional:
             return RoomFromTemplateStatusWrapper(
-                response = docspace.models.room_from_template_status_dto.RoomFromTemplateStatusDto(
+                response = docspace-api-python.models.room_from_template_status_dto.RoomFromTemplateStatusDto(
                     room_id = 9846, 
                     progress = -8.5, 
                     error = 'some text', 
                     is_completed = True, ),
                 count = 56,
                 links = [
-                    docspace.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

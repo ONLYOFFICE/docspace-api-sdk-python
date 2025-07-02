@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.active_connections_item_dto import ActiveConnectionsItemDto
+from docspace-api-python.models.active_connections_item_dto import ActiveConnectionsItemDto
 
 class TestActiveConnectionsItemDto(unittest.TestCase):
     """ActiveConnectionsItemDto unit test stubs"""
@@ -58,7 +58,7 @@ class TestActiveConnectionsItemDto(unittest.TestCase):
                 city = 'some text',
                 browser = 'some text',
                 platform = 'some text',
-                var_date = docspace.models.api_date_time.ApiDateTime(
+                var_date = docspace-api-python.models.api_date_time.ApiDateTime(
                     utc_time = '2008-04-10T06:30+04:00', 
                     time_zone_offset = '00:00:00', ),
                 page = 'some text'

@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.members_request import MembersRequest
+from docspace-api-python.models.members_request import MembersRequest
 
 class TestMembersRequest(unittest.TestCase):
     """MembersRequest unit test stubs"""

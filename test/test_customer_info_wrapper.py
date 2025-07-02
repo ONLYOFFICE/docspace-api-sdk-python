@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.customer_info_wrapper import CustomerInfoWrapper
+from docspace-api-python.models.customer_info_wrapper import CustomerInfoWrapper
 
 class TestCustomerInfoWrapper(unittest.TestCase):
     """CustomerInfoWrapper unit test stubs"""
@@ -49,13 +49,13 @@ class TestCustomerInfoWrapper(unittest.TestCase):
         model = CustomerInfoWrapper()
         if include_optional:
             return CustomerInfoWrapper(
-                response = docspace.models.customer_info.CustomerInfo(
+                response = docspace-api-python.models.customer_info.CustomerInfo(
                     portal_id = 'some text', 
                     payment_method_status = 0, 
                     email = 'Sydney_Roberts4@hotmail.com', ),
                 count = 56,
                 links = [
-                    docspace.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

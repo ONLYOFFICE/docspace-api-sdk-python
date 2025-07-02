@@ -1,5 +1,4 @@
 # UploadRequestDto
-
 The request parameters for uploading a file.
 
 ## Properties
@@ -18,7 +17,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.upload_request_dto import UploadRequestDto
+from docspace-api-python.models.upload_request_dto import UploadRequestDto
 
 # TODO update the JSON string below
 json = "{}"

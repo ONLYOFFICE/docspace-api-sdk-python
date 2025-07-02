@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.deep_link_handling_mode import DeepLinkHandlingMode
+from docspace-api-python.models.deep_link_handling_mode import DeepLinkHandlingMode
 
 class TestDeepLinkHandlingMode(unittest.TestCase):
     """DeepLinkHandlingMode unit test stubs"""

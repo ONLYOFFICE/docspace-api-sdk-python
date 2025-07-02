@@ -1,6 +1,5 @@
 # PaymentCalculationWrapper
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.payment_calculation_wrapper import PaymentCalculationWrapper
+from docspace-api-python.models.payment_calculation_wrapper import PaymentCalculationWrapper
 
 # TODO update the JSON string below
 json = "{}"

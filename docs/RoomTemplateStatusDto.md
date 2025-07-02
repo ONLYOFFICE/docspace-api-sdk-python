@@ -1,5 +1,4 @@
 # RoomTemplateStatusDto
-
 The room template status.
 
 ## Properties
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.room_template_status_dto import RoomTemplateStatusDto
+from docspace-api-python.models.room_template_status_dto import RoomTemplateStatusDto
 
 # TODO update the JSON string below
 json = "{}"

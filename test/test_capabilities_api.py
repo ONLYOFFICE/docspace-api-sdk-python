@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.api.capabilities_api import CapabilitiesApi
+from docspace-api-python.api.capabilities_api import CapabilitiesApi
 
 
 class TestCapabilitiesApi(unittest.TestCase):

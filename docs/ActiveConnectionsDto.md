@@ -1,5 +1,4 @@
 # ActiveConnectionsDto
-
 The active connections parameters.
 
 ## Properties
@@ -12,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.active_connections_dto import ActiveConnectionsDto
+from docspace-api-python.models.active_connections_dto import ActiveConnectionsDto
 
 # TODO update the JSON string below
 json = "{}"

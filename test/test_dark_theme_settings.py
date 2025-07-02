@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.dark_theme_settings import DarkThemeSettings
+from docspace-api-python.models.dark_theme_settings import DarkThemeSettings
 
 class TestDarkThemeSettings(unittest.TestCase):
     """DarkThemeSettings unit test stubs"""

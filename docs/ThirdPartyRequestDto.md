@@ -1,5 +1,4 @@
 # ThirdPartyRequestDto
-
 The third-party request parameters.
 
 ## Properties
@@ -17,7 +16,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.third_party_request_dto import ThirdPartyRequestDto
+from docspace-api-python.models.third_party_request_dto import ThirdPartyRequestDto
 
 # TODO update the JSON string below
 json = "{}"

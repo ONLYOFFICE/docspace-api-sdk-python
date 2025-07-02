@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.file_dto_integer_view_accessibility import FileDtoIntegerViewAccessibility
+from docspace-api-python.models.file_dto_integer_view_accessibility import FileDtoIntegerViewAccessibility
 
 class TestFileDtoIntegerViewAccessibility(unittest.TestCase):
     """FileDtoIntegerViewAccessibility unit test stubs"""

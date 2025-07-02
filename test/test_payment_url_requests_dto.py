@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.payment_url_requests_dto import PaymentUrlRequestsDto
+from docspace-api-python.models.payment_url_requests_dto import PaymentUrlRequestsDto
 
 class TestPaymentUrlRequestsDto(unittest.TestCase):
     """PaymentUrlRequestsDto unit test stubs"""

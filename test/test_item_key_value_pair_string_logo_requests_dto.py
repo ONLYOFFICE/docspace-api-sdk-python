@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.item_key_value_pair_string_logo_requests_dto import ItemKeyValuePairStringLogoRequestsDto
+from docspace-api-python.models.item_key_value_pair_string_logo_requests_dto import ItemKeyValuePairStringLogoRequestsDto
 
 class TestItemKeyValuePairStringLogoRequestsDto(unittest.TestCase):
     """ItemKeyValuePairStringLogoRequestsDto unit test stubs"""
@@ -50,7 +50,7 @@ class TestItemKeyValuePairStringLogoRequestsDto(unittest.TestCase):
         if include_optional:
             return ItemKeyValuePairStringLogoRequestsDto(
                 key = 'some text',
-                value = docspace.models.logo_requests_dto.LogoRequestsDto(
+                value = docspace-api-python.models.logo_requests_dto.LogoRequestsDto(
                     light = 'some text', 
                     dark = 'some text', )
             )

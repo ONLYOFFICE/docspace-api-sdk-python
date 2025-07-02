@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.edit_history_data_wrapper import EditHistoryDataWrapper
+from docspace-api-python.models.edit_history_data_wrapper import EditHistoryDataWrapper
 
 class TestEditHistoryDataWrapper(unittest.TestCase):
     """EditHistoryDataWrapper unit test stubs"""
@@ -49,10 +49,10 @@ class TestEditHistoryDataWrapper(unittest.TestCase):
         model = EditHistoryDataWrapper()
         if include_optional:
             return EditHistoryDataWrapper(
-                response = docspace.models.edit_history_data_dto.EditHistoryDataDto(
+                response = docspace-api-python.models.edit_history_data_dto.EditHistoryDataDto(
                     changes_url = 'some text', 
                     key = 'some text', 
-                    previous = docspace.models.edit_history_url.EditHistoryUrl(
+                    previous = docspace-api-python.models.edit_history_url.EditHistoryUrl(
                         key = 'some text', 
                         url = 'some text', 
                         file_type = 'some text', ), 
@@ -62,7 +62,7 @@ class TestEditHistoryDataWrapper(unittest.TestCase):
                     file_type = 'some text', ),
                 count = 56,
                 links = [
-                    docspace.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

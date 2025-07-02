@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.task_progress_response_dto import TaskProgressResponseDto
+from docspace-api-python.models.task_progress_response_dto import TaskProgressResponseDto
 
 class TestTaskProgressResponseDto(unittest.TestCase):
     """TaskProgressResponseDto unit test stubs"""

@@ -1,6 +1,5 @@
 # ScheduleWrapper
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.schedule_wrapper import ScheduleWrapper
+from docspace-api-python.models.schedule_wrapper import ScheduleWrapper
 
 # TODO update the JSON string below
 json = "{}"

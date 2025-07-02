@@ -1,5 +1,4 @@
 # AuditEventDto
-
 The audit event parameters.
 
 ## Properties
@@ -28,7 +27,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.audit_event_dto import AuditEventDto
+from docspace-api-python.models.audit_event_dto import AuditEventDto
 
 # TODO update the JSON string below
 json = "{}"

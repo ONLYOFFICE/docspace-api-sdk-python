@@ -1,5 +1,4 @@
 # EmailMemberRequestDto
-
 The request parameters for the user email.
 
 ## Properties
@@ -11,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.email_member_request_dto import EmailMemberRequestDto
+from docspace-api-python.models.email_member_request_dto import EmailMemberRequestDto
 
 # TODO update the JSON string below
 json = "{}"

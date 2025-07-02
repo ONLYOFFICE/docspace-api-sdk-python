@@ -1,6 +1,5 @@
 # BalanceWrapper
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.balance_wrapper import BalanceWrapper
+from docspace-api-python.models.balance_wrapper import BalanceWrapper
 
 # TODO update the JSON string below
 json = "{}"

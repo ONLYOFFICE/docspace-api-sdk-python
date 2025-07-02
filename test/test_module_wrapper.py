@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.module_wrapper import ModuleWrapper
+from docspace-api-python.models.module_wrapper import ModuleWrapper
 
 class TestModuleWrapper(unittest.TestCase):
     """ModuleWrapper unit test stubs"""
@@ -49,7 +49,7 @@ class TestModuleWrapper(unittest.TestCase):
         model = ModuleWrapper()
         if include_optional:
             return ModuleWrapper(
-                response = docspace.models.module.Module(
+                response = docspace-api-python.models.module.Module(
                     id = 'aae1e103-bca5-9fa1-ba8c-42058b4abf28', 
                     app_name = 'some text', 
                     title = 'legacy_1080p_small_wooden_mouse', 
@@ -61,7 +61,7 @@ class TestModuleWrapper(unittest.TestCase):
                     is_primary = True, ),
                 count = 56,
                 links = [
-                    docspace.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

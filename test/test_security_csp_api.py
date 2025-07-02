@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.api.security_csp_api import SecurityCSPApi
+from docspace-api-python.api.security_csp_api import SecurityCSPApi
 
 
 class TestSecurityCSPApi(unittest.TestCase):

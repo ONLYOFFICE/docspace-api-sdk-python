@@ -1,5 +1,4 @@
 # TemplatesConfig
-
 The presence or absence of the templates in the \"Create New...\" menu option.
 
 ## Properties
@@ -13,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.templates_config import TemplatesConfig
+from docspace-api-python.models.templates_config import TemplatesConfig
 
 # TODO update the JSON string below
 json = "{}"

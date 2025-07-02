@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.submit_form import SubmitForm
+from docspace-api-python.models.submit_form import SubmitForm
 
 class TestSubmitForm(unittest.TestCase):
     """SubmitForm unit test stubs"""

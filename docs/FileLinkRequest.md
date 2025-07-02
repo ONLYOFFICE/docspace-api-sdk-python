@@ -1,5 +1,4 @@
 # FileLinkRequest
-
 The external link request parameters.
 
 ## Properties
@@ -15,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.file_link_request import FileLinkRequest
+from docspace-api-python.models.file_link_request import FileLinkRequest
 
 # TODO update the JSON string below
 json = "{}"

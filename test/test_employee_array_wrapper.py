@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.employee_array_wrapper import EmployeeArrayWrapper
+from docspace-api-python.models.employee_array_wrapper import EmployeeArrayWrapper
 
 class TestEmployeeArrayWrapper(unittest.TestCase):
     """EmployeeArrayWrapper unit test stubs"""
@@ -50,7 +50,7 @@ class TestEmployeeArrayWrapper(unittest.TestCase):
         if include_optional:
             return EmployeeArrayWrapper(
                 response = [
-                    docspace.models.employee_dto.EmployeeDto(
+                    docspace-api-python.models.employee_dto.EmployeeDto(
                         id = '', 
                         display_name = 'Mike Zanyatski', 
                         title = 'Manager', 
@@ -65,7 +65,7 @@ class TestEmployeeArrayWrapper(unittest.TestCase):
                     ],
                 count = 56,
                 links = [
-                    docspace.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

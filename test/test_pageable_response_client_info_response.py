@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.pageable_response_client_info_response import PageableResponseClientInfoResponse
+from docspace-api-python.models.pageable_response_client_info_response import PageableResponseClientInfoResponse
 
 class TestPageableResponseClientInfoResponse(unittest.TestCase):
     """PageableResponseClientInfoResponse unit test stubs"""

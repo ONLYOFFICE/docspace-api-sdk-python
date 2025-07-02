@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.tariff import Tariff
+from docspace-api-python.models.tariff import Tariff
 
 class TestTariff(unittest.TestCase):
     """Tariff unit test stubs"""
@@ -56,7 +56,7 @@ class TestTariff(unittest.TestCase):
                 license_date = '2008-04-10T06:30+04:00',
                 customer_id = 'some text',
                 quotas = [
-                    docspace.models.quota.Quota(
+                    docspace-api-python.models.quota.Quota(
                         id = 9846, 
                         quantity = 1234, 
                         wallet = True, 
@@ -65,7 +65,7 @@ class TestTariff(unittest.TestCase):
                         state = 0, )
                     ],
                 overdue_quotas = [
-                    docspace.models.quota.Quota(
+                    docspace-api-python.models.quota.Quota(
                         id = 9846, 
                         quantity = 1234, 
                         wallet = True, 

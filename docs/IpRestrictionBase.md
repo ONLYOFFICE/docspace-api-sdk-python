@@ -1,6 +1,5 @@
 # IpRestrictionBase
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -11,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.ip_restriction_base import IpRestrictionBase
+from docspace-api-python.models.ip_restriction_base import IpRestrictionBase
 
 # TODO update the JSON string below
 json = "{}"

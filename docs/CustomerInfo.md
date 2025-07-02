@@ -1,5 +1,4 @@
 # CustomerInfo
-
 The customer information.
 
 ## Properties
@@ -13,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.customer_info import CustomerInfo
+from docspace-api-python.models.customer_info import CustomerInfo
 
 # TODO update the JSON string below
 json = "{}"

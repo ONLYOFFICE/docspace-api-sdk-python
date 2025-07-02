@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.tenant_dev_tools_access_settings import TenantDevToolsAccessSettings
+from docspace-api-python.models.tenant_dev_tools_access_settings import TenantDevToolsAccessSettings
 
 class TestTenantDevToolsAccessSettings(unittest.TestCase):
     """TenantDevToolsAccessSettings unit test stubs"""

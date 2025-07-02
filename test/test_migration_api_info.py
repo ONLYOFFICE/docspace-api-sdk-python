@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.migration_api_info import MigrationApiInfo
+from docspace-api-python.models.migration_api_info import MigrationApiInfo
 
 class TestMigrationApiInfo(unittest.TestCase):
     """MigrationApiInfo unit test stubs"""
@@ -53,7 +53,7 @@ class TestMigrationApiInfo(unittest.TestCase):
                 operation = 'some text',
                 failed_archives = ["some text"],
                 users = [
-                    docspace.models.migrating_api_user.MigratingApiUser(
+                    docspace-api-python.models.migrating_api_user.MigratingApiUser(
                         should_import = True, 
                         key = 'some text', 
                         email = 'Sydney_Roberts4@hotmail.com', 
@@ -61,13 +61,13 @@ class TestMigrationApiInfo(unittest.TestCase):
                         first_name = 'Winfield', 
                         last_name = 'Wyman', 
                         user_type = 0, 
-                        migrating_files = docspace.models.migrating_api_files.MigratingApiFiles(
+                        migrating_files = docspace-api-python.models.migrating_api_files.MigratingApiFiles(
                             folders_count = 1234, 
                             files_count = 1234, 
                             bytes_total = 1234, ), )
                     ],
                 without_email_users = [
-                    docspace.models.migrating_api_user.MigratingApiUser(
+                    docspace-api-python.models.migrating_api_user.MigratingApiUser(
                         should_import = True, 
                         key = 'some text', 
                         email = 'Sydney_Roberts4@hotmail.com', 
@@ -75,13 +75,13 @@ class TestMigrationApiInfo(unittest.TestCase):
                         first_name = 'Winfield', 
                         last_name = 'Wyman', 
                         user_type = 0, 
-                        migrating_files = docspace.models.migrating_api_files.MigratingApiFiles(
+                        migrating_files = docspace-api-python.models.migrating_api_files.MigratingApiFiles(
                             folders_count = 1234, 
                             files_count = 1234, 
                             bytes_total = 1234, ), )
                     ],
                 exist_users = [
-                    docspace.models.migrating_api_user.MigratingApiUser(
+                    docspace-api-python.models.migrating_api_user.MigratingApiUser(
                         should_import = True, 
                         key = 'some text', 
                         email = 'Sydney_Roberts4@hotmail.com', 
@@ -89,13 +89,13 @@ class TestMigrationApiInfo(unittest.TestCase):
                         first_name = 'Winfield', 
                         last_name = 'Wyman', 
                         user_type = 0, 
-                        migrating_files = docspace.models.migrating_api_files.MigratingApiFiles(
+                        migrating_files = docspace-api-python.models.migrating_api_files.MigratingApiFiles(
                             folders_count = 1234, 
                             files_count = 1234, 
                             bytes_total = 1234, ), )
                     ],
                 groups = [
-                    docspace.models.migrating_api_group.MigratingApiGroup(
+                    docspace-api-python.models.migrating_api_group.MigratingApiGroup(
                         should_import = True, 
                         group_name = 'some text', 
                         module_name = 'some text', 

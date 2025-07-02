@@ -1,5 +1,4 @@
 # CurrentLicenseInfo
-
 The current license information.
 
 ## Properties
@@ -12,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.current_license_info import CurrentLicenseInfo
+from docspace-api-python.models.current_license_info import CurrentLicenseInfo
 
 # TODO update the JSON string below
 json = "{}"

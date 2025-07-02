@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.edit_history_array_wrapper import EditHistoryArrayWrapper
+from docspace-api-python.models.edit_history_array_wrapper import EditHistoryArrayWrapper
 
 class TestEditHistoryArrayWrapper(unittest.TestCase):
     """EditHistoryArrayWrapper unit test stubs"""
@@ -50,27 +50,27 @@ class TestEditHistoryArrayWrapper(unittest.TestCase):
         if include_optional:
             return EditHistoryArrayWrapper(
                 response = [
-                    docspace.models.edit_history_dto.EditHistoryDto(
+                    docspace-api-python.models.edit_history_dto.EditHistoryDto(
                         id = 1234, 
                         key = 'some text', 
                         version = 1234, 
                         version_group = 1234, 
-                        user = docspace.models.edit_history_author.EditHistoryAuthor(
+                        user = docspace-api-python.models.edit_history_author.EditHistoryAuthor(
                             id = '9846', 
                             name = 'Winfield Upton', ), 
-                        created = docspace.models.api_date_time.ApiDateTime(
+                        created = docspace-api-python.models.api_date_time.ApiDateTime(
                             utc_time = '2008-04-10T06:30+04:00', 
                             time_zone_offset = '00:00:00', ), 
                         changes_history = 'some text', 
                         changes = [
-                            docspace.models.edit_history_changes_wrapper.EditHistoryChangesWrapper(
+                            docspace-api-python.models.edit_history_changes_wrapper.EditHistoryChangesWrapper(
                                 document_sha256 = 'some text', )
                             ], 
                         server_version = 'some text', )
                     ],
                 count = 56,
                 links = [
-                    docspace.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

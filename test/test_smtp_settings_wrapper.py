@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.smtp_settings_wrapper import SmtpSettingsWrapper
+from docspace-api-python.models.smtp_settings_wrapper import SmtpSettingsWrapper
 
 class TestSmtpSettingsWrapper(unittest.TestCase):
     """SmtpSettingsWrapper unit test stubs"""
@@ -49,7 +49,7 @@ class TestSmtpSettingsWrapper(unittest.TestCase):
         model = SmtpSettingsWrapper()
         if include_optional:
             return SmtpSettingsWrapper(
-                response = docspace.models.smtp_settings_dto.SmtpSettingsDto(
+                response = docspace-api-python.models.smtp_settings_dto.SmtpSettingsDto(
                     host = 'mail.example.com', 
                     port = 25, 
                     sender_address = 'notify@example.com', 
@@ -62,7 +62,7 @@ class TestSmtpSettingsWrapper(unittest.TestCase):
                     is_default_settings = False, ),
                 count = 56,
                 links = [
-                    docspace.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

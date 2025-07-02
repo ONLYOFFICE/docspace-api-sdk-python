@@ -1,6 +1,5 @@
 # FolderStringArrayWrapper
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.folder_string_array_wrapper import FolderStringArrayWrapper
+from docspace-api-python.models.folder_string_array_wrapper import FolderStringArrayWrapper
 
 # TODO update the JSON string below
 json = "{}"

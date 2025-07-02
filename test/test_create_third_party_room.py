@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.create_third_party_room import CreateThirdPartyRoom
+from docspace-api-python.models.create_third_party_room import CreateThirdPartyRoom
 
 class TestCreateThirdPartyRoom(unittest.TestCase):
     """CreateThirdPartyRoom unit test stubs"""
@@ -58,7 +58,7 @@ class TestCreateThirdPartyRoom(unittest.TestCase):
                 color = 'some text',
                 cover = 'some text',
                 tags = ["some text"],
-                logo = docspace.models.logo_request.LogoRequest(
+                logo = docspace-api-python.models.logo_request.LogoRequest(
                     tmp_file = 'some text', 
                     x = 1234, 
                     y = 1234, 

@@ -1,5 +1,4 @@
 # ActionLinkConfig
-
 The config parameter which contains the information about the action in the document that will be scrolled to.
 
 ## Properties
@@ -11,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.action_link_config import ActionLinkConfig
+from docspace-api-python.models.action_link_config import ActionLinkConfig
 
 # TODO update the JSON string below
 json = "{}"

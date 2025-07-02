@@ -1,6 +1,5 @@
 # EmailActivationSettingsWrapper
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.email_activation_settings_wrapper import EmailActivationSettingsWrapper
+from docspace-api-python.models.email_activation_settings_wrapper import EmailActivationSettingsWrapper
 
 # TODO update the JSON string below
 json = "{}"

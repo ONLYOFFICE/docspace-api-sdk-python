@@ -1,5 +1,4 @@
 # ClientSecretResponse
-
 The response containing the regenerated client secret.
 
 ## Properties
@@ -11,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.client_secret_response import ClientSecretResponse
+from docspace-api-python.models.client_secret_response import ClientSecretResponse
 
 # TODO update the JSON string below
 json = "{}"

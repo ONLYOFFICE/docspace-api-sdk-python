@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.key_value_pair_boolean_string import KeyValuePairBooleanString
+from docspace-api-python.models.key_value_pair_boolean_string import KeyValuePairBooleanString
 
 class TestKeyValuePairBooleanString(unittest.TestCase):
     """KeyValuePairBooleanString unit test stubs"""

@@ -1,5 +1,4 @@
 # FilesSettingsDtoInternalFormats
-
 The internal file formats.
 
 ## Properties
@@ -19,7 +18,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.files_settings_dto_internal_formats import FilesSettingsDtoInternalFormats
+from docspace-api-python.models.files_settings_dto_internal_formats import FilesSettingsDtoInternalFormats
 
 # TODO update the JSON string below
 json = "{}"

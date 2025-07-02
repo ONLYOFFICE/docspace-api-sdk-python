@@ -1,5 +1,4 @@
 # AuthKey
-
 The authentication key parameters.
 
 ## Properties
@@ -13,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.auth_key import AuthKey
+from docspace-api-python.models.auth_key import AuthKey
 
 # TODO update the JSON string below
 json = "{}"

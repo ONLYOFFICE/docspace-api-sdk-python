@@ -1,5 +1,4 @@
 # Logo
-
 The room logo information.
 
 ## Properties
@@ -16,7 +15,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.logo import Logo
+from docspace-api-python.models.logo import Logo
 
 # TODO update the JSON string below
 json = "{}"

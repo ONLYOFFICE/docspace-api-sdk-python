@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.csp_requests_dto import CspRequestsDto
+from docspace-api-python.models.csp_requests_dto import CspRequestsDto
 
 class TestCspRequestsDto(unittest.TestCase):
     """CspRequestsDto unit test stubs"""

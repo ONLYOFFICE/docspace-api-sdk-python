@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.usage_space_stat_item_array_wrapper import UsageSpaceStatItemArrayWrapper
+from docspace-api-python.models.usage_space_stat_item_array_wrapper import UsageSpaceStatItemArrayWrapper
 
 class TestUsageSpaceStatItemArrayWrapper(unittest.TestCase):
     """UsageSpaceStatItemArrayWrapper unit test stubs"""
@@ -50,7 +50,7 @@ class TestUsageSpaceStatItemArrayWrapper(unittest.TestCase):
         if include_optional:
             return UsageSpaceStatItemArrayWrapper(
                 response = [
-                    docspace.models.usage_space_stat_item_dto.UsageSpaceStatItemDto(
+                    docspace-api-python.models.usage_space_stat_item_dto.UsageSpaceStatItemDto(
                         name = 'Item name', 
                         icon = 'Item icon path', 
                         disabled = False, 
@@ -59,7 +59,7 @@ class TestUsageSpaceStatItemArrayWrapper(unittest.TestCase):
                     ],
                 count = 56,
                 links = [
-                    docspace.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

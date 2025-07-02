@@ -1,5 +1,4 @@
 # TenantRoomQuotaSettings
-
 The room quota settings.
 
 ## Properties
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.tenant_room_quota_settings import TenantRoomQuotaSettings
+from docspace-api-python.models.tenant_room_quota_settings import TenantRoomQuotaSettings
 
 # TODO update the JSON string below
 json = "{}"

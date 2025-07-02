@@ -1,5 +1,4 @@
 # EncryptionKeysConfig
-
 The encryption keys of the editor configuration.
 
 ## Properties
@@ -13,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.encryption_keys_config import EncryptionKeysConfig
+from docspace-api-python.models.encryption_keys_config import EncryptionKeysConfig
 
 # TODO update the JSON string below
 json = "{}"

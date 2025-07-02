@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.i_magick_geometry import IMagickGeometry
+from docspace-api-python.models.i_magick_geometry import IMagickGeometry
 
 class TestIMagickGeometry(unittest.TestCase):
     """IMagickGeometry unit test stubs"""

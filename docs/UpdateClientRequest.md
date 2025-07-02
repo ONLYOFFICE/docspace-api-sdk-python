@@ -1,5 +1,4 @@
 # UpdateClientRequest
-
 The request for updating client details.
 
 ## Properties
@@ -16,7 +15,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.update_client_request import UpdateClientRequest
+from docspace-api-python.models.update_client_request import UpdateClientRequest
 
 # TODO update the JSON string below
 json = "{}"

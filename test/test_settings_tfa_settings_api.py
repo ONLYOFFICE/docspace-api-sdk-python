@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.api.settings_tfa_settings_api import SettingsTFASettingsApi
+from docspace-api-python.api.settings_tfa_settings_api import SettingsTFASettingsApi
 
 
 class TestSettingsTFASettingsApi(unittest.TestCase):

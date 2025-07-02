@@ -1,6 +1,5 @@
 # BackupHistoryRecord
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.backup_history_record import BackupHistoryRecord
+from docspace-api-python.models.backup_history_record import BackupHistoryRecord
 
 # TODO update the JSON string below
 json = "{}"

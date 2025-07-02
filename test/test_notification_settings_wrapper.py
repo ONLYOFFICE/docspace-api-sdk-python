@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.notification_settings_wrapper import NotificationSettingsWrapper
+from docspace-api-python.models.notification_settings_wrapper import NotificationSettingsWrapper
 
 class TestNotificationSettingsWrapper(unittest.TestCase):
     """NotificationSettingsWrapper unit test stubs"""
@@ -49,12 +49,12 @@ class TestNotificationSettingsWrapper(unittest.TestCase):
         model = NotificationSettingsWrapper()
         if include_optional:
             return NotificationSettingsWrapper(
-                response = docspace.models.notification_settings_dto.NotificationSettingsDto(
+                response = docspace-api-python.models.notification_settings_dto.NotificationSettingsDto(
                     type = 0, 
                     is_enabled = True, ),
                 count = 56,
                 links = [
-                    docspace.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

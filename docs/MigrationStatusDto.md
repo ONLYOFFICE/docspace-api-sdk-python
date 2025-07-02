@@ -1,5 +1,4 @@
 # MigrationStatusDto
-
 The migration status parameters.
 
 ## Properties
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.migration_status_dto import MigrationStatusDto
+from docspace-api-python.models.migration_status_dto import MigrationStatusDto
 
 # TODO update the JSON string below
 json = "{}"

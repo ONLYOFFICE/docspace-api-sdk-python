@@ -1,5 +1,4 @@
 # WatermarkDto
-
 The watermark settings.
 
 ## Properties
@@ -17,7 +16,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.watermark_dto import WatermarkDto
+from docspace-api-python.models.watermark_dto import WatermarkDto
 
 # TODO update the JSON string below
 json = "{}"

@@ -1,6 +1,5 @@
 # IMagickGeometry
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -20,7 +19,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.i_magick_geometry import IMagickGeometry
+from docspace-api-python.models.i_magick_geometry import IMagickGeometry
 
 # TODO update the JSON string below
 json = "{}"

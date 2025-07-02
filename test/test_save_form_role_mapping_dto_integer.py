@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.save_form_role_mapping_dto_integer import SaveFormRoleMappingDtoInteger
+from docspace-api-python.models.save_form_role_mapping_dto_integer import SaveFormRoleMappingDtoInteger
 
 class TestSaveFormRoleMappingDtoInteger(unittest.TestCase):
     """SaveFormRoleMappingDtoInteger unit test stubs"""
@@ -51,7 +51,7 @@ class TestSaveFormRoleMappingDtoInteger(unittest.TestCase):
             return SaveFormRoleMappingDtoInteger(
                 form_id = 1234,
                 roles = [
-                    docspace.models.form_role.FormRole(
+                    docspace-api-python.models.form_role.FormRole(
                         room_id = 9846, 
                         role_name = 'some text', 
                         role_color = 'some text', 

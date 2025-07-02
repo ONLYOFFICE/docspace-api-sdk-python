@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.api.files_folders_api import FilesFoldersApi
+from docspace-api-python.api.files_folders_api import FilesFoldersApi
 
 
 class TestFilesFoldersApi(unittest.TestCase):

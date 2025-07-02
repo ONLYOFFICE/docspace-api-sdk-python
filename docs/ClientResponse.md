@@ -1,6 +1,5 @@
 # ClientResponse
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -29,7 +28,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.client_response import ClientResponse
+from docspace-api-python.models.client_response import ClientResponse
 
 # TODO update the JSON string below
 json = "{}"

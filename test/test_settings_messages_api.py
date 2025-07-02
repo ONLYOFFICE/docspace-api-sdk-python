@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.api.settings_messages_api import SettingsMessagesApi
+from docspace-api-python.api.settings_messages_api import SettingsMessagesApi
 
 
 class TestSettingsMessagesApi(unittest.TestCase):

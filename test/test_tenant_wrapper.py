@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.tenant_wrapper import TenantWrapper
+from docspace-api-python.models.tenant_wrapper import TenantWrapper
 
 class TestTenantWrapper(unittest.TestCase):
     """TenantWrapper unit test stubs"""
@@ -49,7 +49,7 @@ class TestTenantWrapper(unittest.TestCase):
         model = TenantWrapper()
         if include_optional:
             return TenantWrapper(
-                response = docspace.models.tenant_dto.TenantDto(
+                response = docspace-api-python.models.tenant_dto.TenantDto(
                     affiliate_id = 'some text', 
                     tenant_alias = 'some text', 
                     calls = True, 
@@ -76,7 +76,7 @@ class TestTenantWrapper(unittest.TestCase):
                     region = 'some text', ),
                 count = 56,
                 links = [
-                    docspace.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

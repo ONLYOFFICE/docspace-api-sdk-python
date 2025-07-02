@@ -1,6 +1,5 @@
 # ModuleWrapper
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.module_wrapper import ModuleWrapper
+from docspace-api-python.models.module_wrapper import ModuleWrapper
 
 # TODO update the JSON string below
 json = "{}"

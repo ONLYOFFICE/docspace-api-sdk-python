@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.editor_type import EditorType
+from docspace-api-python.models.editor_type import EditorType
 
 class TestEditorType(unittest.TestCase):
     """EditorType unit test stubs"""

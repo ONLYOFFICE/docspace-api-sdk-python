@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.group_summary_array_wrapper import GroupSummaryArrayWrapper
+from docspace-api-python.models.group_summary_array_wrapper import GroupSummaryArrayWrapper
 
 class TestGroupSummaryArrayWrapper(unittest.TestCase):
     """GroupSummaryArrayWrapper unit test stubs"""
@@ -50,14 +50,14 @@ class TestGroupSummaryArrayWrapper(unittest.TestCase):
         if include_optional:
             return GroupSummaryArrayWrapper(
                 response = [
-                    docspace.models.group_summary_dto.GroupSummaryDto(
+                    docspace-api-python.models.group_summary_dto.GroupSummaryDto(
                         id = '', 
                         name = 'Group Name', 
                         manager = 'Jake.Zazhitski', )
                     ],
                 count = 56,
                 links = [
-                    docspace.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.api.api_keys_api import ApiKeysApi
+from docspace-api-python.api.api_keys_api import ApiKeysApi
 
 
 class TestApiKeysApi(unittest.TestCase):

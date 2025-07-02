@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.company_white_label_settings_wrapper import CompanyWhiteLabelSettingsWrapper
+from docspace-api-python.models.company_white_label_settings_wrapper import CompanyWhiteLabelSettingsWrapper
 
 class TestCompanyWhiteLabelSettingsWrapper(unittest.TestCase):
     """CompanyWhiteLabelSettingsWrapper unit test stubs"""
@@ -49,7 +49,7 @@ class TestCompanyWhiteLabelSettingsWrapper(unittest.TestCase):
         model = CompanyWhiteLabelSettingsWrapper()
         if include_optional:
             return CompanyWhiteLabelSettingsWrapper(
-                settings = docspace.models.company_white_label_settings.CompanyWhiteLabelSettings(
+                settings = docspace-api-python.models.company_white_label_settings.CompanyWhiteLabelSettings(
                     company_name = 'some text', 
                     site = 'some text', 
                     email = 'Sydney_Roberts4@hotmail.com', 

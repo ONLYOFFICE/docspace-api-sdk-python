@@ -1,6 +1,5 @@
 # PasswordHasher
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -12,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.password_hasher import PasswordHasher
+from docspace-api-python.models.password_hasher import PasswordHasher
 
 # TODO update the JSON string below
 json = "{}"

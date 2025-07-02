@@ -1,5 +1,4 @@
 # CustomerOperationsReportRequestDto
-
 Parameters of the request for generating the report on client operations
 
 ## Properties
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.customer_operations_report_request_dto import CustomerOperationsReportRequestDto
+from docspace-api-python.models.customer_operations_report_request_dto import CustomerOperationsReportRequestDto
 
 # TODO update the JSON string below
 json = "{}"

@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.storage_settings import StorageSettings
+from docspace-api-python.models.storage_settings import StorageSettings
 
 class TestStorageSettings(unittest.TestCase):
     """StorageSettings unit test stubs"""

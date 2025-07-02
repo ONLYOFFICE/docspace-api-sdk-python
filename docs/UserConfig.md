@@ -1,5 +1,4 @@
 # UserConfig
-
 The configuration parameters of the user currently viewing or editing the document.
 
 ## Properties
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.user_config import UserConfig
+from docspace-api-python.models.user_config import UserConfig
 
 # TODO update the JSON string below
 json = "{}"

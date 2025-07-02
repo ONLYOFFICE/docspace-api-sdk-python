@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.get_reference_data_dto_integer import GetReferenceDataDtoInteger
+from docspace-api-python.models.get_reference_data_dto_integer import GetReferenceDataDtoInteger
 
 class TestGetReferenceDataDtoInteger(unittest.TestCase):
     """GetReferenceDataDtoInteger unit test stubs"""

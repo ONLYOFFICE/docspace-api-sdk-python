@@ -1,5 +1,4 @@
 # MailDomainSettingsRequestsDto
-
 The request parameters for configuring trusted mail domains and visitor invitation settings.
 
 ## Properties
@@ -13,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.mail_domain_settings_requests_dto import MailDomainSettingsRequestsDto
+from docspace-api-python.models.mail_domain_settings_requests_dto import MailDomainSettingsRequestsDto
 
 # TODO update the JSON string below
 json = "{}"

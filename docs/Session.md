@@ -1,5 +1,4 @@
 # Session
-
 Represents a session with reserved amount and currency.
 
 ## Properties
@@ -13,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.session import Session
+from docspace-api-python.models.session import Session
 
 # TODO update the JSON string below
 json = "{}"

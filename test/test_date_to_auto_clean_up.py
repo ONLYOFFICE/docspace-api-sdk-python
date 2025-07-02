@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.date_to_auto_clean_up import DateToAutoCleanUp
+from docspace-api-python.models.date_to_auto_clean_up import DateToAutoCleanUp
 
 class TestDateToAutoCleanUp(unittest.TestCase):
     """DateToAutoCleanUp unit test stubs"""

@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.files_settings_wrapper import FilesSettingsWrapper
+from docspace-api-python.models.files_settings_wrapper import FilesSettingsWrapper
 
 class TestFilesSettingsWrapper(unittest.TestCase):
     """FilesSettingsWrapper unit test stubs"""
@@ -49,7 +49,7 @@ class TestFilesSettingsWrapper(unittest.TestCase):
         model = FilesSettingsWrapper()
         if include_optional:
             return FilesSettingsWrapper(
-                response = docspace.models.files_settings_dto.FilesSettingsDto(
+                response = docspace-api-python.models.files_settings_dto.FilesSettingsDto(
                     exts_image_previewed = ["some text"], 
                     exts_media_previewed = ["some text"], 
                     exts_web_previewed = ["some text"], 
@@ -94,7 +94,7 @@ class TestFilesSettingsWrapper(unittest.TestCase):
                     hide_confirm_convert_save = True, 
                     hide_confirm_convert_open = True, 
                     hide_confirm_room_lifetime = True, 
-                    default_order = docspace.models.order_by.OrderBy(
+                    default_order = docspace-api-python.models.order_by.OrderBy(
                         is_asc = True, 
                         property = 0, ), 
                     forcesave = True, 
@@ -103,7 +103,7 @@ class TestFilesSettingsWrapper(unittest.TestCase):
                     favorites_section = True, 
                     templates_section = True, 
                     download_tar_gz = True, 
-                    automatically_clean_up = docspace.models.auto_clean_up_data.AutoCleanUpData(
+                    automatically_clean_up = docspace-api-python.models.auto_clean_up_data.AutoCleanUpData(
                         is_auto_clean_up = True, 
                         gap = 1, ), 
                     can_search_by_content = True, 
@@ -115,7 +115,7 @@ class TestFilesSettingsWrapper(unittest.TestCase):
                     open_editor_in_same_tab = True, ),
                 count = 56,
                 links = [
-                    docspace.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

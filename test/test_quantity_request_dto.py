@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.quantity_request_dto import QuantityRequestDto
+from docspace-api-python.models.quantity_request_dto import QuantityRequestDto
 
 class TestQuantityRequestDto(unittest.TestCase):
     """QuantityRequestDto unit test stubs"""

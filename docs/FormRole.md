@@ -1,5 +1,4 @@
 # FormRole
-
 The form role.
 
 ## Properties
@@ -18,7 +17,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.form_role import FormRole
+from docspace-api-python.models.form_role import FormRole
 
 # TODO update the JSON string below
 json = "{}"

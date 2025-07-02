@@ -1,6 +1,5 @@
 # MigratingApiUser
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -17,7 +16,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.migrating_api_user import MigratingApiUser
+from docspace-api-python.models.migrating_api_user import MigratingApiUser
 
 # TODO update the JSON string below
 json = "{}"

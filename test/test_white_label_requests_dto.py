@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.white_label_requests_dto import WhiteLabelRequestsDto
+from docspace-api-python.models.white_label_requests_dto import WhiteLabelRequestsDto
 
 class TestWhiteLabelRequestsDto(unittest.TestCase):
     """WhiteLabelRequestsDto unit test stubs"""
@@ -51,9 +51,9 @@ class TestWhiteLabelRequestsDto(unittest.TestCase):
             return WhiteLabelRequestsDto(
                 logo_text = 'some text',
                 logo = [
-                    docspace.models.item_key_value_pair_string_logo_requests_dto.ItemKeyValuePairStringLogoRequestsDto(
+                    docspace-api-python.models.item_key_value_pair_string_logo_requests_dto.ItemKeyValuePairStringLogoRequestsDto(
                         key = 'some text', 
-                        value = docspace.models.logo_requests_dto.LogoRequestsDto(
+                        value = docspace-api-python.models.logo_requests_dto.LogoRequestsDto(
                             light = 'some text', 
                             dark = 'some text', ), )
                     ]

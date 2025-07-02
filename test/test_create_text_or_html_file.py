@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.create_text_or_html_file import CreateTextOrHtmlFile
+from docspace-api-python.models.create_text_or_html_file import CreateTextOrHtmlFile
 
 class TestCreateTextOrHtmlFile(unittest.TestCase):
     """CreateTextOrHtmlFile unit test stubs"""

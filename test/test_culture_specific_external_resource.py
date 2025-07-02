@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.culture_specific_external_resource import CultureSpecificExternalResource
+from docspace-api-python.models.culture_specific_external_resource import CultureSpecificExternalResource
 
 class TestCultureSpecificExternalResource(unittest.TestCase):
     """CultureSpecificExternalResource unit test stubs"""

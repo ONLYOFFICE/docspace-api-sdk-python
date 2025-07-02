@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.csp_wrapper import CspWrapper
+from docspace-api-python.models.csp_wrapper import CspWrapper
 
 class TestCspWrapper(unittest.TestCase):
     """CspWrapper unit test stubs"""
@@ -49,12 +49,12 @@ class TestCspWrapper(unittest.TestCase):
         model = CspWrapper()
         if include_optional:
             return CspWrapper(
-                response = docspace.models.csp_dto.CspDto(
+                response = docspace-api-python.models.csp_dto.CspDto(
                     domains = ["some text"], 
                     header = 'some text', ),
                 count = 56,
                 links = [
-                    docspace.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

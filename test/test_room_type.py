@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.room_type import RoomType
+from docspace-api-python.models.room_type import RoomType
 
 class TestRoomType(unittest.TestCase):
     """RoomType unit test stubs"""

@@ -1,5 +1,4 @@
 # FilesStatisticsFolder
-
 The file statictics folder parameters.
 
 ## Properties
@@ -12,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.files_statistics_folder import FilesStatisticsFolder
+from docspace-api-python.models.files_statistics_folder import FilesStatisticsFolder
 
 # TODO update the JSON string below
 json = "{}"

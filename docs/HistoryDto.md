@@ -1,5 +1,4 @@
 # HistoryDto
-
 The file history information.
 
 ## Properties
@@ -15,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.history_dto import HistoryDto
+from docspace-api-python.models.history_dto import HistoryDto
 
 # TODO update the JSON string below
 json = "{}"

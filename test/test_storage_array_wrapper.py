@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.storage_array_wrapper import StorageArrayWrapper
+from docspace-api-python.models.storage_array_wrapper import StorageArrayWrapper
 
 class TestStorageArrayWrapper(unittest.TestCase):
     """StorageArrayWrapper unit test stubs"""
@@ -50,11 +50,11 @@ class TestStorageArrayWrapper(unittest.TestCase):
         if include_optional:
             return StorageArrayWrapper(
                 response = [
-                    docspace.models.storage_dto.StorageDto(
+                    docspace-api-python.models.storage_dto.StorageDto(
                         id = '9846', 
                         title = 'legacy_1080p_small_wooden_mouse', 
                         properties = [
-                            docspace.models.auth_key.AuthKey(
+                            docspace-api-python.models.auth_key.AuthKey(
                                 name = 'Winfield Upton', 
                                 value = 'some text', 
                                 title = 'legacy_1080p_small_wooden_mouse', )
@@ -64,7 +64,7 @@ class TestStorageArrayWrapper(unittest.TestCase):
                     ],
                 count = 56,
                 links = [
-                    docspace.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

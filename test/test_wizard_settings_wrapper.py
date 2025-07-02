@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.wizard_settings_wrapper import WizardSettingsWrapper
+from docspace-api-python.models.wizard_settings_wrapper import WizardSettingsWrapper
 
 class TestWizardSettingsWrapper(unittest.TestCase):
     """WizardSettingsWrapper unit test stubs"""
@@ -49,12 +49,12 @@ class TestWizardSettingsWrapper(unittest.TestCase):
         model = WizardSettingsWrapper()
         if include_optional:
             return WizardSettingsWrapper(
-                response = docspace.models.wizard_settings.WizardSettings(
+                response = docspace-api-python.models.wizard_settings.WizardSettings(
                     completed = True, 
                     last_modified = '2008-04-10T06:30+04:00', ),
                 count = 56,
                 links = [
-                    docspace.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

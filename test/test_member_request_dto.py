@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.member_request_dto import MemberRequestDto
+from docspace-api-python.models.member_request_dto import MemberRequestDto
 
 class TestMemberRequestDto(unittest.TestCase):
     """MemberRequestDto unit test stubs"""
@@ -60,15 +60,15 @@ class TestMemberRequestDto(unittest.TestCase):
                 title = 'legacy_1080p_small_wooden_mouse',
                 location = '001 Schroeder Run, New Tabithaport, Colombia',
                 sex = 0,
-                birthday = docspace.models.api_date_time.ApiDateTime(
+                birthday = docspace-api-python.models.api_date_time.ApiDateTime(
                     utc_time = '2008-04-10T06:30+04:00', 
                     time_zone_offset = '00:00:00', ),
-                worksfrom = docspace.models.api_date_time.ApiDateTime(
+                worksfrom = docspace-api-python.models.api_date_time.ApiDateTime(
                     utc_time = '2008-04-10T06:30+04:00', 
                     time_zone_offset = '00:00:00', ),
                 comment = 'some text',
                 contacts = [
-                    docspace.models.contact.Contact(
+                    docspace-api-python.models.contact.Contact(
                         type = 'GTalk', 
                         value = 'my@gmail.com', )
                     ],

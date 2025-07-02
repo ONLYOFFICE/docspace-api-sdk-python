@@ -1,6 +1,5 @@
 # FileEntryWrapper
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.file_entry_wrapper import FileEntryWrapper
+from docspace-api-python.models.file_entry_wrapper import FileEntryWrapper
 
 # TODO update the JSON string below
 json = "{}"

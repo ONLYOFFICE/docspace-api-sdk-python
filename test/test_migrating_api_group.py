@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.migrating_api_group import MigratingApiGroup
+from docspace-api-python.models.migrating_api_group import MigratingApiGroup
 
 class TestMigratingApiGroup(unittest.TestCase):
     """MigratingApiGroup unit test stubs"""

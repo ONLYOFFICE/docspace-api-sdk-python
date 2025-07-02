@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.balance import Balance
+from docspace-api-python.models.balance import Balance
 
 class TestBalance(unittest.TestCase):
     """Balance unit test stubs"""
@@ -51,7 +51,7 @@ class TestBalance(unittest.TestCase):
             return Balance(
                 account_number = 1234,
                 sub_accounts = [
-                    docspace.models.sub_account.SubAccount(
+                    docspace-api-python.models.sub_account.SubAccount(
                         currency = 'some text', 
                         amount = 1.337, )
                     ]

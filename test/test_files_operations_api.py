@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.api.files_operations_api import FilesOperationsApi
+from docspace-api-python.api.files_operations_api import FilesOperationsApi
 
 
 class TestFilesOperationsApi(unittest.TestCase):

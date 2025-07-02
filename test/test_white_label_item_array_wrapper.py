@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.white_label_item_array_wrapper import WhiteLabelItemArrayWrapper
+from docspace-api-python.models.white_label_item_array_wrapper import WhiteLabelItemArrayWrapper
 
 class TestWhiteLabelItemArrayWrapper(unittest.TestCase):
     """WhiteLabelItemArrayWrapper unit test stubs"""
@@ -50,9 +50,9 @@ class TestWhiteLabelItemArrayWrapper(unittest.TestCase):
         if include_optional:
             return WhiteLabelItemArrayWrapper(
                 response = [
-                    docspace.models.white_label_item_dto.WhiteLabelItemDto(
+                    docspace-api-python.models.white_label_item_dto.WhiteLabelItemDto(
                         name = 'Winfield Upton', 
-                        size = docspace.models.i_magick_geometry.IMagickGeometry(
+                        size = docspace-api-python.models.i_magick_geometry.IMagickGeometry(
                             aspect_ratio = True, 
                             fill_area = True, 
                             greater = True, 
@@ -64,13 +64,13 @@ class TestWhiteLabelItemArrayWrapper(unittest.TestCase):
                             width = 56, 
                             x = 1234, 
                             y = 1234, ), 
-                        path = docspace.models.white_label_item_path_dto.WhiteLabelItemPathDto(
+                        path = docspace-api-python.models.white_label_item_path_dto.WhiteLabelItemPathDto(
                             light = 'some text', 
                             dark = 'some text', ), )
                     ],
                 count = 56,
                 links = [
-                    docspace.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

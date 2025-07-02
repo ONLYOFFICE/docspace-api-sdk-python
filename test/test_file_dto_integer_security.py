@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.file_dto_integer_security import FileDtoIntegerSecurity
+from docspace-api-python.models.file_dto_integer_security import FileDtoIntegerSecurity
 
 class TestFileDtoIntegerSecurity(unittest.TestCase):
     """FileDtoIntegerSecurity unit test stubs"""

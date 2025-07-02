@@ -1,5 +1,4 @@
 # RoomSecurityDto
-
 The room security parameters.
 
 ## Properties
@@ -13,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.room_security_dto import RoomSecurityDto
+from docspace-api-python.models.room_security_dto import RoomSecurityDto
 
 # TODO update the JSON string below
 json = "{}"

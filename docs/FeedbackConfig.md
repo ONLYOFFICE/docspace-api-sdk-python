@@ -1,5 +1,4 @@
 # FeedbackConfig
-
 The settings for the \"Feedback & Support\" menu button.
 
 ## Properties
@@ -12,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.feedback_config import FeedbackConfig
+from docspace-api-python.models.feedback_config import FeedbackConfig
 
 # TODO update the JSON string below
 json = "{}"

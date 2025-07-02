@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.cdn_storage_settings import CdnStorageSettings
+from docspace-api-python.models.cdn_storage_settings import CdnStorageSettings
 
 class TestCdnStorageSettings(unittest.TestCase):
     """CdnStorageSettings unit test stubs"""

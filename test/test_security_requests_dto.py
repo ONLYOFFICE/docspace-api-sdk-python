@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.security_requests_dto import SecurityRequestsDto
+from docspace-api-python.models.security_requests_dto import SecurityRequestsDto
 
 class TestSecurityRequestsDto(unittest.TestCase):
     """SecurityRequestsDto unit test stubs"""

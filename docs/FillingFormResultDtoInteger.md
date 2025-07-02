@@ -1,5 +1,4 @@
 # FillingFormResultDtoInteger
-
 The parameters of the form filling result.
 
 ## Properties
@@ -16,7 +15,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.filling_form_result_dto_integer import FillingFormResultDtoInteger
+from docspace-api-python.models.filling_form_result_dto_integer import FillingFormResultDtoInteger
 
 # TODO update the JSON string below
 json = "{}"

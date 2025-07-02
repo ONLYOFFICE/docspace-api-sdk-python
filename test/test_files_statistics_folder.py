@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.files_statistics_folder import FilesStatisticsFolder
+from docspace-api-python.models.files_statistics_folder import FilesStatisticsFolder
 
 class TestFilesStatisticsFolder(unittest.TestCase):
     """FilesStatisticsFolder unit test stubs"""

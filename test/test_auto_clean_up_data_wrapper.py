@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.auto_clean_up_data_wrapper import AutoCleanUpDataWrapper
+from docspace-api-python.models.auto_clean_up_data_wrapper import AutoCleanUpDataWrapper
 
 class TestAutoCleanUpDataWrapper(unittest.TestCase):
     """AutoCleanUpDataWrapper unit test stubs"""
@@ -49,12 +49,12 @@ class TestAutoCleanUpDataWrapper(unittest.TestCase):
         model = AutoCleanUpDataWrapper()
         if include_optional:
             return AutoCleanUpDataWrapper(
-                response = docspace.models.auto_clean_up_data.AutoCleanUpData(
+                response = docspace-api-python.models.auto_clean_up_data.AutoCleanUpData(
                     is_auto_clean_up = True, 
                     gap = 1, ),
                 count = 56,
                 links = [
-                    docspace.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

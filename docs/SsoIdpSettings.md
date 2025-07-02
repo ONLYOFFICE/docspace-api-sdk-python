@@ -1,5 +1,4 @@
 # SsoIdpSettings
-
 The SSO IdP settings.
 
 ## Properties
@@ -16,7 +15,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.sso_idp_settings import SsoIdpSettings
+from docspace-api-python.models.sso_idp_settings import SsoIdpSettings
 
 # TODO update the JSON string below
 json = "{}"

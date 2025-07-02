@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.tenant_dto import TenantDto
+from docspace-api-python.models.tenant_dto import TenantDto
 
 class TestTenantDto(unittest.TestCase):
     """TenantDto unit test stubs"""

@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.additional_white_label_settings import AdditionalWhiteLabelSettings
+from docspace-api-python.models.additional_white_label_settings import AdditionalWhiteLabelSettings
 
 class TestAdditionalWhiteLabelSettings(unittest.TestCase):
     """AdditionalWhiteLabelSettings unit test stubs"""

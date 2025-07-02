@@ -1,5 +1,4 @@
 # MemberRequestDto
-
 The user request parameters.
 
 ## Properties
@@ -31,7 +30,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.member_request_dto import MemberRequestDto
+from docspace-api-python.models.member_request_dto import MemberRequestDto
 
 # TODO update the JSON string below
 json = "{}"

@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.product_quantity_type import ProductQuantityType
+from docspace-api-python.models.product_quantity_type import ProductQuantityType
 
 class TestProductQuantityType(unittest.TestCase):
     """ProductQuantityType unit test stubs"""

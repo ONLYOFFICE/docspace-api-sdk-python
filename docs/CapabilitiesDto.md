@@ -1,5 +1,4 @@
 # CapabilitiesDto
-
 The capabilities parameters.
 
 ## Properties
@@ -17,7 +16,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.capabilities_dto import CapabilitiesDto
+from docspace-api-python.models.capabilities_dto import CapabilitiesDto
 
 # TODO update the JSON string below
 json = "{}"

@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.quota_state import QuotaState
+from docspace-api-python.models.quota_state import QuotaState
 
 class TestQuotaState(unittest.TestCase):
     """QuotaState unit test stubs"""

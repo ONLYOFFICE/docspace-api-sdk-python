@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.quota_settings_requests_dto_default_quota import QuotaSettingsRequestsDtoDefaultQuota
+from docspace-api-python.models.quota_settings_requests_dto_default_quota import QuotaSettingsRequestsDtoDefaultQuota
 
 class TestQuotaSettingsRequestsDtoDefaultQuota(unittest.TestCase):
     """QuotaSettingsRequestsDtoDefaultQuota unit test stubs"""

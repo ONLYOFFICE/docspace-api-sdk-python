@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.error_response import ErrorResponse
+from docspace-api-python.models.error_response import ErrorResponse
 
 class TestErrorResponse(unittest.TestCase):
     """ErrorResponse unit test stubs"""

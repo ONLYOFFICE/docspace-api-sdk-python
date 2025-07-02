@@ -1,5 +1,4 @@
 # DocumentBuilderTaskDto
-
 The document builder task parameters.
 
 ## Properties
@@ -18,7 +17,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.document_builder_task_dto import DocumentBuilderTaskDto
+from docspace-api-python.models.document_builder_task_dto import DocumentBuilderTaskDto
 
 # TODO update the JSON string below
 json = "{}"

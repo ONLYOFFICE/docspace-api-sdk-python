@@ -1,36 +1,46 @@
-# docspace.SettingsStatisticsApi
+# docspace-api-python.SettingsStatisticsApi
 
 All URIs are relative to *http://localhost:8092*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get_space_usage_statistics**](SettingsStatisticsApi.md#get_space_usage_statistics) | **GET** /api/2.0/settings/statistics/spaceusage/{id} | Get the space usage statistics
+[**get_space_usage_statistics**](#get_space_usage_statistics) | **GET** /api/2.0/settings/statistics/spaceusage/{id} | Get the space usage statistics
 
 
 # **get_space_usage_statistics**
 > UsageSpaceStatItemArrayWrapper get_space_usage_statistics(id)
 
-Get the space usage statistics
-
 Returns the space usage statistics for the module with the ID specified in the request.
+
+For more information, see [api.onlyoffice.com]().
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **str**| The ID extracted from the route parameters. | 
+
+### Return type
+
+[**UsageSpaceStatItemArrayWrapper**](UsageSpaceStatItemArrayWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
-* Basic Authentication (Basic):
-* OAuth Authentication (OAuth2):
-* Api Key Authentication (ApiKeyBearer):
-* Api Key Authentication (asc_auth_key):
-* Bearer (JWT) Authentication (Bearer):
 
 ```python
-import docspace
-from docspace.models.usage_space_stat_item_array_wrapper import UsageSpaceStatItemArrayWrapper
-from docspace.rest import ApiException
+import docspace-api-python
+from docspace-api-python.models.usage_space_stat_item_array_wrapper import UsageSpaceStatItemArrayWrapper
+from docspace-api-python.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace.Configuration(
+configuration = docspace-api-python.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -40,7 +50,7 @@ configuration = docspace.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = docspace.Configuration(
+configuration = docspace-api-python.Configuration(
     username = os.environ["USERNAME"],
     password = os.environ["PASSWORD"]
 )
@@ -60,14 +70,14 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace.Configuration(
+configuration = docspace-api-python.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace.ApiClient(configuration) as api_client:
+with docspace-api-python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace.SettingsStatisticsApi(api_client)
+    api_instance = docspace-api-python.SettingsStatisticsApi(api_client)
     id = 'aae1e103-bca5-9fa1-ba8c-42058b4abf28' # str | The ID extracted from the route parameters.
 
     try:
@@ -81,25 +91,11 @@ with docspace.ApiClient(configuration) as api_client:
 
 
 
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **id** | **str**| The ID extracted from the route parameters. | 
-
-### Return type
-
-[**UsageSpaceStatItemArrayWrapper**](UsageSpaceStatItemArrayWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
+
 
 ### HTTP response details
 

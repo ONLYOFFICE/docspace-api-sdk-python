@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.product_administrator_wrapper import ProductAdministratorWrapper
+from docspace-api-python.models.product_administrator_wrapper import ProductAdministratorWrapper
 
 class TestProductAdministratorWrapper(unittest.TestCase):
     """ProductAdministratorWrapper unit test stubs"""
@@ -49,13 +49,13 @@ class TestProductAdministratorWrapper(unittest.TestCase):
         model = ProductAdministratorWrapper()
         if include_optional:
             return ProductAdministratorWrapper(
-                response = docspace.models.product_administrator_dto.ProductAdministratorDto(
+                response = docspace-api-python.models.product_administrator_dto.ProductAdministratorDto(
                     product_id = 'aae1e103-bca5-9fa1-ba8c-42058b4abf28', 
                     user_id = 'aae1e103-bca5-9fa1-ba8c-42058b4abf28', 
                     administrator = True, ),
                 count = 56,
                 links = [
-                    docspace.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

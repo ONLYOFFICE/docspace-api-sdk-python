@@ -1,5 +1,4 @@
 # DeleteVersionBatchRequestDto
-
 The request parameters for deleting file versions.
 
 ## Properties
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.delete_version_batch_request_dto import DeleteVersionBatchRequestDto
+from docspace-api-python.models.delete_version_batch_request_dto import DeleteVersionBatchRequestDto
 
 # TODO update the JSON string below
 json = "{}"

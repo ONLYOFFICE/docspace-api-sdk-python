@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.auth_data import AuthData
+from docspace-api-python.models.auth_data import AuthData
 
 class TestAuthData(unittest.TestCase):
     """AuthData unit test stubs"""
@@ -54,7 +54,7 @@ class TestAuthData(unittest.TestCase):
                 raw_token = 'some text',
                 url = 'some text',
                 provider = 'some text',
-                token = docspace.models.o_auth20_token.OAuth20Token(
+                token = docspace-api-python.models.o_auth20_token.OAuth20Token(
                     access_token = 'some text', 
                     refresh_token = 'some text', 
                     expires_in = 1234, 

@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.tfa_requests_dto_type import TfaRequestsDtoType
+from docspace-api-python.models.tfa_requests_dto_type import TfaRequestsDtoType
 
 class TestTfaRequestsDtoType(unittest.TestCase):
     """TfaRequestsDtoType unit test stubs"""

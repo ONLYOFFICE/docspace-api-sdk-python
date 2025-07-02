@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.update_group_request import UpdateGroupRequest
+from docspace-api-python.models.update_group_request import UpdateGroupRequest
 
 class TestUpdateGroupRequest(unittest.TestCase):
     """UpdateGroupRequest unit test stubs"""

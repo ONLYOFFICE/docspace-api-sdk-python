@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.folder_dto_string import FolderDtoString
+from docspace-api-python.models.folder_dto_string import FolderDtoString
 
 class TestFolderDtoString(unittest.TestCase):
     """FolderDtoString unit test stubs"""
@@ -52,10 +52,10 @@ class TestFolderDtoString(unittest.TestCase):
                 title = 'Some titile.txt/ Some title',
                 access = 0,
                 shared = False,
-                created = docspace.models.api_date_time.ApiDateTime(
+                created = docspace-api-python.models.api_date_time.ApiDateTime(
                     utc_time = '2008-04-10T06:30+04:00', 
                     time_zone_offset = '00:00:00', ),
-                created_by = docspace.models.employee_dto.EmployeeDto(
+                created_by = docspace-api-python.models.employee_dto.EmployeeDto(
                     id = '', 
                     display_name = 'Mike Zanyatski', 
                     title = 'Manager', 
@@ -67,15 +67,15 @@ class TestFolderDtoString(unittest.TestCase):
                     profile_url = 'some text', 
                     has_avatar = True, 
                     is_anonim = True, ),
-                updated = docspace.models.api_date_time.ApiDateTime(
+                updated = docspace-api-python.models.api_date_time.ApiDateTime(
                     utc_time = '2008-04-10T06:30+04:00', 
                     time_zone_offset = '00:00:00', ),
-                auto_delete = docspace.models.api_date_time.ApiDateTime(
+                auto_delete = docspace-api-python.models.api_date_time.ApiDateTime(
                     utc_time = '2008-04-10T06:30+04:00', 
                     time_zone_offset = '00:00:00', ),
                 root_folder_type = 0,
                 parent_room_type = 0,
-                updated_by = docspace.models.employee_dto.EmployeeDto(
+                updated_by = docspace-api-python.models.employee_dto.EmployeeDto(
                     id = '', 
                     display_name = 'Mike Zanyatski', 
                     title = 'Manager', 
@@ -108,13 +108,13 @@ class TestFolderDtoString(unittest.TestCase):
                 new = 1234,
                 mute = True,
                 tags = ["some text"],
-                logo = docspace.models.logo.Logo(
+                logo = docspace-api-python.models.logo.Logo(
                     original = 'some text', 
                     large = 'some text', 
                     medium = 'some text', 
                     small = 'some text', 
                     color = 'some text', 
-                    cover = docspace.models.logo_cover.LogoCover(
+                    cover = docspace-api-python.models.logo_cover.LogoCover(
                         id = '9846', 
                         data = 'some text', ), ),
                 pinned = True,
@@ -122,12 +122,12 @@ class TestFolderDtoString(unittest.TestCase):
                 private = True,
                 indexing = True,
                 deny_download = True,
-                lifetime = docspace.models.room_data_lifetime_dto.RoomDataLifetimeDto(
+                lifetime = docspace-api-python.models.room_data_lifetime_dto.RoomDataLifetimeDto(
                     delete_permanently = True, 
                     period = 0, 
                     value = 1234, 
                     enabled = True, ),
-                watermark = docspace.models.watermark_dto.WatermarkDto(
+                watermark = docspace-api-python.models.watermark_dto.WatermarkDto(
                     additions = 1, 
                     text = 'some text', 
                     rotate = 1234, 

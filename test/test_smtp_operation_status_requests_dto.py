@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.smtp_operation_status_requests_dto import SmtpOperationStatusRequestsDto
+from docspace-api-python.models.smtp_operation_status_requests_dto import SmtpOperationStatusRequestsDto
 
 class TestSmtpOperationStatusRequestsDto(unittest.TestCase):
     """SmtpOperationStatusRequestsDto unit test stubs"""

@@ -1,5 +1,4 @@
 # TopUpDepositRequestDto
-
 Put money on deposit request parameters
 
 ## Properties
@@ -12,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.top_up_deposit_request_dto import TopUpDepositRequestDto
+from docspace-api-python.models.top_up_deposit_request_dto import TopUpDepositRequestDto
 
 # TODO update the JSON string below
 json = "{}"

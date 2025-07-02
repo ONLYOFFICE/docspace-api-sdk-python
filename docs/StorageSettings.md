@@ -1,6 +1,5 @@
 # StorageSettings
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -12,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.storage_settings import StorageSettings
+from docspace-api-python.models.storage_settings import StorageSettings
 
 # TODO update the JSON string below
 json = "{}"

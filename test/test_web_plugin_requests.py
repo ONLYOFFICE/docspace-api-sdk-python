@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.web_plugin_requests import WebPluginRequests
+from docspace-api-python.models.web_plugin_requests import WebPluginRequests
 
 class TestWebPluginRequests(unittest.TestCase):
     """WebPluginRequests unit test stubs"""

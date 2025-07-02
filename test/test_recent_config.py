@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.recent_config import RecentConfig
+from docspace-api-python.models.recent_config import RecentConfig
 
 class TestRecentConfig(unittest.TestCase):
     """RecentConfig unit test stubs"""

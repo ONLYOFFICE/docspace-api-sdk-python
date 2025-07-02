@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.tenant_trusted_domains_type import TenantTrustedDomainsType
+from docspace-api-python.models.tenant_trusted_domains_type import TenantTrustedDomainsType
 
 class TestTenantTrustedDomainsType(unittest.TestCase):
     """TenantTrustedDomainsType unit test stubs"""

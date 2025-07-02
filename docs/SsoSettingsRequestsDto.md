@@ -1,5 +1,4 @@
 # SsoSettingsRequestsDto
-
 The request parameters for the Single Sign-On (SSO) configuration settings.
 
 ## Properties
@@ -11,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.sso_settings_requests_dto import SsoSettingsRequestsDto
+from docspace-api-python.models.sso_settings_requests_dto import SsoSettingsRequestsDto
 
 # TODO update the JSON string below
 json = "{}"

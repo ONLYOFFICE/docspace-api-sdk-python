@@ -1,5 +1,4 @@
 # TenantAuditSettings
-
 The tenant audit settings parameters.
 
 ## Properties
@@ -13,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.tenant_audit_settings import TenantAuditSettings
+from docspace-api-python.models.tenant_audit_settings import TenantAuditSettings
 
 # TODO update the JSON string below
 json = "{}"

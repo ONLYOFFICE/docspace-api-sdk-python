@@ -1,6 +1,5 @@
 # IPRestrictionsSettings
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -11,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.ip_restrictions_settings import IPRestrictionsSettings
+from docspace-api-python.models.ip_restrictions_settings import IPRestrictionsSettings
 
 # TODO update the JSON string below
 json = "{}"

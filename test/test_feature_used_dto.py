@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.feature_used_dto import FeatureUsedDto
+from docspace-api-python.models.feature_used_dto import FeatureUsedDto
 
 class TestFeatureUsedDto(unittest.TestCase):
     """FeatureUsedDto unit test stubs"""

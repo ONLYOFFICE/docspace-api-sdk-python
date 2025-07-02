@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.deep_link_configuration_requests_dto import DeepLinkConfigurationRequestsDto
+from docspace-api-python.models.deep_link_configuration_requests_dto import DeepLinkConfigurationRequestsDto
 
 class TestDeepLinkConfigurationRequestsDto(unittest.TestCase):
     """DeepLinkConfigurationRequestsDto unit test stubs"""
@@ -49,7 +49,7 @@ class TestDeepLinkConfigurationRequestsDto(unittest.TestCase):
         model = DeepLinkConfigurationRequestsDto()
         if include_optional:
             return DeepLinkConfigurationRequestsDto(
-                deep_link_settings = docspace.models.tenant_deep_link_settings.TenantDeepLinkSettings(
+                deep_link_settings = docspace-api-python.models.tenant_deep_link_settings.TenantDeepLinkSettings(
                     handling_mode = 0, 
                     last_modified = '2008-04-10T06:30+04:00', )
             )

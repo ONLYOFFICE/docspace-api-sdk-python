@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.api.o_auth20_scope_management_api import OAuth20ScopeManagementApi
+from docspace-api-python.api.o_auth20_scope_management_api import OAuth20ScopeManagementApi
 
 
 class TestOAuth20ScopeManagementApi(unittest.TestCase):

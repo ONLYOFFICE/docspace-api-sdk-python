@@ -1,5 +1,4 @@
 # ScopeResponse
-
 The response containing the scope information.
 
 ## Properties
@@ -13,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.scope_response import ScopeResponse
+from docspace-api-python.models.scope_response import ScopeResponse
 
 # TODO update the JSON string below
 json = "{}"

@@ -1,5 +1,4 @@
 # WhiteLabelItemDto
-
 The white label item parameters.
 
 ## Properties
@@ -13,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.white_label_item_dto import WhiteLabelItemDto
+from docspace-api-python.models.white_label_item_dto import WhiteLabelItemDto
 
 # TODO update the JSON string below
 json = "{}"

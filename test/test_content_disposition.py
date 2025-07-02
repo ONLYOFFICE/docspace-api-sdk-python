@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.content_disposition import ContentDisposition
+from docspace-api-python.models.content_disposition import ContentDisposition
 
 class TestContentDisposition(unittest.TestCase):
     """ContentDisposition unit test stubs"""

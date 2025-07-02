@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.customer_config_dto import CustomerConfigDto
+from docspace-api-python.models.customer_config_dto import CustomerConfigDto
 
 class TestCustomerConfigDto(unittest.TestCase):
     """CustomerConfigDto unit test stubs"""

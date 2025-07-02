@@ -1,5 +1,4 @@
 # ClientInfoResponse
-
 The response containing public client information.
 
 ## Properties
@@ -24,7 +23,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.client_info_response import ClientInfoResponse
+from docspace-api-python.models.client_info_response import ClientInfoResponse
 
 # TODO update the JSON string below
 json = "{}"

@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.storage_settings_wrapper import StorageSettingsWrapper
+from docspace-api-python.models.storage_settings_wrapper import StorageSettingsWrapper
 
 class TestStorageSettingsWrapper(unittest.TestCase):
     """StorageSettingsWrapper unit test stubs"""
@@ -49,13 +49,13 @@ class TestStorageSettingsWrapper(unittest.TestCase):
         model = StorageSettingsWrapper()
         if include_optional:
             return StorageSettingsWrapper(
-                response = docspace.models.storage_settings.StorageSettings(
+                response = docspace-api-python.models.storage_settings.StorageSettings(
                     module = 'some text', 
                     props = [{"key":"some text","value":"some text"}], 
                     last_modified = '2008-04-10T06:30+04:00', ),
                 count = 56,
                 links = [
-                    docspace.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

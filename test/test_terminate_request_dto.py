@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.terminate_request_dto import TerminateRequestDto
+from docspace-api-python.models.terminate_request_dto import TerminateRequestDto
 
 class TestTerminateRequestDto(unittest.TestCase):
     """TerminateRequestDto unit test stubs"""

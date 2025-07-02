@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.company_white_label_settings_array_wrapper import CompanyWhiteLabelSettingsArrayWrapper
+from docspace-api-python.models.company_white_label_settings_array_wrapper import CompanyWhiteLabelSettingsArrayWrapper
 
 class TestCompanyWhiteLabelSettingsArrayWrapper(unittest.TestCase):
     """CompanyWhiteLabelSettingsArrayWrapper unit test stubs"""
@@ -50,7 +50,7 @@ class TestCompanyWhiteLabelSettingsArrayWrapper(unittest.TestCase):
         if include_optional:
             return CompanyWhiteLabelSettingsArrayWrapper(
                 response = [
-                    docspace.models.company_white_label_settings.CompanyWhiteLabelSettings(
+                    docspace-api-python.models.company_white_label_settings.CompanyWhiteLabelSettings(
                         company_name = 'some text', 
                         site = 'some text', 
                         email = 'Sydney_Roberts4@hotmail.com', 
@@ -61,7 +61,7 @@ class TestCompanyWhiteLabelSettingsArrayWrapper(unittest.TestCase):
                     ],
                 count = 56,
                 links = [
-                    docspace.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

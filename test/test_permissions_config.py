@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.permissions_config import PermissionsConfig
+from docspace-api-python.models.permissions_config import PermissionsConfig
 
 class TestPermissionsConfig(unittest.TestCase):
     """PermissionsConfig unit test stubs"""

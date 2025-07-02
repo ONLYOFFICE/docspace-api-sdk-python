@@ -1,5 +1,4 @@
 # EmailActivationSettings
-
 The email activation settings.
 
 ## Properties
@@ -12,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.email_activation_settings import EmailActivationSettings
+from docspace-api-python.models.email_activation_settings import EmailActivationSettings
 
 # TODO update the JSON string below
 json = "{}"

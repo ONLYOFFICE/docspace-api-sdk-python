@@ -1,5 +1,4 @@
 # CreateTagRequestDto
-
 The request parameters for creating a tag.
 
 ## Properties
@@ -11,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.create_tag_request_dto import CreateTagRequestDto
+from docspace-api-python.models.create_tag_request_dto import CreateTagRequestDto
 
 # TODO update the JSON string below
 json = "{}"

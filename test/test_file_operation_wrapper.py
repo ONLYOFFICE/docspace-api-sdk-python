@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.file_operation_wrapper import FileOperationWrapper
+from docspace-api-python.models.file_operation_wrapper import FileOperationWrapper
 
 class TestFileOperationWrapper(unittest.TestCase):
     """FileOperationWrapper unit test stubs"""
@@ -49,7 +49,7 @@ class TestFileOperationWrapper(unittest.TestCase):
         model = FileOperationWrapper()
         if include_optional:
             return FileOperationWrapper(
-                response = docspace.models.file_operation_dto.FileOperationDto(
+                response = docspace-api-python.models.file_operation_dto.FileOperationDto(
                     id = '9846', 
                     operation = 0, 
                     progress = 100, 
@@ -58,14 +58,14 @@ class TestFileOperationWrapper(unittest.TestCase):
                     finished = True, 
                     url = 'some text', 
                     files = [
-                        docspace.models.file_entry_dto.FileEntryDto(
+                        docspace-api-python.models.file_entry_dto.FileEntryDto(
                             title = 'Some titile.txt/ Some title', 
                             access = 0, 
                             shared = False, 
-                            created = docspace.models.api_date_time.ApiDateTime(
+                            created = docspace-api-python.models.api_date_time.ApiDateTime(
                                 utc_time = '2008-04-10T06:30+04:00', 
                                 time_zone_offset = '00:00:00', ), 
-                            created_by = docspace.models.employee_dto.EmployeeDto(
+                            created_by = docspace-api-python.models.employee_dto.EmployeeDto(
                                 id = '', 
                                 display_name = 'Mike Zanyatski', 
                                 title = 'Manager', 
@@ -77,13 +77,13 @@ class TestFileOperationWrapper(unittest.TestCase):
                                 profile_url = 'some text', 
                                 has_avatar = True, 
                                 is_anonim = True, ), 
-                            updated = docspace.models.api_date_time.ApiDateTime(
+                            updated = docspace-api-python.models.api_date_time.ApiDateTime(
                                 utc_time = '2008-04-10T06:30+04:00', 
                                 time_zone_offset = '00:00:00', ), 
                             auto_delete = , 
                             root_folder_type = 0, 
                             parent_room_type = 0, 
-                            updated_by = docspace.models.employee_dto.EmployeeDto(
+                            updated_by = docspace-api-python.models.employee_dto.EmployeeDto(
                                 id = '', 
                                 display_name = 'Mike Zanyatski', 
                                 title = 'Manager', 
@@ -102,7 +102,7 @@ class TestFileOperationWrapper(unittest.TestCase):
                             file_entry_type = 1, )
                         ], 
                     folders = [
-                        docspace.models.file_entry_dto.FileEntryDto(
+                        docspace-api-python.models.file_entry_dto.FileEntryDto(
                             title = 'Some titile.txt/ Some title', 
                             shared = False, 
                             provider_item = True, 
@@ -112,7 +112,7 @@ class TestFileOperationWrapper(unittest.TestCase):
                         ], ),
                 count = 56,
                 links = [
-                    docspace.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

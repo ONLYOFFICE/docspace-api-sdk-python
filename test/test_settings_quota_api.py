@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.api.settings_quota_api import SettingsQuotaApi
+from docspace-api-python.api.settings_quota_api import SettingsQuotaApi
 
 
 class TestSettingsQuotaApi(unittest.TestCase):

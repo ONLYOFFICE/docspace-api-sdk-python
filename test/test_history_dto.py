@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.history_dto import HistoryDto
+from docspace-api-python.models.history_dto import HistoryDto
 
 class TestHistoryDto(unittest.TestCase):
     """HistoryDto unit test stubs"""
@@ -49,10 +49,10 @@ class TestHistoryDto(unittest.TestCase):
         model = HistoryDto()
         if include_optional:
             return HistoryDto(
-                action = docspace.models.history_action.HistoryAction(
+                action = docspace-api-python.models.history_action.HistoryAction(
                     id = 1000, 
                     key = 'some text', ),
-                initiator = docspace.models.employee_dto.EmployeeDto(
+                initiator = docspace-api-python.models.employee_dto.EmployeeDto(
                     id = '', 
                     display_name = 'Mike Zanyatski', 
                     title = 'Manager', 
@@ -64,17 +64,17 @@ class TestHistoryDto(unittest.TestCase):
                     profile_url = 'some text', 
                     has_avatar = True, 
                     is_anonim = True, ),
-                var_date = docspace.models.api_date_time.ApiDateTime(
+                var_date = docspace-api-python.models.api_date_time.ApiDateTime(
                     utc_time = '2008-04-10T06:30+04:00', 
                     time_zone_offset = '00:00:00', ),
-                data = docspace.models.history_data.HistoryData(
+                data = docspace-api-python.models.history_data.HistoryData(
                     initiator_name = 'some text', ),
                 related = [
-                    docspace.models.history_dto.HistoryDto(
-                        action = docspace.models.history_action.HistoryAction(
+                    docspace-api-python.models.history_dto.HistoryDto(
+                        action = docspace-api-python.models.history_action.HistoryAction(
                             id = 1000, 
                             key = 'some text', ), 
-                        initiator = docspace.models.employee_dto.EmployeeDto(
+                        initiator = docspace-api-python.models.employee_dto.EmployeeDto(
                             display_name = 'Mike Zanyatski', 
                             title = 'Manager', 
                             avatar = 'some text', 
@@ -85,10 +85,10 @@ class TestHistoryDto(unittest.TestCase):
                             profile_url = 'some text', 
                             has_avatar = True, 
                             is_anonim = True, ), 
-                        date = docspace.models.api_date_time.ApiDateTime(
+                        date = docspace-api-python.models.api_date_time.ApiDateTime(
                             utc_time = '2008-04-10T06:30+04:00', 
                             time_zone_offset = '00:00:00', ), 
-                        data = docspace.models.history_data.HistoryData(
+                        data = docspace-api-python.models.history_data.HistoryData(
                             initiator_name = 'some text', ), )
                     ]
             )

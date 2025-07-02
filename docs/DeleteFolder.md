@@ -1,5 +1,4 @@
 # DeleteFolder
-
 The parameters for deleting a folder.
 
 ## Properties
@@ -12,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.delete_folder import DeleteFolder
+from docspace-api-python.models.delete_folder import DeleteFolder
 
 # TODO update the JSON string below
 json = "{}"

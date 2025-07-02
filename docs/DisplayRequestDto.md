@@ -1,5 +1,4 @@
 # DisplayRequestDto
-
 The settings request parameters.
 
 ## Properties
@@ -11,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.display_request_dto import DisplayRequestDto
+from docspace-api-python.models.display_request_dto import DisplayRequestDto
 
 # TODO update the JSON string below
 json = "{}"

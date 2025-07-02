@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.mobile_requests_dto import MobileRequestsDto
+from docspace-api-python.models.mobile_requests_dto import MobileRequestsDto
 
 class TestMobileRequestsDto(unittest.TestCase):
     """MobileRequestsDto unit test stubs"""

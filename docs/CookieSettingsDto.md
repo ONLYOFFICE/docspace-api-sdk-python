@@ -1,5 +1,4 @@
 # CookieSettingsDto
-
 The cookie settings.
 
 ## Properties
@@ -12,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.cookie_settings_dto import CookieSettingsDto
+from docspace-api-python.models.cookie_settings_dto import CookieSettingsDto
 
 # TODO update the JSON string below
 json = "{}"

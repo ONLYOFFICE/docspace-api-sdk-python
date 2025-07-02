@@ -1,5 +1,4 @@
 # WebhookRetryRequestsDto
-
 The request parameters for requesting the webhook delivery retries.
 
 ## Properties
@@ -11,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.webhook_retry_requests_dto import WebhookRetryRequestsDto
+from docspace-api-python.models.webhook_retry_requests_dto import WebhookRetryRequestsDto
 
 # TODO update the JSON string below
 json = "{}"

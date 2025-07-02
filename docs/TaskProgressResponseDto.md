@@ -1,5 +1,4 @@
 # TaskProgressResponseDto
-
 The task progress response parameters.
 
 ## Properties
@@ -15,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.task_progress_response_dto import TaskProgressResponseDto
+from docspace-api-python.models.task_progress_response_dto import TaskProgressResponseDto
 
 # TODO update the JSON string below
 json = "{}"

@@ -1,5 +1,4 @@
 # TenantWalletSettingsWrapper
-
 Tenant wallet settings
 
 ## Properties
@@ -11,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.tenant_wallet_settings_wrapper import TenantWalletSettingsWrapper
+from docspace-api-python.models.tenant_wallet_settings_wrapper import TenantWalletSettingsWrapper
 
 # TODO update the JSON string below
 json = "{}"

@@ -1,6 +1,5 @@
 # CurrenciesArrayWrapper
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.currencies_array_wrapper import CurrenciesArrayWrapper
+from docspace-api-python.models.currencies_array_wrapper import CurrenciesArrayWrapper
 
 # TODO update the JSON string below
 json = "{}"

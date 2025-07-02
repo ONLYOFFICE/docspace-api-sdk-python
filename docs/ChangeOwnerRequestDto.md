@@ -1,5 +1,4 @@
 # ChangeOwnerRequestDto
-
 The request parameters for changing the file owner.
 
 ## Properties
@@ -13,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.change_owner_request_dto import ChangeOwnerRequestDto
+from docspace-api-python.models.change_owner_request_dto import ChangeOwnerRequestDto
 
 # TODO update the JSON string below
 json = "{}"

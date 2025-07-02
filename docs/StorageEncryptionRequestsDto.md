@@ -1,5 +1,4 @@
 # StorageEncryptionRequestsDto
-
 The request parameters for managing storage encryption operations and notifications.
 
 ## Properties
@@ -11,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.storage_encryption_requests_dto import StorageEncryptionRequestsDto
+from docspace-api-python.models.storage_encryption_requests_dto import StorageEncryptionRequestsDto
 
 # TODO update the JSON string below
 json = "{}"

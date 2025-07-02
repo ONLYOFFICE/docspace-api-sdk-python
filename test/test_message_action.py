@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.message_action import MessageAction
+from docspace-api-python.models.message_action import MessageAction
 
 class TestMessageAction(unittest.TestCase):
     """MessageAction unit test stubs"""

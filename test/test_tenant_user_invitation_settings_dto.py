@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.tenant_user_invitation_settings_dto import TenantUserInvitationSettingsDto
+from docspace-api-python.models.tenant_user_invitation_settings_dto import TenantUserInvitationSettingsDto
 
 class TestTenantUserInvitationSettingsDto(unittest.TestCase):
     """TenantUserInvitationSettingsDto unit test stubs"""

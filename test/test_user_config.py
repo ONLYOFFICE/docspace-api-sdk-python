@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.user_config import UserConfig
+from docspace-api-python.models.user_config import UserConfig
 
 class TestUserConfig(unittest.TestCase):
     """UserConfig unit test stubs"""

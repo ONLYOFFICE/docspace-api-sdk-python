@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.link_account_request_dto import LinkAccountRequestDto
+from docspace-api-python.models.link_account_request_dto import LinkAccountRequestDto
 
 class TestLinkAccountRequestDto(unittest.TestCase):
     """LinkAccountRequestDto unit test stubs"""

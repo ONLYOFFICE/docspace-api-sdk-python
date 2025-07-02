@@ -1,6 +1,5 @@
 # MigrationApiInfo
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -26,7 +25,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.migration_api_info import MigrationApiInfo
+from docspace-api-python.models.migration_api_info import MigrationApiInfo
 
 # TODO update the JSON string below
 json = "{}"

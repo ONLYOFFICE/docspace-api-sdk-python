@@ -1,6 +1,5 @@
 # NewItemsRoomNewItemsArrayWrapper
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.new_items_room_new_items_array_wrapper import NewItemsRoomNewItemsArrayWrapper
+from docspace-api-python.models.new_items_room_new_items_array_wrapper import NewItemsRoomNewItemsArrayWrapper
 
 # TODO update the JSON string below
 json = "{}"

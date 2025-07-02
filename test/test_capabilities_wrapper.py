@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.capabilities_wrapper import CapabilitiesWrapper
+from docspace-api-python.models.capabilities_wrapper import CapabilitiesWrapper
 
 class TestCapabilitiesWrapper(unittest.TestCase):
     """CapabilitiesWrapper unit test stubs"""
@@ -49,7 +49,7 @@ class TestCapabilitiesWrapper(unittest.TestCase):
         model = CapabilitiesWrapper()
         if include_optional:
             return CapabilitiesWrapper(
-                response = docspace.models.capabilities_dto.CapabilitiesDto(
+                response = docspace-api-python.models.capabilities_dto.CapabilitiesDto(
                     ldap_enabled = False, 
                     ldap_domain = 'some text', 
                     providers = ["some text"], 
@@ -59,7 +59,7 @@ class TestCapabilitiesWrapper(unittest.TestCase):
                     identity_server_enabled = True, ),
                 count = 56,
                 links = [
-                    docspace.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

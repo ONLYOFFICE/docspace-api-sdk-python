@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.update_comment import UpdateComment
+from docspace-api-python.models.update_comment import UpdateComment
 
 class TestUpdateComment(unittest.TestCase):
     """UpdateComment unit test stubs"""

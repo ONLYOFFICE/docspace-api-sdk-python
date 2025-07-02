@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.api_key_response_array_wrapper import ApiKeyResponseArrayWrapper
+from docspace-api-python.models.api_key_response_array_wrapper import ApiKeyResponseArrayWrapper
 
 class TestApiKeyResponseArrayWrapper(unittest.TestCase):
     """ApiKeyResponseArrayWrapper unit test stubs"""
@@ -50,19 +50,19 @@ class TestApiKeyResponseArrayWrapper(unittest.TestCase):
         if include_optional:
             return ApiKeyResponseArrayWrapper(
                 response = [
-                    docspace.models.api_key_response_dto.ApiKeyResponseDto(
+                    docspace-api-python.models.api_key_response_dto.ApiKeyResponseDto(
                         id = 'aae1e103-bca5-9fa1-ba8c-42058b4abf28', 
                         name = 'Winfield Upton', 
                         key = 'some text', 
                         key_postfix = 'some text', 
                         permissions = ["some text"], 
-                        last_used = docspace.models.api_date_time.ApiDateTime(
+                        last_used = docspace-api-python.models.api_date_time.ApiDateTime(
                             utc_time = '2008-04-10T06:30+04:00', 
                             time_zone_offset = '00:00:00', ), 
-                        create_on = docspace.models.api_date_time.ApiDateTime(
+                        create_on = docspace-api-python.models.api_date_time.ApiDateTime(
                             utc_time = '2008-04-10T06:30+04:00', 
                             time_zone_offset = '00:00:00', ), 
-                        create_by = docspace.models.employee_dto.EmployeeDto(
+                        create_by = docspace-api-python.models.employee_dto.EmployeeDto(
                             id = '', 
                             display_name = 'Mike Zanyatski', 
                             title = 'Manager', 
@@ -79,7 +79,7 @@ class TestApiKeyResponseArrayWrapper(unittest.TestCase):
                     ],
                 count = 56,
                 links = [
-                    docspace.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

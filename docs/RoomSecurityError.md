@@ -1,5 +1,4 @@
 # RoomSecurityError
-
 The error type.
 
 ## Enum

@@ -1,6 +1,5 @@
 # NoContentResultWrapper
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.no_content_result_wrapper import NoContentResultWrapper
+from docspace-api-python.models.no_content_result_wrapper import NoContentResultWrapper
 
 # TODO update the JSON string below
 json = "{}"

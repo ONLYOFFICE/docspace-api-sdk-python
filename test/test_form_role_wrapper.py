@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.form_role_wrapper import FormRoleWrapper
+from docspace-api-python.models.form_role_wrapper import FormRoleWrapper
 
 class TestFormRoleWrapper(unittest.TestCase):
     """FormRoleWrapper unit test stubs"""
@@ -49,7 +49,7 @@ class TestFormRoleWrapper(unittest.TestCase):
         model = FormRoleWrapper()
         if include_optional:
             return FormRoleWrapper(
-                response = docspace.models.form_role.FormRole(
+                response = docspace-api-python.models.form_role.FormRole(
                     room_id = 9846, 
                     role_name = 'some text', 
                     role_color = 'some text', 
@@ -60,7 +60,7 @@ class TestFormRoleWrapper(unittest.TestCase):
                     submission_date = '2008-04-10T06:30+04:00', ),
                 count = 56,
                 links = [
-                    docspace.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

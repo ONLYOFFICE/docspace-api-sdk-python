@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.create_tag_request_dto import CreateTagRequestDto
+from docspace-api-python.models.create_tag_request_dto import CreateTagRequestDto
 
 class TestCreateTagRequestDto(unittest.TestCase):
     """CreateTagRequestDto unit test stubs"""

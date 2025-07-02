@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.delete import Delete
+from docspace-api-python.models.delete import Delete
 
 class TestDelete(unittest.TestCase):
     """Delete unit test stubs"""

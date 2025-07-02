@@ -1,5 +1,4 @@
 # NewItemsDtoFileEntryDto
-
 The new item parameters.
 
 ## Properties
@@ -12,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.new_items_dto_file_entry_dto import NewItemsDtoFileEntryDto
+from docspace-api-python.models.new_items_dto_file_entry_dto import NewItemsDtoFileEntryDto
 
 # TODO update the JSON string below
 json = "{}"

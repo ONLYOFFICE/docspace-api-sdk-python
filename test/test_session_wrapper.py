@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.session_wrapper import SessionWrapper
+from docspace-api-python.models.session_wrapper import SessionWrapper
 
 class TestSessionWrapper(unittest.TestCase):
     """SessionWrapper unit test stubs"""
@@ -49,13 +49,13 @@ class TestSessionWrapper(unittest.TestCase):
         model = SessionWrapper()
         if include_optional:
             return SessionWrapper(
-                response = docspace.models.session.Session(
+                response = docspace-api-python.models.session.Session(
                     session_id = 1234, 
                     reserved_amount = 1.337, 
                     currency = 'some text', ),
                 count = 56,
                 links = [
-                    docspace.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

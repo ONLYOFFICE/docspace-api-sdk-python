@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.cdn_storage_settings_wrapper import CdnStorageSettingsWrapper
+from docspace-api-python.models.cdn_storage_settings_wrapper import CdnStorageSettingsWrapper
 
 class TestCdnStorageSettingsWrapper(unittest.TestCase):
     """CdnStorageSettingsWrapper unit test stubs"""
@@ -49,13 +49,13 @@ class TestCdnStorageSettingsWrapper(unittest.TestCase):
         model = CdnStorageSettingsWrapper()
         if include_optional:
             return CdnStorageSettingsWrapper(
-                response = docspace.models.cdn_storage_settings.CdnStorageSettings(
+                response = docspace-api-python.models.cdn_storage_settings.CdnStorageSettings(
                     module = 'some text', 
                     props = [{"key":"some text","value":"some text"}], 
                     last_modified = '2008-04-10T06:30+04:00', ),
                 count = 56,
                 links = [
-                    docspace.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.sso_idp_settings import SsoIdpSettings
+from docspace-api-python.models.sso_idp_settings import SsoIdpSettings
 
 class TestSsoIdpSettings(unittest.TestCase):
     """SsoIdpSettings unit test stubs"""

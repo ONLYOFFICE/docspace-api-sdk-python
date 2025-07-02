@@ -1,5 +1,4 @@
 # SecurityRequestsDto
-
 The request parameters for managing user security and access permissions.
 
 ## Properties
@@ -13,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.security_requests_dto import SecurityRequestsDto
+from docspace-api-python.models.security_requests_dto import SecurityRequestsDto
 
 # TODO update the JSON string below
 json = "{}"

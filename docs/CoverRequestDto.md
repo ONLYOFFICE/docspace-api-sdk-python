@@ -1,5 +1,4 @@
 # CoverRequestDto
-
 The request parameters to change the room cover.
 
 ## Properties
@@ -12,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.cover_request_dto import CoverRequestDto
+from docspace-api-python.models.cover_request_dto import CoverRequestDto
 
 # TODO update the JSON string below
 json = "{}"

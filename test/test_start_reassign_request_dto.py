@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.start_reassign_request_dto import StartReassignRequestDto
+from docspace-api-python.models.start_reassign_request_dto import StartReassignRequestDto
 
 class TestStartReassignRequestDto(unittest.TestCase):
     """StartReassignRequestDto unit test stubs"""

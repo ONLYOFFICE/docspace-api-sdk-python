@@ -1,5 +1,4 @@
 # CreateRoomFromTemplateDto
-
 The parameters for creating a room from a template.
 
 ## Properties
@@ -23,7 +22,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.create_room_from_template_dto import CreateRoomFromTemplateDto
+from docspace-api-python.models.create_room_from_template_dto import CreateRoomFromTemplateDto
 
 # TODO update the JSON string below
 json = "{}"

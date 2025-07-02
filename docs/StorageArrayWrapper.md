@@ -1,6 +1,5 @@
 # StorageArrayWrapper
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.storage_array_wrapper import StorageArrayWrapper
+from docspace-api-python.models.storage_array_wrapper import StorageArrayWrapper
 
 # TODO update the JSON string below
 json = "{}"

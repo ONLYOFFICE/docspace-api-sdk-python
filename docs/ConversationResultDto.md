@@ -1,5 +1,4 @@
 # ConversationResultDto
-
 The result of file convertion operation.
 
 ## Properties
@@ -17,7 +16,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.conversation_result_dto import ConversationResultDto
+from docspace-api-python.models.conversation_result_dto import ConversationResultDto
 
 # TODO update the JSON string below
 json = "{}"

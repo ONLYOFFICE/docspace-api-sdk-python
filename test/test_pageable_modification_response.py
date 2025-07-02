@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.pageable_modification_response import PageableModificationResponse
+from docspace-api-python.models.pageable_modification_response import PageableModificationResponse
 
 class TestPageableModificationResponse(unittest.TestCase):
     """PageableModificationResponse unit test stubs"""

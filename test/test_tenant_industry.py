@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.tenant_industry import TenantIndustry
+from docspace-api-python.models.tenant_industry import TenantIndustry
 
 class TestTenantIndustry(unittest.TestCase):
     """TenantIndustry unit test stubs"""

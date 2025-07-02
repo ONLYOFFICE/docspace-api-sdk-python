@@ -1,5 +1,4 @@
 # TfaRequestsDtoType
-
 [0 - None, 1 - Sms, 2 - App]
 
 ## Enum

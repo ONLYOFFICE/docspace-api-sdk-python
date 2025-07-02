@@ -28,7 +28,7 @@
 
 import unittest
 
-from docspace.models.backup_progress_enum import BackupProgressEnum
+from docspace-api-python.models.backup_progress_enum import BackupProgressEnum
 
 class TestBackupProgressEnum(unittest.TestCase):
     """BackupProgressEnum unit test stubs"""
