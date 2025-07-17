@@ -54,6 +54,60 @@ import docspace-api-python
 
 Execute `pytest` to run the tests.
 
+<a id="documentation-for-authorization"></a>
+## Documentation For Authorization
+
+
+Authentication schemes defined for the API:
+<a id="asc_auth_key"></a>
+### asc_auth_key
+
+- **Type**: API key
+- **API key parameter name**: asc_auth_key
+- **Location**: 
+
+<a id="Basic"></a>
+### Basic
+
+- **Type**: HTTP basic authentication
+
+<a id="Bearer"></a>
+### Bearer
+
+- **Type**: Bearer authentication (JWT)
+
+<a id="ApiKeyBearer"></a>
+### ApiKeyBearer
+
+- **Type**: API key
+- **API key parameter name**: ApiKeyBearer
+- **Location**: HTTP header
+
+<a id="OAuth2"></a>
+### OAuth2
+
+- **Type**: OAuth
+- **Flow**: accessCode
+- **Authorization URL**: 
+- **Token Url**: 
+- **Scopes**: 
+ - **read**: Read access to protected resources
+ - **write**: Write access to protected resources
+
+<a id="OpenId"></a>
+### OpenId
+
+- **Type**: OpenId Connect
+- **OpenId Connect URL**: 
+
+<a id="x-signature"></a>
+### x-signature
+
+- **Type**: API key
+- **API key parameter name**: x-signature
+- **Location**: 
+
+
 ## Getting Started
 
 Please follow the [installation procedure](#installation--usage) and then run the following:
@@ -121,6 +175,7 @@ with docspace-api-python.ApiClient(configuration) as api_client:
 
 All URIs are relative to *http://localhost:8092*
 
+<details><summary>API Endoints table</summary>
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *ApiKeysApi* | [**create_api_key**](docs/ApiKeysApi.md#create_api_key) | **POST** /api/2.0/keys | Create a user API key
@@ -587,9 +642,11 @@ Class | Method | HTTP request | Description
 *SettingsWebpluginsApi* | [**update_web_plugin**](docs/SettingsWebpluginsApi.md#update_web_plugin) | **PUT** /api/2.0/settings/webplugins/{name} | Update a web plugin
 *ThirdPartyApi* | [**get_third_party_code**](docs/ThirdPartyApi.md#get_third_party_code) | **GET** /api/2.0/thirdparty/{provider} | Get the code request
 
+</details>
 
 ## Documentation For Models
 
+<details><summary>Models list</summary>
  - [AccountInfoArrayWrapper](docs/AccountInfoArrayWrapper.md)
  - [AccountInfoDto](docs/AccountInfoDto.md)
  - [AccountLoginType](docs/AccountLoginType.md)
@@ -1165,63 +1222,5 @@ Class | Method | HTTP request | Description
  - [WizardSettings](docs/WizardSettings.md)
  - [WizardSettingsWrapper](docs/WizardSettingsWrapper.md)
 
-
-<a id="documentation-for-authorization"></a>
-## Documentation For Authorization
-
-
-Authentication schemes defined for the API:
-<a id="asc_auth_key"></a>
-### asc_auth_key
-
-- **Type**: API key
-- **API key parameter name**: asc_auth_key
-- **Location**: 
-
-<a id="Basic"></a>
-### Basic
-
-- **Type**: HTTP basic authentication
-
-<a id="Bearer"></a>
-### Bearer
-
-- **Type**: Bearer authentication (JWT)
-
-<a id="ApiKeyBearer"></a>
-### ApiKeyBearer
-
-- **Type**: API key
-- **API key parameter name**: ApiKeyBearer
-- **Location**: HTTP header
-
-<a id="OAuth2"></a>
-### OAuth2
-
-- **Type**: OAuth
-- **Flow**: accessCode
-- **Authorization URL**: 
-- **Token Url**: 
-- **Scopes**: 
- - **read**: Read access to protected resources
- - **write**: Write access to protected resources
-
-<a id="OpenId"></a>
-### OpenId
-
-- **Type**: OpenId Connect
-- **OpenId Connect URL**: 
-
-<a id="x-signature"></a>
-### x-signature
-
-- **Type**: API key
-- **API key parameter name**: x-signature
-- **Location**: 
-
-
-## Author
-
-
-
+</details>
 
