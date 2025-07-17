@@ -1,11 +1,11 @@
-# Operation
+# OperationDto
 Represents an operation.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**var_date** | **datetime** | Date of the operation. | [optional] 
+**var_date** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] 
 **service** | **str** | Service related to the operation. | [optional] 
 **description** | **str** | Brief description of the operation. | [optional] 
 **service_unit** | **str** | Unit of the service. | [optional] 
@@ -17,19 +17,19 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-python.models.operation import Operation
+from docspace-api-python.models.operation_dto import OperationDto
 
 # TODO update the JSON string below
 json = "{}"
-# create an instance of Operation from a JSON string
-operation_instance = Operation.from_json(json)
+# create an instance of OperationDto from a JSON string
+operation_dto_instance = OperationDto.from_json(json)
 # print the JSON string representation of the object
-print(Operation.to_json())
+print(OperationDto.to_json())
 
 # convert the object into a dict
-operation_dict = operation_instance.to_dict()
-# create an instance of Operation from a dict
-operation_from_dict = Operation.from_dict(operation_dict)
+operation_dto_dict = operation_dto_instance.to_dict()
+# create an instance of OperationDto from a dict
+operation_dto_from_dict = OperationDto.from_dict(operation_dto_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

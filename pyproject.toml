@@ -2,10 +2,10 @@
 name = "docspace-api-python"
 version = "1.0.0"
 description = "Api"
-authors = ["API Support <support@onlyoffice.com>"]
+authors = ["OpenAPI Generator Community <team@openapitools.org>"]
 license = "NoLicense"
 readme = "README.md"
-repository = "https://github.com/GIT_USER_ID/GIT_REPO_ID"
+repository = "https://github.com/ONLYOFFICE/docspace-python-sdk"
 keywords = ["OpenAPI", "OpenAPI-Generator", "Api"]
 include = ["docspace-api-python/py.typed"]
 

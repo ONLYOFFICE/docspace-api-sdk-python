@@ -38,6 +38,7 @@ Name | Type | Description | Notes
 **cookie_settings_enabled** | **bool** | Specifies whether the cookie settings are enabled. | [optional] 
 **limited_access_space** | **bool** | Specifies whether the access to the space management is limited or not. | [optional] 
 **limited_access_dev_tools_for_users** | **bool** | Specifies whether the access to the Developer Tools is limited for users or not. | [optional] 
+**display_banners** | **bool** | Specifies whether to display the promotional banners. | [optional] 
 **user_name_regex** | **str** | The user name validation regex. | [optional] 
 **invitation_limit** | **int** | The maximum number of invitations to the portal. | [optional] 
 **plugins** | [**PluginsDto**](PluginsDto.md) |  | [optional] 

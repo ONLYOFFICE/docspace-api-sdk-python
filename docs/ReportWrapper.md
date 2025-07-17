@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**response** | [**Report**](Report.md) |  | [optional] 
+**response** | [**ReportDto**](ReportDto.md) |  | [optional] 
 **count** | **int** |  | [optional] 
 **links** | [**List[ActiveConnectionsWrapperLinksInner]**](ActiveConnectionsWrapperLinksInner.md) |  | [optional] 
 **status** | **int** |  | [optional] 

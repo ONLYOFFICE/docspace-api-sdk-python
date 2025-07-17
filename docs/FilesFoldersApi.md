@@ -1051,7 +1051,7 @@ with docspace-api-python.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_my_folder**
-> FolderContentIntegerWrapper get_my_folder(user_id_or_group_id=user_id_or_group_id, filter_type=filter_type, apply_filter_option=apply_filter_option, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value)
+> FolderContentIntegerWrapper get_my_folder(user_id_or_group_id=user_id_or_group_id, filter_type=filter_type, apply_filter_option=apply_filter_option, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value, fields=fields)
 
 Returns the detailed list of files and folders located in the "My documents" section.
 
@@ -1070,6 +1070,7 @@ Name | Type | Description  | Notes
  **sort_by** | **str**| The property used to specify the sorting criteria for folder contents. | [optional] 
  **sort_order** | [**SortOrder**](.md)| The order in which the results are sorted. | [optional] 
  **filter_value** | **str**| The text used for filtering or searching folder contents. | [optional] 
+ **fields** | **string**| Comma-separated list of fields to include in the response | [optional] 
 
 ### Return type
 
@@ -1139,10 +1140,11 @@ with docspace-api-python.ApiClient(configuration) as api_client:
     sort_by = 'some text' # str | The property used to specify the sorting criteria for folder contents. (optional)
     sort_order = docspace-api-python.SortOrder() # SortOrder | The order in which the results are sorted. (optional)
     filter_value = 'some text' # str | The text used for filtering or searching folder contents. (optional)
+    fields =  # string | Comma-separated list of fields to include in the response (optional)
 
     try:
         # Get the \"My documents\" section
-        api_response = api_instance.get_my_folder(user_id_or_group_id=user_id_or_group_id, filter_type=filter_type, apply_filter_option=apply_filter_option, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value)
+        api_response = api_instance.get_my_folder(user_id_or_group_id=user_id_or_group_id, filter_type=filter_type, apply_filter_option=apply_filter_option, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value, fields=fields)
         print("The response of FilesFoldersApi->get_my_folder:\n")
         pprint(api_response)
     except Exception as e:
@@ -1269,7 +1271,7 @@ with docspace-api-python.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_privacy_folder**
-> FolderContentIntegerWrapper get_privacy_folder(user_id_or_group_id=user_id_or_group_id, filter_type=filter_type, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value)
+> FolderContentIntegerWrapper get_privacy_folder(user_id_or_group_id=user_id_or_group_id, filter_type=filter_type, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value, fields=fields)
 
 Returns the detailed list of files and folders located in the "Private Room" section.
 
@@ -1287,6 +1289,7 @@ Name | Type | Description  | Notes
  **sort_by** | **str**| Specifies the field by which the folder content should be sorted. | [optional] 
  **sort_order** | [**SortOrder**](.md)| The order in which the results are sorted. | [optional] 
  **filter_value** | **str**| The text used as a filter or search criterion for folder content queries. | [optional] 
+ **fields** | **string**| Comma-separated list of fields to include in the response | [optional] 
 
 ### Return type
 
@@ -1354,10 +1357,11 @@ with docspace-api-python.ApiClient(configuration) as api_client:
     sort_by = 'some text' # str | Specifies the field by which the folder content should be sorted. (optional)
     sort_order = docspace-api-python.SortOrder() # SortOrder | The order in which the results are sorted. (optional)
     filter_value = 'some text' # str | The text used as a filter or search criterion for folder content queries. (optional)
+    fields =  # string | Comma-separated list of fields to include in the response (optional)
 
     try:
         # Get the \"Private Room\" section
-        api_response = api_instance.get_privacy_folder(user_id_or_group_id=user_id_or_group_id, filter_type=filter_type, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value)
+        api_response = api_instance.get_privacy_folder(user_id_or_group_id=user_id_or_group_id, filter_type=filter_type, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value, fields=fields)
         print("The response of FilesFoldersApi->get_privacy_folder:\n")
         pprint(api_response)
     except Exception as e:
@@ -1384,7 +1388,7 @@ with docspace-api-python.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_root_folders**
-> FolderContentIntegerArrayWrapper get_root_folders(user_id_or_group_id=user_id_or_group_id, filter_type=filter_type, without_trash=without_trash, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value)
+> FolderContentIntegerArrayWrapper get_root_folders(user_id_or_group_id=user_id_or_group_id, filter_type=filter_type, without_trash=without_trash, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value, fields=fields)
 
 Returns all the sections matching the parameters specified in the request.
 
@@ -1403,6 +1407,7 @@ Name | Type | Description  | Notes
  **sort_by** | **str**| Specifies the field by which the folder content should be sorted. | [optional] 
  **sort_order** | [**SortOrder**](.md)| The order in which the results are sorted. | [optional] 
  **filter_value** | **str**| The text used as a filter for searching or retrieving folder contents. | [optional] 
+ **fields** | **string**| Comma-separated list of fields to include in the response | [optional] 
 
 ### Return type
 
@@ -1471,10 +1476,11 @@ with docspace-api-python.ApiClient(configuration) as api_client:
     sort_by = 'some text' # str | Specifies the field by which the folder content should be sorted. (optional)
     sort_order = docspace-api-python.SortOrder() # SortOrder | The order in which the results are sorted. (optional)
     filter_value = 'some text' # str | The text used as a filter for searching or retrieving folder contents. (optional)
+    fields =  # string | Comma-separated list of fields to include in the response (optional)
 
     try:
         # Get filtered sections
-        api_response = api_instance.get_root_folders(user_id_or_group_id=user_id_or_group_id, filter_type=filter_type, without_trash=without_trash, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value)
+        api_response = api_instance.get_root_folders(user_id_or_group_id=user_id_or_group_id, filter_type=filter_type, without_trash=without_trash, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value, fields=fields)
         print("The response of FilesFoldersApi->get_root_folders:\n")
         pprint(api_response)
     except Exception as e:
@@ -1501,7 +1507,7 @@ with docspace-api-python.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_trash_folder**
-> FolderContentIntegerWrapper get_trash_folder(user_id_or_group_id=user_id_or_group_id, filter_type=filter_type, apply_filter_option=apply_filter_option, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value)
+> FolderContentIntegerWrapper get_trash_folder(user_id_or_group_id=user_id_or_group_id, filter_type=filter_type, apply_filter_option=apply_filter_option, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value, fields=fields)
 
 Returns the detailed list of files and folders located in the "Trash" section.
 
@@ -1520,6 +1526,7 @@ Name | Type | Description  | Notes
  **sort_by** | **str**| The property used to specify the sorting criteria for folder contents. | [optional] 
  **sort_order** | [**SortOrder**](.md)| The order in which the results are sorted. | [optional] 
  **filter_value** | **str**| The text used for filtering or searching folder contents. | [optional] 
+ **fields** | **string**| Comma-separated list of fields to include in the response | [optional] 
 
 ### Return type
 
@@ -1589,10 +1596,11 @@ with docspace-api-python.ApiClient(configuration) as api_client:
     sort_by = 'some text' # str | The property used to specify the sorting criteria for folder contents. (optional)
     sort_order = docspace-api-python.SortOrder() # SortOrder | The order in which the results are sorted. (optional)
     filter_value = 'some text' # str | The text used for filtering or searching folder contents. (optional)
+    fields =  # string | Comma-separated list of fields to include in the response (optional)
 
     try:
         # Get the \"Trash\" section
-        api_response = api_instance.get_trash_folder(user_id_or_group_id=user_id_or_group_id, filter_type=filter_type, apply_filter_option=apply_filter_option, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value)
+        api_response = api_instance.get_trash_folder(user_id_or_group_id=user_id_or_group_id, filter_type=filter_type, apply_filter_option=apply_filter_option, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value, fields=fields)
         print("The response of FilesFoldersApi->get_trash_folder:\n")
         pprint(api_response)
     except Exception as e:

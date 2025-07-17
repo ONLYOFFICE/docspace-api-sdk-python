@@ -1,28 +1,18 @@
-# (c) Copyright Ascensio System SIA 2009-2025
-# 
-# This program is a free software product.
-# You can redistribute it and/or modify it under the terms
-# of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-# Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-# to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-# any third-party rights.
-# 
-# This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-# of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-# the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-# 
-# You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-# 
-# The  interactive user interfaces in modified source and object code versions of the Program must
-# display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-# 
-# Pursuant to Section 7(b) of the License you must retain the original Product logo when
-# distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-# trademark law for use of our trademarks.
-# 
-# All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-# content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-# International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+#
+# (c) Copyright Ascensio System SIA 2025
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
 
 
 
@@ -64,6 +54,7 @@ class FilesSettingsDto(BaseModel):
     exts_spreadsheet: Optional[List[StrictStr]] = Field(default=None, description="The list of the spreadsheet extensions.", alias="extsSpreadsheet")
     exts_presentation: Optional[List[StrictStr]] = Field(default=None, description="The list of the presentation extensions.", alias="extsPresentation")
     exts_document: Optional[List[StrictStr]] = Field(default=None, description="The list of the text document extensions.", alias="extsDocument")
+    exts_diagram: Optional[List[StrictStr]] = Field(default=None, description="The list of the diagram extensions.", alias="extsDiagram")
     internal_formats: Optional[FilesSettingsDtoInternalFormats] = Field(default=None, alias="internalFormats")
     master_form_extension: Optional[StrictStr] = Field(default=None, description="The master form extension.", alias="masterFormExtension")
     param_version: Optional[StrictStr] = Field(default=None, description="The URL parameter which specifies the file version.", alias="paramVersion")
@@ -100,7 +91,7 @@ class FilesSettingsDto(BaseModel):
     max_upload_thread_count: Optional[StrictInt] = Field(default=None, description="The maximum number of upload threads.", alias="maxUploadThreadCount")
     chunk_upload_size: Optional[StrictInt] = Field(default=None, description="The size of a large file that is uploaded in chunks.", alias="chunkUploadSize")
     open_editor_in_same_tab: Optional[StrictBool] = Field(default=None, description="Specifies whether to open the editor in the same tab or not.", alias="openEditorInSameTab")
-    __properties: ClassVar[List[str]] = ["extsImagePreviewed", "extsMediaPreviewed", "extsWebPreviewed", "extsWebEdited", "extsWebEncrypt", "extsWebReviewed", "extsWebCustomFilterEditing", "extsWebRestrictedEditing", "extsWebCommented", "extsWebTemplate", "extsCoAuthoring", "extsMustConvert", "extsConvertible", "extsUploadable", "extsArchive", "extsVideo", "extsAudio", "extsImage", "extsSpreadsheet", "extsPresentation", "extsDocument", "internalFormats", "masterFormExtension", "paramVersion", "paramOutType", "fileDownloadUrlString", "fileWebViewerUrlString", "fileWebViewerExternalUrlString", "fileWebEditorUrlString", "fileWebEditorExternalUrlString", "fileRedirectPreviewUrlString", "fileThumbnailUrlString", "confirmDelete", "enableThirdParty", "externalShare", "externalShareSocialMedia", "storeOriginalFiles", "keepNewFileName", "displayFileExtension", "convertNotify", "hideConfirmCancelOperation", "hideConfirmConvertSave", "hideConfirmConvertOpen", "hideConfirmRoomLifetime", "defaultOrder", "forcesave", "storeForcesave", "recentSection", "favoritesSection", "templatesSection", "downloadTarGz", "automaticallyCleanUp", "canSearchByContent", "defaultSharingAccessRights", "maxUploadThreadCount", "chunkUploadSize", "openEditorInSameTab"]
+    __properties: ClassVar[List[str]] = ["extsImagePreviewed", "extsMediaPreviewed", "extsWebPreviewed", "extsWebEdited", "extsWebEncrypt", "extsWebReviewed", "extsWebCustomFilterEditing", "extsWebRestrictedEditing", "extsWebCommented", "extsWebTemplate", "extsCoAuthoring", "extsMustConvert", "extsConvertible", "extsUploadable", "extsArchive", "extsVideo", "extsAudio", "extsImage", "extsSpreadsheet", "extsPresentation", "extsDocument", "extsDiagram", "internalFormats", "masterFormExtension", "paramVersion", "paramOutType", "fileDownloadUrlString", "fileWebViewerUrlString", "fileWebViewerExternalUrlString", "fileWebEditorUrlString", "fileWebEditorExternalUrlString", "fileRedirectPreviewUrlString", "fileThumbnailUrlString", "confirmDelete", "enableThirdParty", "externalShare", "externalShareSocialMedia", "storeOriginalFiles", "keepNewFileName", "displayFileExtension", "convertNotify", "hideConfirmCancelOperation", "hideConfirmConvertSave", "hideConfirmConvertOpen", "hideConfirmRoomLifetime", "defaultOrder", "forcesave", "storeForcesave", "recentSection", "favoritesSection", "templatesSection", "downloadTarGz", "automaticallyCleanUp", "canSearchByContent", "defaultSharingAccessRights", "maxUploadThreadCount", "chunkUploadSize", "openEditorInSameTab"]
 
     @field_validator('default_sharing_access_rights')
     def default_sharing_access_rights_validate_enum(cls, value):
@@ -266,6 +257,11 @@ class FilesSettingsDto(BaseModel):
         if self.exts_document is None and "exts_document" in self.model_fields_set:
             _dict['extsDocument'] = None
 
+        # set to None if exts_diagram (nullable) is None
+        # and model_fields_set contains the field
+        if self.exts_diagram is None and "exts_diagram" in self.model_fields_set:
+            _dict['extsDiagram'] = None
+
         # set to None if internal_formats (nullable) is None
         # and model_fields_set contains the field
         if self.internal_formats is None and "internal_formats" in self.model_fields_set:
@@ -360,6 +356,7 @@ class FilesSettingsDto(BaseModel):
             "extsSpreadsheet": obj.get("extsSpreadsheet"),
             "extsPresentation": obj.get("extsPresentation"),
             "extsDocument": obj.get("extsDocument"),
+            "extsDiagram": obj.get("extsDiagram"),
             "internalFormats": FilesSettingsDtoInternalFormats.from_dict(obj["internalFormats"]) if obj.get("internalFormats") is not None else None,
             "masterFormExtension": obj.get("masterFormExtension"),
             "paramVersion": obj.get("paramVersion"),

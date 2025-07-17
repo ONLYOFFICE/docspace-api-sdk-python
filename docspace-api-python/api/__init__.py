@@ -1,4 +1,20 @@
-# flake8: noqa
+#
+# (c) Copyright Ascensio System SIA 2025
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+
+
 
 # import apis into api package
 from docspace-api-python.api.api_keys_api import ApiKeysApi
@@ -19,7 +35,6 @@ from docspace-api-python.api.o_auth20_authorization_api import OAuth20Authorizat
 from docspace-api-python.api.o_auth20_client_management_api import OAuth20ClientManagementApi
 from docspace-api-python.api.o_auth20_client_querying_api import OAuth20ClientQueryingApi
 from docspace-api-python.api.o_auth20_scope_management_api import OAuth20ScopeManagementApi
-from docspace-api-python.api.people_contacts_api import PeopleContactsApi
 from docspace-api-python.api.people_guests_api import PeopleGuestsApi
 from docspace-api-python.api.people_password_api import PeoplePasswordApi
 from docspace-api-python.api.people_photos_api import PeoplePhotosApi
@@ -40,6 +55,7 @@ from docspace-api-python.api.rooms_api import RoomsApi
 from docspace-api-python.api.security_access_to_dev_tools_api import SecurityAccessToDevToolsApi
 from docspace-api-python.api.security_active_connections_api import SecurityActiveConnectionsApi
 from docspace-api-python.api.security_audit_trail_data_api import SecurityAuditTrailDataApi
+from docspace-api-python.api.security_banners_visibility_api import SecurityBannersVisibilityApi
 from docspace-api-python.api.security_csp_api import SecurityCSPApi
 from docspace-api-python.api.security_firebase_api import SecurityFirebaseApi
 from docspace-api-python.api.security_login_history_api import SecurityLoginHistoryApi
@@ -47,6 +63,7 @@ from docspace-api-python.api.security_o_auth2_api import SecurityOAuth2Api
 from docspace-api-python.api.security_smtp_settings_api import SecuritySMTPSettingsApi
 from docspace-api-python.api.settings_access_to_dev_tools_api import SettingsAccessToDevToolsApi
 from docspace-api-python.api.settings_authorization_api import SettingsAuthorizationApi
+from docspace-api-python.api.settings_banners_visibility_api import SettingsBannersVisibilityApi
 from docspace-api-python.api.settings_common_settings_api import SettingsCommonSettingsApi
 from docspace-api-python.api.settings_cookies_api import SettingsCookiesApi
 from docspace-api-python.api.settings_custom_navigation_api import SettingsCustomNavigationApi

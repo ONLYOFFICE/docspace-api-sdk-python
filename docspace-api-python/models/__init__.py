@@ -1,31 +1,18 @@
-# coding: utf-8
-
-# flake8: noqa
-# (c) Copyright Ascensio System SIA 2009-2025
-# 
-# This program is a free software product.
-# You can redistribute it and/or modify it under the terms
-# of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-# Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-# to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-# any third-party rights.
-# 
-# This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-# of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-# the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-# 
-# You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-# 
-# The  interactive user interfaces in modified source and object code versions of the Program must
-# display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-# 
-# Pursuant to Section 7(b) of the License you must retain the original Product logo when
-# distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-# trademark law for use of our trademarks.
-# 
-# All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-# content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-# International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+#
+# (c) Copyright Ascensio System SIA 2025
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
 
 
 
@@ -116,7 +103,6 @@ from docspace-api-python.models.confirm_dto import ConfirmDto
 from docspace-api-python.models.confirm_type import ConfirmType
 from docspace-api-python.models.confirm_wrapper import ConfirmWrapper
 from docspace-api-python.models.contact import Contact
-from docspace-api-python.models.contacts_request import ContactsRequest
 from docspace-api-python.models.content_disposition import ContentDisposition
 from docspace-api-python.models.content_type import ContentType
 from docspace-api-python.models.conversation_result_array_wrapper import ConversationResultArrayWrapper
@@ -150,8 +136,6 @@ from docspace-api-python.models.culture_specific_external_resource import Cultur
 from docspace-api-python.models.culture_specific_external_resources import CultureSpecificExternalResources
 from docspace-api-python.models.currencies_array_wrapper import CurrenciesArrayWrapper
 from docspace-api-python.models.currencies_dto import CurrenciesDto
-from docspace-api-python.models.currency import Currency
-from docspace-api-python.models.currency_array_wrapper import CurrencyArrayWrapper
 from docspace-api-python.models.current_license_info import CurrentLicenseInfo
 from docspace-api-python.models.custom_color_themes_settings_color_item import CustomColorThemesSettingsColorItem
 from docspace-api-python.models.custom_color_themes_settings_dto import CustomColorThemesSettingsDto
@@ -163,7 +147,7 @@ from docspace-api-python.models.custom_navigation_item import CustomNavigationIt
 from docspace-api-python.models.custom_navigation_item_array_wrapper import CustomNavigationItemArrayWrapper
 from docspace-api-python.models.custom_navigation_item_wrapper import CustomNavigationItemWrapper
 from docspace-api-python.models.customer_config_dto import CustomerConfigDto
-from docspace-api-python.models.customer_info import CustomerInfo
+from docspace-api-python.models.customer_info_dto import CustomerInfoDto
 from docspace-api-python.models.customer_info_wrapper import CustomerInfoWrapper
 from docspace-api-python.models.customer_operations_report_request_dto import CustomerOperationsReportRequestDto
 from docspace-api-python.models.customization_config_dto import CustomizationConfigDto
@@ -374,8 +358,7 @@ from docspace-api-python.models.notification_type import NotificationType
 from docspace-api-python.models.o_auth20_token import OAuth20Token
 from docspace-api-python.models.object_array_wrapper import ObjectArrayWrapper
 from docspace-api-python.models.object_wrapper import ObjectWrapper
-from docspace-api-python.models.open_customer_session_request_dto import OpenCustomerSessionRequestDto
-from docspace-api-python.models.operation import Operation
+from docspace-api-python.models.operation_dto import OperationDto
 from docspace-api-python.models.options import Options
 from docspace-api-python.models.order_by import OrderBy
 from docspace-api-python.models.order_request_dto import OrderRequestDto
@@ -399,7 +382,6 @@ from docspace-api-python.models.payment_settings_dto import PaymentSettingsDto
 from docspace-api-python.models.payment_settings_wrapper import PaymentSettingsWrapper
 from docspace-api-python.models.payment_url_requests_dto import PaymentUrlRequestsDto
 from docspace-api-python.models.payments import Payments
-from docspace-api-python.models.perform_customer_operation_request_dto import PerformCustomerOperationRequestDto
 from docspace-api-python.models.permissions_config import PermissionsConfig
 from docspace-api-python.models.plugins_config import PluginsConfig
 from docspace-api-python.models.plugins_dto import PluginsDto
@@ -422,8 +404,9 @@ from docspace-api-python.models.quota_state import QuotaState
 from docspace-api-python.models.quota_wrapper import QuotaWrapper
 from docspace-api-python.models.recaptcha_type import RecaptchaType
 from docspace-api-python.models.recent_config import RecentConfig
-from docspace-api-python.models.report import Report
+from docspace-api-python.models.report_dto import ReportDto
 from docspace-api-python.models.report_wrapper import ReportWrapper
+from docspace-api-python.models.review_config import ReviewConfig
 from docspace-api-python.models.room_data_lifetime_dto import RoomDataLifetimeDto
 from docspace-api-python.models.room_data_lifetime_period import RoomDataLifetimePeriod
 from docspace-api-python.models.room_from_template_status_dto import RoomFromTemplateStatusDto
@@ -454,9 +437,7 @@ from docspace-api-python.models.search_area import SearchArea
 from docspace-api-python.models.security_array_wrapper import SecurityArrayWrapper
 from docspace-api-python.models.security_dto import SecurityDto
 from docspace-api-python.models.security_requests_dto import SecurityRequestsDto
-from docspace-api-python.models.session import Session
 from docspace-api-python.models.session_request import SessionRequest
-from docspace-api-python.models.session_wrapper import SessionWrapper
 from docspace-api-python.models.set_manager_request import SetManagerRequest
 from docspace-api-python.models.set_public_dto import SetPublicDto
 from docspace-api-python.models.settings_dto import SettingsDto
@@ -508,6 +489,9 @@ from docspace-api-python.models.templates_config import TemplatesConfig
 from docspace-api-python.models.templates_request_dto import TemplatesRequestDto
 from docspace-api-python.models.tenant_audit_settings import TenantAuditSettings
 from docspace-api-python.models.tenant_audit_settings_wrapper import TenantAuditSettingsWrapper
+from docspace-api-python.models.tenant_banner_settings import TenantBannerSettings
+from docspace-api-python.models.tenant_banner_settings_dto import TenantBannerSettingsDto
+from docspace-api-python.models.tenant_banner_settings_wrapper import TenantBannerSettingsWrapper
 from docspace-api-python.models.tenant_deep_link_settings import TenantDeepLinkSettings
 from docspace-api-python.models.tenant_deep_link_settings_wrapper import TenantDeepLinkSettingsWrapper
 from docspace-api-python.models.tenant_dev_tools_access_settings import TenantDevToolsAccessSettings

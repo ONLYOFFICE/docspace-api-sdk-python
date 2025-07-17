@@ -1,28 +1,18 @@
-# (c) Copyright Ascensio System SIA 2009-2025
-# 
-# This program is a free software product.
-# You can redistribute it and/or modify it under the terms
-# of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-# Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-# to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-# any third-party rights.
-# 
-# This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-# of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-# the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-# 
-# You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-# 
-# The  interactive user interfaces in modified source and object code versions of the Program must
-# display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-# 
-# Pursuant to Section 7(b) of the License you must retain the original Product logo when
-# distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-# trademark law for use of our trademarks.
-# 
-# All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-# content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-# International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+#
+# (c) Copyright Ascensio System SIA 2025
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
 
 
 
@@ -34,15 +24,15 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictInt
 from typing import Any, ClassVar, Dict, List, Optional
 from docspace-api-python.models.active_connections_wrapper_links_inner import ActiveConnectionsWrapperLinksInner
-from docspace-api-python.models.currency import Currency
+from docspace-api-python.models.tenant_banner_settings import TenantBannerSettings
 from typing import Optional, Set
 from typing_extensions import Self
 
-class CurrencyArrayWrapper(BaseModel):
+class TenantBannerSettingsWrapper(BaseModel):
     """
-    CurrencyArrayWrapper
+    TenantBannerSettingsWrapper
     """ # noqa: E501
-    response: Optional[List[Currency]] = None
+    response: Optional[TenantBannerSettings] = None
     count: Optional[StrictInt] = None
     links: Optional[List[ActiveConnectionsWrapperLinksInner]] = None
     status: Optional[StrictInt] = None
@@ -67,7 +57,7 @@ class CurrencyArrayWrapper(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of CurrencyArrayWrapper from a JSON string"""
+        """Create an instance of TenantBannerSettingsWrapper from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -88,13 +78,9 @@ class CurrencyArrayWrapper(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of each item in response (list)
-        _items = []
+        # override the default output from pydantic by calling `to_dict()` of response
         if self.response:
-            for _item_response in self.response:
-                if _item_response:
-                    _items.append(_item_response.to_dict())
-            _dict['response'] = _items
+            _dict['response'] = self.response.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in links (list)
         _items = []
         if self.links:
@@ -106,7 +92,7 @@ class CurrencyArrayWrapper(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of CurrencyArrayWrapper from a dict"""
+        """Create an instance of TenantBannerSettingsWrapper from a dict"""
         if obj is None:
             return None
 
@@ -115,7 +101,7 @@ class CurrencyArrayWrapper(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "response": [Currency.from_dict(_item) for _item in obj["response"]] if obj.get("response") is not None else None,
+            "response": TenantBannerSettings.from_dict(obj["response"]) if obj.get("response") is not None else None,
             "count": obj.get("count"),
             "links": [ActiveConnectionsWrapperLinksInner.from_dict(_item) for _item in obj["links"]] if obj.get("links") is not None else None,
             "status": obj.get("status"),

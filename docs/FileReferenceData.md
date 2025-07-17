@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **file_key** | **str** | The unique document identifier used by the service to get a link to the file. | [optional] 
 **instance_id** | **str** | The unique system identifier. | [optional] 
 **room_id** | **str** | Room ID | [optional] 
+**can_edit_room** | **bool** | Specifies if the room can be edited out or not. | [optional] 
 
 ## Example
 

@@ -524,7 +524,7 @@ with docspace-api-python.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_groups**
-> GroupArrayWrapper get_groups(user_id=user_id, manager=manager, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value)
+> GroupArrayWrapper get_groups(user_id=user_id, manager=manager, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value, fields=fields)
 
 Returns the general information about all the groups, such as group ID and group manager.
 
@@ -544,6 +544,7 @@ Name | Type | Description  | Notes
  **sort_by** | **str**| Specifies the property used to sort the query results. | [optional] 
  **sort_order** | [**SortOrder**](.md)| The order in which the results are sorted. | [optional] 
  **filter_value** | **str**| The text used for filtering or searching group data. | [optional] 
+ **fields** | **string**| Comma-separated list of fields to include in the response | [optional] 
 
 ### Return type
 
@@ -610,10 +611,11 @@ with docspace-api-python.ApiClient(configuration) as api_client:
     sort_by = 'some text' # str | Specifies the property used to sort the query results. (optional)
     sort_order = docspace-api-python.SortOrder() # SortOrder | The order in which the results are sorted. (optional)
     filter_value = 'some text' # str | The text used for filtering or searching group data. (optional)
+    fields =  # string | Comma-separated list of fields to include in the response (optional)
 
     try:
         # Get groups
-        api_response = api_instance.get_groups(user_id=user_id, manager=manager, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value)
+        api_response = api_instance.get_groups(user_id=user_id, manager=manager, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value, fields=fields)
         print("The response of GroupApi->get_groups:\n")
         pprint(api_response)
     except Exception as e:

@@ -26,6 +26,7 @@ Name | Type | Description | Notes
 **exts_spreadsheet** | **List[str]** | The list of the spreadsheet extensions. | [optional] 
 **exts_presentation** | **List[str]** | The list of the presentation extensions. | [optional] 
 **exts_document** | **List[str]** | The list of the text document extensions. | [optional] 
+**exts_diagram** | **List[str]** | The list of the diagram extensions. | [optional] 
 **internal_formats** | [**FilesSettingsDtoInternalFormats**](FilesSettingsDtoInternalFormats.md) |  | [optional] 
 **master_form_extension** | **str** | The master form extension. | [optional] 
 **param_version** | **str** | The URL parameter which specifies the file version. | [optional] 

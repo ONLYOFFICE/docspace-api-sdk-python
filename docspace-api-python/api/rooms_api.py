@@ -1,28 +1,18 @@
-# (c) Copyright Ascensio System SIA 2009-2025
-# 
-# This program is a free software product.
-# You can redistribute it and/or modify it under the terms
-# of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-# Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-# to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-# any third-party rights.
-# 
-# This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-# of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-# the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-# 
-# You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-# 
-# The  interactive user interfaces in modified source and object code versions of the Program must
-# display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-# 
-# Pursuant to Section 7(b) of the License you must retain the original Product logo when
-# distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-# trademark law for use of our trademarks.
-# 
-# All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-# content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-# International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+#
+# (c) Copyright Ascensio System SIA 2025
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
 
 
 
@@ -6056,6 +6046,7 @@ class RoomsApi:
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="Gets or sets the number of tag results to retrieve.  This property specifies the maximum amount of tag data to be included in the result set.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="Represents the starting index from which the tags' information will be retrieved.  This property is used to define the offset for pagination when retrieving a list of tags. It determines  the point in the data set from which the retrieval begins.")] = None,
         filter_value: Annotated[Optional[StrictStr], Field(description="Gets or sets the text value used for searching tags.  This property is typically used as a filter value when retrieving tag information.")] = None,
+        fields:  = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6079,6 +6070,8 @@ class RoomsApi:
         :type start_index: int
         :param filter_value: Gets or sets the text value used for searching tags.  This property is typically used as a filter value when retrieving tag information.
         :type filter_value: str
+        :param fields: Comma-separated list of fields to include in the response
+        :type fields: string
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -6105,6 +6098,7 @@ class RoomsApi:
             count=count,
             start_index=start_index,
             filter_value=filter_value,
+            fields=fields,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -6132,6 +6126,7 @@ class RoomsApi:
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="Gets or sets the number of tag results to retrieve.  This property specifies the maximum amount of tag data to be included in the result set.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="Represents the starting index from which the tags' information will be retrieved.  This property is used to define the offset for pagination when retrieving a list of tags. It determines  the point in the data set from which the retrieval begins.")] = None,
         filter_value: Annotated[Optional[StrictStr], Field(description="Gets or sets the text value used for searching tags.  This property is typically used as a filter value when retrieving tag information.")] = None,
+        fields:  = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6155,6 +6150,8 @@ class RoomsApi:
         :type start_index: int
         :param filter_value: Gets or sets the text value used for searching tags.  This property is typically used as a filter value when retrieving tag information.
         :type filter_value: str
+        :param fields: Comma-separated list of fields to include in the response
+        :type fields: string
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -6181,6 +6178,7 @@ class RoomsApi:
             count=count,
             start_index=start_index,
             filter_value=filter_value,
+            fields=fields,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -6208,6 +6206,7 @@ class RoomsApi:
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="Gets or sets the number of tag results to retrieve.  This property specifies the maximum amount of tag data to be included in the result set.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="Represents the starting index from which the tags' information will be retrieved.  This property is used to define the offset for pagination when retrieving a list of tags. It determines  the point in the data set from which the retrieval begins.")] = None,
         filter_value: Annotated[Optional[StrictStr], Field(description="Gets or sets the text value used for searching tags.  This property is typically used as a filter value when retrieving tag information.")] = None,
+        fields:  = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6231,6 +6230,8 @@ class RoomsApi:
         :type start_index: int
         :param filter_value: Gets or sets the text value used for searching tags.  This property is typically used as a filter value when retrieving tag information.
         :type filter_value: str
+        :param fields: Comma-separated list of fields to include in the response
+        :type fields: string
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -6257,6 +6258,7 @@ class RoomsApi:
             count=count,
             start_index=start_index,
             filter_value=filter_value,
+            fields=fields,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -6279,6 +6281,7 @@ class RoomsApi:
         count,
         start_index,
         filter_value,
+        fields,
         _request_auth,
         _content_type,
         _headers,
@@ -6312,6 +6315,10 @@ class RoomsApi:
         if filter_value is not None:
             
             _query_params.append(('filterValue', filter_value))
+            
+        if fields is not None:
+            
+            _query_params.append(('fields', fields))
             
         # process the header parameters
         # process the form parameters
@@ -6627,6 +6634,7 @@ class RoomsApi:
         sort_by: Annotated[Optional[StrictStr], Field(description="Specifies the field by which the room content should be sorted.")] = None,
         sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
         filter_value: Annotated[Optional[StrictStr], Field(description="The text filter value used to refine search or query operations.")] = None,
+        fields:  = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6674,6 +6682,8 @@ class RoomsApi:
         :type sort_order: SortOrder
         :param filter_value: The text filter value used to refine search or query operations.
         :type filter_value: str
+        :param fields: Comma-separated list of fields to include in the response
+        :type fields: string
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -6712,6 +6722,7 @@ class RoomsApi:
             sort_by=sort_by,
             sort_order=sort_order,
             filter_value=filter_value,
+            fields=fields,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -6752,6 +6763,7 @@ class RoomsApi:
         sort_by: Annotated[Optional[StrictStr], Field(description="Specifies the field by which the room content should be sorted.")] = None,
         sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
         filter_value: Annotated[Optional[StrictStr], Field(description="The text filter value used to refine search or query operations.")] = None,
+        fields:  = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6799,6 +6811,8 @@ class RoomsApi:
         :type sort_order: SortOrder
         :param filter_value: The text filter value used to refine search or query operations.
         :type filter_value: str
+        :param fields: Comma-separated list of fields to include in the response
+        :type fields: string
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -6837,6 +6851,7 @@ class RoomsApi:
             sort_by=sort_by,
             sort_order=sort_order,
             filter_value=filter_value,
+            fields=fields,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -6877,6 +6892,7 @@ class RoomsApi:
         sort_by: Annotated[Optional[StrictStr], Field(description="Specifies the field by which the room content should be sorted.")] = None,
         sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
         filter_value: Annotated[Optional[StrictStr], Field(description="The text filter value used to refine search or query operations.")] = None,
+        fields:  = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6924,6 +6940,8 @@ class RoomsApi:
         :type sort_order: SortOrder
         :param filter_value: The text filter value used to refine search or query operations.
         :type filter_value: str
+        :param fields: Comma-separated list of fields to include in the response
+        :type fields: string
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -6962,6 +6980,7 @@ class RoomsApi:
             sort_by=sort_by,
             sort_order=sort_order,
             filter_value=filter_value,
+            fields=fields,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -6997,6 +7016,7 @@ class RoomsApi:
         sort_by,
         sort_order,
         filter_value,
+        fields,
         _request_auth,
         _content_type,
         _headers,
@@ -7079,6 +7099,10 @@ class RoomsApi:
         if filter_value is not None:
             
             _query_params.append(('filterValue', filter_value))
+            
+        if fields is not None:
+            
+            _query_params.append(('fields', fields))
             
         # process the header parameters
         # process the form parameters

@@ -111,7 +111,7 @@ with docspace-api-python.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_audit_events_by_filter**
-> AuditEventArrayWrapper get_audit_events_by_filter(user_id=user_id, product_type=product_type, module_type=module_type, action_type=action_type, action=action, entry_type=entry_type, target=target, var_from=var_from, to=to, count=count, start_index=start_index)
+> AuditEventArrayWrapper get_audit_events_by_filter(user_id=user_id, product_type=product_type, module_type=module_type, action_type=action_type, action=action, entry_type=entry_type, target=target, var_from=var_from, to=to, count=count, start_index=start_index, fields=fields)
 
 Returns a list of the audit events by the parameters specified in the request.
 
@@ -133,6 +133,7 @@ Name | Type | Description  | Notes
  **to** | [**ApiDateTime**](.md)| The ending date and time for filtering audit events. | [optional] 
  **count** | **int**| The maximum number of audit event records to retrieve. | [optional] 
  **start_index** | **int**| The index of the first audit event record to retrieve in a paged query. | [optional] 
+ **fields** | **string**| Comma-separated list of fields to include in the response | [optional] 
 
 ### Return type
 
@@ -208,10 +209,11 @@ with docspace-api-python.ApiClient(configuration) as api_client:
     to = docspace-api-python.ApiDateTime() # ApiDateTime | The ending date and time for filtering audit events. (optional)
     count = 1234 # int | The maximum number of audit event records to retrieve. (optional)
     start_index = 1234 # int | The index of the first audit event record to retrieve in a paged query. (optional)
+    fields =  # string | Comma-separated list of fields to include in the response (optional)
 
     try:
         # Get filtered audit trail data
-        api_response = api_instance.get_audit_events_by_filter(user_id=user_id, product_type=product_type, module_type=module_type, action_type=action_type, action=action, entry_type=entry_type, target=target, var_from=var_from, to=to, count=count, start_index=start_index)
+        api_response = api_instance.get_audit_events_by_filter(user_id=user_id, product_type=product_type, module_type=module_type, action_type=action_type, action=action, entry_type=entry_type, target=target, var_from=var_from, to=to, count=count, start_index=start_index, fields=fields)
         print("The response of SecurityAuditTrailDataApi->get_audit_events_by_filter:\n")
         pprint(api_response)
     except Exception as e:

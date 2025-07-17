@@ -2124,7 +2124,7 @@ with docspace-api-python.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_room_tags_info**
-> ObjectArrayWrapper get_room_tags_info(count=count, start_index=start_index, filter_value=filter_value)
+> ObjectArrayWrapper get_room_tags_info(count=count, start_index=start_index, filter_value=filter_value, fields=fields)
 
 Returns a list of custom tags.
 
@@ -2138,6 +2138,7 @@ Name | Type | Description  | Notes
  **count** | **int**| Gets or sets the number of tag results to retrieve.  This property specifies the maximum amount of tag data to be included in the result set. | [optional] 
  **start_index** | **int**| Represents the starting index from which the tags&#39; information will be retrieved.  This property is used to define the offset for pagination when retrieving a list of tags. It determines  the point in the data set from which the retrieval begins. | [optional] 
  **filter_value** | **str**| Gets or sets the text value used for searching tags.  This property is typically used as a filter value when retrieving tag information. | [optional] 
+ **fields** | **string**| Comma-separated list of fields to include in the response | [optional] 
 
 ### Return type
 
@@ -2199,10 +2200,11 @@ with docspace-api-python.ApiClient(configuration) as api_client:
     count = 1234 # int | Gets or sets the number of tag results to retrieve.  This property specifies the maximum amount of tag data to be included in the result set. (optional)
     start_index = 1234 # int | Represents the starting index from which the tags' information will be retrieved.  This property is used to define the offset for pagination when retrieving a list of tags. It determines  the point in the data set from which the retrieval begins. (optional)
     filter_value = 'some text' # str | Gets or sets the text value used for searching tags.  This property is typically used as a filter value when retrieving tag information. (optional)
+    fields =  # string | Comma-separated list of fields to include in the response (optional)
 
     try:
         # Get tags
-        api_response = api_instance.get_room_tags_info(count=count, start_index=start_index, filter_value=filter_value)
+        api_response = api_instance.get_room_tags_info(count=count, start_index=start_index, filter_value=filter_value, fields=fields)
         print("The response of RoomsApi->get_room_tags_info:\n")
         pprint(api_response)
     except Exception as e:
@@ -2322,7 +2324,7 @@ with docspace-api-python.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_rooms_folder**
-> FolderContentIntegerWrapper get_rooms_folder(type=type, subject_id=subject_id, search_area=search_area, without_tags=without_tags, tags=tags, exclude_subject=exclude_subject, provider=provider, subject_filter=subject_filter, quota_filter=quota_filter, storage_filter=storage_filter, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value)
+> FolderContentIntegerWrapper get_rooms_folder(type=type, subject_id=subject_id, search_area=search_area, without_tags=without_tags, tags=tags, exclude_subject=exclude_subject, provider=provider, subject_filter=subject_filter, quota_filter=quota_filter, storage_filter=storage_filter, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value, fields=fields)
 
 Returns the contents of the "Rooms" section by the parameters specified in the request.
 
@@ -2348,6 +2350,7 @@ Name | Type | Description  | Notes
  **sort_by** | **str**| Specifies the field by which the room content should be sorted. | [optional] 
  **sort_order** | [**SortOrder**](.md)| The order in which the results are sorted. | [optional] 
  **filter_value** | **str**| The text filter value used to refine search or query operations. | [optional] 
+ **fields** | **string**| Comma-separated list of fields to include in the response | [optional] 
 
 ### Return type
 
@@ -2428,10 +2431,11 @@ with docspace-api-python.ApiClient(configuration) as api_client:
     sort_by = 'some text' # str | Specifies the field by which the room content should be sorted. (optional)
     sort_order = docspace-api-python.SortOrder() # SortOrder | The order in which the results are sorted. (optional)
     filter_value = 'some text' # str | The text filter value used to refine search or query operations. (optional)
+    fields =  # string | Comma-separated list of fields to include in the response (optional)
 
     try:
         # Get rooms
-        api_response = api_instance.get_rooms_folder(type=type, subject_id=subject_id, search_area=search_area, without_tags=without_tags, tags=tags, exclude_subject=exclude_subject, provider=provider, subject_filter=subject_filter, quota_filter=quota_filter, storage_filter=storage_filter, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value)
+        api_response = api_instance.get_rooms_folder(type=type, subject_id=subject_id, search_area=search_area, without_tags=without_tags, tags=tags, exclude_subject=exclude_subject, provider=provider, subject_filter=subject_filter, quota_filter=quota_filter, storage_filter=storage_filter, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value, fields=fields)
         print("The response of RoomsApi->get_rooms_folder:\n")
         pprint(api_response)
     except Exception as e:

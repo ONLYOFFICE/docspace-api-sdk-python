@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **presentation** | **str** |  | [optional] 
 **document** | **str** |  | [optional] 
 **pdf** | **str** |  | [optional] 
+**diagram** | **str** |  | [optional] 
 
 ## Example
 

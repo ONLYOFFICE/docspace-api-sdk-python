@@ -321,7 +321,7 @@ with docspace-api-python.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_all_profiles**
-> EmployeeFullArrayWrapper get_all_profiles(count=count, start_index=start_index, filter_by=filter_by, sort_by=sort_by, sort_order=sort_order, filter_separator=filter_separator, filter_value=filter_value)
+> EmployeeFullArrayWrapper get_all_profiles(count=count, start_index=start_index, filter_by=filter_by, sort_by=sort_by, sort_order=sort_order, filter_separator=filter_separator, filter_value=filter_value, fields=fields)
 
 Returns a list of profiles for all the portal users.
 
@@ -339,6 +339,7 @@ Name | Type | Description  | Notes
  **sort_order** | [**SortOrder**](.md)| The order in which the results are sorted. | [optional] 
  **filter_separator** | **str**| The character or string used to separate multiple filter values in a filtering query. | [optional] 
  **filter_value** | **str**| The text value used as an additional filter criterion for profiles retrieval. | [optional] 
+ **fields** | **string**| Comma-separated list of fields to include in the response | [optional] 
 
 ### Return type
 
@@ -405,10 +406,11 @@ with docspace-api-python.ApiClient(configuration) as api_client:
     sort_order = docspace-api-python.SortOrder() # SortOrder | The order in which the results are sorted. (optional)
     filter_separator = 'some text' # str | The character or string used to separate multiple filter values in a filtering query. (optional)
     filter_value = 'some text' # str | The text value used as an additional filter criterion for profiles retrieval. (optional)
+    fields =  # string | Comma-separated list of fields to include in the response (optional)
 
     try:
         # Get profiles
-        api_response = api_instance.get_all_profiles(count=count, start_index=start_index, filter_by=filter_by, sort_by=sort_by, sort_order=sort_order, filter_separator=filter_separator, filter_value=filter_value)
+        api_response = api_instance.get_all_profiles(count=count, start_index=start_index, filter_by=filter_by, sort_by=sort_by, sort_order=sort_order, filter_separator=filter_separator, filter_value=filter_value, fields=fields)
         print("The response of PeopleProfilesApi->get_all_profiles:\n")
         pprint(api_response)
     except Exception as e:

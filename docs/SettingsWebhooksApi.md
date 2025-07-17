@@ -406,7 +406,7 @@ with docspace-api-python.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_webhooks_logs**
-> WebhooksLogArrayWrapper get_webhooks_logs(delivery_from=delivery_from, delivery_to=delivery_to, hook_uri=hook_uri, config_id=config_id, event_id=event_id, group_status=group_status, user_id=user_id, trigger=trigger, count=count, start_index=start_index)
+> WebhooksLogArrayWrapper get_webhooks_logs(delivery_from=delivery_from, delivery_to=delivery_to, hook_uri=hook_uri, config_id=config_id, event_id=event_id, group_status=group_status, user_id=user_id, trigger=trigger, count=count, start_index=start_index, fields=fields)
 
 Returns the logs of the webhook activities.
 
@@ -427,6 +427,7 @@ Name | Type | Description  | Notes
  **trigger** | [**WebhookTrigger**](.md)| The type of event that triggered the webhook. | [optional] 
  **count** | **int**| The maximum number of webhook log records to return in the query response. | [optional] 
  **start_index** | **int**| Specifies the starting index for retrieving webhook logs.  Used for pagination in the webhook delivery log queries. | [optional] 
+ **fields** | **string**| Comma-separated list of fields to include in the response | [optional] 
 
 ### Return type
 
@@ -497,10 +498,11 @@ with docspace-api-python.ApiClient(configuration) as api_client:
     trigger = docspace-api-python.WebhookTrigger() # WebhookTrigger | The type of event that triggered the webhook. (optional)
     count = 1234 # int | The maximum number of webhook log records to return in the query response. (optional)
     start_index = 1234 # int | Specifies the starting index for retrieving webhook logs.  Used for pagination in the webhook delivery log queries. (optional)
+    fields =  # string | Comma-separated list of fields to include in the response (optional)
 
     try:
         # Get webhook logs
-        api_response = api_instance.get_webhooks_logs(delivery_from=delivery_from, delivery_to=delivery_to, hook_uri=hook_uri, config_id=config_id, event_id=event_id, group_status=group_status, user_id=user_id, trigger=trigger, count=count, start_index=start_index)
+        api_response = api_instance.get_webhooks_logs(delivery_from=delivery_from, delivery_to=delivery_to, hook_uri=hook_uri, config_id=config_id, event_id=event_id, group_status=group_status, user_id=user_id, trigger=trigger, count=count, start_index=start_index, fields=fields)
         print("The response of SettingsWebhooksApi->get_webhooks_logs:\n")
         pprint(api_response)
     except Exception as e:
