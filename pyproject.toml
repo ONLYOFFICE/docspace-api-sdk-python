@@ -1,12 +1,12 @@
 [tool.poetry]
 name = "docspace-api-python"
 version = "1.0.0"
-description = "Api"
-authors = ["OpenAPI Generator Community <team@openapitools.org>"]
-license = "NoLicense"
+description = "Simple integration Python API SDK for ONLYOFFICE DocSpace"
+authors = ["Ascensio System SIA <integration@onlyoffice.com> (https://www.onlyoffice.com)"]
+license = "Apache-2.0"
 readme = "README.md"
 repository = "https://github.com/ONLYOFFICE/docspace-python-sdk"
-keywords = ["OpenAPI", "OpenAPI-Generator", "Api"]
+keywords = ["Onlyoffice", 'DocSpace', "sdk"]
 include = ["docspace-api-python/py.typed"]
 
 [tool.poetry.dependencies]
