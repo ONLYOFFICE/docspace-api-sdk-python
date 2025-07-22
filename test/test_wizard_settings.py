@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.wizard_settings import WizardSettings
+from docspace-api-sdk.models.wizard_settings import WizardSettings
 
 class TestWizardSettings(unittest.TestCase):
     """WizardSettings unit test stubs"""

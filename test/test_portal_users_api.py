@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.api.portal_users_api import PortalUsersApi
+from docspace-api-sdk.api.portal_users_api import PortalUsersApi
 
 
 class TestPortalUsersApi(unittest.TestCase):

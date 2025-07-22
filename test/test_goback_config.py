@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.goback_config import GobackConfig
+from docspace-api-sdk.models.goback_config import GobackConfig
 
 class TestGobackConfig(unittest.TestCase):
     """GobackConfig unit test stubs"""

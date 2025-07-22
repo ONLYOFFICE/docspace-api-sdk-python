@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.set_manager_request import SetManagerRequest
+from docspace-api-sdk.models.set_manager_request import SetManagerRequest
 
 class TestSetManagerRequest(unittest.TestCase):
     """SetManagerRequest unit test stubs"""

@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.draft_location_integer import DraftLocationInteger
+from docspace-api-sdk.models.draft_location_integer import DraftLocationInteger
 
 class TestDraftLocationInteger(unittest.TestCase):
     """DraftLocationInteger unit test stubs"""

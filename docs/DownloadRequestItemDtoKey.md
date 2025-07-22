@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-python.models.download_request_item_dto_key import DownloadRequestItemDtoKey
+from docspace-api-sdk.models.download_request_item_dto_key import DownloadRequestItemDtoKey
 
 # TODO update the JSON string below
 json = "{}"

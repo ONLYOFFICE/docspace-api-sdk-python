@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-python.models.tariff_wrapper import TariffWrapper
+from docspace-api-sdk.models.tariff_wrapper import TariffWrapper
 
 # TODO update the JSON string below
 json = "{}"

@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-python.models.settings_request_dto import SettingsRequestDto
+from docspace-api-sdk.models.settings_request_dto import SettingsRequestDto
 
 # TODO update the JSON string below
 json = "{}"

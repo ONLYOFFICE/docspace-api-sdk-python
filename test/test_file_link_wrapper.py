@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.file_link_wrapper import FileLinkWrapper
+from docspace-api-sdk.models.file_link_wrapper import FileLinkWrapper
 
 class TestFileLinkWrapper(unittest.TestCase):
     """FileLinkWrapper unit test stubs"""
@@ -39,13 +39,13 @@ class TestFileLinkWrapper(unittest.TestCase):
         model = FileLinkWrapper()
         if include_optional:
             return FileLinkWrapper(
-                response = docspace-api-python.models.file_link.FileLink(
+                response = docspace-api-sdk.models.file_link.FileLink(
                     filetype = 'some text', 
                     token = 'some text', 
                     url = 'some text', ),
                 count = 56,
                 links = [
-                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-sdk.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

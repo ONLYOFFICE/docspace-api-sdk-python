@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-python.models.submit_form import SubmitForm
+from docspace-api-sdk.models.submit_form import SubmitForm
 
 # TODO update the JSON string below
 json = "{}"

@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.tenant_user_quota_settings_wrapper import TenantUserQuotaSettingsWrapper
+from docspace-api-sdk.models.tenant_user_quota_settings_wrapper import TenantUserQuotaSettingsWrapper
 
 class TestTenantUserQuotaSettingsWrapper(unittest.TestCase):
     """TenantUserQuotaSettingsWrapper unit test stubs"""
@@ -39,14 +39,14 @@ class TestTenantUserQuotaSettingsWrapper(unittest.TestCase):
         model = TenantUserQuotaSettingsWrapper()
         if include_optional:
             return TenantUserQuotaSettingsWrapper(
-                response = docspace-api-python.models.tenant_user_quota_settings.TenantUserQuotaSettings(
+                response = docspace-api-sdk.models.tenant_user_quota_settings.TenantUserQuotaSettings(
                     enable_quota = True, 
                     default_quota = 1234, 
                     last_recalculate_date = '2008-04-10T06:30+04:00', 
                     last_modified = '2008-04-10T06:30+04:00', ),
                 count = 56,
                 links = [
-                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-sdk.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

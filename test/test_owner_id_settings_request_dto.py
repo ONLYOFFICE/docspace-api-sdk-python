@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.owner_id_settings_request_dto import OwnerIdSettingsRequestDto
+from docspace-api-sdk.models.owner_id_settings_request_dto import OwnerIdSettingsRequestDto
 
 class TestOwnerIdSettingsRequestDto(unittest.TestCase):
     """OwnerIdSettingsRequestDto unit test stubs"""

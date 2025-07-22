@@ -20,7 +20,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-python.models.file_dto_integer_view_accessibility import FileDtoIntegerViewAccessibility
+from docspace-api-sdk.models.file_dto_integer_view_accessibility import FileDtoIntegerViewAccessibility
 
 # TODO update the JSON string below
 json = "{}"

@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.session_request import SessionRequest
+from docspace-api-sdk.models.session_request import SessionRequest
 
 class TestSessionRequest(unittest.TestCase):
     """SessionRequest unit test stubs"""
@@ -42,7 +42,7 @@ class TestSessionRequest(unittest.TestCase):
                 file_name = 'some text',
                 file_size = 1234,
                 relative_path = 'some text',
-                create_on = docspace-api-python.models.api_date_time.ApiDateTime(
+                create_on = docspace-api-sdk.models.api_date_time.ApiDateTime(
                     utc_time = '2008-04-10T06:30+04:00', 
                     time_zone_offset = '00:00:00', ),
                 encrypted = True,

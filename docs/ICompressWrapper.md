@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-python.models.i_compress_wrapper import ICompressWrapper
+from docspace-api-sdk.models.i_compress_wrapper import ICompressWrapper
 
 # TODO update the JSON string below
 json = "{}"

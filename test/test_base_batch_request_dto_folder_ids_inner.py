@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.base_batch_request_dto_folder_ids_inner import BaseBatchRequestDtoFolderIdsInner
+from docspace-api-sdk.models.base_batch_request_dto_folder_ids_inner import BaseBatchRequestDtoFolderIdsInner
 
 class TestBaseBatchRequestDtoFolderIdsInner(unittest.TestCase):
     """BaseBatchRequestDtoFolderIdsInner unit test stubs"""

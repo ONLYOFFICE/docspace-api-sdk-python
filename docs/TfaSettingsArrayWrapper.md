@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-python.models.tfa_settings_array_wrapper import TfaSettingsArrayWrapper
+from docspace-api-sdk.models.tfa_settings_array_wrapper import TfaSettingsArrayWrapper
 
 # TODO update the JSON string below
 json = "{}"

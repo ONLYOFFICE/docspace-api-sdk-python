@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.mention_message_wrapper import MentionMessageWrapper
+from docspace-api-sdk.models.mention_message_wrapper import MentionMessageWrapper
 
 class TestMentionMessageWrapper(unittest.TestCase):
     """MentionMessageWrapper unit test stubs"""
@@ -39,8 +39,8 @@ class TestMentionMessageWrapper(unittest.TestCase):
         model = MentionMessageWrapper()
         if include_optional:
             return MentionMessageWrapper(
-                action_link = docspace-api-python.models.action_link_config.ActionLinkConfig(
-                    action = docspace-api-python.models.action_config.ActionConfig(
+                action_link = docspace-api-sdk.models.action_link_config.ActionLinkConfig(
+                    action = docspace-api-sdk.models.action_config.ActionConfig(
                         data = 'some text', 
                         type = 'some text', ), ),
                 emails = ["some text"],

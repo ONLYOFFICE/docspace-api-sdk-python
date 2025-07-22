@@ -57,7 +57,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-python.models.folder_dto_integer import FolderDtoInteger
+from docspace-api-sdk.models.folder_dto_integer import FolderDtoInteger
 
 # TODO update the JSON string below
 json = "{}"

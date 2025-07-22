@@ -1,4 +1,4 @@
-# docspace-api-python.SettingsSSOApi
+# docspace-api-sdk.SettingsSSOApi
 
 All URIs are relative to *http://localhost:8092*
 
@@ -34,14 +34,14 @@ This endpoint does not need any parameter.
 
 
 ```python
-import docspace-api-python
-from docspace-api-python.models.sso_settings_v2_wrapper import SsoSettingsV2Wrapper
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.models.sso_settings_v2_wrapper import SsoSettingsV2Wrapper
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -51,7 +51,7 @@ configuration = docspace-api-python.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     username = os.environ["USERNAME"],
     password = os.environ["PASSWORD"]
 )
@@ -71,14 +71,14 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.SettingsSSOApi(api_client)
+    api_instance = docspace-api-sdk.SettingsSSOApi(api_client)
 
     try:
         # Get the default SSO settings
@@ -129,22 +129,22 @@ No authorization required
 
 
 ```python
-import docspace-api-python
-from docspace-api-python.models.sso_settings_v2_wrapper import SsoSettingsV2Wrapper
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.models.sso_settings_v2_wrapper import SsoSettingsV2Wrapper
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.SettingsSSOApi(api_client)
+    api_instance = docspace-api-sdk.SettingsSSOApi(api_client)
 
     try:
         # Get the SSO settings
@@ -194,14 +194,14 @@ This endpoint does not need any parameter.
 
 
 ```python
-import docspace-api-python
-from docspace-api-python.models.object_wrapper import ObjectWrapper
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.models.object_wrapper import ObjectWrapper
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -211,7 +211,7 @@ configuration = docspace-api-python.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     username = os.environ["USERNAME"],
     password = os.environ["PASSWORD"]
 )
@@ -231,14 +231,14 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.SettingsSSOApi(api_client)
+    api_instance = docspace-api-sdk.SettingsSSOApi(api_client)
 
     try:
         # Get the SSO settings constants
@@ -289,14 +289,14 @@ This endpoint does not need any parameter.
 
 
 ```python
-import docspace-api-python
-from docspace-api-python.models.sso_settings_v2_wrapper import SsoSettingsV2Wrapper
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.models.sso_settings_v2_wrapper import SsoSettingsV2Wrapper
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -306,7 +306,7 @@ configuration = docspace-api-python.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     username = os.environ["USERNAME"],
     password = os.environ["PASSWORD"]
 )
@@ -326,14 +326,14 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.SettingsSSOApi(api_client)
+    api_instance = docspace-api-sdk.SettingsSSOApi(api_client)
 
     try:
         # Reset the SSO settings
@@ -387,15 +387,15 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-python
-from docspace-api-python.models.sso_settings_requests_dto import SsoSettingsRequestsDto
-from docspace-api-python.models.sso_settings_v2_wrapper import SsoSettingsV2Wrapper
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.models.sso_settings_requests_dto import SsoSettingsRequestsDto
+from docspace-api-sdk.models.sso_settings_v2_wrapper import SsoSettingsV2Wrapper
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -405,7 +405,7 @@ configuration = docspace-api-python.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     username = os.environ["USERNAME"],
     password = os.environ["PASSWORD"]
 )
@@ -425,15 +425,15 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.SettingsSSOApi(api_client)
-    sso_settings_requests_dto = docspace-api-python.SsoSettingsRequestsDto() # SsoSettingsRequestsDto |  (optional)
+    api_instance = docspace-api-sdk.SettingsSSOApi(api_client)
+    sso_settings_requests_dto = docspace-api-sdk.SsoSettingsRequestsDto() # SsoSettingsRequestsDto |  (optional)
 
     try:
         # Save the SSO settings

@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.tenant_quota_wrapper import TenantQuotaWrapper
+from docspace-api-sdk.models.tenant_quota_wrapper import TenantQuotaWrapper
 
 class TestTenantQuotaWrapper(unittest.TestCase):
     """TenantQuotaWrapper unit test stubs"""
@@ -39,7 +39,7 @@ class TestTenantQuotaWrapper(unittest.TestCase):
         model = TenantQuotaWrapper()
         if include_optional:
             return TenantQuotaWrapper(
-                response = docspace-api-python.models.tenant_quota.TenantQuota(
+                response = docspace-api-sdk.models.tenant_quota.TenantQuota(
                     tenant_id = 1234, 
                     name = 'Default', 
                     price = 10, 
@@ -76,7 +76,7 @@ class TestTenantQuotaWrapper(unittest.TestCase):
                     year = True, ),
                 count = 56,
                 links = [
-                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-sdk.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

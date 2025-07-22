@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.doc_service_url_wrapper import DocServiceUrlWrapper
+from docspace-api-sdk.models.doc_service_url_wrapper import DocServiceUrlWrapper
 
 class TestDocServiceUrlWrapper(unittest.TestCase):
     """DocServiceUrlWrapper unit test stubs"""
@@ -39,7 +39,7 @@ class TestDocServiceUrlWrapper(unittest.TestCase):
         model = DocServiceUrlWrapper()
         if include_optional:
             return DocServiceUrlWrapper(
-                response = docspace-api-python.models.doc_service_url_dto.DocServiceUrlDto(
+                response = docspace-api-sdk.models.doc_service_url_dto.DocServiceUrlDto(
                     version = 'some text', 
                     doc_service_url_api = 'some text', 
                     doc_service_url = 'some text', 
@@ -50,7 +50,7 @@ class TestDocServiceUrlWrapper(unittest.TestCase):
                     is_default = True, ),
                 count = 56,
                 links = [
-                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-sdk.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.batch_request_dto_dest_folder_id import BatchRequestDtoDestFolderId
+from docspace-api-sdk.models.batch_request_dto_dest_folder_id import BatchRequestDtoDestFolderId
 
 class TestBatchRequestDtoDestFolderId(unittest.TestCase):
     """BatchRequestDtoDestFolderId unit test stubs"""

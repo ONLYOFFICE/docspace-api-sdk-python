@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.upload_result_dto import UploadResultDto
+from docspace-api-sdk.models.upload_result_dto import UploadResultDto
 
 class TestUploadResultDto(unittest.TestCase):
     """UploadResultDto unit test stubs"""

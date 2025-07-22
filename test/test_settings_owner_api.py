@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.api.settings_owner_api import SettingsOwnerApi
+from docspace-api-sdk.api.settings_owner_api import SettingsOwnerApi
 
 
 class TestSettingsOwnerApi(unittest.TestCase):

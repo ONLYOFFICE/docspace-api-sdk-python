@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-python.models.timezones_requests_array_wrapper import TimezonesRequestsArrayWrapper
+from docspace-api-sdk.models.timezones_requests_array_wrapper import TimezonesRequestsArrayWrapper
 
 # TODO update the JSON string below
 json = "{}"

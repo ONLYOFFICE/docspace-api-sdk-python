@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.sales_requests_dto import SalesRequestsDto
+from docspace-api-sdk.models.sales_requests_dto import SalesRequestsDto
 
 class TestSalesRequestsDto(unittest.TestCase):
     """SalesRequestsDto unit test stubs"""

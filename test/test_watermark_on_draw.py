@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.watermark_on_draw import WatermarkOnDraw
+from docspace-api-sdk.models.watermark_on_draw import WatermarkOnDraw
 
 class TestWatermarkOnDraw(unittest.TestCase):
     """WatermarkOnDraw unit test stubs"""
@@ -46,10 +46,10 @@ class TestWatermarkOnDraw(unittest.TestCase):
                 rotate = 1234,
                 transparent = -8.5,
                 paragraphs = [
-                    docspace-api-python.models.paragraph.Paragraph(
+                    docspace-api-sdk.models.paragraph.Paragraph(
                         align = 1234, 
                         runs = [
-                            docspace-api-python.models.run.Run(
+                            docspace-api-sdk.models.run.Run(
                                 fill = [1234], 
                                 text = 'some text', 
                                 font_size = 'some text', )

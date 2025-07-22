@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-python.models.duplicate_request_dto import DuplicateRequestDto
+from docspace-api-sdk.models.duplicate_request_dto import DuplicateRequestDto
 
 # TODO update the JSON string below
 json = "{}"

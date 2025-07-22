@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.web_plugin_array_wrapper import WebPluginArrayWrapper
+from docspace-api-sdk.models.web_plugin_array_wrapper import WebPluginArrayWrapper
 
 class TestWebPluginArrayWrapper(unittest.TestCase):
     """WebPluginArrayWrapper unit test stubs"""
@@ -40,7 +40,7 @@ class TestWebPluginArrayWrapper(unittest.TestCase):
         if include_optional:
             return WebPluginArrayWrapper(
                 response = [
-                    docspace-api-python.models.web_plugin_dto.WebPluginDto(
+                    docspace-api-sdk.models.web_plugin_dto.WebPluginDto(
                         name = 'Winfield Upton', 
                         version = 'some text', 
                         description = 'some text', 
@@ -50,7 +50,7 @@ class TestWebPluginArrayWrapper(unittest.TestCase):
                         plugin_name = 'some text', 
                         scopes = 'some text', 
                         image = 'some text', 
-                        create_by = docspace-api-python.models.employee_dto.EmployeeDto(
+                        create_by = docspace-api-sdk.models.employee_dto.EmployeeDto(
                             id = '', 
                             display_name = 'Mike Zanyatski', 
                             title = 'Manager', 
@@ -70,7 +70,7 @@ class TestWebPluginArrayWrapper(unittest.TestCase):
                     ],
                 count = 56,
                 links = [
-                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-sdk.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

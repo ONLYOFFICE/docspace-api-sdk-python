@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.action_type import ActionType
+from docspace-api-sdk.models.action_type import ActionType
 
 class TestActionType(unittest.TestCase):
     """ActionType unit test stubs"""

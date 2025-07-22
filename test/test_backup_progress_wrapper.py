@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.backup_progress_wrapper import BackupProgressWrapper
+from docspace-api-sdk.models.backup_progress_wrapper import BackupProgressWrapper
 
 class TestBackupProgressWrapper(unittest.TestCase):
     """BackupProgressWrapper unit test stubs"""
@@ -39,7 +39,7 @@ class TestBackupProgressWrapper(unittest.TestCase):
         model = BackupProgressWrapper()
         if include_optional:
             return BackupProgressWrapper(
-                response = docspace-api-python.models.backup_progress.BackupProgress(
+                response = docspace-api-sdk.models.backup_progress.BackupProgress(
                     is_completed = True, 
                     progress = 1234, 
                     error = 'some text', 
@@ -49,7 +49,7 @@ class TestBackupProgressWrapper(unittest.TestCase):
                     task_id = 'some text', ),
                 count = 56,
                 links = [
-                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-sdk.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.entry_type import EntryType
+from docspace-api-sdk.models.entry_type import EntryType
 
 class TestEntryType(unittest.TestCase):
     """EntryType unit test stubs"""

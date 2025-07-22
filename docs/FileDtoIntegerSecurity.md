@@ -47,7 +47,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-python.models.file_dto_integer_security import FileDtoIntegerSecurity
+from docspace-api-sdk.models.file_dto_integer_security import FileDtoIntegerSecurity
 
 # TODO update the JSON string below
 json = "{}"

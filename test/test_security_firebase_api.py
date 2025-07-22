@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.api.security_firebase_api import SecurityFirebaseApi
+from docspace-api-sdk.api.security_firebase_api import SecurityFirebaseApi
 
 
 class TestSecurityFirebaseApi(unittest.TestCase):

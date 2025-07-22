@@ -33,7 +33,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-python.models.tenant_dto import TenantDto
+from docspace-api-sdk.models.tenant_dto import TenantDto
 
 # TODO update the JSON string below
 json = "{}"

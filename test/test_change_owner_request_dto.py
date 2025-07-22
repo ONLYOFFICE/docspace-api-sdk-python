@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.change_owner_request_dto import ChangeOwnerRequestDto
+from docspace-api-sdk.models.change_owner_request_dto import ChangeOwnerRequestDto
 
 class TestChangeOwnerRequestDto(unittest.TestCase):
     """ChangeOwnerRequestDto unit test stubs"""

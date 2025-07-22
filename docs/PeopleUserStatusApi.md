@@ -1,4 +1,4 @@
-# docspace-api-python.PeopleUserStatusApi
+# docspace-api-sdk.PeopleUserStatusApi
 
 All URIs are relative to *http://localhost:8092*
 
@@ -42,16 +42,16 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-python
-from docspace-api-python.models.employee_full_array_wrapper import EmployeeFullArrayWrapper
-from docspace-api-python.models.employee_status import EmployeeStatus
-from docspace-api-python.models.sort_order import SortOrder
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.models.employee_full_array_wrapper import EmployeeFullArrayWrapper
+from docspace-api-sdk.models.employee_status import EmployeeStatus
+from docspace-api-sdk.models.sort_order import SortOrder
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -61,7 +61,7 @@ configuration = docspace-api-python.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     username = os.environ["USERNAME"],
     password = os.environ["PASSWORD"]
 )
@@ -81,20 +81,20 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.PeopleUserStatusApi(api_client)
-    status = docspace-api-python.EmployeeStatus() # EmployeeStatus | The user status.
+    api_instance = docspace-api-sdk.PeopleUserStatusApi(api_client)
+    status = docspace-api-sdk.EmployeeStatus() # EmployeeStatus | The user status.
     filter_by = 'some text' # str | Specifies the criteria used to filter the profiles in the request. (optional)
     count = 1234 # int | The maximum number of user profiles to retrieve. (optional)
     start_index = 1234 # int | The starting index for retrieving data in a paginated request. (optional)
     sort_by = 'some text' # str | Specifies the property or field name by which the results should be sorted. (optional)
-    sort_order = docspace-api-python.SortOrder() # SortOrder | The order in which the results are sorted. (optional)
+    sort_order = docspace-api-sdk.SortOrder() # SortOrder | The order in which the results are sorted. (optional)
     filter_separator = 'some text' # str | Represents the separator used to split multiple filter criteria in a query string. (optional)
     filter_value = 'some text' # str | A string value representing additional filter criteria used in query parameters. (optional)
 
@@ -151,16 +151,16 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-python
-from docspace-api-python.models.employee_activation_status import EmployeeActivationStatus
-from docspace-api-python.models.employee_full_array_wrapper import EmployeeFullArrayWrapper
-from docspace-api-python.models.update_members_request_dto import UpdateMembersRequestDto
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.models.employee_activation_status import EmployeeActivationStatus
+from docspace-api-sdk.models.employee_full_array_wrapper import EmployeeFullArrayWrapper
+from docspace-api-sdk.models.update_members_request_dto import UpdateMembersRequestDto
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -170,7 +170,7 @@ configuration = docspace-api-python.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     username = os.environ["USERNAME"],
     password = os.environ["PASSWORD"]
 )
@@ -190,16 +190,16 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.PeopleUserStatusApi(api_client)
-    activationstatus = docspace-api-python.EmployeeActivationStatus() # EmployeeActivationStatus | The new user activation status.
-    update_members_request_dto = docspace-api-python.UpdateMembersRequestDto() # UpdateMembersRequestDto | The request parameters for updating the user information. (optional)
+    api_instance = docspace-api-sdk.PeopleUserStatusApi(api_client)
+    activationstatus = docspace-api-sdk.EmployeeActivationStatus() # EmployeeActivationStatus | The new user activation status.
+    update_members_request_dto = docspace-api-sdk.UpdateMembersRequestDto() # UpdateMembersRequestDto | The request parameters for updating the user information. (optional)
 
     try:
         # Set an activation status to the users
@@ -254,16 +254,16 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-python
-from docspace-api-python.models.employee_full_array_wrapper import EmployeeFullArrayWrapper
-from docspace-api-python.models.employee_status import EmployeeStatus
-from docspace-api-python.models.update_members_request_dto import UpdateMembersRequestDto
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.models.employee_full_array_wrapper import EmployeeFullArrayWrapper
+from docspace-api-sdk.models.employee_status import EmployeeStatus
+from docspace-api-sdk.models.update_members_request_dto import UpdateMembersRequestDto
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -273,7 +273,7 @@ configuration = docspace-api-python.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     username = os.environ["USERNAME"],
     password = os.environ["PASSWORD"]
 )
@@ -293,16 +293,16 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.PeopleUserStatusApi(api_client)
-    status = docspace-api-python.EmployeeStatus() # EmployeeStatus | The new user status.
-    update_members_request_dto = docspace-api-python.UpdateMembersRequestDto() # UpdateMembersRequestDto | The request parameters for updating the user information. (optional)
+    api_instance = docspace-api-sdk.PeopleUserStatusApi(api_client)
+    status = docspace-api-sdk.EmployeeStatus() # EmployeeStatus | The new user status.
+    update_members_request_dto = docspace-api-sdk.UpdateMembersRequestDto() # UpdateMembersRequestDto | The request parameters for updating the user information. (optional)
 
     try:
         # Change a user status

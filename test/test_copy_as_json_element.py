@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.copy_as_json_element import CopyAsJsonElement
+from docspace-api-sdk.models.copy_as_json_element import CopyAsJsonElement
 
 class TestCopyAsJsonElement(unittest.TestCase):
     """CopyAsJsonElement unit test stubs"""

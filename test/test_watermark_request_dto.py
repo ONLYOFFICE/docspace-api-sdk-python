@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.watermark_request_dto import WatermarkRequestDto
+from docspace-api-sdk.models.watermark_request_dto import WatermarkRequestDto
 
 class TestWatermarkRequestDto(unittest.TestCase):
     """WatermarkRequestDto unit test stubs"""

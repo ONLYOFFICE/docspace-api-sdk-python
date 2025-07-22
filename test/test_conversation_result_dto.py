@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.conversation_result_dto import ConversationResultDto
+from docspace-api-sdk.models.conversation_result_dto import ConversationResultDto
 
 class TestConversationResultDto(unittest.TestCase):
     """ConversationResultDto unit test stubs"""

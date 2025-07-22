@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.owner_change_instructions_dto import OwnerChangeInstructionsDto
+from docspace-api-sdk.models.owner_change_instructions_dto import OwnerChangeInstructionsDto
 
 class TestOwnerChangeInstructionsDto(unittest.TestCase):
     """OwnerChangeInstructionsDto unit test stubs"""

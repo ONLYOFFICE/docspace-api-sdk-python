@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.no_content_result import NoContentResult
+from docspace-api-sdk.models.no_content_result import NoContentResult
 
 class TestNoContentResult(unittest.TestCase):
     """NoContentResult unit test stubs"""

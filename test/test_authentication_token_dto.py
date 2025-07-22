@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.authentication_token_dto import AuthenticationTokenDto
+from docspace-api-sdk.models.authentication_token_dto import AuthenticationTokenDto
 
 class TestAuthenticationTokenDto(unittest.TestCase):
     """AuthenticationTokenDto unit test stubs"""

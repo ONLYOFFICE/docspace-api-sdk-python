@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.file_share_array_wrapper import FileShareArrayWrapper
+from docspace-api-sdk.models.file_share_array_wrapper import FileShareArrayWrapper
 
 class TestFileShareArrayWrapper(unittest.TestCase):
     """FileShareArrayWrapper unit test stubs"""
@@ -40,7 +40,7 @@ class TestFileShareArrayWrapper(unittest.TestCase):
         if include_optional:
             return FileShareArrayWrapper(
                 response = [
-                    docspace-api-python.models.file_share_dto.FileShareDto(
+                    docspace-api-sdk.models.file_share_dto.FileShareDto(
                         access = 0, 
                         shared_to = {"int":1234,"string":"some text","boolean":true}, 
                         is_locked = False, 
@@ -50,7 +50,7 @@ class TestFileShareArrayWrapper(unittest.TestCase):
                     ],
                 count = 56,
                 links = [
-                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-sdk.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

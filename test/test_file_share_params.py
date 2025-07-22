@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.file_share_params import FileShareParams
+from docspace-api-sdk.models.file_share_params import FileShareParams
 
 class TestFileShareParams(unittest.TestCase):
     """FileShareParams unit test stubs"""

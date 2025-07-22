@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.ace_short_wrapper_array_wrapper import AceShortWrapperArrayWrapper
+from docspace-api-sdk.models.ace_short_wrapper_array_wrapper import AceShortWrapperArrayWrapper
 
 class TestAceShortWrapperArrayWrapper(unittest.TestCase):
     """AceShortWrapperArrayWrapper unit test stubs"""
@@ -40,14 +40,14 @@ class TestAceShortWrapperArrayWrapper(unittest.TestCase):
         if include_optional:
             return AceShortWrapperArrayWrapper(
                 response = [
-                    docspace-api-python.models.ace_short_wrapper.AceShortWrapper(
+                    docspace-api-sdk.models.ace_short_wrapper.AceShortWrapper(
                         user = 'some text', 
                         permissions = 'some text', 
                         is_link = True, )
                     ],
                 count = 56,
                 links = [
-                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-sdk.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

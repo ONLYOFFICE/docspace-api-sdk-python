@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.custom_filter_parameters import CustomFilterParameters
+from docspace-api-sdk.models.custom_filter_parameters import CustomFilterParameters
 
 class TestCustomFilterParameters(unittest.TestCase):
     """CustomFilterParameters unit test stubs"""

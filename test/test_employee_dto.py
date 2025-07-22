@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.employee_dto import EmployeeDto
+from docspace-api-sdk.models.employee_dto import EmployeeDto
 
 class TestEmployeeDto(unittest.TestCase):
     """EmployeeDto unit test stubs"""

@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.api_key_response_dto import ApiKeyResponseDto
+from docspace-api-sdk.models.api_key_response_dto import ApiKeyResponseDto
 
 class TestApiKeyResponseDto(unittest.TestCase):
     """ApiKeyResponseDto unit test stubs"""
@@ -44,13 +44,13 @@ class TestApiKeyResponseDto(unittest.TestCase):
                 key = 'some text',
                 key_postfix = 'some text',
                 permissions = ["some text"],
-                last_used = docspace-api-python.models.api_date_time.ApiDateTime(
+                last_used = docspace-api-sdk.models.api_date_time.ApiDateTime(
                     utc_time = '2008-04-10T06:30+04:00', 
                     time_zone_offset = '00:00:00', ),
-                create_on = docspace-api-python.models.api_date_time.ApiDateTime(
+                create_on = docspace-api-sdk.models.api_date_time.ApiDateTime(
                     utc_time = '2008-04-10T06:30+04:00', 
                     time_zone_offset = '00:00:00', ),
-                create_by = docspace-api-python.models.employee_dto.EmployeeDto(
+                create_by = docspace-api-sdk.models.employee_dto.EmployeeDto(
                     id = '', 
                     display_name = 'Mike Zanyatski', 
                     title = 'Manager', 
@@ -62,7 +62,7 @@ class TestApiKeyResponseDto(unittest.TestCase):
                     profile_url = 'some text', 
                     has_avatar = True, 
                     is_anonim = True, ),
-                expires_at = docspace-api-python.models.api_date_time.ApiDateTime(
+                expires_at = docspace-api-sdk.models.api_date_time.ApiDateTime(
                     utc_time = '2008-04-10T06:30+04:00', 
                     time_zone_offset = '00:00:00', ),
                 is_active = True

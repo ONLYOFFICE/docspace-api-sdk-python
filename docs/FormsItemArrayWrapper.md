@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-python.models.forms_item_array_wrapper import FormsItemArrayWrapper
+from docspace-api-sdk.models.forms_item_array_wrapper import FormsItemArrayWrapper
 
 # TODO update the JSON string below
 json = "{}"

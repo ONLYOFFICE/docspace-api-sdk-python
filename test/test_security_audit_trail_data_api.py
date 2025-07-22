@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.api.security_audit_trail_data_api import SecurityAuditTrailDataApi
+from docspace-api-sdk.api.security_audit_trail_data_api import SecurityAuditTrailDataApi
 
 
 class TestSecurityAuditTrailDataApi(unittest.TestCase):

@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.download_request_dto import DownloadRequestDto
+from docspace-api-sdk.models.download_request_dto import DownloadRequestDto
 
 class TestDownloadRequestDto(unittest.TestCase):
     """DownloadRequestDto unit test stubs"""
@@ -47,7 +47,7 @@ class TestDownloadRequestDto(unittest.TestCase):
                     null
                     ],
                 file_convert_ids = [
-                    docspace-api-python.models.download_request_item_dto.DownloadRequestItemDto(
+                    docspace-api-sdk.models.download_request_item_dto.DownloadRequestItemDto(
                         key = null, 
                         value = 'some text', 
                         password = 'vfmf2vO1Kp', )

@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.web_item_security_requests_dto import WebItemSecurityRequestsDto
+from docspace-api-sdk.models.web_item_security_requests_dto import WebItemSecurityRequestsDto
 
 class TestWebItemSecurityRequestsDto(unittest.TestCase):
     """WebItemSecurityRequestsDto unit test stubs"""

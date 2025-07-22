@@ -1,4 +1,4 @@
-# docspace-api-python.SecurityAuditTrailDataApi
+# docspace-api-sdk.SecurityAuditTrailDataApi
 
 All URIs are relative to *http://localhost:8092*
 
@@ -36,14 +36,14 @@ This endpoint does not need any parameter.
 
 
 ```python
-import docspace-api-python
-from docspace-api-python.models.string_wrapper import StringWrapper
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.models.string_wrapper import StringWrapper
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -53,7 +53,7 @@ configuration = docspace-api-python.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     username = os.environ["USERNAME"],
     password = os.environ["PASSWORD"]
 )
@@ -73,14 +73,14 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.SecurityAuditTrailDataApi(api_client)
+    api_instance = docspace-api-sdk.SecurityAuditTrailDataApi(api_client)
 
     try:
         # Generate the audit trail report
@@ -147,20 +147,20 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-python
-from docspace-api-python.models.action_type import ActionType
-from docspace-api-python.models.api_date_time import ApiDateTime
-from docspace-api-python.models.audit_event_array_wrapper import AuditEventArrayWrapper
-from docspace-api-python.models.entry_type import EntryType
-from docspace-api-python.models.message_action import MessageAction
-from docspace-api-python.models.module_type import ModuleType
-from docspace-api-python.models.product_type import ProductType
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.models.action_type import ActionType
+from docspace-api-sdk.models.api_date_time import ApiDateTime
+from docspace-api-sdk.models.audit_event_array_wrapper import AuditEventArrayWrapper
+from docspace-api-sdk.models.entry_type import EntryType
+from docspace-api-sdk.models.message_action import MessageAction
+from docspace-api-sdk.models.module_type import ModuleType
+from docspace-api-sdk.models.product_type import ProductType
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -170,7 +170,7 @@ configuration = docspace-api-python.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     username = os.environ["USERNAME"],
     password = os.environ["PASSWORD"]
 )
@@ -190,23 +190,23 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.SecurityAuditTrailDataApi(api_client)
+    api_instance = docspace-api-sdk.SecurityAuditTrailDataApi(api_client)
     user_id = 'aae1e103-bca5-9fa1-ba8c-42058b4abf28' # str | The ID of the user who triggered the audit event. (optional)
-    product_type = docspace-api-python.ProductType() # ProductType | The type of product related to the audit event. (optional)
-    module_type = docspace-api-python.ModuleType() # ModuleType | The module within the product where the audit event occurred. (optional)
-    action_type = docspace-api-python.ActionType() # ActionType | The type of action performed in the audit event (e.g., Create, Update, Delete). (optional)
-    action = docspace-api-python.MessageAction() # MessageAction | The specific action that occurred within the audit event. (optional)
-    entry_type = docspace-api-python.EntryType() # EntryType | The type of audit entry (e.g., Folder, User, File). (optional)
+    product_type = docspace-api-sdk.ProductType() # ProductType | The type of product related to the audit event. (optional)
+    module_type = docspace-api-sdk.ModuleType() # ModuleType | The module within the product where the audit event occurred. (optional)
+    action_type = docspace-api-sdk.ActionType() # ActionType | The type of action performed in the audit event (e.g., Create, Update, Delete). (optional)
+    action = docspace-api-sdk.MessageAction() # MessageAction | The specific action that occurred within the audit event. (optional)
+    entry_type = docspace-api-sdk.EntryType() # EntryType | The type of audit entry (e.g., Folder, User, File). (optional)
     target = 'some text' # str | The target object affected by the audit event (e.g., document ID, user account). (optional)
-    var_from = docspace-api-python.ApiDateTime() # ApiDateTime | The starting date and time for filtering audit events. (optional)
-    to = docspace-api-python.ApiDateTime() # ApiDateTime | The ending date and time for filtering audit events. (optional)
+    var_from = docspace-api-sdk.ApiDateTime() # ApiDateTime | The starting date and time for filtering audit events. (optional)
+    to = docspace-api-sdk.ApiDateTime() # ApiDateTime | The ending date and time for filtering audit events. (optional)
     count = 1234 # int | The maximum number of audit event records to retrieve. (optional)
     start_index = 1234 # int | The index of the first audit event record to retrieve in a paged query. (optional)
     fields =  # string | Comma-separated list of fields to include in the response (optional)
@@ -261,14 +261,14 @@ This endpoint does not need any parameter.
 
 
 ```python
-import docspace-api-python
-from docspace-api-python.models.tenant_audit_settings_wrapper import TenantAuditSettingsWrapper
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.models.tenant_audit_settings_wrapper import TenantAuditSettingsWrapper
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -278,7 +278,7 @@ configuration = docspace-api-python.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     username = os.environ["USERNAME"],
     password = os.environ["PASSWORD"]
 )
@@ -298,14 +298,14 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.SecurityAuditTrailDataApi(api_client)
+    api_instance = docspace-api-sdk.SecurityAuditTrailDataApi(api_client)
 
     try:
         # Get the audit trail settings
@@ -361,26 +361,26 @@ No authorization required
 
 
 ```python
-import docspace-api-python
-from docspace-api-python.models.module_type import ModuleType
-from docspace-api-python.models.object_wrapper import ObjectWrapper
-from docspace-api-python.models.product_type import ProductType
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.models.module_type import ModuleType
+from docspace-api-sdk.models.object_wrapper import ObjectWrapper
+from docspace-api-sdk.models.product_type import ProductType
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.SecurityAuditTrailDataApi(api_client)
-    product_type = docspace-api-python.ProductType() # ProductType | The type of product related to the audit trail. (optional)
-    module_type = docspace-api-python.ModuleType() # ModuleType | The module within the product associated with the audit trail. (optional)
+    api_instance = docspace-api-sdk.SecurityAuditTrailDataApi(api_client)
+    product_type = docspace-api-sdk.ProductType() # ProductType | The type of product related to the audit trail. (optional)
+    module_type = docspace-api-sdk.ModuleType() # ModuleType | The module within the product associated with the audit trail. (optional)
 
     try:
         # Get audit trail mappers
@@ -430,22 +430,22 @@ No authorization required
 
 
 ```python
-import docspace-api-python
-from docspace-api-python.models.object_wrapper import ObjectWrapper
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.models.object_wrapper import ObjectWrapper
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.SecurityAuditTrailDataApi(api_client)
+    api_instance = docspace-api-sdk.SecurityAuditTrailDataApi(api_client)
 
     try:
         # Get audit trail types
@@ -495,14 +495,14 @@ This endpoint does not need any parameter.
 
 
 ```python
-import docspace-api-python
-from docspace-api-python.models.audit_event_array_wrapper import AuditEventArrayWrapper
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.models.audit_event_array_wrapper import AuditEventArrayWrapper
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -512,7 +512,7 @@ configuration = docspace-api-python.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     username = os.environ["USERNAME"],
     password = os.environ["PASSWORD"]
 )
@@ -532,14 +532,14 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.SecurityAuditTrailDataApi(api_client)
+    api_instance = docspace-api-sdk.SecurityAuditTrailDataApi(api_client)
 
     try:
         # Get audit trail data
@@ -594,14 +594,14 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-python
-from docspace-api-python.models.tenant_audit_settings_wrapper import TenantAuditSettingsWrapper
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.models.tenant_audit_settings_wrapper import TenantAuditSettingsWrapper
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -611,7 +611,7 @@ configuration = docspace-api-python.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     username = os.environ["USERNAME"],
     password = os.environ["PASSWORD"]
 )
@@ -631,15 +631,15 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.SecurityAuditTrailDataApi(api_client)
-    tenant_audit_settings_wrapper = docspace-api-python.TenantAuditSettingsWrapper() # TenantAuditSettingsWrapper |  (optional)
+    api_instance = docspace-api-sdk.SecurityAuditTrailDataApi(api_client)
+    tenant_audit_settings_wrapper = docspace-api-sdk.TenantAuditSettingsWrapper() # TenantAuditSettingsWrapper |  (optional)
 
     try:
         # Set the audit trail settings

@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-python.models.file_integer_wrapper import FileIntegerWrapper
+from docspace-api-sdk.models.file_integer_wrapper import FileIntegerWrapper
 
 # TODO update the JSON string below
 json = "{}"

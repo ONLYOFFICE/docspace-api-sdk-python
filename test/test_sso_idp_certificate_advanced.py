@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.sso_idp_certificate_advanced import SsoIdpCertificateAdvanced
+from docspace-api-sdk.models.sso_idp_certificate_advanced import SsoIdpCertificateAdvanced
 
 class TestSsoIdpCertificateAdvanced(unittest.TestCase):
     """SsoIdpCertificateAdvanced unit test stubs"""

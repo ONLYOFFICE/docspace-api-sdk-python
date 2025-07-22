@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.api_key_response_wrapper import ApiKeyResponseWrapper
+from docspace-api-sdk.models.api_key_response_wrapper import ApiKeyResponseWrapper
 
 class TestApiKeyResponseWrapper(unittest.TestCase):
     """ApiKeyResponseWrapper unit test stubs"""
@@ -39,19 +39,19 @@ class TestApiKeyResponseWrapper(unittest.TestCase):
         model = ApiKeyResponseWrapper()
         if include_optional:
             return ApiKeyResponseWrapper(
-                response = docspace-api-python.models.api_key_response_dto.ApiKeyResponseDto(
+                response = docspace-api-sdk.models.api_key_response_dto.ApiKeyResponseDto(
                     id = 'aae1e103-bca5-9fa1-ba8c-42058b4abf28', 
                     name = 'Winfield Upton', 
                     key = 'some text', 
                     key_postfix = 'some text', 
                     permissions = ["some text"], 
-                    last_used = docspace-api-python.models.api_date_time.ApiDateTime(
+                    last_used = docspace-api-sdk.models.api_date_time.ApiDateTime(
                         utc_time = '2008-04-10T06:30+04:00', 
                         time_zone_offset = '00:00:00', ), 
-                    create_on = docspace-api-python.models.api_date_time.ApiDateTime(
+                    create_on = docspace-api-sdk.models.api_date_time.ApiDateTime(
                         utc_time = '2008-04-10T06:30+04:00', 
                         time_zone_offset = '00:00:00', ), 
-                    create_by = docspace-api-python.models.employee_dto.EmployeeDto(
+                    create_by = docspace-api-sdk.models.employee_dto.EmployeeDto(
                         id = '', 
                         display_name = 'Mike Zanyatski', 
                         title = 'Manager', 
@@ -67,7 +67,7 @@ class TestApiKeyResponseWrapper(unittest.TestCase):
                     is_active = True, ),
                 count = 56,
                 links = [
-                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-sdk.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

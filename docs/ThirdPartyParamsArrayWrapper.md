@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-python.models.third_party_params_array_wrapper import ThirdPartyParamsArrayWrapper
+from docspace-api-sdk.models.third_party_params_array_wrapper import ThirdPartyParamsArrayWrapper
 
 # TODO update the JSON string below
 json = "{}"

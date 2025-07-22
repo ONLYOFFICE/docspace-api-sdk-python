@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.o_auth20_token import OAuth20Token
+from docspace-api-sdk.models.o_auth20_token import OAuth20Token
 
 class TestOAuth20Token(unittest.TestCase):
     """OAuth20Token unit test stubs"""

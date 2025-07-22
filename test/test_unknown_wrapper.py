@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.unknown_wrapper import UnknownWrapper
+from docspace-api-sdk.models.unknown_wrapper import UnknownWrapper
 
 class TestUnknownWrapper(unittest.TestCase):
     """UnknownWrapper unit test stubs"""
@@ -42,7 +42,7 @@ class TestUnknownWrapper(unittest.TestCase):
                 response = None,
                 count = 56,
                 links = [
-                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-sdk.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

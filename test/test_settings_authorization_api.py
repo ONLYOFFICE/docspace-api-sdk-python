@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.api.settings_authorization_api import SettingsAuthorizationApi
+from docspace-api-sdk.api.settings_authorization_api import SettingsAuthorizationApi
 
 
 class TestSettingsAuthorizationApi(unittest.TestCase):

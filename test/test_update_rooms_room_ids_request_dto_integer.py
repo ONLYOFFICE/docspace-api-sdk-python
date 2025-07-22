@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.update_rooms_room_ids_request_dto_integer import UpdateRoomsRoomIdsRequestDtoInteger
+from docspace-api-sdk.models.update_rooms_room_ids_request_dto_integer import UpdateRoomsRoomIdsRequestDtoInteger
 
 class TestUpdateRoomsRoomIdsRequestDtoInteger(unittest.TestCase):
     """UpdateRoomsRoomIdsRequestDtoInteger unit test stubs"""

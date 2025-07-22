@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.api.settings_access_to_dev_tools_api import SettingsAccessToDevToolsApi
+from docspace-api-sdk.api.settings_access_to_dev_tools_api import SettingsAccessToDevToolsApi
 
 
 class TestSettingsAccessToDevToolsApi(unittest.TestCase):

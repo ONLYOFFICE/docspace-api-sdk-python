@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.edit_history_author import EditHistoryAuthor
+from docspace-api-sdk.models.edit_history_author import EditHistoryAuthor
 
 class TestEditHistoryAuthor(unittest.TestCase):
     """EditHistoryAuthor unit test stubs"""

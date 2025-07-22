@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.room_security_dto import RoomSecurityDto
+from docspace-api-sdk.models.room_security_dto import RoomSecurityDto
 
 class TestRoomSecurityDto(unittest.TestCase):
     """RoomSecurityDto unit test stubs"""
@@ -40,7 +40,7 @@ class TestRoomSecurityDto(unittest.TestCase):
         if include_optional:
             return RoomSecurityDto(
                 members = [
-                    docspace-api-python.models.file_share_dto.FileShareDto(
+                    docspace-api-sdk.models.file_share_dto.FileShareDto(
                         access = 0, 
                         shared_to = {"int":1234,"string":"some text","boolean":true}, 
                         is_locked = False, 

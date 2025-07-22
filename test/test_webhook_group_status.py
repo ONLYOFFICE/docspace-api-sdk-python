@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.webhook_group_status import WebhookGroupStatus
+from docspace-api-sdk.models.webhook_group_status import WebhookGroupStatus
 
 class TestWebhookGroupStatus(unittest.TestCase):
     """WebhookGroupStatus unit test stubs"""

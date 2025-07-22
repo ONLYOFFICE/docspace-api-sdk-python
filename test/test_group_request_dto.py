@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.group_request_dto import GroupRequestDto
+from docspace-api-sdk.models.group_request_dto import GroupRequestDto
 
 class TestGroupRequestDto(unittest.TestCase):
     """GroupRequestDto unit test stubs"""

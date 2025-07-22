@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.api.portal_settings_api import PortalSettingsApi
+from docspace-api-sdk.api.portal_settings_api import PortalSettingsApi
 
 
 class TestPortalSettingsApi(unittest.TestCase):

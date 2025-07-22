@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.forms_item_array_wrapper import FormsItemArrayWrapper
+from docspace-api-sdk.models.forms_item_array_wrapper import FormsItemArrayWrapper
 
 class TestFormsItemArrayWrapper(unittest.TestCase):
     """FormsItemArrayWrapper unit test stubs"""
@@ -40,13 +40,13 @@ class TestFormsItemArrayWrapper(unittest.TestCase):
         if include_optional:
             return FormsItemArrayWrapper(
                 response = [
-                    docspace-api-python.models.forms_item_dto.FormsItemDto(
+                    docspace-api-sdk.models.forms_item_dto.FormsItemDto(
                         key = 'some text', 
                         type = 'some text', )
                     ],
                 count = 56,
                 links = [
-                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-sdk.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

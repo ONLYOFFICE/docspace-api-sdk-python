@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.file_reference import FileReference
+from docspace-api-sdk.models.file_reference import FileReference
 
 class TestFileReference(unittest.TestCase):
     """FileReference unit test stubs"""
@@ -39,7 +39,7 @@ class TestFileReference(unittest.TestCase):
         model = FileReference()
         if include_optional:
             return FileReference(
-                reference_data = docspace-api-python.models.file_reference_data.FileReferenceData(
+                reference_data = docspace-api-sdk.models.file_reference_data.FileReferenceData(
                     file_key = 'some text', 
                     instance_id = '9846', 
                     room_id = '9846', 

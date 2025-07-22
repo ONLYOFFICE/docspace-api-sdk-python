@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.ace_short_wrapper import AceShortWrapper
+from docspace-api-sdk.models.ace_short_wrapper import AceShortWrapper
 
 class TestAceShortWrapper(unittest.TestCase):
     """AceShortWrapper unit test stubs"""

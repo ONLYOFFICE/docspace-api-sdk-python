@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.api.settings_notifications_api import SettingsNotificationsApi
+from docspace-api-sdk.api.settings_notifications_api import SettingsNotificationsApi
 
 
 class TestSettingsNotificationsApi(unittest.TestCase):

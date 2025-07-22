@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.api.files_sharing_api import FilesSharingApi
+from docspace-api-sdk.api.files_sharing_api import FilesSharingApi
 
 
 class TestFilesSharingApi(unittest.TestCase):

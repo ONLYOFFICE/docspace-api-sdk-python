@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.share_filter_type import ShareFilterType
+from docspace-api-sdk.models.share_filter_type import ShareFilterType
 
 class TestShareFilterType(unittest.TestCase):
     """ShareFilterType unit test stubs"""

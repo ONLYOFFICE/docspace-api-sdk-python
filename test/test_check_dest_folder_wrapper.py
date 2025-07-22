@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.check_dest_folder_wrapper import CheckDestFolderWrapper
+from docspace-api-sdk.models.check_dest_folder_wrapper import CheckDestFolderWrapper
 
 class TestCheckDestFolderWrapper(unittest.TestCase):
     """CheckDestFolderWrapper unit test stubs"""
@@ -39,17 +39,17 @@ class TestCheckDestFolderWrapper(unittest.TestCase):
         model = CheckDestFolderWrapper()
         if include_optional:
             return CheckDestFolderWrapper(
-                response = docspace-api-python.models.check_dest_folder_dto.CheckDestFolderDto(
+                response = docspace-api-sdk.models.check_dest_folder_dto.CheckDestFolderDto(
                     result = 0, 
                     files = [
-                        docspace-api-python.models.file_entry_dto.FileEntryDto(
+                        docspace-api-sdk.models.file_entry_dto.FileEntryDto(
                             title = 'Some titile.txt/ Some title', 
                             access = 0, 
                             shared = False, 
-                            created = docspace-api-python.models.api_date_time.ApiDateTime(
+                            created = docspace-api-sdk.models.api_date_time.ApiDateTime(
                                 utc_time = '2008-04-10T06:30+04:00', 
                                 time_zone_offset = '00:00:00', ), 
-                            created_by = docspace-api-python.models.employee_dto.EmployeeDto(
+                            created_by = docspace-api-sdk.models.employee_dto.EmployeeDto(
                                 id = '', 
                                 display_name = 'Mike Zanyatski', 
                                 title = 'Manager', 
@@ -61,13 +61,13 @@ class TestCheckDestFolderWrapper(unittest.TestCase):
                                 profile_url = 'some text', 
                                 has_avatar = True, 
                                 is_anonim = True, ), 
-                            updated = docspace-api-python.models.api_date_time.ApiDateTime(
+                            updated = docspace-api-sdk.models.api_date_time.ApiDateTime(
                                 utc_time = '2008-04-10T06:30+04:00', 
                                 time_zone_offset = '00:00:00', ), 
                             auto_delete = , 
                             root_folder_type = 0, 
                             parent_room_type = 0, 
-                            updated_by = docspace-api-python.models.employee_dto.EmployeeDto(
+                            updated_by = docspace-api-sdk.models.employee_dto.EmployeeDto(
                                 id = '', 
                                 display_name = 'Mike Zanyatski', 
                                 title = 'Manager', 
@@ -87,7 +87,7 @@ class TestCheckDestFolderWrapper(unittest.TestCase):
                         ], ),
                 count = 56,
                 links = [
-                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-sdk.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

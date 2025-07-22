@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-python.models.covers_result_dto import CoversResultDto
+from docspace-api-sdk.models.covers_result_dto import CoversResultDto
 
 # TODO update the JSON string below
 json = "{}"

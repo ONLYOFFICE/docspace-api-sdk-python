@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.tenant_quota import TenantQuota
+from docspace-api-sdk.models.tenant_quota import TenantQuota
 
 class TestTenantQuota(unittest.TestCase):
     """TenantQuota unit test stubs"""

@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.notification_type import NotificationType
+from docspace-api-sdk.models.notification_type import NotificationType
 
 class TestNotificationType(unittest.TestCase):
     """NotificationType unit test stubs"""

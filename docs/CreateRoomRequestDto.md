@@ -22,7 +22,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-python.models.create_room_request_dto import CreateRoomRequestDto
+from docspace-api-sdk.models.create_room_request_dto import CreateRoomRequestDto
 
 # TODO update the JSON string below
 json = "{}"

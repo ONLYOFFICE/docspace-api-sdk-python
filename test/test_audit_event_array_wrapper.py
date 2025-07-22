@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.audit_event_array_wrapper import AuditEventArrayWrapper
+from docspace-api-sdk.models.audit_event_array_wrapper import AuditEventArrayWrapper
 
 class TestAuditEventArrayWrapper(unittest.TestCase):
     """AuditEventArrayWrapper unit test stubs"""
@@ -40,9 +40,9 @@ class TestAuditEventArrayWrapper(unittest.TestCase):
         if include_optional:
             return AuditEventArrayWrapper(
                 response = [
-                    docspace-api-python.models.audit_event_dto.AuditEventDto(
+                    docspace-api-sdk.models.audit_event_dto.AuditEventDto(
                         id = 9846, 
-                        date = docspace-api-python.models.api_date_time.ApiDateTime(
+                        date = docspace-api-sdk.models.api_date_time.ApiDateTime(
                             utc_time = '2008-04-10T06:30+04:00', 
                             time_zone_offset = '00:00:00', ), 
                         user = 'some text', 
@@ -66,7 +66,7 @@ class TestAuditEventArrayWrapper(unittest.TestCase):
                     ],
                 count = 56,
                 links = [
-                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-sdk.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

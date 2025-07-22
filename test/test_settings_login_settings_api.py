@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.api.settings_login_settings_api import SettingsLoginSettingsApi
+from docspace-api-sdk.api.settings_login_settings_api import SettingsLoginSettingsApi
 
 
 class TestSettingsLoginSettingsApi(unittest.TestCase):

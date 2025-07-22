@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.recaptcha_type import RecaptchaType
+from docspace-api-sdk.models.recaptcha_type import RecaptchaType
 
 class TestRecaptchaType(unittest.TestCase):
     """RecaptchaType unit test stubs"""

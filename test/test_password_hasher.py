@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.password_hasher import PasswordHasher
+from docspace-api-sdk.models.password_hasher import PasswordHasher
 
 class TestPasswordHasher(unittest.TestCase):
     """PasswordHasher unit test stubs"""

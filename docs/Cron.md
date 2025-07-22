@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-python.models.cron import Cron
+from docspace-api-sdk.models.cron import Cron
 
 # TODO update the JSON string below
 json = "{}"

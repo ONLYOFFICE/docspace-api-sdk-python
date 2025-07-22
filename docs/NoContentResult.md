@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-python.models.no_content_result import NoContentResult
+from docspace-api-sdk.models.no_content_result import NoContentResult
 
 # TODO update the JSON string below
 json = "{}"

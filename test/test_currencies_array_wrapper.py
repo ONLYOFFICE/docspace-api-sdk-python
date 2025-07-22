@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.currencies_array_wrapper import CurrenciesArrayWrapper
+from docspace-api-sdk.models.currencies_array_wrapper import CurrenciesArrayWrapper
 
 class TestCurrenciesArrayWrapper(unittest.TestCase):
     """CurrenciesArrayWrapper unit test stubs"""
@@ -40,14 +40,14 @@ class TestCurrenciesArrayWrapper(unittest.TestCase):
         if include_optional:
             return CurrenciesArrayWrapper(
                 response = [
-                    docspace-api-python.models.currencies_dto.CurrenciesDto(
+                    docspace-api-sdk.models.currencies_dto.CurrenciesDto(
                         iso_country_code = 'some text', 
                         iso_currency_symbol = 'some text', 
                         currency_native_name = 'some text', )
                     ],
                 count = 56,
                 links = [
-                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-sdk.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

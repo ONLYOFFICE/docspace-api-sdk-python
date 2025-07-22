@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.security_dto import SecurityDto
+from docspace-api-sdk.models.security_dto import SecurityDto
 
 class TestSecurityDto(unittest.TestCase):
     """SecurityDto unit test stubs"""
@@ -41,7 +41,7 @@ class TestSecurityDto(unittest.TestCase):
             return SecurityDto(
                 web_item_id = '{00000000-0000-0000-0000-000000000000}',
                 users = [
-                    docspace-api-python.models.employee_dto.EmployeeDto(
+                    docspace-api-sdk.models.employee_dto.EmployeeDto(
                         id = '', 
                         display_name = 'Mike Zanyatski', 
                         title = 'Manager', 
@@ -55,7 +55,7 @@ class TestSecurityDto(unittest.TestCase):
                         is_anonim = True, )
                     ],
                 groups = [
-                    docspace-api-python.models.group_summary_dto.GroupSummaryDto(
+                    docspace-api-sdk.models.group_summary_dto.GroupSummaryDto(
                         id = '', 
                         name = 'Group Name', 
                         manager = 'Jake.Zazhitski', )

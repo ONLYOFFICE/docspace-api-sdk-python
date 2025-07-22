@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.save_as_pdf_integer import SaveAsPdfInteger
+from docspace-api-sdk.models.save_as_pdf_integer import SaveAsPdfInteger
 
 class TestSaveAsPdfInteger(unittest.TestCase):
     """SaveAsPdfInteger unit test stubs"""

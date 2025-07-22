@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-python.models.owner_change_instructions_dto import OwnerChangeInstructionsDto
+from docspace-api-sdk.models.owner_change_instructions_dto import OwnerChangeInstructionsDto
 
 # TODO update the JSON string below
 json = "{}"

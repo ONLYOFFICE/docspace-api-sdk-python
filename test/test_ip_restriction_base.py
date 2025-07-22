@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.ip_restriction_base import IpRestrictionBase
+from docspace-api-sdk.models.ip_restriction_base import IpRestrictionBase
 
 class TestIpRestrictionBase(unittest.TestCase):
     """IpRestrictionBase unit test stubs"""

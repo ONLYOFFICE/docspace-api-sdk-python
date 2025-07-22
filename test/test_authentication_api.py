@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.api.authentication_api import AuthenticationApi
+from docspace-api-sdk.api.authentication_api import AuthenticationApi
 
 
 class TestAuthenticationApi(unittest.TestCase):

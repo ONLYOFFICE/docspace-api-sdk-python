@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-python.models.ip_restriction_base import IpRestrictionBase
+from docspace-api-sdk.models.ip_restriction_base import IpRestrictionBase
 
 # TODO update the JSON string below
 json = "{}"

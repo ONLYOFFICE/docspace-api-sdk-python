@@ -1,4 +1,4 @@
-# docspace-api-python.CapabilitiesApi
+# docspace-api-sdk.CapabilitiesApi
 
 All URIs are relative to *http://localhost:8092*
 
@@ -30,22 +30,22 @@ No authorization required
 
 
 ```python
-import docspace-api-python
-from docspace-api-python.models.capabilities_wrapper import CapabilitiesWrapper
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.models.capabilities_wrapper import CapabilitiesWrapper
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.CapabilitiesApi(api_client)
+    api_instance = docspace-api-sdk.CapabilitiesApi(api_client)
 
     try:
         # Get portal capabilities

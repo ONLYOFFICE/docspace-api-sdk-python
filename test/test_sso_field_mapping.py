@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.sso_field_mapping import SsoFieldMapping
+from docspace-api-sdk.models.sso_field_mapping import SsoFieldMapping
 
 class TestSsoFieldMapping(unittest.TestCase):
     """SsoFieldMapping unit test stubs"""

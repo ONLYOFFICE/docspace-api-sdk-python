@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.external_share_dto import ExternalShareDto
+from docspace-api-sdk.models.external_share_dto import ExternalShareDto
 
 class TestExternalShareDto(unittest.TestCase):
     """ExternalShareDto unit test stubs"""

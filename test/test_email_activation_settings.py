@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.email_activation_settings import EmailActivationSettings
+from docspace-api-sdk.models.email_activation_settings import EmailActivationSettings
 
 class TestEmailActivationSettings(unittest.TestCase):
     """EmailActivationSettings unit test stubs"""

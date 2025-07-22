@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.create_client_request import CreateClientRequest
+from docspace-api-sdk.models.create_client_request import CreateClientRequest
 
 class TestCreateClientRequest(unittest.TestCase):
     """CreateClientRequest unit test stubs"""

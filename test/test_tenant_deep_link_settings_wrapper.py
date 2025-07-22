@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.tenant_deep_link_settings_wrapper import TenantDeepLinkSettingsWrapper
+from docspace-api-sdk.models.tenant_deep_link_settings_wrapper import TenantDeepLinkSettingsWrapper
 
 class TestTenantDeepLinkSettingsWrapper(unittest.TestCase):
     """TenantDeepLinkSettingsWrapper unit test stubs"""
@@ -39,12 +39,12 @@ class TestTenantDeepLinkSettingsWrapper(unittest.TestCase):
         model = TenantDeepLinkSettingsWrapper()
         if include_optional:
             return TenantDeepLinkSettingsWrapper(
-                response = docspace-api-python.models.tenant_deep_link_settings.TenantDeepLinkSettings(
+                response = docspace-api-sdk.models.tenant_deep_link_settings.TenantDeepLinkSettings(
                     handling_mode = 0, 
                     last_modified = '2008-04-10T06:30+04:00', ),
                 count = 56,
                 links = [
-                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-sdk.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

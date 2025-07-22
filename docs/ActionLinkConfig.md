@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-python.models.action_link_config import ActionLinkConfig
+from docspace-api-sdk.models.action_link_config import ActionLinkConfig
 
 # TODO update the JSON string below
 json = "{}"

@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.orders_request_dto_integer import OrdersRequestDtoInteger
+from docspace-api-sdk.models.orders_request_dto_integer import OrdersRequestDtoInteger
 
 class TestOrdersRequestDtoInteger(unittest.TestCase):
     """OrdersRequestDtoInteger unit test stubs"""
@@ -40,7 +40,7 @@ class TestOrdersRequestDtoInteger(unittest.TestCase):
         if include_optional:
             return OrdersRequestDtoInteger(
                 items = [
-                    docspace-api-python.models.orders_item_request_dto_integer.OrdersItemRequestDtoInteger(
+                    docspace-api-sdk.models.orders_item_request_dto_integer.OrdersItemRequestDtoInteger(
                         entry_id = 1234, 
                         entry_type = 1, 
                         order = 1234, )

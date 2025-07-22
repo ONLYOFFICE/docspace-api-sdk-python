@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.turn_on_admin_message_settings_request_dto import TurnOnAdminMessageSettingsRequestDto
+from docspace-api-sdk.models.turn_on_admin_message_settings_request_dto import TurnOnAdminMessageSettingsRequestDto
 
 class TestTurnOnAdminMessageSettingsRequestDto(unittest.TestCase):
     """TurnOnAdminMessageSettingsRequestDto unit test stubs"""

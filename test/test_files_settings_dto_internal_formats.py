@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.files_settings_dto_internal_formats import FilesSettingsDtoInternalFormats
+from docspace-api-sdk.models.files_settings_dto_internal_formats import FilesSettingsDtoInternalFormats
 
 class TestFilesSettingsDtoInternalFormats(unittest.TestCase):
     """FilesSettingsDtoInternalFormats unit test stubs"""

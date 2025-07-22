@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.customer_info_dto import CustomerInfoDto
+from docspace-api-sdk.models.customer_info_dto import CustomerInfoDto
 
 class TestCustomerInfoDto(unittest.TestCase):
     """CustomerInfoDto unit test stubs"""
@@ -42,7 +42,7 @@ class TestCustomerInfoDto(unittest.TestCase):
                 portal_id = 'some text',
                 payment_method_status = 0,
                 email = 'Sydney_Roberts4@hotmail.com',
-                payer = docspace-api-python.models.employee_dto.EmployeeDto(
+                payer = docspace-api-sdk.models.employee_dto.EmployeeDto(
                     id = '', 
                     display_name = 'Mike Zanyatski', 
                     title = 'Manager', 

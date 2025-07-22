@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.file_link_request import FileLinkRequest
+from docspace-api-sdk.models.file_link_request import FileLinkRequest
 
 class TestFileLinkRequest(unittest.TestCase):
     """FileLinkRequest unit test stubs"""
@@ -41,7 +41,7 @@ class TestFileLinkRequest(unittest.TestCase):
             return FileLinkRequest(
                 link_id = '75a5f745-f697-4418-b38d-0fe0d277e258',
                 access = 0,
-                expiration_date = docspace-api-python.models.api_date_time.ApiDateTime(
+                expiration_date = docspace-api-sdk.models.api_date_time.ApiDateTime(
                     utc_time = '2008-04-10T06:30+04:00', 
                     time_zone_offset = '00:00:00', ),
                 internal = True,

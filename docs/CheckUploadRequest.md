@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-python.models.check_upload_request import CheckUploadRequest
+from docspace-api-sdk.models.check_upload_request import CheckUploadRequest
 
 # TODO update the JSON string below
 json = "{}"

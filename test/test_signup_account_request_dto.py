@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.signup_account_request_dto import SignupAccountRequestDto
+from docspace-api-sdk.models.signup_account_request_dto import SignupAccountRequestDto
 
 class TestSignupAccountRequestDto(unittest.TestCase):
     """SignupAccountRequestDto unit test stubs"""

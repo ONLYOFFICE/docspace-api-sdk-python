@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.backup_history_record import BackupHistoryRecord
+from docspace-api-sdk.models.backup_history_record import BackupHistoryRecord
 
 class TestBackupHistoryRecord(unittest.TestCase):
     """BackupHistoryRecord unit test stubs"""

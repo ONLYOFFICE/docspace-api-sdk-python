@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.api.files_settings_api import FilesSettingsApi
+from docspace-api-sdk.api.files_settings_api import FilesSettingsApi
 
 
 class TestFilesSettingsApi(unittest.TestCase):

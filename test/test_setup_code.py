@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.setup_code import SetupCode
+from docspace-api-sdk.models.setup_code import SetupCode
 
 class TestSetupCode(unittest.TestCase):
     """SetupCode unit test stubs"""

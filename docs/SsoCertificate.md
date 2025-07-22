@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-python.models.sso_certificate import SsoCertificate
+from docspace-api-sdk.models.sso_certificate import SsoCertificate
 
 # TODO update the JSON string below
 json = "{}"

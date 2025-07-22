@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.run import Run
+from docspace-api-sdk.models.run import Run
 
 class TestRun(unittest.TestCase):
     """Run unit test stubs"""

@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.subject_filter import SubjectFilter
+from docspace-api-sdk.models.subject_filter import SubjectFilter
 
 class TestSubjectFilter(unittest.TestCase):
     """SubjectFilter unit test stubs"""

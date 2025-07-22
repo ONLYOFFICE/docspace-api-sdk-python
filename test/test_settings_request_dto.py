@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.settings_request_dto import SettingsRequestDto
+from docspace-api-sdk.models.settings_request_dto import SettingsRequestDto
 
 class TestSettingsRequestDto(unittest.TestCase):
     """SettingsRequestDto unit test stubs"""

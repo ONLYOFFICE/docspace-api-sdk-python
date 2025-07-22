@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.backup_dto import BackupDto
+from docspace-api-sdk.models.backup_dto import BackupDto
 
 class TestBackupDto(unittest.TestCase):
     """BackupDto unit test stubs"""
@@ -41,7 +41,7 @@ class TestBackupDto(unittest.TestCase):
             return BackupDto(
                 storage_type = 0,
                 storage_params = [
-                    docspace-api-python.models.item_key_value_pair_object_object.ItemKeyValuePairObjectObject(
+                    docspace-api-sdk.models.item_key_value_pair_object_object.ItemKeyValuePairObjectObject(
                         key = {"int":1234,"string":"some text","boolean":true}, 
                         value = {"int":1234,"string":"some text","boolean":true}, )
                     ],

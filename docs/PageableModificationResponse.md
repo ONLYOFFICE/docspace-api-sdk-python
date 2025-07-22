@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-python.models.pageable_modification_response import PageableModificationResponse
+from docspace-api-sdk.models.pageable_modification_response import PageableModificationResponse
 
 # TODO update the JSON string below
 json = "{}"

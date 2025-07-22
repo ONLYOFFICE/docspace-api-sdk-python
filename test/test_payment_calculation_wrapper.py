@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.payment_calculation_wrapper import PaymentCalculationWrapper
+from docspace-api-sdk.models.payment_calculation_wrapper import PaymentCalculationWrapper
 
 class TestPaymentCalculationWrapper(unittest.TestCase):
     """PaymentCalculationWrapper unit test stubs"""
@@ -39,14 +39,14 @@ class TestPaymentCalculationWrapper(unittest.TestCase):
         model = PaymentCalculationWrapper()
         if include_optional:
             return PaymentCalculationWrapper(
-                response = docspace-api-python.models.payment_calculation.PaymentCalculation(
+                response = docspace-api-sdk.models.payment_calculation.PaymentCalculation(
                     operation_id = 1234, 
                     amount = 1.337, 
                     currency = 'some text', 
                     quantity = 1234, ),
                 count = 56,
                 links = [
-                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-sdk.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.auth_service_requests_dto import AuthServiceRequestsDto
+from docspace-api-sdk.models.auth_service_requests_dto import AuthServiceRequestsDto
 
 class TestAuthServiceRequestsDto(unittest.TestCase):
     """AuthServiceRequestsDto unit test stubs"""
@@ -45,7 +45,7 @@ class TestAuthServiceRequestsDto(unittest.TestCase):
                 instruction = 'some text',
                 can_set = True,
                 props = [
-                    docspace-api-python.models.auth_key.AuthKey(
+                    docspace-api-sdk.models.auth_key.AuthKey(
                         name = 'Winfield Upton', 
                         value = 'some text', 
                         title = 'legacy_1080p_small_wooden_mouse', )

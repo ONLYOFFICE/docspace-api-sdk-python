@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.download_request_item_dto_key import DownloadRequestItemDtoKey
+from docspace-api-sdk.models.download_request_item_dto_key import DownloadRequestItemDtoKey
 
 class TestDownloadRequestItemDtoKey(unittest.TestCase):
     """DownloadRequestItemDtoKey unit test stubs"""

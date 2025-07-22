@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-python.models.tfa_settings_dto import TfaSettingsDto
+from docspace-api-sdk.models.tfa_settings_dto import TfaSettingsDto
 
 # TODO update the JSON string below
 json = "{}"

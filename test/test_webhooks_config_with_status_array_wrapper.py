@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.webhooks_config_with_status_array_wrapper import WebhooksConfigWithStatusArrayWrapper
+from docspace-api-sdk.models.webhooks_config_with_status_array_wrapper import WebhooksConfigWithStatusArrayWrapper
 
 class TestWebhooksConfigWithStatusArrayWrapper(unittest.TestCase):
     """WebhooksConfigWithStatusArrayWrapper unit test stubs"""
@@ -40,8 +40,8 @@ class TestWebhooksConfigWithStatusArrayWrapper(unittest.TestCase):
         if include_optional:
             return WebhooksConfigWithStatusArrayWrapper(
                 response = [
-                    docspace-api-python.models.webhooks_config_with_status_dto.WebhooksConfigWithStatusDto(
-                        configs = docspace-api-python.models.webhooks_config_dto.WebhooksConfigDto(
+                    docspace-api-sdk.models.webhooks_config_with_status_dto.WebhooksConfigWithStatusDto(
+                        configs = docspace-api-sdk.models.webhooks_config_dto.WebhooksConfigDto(
                             id = 9846, 
                             name = 'Winfield Upton', 
                             uri = 'some text', 
@@ -49,7 +49,7 @@ class TestWebhooksConfigWithStatusArrayWrapper(unittest.TestCase):
                             ssl = True, 
                             triggers = 0, 
                             target_id = 'some text', 
-                            created_by = docspace-api-python.models.employee_dto.EmployeeDto(
+                            created_by = docspace-api-sdk.models.employee_dto.EmployeeDto(
                                 id = '', 
                                 display_name = 'Mike Zanyatski', 
                                 title = 'Manager', 
@@ -62,7 +62,7 @@ class TestWebhooksConfigWithStatusArrayWrapper(unittest.TestCase):
                                 has_avatar = True, 
                                 is_anonim = True, ), 
                             created_on = '2008-04-10T06:30+04:00', 
-                            modified_by = docspace-api-python.models.employee_dto.EmployeeDto(
+                            modified_by = docspace-api-sdk.models.employee_dto.EmployeeDto(
                                 id = '', 
                                 display_name = 'Mike Zanyatski', 
                                 title = 'Manager', 
@@ -82,7 +82,7 @@ class TestWebhooksConfigWithStatusArrayWrapper(unittest.TestCase):
                     ],
                 count = 56,
                 links = [
-                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-sdk.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.webhooks_log_wrapper import WebhooksLogWrapper
+from docspace-api-sdk.models.webhooks_log_wrapper import WebhooksLogWrapper
 
 class TestWebhooksLogWrapper(unittest.TestCase):
     """WebhooksLogWrapper unit test stubs"""
@@ -39,7 +39,7 @@ class TestWebhooksLogWrapper(unittest.TestCase):
         model = WebhooksLogWrapper()
         if include_optional:
             return WebhooksLogWrapper(
-                response = docspace-api-python.models.webhooks_log_dto.WebhooksLogDto(
+                response = docspace-api-sdk.models.webhooks_log_dto.WebhooksLogDto(
                     id = 9846, 
                     config_name = 'some text', 
                     trigger = 0, 
@@ -54,7 +54,7 @@ class TestWebhooksLogWrapper(unittest.TestCase):
                     delivery = '2008-04-10T06:30+04:00', ),
                 count = 56,
                 links = [
-                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-sdk.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

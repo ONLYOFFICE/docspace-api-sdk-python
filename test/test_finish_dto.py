@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.finish_dto import FinishDto
+from docspace-api-sdk.models.finish_dto import FinishDto
 
 class TestFinishDto(unittest.TestCase):
     """FinishDto unit test stubs"""

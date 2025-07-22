@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.firebase_dto import FirebaseDto
+from docspace-api-sdk.models.firebase_dto import FirebaseDto
 
 class TestFirebaseDto(unittest.TestCase):
     """FirebaseDto unit test stubs"""

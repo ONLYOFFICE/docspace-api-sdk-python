@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-python.models.embedded_config import EmbeddedConfig
+from docspace-api-sdk.models.embedded_config import EmbeddedConfig
 
 # TODO update the JSON string below
 json = "{}"

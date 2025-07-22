@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.doc_service_url_dto import DocServiceUrlDto
+from docspace-api-sdk.models.doc_service_url_dto import DocServiceUrlDto
 
 class TestDocServiceUrlDto(unittest.TestCase):
     """DocServiceUrlDto unit test stubs"""

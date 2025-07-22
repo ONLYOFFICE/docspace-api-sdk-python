@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.ip_restriction_array_wrapper import IPRestrictionArrayWrapper
+from docspace-api-sdk.models.ip_restriction_array_wrapper import IPRestrictionArrayWrapper
 
 class TestIPRestrictionArrayWrapper(unittest.TestCase):
     """IPRestrictionArrayWrapper unit test stubs"""
@@ -40,7 +40,7 @@ class TestIPRestrictionArrayWrapper(unittest.TestCase):
         if include_optional:
             return IPRestrictionArrayWrapper(
                 response = [
-                    docspace-api-python.models.ip_restriction.IPRestriction(
+                    docspace-api-sdk.models.ip_restriction.IPRestriction(
                         ip = 'some text', 
                         for_admin = True, 
                         id = 9846, 
@@ -48,7 +48,7 @@ class TestIPRestrictionArrayWrapper(unittest.TestCase):
                     ],
                 count = 56,
                 links = [
-                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-sdk.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

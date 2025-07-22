@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-python.models.templates_config import TemplatesConfig
+from docspace-api-sdk.models.templates_config import TemplatesConfig
 
 # TODO update the JSON string below
 json = "{}"

@@ -19,7 +19,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-python.models.api_key_response_dto import ApiKeyResponseDto
+from docspace-api-sdk.models.api_key_response_dto import ApiKeyResponseDto
 
 # TODO update the JSON string below
 json = "{}"

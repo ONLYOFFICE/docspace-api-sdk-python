@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.additional_white_label_settings_dto import AdditionalWhiteLabelSettingsDto
+from docspace-api-sdk.models.additional_white_label_settings_dto import AdditionalWhiteLabelSettingsDto
 
 class TestAdditionalWhiteLabelSettingsDto(unittest.TestCase):
     """AdditionalWhiteLabelSettingsDto unit test stubs"""

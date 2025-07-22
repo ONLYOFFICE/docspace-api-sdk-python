@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.sso_certificate import SsoCertificate
+from docspace-api-sdk.models.sso_certificate import SsoCertificate
 
 class TestSsoCertificate(unittest.TestCase):
     """SsoCertificate unit test stubs"""

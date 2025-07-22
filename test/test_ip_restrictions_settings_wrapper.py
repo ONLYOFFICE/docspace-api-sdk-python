@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.ip_restrictions_settings_wrapper import IPRestrictionsSettingsWrapper
+from docspace-api-sdk.models.ip_restrictions_settings_wrapper import IPRestrictionsSettingsWrapper
 
 class TestIPRestrictionsSettingsWrapper(unittest.TestCase):
     """IPRestrictionsSettingsWrapper unit test stubs"""
@@ -39,12 +39,12 @@ class TestIPRestrictionsSettingsWrapper(unittest.TestCase):
         model = IPRestrictionsSettingsWrapper()
         if include_optional:
             return IPRestrictionsSettingsWrapper(
-                response = docspace-api-python.models.ip_restrictions_settings.IPRestrictionsSettings(
+                response = docspace-api-sdk.models.ip_restrictions_settings.IPRestrictionsSettings(
                     enable = True, 
                     last_modified = '2008-04-10T06:30+04:00', ),
                 count = 56,
                 links = [
-                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-sdk.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.backup_schedule_dto import BackupScheduleDto
+from docspace-api-sdk.models.backup_schedule_dto import BackupScheduleDto
 
 class TestBackupScheduleDto(unittest.TestCase):
     """BackupScheduleDto unit test stubs"""
@@ -41,12 +41,12 @@ class TestBackupScheduleDto(unittest.TestCase):
             return BackupScheduleDto(
                 storage_type = 0,
                 storage_params = [
-                    docspace-api-python.models.item_key_value_pair_object_object.ItemKeyValuePairObjectObject(
+                    docspace-api-sdk.models.item_key_value_pair_object_object.ItemKeyValuePairObjectObject(
                         key = {"int":1234,"string":"some text","boolean":true}, 
                         value = {"int":1234,"string":"some text","boolean":true}, )
                     ],
                 backups_stored = 1234,
-                cron_params = docspace-api-python.models.cron.Cron(
+                cron_params = docspace-api-sdk.models.cron.Cron(
                     period = 0, 
                     hour = 0, 
                     day = 0, ),

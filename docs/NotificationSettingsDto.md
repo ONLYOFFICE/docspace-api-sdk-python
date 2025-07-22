@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-python.models.notification_settings_dto import NotificationSettingsDto
+from docspace-api-sdk.models.notification_settings_dto import NotificationSettingsDto
 
 # TODO update the JSON string below
 json = "{}"

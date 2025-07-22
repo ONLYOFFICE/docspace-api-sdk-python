@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.confirm_wrapper import ConfirmWrapper
+from docspace-api-sdk.models.confirm_wrapper import ConfirmWrapper
 
 class TestConfirmWrapper(unittest.TestCase):
     """ConfirmWrapper unit test stubs"""
@@ -39,13 +39,13 @@ class TestConfirmWrapper(unittest.TestCase):
         model = ConfirmWrapper()
         if include_optional:
             return ConfirmWrapper(
-                response = docspace-api-python.models.confirm_dto.ConfirmDto(
+                response = docspace-api-sdk.models.confirm_dto.ConfirmDto(
                     result = 0, 
                     room_id = '9846', 
                     title = 'legacy_1080p_small_wooden_mouse', ),
                 count = 56,
                 links = [
-                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-sdk.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

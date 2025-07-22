@@ -1,4 +1,4 @@
-# docspace-api-python.SettingsEncryptionApi
+# docspace-api-sdk.SettingsEncryptionApi
 
 All URIs are relative to *http://localhost:8092*
 
@@ -32,14 +32,14 @@ This endpoint does not need any parameter.
 
 
 ```python
-import docspace-api-python
-from docspace-api-python.models.double_wrapper import DoubleWrapper
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.models.double_wrapper import DoubleWrapper
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -49,7 +49,7 @@ configuration = docspace-api-python.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     username = os.environ["USERNAME"],
     password = os.environ["PASSWORD"]
 )
@@ -69,14 +69,14 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.SettingsEncryptionApi(api_client)
+    api_instance = docspace-api-sdk.SettingsEncryptionApi(api_client)
 
     try:
         # Get the storage encryption progress
@@ -128,14 +128,14 @@ This endpoint does not need any parameter.
 
 
 ```python
-import docspace-api-python
-from docspace-api-python.models.encryption_settings_wrapper import EncryptionSettingsWrapper
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.models.encryption_settings_wrapper import EncryptionSettingsWrapper
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -145,7 +145,7 @@ configuration = docspace-api-python.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     username = os.environ["USERNAME"],
     password = os.environ["PASSWORD"]
 )
@@ -165,14 +165,14 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.SettingsEncryptionApi(api_client)
+    api_instance = docspace-api-sdk.SettingsEncryptionApi(api_client)
 
     try:
         # Get the storage encryption settings
@@ -228,15 +228,15 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-python
-from docspace-api-python.models.boolean_wrapper import BooleanWrapper
-from docspace-api-python.models.storage_encryption_requests_dto import StorageEncryptionRequestsDto
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.models.boolean_wrapper import BooleanWrapper
+from docspace-api-sdk.models.storage_encryption_requests_dto import StorageEncryptionRequestsDto
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -246,7 +246,7 @@ configuration = docspace-api-python.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     username = os.environ["USERNAME"],
     password = os.environ["PASSWORD"]
 )
@@ -266,15 +266,15 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.SettingsEncryptionApi(api_client)
-    storage_encryption_requests_dto = docspace-api-python.StorageEncryptionRequestsDto() # StorageEncryptionRequestsDto |  (optional)
+    api_instance = docspace-api-sdk.SettingsEncryptionApi(api_client)
+    storage_encryption_requests_dto = docspace-api-sdk.StorageEncryptionRequestsDto() # StorageEncryptionRequestsDto |  (optional)
 
     try:
         # Start the storage encryption process

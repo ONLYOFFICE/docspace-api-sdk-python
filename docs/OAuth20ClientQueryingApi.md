@@ -1,4 +1,4 @@
-# docspace-api-python.OAuth20ClientQueryingApi
+# docspace-api-sdk.OAuth20ClientQueryingApi
 
 All URIs are relative to *http://localhost:8092*
 
@@ -38,14 +38,14 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-python
-from docspace-api-python.models.client_response import ClientResponse
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.models.client_response import ClientResponse
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -61,9 +61,9 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.OAuth20ClientQueryingApi(api_client)
+    api_instance = docspace-api-sdk.OAuth20ClientQueryingApi(api_client)
     client_id = '6c7cf17b-1bd3-47d5-94c6-be2d3570e168' # str | The client identifier.
 
     try:
@@ -122,14 +122,14 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-python
-from docspace-api-python.models.client_info_response import ClientInfoResponse
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.models.client_info_response import ClientInfoResponse
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -145,9 +145,9 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.OAuth20ClientQueryingApi(api_client)
+    api_instance = docspace-api-sdk.OAuth20ClientQueryingApi(api_client)
     client_id = '6c7cf17b-1bd3-47d5-94c6-be2d3570e168' # str | The client identifier.
 
     try:
@@ -206,14 +206,14 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-python
-from docspace-api-python.models.pageable_response import PageableResponse
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.models.pageable_response import PageableResponse
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -229,9 +229,9 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.OAuth20ClientQueryingApi(api_client)
+    api_instance = docspace-api-sdk.OAuth20ClientQueryingApi(api_client)
     limit = 1 # int | The maximum number of results returned per page.
     last_client_id = '6c7cf17b-1bd3-47d5-94c6-be2d3570e168' # str | The ID of the last retrieved client. (optional)
     last_created_on = '2024-04-04T12:00:00Z' # datetime | The creation date of the last retrieved client. (optional)
@@ -293,14 +293,14 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-python
-from docspace-api-python.models.pageable_response_client_info_response import PageableResponseClientInfoResponse
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.models.pageable_response_client_info_response import PageableResponseClientInfoResponse
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -316,9 +316,9 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.OAuth20ClientQueryingApi(api_client)
+    api_instance = docspace-api-sdk.OAuth20ClientQueryingApi(api_client)
     limit = 1 # int | The maximum number of results returned per page.
     last_client_id = '6c7cf17b-1bd3-47d5-94c6-be2d3570e168' # str | The identifier of the last retrieved client. (optional)
     last_created_on = '2024-04-04T12:00:00Z' # datetime | The creation date of the last retrieved client. (optional)
@@ -378,14 +378,14 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-python
-from docspace-api-python.models.pageable_modification_response import PageableModificationResponse
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.models.pageable_modification_response import PageableModificationResponse
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -401,9 +401,9 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.OAuth20ClientQueryingApi(api_client)
+    api_instance = docspace-api-sdk.OAuth20ClientQueryingApi(api_client)
     limit = 1 # int | The maximum number of results returned per page.
     last_modified_on = '2024-04-04T12:00:00Z' # datetime | The date when the user consent was last modified. (optional)
 
@@ -458,22 +458,22 @@ No authorization required
 
 
 ```python
-import docspace-api-python
-from docspace-api-python.models.client_info_response import ClientInfoResponse
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.models.client_info_response import ClientInfoResponse
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.OAuth20ClientQueryingApi(api_client)
+    api_instance = docspace-api-sdk.OAuth20ClientQueryingApi(api_client)
     client_id = '6c7cf17b-1bd3-47d5-94c6-be2d3570e168' # str | The client identifier.
 
     try:

@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.order_request_dto import OrderRequestDto
+from docspace-api-sdk.models.order_request_dto import OrderRequestDto
 
 class TestOrderRequestDto(unittest.TestCase):
     """OrderRequestDto unit test stubs"""

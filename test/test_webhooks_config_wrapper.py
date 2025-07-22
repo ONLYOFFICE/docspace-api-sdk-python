@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.webhooks_config_wrapper import WebhooksConfigWrapper
+from docspace-api-sdk.models.webhooks_config_wrapper import WebhooksConfigWrapper
 
 class TestWebhooksConfigWrapper(unittest.TestCase):
     """WebhooksConfigWrapper unit test stubs"""
@@ -39,7 +39,7 @@ class TestWebhooksConfigWrapper(unittest.TestCase):
         model = WebhooksConfigWrapper()
         if include_optional:
             return WebhooksConfigWrapper(
-                response = docspace-api-python.models.webhooks_config_dto.WebhooksConfigDto(
+                response = docspace-api-sdk.models.webhooks_config_dto.WebhooksConfigDto(
                     id = 9846, 
                     name = 'Winfield Upton', 
                     uri = 'some text', 
@@ -47,7 +47,7 @@ class TestWebhooksConfigWrapper(unittest.TestCase):
                     ssl = True, 
                     triggers = 0, 
                     target_id = 'some text', 
-                    created_by = docspace-api-python.models.employee_dto.EmployeeDto(
+                    created_by = docspace-api-sdk.models.employee_dto.EmployeeDto(
                         id = '', 
                         display_name = 'Mike Zanyatski', 
                         title = 'Manager', 
@@ -60,7 +60,7 @@ class TestWebhooksConfigWrapper(unittest.TestCase):
                         has_avatar = True, 
                         is_anonim = True, ), 
                     created_on = '2008-04-10T06:30+04:00', 
-                    modified_by = docspace-api-python.models.employee_dto.EmployeeDto(
+                    modified_by = docspace-api-sdk.models.employee_dto.EmployeeDto(
                         id = '', 
                         display_name = 'Mike Zanyatski', 
                         title = 'Manager', 
@@ -78,7 +78,7 @@ class TestWebhooksConfigWrapper(unittest.TestCase):
                     last_success_on = '2008-04-10T06:30+04:00', ),
                 count = 56,
                 links = [
-                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-sdk.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.feedback_config import FeedbackConfig
+from docspace-api-sdk.models.feedback_config import FeedbackConfig
 
 class TestFeedbackConfig(unittest.TestCase):
     """FeedbackConfig unit test stubs"""

@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.storage_requests_dto import StorageRequestsDto
+from docspace-api-sdk.models.storage_requests_dto import StorageRequestsDto
 
 class TestStorageRequestsDto(unittest.TestCase):
     """StorageRequestsDto unit test stubs"""
@@ -41,7 +41,7 @@ class TestStorageRequestsDto(unittest.TestCase):
             return StorageRequestsDto(
                 module = 'some text',
                 props = [
-                    docspace-api-python.models.item_key_value_pair_string_string.ItemKeyValuePairStringString(
+                    docspace-api-sdk.models.item_key_value_pair_string_string.ItemKeyValuePairStringString(
                         key = 'some text', 
                         value = 'some text', )
                     ]

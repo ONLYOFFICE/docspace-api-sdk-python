@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.tenant_banner_settings_wrapper import TenantBannerSettingsWrapper
+from docspace-api-sdk.models.tenant_banner_settings_wrapper import TenantBannerSettingsWrapper
 
 class TestTenantBannerSettingsWrapper(unittest.TestCase):
     """TenantBannerSettingsWrapper unit test stubs"""
@@ -39,12 +39,12 @@ class TestTenantBannerSettingsWrapper(unittest.TestCase):
         model = TenantBannerSettingsWrapper()
         if include_optional:
             return TenantBannerSettingsWrapper(
-                response = docspace-api-python.models.tenant_banner_settings.TenantBannerSettings(
+                response = docspace-api-sdk.models.tenant_banner_settings.TenantBannerSettings(
                     hidden = True, 
                     last_modified = '2008-04-10T06:30+04:00', ),
                 count = 56,
                 links = [
-                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-sdk.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

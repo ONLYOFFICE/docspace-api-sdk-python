@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.tariff_wrapper import TariffWrapper
+from docspace-api-sdk.models.tariff_wrapper import TariffWrapper
 
 class TestTariffWrapper(unittest.TestCase):
     """TariffWrapper unit test stubs"""
@@ -39,7 +39,7 @@ class TestTariffWrapper(unittest.TestCase):
         model = TariffWrapper()
         if include_optional:
             return TariffWrapper(
-                response = docspace-api-python.models.tariff.Tariff(
+                response = docspace-api-sdk.models.tariff.Tariff(
                     id = 9846, 
                     state = 0, 
                     due_date = '2008-04-10T06:30+04:00', 
@@ -47,7 +47,7 @@ class TestTariffWrapper(unittest.TestCase):
                     license_date = '2008-04-10T06:30+04:00', 
                     customer_id = 'some text', 
                     quotas = [
-                        docspace-api-python.models.quota.Quota(
+                        docspace-api-sdk.models.quota.Quota(
                             id = 9846, 
                             quantity = 1234, 
                             wallet = True, 
@@ -55,7 +55,7 @@ class TestTariffWrapper(unittest.TestCase):
                             next_quantity = 1234, )
                         ], 
                     overdue_quotas = [
-                        docspace-api-python.models.quota.Quota(
+                        docspace-api-sdk.models.quota.Quota(
                             id = 9846, 
                             quantity = 1234, 
                             wallet = True, 
@@ -64,7 +64,7 @@ class TestTariffWrapper(unittest.TestCase):
                         ], ),
                 count = 56,
                 links = [
-                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-sdk.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

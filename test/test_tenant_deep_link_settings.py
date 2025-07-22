@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.tenant_deep_link_settings import TenantDeepLinkSettings
+from docspace-api-sdk.models.tenant_deep_link_settings import TenantDeepLinkSettings
 
 class TestTenantDeepLinkSettings(unittest.TestCase):
     """TenantDeepLinkSettings unit test stubs"""

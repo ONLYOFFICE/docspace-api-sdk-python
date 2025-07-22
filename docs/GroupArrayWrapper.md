@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-python.models.group_array_wrapper import GroupArrayWrapper
+from docspace-api-sdk.models.group_array_wrapper import GroupArrayWrapper
 
 # TODO update the JSON string below
 json = "{}"

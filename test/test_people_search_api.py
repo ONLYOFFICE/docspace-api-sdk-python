@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.api.people_search_api import PeopleSearchApi
+from docspace-api-sdk.api.people_search_api import PeopleSearchApi
 
 
 class TestPeopleSearchApi(unittest.TestCase):

@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-python.models.deep_link_dto import DeepLinkDto
+from docspace-api-sdk.models.deep_link_dto import DeepLinkDto
 
 # TODO update the JSON string below
 json = "{}"

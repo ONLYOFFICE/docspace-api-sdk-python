@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.templates_config import TemplatesConfig
+from docspace-api-sdk.models.templates_config import TemplatesConfig
 
 class TestTemplatesConfig(unittest.TestCase):
     """TemplatesConfig unit test stubs"""

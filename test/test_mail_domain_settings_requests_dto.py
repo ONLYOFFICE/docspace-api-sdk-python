@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.mail_domain_settings_requests_dto import MailDomainSettingsRequestsDto
+from docspace-api-sdk.models.mail_domain_settings_requests_dto import MailDomainSettingsRequestsDto
 
 class TestMailDomainSettingsRequestsDto(unittest.TestCase):
     """MailDomainSettingsRequestsDto unit test stubs"""

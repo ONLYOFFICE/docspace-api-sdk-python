@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.tenant_wallet_settings import TenantWalletSettings
+from docspace-api-sdk.models.tenant_wallet_settings import TenantWalletSettings
 
 class TestTenantWalletSettings(unittest.TestCase):
     """TenantWalletSettings unit test stubs"""

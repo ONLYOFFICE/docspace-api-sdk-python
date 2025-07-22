@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.culture_specific_external_resources import CultureSpecificExternalResources
+from docspace-api-sdk.models.culture_specific_external_resources import CultureSpecificExternalResources
 
 class TestCultureSpecificExternalResources(unittest.TestCase):
     """CultureSpecificExternalResources unit test stubs"""
@@ -39,31 +39,31 @@ class TestCultureSpecificExternalResources(unittest.TestCase):
         model = CultureSpecificExternalResources()
         if include_optional:
             return CultureSpecificExternalResources(
-                api = docspace-api-python.models.culture_specific_external_resource.CultureSpecificExternalResource(
+                api = docspace-api-sdk.models.culture_specific_external_resource.CultureSpecificExternalResource(
                     domain = 'some text', 
                     entries = [{"key":"some text","value":"some text"}], ),
-                common = docspace-api-python.models.culture_specific_external_resource.CultureSpecificExternalResource(
+                common = docspace-api-sdk.models.culture_specific_external_resource.CultureSpecificExternalResource(
                     domain = 'some text', 
                     entries = [{"key":"some text","value":"some text"}], ),
-                forum = docspace-api-python.models.culture_specific_external_resource.CultureSpecificExternalResource(
+                forum = docspace-api-sdk.models.culture_specific_external_resource.CultureSpecificExternalResource(
                     domain = 'some text', 
                     entries = [{"key":"some text","value":"some text"}], ),
-                helpcenter = docspace-api-python.models.culture_specific_external_resource.CultureSpecificExternalResource(
+                helpcenter = docspace-api-sdk.models.culture_specific_external_resource.CultureSpecificExternalResource(
                     domain = 'some text', 
                     entries = [{"key":"some text","value":"some text"}], ),
-                integrations = docspace-api-python.models.culture_specific_external_resource.CultureSpecificExternalResource(
+                integrations = docspace-api-sdk.models.culture_specific_external_resource.CultureSpecificExternalResource(
                     domain = 'some text', 
                     entries = [{"key":"some text","value":"some text"}], ),
-                site = docspace-api-python.models.culture_specific_external_resource.CultureSpecificExternalResource(
+                site = docspace-api-sdk.models.culture_specific_external_resource.CultureSpecificExternalResource(
                     domain = 'some text', 
                     entries = [{"key":"some text","value":"some text"}], ),
-                social_networks = docspace-api-python.models.culture_specific_external_resource.CultureSpecificExternalResource(
+                social_networks = docspace-api-sdk.models.culture_specific_external_resource.CultureSpecificExternalResource(
                     domain = 'some text', 
                     entries = [{"key":"some text","value":"some text"}], ),
-                support = docspace-api-python.models.culture_specific_external_resource.CultureSpecificExternalResource(
+                support = docspace-api-sdk.models.culture_specific_external_resource.CultureSpecificExternalResource(
                     domain = 'some text', 
                     entries = [{"key":"some text","value":"some text"}], ),
-                videoguides = docspace-api-python.models.culture_specific_external_resource.CultureSpecificExternalResource(
+                videoguides = docspace-api-sdk.models.culture_specific_external_resource.CultureSpecificExternalResource(
                     domain = 'some text', 
                     entries = [{"key":"some text","value":"some text"}], )
             )

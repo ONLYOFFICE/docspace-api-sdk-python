@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.info_config_dto import InfoConfigDto
+from docspace-api-sdk.models.info_config_dto import InfoConfigDto
 
 class TestInfoConfigDto(unittest.TestCase):
     """InfoConfigDto unit test stubs"""
@@ -43,7 +43,7 @@ class TestInfoConfigDto(unittest.TestCase):
                 folder = 'some text',
                 owner = 'some text',
                 sharing_settings = [
-                    docspace-api-python.models.ace_short_wrapper.AceShortWrapper(
+                    docspace-api-sdk.models.ace_short_wrapper.AceShortWrapper(
                         user = 'some text', 
                         permissions = 'some text', 
                         is_link = True, )

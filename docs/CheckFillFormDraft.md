@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-python.models.check_fill_form_draft import CheckFillFormDraft
+from docspace-api-sdk.models.check_fill_form_draft import CheckFillFormDraft
 
 # TODO update the JSON string below
 json = "{}"

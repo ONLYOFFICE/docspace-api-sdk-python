@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.csp_dto import CspDto
+from docspace-api-sdk.models.csp_dto import CspDto
 
 class TestCspDto(unittest.TestCase):
     """CspDto unit test stubs"""

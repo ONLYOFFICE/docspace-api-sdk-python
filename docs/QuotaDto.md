@@ -20,7 +20,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-python.models.quota_dto import QuotaDto
+from docspace-api-sdk.models.quota_dto import QuotaDto
 
 # TODO update the JSON string below
 json = "{}"

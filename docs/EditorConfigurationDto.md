@@ -22,7 +22,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-python.models.editor_configuration_dto import EditorConfigurationDto
+from docspace-api-sdk.models.editor_configuration_dto import EditorConfigurationDto
 
 # TODO update the JSON string below
 json = "{}"

@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.schedule_wrapper import ScheduleWrapper
+from docspace-api-sdk.models.schedule_wrapper import ScheduleWrapper
 
 class TestScheduleWrapper(unittest.TestCase):
     """ScheduleWrapper unit test stubs"""
@@ -39,10 +39,10 @@ class TestScheduleWrapper(unittest.TestCase):
         model = ScheduleWrapper()
         if include_optional:
             return ScheduleWrapper(
-                response = docspace-api-python.models.schedule.Schedule(
+                response = docspace-api-sdk.models.schedule.Schedule(
                     storage_type = 0, 
                     storage_params = [{"key":"some text","value":"some text"}], 
-                    cron_params = docspace-api-python.models.cron_params.CronParams(
+                    cron_params = docspace-api-sdk.models.cron_params.CronParams(
                         period = 0, 
                         hour = 1234, 
                         day = 1234, ), 
@@ -51,7 +51,7 @@ class TestScheduleWrapper(unittest.TestCase):
                     dump = False, ),
                 count = 56,
                 links = [
-                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-sdk.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

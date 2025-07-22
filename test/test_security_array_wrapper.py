@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.security_array_wrapper import SecurityArrayWrapper
+from docspace-api-sdk.models.security_array_wrapper import SecurityArrayWrapper
 
 class TestSecurityArrayWrapper(unittest.TestCase):
     """SecurityArrayWrapper unit test stubs"""
@@ -40,10 +40,10 @@ class TestSecurityArrayWrapper(unittest.TestCase):
         if include_optional:
             return SecurityArrayWrapper(
                 response = [
-                    docspace-api-python.models.security_dto.SecurityDto(
+                    docspace-api-sdk.models.security_dto.SecurityDto(
                         web_item_id = '{00000000-0000-0000-0000-000000000000}', 
                         users = [
-                            docspace-api-python.models.employee_dto.EmployeeDto(
+                            docspace-api-sdk.models.employee_dto.EmployeeDto(
                                 id = '', 
                                 display_name = 'Mike Zanyatski', 
                                 title = 'Manager', 
@@ -57,7 +57,7 @@ class TestSecurityArrayWrapper(unittest.TestCase):
                                 is_anonim = True, )
                             ], 
                         groups = [
-                            docspace-api-python.models.group_summary_dto.GroupSummaryDto(
+                            docspace-api-sdk.models.group_summary_dto.GroupSummaryDto(
                                 id = '', 
                                 name = 'Group Name', 
                                 manager = 'Jake.Zazhitski', )
@@ -67,7 +67,7 @@ class TestSecurityArrayWrapper(unittest.TestCase):
                     ],
                 count = 56,
                 links = [
-                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-sdk.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

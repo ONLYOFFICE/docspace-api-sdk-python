@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.api.security_smtp_settings_api import SecuritySMTPSettingsApi
+from docspace-api-sdk.api.security_smtp_settings_api import SecuritySMTPSettingsApi
 
 
 class TestSecuritySMTPSettingsApi(unittest.TestCase):

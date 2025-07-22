@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-python.models.storage_settings import StorageSettings
+from docspace-api-sdk.models.storage_settings import StorageSettings
 
 # TODO update the JSON string below
 json = "{}"

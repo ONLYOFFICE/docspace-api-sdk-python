@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.apply_filter_option import ApplyFilterOption
+from docspace-api-sdk.models.apply_filter_option import ApplyFilterOption
 
 class TestApplyFilterOption(unittest.TestCase):
     """ApplyFilterOption unit test stubs"""

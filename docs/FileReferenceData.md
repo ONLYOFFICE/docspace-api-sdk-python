@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-python.models.file_reference_data import FileReferenceData
+from docspace-api-sdk.models.file_reference_data import FileReferenceData
 
 # TODO update the JSON string below
 json = "{}"

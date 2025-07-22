@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.update_room_request import UpdateRoomRequest
+from docspace-api-sdk.models.update_room_request import UpdateRoomRequest
 
 class TestUpdateRoomRequest(unittest.TestCase):
     """UpdateRoomRequest unit test stubs"""
@@ -43,12 +43,12 @@ class TestUpdateRoomRequest(unittest.TestCase):
                 quota = 1234,
                 indexing = True,
                 deny_download = True,
-                lifetime = docspace-api-python.models.room_data_lifetime_dto.RoomDataLifetimeDto(
+                lifetime = docspace-api-sdk.models.room_data_lifetime_dto.RoomDataLifetimeDto(
                     delete_permanently = True, 
                     period = 0, 
                     value = 1234, 
                     enabled = True, ),
-                watermark = docspace-api-python.models.watermark_request_dto.WatermarkRequestDto(
+                watermark = docspace-api-sdk.models.watermark_request_dto.WatermarkRequestDto(
                     enabled = True, 
                     additions = 1, 
                     text = 'some text', 
@@ -57,7 +57,7 @@ class TestUpdateRoomRequest(unittest.TestCase):
                     image_url = 'some text', 
                     image_height = -8.5, 
                     image_width = -8.5, ),
-                logo = docspace-api-python.models.logo_request.LogoRequest(
+                logo = docspace-api-sdk.models.logo_request.LogoRequest(
                     tmp_file = 'some text', 
                     x = 1234, 
                     y = 1234, 

@@ -16,12 +16,12 @@
 
 
 
-from docspace-api-python import Configuration, ApiClient, AuthenticationApi, FilesFoldersApi, BackupApi
-from docspace-api-python.models.auth_requests_dto import AuthRequestsDto
-from docspace-api-python.models.create_folder import CreateFolder
-from docspace-api-python.models.delete_folder import DeleteFolder
-from docspace-api-python.models.backup_dto import BackupDto
-from docspace-api-python.models.backup_storage_type import BackupStorageType
+from docspace-api-sdk import Configuration, ApiClient, AuthenticationApi, FilesFoldersApi, BackupApi
+from docspace-api-sdk.models.auth_requests_dto import AuthRequestsDto
+from docspace-api-sdk.models.create_folder import CreateFolder
+from docspace-api-sdk.models.delete_folder import DeleteFolder
+from docspace-api-sdk.models.backup_dto import BackupDto
+from docspace-api-sdk.models.backup_storage_type import BackupStorageType
 import time
 
 def main():

@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.login_settings_wrapper import LoginSettingsWrapper
+from docspace-api-sdk.models.login_settings_wrapper import LoginSettingsWrapper
 
 class TestLoginSettingsWrapper(unittest.TestCase):
     """LoginSettingsWrapper unit test stubs"""
@@ -39,14 +39,14 @@ class TestLoginSettingsWrapper(unittest.TestCase):
         model = LoginSettingsWrapper()
         if include_optional:
             return LoginSettingsWrapper(
-                response = docspace-api-python.models.login_settings_dto.LoginSettingsDto(
+                response = docspace-api-sdk.models.login_settings_dto.LoginSettingsDto(
                     attempt_count = 1234, 
                     block_time = 1234, 
                     check_period = 1234, 
                     is_default = True, ),
                 count = 56,
                 links = [
-                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-sdk.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

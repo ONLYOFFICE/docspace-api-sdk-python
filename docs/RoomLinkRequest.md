@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-python.models.room_link_request import RoomLinkRequest
+from docspace-api-sdk.models.room_link_request import RoomLinkRequest
 
 # TODO update the JSON string below
 json = "{}"

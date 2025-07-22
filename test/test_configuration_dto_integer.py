@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.configuration_dto_integer import ConfigurationDtoInteger
+from docspace-api-sdk.models.configuration_dto_integer import ConfigurationDtoInteger
 
 class TestConfigurationDtoInteger(unittest.TestCase):
     """ConfigurationDtoInteger unit test stubs"""
@@ -39,14 +39,14 @@ class TestConfigurationDtoInteger(unittest.TestCase):
         model = ConfigurationDtoInteger()
         if include_optional:
             return ConfigurationDtoInteger(
-                document = docspace-api-python.models.document_config_dto.DocumentConfigDto(
+                document = docspace-api-sdk.models.document_config_dto.DocumentConfigDto(
                     file_type = 'some text', 
-                    info = docspace-api-python.models.info_config_dto.InfoConfigDto(
+                    info = docspace-api-sdk.models.info_config_dto.InfoConfigDto(
                         favorite = True, 
                         folder = 'some text', 
                         owner = 'some text', 
                         sharing_settings = [
-                            docspace-api-python.models.ace_short_wrapper.AceShortWrapper(
+                            docspace-api-sdk.models.ace_short_wrapper.AceShortWrapper(
                                 user = 'some text', 
                                 permissions = 'some text', 
                                 is_link = True, )
@@ -55,7 +55,7 @@ class TestConfigurationDtoInteger(unittest.TestCase):
                         uploaded = 'some text', ), 
                     is_linked_for_me = True, 
                     key = 'some text', 
-                    permissions = docspace-api-python.models.permissions_config.PermissionsConfig(
+                    permissions = docspace-api-sdk.models.permissions_config.PermissionsConfig(
                         comment = True, 
                         chat = True, 
                         download = True, 
@@ -69,7 +69,7 @@ class TestConfigurationDtoInteger(unittest.TestCase):
                         copy = True, ), 
                     shared_link_param = 'some text', 
                     shared_link_key = 'some text', 
-                    reference_data = docspace-api-python.models.file_reference_data.FileReferenceData(
+                    reference_data = docspace-api-sdk.models.file_reference_data.FileReferenceData(
                         file_key = 'some text', 
                         instance_id = '9846', 
                         room_id = '9846', 
@@ -77,8 +77,8 @@ class TestConfigurationDtoInteger(unittest.TestCase):
                     title = 'legacy_1080p_small_wooden_mouse', 
                     url = 'some text', 
                     is_form = True, 
-                    options = docspace-api-python.models.options.Options(
-                        watermark_on_draw = docspace-api-python.models.watermark_on_draw.WatermarkOnDraw(
+                    options = docspace-api-sdk.models.options.Options(
+                        watermark_on_draw = docspace-api-sdk.models.watermark_on_draw.WatermarkOnDraw(
                             width = -8.5, 
                             height = -8.5, 
                             margins = [1234], 
@@ -86,43 +86,43 @@ class TestConfigurationDtoInteger(unittest.TestCase):
                             rotate = 1234, 
                             transparent = -8.5, 
                             paragraphs = [
-                                docspace-api-python.models.paragraph.Paragraph(
+                                docspace-api-sdk.models.paragraph.Paragraph(
                                     align = 1234, 
                                     runs = [
-                                        docspace-api-python.models.run.Run(
+                                        docspace-api-sdk.models.run.Run(
                                             fill = [1234], 
                                             text = 'some text', 
                                             font_size = 'some text', )
                                         ], )
                                 ], ), ), ),
                 document_type = 'some text',
-                editor_config = docspace-api-python.models.editor_configuration_dto.EditorConfigurationDto(
+                editor_config = docspace-api-sdk.models.editor_configuration_dto.EditorConfigurationDto(
                     callback_url = 'some text', 
-                    co_editing = docspace-api-python.models.co_editing_config.CoEditingConfig(
+                    co_editing = docspace-api-sdk.models.co_editing_config.CoEditingConfig(
                         change = True, 
                         fast = True, 
                         mode = 0, ), 
                     create_url = 'some text', 
-                    customization = docspace-api-python.models.customization_config_dto.CustomizationConfigDto(
+                    customization = docspace-api-sdk.models.customization_config_dto.CustomizationConfigDto(
                         about = True, 
-                        customer = docspace-api-python.models.customer_config_dto.CustomerConfigDto(
+                        customer = docspace-api-sdk.models.customer_config_dto.CustomerConfigDto(
                             address = 'some text', 
                             logo = 'some text', 
                             logo_dark = 'some text', 
                             mail = 'some text', 
                             name = 'Winfield Upton', 
                             www = 'some text', ), 
-                        anonymous = docspace-api-python.models.anonymous_config_dto.AnonymousConfigDto(
+                        anonymous = docspace-api-sdk.models.anonymous_config_dto.AnonymousConfigDto(
                             request = True, ), 
-                        feedback = docspace-api-python.models.feedback_config.FeedbackConfig(
+                        feedback = docspace-api-sdk.models.feedback_config.FeedbackConfig(
                             url = 'some text', 
                             visible = True, ), 
                         forcesave = True, 
-                        goback = docspace-api-python.models.goback_config.GobackConfig(
+                        goback = docspace-api-sdk.models.goback_config.GobackConfig(
                             url = 'some text', ), 
-                        review = docspace-api-python.models.review_config.ReviewConfig(
+                        review = docspace-api-sdk.models.review_config.ReviewConfig(
                             review_display = 'some text', ), 
-                        logo = docspace-api-python.models.logo_config_dto.LogoConfigDto(
+                        logo = docspace-api-sdk.models.logo_config_dto.LogoConfigDto(
                             image = 'some text', 
                             image_dark = 'some text', 
                             image_light = 'some text', 
@@ -130,39 +130,39 @@ class TestConfigurationDtoInteger(unittest.TestCase):
                             url = 'some text', 
                             visible = True, ), 
                         mention_share = True, 
-                        submit_form = docspace-api-python.models.submit_form.SubmitForm(
+                        submit_form = docspace-api-sdk.models.submit_form.SubmitForm(
                             visible = True, 
                             result_message = 'some text', ), 
-                        start_filling_form = docspace-api-python.models.start_filling_form.StartFillingForm(
+                        start_filling_form = docspace-api-sdk.models.start_filling_form.StartFillingForm(
                             text = 'some text', ), ), 
-                    embedded = docspace-api-python.models.embedded_config.EmbeddedConfig(
+                    embedded = docspace-api-sdk.models.embedded_config.EmbeddedConfig(
                         embed_url = 'some text', 
                         save_url = 'some text', 
                         share_link_param = 'some text', 
                         share_url = 'some text', 
                         toolbar_docked = 'some text', ), 
-                    encryption_keys = docspace-api-python.models.encryption_keys_config.EncryptionKeysConfig(
+                    encryption_keys = docspace-api-sdk.models.encryption_keys_config.EncryptionKeysConfig(
                         crypto_engine_id = 'some text', 
                         private_key_enc = 'some text', 
                         public_key = 'some text', ), 
                     lang = 'some text', 
                     mode = 'some text', 
                     mode_write = True, 
-                    plugins = docspace-api-python.models.plugins_config.PluginsConfig(
+                    plugins = docspace-api-sdk.models.plugins_config.PluginsConfig(
                         plugins_data = ["some text"], ), 
                     recent = [
-                        docspace-api-python.models.recent_config.RecentConfig(
+                        docspace-api-sdk.models.recent_config.RecentConfig(
                             folder = 'some text', 
                             title = 'legacy_1080p_small_wooden_mouse', 
                             url = 'some text', )
                         ], 
                     templates = [
-                        docspace-api-python.models.templates_config.TemplatesConfig(
+                        docspace-api-sdk.models.templates_config.TemplatesConfig(
                             image = 'some text', 
                             title = 'legacy_1080p_small_wooden_mouse', 
                             url = 'some text', )
                         ], 
-                    user = docspace-api-python.models.user_config.UserConfig(
+                    user = docspace-api-sdk.models.user_config.UserConfig(
                         id = '9846', 
                         name = 'Winfield Upton', 
                         image = 'some text', 
@@ -171,14 +171,14 @@ class TestConfigurationDtoInteger(unittest.TestCase):
                 editor_url = 'some text',
                 token = 'some text',
                 type = 'some text',
-                file = docspace-api-python.models.file_dto_integer.FileDtoInteger(
+                file = docspace-api-sdk.models.file_dto_integer.FileDtoInteger(
                     title = 'Some titile.txt/ Some title', 
                     access = 0, 
                     shared = False, 
-                    created = docspace-api-python.models.api_date_time.ApiDateTime(
+                    created = docspace-api-sdk.models.api_date_time.ApiDateTime(
                         utc_time = '2008-04-10T06:30+04:00', 
                         time_zone_offset = '00:00:00', ), 
-                    created_by = docspace-api-python.models.employee_dto.EmployeeDto(
+                    created_by = docspace-api-sdk.models.employee_dto.EmployeeDto(
                         id = '', 
                         display_name = 'Mike Zanyatski', 
                         title = 'Manager', 
@@ -190,13 +190,13 @@ class TestConfigurationDtoInteger(unittest.TestCase):
                         profile_url = 'some text', 
                         has_avatar = True, 
                         is_anonim = True, ), 
-                    updated = docspace-api-python.models.api_date_time.ApiDateTime(
+                    updated = docspace-api-sdk.models.api_date_time.ApiDateTime(
                         utc_time = '2008-04-10T06:30+04:00', 
                         time_zone_offset = '00:00:00', ), 
                     auto_delete = , 
                     root_folder_type = 0, 
                     parent_room_type = 0, 
-                    updated_by = docspace-api-python.models.employee_dto.EmployeeDto(
+                    updated_by = docspace-api-sdk.models.employee_dto.EmployeeDto(
                         id = '', 
                         display_name = 'Mike Zanyatski', 
                         title = 'Manager', 
@@ -247,7 +247,7 @@ class TestConfigurationDtoInteger(unittest.TestCase):
                     start_filling = False, 
                     in_process_folder_id = 1234, 
                     in_process_folder_title = 'some text', 
-                    draft_location = docspace-api-python.models.draft_location_integer.DraftLocationInteger(
+                    draft_location = docspace-api-sdk.models.draft_location_integer.DraftLocationInteger(
                         folder_id = 9846, 
                         folder_title = 'some text', 
                         file_id = 9846, 

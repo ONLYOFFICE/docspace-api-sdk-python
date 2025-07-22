@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-python.models.security_array_wrapper import SecurityArrayWrapper
+from docspace-api-sdk.models.security_array_wrapper import SecurityArrayWrapper
 
 # TODO update the JSON string below
 json = "{}"

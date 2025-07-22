@@ -1,4 +1,4 @@
-# docspace-api-python.SettingsWebhooksApi
+# docspace-api-sdk.SettingsWebhooksApi
 
 All URIs are relative to *http://localhost:8092*
 
@@ -41,15 +41,15 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-python
-from docspace-api-python.models.create_webhooks_config_requests_dto import CreateWebhooksConfigRequestsDto
-from docspace-api-python.models.webhooks_config_wrapper import WebhooksConfigWrapper
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.models.create_webhooks_config_requests_dto import CreateWebhooksConfigRequestsDto
+from docspace-api-sdk.models.webhooks_config_wrapper import WebhooksConfigWrapper
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -59,7 +59,7 @@ configuration = docspace-api-python.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     username = os.environ["USERNAME"],
     password = os.environ["PASSWORD"]
 )
@@ -79,15 +79,15 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.SettingsWebhooksApi(api_client)
-    create_webhooks_config_requests_dto = docspace-api-python.CreateWebhooksConfigRequestsDto() # CreateWebhooksConfigRequestsDto |  (optional)
+    api_instance = docspace-api-sdk.SettingsWebhooksApi(api_client)
+    create_webhooks_config_requests_dto = docspace-api-sdk.CreateWebhooksConfigRequestsDto() # CreateWebhooksConfigRequestsDto |  (optional)
 
     try:
         # Create a webhook
@@ -141,15 +141,15 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-python
-from docspace-api-python.models.update_webhooks_config_requests_dto import UpdateWebhooksConfigRequestsDto
-from docspace-api-python.models.webhooks_config_wrapper import WebhooksConfigWrapper
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.models.update_webhooks_config_requests_dto import UpdateWebhooksConfigRequestsDto
+from docspace-api-sdk.models.webhooks_config_wrapper import WebhooksConfigWrapper
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -159,7 +159,7 @@ configuration = docspace-api-python.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     username = os.environ["USERNAME"],
     password = os.environ["PASSWORD"]
 )
@@ -179,15 +179,15 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.SettingsWebhooksApi(api_client)
-    update_webhooks_config_requests_dto = docspace-api-python.UpdateWebhooksConfigRequestsDto() # UpdateWebhooksConfigRequestsDto |  (optional)
+    api_instance = docspace-api-sdk.SettingsWebhooksApi(api_client)
+    update_webhooks_config_requests_dto = docspace-api-sdk.UpdateWebhooksConfigRequestsDto() # UpdateWebhooksConfigRequestsDto |  (optional)
 
     try:
         # Enable a webhook
@@ -238,14 +238,14 @@ This endpoint does not need any parameter.
 
 
 ```python
-import docspace-api-python
-from docspace-api-python.models.webhooks_config_with_status_array_wrapper import WebhooksConfigWithStatusArrayWrapper
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.models.webhooks_config_with_status_array_wrapper import WebhooksConfigWithStatusArrayWrapper
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -255,7 +255,7 @@ configuration = docspace-api-python.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     username = os.environ["USERNAME"],
     password = os.environ["PASSWORD"]
 )
@@ -275,14 +275,14 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.SettingsWebhooksApi(api_client)
+    api_instance = docspace-api-sdk.SettingsWebhooksApi(api_client)
 
     try:
         # Get webhooks
@@ -333,14 +333,14 @@ This endpoint does not need any parameter.
 
 
 ```python
-import docspace-api-python
-from docspace-api-python.models.unknown_wrapper import UnknownWrapper
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.models.unknown_wrapper import UnknownWrapper
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -350,7 +350,7 @@ configuration = docspace-api-python.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     username = os.environ["USERNAME"],
     password = os.environ["PASSWORD"]
 )
@@ -370,14 +370,14 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.SettingsWebhooksApi(api_client)
+    api_instance = docspace-api-sdk.SettingsWebhooksApi(api_client)
 
     try:
         # Get webhook triggers
@@ -441,16 +441,16 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-python
-from docspace-api-python.models.webhook_group_status import WebhookGroupStatus
-from docspace-api-python.models.webhook_trigger import WebhookTrigger
-from docspace-api-python.models.webhooks_log_array_wrapper import WebhooksLogArrayWrapper
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.models.webhook_group_status import WebhookGroupStatus
+from docspace-api-sdk.models.webhook_trigger import WebhookTrigger
+from docspace-api-sdk.models.webhooks_log_array_wrapper import WebhooksLogArrayWrapper
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -460,7 +460,7 @@ configuration = docspace-api-python.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     username = os.environ["USERNAME"],
     password = os.environ["PASSWORD"]
 )
@@ -480,22 +480,22 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.SettingsWebhooksApi(api_client)
+    api_instance = docspace-api-sdk.SettingsWebhooksApi(api_client)
     delivery_from = '2008-04-10T06:30+04:00' # datetime | The delivery start time for filtering webhook logs. (optional)
     delivery_to = '2008-04-10T06:30+04:00' # datetime | The delivery end time for filtering webhook logs. (optional)
     hook_uri = 'some text' # str | The destination URL where webhooks are delivered. (optional)
     config_id = 1234 # int | The webhook configuration identifier. (optional)
     event_id = 1234 # int | The unique identifier of the event that triggered the webhook. (optional)
-    group_status = docspace-api-python.WebhookGroupStatus() # WebhookGroupStatus | The status of the webhook delivery group. (optional)
+    group_status = docspace-api-sdk.WebhookGroupStatus() # WebhookGroupStatus | The status of the webhook delivery group. (optional)
     user_id = 'aae1e103-bca5-9fa1-ba8c-42058b4abf28' # str | The identifier of the user associated with the webhook event. (optional)
-    trigger = docspace-api-python.WebhookTrigger() # WebhookTrigger | The type of event that triggered the webhook. (optional)
+    trigger = docspace-api-sdk.WebhookTrigger() # WebhookTrigger | The type of event that triggered the webhook. (optional)
     count = 1234 # int | The maximum number of webhook log records to return in the query response. (optional)
     start_index = 1234 # int | Specifies the starting index for retrieving webhook logs.  Used for pagination in the webhook delivery log queries. (optional)
     fields =  # string | Comma-separated list of fields to include in the response (optional)
@@ -552,14 +552,14 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-python
-from docspace-api-python.models.webhooks_config_wrapper import WebhooksConfigWrapper
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.models.webhooks_config_wrapper import WebhooksConfigWrapper
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -569,7 +569,7 @@ configuration = docspace-api-python.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     username = os.environ["USERNAME"],
     password = os.environ["PASSWORD"]
 )
@@ -589,14 +589,14 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.SettingsWebhooksApi(api_client)
+    api_instance = docspace-api-sdk.SettingsWebhooksApi(api_client)
     id = 9846 # int | The ID extracted from the route parameters.
 
     try:
@@ -651,14 +651,14 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-python
-from docspace-api-python.models.webhooks_log_wrapper import WebhooksLogWrapper
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.models.webhooks_log_wrapper import WebhooksLogWrapper
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -668,7 +668,7 @@ configuration = docspace-api-python.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     username = os.environ["USERNAME"],
     password = os.environ["PASSWORD"]
 )
@@ -688,14 +688,14 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.SettingsWebhooksApi(api_client)
+    api_instance = docspace-api-sdk.SettingsWebhooksApi(api_client)
     id = 9846 # int | The ID extracted from the route parameters.
 
     try:
@@ -752,15 +752,15 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-python
-from docspace-api-python.models.webhook_retry_requests_dto import WebhookRetryRequestsDto
-from docspace-api-python.models.webhooks_log_array_wrapper import WebhooksLogArrayWrapper
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.models.webhook_retry_requests_dto import WebhookRetryRequestsDto
+from docspace-api-sdk.models.webhooks_log_array_wrapper import WebhooksLogArrayWrapper
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -770,7 +770,7 @@ configuration = docspace-api-python.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     username = os.environ["USERNAME"],
     password = os.environ["PASSWORD"]
 )
@@ -790,15 +790,15 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.SettingsWebhooksApi(api_client)
-    webhook_retry_requests_dto = docspace-api-python.WebhookRetryRequestsDto() # WebhookRetryRequestsDto |  (optional)
+    api_instance = docspace-api-sdk.SettingsWebhooksApi(api_client)
+    webhook_retry_requests_dto = docspace-api-sdk.WebhookRetryRequestsDto() # WebhookRetryRequestsDto |  (optional)
 
     try:
         # Retry webhooks
@@ -852,15 +852,15 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-python
-from docspace-api-python.models.update_webhooks_config_requests_dto import UpdateWebhooksConfigRequestsDto
-from docspace-api-python.models.webhooks_config_wrapper import WebhooksConfigWrapper
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.models.update_webhooks_config_requests_dto import UpdateWebhooksConfigRequestsDto
+from docspace-api-sdk.models.webhooks_config_wrapper import WebhooksConfigWrapper
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -870,7 +870,7 @@ configuration = docspace-api-python.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     username = os.environ["USERNAME"],
     password = os.environ["PASSWORD"]
 )
@@ -890,15 +890,15 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.SettingsWebhooksApi(api_client)
-    update_webhooks_config_requests_dto = docspace-api-python.UpdateWebhooksConfigRequestsDto() # UpdateWebhooksConfigRequestsDto |  (optional)
+    api_instance = docspace-api-sdk.SettingsWebhooksApi(api_client)
+    update_webhooks_config_requests_dto = docspace-api-sdk.UpdateWebhooksConfigRequestsDto() # UpdateWebhooksConfigRequestsDto |  (optional)
 
     try:
         # Update a webhook

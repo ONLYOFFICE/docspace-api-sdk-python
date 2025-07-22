@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.culture import Culture
+from docspace-api-sdk.models.culture import Culture
 
 class TestCulture(unittest.TestCase):
     """Culture unit test stubs"""

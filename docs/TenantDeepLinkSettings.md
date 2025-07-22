@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-python.models.tenant_deep_link_settings import TenantDeepLinkSettings
+from docspace-api-sdk.models.tenant_deep_link_settings import TenantDeepLinkSettings
 
 # TODO update the JSON string below
 json = "{}"

@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.external_share_request_param import ExternalShareRequestParam
+from docspace-api-sdk.models.external_share_request_param import ExternalShareRequestParam
 
 class TestExternalShareRequestParam(unittest.TestCase):
     """ExternalShareRequestParam unit test stubs"""

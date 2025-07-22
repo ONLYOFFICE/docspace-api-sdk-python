@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.api.people_quota_api import PeopleQuotaApi
+from docspace-api-sdk.api.people_quota_api import PeopleQuotaApi
 
 
 class TestPeopleQuotaApi(unittest.TestCase):

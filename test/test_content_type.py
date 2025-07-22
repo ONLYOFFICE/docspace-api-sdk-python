@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.content_type import ContentType
+from docspace-api-sdk.models.content_type import ContentType
 
 class TestContentType(unittest.TestCase):
     """ContentType unit test stubs"""

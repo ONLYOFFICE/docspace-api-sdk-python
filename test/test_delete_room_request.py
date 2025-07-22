@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.delete_room_request import DeleteRoomRequest
+from docspace-api-sdk.models.delete_room_request import DeleteRoomRequest
 
 class TestDeleteRoomRequest(unittest.TestCase):
     """DeleteRoomRequest unit test stubs"""

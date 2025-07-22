@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.review_config import ReviewConfig
+from docspace-api-sdk.models.review_config import ReviewConfig
 
 class TestReviewConfig(unittest.TestCase):
     """ReviewConfig unit test stubs"""

@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.logo_requests_dto import LogoRequestsDto
+from docspace-api-sdk.models.logo_requests_dto import LogoRequestsDto
 
 class TestLogoRequestsDto(unittest.TestCase):
     """LogoRequestsDto unit test stubs"""

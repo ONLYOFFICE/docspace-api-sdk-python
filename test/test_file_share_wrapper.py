@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.file_share_wrapper import FileShareWrapper
+from docspace-api-sdk.models.file_share_wrapper import FileShareWrapper
 
 class TestFileShareWrapper(unittest.TestCase):
     """FileShareWrapper unit test stubs"""
@@ -39,7 +39,7 @@ class TestFileShareWrapper(unittest.TestCase):
         model = FileShareWrapper()
         if include_optional:
             return FileShareWrapper(
-                response = docspace-api-python.models.file_share_dto.FileShareDto(
+                response = docspace-api-sdk.models.file_share_dto.FileShareDto(
                     access = 0, 
                     shared_to = {"int":1234,"string":"some text","boolean":true}, 
                     is_locked = False, 
@@ -48,7 +48,7 @@ class TestFileShareWrapper(unittest.TestCase):
                     subject_type = 0, ),
                 count = 56,
                 links = [
-                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-sdk.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

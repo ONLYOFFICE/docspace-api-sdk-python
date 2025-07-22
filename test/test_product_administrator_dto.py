@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.product_administrator_dto import ProductAdministratorDto
+from docspace-api-sdk.models.product_administrator_dto import ProductAdministratorDto
 
 class TestProductAdministratorDto(unittest.TestCase):
     """ProductAdministratorDto unit test stubs"""

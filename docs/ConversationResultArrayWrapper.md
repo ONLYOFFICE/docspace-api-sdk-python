@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-python.models.conversation_result_array_wrapper import ConversationResultArrayWrapper
+from docspace-api-sdk.models.conversation_result_array_wrapper import ConversationResultArrayWrapper
 
 # TODO update the JSON string below
 json = "{}"

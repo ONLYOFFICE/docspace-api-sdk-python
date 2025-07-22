@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-python.models.file_share_params import FileShareParams
+from docspace-api-sdk.models.file_share_params import FileShareParams
 
 # TODO update the JSON string below
 json = "{}"

@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.email_member_request_dto import EmailMemberRequestDto
+from docspace-api-sdk.models.email_member_request_dto import EmailMemberRequestDto
 
 class TestEmailMemberRequestDto(unittest.TestCase):
     """EmailMemberRequestDto unit test stubs"""

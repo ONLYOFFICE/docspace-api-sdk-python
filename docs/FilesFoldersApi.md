@@ -1,4 +1,4 @@
-# docspace-api-python.FilesFoldersApi
+# docspace-api-sdk.FilesFoldersApi
 
 All URIs are relative to *http://localhost:8092*
 
@@ -55,15 +55,15 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-python
-from docspace-api-python.models.check_upload_request import CheckUploadRequest
-from docspace-api-python.models.string_array_wrapper import STRINGArrayWrapper
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.models.check_upload_request import CheckUploadRequest
+from docspace-api-sdk.models.string_array_wrapper import STRINGArrayWrapper
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -73,7 +73,7 @@ configuration = docspace-api-python.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     username = os.environ["USERNAME"],
     password = os.environ["PASSWORD"]
 )
@@ -93,16 +93,16 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.FilesFoldersApi(api_client)
+    api_instance = docspace-api-sdk.FilesFoldersApi(api_client)
     folder_id = 9846 # int | The folder ID.
-    check_upload_request = docspace-api-python.CheckUploadRequest() # CheckUploadRequest | The request parameters for checking file uploads. (optional)
+    check_upload_request = docspace-api-sdk.CheckUploadRequest() # CheckUploadRequest | The request parameters for checking file uploads. (optional)
 
     try:
         # Check file uploads
@@ -157,15 +157,15 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-python
-from docspace-api-python.models.create_folder import CreateFolder
-from docspace-api-python.models.folder_integer_wrapper import FolderIntegerWrapper
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.models.create_folder import CreateFolder
+from docspace-api-sdk.models.folder_integer_wrapper import FolderIntegerWrapper
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -175,7 +175,7 @@ configuration = docspace-api-python.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     username = os.environ["USERNAME"],
     password = os.environ["PASSWORD"]
 )
@@ -195,16 +195,16 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.FilesFoldersApi(api_client)
+    api_instance = docspace-api-sdk.FilesFoldersApi(api_client)
     folder_id = 9846 # int | The folder ID for the folder creation.
-    create_folder = docspace-api-python.CreateFolder() # CreateFolder | The parameters for creating a folder. (optional)
+    create_folder = docspace-api-sdk.CreateFolder() # CreateFolder | The parameters for creating a folder. (optional)
 
     try:
         # Create a folder
@@ -259,15 +259,15 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-python
-from docspace-api-python.models.delete_folder import DeleteFolder
-from docspace-api-python.models.file_operation_array_wrapper import FileOperationArrayWrapper
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.models.delete_folder import DeleteFolder
+from docspace-api-sdk.models.file_operation_array_wrapper import FileOperationArrayWrapper
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -277,7 +277,7 @@ configuration = docspace-api-python.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     username = os.environ["USERNAME"],
     password = os.environ["PASSWORD"]
 )
@@ -297,16 +297,16 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.FilesFoldersApi(api_client)
+    api_instance = docspace-api-sdk.FilesFoldersApi(api_client)
     folder_id = 9846 # int | The folder ID to delete.
-    delete_folder = docspace-api-python.DeleteFolder() # DeleteFolder | The parameters for deleting a folder. (optional)
+    delete_folder = docspace-api-sdk.DeleteFolder() # DeleteFolder | The parameters for deleting a folder. (optional)
 
     try:
         # Delete a folder
@@ -357,14 +357,14 @@ This endpoint does not need any parameter.
 
 
 ```python
-import docspace-api-python
-from docspace-api-python.models.files_statistics_result_wrapper import FilesStatisticsResultWrapper
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.models.files_statistics_result_wrapper import FilesStatisticsResultWrapper
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -374,7 +374,7 @@ configuration = docspace-api-python.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     username = os.environ["USERNAME"],
     password = os.environ["PASSWORD"]
 )
@@ -394,14 +394,14 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.FilesFoldersApi(api_client)
+    api_instance = docspace-api-sdk.FilesFoldersApi(api_client)
 
     try:
         # Get used space of files
@@ -455,22 +455,22 @@ No authorization required
 
 
 ```python
-import docspace-api-python
-from docspace-api-python.models.forms_item_array_wrapper import FormsItemArrayWrapper
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.models.forms_item_array_wrapper import FormsItemArrayWrapper
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.FilesFoldersApi(api_client)
+    api_instance = docspace-api-sdk.FilesFoldersApi(api_client)
     folder_id = 9846 # int | The request folder ID.
 
     try:
@@ -538,40 +538,40 @@ No authorization required
 
 
 ```python
-import docspace-api-python
-from docspace-api-python.models.apply_filter_option import ApplyFilterOption
-from docspace-api-python.models.filter_type import FilterType
-from docspace-api-python.models.folder_content_integer_wrapper import FolderContentIntegerWrapper
-from docspace-api-python.models.search_area import SearchArea
-from docspace-api-python.models.sort_order import SortOrder
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.models.apply_filter_option import ApplyFilterOption
+from docspace-api-sdk.models.filter_type import FilterType
+from docspace-api-sdk.models.folder_content_integer_wrapper import FolderContentIntegerWrapper
+from docspace-api-sdk.models.search_area import SearchArea
+from docspace-api-sdk.models.sort_order import SortOrder
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.FilesFoldersApi(api_client)
+    api_instance = docspace-api-sdk.FilesFoldersApi(api_client)
     folder_id = 9846 # int | The folder ID of the request.
     user_id_or_group_id = '75a5f745-f697-4418-b38d-0fe0d277e258' # str | The user or group ID. (optional)
-    filter_type = docspace-api-python.FilterType() # FilterType | The filter type. (optional)
+    filter_type = docspace-api-sdk.FilterType() # FilterType | The filter type. (optional)
     room_id = 9846 # int | The room ID. (optional)
     exclude_subject = true # bool | Specifies whether to exclude search by user or group ID. (optional)
-    apply_filter_option = docspace-api-python.ApplyFilterOption() # ApplyFilterOption | Specifies whether to return only files, only folders or all elements from the specified folder. (optional)
+    apply_filter_option = docspace-api-sdk.ApplyFilterOption() # ApplyFilterOption | Specifies whether to return only files, only folders or all elements from the specified folder. (optional)
     extension = '.txt' # str | Specifies whether to search for the specific file extension. (optional)
-    search_area = docspace-api-python.SearchArea() # SearchArea | The search area. (optional)
+    search_area = docspace-api-sdk.SearchArea() # SearchArea | The search area. (optional)
     forms_item_key = 'some text' # str | The forms item key. (optional)
     forms_item_type = 'some text' # str | The forms item type. (optional)
     count = 1234 # int | The maximum number of items to retrieve in the request. (optional)
     start_index = 1234 # int | The zero-based index of the first item to retrieve in a paginated request. (optional)
     sort_by = 'some text' # str | Specifies the property used for sorting the folder request results. (optional)
-    sort_order = docspace-api-python.SortOrder() # SortOrder | The order in which the results are sorted. (optional)
+    sort_order = docspace-api-sdk.SortOrder() # SortOrder | The order in which the results are sorted. (optional)
     filter_value = 'some text' # str | The text value used as a filter parameter for folder content queries. (optional)
 
     try:
@@ -631,15 +631,15 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-python
-from docspace-api-python.models.api_date_time import ApiDateTime
-from docspace-api-python.models.history_array_wrapper import HistoryArrayWrapper
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.models.api_date_time import ApiDateTime
+from docspace-api-sdk.models.history_array_wrapper import HistoryArrayWrapper
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -649,7 +649,7 @@ configuration = docspace-api-python.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     username = os.environ["USERNAME"],
     password = os.environ["PASSWORD"]
 )
@@ -669,17 +669,17 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.FilesFoldersApi(api_client)
+    api_instance = docspace-api-sdk.FilesFoldersApi(api_client)
     folder_id = 9846 # int | The folder ID of the history request.
-    from_date = docspace-api-python.ApiDateTime() # ApiDateTime | The start date of the history request. (optional)
-    to_date = docspace-api-python.ApiDateTime() # ApiDateTime | The end date of the history request. (optional)
+    from_date = docspace-api-sdk.ApiDateTime() # ApiDateTime | The start date of the history request. (optional)
+    to_date = docspace-api-sdk.ApiDateTime() # ApiDateTime | The end date of the history request. (optional)
     count = 1234 # int | The number of records to retrieve for the folder history. (optional)
     start_index = 1234 # int | The starting index from which the history records are retrieved in the request. (optional)
 
@@ -737,22 +737,22 @@ No authorization required
 
 
 ```python
-import docspace-api-python
-from docspace-api-python.models.folder_integer_wrapper import FolderIntegerWrapper
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.models.folder_integer_wrapper import FolderIntegerWrapper
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.FilesFoldersApi(api_client)
+    api_instance = docspace-api-sdk.FilesFoldersApi(api_client)
     folder_id = 9846 # int | The request folder ID.
 
     try:
@@ -806,14 +806,14 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-python
-from docspace-api-python.models.file_entry_array_wrapper import FileEntryArrayWrapper
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.models.file_entry_array_wrapper import FileEntryArrayWrapper
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -823,7 +823,7 @@ configuration = docspace-api-python.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     username = os.environ["USERNAME"],
     password = os.environ["PASSWORD"]
 )
@@ -843,14 +843,14 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.FilesFoldersApi(api_client)
+    api_instance = docspace-api-sdk.FilesFoldersApi(api_client)
     folder_id = 9846 # int | The request folder ID.
 
     try:
@@ -906,22 +906,22 @@ No authorization required
 
 
 ```python
-import docspace-api-python
-from docspace-api-python.models.file_share_wrapper import FileShareWrapper
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.models.file_share_wrapper import FileShareWrapper
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.FilesFoldersApi(api_client)
+    api_instance = docspace-api-sdk.FilesFoldersApi(api_client)
     id = 9846 # int | The request folder ID.
 
     try:
@@ -976,14 +976,14 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-python
-from docspace-api-python.models.file_entry_array_wrapper import FileEntryArrayWrapper
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.models.file_entry_array_wrapper import FileEntryArrayWrapper
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -993,7 +993,7 @@ configuration = docspace-api-python.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     username = os.environ["USERNAME"],
     password = os.environ["PASSWORD"]
 )
@@ -1013,14 +1013,14 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.FilesFoldersApi(api_client)
+    api_instance = docspace-api-sdk.FilesFoldersApi(api_client)
     folder_id = 9846 # int | The request folder ID.
 
     try:
@@ -1084,17 +1084,17 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-python
-from docspace-api-python.models.apply_filter_option import ApplyFilterOption
-from docspace-api-python.models.filter_type import FilterType
-from docspace-api-python.models.folder_content_integer_wrapper import FolderContentIntegerWrapper
-from docspace-api-python.models.sort_order import SortOrder
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.models.apply_filter_option import ApplyFilterOption
+from docspace-api-sdk.models.filter_type import FilterType
+from docspace-api-sdk.models.folder_content_integer_wrapper import FolderContentIntegerWrapper
+from docspace-api-sdk.models.sort_order import SortOrder
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -1104,7 +1104,7 @@ configuration = docspace-api-python.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     username = os.environ["USERNAME"],
     password = os.environ["PASSWORD"]
 )
@@ -1124,21 +1124,21 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.FilesFoldersApi(api_client)
+    api_instance = docspace-api-sdk.FilesFoldersApi(api_client)
     user_id_or_group_id = '75a5f745-f697-4418-b38d-0fe0d277e258' # str | The user or group ID. (optional)
-    filter_type = docspace-api-python.FilterType() # FilterType | The filter type. (optional)
-    apply_filter_option = docspace-api-python.ApplyFilterOption() # ApplyFilterOption | Specifies whether to return only files, only folders or all elements. (optional)
+    filter_type = docspace-api-sdk.FilterType() # FilterType | The filter type. (optional)
+    apply_filter_option = docspace-api-sdk.ApplyFilterOption() # ApplyFilterOption | Specifies whether to return only files, only folders or all elements. (optional)
     count = 1234 # int | The maximum number of items to retrieve in the response. (optional)
     start_index = 1234 # int | The starting position of the items to be retrieved. (optional)
     sort_by = 'some text' # str | The property used to specify the sorting criteria for folder contents. (optional)
-    sort_order = docspace-api-python.SortOrder() # SortOrder | The order in which the results are sorted. (optional)
+    sort_order = docspace-api-sdk.SortOrder() # SortOrder | The order in which the results are sorted. (optional)
     filter_value = 'some text' # str | The text used for filtering or searching folder contents. (optional)
     fields =  # string | Comma-separated list of fields to include in the response (optional)
 
@@ -1196,14 +1196,14 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-python
-from docspace-api-python.models.file_entry_array_wrapper import FileEntryArrayWrapper
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.models.file_entry_array_wrapper import FileEntryArrayWrapper
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -1213,7 +1213,7 @@ configuration = docspace-api-python.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     username = os.environ["USERNAME"],
     password = os.environ["PASSWORD"]
 )
@@ -1233,14 +1233,14 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.FilesFoldersApi(api_client)
+    api_instance = docspace-api-sdk.FilesFoldersApi(api_client)
     folder_id = 9846 # int | The request folder ID.
 
     try:
@@ -1303,16 +1303,16 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-python
-from docspace-api-python.models.filter_type import FilterType
-from docspace-api-python.models.folder_content_integer_wrapper import FolderContentIntegerWrapper
-from docspace-api-python.models.sort_order import SortOrder
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.models.filter_type import FilterType
+from docspace-api-sdk.models.folder_content_integer_wrapper import FolderContentIntegerWrapper
+from docspace-api-sdk.models.sort_order import SortOrder
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -1322,7 +1322,7 @@ configuration = docspace-api-python.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     username = os.environ["USERNAME"],
     password = os.environ["PASSWORD"]
 )
@@ -1342,20 +1342,20 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.FilesFoldersApi(api_client)
+    api_instance = docspace-api-sdk.FilesFoldersApi(api_client)
     user_id_or_group_id = '75a5f745-f697-4418-b38d-0fe0d277e258' # str | The user or group ID. (optional)
-    filter_type = docspace-api-python.FilterType() # FilterType | The filter type. (optional)
+    filter_type = docspace-api-sdk.FilterType() # FilterType | The filter type. (optional)
     count = 1234 # int | The maximum number of items to retrieve in the request. (optional)
     start_index = 1234 # int | The zero-based index of the first item to retrieve in a paginated list. (optional)
     sort_by = 'some text' # str | Specifies the field by which the folder content should be sorted. (optional)
-    sort_order = docspace-api-python.SortOrder() # SortOrder | The order in which the results are sorted. (optional)
+    sort_order = docspace-api-sdk.SortOrder() # SortOrder | The order in which the results are sorted. (optional)
     filter_value = 'some text' # str | The text used as a filter or search criterion for folder content queries. (optional)
     fields =  # string | Comma-separated list of fields to include in the response (optional)
 
@@ -1421,16 +1421,16 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-python
-from docspace-api-python.models.filter_type import FilterType
-from docspace-api-python.models.folder_content_integer_array_wrapper import FolderContentIntegerArrayWrapper
-from docspace-api-python.models.sort_order import SortOrder
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.models.filter_type import FilterType
+from docspace-api-sdk.models.folder_content_integer_array_wrapper import FolderContentIntegerArrayWrapper
+from docspace-api-sdk.models.sort_order import SortOrder
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -1440,7 +1440,7 @@ configuration = docspace-api-python.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     username = os.environ["USERNAME"],
     password = os.environ["PASSWORD"]
 )
@@ -1460,21 +1460,21 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.FilesFoldersApi(api_client)
+    api_instance = docspace-api-sdk.FilesFoldersApi(api_client)
     user_id_or_group_id = '75a5f745-f697-4418-b38d-0fe0d277e258' # str | The user or group ID. (optional)
-    filter_type = docspace-api-python.FilterType() # FilterType | The filter type. (optional)
+    filter_type = docspace-api-sdk.FilterType() # FilterType | The filter type. (optional)
     without_trash = true # bool | Specifies whether to return the \"Trash\" section or not. (optional)
     count = 1234 # int | The maximum number of items to retrieve in the response. (optional)
     start_index = 1234 # int | The starting position of the items to be retrieved. (optional)
     sort_by = 'some text' # str | Specifies the field by which the folder content should be sorted. (optional)
-    sort_order = docspace-api-python.SortOrder() # SortOrder | The order in which the results are sorted. (optional)
+    sort_order = docspace-api-sdk.SortOrder() # SortOrder | The order in which the results are sorted. (optional)
     filter_value = 'some text' # str | The text used as a filter for searching or retrieving folder contents. (optional)
     fields =  # string | Comma-separated list of fields to include in the response (optional)
 
@@ -1540,17 +1540,17 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-python
-from docspace-api-python.models.apply_filter_option import ApplyFilterOption
-from docspace-api-python.models.filter_type import FilterType
-from docspace-api-python.models.folder_content_integer_wrapper import FolderContentIntegerWrapper
-from docspace-api-python.models.sort_order import SortOrder
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.models.apply_filter_option import ApplyFilterOption
+from docspace-api-sdk.models.filter_type import FilterType
+from docspace-api-sdk.models.folder_content_integer_wrapper import FolderContentIntegerWrapper
+from docspace-api-sdk.models.sort_order import SortOrder
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -1560,7 +1560,7 @@ configuration = docspace-api-python.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     username = os.environ["USERNAME"],
     password = os.environ["PASSWORD"]
 )
@@ -1580,21 +1580,21 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.FilesFoldersApi(api_client)
+    api_instance = docspace-api-sdk.FilesFoldersApi(api_client)
     user_id_or_group_id = '75a5f745-f697-4418-b38d-0fe0d277e258' # str | The user or group ID. (optional)
-    filter_type = docspace-api-python.FilterType() # FilterType | The filter type. (optional)
-    apply_filter_option = docspace-api-python.ApplyFilterOption() # ApplyFilterOption | Specifies whether to return only files, only folders or all elements. (optional)
+    filter_type = docspace-api-sdk.FilterType() # FilterType | The filter type. (optional)
+    apply_filter_option = docspace-api-sdk.ApplyFilterOption() # ApplyFilterOption | Specifies whether to return only files, only folders or all elements. (optional)
     count = 1234 # int | The maximum number of items to retrieve in the response. (optional)
     start_index = 1234 # int | The starting position of the items to be retrieved. (optional)
     sort_by = 'some text' # str | The property used to specify the sorting criteria for folder contents. (optional)
-    sort_order = docspace-api-python.SortOrder() # SortOrder | The order in which the results are sorted. (optional)
+    sort_order = docspace-api-sdk.SortOrder() # SortOrder | The order in which the results are sorted. (optional)
     filter_value = 'some text' # str | The text used for filtering or searching folder contents. (optional)
     fields =  # string | Comma-separated list of fields to include in the response (optional)
 
@@ -1664,14 +1664,14 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-python
-from docspace-api-python.models.file_integer_wrapper import FileIntegerWrapper
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.models.file_integer_wrapper import FileIntegerWrapper
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -1681,7 +1681,7 @@ configuration = docspace-api-python.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     username = os.environ["USERNAME"],
     password = os.environ["PASSWORD"]
 )
@@ -1701,14 +1701,14 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.FilesFoldersApi(api_client)
+    api_instance = docspace-api-sdk.FilesFoldersApi(api_client)
     folder_id = 9846 # int | The folder ID for inserting a file.
     insert_file_file = None # bytearray | The file to be inserted. (optional)
     insert_file_title = 'insert_file_title_example' # str | The file title to be inserted. (optional)
@@ -1788,14 +1788,14 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-python
-from docspace-api-python.models.file_integer_wrapper import FileIntegerWrapper
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.models.file_integer_wrapper import FileIntegerWrapper
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -1805,7 +1805,7 @@ configuration = docspace-api-python.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     username = os.environ["USERNAME"],
     password = os.environ["PASSWORD"]
 )
@@ -1825,14 +1825,14 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.FilesFoldersApi(api_client)
+    api_instance = docspace-api-sdk.FilesFoldersApi(api_client)
     file = None # bytearray | The file to be inserted. (optional)
     title = 'title_example' # str | The file title to be inserted. (optional)
     create_new_if_exist = True # bool | Specifies whether to create a new file if it already exists or not. (optional)
@@ -1901,15 +1901,15 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-python
-from docspace-api-python.models.create_folder import CreateFolder
-from docspace-api-python.models.folder_integer_wrapper import FolderIntegerWrapper
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.models.create_folder import CreateFolder
+from docspace-api-sdk.models.folder_integer_wrapper import FolderIntegerWrapper
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -1919,7 +1919,7 @@ configuration = docspace-api-python.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     username = os.environ["USERNAME"],
     password = os.environ["PASSWORD"]
 )
@@ -1939,16 +1939,16 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.FilesFoldersApi(api_client)
+    api_instance = docspace-api-sdk.FilesFoldersApi(api_client)
     folder_id = 9846 # int | The folder ID for the folder creation.
-    create_folder = docspace-api-python.CreateFolder() # CreateFolder | The parameters for creating a folder. (optional)
+    create_folder = docspace-api-sdk.CreateFolder() # CreateFolder | The parameters for creating a folder. (optional)
 
     try:
         # Rename a folder
@@ -2004,15 +2004,15 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-python
-from docspace-api-python.models.folder_integer_wrapper import FolderIntegerWrapper
-from docspace-api-python.models.order_request_dto import OrderRequestDto
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.models.folder_integer_wrapper import FolderIntegerWrapper
+from docspace-api-sdk.models.order_request_dto import OrderRequestDto
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -2022,7 +2022,7 @@ configuration = docspace-api-python.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     username = os.environ["USERNAME"],
     password = os.environ["PASSWORD"]
 )
@@ -2042,16 +2042,16 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.FilesFoldersApi(api_client)
+    api_instance = docspace-api-sdk.FilesFoldersApi(api_client)
     folder_id = 9846 # int | The folder unique identifier.
-    order_request_dto = docspace-api-python.OrderRequestDto() # OrderRequestDto | The folder order information. (optional)
+    order_request_dto = docspace-api-sdk.OrderRequestDto() # OrderRequestDto | The folder order information. (optional)
 
     try:
         # Set folder order
@@ -2112,15 +2112,15 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-python
-from docspace-api-python.models.object_wrapper import ObjectWrapper
-from docspace-api-python.models.upload_request_dto import UploadRequestDto
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.models.object_wrapper import ObjectWrapper
+from docspace-api-sdk.models.upload_request_dto import UploadRequestDto
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -2130,7 +2130,7 @@ configuration = docspace-api-python.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     username = os.environ["USERNAME"],
     password = os.environ["PASSWORD"]
 )
@@ -2150,16 +2150,16 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.FilesFoldersApi(api_client)
+    api_instance = docspace-api-sdk.FilesFoldersApi(api_client)
     folder_id = 9846 # int | The folder ID to upload a file.
-    upload_request_dto = docspace-api-python.UploadRequestDto() # UploadRequestDto | The request parameters for uploading a file. (optional)
+    upload_request_dto = docspace-api-sdk.UploadRequestDto() # UploadRequestDto | The request parameters for uploading a file. (optional)
 
     try:
         # Upload a file
@@ -2221,15 +2221,15 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-python
-from docspace-api-python.models.object_wrapper import ObjectWrapper
-from docspace-api-python.models.upload_request_dto import UploadRequestDto
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.models.object_wrapper import ObjectWrapper
+from docspace-api-sdk.models.upload_request_dto import UploadRequestDto
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -2239,7 +2239,7 @@ configuration = docspace-api-python.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     username = os.environ["USERNAME"],
     password = os.environ["PASSWORD"]
 )
@@ -2259,15 +2259,15 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.FilesFoldersApi(api_client)
-    in_dto = docspace-api-python.UploadRequestDto() # UploadRequestDto | The request parameters for uploading a file. (optional)
+    api_instance = docspace-api-sdk.FilesFoldersApi(api_client)
+    in_dto = docspace-api-sdk.UploadRequestDto() # UploadRequestDto | The request parameters for uploading a file. (optional)
 
     try:
         # Upload a file to the \"My documents\" section

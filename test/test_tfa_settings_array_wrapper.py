@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.tfa_settings_array_wrapper import TfaSettingsArrayWrapper
+from docspace-api-sdk.models.tfa_settings_array_wrapper import TfaSettingsArrayWrapper
 
 class TestTfaSettingsArrayWrapper(unittest.TestCase):
     """TfaSettingsArrayWrapper unit test stubs"""
@@ -40,7 +40,7 @@ class TestTfaSettingsArrayWrapper(unittest.TestCase):
         if include_optional:
             return TfaSettingsArrayWrapper(
                 response = [
-                    docspace-api-python.models.tfa_settings_dto.TfaSettingsDto(
+                    docspace-api-sdk.models.tfa_settings_dto.TfaSettingsDto(
                         id = '9846', 
                         title = 'legacy_1080p_small_wooden_mouse', 
                         enabled = True, 
@@ -51,7 +51,7 @@ class TestTfaSettingsArrayWrapper(unittest.TestCase):
                     ],
                 count = 56,
                 links = [
-                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-sdk.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

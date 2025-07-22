@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.owner_change_instructions_wrapper import OwnerChangeInstructionsWrapper
+from docspace-api-sdk.models.owner_change_instructions_wrapper import OwnerChangeInstructionsWrapper
 
 class TestOwnerChangeInstructionsWrapper(unittest.TestCase):
     """OwnerChangeInstructionsWrapper unit test stubs"""
@@ -39,12 +39,12 @@ class TestOwnerChangeInstructionsWrapper(unittest.TestCase):
         model = OwnerChangeInstructionsWrapper()
         if include_optional:
             return OwnerChangeInstructionsWrapper(
-                response = docspace-api-python.models.owner_change_instructions_dto.OwnerChangeInstructionsDto(
+                response = docspace-api-sdk.models.owner_change_instructions_dto.OwnerChangeInstructionsDto(
                     status = 1234, 
                     message = 'some text', ),
                 count = 56,
                 links = [
-                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-sdk.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

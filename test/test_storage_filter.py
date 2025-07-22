@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.storage_filter import StorageFilter
+from docspace-api-sdk.models.storage_filter import StorageFilter
 
 class TestStorageFilter(unittest.TestCase):
     """StorageFilter unit test stubs"""

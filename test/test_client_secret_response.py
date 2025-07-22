@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.client_secret_response import ClientSecretResponse
+from docspace-api-sdk.models.client_secret_response import ClientSecretResponse
 
 class TestClientSecretResponse(unittest.TestCase):
     """ClientSecretResponse unit test stubs"""

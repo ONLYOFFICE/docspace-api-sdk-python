@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.confirm_dto import ConfirmDto
+from docspace-api-sdk.models.confirm_dto import ConfirmDto
 
 class TestConfirmDto(unittest.TestCase):
     """ConfirmDto unit test stubs"""

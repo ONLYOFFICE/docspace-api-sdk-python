@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.room_from_template_status_dto import RoomFromTemplateStatusDto
+from docspace-api-sdk.models.room_from_template_status_dto import RoomFromTemplateStatusDto
 
 class TestRoomFromTemplateStatusDto(unittest.TestCase):
     """RoomFromTemplateStatusDto unit test stubs"""

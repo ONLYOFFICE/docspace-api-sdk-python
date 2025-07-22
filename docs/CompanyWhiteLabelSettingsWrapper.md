@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-python.models.company_white_label_settings_wrapper import CompanyWhiteLabelSettingsWrapper
+from docspace-api-sdk.models.company_white_label_settings_wrapper import CompanyWhiteLabelSettingsWrapper
 
 # TODO update the JSON string below
 json = "{}"

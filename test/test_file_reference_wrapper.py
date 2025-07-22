@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.file_reference_wrapper import FileReferenceWrapper
+from docspace-api-sdk.models.file_reference_wrapper import FileReferenceWrapper
 
 class TestFileReferenceWrapper(unittest.TestCase):
     """FileReferenceWrapper unit test stubs"""
@@ -39,8 +39,8 @@ class TestFileReferenceWrapper(unittest.TestCase):
         model = FileReferenceWrapper()
         if include_optional:
             return FileReferenceWrapper(
-                response = docspace-api-python.models.file_reference.FileReference(
-                    reference_data = docspace-api-python.models.file_reference_data.FileReferenceData(
+                response = docspace-api-sdk.models.file_reference.FileReference(
+                    reference_data = docspace-api-sdk.models.file_reference_data.FileReferenceData(
                         file_key = 'some text', 
                         instance_id = '9846', 
                         room_id = '9846', 
@@ -54,7 +54,7 @@ class TestFileReferenceWrapper(unittest.TestCase):
                     token = 'some text', ),
                 count = 56,
                 links = [
-                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-sdk.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.usage_space_stat_item_dto import UsageSpaceStatItemDto
+from docspace-api-sdk.models.usage_space_stat_item_dto import UsageSpaceStatItemDto
 
 class TestUsageSpaceStatItemDto(unittest.TestCase):
     """UsageSpaceStatItemDto unit test stubs"""

@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.login_settings_dto import LoginSettingsDto
+from docspace-api-sdk.models.login_settings_dto import LoginSettingsDto
 
 class TestLoginSettingsDto(unittest.TestCase):
     """LoginSettingsDto unit test stubs"""

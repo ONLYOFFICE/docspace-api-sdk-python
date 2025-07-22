@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-python.models.timezones_requests_dto import TimezonesRequestsDto
+from docspace-api-sdk.models.timezones_requests_dto import TimezonesRequestsDto
 
 # TODO update the JSON string below
 json = "{}"

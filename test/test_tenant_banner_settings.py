@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.tenant_banner_settings import TenantBannerSettings
+from docspace-api-sdk.models.tenant_banner_settings import TenantBannerSettings
 
 class TestTenantBannerSettings(unittest.TestCase):
     """TenantBannerSettings unit test stubs"""

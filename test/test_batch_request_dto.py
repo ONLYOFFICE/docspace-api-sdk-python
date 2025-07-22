@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.batch_request_dto import BatchRequestDto
+from docspace-api-sdk.models.batch_request_dto import BatchRequestDto
 
 class TestBatchRequestDto(unittest.TestCase):
     """BatchRequestDto unit test stubs"""

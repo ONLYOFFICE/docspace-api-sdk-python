@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.timezones_requests_array_wrapper import TimezonesRequestsArrayWrapper
+from docspace-api-sdk.models.timezones_requests_array_wrapper import TimezonesRequestsArrayWrapper
 
 class TestTimezonesRequestsArrayWrapper(unittest.TestCase):
     """TimezonesRequestsArrayWrapper unit test stubs"""
@@ -40,13 +40,13 @@ class TestTimezonesRequestsArrayWrapper(unittest.TestCase):
         if include_optional:
             return TimezonesRequestsArrayWrapper(
                 response = [
-                    docspace-api-python.models.timezones_requests_dto.TimezonesRequestsDto(
+                    docspace-api-sdk.models.timezones_requests_dto.TimezonesRequestsDto(
                         id = '9846', 
                         display_name = 'some text', )
                     ],
                 count = 56,
                 links = [
-                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-sdk.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

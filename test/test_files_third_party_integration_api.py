@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.api.files_third_party_integration_api import FilesThirdPartyIntegrationApi
+from docspace-api-sdk.api.files_third_party_integration_api import FilesThirdPartyIntegrationApi
 
 
 class TestFilesThirdPartyIntegrationApi(unittest.TestCase):

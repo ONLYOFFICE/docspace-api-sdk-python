@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-python.models.update_members_quota_request_dto_quota import UpdateMembersQuotaRequestDtoQuota
+from docspace-api-sdk.models.update_members_quota_request_dto_quota import UpdateMembersQuotaRequestDtoQuota
 
 # TODO update the JSON string below
 json = "{}"

@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.subject_type import SubjectType
+from docspace-api-sdk.models.subject_type import SubjectType
 
 class TestSubjectType(unittest.TestCase):
     """SubjectType unit test stubs"""

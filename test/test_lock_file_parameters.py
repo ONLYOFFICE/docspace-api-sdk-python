@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.lock_file_parameters import LockFileParameters
+from docspace-api-sdk.models.lock_file_parameters import LockFileParameters
 
 class TestLockFileParameters(unittest.TestCase):
     """LockFileParameters unit test stubs"""

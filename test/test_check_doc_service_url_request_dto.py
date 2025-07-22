@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.check_doc_service_url_request_dto import CheckDocServiceUrlRequestDto
+from docspace-api-sdk.models.check_doc_service_url_request_dto import CheckDocServiceUrlRequestDto
 
 class TestCheckDocServiceUrlRequestDto(unittest.TestCase):
     """CheckDocServiceUrlRequestDto unit test stubs"""

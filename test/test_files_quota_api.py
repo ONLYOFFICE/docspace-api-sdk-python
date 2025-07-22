@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.api.files_quota_api import FilesQuotaApi
+from docspace-api-sdk.api.files_quota_api import FilesQuotaApi
 
 
 class TestFilesQuotaApi(unittest.TestCase):

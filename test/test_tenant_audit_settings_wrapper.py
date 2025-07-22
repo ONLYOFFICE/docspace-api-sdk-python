@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.tenant_audit_settings_wrapper import TenantAuditSettingsWrapper
+from docspace-api-sdk.models.tenant_audit_settings_wrapper import TenantAuditSettingsWrapper
 
 class TestTenantAuditSettingsWrapper(unittest.TestCase):
     """TenantAuditSettingsWrapper unit test stubs"""
@@ -39,7 +39,7 @@ class TestTenantAuditSettingsWrapper(unittest.TestCase):
         model = TenantAuditSettingsWrapper()
         if include_optional:
             return TenantAuditSettingsWrapper(
-                settings = docspace-api-python.models.tenant_audit_settings.TenantAuditSettings(
+                settings = docspace-api-sdk.models.tenant_audit_settings.TenantAuditSettings(
                     login_history_life_time = 1234, 
                     audit_trail_life_time = 1234, 
                     last_modified = '2008-04-10T06:30+04:00', )

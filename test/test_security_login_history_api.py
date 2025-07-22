@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.api.security_login_history_api import SecurityLoginHistoryApi
+from docspace-api-sdk.api.security_login_history_api import SecurityLoginHistoryApi
 
 
 class TestSecurityLoginHistoryApi(unittest.TestCase):

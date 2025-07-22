@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-python.models.cookie_settings_wrapper import CookieSettingsWrapper
+from docspace-api-sdk.models.cookie_settings_wrapper import CookieSettingsWrapper
 
 # TODO update the JSON string below
 json = "{}"

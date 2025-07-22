@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.api.settings_banners_visibility_api import SettingsBannersVisibilityApi
+from docspace-api-sdk.api.settings_banners_visibility_api import SettingsBannersVisibilityApi
 
 
 class TestSettingsBannersVisibilityApi(unittest.TestCase):

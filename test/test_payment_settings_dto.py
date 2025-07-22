@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.payment_settings_dto import PaymentSettingsDto
+from docspace-api-sdk.models.payment_settings_dto import PaymentSettingsDto
 
 class TestPaymentSettingsDto(unittest.TestCase):
     """PaymentSettingsDto unit test stubs"""
@@ -43,7 +43,7 @@ class TestPaymentSettingsDto(unittest.TestCase):
                 feedback_and_support_url = 'some text',
                 buy_url = 'some text',
                 standalone = True,
-                current_license = docspace-api-python.models.current_license_info.CurrentLicenseInfo(
+                current_license = docspace-api-sdk.models.current_license_info.CurrentLicenseInfo(
                     trial = True, 
                     due_date = '2008-04-10T06:30+04:00', ),
                 max = 1234

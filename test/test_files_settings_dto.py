@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.files_settings_dto import FilesSettingsDto
+from docspace-api-sdk.models.files_settings_dto import FilesSettingsDto
 
 class TestFilesSettingsDto(unittest.TestCase):
     """FilesSettingsDto unit test stubs"""
@@ -84,7 +84,7 @@ class TestFilesSettingsDto(unittest.TestCase):
                 hide_confirm_convert_save = True,
                 hide_confirm_convert_open = True,
                 hide_confirm_room_lifetime = True,
-                default_order = docspace-api-python.models.order_by.OrderBy(
+                default_order = docspace-api-sdk.models.order_by.OrderBy(
                     is_asc = True, 
                     property = 0, ),
                 forcesave = True,
@@ -93,7 +93,7 @@ class TestFilesSettingsDto(unittest.TestCase):
                 favorites_section = True,
                 templates_section = True,
                 download_tar_gz = True,
-                automatically_clean_up = docspace-api-python.models.auto_clean_up_data.AutoCleanUpData(
+                automatically_clean_up = docspace-api-sdk.models.auto_clean_up_data.AutoCleanUpData(
                     is_auto_clean_up = True, 
                     gap = 1, ),
                 can_search_by_content = True,

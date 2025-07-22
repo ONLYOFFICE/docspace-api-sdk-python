@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.white_label_item_dto import WhiteLabelItemDto
+from docspace-api-sdk.models.white_label_item_dto import WhiteLabelItemDto
 
 class TestWhiteLabelItemDto(unittest.TestCase):
     """WhiteLabelItemDto unit test stubs"""
@@ -40,7 +40,7 @@ class TestWhiteLabelItemDto(unittest.TestCase):
         if include_optional:
             return WhiteLabelItemDto(
                 name = 'Winfield Upton',
-                size = docspace-api-python.models.i_magick_geometry.IMagickGeometry(
+                size = docspace-api-sdk.models.i_magick_geometry.IMagickGeometry(
                     aspect_ratio = True, 
                     fill_area = True, 
                     greater = True, 
@@ -52,7 +52,7 @@ class TestWhiteLabelItemDto(unittest.TestCase):
                     width = 56, 
                     x = 1234, 
                     y = 1234, ),
-                path = docspace-api-python.models.white_label_item_path_dto.WhiteLabelItemPathDto(
+                path = docspace-api-sdk.models.white_label_item_path_dto.WhiteLabelItemPathDto(
                     light = 'some text', 
                     dark = 'some text', )
             )

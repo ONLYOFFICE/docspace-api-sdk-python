@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-python.models.tenant_wallet_settings_wrapper import TenantWalletSettingsWrapper
+from docspace-api-sdk.models.tenant_wallet_settings_wrapper import TenantWalletSettingsWrapper
 
 # TODO update the JSON string below
 json = "{}"

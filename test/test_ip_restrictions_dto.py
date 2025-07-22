@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.ip_restrictions_dto import IpRestrictionsDto
+from docspace-api-sdk.models.ip_restrictions_dto import IpRestrictionsDto
 
 class TestIpRestrictionsDto(unittest.TestCase):
     """IpRestrictionsDto unit test stubs"""
@@ -40,7 +40,7 @@ class TestIpRestrictionsDto(unittest.TestCase):
         if include_optional:
             return IpRestrictionsDto(
                 ip_restrictions = [
-                    docspace-api-python.models.ip_restriction_base.IpRestrictionBase(
+                    docspace-api-sdk.models.ip_restriction_base.IpRestrictionBase(
                         ip = 'some text', 
                         for_admin = True, )
                     ],

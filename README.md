@@ -1,4 +1,4 @@
-# docspace-api-python
+# docspace-api-sdk
 
 The ONLYOFFICE DocSpace SDK for Python is a library that provides tools for integrating and managing DocSpace features within your applications. It simplifies interaction with the DocSpace API by offering ready-to-use methods and models.
 
@@ -28,7 +28,7 @@ sudo pip install git+https://github.com/GIT_USER_ID/GIT_REPO_ID.git
 
 Then import the package:
 ```python
-import docspace-api-python
+import docspace-api-sdk
 ```
 
 ### Using setuptools
@@ -47,7 +47,7 @@ sudo python setup.py install
 
 Then import the package:
 ```python
-import docspace-api-python
+import docspace-api-sdk
 ```
 
 ### Tests
@@ -114,13 +114,13 @@ Please follow the [installation procedure](#installation--usage) and then run th
 
 ```python
 
-import docspace-api-python
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -130,7 +130,7 @@ configuration = docspace-api-python.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     username = os.environ["USERNAME"],
     password = os.environ["PASSWORD"]
 )
@@ -150,16 +150,16 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.ApiKeysApi(api_client)
-    create_api_key_request_dto = docspace-api-python.CreateApiKeyRequestDto() # CreateApiKeyRequestDto |  (optional)
+    api_instance = docspace-api-sdk.ApiKeysApi(api_client)
+    create_api_key_request_dto = docspace-api-sdk.CreateApiKeyRequestDto() # CreateApiKeyRequestDto |  (optional)
 
     try:
         # Create a user API key

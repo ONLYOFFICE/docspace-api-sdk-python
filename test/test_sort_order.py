@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.sort_order import SortOrder
+from docspace-api-sdk.models.sort_order import SortOrder
 
 class TestSortOrder(unittest.TestCase):
     """SortOrder unit test stubs"""

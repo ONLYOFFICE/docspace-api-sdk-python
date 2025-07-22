@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.api.people_third_party_accounts_api import PeopleThirdPartyAccountsApi
+from docspace-api-sdk.api.people_third_party_accounts_api import PeopleThirdPartyAccountsApi
 
 
 class TestPeopleThirdPartyAccountsApi(unittest.TestCase):

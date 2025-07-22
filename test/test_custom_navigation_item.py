@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.custom_navigation_item import CustomNavigationItem
+from docspace-api-sdk.models.custom_navigation_item import CustomNavigationItem
 
 class TestCustomNavigationItem(unittest.TestCase):
     """CustomNavigationItem unit test stubs"""

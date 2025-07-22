@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.history_array_wrapper import HistoryArrayWrapper
+from docspace-api-sdk.models.history_array_wrapper import HistoryArrayWrapper
 
 class TestHistoryArrayWrapper(unittest.TestCase):
     """HistoryArrayWrapper unit test stubs"""
@@ -40,11 +40,11 @@ class TestHistoryArrayWrapper(unittest.TestCase):
         if include_optional:
             return HistoryArrayWrapper(
                 response = [
-                    docspace-api-python.models.history_dto.HistoryDto(
-                        action = docspace-api-python.models.history_action.HistoryAction(
+                    docspace-api-sdk.models.history_dto.HistoryDto(
+                        action = docspace-api-sdk.models.history_action.HistoryAction(
                             id = 1000, 
                             key = 'some text', ), 
-                        initiator = docspace-api-python.models.employee_dto.EmployeeDto(
+                        initiator = docspace-api-sdk.models.employee_dto.EmployeeDto(
                             display_name = 'Mike Zanyatski', 
                             title = 'Manager', 
                             avatar = 'some text', 
@@ -55,18 +55,18 @@ class TestHistoryArrayWrapper(unittest.TestCase):
                             profile_url = 'some text', 
                             has_avatar = True, 
                             is_anonim = True, ), 
-                        date = docspace-api-python.models.api_date_time.ApiDateTime(
+                        date = docspace-api-sdk.models.api_date_time.ApiDateTime(
                             utc_time = '2008-04-10T06:30+04:00', 
                             time_zone_offset = '00:00:00', ), 
-                        data = docspace-api-python.models.history_data.HistoryData(
+                        data = docspace-api-sdk.models.history_data.HistoryData(
                             initiator_name = 'some text', ), 
                         related = [
-                            docspace-api-python.models.history_dto.HistoryDto()
+                            docspace-api-sdk.models.history_dto.HistoryDto()
                             ], )
                     ],
                 count = 56,
                 links = [
-                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-sdk.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

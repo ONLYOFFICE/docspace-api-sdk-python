@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.api_date_time import ApiDateTime
+from docspace-api-sdk.models.api_date_time import ApiDateTime
 
 class TestApiDateTime(unittest.TestCase):
     """ApiDateTime unit test stubs"""

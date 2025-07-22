@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-python.models.dark_theme_settings import DarkThemeSettings
+from docspace-api-sdk.models.dark_theme_settings import DarkThemeSettings
 
 # TODO update the JSON string below
 json = "{}"

@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.migrating_api_files import MigratingApiFiles
+from docspace-api-sdk.models.migrating_api_files import MigratingApiFiles
 
 class TestMigratingApiFiles(unittest.TestCase):
     """MigratingApiFiles unit test stubs"""

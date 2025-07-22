@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-python.models.start_update_user_type_dto import StartUpdateUserTypeDto
+from docspace-api-sdk.models.start_update_user_type_dto import StartUpdateUserTypeDto
 
 # TODO update the JSON string below
 json = "{}"

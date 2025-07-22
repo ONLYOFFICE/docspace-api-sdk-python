@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.email_validation_key_model import EmailValidationKeyModel
+from docspace-api-sdk.models.email_validation_key_model import EmailValidationKeyModel
 
 class TestEmailValidationKeyModel(unittest.TestCase):
     """EmailValidationKeyModel unit test stubs"""

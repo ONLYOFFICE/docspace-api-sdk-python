@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.logo_cover import LogoCover
+from docspace-api-sdk.models.logo_cover import LogoCover
 
 class TestLogoCover(unittest.TestCase):
     """LogoCover unit test stubs"""

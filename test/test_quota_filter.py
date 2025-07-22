@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.quota_filter import QuotaFilter
+from docspace-api-sdk.models.quota_filter import QuotaFilter
 
 class TestQuotaFilter(unittest.TestCase):
     """QuotaFilter unit test stubs"""

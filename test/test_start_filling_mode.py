@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.start_filling_mode import StartFillingMode
+from docspace-api-sdk.models.start_filling_mode import StartFillingMode
 
 class TestStartFillingMode(unittest.TestCase):
     """StartFillingMode unit test stubs"""

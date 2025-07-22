@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.update_file import UpdateFile
+from docspace-api-sdk.models.update_file import UpdateFile
 
 class TestUpdateFile(unittest.TestCase):
     """UpdateFile unit test stubs"""

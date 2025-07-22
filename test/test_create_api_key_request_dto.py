@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.create_api_key_request_dto import CreateApiKeyRequestDto
+from docspace-api-sdk.models.create_api_key_request_dto import CreateApiKeyRequestDto
 
 class TestCreateApiKeyRequestDto(unittest.TestCase):
     """CreateApiKeyRequestDto unit test stubs"""

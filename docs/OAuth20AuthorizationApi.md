@@ -1,4 +1,4 @@
-# docspace-api-python.OAuth20AuthorizationApi
+# docspace-api-sdk.OAuth20AuthorizationApi
 
 All URIs are relative to *http://localhost:8092*
 
@@ -38,13 +38,13 @@ void (empty response body)
 
 
 ```python
-import docspace-api-python
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -60,9 +60,9 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.OAuth20AuthorizationApi(api_client)
+    api_instance = docspace-api-sdk.OAuth20AuthorizationApi(api_client)
     response_type = 'code' # str | The OAuth 2.0 response type, must be 'code' for authorization code flow.
     client_id = '6c7cf17b-1bd3-47d5-94c6-be2d3570e168' # str | The client identifier issued to the client during registration.
     redirect_uri = 'https://example.com' # str | The URL to redirect to after authorization is complete.
@@ -122,22 +122,22 @@ No authorization required
 
 
 ```python
-import docspace-api-python
-from docspace-api-python.models.exchange_token200_response import ExchangeToken200Response
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.models.exchange_token200_response import ExchangeToken200Response
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.OAuth20AuthorizationApi(api_client)
+    api_instance = docspace-api-sdk.OAuth20AuthorizationApi(api_client)
     grant_type = 'grant_type_example' # str | The OAuth2 grant type, must be 'authorization_code' for the authorization code flow. (optional)
     code = 'code_example' # str | A temporary authorization code that is sent to the client to be exchanged for a token. (optional)
     redirect_uri = 'redirect_uri_example' # str | The URL where the user will be redirected after successful or unsuccessful authentication. (optional)
@@ -198,13 +198,13 @@ void (empty response body)
 
 
 ```python
-import docspace-api-python
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -220,9 +220,9 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.OAuth20AuthorizationApi(api_client)
+    api_instance = docspace-api-sdk.OAuth20AuthorizationApi(api_client)
     client_id = 'client_id_example' # str | The client identifier issued to the client during registration. (optional)
     state = 'state_example' # str | The random string used to solve the CSRF vulnerability problem. (optional)
     scope = 'scope_example' # str | The space-separated list of requested scope permissions. (optional)

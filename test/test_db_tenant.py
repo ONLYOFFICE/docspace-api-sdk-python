@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.db_tenant import DbTenant
+from docspace-api-sdk.models.db_tenant import DbTenant
 
 class TestDbTenant(unittest.TestCase):
     """DbTenant unit test stubs"""
@@ -59,7 +59,7 @@ class TestDbTenant(unittest.TestCase):
                 industry = 0,
                 last_modified = '2008-04-10T06:30+04:00',
                 calls = True,
-                partner = docspace-api-python.models.db_tenant_partner.DbTenantPartner(
+                partner = docspace-api-sdk.models.db_tenant_partner.DbTenantPartner(
                     tenant_id = 1234, 
                     partner_id = 'some text', 
                     affiliate_id = 'some text', 

@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.webhooks_config_with_status_dto import WebhooksConfigWithStatusDto
+from docspace-api-sdk.models.webhooks_config_with_status_dto import WebhooksConfigWithStatusDto
 
 class TestWebhooksConfigWithStatusDto(unittest.TestCase):
     """WebhooksConfigWithStatusDto unit test stubs"""
@@ -39,7 +39,7 @@ class TestWebhooksConfigWithStatusDto(unittest.TestCase):
         model = WebhooksConfigWithStatusDto()
         if include_optional:
             return WebhooksConfigWithStatusDto(
-                configs = docspace-api-python.models.webhooks_config_dto.WebhooksConfigDto(
+                configs = docspace-api-sdk.models.webhooks_config_dto.WebhooksConfigDto(
                     id = 9846, 
                     name = 'Winfield Upton', 
                     uri = 'some text', 
@@ -47,7 +47,7 @@ class TestWebhooksConfigWithStatusDto(unittest.TestCase):
                     ssl = True, 
                     triggers = 0, 
                     target_id = 'some text', 
-                    created_by = docspace-api-python.models.employee_dto.EmployeeDto(
+                    created_by = docspace-api-sdk.models.employee_dto.EmployeeDto(
                         id = '', 
                         display_name = 'Mike Zanyatski', 
                         title = 'Manager', 
@@ -60,7 +60,7 @@ class TestWebhooksConfigWithStatusDto(unittest.TestCase):
                         has_avatar = True, 
                         is_anonim = True, ), 
                     created_on = '2008-04-10T06:30+04:00', 
-                    modified_by = docspace-api-python.models.employee_dto.EmployeeDto(
+                    modified_by = docspace-api-sdk.models.employee_dto.EmployeeDto(
                         id = '', 
                         display_name = 'Mike Zanyatski', 
                         title = 'Manager', 

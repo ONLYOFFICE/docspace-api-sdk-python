@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.file_status import FileStatus
+from docspace-api-sdk.models.file_status import FileStatus
 
 class TestFileStatus(unittest.TestCase):
     """FileStatus unit test stubs"""

@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.update_photo_member_request import UpdatePhotoMemberRequest
+from docspace-api-sdk.models.update_photo_member_request import UpdatePhotoMemberRequest
 
 class TestUpdatePhotoMemberRequest(unittest.TestCase):
     """UpdatePhotoMemberRequest unit test stubs"""

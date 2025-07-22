@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.object_wrapper import ObjectWrapper
+from docspace-api-sdk.models.object_wrapper import ObjectWrapper
 
 class TestObjectWrapper(unittest.TestCase):
     """ObjectWrapper unit test stubs"""
@@ -42,7 +42,7 @@ class TestObjectWrapper(unittest.TestCase):
                 response = None,
                 count = 56,
                 links = [
-                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-sdk.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

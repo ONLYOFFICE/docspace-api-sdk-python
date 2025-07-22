@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.co_editing_config_mode import CoEditingConfigMode
+from docspace-api-sdk.models.co_editing_config_mode import CoEditingConfigMode
 
 class TestCoEditingConfigMode(unittest.TestCase):
     """CoEditingConfigMode unit test stubs"""

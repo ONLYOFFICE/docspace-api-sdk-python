@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.report_dto import ReportDto
+from docspace-api-sdk.models.report_dto import ReportDto
 
 class TestReportDto(unittest.TestCase):
     """ReportDto unit test stubs"""
@@ -40,8 +40,8 @@ class TestReportDto(unittest.TestCase):
         if include_optional:
             return ReportDto(
                 collection = [
-                    docspace-api-python.models.operation_dto.OperationDto(
-                        date = docspace-api-python.models.api_date_time.ApiDateTime(
+                    docspace-api-sdk.models.operation_dto.OperationDto(
+                        date = docspace-api-sdk.models.api_date_time.ApiDateTime(
                             utc_time = '2008-04-10T06:30+04:00', 
                             time_zone_offset = '00:00:00', ), 
                         service = 'some text', 

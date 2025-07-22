@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-python.models.archive_room_request import ArchiveRoomRequest
+from docspace-api-sdk.models.archive_room_request import ArchiveRoomRequest
 
 # TODO update the JSON string below
 json = "{}"

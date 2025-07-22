@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.api.security_o_auth2_api import SecurityOAuth2Api
+from docspace-api-sdk.api.security_o_auth2_api import SecurityOAuth2Api
 
 
 class TestSecurityOAuth2Api(unittest.TestCase):

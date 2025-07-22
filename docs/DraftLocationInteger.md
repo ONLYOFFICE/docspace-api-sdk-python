@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-python.models.draft_location_integer import DraftLocationInteger
+from docspace-api-sdk.models.draft_location_integer import DraftLocationInteger
 
 # TODO update the JSON string below
 json = "{}"

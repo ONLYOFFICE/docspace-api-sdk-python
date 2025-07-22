@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.module import Module
+from docspace-api-sdk.models.module import Module
 
 class TestModule(unittest.TestCase):
     """Module unit test stubs"""

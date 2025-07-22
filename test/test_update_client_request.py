@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.update_client_request import UpdateClientRequest
+from docspace-api-sdk.models.update_client_request import UpdateClientRequest
 
 class TestUpdateClientRequest(unittest.TestCase):
     """UpdateClientRequest unit test stubs"""

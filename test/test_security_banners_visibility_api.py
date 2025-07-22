@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.api.security_banners_visibility_api import SecurityBannersVisibilityApi
+from docspace-api-sdk.api.security_banners_visibility_api import SecurityBannersVisibilityApi
 
 
 class TestSecurityBannersVisibilityApi(unittest.TestCase):

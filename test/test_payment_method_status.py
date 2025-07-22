@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.payment_method_status import PaymentMethodStatus
+from docspace-api-sdk.models.payment_method_status import PaymentMethodStatus
 
 class TestPaymentMethodStatus(unittest.TestCase):
     """PaymentMethodStatus unit test stubs"""

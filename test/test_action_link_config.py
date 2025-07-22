@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.action_link_config import ActionLinkConfig
+from docspace-api-sdk.models.action_link_config import ActionLinkConfig
 
 class TestActionLinkConfig(unittest.TestCase):
     """ActionLinkConfig unit test stubs"""
@@ -39,7 +39,7 @@ class TestActionLinkConfig(unittest.TestCase):
         model = ActionLinkConfig()
         if include_optional:
             return ActionLinkConfig(
-                action = docspace-api-python.models.action_config.ActionConfig(
+                action = docspace-api-sdk.models.action_config.ActionConfig(
                     data = 'some text', 
                     type = 'some text', )
             )

@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.capabilities_dto import CapabilitiesDto
+from docspace-api-sdk.models.capabilities_dto import CapabilitiesDto
 
 class TestCapabilitiesDto(unittest.TestCase):
     """CapabilitiesDto unit test stubs"""

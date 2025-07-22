@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-python.models.password_hasher import PasswordHasher
+from docspace-api-sdk.models.password_hasher import PasswordHasher
 
 # TODO update the JSON string below
 json = "{}"

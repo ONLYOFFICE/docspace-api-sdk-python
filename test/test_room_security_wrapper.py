@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.room_security_wrapper import RoomSecurityWrapper
+from docspace-api-sdk.models.room_security_wrapper import RoomSecurityWrapper
 
 class TestRoomSecurityWrapper(unittest.TestCase):
     """RoomSecurityWrapper unit test stubs"""
@@ -39,9 +39,9 @@ class TestRoomSecurityWrapper(unittest.TestCase):
         model = RoomSecurityWrapper()
         if include_optional:
             return RoomSecurityWrapper(
-                response = docspace-api-python.models.room_security_dto.RoomSecurityDto(
+                response = docspace-api-sdk.models.room_security_dto.RoomSecurityDto(
                     members = [
-                        docspace-api-python.models.file_share_dto.FileShareDto(
+                        docspace-api-sdk.models.file_share_dto.FileShareDto(
                             access = 0, 
                             shared_to = {"int":1234,"string":"some text","boolean":true}, 
                             is_locked = False, 
@@ -53,7 +53,7 @@ class TestRoomSecurityWrapper(unittest.TestCase):
                     error = 0, ),
                 count = 56,
                 links = [
-                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-sdk.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.task_progress_response_wrapper import TaskProgressResponseWrapper
+from docspace-api-sdk.models.task_progress_response_wrapper import TaskProgressResponseWrapper
 
 class TestTaskProgressResponseWrapper(unittest.TestCase):
     """TaskProgressResponseWrapper unit test stubs"""
@@ -39,7 +39,7 @@ class TestTaskProgressResponseWrapper(unittest.TestCase):
         model = TaskProgressResponseWrapper()
         if include_optional:
             return TaskProgressResponseWrapper(
-                response = docspace-api-python.models.task_progress_response_dto.TaskProgressResponseDto(
+                response = docspace-api-sdk.models.task_progress_response_dto.TaskProgressResponseDto(
                     id = '9846', 
                     error = 'some text', 
                     percentage = 1234, 
@@ -47,7 +47,7 @@ class TestTaskProgressResponseWrapper(unittest.TestCase):
                     status = 0, ),
                 count = 56,
                 links = [
-                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-sdk.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

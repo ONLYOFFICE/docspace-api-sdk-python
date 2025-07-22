@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.auto_clean_up_data import AutoCleanUpData
+from docspace-api-sdk.models.auto_clean_up_data import AutoCleanUpData
 
 class TestAutoCleanUpData(unittest.TestCase):
     """AutoCleanUpData unit test stubs"""

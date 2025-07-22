@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-python.models.item_key_value_pair_string_string import ItemKeyValuePairStringString
+from docspace-api-sdk.models.item_key_value_pair_string_string import ItemKeyValuePairStringString
 
 # TODO update the JSON string below
 json = "{}"

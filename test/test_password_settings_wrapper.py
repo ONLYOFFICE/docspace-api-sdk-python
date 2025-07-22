@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.password_settings_wrapper import PasswordSettingsWrapper
+from docspace-api-sdk.models.password_settings_wrapper import PasswordSettingsWrapper
 
 class TestPasswordSettingsWrapper(unittest.TestCase):
     """PasswordSettingsWrapper unit test stubs"""
@@ -39,7 +39,7 @@ class TestPasswordSettingsWrapper(unittest.TestCase):
         model = PasswordSettingsWrapper()
         if include_optional:
             return PasswordSettingsWrapper(
-                response = docspace-api-python.models.password_settings_dto.PasswordSettingsDto(
+                response = docspace-api-sdk.models.password_settings_dto.PasswordSettingsDto(
                     min_length = 1234, 
                     upper_case = True, 
                     digits = True, 
@@ -50,7 +50,7 @@ class TestPasswordSettingsWrapper(unittest.TestCase):
                     spec_symbols_regex_str = 'some text', ),
                 count = 56,
                 links = [
-                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-sdk.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.mobile_phone_activation_status import MobilePhoneActivationStatus
+from docspace-api-sdk.models.mobile_phone_activation_status import MobilePhoneActivationStatus
 
 class TestMobilePhoneActivationStatus(unittest.TestCase):
     """MobilePhoneActivationStatus unit test stubs"""

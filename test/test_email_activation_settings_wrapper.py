@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.email_activation_settings_wrapper import EmailActivationSettingsWrapper
+from docspace-api-sdk.models.email_activation_settings_wrapper import EmailActivationSettingsWrapper
 
 class TestEmailActivationSettingsWrapper(unittest.TestCase):
     """EmailActivationSettingsWrapper unit test stubs"""
@@ -39,12 +39,12 @@ class TestEmailActivationSettingsWrapper(unittest.TestCase):
         model = EmailActivationSettingsWrapper()
         if include_optional:
             return EmailActivationSettingsWrapper(
-                response = docspace-api-python.models.email_activation_settings.EmailActivationSettings(
+                response = docspace-api-sdk.models.email_activation_settings.EmailActivationSettings(
                     show = True, 
                     last_modified = '2008-04-10T06:30+04:00', ),
                 count = 56,
                 links = [
-                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-sdk.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

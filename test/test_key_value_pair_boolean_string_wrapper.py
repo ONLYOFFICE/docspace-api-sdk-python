@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.key_value_pair_boolean_string_wrapper import KeyValuePairBooleanStringWrapper
+from docspace-api-sdk.models.key_value_pair_boolean_string_wrapper import KeyValuePairBooleanStringWrapper
 
 class TestKeyValuePairBooleanStringWrapper(unittest.TestCase):
     """KeyValuePairBooleanStringWrapper unit test stubs"""
@@ -39,12 +39,12 @@ class TestKeyValuePairBooleanStringWrapper(unittest.TestCase):
         model = KeyValuePairBooleanStringWrapper()
         if include_optional:
             return KeyValuePairBooleanStringWrapper(
-                response = docspace-api-python.models.key_value_pair_boolean_string.KeyValuePairBooleanString(
+                response = docspace-api-sdk.models.key_value_pair_boolean_string.KeyValuePairBooleanString(
                     key = True, 
                     value = 'some text', ),
                 count = 56,
                 links = [
-                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-sdk.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

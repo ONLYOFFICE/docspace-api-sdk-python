@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.backup_history_record_array_wrapper import BackupHistoryRecordArrayWrapper
+from docspace-api-sdk.models.backup_history_record_array_wrapper import BackupHistoryRecordArrayWrapper
 
 class TestBackupHistoryRecordArrayWrapper(unittest.TestCase):
     """BackupHistoryRecordArrayWrapper unit test stubs"""
@@ -40,7 +40,7 @@ class TestBackupHistoryRecordArrayWrapper(unittest.TestCase):
         if include_optional:
             return BackupHistoryRecordArrayWrapper(
                 response = [
-                    docspace-api-python.models.backup_history_record.BackupHistoryRecord(
+                    docspace-api-sdk.models.backup_history_record.BackupHistoryRecord(
                         id = 'aae1e103-bca5-9fa1-ba8c-42058b4abf28', 
                         file_name = 'some text', 
                         storage_type = 0, 
@@ -49,7 +49,7 @@ class TestBackupHistoryRecordArrayWrapper(unittest.TestCase):
                     ],
                 count = 56,
                 links = [
-                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-sdk.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

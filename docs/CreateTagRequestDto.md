@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-python.models.create_tag_request_dto import CreateTagRequestDto
+from docspace-api-sdk.models.create_tag_request_dto import CreateTagRequestDto
 
 # TODO update the JSON string below
 json = "{}"

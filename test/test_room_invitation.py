@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.room_invitation import RoomInvitation
+from docspace-api-sdk.models.room_invitation import RoomInvitation
 
 class TestRoomInvitation(unittest.TestCase):
     """RoomInvitation unit test stubs"""

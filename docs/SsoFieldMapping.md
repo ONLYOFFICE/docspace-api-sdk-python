@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-python.models.sso_field_mapping import SsoFieldMapping
+from docspace-api-sdk.models.sso_field_mapping import SsoFieldMapping
 
 # TODO update the JSON string below
 json = "{}"

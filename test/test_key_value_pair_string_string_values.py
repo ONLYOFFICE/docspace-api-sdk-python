@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.key_value_pair_string_string_values import KeyValuePairStringStringValues
+from docspace-api-sdk.models.key_value_pair_string_string_values import KeyValuePairStringStringValues
 
 class TestKeyValuePairStringStringValues(unittest.TestCase):
     """KeyValuePairStringStringValues unit test stubs"""

@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-python.models.delete_batch_request_dto import DeleteBatchRequestDto
+from docspace-api-sdk.models.delete_batch_request_dto import DeleteBatchRequestDto
 
 # TODO update the JSON string below
 json = "{}"

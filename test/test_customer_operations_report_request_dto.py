@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.customer_operations_report_request_dto import CustomerOperationsReportRequestDto
+from docspace-api-sdk.models.customer_operations_report_request_dto import CustomerOperationsReportRequestDto
 
 class TestCustomerOperationsReportRequestDto(unittest.TestCase):
     """CustomerOperationsReportRequestDto unit test stubs"""

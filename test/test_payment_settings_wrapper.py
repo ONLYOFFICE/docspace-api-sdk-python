@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.payment_settings_wrapper import PaymentSettingsWrapper
+from docspace-api-sdk.models.payment_settings_wrapper import PaymentSettingsWrapper
 
 class TestPaymentSettingsWrapper(unittest.TestCase):
     """PaymentSettingsWrapper unit test stubs"""
@@ -39,18 +39,18 @@ class TestPaymentSettingsWrapper(unittest.TestCase):
         model = PaymentSettingsWrapper()
         if include_optional:
             return PaymentSettingsWrapper(
-                response = docspace-api-python.models.payment_settings_dto.PaymentSettingsDto(
+                response = docspace-api-sdk.models.payment_settings_dto.PaymentSettingsDto(
                     sales_email = 'some text', 
                     feedback_and_support_url = 'some text', 
                     buy_url = 'some text', 
                     standalone = True, 
-                    current_license = docspace-api-python.models.current_license_info.CurrentLicenseInfo(
+                    current_license = docspace-api-sdk.models.current_license_info.CurrentLicenseInfo(
                         trial = True, 
                         due_date = '2008-04-10T06:30+04:00', ), 
                     max = 1234, ),
                 count = 56,
                 links = [
-                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-sdk.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

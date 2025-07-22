@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.migration_status_dto import MigrationStatusDto
+from docspace-api-sdk.models.migration_status_dto import MigrationStatusDto
 
 class TestMigrationStatusDto(unittest.TestCase):
     """MigrationStatusDto unit test stubs"""
@@ -41,12 +41,12 @@ class TestMigrationStatusDto(unittest.TestCase):
             return MigrationStatusDto(
                 progress = 1,
                 error = 'some text',
-                parse_result = docspace-api-python.models.migration_api_info.MigrationApiInfo(
+                parse_result = docspace-api-sdk.models.migration_api_info.MigrationApiInfo(
                     migrator_name = 'some text', 
                     operation = 'some text', 
                     failed_archives = ["some text"], 
                     users = [
-                        docspace-api-python.models.migrating_api_user.MigratingApiUser(
+                        docspace-api-sdk.models.migrating_api_user.MigratingApiUser(
                             should_import = True, 
                             key = 'some text', 
                             email = 'Sydney_Roberts4@hotmail.com', 
@@ -54,13 +54,13 @@ class TestMigrationStatusDto(unittest.TestCase):
                             first_name = 'Winfield', 
                             last_name = 'Wyman', 
                             user_type = 0, 
-                            migrating_files = docspace-api-python.models.migrating_api_files.MigratingApiFiles(
+                            migrating_files = docspace-api-sdk.models.migrating_api_files.MigratingApiFiles(
                                 folders_count = 1234, 
                                 files_count = 1234, 
                                 bytes_total = 1234, ), )
                         ], 
                     without_email_users = [
-                        docspace-api-python.models.migrating_api_user.MigratingApiUser(
+                        docspace-api-sdk.models.migrating_api_user.MigratingApiUser(
                             should_import = True, 
                             key = 'some text', 
                             email = 'Sydney_Roberts4@hotmail.com', 
@@ -72,7 +72,7 @@ class TestMigrationStatusDto(unittest.TestCase):
                         
                         ], 
                     groups = [
-                        docspace-api-python.models.migrating_api_group.MigratingApiGroup(
+                        docspace-api-sdk.models.migrating_api_group.MigratingApiGroup(
                             should_import = True, 
                             group_name = 'some text', 
                             module_name = 'some text', 

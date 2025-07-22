@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.boolean_wrapper import BooleanWrapper
+from docspace-api-sdk.models.boolean_wrapper import BooleanWrapper
 
 class TestBooleanWrapper(unittest.TestCase):
     """BooleanWrapper unit test stubs"""
@@ -42,7 +42,7 @@ class TestBooleanWrapper(unittest.TestCase):
                 response = True,
                 count = 56,
                 links = [
-                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-sdk.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.api.people_photos_api import PeoplePhotosApi
+from docspace-api-sdk.api.people_photos_api import PeoplePhotosApi
 
 
 class TestPeoplePhotosApi(unittest.TestCase):

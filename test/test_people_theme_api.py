@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.api.people_theme_api import PeopleThemeApi
+from docspace-api-sdk.api.people_theme_api import PeopleThemeApi
 
 
 class TestPeopleThemeApi(unittest.TestCase):

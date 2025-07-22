@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.fire_base_user_wrapper import FireBaseUserWrapper
+from docspace-api-sdk.models.fire_base_user_wrapper import FireBaseUserWrapper
 
 class TestFireBaseUserWrapper(unittest.TestCase):
     """FireBaseUserWrapper unit test stubs"""
@@ -39,14 +39,14 @@ class TestFireBaseUserWrapper(unittest.TestCase):
         model = FireBaseUserWrapper()
         if include_optional:
             return FireBaseUserWrapper(
-                response = docspace-api-python.models.fire_base_user.FireBaseUser(
+                response = docspace-api-sdk.models.fire_base_user.FireBaseUser(
                     id = 9846, 
                     user_id = 'aae1e103-bca5-9fa1-ba8c-42058b4abf28', 
                     tenant_id = 1234, 
                     firebase_device_token = 'some text', 
                     application = 'some text', 
                     is_subscribed = True, 
-                    tenant = docspace-api-python.models.db_tenant.DbTenant(
+                    tenant = docspace-api-sdk.models.db_tenant.DbTenant(
                         id = 9846, 
                         name = 'Winfield Upton', 
                         alias = 'some text', 
@@ -67,14 +67,14 @@ class TestFireBaseUserWrapper(unittest.TestCase):
                         industry = 0, 
                         last_modified = '2008-04-10T06:30+04:00', 
                         calls = True, 
-                        partner = docspace-api-python.models.db_tenant_partner.DbTenantPartner(
+                        partner = docspace-api-sdk.models.db_tenant_partner.DbTenantPartner(
                             tenant_id = 1234, 
                             partner_id = 'some text', 
                             affiliate_id = 'some text', 
                             campaign = 'some text', ), ), ),
                 count = 56,
                 links = [
-                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-sdk.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

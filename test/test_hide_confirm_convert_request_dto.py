@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.hide_confirm_convert_request_dto import HideConfirmConvertRequestDto
+from docspace-api-sdk.models.hide_confirm_convert_request_dto import HideConfirmConvertRequestDto
 
 class TestHideConfirmConvertRequestDto(unittest.TestCase):
     """HideConfirmConvertRequestDto unit test stubs"""

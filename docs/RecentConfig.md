@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-python.models.recent_config import RecentConfig
+from docspace-api-sdk.models.recent_config import RecentConfig
 
 # TODO update the JSON string below
 json = "{}"

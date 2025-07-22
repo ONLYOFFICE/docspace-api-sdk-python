@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.history_data import HistoryData
+from docspace-api-sdk.models.history_data import HistoryData
 
 class TestHistoryData(unittest.TestCase):
     """HistoryData unit test stubs"""

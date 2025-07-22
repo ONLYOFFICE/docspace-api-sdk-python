@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.string_wrapper import StringWrapper
+from docspace-api-sdk.models.string_wrapper import StringWrapper
 
 class TestStringWrapper(unittest.TestCase):
     """StringWrapper unit test stubs"""
@@ -42,7 +42,7 @@ class TestStringWrapper(unittest.TestCase):
                 response = '',
                 count = 56,
                 links = [
-                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-sdk.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

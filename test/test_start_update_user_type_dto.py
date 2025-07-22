@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.start_update_user_type_dto import StartUpdateUserTypeDto
+from docspace-api-sdk.models.start_update_user_type_dto import StartUpdateUserTypeDto
 
 class TestStartUpdateUserTypeDto(unittest.TestCase):
     """StartUpdateUserTypeDto unit test stubs"""

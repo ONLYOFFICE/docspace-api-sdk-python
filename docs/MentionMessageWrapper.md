@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-python.models.mention_message_wrapper import MentionMessageWrapper
+from docspace-api-sdk.models.mention_message_wrapper import MentionMessageWrapper
 
 # TODO update the JSON string below
 json = "{}"

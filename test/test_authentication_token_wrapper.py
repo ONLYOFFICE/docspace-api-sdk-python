@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.authentication_token_wrapper import AuthenticationTokenWrapper
+from docspace-api-sdk.models.authentication_token_wrapper import AuthenticationTokenWrapper
 
 class TestAuthenticationTokenWrapper(unittest.TestCase):
     """AuthenticationTokenWrapper unit test stubs"""
@@ -39,7 +39,7 @@ class TestAuthenticationTokenWrapper(unittest.TestCase):
         model = AuthenticationTokenWrapper()
         if include_optional:
             return AuthenticationTokenWrapper(
-                response = docspace-api-python.models.authentication_token_dto.AuthenticationTokenDto(
+                response = docspace-api-sdk.models.authentication_token_dto.AuthenticationTokenDto(
                     token = 'abcde12345', 
                     expires = '2008-04-10T06:30+04:00', 
                     sms = False, 
@@ -49,7 +49,7 @@ class TestAuthenticationTokenWrapper(unittest.TestCase):
                     confirm_url = 'some text', ),
                 count = 56,
                 links = [
-                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-sdk.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

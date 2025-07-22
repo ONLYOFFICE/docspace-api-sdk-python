@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.greeting_settings_requests_dto import GreetingSettingsRequestsDto
+from docspace-api-sdk.models.greeting_settings_requests_dto import GreetingSettingsRequestsDto
 
 class TestGreetingSettingsRequestsDto(unittest.TestCase):
     """GreetingSettingsRequestsDto unit test stubs"""

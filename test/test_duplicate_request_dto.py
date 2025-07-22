@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.duplicate_request_dto import DuplicateRequestDto
+from docspace-api-sdk.models.duplicate_request_dto import DuplicateRequestDto
 
 class TestDuplicateRequestDto(unittest.TestCase):
     """DuplicateRequestDto unit test stubs"""

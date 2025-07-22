@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.form_filling_status import FormFillingStatus
+from docspace-api-sdk.models.form_filling_status import FormFillingStatus
 
 class TestFormFillingStatus(unittest.TestCase):
     """FormFillingStatus unit test stubs"""

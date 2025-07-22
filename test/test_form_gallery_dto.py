@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.form_gallery_dto import FormGalleryDto
+from docspace-api-sdk.models.form_gallery_dto import FormGalleryDto
 
 class TestFormGalleryDto(unittest.TestCase):
     """FormGalleryDto unit test stubs"""

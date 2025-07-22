@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.cover_request_dto import CoverRequestDto
+from docspace-api-sdk.models.cover_request_dto import CoverRequestDto
 
 class TestCoverRequestDto(unittest.TestCase):
     """CoverRequestDto unit test stubs"""

@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.anonymous_config_dto import AnonymousConfigDto
+from docspace-api-sdk.models.anonymous_config_dto import AnonymousConfigDto
 
 class TestAnonymousConfigDto(unittest.TestCase):
     """AnonymousConfigDto unit test stubs"""

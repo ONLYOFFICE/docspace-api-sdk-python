@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.account_info_array_wrapper import AccountInfoArrayWrapper
+from docspace-api-sdk.models.account_info_array_wrapper import AccountInfoArrayWrapper
 
 class TestAccountInfoArrayWrapper(unittest.TestCase):
     """AccountInfoArrayWrapper unit test stubs"""
@@ -40,14 +40,14 @@ class TestAccountInfoArrayWrapper(unittest.TestCase):
         if include_optional:
             return AccountInfoArrayWrapper(
                 response = [
-                    docspace-api-python.models.account_info_dto.AccountInfoDto(
+                    docspace-api-sdk.models.account_info_dto.AccountInfoDto(
                         provider = 'some text', 
                         url = 'some text', 
                         linked = True, )
                     ],
                 count = 56,
                 links = [
-                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-sdk.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.payments import Payments
+from docspace-api-sdk.models.payments import Payments
 
 class TestPayments(unittest.TestCase):
     """Payments unit test stubs"""

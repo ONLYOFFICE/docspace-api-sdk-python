@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.operation_dto import OperationDto
+from docspace-api-sdk.models.operation_dto import OperationDto
 
 class TestOperationDto(unittest.TestCase):
     """OperationDto unit test stubs"""
@@ -39,7 +39,7 @@ class TestOperationDto(unittest.TestCase):
         model = OperationDto()
         if include_optional:
             return OperationDto(
-                var_date = docspace-api-python.models.api_date_time.ApiDateTime(
+                var_date = docspace-api-sdk.models.api_date_time.ApiDateTime(
                     utc_time = '2008-04-10T06:30+04:00', 
                     time_zone_offset = '00:00:00', ),
                 service = 'some text',

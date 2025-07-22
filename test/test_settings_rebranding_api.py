@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.api.settings_rebranding_api import SettingsRebrandingApi
+from docspace-api-sdk.api.settings_rebranding_api import SettingsRebrandingApi
 
 
 class TestSettingsRebrandingApi(unittest.TestCase):

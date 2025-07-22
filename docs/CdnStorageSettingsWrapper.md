@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-python.models.cdn_storage_settings_wrapper import CdnStorageSettingsWrapper
+from docspace-api-sdk.models.cdn_storage_settings_wrapper import CdnStorageSettingsWrapper
 
 # TODO update the JSON string below
 json = "{}"

@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-python.models.check_dest_folder_wrapper import CheckDestFolderWrapper
+from docspace-api-sdk.models.check_dest_folder_wrapper import CheckDestFolderWrapper
 
 # TODO update the JSON string below
 json = "{}"

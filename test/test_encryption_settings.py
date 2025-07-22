@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.encryption_settings import EncryptionSettings
+from docspace-api-sdk.models.encryption_settings import EncryptionSettings
 
 class TestEncryptionSettings(unittest.TestCase):
     """EncryptionSettings unit test stubs"""

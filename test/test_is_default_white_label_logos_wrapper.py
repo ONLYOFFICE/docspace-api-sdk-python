@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.is_default_white_label_logos_wrapper import IsDefaultWhiteLabelLogosWrapper
+from docspace-api-sdk.models.is_default_white_label_logos_wrapper import IsDefaultWhiteLabelLogosWrapper
 
 class TestIsDefaultWhiteLabelLogosWrapper(unittest.TestCase):
     """IsDefaultWhiteLabelLogosWrapper unit test stubs"""
@@ -39,12 +39,12 @@ class TestIsDefaultWhiteLabelLogosWrapper(unittest.TestCase):
         model = IsDefaultWhiteLabelLogosWrapper()
         if include_optional:
             return IsDefaultWhiteLabelLogosWrapper(
-                response = docspace-api-python.models.is_default_white_label_logos_dto.IsDefaultWhiteLabelLogosDto(
+                response = docspace-api-sdk.models.is_default_white_label_logos_dto.IsDefaultWhiteLabelLogosDto(
                     name = 'Winfield Upton', 
                     default = True, ),
                 count = 56,
                 links = [
-                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-sdk.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

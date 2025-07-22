@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.additional_white_label_settings_wrapper import AdditionalWhiteLabelSettingsWrapper
+from docspace-api-sdk.models.additional_white_label_settings_wrapper import AdditionalWhiteLabelSettingsWrapper
 
 class TestAdditionalWhiteLabelSettingsWrapper(unittest.TestCase):
     """AdditionalWhiteLabelSettingsWrapper unit test stubs"""
@@ -39,7 +39,7 @@ class TestAdditionalWhiteLabelSettingsWrapper(unittest.TestCase):
         model = AdditionalWhiteLabelSettingsWrapper()
         if include_optional:
             return AdditionalWhiteLabelSettingsWrapper(
-                settings = docspace-api-python.models.additional_white_label_settings.AdditionalWhiteLabelSettings(
+                settings = docspace-api-sdk.models.additional_white_label_settings.AdditionalWhiteLabelSettings(
                     start_docs_enabled = True, 
                     help_center_enabled = True, 
                     feedback_and_support_enabled = True, 

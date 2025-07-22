@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.auth_requests_dto import AuthRequestsDto
+from docspace-api-sdk.models.auth_requests_dto import AuthRequestsDto
 
 class TestAuthRequestsDto(unittest.TestCase):
     """AuthRequestsDto unit test stubs"""
@@ -48,7 +48,7 @@ class TestAuthRequestsDto(unittest.TestCase):
                 code = 'some text',
                 code_o_auth = 'some text',
                 session = True,
-                confirm_data = docspace-api-python.models.confirm_data.ConfirmData(
+                confirm_data = docspace-api-sdk.models.confirm_data.ConfirmData(
                     email = 'Sydney_Roberts4@hotmail.com', 
                     first = True, 
                     key = 'some text', ),

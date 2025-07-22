@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.embedded_config import EmbeddedConfig
+from docspace-api-sdk.models.embedded_config import EmbeddedConfig
 
 class TestEmbeddedConfig(unittest.TestCase):
     """EmbeddedConfig unit test stubs"""

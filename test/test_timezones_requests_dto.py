@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.timezones_requests_dto import TimezonesRequestsDto
+from docspace-api-sdk.models.timezones_requests_dto import TimezonesRequestsDto
 
 class TestTimezonesRequestsDto(unittest.TestCase):
     """TimezonesRequestsDto unit test stubs"""

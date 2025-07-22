@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.customization_config_dto import CustomizationConfigDto
+from docspace-api-sdk.models.customization_config_dto import CustomizationConfigDto
 
 class TestCustomizationConfigDto(unittest.TestCase):
     """CustomizationConfigDto unit test stubs"""
@@ -40,24 +40,24 @@ class TestCustomizationConfigDto(unittest.TestCase):
         if include_optional:
             return CustomizationConfigDto(
                 about = True,
-                customer = docspace-api-python.models.customer_config_dto.CustomerConfigDto(
+                customer = docspace-api-sdk.models.customer_config_dto.CustomerConfigDto(
                     address = 'some text', 
                     logo = 'some text', 
                     logo_dark = 'some text', 
                     mail = 'some text', 
                     name = 'Winfield Upton', 
                     www = 'some text', ),
-                anonymous = docspace-api-python.models.anonymous_config_dto.AnonymousConfigDto(
+                anonymous = docspace-api-sdk.models.anonymous_config_dto.AnonymousConfigDto(
                     request = True, ),
-                feedback = docspace-api-python.models.feedback_config.FeedbackConfig(
+                feedback = docspace-api-sdk.models.feedback_config.FeedbackConfig(
                     url = 'some text', 
                     visible = True, ),
                 forcesave = True,
-                goback = docspace-api-python.models.goback_config.GobackConfig(
+                goback = docspace-api-sdk.models.goback_config.GobackConfig(
                     url = 'some text', ),
-                review = docspace-api-python.models.review_config.ReviewConfig(
+                review = docspace-api-sdk.models.review_config.ReviewConfig(
                     review_display = 'some text', ),
-                logo = docspace-api-python.models.logo_config_dto.LogoConfigDto(
+                logo = docspace-api-sdk.models.logo_config_dto.LogoConfigDto(
                     image = 'some text', 
                     image_dark = 'some text', 
                     image_light = 'some text', 
@@ -65,10 +65,10 @@ class TestCustomizationConfigDto(unittest.TestCase):
                     url = 'some text', 
                     visible = True, ),
                 mention_share = True,
-                submit_form = docspace-api-python.models.submit_form.SubmitForm(
+                submit_form = docspace-api-sdk.models.submit_form.SubmitForm(
                     visible = True, 
                     result_message = 'some text', ),
-                start_filling_form = docspace-api-python.models.start_filling_form.StartFillingForm(
+                start_filling_form = docspace-api-sdk.models.start_filling_form.StartFillingForm(
                     text = 'some text', )
             )
         else:

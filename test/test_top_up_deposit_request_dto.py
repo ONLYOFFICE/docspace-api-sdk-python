@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.top_up_deposit_request_dto import TopUpDepositRequestDto
+from docspace-api-sdk.models.top_up_deposit_request_dto import TopUpDepositRequestDto
 
 class TestTopUpDepositRequestDto(unittest.TestCase):
     """TopUpDepositRequestDto unit test stubs"""

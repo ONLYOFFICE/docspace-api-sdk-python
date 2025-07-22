@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.filter_type import FilterType
+from docspace-api-sdk.models.filter_type import FilterType
 
 class TestFilterType(unittest.TestCase):
     """FilterType unit test stubs"""

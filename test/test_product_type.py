@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.product_type import ProductType
+from docspace-api-sdk.models.product_type import ProductType
 
 class TestProductType(unittest.TestCase):
     """ProductType unit test stubs"""

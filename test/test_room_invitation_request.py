@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.room_invitation_request import RoomInvitationRequest
+from docspace-api-sdk.models.room_invitation_request import RoomInvitationRequest
 
 class TestRoomInvitationRequest(unittest.TestCase):
     """RoomInvitationRequest unit test stubs"""
@@ -40,7 +40,7 @@ class TestRoomInvitationRequest(unittest.TestCase):
         if include_optional:
             return RoomInvitationRequest(
                 invitations = [
-                    docspace-api-python.models.room_invitation.RoomInvitation(
+                    docspace-api-sdk.models.room_invitation.RoomInvitation(
                         email = 'Sydney_Roberts4@hotmail.com', 
                         id = 'aae1e103-bca5-9fa1-ba8c-42058b4abf28', 
                         access = 0, )

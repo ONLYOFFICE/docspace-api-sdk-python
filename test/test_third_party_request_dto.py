@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.third_party_request_dto import ThirdPartyRequestDto
+from docspace-api-sdk.models.third_party_request_dto import ThirdPartyRequestDto
 
 class TestThirdPartyRequestDto(unittest.TestCase):
     """ThirdPartyRequestDto unit test stubs"""

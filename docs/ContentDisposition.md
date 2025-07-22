@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-python.models.content_disposition import ContentDisposition
+from docspace-api-sdk.models.content_disposition import ContentDisposition
 
 # TODO update the JSON string below
 json = "{}"

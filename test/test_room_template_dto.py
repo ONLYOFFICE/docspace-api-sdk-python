@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.room_template_dto import RoomTemplateDto
+from docspace-api-sdk.models.room_template_dto import RoomTemplateDto
 
 class TestRoomTemplateDto(unittest.TestCase):
     """RoomTemplateDto unit test stubs"""
@@ -41,7 +41,7 @@ class TestRoomTemplateDto(unittest.TestCase):
             return RoomTemplateDto(
                 room_id = 9846,
                 title = 'legacy_1080p_small_wooden_mouse',
-                logo = docspace-api-python.models.logo_request.LogoRequest(
+                logo = docspace-api-sdk.models.logo_request.LogoRequest(
                     tmp_file = 'some text', 
                     x = 1234, 
                     y = 1234, 

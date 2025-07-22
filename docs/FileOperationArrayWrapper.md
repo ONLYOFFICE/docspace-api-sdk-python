@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-python.models.file_operation_array_wrapper import FileOperationArrayWrapper
+from docspace-api-sdk.models.file_operation_array_wrapper import FileOperationArrayWrapper
 
 # TODO update the JSON string below
 json = "{}"

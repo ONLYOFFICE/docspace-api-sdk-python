@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-python.models.form_gallery_dto import FormGalleryDto
+from docspace-api-sdk.models.form_gallery_dto import FormGalleryDto
 
 # TODO update the JSON string below
 json = "{}"

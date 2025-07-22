@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-python.models.delete import Delete
+from docspace-api-sdk.models.delete import Delete
 
 # TODO update the JSON string below
 json = "{}"

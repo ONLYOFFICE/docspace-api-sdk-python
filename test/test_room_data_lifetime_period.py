@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.room_data_lifetime_period import RoomDataLifetimePeriod
+from docspace-api-sdk.models.room_data_lifetime_period import RoomDataLifetimePeriod
 
 class TestRoomDataLifetimePeriod(unittest.TestCase):
     """RoomDataLifetimePeriod unit test stubs"""

@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-python.models.lock_file_parameters import LockFileParameters
+from docspace-api-sdk.models.lock_file_parameters import LockFileParameters
 
 # TODO update the JSON string below
 json = "{}"

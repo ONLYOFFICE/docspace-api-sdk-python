@@ -1,4 +1,4 @@
-# docspace-api-python.AuthenticationApi
+# docspace-api-sdk.AuthenticationApi
 
 All URIs are relative to *http://localhost:8092*
 
@@ -39,24 +39,24 @@ No authorization required
 
 
 ```python
-import docspace-api-python
-from docspace-api-python.models.auth_requests_dto import AuthRequestsDto
-from docspace-api-python.models.authentication_token_wrapper import AuthenticationTokenWrapper
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.models.auth_requests_dto import AuthRequestsDto
+from docspace-api-sdk.models.authentication_token_wrapper import AuthenticationTokenWrapper
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.AuthenticationApi(api_client)
-    auth_requests_dto = docspace-api-python.AuthRequestsDto() # AuthRequestsDto |  (optional)
+    api_instance = docspace-api-sdk.AuthenticationApi(api_client)
+    auth_requests_dto = docspace-api-sdk.AuthRequestsDto() # AuthRequestsDto |  (optional)
 
     try:
         # Authenticate a user
@@ -114,25 +114,25 @@ No authorization required
 
 
 ```python
-import docspace-api-python
-from docspace-api-python.models.auth_requests_dto import AuthRequestsDto
-from docspace-api-python.models.authentication_token_wrapper import AuthenticationTokenWrapper
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.models.auth_requests_dto import AuthRequestsDto
+from docspace-api-sdk.models.authentication_token_wrapper import AuthenticationTokenWrapper
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.AuthenticationApi(api_client)
+    api_instance = docspace-api-sdk.AuthenticationApi(api_client)
     code = 'code_example' # str | 
-    auth_requests_dto = docspace-api-python.AuthRequestsDto() # AuthRequestsDto |  (optional)
+    auth_requests_dto = docspace-api-sdk.AuthRequestsDto() # AuthRequestsDto |  (optional)
 
     try:
         # Authenticate a user by code
@@ -189,24 +189,24 @@ No authorization required
 
 
 ```python
-import docspace-api-python
-from docspace-api-python.models.confirm_wrapper import ConfirmWrapper
-from docspace-api-python.models.email_validation_key_model import EmailValidationKeyModel
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.models.confirm_wrapper import ConfirmWrapper
+from docspace-api-sdk.models.email_validation_key_model import EmailValidationKeyModel
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.AuthenticationApi(api_client)
-    email_validation_key_model = docspace-api-python.EmailValidationKeyModel() # EmailValidationKeyModel |  (optional)
+    api_instance = docspace-api-sdk.AuthenticationApi(api_client)
+    email_validation_key_model = docspace-api-sdk.EmailValidationKeyModel() # EmailValidationKeyModel |  (optional)
 
     try:
         # Open confirmation email URL
@@ -256,22 +256,22 @@ No authorization required
 
 
 ```python
-import docspace-api-python
-from docspace-api-python.models.boolean_wrapper import BooleanWrapper
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.models.boolean_wrapper import BooleanWrapper
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.AuthenticationApi(api_client)
+    api_instance = docspace-api-sdk.AuthenticationApi(api_client)
 
     try:
         # Check authentication
@@ -321,22 +321,22 @@ No authorization required
 
 
 ```python
-import docspace-api-python
-from docspace-api-python.models.string_wrapper import StringWrapper
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.models.string_wrapper import StringWrapper
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.AuthenticationApi(api_client)
+    api_instance = docspace-api-sdk.AuthenticationApi(api_client)
 
     try:
         # Log out
@@ -389,15 +389,15 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-python
-from docspace-api-python.models.authentication_token_wrapper import AuthenticationTokenWrapper
-from docspace-api-python.models.mobile_requests_dto import MobileRequestsDto
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.models.authentication_token_wrapper import AuthenticationTokenWrapper
+from docspace-api-sdk.models.mobile_requests_dto import MobileRequestsDto
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -407,7 +407,7 @@ configuration = docspace-api-python.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     username = os.environ["USERNAME"],
     password = os.environ["PASSWORD"]
 )
@@ -427,15 +427,15 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.AuthenticationApi(api_client)
-    mobile_requests_dto = docspace-api-python.MobileRequestsDto() # MobileRequestsDto |  (optional)
+    api_instance = docspace-api-sdk.AuthenticationApi(api_client)
+    mobile_requests_dto = docspace-api-sdk.MobileRequestsDto() # MobileRequestsDto |  (optional)
 
     try:
         # Set a mobile phone
@@ -489,24 +489,24 @@ No authorization required
 
 
 ```python
-import docspace-api-python
-from docspace-api-python.models.auth_requests_dto import AuthRequestsDto
-from docspace-api-python.models.authentication_token_wrapper import AuthenticationTokenWrapper
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.models.auth_requests_dto import AuthRequestsDto
+from docspace-api-sdk.models.authentication_token_wrapper import AuthenticationTokenWrapper
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.AuthenticationApi(api_client)
-    auth_requests_dto = docspace-api-python.AuthRequestsDto() # AuthRequestsDto |  (optional)
+    api_instance = docspace-api-sdk.AuthenticationApi(api_client)
+    auth_requests_dto = docspace-api-sdk.AuthRequestsDto() # AuthRequestsDto |  (optional)
 
     try:
         # Send SMS code

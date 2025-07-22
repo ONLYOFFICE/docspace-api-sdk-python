@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.account_info_dto import AccountInfoDto
+from docspace-api-sdk.models.account_info_dto import AccountInfoDto
 
 class TestAccountInfoDto(unittest.TestCase):
     """AccountInfoDto unit test stubs"""

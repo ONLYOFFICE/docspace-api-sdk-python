@@ -18,7 +18,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-python.models.external_share_dto import ExternalShareDto
+from docspace-api-sdk.models.external_share_dto import ExternalShareDto
 
 # TODO update the JSON string below
 json = "{}"

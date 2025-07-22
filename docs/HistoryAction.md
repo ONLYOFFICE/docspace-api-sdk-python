@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-python.models.history_action import HistoryAction
+from docspace-api-sdk.models.history_action import HistoryAction
 
 # TODO update the JSON string below
 json = "{}"

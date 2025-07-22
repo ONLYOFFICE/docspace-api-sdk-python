@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.exchange_token200_response import ExchangeToken200Response
+from docspace-api-sdk.models.exchange_token200_response import ExchangeToken200Response
 
 class TestExchangeToken200Response(unittest.TestCase):
     """ExchangeToken200Response unit test stubs"""

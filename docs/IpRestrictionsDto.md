@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-python.models.ip_restrictions_dto import IpRestrictionsDto
+from docspace-api-sdk.models.ip_restrictions_dto import IpRestrictionsDto
 
 # TODO update the JSON string below
 json = "{}"

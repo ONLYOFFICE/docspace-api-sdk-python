@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-python.models.schedule_wrapper import ScheduleWrapper
+from docspace-api-sdk.models.schedule_wrapper import ScheduleWrapper
 
 # TODO update the JSON string below
 json = "{}"

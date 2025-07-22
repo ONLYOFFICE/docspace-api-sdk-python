@@ -51,7 +51,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-python.models.settings_dto import SettingsDto
+from docspace-api-sdk.models.settings_dto import SettingsDto
 
 # TODO update the JSON string below
 json = "{}"

@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.file_operation_type import FileOperationType
+from docspace-api-sdk.models.file_operation_type import FileOperationType
 
 class TestFileOperationType(unittest.TestCase):
     """FileOperationType unit test stubs"""

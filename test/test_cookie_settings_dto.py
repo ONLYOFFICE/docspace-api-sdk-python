@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.cookie_settings_dto import CookieSettingsDto
+from docspace-api-sdk.models.cookie_settings_dto import CookieSettingsDto
 
 class TestCookieSettingsDto(unittest.TestCase):
     """CookieSettingsDto unit test stubs"""

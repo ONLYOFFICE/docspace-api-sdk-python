@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.backup_period import BackupPeriod
+from docspace-api-sdk.models.backup_period import BackupPeriod
 
 class TestBackupPeriod(unittest.TestCase):
     """BackupPeriod unit test stubs"""

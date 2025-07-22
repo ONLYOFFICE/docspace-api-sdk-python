@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.api.portal_quota_api import PortalQuotaApi
+from docspace-api-sdk.api.portal_quota_api import PortalQuotaApi
 
 
 class TestPortalQuotaApi(unittest.TestCase):

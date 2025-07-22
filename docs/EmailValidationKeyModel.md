@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-python.models.email_validation_key_model import EmailValidationKeyModel
+from docspace-api-sdk.models.email_validation_key_model import EmailValidationKeyModel
 
 # TODO update the JSON string below
 json = "{}"

@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.provider_filter import ProviderFilter
+from docspace-api-sdk.models.provider_filter import ProviderFilter
 
 class TestProviderFilter(unittest.TestCase):
     """ProviderFilter unit test stubs"""

@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-python.models.create_api_key_request_dto import CreateApiKeyRequestDto
+from docspace-api-sdk.models.create_api_key_request_dto import CreateApiKeyRequestDto
 
 # TODO update the JSON string below
 json = "{}"

@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.file_integer_wrapper import FileIntegerWrapper
+from docspace-api-sdk.models.file_integer_wrapper import FileIntegerWrapper
 
 class TestFileIntegerWrapper(unittest.TestCase):
     """FileIntegerWrapper unit test stubs"""
@@ -39,14 +39,14 @@ class TestFileIntegerWrapper(unittest.TestCase):
         model = FileIntegerWrapper()
         if include_optional:
             return FileIntegerWrapper(
-                response = docspace-api-python.models.file_dto_integer.FileDtoInteger(
+                response = docspace-api-sdk.models.file_dto_integer.FileDtoInteger(
                     title = 'Some titile.txt/ Some title', 
                     access = 0, 
                     shared = False, 
-                    created = docspace-api-python.models.api_date_time.ApiDateTime(
+                    created = docspace-api-sdk.models.api_date_time.ApiDateTime(
                         utc_time = '2008-04-10T06:30+04:00', 
                         time_zone_offset = '00:00:00', ), 
-                    created_by = docspace-api-python.models.employee_dto.EmployeeDto(
+                    created_by = docspace-api-sdk.models.employee_dto.EmployeeDto(
                         id = '', 
                         display_name = 'Mike Zanyatski', 
                         title = 'Manager', 
@@ -58,13 +58,13 @@ class TestFileIntegerWrapper(unittest.TestCase):
                         profile_url = 'some text', 
                         has_avatar = True, 
                         is_anonim = True, ), 
-                    updated = docspace-api-python.models.api_date_time.ApiDateTime(
+                    updated = docspace-api-sdk.models.api_date_time.ApiDateTime(
                         utc_time = '2008-04-10T06:30+04:00', 
                         time_zone_offset = '00:00:00', ), 
                     auto_delete = , 
                     root_folder_type = 0, 
                     parent_room_type = 0, 
-                    updated_by = docspace-api-python.models.employee_dto.EmployeeDto(
+                    updated_by = docspace-api-sdk.models.employee_dto.EmployeeDto(
                         id = '', 
                         display_name = 'Mike Zanyatski', 
                         title = 'Manager', 
@@ -115,7 +115,7 @@ class TestFileIntegerWrapper(unittest.TestCase):
                     start_filling = False, 
                     in_process_folder_id = 1234, 
                     in_process_folder_title = 'some text', 
-                    draft_location = docspace-api-python.models.draft_location_integer.DraftLocationInteger(
+                    draft_location = docspace-api-sdk.models.draft_location_integer.DraftLocationInteger(
                         folder_id = 9846, 
                         folder_title = 'some text', 
                         file_id = 9846, 
@@ -127,7 +127,7 @@ class TestFileIntegerWrapper(unittest.TestCase):
                     file_entry_type = 1, ),
                 count = 56,
                 links = [
-                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-sdk.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

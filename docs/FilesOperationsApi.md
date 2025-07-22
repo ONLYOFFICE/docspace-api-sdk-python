@@ -1,4 +1,4 @@
-# docspace-api-python.FilesOperationsApi
+# docspace-api-sdk.FilesOperationsApi
 
 All URIs are relative to *http://localhost:8092*
 
@@ -49,24 +49,24 @@ No authorization required
 
 
 ```python
-import docspace-api-python
-from docspace-api-python.models.download_request_dto import DownloadRequestDto
-from docspace-api-python.models.file_operation_array_wrapper import FileOperationArrayWrapper
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.models.download_request_dto import DownloadRequestDto
+from docspace-api-sdk.models.file_operation_array_wrapper import FileOperationArrayWrapper
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.FilesOperationsApi(api_client)
-    download_request_dto = docspace-api-python.DownloadRequestDto() # DownloadRequestDto |  (optional)
+    api_instance = docspace-api-sdk.FilesOperationsApi(api_client)
+    download_request_dto = docspace-api-sdk.DownloadRequestDto() # DownloadRequestDto |  (optional)
 
     try:
         # Bulk download
@@ -121,14 +121,14 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-python
-from docspace-api-python.models.conversation_result_array_wrapper import ConversationResultArrayWrapper
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.models.conversation_result_array_wrapper import ConversationResultArrayWrapper
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -138,7 +138,7 @@ configuration = docspace-api-python.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     username = os.environ["USERNAME"],
     password = os.environ["PASSWORD"]
 )
@@ -158,14 +158,14 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.FilesOperationsApi(api_client)
+    api_instance = docspace-api-sdk.FilesOperationsApi(api_client)
     file_id = 9846 # int | The file ID to check conversion status.
     start = true # bool | Specifies whether a conversion operation is started or not. (optional)
 
@@ -221,15 +221,15 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-python
-from docspace-api-python.models.batch_request_dto import BatchRequestDto
-from docspace-api-python.models.file_entry_array_wrapper import FileEntryArrayWrapper
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.models.batch_request_dto import BatchRequestDto
+from docspace-api-sdk.models.file_entry_array_wrapper import FileEntryArrayWrapper
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -239,7 +239,7 @@ configuration = docspace-api-python.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     username = os.environ["USERNAME"],
     password = os.environ["PASSWORD"]
 )
@@ -259,15 +259,15 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.FilesOperationsApi(api_client)
-    in_dto = docspace-api-python.BatchRequestDto() # BatchRequestDto | The request parameters for copying/moving files. (optional)
+    api_instance = docspace-api-sdk.FilesOperationsApi(api_client)
+    in_dto = docspace-api-sdk.BatchRequestDto() # BatchRequestDto | The request parameters for copying/moving files. (optional)
 
     try:
         # Check and move or copy to a folder
@@ -322,15 +322,15 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-python
-from docspace-api-python.models.batch_request_dto import BatchRequestDto
-from docspace-api-python.models.check_dest_folder_wrapper import CheckDestFolderWrapper
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.models.batch_request_dto import BatchRequestDto
+from docspace-api-sdk.models.check_dest_folder_wrapper import CheckDestFolderWrapper
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -340,7 +340,7 @@ configuration = docspace-api-python.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     username = os.environ["USERNAME"],
     password = os.environ["PASSWORD"]
 )
@@ -360,15 +360,15 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.FilesOperationsApi(api_client)
-    in_dto = docspace-api-python.BatchRequestDto() # BatchRequestDto | The request parameters for copying/moving files. (optional)
+    api_instance = docspace-api-sdk.FilesOperationsApi(api_client)
+    in_dto = docspace-api-sdk.BatchRequestDto() # BatchRequestDto | The request parameters for copying/moving files. (optional)
 
     try:
         # Check for moving or copying to a folder
@@ -423,15 +423,15 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-python
-from docspace-api-python.models.batch_request_dto import BatchRequestDto
-from docspace-api-python.models.file_operation_array_wrapper import FileOperationArrayWrapper
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.models.batch_request_dto import BatchRequestDto
+from docspace-api-sdk.models.file_operation_array_wrapper import FileOperationArrayWrapper
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -441,7 +441,7 @@ configuration = docspace-api-python.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     username = os.environ["USERNAME"],
     password = os.environ["PASSWORD"]
 )
@@ -461,15 +461,15 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.FilesOperationsApi(api_client)
-    batch_request_dto = docspace-api-python.BatchRequestDto() # BatchRequestDto |  (optional)
+    api_instance = docspace-api-sdk.FilesOperationsApi(api_client)
+    batch_request_dto = docspace-api-sdk.BatchRequestDto() # BatchRequestDto |  (optional)
 
     try:
         # Copy to the folder
@@ -540,15 +540,15 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-python
-from docspace-api-python.models.object_wrapper import ObjectWrapper
-from docspace-api-python.models.session_request import SessionRequest
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.models.object_wrapper import ObjectWrapper
+from docspace-api-sdk.models.session_request import SessionRequest
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -558,7 +558,7 @@ configuration = docspace-api-python.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     username = os.environ["USERNAME"],
     password = os.environ["PASSWORD"]
 )
@@ -578,16 +578,16 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.FilesOperationsApi(api_client)
+    api_instance = docspace-api-sdk.FilesOperationsApi(api_client)
     folder_id = 9846 # int | The folder ID of the session.
-    session_request = docspace-api-python.SessionRequest() # SessionRequest | The session parameters. (optional)
+    session_request = docspace-api-sdk.SessionRequest() # SessionRequest | The session parameters. (optional)
 
     try:
         # Chunked upload
@@ -642,15 +642,15 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-python
-from docspace-api-python.models.delete_batch_request_dto import DeleteBatchRequestDto
-from docspace-api-python.models.file_operation_array_wrapper import FileOperationArrayWrapper
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.models.delete_batch_request_dto import DeleteBatchRequestDto
+from docspace-api-sdk.models.file_operation_array_wrapper import FileOperationArrayWrapper
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -660,7 +660,7 @@ configuration = docspace-api-python.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     username = os.environ["USERNAME"],
     password = os.environ["PASSWORD"]
 )
@@ -680,15 +680,15 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.FilesOperationsApi(api_client)
-    delete_batch_request_dto = docspace-api-python.DeleteBatchRequestDto() # DeleteBatchRequestDto |  (optional)
+    api_instance = docspace-api-sdk.FilesOperationsApi(api_client)
+    delete_batch_request_dto = docspace-api-sdk.DeleteBatchRequestDto() # DeleteBatchRequestDto |  (optional)
 
     try:
         # Delete files and folders
@@ -743,15 +743,15 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-python
-from docspace-api-python.models.delete_version_batch_request_dto import DeleteVersionBatchRequestDto
-from docspace-api-python.models.file_operation_wrapper import FileOperationWrapper
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.models.delete_version_batch_request_dto import DeleteVersionBatchRequestDto
+from docspace-api-sdk.models.file_operation_wrapper import FileOperationWrapper
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -761,7 +761,7 @@ configuration = docspace-api-python.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     username = os.environ["USERNAME"],
     password = os.environ["PASSWORD"]
 )
@@ -781,15 +781,15 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.FilesOperationsApi(api_client)
-    delete_version_batch_request_dto = docspace-api-python.DeleteVersionBatchRequestDto() # DeleteVersionBatchRequestDto |  (optional)
+    api_instance = docspace-api-sdk.FilesOperationsApi(api_client)
+    delete_version_batch_request_dto = docspace-api-sdk.DeleteVersionBatchRequestDto() # DeleteVersionBatchRequestDto |  (optional)
 
     try:
         # Delete file versions
@@ -843,15 +843,15 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-python
-from docspace-api-python.models.duplicate_request_dto import DuplicateRequestDto
-from docspace-api-python.models.file_operation_array_wrapper import FileOperationArrayWrapper
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.models.duplicate_request_dto import DuplicateRequestDto
+from docspace-api-sdk.models.file_operation_array_wrapper import FileOperationArrayWrapper
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -861,7 +861,7 @@ configuration = docspace-api-python.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     username = os.environ["USERNAME"],
     password = os.environ["PASSWORD"]
 )
@@ -881,15 +881,15 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.FilesOperationsApi(api_client)
-    duplicate_request_dto = docspace-api-python.DuplicateRequestDto() # DuplicateRequestDto |  (optional)
+    api_instance = docspace-api-sdk.FilesOperationsApi(api_client)
+    duplicate_request_dto = docspace-api-sdk.DuplicateRequestDto() # DuplicateRequestDto |  (optional)
 
     try:
         # Duplicate files and folders
@@ -944,14 +944,14 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-python
-from docspace-api-python.models.file_operation_array_wrapper import FileOperationArrayWrapper
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.models.file_operation_array_wrapper import FileOperationArrayWrapper
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -961,7 +961,7 @@ configuration = docspace-api-python.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     username = os.environ["USERNAME"],
     password = os.environ["PASSWORD"]
 )
@@ -981,14 +981,14 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.FilesOperationsApi(api_client)
+    api_instance = docspace-api-sdk.FilesOperationsApi(api_client)
     single = true # bool | Specifies whether to return only the current operation (optional)
 
     try:
@@ -1043,22 +1043,22 @@ No authorization required
 
 
 ```python
-import docspace-api-python
-from docspace-api-python.models.file_operation_array_wrapper import FileOperationArrayWrapper
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.models.file_operation_array_wrapper import FileOperationArrayWrapper
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.FilesOperationsApi(api_client)
+    api_instance = docspace-api-sdk.FilesOperationsApi(api_client)
     id = '9846' # str | The ID of the file operation. (optional)
 
     try:
@@ -1113,24 +1113,24 @@ No authorization required
 
 
 ```python
-import docspace-api-python
-from docspace-api-python.models.file_operation_array_wrapper import FileOperationArrayWrapper
-from docspace-api-python.models.file_operation_type import FileOperationType
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.models.file_operation_array_wrapper import FileOperationArrayWrapper
+from docspace-api-sdk.models.file_operation_type import FileOperationType
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.FilesOperationsApi(api_client)
-    operation_type = docspace-api-python.FileOperationType() # FileOperationType | Specifies the type of file operation to be retrieved.
+    api_instance = docspace-api-sdk.FilesOperationsApi(api_client)
+    operation_type = docspace-api-sdk.FileOperationType() # FileOperationType | Specifies the type of file operation to be retrieved.
     id = '9846' # str | The ID of the file operation. (optional)
 
     try:
@@ -1184,15 +1184,15 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-python
-from docspace-api-python.models.base_batch_request_dto import BaseBatchRequestDto
-from docspace-api-python.models.file_operation_array_wrapper import FileOperationArrayWrapper
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.models.base_batch_request_dto import BaseBatchRequestDto
+from docspace-api-sdk.models.file_operation_array_wrapper import FileOperationArrayWrapper
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -1202,7 +1202,7 @@ configuration = docspace-api-python.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     username = os.environ["USERNAME"],
     password = os.environ["PASSWORD"]
 )
@@ -1222,15 +1222,15 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.FilesOperationsApi(api_client)
-    base_batch_request_dto = docspace-api-python.BaseBatchRequestDto() # BaseBatchRequestDto |  (optional)
+    api_instance = docspace-api-sdk.FilesOperationsApi(api_client)
+    base_batch_request_dto = docspace-api-sdk.BaseBatchRequestDto() # BaseBatchRequestDto |  (optional)
 
     try:
         # Mark as read
@@ -1284,15 +1284,15 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-python
-from docspace-api-python.models.batch_request_dto import BatchRequestDto
-from docspace-api-python.models.file_operation_array_wrapper import FileOperationArrayWrapper
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.models.batch_request_dto import BatchRequestDto
+from docspace-api-sdk.models.file_operation_array_wrapper import FileOperationArrayWrapper
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -1302,7 +1302,7 @@ configuration = docspace-api-python.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     username = os.environ["USERNAME"],
     password = os.environ["PASSWORD"]
 )
@@ -1322,15 +1322,15 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.FilesOperationsApi(api_client)
-    batch_request_dto = docspace-api-python.BatchRequestDto() # BatchRequestDto |  (optional)
+    api_instance = docspace-api-sdk.FilesOperationsApi(api_client)
+    batch_request_dto = docspace-api-sdk.BatchRequestDto() # BatchRequestDto |  (optional)
 
     try:
         # Move or copy to a folder
@@ -1386,15 +1386,15 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-python
-from docspace-api-python.models.check_conversion_request_dto_integer import CheckConversionRequestDtoInteger
-from docspace-api-python.models.conversation_result_array_wrapper import ConversationResultArrayWrapper
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.models.check_conversion_request_dto_integer import CheckConversionRequestDtoInteger
+from docspace-api-sdk.models.conversation_result_array_wrapper import ConversationResultArrayWrapper
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -1404,7 +1404,7 @@ configuration = docspace-api-python.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     username = os.environ["USERNAME"],
     password = os.environ["PASSWORD"]
 )
@@ -1424,16 +1424,16 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.FilesOperationsApi(api_client)
+    api_instance = docspace-api-sdk.FilesOperationsApi(api_client)
     file_id = 9846 # int | The file ID to start conversion proccess.
-    check_conversion_request_dto_integer = docspace-api-python.CheckConversionRequestDtoInteger() # CheckConversionRequestDtoInteger | The parameters for checking file conversion. (optional)
+    check_conversion_request_dto_integer = docspace-api-sdk.CheckConversionRequestDtoInteger() # CheckConversionRequestDtoInteger | The parameters for checking file conversion. (optional)
 
     try:
         # Start file conversion
@@ -1487,22 +1487,22 @@ No authorization required
 
 
 ```python
-import docspace-api-python
-from docspace-api-python.models.file_operation_array_wrapper import FileOperationArrayWrapper
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.models.file_operation_array_wrapper import FileOperationArrayWrapper
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.FilesOperationsApi(api_client)
+    api_instance = docspace-api-sdk.FilesOperationsApi(api_client)
     id = '9846' # str | The operation ID of the request.
 
     try:
@@ -1557,15 +1557,15 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-python
-from docspace-api-python.models.string_wrapper import StringWrapper
-from docspace-api-python.models.update_comment import UpdateComment
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.models.string_wrapper import StringWrapper
+from docspace-api-sdk.models.update_comment import UpdateComment
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -1575,7 +1575,7 @@ configuration = docspace-api-python.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     username = os.environ["USERNAME"],
     password = os.environ["PASSWORD"]
 )
@@ -1595,16 +1595,16 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.FilesOperationsApi(api_client)
+    api_instance = docspace-api-sdk.FilesOperationsApi(api_client)
     file_id = 9846 # int | The file ID where the comment is located.
-    update_comment = docspace-api-python.UpdateComment() # UpdateComment | The parameters for updating a comment. (optional)
+    update_comment = docspace-api-sdk.UpdateComment() # UpdateComment | The parameters for updating a comment. (optional)
 
     try:
         # Update a comment

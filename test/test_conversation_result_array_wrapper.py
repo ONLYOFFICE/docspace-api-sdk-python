@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.conversation_result_array_wrapper import ConversationResultArrayWrapper
+from docspace-api-sdk.models.conversation_result_array_wrapper import ConversationResultArrayWrapper
 
 class TestConversationResultArrayWrapper(unittest.TestCase):
     """ConversationResultArrayWrapper unit test stubs"""
@@ -40,7 +40,7 @@ class TestConversationResultArrayWrapper(unittest.TestCase):
         if include_optional:
             return ConversationResultArrayWrapper(
                 response = [
-                    docspace-api-python.models.conversation_result_dto.ConversationResultDto(
+                    docspace-api-sdk.models.conversation_result_dto.ConversationResultDto(
                         id = '9846', 
                         operation = 0, 
                         progress = 1234, 
@@ -51,7 +51,7 @@ class TestConversationResultArrayWrapper(unittest.TestCase):
                     ],
                 count = 56,
                 links = [
-                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-sdk.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

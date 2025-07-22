@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.third_party_params_array_wrapper import ThirdPartyParamsArrayWrapper
+from docspace-api-sdk.models.third_party_params_array_wrapper import ThirdPartyParamsArrayWrapper
 
 class TestThirdPartyParamsArrayWrapper(unittest.TestCase):
     """ThirdPartyParamsArrayWrapper unit test stubs"""
@@ -40,14 +40,14 @@ class TestThirdPartyParamsArrayWrapper(unittest.TestCase):
         if include_optional:
             return ThirdPartyParamsArrayWrapper(
                 response = [
-                    docspace-api-python.models.third_party_params.ThirdPartyParams(
-                        auth_data = docspace-api-python.models.auth_data.AuthData(
+                    docspace-api-sdk.models.third_party_params.ThirdPartyParams(
+                        auth_data = docspace-api-sdk.models.auth_data.AuthData(
                             login = 'some text', 
                             password = 'vfmf2vO1Kp', 
                             raw_token = 'some text', 
                             url = 'some text', 
                             provider = 'some text', 
-                            token = docspace-api-python.models.o_auth20_token.OAuth20Token(
+                            token = docspace-api-sdk.models.o_auth20_token.OAuth20Token(
                                 access_token = 'some text', 
                                 refresh_token = 'some text', 
                                 expires_in = 1234, 
@@ -64,7 +64,7 @@ class TestThirdPartyParamsArrayWrapper(unittest.TestCase):
                     ],
                 count = 56,
                 links = [
-                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-sdk.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

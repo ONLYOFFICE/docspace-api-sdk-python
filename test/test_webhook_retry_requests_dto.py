@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.webhook_retry_requests_dto import WebhookRetryRequestsDto
+from docspace-api-sdk.models.webhook_retry_requests_dto import WebhookRetryRequestsDto
 
 class TestWebhookRetryRequestsDto(unittest.TestCase):
     """WebhookRetryRequestsDto unit test stubs"""

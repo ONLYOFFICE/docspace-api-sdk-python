@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.check_conversion_request_dto_integer import CheckConversionRequestDtoInteger
+from docspace-api-sdk.models.check_conversion_request_dto_integer import CheckConversionRequestDtoInteger
 
 class TestCheckConversionRequestDtoInteger(unittest.TestCase):
     """CheckConversionRequestDtoInteger unit test stubs"""

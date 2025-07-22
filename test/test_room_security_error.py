@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.room_security_error import RoomSecurityError
+from docspace-api-sdk.models.room_security_error import RoomSecurityError
 
 class TestRoomSecurityError(unittest.TestCase):
     """RoomSecurityError unit test stubs"""

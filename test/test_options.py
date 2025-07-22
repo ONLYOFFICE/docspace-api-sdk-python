@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.options import Options
+from docspace-api-sdk.models.options import Options
 
 class TestOptions(unittest.TestCase):
     """Options unit test stubs"""
@@ -39,7 +39,7 @@ class TestOptions(unittest.TestCase):
         model = Options()
         if include_optional:
             return Options(
-                watermark_on_draw = docspace-api-python.models.watermark_on_draw.WatermarkOnDraw(
+                watermark_on_draw = docspace-api-sdk.models.watermark_on_draw.WatermarkOnDraw(
                     width = -8.5, 
                     height = -8.5, 
                     margins = [1234], 
@@ -47,10 +47,10 @@ class TestOptions(unittest.TestCase):
                     rotate = 1234, 
                     transparent = -8.5, 
                     paragraphs = [
-                        docspace-api-python.models.paragraph.Paragraph(
+                        docspace-api-sdk.models.paragraph.Paragraph(
                             align = 1234, 
                             runs = [
-                                docspace-api-python.models.run.Run(
+                                docspace-api-sdk.models.run.Run(
                                     fill = [1234], 
                                     text = 'some text', 
                                     font_size = 'some text', )

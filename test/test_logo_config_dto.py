@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.logo_config_dto import LogoConfigDto
+from docspace-api-sdk.models.logo_config_dto import LogoConfigDto
 
 class TestLogoConfigDto(unittest.TestCase):
     """LogoConfigDto unit test stubs"""

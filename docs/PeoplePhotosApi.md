@@ -1,4 +1,4 @@
-# docspace-api-python.PeoplePhotosApi
+# docspace-api-sdk.PeoplePhotosApi
 
 All URIs are relative to *http://localhost:8092*
 
@@ -38,15 +38,15 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-python
-from docspace-api-python.models.thumbnails_data_wrapper import ThumbnailsDataWrapper
-from docspace-api-python.models.thumbnails_request import ThumbnailsRequest
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.models.thumbnails_data_wrapper import ThumbnailsDataWrapper
+from docspace-api-sdk.models.thumbnails_request import ThumbnailsRequest
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -56,7 +56,7 @@ configuration = docspace-api-python.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     username = os.environ["USERNAME"],
     password = os.environ["PASSWORD"]
 )
@@ -76,16 +76,16 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.PeoplePhotosApi(api_client)
+    api_instance = docspace-api-sdk.PeoplePhotosApi(api_client)
     userid = '9846' # str | The user ID.
-    thumbnails_request = docspace-api-python.ThumbnailsRequest() # ThumbnailsRequest | The thumbnail request. (optional)
+    thumbnails_request = docspace-api-sdk.ThumbnailsRequest() # ThumbnailsRequest | The thumbnail request. (optional)
 
     try:
         # Create photo thumbnails
@@ -141,14 +141,14 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-python
-from docspace-api-python.models.thumbnails_data_wrapper import ThumbnailsDataWrapper
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.models.thumbnails_data_wrapper import ThumbnailsDataWrapper
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -158,7 +158,7 @@ configuration = docspace-api-python.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     username = os.environ["USERNAME"],
     password = os.environ["PASSWORD"]
 )
@@ -178,14 +178,14 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.PeoplePhotosApi(api_client)
+    api_instance = docspace-api-sdk.PeoplePhotosApi(api_client)
     userid = '9846' # str | The user ID.
 
     try:
@@ -242,14 +242,14 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-python
-from docspace-api-python.models.thumbnails_data_wrapper import ThumbnailsDataWrapper
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.models.thumbnails_data_wrapper import ThumbnailsDataWrapper
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -259,7 +259,7 @@ configuration = docspace-api-python.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     username = os.environ["USERNAME"],
     password = os.environ["PASSWORD"]
 )
@@ -279,14 +279,14 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.PeoplePhotosApi(api_client)
+    api_instance = docspace-api-sdk.PeoplePhotosApi(api_client)
     userid = '9846' # str | The user ID.
 
     try:
@@ -344,15 +344,15 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-python
-from docspace-api-python.models.thumbnails_data_wrapper import ThumbnailsDataWrapper
-from docspace-api-python.models.update_photo_member_request import UpdatePhotoMemberRequest
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.models.thumbnails_data_wrapper import ThumbnailsDataWrapper
+from docspace-api-sdk.models.update_photo_member_request import UpdatePhotoMemberRequest
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -362,7 +362,7 @@ configuration = docspace-api-python.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     username = os.environ["USERNAME"],
     password = os.environ["PASSWORD"]
 )
@@ -382,16 +382,16 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.PeoplePhotosApi(api_client)
+    api_instance = docspace-api-sdk.PeoplePhotosApi(api_client)
     userid = '9846' # str | The user ID.
-    update_photo_member_request = docspace-api-python.UpdatePhotoMemberRequest() # UpdatePhotoMemberRequest | The request parameters for updating a photo. (optional)
+    update_photo_member_request = docspace-api-sdk.UpdatePhotoMemberRequest() # UpdatePhotoMemberRequest | The request parameters for updating a photo. (optional)
 
     try:
         # Update a user photo
@@ -448,15 +448,15 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-python
-from docspace-api-python.models.file_upload_result_wrapper import FileUploadResultWrapper
-from docspace-api-python.models.key_value_pair_string_string_values import KeyValuePairStringStringValues
-from docspace-api-python.rest import ApiException
+import docspace-api-sdk
+from docspace-api-sdk.models.file_upload_result_wrapper import FileUploadResultWrapper
+from docspace-api-sdk.models.key_value_pair_string_string_values import KeyValuePairStringStringValues
+from docspace-api-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost:8092
 # See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     host = "http://localhost:8092"
 )
 
@@ -466,7 +466,7 @@ configuration = docspace-api-python.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     username = os.environ["USERNAME"],
     password = os.environ["PASSWORD"]
 )
@@ -486,16 +486,16 @@ configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
 
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-python.Configuration(
+configuration = docspace-api-sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-python.ApiClient(configuration) as api_client:
+with docspace-api-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-python.PeoplePhotosApi(api_client)
+    api_instance = docspace-api-sdk.PeoplePhotosApi(api_client)
     userid = '9846' # str | The user ID.
-    form_collection = [docspace-api-python.KeyValuePairStringStringValues()] # List[KeyValuePairStringStringValues] | The image data.
+    form_collection = [docspace-api-sdk.KeyValuePairStringStringValues()] # List[KeyValuePairStringStringValues] | The image data.
 
     try:
         # Upload a user photo

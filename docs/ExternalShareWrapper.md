@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-python.models.external_share_wrapper import ExternalShareWrapper
+from docspace-api-sdk.models.external_share_wrapper import ExternalShareWrapper
 
 # TODO update the JSON string below
 json = "{}"

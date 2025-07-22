@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.storage_dto import StorageDto
+from docspace-api-sdk.models.storage_dto import StorageDto
 
 class TestStorageDto(unittest.TestCase):
     """StorageDto unit test stubs"""
@@ -42,7 +42,7 @@ class TestStorageDto(unittest.TestCase):
                 id = '9846',
                 title = 'legacy_1080p_small_wooden_mouse',
                 properties = [
-                    docspace-api-python.models.auth_key.AuthKey(
+                    docspace-api-sdk.models.auth_key.AuthKey(
                         name = 'Winfield Upton', 
                         value = 'some text', 
                         title = 'legacy_1080p_small_wooden_mouse', )

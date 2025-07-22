@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.start_filling_form import StartFillingForm
+from docspace-api-sdk.models.start_filling_form import StartFillingForm
 
 class TestStartFillingForm(unittest.TestCase):
     """StartFillingForm unit test stubs"""

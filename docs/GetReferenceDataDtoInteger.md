@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-python.models.get_reference_data_dto_integer import GetReferenceDataDtoInteger
+from docspace-api-sdk.models.get_reference_data_dto_integer import GetReferenceDataDtoInteger
 
 # TODO update the JSON string below
 json = "{}"

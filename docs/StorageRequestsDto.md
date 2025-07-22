@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-python.models.storage_requests_dto import StorageRequestsDto
+from docspace-api-sdk.models.storage_requests_dto import StorageRequestsDto
 
 # TODO update the JSON string below
 json = "{}"

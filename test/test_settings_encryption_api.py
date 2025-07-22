@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.api.settings_encryption_api import SettingsEncryptionApi
+from docspace-api-sdk.api.settings_encryption_api import SettingsEncryptionApi
 
 
 class TestSettingsEncryptionApi(unittest.TestCase):

@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-python.models.webhooks_log_wrapper import WebhooksLogWrapper
+from docspace-api-sdk.models.webhooks_log_wrapper import WebhooksLogWrapper
 
 # TODO update the JSON string below
 json = "{}"

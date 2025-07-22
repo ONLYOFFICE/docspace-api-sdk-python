@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.order_by import OrderBy
+from docspace-api-sdk.models.order_by import OrderBy
 
 class TestOrderBy(unittest.TestCase):
     """OrderBy unit test stubs"""

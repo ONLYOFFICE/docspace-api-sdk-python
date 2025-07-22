@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-python.models.error_response import ErrorResponse
+from docspace-api-sdk.models.error_response import ErrorResponse
 
 # TODO update the JSON string below
 json = "{}"

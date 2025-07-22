@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.active_connections_wrapper_links_inner import ActiveConnectionsWrapperLinksInner
+from docspace-api-sdk.models.active_connections_wrapper_links_inner import ActiveConnectionsWrapperLinksInner
 
 class TestActiveConnectionsWrapperLinksInner(unittest.TestCase):
     """ActiveConnectionsWrapperLinksInner unit test stubs"""

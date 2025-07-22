@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.encryption_settings_wrapper import EncryptionSettingsWrapper
+from docspace-api-sdk.models.encryption_settings_wrapper import EncryptionSettingsWrapper
 
 class TestEncryptionSettingsWrapper(unittest.TestCase):
     """EncryptionSettingsWrapper unit test stubs"""
@@ -39,13 +39,13 @@ class TestEncryptionSettingsWrapper(unittest.TestCase):
         model = EncryptionSettingsWrapper()
         if include_optional:
             return EncryptionSettingsWrapper(
-                response = docspace-api-python.models.encryption_settings.EncryptionSettings(
+                response = docspace-api-sdk.models.encryption_settings.EncryptionSettings(
                     password = 'vfmf2vO1Kp', 
                     status = 0, 
                     notify_users = True, ),
                 count = 56,
                 links = [
-                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-sdk.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

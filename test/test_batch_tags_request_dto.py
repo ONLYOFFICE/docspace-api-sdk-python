@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.batch_tags_request_dto import BatchTagsRequestDto
+from docspace-api-sdk.models.batch_tags_request_dto import BatchTagsRequestDto
 
 class TestBatchTagsRequestDto(unittest.TestCase):
     """BatchTagsRequestDto unit test stubs"""

@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.active_connections_dto import ActiveConnectionsDto
+from docspace-api-sdk.models.active_connections_dto import ActiveConnectionsDto
 
 class TestActiveConnectionsDto(unittest.TestCase):
     """ActiveConnectionsDto unit test stubs"""
@@ -41,7 +41,7 @@ class TestActiveConnectionsDto(unittest.TestCase):
             return ActiveConnectionsDto(
                 login_event = 1234,
                 items = [
-                    docspace-api-python.models.active_connections_item_dto.ActiveConnectionsItemDto(
+                    docspace-api-sdk.models.active_connections_item_dto.ActiveConnectionsItemDto(
                         id = 9846, 
                         tenant_id = 1234, 
                         user_id = 'aae1e103-bca5-9fa1-ba8c-42058b4abf28', 
@@ -51,7 +51,7 @@ class TestActiveConnectionsDto(unittest.TestCase):
                         city = 'some text', 
                         browser = 'some text', 
                         platform = 'some text', 
-                        date = docspace-api-python.models.api_date_time.ApiDateTime(
+                        date = docspace-api-sdk.models.api_date_time.ApiDateTime(
                             utc_time = '2008-04-10T06:30+04:00', 
                             time_zone_offset = '00:00:00', ), 
                         page = 'some text', )

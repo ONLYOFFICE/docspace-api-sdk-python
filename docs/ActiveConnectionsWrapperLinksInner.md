@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-python.models.active_connections_wrapper_links_inner import ActiveConnectionsWrapperLinksInner
+from docspace-api-sdk.models.active_connections_wrapper_links_inner import ActiveConnectionsWrapperLinksInner
 
 # TODO update the JSON string below
 json = "{}"

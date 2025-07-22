@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.mention_wrapper_array_wrapper import MentionWrapperArrayWrapper
+from docspace-api-sdk.models.mention_wrapper_array_wrapper import MentionWrapperArrayWrapper
 
 class TestMentionWrapperArrayWrapper(unittest.TestCase):
     """MentionWrapperArrayWrapper unit test stubs"""
@@ -40,8 +40,8 @@ class TestMentionWrapperArrayWrapper(unittest.TestCase):
         if include_optional:
             return MentionWrapperArrayWrapper(
                 response = [
-                    docspace-api-python.models.mention_wrapper.MentionWrapper(
-                        user = docspace-api-python.models.user_info.UserInfo(
+                    docspace-api-sdk.models.mention_wrapper.MentionWrapper(
+                        user = docspace-api-sdk.models.user_info.UserInfo(
                             id = 'aae1e103-bca5-9fa1-ba8c-42058b4abf28', 
                             first_name = 'Winfield', 
                             last_name = 'Wyman', 
@@ -81,7 +81,7 @@ class TestMentionWrapperArrayWrapper(unittest.TestCase):
                     ],
                 count = 56,
                 links = [
-                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-sdk.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

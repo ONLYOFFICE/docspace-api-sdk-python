@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.check_fill_form_draft import CheckFillFormDraft
+from docspace-api-sdk.models.check_fill_form_draft import CheckFillFormDraft
 
 class TestCheckFillFormDraft(unittest.TestCase):
     """CheckFillFormDraft unit test stubs"""

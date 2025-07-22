@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.item_key_value_pair_string_boolean import ItemKeyValuePairStringBoolean
+from docspace-api-sdk.models.item_key_value_pair_string_boolean import ItemKeyValuePairStringBoolean
 
 class TestItemKeyValuePairStringBoolean(unittest.TestCase):
     """ItemKeyValuePairStringBoolean unit test stubs"""

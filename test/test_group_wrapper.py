@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.group_wrapper import GroupWrapper
+from docspace-api-sdk.models.group_wrapper import GroupWrapper
 
 class TestGroupWrapper(unittest.TestCase):
     """GroupWrapper unit test stubs"""
@@ -39,13 +39,13 @@ class TestGroupWrapper(unittest.TestCase):
         model = GroupWrapper()
         if include_optional:
             return GroupWrapper(
-                response = docspace-api-python.models.group_dto.GroupDto(
+                response = docspace-api-sdk.models.group_dto.GroupDto(
                     name = 'Winfield Upton', 
                     parent = '75a5f745-f697-4418-b38d-0fe0d277e258', 
                     category = '75a5f745-f697-4418-b38d-0fe0d277e258', 
                     id = 'aae1e103-bca5-9fa1-ba8c-42058b4abf28', 
                     is_ldap = True, 
-                    manager = docspace-api-python.models.employee_full_dto.EmployeeFullDto(
+                    manager = docspace-api-sdk.models.employee_full_dto.EmployeeFullDto(
                         id = '', 
                         display_name = 'Mike Zanyatski', 
                         title = 'Manager', 
@@ -62,23 +62,23 @@ class TestGroupWrapper(unittest.TestCase):
                         user_name = 'Mike.Zanyatski', 
                         email = 'my@gmail.com', 
                         contacts = [
-                            docspace-api-python.models.contact.Contact(
+                            docspace-api-sdk.models.contact.Contact(
                                 type = 'GTalk', 
                                 value = 'my@gmail.com', )
                             ], 
-                        birthday = docspace-api-python.models.api_date_time.ApiDateTime(
+                        birthday = docspace-api-sdk.models.api_date_time.ApiDateTime(
                             utc_time = '2008-04-10T06:30+04:00', 
                             time_zone_offset = '00:00:00', ), 
                         sex = 'male', 
                         status = 1, 
                         activation_status = 0, 
-                        terminated = docspace-api-python.models.api_date_time.ApiDateTime(
+                        terminated = docspace-api-sdk.models.api_date_time.ApiDateTime(
                             utc_time = '2008-04-10T06:30+04:00', 
                             time_zone_offset = '00:00:00', ), 
                         department = 'Marketing', 
                         work_from = , 
                         groups = [
-                            docspace-api-python.models.group_summary_dto.GroupSummaryDto(
+                            docspace-api-sdk.models.group_summary_dto.GroupSummaryDto(
                                 id = '', 
                                 name = 'Group Name', )
                             ], 
@@ -101,7 +101,7 @@ class TestGroupWrapper(unittest.TestCase):
                         shared = True, 
                         is_custom_quota = True, 
                         login_event_id = 1234, 
-                        created_by = docspace-api-python.models.employee_dto.EmployeeDto(
+                        created_by = docspace-api-sdk.models.employee_dto.EmployeeDto(
                             id = '', 
                             display_name = 'Mike Zanyatski', 
                             title = 'Manager', 
@@ -117,7 +117,7 @@ class TestGroupWrapper(unittest.TestCase):
                         has_personal_folder = True, 
                         tfa_app_enabled = True, ), 
                     members = [
-                        docspace-api-python.models.employee_full_dto.EmployeeFullDto(
+                        docspace-api-sdk.models.employee_full_dto.EmployeeFullDto(
                             id = '', 
                             display_name = 'Mike Zanyatski', 
                             title = 'Manager', 
@@ -159,7 +159,7 @@ class TestGroupWrapper(unittest.TestCase):
                     members_count = 1234, ),
                 count = 56,
                 links = [
-                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-sdk.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.dark_theme_settings_wrapper import DarkThemeSettingsWrapper
+from docspace-api-sdk.models.dark_theme_settings_wrapper import DarkThemeSettingsWrapper
 
 class TestDarkThemeSettingsWrapper(unittest.TestCase):
     """DarkThemeSettingsWrapper unit test stubs"""
@@ -39,12 +39,12 @@ class TestDarkThemeSettingsWrapper(unittest.TestCase):
         model = DarkThemeSettingsWrapper()
         if include_optional:
             return DarkThemeSettingsWrapper(
-                response = docspace-api-python.models.dark_theme_settings.DarkThemeSettings(
+                response = docspace-api-sdk.models.dark_theme_settings.DarkThemeSettings(
                     theme = 0, 
                     last_modified = '2008-04-10T06:30+04:00', ),
                 count = 56,
                 links = [
-                    docspace-api-python.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
+                    docspace-api-sdk.models.active_connections_wrapper_links_inner.ActiveConnectionsWrapper_links_inner(
                         href = '', 
                         action = '', )
                     ],

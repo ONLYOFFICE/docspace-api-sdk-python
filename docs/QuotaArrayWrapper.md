@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-python.models.quota_array_wrapper import QuotaArrayWrapper
+from docspace-api-sdk.models.quota_array_wrapper import QuotaArrayWrapper
 
 # TODO update the JSON string below
 json = "{}"

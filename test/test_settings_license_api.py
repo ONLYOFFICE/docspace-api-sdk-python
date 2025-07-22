@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.api.settings_license_api import SettingsLicenseApi
+from docspace-api-sdk.api.settings_license_api import SettingsLicenseApi
 
 
 class TestSettingsLicenseApi(unittest.TestCase):

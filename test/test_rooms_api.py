@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.api.rooms_api import RoomsApi
+from docspace-api-sdk.api.rooms_api import RoomsApi
 
 
 class TestRoomsApi(unittest.TestCase):

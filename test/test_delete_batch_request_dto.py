@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.delete_batch_request_dto import DeleteBatchRequestDto
+from docspace-api-sdk.models.delete_batch_request_dto import DeleteBatchRequestDto
 
 class TestDeleteBatchRequestDto(unittest.TestCase):
     """DeleteBatchRequestDto unit test stubs"""

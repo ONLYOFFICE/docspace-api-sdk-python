@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.migrating_api_user import MigratingApiUser
+from docspace-api-sdk.models.migrating_api_user import MigratingApiUser
 
 class TestMigratingApiUser(unittest.TestCase):
     """MigratingApiUser unit test stubs"""
@@ -46,7 +46,7 @@ class TestMigratingApiUser(unittest.TestCase):
                 first_name = 'Winfield',
                 last_name = 'Wyman',
                 user_type = 0,
-                migrating_files = docspace-api-python.models.migrating_api_files.MigratingApiFiles(
+                migrating_files = docspace-api-sdk.models.migrating_api_files.MigratingApiFiles(
                     folders_count = 1234, 
                     files_count = 1234, 
                     bytes_total = 1234, )

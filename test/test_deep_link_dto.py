@@ -18,7 +18,7 @@
 
 import unittest
 
-from docspace-api-python.models.deep_link_dto import DeepLinkDto
+from docspace-api-sdk.models.deep_link_dto import DeepLinkDto
 
 class TestDeepLinkDto(unittest.TestCase):
     """DeepLinkDto unit test stubs"""
