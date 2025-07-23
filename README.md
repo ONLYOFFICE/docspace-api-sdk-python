@@ -5,7 +5,6 @@ The ONLYOFFICE DocSpace SDK for Python is a library that provides tools for inte
 - API version: 3.2.0
 - SDK version: 1.0.0
 
-For more information, please visit [https://helpdesk.onlyoffice.com/hc/en-us](https://helpdesk.onlyoffice.com/hc/en-us)
 
 ## Requirements
 
@@ -17,13 +16,13 @@ Python 3.9+
 If the Python package is hosted in a repository, you can install it directly using:
 
 ```sh
-pip install git+https://github.com/GIT_USER_ID/GIT_REPO_ID.git
+pip install git+https://github.com/ONLYOFFICE/docspace-api-sdk-python.git
 ```
 
 If required, run with root permissions:
 
 ```bash
-sudo pip install git+https://github.com/GIT_USER_ID/GIT_REPO_ID.git
+sudo pip install git+https://github.com/ONLYOFFICE/docspace-api-sdk-python.git
 ```
 
 Then import the package:
@@ -88,8 +87,8 @@ Authentication schemes defined for the API:
 
 - **Type**: OAuth
 - **Flow**: accessCode
-- **Authorization URL**: 
-- **Token Url**: 
+- **Authorization URL**: {{authBaseUrl}}/oauth2/authorize
+- **Token Url**: {{authBaseUrl}}/oauth2/token
 - **Scopes**: 
  - **read**: Read access to protected resources
  - **write**: Write access to protected resources
@@ -98,7 +97,7 @@ Authentication schemes defined for the API:
 ### OpenId
 
 - **Type**: OpenId Connect
-- **OpenId Connect URL**: 
+- **OpenId Connect URL**: {{authBaseUrl}}/.well-known/openid-configuration
 
 <a id="x-signature"></a>
 ### x-signature
