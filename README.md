@@ -176,6 +176,7 @@ with docspace-api-sdk.ApiClient(configuration) as api_client:
 All URIs are relative to *http://localhost:8092*
 
 <details><summary>API Endoints table</summary>
+
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *ApiKeysApi* | [**create_api_key**](docs/ApiKeysApi.md#create_api_key) | **POST** /api/2.0/keys | Create a user API key
@@ -647,6 +648,7 @@ Class | Method | HTTP request | Description
 ## Documentation For Models
 
 <details><summary>Models list</summary>
+
  - [AccountInfoArrayWrapper](docs/AccountInfoArrayWrapper.md)
  - [AccountInfoDto](docs/AccountInfoDto.md)
  - [AccountLoginType](docs/AccountLoginType.md)

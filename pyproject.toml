@@ -6,7 +6,7 @@ authors = ["Ascensio System SIA <integration@onlyoffice.com> (https://www.onlyof
 license = "Apache-2.0"
 readme = "README.md"
 repository = "https://github.com/ONLYOFFICE/docspace-api-sdk-python"
-keywords = ["Onlyoffice", 'DocSpace', "sdk"]
+keywords = ["onlyoffice", 'docspace', "sdk"]
 include = ["docspace-api-sdk/py.typed"]
 
 [tool.poetry.dependencies]

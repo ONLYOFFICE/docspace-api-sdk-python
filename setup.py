@@ -41,7 +41,7 @@ setup(
     author="Ascensio System SIA <integration@onlyoffice.com> (https://www.onlyoffice.com)",
     author_email="support@onlyoffice.com",
     url="https://github.com/ONLYOFFICE/docspace-api-sdk-python",
-    keywords=["Onlyoffice", 'DocSpace', "sdk"],
+    keywords=["onlyoffice", 'docspace', "sdk"],
     install_requires=REQUIRES,
     packages=find_packages(exclude=["test", "tests"]),
     include_package_data=True,
