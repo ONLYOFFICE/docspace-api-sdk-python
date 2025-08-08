@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.set_manager_request import SetManagerRequest
+from docspace_api_sdk.models.set_manager_request import SetManagerRequest
 
 # TODO update the JSON string below
 json = "{}"

@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.form_role_wrapper import FormRoleWrapper
+from docspace_api_sdk.models.form_role_wrapper import FormRoleWrapper
 
 # TODO update the JSON string below
 json = "{}"

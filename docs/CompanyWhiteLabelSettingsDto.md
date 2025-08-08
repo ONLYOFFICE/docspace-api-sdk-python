@@ -11,12 +11,13 @@ Name | Type | Description | Notes
 **address** | **str** | The company address. | [optional] 
 **phone** | **str** | The company phone number. | [optional] 
 **is_licensor** | **bool** | Specifies if a company is a licensor or not. | [optional] 
-**is_default** | **bool** | Specifies if company white label settings are default or not. | [optional] 
+**hide_about** | **bool** | Specifies if the About page is visible or not. | [optional] 
+**is_default** | **bool** | Specifies if these settings are default or not. | [optional] 
 
 ## Example
 
 ```python
-from docspace-api-sdk.models.company_white_label_settings_dto import CompanyWhiteLabelSettingsDto
+from docspace_api_sdk.models.company_white_label_settings_dto import CompanyWhiteLabelSettingsDto
 
 # TODO update the JSON string below
 json = "{}"

@@ -12,13 +12,13 @@ Name | Type | Description | Notes
 **processed** | **str** | The file operation processing status. | [optional] 
 **finished** | **bool** | Specifies if the file operation is finished or not. | [optional] 
 **url** | **str** | The file operation URL. | [optional] 
-**files** | [**List[FileEntryDto]**](FileEntryDto.md) | The list of files of the file operation. | [optional] 
-**folders** | [**List[FileEntryDto]**](FileEntryDto.md) | The list of folders of the file operation. | [optional] 
+**files** | [**List[FileEntryBaseDto]**](FileEntryBaseDto.md) | The list of files of the file operation. | [optional] 
+**folders** | [**List[FileEntryBaseDto]**](FileEntryBaseDto.md) | The list of folders of the file operation. | [optional] 
 
 ## Example
 
 ```python
-from docspace-api-sdk.models.file_operation_dto import FileOperationDto
+from docspace_api_sdk.models.file_operation_dto import FileOperationDto
 
 # TODO update the JSON string below
 json = "{}"

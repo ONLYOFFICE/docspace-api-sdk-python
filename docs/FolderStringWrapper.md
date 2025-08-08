@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.folder_string_wrapper import FolderStringWrapper
+from docspace_api_sdk.models.folder_string_wrapper import FolderStringWrapper
 
 # TODO update the JSON string below
 json = "{}"

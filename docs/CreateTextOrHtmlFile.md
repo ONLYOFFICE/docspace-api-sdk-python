@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.create_text_or_html_file import CreateTextOrHtmlFile
+from docspace_api_sdk.models.create_text_or_html_file import CreateTextOrHtmlFile
 
 # TODO update the JSON string below
 json = "{}"

@@ -1,6 +1,6 @@
-# docspace-api-sdk.SettingsMessagesApi
+# docspace_api_sdk.MessagesApi
 
-All URIs are relative to *http://localhost:8092*
+All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -35,16 +35,14 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-sdk
-from docspace-api-sdk.models.string_wrapper import StringWrapper
-from docspace-api-sdk.models.turn_on_admin_message_settings_request_dto import TurnOnAdminMessageSettingsRequestDto
-from docspace-api-sdk.rest import ApiException
+import docspace_api_sdk
+from docspace_api_sdk.models.string_wrapper import StringWrapper
+from docspace_api_sdk.models.turn_on_admin_message_settings_request_dto import TurnOnAdminMessageSettingsRequestDto
+from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-sdk.Configuration(
-    host = "http://localhost:8092"
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -52,44 +50,24 @@ configuration = docspace-api-sdk.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure HTTP basic authorization: Basic
-configuration = docspace-api-sdk.Configuration(
-    username = os.environ["USERNAME"],
-    password = os.environ["PASSWORD"]
-)
-
-configuration.access_token = os.environ["ACCESS_TOKEN"]
-
-# Configure API key authorization: ApiKeyBearer
-configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-sdk.Configuration(
+configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-sdk.ApiClient(configuration) as api_client:
+with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-sdk.SettingsMessagesApi(api_client)
-    turn_on_admin_message_settings_request_dto = docspace-api-sdk.TurnOnAdminMessageSettingsRequestDto() # TurnOnAdminMessageSettingsRequestDto |  (optional)
+    api_instance = docspace_api_sdk.MessagesApi(api_client)
+    turn_on_admin_message_settings_request_dto = docspace_api_sdk.TurnOnAdminMessageSettingsRequestDto() # TurnOnAdminMessageSettingsRequestDto |  (optional)
 
     try:
         # Enable the administrator message settings
         api_response = api_instance.enable_admin_message_settings(turn_on_admin_message_settings_request_dto=turn_on_admin_message_settings_request_dto)
-        print("The response of SettingsMessagesApi->enable_admin_message_settings:\n")
+        print("The response of MessagesApi->enable_admin_message_settings:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling SettingsMessagesApi->enable_admin_message_settings: %s\n" % e)
+        print("Exception when calling MessagesApi->enable_admin_message_settings: %s\n" % e)
 ```
 
 
@@ -135,32 +113,30 @@ No authorization required
 
 
 ```python
-import docspace-api-sdk
-from docspace-api-sdk.models.admin_message_settings_requests_dto import AdminMessageSettingsRequestsDto
-from docspace-api-sdk.models.string_wrapper import StringWrapper
-from docspace-api-sdk.rest import ApiException
+import docspace_api_sdk
+from docspace_api_sdk.models.admin_message_settings_requests_dto import AdminMessageSettingsRequestsDto
+from docspace_api_sdk.models.string_wrapper import StringWrapper
+from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-sdk.Configuration(
-    host = "http://localhost:8092"
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
 )
 
 
 # Enter a context with an instance of the API client
-with docspace-api-sdk.ApiClient(configuration) as api_client:
+with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-sdk.SettingsMessagesApi(api_client)
-    admin_message_settings_requests_dto = docspace-api-sdk.AdminMessageSettingsRequestsDto() # AdminMessageSettingsRequestsDto |  (optional)
+    api_instance = docspace_api_sdk.MessagesApi(api_client)
+    admin_message_settings_requests_dto = docspace_api_sdk.AdminMessageSettingsRequestsDto() # AdminMessageSettingsRequestsDto |  (optional)
 
     try:
         # Send a message to the administrator
         api_response = api_instance.send_admin_mail(admin_message_settings_requests_dto=admin_message_settings_requests_dto)
-        print("The response of SettingsMessagesApi->send_admin_mail:\n")
+        print("The response of MessagesApi->send_admin_mail:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling SettingsMessagesApi->send_admin_mail: %s\n" % e)
+        print("Exception when calling MessagesApi->send_admin_mail: %s\n" % e)
 ```
 
 
@@ -207,32 +183,30 @@ No authorization required
 
 
 ```python
-import docspace-api-sdk
-from docspace-api-sdk.models.admin_message_base_settings_requests_dto import AdminMessageBaseSettingsRequestsDto
-from docspace-api-sdk.models.string_wrapper import StringWrapper
-from docspace-api-sdk.rest import ApiException
+import docspace_api_sdk
+from docspace_api_sdk.models.admin_message_base_settings_requests_dto import AdminMessageBaseSettingsRequestsDto
+from docspace_api_sdk.models.string_wrapper import StringWrapper
+from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-sdk.Configuration(
-    host = "http://localhost:8092"
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
 )
 
 
 # Enter a context with an instance of the API client
-with docspace-api-sdk.ApiClient(configuration) as api_client:
+with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-sdk.SettingsMessagesApi(api_client)
-    admin_message_base_settings_requests_dto = docspace-api-sdk.AdminMessageBaseSettingsRequestsDto() # AdminMessageBaseSettingsRequestsDto |  (optional)
+    api_instance = docspace_api_sdk.MessagesApi(api_client)
+    admin_message_base_settings_requests_dto = docspace_api_sdk.AdminMessageBaseSettingsRequestsDto() # AdminMessageBaseSettingsRequestsDto |  (optional)
 
     try:
         # Sends an invitation email
         api_response = api_instance.send_join_invite_mail(admin_message_base_settings_requests_dto=admin_message_base_settings_requests_dto)
-        print("The response of SettingsMessagesApi->send_join_invite_mail:\n")
+        print("The response of MessagesApi->send_join_invite_mail:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling SettingsMessagesApi->send_join_invite_mail: %s\n" % e)
+        print("Exception when calling MessagesApi->send_join_invite_mail: %s\n" % e)
 ```
 
 

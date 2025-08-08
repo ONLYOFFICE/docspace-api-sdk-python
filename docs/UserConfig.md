@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.user_config import UserConfig
+from docspace_api_sdk.models.user_config import UserConfig
 
 # TODO update the JSON string below
 json = "{}"

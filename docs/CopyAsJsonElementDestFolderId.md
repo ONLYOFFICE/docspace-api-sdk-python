@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.copy_as_json_element_dest_folder_id import CopyAsJsonElementDestFolderId
+from docspace_api_sdk.models.copy_as_json_element_dest_folder_id import CopyAsJsonElementDestFolderId
 
 # TODO update the JSON string below
 json = "{}"

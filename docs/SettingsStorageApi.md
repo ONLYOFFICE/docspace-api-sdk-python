@@ -1,6 +1,6 @@
-# docspace-api-sdk.SettingsStorageApi
+# docspace_api_sdk.StorageApi
 
-All URIs are relative to *http://localhost:8092*
+All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -41,15 +41,13 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-sdk
-from docspace-api-sdk.models.storage_array_wrapper import StorageArrayWrapper
-from docspace-api-sdk.rest import ApiException
+import docspace_api_sdk
+from docspace_api_sdk.models.storage_array_wrapper import StorageArrayWrapper
+from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-sdk.Configuration(
-    host = "http://localhost:8092"
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -57,44 +55,24 @@ configuration = docspace-api-sdk.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure HTTP basic authorization: Basic
-configuration = docspace-api-sdk.Configuration(
-    username = os.environ["USERNAME"],
-    password = os.environ["PASSWORD"]
-)
-
-configuration.access_token = os.environ["ACCESS_TOKEN"]
-
-# Configure API key authorization: ApiKeyBearer
-configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-sdk.Configuration(
+configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-sdk.ApiClient(configuration) as api_client:
+with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-sdk.SettingsStorageApi(api_client)
+    api_instance = docspace_api_sdk.StorageApi(api_client)
     dump = true # bool |  (optional)
 
     try:
         # Get the backup storages
         api_response = api_instance.get_all_backup_storages(dump=dump)
-        print("The response of SettingsStorageApi->get_all_backup_storages:\n")
+        print("The response of StorageApi->get_all_backup_storages:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling SettingsStorageApi->get_all_backup_storages: %s\n" % e)
+        print("Exception when calling StorageApi->get_all_backup_storages: %s\n" % e)
 ```
 
 
@@ -138,15 +116,13 @@ This endpoint does not need any parameter.
 
 
 ```python
-import docspace-api-sdk
-from docspace-api-sdk.models.storage_array_wrapper import StorageArrayWrapper
-from docspace-api-sdk.rest import ApiException
+import docspace_api_sdk
+from docspace_api_sdk.models.storage_array_wrapper import StorageArrayWrapper
+from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-sdk.Configuration(
-    host = "http://localhost:8092"
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -154,43 +130,23 @@ configuration = docspace-api-sdk.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure HTTP basic authorization: Basic
-configuration = docspace-api-sdk.Configuration(
-    username = os.environ["USERNAME"],
-    password = os.environ["PASSWORD"]
-)
-
-configuration.access_token = os.environ["ACCESS_TOKEN"]
-
-# Configure API key authorization: ApiKeyBearer
-configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-sdk.Configuration(
+configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-sdk.ApiClient(configuration) as api_client:
+with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-sdk.SettingsStorageApi(api_client)
+    api_instance = docspace_api_sdk.StorageApi(api_client)
 
     try:
         # Get the CDN storages
         api_response = api_instance.get_all_cdn_storages()
-        print("The response of SettingsStorageApi->get_all_cdn_storages:\n")
+        print("The response of StorageApi->get_all_cdn_storages:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling SettingsStorageApi->get_all_cdn_storages: %s\n" % e)
+        print("Exception when calling StorageApi->get_all_cdn_storages: %s\n" % e)
 ```
 
 
@@ -234,15 +190,13 @@ This endpoint does not need any parameter.
 
 
 ```python
-import docspace-api-sdk
-from docspace-api-sdk.models.storage_array_wrapper import StorageArrayWrapper
-from docspace-api-sdk.rest import ApiException
+import docspace_api_sdk
+from docspace_api_sdk.models.storage_array_wrapper import StorageArrayWrapper
+from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-sdk.Configuration(
-    host = "http://localhost:8092"
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -250,43 +204,23 @@ configuration = docspace-api-sdk.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure HTTP basic authorization: Basic
-configuration = docspace-api-sdk.Configuration(
-    username = os.environ["USERNAME"],
-    password = os.environ["PASSWORD"]
-)
-
-configuration.access_token = os.environ["ACCESS_TOKEN"]
-
-# Configure API key authorization: ApiKeyBearer
-configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-sdk.Configuration(
+configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-sdk.ApiClient(configuration) as api_client:
+with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-sdk.SettingsStorageApi(api_client)
+    api_instance = docspace_api_sdk.StorageApi(api_client)
 
     try:
         # Get storages
         api_response = api_instance.get_all_storages()
-        print("The response of SettingsStorageApi->get_all_storages:\n")
+        print("The response of StorageApi->get_all_storages:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling SettingsStorageApi->get_all_storages: %s\n" % e)
+        print("Exception when calling StorageApi->get_all_storages: %s\n" % e)
 ```
 
 
@@ -330,15 +264,13 @@ This endpoint does not need any parameter.
 
 
 ```python
-import docspace-api-sdk
-from docspace-api-sdk.models.object_wrapper import ObjectWrapper
-from docspace-api-sdk.rest import ApiException
+import docspace_api_sdk
+from docspace_api_sdk.models.object_wrapper import ObjectWrapper
+from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-sdk.Configuration(
-    host = "http://localhost:8092"
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -346,43 +278,23 @@ configuration = docspace-api-sdk.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure HTTP basic authorization: Basic
-configuration = docspace-api-sdk.Configuration(
-    username = os.environ["USERNAME"],
-    password = os.environ["PASSWORD"]
-)
-
-configuration.access_token = os.environ["ACCESS_TOKEN"]
-
-# Configure API key authorization: ApiKeyBearer
-configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-sdk.Configuration(
+configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-sdk.ApiClient(configuration) as api_client:
+with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-sdk.SettingsStorageApi(api_client)
+    api_instance = docspace_api_sdk.StorageApi(api_client)
 
     try:
         # Get Amazon regions
         api_response = api_instance.get_amazon_s3_regions()
-        print("The response of SettingsStorageApi->get_amazon_s3_regions:\n")
+        print("The response of StorageApi->get_amazon_s3_regions:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling SettingsStorageApi->get_amazon_s3_regions: %s\n" % e)
+        print("Exception when calling StorageApi->get_amazon_s3_regions: %s\n" % e)
 ```
 
 
@@ -425,15 +337,13 @@ This endpoint does not need any parameter.
 
 
 ```python
-import docspace-api-sdk
-from docspace-api-sdk.models.double_wrapper import DoubleWrapper
-from docspace-api-sdk.rest import ApiException
+import docspace_api_sdk
+from docspace_api_sdk.models.double_wrapper import DoubleWrapper
+from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-sdk.Configuration(
-    host = "http://localhost:8092"
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -441,43 +351,23 @@ configuration = docspace-api-sdk.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure HTTP basic authorization: Basic
-configuration = docspace-api-sdk.Configuration(
-    username = os.environ["USERNAME"],
-    password = os.environ["PASSWORD"]
-)
-
-configuration.access_token = os.environ["ACCESS_TOKEN"]
-
-# Configure API key authorization: ApiKeyBearer
-configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-sdk.Configuration(
+configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-sdk.ApiClient(configuration) as api_client:
+with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-sdk.SettingsStorageApi(api_client)
+    api_instance = docspace_api_sdk.StorageApi(api_client)
 
     try:
         # Get the storage progress
         api_response = api_instance.get_storage_progress()
-        print("The response of SettingsStorageApi->get_storage_progress:\n")
+        print("The response of StorageApi->get_storage_progress:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling SettingsStorageApi->get_storage_progress: %s\n" % e)
+        print("Exception when calling StorageApi->get_storage_progress: %s\n" % e)
 ```
 
 
@@ -520,14 +410,12 @@ void (empty response body)
 
 
 ```python
-import docspace-api-sdk
-from docspace-api-sdk.rest import ApiException
+import docspace_api_sdk
+from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-sdk.Configuration(
-    host = "http://localhost:8092"
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -535,41 +423,21 @@ configuration = docspace-api-sdk.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure HTTP basic authorization: Basic
-configuration = docspace-api-sdk.Configuration(
-    username = os.environ["USERNAME"],
-    password = os.environ["PASSWORD"]
-)
-
-configuration.access_token = os.environ["ACCESS_TOKEN"]
-
-# Configure API key authorization: ApiKeyBearer
-configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-sdk.Configuration(
+configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-sdk.ApiClient(configuration) as api_client:
+with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-sdk.SettingsStorageApi(api_client)
+    api_instance = docspace_api_sdk.StorageApi(api_client)
 
     try:
         # Reset the CDN storage settings
         api_instance.reset_cdn_to_default()
     except Exception as e:
-        print("Exception when calling SettingsStorageApi->reset_cdn_to_default: %s\n" % e)
+        print("Exception when calling StorageApi->reset_cdn_to_default: %s\n" % e)
 ```
 
 
@@ -613,14 +481,12 @@ void (empty response body)
 
 
 ```python
-import docspace-api-sdk
-from docspace-api-sdk.rest import ApiException
+import docspace_api_sdk
+from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-sdk.Configuration(
-    host = "http://localhost:8092"
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -628,41 +494,21 @@ configuration = docspace-api-sdk.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure HTTP basic authorization: Basic
-configuration = docspace-api-sdk.Configuration(
-    username = os.environ["USERNAME"],
-    password = os.environ["PASSWORD"]
-)
-
-configuration.access_token = os.environ["ACCESS_TOKEN"]
-
-# Configure API key authorization: ApiKeyBearer
-configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-sdk.Configuration(
+configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-sdk.ApiClient(configuration) as api_client:
+with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-sdk.SettingsStorageApi(api_client)
+    api_instance = docspace_api_sdk.StorageApi(api_client)
 
     try:
         # Reset the storage settings
         api_instance.reset_storage_to_default()
     except Exception as e:
-        print("Exception when calling SettingsStorageApi->reset_storage_to_default: %s\n" % e)
+        print("Exception when calling StorageApi->reset_storage_to_default: %s\n" % e)
 ```
 
 
@@ -709,16 +555,14 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-sdk
-from docspace-api-sdk.models.cdn_storage_settings_wrapper import CdnStorageSettingsWrapper
-from docspace-api-sdk.models.storage_requests_dto import StorageRequestsDto
-from docspace-api-sdk.rest import ApiException
+import docspace_api_sdk
+from docspace_api_sdk.models.cdn_storage_settings_wrapper import CdnStorageSettingsWrapper
+from docspace_api_sdk.models.storage_requests_dto import StorageRequestsDto
+from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-sdk.Configuration(
-    host = "http://localhost:8092"
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -726,44 +570,24 @@ configuration = docspace-api-sdk.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure HTTP basic authorization: Basic
-configuration = docspace-api-sdk.Configuration(
-    username = os.environ["USERNAME"],
-    password = os.environ["PASSWORD"]
-)
-
-configuration.access_token = os.environ["ACCESS_TOKEN"]
-
-# Configure API key authorization: ApiKeyBearer
-configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-sdk.Configuration(
+configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-sdk.ApiClient(configuration) as api_client:
+with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-sdk.SettingsStorageApi(api_client)
-    storage_requests_dto = docspace-api-sdk.StorageRequestsDto() # StorageRequestsDto |  (optional)
+    api_instance = docspace_api_sdk.StorageApi(api_client)
+    storage_requests_dto = docspace_api_sdk.StorageRequestsDto() # StorageRequestsDto |  (optional)
 
     try:
         # Update the CDN storage
         api_response = api_instance.update_cdn_storage(storage_requests_dto=storage_requests_dto)
-        print("The response of SettingsStorageApi->update_cdn_storage:\n")
+        print("The response of StorageApi->update_cdn_storage:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling SettingsStorageApi->update_cdn_storage: %s\n" % e)
+        print("Exception when calling StorageApi->update_cdn_storage: %s\n" % e)
 ```
 
 
@@ -811,16 +635,14 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-sdk
-from docspace-api-sdk.models.storage_requests_dto import StorageRequestsDto
-from docspace-api-sdk.models.storage_settings_wrapper import StorageSettingsWrapper
-from docspace-api-sdk.rest import ApiException
+import docspace_api_sdk
+from docspace_api_sdk.models.storage_requests_dto import StorageRequestsDto
+from docspace_api_sdk.models.storage_settings_wrapper import StorageSettingsWrapper
+from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-sdk.Configuration(
-    host = "http://localhost:8092"
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -828,44 +650,24 @@ configuration = docspace-api-sdk.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure HTTP basic authorization: Basic
-configuration = docspace-api-sdk.Configuration(
-    username = os.environ["USERNAME"],
-    password = os.environ["PASSWORD"]
-)
-
-configuration.access_token = os.environ["ACCESS_TOKEN"]
-
-# Configure API key authorization: ApiKeyBearer
-configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-sdk.Configuration(
+configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-sdk.ApiClient(configuration) as api_client:
+with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-sdk.SettingsStorageApi(api_client)
-    storage_requests_dto = docspace-api-sdk.StorageRequestsDto() # StorageRequestsDto |  (optional)
+    api_instance = docspace_api_sdk.StorageApi(api_client)
+    storage_requests_dto = docspace_api_sdk.StorageRequestsDto() # StorageRequestsDto |  (optional)
 
     try:
         # Update a storage
         api_response = api_instance.update_storage(storage_requests_dto=storage_requests_dto)
-        print("The response of SettingsStorageApi->update_storage:\n")
+        print("The response of StorageApi->update_storage:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling SettingsStorageApi->update_storage: %s\n" % e)
+        print("Exception when calling StorageApi->update_storage: %s\n" % e)
 ```
 
 

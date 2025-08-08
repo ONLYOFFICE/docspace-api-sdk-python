@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.file_link_request import FileLinkRequest
+from docspace_api_sdk.models.file_link_request import FileLinkRequest
 
 # TODO update the JSON string below
 json = "{}"

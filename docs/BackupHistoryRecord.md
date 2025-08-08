@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.backup_history_record import BackupHistoryRecord
+from docspace_api_sdk.models.backup_history_record import BackupHistoryRecord
 
 # TODO update the JSON string below
 json = "{}"

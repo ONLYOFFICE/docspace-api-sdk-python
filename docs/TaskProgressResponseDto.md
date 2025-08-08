@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.task_progress_response_dto import TaskProgressResponseDto
+from docspace_api_sdk.models.task_progress_response_dto import TaskProgressResponseDto
 
 # TODO update the JSON string below
 json = "{}"

@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.co_editing_config import CoEditingConfig
+from docspace_api_sdk.models.co_editing_config import CoEditingConfig
 
 # TODO update the JSON string below
 json = "{}"

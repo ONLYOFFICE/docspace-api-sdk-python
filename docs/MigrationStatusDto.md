@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.migration_status_dto import MigrationStatusDto
+from docspace_api_sdk.models.migration_status_dto import MigrationStatusDto
 
 # TODO update the JSON string below
 json = "{}"

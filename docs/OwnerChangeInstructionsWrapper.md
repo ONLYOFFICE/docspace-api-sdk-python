@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.owner_change_instructions_wrapper import OwnerChangeInstructionsWrapper
+from docspace_api_sdk.models.owner_change_instructions_wrapper import OwnerChangeInstructionsWrapper
 
 # TODO update the JSON string below
 json = "{}"

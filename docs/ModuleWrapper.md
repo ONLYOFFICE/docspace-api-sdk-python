@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.module_wrapper import ModuleWrapper
+from docspace_api_sdk.models.module_wrapper import ModuleWrapper
 
 # TODO update the JSON string below
 json = "{}"

@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.boolean_wrapper import BooleanWrapper
+from docspace_api_sdk.models.boolean_wrapper import BooleanWrapper
 
 # TODO update the JSON string below
 json = "{}"

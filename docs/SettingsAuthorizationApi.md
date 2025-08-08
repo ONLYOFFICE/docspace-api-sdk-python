@@ -1,6 +1,6 @@
-# docspace-api-sdk.SettingsAuthorizationApi
+# docspace_api_sdk.AuthorizationApi
 
-All URIs are relative to *http://localhost:8092*
+All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -31,15 +31,13 @@ This endpoint does not need any parameter.
 
 
 ```python
-import docspace-api-sdk
-from docspace-api-sdk.models.auth_service_requests_array_wrapper import AuthServiceRequestsArrayWrapper
-from docspace-api-sdk.rest import ApiException
+import docspace_api_sdk
+from docspace_api_sdk.models.auth_service_requests_array_wrapper import AuthServiceRequestsArrayWrapper
+from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-sdk.Configuration(
-    host = "http://localhost:8092"
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -47,43 +45,23 @@ configuration = docspace-api-sdk.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure HTTP basic authorization: Basic
-configuration = docspace-api-sdk.Configuration(
-    username = os.environ["USERNAME"],
-    password = os.environ["PASSWORD"]
-)
-
-configuration.access_token = os.environ["ACCESS_TOKEN"]
-
-# Configure API key authorization: ApiKeyBearer
-configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-sdk.Configuration(
+configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-sdk.ApiClient(configuration) as api_client:
+with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-sdk.SettingsAuthorizationApi(api_client)
+    api_instance = docspace_api_sdk.AuthorizationApi(api_client)
 
     try:
         # Get the authorization services
         api_response = api_instance.get_auth_services()
-        print("The response of SettingsAuthorizationApi->get_auth_services:\n")
+        print("The response of AuthorizationApi->get_auth_services:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling SettingsAuthorizationApi->get_auth_services: %s\n" % e)
+        print("Exception when calling AuthorizationApi->get_auth_services: %s\n" % e)
 ```
 
 
@@ -129,16 +107,14 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-sdk
-from docspace-api-sdk.models.auth_service_requests_dto import AuthServiceRequestsDto
-from docspace-api-sdk.models.boolean_wrapper import BooleanWrapper
-from docspace-api-sdk.rest import ApiException
+import docspace_api_sdk
+from docspace_api_sdk.models.auth_service_requests_dto import AuthServiceRequestsDto
+from docspace_api_sdk.models.boolean_wrapper import BooleanWrapper
+from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-sdk.Configuration(
-    host = "http://localhost:8092"
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -146,44 +122,24 @@ configuration = docspace-api-sdk.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure HTTP basic authorization: Basic
-configuration = docspace-api-sdk.Configuration(
-    username = os.environ["USERNAME"],
-    password = os.environ["PASSWORD"]
-)
-
-configuration.access_token = os.environ["ACCESS_TOKEN"]
-
-# Configure API key authorization: ApiKeyBearer
-configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-sdk.Configuration(
+configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-sdk.ApiClient(configuration) as api_client:
+with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-sdk.SettingsAuthorizationApi(api_client)
-    auth_service_requests_dto = docspace-api-sdk.AuthServiceRequestsDto() # AuthServiceRequestsDto |  (optional)
+    api_instance = docspace_api_sdk.AuthorizationApi(api_client)
+    auth_service_requests_dto = docspace_api_sdk.AuthServiceRequestsDto() # AuthServiceRequestsDto |  (optional)
 
     try:
         # Save the authorization keys
         api_response = api_instance.save_auth_keys(auth_service_requests_dto=auth_service_requests_dto)
-        print("The response of SettingsAuthorizationApi->save_auth_keys:\n")
+        print("The response of AuthorizationApi->save_auth_keys:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling SettingsAuthorizationApi->save_auth_keys: %s\n" % e)
+        print("Exception when calling AuthorizationApi->save_auth_keys: %s\n" % e)
 ```
 
 

@@ -5,14 +5,14 @@ The request parameters for changing the file owner.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**folder_ids** | [**List[BaseBatchRequestDtoFolderIdsInner]**](BaseBatchRequestDtoFolderIdsInner.md) | The list of folder IDs to change the owner. | [optional] 
-**file_ids** | [**List[BaseBatchRequestDtoFolderIdsInner]**](BaseBatchRequestDtoFolderIdsInner.md) | The list of file IDs to change the owner. | [optional] 
+**folder_ids** | [**List[BatchRequestDtoAllOfFileIds]**](BatchRequestDtoAllOfFileIds.md) | The list of folder IDs to change the owner. | [optional] 
+**file_ids** | [**List[BatchRequestDtoAllOfFileIds]**](BatchRequestDtoAllOfFileIds.md) | The list of file IDs to change the owner. | [optional] 
 **user_id** | **str** | The new file owner ID. | 
 
 ## Example
 
 ```python
-from docspace-api-sdk.models.change_owner_request_dto import ChangeOwnerRequestDto
+from docspace_api_sdk.models.change_owner_request_dto import ChangeOwnerRequestDto
 
 # TODO update the JSON string below
 json = "{}"

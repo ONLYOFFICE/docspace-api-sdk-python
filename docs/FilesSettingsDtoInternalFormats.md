@@ -19,7 +19,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.files_settings_dto_internal_formats import FilesSettingsDtoInternalFormats
+from docspace_api_sdk.models.files_settings_dto_internal_formats import FilesSettingsDtoInternalFormats
 
 # TODO update the JSON string below
 json = "{}"

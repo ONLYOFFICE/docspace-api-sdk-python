@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.tenant_user_quota_settings_wrapper import TenantUserQuotaSettingsWrapper
+from docspace_api_sdk.models.tenant_user_quota_settings_wrapper import TenantUserQuotaSettingsWrapper
 
 # TODO update the JSON string below
 json = "{}"

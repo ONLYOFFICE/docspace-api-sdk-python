@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.white_label_item_array_wrapper import WhiteLabelItemArrayWrapper
+from docspace_api_sdk.models.white_label_item_array_wrapper import WhiteLabelItemArrayWrapper
 
 # TODO update the JSON string below
 json = "{}"

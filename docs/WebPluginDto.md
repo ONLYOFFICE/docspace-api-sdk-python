@@ -24,7 +24,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.web_plugin_dto import WebPluginDto
+from docspace_api_sdk.models.web_plugin_dto import WebPluginDto
 
 # TODO update the JSON string below
 json = "{}"

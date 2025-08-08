@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.tenant_banner_settings import TenantBannerSettings
+from docspace_api_sdk.models.tenant_banner_settings import TenantBannerSettings
 
 # TODO update the JSON string below
 json = "{}"

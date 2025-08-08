@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.document_builder_task_wrapper import DocumentBuilderTaskWrapper
+from docspace_api_sdk.models.document_builder_task_wrapper import DocumentBuilderTaskWrapper
 
 # TODO update the JSON string below
 json = "{}"

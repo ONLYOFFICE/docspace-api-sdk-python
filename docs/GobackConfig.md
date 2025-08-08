@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.goback_config import GobackConfig
+from docspace_api_sdk.models.goback_config import GobackConfig
 
 # TODO update the JSON string below
 json = "{}"

@@ -5,13 +5,13 @@ The room new items information.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**room** | [**FileEntryDto**](FileEntryDto.md) |  | [optional] 
-**items** | [**List[FileEntryDto]**](FileEntryDto.md) | The list of file entry items. | [optional] 
+**room** | [**FileEntryBaseDto**](FileEntryBaseDto.md) |  | [optional] 
+**items** | [**List[FileEntryBaseDto]**](FileEntryBaseDto.md) | The list of file entry items. | [optional] 
 
 ## Example
 
 ```python
-from docspace-api-sdk.models.room_new_items_dto import RoomNewItemsDto
+from docspace_api_sdk.models.room_new_items_dto import RoomNewItemsDto
 
 # TODO update the JSON string below
 json = "{}"

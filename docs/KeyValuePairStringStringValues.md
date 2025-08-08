@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.key_value_pair_string_string_values import KeyValuePairStringStringValues
+from docspace_api_sdk.models.key_value_pair_string_string_values import KeyValuePairStringStringValues
 
 # TODO update the JSON string below
 json = "{}"

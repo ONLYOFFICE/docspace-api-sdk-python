@@ -23,7 +23,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.client_info_response import ClientInfoResponse
+from docspace_api_sdk.models.client_info_response import ClientInfoResponse
 
 # TODO update the JSON string below
 json = "{}"

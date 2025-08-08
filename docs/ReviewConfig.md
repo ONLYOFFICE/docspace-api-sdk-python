@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.review_config import ReviewConfig
+from docspace_api_sdk.models.review_config import ReviewConfig
 
 # TODO update the JSON string below
 json = "{}"

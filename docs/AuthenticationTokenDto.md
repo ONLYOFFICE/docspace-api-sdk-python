@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.authentication_token_dto import AuthenticationTokenDto
+from docspace_api_sdk.models.authentication_token_dto import AuthenticationTokenDto
 
 # TODO update the JSON string below
 json = "{}"

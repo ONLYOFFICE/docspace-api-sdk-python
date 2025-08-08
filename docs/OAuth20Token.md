@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.o_auth20_token import OAuth20Token
+from docspace_api_sdk.models.o_auth20_token import OAuth20Token
 
 # TODO update the JSON string below
 json = "{}"

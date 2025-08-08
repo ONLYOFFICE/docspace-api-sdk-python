@@ -20,7 +20,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.customization_config_dto import CustomizationConfigDto
+from docspace_api_sdk.models.customization_config_dto import CustomizationConfigDto
 
 # TODO update the JSON string below
 json = "{}"

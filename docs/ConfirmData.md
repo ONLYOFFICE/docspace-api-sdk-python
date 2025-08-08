@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.confirm_data import ConfirmData
+from docspace_api_sdk.models.confirm_data import ConfirmData
 
 # TODO update the JSON string below
 json = "{}"

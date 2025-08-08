@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.pageable_response_client_info_response import PageableResponseClientInfoResponse
+from docspace_api_sdk.models.pageable_response_client_info_response import PageableResponseClientInfoResponse
 
 # TODO update the JSON string below
 json = "{}"

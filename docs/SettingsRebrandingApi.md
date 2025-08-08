@@ -1,6 +1,6 @@
-# docspace-api-sdk.SettingsRebrandingApi
+# docspace_api_sdk.RebrandingApi
 
-All URIs are relative to *http://localhost:8092*
+All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -46,15 +46,13 @@ This endpoint does not need any parameter.
 
 
 ```python
-import docspace-api-sdk
-from docspace-api-sdk.models.additional_white_label_settings_wrapper import AdditionalWhiteLabelSettingsWrapper
-from docspace-api-sdk.rest import ApiException
+import docspace_api_sdk
+from docspace_api_sdk.models.additional_white_label_settings_wrapper import AdditionalWhiteLabelSettingsWrapper
+from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-sdk.Configuration(
-    host = "http://localhost:8092"
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -62,43 +60,23 @@ configuration = docspace-api-sdk.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure HTTP basic authorization: Basic
-configuration = docspace-api-sdk.Configuration(
-    username = os.environ["USERNAME"],
-    password = os.environ["PASSWORD"]
-)
-
-configuration.access_token = os.environ["ACCESS_TOKEN"]
-
-# Configure API key authorization: ApiKeyBearer
-configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-sdk.Configuration(
+configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-sdk.ApiClient(configuration) as api_client:
+with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-sdk.SettingsRebrandingApi(api_client)
+    api_instance = docspace_api_sdk.RebrandingApi(api_client)
 
     try:
         # Delete the additional white label settings
         api_response = api_instance.delete_additional_white_label_settings()
-        print("The response of SettingsRebrandingApi->delete_additional_white_label_settings:\n")
+        print("The response of RebrandingApi->delete_additional_white_label_settings:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling SettingsRebrandingApi->delete_additional_white_label_settings: %s\n" % e)
+        print("Exception when calling RebrandingApi->delete_additional_white_label_settings: %s\n" % e)
 ```
 
 
@@ -142,15 +120,13 @@ This endpoint does not need any parameter.
 
 
 ```python
-import docspace-api-sdk
-from docspace-api-sdk.models.company_white_label_settings_wrapper import CompanyWhiteLabelSettingsWrapper
-from docspace-api-sdk.rest import ApiException
+import docspace_api_sdk
+from docspace_api_sdk.models.company_white_label_settings_wrapper import CompanyWhiteLabelSettingsWrapper
+from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-sdk.Configuration(
-    host = "http://localhost:8092"
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -158,43 +134,23 @@ configuration = docspace-api-sdk.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure HTTP basic authorization: Basic
-configuration = docspace-api-sdk.Configuration(
-    username = os.environ["USERNAME"],
-    password = os.environ["PASSWORD"]
-)
-
-configuration.access_token = os.environ["ACCESS_TOKEN"]
-
-# Configure API key authorization: ApiKeyBearer
-configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-sdk.Configuration(
+configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-sdk.ApiClient(configuration) as api_client:
+with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-sdk.SettingsRebrandingApi(api_client)
+    api_instance = docspace_api_sdk.RebrandingApi(api_client)
 
     try:
         # Delete the company white label settings
         api_response = api_instance.delete_company_white_label_settings()
-        print("The response of SettingsRebrandingApi->delete_company_white_label_settings:\n")
+        print("The response of RebrandingApi->delete_company_white_label_settings:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling SettingsRebrandingApi->delete_company_white_label_settings: %s\n" % e)
+        print("Exception when calling RebrandingApi->delete_company_white_label_settings: %s\n" % e)
 ```
 
 
@@ -238,15 +194,13 @@ This endpoint does not need any parameter.
 
 
 ```python
-import docspace-api-sdk
-from docspace-api-sdk.models.additional_white_label_settings_wrapper import AdditionalWhiteLabelSettingsWrapper
-from docspace-api-sdk.rest import ApiException
+import docspace_api_sdk
+from docspace_api_sdk.models.additional_white_label_settings_wrapper import AdditionalWhiteLabelSettingsWrapper
+from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-sdk.Configuration(
-    host = "http://localhost:8092"
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -254,43 +208,23 @@ configuration = docspace-api-sdk.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure HTTP basic authorization: Basic
-configuration = docspace-api-sdk.Configuration(
-    username = os.environ["USERNAME"],
-    password = os.environ["PASSWORD"]
-)
-
-configuration.access_token = os.environ["ACCESS_TOKEN"]
-
-# Configure API key authorization: ApiKeyBearer
-configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-sdk.Configuration(
+configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-sdk.ApiClient(configuration) as api_client:
+with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-sdk.SettingsRebrandingApi(api_client)
+    api_instance = docspace_api_sdk.RebrandingApi(api_client)
 
     try:
         # Get the additional white label settings
         api_response = api_instance.get_additional_white_label_settings()
-        print("The response of SettingsRebrandingApi->get_additional_white_label_settings:\n")
+        print("The response of RebrandingApi->get_additional_white_label_settings:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling SettingsRebrandingApi->get_additional_white_label_settings: %s\n" % e)
+        print("Exception when calling RebrandingApi->get_additional_white_label_settings: %s\n" % e)
 ```
 
 
@@ -333,15 +267,13 @@ This endpoint does not need any parameter.
 
 
 ```python
-import docspace-api-sdk
-from docspace-api-sdk.models.company_white_label_settings_wrapper import CompanyWhiteLabelSettingsWrapper
-from docspace-api-sdk.rest import ApiException
+import docspace_api_sdk
+from docspace_api_sdk.models.company_white_label_settings_wrapper import CompanyWhiteLabelSettingsWrapper
+from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-sdk.Configuration(
-    host = "http://localhost:8092"
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -349,43 +281,23 @@ configuration = docspace-api-sdk.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure HTTP basic authorization: Basic
-configuration = docspace-api-sdk.Configuration(
-    username = os.environ["USERNAME"],
-    password = os.environ["PASSWORD"]
-)
-
-configuration.access_token = os.environ["ACCESS_TOKEN"]
-
-# Configure API key authorization: ApiKeyBearer
-configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-sdk.Configuration(
+configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-sdk.ApiClient(configuration) as api_client:
+with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-sdk.SettingsRebrandingApi(api_client)
+    api_instance = docspace_api_sdk.RebrandingApi(api_client)
 
     try:
         # Get the company white label settings
         api_response = api_instance.get_company_white_label_settings()
-        print("The response of SettingsRebrandingApi->get_company_white_label_settings:\n")
+        print("The response of RebrandingApi->get_company_white_label_settings:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling SettingsRebrandingApi->get_company_white_label_settings: %s\n" % e)
+        print("Exception when calling RebrandingApi->get_company_white_label_settings: %s\n" % e)
 ```
 
 
@@ -428,15 +340,13 @@ This endpoint does not need any parameter.
 
 
 ```python
-import docspace-api-sdk
-from docspace-api-sdk.models.boolean_wrapper import BooleanWrapper
-from docspace-api-sdk.rest import ApiException
+import docspace_api_sdk
+from docspace_api_sdk.models.boolean_wrapper import BooleanWrapper
+from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-sdk.Configuration(
-    host = "http://localhost:8092"
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -444,43 +354,23 @@ configuration = docspace-api-sdk.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure HTTP basic authorization: Basic
-configuration = docspace-api-sdk.Configuration(
-    username = os.environ["USERNAME"],
-    password = os.environ["PASSWORD"]
-)
-
-configuration.access_token = os.environ["ACCESS_TOKEN"]
-
-# Configure API key authorization: ApiKeyBearer
-configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-sdk.Configuration(
+configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-sdk.ApiClient(configuration) as api_client:
+with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-sdk.SettingsRebrandingApi(api_client)
+    api_instance = docspace_api_sdk.RebrandingApi(api_client)
 
     try:
         # Check the white label availability
         api_response = api_instance.get_enable_whitelabel()
-        print("The response of SettingsRebrandingApi->get_enable_whitelabel:\n")
+        print("The response of RebrandingApi->get_enable_whitelabel:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling SettingsRebrandingApi->get_enable_whitelabel: %s\n" % e)
+        print("Exception when calling RebrandingApi->get_enable_whitelabel: %s\n" % e)
 ```
 
 
@@ -527,15 +417,13 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-sdk
-from docspace-api-sdk.models.is_default_white_label_logos_wrapper import IsDefaultWhiteLabelLogosWrapper
-from docspace-api-sdk.rest import ApiException
+import docspace_api_sdk
+from docspace_api_sdk.models.is_default_white_label_logos_wrapper import IsDefaultWhiteLabelLogosWrapper
+from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-sdk.Configuration(
-    host = "http://localhost:8092"
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -543,45 +431,25 @@ configuration = docspace-api-sdk.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure HTTP basic authorization: Basic
-configuration = docspace-api-sdk.Configuration(
-    username = os.environ["USERNAME"],
-    password = os.environ["PASSWORD"]
-)
-
-configuration.access_token = os.environ["ACCESS_TOKEN"]
-
-# Configure API key authorization: ApiKeyBearer
-configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-sdk.Configuration(
+configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-sdk.ApiClient(configuration) as api_client:
+with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-sdk.SettingsRebrandingApi(api_client)
+    api_instance = docspace_api_sdk.RebrandingApi(api_client)
     is_dark = true # bool | Specifies if the white label logo is for the dark theme or not. (optional)
     is_default = true # bool | Specifies if the logo is for a default tenant or not. (optional)
 
     try:
         # Check the default white label logo text
         api_response = api_instance.get_is_default_white_label_logo_text(is_dark=is_dark, is_default=is_default)
-        print("The response of SettingsRebrandingApi->get_is_default_white_label_logo_text:\n")
+        print("The response of RebrandingApi->get_is_default_white_label_logo_text:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling SettingsRebrandingApi->get_is_default_white_label_logo_text: %s\n" % e)
+        print("Exception when calling RebrandingApi->get_is_default_white_label_logo_text: %s\n" % e)
 ```
 
 
@@ -628,15 +496,13 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-sdk
-from docspace-api-sdk.models.is_default_white_label_logos_array_wrapper import IsDefaultWhiteLabelLogosArrayWrapper
-from docspace-api-sdk.rest import ApiException
+import docspace_api_sdk
+from docspace_api_sdk.models.is_default_white_label_logos_array_wrapper import IsDefaultWhiteLabelLogosArrayWrapper
+from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-sdk.Configuration(
-    host = "http://localhost:8092"
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -644,45 +510,25 @@ configuration = docspace-api-sdk.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure HTTP basic authorization: Basic
-configuration = docspace-api-sdk.Configuration(
-    username = os.environ["USERNAME"],
-    password = os.environ["PASSWORD"]
-)
-
-configuration.access_token = os.environ["ACCESS_TOKEN"]
-
-# Configure API key authorization: ApiKeyBearer
-configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-sdk.Configuration(
+configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-sdk.ApiClient(configuration) as api_client:
+with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-sdk.SettingsRebrandingApi(api_client)
+    api_instance = docspace_api_sdk.RebrandingApi(api_client)
     is_dark = true # bool | Specifies if the white label logo is for the dark theme or not. (optional)
     is_default = true # bool | Specifies if the logo is for a default tenant or not. (optional)
 
     try:
         # Check the default white label logos
         api_response = api_instance.get_is_default_white_label_logos(is_dark=is_dark, is_default=is_default)
-        print("The response of SettingsRebrandingApi->get_is_default_white_label_logos:\n")
+        print("The response of RebrandingApi->get_is_default_white_label_logos:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling SettingsRebrandingApi->get_is_default_white_label_logos: %s\n" % e)
+        print("Exception when calling RebrandingApi->get_is_default_white_label_logos: %s\n" % e)
 ```
 
 
@@ -725,15 +571,13 @@ This endpoint does not need any parameter.
 
 
 ```python
-import docspace-api-sdk
-from docspace-api-sdk.models.company_white_label_settings_array_wrapper import CompanyWhiteLabelSettingsArrayWrapper
-from docspace-api-sdk.rest import ApiException
+import docspace_api_sdk
+from docspace_api_sdk.models.company_white_label_settings_array_wrapper import CompanyWhiteLabelSettingsArrayWrapper
+from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-sdk.Configuration(
-    host = "http://localhost:8092"
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -741,43 +585,23 @@ configuration = docspace-api-sdk.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure HTTP basic authorization: Basic
-configuration = docspace-api-sdk.Configuration(
-    username = os.environ["USERNAME"],
-    password = os.environ["PASSWORD"]
-)
-
-configuration.access_token = os.environ["ACCESS_TOKEN"]
-
-# Configure API key authorization: ApiKeyBearer
-configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-sdk.Configuration(
+configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-sdk.ApiClient(configuration) as api_client:
+with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-sdk.SettingsRebrandingApi(api_client)
+    api_instance = docspace_api_sdk.RebrandingApi(api_client)
 
     try:
         # Get the licensor data
         api_response = api_instance.get_licensor_data()
-        print("The response of SettingsRebrandingApi->get_licensor_data:\n")
+        print("The response of RebrandingApi->get_licensor_data:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling SettingsRebrandingApi->get_licensor_data: %s\n" % e)
+        print("Exception when calling RebrandingApi->get_licensor_data: %s\n" % e)
 ```
 
 
@@ -824,15 +648,13 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-sdk
-from docspace-api-sdk.models.string_wrapper import StringWrapper
-from docspace-api-sdk.rest import ApiException
+import docspace_api_sdk
+from docspace_api_sdk.models.string_wrapper import StringWrapper
+from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-sdk.Configuration(
-    host = "http://localhost:8092"
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -840,45 +662,25 @@ configuration = docspace-api-sdk.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure HTTP basic authorization: Basic
-configuration = docspace-api-sdk.Configuration(
-    username = os.environ["USERNAME"],
-    password = os.environ["PASSWORD"]
-)
-
-configuration.access_token = os.environ["ACCESS_TOKEN"]
-
-# Configure API key authorization: ApiKeyBearer
-configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-sdk.Configuration(
+configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-sdk.ApiClient(configuration) as api_client:
+with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-sdk.SettingsRebrandingApi(api_client)
+    api_instance = docspace_api_sdk.RebrandingApi(api_client)
     is_dark = true # bool | Specifies if the white label logo is for the dark theme or not. (optional)
     is_default = true # bool | Specifies if the logo is for a default tenant or not. (optional)
 
     try:
         # Get the white label logo text
         api_response = api_instance.get_white_label_logo_text(is_dark=is_dark, is_default=is_default)
-        print("The response of SettingsRebrandingApi->get_white_label_logo_text:\n")
+        print("The response of RebrandingApi->get_white_label_logo_text:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling SettingsRebrandingApi->get_white_label_logo_text: %s\n" % e)
+        print("Exception when calling RebrandingApi->get_white_label_logo_text: %s\n" % e)
 ```
 
 
@@ -925,32 +727,30 @@ No authorization required
 
 
 ```python
-import docspace-api-sdk
-from docspace-api-sdk.models.white_label_item_array_wrapper import WhiteLabelItemArrayWrapper
-from docspace-api-sdk.rest import ApiException
+import docspace_api_sdk
+from docspace_api_sdk.models.white_label_item_array_wrapper import WhiteLabelItemArrayWrapper
+from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-sdk.Configuration(
-    host = "http://localhost:8092"
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
 )
 
 
 # Enter a context with an instance of the API client
-with docspace-api-sdk.ApiClient(configuration) as api_client:
+with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-sdk.SettingsRebrandingApi(api_client)
+    api_instance = docspace_api_sdk.RebrandingApi(api_client)
     is_dark = true # bool | Specifies if the white label logo is for the dark theme or not. (optional)
     is_default = true # bool | Specifies if the logo is for a default tenant or not. (optional)
 
     try:
         # Get the white label logos
         api_response = api_instance.get_white_label_logos(is_dark=is_dark, is_default=is_default)
-        print("The response of SettingsRebrandingApi->get_white_label_logos:\n")
+        print("The response of RebrandingApi->get_white_label_logos:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling SettingsRebrandingApi->get_white_label_logos: %s\n" % e)
+        print("Exception when calling RebrandingApi->get_white_label_logos: %s\n" % e)
 ```
 
 
@@ -996,15 +796,13 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-sdk
-from docspace-api-sdk.models.boolean_wrapper import BooleanWrapper
-from docspace-api-sdk.rest import ApiException
+import docspace_api_sdk
+from docspace_api_sdk.models.boolean_wrapper import BooleanWrapper
+from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-sdk.Configuration(
-    host = "http://localhost:8092"
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -1012,45 +810,25 @@ configuration = docspace-api-sdk.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure HTTP basic authorization: Basic
-configuration = docspace-api-sdk.Configuration(
-    username = os.environ["USERNAME"],
-    password = os.environ["PASSWORD"]
-)
-
-configuration.access_token = os.environ["ACCESS_TOKEN"]
-
-# Configure API key authorization: ApiKeyBearer
-configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-sdk.Configuration(
+configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-sdk.ApiClient(configuration) as api_client:
+with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-sdk.SettingsRebrandingApi(api_client)
+    api_instance = docspace_api_sdk.RebrandingApi(api_client)
     is_dark = true # bool | Specifies if the white label logo is for the dark theme or not. (optional)
     is_default = true # bool | Specifies if the logo is for a default tenant or not. (optional)
 
     try:
         # Restore the white label logo text
         api_response = api_instance.restore_white_label_logo_text(is_dark=is_dark, is_default=is_default)
-        print("The response of SettingsRebrandingApi->restore_white_label_logo_text:\n")
+        print("The response of RebrandingApi->restore_white_label_logo_text:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling SettingsRebrandingApi->restore_white_label_logo_text: %s\n" % e)
+        print("Exception when calling RebrandingApi->restore_white_label_logo_text: %s\n" % e)
 ```
 
 
@@ -1098,15 +876,13 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-sdk
-from docspace-api-sdk.models.boolean_wrapper import BooleanWrapper
-from docspace-api-sdk.rest import ApiException
+import docspace_api_sdk
+from docspace_api_sdk.models.boolean_wrapper import BooleanWrapper
+from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-sdk.Configuration(
-    host = "http://localhost:8092"
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -1114,45 +890,25 @@ configuration = docspace-api-sdk.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure HTTP basic authorization: Basic
-configuration = docspace-api-sdk.Configuration(
-    username = os.environ["USERNAME"],
-    password = os.environ["PASSWORD"]
-)
-
-configuration.access_token = os.environ["ACCESS_TOKEN"]
-
-# Configure API key authorization: ApiKeyBearer
-configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-sdk.Configuration(
+configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-sdk.ApiClient(configuration) as api_client:
+with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-sdk.SettingsRebrandingApi(api_client)
+    api_instance = docspace_api_sdk.RebrandingApi(api_client)
     is_dark = true # bool | Specifies if the white label logo is for the dark theme or not. (optional)
     is_default = true # bool | Specifies if the logo is for a default tenant or not. (optional)
 
     try:
         # Restore the white label logos
         api_response = api_instance.restore_white_label_logos(is_dark=is_dark, is_default=is_default)
-        print("The response of SettingsRebrandingApi->restore_white_label_logos:\n")
+        print("The response of RebrandingApi->restore_white_label_logos:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling SettingsRebrandingApi->restore_white_label_logos: %s\n" % e)
+        print("Exception when calling RebrandingApi->restore_white_label_logos: %s\n" % e)
 ```
 
 
@@ -1199,16 +955,14 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-sdk
-from docspace-api-sdk.models.additional_white_label_settings_wrapper import AdditionalWhiteLabelSettingsWrapper
-from docspace-api-sdk.models.boolean_wrapper import BooleanWrapper
-from docspace-api-sdk.rest import ApiException
+import docspace_api_sdk
+from docspace_api_sdk.models.additional_white_label_settings_wrapper import AdditionalWhiteLabelSettingsWrapper
+from docspace_api_sdk.models.boolean_wrapper import BooleanWrapper
+from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-sdk.Configuration(
-    host = "http://localhost:8092"
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -1216,44 +970,24 @@ configuration = docspace-api-sdk.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure HTTP basic authorization: Basic
-configuration = docspace-api-sdk.Configuration(
-    username = os.environ["USERNAME"],
-    password = os.environ["PASSWORD"]
-)
-
-configuration.access_token = os.environ["ACCESS_TOKEN"]
-
-# Configure API key authorization: ApiKeyBearer
-configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-sdk.Configuration(
+configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-sdk.ApiClient(configuration) as api_client:
+with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-sdk.SettingsRebrandingApi(api_client)
-    additional_white_label_settings_wrapper = docspace-api-sdk.AdditionalWhiteLabelSettingsWrapper() # AdditionalWhiteLabelSettingsWrapper |  (optional)
+    api_instance = docspace_api_sdk.RebrandingApi(api_client)
+    additional_white_label_settings_wrapper = docspace_api_sdk.AdditionalWhiteLabelSettingsWrapper() # AdditionalWhiteLabelSettingsWrapper |  (optional)
 
     try:
         # Save the additional white label settings
         api_response = api_instance.save_additional_white_label_settings(additional_white_label_settings_wrapper=additional_white_label_settings_wrapper)
-        print("The response of SettingsRebrandingApi->save_additional_white_label_settings:\n")
+        print("The response of RebrandingApi->save_additional_white_label_settings:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling SettingsRebrandingApi->save_additional_white_label_settings: %s\n" % e)
+        print("Exception when calling RebrandingApi->save_additional_white_label_settings: %s\n" % e)
 ```
 
 
@@ -1301,16 +1035,14 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-sdk
-from docspace-api-sdk.models.boolean_wrapper import BooleanWrapper
-from docspace-api-sdk.models.company_white_label_settings_wrapper import CompanyWhiteLabelSettingsWrapper
-from docspace-api-sdk.rest import ApiException
+import docspace_api_sdk
+from docspace_api_sdk.models.boolean_wrapper import BooleanWrapper
+from docspace_api_sdk.models.company_white_label_settings_wrapper import CompanyWhiteLabelSettingsWrapper
+from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-sdk.Configuration(
-    host = "http://localhost:8092"
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -1318,44 +1050,24 @@ configuration = docspace-api-sdk.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure HTTP basic authorization: Basic
-configuration = docspace-api-sdk.Configuration(
-    username = os.environ["USERNAME"],
-    password = os.environ["PASSWORD"]
-)
-
-configuration.access_token = os.environ["ACCESS_TOKEN"]
-
-# Configure API key authorization: ApiKeyBearer
-configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-sdk.Configuration(
+configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-sdk.ApiClient(configuration) as api_client:
+with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-sdk.SettingsRebrandingApi(api_client)
-    company_white_label_settings_wrapper = docspace-api-sdk.CompanyWhiteLabelSettingsWrapper() # CompanyWhiteLabelSettingsWrapper |  (optional)
+    api_instance = docspace_api_sdk.RebrandingApi(api_client)
+    company_white_label_settings_wrapper = docspace_api_sdk.CompanyWhiteLabelSettingsWrapper() # CompanyWhiteLabelSettingsWrapper |  (optional)
 
     try:
         # Save the company white label settings
         api_response = api_instance.save_company_white_label_settings(company_white_label_settings_wrapper=company_white_label_settings_wrapper)
-        print("The response of SettingsRebrandingApi->save_company_white_label_settings:\n")
+        print("The response of RebrandingApi->save_company_white_label_settings:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling SettingsRebrandingApi->save_company_white_label_settings: %s\n" % e)
+        print("Exception when calling RebrandingApi->save_company_white_label_settings: %s\n" % e)
 ```
 
 
@@ -1405,16 +1117,14 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-sdk
-from docspace-api-sdk.models.boolean_wrapper import BooleanWrapper
-from docspace-api-sdk.models.white_label_requests_dto import WhiteLabelRequestsDto
-from docspace-api-sdk.rest import ApiException
+import docspace_api_sdk
+from docspace_api_sdk.models.boolean_wrapper import BooleanWrapper
+from docspace_api_sdk.models.white_label_requests_dto import WhiteLabelRequestsDto
+from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-sdk.Configuration(
-    host = "http://localhost:8092"
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -1422,46 +1132,26 @@ configuration = docspace-api-sdk.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure HTTP basic authorization: Basic
-configuration = docspace-api-sdk.Configuration(
-    username = os.environ["USERNAME"],
-    password = os.environ["PASSWORD"]
-)
-
-configuration.access_token = os.environ["ACCESS_TOKEN"]
-
-# Configure API key authorization: ApiKeyBearer
-configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-sdk.Configuration(
+configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-sdk.ApiClient(configuration) as api_client:
+with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-sdk.SettingsRebrandingApi(api_client)
+    api_instance = docspace_api_sdk.RebrandingApi(api_client)
     is_dark = true # bool | Specifies if the white label logo is for the dark theme or not. (optional)
     is_default = true # bool | Specifies if the logo is for a default tenant or not. (optional)
-    white_label_requests_dto = docspace-api-sdk.WhiteLabelRequestsDto() # WhiteLabelRequestsDto |  (optional)
+    white_label_requests_dto = docspace_api_sdk.WhiteLabelRequestsDto() # WhiteLabelRequestsDto |  (optional)
 
     try:
         # Save the white label logo text settings
         api_response = api_instance.save_white_label_logo_text(is_dark=is_dark, is_default=is_default, white_label_requests_dto=white_label_requests_dto)
-        print("The response of SettingsRebrandingApi->save_white_label_logo_text:\n")
+        print("The response of RebrandingApi->save_white_label_logo_text:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling SettingsRebrandingApi->save_white_label_logo_text: %s\n" % e)
+        print("Exception when calling RebrandingApi->save_white_label_logo_text: %s\n" % e)
 ```
 
 
@@ -1510,16 +1200,14 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-sdk
-from docspace-api-sdk.models.boolean_wrapper import BooleanWrapper
-from docspace-api-sdk.models.white_label_requests_dto import WhiteLabelRequestsDto
-from docspace-api-sdk.rest import ApiException
+import docspace_api_sdk
+from docspace_api_sdk.models.boolean_wrapper import BooleanWrapper
+from docspace_api_sdk.models.white_label_requests_dto import WhiteLabelRequestsDto
+from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-sdk.Configuration(
-    host = "http://localhost:8092"
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -1527,46 +1215,26 @@ configuration = docspace-api-sdk.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure HTTP basic authorization: Basic
-configuration = docspace-api-sdk.Configuration(
-    username = os.environ["USERNAME"],
-    password = os.environ["PASSWORD"]
-)
-
-configuration.access_token = os.environ["ACCESS_TOKEN"]
-
-# Configure API key authorization: ApiKeyBearer
-configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-sdk.Configuration(
+configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-sdk.ApiClient(configuration) as api_client:
+with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-sdk.SettingsRebrandingApi(api_client)
+    api_instance = docspace_api_sdk.RebrandingApi(api_client)
     is_dark = true # bool | Specifies if the white label logo is for the dark theme or not. (optional)
     is_default = true # bool | Specifies if the logo is for a default tenant or not. (optional)
-    white_label_requests_dto = docspace-api-sdk.WhiteLabelRequestsDto() # WhiteLabelRequestsDto |  (optional)
+    white_label_requests_dto = docspace_api_sdk.WhiteLabelRequestsDto() # WhiteLabelRequestsDto |  (optional)
 
     try:
         # Save the white label logos
         api_response = api_instance.save_white_label_settings(is_dark=is_dark, is_default=is_default, white_label_requests_dto=white_label_requests_dto)
-        print("The response of SettingsRebrandingApi->save_white_label_settings:\n")
+        print("The response of RebrandingApi->save_white_label_settings:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling SettingsRebrandingApi->save_white_label_settings: %s\n" % e)
+        print("Exception when calling RebrandingApi->save_white_label_settings: %s\n" % e)
 ```
 
 
@@ -1614,15 +1282,13 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-sdk
-from docspace-api-sdk.models.boolean_wrapper import BooleanWrapper
-from docspace-api-sdk.rest import ApiException
+import docspace_api_sdk
+from docspace_api_sdk.models.boolean_wrapper import BooleanWrapper
+from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-sdk.Configuration(
-    host = "http://localhost:8092"
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -1630,45 +1296,25 @@ configuration = docspace-api-sdk.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure HTTP basic authorization: Basic
-configuration = docspace-api-sdk.Configuration(
-    username = os.environ["USERNAME"],
-    password = os.environ["PASSWORD"]
-)
-
-configuration.access_token = os.environ["ACCESS_TOKEN"]
-
-# Configure API key authorization: ApiKeyBearer
-configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-sdk.Configuration(
+configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-sdk.ApiClient(configuration) as api_client:
+with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-sdk.SettingsRebrandingApi(api_client)
+    api_instance = docspace_api_sdk.RebrandingApi(api_client)
     is_dark = true # bool | Specifies if the white label logo is for the dark theme or not. (optional)
     is_default = true # bool | Specifies if the logo is for a default tenant or not. (optional)
 
     try:
         # Save the white label logos from files
         api_response = api_instance.save_white_label_settings_from_files(is_dark=is_dark, is_default=is_default)
-        print("The response of SettingsRebrandingApi->save_white_label_settings_from_files:\n")
+        print("The response of RebrandingApi->save_white_label_settings_from_files:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling SettingsRebrandingApi->save_white_label_settings_from_files: %s\n" % e)
+        print("Exception when calling RebrandingApi->save_white_label_settings_from_files: %s\n" % e)
 ```
 
 

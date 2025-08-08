@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.db_tenant_partner import DbTenantPartner
+from docspace_api_sdk.models.db_tenant_partner import DbTenantPartner
 
 # TODO update the JSON string below
 json = "{}"

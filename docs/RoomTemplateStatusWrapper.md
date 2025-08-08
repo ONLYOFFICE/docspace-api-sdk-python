@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.room_template_status_wrapper import RoomTemplateStatusWrapper
+from docspace_api_sdk.models.room_template_status_wrapper import RoomTemplateStatusWrapper
 
 # TODO update the JSON string below
 json = "{}"

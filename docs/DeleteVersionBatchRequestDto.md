@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.delete_version_batch_request_dto import DeleteVersionBatchRequestDto
+from docspace_api_sdk.models.delete_version_batch_request_dto import DeleteVersionBatchRequestDto
 
 # TODO update the JSON string below
 json = "{}"

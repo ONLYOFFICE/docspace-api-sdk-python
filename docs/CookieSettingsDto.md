@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.cookie_settings_dto import CookieSettingsDto
+from docspace_api_sdk.models.cookie_settings_dto import CookieSettingsDto
 
 # TODO update the JSON string below
 json = "{}"

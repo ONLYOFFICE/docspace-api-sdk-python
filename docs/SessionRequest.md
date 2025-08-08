@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.session_request import SessionRequest
+from docspace_api_sdk.models.session_request import SessionRequest
 
 # TODO update the JSON string below
 json = "{}"

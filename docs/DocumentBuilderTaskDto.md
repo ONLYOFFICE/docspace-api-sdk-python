@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.document_builder_task_dto import DocumentBuilderTaskDto
+from docspace_api_sdk.models.document_builder_task_dto import DocumentBuilderTaskDto
 
 # TODO update the JSON string below
 json = "{}"

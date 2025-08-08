@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.info_config_dto import InfoConfigDto
+from docspace_api_sdk.models.info_config_dto import InfoConfigDto
 
 # TODO update the JSON string below
 json = "{}"

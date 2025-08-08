@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.history_array_wrapper import HistoryArrayWrapper
+from docspace_api_sdk.models.history_array_wrapper import HistoryArrayWrapper
 
 # TODO update the JSON string below
 json = "{}"

@@ -19,6 +19,7 @@ Name | Type | Description | Notes
 **provider_key** | **str** | The provider key of the file entry. | [optional] 
 **provider_id** | **int** | The provider ID of the file entry. | [optional] 
 **order** | **str** | The order of the file entry. | [optional] 
+**file_entry_type** | [**FileEntryType**](FileEntryType.md) |  | [optional] 
 **id** | **int** | The file entry ID. | [optional] 
 **root_folder_id** | **int** | The root folder ID of the file entry. | [optional] 
 **origin_id** | **int** | The origin ID of the file entry. | [optional] 
@@ -26,7 +27,7 @@ Name | Type | Description | Notes
 **origin_title** | **str** | The origin title of the file entry. | [optional] 
 **origin_room_title** | **str** | The origin room title of the file entry. | [optional] 
 **can_share** | **bool** | Specifies if the file entry can be shared or not. | [optional] 
-**security** | [**FileDtoIntegerSecurity**](FileDtoIntegerSecurity.md) |  | [optional] 
+**security** | [**FileEntryDtoIntegerAllOfSecurity**](FileEntryDtoIntegerAllOfSecurity.md) |  | [optional] 
 **request_token** | **str** | The request token of the file entry. | [optional] 
 **folder_id** | **int** | The folder ID where the file is located. | [optional] 
 **version** | **int** | The file version. | [optional] 
@@ -55,16 +56,15 @@ Name | Type | Description | Notes
 **in_process_folder_id** | **int** | The InProcess folder ID of the file. | [optional] 
 **in_process_folder_title** | **str** | The InProcess folder title of the file. | [optional] 
 **draft_location** | [**DraftLocationInteger**](DraftLocationInteger.md) |  | [optional] 
-**view_accessibility** | [**FileDtoIntegerViewAccessibility**](FileDtoIntegerViewAccessibility.md) |  | [optional] 
+**view_accessibility** | [**FileDtoIntegerAllOfViewAccessibility**](FileDtoIntegerAllOfViewAccessibility.md) |  | [optional] 
 **available_external_rights** | **Dict[str, bool]** | The available external rights of the file. | [optional] 
 **last_opened** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] 
 **expired** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] 
-**file_entry_type** | [**FileEntryType**](FileEntryType.md) |  | [optional] 
 
 ## Example
 
 ```python
-from docspace-api-sdk.models.file_dto_integer import FileDtoInteger
+from docspace_api_sdk.models.file_dto_integer import FileDtoInteger
 
 # TODO update the JSON string below
 json = "{}"

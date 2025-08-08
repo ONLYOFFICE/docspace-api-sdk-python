@@ -6,13 +6,13 @@ The duplicate request parameters.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **return_single_operation** | **bool** | Specifies whether to return only the current operation | [optional] 
-**folder_ids** | [**List[BaseBatchRequestDtoFolderIdsInner]**](BaseBatchRequestDtoFolderIdsInner.md) | The list of folder IDs. | [optional] 
-**file_ids** | [**List[BaseBatchRequestDtoFolderIdsInner]**](BaseBatchRequestDtoFolderIdsInner.md) | The list of file IDs. | [optional] 
+**folder_ids** | [**List[DuplicateRequestDtoAllOfFolderIds]**](DuplicateRequestDtoAllOfFolderIds.md) | The list of folder IDs. | [optional] 
+**file_ids** | [**List[DuplicateRequestDtoAllOfFileIds]**](DuplicateRequestDtoAllOfFileIds.md) | The list of file IDs. | [optional] 
 
 ## Example
 
 ```python
-from docspace-api-sdk.models.duplicate_request_dto import DuplicateRequestDto
+from docspace_api_sdk.models.duplicate_request_dto import DuplicateRequestDto
 
 # TODO update the JSON string below
 json = "{}"

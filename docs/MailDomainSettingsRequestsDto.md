@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.mail_domain_settings_requests_dto import MailDomainSettingsRequestsDto
+from docspace_api_sdk.models.mail_domain_settings_requests_dto import MailDomainSettingsRequestsDto
 
 # TODO update the JSON string below
 json = "{}"

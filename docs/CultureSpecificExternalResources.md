@@ -18,7 +18,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.culture_specific_external_resources import CultureSpecificExternalResources
+from docspace_api_sdk.models.culture_specific_external_resources import CultureSpecificExternalResources
 
 # TODO update the JSON string below
 json = "{}"

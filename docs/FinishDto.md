@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.finish_dto import FinishDto
+from docspace_api_sdk.models.finish_dto import FinishDto
 
 # TODO update the JSON string below
 json = "{}"

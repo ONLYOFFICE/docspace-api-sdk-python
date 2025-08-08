@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.edit_history_url import EditHistoryUrl
+from docspace_api_sdk.models.edit_history_url import EditHistoryUrl
 
 # TODO update the JSON string below
 json = "{}"

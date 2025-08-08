@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.anonymous_config_dto import AnonymousConfigDto
+from docspace_api_sdk.models.anonymous_config_dto import AnonymousConfigDto
 
 # TODO update the JSON string below
 json = "{}"

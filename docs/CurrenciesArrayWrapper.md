@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.currencies_array_wrapper import CurrenciesArrayWrapper
+from docspace_api_sdk.models.currencies_array_wrapper import CurrenciesArrayWrapper
 
 # TODO update the JSON string below
 json = "{}"

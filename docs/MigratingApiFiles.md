@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.migrating_api_files import MigratingApiFiles
+from docspace_api_sdk.models.migrating_api_files import MigratingApiFiles
 
 # TODO update the JSON string below
 json = "{}"

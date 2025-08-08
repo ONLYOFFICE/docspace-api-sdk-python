@@ -28,7 +28,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.client_response import ClientResponse
+from docspace_api_sdk.models.client_response import ClientResponse
 
 # TODO update the JSON string below
 json = "{}"

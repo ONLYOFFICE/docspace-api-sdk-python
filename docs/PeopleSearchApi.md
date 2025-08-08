@@ -1,6 +1,6 @@
-# docspace-api-sdk.PeopleSearchApi
+# docspace_api_sdk.SearchApi
 
-All URIs are relative to *http://localhost:8092*
+All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -51,19 +51,17 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-sdk
-from docspace-api-sdk.models.area import Area
-from docspace-api-sdk.models.employee_activation_status import EmployeeActivationStatus
-from docspace-api-sdk.models.employee_status import EmployeeStatus
-from docspace-api-sdk.models.employee_type import EmployeeType
-from docspace-api-sdk.models.object_array_wrapper import ObjectArrayWrapper
-from docspace-api-sdk.rest import ApiException
+import docspace_api_sdk
+from docspace_api_sdk.models.area import Area
+from docspace_api_sdk.models.employee_activation_status import EmployeeActivationStatus
+from docspace_api_sdk.models.employee_status import EmployeeStatus
+from docspace_api_sdk.models.employee_type import EmployeeType
+from docspace_api_sdk.models.object_array_wrapper import ObjectArrayWrapper
+from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-sdk.Configuration(
-    host = "http://localhost:8092"
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -71,44 +69,24 @@ configuration = docspace-api-sdk.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure HTTP basic authorization: Basic
-configuration = docspace-api-sdk.Configuration(
-    username = os.environ["USERNAME"],
-    password = os.environ["PASSWORD"]
-)
-
-configuration.access_token = os.environ["ACCESS_TOKEN"]
-
-# Configure API key authorization: ApiKeyBearer
-configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-sdk.Configuration(
+configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-sdk.ApiClient(configuration) as api_client:
+with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-sdk.PeopleSearchApi(api_client)
+    api_instance = docspace_api_sdk.SearchApi(api_client)
     id = 9846 # int | The user ID.
-    employee_status = docspace-api-sdk.EmployeeStatus() # EmployeeStatus | The user status. (optional)
-    activation_status = docspace-api-sdk.EmployeeActivationStatus() # EmployeeActivationStatus | The user activation status. (optional)
+    employee_status = docspace_api_sdk.EmployeeStatus() # EmployeeStatus | The user status. (optional)
+    activation_status = docspace_api_sdk.EmployeeActivationStatus() # EmployeeActivationStatus | The user activation status. (optional)
     exclude_shared = true # bool | Specifies whether to exclude the account sharing settings from the response. (optional)
     include_shared = true # bool | Specifies whether to include the account sharing settings in the response. (optional)
     invited_by_me = true # bool | Specifies whether the user is invited by the current user or not. (optional)
     inviter_id = '75a5f745-f697-4418-b38d-0fe0d277e258' # str | The inviter ID. (optional)
-    area = docspace-api-sdk.Area() # Area | The area of the account entries. (optional)
-    employee_types = [docspace-api-sdk.EmployeeType()] # List[EmployeeType] | The list of the user types. (optional)
+    area = docspace_api_sdk.Area() # Area | The area of the account entries. (optional)
+    employee_types = [docspace_api_sdk.EmployeeType()] # List[EmployeeType] | The list of the user types. (optional)
     count = 1234 # int | The number of items to retrieve in a request. (optional)
     start_index = 1234 # int | The starting index for the query results. (optional)
     filter_separator = 'some text' # str | Specifies the separator used in filter expressions. (optional)
@@ -117,10 +95,10 @@ with docspace-api-sdk.ApiClient(configuration) as api_client:
     try:
         # Get account entries
         api_response = api_instance.get_accounts_entries_with_shared(id, employee_status=employee_status, activation_status=activation_status, exclude_shared=exclude_shared, include_shared=include_shared, invited_by_me=invited_by_me, inviter_id=inviter_id, area=area, employee_types=employee_types, count=count, start_index=start_index, filter_separator=filter_separator, filter_value=filter_value)
-        print("The response of PeopleSearchApi->get_accounts_entries_with_shared:\n")
+        print("The response of SearchApi->get_accounts_entries_with_shared:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling PeopleSearchApi->get_accounts_entries_with_shared: %s\n" % e)
+        print("Exception when calling SearchApi->get_accounts_entries_with_shared: %s\n" % e)
 ```
 
 
@@ -169,15 +147,13 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-sdk
-from docspace-api-sdk.models.employee_full_array_wrapper import EmployeeFullArrayWrapper
-from docspace-api-sdk.rest import ApiException
+import docspace_api_sdk
+from docspace_api_sdk.models.employee_full_array_wrapper import EmployeeFullArrayWrapper
+from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-sdk.Configuration(
-    host = "http://localhost:8092"
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -185,35 +161,15 @@ configuration = docspace-api-sdk.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure HTTP basic authorization: Basic
-configuration = docspace-api-sdk.Configuration(
-    username = os.environ["USERNAME"],
-    password = os.environ["PASSWORD"]
-)
-
-configuration.access_token = os.environ["ACCESS_TOKEN"]
-
-# Configure API key authorization: ApiKeyBearer
-configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-sdk.Configuration(
+configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-sdk.ApiClient(configuration) as api_client:
+with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-sdk.PeopleSearchApi(api_client)
+    api_instance = docspace_api_sdk.SearchApi(api_client)
     query = 'some text' # str | The search query.
     filter_by = 'some text' # str | Specifies a filter criteria for the user search query. (optional)
     filter_value = 'some text' # str | The value used for filtering users, allowing additional constraints for the query. (optional)
@@ -221,10 +177,10 @@ with docspace-api-sdk.ApiClient(configuration) as api_client:
     try:
         # Search users
         api_response = api_instance.get_search(query, filter_by=filter_by, filter_value=filter_value)
-        print("The response of PeopleSearchApi->get_search:\n")
+        print("The response of SearchApi->get_search:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling PeopleSearchApi->get_search: %s\n" % e)
+        print("Exception when calling SearchApi->get_search: %s\n" % e)
 ```
 
 
@@ -291,23 +247,21 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-sdk
-from docspace-api-sdk.models.account_login_type import AccountLoginType
-from docspace-api-sdk.models.area import Area
-from docspace-api-sdk.models.employee_activation_status import EmployeeActivationStatus
-from docspace-api-sdk.models.employee_array_wrapper import EmployeeArrayWrapper
-from docspace-api-sdk.models.employee_status import EmployeeStatus
-from docspace-api-sdk.models.employee_type import EmployeeType
-from docspace-api-sdk.models.payments import Payments
-from docspace-api-sdk.models.quota_filter import QuotaFilter
-from docspace-api-sdk.models.sort_order import SortOrder
-from docspace-api-sdk.rest import ApiException
+import docspace_api_sdk
+from docspace_api_sdk.models.account_login_type import AccountLoginType
+from docspace_api_sdk.models.area import Area
+from docspace_api_sdk.models.employee_activation_status import EmployeeActivationStatus
+from docspace_api_sdk.models.employee_array_wrapper import EmployeeArrayWrapper
+from docspace_api_sdk.models.employee_status import EmployeeStatus
+from docspace_api_sdk.models.employee_type import EmployeeType
+from docspace_api_sdk.models.payments import Payments
+from docspace_api_sdk.models.quota_filter import QuotaFilter
+from docspace_api_sdk.models.sort_order import SortOrder
+from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-sdk.Configuration(
-    host = "http://localhost:8092"
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -315,53 +269,33 @@ configuration = docspace-api-sdk.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure HTTP basic authorization: Basic
-configuration = docspace-api-sdk.Configuration(
-    username = os.environ["USERNAME"],
-    password = os.environ["PASSWORD"]
-)
-
-configuration.access_token = os.environ["ACCESS_TOKEN"]
-
-# Configure API key authorization: ApiKeyBearer
-configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-sdk.Configuration(
+configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-sdk.ApiClient(configuration) as api_client:
+with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-sdk.PeopleSearchApi(api_client)
-    employee_status = docspace-api-sdk.EmployeeStatus() # EmployeeStatus | The user status. (optional)
+    api_instance = docspace_api_sdk.SearchApi(api_client)
+    employee_status = docspace_api_sdk.EmployeeStatus() # EmployeeStatus | The user status. (optional)
     group_id = '75a5f745-f697-4418-b38d-0fe0d277e258' # str | The group ID. (optional)
-    activation_status = docspace-api-sdk.EmployeeActivationStatus() # EmployeeActivationStatus | The user activation status. (optional)
-    employee_type = docspace-api-sdk.EmployeeType() # EmployeeType | The user type. (optional)
+    activation_status = docspace_api_sdk.EmployeeActivationStatus() # EmployeeActivationStatus | The user activation status. (optional)
+    employee_type = docspace_api_sdk.EmployeeType() # EmployeeType | The user type. (optional)
     employee_types = [56] # List[int] | The list of user types. (optional)
     is_administrator = true # bool | Specifies if the user is an administrator or not. (optional)
-    payments = docspace-api-sdk.Payments() # Payments | The user payment status. (optional)
-    account_login_type = docspace-api-sdk.AccountLoginType() # AccountLoginType | The account login type. (optional)
-    quota_filter = docspace-api-sdk.QuotaFilter() # QuotaFilter | The quota filter (All - 0, Default - 1, Custom - 2). (optional)
+    payments = docspace_api_sdk.Payments() # Payments | The user payment status. (optional)
+    account_login_type = docspace_api_sdk.AccountLoginType() # AccountLoginType | The account login type. (optional)
+    quota_filter = docspace_api_sdk.QuotaFilter() # QuotaFilter | The quota filter (All - 0, Default - 1, Custom - 2). (optional)
     without_group = true # bool | Specifies whether the user should be a member of a group or not. (optional)
     exclude_group = true # bool | Specifies whether the user should be a member of the group with the specified ID. (optional)
     invited_by_me = true # bool | Specifies whether the user is invited by the current user or not. (optional)
     inviter_id = '75a5f745-f697-4418-b38d-0fe0d277e258' # str | The inviter ID. (optional)
-    area = docspace-api-sdk.Area() # Area | The filter area. (optional)
+    area = docspace_api_sdk.Area() # Area | The filter area. (optional)
     count = 1234 # int | The maximum number of items to be retrieved in the response. (optional)
     start_index = 1234 # int | The zero-based index of the first item to be retrieved in a filtered result set. (optional)
     sort_by = 'some text' # str | Specifies the property or field name by which the results should be sorted. (optional)
-    sort_order = docspace-api-sdk.SortOrder() # SortOrder | The order in which the results are sorted. (optional)
+    sort_order = docspace_api_sdk.SortOrder() # SortOrder | The order in which the results are sorted. (optional)
     filter_separator = 'some text' # str | Represents the separator used to split filter criteria in query parameters. (optional)
     filter_value = 'some text' # str | The search text used to filter results based on user input. (optional)
     fields =  # string | Comma-separated list of fields to include in the response (optional)
@@ -369,10 +303,10 @@ with docspace-api-sdk.ApiClient(configuration) as api_client:
     try:
         # Search users by extended filter
         api_response = api_instance.get_simple_by_filter(employee_status=employee_status, group_id=group_id, activation_status=activation_status, employee_type=employee_type, employee_types=employee_types, is_administrator=is_administrator, payments=payments, account_login_type=account_login_type, quota_filter=quota_filter, without_group=without_group, exclude_group=exclude_group, invited_by_me=invited_by_me, inviter_id=inviter_id, area=area, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_separator=filter_separator, filter_value=filter_value, fields=fields)
-        print("The response of PeopleSearchApi->get_simple_by_filter:\n")
+        print("The response of SearchApi->get_simple_by_filter:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling PeopleSearchApi->get_simple_by_filter: %s\n" % e)
+        print("Exception when calling SearchApi->get_simple_by_filter: %s\n" % e)
 ```
 
 
@@ -431,19 +365,17 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-sdk
-from docspace-api-sdk.models.area import Area
-from docspace-api-sdk.models.employee_activation_status import EmployeeActivationStatus
-from docspace-api-sdk.models.employee_full_array_wrapper import EmployeeFullArrayWrapper
-from docspace-api-sdk.models.employee_status import EmployeeStatus
-from docspace-api-sdk.models.employee_type import EmployeeType
-from docspace-api-sdk.rest import ApiException
+import docspace_api_sdk
+from docspace_api_sdk.models.area import Area
+from docspace_api_sdk.models.employee_activation_status import EmployeeActivationStatus
+from docspace_api_sdk.models.employee_full_array_wrapper import EmployeeFullArrayWrapper
+from docspace_api_sdk.models.employee_status import EmployeeStatus
+from docspace_api_sdk.models.employee_type import EmployeeType
+from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-sdk.Configuration(
-    host = "http://localhost:8092"
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -451,44 +383,24 @@ configuration = docspace-api-sdk.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure HTTP basic authorization: Basic
-configuration = docspace-api-sdk.Configuration(
-    username = os.environ["USERNAME"],
-    password = os.environ["PASSWORD"]
-)
-
-configuration.access_token = os.environ["ACCESS_TOKEN"]
-
-# Configure API key authorization: ApiKeyBearer
-configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-sdk.Configuration(
+configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-sdk.ApiClient(configuration) as api_client:
+with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-sdk.PeopleSearchApi(api_client)
+    api_instance = docspace_api_sdk.SearchApi(api_client)
     id = 9846 # int | The user ID.
-    employee_status = docspace-api-sdk.EmployeeStatus() # EmployeeStatus | The user status. (optional)
-    activation_status = docspace-api-sdk.EmployeeActivationStatus() # EmployeeActivationStatus | The user activation status. (optional)
+    employee_status = docspace_api_sdk.EmployeeStatus() # EmployeeStatus | The user status. (optional)
+    activation_status = docspace_api_sdk.EmployeeActivationStatus() # EmployeeActivationStatus | The user activation status. (optional)
     exclude_shared = true # bool | Specifies whether to exclude the user sharing settings or not. (optional)
     include_shared = true # bool | Specifies whether to include the user sharing settings or not. (optional)
     invited_by_me = true # bool | Specifies whether the user was invited by the current user or not. (optional)
     inviter_id = '75a5f745-f697-4418-b38d-0fe0d277e258' # str | The inviter ID. (optional)
-    area = docspace-api-sdk.Area() # Area | The user area. (optional)
-    employee_types = [docspace-api-sdk.EmployeeType()] # List[EmployeeType] | The list of user types. (optional)
+    area = docspace_api_sdk.Area() # Area | The user area. (optional)
+    employee_types = [docspace_api_sdk.EmployeeType()] # List[EmployeeType] | The list of user types. (optional)
     count = 1234 # int | The maximum number of users to be retrieved in the request. (optional)
     start_index = 1234 # int | The zero-based index of the first record to retrieve in a paged query. (optional)
     filter_separator = 'some text' # str | The character or string used to separate multiple filter values in a filtering query. (optional)
@@ -497,10 +409,10 @@ with docspace-api-sdk.ApiClient(configuration) as api_client:
     try:
         # Get users with room sharing settings
         api_response = api_instance.get_users_with_room_shared(id, employee_status=employee_status, activation_status=activation_status, exclude_shared=exclude_shared, include_shared=include_shared, invited_by_me=invited_by_me, inviter_id=inviter_id, area=area, employee_types=employee_types, count=count, start_index=start_index, filter_separator=filter_separator, filter_value=filter_value)
-        print("The response of PeopleSearchApi->get_users_with_room_shared:\n")
+        print("The response of SearchApi->get_users_with_room_shared:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling PeopleSearchApi->get_users_with_room_shared: %s\n" % e)
+        print("Exception when calling SearchApi->get_users_with_room_shared: %s\n" % e)
 ```
 
 
@@ -567,23 +479,21 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-sdk
-from docspace-api-sdk.models.account_login_type import AccountLoginType
-from docspace-api-sdk.models.area import Area
-from docspace-api-sdk.models.employee_activation_status import EmployeeActivationStatus
-from docspace-api-sdk.models.employee_full_array_wrapper import EmployeeFullArrayWrapper
-from docspace-api-sdk.models.employee_status import EmployeeStatus
-from docspace-api-sdk.models.employee_type import EmployeeType
-from docspace-api-sdk.models.payments import Payments
-from docspace-api-sdk.models.quota_filter import QuotaFilter
-from docspace-api-sdk.models.sort_order import SortOrder
-from docspace-api-sdk.rest import ApiException
+import docspace_api_sdk
+from docspace_api_sdk.models.account_login_type import AccountLoginType
+from docspace_api_sdk.models.area import Area
+from docspace_api_sdk.models.employee_activation_status import EmployeeActivationStatus
+from docspace_api_sdk.models.employee_full_array_wrapper import EmployeeFullArrayWrapper
+from docspace_api_sdk.models.employee_status import EmployeeStatus
+from docspace_api_sdk.models.employee_type import EmployeeType
+from docspace_api_sdk.models.payments import Payments
+from docspace_api_sdk.models.quota_filter import QuotaFilter
+from docspace_api_sdk.models.sort_order import SortOrder
+from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-sdk.Configuration(
-    host = "http://localhost:8092"
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -591,53 +501,33 @@ configuration = docspace-api-sdk.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure HTTP basic authorization: Basic
-configuration = docspace-api-sdk.Configuration(
-    username = os.environ["USERNAME"],
-    password = os.environ["PASSWORD"]
-)
-
-configuration.access_token = os.environ["ACCESS_TOKEN"]
-
-# Configure API key authorization: ApiKeyBearer
-configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-sdk.Configuration(
+configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-sdk.ApiClient(configuration) as api_client:
+with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-sdk.PeopleSearchApi(api_client)
-    employee_status = docspace-api-sdk.EmployeeStatus() # EmployeeStatus | The user status. (optional)
+    api_instance = docspace_api_sdk.SearchApi(api_client)
+    employee_status = docspace_api_sdk.EmployeeStatus() # EmployeeStatus | The user status. (optional)
     group_id = '75a5f745-f697-4418-b38d-0fe0d277e258' # str | The group ID. (optional)
-    activation_status = docspace-api-sdk.EmployeeActivationStatus() # EmployeeActivationStatus | The user activation status. (optional)
-    employee_type = docspace-api-sdk.EmployeeType() # EmployeeType | The user type. (optional)
+    activation_status = docspace_api_sdk.EmployeeActivationStatus() # EmployeeActivationStatus | The user activation status. (optional)
+    employee_type = docspace_api_sdk.EmployeeType() # EmployeeType | The user type. (optional)
     employee_types = [56] # List[int] | The list of user types. (optional)
     is_administrator = true # bool | Specifies if the user is an administrator or not. (optional)
-    payments = docspace-api-sdk.Payments() # Payments | The user payment status. (optional)
-    account_login_type = docspace-api-sdk.AccountLoginType() # AccountLoginType | The account login type. (optional)
-    quota_filter = docspace-api-sdk.QuotaFilter() # QuotaFilter | The quota filter (All - 0, Default - 1, Custom - 2). (optional)
+    payments = docspace_api_sdk.Payments() # Payments | The user payment status. (optional)
+    account_login_type = docspace_api_sdk.AccountLoginType() # AccountLoginType | The account login type. (optional)
+    quota_filter = docspace_api_sdk.QuotaFilter() # QuotaFilter | The quota filter (All - 0, Default - 1, Custom - 2). (optional)
     without_group = true # bool | Specifies whether the user should be a member of a group or not. (optional)
     exclude_group = true # bool | Specifies whether the user should be a member of the group with the specified ID. (optional)
     invited_by_me = true # bool | Specifies whether the user is invited by the current user or not. (optional)
     inviter_id = '75a5f745-f697-4418-b38d-0fe0d277e258' # str | The inviter ID. (optional)
-    area = docspace-api-sdk.Area() # Area | The filter area. (optional)
+    area = docspace_api_sdk.Area() # Area | The filter area. (optional)
     count = 1234 # int | The maximum number of items to be retrieved in the response. (optional)
     start_index = 1234 # int | The zero-based index of the first item to be retrieved in a filtered result set. (optional)
     sort_by = 'some text' # str | Specifies the property or field name by which the results should be sorted. (optional)
-    sort_order = docspace-api-sdk.SortOrder() # SortOrder | The order in which the results are sorted. (optional)
+    sort_order = docspace_api_sdk.SortOrder() # SortOrder | The order in which the results are sorted. (optional)
     filter_separator = 'some text' # str | Represents the separator used to split filter criteria in query parameters. (optional)
     filter_value = 'some text' # str | The search text used to filter results based on user input. (optional)
     fields =  # string | Comma-separated list of fields to include in the response (optional)
@@ -645,10 +535,10 @@ with docspace-api-sdk.ApiClient(configuration) as api_client:
     try:
         # Search users with detaailed information by extended filter
         api_response = api_instance.search_users_by_extended_filter(employee_status=employee_status, group_id=group_id, activation_status=activation_status, employee_type=employee_type, employee_types=employee_types, is_administrator=is_administrator, payments=payments, account_login_type=account_login_type, quota_filter=quota_filter, without_group=without_group, exclude_group=exclude_group, invited_by_me=invited_by_me, inviter_id=inviter_id, area=area, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_separator=filter_separator, filter_value=filter_value, fields=fields)
-        print("The response of PeopleSearchApi->search_users_by_extended_filter:\n")
+        print("The response of SearchApi->search_users_by_extended_filter:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling PeopleSearchApi->search_users_by_extended_filter: %s\n" % e)
+        print("Exception when calling SearchApi->search_users_by_extended_filter: %s\n" % e)
 ```
 
 
@@ -695,15 +585,13 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-sdk
-from docspace-api-sdk.models.employee_array_wrapper import EmployeeArrayWrapper
-from docspace-api-sdk.rest import ApiException
+import docspace_api_sdk
+from docspace_api_sdk.models.employee_array_wrapper import EmployeeArrayWrapper
+from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-sdk.Configuration(
-    host = "http://localhost:8092"
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -711,44 +599,24 @@ configuration = docspace-api-sdk.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure HTTP basic authorization: Basic
-configuration = docspace-api-sdk.Configuration(
-    username = os.environ["USERNAME"],
-    password = os.environ["PASSWORD"]
-)
-
-configuration.access_token = os.environ["ACCESS_TOKEN"]
-
-# Configure API key authorization: ApiKeyBearer
-configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-sdk.Configuration(
+configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-sdk.ApiClient(configuration) as api_client:
+with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-sdk.PeopleSearchApi(api_client)
+    api_instance = docspace_api_sdk.SearchApi(api_client)
     query = 'some text' # str | The search query. (optional)
 
     try:
         # Search users (using query parameters)
         api_response = api_instance.search_users_by_query(query=query)
-        print("The response of PeopleSearchApi->search_users_by_query:\n")
+        print("The response of SearchApi->search_users_by_query:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling PeopleSearchApi->search_users_by_query: %s\n" % e)
+        print("Exception when calling SearchApi->search_users_by_query: %s\n" % e)
 ```
 
 
@@ -797,16 +665,14 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-sdk
-from docspace-api-sdk.models.employee_full_array_wrapper import EmployeeFullArrayWrapper
-from docspace-api-sdk.models.employee_status import EmployeeStatus
-from docspace-api-sdk.rest import ApiException
+import docspace_api_sdk
+from docspace_api_sdk.models.employee_full_array_wrapper import EmployeeFullArrayWrapper
+from docspace_api_sdk.models.employee_status import EmployeeStatus
+from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-sdk.Configuration(
-    host = "http://localhost:8092"
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -814,36 +680,16 @@ configuration = docspace-api-sdk.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure HTTP basic authorization: Basic
-configuration = docspace-api-sdk.Configuration(
-    username = os.environ["USERNAME"],
-    password = os.environ["PASSWORD"]
-)
-
-configuration.access_token = os.environ["ACCESS_TOKEN"]
-
-# Configure API key authorization: ApiKeyBearer
-configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-sdk.Configuration(
+configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-sdk.ApiClient(configuration) as api_client:
+with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-sdk.PeopleSearchApi(api_client)
-    status = docspace-api-sdk.EmployeeStatus() # EmployeeStatus | The user status.
+    api_instance = docspace_api_sdk.SearchApi(api_client)
+    status = docspace_api_sdk.EmployeeStatus() # EmployeeStatus | The user status.
     query = 'some text' # str | The advanced search query. (optional)
     filter_by = 'some text' # str | Specifies the criteria used to filter search results in advanced queries. (optional)
     filter_value = 'some text' # str | The value used to filter the search query. (optional)
@@ -851,10 +697,10 @@ with docspace-api-sdk.ApiClient(configuration) as api_client:
     try:
         # Search users by status filter
         api_response = api_instance.search_users_by_status(status, query=query, filter_by=filter_by, filter_value=filter_value)
-        print("The response of PeopleSearchApi->search_users_by_status:\n")
+        print("The response of SearchApi->search_users_by_status:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling PeopleSearchApi->search_users_by_status: %s\n" % e)
+        print("Exception when calling SearchApi->search_users_by_status: %s\n" % e)
 ```
 
 

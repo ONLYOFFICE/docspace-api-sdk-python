@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.folder_content_integer_array_wrapper import FolderContentIntegerArrayWrapper
+from docspace_api_sdk.models.folder_content_integer_array_wrapper import FolderContentIntegerArrayWrapper
 
 # TODO update the JSON string below
 json = "{}"

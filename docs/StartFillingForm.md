@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.start_filling_form import StartFillingForm
+from docspace_api_sdk.models.start_filling_form import StartFillingForm
 
 # TODO update the JSON string below
 json = "{}"

@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.watermark_request_dto import WatermarkRequestDto
+from docspace_api_sdk.models.watermark_request_dto import WatermarkRequestDto
 
 # TODO update the JSON string below
 json = "{}"

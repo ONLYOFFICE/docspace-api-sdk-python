@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.confirm_wrapper import ConfirmWrapper
+from docspace_api_sdk.models.confirm_wrapper import ConfirmWrapper
 
 # TODO update the JSON string below
 json = "{}"

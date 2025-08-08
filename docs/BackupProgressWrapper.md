@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.backup_progress_wrapper import BackupProgressWrapper
+from docspace_api_sdk.models.backup_progress_wrapper import BackupProgressWrapper
 
 # TODO update the JSON string below
 json = "{}"

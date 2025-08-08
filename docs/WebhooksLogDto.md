@@ -21,7 +21,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.webhooks_log_dto import WebhooksLogDto
+from docspace_api_sdk.models.webhooks_log_dto import WebhooksLogDto
 
 # TODO update the JSON string below
 json = "{}"

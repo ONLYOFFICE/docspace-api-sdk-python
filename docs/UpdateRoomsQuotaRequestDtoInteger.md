@@ -5,13 +5,13 @@ The request parameters for updating the room quota.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**room_ids** | [**List[BaseBatchRequestDtoFolderIdsInner]**](BaseBatchRequestDtoFolderIdsInner.md) | The list of room IDs. | [optional] 
+**room_ids** | [**List[DuplicateRequestDtoAllOfFileIds]**](DuplicateRequestDtoAllOfFileIds.md) | The list of room IDs. | [optional] 
 **quota** | **int** | The room quota. | [optional] 
 
 ## Example
 
 ```python
-from docspace-api-sdk.models.update_rooms_quota_request_dto_integer import UpdateRoomsQuotaRequestDtoInteger
+from docspace_api_sdk.models.update_rooms_quota_request_dto_integer import UpdateRoomsQuotaRequestDtoInteger
 
 # TODO update the JSON string below
 json = "{}"

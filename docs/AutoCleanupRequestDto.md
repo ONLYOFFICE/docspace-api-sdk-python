@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.auto_cleanup_request_dto import AutoCleanupRequestDto
+from docspace_api_sdk.models.auto_cleanup_request_dto import AutoCleanupRequestDto
 
 # TODO update the JSON string below
 json = "{}"

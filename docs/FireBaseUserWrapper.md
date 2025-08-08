@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.fire_base_user_wrapper import FireBaseUserWrapper
+from docspace_api_sdk.models.fire_base_user_wrapper import FireBaseUserWrapper
 
 # TODO update the JSON string below
 json = "{}"

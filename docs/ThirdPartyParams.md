@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.third_party_params import ThirdPartyParams
+from docspace_api_sdk.models.third_party_params import ThirdPartyParams
 
 # TODO update the JSON string below
 json = "{}"

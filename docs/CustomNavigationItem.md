@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.custom_navigation_item import CustomNavigationItem
+from docspace_api_sdk.models.custom_navigation_item import CustomNavigationItem
 
 # TODO update the JSON string below
 json = "{}"

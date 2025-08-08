@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.order_by import OrderBy
+from docspace_api_sdk.models.order_by import OrderBy
 
 # TODO update the JSON string below
 json = "{}"

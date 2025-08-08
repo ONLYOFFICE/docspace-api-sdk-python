@@ -1,13 +1,13 @@
 [tool.poetry]
-name = "docspace-api-sdk"
-version = "1.0.0"
+name = "docspace_api_sdk"
+version = "3.2.1-preview.1"
 description = "A simple Python SDK for integrating with the ONLYOFFICE DocSpace API"
 authors = ["Ascensio System SIA <integration@onlyoffice.com> (https://www.onlyoffice.com)"]
 license = "Apache-2.0"
 readme = "README.md"
 repository = "https://github.com/ONLYOFFICE/docspace-api-sdk-python"
 keywords = ["onlyoffice", 'docspace', "sdk"]
-include = ["docspace-api-sdk/py.typed"]
+include = ["docspace_api_sdk/py.typed"]
 
 [tool.poetry.dependencies]
 python = "^3.9"
@@ -35,7 +35,7 @@ extension-pkg-whitelist = "pydantic"
 
 [tool.mypy]
 files = [
-  "docspace-api-sdk",
+  "docspace_api_sdk",
   #"test",  # auto-generated tests
   "tests", # hand-written tests
 ]
@@ -73,7 +73,7 @@ disallow_any_generics = true
 
 [[tool.mypy.overrides]]
 module = [
-  "docspace-api-sdk.configuration",
+  "docspace_api_sdk.configuration",
 ]
 warn_unused_ignores = true
 strict_equality = true

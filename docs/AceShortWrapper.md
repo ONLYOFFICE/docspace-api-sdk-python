@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.ace_short_wrapper import AceShortWrapper
+from docspace_api_sdk.models.ace_short_wrapper import AceShortWrapper
 
 # TODO update the JSON string below
 json = "{}"

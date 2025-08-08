@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.file_share_dto import FileShareDto
+from docspace_api_sdk.models.file_share_dto import FileShareDto
 
 # TODO update the JSON string below
 json = "{}"

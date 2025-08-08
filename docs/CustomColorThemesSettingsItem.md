@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.custom_color_themes_settings_item import CustomColorThemesSettingsItem
+from docspace_api_sdk.models.custom_color_themes_settings_item import CustomColorThemesSettingsItem
 
 # TODO update the JSON string below
 json = "{}"

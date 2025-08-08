@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.ip_restriction_array_wrapper import IPRestrictionArrayWrapper
+from docspace_api_sdk.models.ip_restriction_array_wrapper import IPRestrictionArrayWrapper
 
 # TODO update the JSON string below
 json = "{}"

@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.wizard_settings_wrapper import WizardSettingsWrapper
+from docspace_api_sdk.models.wizard_settings_wrapper import WizardSettingsWrapper
 
 # TODO update the JSON string below
 json = "{}"

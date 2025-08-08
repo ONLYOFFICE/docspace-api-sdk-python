@@ -6,12 +6,12 @@ The destination folder checking information.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **result** | [**CheckDestFolderResult**](CheckDestFolderResult.md) |  | [optional] 
-**files** | [**List[FileEntryDto]**](FileEntryDto.md) | The list of files of the destination folder. | [optional] 
+**files** | [**List[FileEntryBaseDto]**](FileEntryBaseDto.md) | The list of files of the destination folder. | [optional] 
 
 ## Example
 
 ```python
-from docspace-api-sdk.models.check_dest_folder_dto import CheckDestFolderDto
+from docspace_api_sdk.models.check_dest_folder_dto import CheckDestFolderDto
 
 # TODO update the JSON string below
 json = "{}"

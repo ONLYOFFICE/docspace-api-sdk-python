@@ -40,7 +40,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.user_info import UserInfo
+from docspace_api_sdk.models.user_info import UserInfo
 
 # TODO update the JSON string below
 json = "{}"

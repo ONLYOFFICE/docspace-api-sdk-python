@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.usage_space_stat_item_dto import UsageSpaceStatItemDto
+from docspace_api_sdk.models.usage_space_stat_item_dto import UsageSpaceStatItemDto
 
 # TODO update the JSON string below
 json = "{}"

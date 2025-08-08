@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.create_file_json_element import CreateFileJsonElement
+from docspace_api_sdk.models.create_file_json_element import CreateFileJsonElement
 
 # TODO update the JSON string below
 json = "{}"

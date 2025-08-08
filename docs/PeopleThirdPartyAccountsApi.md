@@ -1,6 +1,6 @@
-# docspace-api-sdk.PeopleThirdPartyAccountsApi
+# docspace_api_sdk.ThirdPartyAccountsApi
 
-All URIs are relative to *http://localhost:8092*
+All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -39,22 +39,20 @@ No authorization required
 
 
 ```python
-import docspace-api-sdk
-from docspace-api-sdk.models.account_info_array_wrapper import AccountInfoArrayWrapper
-from docspace-api-sdk.rest import ApiException
+import docspace_api_sdk
+from docspace_api_sdk.models.account_info_array_wrapper import AccountInfoArrayWrapper
+from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-sdk.Configuration(
-    host = "http://localhost:8092"
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
 )
 
 
 # Enter a context with an instance of the API client
-with docspace-api-sdk.ApiClient(configuration) as api_client:
+with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-sdk.PeopleThirdPartyAccountsApi(api_client)
+    api_instance = docspace_api_sdk.ThirdPartyAccountsApi(api_client)
     invite_view = true # bool | Specifies whether to return providers that are available for invitation links, i.e. the user can login or register through these providers. (optional)
     settings_view = true # bool | Specifies whether to display the provider settings in a pop-up window (true) or redirect them to the desktop application (false). (optional)
     client_callback = 'some text' # str | The method that is called after authentication. (optional)
@@ -63,10 +61,10 @@ with docspace-api-sdk.ApiClient(configuration) as api_client:
     try:
         # Get third-party accounts
         api_response = api_instance.get_third_party_auth_providers(invite_view=invite_view, settings_view=settings_view, client_callback=client_callback, from_only=from_only)
-        print("The response of PeopleThirdPartyAccountsApi->get_third_party_auth_providers:\n")
+        print("The response of ThirdPartyAccountsApi->get_third_party_auth_providers:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling PeopleThirdPartyAccountsApi->get_third_party_auth_providers: %s\n" % e)
+        print("Exception when calling ThirdPartyAccountsApi->get_third_party_auth_providers: %s\n" % e)
 ```
 
 
@@ -111,15 +109,13 @@ void (empty response body)
 
 
 ```python
-import docspace-api-sdk
-from docspace-api-sdk.models.link_account_request_dto import LinkAccountRequestDto
-from docspace-api-sdk.rest import ApiException
+import docspace_api_sdk
+from docspace_api_sdk.models.link_account_request_dto import LinkAccountRequestDto
+from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-sdk.Configuration(
-    host = "http://localhost:8092"
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -127,42 +123,22 @@ configuration = docspace-api-sdk.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure HTTP basic authorization: Basic
-configuration = docspace-api-sdk.Configuration(
-    username = os.environ["USERNAME"],
-    password = os.environ["PASSWORD"]
-)
-
-configuration.access_token = os.environ["ACCESS_TOKEN"]
-
-# Configure API key authorization: ApiKeyBearer
-configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-sdk.Configuration(
+configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-sdk.ApiClient(configuration) as api_client:
+with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-sdk.PeopleThirdPartyAccountsApi(api_client)
-    link_account_request_dto = docspace-api-sdk.LinkAccountRequestDto() # LinkAccountRequestDto |  (optional)
+    api_instance = docspace_api_sdk.ThirdPartyAccountsApi(api_client)
+    link_account_request_dto = docspace_api_sdk.LinkAccountRequestDto() # LinkAccountRequestDto |  (optional)
 
     try:
         # Link a third-pary account
         api_instance.link_third_party_account(link_account_request_dto=link_account_request_dto)
     except Exception as e:
-        print("Exception when calling PeopleThirdPartyAccountsApi->link_third_party_account: %s\n" % e)
+        print("Exception when calling ThirdPartyAccountsApi->link_third_party_account: %s\n" % e)
 ```
 
 
@@ -209,29 +185,27 @@ No authorization required
 
 
 ```python
-import docspace-api-sdk
-from docspace-api-sdk.models.signup_account_request_dto import SignupAccountRequestDto
-from docspace-api-sdk.rest import ApiException
+import docspace_api_sdk
+from docspace_api_sdk.models.signup_account_request_dto import SignupAccountRequestDto
+from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-sdk.Configuration(
-    host = "http://localhost:8092"
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
 )
 
 
 # Enter a context with an instance of the API client
-with docspace-api-sdk.ApiClient(configuration) as api_client:
+with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-sdk.PeopleThirdPartyAccountsApi(api_client)
-    signup_account_request_dto = docspace-api-sdk.SignupAccountRequestDto() # SignupAccountRequestDto |  (optional)
+    api_instance = docspace_api_sdk.ThirdPartyAccountsApi(api_client)
+    signup_account_request_dto = docspace_api_sdk.SignupAccountRequestDto() # SignupAccountRequestDto |  (optional)
 
     try:
         # Create a third-pary account
         api_instance.signup_third_party_account(signup_account_request_dto=signup_account_request_dto)
     except Exception as e:
-        print("Exception when calling PeopleThirdPartyAccountsApi->signup_third_party_account: %s\n" % e)
+        print("Exception when calling ThirdPartyAccountsApi->signup_third_party_account: %s\n" % e)
 ```
 
 
@@ -278,14 +252,12 @@ void (empty response body)
 
 
 ```python
-import docspace-api-sdk
-from docspace-api-sdk.rest import ApiException
+import docspace_api_sdk
+from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-sdk.Configuration(
-    host = "http://localhost:8092"
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -293,42 +265,22 @@ configuration = docspace-api-sdk.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure HTTP basic authorization: Basic
-configuration = docspace-api-sdk.Configuration(
-    username = os.environ["USERNAME"],
-    password = os.environ["PASSWORD"]
-)
-
-configuration.access_token = os.environ["ACCESS_TOKEN"]
-
-# Configure API key authorization: ApiKeyBearer
-configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-sdk.Configuration(
+configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-sdk.ApiClient(configuration) as api_client:
+with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-sdk.PeopleThirdPartyAccountsApi(api_client)
+    api_instance = docspace_api_sdk.ThirdPartyAccountsApi(api_client)
     provider = 'some text' # str | The provider name. (optional)
 
     try:
         # Unlink a third-pary account
         api_instance.unlink_third_party_account(provider=provider)
     except Exception as e:
-        print("Exception when calling PeopleThirdPartyAccountsApi->unlink_third_party_account: %s\n" % e)
+        print("Exception when calling ThirdPartyAccountsApi->unlink_third_party_account: %s\n" % e)
 ```
 
 

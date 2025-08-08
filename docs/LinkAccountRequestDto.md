@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.link_account_request_dto import LinkAccountRequestDto
+from docspace_api_sdk.models.link_account_request_dto import LinkAccountRequestDto
 
 # TODO update the JSON string below
 json = "{}"

@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.custom_filter_parameters import CustomFilterParameters
+from docspace_api_sdk.models.custom_filter_parameters import CustomFilterParameters
 
 # TODO update the JSON string below
 json = "{}"

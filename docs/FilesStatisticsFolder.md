@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.files_statistics_folder import FilesStatisticsFolder
+from docspace_api_sdk.models.files_statistics_folder import FilesStatisticsFolder
 
 # TODO update the JSON string below
 json = "{}"

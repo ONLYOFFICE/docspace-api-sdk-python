@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.current_license_info import CurrentLicenseInfo
+from docspace_api_sdk.models.current_license_info import CurrentLicenseInfo
 
 # TODO update the JSON string below
 json = "{}"

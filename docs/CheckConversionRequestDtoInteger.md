@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.check_conversion_request_dto_integer import CheckConversionRequestDtoInteger
+from docspace_api_sdk.models.check_conversion_request_dto_integer import CheckConversionRequestDtoInteger
 
 # TODO update the JSON string below
 json = "{}"

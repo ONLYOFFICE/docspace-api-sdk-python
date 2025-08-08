@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.filling_form_result_dto_integer import FillingFormResultDtoInteger
+from docspace_api_sdk.models.filling_form_result_dto_integer import FillingFormResultDtoInteger
 
 # TODO update the JSON string below
 json = "{}"

@@ -24,8 +24,8 @@ from setuptools import setup, find_packages  # noqa: H301
 #
 # prerequisite: setuptools
 # http://pypi.python.org/pypi/setuptools
-NAME = "docspace-api-sdk"
-VERSION = "1.0.0"
+NAME = "docspace_api_sdk"
+VERSION = "3.2.1-preview.1"
 PYTHON_REQUIRES = ">= 3.9"
 REQUIRES = [
     "urllib3 >= 2.1.0, < 3.0.0",
@@ -50,5 +50,5 @@ setup(
     long_description="""\
     The ONLYOFFICE DocSpace SDK for Python is a library that provides tools for integrating and managing DocSpace features within your applications. It simplifies interaction with the DocSpace API by offering ready-to-use methods and models.
     """,  # noqa: E501
-    package_data={"docspace-api-sdk": ["py.typed"]},
+    package_data={"docspace_api_sdk": ["py.typed"]},
 )

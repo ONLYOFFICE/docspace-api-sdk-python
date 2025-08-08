@@ -1,6 +1,6 @@
-# docspace-api-sdk.OAuth20ClientQueryingApi
+# docspace_api_sdk.ClientQueryingApi
 
-All URIs are relative to *http://localhost:8092*
+All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -38,15 +38,13 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-sdk
-from docspace-api-sdk.models.client_response import ClientResponse
-from docspace-api-sdk.rest import ApiException
+import docspace_api_sdk
+from docspace_api_sdk.models.client_response import ClientResponse
+from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-sdk.Configuration(
-    host = "http://localhost:8092"
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -54,25 +52,19 @@ configuration = docspace-api-sdk.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
 # Enter a context with an instance of the API client
-with docspace-api-sdk.ApiClient(configuration) as api_client:
+with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-sdk.OAuth20ClientQueryingApi(api_client)
+    api_instance = docspace_api_sdk.ClientQueryingApi(api_client)
     client_id = '6c7cf17b-1bd3-47d5-94c6-be2d3570e168' # str | The client identifier.
 
     try:
         # Get client details
         api_response = api_instance.get_client(client_id)
-        print("The response of OAuth20ClientQueryingApi->get_client:\n")
+        print("The response of ClientQueryingApi->get_client:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling OAuth20ClientQueryingApi->get_client: %s\n" % e)
+        print("Exception when calling ClientQueryingApi->get_client: %s\n" % e)
 ```
 
 
@@ -122,15 +114,13 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-sdk
-from docspace-api-sdk.models.client_info_response import ClientInfoResponse
-from docspace-api-sdk.rest import ApiException
+import docspace_api_sdk
+from docspace_api_sdk.models.client_info_response import ClientInfoResponse
+from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-sdk.Configuration(
-    host = "http://localhost:8092"
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -138,25 +128,19 @@ configuration = docspace-api-sdk.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
 # Enter a context with an instance of the API client
-with docspace-api-sdk.ApiClient(configuration) as api_client:
+with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-sdk.OAuth20ClientQueryingApi(api_client)
+    api_instance = docspace_api_sdk.ClientQueryingApi(api_client)
     client_id = '6c7cf17b-1bd3-47d5-94c6-be2d3570e168' # str | The client identifier.
 
     try:
         # Get detailed client information
         api_response = api_instance.get_client_info(client_id)
-        print("The response of OAuth20ClientQueryingApi->get_client_info:\n")
+        print("The response of ClientQueryingApi->get_client_info:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling OAuth20ClientQueryingApi->get_client_info: %s\n" % e)
+        print("Exception when calling ClientQueryingApi->get_client_info: %s\n" % e)
 ```
 
 
@@ -206,15 +190,13 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-sdk
-from docspace-api-sdk.models.pageable_response import PageableResponse
-from docspace-api-sdk.rest import ApiException
+import docspace_api_sdk
+from docspace_api_sdk.models.pageable_response import PageableResponse
+from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-sdk.Configuration(
-    host = "http://localhost:8092"
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -222,16 +204,10 @@ configuration = docspace-api-sdk.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
 # Enter a context with an instance of the API client
-with docspace-api-sdk.ApiClient(configuration) as api_client:
+with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-sdk.OAuth20ClientQueryingApi(api_client)
+    api_instance = docspace_api_sdk.ClientQueryingApi(api_client)
     limit = 1 # int | The maximum number of results returned per page.
     last_client_id = '6c7cf17b-1bd3-47d5-94c6-be2d3570e168' # str | The ID of the last retrieved client. (optional)
     last_created_on = '2024-04-04T12:00:00Z' # datetime | The creation date of the last retrieved client. (optional)
@@ -239,10 +215,10 @@ with docspace-api-sdk.ApiClient(configuration) as api_client:
     try:
         # Get clients
         api_response = api_instance.get_clients(limit, last_client_id=last_client_id, last_created_on=last_created_on)
-        print("The response of OAuth20ClientQueryingApi->get_clients:\n")
+        print("The response of ClientQueryingApi->get_clients:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling OAuth20ClientQueryingApi->get_clients: %s\n" % e)
+        print("Exception when calling ClientQueryingApi->get_clients: %s\n" % e)
 ```
 
 
@@ -293,15 +269,13 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-sdk
-from docspace-api-sdk.models.pageable_response_client_info_response import PageableResponseClientInfoResponse
-from docspace-api-sdk.rest import ApiException
+import docspace_api_sdk
+from docspace_api_sdk.models.pageable_response_client_info_response import PageableResponseClientInfoResponse
+from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-sdk.Configuration(
-    host = "http://localhost:8092"
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -309,16 +283,10 @@ configuration = docspace-api-sdk.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
 # Enter a context with an instance of the API client
-with docspace-api-sdk.ApiClient(configuration) as api_client:
+with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-sdk.OAuth20ClientQueryingApi(api_client)
+    api_instance = docspace_api_sdk.ClientQueryingApi(api_client)
     limit = 1 # int | The maximum number of results returned per page.
     last_client_id = '6c7cf17b-1bd3-47d5-94c6-be2d3570e168' # str | The identifier of the last retrieved client. (optional)
     last_created_on = '2024-04-04T12:00:00Z' # datetime | The creation date of the last retrieved client. (optional)
@@ -326,10 +294,10 @@ with docspace-api-sdk.ApiClient(configuration) as api_client:
     try:
         # Get detailed information of clients
         api_response = api_instance.get_clients_info(limit, last_client_id=last_client_id, last_created_on=last_created_on)
-        print("The response of OAuth20ClientQueryingApi->get_clients_info:\n")
+        print("The response of ClientQueryingApi->get_clients_info:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling OAuth20ClientQueryingApi->get_clients_info: %s\n" % e)
+        print("Exception when calling ClientQueryingApi->get_clients_info: %s\n" % e)
 ```
 
 
@@ -378,15 +346,13 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-sdk
-from docspace-api-sdk.models.pageable_modification_response import PageableModificationResponse
-from docspace-api-sdk.rest import ApiException
+import docspace_api_sdk
+from docspace_api_sdk.models.pageable_modification_response import PageableModificationResponse
+from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-sdk.Configuration(
-    host = "http://localhost:8092"
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -394,26 +360,20 @@ configuration = docspace-api-sdk.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
 # Enter a context with an instance of the API client
-with docspace-api-sdk.ApiClient(configuration) as api_client:
+with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-sdk.OAuth20ClientQueryingApi(api_client)
+    api_instance = docspace_api_sdk.ClientQueryingApi(api_client)
     limit = 1 # int | The maximum number of results returned per page.
     last_modified_on = '2024-04-04T12:00:00Z' # datetime | The date when the user consent was last modified. (optional)
 
     try:
         # Get user consents
         api_response = api_instance.get_consents(limit, last_modified_on=last_modified_on)
-        print("The response of OAuth20ClientQueryingApi->get_consents:\n")
+        print("The response of ClientQueryingApi->get_consents:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling OAuth20ClientQueryingApi->get_consents: %s\n" % e)
+        print("Exception when calling ClientQueryingApi->get_consents: %s\n" % e)
 ```
 
 
@@ -458,31 +418,29 @@ No authorization required
 
 
 ```python
-import docspace-api-sdk
-from docspace-api-sdk.models.client_info_response import ClientInfoResponse
-from docspace-api-sdk.rest import ApiException
+import docspace_api_sdk
+from docspace_api_sdk.models.client_info_response import ClientInfoResponse
+from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-sdk.Configuration(
-    host = "http://localhost:8092"
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
 )
 
 
 # Enter a context with an instance of the API client
-with docspace-api-sdk.ApiClient(configuration) as api_client:
+with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-sdk.OAuth20ClientQueryingApi(api_client)
+    api_instance = docspace_api_sdk.ClientQueryingApi(api_client)
     client_id = '6c7cf17b-1bd3-47d5-94c6-be2d3570e168' # str | The client identifier.
 
     try:
         # Get public client information
         api_response = api_instance.get_public_client_info(client_id)
-        print("The response of OAuth20ClientQueryingApi->get_public_client_info:\n")
+        print("The response of ClientQueryingApi->get_public_client_info:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling OAuth20ClientQueryingApi->get_public_client_info: %s\n" % e)
+        print("Exception when calling ClientQueryingApi->get_public_client_info: %s\n" % e)
 ```
 
 

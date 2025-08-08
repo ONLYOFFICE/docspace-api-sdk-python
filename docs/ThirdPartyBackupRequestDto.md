@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.third_party_backup_request_dto import ThirdPartyBackupRequestDto
+from docspace_api_sdk.models.third_party_backup_request_dto import ThirdPartyBackupRequestDto
 
 # TODO update the JSON string below
 json = "{}"

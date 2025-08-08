@@ -22,7 +22,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.configuration_dto_integer import ConfigurationDtoInteger
+from docspace_api_sdk.models.configuration_dto_integer import ConfigurationDtoInteger
 
 # TODO update the JSON string below
 json = "{}"

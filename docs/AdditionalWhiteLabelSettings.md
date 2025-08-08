@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.additional_white_label_settings import AdditionalWhiteLabelSettings
+from docspace_api_sdk.models.additional_white_label_settings import AdditionalWhiteLabelSettings
 
 # TODO update the JSON string below
 json = "{}"

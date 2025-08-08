@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.exchange_token200_response import ExchangeToken200Response
+from docspace_api_sdk.models.exchange_token200_response import ExchangeToken200Response
 
 # TODO update the JSON string below
 json = "{}"

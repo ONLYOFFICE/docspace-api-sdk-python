@@ -1,6 +1,6 @@
-# docspace-api-sdk.OAuth20ClientManagementApi
+# docspace_api_sdk.ClientManagementApi
 
-All URIs are relative to *http://localhost:8092*
+All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -39,15 +39,13 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-sdk
-from docspace-api-sdk.models.change_client_activation_request import ChangeClientActivationRequest
-from docspace-api-sdk.rest import ApiException
+import docspace_api_sdk
+from docspace_api_sdk.models.change_client_activation_request import ChangeClientActivationRequest
+from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-sdk.Configuration(
-    host = "http://localhost:8092"
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -55,26 +53,20 @@ configuration = docspace-api-sdk.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
 # Enter a context with an instance of the API client
-with docspace-api-sdk.ApiClient(configuration) as api_client:
+with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-sdk.OAuth20ClientManagementApi(api_client)
+    api_instance = docspace_api_sdk.ClientManagementApi(api_client)
     client_id = '6c7cf17b-1bd3-47d5-94c6-be2d3570e168' # str | The client identifier.
-    change_client_activation_request = docspace-api-sdk.ChangeClientActivationRequest() # ChangeClientActivationRequest | 
+    change_client_activation_request = docspace_api_sdk.ChangeClientActivationRequest() # ChangeClientActivationRequest | 
 
     try:
         # Change the client activation status
         api_response = api_instance.change_activation(client_id, change_client_activation_request)
-        print("The response of OAuth20ClientManagementApi->change_activation:\n")
+        print("The response of ClientManagementApi->change_activation:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling OAuth20ClientManagementApi->change_activation: %s\n" % e)
+        print("Exception when calling ClientManagementApi->change_activation: %s\n" % e)
 ```
 
 
@@ -124,16 +116,14 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-sdk
-from docspace-api-sdk.models.client_response import ClientResponse
-from docspace-api-sdk.models.create_client_request import CreateClientRequest
-from docspace-api-sdk.rest import ApiException
+import docspace_api_sdk
+from docspace_api_sdk.models.client_response import ClientResponse
+from docspace_api_sdk.models.create_client_request import CreateClientRequest
+from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-sdk.Configuration(
-    host = "http://localhost:8092"
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -141,25 +131,19 @@ configuration = docspace-api-sdk.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
 # Enter a context with an instance of the API client
-with docspace-api-sdk.ApiClient(configuration) as api_client:
+with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-sdk.OAuth20ClientManagementApi(api_client)
-    create_client_request = docspace-api-sdk.CreateClientRequest() # CreateClientRequest | 
+    api_instance = docspace_api_sdk.ClientManagementApi(api_client)
+    create_client_request = docspace_api_sdk.CreateClientRequest() # CreateClientRequest | 
 
     try:
         # Create a new OAuth2 client
         api_response = api_instance.create_client(create_client_request)
-        print("The response of OAuth20ClientManagementApi->create_client:\n")
+        print("The response of ClientManagementApi->create_client:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling OAuth20ClientManagementApi->create_client: %s\n" % e)
+        print("Exception when calling ClientManagementApi->create_client: %s\n" % e)
 ```
 
 
@@ -208,14 +192,12 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-sdk
-from docspace-api-sdk.rest import ApiException
+import docspace_api_sdk
+from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-sdk.Configuration(
-    host = "http://localhost:8092"
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -223,25 +205,19 @@ configuration = docspace-api-sdk.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
 # Enter a context with an instance of the API client
-with docspace-api-sdk.ApiClient(configuration) as api_client:
+with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-sdk.OAuth20ClientManagementApi(api_client)
+    api_instance = docspace_api_sdk.ClientManagementApi(api_client)
     client_id = '6c7cf17b-1bd3-47d5-94c6-be2d3570e168' # str | The client identifier.
 
     try:
         # Delete an OAuth2 client
         api_response = api_instance.delete_client(client_id)
-        print("The response of OAuth20ClientManagementApi->delete_client:\n")
+        print("The response of ClientManagementApi->delete_client:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling OAuth20ClientManagementApi->delete_client: %s\n" % e)
+        print("Exception when calling ClientManagementApi->delete_client: %s\n" % e)
 ```
 
 
@@ -291,15 +267,13 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-sdk
-from docspace-api-sdk.models.client_secret_response import ClientSecretResponse
-from docspace-api-sdk.rest import ApiException
+import docspace_api_sdk
+from docspace_api_sdk.models.client_secret_response import ClientSecretResponse
+from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-sdk.Configuration(
-    host = "http://localhost:8092"
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -307,25 +281,19 @@ configuration = docspace-api-sdk.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
 # Enter a context with an instance of the API client
-with docspace-api-sdk.ApiClient(configuration) as api_client:
+with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-sdk.OAuth20ClientManagementApi(api_client)
+    api_instance = docspace_api_sdk.ClientManagementApi(api_client)
     client_id = '6c7cf17b-1bd3-47d5-94c6-be2d3570e168' # str | The client identifier.
 
     try:
         # Regenerate the client secret
         api_response = api_instance.regenerate_secret(client_id)
-        print("The response of OAuth20ClientManagementApi->regenerate_secret:\n")
+        print("The response of ClientManagementApi->regenerate_secret:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling OAuth20ClientManagementApi->regenerate_secret: %s\n" % e)
+        print("Exception when calling ClientManagementApi->regenerate_secret: %s\n" % e)
 ```
 
 
@@ -375,14 +343,12 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-sdk
-from docspace-api-sdk.rest import ApiException
+import docspace_api_sdk
+from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-sdk.Configuration(
-    host = "http://localhost:8092"
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -390,25 +356,19 @@ configuration = docspace-api-sdk.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
 # Enter a context with an instance of the API client
-with docspace-api-sdk.ApiClient(configuration) as api_client:
+with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-sdk.OAuth20ClientManagementApi(api_client)
+    api_instance = docspace_api_sdk.ClientManagementApi(api_client)
     client_id = '6c7cf17b-1bd3-47d5-94c6-be2d3570e168' # str | The client identifier.
 
     try:
         # Revoke client consent
         api_response = api_instance.revoke_user_client(client_id)
-        print("The response of OAuth20ClientManagementApi->revoke_user_client:\n")
+        print("The response of ClientManagementApi->revoke_user_client:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling OAuth20ClientManagementApi->revoke_user_client: %s\n" % e)
+        print("Exception when calling ClientManagementApi->revoke_user_client: %s\n" % e)
 ```
 
 
@@ -460,15 +420,13 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-sdk
-from docspace-api-sdk.models.update_client_request import UpdateClientRequest
-from docspace-api-sdk.rest import ApiException
+import docspace_api_sdk
+from docspace_api_sdk.models.update_client_request import UpdateClientRequest
+from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-sdk.Configuration(
-    host = "http://localhost:8092"
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -476,26 +434,20 @@ configuration = docspace-api-sdk.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
 # Enter a context with an instance of the API client
-with docspace-api-sdk.ApiClient(configuration) as api_client:
+with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-sdk.OAuth20ClientManagementApi(api_client)
+    api_instance = docspace_api_sdk.ClientManagementApi(api_client)
     client_id = '6c7cf17b-1bd3-47d5-94c6-be2d3570e168' # str | The client identifier.
-    update_client_request = docspace-api-sdk.UpdateClientRequest() # UpdateClientRequest | 
+    update_client_request = docspace_api_sdk.UpdateClientRequest() # UpdateClientRequest | 
 
     try:
         # Update an existing OAuth2 client
         api_response = api_instance.update_client(client_id, update_client_request)
-        print("The response of OAuth20ClientManagementApi->update_client:\n")
+        print("The response of ClientManagementApi->update_client:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling OAuth20ClientManagementApi->update_client: %s\n" % e)
+        print("Exception when calling ClientManagementApi->update_client: %s\n" % e)
 ```
 
 

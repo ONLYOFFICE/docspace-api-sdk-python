@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.task_progress_response_wrapper import TaskProgressResponseWrapper
+from docspace_api_sdk.models.task_progress_response_wrapper import TaskProgressResponseWrapper
 
 # TODO update the JSON string below
 json = "{}"

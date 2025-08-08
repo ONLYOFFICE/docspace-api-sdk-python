@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.encryption_settings import EncryptionSettings
+from docspace_api_sdk.models.encryption_settings import EncryptionSettings
 
 # TODO update the JSON string below
 json = "{}"

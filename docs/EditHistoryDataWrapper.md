@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.edit_history_data_wrapper import EditHistoryDataWrapper
+from docspace_api_sdk.models.edit_history_data_wrapper import EditHistoryDataWrapper
 
 # TODO update the JSON string below
 json = "{}"

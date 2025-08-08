@@ -19,6 +19,7 @@ Name | Type | Description | Notes
 **provider_key** | **str** | The provider key of the file entry. | [optional] 
 **provider_id** | **int** | The provider ID of the file entry. | [optional] 
 **order** | **str** | The order of the file entry. | [optional] 
+**file_entry_type** | [**FileEntryType**](FileEntryType.md) |  | [optional] 
 **id** | **int** | The file entry ID. | [optional] 
 **root_folder_id** | **int** | The root folder ID of the file entry. | [optional] 
 **origin_id** | **int** | The origin ID of the file entry. | [optional] 
@@ -26,7 +27,7 @@ Name | Type | Description | Notes
 **origin_title** | **str** | The origin title of the file entry. | [optional] 
 **origin_room_title** | **str** | The origin room title of the file entry. | [optional] 
 **can_share** | **bool** | Specifies if the file entry can be shared or not. | [optional] 
-**security** | [**FileDtoIntegerSecurity**](FileDtoIntegerSecurity.md) |  | [optional] 
+**security** | [**FileEntryDtoIntegerAllOfSecurity**](FileEntryDtoIntegerAllOfSecurity.md) |  | [optional] 
 **request_token** | **str** | The request token of the file entry. | [optional] 
 **parent_id** | **int** | The parent folder ID of the folder. | [optional] 
 **files_count** | **int** | The number of files that the folder contains. | [optional] 
@@ -52,12 +53,11 @@ Name | Type | Description | Notes
 **external** | **bool** | Specifies if the folder can be accessed via an external link or not. | [optional] 
 **password_protected** | **bool** | Specifies if the folder is password protected or not. | [optional] 
 **expired** | **bool** | Specifies if an external link to the folder is expired or not. | [optional] 
-**file_entry_type** | [**FileEntryType**](FileEntryType.md) |  | [optional] 
 
 ## Example
 
 ```python
-from docspace-api-sdk.models.folder_dto_integer import FolderDtoInteger
+from docspace_api_sdk.models.folder_dto_integer import FolderDtoInteger
 
 # TODO update the JSON string below
 json = "{}"

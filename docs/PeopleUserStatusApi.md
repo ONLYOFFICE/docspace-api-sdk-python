@@ -1,6 +1,6 @@
-# docspace-api-sdk.PeopleUserStatusApi
+# docspace_api_sdk.UserStatusApi
 
-All URIs are relative to *http://localhost:8092*
+All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -42,17 +42,15 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-sdk
-from docspace-api-sdk.models.employee_full_array_wrapper import EmployeeFullArrayWrapper
-from docspace-api-sdk.models.employee_status import EmployeeStatus
-from docspace-api-sdk.models.sort_order import SortOrder
-from docspace-api-sdk.rest import ApiException
+import docspace_api_sdk
+from docspace_api_sdk.models.employee_full_array_wrapper import EmployeeFullArrayWrapper
+from docspace_api_sdk.models.employee_status import EmployeeStatus
+from docspace_api_sdk.models.sort_order import SortOrder
+from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-sdk.Configuration(
-    host = "http://localhost:8092"
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -60,51 +58,31 @@ configuration = docspace-api-sdk.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure HTTP basic authorization: Basic
-configuration = docspace-api-sdk.Configuration(
-    username = os.environ["USERNAME"],
-    password = os.environ["PASSWORD"]
-)
-
-configuration.access_token = os.environ["ACCESS_TOKEN"]
-
-# Configure API key authorization: ApiKeyBearer
-configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-sdk.Configuration(
+configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-sdk.ApiClient(configuration) as api_client:
+with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-sdk.PeopleUserStatusApi(api_client)
-    status = docspace-api-sdk.EmployeeStatus() # EmployeeStatus | The user status.
+    api_instance = docspace_api_sdk.UserStatusApi(api_client)
+    status = docspace_api_sdk.EmployeeStatus() # EmployeeStatus | The user status.
     filter_by = 'some text' # str | Specifies the criteria used to filter the profiles in the request. (optional)
     count = 1234 # int | The maximum number of user profiles to retrieve. (optional)
     start_index = 1234 # int | The starting index for retrieving data in a paginated request. (optional)
     sort_by = 'some text' # str | Specifies the property or field name by which the results should be sorted. (optional)
-    sort_order = docspace-api-sdk.SortOrder() # SortOrder | The order in which the results are sorted. (optional)
+    sort_order = docspace_api_sdk.SortOrder() # SortOrder | The order in which the results are sorted. (optional)
     filter_separator = 'some text' # str | Represents the separator used to split multiple filter criteria in a query string. (optional)
     filter_value = 'some text' # str | A string value representing additional filter criteria used in query parameters. (optional)
 
     try:
         # Get profiles by status
         api_response = api_instance.get_by_status(status, filter_by=filter_by, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_separator=filter_separator, filter_value=filter_value)
-        print("The response of PeopleUserStatusApi->get_by_status:\n")
+        print("The response of UserStatusApi->get_by_status:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling PeopleUserStatusApi->get_by_status: %s\n" % e)
+        print("Exception when calling UserStatusApi->get_by_status: %s\n" % e)
 ```
 
 
@@ -151,17 +129,15 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-sdk
-from docspace-api-sdk.models.employee_activation_status import EmployeeActivationStatus
-from docspace-api-sdk.models.employee_full_array_wrapper import EmployeeFullArrayWrapper
-from docspace-api-sdk.models.update_members_request_dto import UpdateMembersRequestDto
-from docspace-api-sdk.rest import ApiException
+import docspace_api_sdk
+from docspace_api_sdk.models.employee_activation_status import EmployeeActivationStatus
+from docspace_api_sdk.models.employee_full_array_wrapper import EmployeeFullArrayWrapper
+from docspace_api_sdk.models.update_members_request_dto import UpdateMembersRequestDto
+from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-sdk.Configuration(
-    host = "http://localhost:8092"
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -169,45 +145,25 @@ configuration = docspace-api-sdk.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure HTTP basic authorization: Basic
-configuration = docspace-api-sdk.Configuration(
-    username = os.environ["USERNAME"],
-    password = os.environ["PASSWORD"]
-)
-
-configuration.access_token = os.environ["ACCESS_TOKEN"]
-
-# Configure API key authorization: ApiKeyBearer
-configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-sdk.Configuration(
+configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-sdk.ApiClient(configuration) as api_client:
+with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-sdk.PeopleUserStatusApi(api_client)
-    activationstatus = docspace-api-sdk.EmployeeActivationStatus() # EmployeeActivationStatus | The new user activation status.
-    update_members_request_dto = docspace-api-sdk.UpdateMembersRequestDto() # UpdateMembersRequestDto | The request parameters for updating the user information. (optional)
+    api_instance = docspace_api_sdk.UserStatusApi(api_client)
+    activationstatus = docspace_api_sdk.EmployeeActivationStatus() # EmployeeActivationStatus | The new user activation status.
+    update_members_request_dto = docspace_api_sdk.UpdateMembersRequestDto() # UpdateMembersRequestDto | The request parameters for updating the user information. (optional)
 
     try:
         # Set an activation status to the users
         api_response = api_instance.update_user_activation_status(activationstatus, update_members_request_dto=update_members_request_dto)
-        print("The response of PeopleUserStatusApi->update_user_activation_status:\n")
+        print("The response of UserStatusApi->update_user_activation_status:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling PeopleUserStatusApi->update_user_activation_status: %s\n" % e)
+        print("Exception when calling UserStatusApi->update_user_activation_status: %s\n" % e)
 ```
 
 
@@ -254,17 +210,15 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-sdk
-from docspace-api-sdk.models.employee_full_array_wrapper import EmployeeFullArrayWrapper
-from docspace-api-sdk.models.employee_status import EmployeeStatus
-from docspace-api-sdk.models.update_members_request_dto import UpdateMembersRequestDto
-from docspace-api-sdk.rest import ApiException
+import docspace_api_sdk
+from docspace_api_sdk.models.employee_full_array_wrapper import EmployeeFullArrayWrapper
+from docspace_api_sdk.models.employee_status import EmployeeStatus
+from docspace_api_sdk.models.update_members_request_dto import UpdateMembersRequestDto
+from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-sdk.Configuration(
-    host = "http://localhost:8092"
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -272,45 +226,25 @@ configuration = docspace-api-sdk.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure HTTP basic authorization: Basic
-configuration = docspace-api-sdk.Configuration(
-    username = os.environ["USERNAME"],
-    password = os.environ["PASSWORD"]
-)
-
-configuration.access_token = os.environ["ACCESS_TOKEN"]
-
-# Configure API key authorization: ApiKeyBearer
-configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-sdk.Configuration(
+configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-sdk.ApiClient(configuration) as api_client:
+with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-sdk.PeopleUserStatusApi(api_client)
-    status = docspace-api-sdk.EmployeeStatus() # EmployeeStatus | The new user status.
-    update_members_request_dto = docspace-api-sdk.UpdateMembersRequestDto() # UpdateMembersRequestDto | The request parameters for updating the user information. (optional)
+    api_instance = docspace_api_sdk.UserStatusApi(api_client)
+    status = docspace_api_sdk.EmployeeStatus() # EmployeeStatus | The new user status.
+    update_members_request_dto = docspace_api_sdk.UpdateMembersRequestDto() # UpdateMembersRequestDto | The request parameters for updating the user information. (optional)
 
     try:
         # Change a user status
         api_response = api_instance.update_user_status(status, update_members_request_dto=update_members_request_dto)
-        print("The response of PeopleUserStatusApi->update_user_status:\n")
+        print("The response of UserStatusApi->update_user_status:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling PeopleUserStatusApi->update_user_status: %s\n" % e)
+        print("Exception when calling UserStatusApi->update_user_status: %s\n" % e)
 ```
 
 

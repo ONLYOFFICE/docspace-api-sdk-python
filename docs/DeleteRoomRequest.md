@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.delete_room_request import DeleteRoomRequest
+from docspace_api_sdk.models.delete_room_request import DeleteRoomRequest
 
 # TODO update the JSON string below
 json = "{}"

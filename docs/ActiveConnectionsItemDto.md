@@ -20,7 +20,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.active_connections_item_dto import ActiveConnectionsItemDto
+from docspace_api_sdk.models.active_connections_item_dto import ActiveConnectionsItemDto
 
 # TODO update the JSON string below
 json = "{}"

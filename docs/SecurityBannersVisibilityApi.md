@@ -1,6 +1,6 @@
-# docspace-api-sdk.SecurityBannersVisibilityApi
+# docspace_api_sdk.BannersVisibilityApi
 
-All URIs are relative to *http://localhost:8092*
+All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -33,16 +33,14 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-sdk
-from docspace-api-sdk.models.tenant_banner_settings_dto import TenantBannerSettingsDto
-from docspace-api-sdk.models.tenant_banner_settings_wrapper import TenantBannerSettingsWrapper
-from docspace-api-sdk.rest import ApiException
+import docspace_api_sdk
+from docspace_api_sdk.models.tenant_banner_settings_dto import TenantBannerSettingsDto
+from docspace_api_sdk.models.tenant_banner_settings_wrapper import TenantBannerSettingsWrapper
+from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-sdk.Configuration(
-    host = "http://localhost:8092"
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -50,44 +48,24 @@ configuration = docspace-api-sdk.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure HTTP basic authorization: Basic
-configuration = docspace-api-sdk.Configuration(
-    username = os.environ["USERNAME"],
-    password = os.environ["PASSWORD"]
-)
-
-configuration.access_token = os.environ["ACCESS_TOKEN"]
-
-# Configure API key authorization: ApiKeyBearer
-configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-sdk.Configuration(
+configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-sdk.ApiClient(configuration) as api_client:
+with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-sdk.SecurityBannersVisibilityApi(api_client)
-    tenant_banner_settings_dto = docspace-api-sdk.TenantBannerSettingsDto() # TenantBannerSettingsDto |  (optional)
+    api_instance = docspace_api_sdk.BannersVisibilityApi(api_client)
+    tenant_banner_settings_dto = docspace_api_sdk.TenantBannerSettingsDto() # TenantBannerSettingsDto |  (optional)
 
     try:
         # Set the promotional banners visibility settings
         api_response = api_instance.set_tenant_banner_settings(tenant_banner_settings_dto=tenant_banner_settings_dto)
-        print("The response of SecurityBannersVisibilityApi->set_tenant_banner_settings:\n")
+        print("The response of BannersVisibilityApi->set_tenant_banner_settings:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling SecurityBannersVisibilityApi->set_tenant_banner_settings: %s\n" % e)
+        print("Exception when calling BannersVisibilityApi->set_tenant_banner_settings: %s\n" % e)
 ```
 
 

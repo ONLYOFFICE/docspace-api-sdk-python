@@ -19,7 +19,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.smtp_settings_dto import SmtpSettingsDto
+from docspace_api_sdk.models.smtp_settings_dto import SmtpSettingsDto
 
 # TODO update the JSON string below
 json = "{}"

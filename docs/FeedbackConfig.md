@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.feedback_config import FeedbackConfig
+from docspace_api_sdk.models.feedback_config import FeedbackConfig
 
 # TODO update the JSON string below
 json = "{}"

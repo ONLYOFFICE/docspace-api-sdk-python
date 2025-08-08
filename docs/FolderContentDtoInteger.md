@@ -5,8 +5,8 @@ The folder content information.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**files** | [**List[FileEntryDto]**](FileEntryDto.md) | The list of files in the folder. | [optional] 
-**folders** | [**List[FileEntryDto]**](FileEntryDto.md) | The list of folders in the folder. | [optional] 
+**files** | [**List[FileEntryBaseDto]**](FileEntryBaseDto.md) | The list of files in the folder. | [optional] 
+**folders** | [**List[FileEntryBaseDto]**](FileEntryBaseDto.md) | The list of folders in the folder. | [optional] 
 **current** | [**FolderDtoInteger**](FolderDtoInteger.md) |  | [optional] 
 **path_parts** | **object** | The folder path. | [optional] 
 **start_index** | **int** | The folder start index. | [optional] 
@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.folder_content_dto_integer import FolderContentDtoInteger
+from docspace_api_sdk.models.folder_content_dto_integer import FolderContentDtoInteger
 
 # TODO update the JSON string below
 json = "{}"

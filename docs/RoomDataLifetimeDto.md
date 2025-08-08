@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.room_data_lifetime_dto import RoomDataLifetimeDto
+from docspace_api_sdk.models.room_data_lifetime_dto import RoomDataLifetimeDto
 
 # TODO update the JSON string below
 json = "{}"

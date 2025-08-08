@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.options import Options
+from docspace_api_sdk.models.options import Options
 
 # TODO update the JSON string below
 json = "{}"

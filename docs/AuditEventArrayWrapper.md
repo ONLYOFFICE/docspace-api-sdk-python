@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.audit_event_array_wrapper import AuditEventArrayWrapper
+from docspace_api_sdk.models.audit_event_array_wrapper import AuditEventArrayWrapper
 
 # TODO update the JSON string below
 json = "{}"

@@ -1,6 +1,6 @@
-# docspace-api-sdk.SecurityLoginHistoryApi
+# docspace_api_sdk.LoginHistoryApi
 
-All URIs are relative to *http://localhost:8092*
+All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -32,15 +32,13 @@ This endpoint does not need any parameter.
 
 
 ```python
-import docspace-api-sdk
-from docspace-api-sdk.models.string_wrapper import StringWrapper
-from docspace-api-sdk.rest import ApiException
+import docspace_api_sdk
+from docspace_api_sdk.models.string_wrapper import StringWrapper
+from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-sdk.Configuration(
-    host = "http://localhost:8092"
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -48,43 +46,23 @@ configuration = docspace-api-sdk.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure HTTP basic authorization: Basic
-configuration = docspace-api-sdk.Configuration(
-    username = os.environ["USERNAME"],
-    password = os.environ["PASSWORD"]
-)
-
-configuration.access_token = os.environ["ACCESS_TOKEN"]
-
-# Configure API key authorization: ApiKeyBearer
-configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-sdk.Configuration(
+configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-sdk.ApiClient(configuration) as api_client:
+with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-sdk.SecurityLoginHistoryApi(api_client)
+    api_instance = docspace_api_sdk.LoginHistoryApi(api_client)
 
     try:
         # Generate the login history report
         api_response = api_instance.create_login_history_report()
-        print("The response of SecurityLoginHistoryApi->create_login_history_report:\n")
+        print("The response of LoginHistoryApi->create_login_history_report:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling SecurityLoginHistoryApi->create_login_history_report: %s\n" % e)
+        print("Exception when calling LoginHistoryApi->create_login_history_report: %s\n" % e)
 ```
 
 
@@ -128,15 +106,13 @@ This endpoint does not need any parameter.
 
 
 ```python
-import docspace-api-sdk
-from docspace-api-sdk.models.login_event_array_wrapper import LoginEventArrayWrapper
-from docspace-api-sdk.rest import ApiException
+import docspace_api_sdk
+from docspace_api_sdk.models.login_event_array_wrapper import LoginEventArrayWrapper
+from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-sdk.Configuration(
-    host = "http://localhost:8092"
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -144,43 +120,23 @@ configuration = docspace-api-sdk.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure HTTP basic authorization: Basic
-configuration = docspace-api-sdk.Configuration(
-    username = os.environ["USERNAME"],
-    password = os.environ["PASSWORD"]
-)
-
-configuration.access_token = os.environ["ACCESS_TOKEN"]
-
-# Configure API key authorization: ApiKeyBearer
-configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-sdk.Configuration(
+configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-sdk.ApiClient(configuration) as api_client:
+with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-sdk.SecurityLoginHistoryApi(api_client)
+    api_instance = docspace_api_sdk.LoginHistoryApi(api_client)
 
     try:
         # Get login history
         api_response = api_instance.get_last_login_events()
-        print("The response of SecurityLoginHistoryApi->get_last_login_events:\n")
+        print("The response of LoginHistoryApi->get_last_login_events:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling SecurityLoginHistoryApi->get_last_login_events: %s\n" % e)
+        print("Exception when calling LoginHistoryApi->get_last_login_events: %s\n" % e)
 ```
 
 
@@ -233,17 +189,15 @@ Name | Type | Description  | Notes
 
 
 ```python
-import docspace-api-sdk
-from docspace-api-sdk.models.api_date_time import ApiDateTime
-from docspace-api-sdk.models.login_event_array_wrapper import LoginEventArrayWrapper
-from docspace-api-sdk.models.message_action import MessageAction
-from docspace-api-sdk.rest import ApiException
+import docspace_api_sdk
+from docspace_api_sdk.models.api_date_time import ApiDateTime
+from docspace_api_sdk.models.login_event_array_wrapper import LoginEventArrayWrapper
+from docspace_api_sdk.models.message_action import MessageAction
+from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace-api-sdk.Configuration(
-    host = "http://localhost:8092"
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -251,39 +205,19 @@ configuration = docspace-api-sdk.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure HTTP basic authorization: Basic
-configuration = docspace-api-sdk.Configuration(
-    username = os.environ["USERNAME"],
-    password = os.environ["PASSWORD"]
-)
-
-configuration.access_token = os.environ["ACCESS_TOKEN"]
-
-# Configure API key authorization: ApiKeyBearer
-configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
 # Configure Bearer authorization (JWT): Bearer
-configuration = docspace-api-sdk.Configuration(
+configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with docspace-api-sdk.ApiClient(configuration) as api_client:
+with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace-api-sdk.SecurityLoginHistoryApi(api_client)
+    api_instance = docspace_api_sdk.LoginHistoryApi(api_client)
     user_id = 'aae1e103-bca5-9fa1-ba8c-42058b4abf28' # str | The ID of the user whose login events are being queried. (optional)
-    action = docspace-api-sdk.MessageAction() # MessageAction | The login-related action to filter events by. (optional)
-    var_from = docspace-api-sdk.ApiDateTime() # ApiDateTime | The starting date and time for filtering login events. (optional)
-    to = docspace-api-sdk.ApiDateTime() # ApiDateTime | The ending date and time for filtering login events. (optional)
+    action = docspace_api_sdk.MessageAction() # MessageAction | The login-related action to filter events by. (optional)
+    var_from = docspace_api_sdk.ApiDateTime() # ApiDateTime | The starting date and time for filtering login events. (optional)
+    to = docspace_api_sdk.ApiDateTime() # ApiDateTime | The ending date and time for filtering login events. (optional)
     count = 1234 # int | The number of login events to retrieve in the query. (optional)
     start_index = 1234 # int | The starting index for fetching a subset of login events from the query results. (optional)
     fields =  # string | Comma-separated list of fields to include in the response (optional)
@@ -291,10 +225,10 @@ with docspace-api-sdk.ApiClient(configuration) as api_client:
     try:
         # Get filtered login events
         api_response = api_instance.get_login_events_by_filter(user_id=user_id, action=action, var_from=var_from, to=to, count=count, start_index=start_index, fields=fields)
-        print("The response of SecurityLoginHistoryApi->get_login_events_by_filter:\n")
+        print("The response of LoginHistoryApi->get_login_events_by_filter:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling SecurityLoginHistoryApi->get_login_events_by_filter: %s\n" % e)
+        print("Exception when calling LoginHistoryApi->get_login_events_by_filter: %s\n" % e)
 ```
 
 

@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.fire_base_user import FireBaseUser
+from docspace_api_sdk.models.fire_base_user import FireBaseUser
 
 # TODO update the JSON string below
 json = "{}"

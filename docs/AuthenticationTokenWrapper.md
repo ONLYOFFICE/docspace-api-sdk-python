@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.authentication_token_wrapper import AuthenticationTokenWrapper
+from docspace_api_sdk.models.authentication_token_wrapper import AuthenticationTokenWrapper
 
 # TODO update the JSON string below
 json = "{}"

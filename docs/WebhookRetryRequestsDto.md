@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.webhook_retry_requests_dto import WebhookRetryRequestsDto
+from docspace_api_sdk.models.webhook_retry_requests_dto import WebhookRetryRequestsDto
 
 # TODO update the JSON string below
 json = "{}"

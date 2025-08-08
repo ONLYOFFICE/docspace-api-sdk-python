@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.email_activation_settings_wrapper import EmailActivationSettingsWrapper
+from docspace_api_sdk.models.email_activation_settings_wrapper import EmailActivationSettingsWrapper
 
 # TODO update the JSON string below
 json = "{}"

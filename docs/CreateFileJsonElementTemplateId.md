@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.create_file_json_element_template_id import CreateFileJsonElementTemplateId
+from docspace_api_sdk.models.create_file_json_element_template_id import CreateFileJsonElementTemplateId
 
 # TODO update the JSON string below
 json = "{}"

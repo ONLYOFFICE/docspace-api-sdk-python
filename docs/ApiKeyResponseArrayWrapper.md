@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.api_key_response_array_wrapper import ApiKeyResponseArrayWrapper
+from docspace_api_sdk.models.api_key_response_array_wrapper import ApiKeyResponseArrayWrapper
 
 # TODO update the JSON string below
 json = "{}"

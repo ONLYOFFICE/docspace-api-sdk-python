@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.plugins_dto import PluginsDto
+from docspace_api_sdk.models.plugins_dto import PluginsDto
 
 # TODO update the JSON string below
 json = "{}"

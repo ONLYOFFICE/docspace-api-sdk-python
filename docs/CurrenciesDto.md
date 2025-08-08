@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.currencies_dto import CurrenciesDto
+from docspace_api_sdk.models.currencies_dto import CurrenciesDto
 
 # TODO update the JSON string below
 json = "{}"

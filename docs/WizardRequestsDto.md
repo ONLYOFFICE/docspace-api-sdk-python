@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace-api-sdk.models.wizard_requests_dto import WizardRequestsDto
+from docspace_api_sdk.models.wizard_requests_dto import WizardRequestsDto
 
 # TODO update the JSON string below
 json = "{}"
