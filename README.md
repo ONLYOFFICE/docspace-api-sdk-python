@@ -350,227 +350,227 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
       <tr>
         <td><a href="docs/FilesFilesApi.md#add_templates"><strong>add_templates</strong></a></td>
         <td><strong>POST</strong> /api/2.0/files/templates</td>
-        <td></td>
+        <td>Add template files</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFilesApi.md#change_version_history"><strong>change_version_history</strong></a></td>
         <td><strong>PUT</strong> /api/2.0/files/file/{fileId}/history</td>
-        <td></td>
+        <td>Change version history</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFilesApi.md#check_fill_form_draft"><strong>check_fill_form_draft</strong></a></td>
         <td><strong>POST</strong> /api/2.0/files/masterform/{fileId}/checkfillformdraft</td>
-        <td></td>
+        <td>Check the form draft filling</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFilesApi.md#copy_file_as"><strong>copy_file_as</strong></a></td>
         <td><strong>POST</strong> /api/2.0/files/file/{fileId}/copyas</td>
-        <td></td>
+        <td>Copy a file</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFilesApi.md#create_edit_session"><strong>create_edit_session</strong></a></td>
         <td><strong>POST</strong> /api/2.0/files/file/{fileId}/edit_session</td>
-        <td></td>
+        <td>Create the editing session</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFilesApi.md#create_file"><strong>create_file</strong></a></td>
         <td><strong>POST</strong> /api/2.0/files/{folderId}/file</td>
-        <td></td>
+        <td>Create a file</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFilesApi.md#create_file_in_my_documents"><strong>create_file_in_my_documents</strong></a></td>
         <td><strong>POST</strong> /api/2.0/files/@my/file</td>
-        <td></td>
+        <td>Create a file in the \&quot;My documents\&quot; section</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFilesApi.md#create_html_file"><strong>create_html_file</strong></a></td>
         <td><strong>POST</strong> /api/2.0/files/{folderId}/html</td>
-        <td></td>
+        <td>Create an HTML file</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFilesApi.md#create_html_file_in_my_documents"><strong>create_html_file_in_my_documents</strong></a></td>
         <td><strong>POST</strong> /api/2.0/files/@my/html</td>
-        <td></td>
+        <td>Create an HTML file in the \&quot;My documents\&quot; section</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFilesApi.md#create_primary_external_link"><strong>create_primary_external_link</strong></a></td>
         <td><strong>POST</strong> /api/2.0/files/file/{id}/link</td>
-        <td></td>
+        <td>Create primary external link</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFilesApi.md#create_text_file"><strong>create_text_file</strong></a></td>
         <td><strong>POST</strong> /api/2.0/files/{folderId}/text</td>
-        <td></td>
+        <td>Create a text file</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFilesApi.md#create_text_file_in_my_documents"><strong>create_text_file_in_my_documents</strong></a></td>
         <td><strong>POST</strong> /api/2.0/files/@my/text</td>
-        <td></td>
+        <td>Create a text file in the \&quot;My documents\&quot; section</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFilesApi.md#create_thumbnails"><strong>create_thumbnails</strong></a></td>
         <td><strong>POST</strong> /api/2.0/files/thumbnails</td>
-        <td></td>
+        <td>Create file thumbnails</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFilesApi.md#delete_file"><strong>delete_file</strong></a></td>
         <td><strong>DELETE</strong> /api/2.0/files/file/{fileId}</td>
-        <td></td>
+        <td>Delete a file</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFilesApi.md#delete_recent"><strong>delete_recent</strong></a></td>
         <td><strong>DELETE</strong> /api/2.0/files/recent</td>
-        <td></td>
+        <td>Delete recent files</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFilesApi.md#delete_templates"><strong>delete_templates</strong></a></td>
         <td><strong>DELETE</strong> /api/2.0/files/templates</td>
-        <td></td>
+        <td>Delete template files</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFilesApi.md#get_all_form_roles"><strong>get_all_form_roles</strong></a></td>
         <td><strong>GET</strong> /api/2.0/files/file/{fileId}/formroles</td>
-        <td></td>
+        <td>Get form roles</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFilesApi.md#get_edit_diff_url"><strong>get_edit_diff_url</strong></a></td>
         <td><strong>GET</strong> /api/2.0/files/file/{fileId}/edit/diff</td>
-        <td></td>
+        <td>Get changes URL</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFilesApi.md#get_edit_history"><strong>get_edit_history</strong></a></td>
         <td><strong>GET</strong> /api/2.0/files/file/{fileId}/edit/history</td>
-        <td></td>
+        <td>Get version history</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFilesApi.md#get_file_history"><strong>get_file_history</strong></a></td>
         <td><strong>GET</strong> /api/2.0/files/file/{fileId}/log</td>
-        <td></td>
+        <td>Get file history</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFilesApi.md#get_file_info"><strong>get_file_info</strong></a></td>
         <td><strong>GET</strong> /api/2.0/files/file/{fileId}</td>
-        <td></td>
+        <td>Get file information</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFilesApi.md#get_file_links"><strong>get_file_links</strong></a></td>
         <td><strong>GET</strong> /api/2.0/files/file/{id}/links</td>
-        <td></td>
+        <td>Get file external links</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFilesApi.md#get_file_primary_external_link"><strong>get_file_primary_external_link</strong></a></td>
         <td><strong>GET</strong> /api/2.0/files/file/{id}/link</td>
-        <td></td>
+        <td>Get primary external link</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFilesApi.md#get_file_version_info"><strong>get_file_version_info</strong></a></td>
         <td><strong>GET</strong> /api/2.0/files/file/{fileId}/history</td>
-        <td></td>
+        <td>Get file versions</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFilesApi.md#get_fill_result"><strong>get_fill_result</strong></a></td>
         <td><strong>GET</strong> /api/2.0/files/file/fillresult</td>
-        <td></td>
+        <td>Get form-filling result</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFilesApi.md#get_presigned_file_uri"><strong>get_presigned_file_uri</strong></a></td>
         <td><strong>GET</strong> /api/2.0/files/file/{fileId}/presigned</td>
-        <td></td>
+        <td>Get file download link asynchronously</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFilesApi.md#get_presigned_uri"><strong>get_presigned_uri</strong></a></td>
         <td><strong>GET</strong> /api/2.0/files/file/{fileId}/presigneduri</td>
-        <td></td>
+        <td>Get file download link</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFilesApi.md#get_protected_file_users"><strong>get_protected_file_users</strong></a></td>
         <td><strong>GET</strong> /api/2.0/files/file/{fileId}/protectusers</td>
-        <td></td>
+        <td>Get users access rights to the protected file</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFilesApi.md#get_reference_data"><strong>get_reference_data</strong></a></td>
         <td><strong>POST</strong> /api/2.0/files/file/referencedata</td>
-        <td></td>
+        <td>Get reference data</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFilesApi.md#is_form_pdf"><strong>is_form_pdf</strong></a></td>
         <td><strong>GET</strong> /api/2.0/files/file/{fileId}/isformpdf</td>
-        <td></td>
+        <td>Check the PDF file</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFilesApi.md#lock_file"><strong>lock_file</strong></a></td>
         <td><strong>PUT</strong> /api/2.0/files/file/{fileId}/lock</td>
-        <td></td>
+        <td>Lock a file</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFilesApi.md#manage_form_filling"><strong>manage_form_filling</strong></a></td>
         <td><strong>PUT</strong> /api/2.0/files/file/{fileId}/manageformfilling</td>
-        <td></td>
+        <td>Perform form filling action</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFilesApi.md#open_edit_file"><strong>open_edit_file</strong></a></td>
         <td><strong>GET</strong> /api/2.0/files/file/{fileId}/openedit</td>
-        <td></td>
+        <td>Open a file configuration</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFilesApi.md#restore_file_version"><strong>restore_file_version</strong></a></td>
         <td><strong>GET</strong> /api/2.0/files/file/{fileId}/restoreversion</td>
-        <td></td>
+        <td>Restore a file version</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFilesApi.md#save_editing_file_from_form"><strong>save_editing_file_from_form</strong></a></td>
         <td><strong>PUT</strong> /api/2.0/files/file/{fileId}/saveediting</td>
-        <td></td>
+        <td>Save file edits</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFilesApi.md#save_file_as_pdf"><strong>save_file_as_pdf</strong></a></td>
         <td><strong>POST</strong> /api/2.0/files/file/{id}/saveaspdf</td>
-        <td></td>
+        <td>Save a file as PDF</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFilesApi.md#save_form_role_mapping"><strong>save_form_role_mapping</strong></a></td>
         <td><strong>POST</strong> /api/2.0/files/file/{fileId}/formrolemapping</td>
-        <td></td>
+        <td>Save form role mapping</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFilesApi.md#set_custom_filter_tag"><strong>set_custom_filter_tag</strong></a></td>
         <td><strong>PUT</strong> /api/2.0/files/file/{fileId}/customfilter</td>
-        <td></td>
+        <td>Set the Custom Filter editing mode</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFilesApi.md#set_external_link"><strong>set_external_link</strong></a></td>
         <td><strong>PUT</strong> /api/2.0/files/file/{id}/links</td>
-        <td></td>
+        <td>Set an external link</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFilesApi.md#set_file_order"><strong>set_file_order</strong></a></td>
         <td><strong>PUT</strong> /api/2.0/files/{fileId}/order</td>
-        <td></td>
+        <td>Set file order</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFilesApi.md#set_files_order"><strong>set_files_order</strong></a></td>
         <td><strong>PUT</strong> /api/2.0/files/order</td>
-        <td></td>
+        <td>Set order of files</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFilesApi.md#start_edit_file"><strong>start_edit_file</strong></a></td>
         <td><strong>POST</strong> /api/2.0/files/file/{fileId}/startedit</td>
-        <td></td>
+        <td>Start file editing</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFilesApi.md#start_filling_file"><strong>start_filling_file</strong></a></td>
         <td><strong>PUT</strong> /api/2.0/files/file/{fileId}/startfilling</td>
-        <td></td>
+        <td>Start file filling</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFilesApi.md#track_edit_file"><strong>track_edit_file</strong></a></td>
         <td><strong>GET</strong> /api/2.0/files/file/{fileId}/trackeditfile</td>
-        <td></td>
+        <td>Track file editing</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFilesApi.md#update_file"><strong>update_file</strong></a></td>
         <td><strong>PUT</strong> /api/2.0/files/file/{fileId}</td>
-        <td></td>
+        <td>Update a file</td>
       </tr>
     <tr>
         <td colspan="3" style="text-align: center;"><strong>FoldersApi</strong></td>
@@ -578,112 +578,112 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
       <tr>
         <td><a href="docs/FilesFoldersApi.md#check_upload"><strong>check_upload</strong></a></td>
         <td><strong>POST</strong> /api/2.0/files/{folderId}/upload/check</td>
-        <td></td>
+        <td>Check file uploads</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFoldersApi.md#create_folder"><strong>create_folder</strong></a></td>
         <td><strong>POST</strong> /api/2.0/files/folder/{folderId}</td>
-        <td></td>
+        <td>Create a folder</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFoldersApi.md#delete_folder"><strong>delete_folder</strong></a></td>
         <td><strong>DELETE</strong> /api/2.0/files/folder/{folderId}</td>
-        <td></td>
+        <td>Delete a folder</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFoldersApi.md#get_files_used_space"><strong>get_files_used_space</strong></a></td>
         <td><strong>GET</strong> /api/2.0/files/filesusedspace</td>
-        <td></td>
+        <td>Get used space of files</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFoldersApi.md#get_folder"><strong>get_folder</strong></a></td>
         <td><strong>GET</strong> /api/2.0/files/{folderId}/formfilter</td>
-        <td></td>
+        <td>Get folder form filter</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFoldersApi.md#get_folder_by_folder_id"><strong>get_folder_by_folder_id</strong></a></td>
         <td><strong>GET</strong> /api/2.0/files/{folderId}</td>
-        <td></td>
+        <td>Get a folder by ID</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFoldersApi.md#get_folder_history"><strong>get_folder_history</strong></a></td>
         <td><strong>GET</strong> /api/2.0/files/folder/{folderId}/log</td>
-        <td></td>
+        <td>Get folder history</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFoldersApi.md#get_folder_info"><strong>get_folder_info</strong></a></td>
         <td><strong>GET</strong> /api/2.0/files/folder/{folderId}</td>
-        <td></td>
+        <td>Get folder information</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFoldersApi.md#get_folder_path"><strong>get_folder_path</strong></a></td>
         <td><strong>GET</strong> /api/2.0/files/folder/{folderId}/path</td>
-        <td></td>
+        <td>Get the folder path</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFoldersApi.md#get_folder_primary_external_link"><strong>get_folder_primary_external_link</strong></a></td>
         <td><strong>GET</strong> /api/2.0/files/folder/{id}/link</td>
-        <td></td>
+        <td>Get primary external link</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFoldersApi.md#get_folders"><strong>get_folders</strong></a></td>
         <td><strong>GET</strong> /api/2.0/files/{folderId}/subfolders</td>
-        <td></td>
+        <td>Get subfolders</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFoldersApi.md#get_my_folder"><strong>get_my_folder</strong></a></td>
         <td><strong>GET</strong> /api/2.0/files/@my</td>
-        <td></td>
+        <td>Get the \&quot;My documents\&quot; section</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFoldersApi.md#get_new_folder_items"><strong>get_new_folder_items</strong></a></td>
         <td><strong>GET</strong> /api/2.0/files/{folderId}/news</td>
-        <td></td>
+        <td>Get new folder items</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFoldersApi.md#get_privacy_folder"><strong>get_privacy_folder</strong></a></td>
         <td><strong>GET</strong> /api/2.0/files/@privacy</td>
-        <td></td>
+        <td>Get the \&quot;Private Room\&quot; section</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFoldersApi.md#get_root_folders"><strong>get_root_folders</strong></a></td>
         <td><strong>GET</strong> /api/2.0/files/@root</td>
-        <td></td>
+        <td>Get filtered sections</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFoldersApi.md#get_trash_folder"><strong>get_trash_folder</strong></a></td>
         <td><strong>GET</strong> /api/2.0/files/@trash</td>
-        <td></td>
+        <td>Get the \&quot;Trash\&quot; section</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFoldersApi.md#insert_file"><strong>insert_file</strong></a></td>
         <td><strong>POST</strong> /api/2.0/files/{folderId}/insert</td>
-        <td></td>
+        <td>Insert a file</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFoldersApi.md#insert_file_to_my_from_body"><strong>insert_file_to_my_from_body</strong></a></td>
         <td><strong>POST</strong> /api/2.0/files/@my/insert</td>
-        <td></td>
+        <td>Insert a file to the \&quot;My documents\&quot; section</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFoldersApi.md#rename_folder"><strong>rename_folder</strong></a></td>
         <td><strong>PUT</strong> /api/2.0/files/folder/{folderId}</td>
-        <td></td>
+        <td>Rename a folder</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFoldersApi.md#set_folder_order"><strong>set_folder_order</strong></a></td>
         <td><strong>PUT</strong> /api/2.0/files/folder/{folderId}/order</td>
-        <td></td>
+        <td>Set folder order</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFoldersApi.md#upload_file"><strong>upload_file</strong></a></td>
         <td><strong>POST</strong> /api/2.0/files/{folderId}/upload</td>
-        <td></td>
+        <td>Upload a file</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFoldersApi.md#upload_file_to_my"><strong>upload_file_to_my</strong></a></td>
         <td><strong>POST</strong> /api/2.0/files/@my/upload</td>
-        <td></td>
+        <td>Upload a file to the \&quot;My documents\&quot; section</td>
       </tr>
     <tr>
         <td colspan="3" style="text-align: center;"><strong>OperationsApi</strong></td>
@@ -691,87 +691,87 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
       <tr>
         <td><a href="docs/FilesOperationsApi.md#bulk_download"><strong>bulk_download</strong></a></td>
         <td><strong>PUT</strong> /api/2.0/files/fileops/bulkdownload</td>
-        <td></td>
+        <td>Bulk download</td>
       </tr>
       <tr>
         <td><a href="docs/FilesOperationsApi.md#check_conversion_status"><strong>check_conversion_status</strong></a></td>
         <td><strong>GET</strong> /api/2.0/files/file/{fileId}/checkconversion</td>
-        <td></td>
+        <td>Get conversion status</td>
       </tr>
       <tr>
         <td><a href="docs/FilesOperationsApi.md#check_move_or_copy_batch_items"><strong>check_move_or_copy_batch_items</strong></a></td>
         <td><strong>GET</strong> /api/2.0/files/fileops/move</td>
-        <td></td>
+        <td>Check and move or copy to a folder</td>
       </tr>
       <tr>
         <td><a href="docs/FilesOperationsApi.md#check_move_or_copy_dest_folder"><strong>check_move_or_copy_dest_folder</strong></a></td>
         <td><strong>GET</strong> /api/2.0/files/fileops/checkdestfolder</td>
-        <td></td>
+        <td>Check for moving or copying to a folder</td>
       </tr>
       <tr>
         <td><a href="docs/FilesOperationsApi.md#copy_batch_items"><strong>copy_batch_items</strong></a></td>
         <td><strong>PUT</strong> /api/2.0/files/fileops/copy</td>
-        <td></td>
+        <td>Copy to the folder</td>
       </tr>
       <tr>
         <td><a href="docs/FilesOperationsApi.md#create_upload_session"><strong>create_upload_session</strong></a></td>
         <td><strong>POST</strong> /api/2.0/files/{folderId}/upload/create_session</td>
-        <td></td>
+        <td>Chunked upload</td>
       </tr>
       <tr>
         <td><a href="docs/FilesOperationsApi.md#delete_batch_items"><strong>delete_batch_items</strong></a></td>
         <td><strong>PUT</strong> /api/2.0/files/fileops/delete</td>
-        <td></td>
+        <td>Delete files and folders</td>
       </tr>
       <tr>
         <td><a href="docs/FilesOperationsApi.md#delete_file_versions"><strong>delete_file_versions</strong></a></td>
         <td><strong>PUT</strong> /api/2.0/files/fileops/deleteversion</td>
-        <td></td>
+        <td>Delete file versions</td>
       </tr>
       <tr>
         <td><a href="docs/FilesOperationsApi.md#duplicate_batch_items"><strong>duplicate_batch_items</strong></a></td>
         <td><strong>PUT</strong> /api/2.0/files/fileops/duplicate</td>
-        <td></td>
+        <td>Duplicate files and folders</td>
       </tr>
       <tr>
         <td><a href="docs/FilesOperationsApi.md#empty_trash"><strong>empty_trash</strong></a></td>
         <td><strong>PUT</strong> /api/2.0/files/fileops/emptytrash</td>
-        <td></td>
+        <td>Empty the \&quot;Trash\&quot; folder</td>
       </tr>
       <tr>
         <td><a href="docs/FilesOperationsApi.md#get_operation_statuses"><strong>get_operation_statuses</strong></a></td>
         <td><strong>GET</strong> /api/2.0/files/fileops</td>
-        <td></td>
+        <td>Get active file operations</td>
       </tr>
       <tr>
         <td><a href="docs/FilesOperationsApi.md#get_operation_statuses_by_type"><strong>get_operation_statuses_by_type</strong></a></td>
         <td><strong>GET</strong> /api/2.0/files/fileops/{operationType}</td>
-        <td></td>
+        <td>Get file operation statuses</td>
       </tr>
       <tr>
         <td><a href="docs/FilesOperationsApi.md#mark_as_read"><strong>mark_as_read</strong></a></td>
         <td><strong>PUT</strong> /api/2.0/files/fileops/markasread</td>
-        <td></td>
+        <td>Mark as read</td>
       </tr>
       <tr>
         <td><a href="docs/FilesOperationsApi.md#move_batch_items"><strong>move_batch_items</strong></a></td>
         <td><strong>PUT</strong> /api/2.0/files/fileops/move</td>
-        <td></td>
+        <td>Move or copy to a folder</td>
       </tr>
       <tr>
         <td><a href="docs/FilesOperationsApi.md#start_file_conversion"><strong>start_file_conversion</strong></a></td>
         <td><strong>PUT</strong> /api/2.0/files/file/{fileId}/checkconversion</td>
-        <td></td>
+        <td>Start file conversion</td>
       </tr>
       <tr>
         <td><a href="docs/FilesOperationsApi.md#terminate_tasks"><strong>terminate_tasks</strong></a></td>
         <td><strong>PUT</strong> /api/2.0/files/fileops/terminate/{id}</td>
-        <td></td>
+        <td>Finish active operations</td>
       </tr>
       <tr>
         <td><a href="docs/FilesOperationsApi.md#update_file_comment"><strong>update_file_comment</strong></a></td>
         <td><strong>PUT</strong> /api/2.0/files/file/{fileId}/comment</td>
-        <td></td>
+        <td>Update a comment</td>
       </tr>
     <tr>
         <td colspan="3" style="text-align: center;"><strong>QuotaApi</strong></td>
@@ -779,12 +779,12 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
       <tr>
         <td><a href="docs/FilesQuotaApi.md#reset_room_quota"><strong>reset_room_quota</strong></a></td>
         <td><strong>PUT</strong> /api/2.0/files/rooms/resetquota</td>
-        <td></td>
+        <td>Reset the room quota limit</td>
       </tr>
       <tr>
         <td><a href="docs/FilesQuotaApi.md#update_rooms_quota"><strong>update_rooms_quota</strong></a></td>
         <td><strong>PUT</strong> /api/2.0/files/rooms/roomquota</td>
-        <td></td>
+        <td>Change the room quota limit</td>
       </tr>
     <tr>
         <td colspan="3" style="text-align: center;"><strong>SettingsApi</strong></td>
@@ -792,117 +792,117 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
       <tr>
         <td><a href="docs/FilesSettingsApi.md#change_access_to_thirdparty"><strong>change_access_to_thirdparty</strong></a></td>
         <td><strong>PUT</strong> /api/2.0/files/thirdparty</td>
-        <td></td>
+        <td>Change the third-party settings access</td>
       </tr>
       <tr>
         <td><a href="docs/FilesSettingsApi.md#change_automatically_clean_up"><strong>change_automatically_clean_up</strong></a></td>
         <td><strong>PUT</strong> /api/2.0/files/settings/autocleanup</td>
-        <td></td>
+        <td>Update the trash bin auto-clearing setting</td>
       </tr>
       <tr>
         <td><a href="docs/FilesSettingsApi.md#change_default_access_rights"><strong>change_default_access_rights</strong></a></td>
         <td><strong>PUT</strong> /api/2.0/files/settings/dafaultaccessrights</td>
-        <td></td>
+        <td>Change the default access rights</td>
       </tr>
       <tr>
         <td><a href="docs/FilesSettingsApi.md#change_delete_confirm"><strong>change_delete_confirm</strong></a></td>
         <td><strong>PUT</strong> /api/2.0/files/changedeleteconfrim</td>
-        <td></td>
+        <td>Confirm the file deletion</td>
       </tr>
       <tr>
         <td><a href="docs/FilesSettingsApi.md#change_download_zip_from_body"><strong>change_download_zip_from_body</strong></a></td>
         <td><strong>PUT</strong> /api/2.0/files/settings/downloadtargz</td>
-        <td></td>
+        <td>Change the archive format (using body parameters)</td>
       </tr>
       <tr>
         <td><a href="docs/FilesSettingsApi.md#check_doc_service_url"><strong>check_doc_service_url</strong></a></td>
         <td><strong>PUT</strong> /api/2.0/files/docservice</td>
-        <td></td>
+        <td>Check the document service URL</td>
       </tr>
       <tr>
         <td><a href="docs/FilesSettingsApi.md#display_file_extension"><strong>display_file_extension</strong></a></td>
         <td><strong>PUT</strong> /api/2.0/files/displayfileextension</td>
-        <td></td>
+        <td>Display a file extension</td>
       </tr>
       <tr>
         <td><a href="docs/FilesSettingsApi.md#external_share"><strong>external_share</strong></a></td>
         <td><strong>PUT</strong> /api/2.0/files/settings/external</td>
-        <td></td>
+        <td>Change the external sharing ability</td>
       </tr>
       <tr>
         <td><a href="docs/FilesSettingsApi.md#external_share_social_media"><strong>external_share_social_media</strong></a></td>
         <td><strong>PUT</strong> /api/2.0/files/settings/externalsocialmedia</td>
-        <td></td>
+        <td>Change the external sharing ability on social networks</td>
       </tr>
       <tr>
         <td><a href="docs/FilesSettingsApi.md#forcesave"><strong>forcesave</strong></a></td>
         <td><strong>PUT</strong> /api/2.0/files/forcesave</td>
-        <td></td>
+        <td>Change the forcesaving ability</td>
       </tr>
       <tr>
         <td><a href="docs/FilesSettingsApi.md#get_automatically_clean_up"><strong>get_automatically_clean_up</strong></a></td>
         <td><strong>GET</strong> /api/2.0/files/settings/autocleanup</td>
-        <td></td>
+        <td>Get the trash bin auto-clearing setting</td>
       </tr>
       <tr>
         <td><a href="docs/FilesSettingsApi.md#get_doc_service_url"><strong>get_doc_service_url</strong></a></td>
         <td><strong>GET</strong> /api/2.0/files/docservice</td>
-        <td></td>
+        <td>Get the document service URL</td>
       </tr>
       <tr>
         <td><a href="docs/FilesSettingsApi.md#get_files_module"><strong>get_files_module</strong></a></td>
         <td><strong>GET</strong> /api/2.0/files/info</td>
-        <td></td>
+        <td>Get the \&quot;Documents\&quot; information</td>
       </tr>
       <tr>
         <td><a href="docs/FilesSettingsApi.md#get_files_settings"><strong>get_files_settings</strong></a></td>
         <td><strong>GET</strong> /api/2.0/files/settings</td>
-        <td></td>
+        <td>Get file settings</td>
       </tr>
       <tr>
         <td><a href="docs/FilesSettingsApi.md#hide_confirm_cancel_operation"><strong>hide_confirm_cancel_operation</strong></a></td>
         <td><strong>PUT</strong> /api/2.0/files/hideconfirmcanceloperation</td>
-        <td></td>
+        <td>Hide confirmation dialog when canceling operations</td>
       </tr>
       <tr>
         <td><a href="docs/FilesSettingsApi.md#hide_confirm_convert"><strong>hide_confirm_convert</strong></a></td>
         <td><strong>PUT</strong> /api/2.0/files/hideconfirmconvert</td>
-        <td></td>
+        <td>Hide the confirmation dialog when converting</td>
       </tr>
       <tr>
         <td><a href="docs/FilesSettingsApi.md#hide_confirm_room_lifetime"><strong>hide_confirm_room_lifetime</strong></a></td>
         <td><strong>PUT</strong> /api/2.0/files/hideconfirmroomlifetime</td>
-        <td></td>
+        <td>Hide confirmation dialog when changing room lifetime settings</td>
       </tr>
       <tr>
         <td><a href="docs/FilesSettingsApi.md#is_available_privacy_room_settings"><strong>is_available_privacy_room_settings</strong></a></td>
         <td><strong>GET</strong> /api/2.0/files/@privacy/available</td>
-        <td></td>
+        <td>Check the \&quot;Private Room\&quot; availability</td>
       </tr>
       <tr>
         <td><a href="docs/FilesSettingsApi.md#keep_new_file_name"><strong>keep_new_file_name</strong></a></td>
         <td><strong>PUT</strong> /api/2.0/files/keepnewfilename</td>
-        <td></td>
+        <td>Ask a new file name</td>
       </tr>
       <tr>
         <td><a href="docs/FilesSettingsApi.md#set_open_editor_in_same_tab"><strong>set_open_editor_in_same_tab</strong></a></td>
         <td><strong>PUT</strong> /api/2.0/files/settings/openeditorinsametab</td>
-        <td></td>
+        <td>Open document in the same browser tab</td>
       </tr>
       <tr>
         <td><a href="docs/FilesSettingsApi.md#store_forcesave"><strong>store_forcesave</strong></a></td>
         <td><strong>PUT</strong> /api/2.0/files/storeforcesave</td>
-        <td></td>
+        <td>Change the ability to store the forcesaved files</td>
       </tr>
       <tr>
         <td><a href="docs/FilesSettingsApi.md#store_original"><strong>store_original</strong></a></td>
         <td><strong>PUT</strong> /api/2.0/files/storeoriginal</td>
-        <td></td>
+        <td>Change the ability to upload original formats</td>
       </tr>
       <tr>
         <td><a href="docs/FilesSettingsApi.md#update_file_if_exist"><strong>update_file_if_exist</strong></a></td>
         <td><strong>PUT</strong> /api/2.0/files/updateifexist</td>
-        <td></td>
+        <td>Update a file version if it exists</td>
       </tr>
     <tr>
         <td colspan="3" style="text-align: center;"><strong>SharingApi</strong></td>
@@ -910,27 +910,27 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
       <tr>
         <td><a href="docs/FilesSharingApi.md#apply_external_share_password"><strong>apply_external_share_password</strong></a></td>
         <td><strong>POST</strong> /api/2.0/files/share/{key}/password</td>
-        <td></td>
+        <td>Apply external data password</td>
       </tr>
       <tr>
         <td><a href="docs/FilesSharingApi.md#change_file_owner"><strong>change_file_owner</strong></a></td>
         <td><strong>POST</strong> /api/2.0/files/owner</td>
-        <td></td>
+        <td>Change the file owner</td>
       </tr>
       <tr>
         <td><a href="docs/FilesSharingApi.md#get_external_share_data"><strong>get_external_share_data</strong></a></td>
         <td><strong>GET</strong> /api/2.0/files/share/{key}</td>
-        <td></td>
+        <td>Get the external data</td>
       </tr>
       <tr>
         <td><a href="docs/FilesSharingApi.md#get_shared_users"><strong>get_shared_users</strong></a></td>
         <td><strong>GET</strong> /api/2.0/files/file/{fileId}/sharedusers</td>
-        <td></td>
+        <td>Get user access rights by file ID</td>
       </tr>
       <tr>
         <td><a href="docs/FilesSharingApi.md#send_editor_notify"><strong>send_editor_notify</strong></a></td>
         <td><strong>POST</strong> /api/2.0/files/file/{fileId}/sendeditornotify</td>
-        <td></td>
+        <td>Send the mention message</td>
       </tr>
     <tr>
         <td colspan="3" style="text-align: center;"><strong>ThirdPartyIntegrationApi</strong></td>
@@ -938,42 +938,42 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
       <tr>
         <td><a href="docs/FilesThirdPartyIntegrationApi.md#delete_third_party"><strong>delete_third_party</strong></a></td>
         <td><strong>DELETE</strong> /api/2.0/files/thirdparty/{providerId}</td>
-        <td></td>
+        <td>Remove a third-party account</td>
       </tr>
       <tr>
         <td><a href="docs/FilesThirdPartyIntegrationApi.md#get_all_providers"><strong>get_all_providers</strong></a></td>
         <td><strong>GET</strong> /api/2.0/files/thirdparty/providers</td>
-        <td></td>
+        <td>Get all providers</td>
       </tr>
       <tr>
         <td><a href="docs/FilesThirdPartyIntegrationApi.md#get_backup_third_party_account"><strong>get_backup_third_party_account</strong></a></td>
         <td><strong>GET</strong> /api/2.0/files/thirdparty/backup</td>
-        <td></td>
+        <td>Get a third-party account backup</td>
       </tr>
       <tr>
         <td><a href="docs/FilesThirdPartyIntegrationApi.md#get_capabilities"><strong>get_capabilities</strong></a></td>
         <td><strong>GET</strong> /api/2.0/files/thirdparty/capabilities</td>
-        <td></td>
+        <td>Get providers</td>
       </tr>
       <tr>
         <td><a href="docs/FilesThirdPartyIntegrationApi.md#get_common_third_party_folders"><strong>get_common_third_party_folders</strong></a></td>
         <td><strong>GET</strong> /api/2.0/files/thirdparty/common</td>
-        <td></td>
+        <td>Get the common third-party services</td>
       </tr>
       <tr>
         <td><a href="docs/FilesThirdPartyIntegrationApi.md#get_third_party_accounts"><strong>get_third_party_accounts</strong></a></td>
         <td><strong>GET</strong> /api/2.0/files/thirdparty</td>
-        <td></td>
+        <td>Get the third-party accounts</td>
       </tr>
       <tr>
         <td><a href="docs/FilesThirdPartyIntegrationApi.md#save_third_party"><strong>save_third_party</strong></a></td>
         <td><strong>POST</strong> /api/2.0/files/thirdparty</td>
-        <td></td>
+        <td>Save a third-party account</td>
       </tr>
       <tr>
         <td><a href="docs/FilesThirdPartyIntegrationApi.md#save_third_party_backup"><strong>save_third_party_backup</strong></a></td>
         <td><strong>POST</strong> /api/2.0/files/thirdparty/backup</td>
-        <td></td>
+        <td>Save a third-party account backup</td>
       </tr>
     </tbody>
   </table>
@@ -1764,192 +1764,192 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
       <tr>
         <td><a href="docs/RoomsApi.md#add_room_tags"><strong>add_room_tags</strong></a></td>
         <td><strong>PUT</strong> /api/2.0/files/rooms/{id}/tags</td>
-        <td></td>
+        <td>Add the room tags</td>
       </tr>
       <tr>
         <td><a href="docs/RoomsApi.md#archive_room"><strong>archive_room</strong></a></td>
         <td><strong>PUT</strong> /api/2.0/files/rooms/{id}/archive</td>
-        <td></td>
+        <td>Archive a room</td>
       </tr>
       <tr>
         <td><a href="docs/RoomsApi.md#change_room_cover"><strong>change_room_cover</strong></a></td>
         <td><strong>POST</strong> /api/2.0/files/rooms/{id}/cover</td>
-        <td></td>
+        <td>Change the room cover</td>
       </tr>
       <tr>
         <td><a href="docs/RoomsApi.md#create_room"><strong>create_room</strong></a></td>
         <td><strong>POST</strong> /api/2.0/files/rooms</td>
-        <td></td>
+        <td>Create a room</td>
       </tr>
       <tr>
         <td><a href="docs/RoomsApi.md#create_room_from_template"><strong>create_room_from_template</strong></a></td>
         <td><strong>POST</strong> /api/2.0/files/rooms/fromtemplate</td>
-        <td></td>
+        <td>Create a room from the template</td>
       </tr>
       <tr>
         <td><a href="docs/RoomsApi.md#create_room_logo"><strong>create_room_logo</strong></a></td>
         <td><strong>POST</strong> /api/2.0/files/rooms/{id}/logo</td>
-        <td></td>
+        <td>Create a room logo</td>
       </tr>
       <tr>
         <td><a href="docs/RoomsApi.md#create_room_tag"><strong>create_room_tag</strong></a></td>
         <td><strong>POST</strong> /api/2.0/files/tags</td>
-        <td></td>
+        <td>Create a tag</td>
       </tr>
       <tr>
         <td><a href="docs/RoomsApi.md#create_room_template"><strong>create_room_template</strong></a></td>
         <td><strong>POST</strong> /api/2.0/files/roomtemplate</td>
-        <td></td>
+        <td>Start creating room template</td>
       </tr>
       <tr>
         <td><a href="docs/RoomsApi.md#create_room_third_party"><strong>create_room_third_party</strong></a></td>
         <td><strong>POST</strong> /api/2.0/files/rooms/thirdparty/{id}</td>
-        <td></td>
+        <td>Create a third-party room</td>
       </tr>
       <tr>
         <td><a href="docs/RoomsApi.md#delete_custom_tags"><strong>delete_custom_tags</strong></a></td>
         <td><strong>DELETE</strong> /api/2.0/files/tags</td>
-        <td></td>
+        <td>Delete tags</td>
       </tr>
       <tr>
         <td><a href="docs/RoomsApi.md#delete_room"><strong>delete_room</strong></a></td>
         <td><strong>DELETE</strong> /api/2.0/files/rooms/{id}</td>
-        <td></td>
+        <td>Remove a room</td>
       </tr>
       <tr>
         <td><a href="docs/RoomsApi.md#delete_room_logo"><strong>delete_room_logo</strong></a></td>
         <td><strong>DELETE</strong> /api/2.0/files/rooms/{id}/logo</td>
-        <td></td>
+        <td>Remove a room logo</td>
       </tr>
       <tr>
         <td><a href="docs/RoomsApi.md#delete_room_tags"><strong>delete_room_tags</strong></a></td>
         <td><strong>DELETE</strong> /api/2.0/files/rooms/{id}/tags</td>
-        <td></td>
+        <td>Remove the room tags</td>
       </tr>
       <tr>
         <td><a href="docs/RoomsApi.md#get_new_room_items"><strong>get_new_room_items</strong></a></td>
         <td><strong>GET</strong> /api/2.0/files/rooms/{id}/news</td>
-        <td></td>
+        <td>Get the new room items</td>
       </tr>
       <tr>
         <td><a href="docs/RoomsApi.md#get_public_settings"><strong>get_public_settings</strong></a></td>
         <td><strong>GET</strong> /api/2.0/files/roomtemplate/{id}/public</td>
-        <td></td>
+        <td>Get public settings</td>
       </tr>
       <tr>
         <td><a href="docs/RoomsApi.md#get_room_covers"><strong>get_room_covers</strong></a></td>
         <td><strong>GET</strong> /api/2.0/files/rooms/covers</td>
-        <td></td>
+        <td>Get covers</td>
       </tr>
       <tr>
         <td><a href="docs/RoomsApi.md#get_room_creating_status"><strong>get_room_creating_status</strong></a></td>
         <td><strong>GET</strong> /api/2.0/files/rooms/fromtemplate/status</td>
-        <td></td>
+        <td>Get the room creation progress</td>
       </tr>
       <tr>
         <td><a href="docs/RoomsApi.md#get_room_index_export"><strong>get_room_index_export</strong></a></td>
         <td><strong>GET</strong> /api/2.0/files/rooms/indexexport</td>
-        <td></td>
+        <td>Get the room index export</td>
       </tr>
       <tr>
         <td><a href="docs/RoomsApi.md#get_room_info"><strong>get_room_info</strong></a></td>
         <td><strong>GET</strong> /api/2.0/files/rooms/{id}</td>
-        <td></td>
+        <td>Get room information</td>
       </tr>
       <tr>
         <td><a href="docs/RoomsApi.md#get_room_links"><strong>get_room_links</strong></a></td>
         <td><strong>GET</strong> /api/2.0/files/rooms/{id}/links</td>
-        <td></td>
+        <td>Get the room links</td>
       </tr>
       <tr>
         <td><a href="docs/RoomsApi.md#get_room_security_info"><strong>get_room_security_info</strong></a></td>
         <td><strong>GET</strong> /api/2.0/files/rooms/{id}/share</td>
-        <td></td>
+        <td>Get the room access rights</td>
       </tr>
       <tr>
         <td><a href="docs/RoomsApi.md#get_room_tags_info"><strong>get_room_tags_info</strong></a></td>
         <td><strong>GET</strong> /api/2.0/files/tags</td>
-        <td></td>
+        <td>Get tags</td>
       </tr>
       <tr>
         <td><a href="docs/RoomsApi.md#get_room_template_creating_status"><strong>get_room_template_creating_status</strong></a></td>
         <td><strong>GET</strong> /api/2.0/files/roomtemplate/status</td>
-        <td></td>
+        <td>Get status of room template creation</td>
       </tr>
       <tr>
         <td><a href="docs/RoomsApi.md#get_rooms_folder"><strong>get_rooms_folder</strong></a></td>
         <td><strong>GET</strong> /api/2.0/files/rooms</td>
-        <td></td>
+        <td>Get rooms</td>
       </tr>
       <tr>
         <td><a href="docs/RoomsApi.md#get_rooms_new_items"><strong>get_rooms_new_items</strong></a></td>
         <td><strong>GET</strong> /api/2.0/files/rooms/news</td>
-        <td></td>
+        <td>Get the room new items</td>
       </tr>
       <tr>
         <td><a href="docs/RoomsApi.md#get_rooms_primary_external_link"><strong>get_rooms_primary_external_link</strong></a></td>
         <td><strong>GET</strong> /api/2.0/files/rooms/{id}/link</td>
-        <td></td>
+        <td>Get the room primary external link</td>
       </tr>
       <tr>
         <td><a href="docs/RoomsApi.md#pin_room"><strong>pin_room</strong></a></td>
         <td><strong>PUT</strong> /api/2.0/files/rooms/{id}/pin</td>
-        <td></td>
+        <td>Pin a room</td>
       </tr>
       <tr>
         <td><a href="docs/RoomsApi.md#reorder_room"><strong>reorder_room</strong></a></td>
         <td><strong>PUT</strong> /api/2.0/files/rooms/{id}/reorder</td>
-        <td></td>
+        <td>Reorder the room</td>
       </tr>
       <tr>
         <td><a href="docs/RoomsApi.md#resend_email_invitations"><strong>resend_email_invitations</strong></a></td>
         <td><strong>POST</strong> /api/2.0/files/rooms/{id}/resend</td>
-        <td></td>
+        <td>Resend the room invitations</td>
       </tr>
       <tr>
         <td><a href="docs/RoomsApi.md#set_public_settings"><strong>set_public_settings</strong></a></td>
         <td><strong>PUT</strong> /api/2.0/files/roomtemplate/public</td>
-        <td></td>
+        <td>Set public settings</td>
       </tr>
       <tr>
         <td><a href="docs/RoomsApi.md#set_room_link"><strong>set_room_link</strong></a></td>
         <td><strong>PUT</strong> /api/2.0/files/rooms/{id}/links</td>
-        <td></td>
+        <td>Set the room external or invitation link</td>
       </tr>
       <tr>
         <td><a href="docs/RoomsApi.md#set_room_security"><strong>set_room_security</strong></a></td>
         <td><strong>PUT</strong> /api/2.0/files/rooms/{id}/share</td>
-        <td></td>
+        <td>Set the room access rights</td>
       </tr>
       <tr>
         <td><a href="docs/RoomsApi.md#start_room_index_export"><strong>start_room_index_export</strong></a></td>
         <td><strong>POST</strong> /api/2.0/files/rooms/{id}/indexexport</td>
-        <td></td>
+        <td>Start the room index export</td>
       </tr>
       <tr>
         <td><a href="docs/RoomsApi.md#terminate_room_index_export"><strong>terminate_room_index_export</strong></a></td>
         <td><strong>DELETE</strong> /api/2.0/files/rooms/indexexport</td>
-        <td></td>
+        <td>Terminate the room index export</td>
       </tr>
       <tr>
         <td><a href="docs/RoomsApi.md#unarchive_room"><strong>unarchive_room</strong></a></td>
         <td><strong>PUT</strong> /api/2.0/files/rooms/{id}/unarchive</td>
-        <td></td>
+        <td>Unarchive a room</td>
       </tr>
       <tr>
         <td><a href="docs/RoomsApi.md#unpin_room"><strong>unpin_room</strong></a></td>
         <td><strong>PUT</strong> /api/2.0/files/rooms/{id}/unpin</td>
-        <td></td>
+        <td>Unpin a room</td>
       </tr>
       <tr>
         <td><a href="docs/RoomsApi.md#update_room"><strong>update_room</strong></a></td>
         <td><strong>PUT</strong> /api/2.0/files/rooms/{id}</td>
-        <td></td>
+        <td>Update a room</td>
       </tr>
       <tr>
         <td><a href="docs/RoomsApi.md#upload_room_logo"><strong>upload_room_logo</strong></a></td>
         <td><strong>POST</strong> /api/2.0/files/logos</td>
-        <td></td>
+        <td>Upload a room logo image</td>
       </tr>
     </tbody>
   </table>

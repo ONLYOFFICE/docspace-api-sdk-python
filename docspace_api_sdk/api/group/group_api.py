@@ -29,6 +29,7 @@ from docspace_api_sdk.models.group_request_dto import GroupRequestDto
 from docspace_api_sdk.models.group_summary_array_wrapper import GroupSummaryArrayWrapper
 from docspace_api_sdk.models.group_wrapper import GroupWrapper
 from docspace_api_sdk.models.members_request import MembersRequest
+from docspace_api_sdk.models.no_content_result_wrapper import NoContentResultWrapper
 from docspace_api_sdk.models.set_manager_request import SetManagerRequest
 from docspace_api_sdk.models.sort_order import SortOrder
 from docspace_api_sdk.models.update_group_request import UpdateGroupRequest
@@ -649,7 +650,7 @@ class GroupApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> NoContentResultWrapper:
         """Delete a group
 
         Deletes a group with the ID specified in the request from the list of groups on the portal.
@@ -687,7 +688,7 @@ class GroupApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '204': None,
+            '200': "NoContentResultWrapper",
             '401': None,
             '404': None,
         }
@@ -718,7 +719,7 @@ class GroupApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[NoContentResultWrapper]:
         """Delete a group
 
         Deletes a group with the ID specified in the request from the list of groups on the portal.
@@ -756,7 +757,7 @@ class GroupApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '204': None,
+            '200': "NoContentResultWrapper",
             '401': None,
             '404': None,
         }
@@ -825,7 +826,7 @@ class GroupApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '204': None,
+            '200': "NoContentResultWrapper",
             '401': None,
             '404': None,
         }
@@ -868,6 +869,13 @@ class GroupApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting

@@ -104,8 +104,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> BooleanWrapper:
-        """add_templates
+        """Add template files
 
+        Adds files with the IDs specified in the request to the template list.
 
         :param templates_request_dto:
         :type templates_request_dto: TemplatesRequestDto
@@ -141,6 +142,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -170,8 +172,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[BooleanWrapper]:
-        """add_templates
+        """Add template files
 
+        Adds files with the IDs specified in the request to the template list.
 
         :param templates_request_dto:
         :type templates_request_dto: TemplatesRequestDto
@@ -207,6 +210,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -236,8 +240,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """add_templates
+        """Add template files
 
+        Adds files with the IDs specified in the request to the template list.
 
         :param templates_request_dto:
         :type templates_request_dto: TemplatesRequestDto
@@ -273,6 +278,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -337,6 +343,12 @@ class FilesApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
 
         return self.api_client.param_serialize(
@@ -375,8 +387,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FileStringArrayWrapper:
-        """change_version_history
+        """Change version history
 
+        Changes the version history of a file with the ID specified in the request.
 
         :param file_id: The file Id to change its version history. (required)
         :type file_id: int
@@ -415,6 +428,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileStringArrayWrapper",
+            '401': None,
             '403': None,
         }
         response_data = self.api_client.call_api(
@@ -446,8 +460,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FileStringArrayWrapper]:
-        """change_version_history
+        """Change version history
 
+        Changes the version history of a file with the ID specified in the request.
 
         :param file_id: The file Id to change its version history. (required)
         :type file_id: int
@@ -486,6 +501,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileStringArrayWrapper",
+            '401': None,
             '403': None,
         }
         response_data = self.api_client.call_api(
@@ -517,8 +533,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """change_version_history
+        """Change version history
 
+        Changes the version history of a file with the ID specified in the request.
 
         :param file_id: The file Id to change its version history. (required)
         :type file_id: int
@@ -557,6 +574,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileStringArrayWrapper",
+            '401': None,
             '403': None,
         }
         response_data = self.api_client.call_api(
@@ -625,6 +643,12 @@ class FilesApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
 
         return self.api_client.param_serialize(
@@ -663,8 +687,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> StringWrapper:
-        """check_fill_form_draft
+        """Check the form draft filling
 
+        Checks if the current file is a form draft which can be filled out.
 
         :param file_id: The file ID of the form draft. (required)
         :type file_id: int
@@ -734,8 +759,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[StringWrapper]:
-        """check_fill_form_draft
+        """Check the form draft filling
 
+        Checks if the current file is a form draft which can be filled out.
 
         :param file_id: The file ID of the form draft. (required)
         :type file_id: int
@@ -805,8 +831,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """check_fill_form_draft
+        """Check the form draft filling
 
+        Checks if the current file is a form draft which can be filled out.
 
         :param file_id: The file ID of the form draft. (required)
         :type file_id: int
@@ -951,8 +978,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FileEntryBaseWrapper:
-        """copy_file_as
+        """Copy a file
 
+        Copies (and converts if possible) an existing file to the specified folder.
 
         :param file_id: The file ID to copy. (required)
         :type file_id: int
@@ -992,6 +1020,7 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileEntryBaseWrapper",
             '400': None,
+            '401': None,
             '403': None,
             '404': None,
         }
@@ -1024,8 +1053,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FileEntryBaseWrapper]:
-        """copy_file_as
+        """Copy a file
 
+        Copies (and converts if possible) an existing file to the specified folder.
 
         :param file_id: The file ID to copy. (required)
         :type file_id: int
@@ -1065,6 +1095,7 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileEntryBaseWrapper",
             '400': None,
+            '401': None,
             '403': None,
             '404': None,
         }
@@ -1097,8 +1128,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """copy_file_as
+        """Copy a file
 
+        Copies (and converts if possible) an existing file to the specified folder.
 
         :param file_id: The file ID to copy. (required)
         :type file_id: int
@@ -1138,6 +1170,7 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileEntryBaseWrapper",
             '400': None,
+            '401': None,
             '403': None,
             '404': None,
         }
@@ -1207,6 +1240,12 @@ class FilesApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
 
         return self.api_client.param_serialize(
@@ -1245,8 +1284,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ObjectWrapper:
-        """create_edit_session
+        """Create the editing session
 
+        Creates a session to edit the existing file with multiple chunks (needed for WebDAV).   **Note**: Information about created session which includes:  <ul>  <li><b>id:</b> unique ID of this upload session,</li>  <li><b>created:</b> UTC time when the session was created,</li>  <li><b>expired:</b> UTC time when the session will expire if no chunks are sent before that time,</li>  <li><b>location:</b> URL where you should send your next chunk,</li>  <li><b>bytes_uploaded:</b> number of bytes uploaded for the specific upload ID,</li>  <li><b>bytes_total:</b> total number of bytes which will be uploaded.</li>  </ul>
 
         :param file_id: The file ID. (required)
         :type file_id: int
@@ -1285,6 +1325,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectWrapper",
+            '401': None,
             '403': None,
         }
         response_data = self.api_client.call_api(
@@ -1316,8 +1357,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[ObjectWrapper]:
-        """create_edit_session
+        """Create the editing session
 
+        Creates a session to edit the existing file with multiple chunks (needed for WebDAV).   **Note**: Information about created session which includes:  <ul>  <li><b>id:</b> unique ID of this upload session,</li>  <li><b>created:</b> UTC time when the session was created,</li>  <li><b>expired:</b> UTC time when the session will expire if no chunks are sent before that time,</li>  <li><b>location:</b> URL where you should send your next chunk,</li>  <li><b>bytes_uploaded:</b> number of bytes uploaded for the specific upload ID,</li>  <li><b>bytes_total:</b> total number of bytes which will be uploaded.</li>  </ul>
 
         :param file_id: The file ID. (required)
         :type file_id: int
@@ -1356,6 +1398,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectWrapper",
+            '401': None,
             '403': None,
         }
         response_data = self.api_client.call_api(
@@ -1387,8 +1430,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """create_edit_session
+        """Create the editing session
 
+        Creates a session to edit the existing file with multiple chunks (needed for WebDAV).   **Note**: Information about created session which includes:  <ul>  <li><b>id:</b> unique ID of this upload session,</li>  <li><b>created:</b> UTC time when the session was created,</li>  <li><b>expired:</b> UTC time when the session will expire if no chunks are sent before that time,</li>  <li><b>location:</b> URL where you should send your next chunk,</li>  <li><b>bytes_uploaded:</b> number of bytes uploaded for the specific upload ID,</li>  <li><b>bytes_total:</b> total number of bytes which will be uploaded.</li>  </ul>
 
         :param file_id: The file ID. (required)
         :type file_id: int
@@ -1427,6 +1471,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectWrapper",
+            '401': None,
             '403': None,
         }
         response_data = self.api_client.call_api(
@@ -1484,6 +1529,12 @@ class FilesApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
 
         return self.api_client.param_serialize(
@@ -1522,8 +1573,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FileIntegerWrapper:
-        """create_file
+        """Create a file
 
+        Creates a new file in the specified folder with the title specified in the request.   **Note**: If a file extension is different from DOCX/XLSX/PPTX and refers to one of the known text, spreadsheet, or presentation formats, it will be changed to DOCX/XLSX/PPTX accordingly. If the file extension is not specified or is unknown, the DOCX extension will be added to the file title.
 
         :param folder_id: The folder ID for the file creation. (required)
         :type folder_id: int
@@ -1562,6 +1614,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1592,8 +1645,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FileIntegerWrapper]:
-        """create_file
+        """Create a file
 
+        Creates a new file in the specified folder with the title specified in the request.   **Note**: If a file extension is different from DOCX/XLSX/PPTX and refers to one of the known text, spreadsheet, or presentation formats, it will be changed to DOCX/XLSX/PPTX accordingly. If the file extension is not specified or is unknown, the DOCX extension will be added to the file title.
 
         :param folder_id: The folder ID for the file creation. (required)
         :type folder_id: int
@@ -1632,6 +1686,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1662,8 +1717,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """create_file
+        """Create a file
 
+        Creates a new file in the specified folder with the title specified in the request.   **Note**: If a file extension is different from DOCX/XLSX/PPTX and refers to one of the known text, spreadsheet, or presentation formats, it will be changed to DOCX/XLSX/PPTX accordingly. If the file extension is not specified or is unknown, the DOCX extension will be added to the file title.
 
         :param folder_id: The folder ID for the file creation. (required)
         :type folder_id: int
@@ -1702,6 +1758,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1769,6 +1826,12 @@ class FilesApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
 
         return self.api_client.param_serialize(
@@ -1806,8 +1869,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FileIntegerWrapper:
-        """create_file_in_my_documents
+        """Create a file in the \"My documents\" section
 
+        Creates a new file in the \"My documents\" section with the title specified in the request.   **Note**: If a file extension is different from DOCX/XLSX/PPTX and refers to one of the known text, spreadsheet, or presentation formats, it will be changed to DOCX/XLSX/PPTX accordingly. If the file extension is not specified or is unknown, the DOCX extension will be added to the file title.
 
         :param create_file_json_element:
         :type create_file_json_element: CreateFileJsonElement
@@ -1843,6 +1907,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1872,8 +1937,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FileIntegerWrapper]:
-        """create_file_in_my_documents
+        """Create a file in the \"My documents\" section
 
+        Creates a new file in the \"My documents\" section with the title specified in the request.   **Note**: If a file extension is different from DOCX/XLSX/PPTX and refers to one of the known text, spreadsheet, or presentation formats, it will be changed to DOCX/XLSX/PPTX accordingly. If the file extension is not specified or is unknown, the DOCX extension will be added to the file title.
 
         :param create_file_json_element:
         :type create_file_json_element: CreateFileJsonElement
@@ -1909,6 +1975,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1938,8 +2005,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """create_file_in_my_documents
+        """Create a file in the \"My documents\" section
 
+        Creates a new file in the \"My documents\" section with the title specified in the request.   **Note**: If a file extension is different from DOCX/XLSX/PPTX and refers to one of the known text, spreadsheet, or presentation formats, it will be changed to DOCX/XLSX/PPTX accordingly. If the file extension is not specified or is unknown, the DOCX extension will be added to the file title.
 
         :param create_file_json_element:
         :type create_file_json_element: CreateFileJsonElement
@@ -1975,6 +2043,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2039,6 +2108,12 @@ class FilesApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
 
         return self.api_client.param_serialize(
@@ -2077,8 +2152,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FileIntegerWrapper:
-        """create_html_file
+        """Create an HTML file
 
+        Creates an HTML (.html) file in the selected folder with the title and contents specified in the request.
 
         :param folder_id: The folder ID to create the text or HTML file. (required)
         :type folder_id: int
@@ -2117,6 +2193,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
+            '401': None,
             '403': None,
         }
         response_data = self.api_client.call_api(
@@ -2148,8 +2225,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FileIntegerWrapper]:
-        """create_html_file
+        """Create an HTML file
 
+        Creates an HTML (.html) file in the selected folder with the title and contents specified in the request.
 
         :param folder_id: The folder ID to create the text or HTML file. (required)
         :type folder_id: int
@@ -2188,6 +2266,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
+            '401': None,
             '403': None,
         }
         response_data = self.api_client.call_api(
@@ -2219,8 +2298,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """create_html_file
+        """Create an HTML file
 
+        Creates an HTML (.html) file in the selected folder with the title and contents specified in the request.
 
         :param folder_id: The folder ID to create the text or HTML file. (required)
         :type folder_id: int
@@ -2259,6 +2339,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
+            '401': None,
             '403': None,
         }
         response_data = self.api_client.call_api(
@@ -2327,6 +2408,12 @@ class FilesApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
 
         return self.api_client.param_serialize(
@@ -2364,8 +2451,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FileIntegerWrapper:
-        """create_html_file_in_my_documents
+        """Create an HTML file in the \"My documents\" section
 
+        Creates an HTML (.html) file in the \"My documents\" section with the title and contents specified in the request.
 
         :param create_text_or_html_file:
         :type create_text_or_html_file: CreateTextOrHtmlFile
@@ -2401,6 +2489,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
+            '401': None,
             '403': None,
         }
         response_data = self.api_client.call_api(
@@ -2431,8 +2520,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FileIntegerWrapper]:
-        """create_html_file_in_my_documents
+        """Create an HTML file in the \"My documents\" section
 
+        Creates an HTML (.html) file in the \"My documents\" section with the title and contents specified in the request.
 
         :param create_text_or_html_file:
         :type create_text_or_html_file: CreateTextOrHtmlFile
@@ -2468,6 +2558,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
+            '401': None,
             '403': None,
         }
         response_data = self.api_client.call_api(
@@ -2498,8 +2589,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """create_html_file_in_my_documents
+        """Create an HTML file in the \"My documents\" section
 
+        Creates an HTML (.html) file in the \"My documents\" section with the title and contents specified in the request.
 
         :param create_text_or_html_file:
         :type create_text_or_html_file: CreateTextOrHtmlFile
@@ -2535,6 +2627,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
+            '401': None,
             '403': None,
         }
         response_data = self.api_client.call_api(
@@ -2600,6 +2693,12 @@ class FilesApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
 
         return self.api_client.param_serialize(
@@ -2638,8 +2737,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FileShareWrapper:
-        """create_primary_external_link
+        """Create primary external link
 
+        Creates a primary external link by the identifier specified in the request.
 
         :param id: The file ID. (required)
         :type id: int
@@ -2678,6 +2778,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
+            '401': None,
             '404': None,
         }
         response_data = self.api_client.call_api(
@@ -2709,8 +2810,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FileShareWrapper]:
-        """create_primary_external_link
+        """Create primary external link
 
+        Creates a primary external link by the identifier specified in the request.
 
         :param id: The file ID. (required)
         :type id: int
@@ -2749,6 +2851,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
+            '401': None,
             '404': None,
         }
         response_data = self.api_client.call_api(
@@ -2780,8 +2883,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """create_primary_external_link
+        """Create primary external link
 
+        Creates a primary external link by the identifier specified in the request.
 
         :param id: The file ID. (required)
         :type id: int
@@ -2820,6 +2924,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
+            '401': None,
             '404': None,
         }
         response_data = self.api_client.call_api(
@@ -2888,6 +2993,12 @@ class FilesApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
 
         return self.api_client.param_serialize(
@@ -2926,8 +3037,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FileIntegerWrapper:
-        """create_text_file
+        """Create a text file
 
+        Creates a text (.txt) file in the selected folder with the title and contents specified in the request.
 
         :param folder_id: The folder ID to create the text or HTML file. (required)
         :type folder_id: int
@@ -2966,6 +3078,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2996,8 +3109,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FileIntegerWrapper]:
-        """create_text_file
+        """Create a text file
 
+        Creates a text (.txt) file in the selected folder with the title and contents specified in the request.
 
         :param folder_id: The folder ID to create the text or HTML file. (required)
         :type folder_id: int
@@ -3036,6 +3150,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3066,8 +3181,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """create_text_file
+        """Create a text file
 
+        Creates a text (.txt) file in the selected folder with the title and contents specified in the request.
 
         :param folder_id: The folder ID to create the text or HTML file. (required)
         :type folder_id: int
@@ -3106,6 +3222,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3173,6 +3290,12 @@ class FilesApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
 
         return self.api_client.param_serialize(
@@ -3210,8 +3333,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FileIntegerWrapper:
-        """create_text_file_in_my_documents
+        """Create a text file in the \"My documents\" section
 
+        Creates a text (.txt) file in the \"My documents\" section with the title and contents specified in the request.
 
         :param create_text_or_html_file:
         :type create_text_or_html_file: CreateTextOrHtmlFile
@@ -3247,6 +3371,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3276,8 +3401,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FileIntegerWrapper]:
-        """create_text_file_in_my_documents
+        """Create a text file in the \"My documents\" section
 
+        Creates a text (.txt) file in the \"My documents\" section with the title and contents specified in the request.
 
         :param create_text_or_html_file:
         :type create_text_or_html_file: CreateTextOrHtmlFile
@@ -3313,6 +3439,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3342,8 +3469,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """create_text_file_in_my_documents
+        """Create a text file in the \"My documents\" section
 
+        Creates a text (.txt) file in the \"My documents\" section with the title and contents specified in the request.
 
         :param create_text_or_html_file:
         :type create_text_or_html_file: CreateTextOrHtmlFile
@@ -3379,6 +3507,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3443,6 +3572,12 @@ class FilesApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
 
         return self.api_client.param_serialize(
@@ -3480,8 +3615,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ObjectArrayWrapper:
-        """create_thumbnails
+        """Create file thumbnails
 
+        Creates thumbnails for the files with the IDs specified in the request.
 
         :param base_batch_request_dto:
         :type base_batch_request_dto: BaseBatchRequestDto
@@ -3546,8 +3682,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[ObjectArrayWrapper]:
-        """create_thumbnails
+        """Create file thumbnails
 
+        Creates thumbnails for the files with the IDs specified in the request.
 
         :param base_batch_request_dto:
         :type base_batch_request_dto: BaseBatchRequestDto
@@ -3612,8 +3749,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """create_thumbnails
+        """Create file thumbnails
 
+        Creates thumbnails for the files with the IDs specified in the request.
 
         :param base_batch_request_dto:
         :type base_batch_request_dto: BaseBatchRequestDto
@@ -3751,8 +3889,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FileOperationArrayWrapper:
-        """delete_file
+        """Delete a file
 
+        Deletes a file with the ID specified in the request.
 
         :param file_id: The file ID to delete. (required)
         :type file_id: int
@@ -3791,6 +3930,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3821,8 +3961,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FileOperationArrayWrapper]:
-        """delete_file
+        """Delete a file
 
+        Deletes a file with the ID specified in the request.
 
         :param file_id: The file ID to delete. (required)
         :type file_id: int
@@ -3861,6 +4002,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3891,8 +4033,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """delete_file
+        """Delete a file
 
+        Deletes a file with the ID specified in the request.
 
         :param file_id: The file ID to delete. (required)
         :type file_id: int
@@ -3931,6 +4074,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3998,6 +4142,12 @@ class FilesApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
 
         return self.api_client.param_serialize(
@@ -4035,8 +4185,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> NoContentResultWrapper:
-        """delete_recent
+        """Delete recent files
 
+        Removes files with the IDs specified in the request from the \"Recent\" section.
 
         :param base_batch_request_dto:
         :type base_batch_request_dto: BaseBatchRequestDto
@@ -4072,6 +4223,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "NoContentResultWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4101,8 +4253,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[NoContentResultWrapper]:
-        """delete_recent
+        """Delete recent files
 
+        Removes files with the IDs specified in the request from the \"Recent\" section.
 
         :param base_batch_request_dto:
         :type base_batch_request_dto: BaseBatchRequestDto
@@ -4138,6 +4291,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "NoContentResultWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4167,8 +4321,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """delete_recent
+        """Delete recent files
 
+        Removes files with the IDs specified in the request from the \"Recent\" section.
 
         :param base_batch_request_dto:
         :type base_batch_request_dto: BaseBatchRequestDto
@@ -4204,6 +4359,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "NoContentResultWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4268,6 +4424,12 @@ class FilesApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
 
         return self.api_client.param_serialize(
@@ -4305,8 +4467,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> BooleanWrapper:
-        """delete_templates
+        """Delete template files
 
+        Removes files with the IDs specified in the request from the template list.
 
         :param request_body: The file IDs.
         :type request_body: List[int]
@@ -4342,6 +4505,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4371,8 +4535,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[BooleanWrapper]:
-        """delete_templates
+        """Delete template files
 
+        Removes files with the IDs specified in the request from the template list.
 
         :param request_body: The file IDs.
         :type request_body: List[int]
@@ -4408,6 +4573,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4437,8 +4603,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """delete_templates
+        """Delete template files
 
+        Removes files with the IDs specified in the request from the template list.
 
         :param request_body: The file IDs.
         :type request_body: List[int]
@@ -4474,6 +4641,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4539,6 +4707,12 @@ class FilesApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
 
         return self.api_client.param_serialize(
@@ -4576,8 +4750,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FormRoleArrayWrapper:
-        """get_all_form_roles
+        """Get form roles
 
+        Returns all roles for the specified form.
 
         :param file_id: The file ID of the request. (required)
         :type file_id: int
@@ -4613,6 +4788,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FormRoleArrayWrapper",
+            '401': None,
             '403': None,
         }
         response_data = self.api_client.call_api(
@@ -4643,8 +4819,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FormRoleArrayWrapper]:
-        """get_all_form_roles
+        """Get form roles
 
+        Returns all roles for the specified form.
 
         :param file_id: The file ID of the request. (required)
         :type file_id: int
@@ -4680,6 +4857,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FormRoleArrayWrapper",
+            '401': None,
             '403': None,
         }
         response_data = self.api_client.call_api(
@@ -4710,8 +4888,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_all_form_roles
+        """Get form roles
 
+        Returns all roles for the specified form.
 
         :param file_id: The file ID of the request. (required)
         :type file_id: int
@@ -4747,6 +4926,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FormRoleArrayWrapper",
+            '401': None,
             '403': None,
         }
         response_data = self.api_client.call_api(
@@ -4799,6 +4979,12 @@ class FilesApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
 
         return self.api_client.param_serialize(
@@ -4837,8 +5023,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> EditHistoryDataWrapper:
-        """get_edit_diff_url
+        """Get changes URL
 
+        Returns a URL to the changes of a file version specified in the request.
 
         :param file_id: The file ID. (required)
         :type file_id: int
@@ -4907,8 +5094,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[EditHistoryDataWrapper]:
-        """get_edit_diff_url
+        """Get changes URL
 
+        Returns a URL to the changes of a file version specified in the request.
 
         :param file_id: The file ID. (required)
         :type file_id: int
@@ -4977,8 +5165,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_edit_diff_url
+        """Get changes URL
 
+        Returns a URL to the changes of a file version specified in the request.
 
         :param file_id: The file ID. (required)
         :type file_id: int
@@ -5110,8 +5299,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> EditHistoryArrayWrapper:
-        """get_edit_history
+        """Get version history
 
+        Returns the version history of a file with the ID specified in the request.
 
         :param file_id: The file ID of the request. (required)
         :type file_id: int
@@ -5176,8 +5366,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[EditHistoryArrayWrapper]:
-        """get_edit_history
+        """Get version history
 
+        Returns the version history of a file with the ID specified in the request.
 
         :param file_id: The file ID of the request. (required)
         :type file_id: int
@@ -5242,8 +5433,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_edit_history
+        """Get version history
 
+        Returns the version history of a file with the ID specified in the request.
 
         :param file_id: The file ID of the request. (required)
         :type file_id: int
@@ -5371,8 +5563,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> HistoryArrayWrapper:
-        """get_file_history
+        """Get file history
 
+        Returns the list of actions performed on the file with the specified identifier.
 
         :param file_id: The file ID of the history request. (required)
         :type file_id: int
@@ -5420,6 +5613,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "HistoryArrayWrapper",
+            '401': None,
             '403': None,
             '404': None,
         }
@@ -5455,8 +5649,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[HistoryArrayWrapper]:
-        """get_file_history
+        """Get file history
 
+        Returns the list of actions performed on the file with the specified identifier.
 
         :param file_id: The file ID of the history request. (required)
         :type file_id: int
@@ -5504,6 +5699,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "HistoryArrayWrapper",
+            '401': None,
             '403': None,
             '404': None,
         }
@@ -5539,8 +5735,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_file_history
+        """Get file history
 
+        Returns the list of actions performed on the file with the specified identifier.
 
         :param file_id: The file ID of the history request. (required)
         :type file_id: int
@@ -5588,6 +5785,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "HistoryArrayWrapper",
+            '401': None,
             '403': None,
             '404': None,
         }
@@ -5661,6 +5859,12 @@ class FilesApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
 
         return self.api_client.param_serialize(
@@ -5699,8 +5903,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FileIntegerWrapper:
-        """get_file_info
+        """Get file information
 
+        Returns the detailed information about a file with the ID specified in the request.
 
         :param file_id: The file ID. (required)
         :type file_id: int
@@ -5769,8 +5974,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FileIntegerWrapper]:
-        """get_file_info
+        """Get file information
 
+        Returns the detailed information about a file with the ID specified in the request.
 
         :param file_id: The file ID. (required)
         :type file_id: int
@@ -5839,8 +6045,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_file_info
+        """Get file information
 
+        Returns the detailed information about a file with the ID specified in the request.
 
         :param file_id: The file ID. (required)
         :type file_id: int
@@ -5974,8 +6181,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FileShareArrayWrapper:
-        """get_file_links
+        """Get file external links
 
+        Returns the external links of a file with the ID specified in the request.
 
         :param id: The file ID of the request. (required)
         :type id: int
@@ -6017,6 +6225,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -6048,8 +6257,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FileShareArrayWrapper]:
-        """get_file_links
+        """Get file external links
 
+        Returns the external links of a file with the ID specified in the request.
 
         :param id: The file ID of the request. (required)
         :type id: int
@@ -6091,6 +6301,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -6122,8 +6333,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_file_links
+        """Get file external links
 
+        Returns the external links of a file with the ID specified in the request.
 
         :param id: The file ID of the request. (required)
         :type id: int
@@ -6165,6 +6377,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -6226,6 +6439,12 @@ class FilesApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
 
         return self.api_client.param_serialize(
@@ -6265,8 +6484,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FileShareWrapper:
-        """get_file_primary_external_link
+        """Get primary external link
 
+        Returns the primary external link by the identifier specified in the request.
 
         :param id: The file ID of the request. (required)
         :type id: int
@@ -6340,8 +6560,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FileShareWrapper]:
-        """get_file_primary_external_link
+        """Get primary external link
 
+        Returns the primary external link by the identifier specified in the request.
 
         :param id: The file ID of the request. (required)
         :type id: int
@@ -6415,8 +6636,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_file_primary_external_link
+        """Get primary external link
 
+        Returns the primary external link by the identifier specified in the request.
 
         :param id: The file ID of the request. (required)
         :type id: int
@@ -6557,8 +6779,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FileStringArrayWrapper:
-        """get_file_version_info
+        """Get file versions
 
+        Returns the detailed information about all the available file versions with the ID specified in the request.
 
         :param file_id: The file ID of the request. (required)
         :type file_id: int
@@ -6623,8 +6846,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FileStringArrayWrapper]:
-        """get_file_version_info
+        """Get file versions
 
+        Returns the detailed information about all the available file versions with the ID specified in the request.
 
         :param file_id: The file ID of the request. (required)
         :type file_id: int
@@ -6689,8 +6913,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_file_version_info
+        """Get file versions
 
+        Returns the detailed information about all the available file versions with the ID specified in the request.
 
         :param file_id: The file ID of the request. (required)
         :type file_id: int
@@ -6814,8 +7039,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FillingFormResultIntegerWrapper:
-        """get_fill_result
+        """Get form-filling result
 
+        Retrieves the result of a form-filling session.
 
         :param filling_session_id: The form-filling session ID.
         :type filling_session_id: str
@@ -6880,8 +7106,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FillingFormResultIntegerWrapper]:
-        """get_fill_result
+        """Get form-filling result
 
+        Retrieves the result of a form-filling session.
 
         :param filling_session_id: The form-filling session ID.
         :type filling_session_id: str
@@ -6946,8 +7173,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_fill_result
+        """Get form-filling result
 
+        Retrieves the result of a form-filling session.
 
         :param filling_session_id: The form-filling session ID.
         :type filling_session_id: str
@@ -7073,8 +7301,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FileLinkWrapper:
-        """get_presigned_file_uri
+        """Get file download link asynchronously
 
+        Returns a link to download a file with the ID specified in the request asynchronously.
 
         :param file_id: The file ID of the request. (required)
         :type file_id: int
@@ -7110,6 +7339,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileLinkWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -7139,8 +7369,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FileLinkWrapper]:
-        """get_presigned_file_uri
+        """Get file download link asynchronously
 
+        Returns a link to download a file with the ID specified in the request asynchronously.
 
         :param file_id: The file ID of the request. (required)
         :type file_id: int
@@ -7176,6 +7407,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileLinkWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -7205,8 +7437,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_presigned_file_uri
+        """Get file download link asynchronously
 
+        Returns a link to download a file with the ID specified in the request asynchronously.
 
         :param file_id: The file ID of the request. (required)
         :type file_id: int
@@ -7242,6 +7475,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileLinkWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -7293,6 +7527,12 @@ class FilesApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
 
         return self.api_client.param_serialize(
@@ -7330,8 +7570,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> StringWrapper:
-        """get_presigned_uri
+        """Get file download link
 
+        Returns a pre-signed URL to download a file with the specified ID.  This temporary link provides secure access to the file.
 
         :param file_id: The file ID of the request. (required)
         :type file_id: int
@@ -7367,6 +7608,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -7396,8 +7638,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[StringWrapper]:
-        """get_presigned_uri
+        """Get file download link
 
+        Returns a pre-signed URL to download a file with the specified ID.  This temporary link provides secure access to the file.
 
         :param file_id: The file ID of the request. (required)
         :type file_id: int
@@ -7433,6 +7676,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -7462,8 +7706,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_presigned_uri
+        """Get file download link
 
+        Returns a pre-signed URL to download a file with the specified ID.  This temporary link provides secure access to the file.
 
         :param file_id: The file ID of the request. (required)
         :type file_id: int
@@ -7499,6 +7744,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -7550,6 +7796,12 @@ class FilesApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
 
         return self.api_client.param_serialize(
@@ -7587,8 +7839,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> MentionWrapperArrayWrapper:
-        """get_protected_file_users
+        """Get users access rights to the protected file
 
+        Returns a list of users with their access rights to the protected file with the ID specified in the request.
 
         :param file_id: The file ID of the request. (required)
         :type file_id: int
@@ -7624,6 +7877,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "MentionWrapperArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -7653,8 +7907,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[MentionWrapperArrayWrapper]:
-        """get_protected_file_users
+        """Get users access rights to the protected file
 
+        Returns a list of users with their access rights to the protected file with the ID specified in the request.
 
         :param file_id: The file ID of the request. (required)
         :type file_id: int
@@ -7690,6 +7945,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "MentionWrapperArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -7719,8 +7975,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_protected_file_users
+        """Get users access rights to the protected file
 
+        Returns a list of users with their access rights to the protected file with the ID specified in the request.
 
         :param file_id: The file ID of the request. (required)
         :type file_id: int
@@ -7756,6 +8013,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "MentionWrapperArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -7807,6 +8065,12 @@ class FilesApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
 
         return self.api_client.param_serialize(
@@ -7844,8 +8108,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FileReferenceWrapper:
-        """get_reference_data
+        """Get reference data
 
+        Returns the reference data to uniquely identify a file in its system and check the availability of insering data into the destination spreadsheet by the external link.
 
         :param get_reference_data_dto_integer:
         :type get_reference_data_dto_integer: GetReferenceDataDtoInteger
@@ -7881,6 +8146,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileReferenceWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -7910,8 +8176,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FileReferenceWrapper]:
-        """get_reference_data
+        """Get reference data
 
+        Returns the reference data to uniquely identify a file in its system and check the availability of insering data into the destination spreadsheet by the external link.
 
         :param get_reference_data_dto_integer:
         :type get_reference_data_dto_integer: GetReferenceDataDtoInteger
@@ -7947,6 +8214,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileReferenceWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -7976,8 +8244,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_reference_data
+        """Get reference data
 
+        Returns the reference data to uniquely identify a file in its system and check the availability of insering data into the destination spreadsheet by the external link.
 
         :param get_reference_data_dto_integer:
         :type get_reference_data_dto_integer: GetReferenceDataDtoInteger
@@ -8013,6 +8282,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileReferenceWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -8077,6 +8347,12 @@ class FilesApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
 
         return self.api_client.param_serialize(
@@ -8114,8 +8390,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> BooleanWrapper:
-        """is_form_pdf
+        """Check the PDF file
 
+        Checks if the PDF file is a form or not.
 
         :param file_id: The file ID of the request. (required)
         :type file_id: int
@@ -8151,6 +8428,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -8180,8 +8458,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[BooleanWrapper]:
-        """is_form_pdf
+        """Check the PDF file
 
+        Checks if the PDF file is a form or not.
 
         :param file_id: The file ID of the request. (required)
         :type file_id: int
@@ -8217,6 +8496,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -8246,8 +8526,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """is_form_pdf
+        """Check the PDF file
 
+        Checks if the PDF file is a form or not.
 
         :param file_id: The file ID of the request. (required)
         :type file_id: int
@@ -8283,6 +8564,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -8334,6 +8616,12 @@ class FilesApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
 
         return self.api_client.param_serialize(
@@ -8372,8 +8660,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FileIntegerWrapper:
-        """lock_file
+        """Lock a file
 
+        Locks a file with the ID specified in the request.
 
         :param file_id: The file ID for locking. (required)
         :type file_id: int
@@ -8412,6 +8701,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -8442,8 +8732,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FileIntegerWrapper]:
-        """lock_file
+        """Lock a file
 
+        Locks a file with the ID specified in the request.
 
         :param file_id: The file ID for locking. (required)
         :type file_id: int
@@ -8482,6 +8773,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -8512,8 +8804,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """lock_file
+        """Lock a file
 
+        Locks a file with the ID specified in the request.
 
         :param file_id: The file ID for locking. (required)
         :type file_id: int
@@ -8552,6 +8845,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -8619,6 +8913,12 @@ class FilesApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
 
         return self.api_client.param_serialize(
@@ -8657,8 +8957,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
-        """manage_form_filling
+        """Perform form filling action
 
+        Performs the specified form filling action.
 
         :param file_id: (required)
         :type file_id: str
@@ -8697,6 +8998,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
+            '401': None,
             '403': None,
         }
         response_data = self.api_client.call_api(
@@ -8728,8 +9030,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[None]:
-        """manage_form_filling
+        """Perform form filling action
 
+        Performs the specified form filling action.
 
         :param file_id: (required)
         :type file_id: str
@@ -8768,6 +9071,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
+            '401': None,
             '403': None,
         }
         response_data = self.api_client.call_api(
@@ -8799,8 +9103,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """manage_form_filling
+        """Perform form filling action
 
+        Performs the specified form filling action.
 
         :param file_id: (required)
         :type file_id: str
@@ -8839,6 +9144,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
+            '401': None,
             '403': None,
         }
         response_data = self.api_client.call_api(
@@ -8900,6 +9206,12 @@ class FilesApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
 
         return self.api_client.param_serialize(
@@ -8942,8 +9254,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ConfigurationIntegerWrapper:
-        """open_edit_file
+        """Open a file configuration
 
+        Returns the initialization configuration of a file to open it in the editor.
 
         :param file_id: The file ID to open. (required)
         :type file_id: int
@@ -9029,8 +9342,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[ConfigurationIntegerWrapper]:
-        """open_edit_file
+        """Open a file configuration
 
+        Returns the initialization configuration of a file to open it in the editor.
 
         :param file_id: The file ID to open. (required)
         :type file_id: int
@@ -9116,8 +9430,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """open_edit_file
+        """Open a file configuration
 
+        Returns the initialization configuration of a file to open it in the editor.
 
         :param file_id: The file ID to open. (required)
         :type file_id: int
@@ -9284,8 +9599,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> EditHistoryArrayWrapper:
-        """restore_file_version
+        """Restore a file version
 
+        Restores a file version specified in the request.
 
         :param file_id: The file ID of the restore version. (required)
         :type file_id: int
@@ -9360,8 +9676,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[EditHistoryArrayWrapper]:
-        """restore_file_version
+        """Restore a file version
 
+        Restores a file version specified in the request.
 
         :param file_id: The file ID of the restore version. (required)
         :type file_id: int
@@ -9436,8 +9753,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """restore_file_version
+        """Restore a file version
 
+        Restores a file version specified in the request.
 
         :param file_id: The file ID of the restore version. (required)
         :type file_id: int
@@ -9583,8 +9901,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FileIntegerWrapper:
-        """save_editing_file_from_form
+        """Save file edits
 
+        Saves edits to a file with the ID specified in the request.
 
         :param file_id: The editing file ID from the request. (required)
         :type file_id: int
@@ -9633,6 +9952,7 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
             '400': None,
+            '401': None,
             '403': None,
         }
         response_data = self.api_client.call_api(
@@ -9667,8 +9987,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FileIntegerWrapper]:
-        """save_editing_file_from_form
+        """Save file edits
 
+        Saves edits to a file with the ID specified in the request.
 
         :param file_id: The editing file ID from the request. (required)
         :type file_id: int
@@ -9717,6 +10038,7 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
             '400': None,
+            '401': None,
             '403': None,
         }
         response_data = self.api_client.call_api(
@@ -9751,8 +10073,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """save_editing_file_from_form
+        """Save file edits
 
+        Saves edits to a file with the ID specified in the request.
 
         :param file_id: The editing file ID from the request. (required)
         :type file_id: int
@@ -9801,6 +10124,7 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
             '400': None,
+            '401': None,
             '403': None,
         }
         response_data = self.api_client.call_api(
@@ -9878,6 +10202,12 @@ class FilesApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
 
         return self.api_client.param_serialize(
@@ -9916,8 +10246,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FileIntegerWrapper:
-        """save_file_as_pdf
+        """Save a file as PDF
 
+        Saves a file with the identifier specified in the request as a PDF document.
 
         :param id: The file ID to save as PDF. (required)
         :type id: int
@@ -9956,6 +10287,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
+            '401': None,
             '404': None,
         }
         response_data = self.api_client.call_api(
@@ -9987,8 +10319,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FileIntegerWrapper]:
-        """save_file_as_pdf
+        """Save a file as PDF
 
+        Saves a file with the identifier specified in the request as a PDF document.
 
         :param id: The file ID to save as PDF. (required)
         :type id: int
@@ -10027,6 +10360,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
+            '401': None,
             '404': None,
         }
         response_data = self.api_client.call_api(
@@ -10058,8 +10392,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """save_file_as_pdf
+        """Save a file as PDF
 
+        Saves a file with the identifier specified in the request as a PDF document.
 
         :param id: The file ID to save as PDF. (required)
         :type id: int
@@ -10098,6 +10433,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
+            '401': None,
             '404': None,
         }
         response_data = self.api_client.call_api(
@@ -10166,6 +10502,12 @@ class FilesApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
 
         return self.api_client.param_serialize(
@@ -10204,8 +10546,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FormRoleWrapper:
-        """save_form_role_mapping
+        """Save form role mapping
 
+        Saves the form role mapping.
 
         :param file_id: (required)
         :type file_id: str
@@ -10244,6 +10587,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FormRoleWrapper",
+            '401': None,
             '403': None,
         }
         response_data = self.api_client.call_api(
@@ -10275,8 +10619,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FormRoleWrapper]:
-        """save_form_role_mapping
+        """Save form role mapping
 
+        Saves the form role mapping.
 
         :param file_id: (required)
         :type file_id: str
@@ -10315,6 +10660,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FormRoleWrapper",
+            '401': None,
             '403': None,
         }
         response_data = self.api_client.call_api(
@@ -10346,8 +10692,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """save_form_role_mapping
+        """Save form role mapping
 
+        Saves the form role mapping.
 
         :param file_id: (required)
         :type file_id: str
@@ -10386,6 +10733,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FormRoleWrapper",
+            '401': None,
             '403': None,
         }
         response_data = self.api_client.call_api(
@@ -10454,6 +10802,12 @@ class FilesApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
 
         return self.api_client.param_serialize(
@@ -10492,8 +10846,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FileIntegerWrapper:
-        """set_custom_filter_tag
+        """Set the Custom Filter editing mode
 
+        Sets the Custom Filter editing mode to a file with the ID specified in the request.
 
         :param file_id: The file ID. (required)
         :type file_id: int
@@ -10532,6 +10887,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -10562,8 +10918,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FileIntegerWrapper]:
-        """set_custom_filter_tag
+        """Set the Custom Filter editing mode
 
+        Sets the Custom Filter editing mode to a file with the ID specified in the request.
 
         :param file_id: The file ID. (required)
         :type file_id: int
@@ -10602,6 +10959,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -10632,8 +10990,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """set_custom_filter_tag
+        """Set the Custom Filter editing mode
 
+        Sets the Custom Filter editing mode to a file with the ID specified in the request.
 
         :param file_id: The file ID. (required)
         :type file_id: int
@@ -10672,6 +11031,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -10739,6 +11099,12 @@ class FilesApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
 
         return self.api_client.param_serialize(
@@ -10777,8 +11143,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FileShareWrapper:
-        """set_external_link
+        """Set an external link
 
+        Sets an external link to a file with the ID specified in the request.
 
         :param id: The file ID. (required)
         :type id: int
@@ -10817,6 +11184,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -10847,8 +11215,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FileShareWrapper]:
-        """set_external_link
+        """Set an external link
 
+        Sets an external link to a file with the ID specified in the request.
 
         :param id: The file ID. (required)
         :type id: int
@@ -10887,6 +11256,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -10917,8 +11287,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """set_external_link
+        """Set an external link
 
+        Sets an external link to a file with the ID specified in the request.
 
         :param id: The file ID. (required)
         :type id: int
@@ -10957,6 +11328,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -11024,6 +11396,12 @@ class FilesApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
 
         return self.api_client.param_serialize(
@@ -11062,8 +11440,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FileIntegerWrapper:
-        """set_file_order
+        """Set file order
 
+        Sets order of the file with ID specified in the request.
 
         :param file_id: The file unique identifier. (required)
         :type file_id: int
@@ -11102,6 +11481,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
+            '401': None,
             '403': None,
             '404': None,
         }
@@ -11134,8 +11514,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FileIntegerWrapper]:
-        """set_file_order
+        """Set file order
 
+        Sets order of the file with ID specified in the request.
 
         :param file_id: The file unique identifier. (required)
         :type file_id: int
@@ -11174,6 +11555,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
+            '401': None,
             '403': None,
             '404': None,
         }
@@ -11206,8 +11588,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """set_file_order
+        """Set file order
 
+        Sets order of the file with ID specified in the request.
 
         :param file_id: The file unique identifier. (required)
         :type file_id: int
@@ -11246,6 +11629,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
+            '401': None,
             '403': None,
             '404': None,
         }
@@ -11315,6 +11699,12 @@ class FilesApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
 
         return self.api_client.param_serialize(
@@ -11352,8 +11742,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FileEntryStringArrayWrapper:
-        """set_files_order
+        """Set order of files
 
+        Sets order of the files.
 
         :param orders_request_dto_integer:
         :type orders_request_dto_integer: OrdersRequestDtoInteger
@@ -11389,6 +11780,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileEntryStringArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -11418,8 +11810,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FileEntryStringArrayWrapper]:
-        """set_files_order
+        """Set order of files
 
+        Sets order of the files.
 
         :param orders_request_dto_integer:
         :type orders_request_dto_integer: OrdersRequestDtoInteger
@@ -11455,6 +11848,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileEntryStringArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -11484,8 +11878,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """set_files_order
+        """Set order of files
 
+        Sets order of the files.
 
         :param orders_request_dto_integer:
         :type orders_request_dto_integer: OrdersRequestDtoInteger
@@ -11521,6 +11916,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileEntryStringArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -11585,6 +11981,12 @@ class FilesApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
 
         return self.api_client.param_serialize(
@@ -11623,8 +12025,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> StringWrapper:
-        """start_edit_file
+        """Start file editing
 
+        Informs about opening a file with the ID specified in the request for editing, locking it from being deleted or moved (this method is called by the mobile editors).
 
         :param file_id: The file ID to start editing. (required)
         :type file_id: int
@@ -11694,8 +12097,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[StringWrapper]:
-        """start_edit_file
+        """Start file editing
 
+        Informs about opening a file with the ID specified in the request for editing, locking it from being deleted or moved (this method is called by the mobile editors).
 
         :param file_id: The file ID to start editing. (required)
         :type file_id: int
@@ -11765,8 +12169,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """start_edit_file
+        """Start file editing
 
+        Informs about opening a file with the ID specified in the request for editing, locking it from being deleted or moved (this method is called by the mobile editors).
 
         :param file_id: The file ID to start editing. (required)
         :type file_id: int
@@ -11910,8 +12315,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FileIntegerWrapper:
-        """start_filling_file
+        """Start file filling
 
+        Starts filling a file with the ID specified in the request.
 
         :param file_id: The file ID to start filling. (required)
         :type file_id: int
@@ -11947,6 +12353,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
+            '401': None,
             '403': None,
         }
         response_data = self.api_client.call_api(
@@ -11977,8 +12384,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FileIntegerWrapper]:
-        """start_filling_file
+        """Start file filling
 
+        Starts filling a file with the ID specified in the request.
 
         :param file_id: The file ID to start filling. (required)
         :type file_id: int
@@ -12014,6 +12422,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
+            '401': None,
             '403': None,
         }
         response_data = self.api_client.call_api(
@@ -12044,8 +12453,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """start_filling_file
+        """Start file filling
 
+        Starts filling a file with the ID specified in the request.
 
         :param file_id: The file ID to start filling. (required)
         :type file_id: int
@@ -12081,6 +12491,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
+            '401': None,
             '403': None,
         }
         response_data = self.api_client.call_api(
@@ -12133,6 +12544,12 @@ class FilesApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
 
         return self.api_client.param_serialize(
@@ -12173,8 +12590,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> KeyValuePairBooleanStringWrapper:
-        """track_edit_file
+        """Track file editing
 
+        Tracks file changes when editing.
 
         :param file_id: The file ID to track editing changes. (required)
         :type file_id: int
@@ -12252,8 +12670,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[KeyValuePairBooleanStringWrapper]:
-        """track_edit_file
+        """Track file editing
 
+        Tracks file changes when editing.
 
         :param file_id: The file ID to track editing changes. (required)
         :type file_id: int
@@ -12331,8 +12750,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """track_edit_file
+        """Track file editing
 
+        Tracks file changes when editing.
 
         :param file_id: The file ID to track editing changes. (required)
         :type file_id: int
@@ -12482,8 +12902,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FileIntegerWrapper:
-        """update_file
+        """Update a file
 
+        Updates the information of the selected file with the parameters specified in the request.
 
         :param file_id: The file ID to update. (required)
         :type file_id: int
@@ -12553,8 +12974,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FileIntegerWrapper]:
-        """update_file
+        """Update a file
 
+        Updates the information of the selected file with the parameters specified in the request.
 
         :param file_id: The file ID to update. (required)
         :type file_id: int
@@ -12624,8 +13046,9 @@ class FilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """update_file
+        """Update a file
 
+        Updates the information of the selected file with the parameters specified in the request.
 
         :param file_id: The file ID to update. (required)
         :type file_id: int

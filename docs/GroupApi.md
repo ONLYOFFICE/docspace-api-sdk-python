@@ -177,7 +177,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_group**
-> delete_group(id)
+> NoContentResultWrapper delete_group(id)
 
 Deletes a group with the ID specified in the request from the list of groups on the portal.
 
@@ -192,7 +192,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**NoContentResultWrapper**](NoContentResultWrapper.md)
 
 ### Authorization
 
@@ -203,6 +203,7 @@ void (empty response body)
 
 ```python
 import docspace_api_sdk
+from docspace_api_sdk.models.no_content_result_wrapper import NoContentResultWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -228,7 +229,9 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
     try:
         # Delete a group
-        api_instance.delete_group(id)
+        api_response = api_instance.delete_group(id)
+        print("The response of GroupApi->delete_group:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling GroupApi->delete_group: %s\n" % e)
 ```
@@ -238,14 +241,14 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**204** | No content |  -  |
+**200** | No content |  -  |
 **401** | Unauthorized |  -  |
 **404** | Group not found |  -  |
 

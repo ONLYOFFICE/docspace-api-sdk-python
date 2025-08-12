@@ -4,57 +4,57 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**add_templates**](#add_templates) | **POST** /api/2.0/files/templates | 
-[**change_version_history**](#change_version_history) | **PUT** /api/2.0/files/file/{fileId}/history | 
-[**check_fill_form_draft**](#check_fill_form_draft) | **POST** /api/2.0/files/masterform/{fileId}/checkfillformdraft | 
-[**copy_file_as**](#copy_file_as) | **POST** /api/2.0/files/file/{fileId}/copyas | 
-[**create_edit_session**](#create_edit_session) | **POST** /api/2.0/files/file/{fileId}/edit_session | 
-[**create_file**](#create_file) | **POST** /api/2.0/files/{folderId}/file | 
-[**create_file_in_my_documents**](#create_file_in_my_documents) | **POST** /api/2.0/files/@my/file | 
-[**create_html_file**](#create_html_file) | **POST** /api/2.0/files/{folderId}/html | 
-[**create_html_file_in_my_documents**](#create_html_file_in_my_documents) | **POST** /api/2.0/files/@my/html | 
-[**create_primary_external_link**](#create_primary_external_link) | **POST** /api/2.0/files/file/{id}/link | 
-[**create_text_file**](#create_text_file) | **POST** /api/2.0/files/{folderId}/text | 
-[**create_text_file_in_my_documents**](#create_text_file_in_my_documents) | **POST** /api/2.0/files/@my/text | 
-[**create_thumbnails**](#create_thumbnails) | **POST** /api/2.0/files/thumbnails | 
-[**delete_file**](#delete_file) | **DELETE** /api/2.0/files/file/{fileId} | 
-[**delete_recent**](#delete_recent) | **DELETE** /api/2.0/files/recent | 
-[**delete_templates**](#delete_templates) | **DELETE** /api/2.0/files/templates | 
-[**get_all_form_roles**](#get_all_form_roles) | **GET** /api/2.0/files/file/{fileId}/formroles | 
-[**get_edit_diff_url**](#get_edit_diff_url) | **GET** /api/2.0/files/file/{fileId}/edit/diff | 
-[**get_edit_history**](#get_edit_history) | **GET** /api/2.0/files/file/{fileId}/edit/history | 
-[**get_file_history**](#get_file_history) | **GET** /api/2.0/files/file/{fileId}/log | 
-[**get_file_info**](#get_file_info) | **GET** /api/2.0/files/file/{fileId} | 
-[**get_file_links**](#get_file_links) | **GET** /api/2.0/files/file/{id}/links | 
-[**get_file_primary_external_link**](#get_file_primary_external_link) | **GET** /api/2.0/files/file/{id}/link | 
-[**get_file_version_info**](#get_file_version_info) | **GET** /api/2.0/files/file/{fileId}/history | 
-[**get_fill_result**](#get_fill_result) | **GET** /api/2.0/files/file/fillresult | 
-[**get_presigned_file_uri**](#get_presigned_file_uri) | **GET** /api/2.0/files/file/{fileId}/presigned | 
-[**get_presigned_uri**](#get_presigned_uri) | **GET** /api/2.0/files/file/{fileId}/presigneduri | 
-[**get_protected_file_users**](#get_protected_file_users) | **GET** /api/2.0/files/file/{fileId}/protectusers | 
-[**get_reference_data**](#get_reference_data) | **POST** /api/2.0/files/file/referencedata | 
-[**is_form_pdf**](#is_form_pdf) | **GET** /api/2.0/files/file/{fileId}/isformpdf | 
-[**lock_file**](#lock_file) | **PUT** /api/2.0/files/file/{fileId}/lock | 
-[**manage_form_filling**](#manage_form_filling) | **PUT** /api/2.0/files/file/{fileId}/manageformfilling | 
-[**open_edit_file**](#open_edit_file) | **GET** /api/2.0/files/file/{fileId}/openedit | 
-[**restore_file_version**](#restore_file_version) | **GET** /api/2.0/files/file/{fileId}/restoreversion | 
-[**save_editing_file_from_form**](#save_editing_file_from_form) | **PUT** /api/2.0/files/file/{fileId}/saveediting | 
-[**save_file_as_pdf**](#save_file_as_pdf) | **POST** /api/2.0/files/file/{id}/saveaspdf | 
-[**save_form_role_mapping**](#save_form_role_mapping) | **POST** /api/2.0/files/file/{fileId}/formrolemapping | 
-[**set_custom_filter_tag**](#set_custom_filter_tag) | **PUT** /api/2.0/files/file/{fileId}/customfilter | 
-[**set_external_link**](#set_external_link) | **PUT** /api/2.0/files/file/{id}/links | 
-[**set_file_order**](#set_file_order) | **PUT** /api/2.0/files/{fileId}/order | 
-[**set_files_order**](#set_files_order) | **PUT** /api/2.0/files/order | 
-[**start_edit_file**](#start_edit_file) | **POST** /api/2.0/files/file/{fileId}/startedit | 
-[**start_filling_file**](#start_filling_file) | **PUT** /api/2.0/files/file/{fileId}/startfilling | 
-[**track_edit_file**](#track_edit_file) | **GET** /api/2.0/files/file/{fileId}/trackeditfile | 
-[**update_file**](#update_file) | **PUT** /api/2.0/files/file/{fileId} | 
+[**add_templates**](#add_templates) | **POST** /api/2.0/files/templates | Add template files
+[**change_version_history**](#change_version_history) | **PUT** /api/2.0/files/file/{fileId}/history | Change version history
+[**check_fill_form_draft**](#check_fill_form_draft) | **POST** /api/2.0/files/masterform/{fileId}/checkfillformdraft | Check the form draft filling
+[**copy_file_as**](#copy_file_as) | **POST** /api/2.0/files/file/{fileId}/copyas | Copy a file
+[**create_edit_session**](#create_edit_session) | **POST** /api/2.0/files/file/{fileId}/edit_session | Create the editing session
+[**create_file**](#create_file) | **POST** /api/2.0/files/{folderId}/file | Create a file
+[**create_file_in_my_documents**](#create_file_in_my_documents) | **POST** /api/2.0/files/@my/file | Create a file in the \&quot;My documents\&quot; section
+[**create_html_file**](#create_html_file) | **POST** /api/2.0/files/{folderId}/html | Create an HTML file
+[**create_html_file_in_my_documents**](#create_html_file_in_my_documents) | **POST** /api/2.0/files/@my/html | Create an HTML file in the \&quot;My documents\&quot; section
+[**create_primary_external_link**](#create_primary_external_link) | **POST** /api/2.0/files/file/{id}/link | Create primary external link
+[**create_text_file**](#create_text_file) | **POST** /api/2.0/files/{folderId}/text | Create a text file
+[**create_text_file_in_my_documents**](#create_text_file_in_my_documents) | **POST** /api/2.0/files/@my/text | Create a text file in the \&quot;My documents\&quot; section
+[**create_thumbnails**](#create_thumbnails) | **POST** /api/2.0/files/thumbnails | Create file thumbnails
+[**delete_file**](#delete_file) | **DELETE** /api/2.0/files/file/{fileId} | Delete a file
+[**delete_recent**](#delete_recent) | **DELETE** /api/2.0/files/recent | Delete recent files
+[**delete_templates**](#delete_templates) | **DELETE** /api/2.0/files/templates | Delete template files
+[**get_all_form_roles**](#get_all_form_roles) | **GET** /api/2.0/files/file/{fileId}/formroles | Get form roles
+[**get_edit_diff_url**](#get_edit_diff_url) | **GET** /api/2.0/files/file/{fileId}/edit/diff | Get changes URL
+[**get_edit_history**](#get_edit_history) | **GET** /api/2.0/files/file/{fileId}/edit/history | Get version history
+[**get_file_history**](#get_file_history) | **GET** /api/2.0/files/file/{fileId}/log | Get file history
+[**get_file_info**](#get_file_info) | **GET** /api/2.0/files/file/{fileId} | Get file information
+[**get_file_links**](#get_file_links) | **GET** /api/2.0/files/file/{id}/links | Get file external links
+[**get_file_primary_external_link**](#get_file_primary_external_link) | **GET** /api/2.0/files/file/{id}/link | Get primary external link
+[**get_file_version_info**](#get_file_version_info) | **GET** /api/2.0/files/file/{fileId}/history | Get file versions
+[**get_fill_result**](#get_fill_result) | **GET** /api/2.0/files/file/fillresult | Get form-filling result
+[**get_presigned_file_uri**](#get_presigned_file_uri) | **GET** /api/2.0/files/file/{fileId}/presigned | Get file download link asynchronously
+[**get_presigned_uri**](#get_presigned_uri) | **GET** /api/2.0/files/file/{fileId}/presigneduri | Get file download link
+[**get_protected_file_users**](#get_protected_file_users) | **GET** /api/2.0/files/file/{fileId}/protectusers | Get users access rights to the protected file
+[**get_reference_data**](#get_reference_data) | **POST** /api/2.0/files/file/referencedata | Get reference data
+[**is_form_pdf**](#is_form_pdf) | **GET** /api/2.0/files/file/{fileId}/isformpdf | Check the PDF file
+[**lock_file**](#lock_file) | **PUT** /api/2.0/files/file/{fileId}/lock | Lock a file
+[**manage_form_filling**](#manage_form_filling) | **PUT** /api/2.0/files/file/{fileId}/manageformfilling | Perform form filling action
+[**open_edit_file**](#open_edit_file) | **GET** /api/2.0/files/file/{fileId}/openedit | Open a file configuration
+[**restore_file_version**](#restore_file_version) | **GET** /api/2.0/files/file/{fileId}/restoreversion | Restore a file version
+[**save_editing_file_from_form**](#save_editing_file_from_form) | **PUT** /api/2.0/files/file/{fileId}/saveediting | Save file edits
+[**save_file_as_pdf**](#save_file_as_pdf) | **POST** /api/2.0/files/file/{id}/saveaspdf | Save a file as PDF
+[**save_form_role_mapping**](#save_form_role_mapping) | **POST** /api/2.0/files/file/{fileId}/formrolemapping | Save form role mapping
+[**set_custom_filter_tag**](#set_custom_filter_tag) | **PUT** /api/2.0/files/file/{fileId}/customfilter | Set the Custom Filter editing mode
+[**set_external_link**](#set_external_link) | **PUT** /api/2.0/files/file/{id}/links | Set an external link
+[**set_file_order**](#set_file_order) | **PUT** /api/2.0/files/{fileId}/order | Set file order
+[**set_files_order**](#set_files_order) | **PUT** /api/2.0/files/order | Set order of files
+[**start_edit_file**](#start_edit_file) | **POST** /api/2.0/files/file/{fileId}/startedit | Start file editing
+[**start_filling_file**](#start_filling_file) | **PUT** /api/2.0/files/file/{fileId}/startfilling | Start file filling
+[**track_edit_file**](#track_edit_file) | **GET** /api/2.0/files/file/{fileId}/trackeditfile | Track file editing
+[**update_file**](#update_file) | **PUT** /api/2.0/files/file/{fileId} | Update a file
 
 
 # **add_templates**
 > BooleanWrapper add_templates(templates_request_dto=templates_request_dto)
 
-
+Adds files with the IDs specified in the request to the template list.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -71,7 +71,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -87,6 +87,15 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
@@ -95,6 +104,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     templates_request_dto = docspace_api_sdk.TemplatesRequestDto() # TemplatesRequestDto |  (optional)
 
     try:
+        # Add template files
         api_response = api_instance.add_templates(templates_request_dto=templates_request_dto)
         print("The response of FilesApi->add_templates:\n")
         pprint(api_response)
@@ -115,13 +125,14 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Boolean value: true if the operation is successful |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **change_version_history**
 > FileStringArrayWrapper change_version_history(file_id, change_history=change_history)
 
-
+Changes the version history of a file with the ID specified in the request.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -139,7 +150,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -155,6 +166,15 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
@@ -164,6 +184,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     change_history = docspace_api_sdk.ChangeHistory() # ChangeHistory | The parameters for changing version history. (optional)
 
     try:
+        # Change version history
         api_response = api_instance.change_version_history(file_id, change_history=change_history)
         print("The response of FilesApi->change_version_history:\n")
         pprint(api_response)
@@ -184,6 +205,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Updated information about file versions |  -  |
+**401** | Unauthorized |  -  |
 **403** | You do not have enough permissions to edit the file |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -191,7 +213,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **check_fill_form_draft**
 > StringWrapper check_fill_form_draft(file_id, check_fill_form_draft=check_fill_form_draft)
 
-
+Checks if the current file is a form draft which can be filled out.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -234,6 +256,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     check_fill_form_draft = docspace_api_sdk.CheckFillFormDraft() # CheckFillFormDraft | The parameters for checking the form draft filling. (optional)
 
     try:
+        # Check the form draft filling
         api_response = api_instance.check_fill_form_draft(file_id, check_fill_form_draft=check_fill_form_draft)
         print("The response of FilesApi->check_fill_form_draft:\n")
         pprint(api_response)
@@ -261,7 +284,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **copy_file_as**
 > FileEntryBaseWrapper copy_file_as(file_id, copy_as_json_element=copy_as_json_element)
 
-
+Copies (and converts if possible) an existing file to the specified folder.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -279,7 +302,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -295,6 +318,15 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
@@ -304,6 +336,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     copy_as_json_element = docspace_api_sdk.CopyAsJsonElement() # CopyAsJsonElement | The parameters for copying a file. (optional)
 
     try:
+        # Copy a file
         api_response = api_instance.copy_file_as(file_id, copy_as_json_element=copy_as_json_element)
         print("The response of FilesApi->copy_file_as:\n")
         pprint(api_response)
@@ -325,6 +358,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 |-------------|-------------|------------------|
 **200** | Copied file entry information |  -  |
 **400** | No file id or folder id toFolderId determine provider |  -  |
+**401** | Unauthorized |  -  |
 **403** | You don&#39;t have enough permission to create |  -  |
 **404** | File not found |  -  |
 
@@ -333,7 +367,17 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **create_edit_session**
 > ObjectWrapper create_edit_session(file_id, file_size=file_size)
 
+Creates a session to edit the existing file with multiple chunks (needed for WebDAV).
 
+ **Note**: Information about created session which includes:
+<ul>
+<li><b>id:</b> unique ID of this upload session,</li>
+<li><b>created:</b> UTC time when the session was created,</li>
+<li><b>expired:</b> UTC time when the session will expire if no chunks are sent before that time,</li>
+<li><b>location:</b> URL where you should send your next chunk,</li>
+<li><b>bytes_uploaded:</b> number of bytes uploaded for the specific upload ID,</li>
+<li><b>bytes_total:</b> total number of bytes which will be uploaded.</li>
+</ul>
 
 For more information, see [api.onlyoffice.com]().
 
@@ -351,7 +395,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -366,6 +410,15 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
@@ -375,6 +428,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     file_size = 1234 # int | The file size in bytes. (optional)
 
     try:
+        # Create the editing session
         api_response = api_instance.create_edit_session(file_id, file_size=file_size)
         print("The response of FilesApi->create_edit_session:\n")
         pprint(api_response)
@@ -395,6 +449,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Information about created session |  -  |
+**401** | Unauthorized |  -  |
 **403** | You don&#39;t have enough permission to edit the file |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -402,7 +457,9 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **create_file**
 > FileIntegerWrapper create_file(folder_id, create_file_json_element=create_file_json_element)
 
+Creates a new file in the specified folder with the title specified in the request.
 
+ **Note**: If a file extension is different from DOCX/XLSX/PPTX and refers to one of the known text, spreadsheet, or presentation formats, it will be changed to DOCX/XLSX/PPTX accordingly. If the file extension is not specified or is unknown, the DOCX extension will be added to the file title.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -420,7 +477,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -436,6 +493,15 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
@@ -445,6 +511,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     create_file_json_element = docspace_api_sdk.CreateFileJsonElement() # CreateFileJsonElement | The parameters for creating a file. (optional)
 
     try:
+        # Create a file
         api_response = api_instance.create_file(folder_id, create_file_json_element=create_file_json_element)
         print("The response of FilesApi->create_file:\n")
         pprint(api_response)
@@ -465,13 +532,16 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | New file information |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_file_in_my_documents**
 > FileIntegerWrapper create_file_in_my_documents(create_file_json_element=create_file_json_element)
 
+Creates a new file in the "My documents" section with the title specified in the request.
 
+ **Note**: If a file extension is different from DOCX/XLSX/PPTX and refers to one of the known text, spreadsheet, or presentation formats, it will be changed to DOCX/XLSX/PPTX accordingly. If the file extension is not specified or is unknown, the DOCX extension will be added to the file title.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -488,7 +558,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -504,6 +574,15 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
@@ -512,6 +591,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     create_file_json_element = docspace_api_sdk.CreateFileJsonElement() # CreateFileJsonElement |  (optional)
 
     try:
+        # Create a file in the \"My documents\" section
         api_response = api_instance.create_file_in_my_documents(create_file_json_element=create_file_json_element)
         print("The response of FilesApi->create_file_in_my_documents:\n")
         pprint(api_response)
@@ -532,13 +612,14 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | New file information |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_html_file**
 > FileIntegerWrapper create_html_file(folder_id, create_text_or_html_file=create_text_or_html_file)
 
-
+Creates an HTML (.html) file in the selected folder with the title and contents specified in the request.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -556,7 +637,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -572,6 +653,15 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
@@ -581,6 +671,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     create_text_or_html_file = docspace_api_sdk.CreateTextOrHtmlFile() # CreateTextOrHtmlFile | The parameters for creating an HTML or text file. (optional)
 
     try:
+        # Create an HTML file
         api_response = api_instance.create_html_file(folder_id, create_text_or_html_file=create_text_or_html_file)
         print("The response of FilesApi->create_html_file:\n")
         pprint(api_response)
@@ -601,6 +692,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | New file information |  -  |
+**401** | Unauthorized |  -  |
 **403** | You don&#39;t have enough permission to create |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -608,7 +700,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **create_html_file_in_my_documents**
 > FileIntegerWrapper create_html_file_in_my_documents(create_text_or_html_file=create_text_or_html_file)
 
-
+Creates an HTML (.html) file in the "My documents" section with the title and contents specified in the request.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -625,7 +717,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -641,6 +733,15 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
@@ -649,6 +750,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     create_text_or_html_file = docspace_api_sdk.CreateTextOrHtmlFile() # CreateTextOrHtmlFile |  (optional)
 
     try:
+        # Create an HTML file in the \"My documents\" section
         api_response = api_instance.create_html_file_in_my_documents(create_text_or_html_file=create_text_or_html_file)
         print("The response of FilesApi->create_html_file_in_my_documents:\n")
         pprint(api_response)
@@ -669,6 +771,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | New file information |  -  |
+**401** | Unauthorized |  -  |
 **403** | You don&#39;t have enough permission to create |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -676,7 +779,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **create_primary_external_link**
 > FileShareWrapper create_primary_external_link(id, file_link_request=file_link_request)
 
-
+Creates a primary external link by the identifier specified in the request.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -694,7 +797,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -710,6 +813,15 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
@@ -719,6 +831,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     file_link_request = docspace_api_sdk.FileLinkRequest() # FileLinkRequest | The file external link parameters. (optional)
 
     try:
+        # Create primary external link
         api_response = api_instance.create_primary_external_link(id, file_link_request=file_link_request)
         print("The response of FilesApi->create_primary_external_link:\n")
         pprint(api_response)
@@ -739,6 +852,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | File security information |  -  |
+**401** | Unauthorized |  -  |
 **404** | Not Found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -746,7 +860,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **create_text_file**
 > FileIntegerWrapper create_text_file(folder_id, create_text_or_html_file=create_text_or_html_file)
 
-
+Creates a text (.txt) file in the selected folder with the title and contents specified in the request.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -764,7 +878,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -780,6 +894,15 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
@@ -789,6 +912,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     create_text_or_html_file = docspace_api_sdk.CreateTextOrHtmlFile() # CreateTextOrHtmlFile | The parameters for creating an HTML or text file. (optional)
 
     try:
+        # Create a text file
         api_response = api_instance.create_text_file(folder_id, create_text_or_html_file=create_text_or_html_file)
         print("The response of FilesApi->create_text_file:\n")
         pprint(api_response)
@@ -809,13 +933,14 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | New file information |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_text_file_in_my_documents**
 > FileIntegerWrapper create_text_file_in_my_documents(create_text_or_html_file=create_text_or_html_file)
 
-
+Creates a text (.txt) file in the "My documents" section with the title and contents specified in the request.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -832,7 +957,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -848,6 +973,15 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
@@ -856,6 +990,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     create_text_or_html_file = docspace_api_sdk.CreateTextOrHtmlFile() # CreateTextOrHtmlFile |  (optional)
 
     try:
+        # Create a text file in the \"My documents\" section
         api_response = api_instance.create_text_file_in_my_documents(create_text_or_html_file=create_text_or_html_file)
         print("The response of FilesApi->create_text_file_in_my_documents:\n")
         pprint(api_response)
@@ -876,13 +1011,14 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | New file information |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_thumbnails**
 > ObjectArrayWrapper create_thumbnails(base_batch_request_dto=base_batch_request_dto)
 
-
+Creates thumbnails for the files with the IDs specified in the request.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -923,6 +1059,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     base_batch_request_dto = docspace_api_sdk.BaseBatchRequestDto() # BaseBatchRequestDto |  (optional)
 
     try:
+        # Create file thumbnails
         api_response = api_instance.create_thumbnails(base_batch_request_dto=base_batch_request_dto)
         print("The response of FilesApi->create_thumbnails:\n")
         pprint(api_response)
@@ -949,7 +1086,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **delete_file**
 > FileOperationArrayWrapper delete_file(file_id, delete)
 
-
+Deletes a file with the ID specified in the request.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -967,7 +1104,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -983,6 +1120,15 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
@@ -992,6 +1138,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     delete = docspace_api_sdk.Delete() # Delete | The parameters for deleting a file.
 
     try:
+        # Delete a file
         api_response = api_instance.delete_file(file_id, delete)
         print("The response of FilesApi->delete_file:\n")
         pprint(api_response)
@@ -1012,13 +1159,14 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | List of file operations |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_recent**
 > NoContentResultWrapper delete_recent(base_batch_request_dto=base_batch_request_dto)
 
-
+Removes files with the IDs specified in the request from the "Recent" section.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -1035,7 +1183,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -1051,6 +1199,15 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
@@ -1059,6 +1216,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     base_batch_request_dto = docspace_api_sdk.BaseBatchRequestDto() # BaseBatchRequestDto |  (optional)
 
     try:
+        # Delete recent files
         api_response = api_instance.delete_recent(base_batch_request_dto=base_batch_request_dto)
         print("The response of FilesApi->delete_recent:\n")
         pprint(api_response)
@@ -1079,13 +1237,14 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | No content |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_templates**
 > BooleanWrapper delete_templates(request_body=request_body)
 
-
+Removes files with the IDs specified in the request from the template list.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -1102,7 +1261,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -1117,6 +1276,15 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
@@ -1125,6 +1293,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     request_body = [56] # List[int] | The file IDs. (optional)
 
     try:
+        # Delete template files
         api_response = api_instance.delete_templates(request_body=request_body)
         print("The response of FilesApi->delete_templates:\n")
         pprint(api_response)
@@ -1145,13 +1314,14 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Boolean value: true if the operation is successful |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_all_form_roles**
 > FormRoleArrayWrapper get_all_form_roles(file_id)
 
-
+Returns all roles for the specified form.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -1168,7 +1338,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -1183,6 +1353,15 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
@@ -1191,6 +1370,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     file_id = 9846 # int | The file ID of the request.
 
     try:
+        # Get form roles
         api_response = api_instance.get_all_form_roles(file_id)
         print("The response of FilesApi->get_all_form_roles:\n")
         pprint(api_response)
@@ -1211,6 +1391,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Successfully retrieved all roles for the form |  -  |
+**401** | Unauthorized |  -  |
 **403** | You do not have enough permissions to view the form roles |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -1218,7 +1399,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **get_edit_diff_url**
 > EditHistoryDataWrapper get_edit_diff_url(file_id, version=version)
 
-
+Returns a URL to the changes of a file version specified in the request.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -1260,6 +1441,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     version = 1234 # int | The file version. (optional)
 
     try:
+        # Get changes URL
         api_response = api_instance.get_edit_diff_url(file_id, version=version)
         print("The response of FilesApi->get_edit_diff_url:\n")
         pprint(api_response)
@@ -1286,7 +1468,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **get_edit_history**
 > EditHistoryArrayWrapper get_edit_history(file_id)
 
-
+Returns the version history of a file with the ID specified in the request.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -1326,6 +1508,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     file_id = 9846 # int | The file ID of the request.
 
     try:
+        # Get version history
         api_response = api_instance.get_edit_history(file_id)
         print("The response of FilesApi->get_edit_history:\n")
         pprint(api_response)
@@ -1352,7 +1535,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **get_file_history**
 > HistoryArrayWrapper get_file_history(file_id, from_date=from_date, to_date=to_date, count=count, start_index=start_index)
 
-
+Returns the list of actions performed on the file with the specified identifier.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -1373,7 +1556,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -1389,6 +1572,15 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
@@ -1401,6 +1593,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     start_index = 1234 # int | The starting index for retrieving a subset of file history entries. (optional)
 
     try:
+        # Get file history
         api_response = api_instance.get_file_history(file_id, from_date=from_date, to_date=to_date, count=count, start_index=start_index)
         print("The response of FilesApi->get_file_history:\n")
         pprint(api_response)
@@ -1421,6 +1614,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | List of actions performed on the file |  -  |
+**401** | Unauthorized |  -  |
 **403** | You don&#39;t have enough permission to perform the operation |  -  |
 **404** | The required file was not found |  -  |
 
@@ -1429,7 +1623,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **get_file_info**
 > FileIntegerWrapper get_file_info(file_id, version=version)
 
-
+Returns the detailed information about a file with the ID specified in the request.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -1471,6 +1665,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     version = 1234 # int | The file version. (optional)
 
     try:
+        # Get file information
         api_response = api_instance.get_file_info(file_id, version=version)
         print("The response of FilesApi->get_file_info:\n")
         pprint(api_response)
@@ -1497,7 +1692,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **get_file_links**
 > FileShareArrayWrapper get_file_links(id, count=count, start_index=start_index)
 
-
+Returns the external links of a file with the ID specified in the request.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -1516,7 +1711,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -1531,6 +1726,15 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
@@ -1541,6 +1745,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     start_index = 1234 # int | The starting index for the query results. (optional)
 
     try:
+        # Get file external links
         api_response = api_instance.get_file_links(id, count=count, start_index=start_index)
         print("The response of FilesApi->get_file_links:\n")
         pprint(api_response)
@@ -1561,13 +1766,14 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | File security information |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_file_primary_external_link**
 > FileShareWrapper get_file_primary_external_link(id, count=count, start_index=start_index)
 
-
+Returns the primary external link by the identifier specified in the request.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -1611,6 +1817,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     start_index = 1234 # int | The starting index for the query results. (optional)
 
     try:
+        # Get primary external link
         api_response = api_instance.get_file_primary_external_link(id, count=count, start_index=start_index)
         print("The response of FilesApi->get_file_primary_external_link:\n")
         pprint(api_response)
@@ -1638,7 +1845,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **get_file_version_info**
 > FileStringArrayWrapper get_file_version_info(file_id)
 
-
+Returns the detailed information about all the available file versions with the ID specified in the request.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -1678,6 +1885,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     file_id = 9846 # int | The file ID of the request.
 
     try:
+        # Get file versions
         api_response = api_instance.get_file_version_info(file_id)
         print("The response of FilesApi->get_file_version_info:\n")
         pprint(api_response)
@@ -1704,7 +1912,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **get_fill_result**
 > FillingFormResultIntegerWrapper get_fill_result(filling_session_id=filling_session_id)
 
-
+Retrieves the result of a form-filling session.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -1744,6 +1952,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     filling_session_id = 'some text' # str | The form-filling session ID. (optional)
 
     try:
+        # Get form-filling result
         api_response = api_instance.get_fill_result(filling_session_id=filling_session_id)
         print("The response of FilesApi->get_fill_result:\n")
         pprint(api_response)
@@ -1770,7 +1979,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **get_presigned_file_uri**
 > FileLinkWrapper get_presigned_file_uri(file_id)
 
-
+Returns a link to download a file with the ID specified in the request asynchronously.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -1787,7 +1996,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -1802,6 +2011,15 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
@@ -1810,6 +2028,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     file_id = 9846 # int | The file ID of the request.
 
     try:
+        # Get file download link asynchronously
         api_response = api_instance.get_presigned_file_uri(file_id)
         print("The response of FilesApi->get_presigned_file_uri:\n")
         pprint(api_response)
@@ -1830,13 +2049,15 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | File download link |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_presigned_uri**
 > StringWrapper get_presigned_uri(file_id)
 
-
+Returns a pre-signed URL to download a file with the specified ID.
+This temporary link provides secure access to the file.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -1853,7 +2074,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -1868,6 +2089,15 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
@@ -1876,6 +2106,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     file_id = 9846 # int | The file ID of the request.
 
     try:
+        # Get file download link
         api_response = api_instance.get_presigned_uri(file_id)
         print("The response of FilesApi->get_presigned_uri:\n")
         pprint(api_response)
@@ -1896,13 +2127,14 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | File download link |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_protected_file_users**
 > MentionWrapperArrayWrapper get_protected_file_users(file_id)
 
-
+Returns a list of users with their access rights to the protected file with the ID specified in the request.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -1919,7 +2151,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -1934,6 +2166,15 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
@@ -1942,6 +2183,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     file_id = 9846 # int | The file ID of the request.
 
     try:
+        # Get users access rights to the protected file
         api_response = api_instance.get_protected_file_users(file_id)
         print("The response of FilesApi->get_protected_file_users:\n")
         pprint(api_response)
@@ -1962,13 +2204,14 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | List of users with their access rights to the protected file |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_reference_data**
 > FileReferenceWrapper get_reference_data(get_reference_data_dto_integer=get_reference_data_dto_integer)
 
-
+Returns the reference data to uniquely identify a file in its system and check the availability of insering data into the destination spreadsheet by the external link.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -1985,7 +2228,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -2001,6 +2244,15 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
@@ -2009,6 +2261,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     get_reference_data_dto_integer = docspace_api_sdk.GetReferenceDataDtoInteger() # GetReferenceDataDtoInteger |  (optional)
 
     try:
+        # Get reference data
         api_response = api_instance.get_reference_data(get_reference_data_dto_integer=get_reference_data_dto_integer)
         print("The response of FilesApi->get_reference_data:\n")
         pprint(api_response)
@@ -2029,13 +2282,14 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | File reference data |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **is_form_pdf**
 > BooleanWrapper is_form_pdf(file_id)
 
-
+Checks if the PDF file is a form or not.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -2052,7 +2306,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -2067,6 +2321,15 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
@@ -2075,6 +2338,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     file_id = 9846 # int | The file ID of the request.
 
     try:
+        # Check the PDF file
         api_response = api_instance.is_form_pdf(file_id)
         print("The response of FilesApi->is_form_pdf:\n")
         pprint(api_response)
@@ -2095,13 +2359,14 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Boolean value: true - the PDF file is form, false - the PDF file is not a form |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **lock_file**
 > FileIntegerWrapper lock_file(file_id, lock_file_parameters=lock_file_parameters)
 
-
+Locks a file with the ID specified in the request.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -2119,7 +2384,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -2135,6 +2400,15 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
@@ -2144,6 +2418,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     lock_file_parameters = docspace_api_sdk.LockFileParameters() # LockFileParameters | The parameters for locking a file. (optional)
 
     try:
+        # Lock a file
         api_response = api_instance.lock_file(file_id, lock_file_parameters=lock_file_parameters)
         print("The response of FilesApi->lock_file:\n")
         pprint(api_response)
@@ -2164,13 +2439,14 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Locked file information |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **manage_form_filling**
 > manage_form_filling(file_id, manage_form_filling_dto_integer=manage_form_filling_dto_integer)
 
-
+Performs the specified form filling action.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -2188,7 +2464,7 @@ void (empty response body)
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -2203,6 +2479,15 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
@@ -2212,6 +2497,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     manage_form_filling_dto_integer = docspace_api_sdk.ManageFormFillingDtoInteger() # ManageFormFillingDtoInteger |  (optional)
 
     try:
+        # Perform form filling action
         api_instance.manage_form_filling(file_id, manage_form_filling_dto_integer=manage_form_filling_dto_integer)
     except Exception as e:
         print("Exception when calling FilesApi->manage_form_filling: %s\n" % e)
@@ -2230,6 +2516,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Successfully processed the form filling action |  -  |
+**401** | Unauthorized |  -  |
 **403** | You do not have enough permissions to perform this action |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -2237,7 +2524,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **open_edit_file**
 > ConfigurationIntegerWrapper open_edit_file(file_id, version=version, view=view, editor_type=editor_type, edit=edit, fill=fill)
 
-
+Returns the initialization configuration of a file to open it in the editor.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -2288,6 +2575,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     fill = true # bool | Specifies if the document is opened in the form-filling mode or not. (optional)
 
     try:
+        # Open a file configuration
         api_response = api_instance.open_edit_file(file_id, version=version, view=view, editor_type=editor_type, edit=edit, fill=fill)
         print("The response of FilesApi->open_edit_file:\n")
         pprint(api_response)
@@ -2315,7 +2603,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **restore_file_version**
 > EditHistoryArrayWrapper restore_file_version(file_id, version=version, url=url)
 
-
+Restores a file version specified in the request.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -2359,6 +2647,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     url = 'some text' # str | The file version URL of the restore. (optional)
 
     try:
+        # Restore a file version
         api_response = api_instance.restore_file_version(file_id, version=version, url=url)
         print("The response of FilesApi->restore_file_version:\n")
         pprint(api_response)
@@ -2387,7 +2676,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **save_editing_file_from_form**
 > FileIntegerWrapper save_editing_file_from_form(file_id, file_extension=file_extension, download_uri=download_uri, file=file, forcesave=forcesave)
 
-
+Saves edits to a file with the ID specified in the request.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -2408,7 +2697,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -2423,6 +2712,15 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
@@ -2435,6 +2733,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     forcesave = True # bool | Specifies whether to force save the file or not. (optional)
 
     try:
+        # Save file edits
         api_response = api_instance.save_editing_file_from_form(file_id, file_extension=file_extension, download_uri=download_uri, file=file, forcesave=forcesave)
         print("The response of FilesApi->save_editing_file_from_form:\n")
         pprint(api_response)
@@ -2456,6 +2755,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 |-------------|-------------|------------------|
 **200** | Saved file parameters |  -  |
 **400** | No file id or folder id toFolderId determine provider |  -  |
+**401** | Unauthorized |  -  |
 **403** | You do not have enough permissions to edit the file |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -2463,7 +2763,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **save_file_as_pdf**
 > FileIntegerWrapper save_file_as_pdf(id, save_as_pdf_integer=save_as_pdf_integer)
 
-
+Saves a file with the identifier specified in the request as a PDF document.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -2481,7 +2781,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -2497,6 +2797,15 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
@@ -2506,6 +2815,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     save_as_pdf_integer = docspace_api_sdk.SaveAsPdfInteger() # SaveAsPdfInteger | The parameters for saving file as PDF. (optional)
 
     try:
+        # Save a file as PDF
         api_response = api_instance.save_file_as_pdf(id, save_as_pdf_integer=save_as_pdf_integer)
         print("The response of FilesApi->save_file_as_pdf:\n")
         pprint(api_response)
@@ -2526,6 +2836,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | New file information |  -  |
+**401** | Unauthorized |  -  |
 **404** | File not found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -2533,7 +2844,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **save_form_role_mapping**
 > FormRoleWrapper save_form_role_mapping(file_id, save_form_role_mapping_dto_integer=save_form_role_mapping_dto_integer)
 
-
+Saves the form role mapping.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -2551,7 +2862,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -2567,6 +2878,15 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
@@ -2576,6 +2896,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     save_form_role_mapping_dto_integer = docspace_api_sdk.SaveFormRoleMappingDtoInteger() # SaveFormRoleMappingDtoInteger |  (optional)
 
     try:
+        # Save form role mapping
         api_response = api_instance.save_form_role_mapping(file_id, save_form_role_mapping_dto_integer=save_form_role_mapping_dto_integer)
         print("The response of FilesApi->save_form_role_mapping:\n")
         pprint(api_response)
@@ -2596,6 +2917,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Updated information about form role mappings |  -  |
+**401** | Unauthorized |  -  |
 **403** | You do not have enough permissions to edit the file |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -2603,7 +2925,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **set_custom_filter_tag**
 > FileIntegerWrapper set_custom_filter_tag(file_id, custom_filter_parameters=custom_filter_parameters)
 
-
+Sets the Custom Filter editing mode to a file with the ID specified in the request.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -2621,7 +2943,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -2637,6 +2959,15 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
@@ -2646,6 +2977,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     custom_filter_parameters = docspace_api_sdk.CustomFilterParameters() # CustomFilterParameters | The parameters for setting the Custom Filter editing mode. (optional)
 
     try:
+        # Set the Custom Filter editing mode
         api_response = api_instance.set_custom_filter_tag(file_id, custom_filter_parameters=custom_filter_parameters)
         print("The response of FilesApi->set_custom_filter_tag:\n")
         pprint(api_response)
@@ -2666,13 +2998,14 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | File information |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **set_external_link**
 > FileShareWrapper set_external_link(id, file_link_request=file_link_request)
 
-
+Sets an external link to a file with the ID specified in the request.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -2690,7 +3023,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -2706,6 +3039,15 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
@@ -2715,6 +3057,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     file_link_request = docspace_api_sdk.FileLinkRequest() # FileLinkRequest | The file external link parameters. (optional)
 
     try:
+        # Set an external link
         api_response = api_instance.set_external_link(id, file_link_request=file_link_request)
         print("The response of FilesApi->set_external_link:\n")
         pprint(api_response)
@@ -2735,13 +3078,14 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | File security information |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **set_file_order**
 > FileIntegerWrapper set_file_order(file_id, order_request_dto=order_request_dto)
 
-
+Sets order of the file with ID specified in the request.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -2759,7 +3103,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -2775,6 +3119,15 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
@@ -2784,6 +3137,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     order_request_dto = docspace_api_sdk.OrderRequestDto() # OrderRequestDto | The file order information. (optional)
 
     try:
+        # Set file order
         api_response = api_instance.set_file_order(file_id, order_request_dto=order_request_dto)
         print("The response of FilesApi->set_file_order:\n")
         pprint(api_response)
@@ -2804,6 +3158,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Updated file information |  -  |
+**401** | Unauthorized |  -  |
 **403** | You don&#39;t have enough permission to perform the operation |  -  |
 **404** | Not Found |  -  |
 
@@ -2812,7 +3167,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **set_files_order**
 > FileEntryStringArrayWrapper set_files_order(orders_request_dto_integer=orders_request_dto_integer)
 
-
+Sets order of the files.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -2829,7 +3184,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -2845,6 +3200,15 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
@@ -2853,6 +3217,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     orders_request_dto_integer = docspace_api_sdk.OrdersRequestDtoInteger() # OrdersRequestDtoInteger |  (optional)
 
     try:
+        # Set order of files
         api_response = api_instance.set_files_order(orders_request_dto_integer=orders_request_dto_integer)
         print("The response of FilesApi->set_files_order:\n")
         pprint(api_response)
@@ -2873,13 +3238,14 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Updated file entries information |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **start_edit_file**
 > StringWrapper start_edit_file(file_id, start_edit=start_edit)
 
-
+Informs about opening a file with the ID specified in the request for editing, locking it from being deleted or moved (this method is called by the mobile editors).
 
 For more information, see [api.onlyoffice.com]().
 
@@ -2922,6 +3288,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     start_edit = docspace_api_sdk.StartEdit() # StartEdit | The file parameters to start editing. (optional)
 
     try:
+        # Start file editing
         api_response = api_instance.start_edit_file(file_id, start_edit=start_edit)
         print("The response of FilesApi->start_edit_file:\n")
         pprint(api_response)
@@ -2949,7 +3316,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **start_filling_file**
 > FileIntegerWrapper start_filling_file(file_id)
 
-
+Starts filling a file with the ID specified in the request.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -2966,7 +3333,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -2981,6 +3348,15 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
@@ -2989,6 +3365,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     file_id = 9846 # int | The file ID to start filling.
 
     try:
+        # Start file filling
         api_response = api_instance.start_filling_file(file_id)
         print("The response of FilesApi->start_filling_file:\n")
         pprint(api_response)
@@ -3009,6 +3386,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | File information |  -  |
+**401** | Unauthorized |  -  |
 **403** | You do not have enough permissions to edit the file |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -3016,7 +3394,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **track_edit_file**
 > KeyValuePairBooleanStringWrapper track_edit_file(file_id, tab_id=tab_id, doc_key_for_track=doc_key_for_track, is_finish=is_finish)
 
-
+Tracks file changes when editing.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -3062,6 +3440,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     is_finish = true # bool | Specifies whether to finish file tracking or not. (optional)
 
     try:
+        # Track file editing
         api_response = api_instance.track_edit_file(file_id, tab_id=tab_id, doc_key_for_track=doc_key_for_track, is_finish=is_finish)
         print("The response of FilesApi->track_edit_file:\n")
         pprint(api_response)
@@ -3089,7 +3468,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **update_file**
 > FileIntegerWrapper update_file(file_id, update_file=update_file)
 
-
+Updates the information of the selected file with the parameters specified in the request.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -3132,6 +3511,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     update_file = docspace_api_sdk.UpdateFile() # UpdateFile | The parameters for updating a file. (optional)
 
     try:
+        # Update a file
         api_response = api_instance.update_file(file_id, update_file=update_file)
         print("The response of FilesApi->update_file:\n")
         pprint(api_response)
