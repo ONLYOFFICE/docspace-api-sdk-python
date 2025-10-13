@@ -245,7 +245,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update_user_type**
-> EmployeeFullArrayWrapper update_user_type(type, update_members_request_dto=update_members_request_dto)
+> EmployeeFullArrayWrapper update_user_type(type, update_members_request_dto)
 
 Changes a type of the users with the IDs specified in the request.
 
@@ -257,7 +257,7 @@ For more information, see [api.onlyoffice.com]().
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **type** | [**EmployeeType**](.md)| The new user type. | 
- **update_members_request_dto** | [**UpdateMembersRequestDto**](UpdateMembersRequestDto.md)| The request parameters for updating the user information. | [optional] 
+ **update_members_request_dto** | [**UpdateMembersRequestDto**](UpdateMembersRequestDto.md)| The request parameters for updating the user information. | 
 
 ### Return type
 
@@ -297,11 +297,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.UserTypeApi(api_client)
     type = docspace_api_sdk.EmployeeType() # EmployeeType | The new user type.
-    update_members_request_dto = docspace_api_sdk.UpdateMembersRequestDto() # UpdateMembersRequestDto | The request parameters for updating the user information. (optional)
+    update_members_request_dto = docspace_api_sdk.UpdateMembersRequestDto() # UpdateMembersRequestDto | The request parameters for updating the user information.
 
     try:
         # Change a user type
-        api_response = api_instance.update_user_type(type, update_members_request_dto=update_members_request_dto)
+        api_response = api_instance.update_user_type(type, update_members_request_dto)
         print("The response of UserTypeApi->update_user_type:\n")
         pprint(api_response)
     except Exception as e:

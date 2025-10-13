@@ -30,7 +30,7 @@ class EditHistoryAuthor(BaseModel):
     """
     The information about the file editing history author.
     """ # noqa: E501
-    id: Optional[StrictStr] = Field(default=None, description="The author ID.")
+    id: Optional[StrictStr] = Field(description="The author ID.")
     name: Optional[StrictStr] = Field(default=None, description="The author name.")
     __properties: ClassVar[List[str]] = ["id", "name"]
 

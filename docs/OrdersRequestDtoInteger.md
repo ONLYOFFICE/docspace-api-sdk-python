@@ -5,7 +5,7 @@ The collection of items to be ordered.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**items** | [**List[OrdersItemRequestDtoInteger]**](OrdersItemRequestDtoInteger.md) | The list of items with their ordering information. | [optional] 
+**items** | [**List[OrdersItemRequestDtoInteger]**](OrdersItemRequestDtoInteger.md) | The list of items with their ordering information. | 
 
 ## Example
 

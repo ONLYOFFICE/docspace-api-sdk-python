@@ -595,8 +595,8 @@ conf = docspace_api_sdk.Configuration(
         return "Python SDK Debug Report:\n"\
                "OS: {env}\n"\
                "Python Version: {pyversion}\n"\
-               "Version of the API: 3.2.0\n"\
-               "SDK Package Version: 3.2.1-preview.1".\
+               "Version of the API: 3.5.0\n"\
+               "SDK Package Version: 3.5.0-preview.1".\
                format(env=sys.platform, pyversion=sys.version)
 
     def get_host_settings(self) -> List[HostSetting]:

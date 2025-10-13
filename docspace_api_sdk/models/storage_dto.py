@@ -31,11 +31,11 @@ class StorageDto(BaseModel):
     """
     The storage information.
     """ # noqa: E501
-    id: Optional[StrictStr] = Field(default=None, description="The storage ID.")
-    title: Optional[StrictStr] = Field(default=None, description="The storage title.")
+    id: Optional[StrictStr] = Field(description="The storage ID.")
+    title: Optional[StrictStr] = Field(description="The storage title.")
     properties: Optional[List[AuthKey]] = Field(default=None, description="The list of storage authentication keys.")
-    current: Optional[StrictBool] = Field(default=None, description="Specifies if this is the current portal storage or not.")
-    is_set: Optional[StrictBool] = Field(default=None, description="Specifies if this storage can be set or not.", alias="isSet")
+    current: StrictBool = Field(description="Specifies if this is the current portal storage or not.")
+    is_set: StrictBool = Field(description="Specifies if this storage can be set or not.", alias="isSet")
     __properties: ClassVar[List[str]] = ["id", "title", "properties", "current", "isSet"]
 
     model_config = ConfigDict(

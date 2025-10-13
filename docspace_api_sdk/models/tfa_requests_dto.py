@@ -31,8 +31,8 @@ class TfaRequestsDto(BaseModel):
     """
     The request parameters for configuring the Two-Factor Authentication (TFA) settings.
     """ # noqa: E501
-    type: Optional[TfaRequestsDtoType] = None
-    id: Optional[StrictStr] = Field(default=None, description="The ID of the user for whom the TFA settings are being configured.")
+    type: TfaRequestsDtoType
+    id: StrictStr = Field(description="The ID of the user for whom the TFA settings are being configured.")
     trusted_ips: Optional[List[StrictStr]] = Field(default=None, description="The list of IP addresses that bypass TFA verification.", alias="trustedIps")
     mandatory_users: Optional[List[StrictStr]] = Field(default=None, description="The list of user IDs for whom TFA is mandatory.", alias="mandatoryUsers")
     mandatory_groups: Optional[List[StrictStr]] = Field(default=None, description="The list group IDs whose members must use TFA.", alias="mandatoryGroups")

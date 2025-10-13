@@ -46,6 +46,7 @@ class QuotaApi:
         self.api_client = api_client
 
 
+
     @validate_call
     def get_user_quota_settings(
         self,

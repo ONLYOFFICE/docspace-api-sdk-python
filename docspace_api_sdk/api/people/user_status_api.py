@@ -48,6 +48,7 @@ class UserStatusApi:
         self.api_client = api_client
 
 
+
     @validate_call
     def get_by_status(
         self,
@@ -440,7 +441,7 @@ class UserStatusApi:
     def update_user_activation_status(
         self,
         activationstatus: Annotated[EmployeeActivationStatus, Field(description="The new user activation status.")],
-        update_members_request_dto: Annotated[Optional[UpdateMembersRequestDto], Field(description="The request parameters for updating the user information.")] = None,
+        update_members_request_dto: Annotated[UpdateMembersRequestDto, Field(description="The request parameters for updating the user information.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -460,7 +461,7 @@ class UserStatusApi:
 
         :param activationstatus: The new user activation status. (required)
         :type activationstatus: EmployeeActivationStatus
-        :param update_members_request_dto: The request parameters for updating the user information.
+        :param update_members_request_dto: The request parameters for updating the user information. (required)
         :type update_members_request_dto: UpdateMembersRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -512,7 +513,7 @@ class UserStatusApi:
     def update_user_activation_status_with_http_info(
         self,
         activationstatus: Annotated[EmployeeActivationStatus, Field(description="The new user activation status.")],
-        update_members_request_dto: Annotated[Optional[UpdateMembersRequestDto], Field(description="The request parameters for updating the user information.")] = None,
+        update_members_request_dto: Annotated[UpdateMembersRequestDto, Field(description="The request parameters for updating the user information.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -532,7 +533,7 @@ class UserStatusApi:
 
         :param activationstatus: The new user activation status. (required)
         :type activationstatus: EmployeeActivationStatus
-        :param update_members_request_dto: The request parameters for updating the user information.
+        :param update_members_request_dto: The request parameters for updating the user information. (required)
         :type update_members_request_dto: UpdateMembersRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -584,7 +585,7 @@ class UserStatusApi:
     def update_user_activation_status_without_preload_content(
         self,
         activationstatus: Annotated[EmployeeActivationStatus, Field(description="The new user activation status.")],
-        update_members_request_dto: Annotated[Optional[UpdateMembersRequestDto], Field(description="The request parameters for updating the user information.")] = None,
+        update_members_request_dto: Annotated[UpdateMembersRequestDto, Field(description="The request parameters for updating the user information.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -604,7 +605,7 @@ class UserStatusApi:
 
         :param activationstatus: The new user activation status. (required)
         :type activationstatus: EmployeeActivationStatus
-        :param update_members_request_dto: The request parameters for updating the user information.
+        :param update_members_request_dto: The request parameters for updating the user information. (required)
         :type update_members_request_dto: UpdateMembersRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -737,7 +738,7 @@ class UserStatusApi:
     def update_user_status(
         self,
         status: Annotated[EmployeeStatus, Field(description="The new user status.")],
-        update_members_request_dto: Annotated[Optional[UpdateMembersRequestDto], Field(description="The request parameters for updating the user information.")] = None,
+        update_members_request_dto: Annotated[UpdateMembersRequestDto, Field(description="The request parameters for updating the user information.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -757,7 +758,7 @@ class UserStatusApi:
 
         :param status: The new user status. (required)
         :type status: EmployeeStatus
-        :param update_members_request_dto: The request parameters for updating the user information.
+        :param update_members_request_dto: The request parameters for updating the user information. (required)
         :type update_members_request_dto: UpdateMembersRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -809,7 +810,7 @@ class UserStatusApi:
     def update_user_status_with_http_info(
         self,
         status: Annotated[EmployeeStatus, Field(description="The new user status.")],
-        update_members_request_dto: Annotated[Optional[UpdateMembersRequestDto], Field(description="The request parameters for updating the user information.")] = None,
+        update_members_request_dto: Annotated[UpdateMembersRequestDto, Field(description="The request parameters for updating the user information.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -829,7 +830,7 @@ class UserStatusApi:
 
         :param status: The new user status. (required)
         :type status: EmployeeStatus
-        :param update_members_request_dto: The request parameters for updating the user information.
+        :param update_members_request_dto: The request parameters for updating the user information. (required)
         :type update_members_request_dto: UpdateMembersRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -881,7 +882,7 @@ class UserStatusApi:
     def update_user_status_without_preload_content(
         self,
         status: Annotated[EmployeeStatus, Field(description="The new user status.")],
-        update_members_request_dto: Annotated[Optional[UpdateMembersRequestDto], Field(description="The request parameters for updating the user information.")] = None,
+        update_members_request_dto: Annotated[UpdateMembersRequestDto, Field(description="The request parameters for updating the user information.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -901,7 +902,7 @@ class UserStatusApi:
 
         :param status: The new user status. (required)
         :type status: EmployeeStatus
-        :param update_members_request_dto: The request parameters for updating the user information.
+        :param update_members_request_dto: The request parameters for updating the user information. (required)
         :type update_members_request_dto: UpdateMembersRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request

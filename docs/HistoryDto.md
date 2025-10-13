@@ -5,10 +5,10 @@ The file history information.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**action** | [**HistoryAction**](HistoryAction.md) |  | [optional] 
-**initiator** | [**EmployeeDto**](EmployeeDto.md) |  | [optional] 
-**var_date** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] 
-**data** | [**HistoryData**](HistoryData.md) |  | [optional] 
+**action** | [**HistoryAction**](HistoryAction.md) |  | 
+**initiator** | [**EmployeeDto**](EmployeeDto.md) |  | 
+**var_date** | [**ApiDateTime**](ApiDateTime.md) |  | 
+**data** | [**HistoryData**](HistoryData.md) |  | 
 **related** | [**List[HistoryDto]**](HistoryDto.md) | The list of related history. | [optional] 
 
 ## Example

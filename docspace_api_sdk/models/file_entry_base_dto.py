@@ -37,7 +37,10 @@ class FileEntryBaseDto(BaseModel):
     """ # noqa: E501
     title: Optional[StrictStr] = Field(default=None, description="The file entry title.")
     access: Optional[FileShare] = None
-    shared: Optional[StrictBool] = Field(default=None, description="Specifies if the file entry is shared or not.")
+    shared: Optional[StrictBool] = Field(default=None, description="Specifies if the file entry is shared via link or not.")
+    shared_for_user: Optional[StrictBool] = Field(default=None, description="Specifies if the file entry is shared for user or not.", alias="sharedForUser")
+    parent_shared: Optional[StrictBool] = Field(default=None, description="Indicates whether the parent entity is shared.", alias="parentShared")
+    short_web_url: Optional[StrictStr] = Field(default=None, description="The short Web URL.", alias="shortWebUrl")
     created: Optional[ApiDateTime] = None
     created_by: Optional[EmployeeDto] = Field(default=None, alias="createdBy")
     updated: Optional[ApiDateTime] = None
@@ -49,8 +52,9 @@ class FileEntryBaseDto(BaseModel):
     provider_key: Optional[StrictStr] = Field(default=None, description="The provider key of the file entry.", alias="providerKey")
     provider_id: Optional[StrictInt] = Field(default=None, description="The provider ID of the file entry.", alias="providerId")
     order: Optional[StrictStr] = Field(default=None, description="The order of the file entry.")
+    is_favorite: Optional[StrictBool] = Field(default=None, description="Specifies if the file is a favorite or not.", alias="isFavorite")
     file_entry_type: Optional[FileEntryType] = Field(default=None, alias="fileEntryType")
-    __properties: ClassVar[List[str]] = ["title", "access", "shared", "created", "createdBy", "updated", "autoDelete", "rootFolderType", "parentRoomType", "updatedBy", "providerItem", "providerKey", "providerId", "order", "fileEntryType"]
+    __properties: ClassVar[List[str]] = ["title", "access", "shared", "sharedForUser", "parentShared", "shortWebUrl", "created", "createdBy", "updated", "autoDelete", "rootFolderType", "parentRoomType", "updatedBy", "providerItem", "providerKey", "providerId", "order", "isFavorite", "fileEntryType"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -111,6 +115,11 @@ class FileEntryBaseDto(BaseModel):
         if self.title is None and "title" in self.model_fields_set:
             _dict['title'] = None
 
+        # set to None if short_web_url (nullable) is None
+        # and model_fields_set contains the field
+        if self.short_web_url is None and "short_web_url" in self.model_fields_set:
+            _dict['shortWebUrl'] = None
+
         # set to None if provider_item (nullable) is None
         # and model_fields_set contains the field
         if self.provider_item is None and "provider_item" in self.model_fields_set:
@@ -131,6 +140,11 @@ class FileEntryBaseDto(BaseModel):
         if self.order is None and "order" in self.model_fields_set:
             _dict['order'] = None
 
+        # set to None if is_favorite (nullable) is None
+        # and model_fields_set contains the field
+        if self.is_favorite is None and "is_favorite" in self.model_fields_set:
+            _dict['isFavorite'] = None
+
         return _dict
 
     @classmethod
@@ -147,6 +161,9 @@ class FileEntryBaseDto(BaseModel):
             "title": obj.get("title"),
             "access": obj.get("access"),
             "shared": obj.get("shared"),
+            "sharedForUser": obj.get("sharedForUser"),
+            "parentShared": obj.get("parentShared"),
+            "shortWebUrl": obj.get("shortWebUrl"),
             "created": ApiDateTime.from_dict(obj["created"]) if obj.get("created") is not None else None,
             "createdBy": EmployeeDto.from_dict(obj["createdBy"]) if obj.get("createdBy") is not None else None,
             "updated": ApiDateTime.from_dict(obj["updated"]) if obj.get("updated") is not None else None,
@@ -158,6 +175,7 @@ class FileEntryBaseDto(BaseModel):
             "providerKey": obj.get("providerKey"),
             "providerId": obj.get("providerId"),
             "order": obj.get("order"),
+            "isFavorite": obj.get("isFavorite"),
             "fileEntryType": obj.get("fileEntryType")
         })
         return _obj

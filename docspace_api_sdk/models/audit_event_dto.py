@@ -26,8 +26,8 @@ from typing import Any, ClassVar, Dict, List, Optional
 from docspace_api_sdk.models.action_type import ActionType
 from docspace_api_sdk.models.api_date_time import ApiDateTime
 from docspace_api_sdk.models.entry_type import EntryType
+from docspace_api_sdk.models.location_type import LocationType
 from docspace_api_sdk.models.message_action import MessageAction
-from docspace_api_sdk.models.module_type import ModuleType
 from docspace_api_sdk.models.product_type import ProductType
 from typing import Optional, Set
 from typing_extensions import Self
@@ -50,11 +50,11 @@ class AuditEventDto(BaseModel):
     page: Optional[StrictStr] = Field(default=None, description="The audit event page.")
     action_type: Optional[ActionType] = Field(default=None, alias="actionType")
     product: Optional[ProductType] = None
-    module: Optional[ModuleType] = None
+    location: Optional[LocationType] = None
     target: Optional[List[StrictStr]] = Field(default=None, description="The list of target objects affected by the audit event (e.g., document ID, user account).")
     entries: Optional[List[EntryType]] = Field(default=None, description="The list of audit entry types (e.g., Folder, User, File).")
     context: Optional[StrictStr] = Field(default=None, description="The audit event context.")
-    __properties: ClassVar[List[str]] = ["id", "date", "user", "userId", "action", "actionId", "ip", "country", "city", "browser", "platform", "page", "actionType", "product", "module", "target", "entries", "context"]
+    __properties: ClassVar[List[str]] = ["id", "date", "user", "userId", "action", "actionId", "ip", "country", "city", "browser", "platform", "page", "actionType", "product", "location", "target", "entries", "context"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -180,7 +180,7 @@ class AuditEventDto(BaseModel):
             "page": obj.get("page"),
             "actionType": obj.get("actionType"),
             "product": obj.get("product"),
-            "module": obj.get("module"),
+            "location": obj.get("location"),
             "target": obj.get("target"),
             "entries": obj.get("entries"),
             "context": obj.get("context")

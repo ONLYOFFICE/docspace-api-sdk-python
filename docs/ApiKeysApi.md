@@ -387,7 +387,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update_api_key**
-> BooleanWrapper update_api_key(key_id, update_api_key_request=update_api_key_request)
+> BooleanWrapper update_api_key(key_id, update_api_key_request)
 
 Updates an existing API key changing its name, permissions and status.
 
@@ -399,7 +399,7 @@ For more information, see [api.onlyoffice.com]().
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **key_id** | **str**| The unique identifier of the API key to update. | 
- **update_api_key_request** | [**UpdateApiKeyRequest**](UpdateApiKeyRequest.md)| The request parameters for updating an existing API key. | [optional] 
+ **update_api_key_request** | [**UpdateApiKeyRequest**](UpdateApiKeyRequest.md)| The request parameters for updating an existing API key. | 
 
 ### Return type
 
@@ -438,11 +438,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.ApiKeysApi(api_client)
     key_id = '75a5f745-f697-4418-b38d-0fe0d277e258' # str | The unique identifier of the API key to update.
-    update_api_key_request = docspace_api_sdk.UpdateApiKeyRequest() # UpdateApiKeyRequest | The request parameters for updating an existing API key. (optional)
+    update_api_key_request = docspace_api_sdk.UpdateApiKeyRequest() # UpdateApiKeyRequest | The request parameters for updating an existing API key.
 
     try:
         # Update an API key
-        api_response = api_instance.update_api_key(key_id, update_api_key_request=update_api_key_request)
+        api_response = api_instance.update_api_key(key_id, update_api_key_request)
         print("The response of ApiKeysApi->update_api_key:\n")
         pprint(api_response)
     except Exception as e:

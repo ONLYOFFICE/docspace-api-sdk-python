@@ -5,11 +5,11 @@ The storage information.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** | The storage ID. | [optional] 
-**title** | **str** | The storage title. | [optional] 
+**id** | **str** | The storage ID. | 
+**title** | **str** | The storage title. | 
 **properties** | [**List[AuthKey]**](AuthKey.md) | The list of storage authentication keys. | [optional] 
-**current** | **bool** | Specifies if this is the current portal storage or not. | [optional] 
-**is_set** | **bool** | Specifies if this storage can be set or not. | [optional] 
+**current** | **bool** | Specifies if this is the current portal storage or not. | 
+**is_set** | **bool** | Specifies if this storage can be set or not. | 
 
 ## Example
 

@@ -30,9 +30,9 @@ class DeepLinkDto(BaseModel):
     """
     The deep link parameters.
     """ # noqa: E501
-    android_package_name: Optional[StrictStr] = Field(default=None, description="The Android package name.", alias="androidPackageName")
-    url: Optional[StrictStr] = Field(default=None, description="The deep link URL.")
-    ios_package_id: Optional[StrictStr] = Field(default=None, description="The deep link IOS package ID.", alias="iosPackageId")
+    android_package_name: Optional[StrictStr] = Field(description="The Android package name.", alias="androidPackageName")
+    url: Optional[StrictStr] = Field(description="The deep link URL.")
+    ios_package_id: Optional[StrictStr] = Field(description="The deep link IOS package ID.", alias="iosPackageId")
     __properties: ClassVar[List[str]] = ["androidPackageName", "url", "iosPackageId"]
 
     model_config = ConfigDict(

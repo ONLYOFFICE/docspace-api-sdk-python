@@ -5,8 +5,8 @@ The request parameters for configuring the Two-Factor Authentication (TFA) setti
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**type** | [**TfaRequestsDtoType**](TfaRequestsDtoType.md) |  | [optional] 
-**id** | **str** | The ID of the user for whom the TFA settings are being configured. | [optional] 
+**type** | [**TfaRequestsDtoType**](TfaRequestsDtoType.md) |  | 
+**id** | **str** | The ID of the user for whom the TFA settings are being configured. | 
 **trusted_ips** | **List[str]** | The list of IP addresses that bypass TFA verification. | [optional] 
 **mandatory_users** | **List[str]** | The list of user IDs for whom TFA is mandatory. | [optional] 
 **mandatory_groups** | **List[str]** | The list group IDs whose members must use TFA. | [optional] 

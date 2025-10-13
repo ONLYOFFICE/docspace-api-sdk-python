@@ -7,8 +7,9 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **start_date** | **datetime** | Start date | [optional] 
 **end_date** | **datetime** | End date | [optional] 
+**participant_name** | **str** | Participant name | [optional] 
 **credit** | **bool** | Include credit operations | [optional] 
-**withdrawal** | **bool** | Include withdrawal operations | [optional] 
+**debit** | **bool** | Include debit operations | [optional] 
 
 ## Example
 

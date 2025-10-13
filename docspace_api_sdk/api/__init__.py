@@ -29,7 +29,7 @@ from docspace_api_sdk.api.Files.settings_api import SettingsApi
 from docspace_api_sdk.api.Files.sharing_api import SharingApi
 from docspace_api_sdk.api.Files.third_party_integration_api import ThirdPartyIntegrationApi
 from docspace_api_sdk.api.Group.group_api import GroupApi
-from docspace_api_sdk.api.Group.rooms_api import RoomsApi
+from docspace_api_sdk.api.Group.search_api import SearchApi
 from docspace_api_sdk.api.Migration.migration_api import MigrationApi
 from docspace_api_sdk.api.OAuth20.authorization_api import AuthorizationApi
 from docspace_api_sdk.api.OAuth20.client_management_api import ClientManagementApi
@@ -66,7 +66,6 @@ from docspace_api_sdk.api.Settings.authorization_api import AuthorizationApi
 from docspace_api_sdk.api.Settings.banners_visibility_api import BannersVisibilityApi
 from docspace_api_sdk.api.Settings.common_settings_api import CommonSettingsApi
 from docspace_api_sdk.api.Settings.cookies_api import CookiesApi
-from docspace_api_sdk.api.Settings.custom_navigation_api import CustomNavigationApi
 from docspace_api_sdk.api.Settings.encryption_api import EncryptionApi
 from docspace_api_sdk.api.Settings.greeting_settings_api import GreetingSettingsApi
 from docspace_api_sdk.api.Settings.ip_restrictions_api import IPRestrictionsApi
@@ -82,6 +81,7 @@ from docspace_api_sdk.api.Settings.security_api import SecurityApi
 from docspace_api_sdk.api.Settings.statistics_api import StatisticsApi
 from docspace_api_sdk.api.Settings.storage_api import StorageApi
 from docspace_api_sdk.api.Settings.tfa_settings_api import TFASettingsApi
+from docspace_api_sdk.api.Settings.telegram_api import TelegramApi
 from docspace_api_sdk.api.Settings.webhooks_api import WebhooksApi
 from docspace_api_sdk.api.Settings.webplugins_api import WebpluginsApi
 from docspace_api_sdk.api.ThirdParty.third_party_api import ThirdPartyApi

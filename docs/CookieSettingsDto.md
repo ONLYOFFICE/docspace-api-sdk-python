@@ -5,8 +5,8 @@ The cookie settings.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**life_time** | **int** | The cookie lifetime value in minutes. | [optional] 
-**enabled** | **bool** | Specifies if the cookie settings are enabled or not. | [optional] 
+**life_time** | **int** | The cookie lifetime value in minutes. | 
+**enabled** | **bool** | Specifies if the cookie settings are enabled or not. | 
 
 ## Example
 

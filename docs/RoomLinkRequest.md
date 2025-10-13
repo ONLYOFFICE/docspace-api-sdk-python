@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **link_id** | **str** | The room link ID. | [optional] 
 **access** | [**FileShare**](FileShare.md) |  | [optional] 
 **expiration_date** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] 
+**internal** | **bool** | The link scope, whether it is internal or not. | [optional] 
 **title** | **str** | The link name. | [optional] 
 **link_type** | [**LinkType**](LinkType.md) |  | [optional] 
 **password** | **str** | The link password. | [optional] 

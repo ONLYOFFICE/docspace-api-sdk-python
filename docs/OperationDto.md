@@ -8,11 +8,14 @@ Name | Type | Description | Notes
 **var_date** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] 
 **service** | **str** | Service related to the operation. | [optional] 
 **description** | **str** | Brief description of the operation. | [optional] 
+**details** | **str** | Brief details of the operation. | [optional] 
 **service_unit** | **str** | Unit of the service. | [optional] 
 **quantity** | **int** | Quantity of the service used. | [optional] 
 **currency** | **str** | The three-character ISO 4217 currency symbol of the operation. | [optional] 
 **credit** | **float** | Credit amount of the operation. | [optional] 
-**withdrawal** | **float** | Withdrawal amount of the operation. | [optional] 
+**debit** | **float** | Debit amount of the operation. | [optional] 
+**participant_name** | **str** | Original name of the participant. | [optional] 
+**participant_display_name** | **str** | Display name of the participant. | [optional] 
 
 ## Example
 

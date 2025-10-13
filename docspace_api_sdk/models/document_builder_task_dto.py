@@ -31,14 +31,14 @@ class DocumentBuilderTaskDto(BaseModel):
     """
     The document builder task parameters.
     """ # noqa: E501
-    id: Optional[StrictStr] = Field(default=None, description="The document builder ID.")
-    error: Optional[StrictStr] = Field(default=None, description="The error message occured while the document building process.")
-    percentage: Optional[StrictInt] = Field(default=None, description="The percentage of the progress of the document building process.")
-    is_completed: Optional[StrictBool] = Field(default=None, description="Specifies whether the document building process is completed or not.", alias="isCompleted")
-    status: Optional[DistributedTaskStatus] = None
-    result_file_id: Optional[Any] = Field(default=None, description="The result file ID.", alias="resultFileId")
-    result_file_name: Optional[StrictStr] = Field(default=None, description="The result file name.", alias="resultFileName")
-    result_file_url: Optional[StrictStr] = Field(default=None, description="The result file URL.", alias="resultFileUrl")
+    id: Optional[StrictStr] = Field(description="The document builder ID.")
+    error: Optional[StrictStr] = Field(description="The error message occured while the document building process.")
+    percentage: StrictInt = Field(description="The percentage of the progress of the document building process.")
+    is_completed: StrictBool = Field(description="Specifies whether the document building process is completed or not.", alias="isCompleted")
+    status: DistributedTaskStatus
+    result_file_id: Optional[Any] = Field(description="The result file ID.", alias="resultFileId")
+    result_file_name: Optional[StrictStr] = Field(description="The result file name.", alias="resultFileName")
+    result_file_url: Optional[StrictStr] = Field(description="The result file URL.", alias="resultFileUrl")
     __properties: ClassVar[List[str]] = ["id", "error", "percentage", "isCompleted", "status", "resultFileId", "resultFileName", "resultFileUrl"]
 
     model_config = ConfigDict(

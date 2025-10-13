@@ -34,8 +34,8 @@ class ThirdPartyRequestDto(BaseModel):
     login: Optional[StrictStr] = Field(default=None, description="The third-party request login.")
     password: Optional[StrictStr] = Field(default=None, description="The third-party request password.")
     token: Optional[StrictStr] = Field(default=None, description="The authentication token.")
-    customer_title: Optional[StrictStr] = Field(default=None, description="The customer title.", alias="customerTitle")
-    provider_key: Optional[StrictStr] = Field(default=None, description="The provider key.", alias="providerKey")
+    customer_title: Optional[StrictStr] = Field(description="The customer title.", alias="customerTitle")
+    provider_key: Optional[StrictStr] = Field(description="The provider key.", alias="providerKey")
     provider_id: Optional[StrictInt] = Field(default=None, description="The provider ID.", alias="providerId")
     __properties: ClassVar[List[str]] = ["url", "login", "password", "token", "customerTitle", "providerKey", "providerId"]
 

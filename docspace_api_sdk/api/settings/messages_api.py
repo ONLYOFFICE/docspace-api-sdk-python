@@ -45,6 +45,7 @@ class MessagesApi:
         self.api_client = api_client
 
 
+
     @validate_call
     def enable_admin_message_settings(
         self,
@@ -64,7 +65,7 @@ class MessagesApi:
     ) -> StringWrapper:
         """Enable the administrator message settings
 
-        Displays the contact form on the \"Sign In\" page, allowing users to send a message to the DocSpace administrator in case they encounter any issues while accessing DocSpace.
+        Displays the contact form on the Sign In page, allowing users to send a message to the DocSpace administrator in case they encounter any issues while accessing DocSpace.
 
         :param turn_on_admin_message_settings_request_dto:
         :type turn_on_admin_message_settings_request_dto: TurnOnAdminMessageSettingsRequestDto
@@ -132,7 +133,7 @@ class MessagesApi:
     ) -> ApiResponse[StringWrapper]:
         """Enable the administrator message settings
 
-        Displays the contact form on the \"Sign In\" page, allowing users to send a message to the DocSpace administrator in case they encounter any issues while accessing DocSpace.
+        Displays the contact form on the Sign In page, allowing users to send a message to the DocSpace administrator in case they encounter any issues while accessing DocSpace.
 
         :param turn_on_admin_message_settings_request_dto:
         :type turn_on_admin_message_settings_request_dto: TurnOnAdminMessageSettingsRequestDto
@@ -200,7 +201,7 @@ class MessagesApi:
     ) -> RESTResponseType:
         """Enable the administrator message settings
 
-        Displays the contact form on the \"Sign In\" page, allowing users to send a message to the DocSpace administrator in case they encounter any issues while accessing DocSpace.
+        Displays the contact form on the Sign In page, allowing users to send a message to the DocSpace administrator in case they encounter any issues while accessing DocSpace.
 
         :param turn_on_admin_message_settings_request_dto:
         :type turn_on_admin_message_settings_request_dto: TurnOnAdminMessageSettingsRequestDto

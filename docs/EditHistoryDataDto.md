@@ -6,12 +6,12 @@ The file editing history data.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **changes_url** | **str** | The URL address of the file with the document changes data. | [optional] 
-**key** | **str** | The document identifier used to unambiguously identify the document file. | [optional] 
+**key** | **str** | The document identifier used to unambiguously identify the document file. | 
 **previous** | [**EditHistoryUrl**](EditHistoryUrl.md) |  | [optional] 
 **token** | **str** | The encrypted signature added to the parameter in the form of a token. | [optional] 
-**url** | **str** | The URL address of the current document version. | [optional] 
-**version** | **int** | The document version number. | [optional] 
-**file_type** | **str** | The document extension. | [optional] 
+**url** | **str** | The URL address of the current document version. | 
+**version** | **int** | The document version number. | 
+**file_type** | **str** | The document extension. | 
 
 ## Example
 

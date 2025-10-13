@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **password** | **str** | The user password. | [optional] 
 **password_hash** | **str** | The user password hash. | [optional] 
 **email** | **str** | The user email address. | [optional] 
+**enc_email** | **str** | The user encrypted email address. | [optional] 
 
 ## Example
 

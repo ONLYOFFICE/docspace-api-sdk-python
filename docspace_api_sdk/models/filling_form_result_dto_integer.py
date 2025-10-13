@@ -32,11 +32,11 @@ class FillingFormResultDtoInteger(BaseModel):
     """
     The parameters of the form filling result.
     """ # noqa: E501
-    form_number: Optional[StrictInt] = Field(default=None, description="The filling form number.", alias="formNumber")
+    form_number: StrictInt = Field(description="The filling form number.", alias="formNumber")
     completed_form: Optional[FileDtoInteger] = Field(default=None, alias="completedForm")
     original_form: Optional[FileDtoInteger] = Field(default=None, alias="originalForm")
     manager: Optional[EmployeeFullDto] = None
-    room_id: Optional[StrictInt] = Field(default=None, description="The room ID where filling the form.", alias="roomId")
+    room_id: StrictInt = Field(description="The room ID where filling the form.", alias="roomId")
     is_room_member: Optional[StrictBool] = Field(default=None, description="Specifies if the manager who fills the form is a room member or not.", alias="isRoomMember")
     __properties: ClassVar[List[str]] = ["formNumber", "completedForm", "originalForm", "manager", "roomId", "isRoomMember"]
 

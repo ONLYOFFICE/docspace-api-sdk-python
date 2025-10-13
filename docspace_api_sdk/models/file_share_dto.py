@@ -23,7 +23,10 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool
 from typing import Any, ClassVar, Dict, List, Optional
+from docspace_api_sdk.models.employee_full_dto import EmployeeFullDto
 from docspace_api_sdk.models.file_share import FileShare
+from docspace_api_sdk.models.file_share_link import FileShareLink
+from docspace_api_sdk.models.group_summary_dto import GroupSummaryDto
 from docspace_api_sdk.models.subject_type import SubjectType
 from typing import Optional, Set
 from typing_extensions import Self
@@ -34,11 +37,17 @@ class FileShareDto(BaseModel):
     """ # noqa: E501
     access: Optional[FileShare] = None
     shared_to: Optional[Any] = Field(default=None, description="The user who has the access to the specified file.", alias="sharedTo")
-    is_locked: Optional[StrictBool] = Field(default=None, description="Specifies if the access right is locked or not.", alias="isLocked")
-    is_owner: Optional[StrictBool] = Field(default=None, description="Specifies if the user is an owner of the specified file or not.", alias="isOwner")
-    can_edit_access: Optional[StrictBool] = Field(default=None, description="Specifies if the user can edit the access to the specified file or not.", alias="canEditAccess")
-    subject_type: Optional[SubjectType] = Field(default=None, alias="subjectType")
-    __properties: ClassVar[List[str]] = ["access", "sharedTo", "isLocked", "isOwner", "canEditAccess", "subjectType"]
+    shared_to_user: Optional[EmployeeFullDto] = Field(default=None, alias="sharedToUser")
+    shared_to_group: Optional[GroupSummaryDto] = Field(default=None, alias="sharedToGroup")
+    shared_link: Optional[FileShareLink] = Field(default=None, alias="sharedLink")
+    is_locked: StrictBool = Field(description="Specifies if the access right is locked or not.", alias="isLocked")
+    is_owner: StrictBool = Field(description="Specifies if the user is an owner of the specified file or not.", alias="isOwner")
+    can_edit_access: StrictBool = Field(description="Specifies if the user can edit the access to the specified file or not.", alias="canEditAccess")
+    can_edit_internal: StrictBool = Field(description="Indicates whether internal editing permissions are granted.", alias="canEditInternal")
+    can_edit_deny_download: StrictBool = Field(description="Determines whether the user has permission to modify the deny download setting for the file share.", alias="canEditDenyDownload")
+    can_edit_expiration_date: StrictBool = Field(description="Indicates whether the expiration date of access permissions can be edited.", alias="canEditExpirationDate")
+    subject_type: SubjectType = Field(alias="subjectType")
+    __properties: ClassVar[List[str]] = ["access", "sharedTo", "sharedToUser", "sharedToGroup", "sharedLink", "isLocked", "isOwner", "canEditAccess", "canEditInternal", "canEditDenyDownload", "canEditExpirationDate", "subjectType"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -79,6 +88,15 @@ class FileShareDto(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of shared_to_user
+        if self.shared_to_user:
+            _dict['sharedToUser'] = self.shared_to_user.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of shared_to_group
+        if self.shared_to_group:
+            _dict['sharedToGroup'] = self.shared_to_group.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of shared_link
+        if self.shared_link:
+            _dict['sharedLink'] = self.shared_link.to_dict()
         # set to None if shared_to (nullable) is None
         # and model_fields_set contains the field
         if self.shared_to is None and "shared_to" in self.model_fields_set:
@@ -99,9 +117,15 @@ class FileShareDto(BaseModel):
         _obj = cls.model_validate({
             "access": obj.get("access"),
             "sharedTo": obj.get("sharedTo"),
+            "sharedToUser": EmployeeFullDto.from_dict(obj["sharedToUser"]) if obj.get("sharedToUser") is not None else None,
+            "sharedToGroup": GroupSummaryDto.from_dict(obj["sharedToGroup"]) if obj.get("sharedToGroup") is not None else None,
+            "sharedLink": FileShareLink.from_dict(obj["sharedLink"]) if obj.get("sharedLink") is not None else None,
             "isLocked": obj.get("isLocked"),
             "isOwner": obj.get("isOwner"),
             "canEditAccess": obj.get("canEditAccess"),
+            "canEditInternal": obj.get("canEditInternal"),
+            "canEditDenyDownload": obj.get("canEditDenyDownload"),
+            "canEditExpirationDate": obj.get("canEditExpirationDate"),
             "subjectType": obj.get("subjectType")
         })
         return _obj

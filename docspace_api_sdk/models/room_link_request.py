@@ -37,11 +37,12 @@ class RoomLinkRequest(BaseModel):
     link_id: Optional[StrictStr] = Field(default=None, description="The room link ID.", alias="linkId")
     access: Optional[FileShare] = None
     expiration_date: Optional[ApiDateTime] = Field(default=None, alias="expirationDate")
+    internal: Optional[StrictBool] = Field(default=None, description="The link scope, whether it is internal or not.")
     title: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The link name.")
     link_type: Optional[LinkType] = Field(default=None, alias="linkType")
     password: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The link password.")
     deny_download: Optional[StrictBool] = Field(default=None, description="Specifies if downloading the file from the link is disabled or not.", alias="denyDownload")
-    __properties: ClassVar[List[str]] = ["linkId", "access", "expirationDate", "title", "linkType", "password", "denyDownload"]
+    __properties: ClassVar[List[str]] = ["linkId", "access", "expirationDate", "internal", "title", "linkType", "password", "denyDownload"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -111,6 +112,7 @@ class RoomLinkRequest(BaseModel):
             "linkId": obj.get("linkId"),
             "access": obj.get("access"),
             "expirationDate": ApiDateTime.from_dict(obj["expirationDate"]) if obj.get("expirationDate") is not None else None,
+            "internal": obj.get("internal"),
             "title": obj.get("title"),
             "linkType": obj.get("linkType"),
             "password": obj.get("password"),

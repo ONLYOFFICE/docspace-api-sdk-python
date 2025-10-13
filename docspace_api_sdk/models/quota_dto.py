@@ -35,13 +35,13 @@ class QuotaDto(BaseModel):
     """
     The quota information.
     """ # noqa: E501
-    id: Optional[StrictInt] = Field(default=None, description="The quota ID.")
-    title: Optional[StrictStr] = Field(default=None, description="The quota title.")
-    price: Optional[PriceDto] = None
-    non_profit: Optional[StrictBool] = Field(default=None, description="Specifies if the quota is nonprofit or not.", alias="nonProfit")
-    free: Optional[StrictBool] = Field(default=None, description="Specifies if the quota is free or not.")
-    trial: Optional[StrictBool] = Field(default=None, description="Specifies if the quota is trial or not.")
-    features: Optional[List[TenantQuotaFeatureDto]] = Field(default=None, description="The list of tenant quota features.")
+    id: StrictInt = Field(description="The quota ID.")
+    title: Optional[StrictStr] = Field(description="The quota title.")
+    price: PriceDto
+    non_profit: StrictBool = Field(description="Specifies if the quota is nonprofit or not.", alias="nonProfit")
+    free: StrictBool = Field(description="Specifies if the quota is free or not.")
+    trial: StrictBool = Field(description="Specifies if the quota is trial or not.")
+    features: Optional[List[TenantQuotaFeatureDto]] = Field(description="The list of tenant quota features.")
     users_quota: Optional[TenantEntityQuotaSettings] = Field(default=None, alias="usersQuota")
     rooms_quota: Optional[TenantEntityQuotaSettings] = Field(default=None, alias="roomsQuota")
     tenant_custom_quota: Optional[TenantQuotaSettings] = Field(default=None, alias="tenantCustomQuota")

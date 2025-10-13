@@ -5,7 +5,7 @@ The used space parameters of the tenant quota feature.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**value** | **object** | The used space value. | [optional] 
+**value** | **object** | The used space value. | 
 **title** | **str** | The used space title. | [optional] 
 
 ## Example

@@ -13,7 +13,6 @@ Name | Type | Description | Notes
 **web_custom_filter_editing** | **bool** |  | [optional] 
 **web_restricted_editing** | **bool** |  | [optional] 
 **web_comment** | **bool** |  | [optional] 
-**co_auhtoring** | **bool** |  | [optional] 
 **can_convert** | **bool** |  | [optional] 
 **must_convert** | **bool** |  | [optional] 
 

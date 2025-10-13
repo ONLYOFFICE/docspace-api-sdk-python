@@ -5,10 +5,10 @@ The parameters representing the Two-Factor Authentication (TFA) configuration se
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** | The ID of the TFA configuration. | [optional] 
-**title** | **str** | The display name or description of the TFA configuration. | [optional] 
-**enabled** | **bool** | Indicates whether the TFA configuration is currently active. | [optional] 
-**avaliable** | **bool** | Indicates whether the TFA configuration can be used. | [optional] 
+**id** | **str** | The ID of the TFA configuration. | 
+**title** | **str** | The display name or description of the TFA configuration. | 
+**enabled** | **bool** | Indicates whether the TFA configuration is currently active. | 
+**avaliable** | **bool** | Indicates whether the TFA configuration can be used. | 
 **trusted_ips** | **List[str]** | The list of IP addresses that are exempt from TFA requirements. | [optional] 
 **mandatory_users** | **List[str]** | The list of user IDs that are required to use TFA. | [optional] 
 **mandatory_groups** | **List[str]** | The list of group IDs whose members are required to use TFA. | [optional] 

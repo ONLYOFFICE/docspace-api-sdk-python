@@ -53,6 +53,7 @@ class SecurityApi:
         self.api_client = api_client
 
 
+
     @validate_call
     def get_enabled_modules(
         self,
@@ -310,8 +311,8 @@ class SecurityApi:
     @validate_call
     def get_is_product_administrator(
         self,
-        productid: Annotated[Optional[StrictStr], Field(description="The ID of the product extracted from the query parameters.")] = None,
-        userid: Annotated[Optional[StrictStr], Field(description="The user ID extracted from the query parameters.")] = None,
+        productid: Annotated[StrictStr, Field(description="The ID of the product extracted from the query parameters.")],
+        userid: Annotated[StrictStr, Field(description="The user ID extracted from the query parameters.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -329,9 +330,9 @@ class SecurityApi:
 
         Checks if the selected user is an administrator of a product with the ID specified in the request.
 
-        :param productid: The ID of the product extracted from the query parameters.
+        :param productid: The ID of the product extracted from the query parameters. (required)
         :type productid: str
-        :param userid: The user ID extracted from the query parameters.
+        :param userid: The user ID extracted from the query parameters. (required)
         :type userid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -382,8 +383,8 @@ class SecurityApi:
     @validate_call
     def get_is_product_administrator_with_http_info(
         self,
-        productid: Annotated[Optional[StrictStr], Field(description="The ID of the product extracted from the query parameters.")] = None,
-        userid: Annotated[Optional[StrictStr], Field(description="The user ID extracted from the query parameters.")] = None,
+        productid: Annotated[StrictStr, Field(description="The ID of the product extracted from the query parameters.")],
+        userid: Annotated[StrictStr, Field(description="The user ID extracted from the query parameters.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -401,9 +402,9 @@ class SecurityApi:
 
         Checks if the selected user is an administrator of a product with the ID specified in the request.
 
-        :param productid: The ID of the product extracted from the query parameters.
+        :param productid: The ID of the product extracted from the query parameters. (required)
         :type productid: str
-        :param userid: The user ID extracted from the query parameters.
+        :param userid: The user ID extracted from the query parameters. (required)
         :type userid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -454,8 +455,8 @@ class SecurityApi:
     @validate_call
     def get_is_product_administrator_without_preload_content(
         self,
-        productid: Annotated[Optional[StrictStr], Field(description="The ID of the product extracted from the query parameters.")] = None,
-        userid: Annotated[Optional[StrictStr], Field(description="The user ID extracted from the query parameters.")] = None,
+        productid: Annotated[StrictStr, Field(description="The ID of the product extracted from the query parameters.")],
+        userid: Annotated[StrictStr, Field(description="The user ID extracted from the query parameters.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -473,9 +474,9 @@ class SecurityApi:
 
         Checks if the selected user is an administrator of a product with the ID specified in the request.
 
-        :param productid: The ID of the product extracted from the query parameters.
+        :param productid: The ID of the product extracted from the query parameters. (required)
         :type productid: str
-        :param userid: The user ID extracted from the query parameters.
+        :param userid: The user ID extracted from the query parameters. (required)
         :type userid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request

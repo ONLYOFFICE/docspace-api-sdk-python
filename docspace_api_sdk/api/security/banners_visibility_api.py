@@ -43,6 +43,7 @@ class BannersVisibilityApi:
         self.api_client = api_client
 
 
+
     @validate_call
     def set_tenant_banner_settings(
         self,

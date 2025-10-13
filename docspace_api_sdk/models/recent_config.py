@@ -28,7 +28,7 @@ from typing_extensions import Self
 
 class RecentConfig(BaseModel):
     """
-    The presence or absence of the documents in the \"Open Recent...\" menu option.
+    The presence or absence of the documents in the Open Recent... menu option.
     """ # noqa: E501
     folder: Optional[StrictStr] = Field(default=None, description="The folder where the document is stored.")
     title: Optional[StrictStr] = Field(default=None, description="The document title that will be displayed in the Open Recent... menu option.")

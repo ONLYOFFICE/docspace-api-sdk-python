@@ -160,7 +160,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **signup_third_party_account**
-> signup_third_party_account(signup_account_request_dto=signup_account_request_dto)
+> EmployeeWrapper signup_third_party_account(signup_account_request_dto=signup_account_request_dto)
 
 Creates a third-party account with the parameters specified in the request.
 
@@ -175,7 +175,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**EmployeeWrapper**](EmployeeWrapper.md)
 
 ### Authorization
 
@@ -186,6 +186,7 @@ No authorization required
 
 ```python
 import docspace_api_sdk
+from docspace_api_sdk.models.employee_wrapper import EmployeeWrapper
 from docspace_api_sdk.models.signup_account_request_dto import SignupAccountRequestDto
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
@@ -203,7 +204,9 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
     try:
         # Create a third-pary account
-        api_instance.signup_third_party_account(signup_account_request_dto=signup_account_request_dto)
+        api_response = api_instance.signup_third_party_account(signup_account_request_dto=signup_account_request_dto)
+        print("The response of ThirdPartyAccountsApi->signup_third_party_account:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling ThirdPartyAccountsApi->signup_third_party_account: %s\n" % e)
 ```
@@ -213,7 +216,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 
 ### HTTP response details

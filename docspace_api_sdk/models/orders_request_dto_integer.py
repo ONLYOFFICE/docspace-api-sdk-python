@@ -31,7 +31,7 @@ class OrdersRequestDtoInteger(BaseModel):
     """
     The collection of items to be ordered.
     """ # noqa: E501
-    items: Optional[List[OrdersItemRequestDtoInteger]] = Field(default=None, description="The list of items with their ordering information.")
+    items: Optional[List[OrdersItemRequestDtoInteger]] = Field(description="The list of items with their ordering information.")
     __properties: ClassVar[List[str]] = ["items"]
 
     model_config = ConfigDict(

@@ -5,7 +5,7 @@ The anonymous config parameters.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**request** | **bool** | Specifies if the anonymous is a request. | [optional] 
+**request** | **bool** | Specifies if the anonymous is a request. | 
 
 ## Example
 

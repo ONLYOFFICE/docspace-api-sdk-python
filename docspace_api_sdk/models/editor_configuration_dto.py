@@ -44,13 +44,13 @@ class EditorConfigurationDto(BaseModel):
     customization: Optional[CustomizationConfigDto] = None
     embedded: Optional[EmbeddedConfig] = None
     encryption_keys: Optional[EncryptionKeysConfig] = Field(default=None, alias="encryptionKeys")
-    lang: Optional[StrictStr] = Field(default=None, description="The language of the editor configuration.")
-    mode: Optional[StrictStr] = Field(default=None, description="The mode of the editor configuration.")
+    lang: Optional[StrictStr] = Field(description="The language of the editor configuration.")
+    mode: Optional[StrictStr] = Field(description="The mode of the editor configuration.")
     mode_write: Optional[StrictBool] = Field(default=None, description="Specifies if the mode is write of the editor configuration.", alias="modeWrite")
     plugins: Optional[PluginsConfig] = None
     recent: Optional[List[RecentConfig]] = Field(default=None, description="The recent configuration of the editor.")
     templates: Optional[List[TemplatesConfig]] = Field(default=None, description="The templates of the editor configuration.")
-    user: Optional[UserConfig] = None
+    user: UserConfig
     __properties: ClassVar[List[str]] = ["callbackUrl", "coEditing", "createUrl", "customization", "embedded", "encryptionKeys", "lang", "mode", "modeWrite", "plugins", "recent", "templates", "user"]
 
     model_config = ConfigDict(

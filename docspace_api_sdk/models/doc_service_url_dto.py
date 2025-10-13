@@ -33,12 +33,13 @@ class DocServiceUrlDto(BaseModel):
     version: Optional[StrictStr] = Field(description="The version of the document service.")
     doc_service_url_api: Optional[StrictStr] = Field(description="The document service URL API.", alias="docServiceUrlApi")
     doc_service_url: Optional[StrictStr] = Field(description="The document service URL.", alias="docServiceUrl")
+    doc_service_preload_url: Optional[StrictStr] = Field(description="The URL used to preload the document service scripts.", alias="docServicePreloadUrl")
     doc_service_url_internal: Optional[StrictStr] = Field(description="The internal document service URL.", alias="docServiceUrlInternal")
     doc_service_portal_url: Optional[StrictStr] = Field(description="The document service portal URL.", alias="docServicePortalUrl")
-    doc_service_signature_header: Optional[StrictStr] = Field(default=None, description="The document service signature header.", alias="docServiceSignatureHeader")
-    doc_service_ssl_verification: Optional[StrictBool] = Field(default=None, description="Specifies if the document service SSL verification is enabled.", alias="docServiceSslVerification")
+    doc_service_signature_header: Optional[StrictStr] = Field(description="The document service signature header.", alias="docServiceSignatureHeader")
+    doc_service_ssl_verification: StrictBool = Field(description="Specifies if the document service SSL verification is enabled.", alias="docServiceSslVerification")
     is_default: StrictBool = Field(description="Specifies if the document service is default.", alias="isDefault")
-    __properties: ClassVar[List[str]] = ["version", "docServiceUrlApi", "docServiceUrl", "docServiceUrlInternal", "docServicePortalUrl", "docServiceSignatureHeader", "docServiceSslVerification", "isDefault"]
+    __properties: ClassVar[List[str]] = ["version", "docServiceUrlApi", "docServiceUrl", "docServicePreloadUrl", "docServiceUrlInternal", "docServicePortalUrl", "docServiceSignatureHeader", "docServiceSslVerification", "isDefault"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -94,6 +95,11 @@ class DocServiceUrlDto(BaseModel):
         if self.doc_service_url is None and "doc_service_url" in self.model_fields_set:
             _dict['docServiceUrl'] = None
 
+        # set to None if doc_service_preload_url (nullable) is None
+        # and model_fields_set contains the field
+        if self.doc_service_preload_url is None and "doc_service_preload_url" in self.model_fields_set:
+            _dict['docServicePreloadUrl'] = None
+
         # set to None if doc_service_url_internal (nullable) is None
         # and model_fields_set contains the field
         if self.doc_service_url_internal is None and "doc_service_url_internal" in self.model_fields_set:
@@ -125,6 +131,7 @@ class DocServiceUrlDto(BaseModel):
             "version": obj.get("version"),
             "docServiceUrlApi": obj.get("docServiceUrlApi"),
             "docServiceUrl": obj.get("docServiceUrl"),
+            "docServicePreloadUrl": obj.get("docServicePreloadUrl"),
             "docServiceUrlInternal": obj.get("docServiceUrlInternal"),
             "docServicePortalUrl": obj.get("docServicePortalUrl"),
             "docServiceSignatureHeader": obj.get("docServiceSignatureHeader"),

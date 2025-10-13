@@ -32,7 +32,7 @@ class WebhooksLogDto(BaseModel):
     """
     The webhook log parameters.
     """ # noqa: E501
-    id: Optional[StrictInt] = Field(default=None, description="The webhook log ID.")
+    id: StrictInt = Field(description="The webhook log ID.")
     config_name: Optional[StrictStr] = Field(default=None, description="The webhook configuration name.", alias="configName")
     trigger: Optional[WebhookTrigger] = None
     creation_time: Optional[datetime] = Field(default=None, description="The webhook creation time.", alias="creationTime")

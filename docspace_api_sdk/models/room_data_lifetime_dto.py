@@ -32,8 +32,8 @@ class RoomDataLifetimeDto(BaseModel):
     """
     The room data lifetime information.
     """ # noqa: E501
-    delete_permanently: Optional[StrictBool] = Field(default=None, description="Specifies whether to permanently delete the room data or not.", alias="deletePermanently")
-    period: Optional[RoomDataLifetimePeriod] = None
+    delete_permanently: StrictBool = Field(description="Specifies whether to permanently delete the room data or not.", alias="deletePermanently")
+    period: RoomDataLifetimePeriod
     value: Optional[Annotated[int, Field(le=999, strict=True, ge=1)]] = Field(default=None, description="Specifies the time period value of the room data lifetime.")
     enabled: Optional[StrictBool] = Field(default=None, description="Specifies whether the room data lifetime setting is enabled or not.")
     __properties: ClassVar[List[str]] = ["deletePermanently", "period", "value", "enabled"]

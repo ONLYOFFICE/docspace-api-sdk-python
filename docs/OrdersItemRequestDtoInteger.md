@@ -5,9 +5,9 @@ An item in the ordering request with its entry type and ID.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**entry_id** | **int** | The entry unique identifier (file or folder). | [optional] 
-**entry_type** | [**FileEntryType**](FileEntryType.md) |  | [optional] 
-**order** | **int** | The order value. | [optional] 
+**entry_id** | **int** | The entry unique identifier (file or folder). | 
+**entry_type** | [**FileEntryType**](FileEntryType.md) |  | 
+**order** | **int** | The order value. | 
 
 ## Example
 

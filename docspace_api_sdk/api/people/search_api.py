@@ -20,6 +20,7 @@ import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
+from __future__ import annotations
 
 from pydantic import Field, StrictBool, StrictInt, StrictStr, field_validator
 from typing import List, Optional
@@ -52,10 +53,15 @@ class SearchApi:
         if api_client is None:
             api_client = ApiClient.get_default()
         self.api_client = api_client
+        self._fields = None
+
+    def with_fields(self, fields: str) -> SearchApi:
+        self._fields = fields
+        return self
 
 
     @validate_call
-    def get_accounts_entries_with_shared(
+    def get_accounts_entries_with_files_shared(
         self,
         id: Annotated[StrictInt, Field(description="The user ID.")],
         employee_status: Annotated[Optional[EmployeeStatus], Field(description="The user status.")] = None,
@@ -83,9 +89,9 @@ class SearchApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ObjectArrayWrapper:
-        """Get account entries
+        """Get account entries with file sharing settings
 
-        Returns the account entries with their sharing settings.
+        Returns the account entries with their sharing settings for a file with the ID specified in request.
 
         :param id: The user ID. (required)
         :type id: int
@@ -135,7 +141,7 @@ class SearchApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_accounts_entries_with_shared_serialize(
+        _param = self._get_accounts_entries_with_files_shared_serialize(
             id=id,
             employee_status=employee_status,
             activation_status=activation_status,
@@ -172,7 +178,7 @@ class SearchApi:
 
 
     @validate_call
-    def get_accounts_entries_with_shared_with_http_info(
+    def get_accounts_entries_with_files_shared_with_http_info(
         self,
         id: Annotated[StrictInt, Field(description="The user ID.")],
         employee_status: Annotated[Optional[EmployeeStatus], Field(description="The user status.")] = None,
@@ -200,9 +206,9 @@ class SearchApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[ObjectArrayWrapper]:
-        """Get account entries
+        """Get account entries with file sharing settings
 
-        Returns the account entries with their sharing settings.
+        Returns the account entries with their sharing settings for a file with the ID specified in request.
 
         :param id: The user ID. (required)
         :type id: int
@@ -252,7 +258,7 @@ class SearchApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_accounts_entries_with_shared_serialize(
+        _param = self._get_accounts_entries_with_files_shared_serialize(
             id=id,
             employee_status=employee_status,
             activation_status=activation_status,
@@ -289,7 +295,7 @@ class SearchApi:
 
 
     @validate_call
-    def get_accounts_entries_with_shared_without_preload_content(
+    def get_accounts_entries_with_files_shared_without_preload_content(
         self,
         id: Annotated[StrictInt, Field(description="The user ID.")],
         employee_status: Annotated[Optional[EmployeeStatus], Field(description="The user status.")] = None,
@@ -317,9 +323,9 @@ class SearchApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get account entries
+        """Get account entries with file sharing settings
 
-        Returns the account entries with their sharing settings.
+        Returns the account entries with their sharing settings for a file with the ID specified in request.
 
         :param id: The user ID. (required)
         :type id: int
@@ -369,7 +375,7 @@ class SearchApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_accounts_entries_with_shared_serialize(
+        _param = self._get_accounts_entries_with_files_shared_serialize(
             id=id,
             employee_status=employee_status,
             activation_status=activation_status,
@@ -401,7 +407,961 @@ class SearchApi:
         return response_data.response
 
 
-    def _get_accounts_entries_with_shared_serialize(
+    def _get_accounts_entries_with_files_shared_serialize(
+        self,
+        id,
+        employee_status,
+        activation_status,
+        exclude_shared,
+        include_shared,
+        invited_by_me,
+        inviter_id,
+        area,
+        employee_types,
+        count,
+        start_index,
+        filter_separator,
+        filter_value,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+            'employeeTypes': 'csv',
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if id is not None:
+            _path_params['id'] = id
+        # process the query parameters
+        if employee_status is not None:
+            
+            _query_params.append(('employeeStatus', employee_status.value))
+            
+        if activation_status is not None:
+            
+            _query_params.append(('activationStatus', activation_status.value))
+            
+        if exclude_shared is not None:
+            
+            _query_params.append(('excludeShared', exclude_shared))
+            
+        if include_shared is not None:
+            
+            _query_params.append(('includeShared', include_shared))
+            
+        if invited_by_me is not None:
+            
+            _query_params.append(('invitedByMe', invited_by_me))
+            
+        if inviter_id is not None:
+            
+            _query_params.append(('inviterId', inviter_id))
+            
+        if area is not None:
+            
+            _query_params.append(('area', area.value))
+            
+        if employee_types is not None:
+            
+            _query_params.append(('employeeTypes', employee_types))
+            
+        if count is not None:
+            
+            _query_params.append(('count', count))
+            
+        if start_index is not None:
+            
+            _query_params.append(('startIndex', start_index))
+            
+        if filter_separator is not None:
+            
+            _query_params.append(('filterSeparator', filter_separator))
+            
+        if filter_value is not None:
+            
+            _query_params.append(('filterValue', filter_value))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
+        ]
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/api/2.0/accounts/file/{id}/search',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def get_accounts_entries_with_folders_shared(
+        self,
+        id: Annotated[StrictInt, Field(description="The user ID.")],
+        employee_status: Annotated[Optional[EmployeeStatus], Field(description="The user status.")] = None,
+        activation_status: Annotated[Optional[EmployeeActivationStatus], Field(description="The user activation status.")] = None,
+        exclude_shared: Annotated[Optional[StrictBool], Field(description="Specifies whether to exclude the account sharing settings from the response.")] = None,
+        include_shared: Annotated[Optional[StrictBool], Field(description="Specifies whether to include the account sharing settings in the response.")] = None,
+        invited_by_me: Annotated[Optional[StrictBool], Field(description="Specifies whether the user is invited by the current user or not.")] = None,
+        inviter_id: Annotated[Optional[StrictStr], Field(description="The inviter ID.")] = None,
+        area: Annotated[Optional[Area], Field(description="The area of the account entries.")] = None,
+        employee_types: Annotated[Optional[List[List[EmployeeType]]], Field(description="The list of the user types.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of items to retrieve in a request.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The starting index for the query results.")] = None,
+        filter_separator: Annotated[Optional[StrictStr], Field(description="Specifies the separator used in filter expressions.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The text filter applied to the accounts search query.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ObjectArrayWrapper:
+        """Get account entries with folder sharing settings
+
+        Returns the account entries with their sharing settings in a folder with the ID specified in request.
+
+        :param id: The user ID. (required)
+        :type id: int
+        :param employee_status: The user status.
+        :type employee_status: EmployeeStatus
+        :param activation_status: The user activation status.
+        :type activation_status: EmployeeActivationStatus
+        :param exclude_shared: Specifies whether to exclude the account sharing settings from the response.
+        :type exclude_shared: bool
+        :param include_shared: Specifies whether to include the account sharing settings in the response.
+        :type include_shared: bool
+        :param invited_by_me: Specifies whether the user is invited by the current user or not.
+        :type invited_by_me: bool
+        :param inviter_id: The inviter ID.
+        :type inviter_id: str
+        :param area: The area of the account entries.
+        :type area: Area
+        :param employee_types: The list of the user types.
+        :type employee_types: List[EmployeeType]
+        :param count: The number of items to retrieve in a request.
+        :type count: int
+        :param start_index: The starting index for the query results.
+        :type start_index: int
+        :param filter_separator: Specifies the separator used in filter expressions.
+        :type filter_separator: str
+        :param filter_value: The text filter applied to the accounts search query.
+        :type filter_value: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_accounts_entries_with_folders_shared_serialize(
+            id=id,
+            employee_status=employee_status,
+            activation_status=activation_status,
+            exclude_shared=exclude_shared,
+            include_shared=include_shared,
+            invited_by_me=invited_by_me,
+            inviter_id=inviter_id,
+            area=area,
+            employee_types=employee_types,
+            count=count,
+            start_index=start_index,
+            filter_separator=filter_separator,
+            filter_value=filter_value,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ObjectArrayWrapper",
+            '401': None,
+            '403': None,
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def get_accounts_entries_with_folders_shared_with_http_info(
+        self,
+        id: Annotated[StrictInt, Field(description="The user ID.")],
+        employee_status: Annotated[Optional[EmployeeStatus], Field(description="The user status.")] = None,
+        activation_status: Annotated[Optional[EmployeeActivationStatus], Field(description="The user activation status.")] = None,
+        exclude_shared: Annotated[Optional[StrictBool], Field(description="Specifies whether to exclude the account sharing settings from the response.")] = None,
+        include_shared: Annotated[Optional[StrictBool], Field(description="Specifies whether to include the account sharing settings in the response.")] = None,
+        invited_by_me: Annotated[Optional[StrictBool], Field(description="Specifies whether the user is invited by the current user or not.")] = None,
+        inviter_id: Annotated[Optional[StrictStr], Field(description="The inviter ID.")] = None,
+        area: Annotated[Optional[Area], Field(description="The area of the account entries.")] = None,
+        employee_types: Annotated[Optional[List[List[EmployeeType]]], Field(description="The list of the user types.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of items to retrieve in a request.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The starting index for the query results.")] = None,
+        filter_separator: Annotated[Optional[StrictStr], Field(description="Specifies the separator used in filter expressions.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The text filter applied to the accounts search query.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[ObjectArrayWrapper]:
+        """Get account entries with folder sharing settings
+
+        Returns the account entries with their sharing settings in a folder with the ID specified in request.
+
+        :param id: The user ID. (required)
+        :type id: int
+        :param employee_status: The user status.
+        :type employee_status: EmployeeStatus
+        :param activation_status: The user activation status.
+        :type activation_status: EmployeeActivationStatus
+        :param exclude_shared: Specifies whether to exclude the account sharing settings from the response.
+        :type exclude_shared: bool
+        :param include_shared: Specifies whether to include the account sharing settings in the response.
+        :type include_shared: bool
+        :param invited_by_me: Specifies whether the user is invited by the current user or not.
+        :type invited_by_me: bool
+        :param inviter_id: The inviter ID.
+        :type inviter_id: str
+        :param area: The area of the account entries.
+        :type area: Area
+        :param employee_types: The list of the user types.
+        :type employee_types: List[EmployeeType]
+        :param count: The number of items to retrieve in a request.
+        :type count: int
+        :param start_index: The starting index for the query results.
+        :type start_index: int
+        :param filter_separator: Specifies the separator used in filter expressions.
+        :type filter_separator: str
+        :param filter_value: The text filter applied to the accounts search query.
+        :type filter_value: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_accounts_entries_with_folders_shared_serialize(
+            id=id,
+            employee_status=employee_status,
+            activation_status=activation_status,
+            exclude_shared=exclude_shared,
+            include_shared=include_shared,
+            invited_by_me=invited_by_me,
+            inviter_id=inviter_id,
+            area=area,
+            employee_types=employee_types,
+            count=count,
+            start_index=start_index,
+            filter_separator=filter_separator,
+            filter_value=filter_value,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ObjectArrayWrapper",
+            '401': None,
+            '403': None,
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def get_accounts_entries_with_folders_shared_without_preload_content(
+        self,
+        id: Annotated[StrictInt, Field(description="The user ID.")],
+        employee_status: Annotated[Optional[EmployeeStatus], Field(description="The user status.")] = None,
+        activation_status: Annotated[Optional[EmployeeActivationStatus], Field(description="The user activation status.")] = None,
+        exclude_shared: Annotated[Optional[StrictBool], Field(description="Specifies whether to exclude the account sharing settings from the response.")] = None,
+        include_shared: Annotated[Optional[StrictBool], Field(description="Specifies whether to include the account sharing settings in the response.")] = None,
+        invited_by_me: Annotated[Optional[StrictBool], Field(description="Specifies whether the user is invited by the current user or not.")] = None,
+        inviter_id: Annotated[Optional[StrictStr], Field(description="The inviter ID.")] = None,
+        area: Annotated[Optional[Area], Field(description="The area of the account entries.")] = None,
+        employee_types: Annotated[Optional[List[List[EmployeeType]]], Field(description="The list of the user types.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of items to retrieve in a request.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The starting index for the query results.")] = None,
+        filter_separator: Annotated[Optional[StrictStr], Field(description="Specifies the separator used in filter expressions.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The text filter applied to the accounts search query.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Get account entries with folder sharing settings
+
+        Returns the account entries with their sharing settings in a folder with the ID specified in request.
+
+        :param id: The user ID. (required)
+        :type id: int
+        :param employee_status: The user status.
+        :type employee_status: EmployeeStatus
+        :param activation_status: The user activation status.
+        :type activation_status: EmployeeActivationStatus
+        :param exclude_shared: Specifies whether to exclude the account sharing settings from the response.
+        :type exclude_shared: bool
+        :param include_shared: Specifies whether to include the account sharing settings in the response.
+        :type include_shared: bool
+        :param invited_by_me: Specifies whether the user is invited by the current user or not.
+        :type invited_by_me: bool
+        :param inviter_id: The inviter ID.
+        :type inviter_id: str
+        :param area: The area of the account entries.
+        :type area: Area
+        :param employee_types: The list of the user types.
+        :type employee_types: List[EmployeeType]
+        :param count: The number of items to retrieve in a request.
+        :type count: int
+        :param start_index: The starting index for the query results.
+        :type start_index: int
+        :param filter_separator: Specifies the separator used in filter expressions.
+        :type filter_separator: str
+        :param filter_value: The text filter applied to the accounts search query.
+        :type filter_value: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_accounts_entries_with_folders_shared_serialize(
+            id=id,
+            employee_status=employee_status,
+            activation_status=activation_status,
+            exclude_shared=exclude_shared,
+            include_shared=include_shared,
+            invited_by_me=invited_by_me,
+            inviter_id=inviter_id,
+            area=area,
+            employee_types=employee_types,
+            count=count,
+            start_index=start_index,
+            filter_separator=filter_separator,
+            filter_value=filter_value,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ObjectArrayWrapper",
+            '401': None,
+            '403': None,
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _get_accounts_entries_with_folders_shared_serialize(
+        self,
+        id,
+        employee_status,
+        activation_status,
+        exclude_shared,
+        include_shared,
+        invited_by_me,
+        inviter_id,
+        area,
+        employee_types,
+        count,
+        start_index,
+        filter_separator,
+        filter_value,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+            'employeeTypes': 'csv',
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if id is not None:
+            _path_params['id'] = id
+        # process the query parameters
+        if employee_status is not None:
+            
+            _query_params.append(('employeeStatus', employee_status.value))
+            
+        if activation_status is not None:
+            
+            _query_params.append(('activationStatus', activation_status.value))
+            
+        if exclude_shared is not None:
+            
+            _query_params.append(('excludeShared', exclude_shared))
+            
+        if include_shared is not None:
+            
+            _query_params.append(('includeShared', include_shared))
+            
+        if invited_by_me is not None:
+            
+            _query_params.append(('invitedByMe', invited_by_me))
+            
+        if inviter_id is not None:
+            
+            _query_params.append(('inviterId', inviter_id))
+            
+        if area is not None:
+            
+            _query_params.append(('area', area.value))
+            
+        if employee_types is not None:
+            
+            _query_params.append(('employeeTypes', employee_types))
+            
+        if count is not None:
+            
+            _query_params.append(('count', count))
+            
+        if start_index is not None:
+            
+            _query_params.append(('startIndex', start_index))
+            
+        if filter_separator is not None:
+            
+            _query_params.append(('filterSeparator', filter_separator))
+            
+        if filter_value is not None:
+            
+            _query_params.append(('filterValue', filter_value))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
+        ]
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/api/2.0/accounts/folder/{id}/search',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def get_accounts_entries_with_rooms_shared(
+        self,
+        id: Annotated[StrictInt, Field(description="The user ID.")],
+        employee_status: Annotated[Optional[EmployeeStatus], Field(description="The user status.")] = None,
+        activation_status: Annotated[Optional[EmployeeActivationStatus], Field(description="The user activation status.")] = None,
+        exclude_shared: Annotated[Optional[StrictBool], Field(description="Specifies whether to exclude the account sharing settings from the response.")] = None,
+        include_shared: Annotated[Optional[StrictBool], Field(description="Specifies whether to include the account sharing settings in the response.")] = None,
+        invited_by_me: Annotated[Optional[StrictBool], Field(description="Specifies whether the user is invited by the current user or not.")] = None,
+        inviter_id: Annotated[Optional[StrictStr], Field(description="The inviter ID.")] = None,
+        area: Annotated[Optional[Area], Field(description="The area of the account entries.")] = None,
+        employee_types: Annotated[Optional[List[List[EmployeeType]]], Field(description="The list of the user types.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of items to retrieve in a request.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The starting index for the query results.")] = None,
+        filter_separator: Annotated[Optional[StrictStr], Field(description="Specifies the separator used in filter expressions.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The text filter applied to the accounts search query.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ObjectArrayWrapper:
+        """Get account entries
+
+        Returns the account entries with their sharing settings in a room with the ID specified in request.
+
+        :param id: The user ID. (required)
+        :type id: int
+        :param employee_status: The user status.
+        :type employee_status: EmployeeStatus
+        :param activation_status: The user activation status.
+        :type activation_status: EmployeeActivationStatus
+        :param exclude_shared: Specifies whether to exclude the account sharing settings from the response.
+        :type exclude_shared: bool
+        :param include_shared: Specifies whether to include the account sharing settings in the response.
+        :type include_shared: bool
+        :param invited_by_me: Specifies whether the user is invited by the current user or not.
+        :type invited_by_me: bool
+        :param inviter_id: The inviter ID.
+        :type inviter_id: str
+        :param area: The area of the account entries.
+        :type area: Area
+        :param employee_types: The list of the user types.
+        :type employee_types: List[EmployeeType]
+        :param count: The number of items to retrieve in a request.
+        :type count: int
+        :param start_index: The starting index for the query results.
+        :type start_index: int
+        :param filter_separator: Specifies the separator used in filter expressions.
+        :type filter_separator: str
+        :param filter_value: The text filter applied to the accounts search query.
+        :type filter_value: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_accounts_entries_with_rooms_shared_serialize(
+            id=id,
+            employee_status=employee_status,
+            activation_status=activation_status,
+            exclude_shared=exclude_shared,
+            include_shared=include_shared,
+            invited_by_me=invited_by_me,
+            inviter_id=inviter_id,
+            area=area,
+            employee_types=employee_types,
+            count=count,
+            start_index=start_index,
+            filter_separator=filter_separator,
+            filter_value=filter_value,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ObjectArrayWrapper",
+            '401': None,
+            '403': None,
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def get_accounts_entries_with_rooms_shared_with_http_info(
+        self,
+        id: Annotated[StrictInt, Field(description="The user ID.")],
+        employee_status: Annotated[Optional[EmployeeStatus], Field(description="The user status.")] = None,
+        activation_status: Annotated[Optional[EmployeeActivationStatus], Field(description="The user activation status.")] = None,
+        exclude_shared: Annotated[Optional[StrictBool], Field(description="Specifies whether to exclude the account sharing settings from the response.")] = None,
+        include_shared: Annotated[Optional[StrictBool], Field(description="Specifies whether to include the account sharing settings in the response.")] = None,
+        invited_by_me: Annotated[Optional[StrictBool], Field(description="Specifies whether the user is invited by the current user or not.")] = None,
+        inviter_id: Annotated[Optional[StrictStr], Field(description="The inviter ID.")] = None,
+        area: Annotated[Optional[Area], Field(description="The area of the account entries.")] = None,
+        employee_types: Annotated[Optional[List[List[EmployeeType]]], Field(description="The list of the user types.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of items to retrieve in a request.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The starting index for the query results.")] = None,
+        filter_separator: Annotated[Optional[StrictStr], Field(description="Specifies the separator used in filter expressions.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The text filter applied to the accounts search query.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[ObjectArrayWrapper]:
+        """Get account entries
+
+        Returns the account entries with their sharing settings in a room with the ID specified in request.
+
+        :param id: The user ID. (required)
+        :type id: int
+        :param employee_status: The user status.
+        :type employee_status: EmployeeStatus
+        :param activation_status: The user activation status.
+        :type activation_status: EmployeeActivationStatus
+        :param exclude_shared: Specifies whether to exclude the account sharing settings from the response.
+        :type exclude_shared: bool
+        :param include_shared: Specifies whether to include the account sharing settings in the response.
+        :type include_shared: bool
+        :param invited_by_me: Specifies whether the user is invited by the current user or not.
+        :type invited_by_me: bool
+        :param inviter_id: The inviter ID.
+        :type inviter_id: str
+        :param area: The area of the account entries.
+        :type area: Area
+        :param employee_types: The list of the user types.
+        :type employee_types: List[EmployeeType]
+        :param count: The number of items to retrieve in a request.
+        :type count: int
+        :param start_index: The starting index for the query results.
+        :type start_index: int
+        :param filter_separator: Specifies the separator used in filter expressions.
+        :type filter_separator: str
+        :param filter_value: The text filter applied to the accounts search query.
+        :type filter_value: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_accounts_entries_with_rooms_shared_serialize(
+            id=id,
+            employee_status=employee_status,
+            activation_status=activation_status,
+            exclude_shared=exclude_shared,
+            include_shared=include_shared,
+            invited_by_me=invited_by_me,
+            inviter_id=inviter_id,
+            area=area,
+            employee_types=employee_types,
+            count=count,
+            start_index=start_index,
+            filter_separator=filter_separator,
+            filter_value=filter_value,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ObjectArrayWrapper",
+            '401': None,
+            '403': None,
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def get_accounts_entries_with_rooms_shared_without_preload_content(
+        self,
+        id: Annotated[StrictInt, Field(description="The user ID.")],
+        employee_status: Annotated[Optional[EmployeeStatus], Field(description="The user status.")] = None,
+        activation_status: Annotated[Optional[EmployeeActivationStatus], Field(description="The user activation status.")] = None,
+        exclude_shared: Annotated[Optional[StrictBool], Field(description="Specifies whether to exclude the account sharing settings from the response.")] = None,
+        include_shared: Annotated[Optional[StrictBool], Field(description="Specifies whether to include the account sharing settings in the response.")] = None,
+        invited_by_me: Annotated[Optional[StrictBool], Field(description="Specifies whether the user is invited by the current user or not.")] = None,
+        inviter_id: Annotated[Optional[StrictStr], Field(description="The inviter ID.")] = None,
+        area: Annotated[Optional[Area], Field(description="The area of the account entries.")] = None,
+        employee_types: Annotated[Optional[List[List[EmployeeType]]], Field(description="The list of the user types.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of items to retrieve in a request.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The starting index for the query results.")] = None,
+        filter_separator: Annotated[Optional[StrictStr], Field(description="Specifies the separator used in filter expressions.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The text filter applied to the accounts search query.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Get account entries
+
+        Returns the account entries with their sharing settings in a room with the ID specified in request.
+
+        :param id: The user ID. (required)
+        :type id: int
+        :param employee_status: The user status.
+        :type employee_status: EmployeeStatus
+        :param activation_status: The user activation status.
+        :type activation_status: EmployeeActivationStatus
+        :param exclude_shared: Specifies whether to exclude the account sharing settings from the response.
+        :type exclude_shared: bool
+        :param include_shared: Specifies whether to include the account sharing settings in the response.
+        :type include_shared: bool
+        :param invited_by_me: Specifies whether the user is invited by the current user or not.
+        :type invited_by_me: bool
+        :param inviter_id: The inviter ID.
+        :type inviter_id: str
+        :param area: The area of the account entries.
+        :type area: Area
+        :param employee_types: The list of the user types.
+        :type employee_types: List[EmployeeType]
+        :param count: The number of items to retrieve in a request.
+        :type count: int
+        :param start_index: The starting index for the query results.
+        :type start_index: int
+        :param filter_separator: Specifies the separator used in filter expressions.
+        :type filter_separator: str
+        :param filter_value: The text filter applied to the accounts search query.
+        :type filter_value: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_accounts_entries_with_rooms_shared_serialize(
+            id=id,
+            employee_status=employee_status,
+            activation_status=activation_status,
+            exclude_shared=exclude_shared,
+            include_shared=include_shared,
+            invited_by_me=invited_by_me,
+            inviter_id=inviter_id,
+            area=area,
+            employee_types=employee_types,
+            count=count,
+            start_index=start_index,
+            filter_separator=filter_separator,
+            filter_value=filter_value,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ObjectArrayWrapper",
+            '401': None,
+            '403': None,
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _get_accounts_entries_with_rooms_shared_serialize(
         self,
         id,
         employee_status,
@@ -860,7 +1820,6 @@ class SearchApi:
         sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
         filter_separator: Annotated[Optional[StrictStr], Field(description="Represents the separator used to split filter criteria in query parameters.")] = None,
         filter_value: Annotated[Optional[StrictStr], Field(description="The search text used to filter results based on user input.")] = None,
-        fields:  = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -918,8 +1877,6 @@ class SearchApi:
         :type filter_separator: str
         :param filter_value: The search text used to filter results based on user input.
         :type filter_value: str
-        :param fields: Comma-separated list of fields to include in the response
-        :type fields: string
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -963,7 +1920,6 @@ class SearchApi:
             sort_order=sort_order,
             filter_separator=filter_separator,
             filter_value=filter_value,
-            fields=fields,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1009,7 +1965,6 @@ class SearchApi:
         sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
         filter_separator: Annotated[Optional[StrictStr], Field(description="Represents the separator used to split filter criteria in query parameters.")] = None,
         filter_value: Annotated[Optional[StrictStr], Field(description="The search text used to filter results based on user input.")] = None,
-        fields:  = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1067,8 +2022,6 @@ class SearchApi:
         :type filter_separator: str
         :param filter_value: The search text used to filter results based on user input.
         :type filter_value: str
-        :param fields: Comma-separated list of fields to include in the response
-        :type fields: string
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1112,7 +2065,6 @@ class SearchApi:
             sort_order=sort_order,
             filter_separator=filter_separator,
             filter_value=filter_value,
-            fields=fields,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1158,7 +2110,6 @@ class SearchApi:
         sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
         filter_separator: Annotated[Optional[StrictStr], Field(description="Represents the separator used to split filter criteria in query parameters.")] = None,
         filter_value: Annotated[Optional[StrictStr], Field(description="The search text used to filter results based on user input.")] = None,
-        fields:  = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1216,8 +2167,6 @@ class SearchApi:
         :type filter_separator: str
         :param filter_value: The search text used to filter results based on user input.
         :type filter_value: str
-        :param fields: Comma-separated list of fields to include in the response
-        :type fields: string
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1261,7 +2210,6 @@ class SearchApi:
             sort_order=sort_order,
             filter_separator=filter_separator,
             filter_value=filter_value,
-            fields=fields,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1302,7 +2250,6 @@ class SearchApi:
         sort_order,
         filter_separator,
         filter_value,
-        fields,
         _request_auth,
         _content_type,
         _headers,
@@ -1406,9 +2353,484 @@ class SearchApi:
             
             _query_params.append(('filterValue', filter_value))
             
-        if fields is not None:
+        # process the header parameters
+        if self._fields is not None:
+            _header_params['fields'] = self._fields
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
+        ]
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/api/2.0/people/simple/filter',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def get_users_with_files_shared(
+        self,
+        id: Annotated[StrictInt, Field(description="The user ID.")],
+        employee_status: Annotated[Optional[EmployeeStatus], Field(description="The user status.")] = None,
+        activation_status: Annotated[Optional[EmployeeActivationStatus], Field(description="The user activation status.")] = None,
+        exclude_shared: Annotated[Optional[StrictBool], Field(description="Specifies whether to exclude the user sharing settings or not.")] = None,
+        include_shared: Annotated[Optional[StrictBool], Field(description="Specifies whether to include the user sharing settings or not.")] = None,
+        invited_by_me: Annotated[Optional[StrictBool], Field(description="Specifies whether the user was invited by the current user or not.")] = None,
+        inviter_id: Annotated[Optional[StrictStr], Field(description="The inviter ID.")] = None,
+        area: Annotated[Optional[Area], Field(description="The user area.")] = None,
+        employee_types: Annotated[Optional[List[List[EmployeeType]]], Field(description="The list of user types.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of users to be retrieved in the request.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The zero-based index of the first record to retrieve in a paged query.")] = None,
+        filter_separator: Annotated[Optional[StrictStr], Field(description="The character or string used to separate multiple filter values in a filtering query.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The filter text value used for searching or filtering user results.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> EmployeeFullArrayWrapper:
+        """Get users with file sharing settings
+
+        Returns the users with the sharing settings in a file with the ID specified in request.
+
+        :param id: The user ID. (required)
+        :type id: int
+        :param employee_status: The user status.
+        :type employee_status: EmployeeStatus
+        :param activation_status: The user activation status.
+        :type activation_status: EmployeeActivationStatus
+        :param exclude_shared: Specifies whether to exclude the user sharing settings or not.
+        :type exclude_shared: bool
+        :param include_shared: Specifies whether to include the user sharing settings or not.
+        :type include_shared: bool
+        :param invited_by_me: Specifies whether the user was invited by the current user or not.
+        :type invited_by_me: bool
+        :param inviter_id: The inviter ID.
+        :type inviter_id: str
+        :param area: The user area.
+        :type area: Area
+        :param employee_types: The list of user types.
+        :type employee_types: List[EmployeeType]
+        :param count: The maximum number of users to be retrieved in the request.
+        :type count: int
+        :param start_index: The zero-based index of the first record to retrieve in a paged query.
+        :type start_index: int
+        :param filter_separator: The character or string used to separate multiple filter values in a filtering query.
+        :type filter_separator: str
+        :param filter_value: The filter text value used for searching or filtering user results.
+        :type filter_value: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_users_with_files_shared_serialize(
+            id=id,
+            employee_status=employee_status,
+            activation_status=activation_status,
+            exclude_shared=exclude_shared,
+            include_shared=include_shared,
+            invited_by_me=invited_by_me,
+            inviter_id=inviter_id,
+            area=area,
+            employee_types=employee_types,
+            count=count,
+            start_index=start_index,
+            filter_separator=filter_separator,
+            filter_value=filter_value,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "EmployeeFullArrayWrapper",
+            '401': None,
+            '403': None,
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def get_users_with_files_shared_with_http_info(
+        self,
+        id: Annotated[StrictInt, Field(description="The user ID.")],
+        employee_status: Annotated[Optional[EmployeeStatus], Field(description="The user status.")] = None,
+        activation_status: Annotated[Optional[EmployeeActivationStatus], Field(description="The user activation status.")] = None,
+        exclude_shared: Annotated[Optional[StrictBool], Field(description="Specifies whether to exclude the user sharing settings or not.")] = None,
+        include_shared: Annotated[Optional[StrictBool], Field(description="Specifies whether to include the user sharing settings or not.")] = None,
+        invited_by_me: Annotated[Optional[StrictBool], Field(description="Specifies whether the user was invited by the current user or not.")] = None,
+        inviter_id: Annotated[Optional[StrictStr], Field(description="The inviter ID.")] = None,
+        area: Annotated[Optional[Area], Field(description="The user area.")] = None,
+        employee_types: Annotated[Optional[List[List[EmployeeType]]], Field(description="The list of user types.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of users to be retrieved in the request.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The zero-based index of the first record to retrieve in a paged query.")] = None,
+        filter_separator: Annotated[Optional[StrictStr], Field(description="The character or string used to separate multiple filter values in a filtering query.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The filter text value used for searching or filtering user results.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[EmployeeFullArrayWrapper]:
+        """Get users with file sharing settings
+
+        Returns the users with the sharing settings in a file with the ID specified in request.
+
+        :param id: The user ID. (required)
+        :type id: int
+        :param employee_status: The user status.
+        :type employee_status: EmployeeStatus
+        :param activation_status: The user activation status.
+        :type activation_status: EmployeeActivationStatus
+        :param exclude_shared: Specifies whether to exclude the user sharing settings or not.
+        :type exclude_shared: bool
+        :param include_shared: Specifies whether to include the user sharing settings or not.
+        :type include_shared: bool
+        :param invited_by_me: Specifies whether the user was invited by the current user or not.
+        :type invited_by_me: bool
+        :param inviter_id: The inviter ID.
+        :type inviter_id: str
+        :param area: The user area.
+        :type area: Area
+        :param employee_types: The list of user types.
+        :type employee_types: List[EmployeeType]
+        :param count: The maximum number of users to be retrieved in the request.
+        :type count: int
+        :param start_index: The zero-based index of the first record to retrieve in a paged query.
+        :type start_index: int
+        :param filter_separator: The character or string used to separate multiple filter values in a filtering query.
+        :type filter_separator: str
+        :param filter_value: The filter text value used for searching or filtering user results.
+        :type filter_value: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_users_with_files_shared_serialize(
+            id=id,
+            employee_status=employee_status,
+            activation_status=activation_status,
+            exclude_shared=exclude_shared,
+            include_shared=include_shared,
+            invited_by_me=invited_by_me,
+            inviter_id=inviter_id,
+            area=area,
+            employee_types=employee_types,
+            count=count,
+            start_index=start_index,
+            filter_separator=filter_separator,
+            filter_value=filter_value,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "EmployeeFullArrayWrapper",
+            '401': None,
+            '403': None,
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def get_users_with_files_shared_without_preload_content(
+        self,
+        id: Annotated[StrictInt, Field(description="The user ID.")],
+        employee_status: Annotated[Optional[EmployeeStatus], Field(description="The user status.")] = None,
+        activation_status: Annotated[Optional[EmployeeActivationStatus], Field(description="The user activation status.")] = None,
+        exclude_shared: Annotated[Optional[StrictBool], Field(description="Specifies whether to exclude the user sharing settings or not.")] = None,
+        include_shared: Annotated[Optional[StrictBool], Field(description="Specifies whether to include the user sharing settings or not.")] = None,
+        invited_by_me: Annotated[Optional[StrictBool], Field(description="Specifies whether the user was invited by the current user or not.")] = None,
+        inviter_id: Annotated[Optional[StrictStr], Field(description="The inviter ID.")] = None,
+        area: Annotated[Optional[Area], Field(description="The user area.")] = None,
+        employee_types: Annotated[Optional[List[List[EmployeeType]]], Field(description="The list of user types.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of users to be retrieved in the request.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The zero-based index of the first record to retrieve in a paged query.")] = None,
+        filter_separator: Annotated[Optional[StrictStr], Field(description="The character or string used to separate multiple filter values in a filtering query.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The filter text value used for searching or filtering user results.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Get users with file sharing settings
+
+        Returns the users with the sharing settings in a file with the ID specified in request.
+
+        :param id: The user ID. (required)
+        :type id: int
+        :param employee_status: The user status.
+        :type employee_status: EmployeeStatus
+        :param activation_status: The user activation status.
+        :type activation_status: EmployeeActivationStatus
+        :param exclude_shared: Specifies whether to exclude the user sharing settings or not.
+        :type exclude_shared: bool
+        :param include_shared: Specifies whether to include the user sharing settings or not.
+        :type include_shared: bool
+        :param invited_by_me: Specifies whether the user was invited by the current user or not.
+        :type invited_by_me: bool
+        :param inviter_id: The inviter ID.
+        :type inviter_id: str
+        :param area: The user area.
+        :type area: Area
+        :param employee_types: The list of user types.
+        :type employee_types: List[EmployeeType]
+        :param count: The maximum number of users to be retrieved in the request.
+        :type count: int
+        :param start_index: The zero-based index of the first record to retrieve in a paged query.
+        :type start_index: int
+        :param filter_separator: The character or string used to separate multiple filter values in a filtering query.
+        :type filter_separator: str
+        :param filter_value: The filter text value used for searching or filtering user results.
+        :type filter_value: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_users_with_files_shared_serialize(
+            id=id,
+            employee_status=employee_status,
+            activation_status=activation_status,
+            exclude_shared=exclude_shared,
+            include_shared=include_shared,
+            invited_by_me=invited_by_me,
+            inviter_id=inviter_id,
+            area=area,
+            employee_types=employee_types,
+            count=count,
+            start_index=start_index,
+            filter_separator=filter_separator,
+            filter_value=filter_value,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "EmployeeFullArrayWrapper",
+            '401': None,
+            '403': None,
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _get_users_with_files_shared_serialize(
+        self,
+        id,
+        employee_status,
+        activation_status,
+        exclude_shared,
+        include_shared,
+        invited_by_me,
+        inviter_id,
+        area,
+        employee_types,
+        count,
+        start_index,
+        filter_separator,
+        filter_value,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+            'employeeTypes': 'csv',
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if id is not None:
+            _path_params['id'] = id
+        # process the query parameters
+        if employee_status is not None:
             
-            _query_params.append(('fields', fields))
+            _query_params.append(('employeeStatus', employee_status.value))
+            
+        if activation_status is not None:
+            
+            _query_params.append(('activationStatus', activation_status.value))
+            
+        if exclude_shared is not None:
+            
+            _query_params.append(('excludeShared', exclude_shared))
+            
+        if include_shared is not None:
+            
+            _query_params.append(('includeShared', include_shared))
+            
+        if invited_by_me is not None:
+            
+            _query_params.append(('invitedByMe', invited_by_me))
+            
+        if inviter_id is not None:
+            
+            _query_params.append(('inviterId', inviter_id))
+            
+        if area is not None:
+            
+            _query_params.append(('area', area.value))
+            
+        if employee_types is not None:
+            
+            _query_params.append(('employeeTypes', employee_types))
+            
+        if count is not None:
+            
+            _query_params.append(('count', count))
+            
+        if start_index is not None:
+            
+            _query_params.append(('startIndex', start_index))
+            
+        if filter_separator is not None:
+            
+            _query_params.append(('filterSeparator', filter_separator))
+            
+        if filter_value is not None:
+            
+            _query_params.append(('filterValue', filter_value))
             
         # process the header parameters
         # process the form parameters
@@ -1436,7 +2858,484 @@ class SearchApi:
 
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/people/simple/filter',
+            resource_path='/api/2.0/people/file/{id}',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def get_users_with_folders_shared(
+        self,
+        id: Annotated[StrictInt, Field(description="The user ID.")],
+        employee_status: Annotated[Optional[EmployeeStatus], Field(description="The user status.")] = None,
+        activation_status: Annotated[Optional[EmployeeActivationStatus], Field(description="The user activation status.")] = None,
+        exclude_shared: Annotated[Optional[StrictBool], Field(description="Specifies whether to exclude the user sharing settings or not.")] = None,
+        include_shared: Annotated[Optional[StrictBool], Field(description="Specifies whether to include the user sharing settings or not.")] = None,
+        invited_by_me: Annotated[Optional[StrictBool], Field(description="Specifies whether the user was invited by the current user or not.")] = None,
+        inviter_id: Annotated[Optional[StrictStr], Field(description="The inviter ID.")] = None,
+        area: Annotated[Optional[Area], Field(description="The user area.")] = None,
+        employee_types: Annotated[Optional[List[List[EmployeeType]]], Field(description="The list of user types.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of users to be retrieved in the request.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The zero-based index of the first record to retrieve in a paged query.")] = None,
+        filter_separator: Annotated[Optional[StrictStr], Field(description="The character or string used to separate multiple filter values in a filtering query.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The filter text value used for searching or filtering user results.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> EmployeeFullArrayWrapper:
+        """Get users with folder sharing settings
+
+        Returns the users with the sharing settings in a folder with the ID specified in request.
+
+        :param id: The user ID. (required)
+        :type id: int
+        :param employee_status: The user status.
+        :type employee_status: EmployeeStatus
+        :param activation_status: The user activation status.
+        :type activation_status: EmployeeActivationStatus
+        :param exclude_shared: Specifies whether to exclude the user sharing settings or not.
+        :type exclude_shared: bool
+        :param include_shared: Specifies whether to include the user sharing settings or not.
+        :type include_shared: bool
+        :param invited_by_me: Specifies whether the user was invited by the current user or not.
+        :type invited_by_me: bool
+        :param inviter_id: The inviter ID.
+        :type inviter_id: str
+        :param area: The user area.
+        :type area: Area
+        :param employee_types: The list of user types.
+        :type employee_types: List[EmployeeType]
+        :param count: The maximum number of users to be retrieved in the request.
+        :type count: int
+        :param start_index: The zero-based index of the first record to retrieve in a paged query.
+        :type start_index: int
+        :param filter_separator: The character or string used to separate multiple filter values in a filtering query.
+        :type filter_separator: str
+        :param filter_value: The filter text value used for searching or filtering user results.
+        :type filter_value: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_users_with_folders_shared_serialize(
+            id=id,
+            employee_status=employee_status,
+            activation_status=activation_status,
+            exclude_shared=exclude_shared,
+            include_shared=include_shared,
+            invited_by_me=invited_by_me,
+            inviter_id=inviter_id,
+            area=area,
+            employee_types=employee_types,
+            count=count,
+            start_index=start_index,
+            filter_separator=filter_separator,
+            filter_value=filter_value,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "EmployeeFullArrayWrapper",
+            '401': None,
+            '403': None,
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def get_users_with_folders_shared_with_http_info(
+        self,
+        id: Annotated[StrictInt, Field(description="The user ID.")],
+        employee_status: Annotated[Optional[EmployeeStatus], Field(description="The user status.")] = None,
+        activation_status: Annotated[Optional[EmployeeActivationStatus], Field(description="The user activation status.")] = None,
+        exclude_shared: Annotated[Optional[StrictBool], Field(description="Specifies whether to exclude the user sharing settings or not.")] = None,
+        include_shared: Annotated[Optional[StrictBool], Field(description="Specifies whether to include the user sharing settings or not.")] = None,
+        invited_by_me: Annotated[Optional[StrictBool], Field(description="Specifies whether the user was invited by the current user or not.")] = None,
+        inviter_id: Annotated[Optional[StrictStr], Field(description="The inviter ID.")] = None,
+        area: Annotated[Optional[Area], Field(description="The user area.")] = None,
+        employee_types: Annotated[Optional[List[List[EmployeeType]]], Field(description="The list of user types.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of users to be retrieved in the request.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The zero-based index of the first record to retrieve in a paged query.")] = None,
+        filter_separator: Annotated[Optional[StrictStr], Field(description="The character or string used to separate multiple filter values in a filtering query.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The filter text value used for searching or filtering user results.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[EmployeeFullArrayWrapper]:
+        """Get users with folder sharing settings
+
+        Returns the users with the sharing settings in a folder with the ID specified in request.
+
+        :param id: The user ID. (required)
+        :type id: int
+        :param employee_status: The user status.
+        :type employee_status: EmployeeStatus
+        :param activation_status: The user activation status.
+        :type activation_status: EmployeeActivationStatus
+        :param exclude_shared: Specifies whether to exclude the user sharing settings or not.
+        :type exclude_shared: bool
+        :param include_shared: Specifies whether to include the user sharing settings or not.
+        :type include_shared: bool
+        :param invited_by_me: Specifies whether the user was invited by the current user or not.
+        :type invited_by_me: bool
+        :param inviter_id: The inviter ID.
+        :type inviter_id: str
+        :param area: The user area.
+        :type area: Area
+        :param employee_types: The list of user types.
+        :type employee_types: List[EmployeeType]
+        :param count: The maximum number of users to be retrieved in the request.
+        :type count: int
+        :param start_index: The zero-based index of the first record to retrieve in a paged query.
+        :type start_index: int
+        :param filter_separator: The character or string used to separate multiple filter values in a filtering query.
+        :type filter_separator: str
+        :param filter_value: The filter text value used for searching or filtering user results.
+        :type filter_value: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_users_with_folders_shared_serialize(
+            id=id,
+            employee_status=employee_status,
+            activation_status=activation_status,
+            exclude_shared=exclude_shared,
+            include_shared=include_shared,
+            invited_by_me=invited_by_me,
+            inviter_id=inviter_id,
+            area=area,
+            employee_types=employee_types,
+            count=count,
+            start_index=start_index,
+            filter_separator=filter_separator,
+            filter_value=filter_value,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "EmployeeFullArrayWrapper",
+            '401': None,
+            '403': None,
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def get_users_with_folders_shared_without_preload_content(
+        self,
+        id: Annotated[StrictInt, Field(description="The user ID.")],
+        employee_status: Annotated[Optional[EmployeeStatus], Field(description="The user status.")] = None,
+        activation_status: Annotated[Optional[EmployeeActivationStatus], Field(description="The user activation status.")] = None,
+        exclude_shared: Annotated[Optional[StrictBool], Field(description="Specifies whether to exclude the user sharing settings or not.")] = None,
+        include_shared: Annotated[Optional[StrictBool], Field(description="Specifies whether to include the user sharing settings or not.")] = None,
+        invited_by_me: Annotated[Optional[StrictBool], Field(description="Specifies whether the user was invited by the current user or not.")] = None,
+        inviter_id: Annotated[Optional[StrictStr], Field(description="The inviter ID.")] = None,
+        area: Annotated[Optional[Area], Field(description="The user area.")] = None,
+        employee_types: Annotated[Optional[List[List[EmployeeType]]], Field(description="The list of user types.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of users to be retrieved in the request.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The zero-based index of the first record to retrieve in a paged query.")] = None,
+        filter_separator: Annotated[Optional[StrictStr], Field(description="The character or string used to separate multiple filter values in a filtering query.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The filter text value used for searching or filtering user results.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Get users with folder sharing settings
+
+        Returns the users with the sharing settings in a folder with the ID specified in request.
+
+        :param id: The user ID. (required)
+        :type id: int
+        :param employee_status: The user status.
+        :type employee_status: EmployeeStatus
+        :param activation_status: The user activation status.
+        :type activation_status: EmployeeActivationStatus
+        :param exclude_shared: Specifies whether to exclude the user sharing settings or not.
+        :type exclude_shared: bool
+        :param include_shared: Specifies whether to include the user sharing settings or not.
+        :type include_shared: bool
+        :param invited_by_me: Specifies whether the user was invited by the current user or not.
+        :type invited_by_me: bool
+        :param inviter_id: The inviter ID.
+        :type inviter_id: str
+        :param area: The user area.
+        :type area: Area
+        :param employee_types: The list of user types.
+        :type employee_types: List[EmployeeType]
+        :param count: The maximum number of users to be retrieved in the request.
+        :type count: int
+        :param start_index: The zero-based index of the first record to retrieve in a paged query.
+        :type start_index: int
+        :param filter_separator: The character or string used to separate multiple filter values in a filtering query.
+        :type filter_separator: str
+        :param filter_value: The filter text value used for searching or filtering user results.
+        :type filter_value: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_users_with_folders_shared_serialize(
+            id=id,
+            employee_status=employee_status,
+            activation_status=activation_status,
+            exclude_shared=exclude_shared,
+            include_shared=include_shared,
+            invited_by_me=invited_by_me,
+            inviter_id=inviter_id,
+            area=area,
+            employee_types=employee_types,
+            count=count,
+            start_index=start_index,
+            filter_separator=filter_separator,
+            filter_value=filter_value,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "EmployeeFullArrayWrapper",
+            '401': None,
+            '403': None,
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _get_users_with_folders_shared_serialize(
+        self,
+        id,
+        employee_status,
+        activation_status,
+        exclude_shared,
+        include_shared,
+        invited_by_me,
+        inviter_id,
+        area,
+        employee_types,
+        count,
+        start_index,
+        filter_separator,
+        filter_value,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+            'employeeTypes': 'csv',
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if id is not None:
+            _path_params['id'] = id
+        # process the query parameters
+        if employee_status is not None:
+            
+            _query_params.append(('employeeStatus', employee_status.value))
+            
+        if activation_status is not None:
+            
+            _query_params.append(('activationStatus', activation_status.value))
+            
+        if exclude_shared is not None:
+            
+            _query_params.append(('excludeShared', exclude_shared))
+            
+        if include_shared is not None:
+            
+            _query_params.append(('includeShared', include_shared))
+            
+        if invited_by_me is not None:
+            
+            _query_params.append(('invitedByMe', invited_by_me))
+            
+        if inviter_id is not None:
+            
+            _query_params.append(('inviterId', inviter_id))
+            
+        if area is not None:
+            
+            _query_params.append(('area', area.value))
+            
+        if employee_types is not None:
+            
+            _query_params.append(('employeeTypes', employee_types))
+            
+        if count is not None:
+            
+            _query_params.append(('count', count))
+            
+        if start_index is not None:
+            
+            _query_params.append(('startIndex', start_index))
+            
+        if filter_separator is not None:
+            
+            _query_params.append(('filterSeparator', filter_separator))
+            
+        if filter_value is not None:
+            
+            _query_params.append(('filterValue', filter_value))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
+        ]
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/api/2.0/people/folder/{id}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1952,7 +3851,6 @@ class SearchApi:
         sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
         filter_separator: Annotated[Optional[StrictStr], Field(description="Represents the separator used to split filter criteria in query parameters.")] = None,
         filter_value: Annotated[Optional[StrictStr], Field(description="The search text used to filter results based on user input.")] = None,
-        fields:  = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2010,8 +3908,6 @@ class SearchApi:
         :type filter_separator: str
         :param filter_value: The search text used to filter results based on user input.
         :type filter_value: str
-        :param fields: Comma-separated list of fields to include in the response
-        :type fields: string
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2055,7 +3951,6 @@ class SearchApi:
             sort_order=sort_order,
             filter_separator=filter_separator,
             filter_value=filter_value,
-            fields=fields,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2101,7 +3996,6 @@ class SearchApi:
         sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
         filter_separator: Annotated[Optional[StrictStr], Field(description="Represents the separator used to split filter criteria in query parameters.")] = None,
         filter_value: Annotated[Optional[StrictStr], Field(description="The search text used to filter results based on user input.")] = None,
-        fields:  = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2159,8 +4053,6 @@ class SearchApi:
         :type filter_separator: str
         :param filter_value: The search text used to filter results based on user input.
         :type filter_value: str
-        :param fields: Comma-separated list of fields to include in the response
-        :type fields: string
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2204,7 +4096,6 @@ class SearchApi:
             sort_order=sort_order,
             filter_separator=filter_separator,
             filter_value=filter_value,
-            fields=fields,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2250,7 +4141,6 @@ class SearchApi:
         sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
         filter_separator: Annotated[Optional[StrictStr], Field(description="Represents the separator used to split filter criteria in query parameters.")] = None,
         filter_value: Annotated[Optional[StrictStr], Field(description="The search text used to filter results based on user input.")] = None,
-        fields:  = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2308,8 +4198,6 @@ class SearchApi:
         :type filter_separator: str
         :param filter_value: The search text used to filter results based on user input.
         :type filter_value: str
-        :param fields: Comma-separated list of fields to include in the response
-        :type fields: string
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2353,7 +4241,6 @@ class SearchApi:
             sort_order=sort_order,
             filter_separator=filter_separator,
             filter_value=filter_value,
-            fields=fields,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2394,7 +4281,6 @@ class SearchApi:
         sort_order,
         filter_separator,
         filter_value,
-        fields,
         _request_auth,
         _content_type,
         _headers,
@@ -2498,11 +4384,9 @@ class SearchApi:
             
             _query_params.append(('filterValue', filter_value))
             
-        if fields is not None:
-            
-            _query_params.append(('fields', fields))
-            
         # process the header parameters
+        if self._fields is not None:
+            _header_params['fields'] = self._fields
         # process the form parameters
         # process the body parameter
 

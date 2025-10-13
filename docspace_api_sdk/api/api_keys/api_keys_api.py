@@ -49,6 +49,7 @@ class ApiKeysApi:
         self.api_client = api_client
 
 
+
     @validate_call
     def create_api_key(
         self,
@@ -1366,7 +1367,7 @@ class ApiKeysApi:
     def update_api_key(
         self,
         key_id: Annotated[StrictStr, Field(description="The unique identifier of the API key to update.")],
-        update_api_key_request: Annotated[Optional[UpdateApiKeyRequest], Field(description="The request parameters for updating an existing API key.")] = None,
+        update_api_key_request: Annotated[UpdateApiKeyRequest, Field(description="The request parameters for updating an existing API key.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1386,7 +1387,7 @@ class ApiKeysApi:
 
         :param key_id: The unique identifier of the API key to update. (required)
         :type key_id: str
-        :param update_api_key_request: The request parameters for updating an existing API key.
+        :param update_api_key_request: The request parameters for updating an existing API key. (required)
         :type update_api_key_request: UpdateApiKeyRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1438,7 +1439,7 @@ class ApiKeysApi:
     def update_api_key_with_http_info(
         self,
         key_id: Annotated[StrictStr, Field(description="The unique identifier of the API key to update.")],
-        update_api_key_request: Annotated[Optional[UpdateApiKeyRequest], Field(description="The request parameters for updating an existing API key.")] = None,
+        update_api_key_request: Annotated[UpdateApiKeyRequest, Field(description="The request parameters for updating an existing API key.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1458,7 +1459,7 @@ class ApiKeysApi:
 
         :param key_id: The unique identifier of the API key to update. (required)
         :type key_id: str
-        :param update_api_key_request: The request parameters for updating an existing API key.
+        :param update_api_key_request: The request parameters for updating an existing API key. (required)
         :type update_api_key_request: UpdateApiKeyRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1510,7 +1511,7 @@ class ApiKeysApi:
     def update_api_key_without_preload_content(
         self,
         key_id: Annotated[StrictStr, Field(description="The unique identifier of the API key to update.")],
-        update_api_key_request: Annotated[Optional[UpdateApiKeyRequest], Field(description="The request parameters for updating an existing API key.")] = None,
+        update_api_key_request: Annotated[UpdateApiKeyRequest, Field(description="The request parameters for updating an existing API key.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1530,7 +1531,7 @@ class ApiKeysApi:
 
         :param key_id: The unique identifier of the API key to update. (required)
         :type key_id: str
-        :param update_api_key_request: The request parameters for updating an existing API key.
+        :param update_api_key_request: The request parameters for updating an existing API key. (required)
         :type update_api_key_request: UpdateApiKeyRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request

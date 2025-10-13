@@ -11,6 +11,8 @@ Method | HTTP request | Description
 [**get_backup_history**](#get_backup_history) | **GET** /api/2.0/backup/getbackuphistory | Get the backup history
 [**get_backup_progress**](#get_backup_progress) | **GET** /api/2.0/backup/getbackupprogress | Get the backup progress
 [**get_backup_schedule**](#get_backup_schedule) | **GET** /api/2.0/backup/getbackupschedule | Get the backup schedule
+[**get_backups_count**](#get_backups_count) | **GET** /api/2.0/backup/getbackupscount | Get the number of backups
+[**get_backups_service_state**](#get_backups_service_state) | **GET** /api/2.0/backup/getservicestate | Get the backup service state
 [**get_restore_progress**](#get_restore_progress) | **GET** /api/2.0/backup/getrestoreprogress | Get the restoring progress
 [**start_backup**](#start_backup) | **POST** /api/2.0/backup/startbackup | Start the backup
 [**start_backup_restore**](#start_backup_restore) | **POST** /api/2.0/backup/startrestore | Start the restoring process
@@ -563,6 +565,160 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 **200** | Backup schedule |  -  |
 **401** | Unauthorized |  -  |
 **402** | Your pricing plan does not support this option |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_backups_count**
+> Int32Wrapper get_backups_count(var_from=var_from, to=to, paid=paid)
+
+Returns the number of backups for a period of time. The default is one month.
+
+For more information, see [api.onlyoffice.com]().
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **var_from** | **datetime**| The from date. | [optional] 
+ **to** | **datetime**| The to date. | [optional] 
+ **paid** | **bool**| Specifies if the backups are paid or not. | [optional] 
+
+### Return type
+
+[**Int32Wrapper**](Int32Wrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+
+```python
+import docspace_api_sdk
+from docspace_api_sdk.models.int32_wrapper import Int32Wrapper
+from docspace_api_sdk.rest import ApiException
+from pprint import pprint
+
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with docspace_api_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace_api_sdk.BackupApi(api_client)
+    var_from = '2008-04-10T06:30+04:00' # datetime | The from date. (optional)
+    to = '2008-04-10T06:30+04:00' # datetime | The to date. (optional)
+    paid = true # bool | Specifies if the backups are paid or not. (optional)
+
+    try:
+        # Get the number of backups
+        api_response = api_instance.get_backups_count(var_from=var_from, to=to, paid=paid)
+        print("The response of BackupApi->get_backups_count:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling BackupApi->get_backups_count: %s\n" % e)
+```
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Number of backups |  -  |
+**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_backups_service_state**
+> BackupServiceStateWrapper get_backups_service_state()
+
+Returns the backup service state.
+
+For more information, see [api.onlyoffice.com]().
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**BackupServiceStateWrapper**](BackupServiceStateWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+
+```python
+import docspace_api_sdk
+from docspace_api_sdk.models.backup_service_state_wrapper import BackupServiceStateWrapper
+from docspace_api_sdk.rest import ApiException
+from pprint import pprint
+
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with docspace_api_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace_api_sdk.BackupApi(api_client)
+
+    try:
+        # Get the backup service state
+        api_response = api_instance.get_backups_service_state()
+        print("The response of BackupApi->get_backups_service_state:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling BackupApi->get_backups_service_state: %s\n" % e)
+```
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Backup service state |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

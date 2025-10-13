@@ -5,14 +5,14 @@ The document builder task parameters.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** | The document builder ID. | [optional] 
-**error** | **str** | The error message occured while the document building process. | [optional] 
-**percentage** | **int** | The percentage of the progress of the document building process. | [optional] 
-**is_completed** | **bool** | Specifies whether the document building process is completed or not. | [optional] 
-**status** | [**DistributedTaskStatus**](DistributedTaskStatus.md) |  | [optional] 
-**result_file_id** | **object** | The result file ID. | [optional] 
-**result_file_name** | **str** | The result file name. | [optional] 
-**result_file_url** | **str** | The result file URL. | [optional] 
+**id** | **str** | The document builder ID. | 
+**error** | **str** | The error message occured while the document building process. | 
+**percentage** | **int** | The percentage of the progress of the document building process. | 
+**is_completed** | **bool** | Specifies whether the document building process is completed or not. | 
+**status** | [**DistributedTaskStatus**](DistributedTaskStatus.md) |  | 
+**result_file_id** | **object** | The result file ID. | 
+**result_file_name** | **str** | The result file name. | 
+**result_file_url** | **str** | The result file URL. | 
 
 ## Example
 

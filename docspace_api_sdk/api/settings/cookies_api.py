@@ -44,6 +44,7 @@ class CookiesApi:
         self.api_client = api_client
 
 
+
     @validate_call
     def get_cookie_settings(
         self,

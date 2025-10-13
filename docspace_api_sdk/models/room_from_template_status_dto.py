@@ -30,10 +30,10 @@ class RoomFromTemplateStatusDto(BaseModel):
     """
     The progress parameters of creating a room from the template.
     """ # noqa: E501
-    room_id: Optional[StrictInt] = Field(default=None, description="The room ID.", alias="roomId")
-    progress: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The progress of creating a room from the template.")
-    error: Optional[StrictStr] = Field(default=None, description="The error message that is sent when a room is not created successfully from the template.")
-    is_completed: Optional[StrictBool] = Field(default=None, description="Specifies whether the process of creating a room from the template is completed.", alias="isCompleted")
+    room_id: StrictInt = Field(description="The room ID.", alias="roomId")
+    progress: Union[StrictFloat, StrictInt] = Field(description="The progress of creating a room from the template.")
+    error: Optional[StrictStr] = Field(description="The error message that is sent when a room is not created successfully from the template.")
+    is_completed: StrictBool = Field(description="Specifies whether the process of creating a room from the template is completed.", alias="isCompleted")
     __properties: ClassVar[List[str]] = ["roomId", "progress", "error", "isCompleted"]
 
     model_config = ConfigDict(

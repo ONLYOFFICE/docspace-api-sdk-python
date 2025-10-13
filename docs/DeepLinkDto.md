@@ -5,9 +5,9 @@ The deep link parameters.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**android_package_name** | **str** | The Android package name. | [optional] 
-**url** | **str** | The deep link URL. | [optional] 
-**ios_package_id** | **str** | The deep link IOS package ID. | [optional] 
+**android_package_name** | **str** | The Android package name. | 
+**url** | **str** | The deep link URL. | 
+**ios_package_id** | **str** | The deep link IOS package ID. | 
 
 ## Example
 

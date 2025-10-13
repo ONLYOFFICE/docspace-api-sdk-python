@@ -31,7 +31,7 @@ class DeleteFolder(BaseModel):
     The parameters for deleting a folder.
     """ # noqa: E501
     delete_after: Optional[StrictBool] = Field(default=None, description="Specifies whether to delete a folder after the editing session is finished or not.", alias="deleteAfter")
-    immediately: Optional[StrictBool] = Field(default=None, description="Specifies whether to move a folder to the \\\"Trash\\\" folder or delete it immediately.")
+    immediately: Optional[StrictBool] = Field(default=None, description="Specifies whether to move a folder to the \\Trash\\ folder or delete it immediately.")
     __properties: ClassVar[List[str]] = ["deleteAfter", "immediately"]
 
     model_config = ConfigDict(

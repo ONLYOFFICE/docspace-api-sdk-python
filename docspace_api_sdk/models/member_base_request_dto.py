@@ -34,7 +34,8 @@ class MemberBaseRequestDto(BaseModel):
     password: Optional[StrictStr] = Field(default=None, description="The user password.")
     password_hash: Optional[StrictStr] = Field(default=None, description="The user password hash.", alias="passwordHash")
     email: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The user email address.")
-    __properties: ClassVar[List[str]] = ["password", "passwordHash", "email"]
+    enc_email: Optional[StrictStr] = Field(default=None, description="The user encrypted email address.", alias="encEmail")
+    __properties: ClassVar[List[str]] = ["password", "passwordHash", "email", "encEmail"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -90,6 +91,11 @@ class MemberBaseRequestDto(BaseModel):
         if self.email is None and "email" in self.model_fields_set:
             _dict['email'] = None
 
+        # set to None if enc_email (nullable) is None
+        # and model_fields_set contains the field
+        if self.enc_email is None and "enc_email" in self.model_fields_set:
+            _dict['encEmail'] = None
+
         return _dict
 
     @classmethod
@@ -105,7 +111,8 @@ class MemberBaseRequestDto(BaseModel):
         _obj = cls.model_validate({
             "password": obj.get("password"),
             "passwordHash": obj.get("passwordHash"),
-            "email": obj.get("email")
+            "email": obj.get("email"),
+            "encEmail": obj.get("encEmail")
         })
         return _obj
 

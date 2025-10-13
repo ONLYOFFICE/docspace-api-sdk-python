@@ -322,7 +322,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update_web_plugin**
-> update_web_plugin(name, web_plugin_requests=web_plugin_requests)
+> update_web_plugin(name, web_plugin_requests)
 
 Updates a web plugin with the parameters specified in the request.
 
@@ -334,7 +334,7 @@ For more information, see [api.onlyoffice.com]().
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **str**| The web plugin name. | 
- **web_plugin_requests** | [**WebPluginRequests**](WebPluginRequests.md)| The configuration settings for the web plugin instance. | [optional] 
+ **web_plugin_requests** | [**WebPluginRequests**](WebPluginRequests.md)| The configuration settings for the web plugin instance. | 
 
 ### Return type
 
@@ -372,11 +372,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.WebpluginsApi(api_client)
     name = 'Winfield Upton' # str | The web plugin name.
-    web_plugin_requests = docspace_api_sdk.WebPluginRequests() # WebPluginRequests | The configuration settings for the web plugin instance. (optional)
+    web_plugin_requests = docspace_api_sdk.WebPluginRequests() # WebPluginRequests | The configuration settings for the web plugin instance.
 
     try:
         # Update a web plugin
-        api_instance.update_web_plugin(name, web_plugin_requests=web_plugin_requests)
+        api_instance.update_web_plugin(name, web_plugin_requests)
     except Exception as e:
         print("Exception when calling WebpluginsApi->update_web_plugin: %s\n" % e)
 ```

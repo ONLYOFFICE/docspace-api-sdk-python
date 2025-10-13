@@ -30,8 +30,8 @@ class CspDto(BaseModel):
     """
     The CSP (Content Security Policy) parameters.
     """ # noqa: E501
-    domains: Optional[List[StrictStr]] = Field(default=None, description="The list of CSP domains.")
-    header: Optional[StrictStr] = Field(default=None, description="The CSP header.")
+    domains: Optional[List[StrictStr]] = Field(description="The list of CSP domains.")
+    header: Optional[StrictStr] = Field(description="The CSP header.")
     __properties: ClassVar[List[str]] = ["domains", "header"]
 
     model_config = ConfigDict(

@@ -44,6 +44,7 @@ class SSOApi:
         self.api_client = api_client
 
 
+
     @validate_call
     def get_default_sso_settings_v2(
         self,

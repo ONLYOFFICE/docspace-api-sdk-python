@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **save_url** | **str** | The absolute URL that will allow the document to be saved onto the user personal computer. | [optional] [readonly] 
 **share_link_param** | **str** | The shared URL parameter. | [optional] 
 **share_url** | **str** | The absolute URL that will allow other users to share this document. | [optional] 
-**toolbar_docked** | **str** | The place for the embedded viewer toolbar, can be either \&quot;top\&quot; or \&quot;bottom\&quot;. | [optional] [readonly] 
+**toolbar_docked** | **str** | The place for the embedded viewer toolbar, can be either top or bottom. | [optional] [readonly] 
 
 ## Example
 

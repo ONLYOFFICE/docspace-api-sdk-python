@@ -44,6 +44,7 @@ class GuestsApi:
         self.api_client = api_client
 
 
+
     @validate_call
     def approve_guest_share_link(
         self,

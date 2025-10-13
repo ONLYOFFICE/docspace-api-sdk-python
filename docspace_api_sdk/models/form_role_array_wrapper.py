@@ -24,7 +24,7 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictInt
 from typing import Any, ClassVar, Dict, List, Optional
 from docspace_api_sdk.models.active_connections_wrapper_links_inner import ActiveConnectionsWrapperLinksInner
-from docspace_api_sdk.models.form_role import FormRole
+from docspace_api_sdk.models.form_role_dto import FormRoleDto
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -32,7 +32,7 @@ class FormRoleArrayWrapper(BaseModel):
     """
     FormRoleArrayWrapper
     """ # noqa: E501
-    response: Optional[List[FormRole]] = None
+    response: Optional[List[FormRoleDto]] = None
     count: Optional[StrictInt] = None
     links: Optional[List[ActiveConnectionsWrapperLinksInner]] = None
     status: Optional[StrictInt] = None
@@ -105,7 +105,7 @@ class FormRoleArrayWrapper(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "response": [FormRole.from_dict(_item) for _item in obj["response"]] if obj.get("response") is not None else None,
+            "response": [FormRoleDto.from_dict(_item) for _item in obj["response"]] if obj.get("response") is not None else None,
             "count": obj.get("count"),
             "links": [ActiveConnectionsWrapperLinksInner.from_dict(_item) for _item in obj["links"]] if obj.get("links") is not None else None,
             "status": obj.get("status"),

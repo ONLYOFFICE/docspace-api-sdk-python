@@ -49,6 +49,7 @@ class UserDataApi:
         self.api_client = api_client
 
 
+
     @validate_call
     def get_delete_personal_folder_progress(
         self,

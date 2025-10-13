@@ -5,13 +5,13 @@ The quota information.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **int** | The quota ID. | [optional] 
-**title** | **str** | The quota title. | [optional] 
-**price** | [**PriceDto**](PriceDto.md) |  | [optional] 
-**non_profit** | **bool** | Specifies if the quota is nonprofit or not. | [optional] 
-**free** | **bool** | Specifies if the quota is free or not. | [optional] 
-**trial** | **bool** | Specifies if the quota is trial or not. | [optional] 
-**features** | [**List[TenantQuotaFeatureDto]**](TenantQuotaFeatureDto.md) | The list of tenant quota features. | [optional] 
+**id** | **int** | The quota ID. | 
+**title** | **str** | The quota title. | 
+**price** | [**PriceDto**](PriceDto.md) |  | 
+**non_profit** | **bool** | Specifies if the quota is nonprofit or not. | 
+**free** | **bool** | Specifies if the quota is free or not. | 
+**trial** | **bool** | Specifies if the quota is trial or not. | 
+**features** | [**List[TenantQuotaFeatureDto]**](TenantQuotaFeatureDto.md) | The list of tenant quota features. | 
 **users_quota** | [**TenantEntityQuotaSettings**](TenantEntityQuotaSettings.md) |  | [optional] 
 **rooms_quota** | [**TenantEntityQuotaSettings**](TenantEntityQuotaSettings.md) |  | [optional] 
 **tenant_custom_quota** | [**TenantQuotaSettings**](TenantQuotaSettings.md) |  | [optional] 

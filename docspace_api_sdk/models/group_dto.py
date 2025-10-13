@@ -31,16 +31,17 @@ class GroupDto(BaseModel):
     """
     The group parameters.
     """ # noqa: E501
-    name: Optional[StrictStr] = Field(default=None, description="The group name.")
+    name: Optional[StrictStr] = Field(description="The group name.")
     parent: Optional[StrictStr] = Field(default=None, description="The parent group ID.")
-    category: Optional[StrictStr] = Field(default=None, description="The group category ID.")
-    id: Optional[StrictStr] = Field(default=None, description="The group ID.")
-    is_ldap: Optional[StrictBool] = Field(default=None, description="Specifies if the LDAP settings are enabled for the group or not.", alias="isLDAP")
+    category: StrictStr = Field(description="The group category ID.")
+    id: StrictStr = Field(description="The group ID.")
+    is_ldap: StrictBool = Field(description="Specifies if the LDAP settings are enabled for the group or not.", alias="isLDAP")
+    is_system: Optional[StrictBool] = Field(default=None, description="Indicates whether the group is a system group.", alias="isSystem")
     manager: Optional[EmployeeFullDto] = None
     members: Optional[List[EmployeeFullDto]] = Field(default=None, description="The list of group members.")
     shared: Optional[StrictBool] = Field(default=None, description="Specifies whether the group can be shared or not.")
     members_count: Optional[StrictInt] = Field(default=None, description="The number of group members.", alias="membersCount")
-    __properties: ClassVar[List[str]] = ["name", "parent", "category", "id", "isLDAP", "manager", "members", "shared", "membersCount"]
+    __properties: ClassVar[List[str]] = ["name", "parent", "category", "id", "isLDAP", "isSystem", "manager", "members", "shared", "membersCount"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -101,6 +102,11 @@ class GroupDto(BaseModel):
         if self.parent is None and "parent" in self.model_fields_set:
             _dict['parent'] = None
 
+        # set to None if is_system (nullable) is None
+        # and model_fields_set contains the field
+        if self.is_system is None and "is_system" in self.model_fields_set:
+            _dict['isSystem'] = None
+
         # set to None if members (nullable) is None
         # and model_fields_set contains the field
         if self.members is None and "members" in self.model_fields_set:
@@ -129,6 +135,7 @@ class GroupDto(BaseModel):
             "category": obj.get("category"),
             "id": obj.get("id"),
             "isLDAP": obj.get("isLDAP"),
+            "isSystem": obj.get("isSystem"),
             "manager": EmployeeFullDto.from_dict(obj["manager"]) if obj.get("manager") is not None else None,
             "members": [EmployeeFullDto.from_dict(_item) for _item in obj["members"]] if obj.get("members") is not None else None,
             "shared": obj.get("shared"),

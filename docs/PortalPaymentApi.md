@@ -5,20 +5,26 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**calculate_wallet_payment**](#calculate_wallet_payment) | **PUT** /api/2.0/portal/payment/calculatewallet | Calculate amount of the wallet payment
-[**create_customer_operations_report**](#create_customer_operations_report) | **POST** /api/2.0/portal/payment/customer/operationsreport | Generate the customer operations report
+[**change_tenant_wallet_service_state**](#change_tenant_wallet_service_state) | **POST** /api/2.0/portal/payment/servicestate | Change wallet service state
+[**create_customer_operations_report**](#create_customer_operations_report) | **POST** /api/2.0/portal/payment/customer/operationsreport | Start generating the customer operations report
 [**get_checkout_setup_url**](#get_checkout_setup_url) | **GET** /api/2.0/portal/payment/chechoutsetupurl | Get the checkout setup page URL
 [**get_customer_balance**](#get_customer_balance) | **GET** /api/2.0/portal/payment/customer/balance | Get the customer balance
 [**get_customer_info**](#get_customer_info) | **GET** /api/2.0/portal/payment/customerinfo | Get the customer info
 [**get_customer_operations**](#get_customer_operations) | **GET** /api/2.0/portal/payment/customer/operations | Get the customer operations
+[**get_customer_operations_report**](#get_customer_operations_report) | **GET** /api/2.0/portal/payment/customer/operationsreport | Get the status of generating a customer operations report
 [**get_payment_account**](#get_payment_account) | **GET** /api/2.0/portal/payment/account | Get the payment account
 [**get_payment_currencies**](#get_payment_currencies) | **GET** /api/2.0/portal/payment/currencies | Get currencies
 [**get_payment_quotas**](#get_payment_quotas) | **GET** /api/2.0/portal/payment/quotas | Get quotas
 [**get_payment_url**](#get_payment_url) | **PUT** /api/2.0/portal/payment/url | Get the payment page URL
 [**get_portal_prices**](#get_portal_prices) | **GET** /api/2.0/portal/payment/prices | Get prices
 [**get_quota_payment_information**](#get_quota_payment_information) | **GET** /api/2.0/portal/payment/quota | Get quota payment information
+[**get_tenant_wallet_service_settings**](#get_tenant_wallet_service_settings) | **GET** /api/2.0/portal/payment/servicessettings | Get wallet services settings
 [**get_tenant_wallet_settings**](#get_tenant_wallet_settings) | **GET** /api/2.0/portal/payment/topupsettings | Get wallet auto top up settings
+[**get_wallet_service**](#get_wallet_service) | **GET** /api/2.0/portal/payment/walletservice | Get wallet service
+[**get_wallet_services**](#get_wallet_services) | **GET** /api/2.0/portal/payment/walletservices | Get wallet services
 [**send_payment_request**](#send_payment_request) | **POST** /api/2.0/portal/payment/request | Send a payment request
 [**set_tenant_wallet_settings**](#set_tenant_wallet_settings) | **POST** /api/2.0/portal/payment/topupsettings | Set wallet auto top up settings
+[**terminate_customer_operations_report**](#terminate_customer_operations_report) | **DELETE** /api/2.0/portal/payment/customer/operationsreport | Terminate the generating a customer operations report
 [**top_up_deposit**](#top_up_deposit) | **POST** /api/2.0/portal/payment/deposit | Put money on deposit
 [**update_payment**](#update_payment) | **PUT** /api/2.0/portal/payment/update | Update the payment quantity
 [**update_wallet_payment**](#update_wallet_payment) | **PUT** /api/2.0/portal/payment/updatewallet | Update the wallet payment quantity
@@ -103,10 +109,89 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **create_customer_operations_report**
-> StringWrapper create_customer_operations_report(customer_operations_report_request_dto=customer_operations_report_request_dto)
+# **change_tenant_wallet_service_state**
+> TenantWalletServiceSettingsWrapper change_tenant_wallet_service_state(change_wallet_service_state_request_dto=change_wallet_service_state_request_dto)
 
-Generates the customer operations report as csv file and save in Documents.
+Change wallet service state.
+
+For more information, see [api.onlyoffice.com]().
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **change_wallet_service_state_request_dto** | [**ChangeWalletServiceStateRequestDto**](ChangeWalletServiceStateRequestDto.md)|  | [optional] 
+
+### Return type
+
+[**TenantWalletServiceSettingsWrapper**](TenantWalletServiceSettingsWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+
+```python
+import docspace_api_sdk
+from docspace_api_sdk.models.change_wallet_service_state_request_dto import ChangeWalletServiceStateRequestDto
+from docspace_api_sdk.models.tenant_wallet_service_settings_wrapper import TenantWalletServiceSettingsWrapper
+from docspace_api_sdk.rest import ApiException
+from pprint import pprint
+
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with docspace_api_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace_api_sdk.PaymentApi(api_client)
+    change_wallet_service_state_request_dto = docspace_api_sdk.ChangeWalletServiceStateRequestDto() # ChangeWalletServiceStateRequestDto |  (optional)
+
+    try:
+        # Change wallet service state
+        api_response = api_instance.change_tenant_wallet_service_state(change_wallet_service_state_request_dto=change_wallet_service_state_request_dto)
+        print("The response of PaymentApi->change_tenant_wallet_service_state:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PaymentApi->change_tenant_wallet_service_state: %s\n" % e)
+```
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The wallet service settings |  -  |
+**401** | Unauthorized |  -  |
+**403** | No permissions to perform this action |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **create_customer_operations_report**
+> DocumentBuilderTaskWrapper create_customer_operations_report(customer_operations_report_request_dto=customer_operations_report_request_dto)
+
+Start generating the customer operations report as xlsx file and save in Documents.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -119,7 +204,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**StringWrapper**](StringWrapper.md)
+[**DocumentBuilderTaskWrapper**](DocumentBuilderTaskWrapper.md)
 
 ### Authorization
 
@@ -131,7 +216,7 @@ Name | Type | Description  | Notes
 ```python
 import docspace_api_sdk
 from docspace_api_sdk.models.customer_operations_report_request_dto import CustomerOperationsReportRequestDto
-from docspace_api_sdk.models.string_wrapper import StringWrapper
+from docspace_api_sdk.models.document_builder_task_wrapper import DocumentBuilderTaskWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -156,7 +241,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     customer_operations_report_request_dto = docspace_api_sdk.CustomerOperationsReportRequestDto() # CustomerOperationsReportRequestDto |  (optional)
 
     try:
-        # Generate the customer operations report
+        # Start generating the customer operations report
         api_response = api_instance.create_customer_operations_report(customer_operations_report_request_dto=customer_operations_report_request_dto)
         print("The response of PaymentApi->create_customer_operations_report:\n")
         pprint(api_response)
@@ -176,7 +261,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | URL to the csv report file |  -  |
+**200** | Ok |  -  |
 **401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -416,7 +501,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_customer_operations**
-> ReportWrapper get_customer_operations(start_date=start_date, end_date=end_date, credit=credit, withdrawal=withdrawal, offset=offset, limit=limit)
+> ReportWrapper get_customer_operations(start_date=start_date, end_date=end_date, participant_name=participant_name, credit=credit, debit=debit, offset=offset, limit=limit)
 
 Returns the report of customer operations from the accounting service.
 
@@ -429,8 +514,9 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **start_date** | **datetime**| Start date | [optional] 
  **end_date** | **datetime**| End date | [optional] 
+ **participant_name** | **str**| Participant name | [optional] 
  **credit** | **bool**| Include credit operations (true by default) | [optional] 
- **withdrawal** | **bool**| Include withdrawal operations (true by default) | [optional] 
+ **debit** | **bool**| Include debit operations (true by default) | [optional] 
  **offset** | **int**| Offset (0 by default) | [optional] 
  **limit** | **int**| Limit (25 by default) | [optional] 
 
@@ -471,14 +557,15 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     api_instance = docspace_api_sdk.PaymentApi(api_client)
     start_date = '2008-04-10T06:30+04:00' # datetime | Start date (optional)
     end_date = '2008-04-10T06:30+04:00' # datetime | End date (optional)
+    participant_name = 'some text' # str | Participant name (optional)
     credit = true # bool | Include credit operations (true by default) (optional)
-    withdrawal = true # bool | Include withdrawal operations (true by default) (optional)
+    debit = true # bool | Include debit operations (true by default) (optional)
     offset = 1234 # int | Offset (0 by default) (optional)
     limit = 1234 # int | Limit (25 by default) (optional)
 
     try:
         # Get the customer operations
-        api_response = api_instance.get_customer_operations(start_date=start_date, end_date=end_date, credit=credit, withdrawal=withdrawal, offset=offset, limit=limit)
+        api_response = api_instance.get_customer_operations(start_date=start_date, end_date=end_date, participant_name=participant_name, credit=credit, debit=debit, offset=offset, limit=limit)
         print("The response of PaymentApi->get_customer_operations:\n")
         pprint(api_response)
     except Exception as e:
@@ -500,6 +587,79 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 **200** | The customer operations |  -  |
 **401** | Unauthorized |  -  |
 **403** | No permissions to perform this action |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_customer_operations_report**
+> DocumentBuilderTaskWrapper get_customer_operations_report()
+
+Get the status of generating a customer operations report.
+
+For more information, see [api.onlyoffice.com]().
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**DocumentBuilderTaskWrapper**](DocumentBuilderTaskWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+
+```python
+import docspace_api_sdk
+from docspace_api_sdk.models.document_builder_task_wrapper import DocumentBuilderTaskWrapper
+from docspace_api_sdk.rest import ApiException
+from pprint import pprint
+
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with docspace_api_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace_api_sdk.PaymentApi(api_client)
+
+    try:
+        # Get the status of generating a customer operations report
+        api_response = api_instance.get_customer_operations_report()
+        print("The response of PaymentApi->get_customer_operations_report:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PaymentApi->get_customer_operations_report: %s\n" % e)
+```
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Ok |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -811,7 +971,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_portal_prices**
-> ObjectWrapper get_portal_prices()
+> UnknownWrapper get_portal_prices()
 
 Returns the available portal prices.
 
@@ -823,7 +983,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**ObjectWrapper**](ObjectWrapper.md)
+[**UnknownWrapper**](UnknownWrapper.md)
 
 ### Authorization
 
@@ -834,7 +994,7 @@ This endpoint does not need any parameter.
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.object_wrapper import ObjectWrapper
+from docspace_api_sdk.models.unknown_wrapper import UnknownWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -961,6 +1121,80 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **get_tenant_wallet_service_settings**
+> TenantWalletServiceSettingsWrapper get_tenant_wallet_service_settings()
+
+Get the wallet services settings.
+
+For more information, see [api.onlyoffice.com]().
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**TenantWalletServiceSettingsWrapper**](TenantWalletServiceSettingsWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+
+```python
+import docspace_api_sdk
+from docspace_api_sdk.models.tenant_wallet_service_settings_wrapper import TenantWalletServiceSettingsWrapper
+from docspace_api_sdk.rest import ApiException
+from pprint import pprint
+
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with docspace_api_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace_api_sdk.PaymentApi(api_client)
+
+    try:
+        # Get wallet services settings
+        api_response = api_instance.get_tenant_wallet_service_settings()
+        print("The response of PaymentApi->get_tenant_wallet_service_settings:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PaymentApi->get_tenant_wallet_service_settings: %s\n" % e)
+```
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The wallet services settings |  -  |
+**401** | Unauthorized |  -  |
+**403** | No permissions to perform this action |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **get_tenant_wallet_settings**
 > TenantWalletSettingsWrapper get_tenant_wallet_settings()
 
@@ -1032,6 +1266,157 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 **200** | The wallet auto top up settings |  -  |
 **401** | Unauthorized |  -  |
 **403** | No permissions to perform this action |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_wallet_service**
+> QuotaWrapper get_wallet_service(service)
+
+Returns the wallet services.
+
+For more information, see [api.onlyoffice.com]().
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **service** | [**TenantWalletService**](.md)| Wallet service | 
+
+### Return type
+
+[**QuotaWrapper**](QuotaWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+
+```python
+import docspace_api_sdk
+from docspace_api_sdk.models.quota_wrapper import QuotaWrapper
+from docspace_api_sdk.models.tenant_wallet_service import TenantWalletService
+from docspace_api_sdk.rest import ApiException
+from pprint import pprint
+
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with docspace_api_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace_api_sdk.PaymentApi(api_client)
+    service = docspace_api_sdk.TenantWalletService() # TenantWalletService | Wallet service
+
+    try:
+        # Get wallet service
+        api_response = api_instance.get_wallet_service(service)
+        print("The response of PaymentApi->get_wallet_service:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PaymentApi->get_wallet_service: %s\n" % e)
+```
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Wallet service |  -  |
+**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_wallet_services**
+> QuotaArrayWrapper get_wallet_services()
+
+Returns the available wallet services.
+
+For more information, see [api.onlyoffice.com]().
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**QuotaArrayWrapper**](QuotaArrayWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+
+```python
+import docspace_api_sdk
+from docspace_api_sdk.models.quota_array_wrapper import QuotaArrayWrapper
+from docspace_api_sdk.rest import ApiException
+from pprint import pprint
+
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with docspace_api_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace_api_sdk.PaymentApi(api_client)
+
+    try:
+        # Get wallet services
+        api_response = api_instance.get_wallet_services()
+        print("The response of PaymentApi->get_wallet_services:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PaymentApi->get_wallet_services: %s\n" % e)
+```
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | List of available wallet services |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1187,6 +1572,76 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 **200** | The wallet auto top up settings |  -  |
 **401** | Unauthorized |  -  |
 **403** | No permissions to perform this action |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **terminate_customer_operations_report**
+> terminate_customer_operations_report()
+
+Terminates the generating a customer operations report.
+
+For more information, see [api.onlyoffice.com]().
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+
+```python
+import docspace_api_sdk
+from docspace_api_sdk.rest import ApiException
+from pprint import pprint
+
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with docspace_api_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace_api_sdk.PaymentApi(api_client)
+
+    try:
+        # Terminate the generating a customer operations report
+        api_instance.terminate_customer_operations_report()
+    except Exception as e:
+        print("Exception when calling PaymentApi->terminate_customer_operations_report: %s\n" % e)
+```
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Ok |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

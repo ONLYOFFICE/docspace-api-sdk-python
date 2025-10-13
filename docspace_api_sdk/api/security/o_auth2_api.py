@@ -41,6 +41,7 @@ class OAuth2Api:
         self.api_client = api_client
 
 
+
     @validate_call
     def generate_jwt_token(
         self,

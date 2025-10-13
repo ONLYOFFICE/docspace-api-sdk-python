@@ -32,16 +32,16 @@ class ApiKeyResponseDto(BaseModel):
     """
     The response data for the API key operations.
     """ # noqa: E501
-    id: Optional[StrictStr] = Field(default=None, description="The unique identifier of the API key.")
-    name: Optional[StrictStr] = Field(default=None, description="The API key name.")
-    key: Optional[StrictStr] = Field(default=None, description="The full API key value (only returned when creating a new key).")
+    id: StrictStr = Field(description="The unique identifier of the API key.")
+    name: Optional[StrictStr] = Field(description="The API key name.")
+    key: Optional[StrictStr] = Field(description="The full API key value (only returned when creating a new key).")
     key_postfix: Optional[StrictStr] = Field(default=None, description="The API key postfix (used for identification).", alias="keyPostfix")
-    permissions: Optional[List[StrictStr]] = Field(default=None, description="The list of permissions granted to the API key.")
+    permissions: Optional[List[StrictStr]] = Field(description="The list of permissions granted to the API key.")
     last_used: Optional[ApiDateTime] = Field(default=None, alias="lastUsed")
     create_on: Optional[ApiDateTime] = Field(default=None, alias="createOn")
     create_by: Optional[EmployeeDto] = Field(default=None, alias="createBy")
     expires_at: Optional[ApiDateTime] = Field(default=None, alias="expiresAt")
-    is_active: Optional[StrictBool] = Field(default=None, description="Indicates whether the API key is active or not.", alias="isActive")
+    is_active: StrictBool = Field(description="Indicates whether the API key is active or not.", alias="isActive")
     __properties: ClassVar[List[str]] = ["id", "name", "key", "keyPostfix", "permissions", "lastUsed", "createOn", "createBy", "expiresAt", "isActive"]
 
     model_config = ConfigDict(

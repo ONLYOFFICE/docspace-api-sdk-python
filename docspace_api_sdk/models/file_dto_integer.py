@@ -27,7 +27,9 @@ from docspace_api_sdk.models.api_date_time import ApiDateTime
 from docspace_api_sdk.models.draft_location_integer import DraftLocationInteger
 from docspace_api_sdk.models.employee_dto import EmployeeDto
 from docspace_api_sdk.models.file_dto_integer_all_of_view_accessibility import FileDtoIntegerAllOfViewAccessibility
+from docspace_api_sdk.models.file_entry_dto_integer_all_of_available_share_rights import FileEntryDtoIntegerAllOfAvailableShareRights
 from docspace_api_sdk.models.file_entry_dto_integer_all_of_security import FileEntryDtoIntegerAllOfSecurity
+from docspace_api_sdk.models.file_entry_dto_integer_all_of_share_settings import FileEntryDtoIntegerAllOfShareSettings
 from docspace_api_sdk.models.file_entry_type import FileEntryType
 from docspace_api_sdk.models.file_share import FileShare
 from docspace_api_sdk.models.file_status import FileStatus
@@ -54,7 +56,6 @@ class FileDtoInteger(FileEntryDtoInteger):
     mute: Optional[StrictBool] = Field(default=None, description="Specifies if the file is muted or not.")
     view_url: Optional[StrictStr] = Field(default=None, description="The URL link to view the file.", alias="viewUrl")
     web_url: Optional[StrictStr] = Field(default=None, description="The Web URL link to the file.", alias="webUrl")
-    short_web_url: Optional[StrictStr] = Field(default=None, description="The short Web URL.", alias="shortWebUrl")
     file_type: Optional[FileType] = Field(default=None, alias="fileType")
     file_exst: Optional[StrictStr] = Field(default=None, description="The file extension.", alias="fileExst")
     comment: Optional[StrictStr] = Field(default=None, description="The comment to the file.")
@@ -73,7 +74,6 @@ class FileDtoInteger(FileEntryDtoInteger):
     in_process_folder_title: Optional[StrictStr] = Field(default=None, description="The InProcess folder title of the file.", alias="inProcessFolderTitle")
     draft_location: Optional[DraftLocationInteger] = Field(default=None, alias="draftLocation")
     view_accessibility: Optional[FileDtoIntegerAllOfViewAccessibility] = Field(default=None, alias="viewAccessibility")
-    available_external_rights: Optional[Dict[str, StrictBool]] = Field(default=None, description="The available external rights of the file.", alias="availableExternalRights")
     last_opened: Optional[ApiDateTime] = Field(default=None, alias="lastOpened")
     expired: Optional[ApiDateTime] = None
 
@@ -130,9 +130,18 @@ class FileDtoInteger(FileEntryDtoInteger):
         # override the default output from pydantic by calling `to_dict()` of updated_by
         if self.updated_by:
             _dict['updatedBy'] = self.updated_by.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of share_settings
+        if self.share_settings:
+            _dict['shareSettings'] = self.share_settings.to_dict()
         # override the default output from pydantic by calling `to_dict()` of security
         if self.security:
             _dict['security'] = self.security.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of available_share_rights
+        if self.available_share_rights:
+            _dict['availableShareRights'] = self.available_share_rights.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of expiration_date
+        if self.expiration_date:
+            _dict['expirationDate'] = self.expiration_date.to_dict()
         # override the default output from pydantic by calling `to_dict()` of draft_location
         if self.draft_location:
             _dict['draftLocation'] = self.draft_location.to_dict()
@@ -149,6 +158,11 @@ class FileDtoInteger(FileEntryDtoInteger):
         # and model_fields_set contains the field
         if self.title is None and "title" in self.model_fields_set:
             _dict['title'] = None
+
+        # set to None if short_web_url (nullable) is None
+        # and model_fields_set contains the field
+        if self.short_web_url is None and "short_web_url" in self.model_fields_set:
+            _dict['shortWebUrl'] = None
 
         # set to None if provider_item (nullable) is None
         # and model_fields_set contains the field
@@ -170,6 +184,11 @@ class FileDtoInteger(FileEntryDtoInteger):
         if self.order is None and "order" in self.model_fields_set:
             _dict['order'] = None
 
+        # set to None if is_favorite (nullable) is None
+        # and model_fields_set contains the field
+        if self.is_favorite is None and "is_favorite" in self.model_fields_set:
+            _dict['isFavorite'] = None
+
         # set to None if origin_title (nullable) is None
         # and model_fields_set contains the field
         if self.origin_title is None and "origin_title" in self.model_fields_set:
@@ -180,15 +199,30 @@ class FileDtoInteger(FileEntryDtoInteger):
         if self.origin_room_title is None and "origin_room_title" in self.model_fields_set:
             _dict['originRoomTitle'] = None
 
+        # set to None if share_settings (nullable) is None
+        # and model_fields_set contains the field
+        if self.share_settings is None and "share_settings" in self.model_fields_set:
+            _dict['shareSettings'] = None
+
         # set to None if security (nullable) is None
         # and model_fields_set contains the field
         if self.security is None and "security" in self.model_fields_set:
             _dict['security'] = None
 
+        # set to None if available_share_rights (nullable) is None
+        # and model_fields_set contains the field
+        if self.available_share_rights is None and "available_share_rights" in self.model_fields_set:
+            _dict['availableShareRights'] = None
+
         # set to None if request_token (nullable) is None
         # and model_fields_set contains the field
         if self.request_token is None and "request_token" in self.model_fields_set:
             _dict['requestToken'] = None
+
+        # set to None if external (nullable) is None
+        # and model_fields_set contains the field
+        if self.external is None and "external" in self.model_fields_set:
+            _dict['external'] = None
 
         # set to None if content_length (nullable) is None
         # and model_fields_set contains the field
@@ -209,11 +243,6 @@ class FileDtoInteger(FileEntryDtoInteger):
         # and model_fields_set contains the field
         if self.web_url is None and "web_url" in self.model_fields_set:
             _dict['webUrl'] = None
-
-        # set to None if short_web_url (nullable) is None
-        # and model_fields_set contains the field
-        if self.short_web_url is None and "short_web_url" in self.model_fields_set:
-            _dict['shortWebUrl'] = None
 
         # set to None if file_exst (nullable) is None
         # and model_fields_set contains the field
@@ -285,11 +314,6 @@ class FileDtoInteger(FileEntryDtoInteger):
         if self.view_accessibility is None and "view_accessibility" in self.model_fields_set:
             _dict['viewAccessibility'] = None
 
-        # set to None if available_external_rights (nullable) is None
-        # and model_fields_set contains the field
-        if self.available_external_rights is None and "available_external_rights" in self.model_fields_set:
-            _dict['availableExternalRights'] = None
-
         return _dict
 
     @classmethod
@@ -312,7 +336,6 @@ class FileDtoInteger(FileEntryDtoInteger):
             "mute": obj.get("mute"),
             "viewUrl": obj.get("viewUrl"),
             "webUrl": obj.get("webUrl"),
-            "shortWebUrl": obj.get("shortWebUrl"),
             "fileType": obj.get("fileType"),
             "fileExst": obj.get("fileExst"),
             "comment": obj.get("comment"),
@@ -331,7 +354,6 @@ class FileDtoInteger(FileEntryDtoInteger):
             "inProcessFolderTitle": obj.get("inProcessFolderTitle"),
             "draftLocation": DraftLocationInteger.from_dict(obj["draftLocation"]) if obj.get("draftLocation") is not None else None,
             "viewAccessibility": FileDtoIntegerAllOfViewAccessibility.from_dict(obj["viewAccessibility"]) if obj.get("viewAccessibility") is not None else None,
-            "availableExternalRights": obj.get("availableExternalRights"),
             "lastOpened": ApiDateTime.from_dict(obj["lastOpened"]) if obj.get("lastOpened") is not None else None,
             "expired": ApiDateTime.from_dict(obj["expired"]) if obj.get("expired") is not None else None
         })

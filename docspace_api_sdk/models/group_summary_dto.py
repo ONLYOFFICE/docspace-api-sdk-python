@@ -21,7 +21,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -30,10 +30,11 @@ class GroupSummaryDto(BaseModel):
     """
     The group summary parameters.
     """ # noqa: E501
-    id: Optional[StrictStr] = Field(default=None, description="The group ID.")
-    name: Optional[StrictStr] = Field(default=None, description="The group name.")
+    id: StrictStr = Field(description="The group ID.")
+    name: Optional[StrictStr] = Field(description="The group name.")
     manager: Optional[StrictStr] = Field(default=None, description="The group manager.")
-    __properties: ClassVar[List[str]] = ["id", "name", "manager"]
+    is_system: Optional[StrictBool] = Field(default=None, description="Indicates whether the group is a system group.", alias="isSystem")
+    __properties: ClassVar[List[str]] = ["id", "name", "manager", "isSystem"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -84,6 +85,11 @@ class GroupSummaryDto(BaseModel):
         if self.manager is None and "manager" in self.model_fields_set:
             _dict['manager'] = None
 
+        # set to None if is_system (nullable) is None
+        # and model_fields_set contains the field
+        if self.is_system is None and "is_system" in self.model_fields_set:
+            _dict['isSystem'] = None
+
         return _dict
 
     @classmethod
@@ -99,7 +105,8 @@ class GroupSummaryDto(BaseModel):
         _obj = cls.model_validate({
             "id": obj.get("id"),
             "name": obj.get("name"),
-            "manager": obj.get("manager")
+            "manager": obj.get("manager"),
+            "isSystem": obj.get("isSystem")
         })
         return _obj
 

@@ -8,10 +8,10 @@ Name | Type | Description | Notes
 **files** | [**List[FileEntryBaseDto]**](FileEntryBaseDto.md) | The list of files in the folder. | [optional] 
 **folders** | [**List[FileEntryBaseDto]**](FileEntryBaseDto.md) | The list of folders in the folder. | [optional] 
 **current** | [**FolderDtoInteger**](FolderDtoInteger.md) |  | [optional] 
-**path_parts** | **object** | The folder path. | [optional] 
+**path_parts** | **object** | The folder path. | 
 **start_index** | **int** | The folder start index. | [optional] 
 **count** | **int** | The number of folder elements. | [optional] 
-**total** | **int** | The total number of elements in the folder. | [optional] 
+**total** | **int** | The total number of elements in the folder. | 
 **new** | **int** | The new element index in the folder. | [optional] 
 
 ## Example

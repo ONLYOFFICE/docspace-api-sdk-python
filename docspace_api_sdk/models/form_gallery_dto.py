@@ -30,13 +30,13 @@ class FormGalleryDto(BaseModel):
     """
     The form gallery parameters.
     """ # noqa: E501
-    path: Optional[StrictStr] = Field(default=None, description="The form gallery path.")
-    domain: Optional[StrictStr] = Field(default=None, description="The form gallery domain.")
-    ext: Optional[StrictStr] = Field(default=None, description="The form gallery extension.")
-    upload_path: Optional[StrictStr] = Field(default=None, description="The form gallery upload path.", alias="uploadPath")
-    upload_domain: Optional[StrictStr] = Field(default=None, description="The form gallery upload domain.", alias="uploadDomain")
-    upload_ext: Optional[StrictStr] = Field(default=None, description="The form gallery upload extension.", alias="uploadExt")
-    upload_dashboard: Optional[StrictStr] = Field(default=None, description="The form gallery upload dashboard.", alias="uploadDashboard")
+    path: Optional[StrictStr] = Field(description="The form gallery path.")
+    domain: Optional[StrictStr] = Field(description="The form gallery domain.")
+    ext: Optional[StrictStr] = Field(description="The form gallery extension.")
+    upload_path: Optional[StrictStr] = Field(description="The form gallery upload path.", alias="uploadPath")
+    upload_domain: Optional[StrictStr] = Field(description="The form gallery upload domain.", alias="uploadDomain")
+    upload_ext: Optional[StrictStr] = Field(description="The form gallery upload extension.", alias="uploadExt")
+    upload_dashboard: Optional[StrictStr] = Field(description="The form gallery upload dashboard.", alias="uploadDashboard")
     __properties: ClassVar[List[str]] = ["path", "domain", "ext", "uploadPath", "uploadDomain", "uploadExt", "uploadDashboard"]
 
     model_config = ConfigDict(

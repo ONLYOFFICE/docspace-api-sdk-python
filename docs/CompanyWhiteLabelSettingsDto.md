@@ -5,14 +5,14 @@ The company white label settings.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**company_name** | **str** | The company name. | [optional] 
-**site** | **str** | The company site. | [optional] 
-**email** | **str** | The company email address. | [optional] 
-**address** | **str** | The company address. | [optional] 
-**phone** | **str** | The company phone number. | [optional] 
-**is_licensor** | **bool** | Specifies if a company is a licensor or not. | [optional] 
-**hide_about** | **bool** | Specifies if the About page is visible or not. | [optional] 
-**is_default** | **bool** | Specifies if these settings are default or not. | [optional] 
+**company_name** | **str** | The company name. | 
+**site** | **str** | The company site. | 
+**email** | **str** | The company email address. | 
+**address** | **str** | The company address. | 
+**phone** | **str** | The company phone number. | 
+**is_licensor** | **bool** | Specifies if a company is a licensor or not. | 
+**hide_about** | **bool** | Specifies if the About page is visible or not. | 
+**is_default** | **bool** | Specifies if these settings are default or not. | 
 
 ## Example
 

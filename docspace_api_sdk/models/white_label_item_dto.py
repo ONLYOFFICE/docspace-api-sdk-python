@@ -25,6 +25,7 @@ from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from docspace_api_sdk.models.i_magick_geometry import IMagickGeometry
 from docspace_api_sdk.models.white_label_item_path_dto import WhiteLabelItemPathDto
+from docspace_api_sdk.models.white_label_logo_type import WhiteLabelLogoType
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -32,10 +33,11 @@ class WhiteLabelItemDto(BaseModel):
     """
     The white label item parameters.
     """ # noqa: E501
+    type: Optional[WhiteLabelLogoType] = None
     name: Optional[StrictStr] = Field(default=None, description="The white label file name.")
     size: Optional[IMagickGeometry] = None
     path: Optional[WhiteLabelItemPathDto] = None
-    __properties: ClassVar[List[str]] = ["name", "size", "path"]
+    __properties: ClassVar[List[str]] = ["type", "name", "size", "path"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -100,6 +102,7 @@ class WhiteLabelItemDto(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "type": obj.get("type"),
             "name": obj.get("name"),
             "size": IMagickGeometry.from_dict(obj["size"]) if obj.get("size") is not None else None,
             "path": WhiteLabelItemPathDto.from_dict(obj["path"]) if obj.get("path") is not None else None

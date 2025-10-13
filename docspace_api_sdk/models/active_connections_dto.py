@@ -31,7 +31,7 @@ class ActiveConnectionsDto(BaseModel):
     """
     The active connections parameters.
     """ # noqa: E501
-    login_event: Optional[StrictInt] = Field(default=None, description="The login event.", alias="loginEvent")
+    login_event: StrictInt = Field(description="The login event.", alias="loginEvent")
     items: Optional[List[ActiveConnectionsItemDto]] = Field(default=None, description="The list of active connection items.")
     __properties: ClassVar[List[str]] = ["loginEvent", "items"]
 

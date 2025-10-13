@@ -52,6 +52,7 @@ class RebrandingApi:
         self.api_client = api_client
 
 
+
     @validate_call
     def delete_additional_white_label_settings(
         self,

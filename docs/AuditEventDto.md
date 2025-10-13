@@ -19,7 +19,7 @@ Name | Type | Description | Notes
 **page** | **str** | The audit event page. | [optional] 
 **action_type** | [**ActionType**](ActionType.md) |  | [optional] 
 **product** | [**ProductType**](ProductType.md) |  | [optional] 
-**module** | [**ModuleType**](ModuleType.md) |  | [optional] 
+**location** | [**LocationType**](LocationType.md) |  | [optional] 
 **target** | **List[str]** | The list of target objects affected by the audit event (e.g., document ID, user account). | [optional] 
 **entries** | [**List[EntryType]**](EntryType.md) | The list of audit entry types (e.g., Folder, User, File). | [optional] 
 **context** | **str** | The audit event context. | [optional] 

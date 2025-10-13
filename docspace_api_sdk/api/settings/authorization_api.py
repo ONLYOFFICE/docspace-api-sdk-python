@@ -44,6 +44,7 @@ class AuthorizationApi:
         self.api_client = api_client
 
 
+
     @validate_call
     def get_auth_services(
         self,

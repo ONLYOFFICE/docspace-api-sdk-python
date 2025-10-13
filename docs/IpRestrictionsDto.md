@@ -5,7 +5,7 @@ The parameters for configuring new IP restriction settings.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ip_restrictions** | [**List[IpRestrictionBase]**](IpRestrictionBase.md) | The list of IP restriction addresses. | [optional] 
+**ip_restrictions** | [**List[IpRestrictionBase]**](IpRestrictionBase.md) | The list of IP restriction addresses. | 
 **enable** | **bool** | Specifies whether to enable IP restrictions or not. | [optional] 
 
 ## Example

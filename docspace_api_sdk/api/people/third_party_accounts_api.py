@@ -25,6 +25,7 @@ from pydantic import Field, StrictBool, StrictStr
 from typing import Optional
 from typing_extensions import Annotated
 from docspace_api_sdk.models.account_info_array_wrapper import AccountInfoArrayWrapper
+from docspace_api_sdk.models.employee_wrapper import EmployeeWrapper
 from docspace_api_sdk.models.link_account_request_dto import LinkAccountRequestDto
 from docspace_api_sdk.models.signup_account_request_dto import SignupAccountRequestDto
 
@@ -44,6 +45,7 @@ class ThirdPartyAccountsApi:
         if api_client is None:
             api_client = ApiClient.get_default()
         self.api_client = api_client
+
 
 
     @validate_call
@@ -653,7 +655,7 @@ class ThirdPartyAccountsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> EmployeeWrapper:
         """Create a third-pary account
 
         Creates a third-party account with the parameters specified in the request.
@@ -691,7 +693,7 @@ class ThirdPartyAccountsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '200': "EmployeeWrapper",
             '400': None,
             '403': None,
         }
@@ -722,7 +724,7 @@ class ThirdPartyAccountsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[EmployeeWrapper]:
         """Create a third-pary account
 
         Creates a third-party account with the parameters specified in the request.
@@ -760,7 +762,7 @@ class ThirdPartyAccountsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '200': "EmployeeWrapper",
             '400': None,
             '403': None,
         }
@@ -829,7 +831,7 @@ class ThirdPartyAccountsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '200': "EmployeeWrapper",
             '400': None,
             '403': None,
         }
@@ -872,6 +874,13 @@ class ThirdPartyAccountsApi:
             _body_params = signup_account_request_dto
 
 
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
         # set the HTTP header `Content-Type`
         if _content_type:

@@ -6,7 +6,7 @@ The configuration settings for the web plugin instance.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **enabled** | **bool** | Controls whether the web plugin is active and operational. | [optional] 
-**settings** | **str** | The JSON-formatted configuration settings for the web plugin. | [optional] 
+**settings** | **str** | The JSON-formatted configuration settings for the web plugin. | 
 
 ## Example
 

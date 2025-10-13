@@ -5,13 +5,13 @@ The watermark settings.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**additions** | [**WatermarkAdditions**](WatermarkAdditions.md) |  | [optional] 
+**additions** | [**WatermarkAdditions**](WatermarkAdditions.md) |  | 
 **text** | **str** | The watermark text. | [optional] 
-**rotate** | **int** | The watermark text and image rotate. | [optional] 
-**image_scale** | **int** | The watermark image scale. | [optional] 
+**rotate** | **int** | The watermark text and image rotate. | 
+**image_scale** | **int** | The watermark image scale. | 
 **image_url** | **str** | The watermark image url. | [optional] 
-**image_height** | **float** | The watermark image height. | [optional] 
-**image_width** | **float** | The watermark image width. | [optional] 
+**image_height** | **float** | The watermark image height. | 
+**image_width** | **float** | The watermark image width. | 
 
 ## Example
 

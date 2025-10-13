@@ -35,7 +35,7 @@ class UpdateWebhooksConfigRequestsDto(CreateWebhooksConfigRequestsDto):
     The request parameters for updating the webhook configuration.
     """
 
-    id: Optional[StrictInt] = Field(default=None, description="The webhook configuration ID.")
+    id: StrictInt = Field(description="The webhook configuration ID.")
 
     model_config = ConfigDict(
         populate_by_name=True,

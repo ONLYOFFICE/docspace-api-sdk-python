@@ -5,8 +5,8 @@ User invitation settings
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**allow_inviting_members** | **bool** | Allow invite new DocSpace members through the Contacts section. | [optional] 
-**allow_inviting_guests** | **bool** | Allow all DocSpace members to invite external guests to rooms. | [optional] 
+**allow_inviting_members** | **bool** | Allow invite new DocSpace members through the Contacts section. | 
+**allow_inviting_guests** | **bool** | Allow all DocSpace members to invite external guests to rooms. | 
 
 ## Example
 

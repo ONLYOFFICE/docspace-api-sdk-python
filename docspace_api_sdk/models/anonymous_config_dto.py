@@ -22,7 +22,7 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool
-from typing import Any, ClassVar, Dict, List, Optional
+from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -30,7 +30,7 @@ class AnonymousConfigDto(BaseModel):
     """
     The anonymous config parameters.
     """ # noqa: E501
-    request: Optional[StrictBool] = Field(default=None, description="Specifies if the anonymous is a request.")
+    request: StrictBool = Field(description="Specifies if the anonymous is a request.")
     __properties: ClassVar[List[str]] = ["request"]
 
     model_config = ConfigDict(

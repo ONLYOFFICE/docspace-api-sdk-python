@@ -5,9 +5,9 @@ The authentication key parameters.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **str** | The authentication key name. | [optional] 
-**value** | **str** | The authentication key value. | [optional] 
-**title** | **str** | The authentication key title. | [optional] 
+**name** | **str** | The authentication key name. | 
+**value** | **str** | The authentication key value. | 
+**title** | **str** | The authentication key title. | 
 
 ## Example
 

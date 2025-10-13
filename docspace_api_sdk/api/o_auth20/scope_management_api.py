@@ -41,6 +41,7 @@ class ScopeManagementApi:
         self.api_client = api_client
 
 
+
     @validate_call
     def get_scopes(
         self,

@@ -32,12 +32,12 @@ class FileOperationDto(BaseModel):
     """
     The file operation information.
     """ # noqa: E501
-    id: Optional[StrictStr] = Field(default=None, description="The file operation ID.")
-    operation: Optional[FileOperationType] = Field(default=None, alias="Operation")
-    progress: Optional[StrictInt] = Field(default=None, description="The file operation progress in percentage.")
-    error: Optional[StrictStr] = Field(default=None, description="The file operation error message.")
-    processed: Optional[StrictStr] = Field(default=None, description="The file operation processing status.")
-    finished: Optional[StrictBool] = Field(default=None, description="Specifies if the file operation is finished or not.")
+    id: Optional[StrictStr] = Field(description="The file operation ID.")
+    operation: FileOperationType = Field(alias="Operation")
+    progress: StrictInt = Field(description="The file operation progress in percentage.")
+    error: Optional[StrictStr] = Field(description="The file operation error message.")
+    processed: Optional[StrictStr] = Field(description="The file operation processing status.")
+    finished: StrictBool = Field(description="Specifies if the file operation is finished or not.")
     url: Optional[StrictStr] = Field(default=None, description="The file operation URL.")
     files: Optional[List[FileEntryBaseDto]] = Field(default=None, description="The list of files of the file operation.")
     folders: Optional[List[FileEntryBaseDto]] = Field(default=None, description="The list of folders of the file operation.")

@@ -5,7 +5,7 @@ The information about the file editing history author.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** | The author ID. | [optional] 
+**id** | **str** | The author ID. | 
 **name** | **str** | The author name. | [optional] 
 
 ## Example

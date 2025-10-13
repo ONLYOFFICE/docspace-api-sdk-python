@@ -30,7 +30,7 @@ class CheckFillFormDraft(BaseModel):
     """
     The parameters for checking the form draft filling.
     """ # noqa: E501
-    version: Optional[StrictInt] = Field(default=None, description="The file version of the form draft.")
+    version: StrictInt = Field(description="The file version of the form draft.")
     action: Optional[StrictStr] = Field(default=None, description="The action with the form draft.")
     request_view: Optional[StrictBool] = Field(default=None, description="Specifies whether to request the form for viewing or not.", alias="requestView")
     request_embedded: Optional[StrictBool] = Field(default=None, description="Specifies whether to request an embedded form or not.", alias="requestEmbedded")

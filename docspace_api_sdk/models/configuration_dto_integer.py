@@ -35,14 +35,14 @@ class ConfigurationDtoInteger(BaseModel):
     """
     The configuration parameters.
     """ # noqa: E501
-    document: Optional[DocumentConfigDto] = None
-    document_type: Optional[StrictStr] = Field(default=None, description="The document type.", alias="documentType")
-    editor_config: Optional[EditorConfigurationDto] = Field(default=None, alias="editorConfig")
-    editor_type: Optional[EditorType] = Field(default=None, alias="editorType")
-    editor_url: Optional[StrictStr] = Field(default=None, description="The editor URL.", alias="editorUrl")
+    document: DocumentConfigDto
+    document_type: Optional[StrictStr] = Field(description="The document type.", alias="documentType")
+    editor_config: EditorConfigurationDto = Field(alias="editorConfig")
+    editor_type: EditorType = Field(alias="editorType")
+    editor_url: Optional[StrictStr] = Field(description="The editor URL.", alias="editorUrl")
     token: Optional[StrictStr] = Field(default=None, description="The token of the file configuration.")
     type: Optional[StrictStr] = Field(default=None, description="The platform type.")
-    file: Optional[FileDtoInteger] = None
+    file: FileDtoInteger
     error_message: Optional[StrictStr] = Field(default=None, description="The error message.", alias="errorMessage")
     start_filling: Optional[StrictBool] = Field(default=None, description="Specifies if the file filling has started or not.", alias="startFilling")
     filling_status: Optional[StrictBool] = Field(default=None, description="The file filling status.", alias="fillingStatus")

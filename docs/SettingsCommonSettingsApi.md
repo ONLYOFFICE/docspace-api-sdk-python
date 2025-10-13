@@ -256,7 +256,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_portal_color_theme**
-> CustomColorThemesSettingsWrapper delete_portal_color_theme(id=id)
+> CustomColorThemesSettingsWrapper delete_portal_color_theme(id)
 
 Deletes the portal color theme with the ID specified in the request.
 
@@ -267,7 +267,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**| The ID of the portal theme to delete. | [optional] 
+ **id** | **int**| The ID of the portal theme to delete. | 
 
 ### Return type
 
@@ -304,11 +304,11 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.CommonSettingsApi(api_client)
-    id = 9846 # int | The ID of the portal theme to delete. (optional)
+    id = 9846 # int | The ID of the portal theme to delete.
 
     try:
         # Delete a color theme
-        api_response = api_instance.delete_portal_color_theme(id=id)
+        api_response = api_instance.delete_portal_color_theme(id)
         print("The response of CommonSettingsApi->delete_portal_color_theme:\n")
         pprint(api_response)
     except Exception as e:
@@ -830,7 +830,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **get_supported_cultures**
 > STRINGArrayWrapper get_supported_cultures()
 
-Returns a list of all the available portal languages in the format of a two-letter or four-letter language code (e.g. "de", "en-US", etc.).
+Returns a list of all the available portal languages in the format of a two-letter or four-letter language code (e.g. de, en-US, etc.).
 
 For more information, see [api.onlyoffice.com]().
 

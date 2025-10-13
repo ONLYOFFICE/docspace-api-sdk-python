@@ -43,6 +43,7 @@ class OwnerApi:
         self.api_client = api_client
 
 
+
     @validate_call
     def send_owner_change_instructions(
         self,
@@ -98,6 +99,7 @@ class OwnerApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "OwnerChangeInstructionsWrapper",
+            '400': None,
             '401': None,
             '403': None,
         }
@@ -167,6 +169,7 @@ class OwnerApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "OwnerChangeInstructionsWrapper",
+            '400': None,
             '401': None,
             '403': None,
         }
@@ -236,6 +239,7 @@ class OwnerApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "OwnerChangeInstructionsWrapper",
+            '400': None,
             '401': None,
             '403': None,
         }

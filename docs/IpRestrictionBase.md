@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ip** | **str** |  | [optional] 
+**ip** | **str** |  | 
 **for_admin** | **bool** |  | [optional] 
 
 ## Example

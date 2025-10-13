@@ -7,7 +7,10 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **title** | **str** | The file entry title. | [optional] 
 **access** | [**FileShare**](FileShare.md) |  | [optional] 
-**shared** | **bool** | Specifies if the file entry is shared or not. | [optional] 
+**shared** | **bool** | Specifies if the file entry is shared via link or not. | [optional] 
+**shared_for_user** | **bool** | Specifies if the file entry is shared for user or not. | [optional] 
+**parent_shared** | **bool** | Indicates whether the parent entity is shared. | [optional] 
+**short_web_url** | **str** | The short Web URL. | [optional] 
 **created** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] 
 **created_by** | [**EmployeeDto**](EmployeeDto.md) |  | [optional] 
 **updated** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] 
@@ -19,6 +22,7 @@ Name | Type | Description | Notes
 **provider_key** | **str** | The provider key of the file entry. | [optional] 
 **provider_id** | **int** | The provider ID of the file entry. | [optional] 
 **order** | **str** | The order of the file entry. | [optional] 
+**is_favorite** | **bool** | Specifies if the file is a favorite or not. | [optional] 
 **file_entry_type** | [**FileEntryType**](FileEntryType.md) |  | [optional] 
 
 ## Example

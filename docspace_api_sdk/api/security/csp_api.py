@@ -43,6 +43,7 @@ class CSPApi:
         self.api_client = api_client
 
 
+
     @validate_call
     def configure_csp(
         self,

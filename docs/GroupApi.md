@@ -96,7 +96,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **add_members_to**
-> GroupWrapper add_members_to(id, members_request=members_request)
+> GroupWrapper add_members_to(id, members_request)
 
 Adds new group members to the group with the ID specified in the request.
 
@@ -108,7 +108,7 @@ For more information, see [api.onlyoffice.com]().
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **str**| The group ID. | 
- **members_request** | [**MembersRequest**](MembersRequest.md)| The member request. | [optional] 
+ **members_request** | [**MembersRequest**](MembersRequest.md)| The member request. | 
 
 ### Return type
 
@@ -147,11 +147,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.GroupApi(api_client)
     id = 'aae1e103-bca5-9fa1-ba8c-42058b4abf28' # str | The group ID.
-    members_request = docspace_api_sdk.MembersRequest() # MembersRequest | The member request. (optional)
+    members_request = docspace_api_sdk.MembersRequest() # MembersRequest | The member request.
 
     try:
         # Add group members
-        api_response = api_instance.add_members_to(id, members_request=members_request)
+        api_response = api_instance.add_members_to(id, members_request)
         print("The response of GroupApi->add_members_to:\n")
         pprint(api_response)
     except Exception as e:
@@ -414,7 +414,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_groups**
-> GroupArrayWrapper get_groups(user_id=user_id, manager=manager, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value, fields=fields)
+> GroupArrayWrapper get_groups(user_id=user_id, manager=manager, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value)
 
 Returns the general information about all the groups, such as group ID and group manager.
 
@@ -434,7 +434,6 @@ Name | Type | Description  | Notes
  **sort_by** | **str**| Specifies the property used to sort the query results. | [optional] 
  **sort_order** | [**SortOrder**](.md)| The order in which the results are sorted. | [optional] 
  **filter_value** | **str**| The text used for filtering or searching group data. | [optional] 
- **fields** | **string**| Comma-separated list of fields to include in the response | [optional] 
 
 ### Return type
 
@@ -479,11 +478,10 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     sort_by = 'some text' # str | Specifies the property used to sort the query results. (optional)
     sort_order = docspace_api_sdk.SortOrder() # SortOrder | The order in which the results are sorted. (optional)
     filter_value = 'some text' # str | The text used for filtering or searching group data. (optional)
-    fields =  # string | Comma-separated list of fields to include in the response (optional)
 
     try:
         # Get groups
-        api_response = api_instance.get_groups(user_id=user_id, manager=manager, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value, fields=fields)
+        api_response = api_instance.get_groups(user_id=user_id, manager=manager, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value)
         print("The response of GroupApi->get_groups:\n")
         pprint(api_response)
     except Exception as e:
@@ -588,7 +586,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **remove_members_from**
-> GroupWrapper remove_members_from(id, members_request=members_request)
+> GroupWrapper remove_members_from(id, members_request)
 
 Removes the group members specified in the request from the selected group.
 
@@ -600,7 +598,7 @@ For more information, see [api.onlyoffice.com]().
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **str**| The group ID. | 
- **members_request** | [**MembersRequest**](MembersRequest.md)| The member request. | [optional] 
+ **members_request** | [**MembersRequest**](MembersRequest.md)| The member request. | 
 
 ### Return type
 
@@ -639,11 +637,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.GroupApi(api_client)
     id = 'aae1e103-bca5-9fa1-ba8c-42058b4abf28' # str | The group ID.
-    members_request = docspace_api_sdk.MembersRequest() # MembersRequest | The member request. (optional)
+    members_request = docspace_api_sdk.MembersRequest() # MembersRequest | The member request.
 
     try:
         # Remove group members
-        api_response = api_instance.remove_members_from(id, members_request=members_request)
+        api_response = api_instance.remove_members_from(id, members_request)
         print("The response of GroupApi->remove_members_from:\n")
         pprint(api_response)
     except Exception as e:
@@ -669,7 +667,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **set_group_manager**
-> GroupWrapper set_group_manager(id, set_manager_request=set_manager_request)
+> GroupWrapper set_group_manager(id, set_manager_request)
 
 Sets a user with the ID specified in the request as a group manager.
 
@@ -681,7 +679,7 @@ For more information, see [api.onlyoffice.com]().
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **str**| The group ID. | 
- **set_manager_request** | [**SetManagerRequest**](SetManagerRequest.md)| The request for setting a group manager. | [optional] 
+ **set_manager_request** | [**SetManagerRequest**](SetManagerRequest.md)| The request for setting a group manager. | 
 
 ### Return type
 
@@ -720,11 +718,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.GroupApi(api_client)
     id = 'aae1e103-bca5-9fa1-ba8c-42058b4abf28' # str | The group ID.
-    set_manager_request = docspace_api_sdk.SetManagerRequest() # SetManagerRequest | The request for setting a group manager. (optional)
+    set_manager_request = docspace_api_sdk.SetManagerRequest() # SetManagerRequest | The request for setting a group manager.
 
     try:
         # Set a group manager
-        api_response = api_instance.set_group_manager(id, set_manager_request=set_manager_request)
+        api_response = api_instance.set_group_manager(id, set_manager_request)
         print("The response of GroupApi->set_group_manager:\n")
         pprint(api_response)
     except Exception as e:
@@ -750,7 +748,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **set_members_to**
-> GroupWrapper set_members_to(id, members_request=members_request)
+> GroupWrapper set_members_to(id, members_request)
 
 Replaces the group members with those specified in the request.
 
@@ -762,7 +760,7 @@ For more information, see [api.onlyoffice.com]().
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **str**| The group ID. | 
- **members_request** | [**MembersRequest**](MembersRequest.md)| The member request. | [optional] 
+ **members_request** | [**MembersRequest**](MembersRequest.md)| The member request. | 
 
 ### Return type
 
@@ -801,11 +799,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.GroupApi(api_client)
     id = 'aae1e103-bca5-9fa1-ba8c-42058b4abf28' # str | The group ID.
-    members_request = docspace_api_sdk.MembersRequest() # MembersRequest | The member request. (optional)
+    members_request = docspace_api_sdk.MembersRequest() # MembersRequest | The member request.
 
     try:
         # Replace group members
-        api_response = api_instance.set_members_to(id, members_request=members_request)
+        api_response = api_instance.set_members_to(id, members_request)
         print("The response of GroupApi->set_members_to:\n")
         pprint(api_response)
     except Exception as e:
@@ -830,7 +828,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update_group**
-> GroupWrapper update_group(id, update_group_request=update_group_request)
+> GroupWrapper update_group(id, update_group_request)
 
 Updates the existing group changing the group manager, name, and/or members.
 
@@ -842,7 +840,7 @@ For more information, see [api.onlyoffice.com]().
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **str**| The group ID. | 
- **update_group_request** | [**UpdateGroupRequest**](UpdateGroupRequest.md)| The request for updating a group. | [optional] 
+ **update_group_request** | [**UpdateGroupRequest**](UpdateGroupRequest.md)| The request for updating a group. | 
 
 ### Return type
 
@@ -881,11 +879,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.GroupApi(api_client)
     id = 'aae1e103-bca5-9fa1-ba8c-42058b4abf28' # str | The group ID.
-    update_group_request = docspace_api_sdk.UpdateGroupRequest() # UpdateGroupRequest | The request for updating a group. (optional)
+    update_group_request = docspace_api_sdk.UpdateGroupRequest() # UpdateGroupRequest | The request for updating a group.
 
     try:
         # Update a group
-        api_response = api_instance.update_group(id, update_group_request=update_group_request)
+        api_response = api_instance.update_group(id, update_group_request)
         print("The response of GroupApi->update_group:\n")
         pprint(api_response)
     except Exception as e:

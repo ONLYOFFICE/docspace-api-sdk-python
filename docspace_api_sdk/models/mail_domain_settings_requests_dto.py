@@ -33,7 +33,7 @@ class MailDomainSettingsRequestsDto(BaseModel):
     """ # noqa: E501
     type: TenantTrustedDomainsType
     domains: Optional[List[StrictStr]] = Field(description="The list of authorized email domains that are considered trusted.")
-    invite_users_as_visitors: Optional[StrictBool] = Field(default=None, description="Specifies the default permission level for the invited users (visitors or not).", alias="inviteUsersAsVisitors")
+    invite_users_as_visitors: StrictBool = Field(description="Specifies the default permission level for the invited users (visitors or not).", alias="inviteUsersAsVisitors")
     __properties: ClassVar[List[str]] = ["type", "domains", "inviteUsersAsVisitors"]
 
     model_config = ConfigDict(

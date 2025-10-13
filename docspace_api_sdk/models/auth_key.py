@@ -31,9 +31,9 @@ class AuthKey(BaseModel):
     """
     The authentication key parameters.
     """ # noqa: E501
-    name: Optional[StrictStr] = Field(default=None, description="The authentication key name.")
-    value: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The authentication key value.")
-    title: Optional[StrictStr] = Field(default=None, description="The authentication key title.")
+    name: Optional[StrictStr] = Field(description="The authentication key name.")
+    value: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(description="The authentication key value.")
+    title: Optional[StrictStr] = Field(description="The authentication key title.")
     __properties: ClassVar[List[str]] = ["name", "value", "title"]
 
     model_config = ConfigDict(

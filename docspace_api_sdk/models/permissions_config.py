@@ -36,7 +36,7 @@ class PermissionsConfig(BaseModel):
     edit: Optional[StrictBool] = Field(default=None, description="Defines if the document can be edited or only viewed.")
     fill_forms: Optional[StrictBool] = Field(default=None, description="Defines if the forms can be filled.", alias="fillForms")
     modify_filter: Optional[StrictBool] = Field(default=None, description="Defines if the filter can be applied globally (true) affecting all the other users,  or locally (false), i.e. for the current user only.", alias="modifyFilter")
-    protect: Optional[StrictBool] = Field(default=None, description="Defines if the \"Protection\" tab on the toolbar and the \"Protect\" button in the left menu are displayedor hidden.")
+    protect: Optional[StrictBool] = Field(default=None, description="Defines if the Protection tab on the toolbar and the Protect button in the left menu are displayedor hidden.")
     var_print: Optional[StrictBool] = Field(default=None, description="Defines if the document can be printed or not.", alias="print")
     review: Optional[StrictBool] = Field(default=None, description="Defines if the document can be reviewed or not.")
     copy: Optional[StrictBool] = Field(default=None, description="Defines if the content can be copied to the clipboard or not.")

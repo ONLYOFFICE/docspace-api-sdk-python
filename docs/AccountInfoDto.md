@@ -5,9 +5,9 @@ The account information parameters.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**provider** | **str** | The account provider. | [optional] 
-**url** | **str** | The account URL. | [optional] 
-**linked** | **bool** | Specifies if an account is linked with other profiles or not. | [optional] 
+**provider** | **str** | The account provider. | 
+**url** | **str** | The account URL. | 
+**linked** | **bool** | Specifies if an account is linked with other profiles or not. | 
 
 ## Example
 

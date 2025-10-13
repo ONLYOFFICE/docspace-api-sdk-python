@@ -5,21 +5,22 @@ The web plugin information.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **str** | The web plugin name. | [optional] 
-**version** | **str** | The web plugin version. | [optional] 
-**description** | **str** | The web plugin description. | [optional] 
-**license** | **str** | The web plugin license. | [optional] 
-**author** | **str** | The web plugin author. | [optional] 
-**home_page** | **str** | The web plugin home page URL. | [optional] 
-**plugin_name** | **str** | The name by which the web plugin is registered in the window object. | [optional] 
-**scopes** | **str** | The web plugin scopes. | [optional] 
-**image** | **str** | The web plugin image. | [optional] 
-**create_by** | [**EmployeeDto**](EmployeeDto.md) |  | [optional] 
-**create_on** | **datetime** | The date and time when the web plugin was created. | [optional] 
-**enabled** | **bool** | Specifies if the web plugin is enabled or not. | [optional] 
-**system** | **bool** | Specifies if the web plugin is system or not. | [optional] 
-**url** | **str** | The web plugin URL. | [optional] 
-**settings** | **str** | The web plugin settings. | [optional] 
+**name** | **str** | The web plugin name. | 
+**version** | **str** | The web plugin version. | 
+**min_doc_space_version** | **str** | The minimum version of DocSpace with which the plugin is guaranteed to work. | [optional] 
+**description** | **str** | The web plugin description. | 
+**license** | **str** | The web plugin license. | 
+**author** | **str** | The web plugin author. | 
+**home_page** | **str** | The web plugin home page URL. | 
+**plugin_name** | **str** | The name by which the web plugin is registered in the window object. | 
+**scopes** | **str** | The web plugin scopes. | 
+**image** | **str** | The web plugin image. | 
+**create_by** | [**EmployeeDto**](EmployeeDto.md) |  | 
+**create_on** | **datetime** | The date and time when the web plugin was created. | 
+**enabled** | **bool** | Specifies if the web plugin is enabled or not. | 
+**system** | **bool** | Specifies if the web plugin is system or not. | 
+**url** | **str** | The web plugin URL. | 
+**settings** | **str** | The web plugin settings. | 
 
 ## Example
 

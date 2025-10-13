@@ -5,8 +5,8 @@ The parameters for saving form role mapping.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**form_id** | **int** | The form ID. | [optional] 
-**roles** | [**List[FormRole]**](FormRole.md) | The collection of roles. | [optional] 
+**form_id** | **int** | The form ID. | 
+**roles** | [**List[FormRole]**](FormRole.md) | The collection of roles. | 
 
 ## Example
 

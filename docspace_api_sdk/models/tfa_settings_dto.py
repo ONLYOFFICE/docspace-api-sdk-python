@@ -30,10 +30,10 @@ class TfaSettingsDto(BaseModel):
     """
     The parameters representing the Two-Factor Authentication (TFA) configuration settings.
     """ # noqa: E501
-    id: Optional[StrictStr] = Field(default=None, description="The ID of the TFA configuration.")
-    title: Optional[StrictStr] = Field(default=None, description="The display name or description of the TFA configuration.")
-    enabled: Optional[StrictBool] = Field(default=None, description="Indicates whether the TFA configuration is currently active.")
-    avaliable: Optional[StrictBool] = Field(default=None, description="Indicates whether the TFA configuration can be used.")
+    id: Optional[StrictStr] = Field(description="The ID of the TFA configuration.")
+    title: Optional[StrictStr] = Field(description="The display name or description of the TFA configuration.")
+    enabled: StrictBool = Field(description="Indicates whether the TFA configuration is currently active.")
+    avaliable: StrictBool = Field(description="Indicates whether the TFA configuration can be used.")
     trusted_ips: Optional[List[StrictStr]] = Field(default=None, description="The list of IP addresses that are exempt from TFA requirements.", alias="trustedIps")
     mandatory_users: Optional[List[StrictStr]] = Field(default=None, description="The list of user IDs that are required to use TFA.", alias="mandatoryUsers")
     mandatory_groups: Optional[List[StrictStr]] = Field(default=None, description="The list of group IDs whose members are required to use TFA.", alias="mandatoryGroups")

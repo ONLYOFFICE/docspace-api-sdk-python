@@ -33,7 +33,7 @@ class AdditionalWhiteLabelSettings(BaseModel):
     """ # noqa: E501
     start_docs_enabled: Optional[StrictBool] = Field(default=None, description="Specifies if the sample documents are displayed or hidden.", alias="startDocsEnabled")
     help_center_enabled: Optional[StrictBool] = Field(default=None, description="Specifies if the Help Center link is available or not.", alias="helpCenterEnabled")
-    feedback_and_support_enabled: Optional[StrictBool] = Field(default=None, description="Specifies if the \"Feedback & Support\" link is available or not.", alias="feedbackAndSupportEnabled")
+    feedback_and_support_enabled: Optional[StrictBool] = Field(default=None, description="Specifies if the Feedback & Support link is available or not.", alias="feedbackAndSupportEnabled")
     user_forum_enabled: Optional[StrictBool] = Field(default=None, description="Specifies if the user forum is available or not.", alias="userForumEnabled")
     video_guides_enabled: Optional[StrictBool] = Field(default=None, description="Specifies if the Video Guides link is available or not.", alias="videoGuidesEnabled")
     license_agreements_enabled: Optional[StrictBool] = Field(default=None, description="Specifies if the License Agreements link is available or not.", alias="licenseAgreementsEnabled")

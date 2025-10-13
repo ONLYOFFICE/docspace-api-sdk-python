@@ -32,7 +32,7 @@ class BackupRestoreDto(BaseModel):
     """
     The backup restoring parameters.
     """ # noqa: E501
-    backup_id: Optional[StrictStr] = Field(default=None, description="The backup ID.", alias="backupId")
+    backup_id: Optional[StrictStr] = Field(description="The backup ID.", alias="backupId")
     storage_type: Optional[BackupStorageType] = Field(default=None, alias="storageType")
     storage_params: Optional[List[ItemKeyValuePairObjectObject]] = Field(default=None, description="The backup storage parameters.", alias="storageParams")
     notify: Optional[StrictBool] = Field(default=None, description="Notifies users about the portal restoring process or not.")

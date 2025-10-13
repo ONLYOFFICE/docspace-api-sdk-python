@@ -43,6 +43,7 @@ class FirebaseApi:
         self.api_client = api_client
 
 
+
     @validate_call
     def doc_register_pusn_notification_device(
         self,

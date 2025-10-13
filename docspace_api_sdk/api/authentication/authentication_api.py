@@ -49,6 +49,7 @@ class AuthenticationApi:
         self.api_client = api_client
 
 
+
     @validate_call
     def authenticate_me(
         self,
