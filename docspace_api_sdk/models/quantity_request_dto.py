@@ -28,9 +28,9 @@ from typing_extensions import Self
 
 class QuantityRequestDto(BaseModel):
     """
-    The request parameters for the payment quantity specifications.
+    The request parameters for specifying payment quantity.
     """ # noqa: E501
-    quantity: Optional[Dict[str, StrictInt]] = Field(default=None, description="The mapping of item identifiers with their respective quantities in the payment.")
+    quantity: Optional[Dict[str, StrictInt]] = Field(default=None, description="The mapping of item identifiers to their respective quantities in the payment.")
     __properties: ClassVar[List[str]] = ["quantity"]
 
     model_config = ConfigDict(

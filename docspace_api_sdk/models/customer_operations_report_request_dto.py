@@ -29,13 +29,13 @@ from typing_extensions import Self
 
 class CustomerOperationsReportRequestDto(BaseModel):
     """
-    Parameters of the request for generating the report on client operations
+    The request parameters for generating a report on client operations.
     """ # noqa: E501
-    start_date: Optional[datetime] = Field(default=None, description="Start date", alias="startDate")
-    end_date: Optional[datetime] = Field(default=None, description="End date", alias="endDate")
-    participant_name: Optional[StrictStr] = Field(default=None, description="Participant name", alias="participantName")
-    credit: Optional[StrictBool] = Field(default=None, description="Include credit operations")
-    debit: Optional[StrictBool] = Field(default=None, description="Include debit operations")
+    start_date: Optional[datetime] = Field(default=None, description="The report start date.", alias="startDate")
+    end_date: Optional[datetime] = Field(default=None, description="The report end date.", alias="endDate")
+    participant_name: Optional[StrictStr] = Field(default=None, description="The participant name.", alias="participantName")
+    credit: Optional[StrictBool] = Field(default=None, description="Specifies whether to include credit operations in the report.")
+    debit: Optional[StrictBool] = Field(default=None, description="Specifies whether to include debit operations in the report.")
     __properties: ClassVar[List[str]] = ["startDate", "endDate", "participantName", "credit", "debit"]
 
     model_config = ConfigDict(

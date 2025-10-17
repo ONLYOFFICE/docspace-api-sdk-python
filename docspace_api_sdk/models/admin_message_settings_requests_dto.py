@@ -24,6 +24,7 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
+from docspace_api_sdk.models.recaptcha_type import RecaptchaType
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -34,7 +35,9 @@ class AdminMessageSettingsRequestsDto(BaseModel):
     message: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(description="The content of the administrator message to be sent.")
     email: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(description="Email")
     culture: Optional[StrictStr] = Field(default=None, description="Culture")
-    __properties: ClassVar[List[str]] = ["message", "email", "culture"]
+    recaptcha_type: Optional[RecaptchaType] = Field(default=None, alias="recaptchaType")
+    recaptcha_response: Optional[StrictStr] = Field(default=None, description="The user's response to the CAPTCHA challenge.", alias="recaptchaResponse")
+    __properties: ClassVar[List[str]] = ["message", "email", "culture", "recaptchaType", "recaptchaResponse"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -90,6 +93,11 @@ class AdminMessageSettingsRequestsDto(BaseModel):
         if self.culture is None and "culture" in self.model_fields_set:
             _dict['culture'] = None
 
+        # set to None if recaptcha_response (nullable) is None
+        # and model_fields_set contains the field
+        if self.recaptcha_response is None and "recaptcha_response" in self.model_fields_set:
+            _dict['recaptchaResponse'] = None
+
         return _dict
 
     @classmethod
@@ -105,7 +113,9 @@ class AdminMessageSettingsRequestsDto(BaseModel):
         _obj = cls.model_validate({
             "message": obj.get("message"),
             "email": obj.get("email"),
-            "culture": obj.get("culture")
+            "culture": obj.get("culture"),
+            "recaptchaType": obj.get("recaptchaType"),
+            "recaptchaResponse": obj.get("recaptchaResponse")
         })
         return _obj
 

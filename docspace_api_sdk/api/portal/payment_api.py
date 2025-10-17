@@ -83,9 +83,9 @@ class PaymentApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> PaymentCalculationWrapper:
-        """Calculate amount of the wallet payment
+        """Calculate the wallet payment amount
 
-        Calculate amount of the wallet payment with the parameters specified in the request.
+        Calculates an amount of the wallet payment with the parameters specified in the request.
 
         :param wallet_quantity_request_dto:
         :type wallet_quantity_request_dto: WalletQuantityRequestDto
@@ -152,9 +152,9 @@ class PaymentApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[PaymentCalculationWrapper]:
-        """Calculate amount of the wallet payment
+        """Calculate the wallet payment amount
 
-        Calculate amount of the wallet payment with the parameters specified in the request.
+        Calculates an amount of the wallet payment with the parameters specified in the request.
 
         :param wallet_quantity_request_dto:
         :type wallet_quantity_request_dto: WalletQuantityRequestDto
@@ -221,9 +221,9 @@ class PaymentApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Calculate amount of the wallet payment
+        """Calculate the wallet payment amount
 
-        Calculate amount of the wallet payment with the parameters specified in the request.
+        Calculates an amount of the wallet payment with the parameters specified in the request.
 
         :param wallet_quantity_request_dto:
         :type wallet_quantity_request_dto: WalletQuantityRequestDto
@@ -370,7 +370,7 @@ class PaymentApi:
     ) -> TenantWalletServiceSettingsWrapper:
         """Change wallet service state
 
-        Change wallet service state.
+        Changes the wallet service state.
 
         :param change_wallet_service_state_request_dto:
         :type change_wallet_service_state_request_dto: ChangeWalletServiceStateRequestDto
@@ -439,7 +439,7 @@ class PaymentApi:
     ) -> ApiResponse[TenantWalletServiceSettingsWrapper]:
         """Change wallet service state
 
-        Change wallet service state.
+        Changes the wallet service state.
 
         :param change_wallet_service_state_request_dto:
         :type change_wallet_service_state_request_dto: ChangeWalletServiceStateRequestDto
@@ -508,7 +508,7 @@ class PaymentApi:
     ) -> RESTResponseType:
         """Change wallet service state
 
-        Change wallet service state.
+        Changes the wallet service state.
 
         :param change_wallet_service_state_request_dto:
         :type change_wallet_service_state_request_dto: ChangeWalletServiceStateRequestDto
@@ -653,9 +653,9 @@ class PaymentApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> DocumentBuilderTaskWrapper:
-        """Start generating the customer operations report
+        """Start the customer operations report generation
 
-        Start generating the customer operations report as xlsx file and save in Documents.
+        Starts generating a customer operations report as an xlsx file and saves it in Documents.
 
         :param customer_operations_report_request_dto:
         :type customer_operations_report_request_dto: CustomerOperationsReportRequestDto
@@ -721,9 +721,9 @@ class PaymentApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[DocumentBuilderTaskWrapper]:
-        """Start generating the customer operations report
+        """Start the customer operations report generation
 
-        Start generating the customer operations report as xlsx file and save in Documents.
+        Starts generating a customer operations report as an xlsx file and saves it in Documents.
 
         :param customer_operations_report_request_dto:
         :type customer_operations_report_request_dto: CustomerOperationsReportRequestDto
@@ -789,9 +789,9 @@ class PaymentApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Start generating the customer operations report
+        """Start the customer operations report generation
 
-        Start generating the customer operations report as xlsx file and save in Documents.
+        Starts generating a customer operations report as an xlsx file and saves it in Documents.
 
         :param customer_operations_report_request_dto:
         :type customer_operations_report_request_dto: CustomerOperationsReportRequestDto
@@ -921,7 +921,7 @@ class PaymentApi:
     @validate_call
     def get_checkout_setup_url(
         self,
-        back_url: Annotated[Optional[StrictStr], Field(description="Back URL")] = None,
+        back_url: Annotated[Optional[StrictStr], Field(description="The URL where the user will be redirected after completing the setup.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -939,7 +939,7 @@ class PaymentApi:
 
         Returns the URL to the checkout setup page.
 
-        :param back_url: Back URL
+        :param back_url: The URL where the user will be redirected after completing the setup.
         :type back_url: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -990,7 +990,7 @@ class PaymentApi:
     @validate_call
     def get_checkout_setup_url_with_http_info(
         self,
-        back_url: Annotated[Optional[StrictStr], Field(description="Back URL")] = None,
+        back_url: Annotated[Optional[StrictStr], Field(description="The URL where the user will be redirected after completing the setup.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1008,7 +1008,7 @@ class PaymentApi:
 
         Returns the URL to the checkout setup page.
 
-        :param back_url: Back URL
+        :param back_url: The URL where the user will be redirected after completing the setup.
         :type back_url: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1059,7 +1059,7 @@ class PaymentApi:
     @validate_call
     def get_checkout_setup_url_without_preload_content(
         self,
-        back_url: Annotated[Optional[StrictStr], Field(description="Back URL")] = None,
+        back_url: Annotated[Optional[StrictStr], Field(description="The URL where the user will be redirected after completing the setup.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1077,7 +1077,7 @@ class PaymentApi:
 
         Returns the URL to the checkout setup page.
 
-        :param back_url: Back URL
+        :param back_url: The URL where the user will be redirected after completing the setup.
         :type back_url: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1483,9 +1483,9 @@ class PaymentApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> CustomerInfoWrapper:
-        """Get the customer info
+        """Get the customer information
 
-        Returns the customer info.
+        Returns the customer information.
 
         :param refresh: Specifies whether to refresh the payment information cache or not.
         :type refresh: bool
@@ -1552,9 +1552,9 @@ class PaymentApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[CustomerInfoWrapper]:
-        """Get the customer info
+        """Get the customer information
 
-        Returns the customer info.
+        Returns the customer information.
 
         :param refresh: Specifies whether to refresh the payment information cache or not.
         :type refresh: bool
@@ -1621,9 +1621,9 @@ class PaymentApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get the customer info
+        """Get the customer information
 
-        Returns the customer info.
+        Returns the customer information.
 
         :param refresh: Specifies whether to refresh the payment information cache or not.
         :type refresh: bool
@@ -1743,13 +1743,13 @@ class PaymentApi:
     @validate_call
     def get_customer_operations(
         self,
-        start_date: Annotated[Optional[datetime], Field(description="Start date")] = None,
-        end_date: Annotated[Optional[datetime], Field(description="End date")] = None,
-        participant_name: Annotated[Optional[StrictStr], Field(description="Participant name")] = None,
-        credit: Annotated[Optional[StrictBool], Field(description="Include credit operations (true by default)")] = None,
-        debit: Annotated[Optional[StrictBool], Field(description="Include debit operations (true by default)")] = None,
-        offset: Annotated[Optional[StrictInt], Field(description="Offset (0 by default)")] = None,
-        limit: Annotated[Optional[StrictInt], Field(description="Limit (25 by default)")] = None,
+        start_date: Annotated[Optional[datetime], Field(description="The report start date.")] = None,
+        end_date: Annotated[Optional[datetime], Field(description="The report end date.")] = None,
+        participant_name: Annotated[Optional[StrictStr], Field(description="The participant name.")] = None,
+        credit: Annotated[Optional[StrictBool], Field(description="Specifies whether to include credit operations in the report. The default value is true.")] = None,
+        debit: Annotated[Optional[StrictBool], Field(description="Specifies whether to include debit operations in the report. The default value is true.")] = None,
+        offset: Annotated[Optional[StrictInt], Field(description="The number of items to skip for pagination. The default value is 0.")] = None,
+        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of items to return for pagination. The default value is 25.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1767,19 +1767,19 @@ class PaymentApi:
 
         Returns the report of customer operations from the accounting service.
 
-        :param start_date: Start date
+        :param start_date: The report start date.
         :type start_date: datetime
-        :param end_date: End date
+        :param end_date: The report end date.
         :type end_date: datetime
-        :param participant_name: Participant name
+        :param participant_name: The participant name.
         :type participant_name: str
-        :param credit: Include credit operations (true by default)
+        :param credit: Specifies whether to include credit operations in the report. The default value is true.
         :type credit: bool
-        :param debit: Include debit operations (true by default)
+        :param debit: Specifies whether to include debit operations in the report. The default value is true.
         :type debit: bool
-        :param offset: Offset (0 by default)
+        :param offset: The number of items to skip for pagination. The default value is 0.
         :type offset: int
-        :param limit: Limit (25 by default)
+        :param limit: The maximum number of items to return for pagination. The default value is 25.
         :type limit: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1836,13 +1836,13 @@ class PaymentApi:
     @validate_call
     def get_customer_operations_with_http_info(
         self,
-        start_date: Annotated[Optional[datetime], Field(description="Start date")] = None,
-        end_date: Annotated[Optional[datetime], Field(description="End date")] = None,
-        participant_name: Annotated[Optional[StrictStr], Field(description="Participant name")] = None,
-        credit: Annotated[Optional[StrictBool], Field(description="Include credit operations (true by default)")] = None,
-        debit: Annotated[Optional[StrictBool], Field(description="Include debit operations (true by default)")] = None,
-        offset: Annotated[Optional[StrictInt], Field(description="Offset (0 by default)")] = None,
-        limit: Annotated[Optional[StrictInt], Field(description="Limit (25 by default)")] = None,
+        start_date: Annotated[Optional[datetime], Field(description="The report start date.")] = None,
+        end_date: Annotated[Optional[datetime], Field(description="The report end date.")] = None,
+        participant_name: Annotated[Optional[StrictStr], Field(description="The participant name.")] = None,
+        credit: Annotated[Optional[StrictBool], Field(description="Specifies whether to include credit operations in the report. The default value is true.")] = None,
+        debit: Annotated[Optional[StrictBool], Field(description="Specifies whether to include debit operations in the report. The default value is true.")] = None,
+        offset: Annotated[Optional[StrictInt], Field(description="The number of items to skip for pagination. The default value is 0.")] = None,
+        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of items to return for pagination. The default value is 25.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1860,19 +1860,19 @@ class PaymentApi:
 
         Returns the report of customer operations from the accounting service.
 
-        :param start_date: Start date
+        :param start_date: The report start date.
         :type start_date: datetime
-        :param end_date: End date
+        :param end_date: The report end date.
         :type end_date: datetime
-        :param participant_name: Participant name
+        :param participant_name: The participant name.
         :type participant_name: str
-        :param credit: Include credit operations (true by default)
+        :param credit: Specifies whether to include credit operations in the report. The default value is true.
         :type credit: bool
-        :param debit: Include debit operations (true by default)
+        :param debit: Specifies whether to include debit operations in the report. The default value is true.
         :type debit: bool
-        :param offset: Offset (0 by default)
+        :param offset: The number of items to skip for pagination. The default value is 0.
         :type offset: int
-        :param limit: Limit (25 by default)
+        :param limit: The maximum number of items to return for pagination. The default value is 25.
         :type limit: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1929,13 +1929,13 @@ class PaymentApi:
     @validate_call
     def get_customer_operations_without_preload_content(
         self,
-        start_date: Annotated[Optional[datetime], Field(description="Start date")] = None,
-        end_date: Annotated[Optional[datetime], Field(description="End date")] = None,
-        participant_name: Annotated[Optional[StrictStr], Field(description="Participant name")] = None,
-        credit: Annotated[Optional[StrictBool], Field(description="Include credit operations (true by default)")] = None,
-        debit: Annotated[Optional[StrictBool], Field(description="Include debit operations (true by default)")] = None,
-        offset: Annotated[Optional[StrictInt], Field(description="Offset (0 by default)")] = None,
-        limit: Annotated[Optional[StrictInt], Field(description="Limit (25 by default)")] = None,
+        start_date: Annotated[Optional[datetime], Field(description="The report start date.")] = None,
+        end_date: Annotated[Optional[datetime], Field(description="The report end date.")] = None,
+        participant_name: Annotated[Optional[StrictStr], Field(description="The participant name.")] = None,
+        credit: Annotated[Optional[StrictBool], Field(description="Specifies whether to include credit operations in the report. The default value is true.")] = None,
+        debit: Annotated[Optional[StrictBool], Field(description="Specifies whether to include debit operations in the report. The default value is true.")] = None,
+        offset: Annotated[Optional[StrictInt], Field(description="The number of items to skip for pagination. The default value is 0.")] = None,
+        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of items to return for pagination. The default value is 25.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1953,19 +1953,19 @@ class PaymentApi:
 
         Returns the report of customer operations from the accounting service.
 
-        :param start_date: Start date
+        :param start_date: The report start date.
         :type start_date: datetime
-        :param end_date: End date
+        :param end_date: The report end date.
         :type end_date: datetime
-        :param participant_name: Participant name
+        :param participant_name: The participant name.
         :type participant_name: str
-        :param credit: Include credit operations (true by default)
+        :param credit: Specifies whether to include credit operations in the report. The default value is true.
         :type credit: bool
-        :param debit: Include debit operations (true by default)
+        :param debit: Specifies whether to include debit operations in the report. The default value is true.
         :type debit: bool
-        :param offset: Offset (0 by default)
+        :param offset: The number of items to skip for pagination. The default value is 0.
         :type offset: int
-        :param limit: Limit (25 by default)
+        :param limit: The maximum number of items to return for pagination. The default value is 25.
         :type limit: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2150,9 +2150,9 @@ class PaymentApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> DocumentBuilderTaskWrapper:
-        """Get the status of generating a customer operations report
+        """Get the status of the customer operations report generation
 
-        Get the status of generating a customer operations report.
+        Returns the status of generating a customer operations report.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2214,9 +2214,9 @@ class PaymentApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[DocumentBuilderTaskWrapper]:
-        """Get the status of generating a customer operations report
+        """Get the status of the customer operations report generation
 
-        Get the status of generating a customer operations report.
+        Returns the status of generating a customer operations report.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2278,9 +2278,9 @@ class PaymentApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get the status of generating a customer operations report
+        """Get the status of the customer operations report generation
 
-        Get the status of generating a customer operations report.
+        Returns the status of generating a customer operations report.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2919,7 +2919,7 @@ class PaymentApi:
     @validate_call
     def get_payment_quotas(
         self,
-        wallet: Annotated[Optional[StrictBool], Field(description="Get wallet quotas only")] = None,
+        wallet: Annotated[Optional[StrictBool], Field(description="Specifies whether to return the wallet quotas only.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2937,7 +2937,7 @@ class PaymentApi:
 
         Returns the available portal quotas.
 
-        :param wallet: Get wallet quotas only
+        :param wallet: Specifies whether to return the wallet quotas only.
         :type wallet: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2987,7 +2987,7 @@ class PaymentApi:
     @validate_call
     def get_payment_quotas_with_http_info(
         self,
-        wallet: Annotated[Optional[StrictBool], Field(description="Get wallet quotas only")] = None,
+        wallet: Annotated[Optional[StrictBool], Field(description="Specifies whether to return the wallet quotas only.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3005,7 +3005,7 @@ class PaymentApi:
 
         Returns the available portal quotas.
 
-        :param wallet: Get wallet quotas only
+        :param wallet: Specifies whether to return the wallet quotas only.
         :type wallet: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3055,7 +3055,7 @@ class PaymentApi:
     @validate_call
     def get_payment_quotas_without_preload_content(
         self,
-        wallet: Annotated[Optional[StrictBool], Field(description="Get wallet quotas only")] = None,
+        wallet: Annotated[Optional[StrictBool], Field(description="Specifies whether to return the wallet quotas only.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3073,7 +3073,7 @@ class PaymentApi:
 
         Returns the available portal quotas.
 
-        :param wallet: Get wallet quotas only
+        :param wallet: Specifies whether to return the wallet quotas only.
         :type wallet: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4018,7 +4018,7 @@ class PaymentApi:
     ) -> TenantWalletServiceSettingsWrapper:
         """Get wallet services settings
 
-        Get the wallet services settings.
+        Returns the wallet services settings.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4083,7 +4083,7 @@ class PaymentApi:
     ) -> ApiResponse[TenantWalletServiceSettingsWrapper]:
         """Get wallet services settings
 
-        Get the wallet services settings.
+        Returns the wallet services settings.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4148,7 +4148,7 @@ class PaymentApi:
     ) -> RESTResponseType:
         """Get wallet services settings
 
-        Get the wallet services settings.
+        Returns the wallet services settings.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4273,9 +4273,9 @@ class PaymentApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> TenantWalletSettingsWrapper:
-        """Get wallet auto top up settings
+        """Get wallet auto top-up settings
 
-        Returns the wallet auto top up settings.
+        Returns the wallet auto top-up settings.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4338,9 +4338,9 @@ class PaymentApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[TenantWalletSettingsWrapper]:
-        """Get wallet auto top up settings
+        """Get wallet auto top-up settings
 
-        Returns the wallet auto top up settings.
+        Returns the wallet auto top-up settings.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4403,9 +4403,9 @@ class PaymentApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get wallet auto top up settings
+        """Get wallet auto top-up settings
 
-        Returns the wallet auto top up settings.
+        Returns the wallet auto top-up settings.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4517,7 +4517,7 @@ class PaymentApi:
     @validate_call
     def get_wallet_service(
         self,
-        service: Annotated[TenantWalletService, Field(description="Wallet service")],
+        service: Annotated[TenantWalletService, Field(description="The wallet service type.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4533,9 +4533,9 @@ class PaymentApi:
     ) -> QuotaWrapper:
         """Get wallet service
 
-        Returns the wallet services.
+        Returns the specified wallet service.
 
-        :param service: Wallet service (required)
+        :param service: The wallet service type. (required)
         :type service: TenantWalletService
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4585,7 +4585,7 @@ class PaymentApi:
     @validate_call
     def get_wallet_service_with_http_info(
         self,
-        service: Annotated[TenantWalletService, Field(description="Wallet service")],
+        service: Annotated[TenantWalletService, Field(description="The wallet service type.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4601,9 +4601,9 @@ class PaymentApi:
     ) -> ApiResponse[QuotaWrapper]:
         """Get wallet service
 
-        Returns the wallet services.
+        Returns the specified wallet service.
 
-        :param service: Wallet service (required)
+        :param service: The wallet service type. (required)
         :type service: TenantWalletService
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4653,7 +4653,7 @@ class PaymentApi:
     @validate_call
     def get_wallet_service_without_preload_content(
         self,
-        service: Annotated[TenantWalletService, Field(description="Wallet service")],
+        service: Annotated[TenantWalletService, Field(description="The wallet service type.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4669,9 +4669,9 @@ class PaymentApi:
     ) -> RESTResponseType:
         """Get wallet service
 
-        Returns the wallet services.
+        Returns the specified wallet service.
 
-        :param service: Wallet service (required)
+        :param service: The wallet service type. (required)
         :type service: TenantWalletService
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -5337,9 +5337,9 @@ class PaymentApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> TenantWalletSettingsWrapper:
-        """Set wallet auto top up settings
+        """Set wallet auto top-up settings
 
-        Set the wallet auto top up settings.
+        Sets the wallet auto top-up settings.
 
         :param tenant_wallet_settings_wrapper:
         :type tenant_wallet_settings_wrapper: TenantWalletSettingsWrapper
@@ -5406,9 +5406,9 @@ class PaymentApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[TenantWalletSettingsWrapper]:
-        """Set wallet auto top up settings
+        """Set wallet auto top-up settings
 
-        Set the wallet auto top up settings.
+        Sets the wallet auto top-up settings.
 
         :param tenant_wallet_settings_wrapper:
         :type tenant_wallet_settings_wrapper: TenantWalletSettingsWrapper
@@ -5475,9 +5475,9 @@ class PaymentApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Set wallet auto top up settings
+        """Set wallet auto top-up settings
 
-        Set the wallet auto top up settings.
+        Sets the wallet auto top-up settings.
 
         :param tenant_wallet_settings_wrapper:
         :type tenant_wallet_settings_wrapper: TenantWalletSettingsWrapper
@@ -5621,9 +5621,9 @@ class PaymentApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
-        """Terminate the generating a customer operations report
+        """Terminate the customer operations report generation
 
-        Terminates the generating a customer operations report.
+        Terminates generating a customer operations report.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -5685,9 +5685,9 @@ class PaymentApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[None]:
-        """Terminate the generating a customer operations report
+        """Terminate the customer operations report generation
 
-        Terminates the generating a customer operations report.
+        Terminates generating a customer operations report.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -5749,9 +5749,9 @@ class PaymentApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Terminate the generating a customer operations report
+        """Terminate the customer operations report generation
 
-        Terminates the generating a customer operations report.
+        Terminates generating a customer operations report.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -5871,7 +5871,7 @@ class PaymentApi:
     ) -> BooleanWrapper:
         """Put money on deposit
 
-        Returns result of putting money on deposit.
+        Returns the result of putting money on deposit.
 
         :param top_up_deposit_request_dto:
         :type top_up_deposit_request_dto: TopUpDepositRequestDto
@@ -5940,7 +5940,7 @@ class PaymentApi:
     ) -> ApiResponse[BooleanWrapper]:
         """Put money on deposit
 
-        Returns result of putting money on deposit.
+        Returns the result of putting money on deposit.
 
         :param top_up_deposit_request_dto:
         :type top_up_deposit_request_dto: TopUpDepositRequestDto
@@ -6009,7 +6009,7 @@ class PaymentApi:
     ) -> RESTResponseType:
         """Put money on deposit
 
-        Returns result of putting money on deposit.
+        Returns the result of putting money on deposit.
 
         :param top_up_deposit_request_dto:
         :type top_up_deposit_request_dto: TopUpDepositRequestDto

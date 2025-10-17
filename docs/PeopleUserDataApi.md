@@ -7,7 +7,7 @@ Method | HTTP request | Description
 [**get_delete_personal_folder_progress**](#get_delete_personal_folder_progress) | **GET** /api/2.0/people/delete/personal/progress | Get the progress of deleting the personal folder
 [**get_reassign_progress**](#get_reassign_progress) | **GET** /api/2.0/people/reassign/progress/{userid} | Get the reassignment progress
 [**get_remove_progress**](#get_remove_progress) | **GET** /api/2.0/people/remove/progress/{userid} | Get the deletion progress
-[**necessary_reassign**](#necessary_reassign) | **GET** /api/2.0/people/reassign/necessary | Check the data reassignment need
+[**necessary_reassign**](#necessary_reassign) | **GET** /api/2.0/people/reassign/necessary | Check data for reassignment need
 [**send_instructions_to_delete**](#send_instructions_to_delete) | **PUT** /api/2.0/people/self/delete | Send the deletion instructions
 [**start_delete_personal_folder**](#start_delete_personal_folder) | **POST** /api/2.0/people/delete/personal/start | Delete the personal folder
 [**start_reassign**](#start_reassign) | **POST** /api/2.0/people/reassign/start | Start the data reassignment
@@ -246,7 +246,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **necessary_reassign**
 > BooleanWrapper necessary_reassign(user_id=user_id, type=type)
 
-Checks if the reassignment of rooms and shared files is necessary or not.
+Checks whether the reassignment of rooms and shared files is required.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -298,7 +298,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     type = docspace_api_sdk.EmployeeType() # EmployeeType | The expected user type. (optional)
 
     try:
-        # Check the data reassignment need
+        # Check data for reassignment need
         api_response = api_instance.necessary_reassign(user_id=user_id, type=type)
         print("The response of UserDataApi->necessary_reassign:\n")
         pprint(api_response)

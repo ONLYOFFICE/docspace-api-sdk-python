@@ -24,7 +24,7 @@ from typing_extensions import Self
 
 class Location(int, Enum):
     """
-    Location
+    The location context of the request.
     """
 
     """

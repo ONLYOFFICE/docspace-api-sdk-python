@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **can_edit_internal** | **bool** | Indicates whether internal editing permissions are granted. | 
 **can_edit_deny_download** | **bool** | Determines whether the user has permission to modify the deny download setting for the file share. | 
 **can_edit_expiration_date** | **bool** | Indicates whether the expiration date of access permissions can be edited. | 
+**can_revoke** | **bool** | Specifies whether the file sharing access can be revoked by the current user. | 
 **subject_type** | [**SubjectType**](SubjectType.md) |  | 
 
 ## Example

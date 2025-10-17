@@ -212,6 +212,11 @@ class FolderDtoInteger(FileEntryDtoInteger):
         if self.external is None and "external" in self.model_fields_set:
             _dict['external'] = None
 
+        # set to None if is_link_expired (nullable) is None
+        # and model_fields_set contains the field
+        if self.is_link_expired is None and "is_link_expired" in self.model_fields_set:
+            _dict['isLinkExpired'] = None
+
         # set to None if is_shareable (nullable) is None
         # and model_fields_set contains the field
         if self.is_shareable is None and "is_shareable" in self.model_fields_set:

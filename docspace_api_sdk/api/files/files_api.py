@@ -90,7 +90,7 @@ class FilesApi:
     @validate_call
     def add_file_to_recent(
         self,
-        file_id: Annotated[StrictInt, Field(description="The file ID of the request.")],
+        file_id: Annotated[StrictInt, Field(description="The file unique identifier.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -107,7 +107,7 @@ class FilesApi:
         """add_file_to_recent
 
 
-        :param file_id: The file ID of the request. (required)
+        :param file_id: The file unique identifier. (required)
         :type file_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -156,7 +156,7 @@ class FilesApi:
     @validate_call
     def add_file_to_recent_with_http_info(
         self,
-        file_id: Annotated[StrictInt, Field(description="The file ID of the request.")],
+        file_id: Annotated[StrictInt, Field(description="The file unique identifier.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -173,7 +173,7 @@ class FilesApi:
         """add_file_to_recent
 
 
-        :param file_id: The file ID of the request. (required)
+        :param file_id: The file unique identifier. (required)
         :type file_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -222,7 +222,7 @@ class FilesApi:
     @validate_call
     def add_file_to_recent_without_preload_content(
         self,
-        file_id: Annotated[StrictInt, Field(description="The file ID of the request.")],
+        file_id: Annotated[StrictInt, Field(description="The file unique identifier.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -239,7 +239,7 @@ class FilesApi:
         """add_file_to_recent
 
 
-        :param file_id: The file ID of the request. (required)
+        :param file_id: The file unique identifier. (required)
         :type file_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4819,7 +4819,7 @@ class FilesApi:
     @validate_call
     def get_all_form_roles(
         self,
-        file_id: Annotated[StrictInt, Field(description="The file ID of the request.")],
+        file_id: Annotated[StrictInt, Field(description="The file unique identifier.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4836,7 +4836,7 @@ class FilesApi:
         """get_all_form_roles
 
 
-        :param file_id: The file ID of the request. (required)
+        :param file_id: The file unique identifier. (required)
         :type file_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4886,7 +4886,7 @@ class FilesApi:
     @validate_call
     def get_all_form_roles_with_http_info(
         self,
-        file_id: Annotated[StrictInt, Field(description="The file ID of the request.")],
+        file_id: Annotated[StrictInt, Field(description="The file unique identifier.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4903,7 +4903,7 @@ class FilesApi:
         """get_all_form_roles
 
 
-        :param file_id: The file ID of the request. (required)
+        :param file_id: The file unique identifier. (required)
         :type file_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4953,7 +4953,7 @@ class FilesApi:
     @validate_call
     def get_all_form_roles_without_preload_content(
         self,
-        file_id: Annotated[StrictInt, Field(description="The file ID of the request.")],
+        file_id: Annotated[StrictInt, Field(description="The file unique identifier.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4970,7 +4970,7 @@ class FilesApi:
         """get_all_form_roles
 
 
-        :param file_id: The file ID of the request. (required)
+        :param file_id: The file unique identifier. (required)
         :type file_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -5353,7 +5353,7 @@ class FilesApi:
     @validate_call
     def get_edit_history(
         self,
-        file_id: Annotated[StrictInt, Field(description="The file ID of the request.")],
+        file_id: Annotated[StrictInt, Field(description="The file unique identifier.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5370,7 +5370,7 @@ class FilesApi:
         """get_edit_history
 
 
-        :param file_id: The file ID of the request. (required)
+        :param file_id: The file unique identifier. (required)
         :type file_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -5419,7 +5419,7 @@ class FilesApi:
     @validate_call
     def get_edit_history_with_http_info(
         self,
-        file_id: Annotated[StrictInt, Field(description="The file ID of the request.")],
+        file_id: Annotated[StrictInt, Field(description="The file unique identifier.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5436,7 +5436,7 @@ class FilesApi:
         """get_edit_history
 
 
-        :param file_id: The file ID of the request. (required)
+        :param file_id: The file unique identifier. (required)
         :type file_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -5485,7 +5485,7 @@ class FilesApi:
     @validate_call
     def get_edit_history_without_preload_content(
         self,
-        file_id: Annotated[StrictInt, Field(description="The file ID of the request.")],
+        file_id: Annotated[StrictInt, Field(description="The file unique identifier.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5502,7 +5502,7 @@ class FilesApi:
         """get_edit_history
 
 
-        :param file_id: The file ID of the request. (required)
+        :param file_id: The file unique identifier. (required)
         :type file_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -6215,7 +6215,7 @@ class FilesApi:
     @validate_call
     def get_file_links(
         self,
-        id: Annotated[StrictInt, Field(description="The file ID of the request.")],
+        id: Annotated[StrictInt, Field(description="The file unique identifier.")],
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of items to retrieve in the request.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The starting index for the query results.")] = None,
         _request_timeout: Union[
@@ -6234,7 +6234,7 @@ class FilesApi:
         """get_file_links
 
 
-        :param id: The file ID of the request. (required)
+        :param id: The file unique identifier. (required)
         :type id: int
         :param count: The number of items to retrieve in the request.
         :type count: int
@@ -6289,7 +6289,7 @@ class FilesApi:
     @validate_call
     def get_file_links_with_http_info(
         self,
-        id: Annotated[StrictInt, Field(description="The file ID of the request.")],
+        id: Annotated[StrictInt, Field(description="The file unique identifier.")],
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of items to retrieve in the request.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The starting index for the query results.")] = None,
         _request_timeout: Union[
@@ -6308,7 +6308,7 @@ class FilesApi:
         """get_file_links
 
 
-        :param id: The file ID of the request. (required)
+        :param id: The file unique identifier. (required)
         :type id: int
         :param count: The number of items to retrieve in the request.
         :type count: int
@@ -6363,7 +6363,7 @@ class FilesApi:
     @validate_call
     def get_file_links_without_preload_content(
         self,
-        id: Annotated[StrictInt, Field(description="The file ID of the request.")],
+        id: Annotated[StrictInt, Field(description="The file unique identifier.")],
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of items to retrieve in the request.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The starting index for the query results.")] = None,
         _request_timeout: Union[
@@ -6382,7 +6382,7 @@ class FilesApi:
         """get_file_links
 
 
-        :param id: The file ID of the request. (required)
+        :param id: The file unique identifier. (required)
         :type id: int
         :param count: The number of items to retrieve in the request.
         :type count: int
@@ -6506,7 +6506,7 @@ class FilesApi:
     @validate_call
     def get_file_primary_external_link(
         self,
-        id: Annotated[StrictInt, Field(description="The file ID of the request.")],
+        id: Annotated[StrictInt, Field(description="The file unique identifier.")],
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of items to retrieve in the request.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The starting index for the query results.")] = None,
         _request_timeout: Union[
@@ -6525,7 +6525,7 @@ class FilesApi:
         """get_file_primary_external_link
 
 
-        :param id: The file ID of the request. (required)
+        :param id: The file unique identifier. (required)
         :type id: int
         :param count: The number of items to retrieve in the request.
         :type count: int
@@ -6581,7 +6581,7 @@ class FilesApi:
     @validate_call
     def get_file_primary_external_link_with_http_info(
         self,
-        id: Annotated[StrictInt, Field(description="The file ID of the request.")],
+        id: Annotated[StrictInt, Field(description="The file unique identifier.")],
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of items to retrieve in the request.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The starting index for the query results.")] = None,
         _request_timeout: Union[
@@ -6600,7 +6600,7 @@ class FilesApi:
         """get_file_primary_external_link
 
 
-        :param id: The file ID of the request. (required)
+        :param id: The file unique identifier. (required)
         :type id: int
         :param count: The number of items to retrieve in the request.
         :type count: int
@@ -6656,7 +6656,7 @@ class FilesApi:
     @validate_call
     def get_file_primary_external_link_without_preload_content(
         self,
-        id: Annotated[StrictInt, Field(description="The file ID of the request.")],
+        id: Annotated[StrictInt, Field(description="The file unique identifier.")],
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of items to retrieve in the request.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The starting index for the query results.")] = None,
         _request_timeout: Union[
@@ -6675,7 +6675,7 @@ class FilesApi:
         """get_file_primary_external_link
 
 
-        :param id: The file ID of the request. (required)
+        :param id: The file unique identifier. (required)
         :type id: int
         :param count: The number of items to retrieve in the request.
         :type count: int
@@ -6800,7 +6800,7 @@ class FilesApi:
     @validate_call
     def get_file_version_info(
         self,
-        file_id: Annotated[StrictInt, Field(description="The file ID of the request.")],
+        file_id: Annotated[StrictInt, Field(description="The file unique identifier.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6817,7 +6817,7 @@ class FilesApi:
         """get_file_version_info
 
 
-        :param file_id: The file ID of the request. (required)
+        :param file_id: The file unique identifier. (required)
         :type file_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -6866,7 +6866,7 @@ class FilesApi:
     @validate_call
     def get_file_version_info_with_http_info(
         self,
-        file_id: Annotated[StrictInt, Field(description="The file ID of the request.")],
+        file_id: Annotated[StrictInt, Field(description="The file unique identifier.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6883,7 +6883,7 @@ class FilesApi:
         """get_file_version_info
 
 
-        :param file_id: The file ID of the request. (required)
+        :param file_id: The file unique identifier. (required)
         :type file_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -6932,7 +6932,7 @@ class FilesApi:
     @validate_call
     def get_file_version_info_without_preload_content(
         self,
-        file_id: Annotated[StrictInt, Field(description="The file ID of the request.")],
+        file_id: Annotated[StrictInt, Field(description="The file unique identifier.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6949,7 +6949,7 @@ class FilesApi:
         """get_file_version_info
 
 
-        :param file_id: The file ID of the request. (required)
+        :param file_id: The file unique identifier. (required)
         :type file_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -7316,7 +7316,7 @@ class FilesApi:
     @validate_call
     def get_presigned_file_uri(
         self,
-        file_id: Annotated[StrictInt, Field(description="The file ID of the request.")],
+        file_id: Annotated[StrictInt, Field(description="The file unique identifier.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -7333,7 +7333,7 @@ class FilesApi:
         """get_presigned_file_uri
 
 
-        :param file_id: The file ID of the request. (required)
+        :param file_id: The file unique identifier. (required)
         :type file_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -7382,7 +7382,7 @@ class FilesApi:
     @validate_call
     def get_presigned_file_uri_with_http_info(
         self,
-        file_id: Annotated[StrictInt, Field(description="The file ID of the request.")],
+        file_id: Annotated[StrictInt, Field(description="The file unique identifier.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -7399,7 +7399,7 @@ class FilesApi:
         """get_presigned_file_uri
 
 
-        :param file_id: The file ID of the request. (required)
+        :param file_id: The file unique identifier. (required)
         :type file_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -7448,7 +7448,7 @@ class FilesApi:
     @validate_call
     def get_presigned_file_uri_without_preload_content(
         self,
-        file_id: Annotated[StrictInt, Field(description="The file ID of the request.")],
+        file_id: Annotated[StrictInt, Field(description="The file unique identifier.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -7465,7 +7465,7 @@ class FilesApi:
         """get_presigned_file_uri
 
 
-        :param file_id: The file ID of the request. (required)
+        :param file_id: The file unique identifier. (required)
         :type file_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -7573,7 +7573,7 @@ class FilesApi:
     @validate_call
     def get_presigned_uri(
         self,
-        file_id: Annotated[StrictInt, Field(description="The file ID of the request.")],
+        file_id: Annotated[StrictInt, Field(description="The file unique identifier.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -7590,7 +7590,7 @@ class FilesApi:
         """get_presigned_uri
 
 
-        :param file_id: The file ID of the request. (required)
+        :param file_id: The file unique identifier. (required)
         :type file_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -7639,7 +7639,7 @@ class FilesApi:
     @validate_call
     def get_presigned_uri_with_http_info(
         self,
-        file_id: Annotated[StrictInt, Field(description="The file ID of the request.")],
+        file_id: Annotated[StrictInt, Field(description="The file unique identifier.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -7656,7 +7656,7 @@ class FilesApi:
         """get_presigned_uri
 
 
-        :param file_id: The file ID of the request. (required)
+        :param file_id: The file unique identifier. (required)
         :type file_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -7705,7 +7705,7 @@ class FilesApi:
     @validate_call
     def get_presigned_uri_without_preload_content(
         self,
-        file_id: Annotated[StrictInt, Field(description="The file ID of the request.")],
+        file_id: Annotated[StrictInt, Field(description="The file unique identifier.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -7722,7 +7722,7 @@ class FilesApi:
         """get_presigned_uri
 
 
-        :param file_id: The file ID of the request. (required)
+        :param file_id: The file unique identifier. (required)
         :type file_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -7830,7 +7830,7 @@ class FilesApi:
     @validate_call
     def get_protected_file_users(
         self,
-        file_id: Annotated[StrictInt, Field(description="The file ID of the request.")],
+        file_id: Annotated[StrictInt, Field(description="The file unique identifier.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -7847,7 +7847,7 @@ class FilesApi:
         """get_protected_file_users
 
 
-        :param file_id: The file ID of the request. (required)
+        :param file_id: The file unique identifier. (required)
         :type file_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -7896,7 +7896,7 @@ class FilesApi:
     @validate_call
     def get_protected_file_users_with_http_info(
         self,
-        file_id: Annotated[StrictInt, Field(description="The file ID of the request.")],
+        file_id: Annotated[StrictInt, Field(description="The file unique identifier.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -7913,7 +7913,7 @@ class FilesApi:
         """get_protected_file_users
 
 
-        :param file_id: The file ID of the request. (required)
+        :param file_id: The file unique identifier. (required)
         :type file_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -7962,7 +7962,7 @@ class FilesApi:
     @validate_call
     def get_protected_file_users_without_preload_content(
         self,
-        file_id: Annotated[StrictInt, Field(description="The file ID of the request.")],
+        file_id: Annotated[StrictInt, Field(description="The file unique identifier.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -7979,7 +7979,7 @@ class FilesApi:
         """get_protected_file_users
 
 
-        :param file_id: The file ID of the request. (required)
+        :param file_id: The file unique identifier. (required)
         :type file_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -8357,7 +8357,7 @@ class FilesApi:
     @validate_call
     def is_form_pdf(
         self,
-        file_id: Annotated[StrictInt, Field(description="The file ID of the request.")],
+        file_id: Annotated[StrictInt, Field(description="The file unique identifier.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8374,7 +8374,7 @@ class FilesApi:
         """is_form_pdf
 
 
-        :param file_id: The file ID of the request. (required)
+        :param file_id: The file unique identifier. (required)
         :type file_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -8423,7 +8423,7 @@ class FilesApi:
     @validate_call
     def is_form_pdf_with_http_info(
         self,
-        file_id: Annotated[StrictInt, Field(description="The file ID of the request.")],
+        file_id: Annotated[StrictInt, Field(description="The file unique identifier.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8440,7 +8440,7 @@ class FilesApi:
         """is_form_pdf
 
 
-        :param file_id: The file ID of the request. (required)
+        :param file_id: The file unique identifier. (required)
         :type file_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -8489,7 +8489,7 @@ class FilesApi:
     @validate_call
     def is_form_pdf_without_preload_content(
         self,
-        file_id: Annotated[StrictInt, Field(description="The file ID of the request.")],
+        file_id: Annotated[StrictInt, Field(description="The file unique identifier.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8506,7 +8506,7 @@ class FilesApi:
         """is_form_pdf
 
 
-        :param file_id: The file ID of the request. (required)
+        :param file_id: The file unique identifier. (required)
         :type file_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -10159,7 +10159,7 @@ class FilesApi:
     def save_file_as_pdf(
         self,
         id: Annotated[StrictInt, Field(description="The file ID to save as PDF.")],
-        save_as_pdf_integer: Annotated[SaveAsPdfInteger, Field(description="The parameters for saving file as PDF.")],
+        save_as_pdf_integer: Annotated[SaveAsPdfInteger, Field(description="The parameters for saving the file as PDF.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -10178,7 +10178,7 @@ class FilesApi:
 
         :param id: The file ID to save as PDF. (required)
         :type id: int
-        :param save_as_pdf_integer: The parameters for saving file as PDF. (required)
+        :param save_as_pdf_integer: The parameters for saving the file as PDF. (required)
         :type save_as_pdf_integer: SaveAsPdfInteger
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -10230,7 +10230,7 @@ class FilesApi:
     def save_file_as_pdf_with_http_info(
         self,
         id: Annotated[StrictInt, Field(description="The file ID to save as PDF.")],
-        save_as_pdf_integer: Annotated[SaveAsPdfInteger, Field(description="The parameters for saving file as PDF.")],
+        save_as_pdf_integer: Annotated[SaveAsPdfInteger, Field(description="The parameters for saving the file as PDF.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -10249,7 +10249,7 @@ class FilesApi:
 
         :param id: The file ID to save as PDF. (required)
         :type id: int
-        :param save_as_pdf_integer: The parameters for saving file as PDF. (required)
+        :param save_as_pdf_integer: The parameters for saving the file as PDF. (required)
         :type save_as_pdf_integer: SaveAsPdfInteger
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -10301,7 +10301,7 @@ class FilesApi:
     def save_file_as_pdf_without_preload_content(
         self,
         id: Annotated[StrictInt, Field(description="The file ID to save as PDF.")],
-        save_as_pdf_integer: Annotated[SaveAsPdfInteger, Field(description="The parameters for saving file as PDF.")],
+        save_as_pdf_integer: Annotated[SaveAsPdfInteger, Field(description="The parameters for saving the file as PDF.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -10320,7 +10320,7 @@ class FilesApi:
 
         :param id: The file ID to save as PDF. (required)
         :type id: int
-        :param save_as_pdf_integer: The parameters for saving file as PDF. (required)
+        :param save_as_pdf_integer: The parameters for saving the file as PDF. (required)
         :type save_as_pdf_integer: SaveAsPdfInteger
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request

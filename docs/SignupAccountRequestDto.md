@@ -8,11 +8,11 @@ Name | Type | Description | Notes
 **employee_type** | [**EmployeeType**](EmployeeType.md) |  | [optional] 
 **first_name** | **str** | The user first name. | [optional] 
 **last_name** | **str** | The user last name. | [optional] 
-**email** | **str** | The user email address. | 
+**email** | **str** | The user email address. | [optional] 
 **password_hash** | **str** | The user password hash. | [optional] 
 **key** | **str** | The user link key. | 
 **culture** | **str** | The user culture code. | [optional] 
-**serialized_profile** | **str** | Third-party profile in the serialized format | 
+**serialized_profile** | **str** | The third-party profile in the serialized format | 
 
 ## Example
 

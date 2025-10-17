@@ -28,7 +28,7 @@ from typing_extensions import Self
 
 class TenantBannerSettingsDto(BaseModel):
     """
-    The request parameters for managing the promotional banners visibility settings for the current tenant.
+    The request parameters for managing the visibility settings of the promotional banners for the current tenant.
     """ # noqa: E501
     hidden: Optional[StrictBool] = Field(default=None, description="The banners visibility flag.")
     __properties: ClassVar[List[str]] = ["hidden"]

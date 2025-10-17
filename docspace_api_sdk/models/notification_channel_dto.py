@@ -28,10 +28,10 @@ from typing_extensions import Self
 
 class NotificationChannelDto(BaseModel):
     """
-    NotificationChannelDto
+    The notification channel information.
     """ # noqa: E501
-    name: Optional[StrictStr]
-    is_enabled: StrictBool = Field(alias="isEnabled")
+    name: Optional[StrictStr] = Field(description="The notification channel name.")
+    is_enabled: StrictBool = Field(description="Specifies whether the notification channel is enabled.", alias="isEnabled")
     __properties: ClassVar[List[str]] = ["name", "isEnabled"]
 
     model_config = ConfigDict(

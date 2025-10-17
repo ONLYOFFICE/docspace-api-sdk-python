@@ -239,7 +239,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**| The file ID of the request. | 
+ **id** | **int**| The file unique identifier. | 
  **count** | **int**| The number of items to retrieve in the request. | [optional] 
  **start_index** | **int**| The starting index for the query results. | [optional] 
 
@@ -269,7 +269,7 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.SharingApi(api_client)
-    id = 9846 # int | The file ID of the request.
+    id = 9846 # int | The file unique identifier.
     count = 1234 # int | The number of items to retrieve in the request. (optional)
     start_index = 1234 # int | The starting index for the query results. (optional)
 
@@ -309,7 +309,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**| The request folder ID. | 
+ **id** | **int**| The folder unique identifier. | 
  **count** | **int**| The number of items to retrieve in the request. | [optional] 
  **start_index** | **int**| The starting index for the query results. | [optional] 
 
@@ -339,7 +339,7 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.SharingApi(api_client)
-    id = 9846 # int | The request folder ID.
+    id = 9846 # int | The folder unique identifier.
     count = 1234 # int | The number of items to retrieve in the request. (optional)
     start_index = 1234 # int | The starting index for the query results. (optional)
 
@@ -594,7 +594,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **file_id** | **int**| The file ID of the request. | 
+ **file_id** | **int**| The file unique identifier. | 
 
 ### Return type
 
@@ -622,7 +622,7 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.SharingApi(api_client)
-    file_id = 9846 # int | The file ID of the request.
+    file_id = 9846 # int | The file unique identifier.
 
     try:
         api_response = api_instance.get_shared_users(file_id)
@@ -727,7 +727,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **file_id** | **int**| The file ID of the mention message. | 
+ **file_id** | **int**| The file ID with the mention message. | 
  **mention_message_wrapper** | [**MentionMessageWrapper**](MentionMessageWrapper.md)| The mention message. | [optional] 
 
 ### Return type
@@ -757,7 +757,7 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.SharingApi(api_client)
-    file_id = 9846 # int | The file ID of the mention message.
+    file_id = 9846 # int | The file ID with the mention message.
     mention_message_wrapper = docspace_api_sdk.MentionMessageWrapper() # MentionMessageWrapper | The mention message. (optional)
 
     try:

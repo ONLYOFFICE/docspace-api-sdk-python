@@ -32,16 +32,16 @@ class OperationDto(BaseModel):
     Represents an operation.
     """ # noqa: E501
     var_date: Optional[ApiDateTime] = Field(default=None, alias="date")
-    service: Optional[StrictStr] = Field(default=None, description="Service related to the operation.")
-    description: Optional[StrictStr] = Field(default=None, description="Brief description of the operation.")
-    details: Optional[StrictStr] = Field(default=None, description="Brief details of the operation.")
-    service_unit: Optional[StrictStr] = Field(default=None, description="Unit of the service.", alias="serviceUnit")
-    quantity: Optional[StrictInt] = Field(default=None, description="Quantity of the service used.")
+    service: Optional[StrictStr] = Field(default=None, description="The service related to the operation.")
+    description: Optional[StrictStr] = Field(default=None, description="The brief operation description.")
+    details: Optional[StrictStr] = Field(default=None, description="The detailed information about the operation.")
+    service_unit: Optional[StrictStr] = Field(default=None, description="The service unit.", alias="serviceUnit")
+    quantity: Optional[StrictInt] = Field(default=None, description="The quantity of the service used.")
     currency: Optional[StrictStr] = Field(default=None, description="The three-character ISO 4217 currency symbol of the operation.")
-    credit: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Credit amount of the operation.")
-    debit: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Debit amount of the operation.")
-    participant_name: Optional[StrictStr] = Field(default=None, description="Original name of the participant.", alias="participantName")
-    participant_display_name: Optional[StrictStr] = Field(default=None, description="Display name of the participant.", alias="participantDisplayName")
+    credit: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The credit amount of the operation.")
+    debit: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The debit amount of the operation.")
+    participant_name: Optional[StrictStr] = Field(default=None, description="The participant original name.", alias="participantName")
+    participant_display_name: Optional[StrictStr] = Field(default=None, description="The participant display name.", alias="participantDisplayName")
     __properties: ClassVar[List[str]] = ["date", "service", "description", "details", "serviceUnit", "quantity", "currency", "credit", "debit", "participantName", "participantDisplayName"]
 
     model_config = ConfigDict(

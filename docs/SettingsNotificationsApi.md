@@ -4,7 +4,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get_notification_channels**](#get_notification_channels) | **GET** /api/2.0/settings/notification/channels | Gets notification channel settings
+[**get_notification_channels**](#get_notification_channels) | **GET** /api/2.0/settings/notification/channels | Get notification channels
 [**get_notification_settings**](#get_notification_settings) | **GET** /api/2.0/settings/notification/{type} | Check notification availability
 [**get_rooms_notification_settings**](#get_rooms_notification_settings) | **GET** /api/2.0/settings/notification/rooms | Get room notification settings
 [**set_notification_settings**](#set_notification_settings) | **POST** /api/2.0/settings/notification | Enable notifications
@@ -14,7 +14,7 @@ Method | HTTP request | Description
 # **get_notification_channels**
 > NotificationChannelStatusWrapper get_notification_channels()
 
-Returns a list of notification channels
+Returns a list of notification channels.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -59,7 +59,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     api_instance = docspace_api_sdk.NotificationsApi(api_client)
 
     try:
-        # Gets notification channel settings
+        # Get notification channels
         api_response = api_instance.get_notification_channels()
         print("The response of NotificationsApi->get_notification_channels:\n")
         pprint(api_response)

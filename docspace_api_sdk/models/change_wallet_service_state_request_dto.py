@@ -29,10 +29,10 @@ from typing_extensions import Self
 
 class ChangeWalletServiceStateRequestDto(BaseModel):
     """
-    Tenant wallet service state request parameters
+    The request parameters for changing the tenant wallet service state.
     """ # noqa: E501
     service: Optional[TenantWalletService] = None
-    enabled: Optional[StrictBool] = Field(default=None, description="Service state")
+    enabled: Optional[StrictBool] = Field(default=None, description="Specifies whether the wallet service is enabled.")
     __properties: ClassVar[List[str]] = ["service", "enabled"]
 
     model_config = ConfigDict(

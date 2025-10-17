@@ -28,7 +28,7 @@ from typing_extensions import Self
 
 class IsDefaultWhiteLabelLogosDto(BaseModel):
     """
-    The default white label logos parameters.
+    The default white label logo parameters.
     """ # noqa: E501
     name: Optional[StrictStr] = Field(description="The white label logo name.")
     default: StrictBool = Field(description="Specifies if the white label logo is default or not.")

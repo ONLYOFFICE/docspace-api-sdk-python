@@ -46,8 +46,9 @@ class FileShareDto(BaseModel):
     can_edit_internal: StrictBool = Field(description="Indicates whether internal editing permissions are granted.", alias="canEditInternal")
     can_edit_deny_download: StrictBool = Field(description="Determines whether the user has permission to modify the deny download setting for the file share.", alias="canEditDenyDownload")
     can_edit_expiration_date: StrictBool = Field(description="Indicates whether the expiration date of access permissions can be edited.", alias="canEditExpirationDate")
+    can_revoke: StrictBool = Field(description="Specifies whether the file sharing access can be revoked by the current user.", alias="canRevoke")
     subject_type: SubjectType = Field(alias="subjectType")
-    __properties: ClassVar[List[str]] = ["access", "sharedTo", "sharedToUser", "sharedToGroup", "sharedLink", "isLocked", "isOwner", "canEditAccess", "canEditInternal", "canEditDenyDownload", "canEditExpirationDate", "subjectType"]
+    __properties: ClassVar[List[str]] = ["access", "sharedTo", "sharedToUser", "sharedToGroup", "sharedLink", "isLocked", "isOwner", "canEditAccess", "canEditInternal", "canEditDenyDownload", "canEditExpirationDate", "canRevoke", "subjectType"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -126,6 +127,7 @@ class FileShareDto(BaseModel):
             "canEditInternal": obj.get("canEditInternal"),
             "canEditDenyDownload": obj.get("canEditDenyDownload"),
             "canEditExpirationDate": obj.get("canEditExpirationDate"),
+            "canRevoke": obj.get("canRevoke"),
             "subjectType": obj.get("subjectType")
         })
         return _obj

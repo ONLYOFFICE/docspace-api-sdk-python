@@ -1,13 +1,13 @@
 # DocumentBuilderTaskDto
-The document builder task parameters.
+The Document Builder task parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** | The document builder ID. | 
-**error** | **str** | The error message occured while the document building process. | 
-**percentage** | **int** | The percentage of the progress of the document building process. | 
+**id** | **str** | The Document Builder task ID. | 
+**error** | **str** | The error message occurred during the document building process. | 
+**percentage** | **int** | The progress percentage of the document building process. | 
 **is_completed** | **bool** | Specifies whether the document building process is completed or not. | 
 **status** | [**DistributedTaskStatus**](DistributedTaskStatus.md) |  | 
 **result_file_id** | **object** | The result file ID. | 

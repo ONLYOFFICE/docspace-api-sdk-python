@@ -28,11 +28,11 @@ from typing_extensions import Self
 
 class PaymentCalculation(BaseModel):
     """
-    The payment calculation.
+    The parameters of the calculated payment amount.
     """ # noqa: E501
-    operation_id: Optional[StrictInt] = Field(default=None, description="Unique identifier of the operation.", alias="operationId")
-    amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The amount of the payment calculation.")
-    currency: Optional[StrictStr] = Field(default=None, description="The three-character ISO 4217 currency symbol of the payment calculation.")
+    operation_id: Optional[StrictInt] = Field(default=None, description="The operation unique identifier.", alias="operationId")
+    amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The calculated payment amount.")
+    currency: Optional[StrictStr] = Field(default=None, description="The three-character ISO 4217 currency symbol used for the payment calculation.")
     quantity: Optional[StrictInt] = Field(default=None, description="The quantity associated with the payment calculation.")
     __properties: ClassVar[List[str]] = ["operationId", "amount", "currency", "quantity"]
 

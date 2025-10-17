@@ -29,7 +29,7 @@ from typing_extensions import Self
 
 class AutoCleanupRequestDto(BaseModel):
     """
-    The auto-clearing request parameters.
+    The request parameters for updating the trash bin auto-clearing setting.
     """ # noqa: E501
     set: Optional[StrictBool] = Field(default=None, description="Specifies whether to enable the auto-clearing or not.")
     gap: Optional[DateToAutoCleanUp] = None

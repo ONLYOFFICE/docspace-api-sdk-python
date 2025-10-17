@@ -5,12 +5,12 @@ Represents a report containing a collection of operations.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**collection** | [**List[OperationDto]**](OperationDto.md) | Collection of operations. | [optional] 
-**offset** | **int** | Offset of the report data. | [optional] 
-**limit** | **int** | Limit of the report data. | [optional] 
-**total_quantity** | **int** | Total quantity of operations in the report. | [optional] 
-**total_page** | **int** | Total number of pages in the report. | [optional] 
-**current_page** | **int** | Current page number of the report. | [optional] 
+**collection** | [**List[OperationDto]**](OperationDto.md) | A collection of operations. | [optional] 
+**offset** | **int** | The report data offset. | [optional] 
+**limit** | **int** | The report data limit. | [optional] 
+**total_quantity** | **int** | The total quantity of operations in the report. | [optional] 
+**total_page** | **int** | The total number of pages in the report. | [optional] 
+**current_page** | **int** | The current page number of the report. | [optional] 
 
 ## Example
 

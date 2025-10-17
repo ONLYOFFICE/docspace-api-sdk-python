@@ -5,12 +5,12 @@ The request parameters for handling the authorization service.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **str** | The name of the authentication service. | [optional] 
-**title** | **str** | The user-friendly display title of the authentication service. | [optional] 
-**description** | **str** | The brief description of the authentication service. | [optional] 
-**instruction** | **str** | The detailed instructions for configuring or using the authentication service. | [optional] 
-**can_set** | **bool** | Specifies whether the authentication service can be configured by the user. | [optional] 
-**props** | [**List[AuthKey]**](AuthKey.md) | The collection of authorization keys associated with the authentication service. | [optional] 
+**name** | **str** | The name of the authorization service. | [optional] 
+**title** | **str** | The user-friendly display title of the authorization service. | [optional] 
+**description** | **str** | The brief description of the authorization service. | [optional] 
+**instruction** | **str** | The detailed instructions for configuring or using the authorization service. | [optional] 
+**can_set** | **bool** | Specifies whether the authorization service can be configured by the user. | [optional] 
+**props** | [**List[AuthKey]**](AuthKey.md) | The collection of authorization keys associated with the authorization service. | [optional] 
 
 ## Example
 

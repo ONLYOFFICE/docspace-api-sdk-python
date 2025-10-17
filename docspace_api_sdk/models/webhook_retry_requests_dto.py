@@ -28,7 +28,7 @@ from typing_extensions import Self
 
 class WebhookRetryRequestsDto(BaseModel):
     """
-    The request parameters for requesting the webhook delivery retries.
+    The parameters for requesting the webhook delivery retries.
     """ # noqa: E501
     ids: Optional[List[StrictInt]] = Field(default=None, description="The list of webhook delivery IDs to retry.")
     __properties: ClassVar[List[str]] = ["ids"]

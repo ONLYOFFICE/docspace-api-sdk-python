@@ -57,7 +57,7 @@ For more information, see [api.onlyoffice.com]().
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **int**| The room Id. | 
- **batch_tags_request_dto** | [**BatchTagsRequestDto**](BatchTagsRequestDto.md)| The parameters for adding tags. | [optional] 
+ **batch_tags_request_dto** | [**BatchTagsRequestDto**](BatchTagsRequestDto.md)| The parameters for managing tags. | [optional] 
 
 ### Return type
 
@@ -87,7 +87,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.RoomsApi(api_client)
     id = 9846 # int | The room Id.
-    batch_tags_request_dto = docspace_api_sdk.BatchTagsRequestDto() # BatchTagsRequestDto | The parameters for adding tags. (optional)
+    batch_tags_request_dto = docspace_api_sdk.BatchTagsRequestDto() # BatchTagsRequestDto | The parameters for managing tags. (optional)
 
     try:
         api_response = api_instance.add_room_tags(id, batch_tags_request_dto=batch_tags_request_dto)
@@ -808,7 +808,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**| The room ID of the request. | 
+ **id** | **int**| The room ID. | 
 
 ### Return type
 
@@ -836,7 +836,7 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.RoomsApi(api_client)
-    id = 9846 # int | The room ID of the request.
+    id = 9846 # int | The room ID.
 
     try:
         api_response = api_instance.delete_room_logo(id)
@@ -875,7 +875,7 @@ For more information, see [api.onlyoffice.com]().
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **int**| The room Id. | 
- **batch_tags_request_dto** | [**BatchTagsRequestDto**](BatchTagsRequestDto.md)| The parameters for adding tags. | [optional] 
+ **batch_tags_request_dto** | [**BatchTagsRequestDto**](BatchTagsRequestDto.md)| The parameters for managing tags. | [optional] 
 
 ### Return type
 
@@ -905,7 +905,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.RoomsApi(api_client)
     id = 9846 # int | The room Id.
-    batch_tags_request_dto = docspace_api_sdk.BatchTagsRequestDto() # BatchTagsRequestDto | The parameters for adding tags. (optional)
+    batch_tags_request_dto = docspace_api_sdk.BatchTagsRequestDto() # BatchTagsRequestDto | The parameters for managing tags. (optional)
 
     try:
         api_response = api_instance.delete_room_tags(id, batch_tags_request_dto=batch_tags_request_dto)
@@ -944,7 +944,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**| The room ID of the request. | 
+ **id** | **int**| The room ID. | 
 
 ### Return type
 
@@ -972,7 +972,7 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.RoomsApi(api_client)
-    id = 9846 # int | The room ID of the request.
+    id = 9846 # int | The room ID.
 
     try:
         api_response = api_instance.get_new_room_items(id)
@@ -1262,7 +1262,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**| The room ID of the request. | 
+ **id** | **int**| The room ID. | 
 
 ### Return type
 
@@ -1290,7 +1290,7 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.RoomsApi(api_client)
-    id = 9846 # int | The room ID of the request.
+    id = 9846 # int | The room ID.
 
     try:
         api_response = api_instance.get_room_info(id)
@@ -1768,7 +1768,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**| The room ID of the request. | 
+ **id** | **int**| The room ID. | 
 
 ### Return type
 
@@ -1796,7 +1796,7 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.RoomsApi(api_client)
-    id = 9846 # int | The room ID of the request.
+    id = 9846 # int | The room ID.
 
     try:
         api_response = api_instance.get_rooms_primary_external_link(id)
@@ -1835,7 +1835,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**| The room ID of the request. | 
+ **id** | **int**| The room ID. | 
 
 ### Return type
 
@@ -1863,7 +1863,7 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.RoomsApi(api_client)
-    id = 9846 # int | The room ID of the request.
+    id = 9846 # int | The room ID.
 
     try:
         api_response = api_instance.pin_room(id)
@@ -1901,7 +1901,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**| The room ID of the request. | 
+ **id** | **int**| The room ID. | 
 
 ### Return type
 
@@ -1929,7 +1929,7 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.RoomsApi(api_client)
-    id = 9846 # int | The room ID of the request.
+    id = 9846 # int | The room ID.
 
     try:
         api_response = api_instance.reorder_room(id)
@@ -2235,7 +2235,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**| The room ID of the request. | 
+ **id** | **int**| The room ID. | 
 
 ### Return type
 
@@ -2263,7 +2263,7 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.RoomsApi(api_client)
-    id = 9846 # int | The room ID of the request.
+    id = 9846 # int | The room ID.
 
     try:
         api_response = api_instance.start_room_index_export(id)
@@ -2430,7 +2430,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**| The room ID of the request. | 
+ **id** | **int**| The room ID. | 
 
 ### Return type
 
@@ -2458,7 +2458,7 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.RoomsApi(api_client)
-    id = 9846 # int | The room ID of the request.
+    id = 9846 # int | The room ID.
 
     try:
         api_response = api_instance.unpin_room(id)

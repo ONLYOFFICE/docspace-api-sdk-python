@@ -28,10 +28,10 @@ from typing_extensions import Self
 
 class TenantUserInvitationSettingsDto(BaseModel):
     """
-    User invitation settings
+    The user invitation settings.
     """ # noqa: E501
-    allow_inviting_members: StrictBool = Field(description="Allow invite new DocSpace members through the Contacts section.", alias="allowInvitingMembers")
-    allow_inviting_guests: StrictBool = Field(description="Allow all DocSpace members to invite external guests to rooms.", alias="allowInvitingGuests")
+    allow_inviting_members: StrictBool = Field(description="Specifies whether to allow inviting new DocSpace members through the Contacts section.", alias="allowInvitingMembers")
+    allow_inviting_guests: StrictBool = Field(description="Specifies whether to allow all DocSpace members to invite external guests to the rooms.", alias="allowInvitingGuests")
     __properties: ClassVar[List[str]] = ["allowInvitingMembers", "allowInvitingGuests"]
 
     model_config = ConfigDict(

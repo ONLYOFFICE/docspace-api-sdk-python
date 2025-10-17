@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **portal_id** | **str** | The portal ID. | [optional] [readonly] 
 **payment_method_status** | [**PaymentMethodStatus**](PaymentMethodStatus.md) |  | [optional] 
-**email** | **str** | The email address of the customer. | [optional] [readonly] 
+**email** | **str** | The customer email address. | [optional] [readonly] 
 **payer** | [**EmployeeDto**](EmployeeDto.md) |  | [optional] 
 
 ## Example

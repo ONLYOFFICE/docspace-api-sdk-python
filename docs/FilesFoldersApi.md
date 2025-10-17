@@ -18,6 +18,7 @@ Method | HTTP request | Description
 [**get_folder_links**](#get_folder_links) | **GET** /api/2.0/files/folder/{id}/links | 
 [**get_folder_path**](#get_folder_path) | **GET** /api/2.0/files/folder/{folderId}/path | 
 [**get_folder_primary_external_link**](#get_folder_primary_external_link) | **GET** /api/2.0/files/folder/{id}/link | 
+[**get_folder_recent**](#get_folder_recent) | **GET** /api/2.0/files/recent | 
 [**get_folders**](#get_folders) | **GET** /api/2.0/files/{folderId}/subfolders | 
 [**get_my_folder**](#get_my_folder) | **GET** /api/2.0/files/@my | 
 [**get_new_folder_items**](#get_new_folder_items) | **GET** /api/2.0/files/{folderId}/news | 
@@ -535,7 +536,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **folder_id** | **int**| The request folder ID. | 
+ **folder_id** | **int**| The folder unique identifier. | 
 
 ### Return type
 
@@ -563,7 +564,7 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.FoldersApi(api_client)
-    folder_id = 9846 # int | The request folder ID.
+    folder_id = 9846 # int | The folder unique identifier.
 
     try:
         api_response = api_instance.get_folder(folder_id)
@@ -601,22 +602,22 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **folder_id** | **int**| The folder ID of the request. | 
+ **folder_id** | **int**| The folder ID. | 
  **user_id_or_group_id** | **str**| The user or group ID. | [optional] 
  **filter_type** | [**FilterType**](.md)| The filter type. | [optional] 
  **room_id** | **int**| The room ID. | [optional] 
  **exclude_subject** | **bool**| Specifies whether to exclude search by user or group ID. | [optional] 
- **apply_filter_option** | [**ApplyFilterOption**](.md)| Specifies whether to return only files, only folders or all elements from the specified folder. | [optional] 
+ **apply_filter_option** | [**ApplyFilterOption**](.md)| Specifies whether to return only files, only folders, or all elements from the specified folder. | [optional] 
  **extension** | **str**| Specifies whether to search for the specific file extension. | [optional] 
  **search_area** | [**SearchArea**](.md)| The search area. | [optional] 
  **forms_item_key** | **str**| The forms item key. | [optional] 
  **forms_item_type** | **str**| The forms item type. | [optional] 
  **count** | **int**| The maximum number of items to retrieve in the request. | [optional] 
  **start_index** | **int**| The zero-based index of the first item to retrieve in a paginated request. | [optional] 
- **sort_by** | **str**| Specifies the property used for sorting the folder request results. | [optional] 
+ **sort_by** | **str**| The property used for sorting the folder request results. | [optional] 
  **sort_order** | [**SortOrder**](.md)| The order in which the results are sorted. | [optional] 
  **filter_value** | **str**| The text value used as a filter parameter for folder content queries. | [optional] 
- **location** | [**Location**](.md)| Represents the location context of the request, specifying the area  where the operation is performed, such as a room, documents, or a link. | [optional] 
+ **location** | [**Location**](.md)| The location context of the request, specifying the area  where the operation is performed, such as a room, documents, or a link. | [optional] 
 
 ### Return type
 
@@ -649,22 +650,22 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.FoldersApi(api_client)
-    folder_id = 9846 # int | The folder ID of the request.
+    folder_id = 9846 # int | The folder ID.
     user_id_or_group_id = '75a5f745-f697-4418-b38d-0fe0d277e258' # str | The user or group ID. (optional)
     filter_type = docspace_api_sdk.FilterType() # FilterType | The filter type. (optional)
     room_id = 9846 # int | The room ID. (optional)
     exclude_subject = true # bool | Specifies whether to exclude search by user or group ID. (optional)
-    apply_filter_option = docspace_api_sdk.ApplyFilterOption() # ApplyFilterOption | Specifies whether to return only files, only folders or all elements from the specified folder. (optional)
+    apply_filter_option = docspace_api_sdk.ApplyFilterOption() # ApplyFilterOption | Specifies whether to return only files, only folders, or all elements from the specified folder. (optional)
     extension = '.txt' # str | Specifies whether to search for the specific file extension. (optional)
     search_area = docspace_api_sdk.SearchArea() # SearchArea | The search area. (optional)
     forms_item_key = 'some text' # str | The forms item key. (optional)
     forms_item_type = 'some text' # str | The forms item type. (optional)
     count = 1234 # int | The maximum number of items to retrieve in the request. (optional)
     start_index = 1234 # int | The zero-based index of the first item to retrieve in a paginated request. (optional)
-    sort_by = 'some text' # str | Specifies the property used for sorting the folder request results. (optional)
+    sort_by = 'some text' # str | The property used for sorting the folder request results. (optional)
     sort_order = docspace_api_sdk.SortOrder() # SortOrder | The order in which the results are sorted. (optional)
     filter_value = 'some text' # str | The text value used as a filter parameter for folder content queries. (optional)
-    location = docspace_api_sdk.Location() # Location | Represents the location context of the request, specifying the area  where the operation is performed, such as a room, documents, or a link. (optional)
+    location = docspace_api_sdk.Location() # Location | The location context of the request, specifying the area  where the operation is performed, such as a room, documents, or a link. (optional)
 
     try:
         api_response = api_instance.get_folder_by_folder_id(folder_id, user_id_or_group_id=user_id_or_group_id, filter_type=filter_type, room_id=room_id, exclude_subject=exclude_subject, apply_filter_option=apply_filter_option, extension=extension, search_area=search_area, forms_item_key=forms_item_key, forms_item_type=forms_item_type, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value, location=location)
@@ -781,7 +782,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **folder_id** | **int**| The request folder ID. | 
+ **folder_id** | **int**| The folder unique identifier. | 
 
 ### Return type
 
@@ -809,7 +810,7 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.FoldersApi(api_client)
-    folder_id = 9846 # int | The request folder ID.
+    folder_id = 9846 # int | The folder unique identifier.
 
     try:
         api_response = api_instance.get_folder_info(folder_id)
@@ -913,7 +914,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **folder_id** | **int**| The request folder ID. | 
+ **folder_id** | **int**| The folder unique identifier. | 
 
 ### Return type
 
@@ -941,7 +942,7 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.FoldersApi(api_client)
-    folder_id = 9846 # int | The request folder ID.
+    folder_id = 9846 # int | The folder unique identifier.
 
     try:
         api_response = api_instance.get_folder_path(folder_id)
@@ -980,7 +981,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**| The request folder ID. | 
+ **id** | **int**| The folder unique identifier. | 
  **count** | **int**| The number of items to retrieve in the request. | [optional] 
  **start_index** | **int**| The starting index for the query results. | [optional] 
 
@@ -1010,7 +1011,7 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.FoldersApi(api_client)
-    id = 9846 # int | The request folder ID.
+    id = 9846 # int | The folder unique identifier.
     count = 1234 # int | The number of items to retrieve in the request. (optional)
     start_index = 1234 # int | The starting index for the query results. (optional)
 
@@ -1039,6 +1040,98 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **get_folder_recent**
+> FolderContentIntegerWrapper get_folder_recent(user_id_or_group_id=user_id_or_group_id, filter_type=filter_type, exclude_subject=exclude_subject, apply_filter_option=apply_filter_option, search_area=search_area, extension=extension, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value)
+
+
+
+For more information, see [api.onlyoffice.com]().
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **user_id_or_group_id** | **str**| The user or group ID. | [optional] 
+ **filter_type** | [**FilterType**](.md)| The filter type. | [optional] 
+ **exclude_subject** | **bool**| Specifies whether to exclude search by user or group ID. | [optional] 
+ **apply_filter_option** | [**ApplyFilterOption**](.md)| Specifies whether to return only files, only folders or all elements. | [optional] 
+ **search_area** | [**SearchArea**](.md)| The search area. | [optional] 
+ **extension** | [**List[str]**](str.md)| Specifies whether to search for a specific file extension in the Recent folder. | [optional] 
+ **count** | **int**| The maximum number of items to return. | [optional] 
+ **start_index** | **int**| The starting position of the results to be returned in the query response. | [optional] 
+ **sort_by** | **str**| Specifies the sorting criteria for the folder request. | [optional] 
+ **sort_order** | [**SortOrder**](.md)| The order in which the results are sorted. | [optional] 
+ **filter_value** | **str**| The text used for filtering or searching folder contents. | [optional] 
+
+### Return type
+
+[**FolderContentIntegerWrapper**](FolderContentIntegerWrapper.md)
+
+### Authorization
+
+No authorization required
+
+### Example
+
+
+```python
+import docspace_api_sdk
+from docspace_api_sdk.models.apply_filter_option import ApplyFilterOption
+from docspace_api_sdk.models.filter_type import FilterType
+from docspace_api_sdk.models.folder_content_integer_wrapper import FolderContentIntegerWrapper
+from docspace_api_sdk.models.search_area import SearchArea
+from docspace_api_sdk.models.sort_order import SortOrder
+from docspace_api_sdk.rest import ApiException
+from pprint import pprint
+
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
+)
+
+
+# Enter a context with an instance of the API client
+with docspace_api_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace_api_sdk.FoldersApi(api_client)
+    user_id_or_group_id = '75a5f745-f697-4418-b38d-0fe0d277e258' # str | The user or group ID. (optional)
+    filter_type = docspace_api_sdk.FilterType() # FilterType | The filter type. (optional)
+    exclude_subject = true # bool | Specifies whether to exclude search by user or group ID. (optional)
+    apply_filter_option = docspace_api_sdk.ApplyFilterOption() # ApplyFilterOption | Specifies whether to return only files, only folders or all elements. (optional)
+    search_area = docspace_api_sdk.SearchArea() # SearchArea | The search area. (optional)
+    extension = ['.txt'] # List[str] | Specifies whether to search for a specific file extension in the Recent folder. (optional)
+    count = 1234 # int | The maximum number of items to return. (optional)
+    start_index = 1234 # int | The starting position of the results to be returned in the query response. (optional)
+    sort_by = 'some text' # str | Specifies the sorting criteria for the folder request. (optional)
+    sort_order = docspace_api_sdk.SortOrder() # SortOrder | The order in which the results are sorted. (optional)
+    filter_value = 'some text' # str | The text used for filtering or searching folder contents. (optional)
+
+    try:
+        api_response = api_instance.get_folder_recent(user_id_or_group_id=user_id_or_group_id, filter_type=filter_type, exclude_subject=exclude_subject, apply_filter_option=apply_filter_option, search_area=search_area, extension=extension, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value)
+        print("The response of FoldersApi->get_folder_recent:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling FoldersApi->get_folder_recent: %s\n" % e)
+```
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The Recent section contents |  -  |
+**403** | You don&#39;t have enough permission to view the folder content |  -  |
+**404** | The required folder was not found |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **get_folders**
 > FileEntryBaseArrayWrapper get_folders(folder_id)
 
@@ -1051,7 +1144,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **folder_id** | **int**| The request folder ID. | 
+ **folder_id** | **int**| The folder unique identifier. | 
 
 ### Return type
 
@@ -1079,7 +1172,7 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.FoldersApi(api_client)
-    folder_id = 9846 # int | The request folder ID.
+    folder_id = 9846 # int | The folder unique identifier.
 
     try:
         api_response = api_instance.get_folders(folder_id)
@@ -1203,7 +1296,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **folder_id** | **int**| The request folder ID. | 
+ **folder_id** | **int**| The folder unique identifier. | 
 
 ### Return type
 
@@ -1231,7 +1324,7 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.FoldersApi(api_client)
-    folder_id = 9846 # int | The request folder ID.
+    folder_id = 9846 # int | The folder unique identifier.
 
     try:
         api_response = api_instance.get_new_folder_items(folder_id)

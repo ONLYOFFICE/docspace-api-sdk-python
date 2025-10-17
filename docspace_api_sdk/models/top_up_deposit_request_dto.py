@@ -29,10 +29,10 @@ from typing_extensions import Self
 
 class TopUpDepositRequestDto(BaseModel):
     """
-    Put money on deposit request parameters
+    The request parameters for putting money on deposit.
     """ # noqa: E501
-    amount: Optional[Annotated[int, Field(le=999999, strict=True, ge=1)]] = Field(default=None, description="Amount")
-    currency: Optional[StrictStr] = Field(default=None, description="The three-character ISO 4217 currency symbol")
+    amount: Optional[Annotated[int, Field(le=999999, strict=True, ge=1)]] = Field(default=None, description="The amount of money for the operation.")
+    currency: Optional[StrictStr] = Field(default=None, description="The three-character ISO 4217 currency symbol.")
     __properties: ClassVar[List[str]] = ["amount", "currency"]
 
     model_config = ConfigDict(

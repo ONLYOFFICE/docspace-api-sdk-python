@@ -29,10 +29,10 @@ from typing_extensions import Self
 
 class TenantWalletServiceSettings(BaseModel):
     """
-    TenantWalletServiceSettings
+    The wallet services settings.
     """ # noqa: E501
-    enabled_services: Optional[List[StrictInt]] = Field(default=None, description="Enabled services", alias="enabledServices")
-    last_modified: Optional[datetime] = Field(default=None, alias="lastModified")
+    enabled_services: Optional[List[StrictInt]] = Field(default=None, description="The list of the enabled wallet services.", alias="enabledServices")
+    last_modified: Optional[datetime] = Field(default=None, description="The date and time when the wallet services settings were last modified.", alias="lastModified")
     __properties: ClassVar[List[str]] = ["enabledServices", "lastModified"]
 
     @field_validator('enabled_services')

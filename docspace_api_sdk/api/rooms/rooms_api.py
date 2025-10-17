@@ -95,7 +95,7 @@ class RoomsApi:
     def add_room_tags(
         self,
         id: Annotated[StrictInt, Field(description="The room Id.")],
-        batch_tags_request_dto: Annotated[Optional[BatchTagsRequestDto], Field(description="The parameters for adding tags.")] = None,
+        batch_tags_request_dto: Annotated[Optional[BatchTagsRequestDto], Field(description="The parameters for managing tags.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -114,7 +114,7 @@ class RoomsApi:
 
         :param id: The room Id. (required)
         :type id: int
-        :param batch_tags_request_dto: The parameters for adding tags.
+        :param batch_tags_request_dto: The parameters for managing tags.
         :type batch_tags_request_dto: BatchTagsRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -166,7 +166,7 @@ class RoomsApi:
     def add_room_tags_with_http_info(
         self,
         id: Annotated[StrictInt, Field(description="The room Id.")],
-        batch_tags_request_dto: Annotated[Optional[BatchTagsRequestDto], Field(description="The parameters for adding tags.")] = None,
+        batch_tags_request_dto: Annotated[Optional[BatchTagsRequestDto], Field(description="The parameters for managing tags.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -185,7 +185,7 @@ class RoomsApi:
 
         :param id: The room Id. (required)
         :type id: int
-        :param batch_tags_request_dto: The parameters for adding tags.
+        :param batch_tags_request_dto: The parameters for managing tags.
         :type batch_tags_request_dto: BatchTagsRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -237,7 +237,7 @@ class RoomsApi:
     def add_room_tags_without_preload_content(
         self,
         id: Annotated[StrictInt, Field(description="The room Id.")],
-        batch_tags_request_dto: Annotated[Optional[BatchTagsRequestDto], Field(description="The parameters for adding tags.")] = None,
+        batch_tags_request_dto: Annotated[Optional[BatchTagsRequestDto], Field(description="The parameters for managing tags.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -256,7 +256,7 @@ class RoomsApi:
 
         :param id: The room Id. (required)
         :type id: int
-        :param batch_tags_request_dto: The parameters for adding tags.
+        :param batch_tags_request_dto: The parameters for managing tags.
         :type batch_tags_request_dto: BatchTagsRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3165,7 +3165,7 @@ class RoomsApi:
     @validate_call
     def delete_room_logo(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID of the request.")],
+        id: Annotated[StrictInt, Field(description="The room ID.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3182,7 +3182,7 @@ class RoomsApi:
         """delete_room_logo
 
 
-        :param id: The room ID of the request. (required)
+        :param id: The room ID. (required)
         :type id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3231,7 +3231,7 @@ class RoomsApi:
     @validate_call
     def delete_room_logo_with_http_info(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID of the request.")],
+        id: Annotated[StrictInt, Field(description="The room ID.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3248,7 +3248,7 @@ class RoomsApi:
         """delete_room_logo
 
 
-        :param id: The room ID of the request. (required)
+        :param id: The room ID. (required)
         :type id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3297,7 +3297,7 @@ class RoomsApi:
     @validate_call
     def delete_room_logo_without_preload_content(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID of the request.")],
+        id: Annotated[StrictInt, Field(description="The room ID.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3314,7 +3314,7 @@ class RoomsApi:
         """delete_room_logo
 
 
-        :param id: The room ID of the request. (required)
+        :param id: The room ID. (required)
         :type id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3423,7 +3423,7 @@ class RoomsApi:
     def delete_room_tags(
         self,
         id: Annotated[StrictInt, Field(description="The room Id.")],
-        batch_tags_request_dto: Annotated[Optional[BatchTagsRequestDto], Field(description="The parameters for adding tags.")] = None,
+        batch_tags_request_dto: Annotated[Optional[BatchTagsRequestDto], Field(description="The parameters for managing tags.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3442,7 +3442,7 @@ class RoomsApi:
 
         :param id: The room Id. (required)
         :type id: int
-        :param batch_tags_request_dto: The parameters for adding tags.
+        :param batch_tags_request_dto: The parameters for managing tags.
         :type batch_tags_request_dto: BatchTagsRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3494,7 +3494,7 @@ class RoomsApi:
     def delete_room_tags_with_http_info(
         self,
         id: Annotated[StrictInt, Field(description="The room Id.")],
-        batch_tags_request_dto: Annotated[Optional[BatchTagsRequestDto], Field(description="The parameters for adding tags.")] = None,
+        batch_tags_request_dto: Annotated[Optional[BatchTagsRequestDto], Field(description="The parameters for managing tags.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3513,7 +3513,7 @@ class RoomsApi:
 
         :param id: The room Id. (required)
         :type id: int
-        :param batch_tags_request_dto: The parameters for adding tags.
+        :param batch_tags_request_dto: The parameters for managing tags.
         :type batch_tags_request_dto: BatchTagsRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3565,7 +3565,7 @@ class RoomsApi:
     def delete_room_tags_without_preload_content(
         self,
         id: Annotated[StrictInt, Field(description="The room Id.")],
-        batch_tags_request_dto: Annotated[Optional[BatchTagsRequestDto], Field(description="The parameters for adding tags.")] = None,
+        batch_tags_request_dto: Annotated[Optional[BatchTagsRequestDto], Field(description="The parameters for managing tags.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3584,7 +3584,7 @@ class RoomsApi:
 
         :param id: The room Id. (required)
         :type id: int
-        :param batch_tags_request_dto: The parameters for adding tags.
+        :param batch_tags_request_dto: The parameters for managing tags.
         :type batch_tags_request_dto: BatchTagsRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3710,7 +3710,7 @@ class RoomsApi:
     @validate_call
     def get_new_room_items(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID of the request.")],
+        id: Annotated[StrictInt, Field(description="The room ID.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3727,7 +3727,7 @@ class RoomsApi:
         """get_new_room_items
 
 
-        :param id: The room ID of the request. (required)
+        :param id: The room ID. (required)
         :type id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3776,7 +3776,7 @@ class RoomsApi:
     @validate_call
     def get_new_room_items_with_http_info(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID of the request.")],
+        id: Annotated[StrictInt, Field(description="The room ID.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3793,7 +3793,7 @@ class RoomsApi:
         """get_new_room_items
 
 
-        :param id: The room ID of the request. (required)
+        :param id: The room ID. (required)
         :type id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3842,7 +3842,7 @@ class RoomsApi:
     @validate_call
     def get_new_room_items_without_preload_content(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID of the request.")],
+        id: Annotated[StrictInt, Field(description="The room ID.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3859,7 +3859,7 @@ class RoomsApi:
         """get_new_room_items
 
 
-        :param id: The room ID of the request. (required)
+        :param id: The room ID. (required)
         :type id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4950,7 +4950,7 @@ class RoomsApi:
     @validate_call
     def get_room_info(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID of the request.")],
+        id: Annotated[StrictInt, Field(description="The room ID.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4967,7 +4967,7 @@ class RoomsApi:
         """get_room_info
 
 
-        :param id: The room ID of the request. (required)
+        :param id: The room ID. (required)
         :type id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -5016,7 +5016,7 @@ class RoomsApi:
     @validate_call
     def get_room_info_with_http_info(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID of the request.")],
+        id: Annotated[StrictInt, Field(description="The room ID.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5033,7 +5033,7 @@ class RoomsApi:
         """get_room_info
 
 
-        :param id: The room ID of the request. (required)
+        :param id: The room ID. (required)
         :type id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -5082,7 +5082,7 @@ class RoomsApi:
     @validate_call
     def get_room_info_without_preload_content(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID of the request.")],
+        id: Annotated[StrictInt, Field(description="The room ID.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5099,7 +5099,7 @@ class RoomsApi:
         """get_room_info
 
 
-        :param id: The room ID of the request. (required)
+        :param id: The room ID. (required)
         :type id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -7088,7 +7088,7 @@ class RoomsApi:
     @validate_call
     def get_rooms_primary_external_link(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID of the request.")],
+        id: Annotated[StrictInt, Field(description="The room ID.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -7105,7 +7105,7 @@ class RoomsApi:
         """get_rooms_primary_external_link
 
 
-        :param id: The room ID of the request. (required)
+        :param id: The room ID. (required)
         :type id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -7155,7 +7155,7 @@ class RoomsApi:
     @validate_call
     def get_rooms_primary_external_link_with_http_info(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID of the request.")],
+        id: Annotated[StrictInt, Field(description="The room ID.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -7172,7 +7172,7 @@ class RoomsApi:
         """get_rooms_primary_external_link
 
 
-        :param id: The room ID of the request. (required)
+        :param id: The room ID. (required)
         :type id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -7222,7 +7222,7 @@ class RoomsApi:
     @validate_call
     def get_rooms_primary_external_link_without_preload_content(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID of the request.")],
+        id: Annotated[StrictInt, Field(description="The room ID.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -7239,7 +7239,7 @@ class RoomsApi:
         """get_rooms_primary_external_link
 
 
-        :param id: The room ID of the request. (required)
+        :param id: The room ID. (required)
         :type id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -7348,7 +7348,7 @@ class RoomsApi:
     @validate_call
     def pin_room(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID of the request.")],
+        id: Annotated[StrictInt, Field(description="The room ID.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -7365,7 +7365,7 @@ class RoomsApi:
         """pin_room
 
 
-        :param id: The room ID of the request. (required)
+        :param id: The room ID. (required)
         :type id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -7414,7 +7414,7 @@ class RoomsApi:
     @validate_call
     def pin_room_with_http_info(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID of the request.")],
+        id: Annotated[StrictInt, Field(description="The room ID.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -7431,7 +7431,7 @@ class RoomsApi:
         """pin_room
 
 
-        :param id: The room ID of the request. (required)
+        :param id: The room ID. (required)
         :type id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -7480,7 +7480,7 @@ class RoomsApi:
     @validate_call
     def pin_room_without_preload_content(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID of the request.")],
+        id: Annotated[StrictInt, Field(description="The room ID.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -7497,7 +7497,7 @@ class RoomsApi:
         """pin_room
 
 
-        :param id: The room ID of the request. (required)
+        :param id: The room ID. (required)
         :type id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -7605,7 +7605,7 @@ class RoomsApi:
     @validate_call
     def reorder_room(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID of the request.")],
+        id: Annotated[StrictInt, Field(description="The room ID.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -7622,7 +7622,7 @@ class RoomsApi:
         """reorder_room
 
 
-        :param id: The room ID of the request. (required)
+        :param id: The room ID. (required)
         :type id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -7671,7 +7671,7 @@ class RoomsApi:
     @validate_call
     def reorder_room_with_http_info(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID of the request.")],
+        id: Annotated[StrictInt, Field(description="The room ID.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -7688,7 +7688,7 @@ class RoomsApi:
         """reorder_room
 
 
-        :param id: The room ID of the request. (required)
+        :param id: The room ID. (required)
         :type id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -7737,7 +7737,7 @@ class RoomsApi:
     @validate_call
     def reorder_room_without_preload_content(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID of the request.")],
+        id: Annotated[StrictInt, Field(description="The room ID.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -7754,7 +7754,7 @@ class RoomsApi:
         """reorder_room
 
 
-        :param id: The room ID of the request. (required)
+        :param id: The room ID. (required)
         :type id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -8973,7 +8973,7 @@ class RoomsApi:
     @validate_call
     def start_room_index_export(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID of the request.")],
+        id: Annotated[StrictInt, Field(description="The room ID.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8990,7 +8990,7 @@ class RoomsApi:
         """start_room_index_export
 
 
-        :param id: The room ID of the request. (required)
+        :param id: The room ID. (required)
         :type id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -9040,7 +9040,7 @@ class RoomsApi:
     @validate_call
     def start_room_index_export_with_http_info(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID of the request.")],
+        id: Annotated[StrictInt, Field(description="The room ID.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -9057,7 +9057,7 @@ class RoomsApi:
         """start_room_index_export
 
 
-        :param id: The room ID of the request. (required)
+        :param id: The room ID. (required)
         :type id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -9107,7 +9107,7 @@ class RoomsApi:
     @validate_call
     def start_room_index_export_without_preload_content(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID of the request.")],
+        id: Annotated[StrictInt, Field(description="The room ID.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -9124,7 +9124,7 @@ class RoomsApi:
         """start_room_index_export
 
 
-        :param id: The room ID of the request. (required)
+        :param id: The room ID. (required)
         :type id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -9753,7 +9753,7 @@ class RoomsApi:
     @validate_call
     def unpin_room(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID of the request.")],
+        id: Annotated[StrictInt, Field(description="The room ID.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -9770,7 +9770,7 @@ class RoomsApi:
         """unpin_room
 
 
-        :param id: The room ID of the request. (required)
+        :param id: The room ID. (required)
         :type id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -9819,7 +9819,7 @@ class RoomsApi:
     @validate_call
     def unpin_room_with_http_info(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID of the request.")],
+        id: Annotated[StrictInt, Field(description="The room ID.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -9836,7 +9836,7 @@ class RoomsApi:
         """unpin_room
 
 
-        :param id: The room ID of the request. (required)
+        :param id: The room ID. (required)
         :type id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -9885,7 +9885,7 @@ class RoomsApi:
     @validate_call
     def unpin_room_without_preload_content(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID of the request.")],
+        id: Annotated[StrictInt, Field(description="The room ID.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -9902,7 +9902,7 @@ class RoomsApi:
         """unpin_room
 
 
-        :param id: The room ID of the request. (required)
+        :param id: The room ID. (required)
         :type id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request

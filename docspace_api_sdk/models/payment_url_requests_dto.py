@@ -31,7 +31,7 @@ class PaymentUrlRequestsDto(BaseModel):
     The request parameters for the payment URL configuration with quantity information.
     """ # noqa: E501
     back_url: Optional[StrictStr] = Field(default=None, description="The URL where the user will be redirected after payment processing.", alias="backUrl")
-    quantity: Optional[Dict[str, StrictInt]] = Field(default=None, description="The quantity of payment")
+    quantity: Optional[Dict[str, StrictInt]] = Field(default=None, description="The payment quantity.")
     __properties: ClassVar[List[str]] = ["backUrl", "quantity"]
 
     model_config = ConfigDict(

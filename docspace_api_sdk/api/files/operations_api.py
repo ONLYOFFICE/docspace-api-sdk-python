@@ -1682,7 +1682,7 @@ class OperationsApi:
     @validate_call
     def create_upload_session(
         self,
-        folder_id: Annotated[StrictInt, Field(description="The folder ID of the session.")],
+        folder_id: Annotated[StrictInt, Field(description="The session folder ID.")],
         session_request: Annotated[SessionRequest, Field(description="The session parameters.")],
         _request_timeout: Union[
             None,
@@ -1700,7 +1700,7 @@ class OperationsApi:
         """create_upload_session
 
 
-        :param folder_id: The folder ID of the session. (required)
+        :param folder_id: The session folder ID. (required)
         :type folder_id: int
         :param session_request: The session parameters. (required)
         :type session_request: SessionRequest
@@ -1753,7 +1753,7 @@ class OperationsApi:
     @validate_call
     def create_upload_session_with_http_info(
         self,
-        folder_id: Annotated[StrictInt, Field(description="The folder ID of the session.")],
+        folder_id: Annotated[StrictInt, Field(description="The session folder ID.")],
         session_request: Annotated[SessionRequest, Field(description="The session parameters.")],
         _request_timeout: Union[
             None,
@@ -1771,7 +1771,7 @@ class OperationsApi:
         """create_upload_session
 
 
-        :param folder_id: The folder ID of the session. (required)
+        :param folder_id: The session folder ID. (required)
         :type folder_id: int
         :param session_request: The session parameters. (required)
         :type session_request: SessionRequest
@@ -1824,7 +1824,7 @@ class OperationsApi:
     @validate_call
     def create_upload_session_without_preload_content(
         self,
-        folder_id: Annotated[StrictInt, Field(description="The folder ID of the session.")],
+        folder_id: Annotated[StrictInt, Field(description="The session folder ID.")],
         session_request: Annotated[SessionRequest, Field(description="The session parameters.")],
         _request_timeout: Union[
             None,
@@ -1842,7 +1842,7 @@ class OperationsApi:
         """create_upload_session
 
 
-        :param folder_id: The folder ID of the session. (required)
+        :param folder_id: The session folder ID. (required)
         :type folder_id: int
         :param session_request: The session parameters. (required)
         :type session_request: SessionRequest
@@ -4676,7 +4676,7 @@ class OperationsApi:
     @validate_call
     def terminate_tasks(
         self,
-        id: Annotated[StrictStr, Field(description="The operation ID of the request.")],
+        id: Annotated[StrictStr, Field(description="The operation unique identifier.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4693,7 +4693,7 @@ class OperationsApi:
         """terminate_tasks
 
 
-        :param id: The operation ID of the request. (required)
+        :param id: The operation unique identifier. (required)
         :type id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4742,7 +4742,7 @@ class OperationsApi:
     @validate_call
     def terminate_tasks_with_http_info(
         self,
-        id: Annotated[StrictStr, Field(description="The operation ID of the request.")],
+        id: Annotated[StrictStr, Field(description="The operation unique identifier.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4759,7 +4759,7 @@ class OperationsApi:
         """terminate_tasks
 
 
-        :param id: The operation ID of the request. (required)
+        :param id: The operation unique identifier. (required)
         :type id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4808,7 +4808,7 @@ class OperationsApi:
     @validate_call
     def terminate_tasks_without_preload_content(
         self,
-        id: Annotated[StrictStr, Field(description="The operation ID of the request.")],
+        id: Annotated[StrictStr, Field(description="The operation unique identifier.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4825,7 +4825,7 @@ class OperationsApi:
         """terminate_tasks
 
 
-        :param id: The operation ID of the request. (required)
+        :param id: The operation unique identifier. (required)
         :type id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request

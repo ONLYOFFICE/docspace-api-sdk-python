@@ -29,11 +29,11 @@ from typing_extensions import Self
 
 class DocumentBuilderTaskDto(BaseModel):
     """
-    The document builder task parameters.
+    The Document Builder task parameters.
     """ # noqa: E501
-    id: Optional[StrictStr] = Field(description="The document builder ID.")
-    error: Optional[StrictStr] = Field(description="The error message occured while the document building process.")
-    percentage: StrictInt = Field(description="The percentage of the progress of the document building process.")
+    id: Optional[StrictStr] = Field(description="The Document Builder task ID.")
+    error: Optional[StrictStr] = Field(description="The error message occurred during the document building process.")
+    percentage: StrictInt = Field(description="The progress percentage of the document building process.")
     is_completed: StrictBool = Field(description="Specifies whether the document building process is completed or not.", alias="isCompleted")
     status: DistributedTaskStatus
     result_file_id: Optional[Any] = Field(description="The result file ID.", alias="resultFileId")

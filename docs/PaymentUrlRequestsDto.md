@@ -6,7 +6,7 @@ The request parameters for the payment URL configuration with quantity informati
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **back_url** | **str** | The URL where the user will be redirected after payment processing. | [optional] 
-**quantity** | **Dict[str, int]** | The quantity of payment | [optional] 
+**quantity** | **Dict[str, int]** | The payment quantity. | [optional] 
 
 ## Example
 

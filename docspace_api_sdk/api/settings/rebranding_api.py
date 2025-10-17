@@ -1349,7 +1349,7 @@ class RebrandingApi:
     ) -> IsDefaultWhiteLabelLogosWrapper:
         """Check the default white label logo text
 
-        Specifies if the white label logo text are default or not.
+        Specifies if the white label logo text is default or not.
 
         :param is_dark: Specifies if the white label logo is for the dark theme or not.
         :type is_dark: bool
@@ -1421,7 +1421,7 @@ class RebrandingApi:
     ) -> ApiResponse[IsDefaultWhiteLabelLogosWrapper]:
         """Check the default white label logo text
 
-        Specifies if the white label logo text are default or not.
+        Specifies if the white label logo text is default or not.
 
         :param is_dark: Specifies if the white label logo is for the dark theme or not.
         :type is_dark: bool
@@ -1493,7 +1493,7 @@ class RebrandingApi:
     ) -> RESTResponseType:
         """Check the default white label logo text
 
-        Specifies if the white label logo text are default or not.
+        Specifies if the white label logo text is default or not.
 
         :param is_dark: Specifies if the white label logo is for the dark theme or not.
         :type is_dark: bool

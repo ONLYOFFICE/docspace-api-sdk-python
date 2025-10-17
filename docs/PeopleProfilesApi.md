@@ -8,9 +8,9 @@ Method | HTTP request | Description
 [**delete_member**](#delete_member) | **DELETE** /api/2.0/people/{userid} | Delete a user
 [**delete_profile**](#delete_profile) | **DELETE** /api/2.0/people/@self | Delete my profile
 [**get_all_profiles**](#get_all_profiles) | **GET** /api/2.0/people | Get profiles
-[**get_claims**](#get_claims) | **GET** /api/2.0/people/tokendiagnostics | Returns the user claims.
+[**get_claims**](#get_claims) | **GET** /api/2.0/people/tokendiagnostics | Get user claims
 [**get_profile_by_email**](#get_profile_by_email) | **GET** /api/2.0/people/email | Get a profile by user email
-[**get_profile_by_user_id**](#get_profile_by_user_id) | **GET** /api/2.0/people/{userid} | Get a profile by user name
+[**get_profile_by_user_id**](#get_profile_by_user_id) | **GET** /api/2.0/people/{userid} | Get a profile by user ID
 [**get_self_profile**](#get_self_profile) | **GET** /api/2.0/people/@self | Get my profile
 [**invite_users**](#invite_users) | **POST** /api/2.0/people/invite | Invite users
 [**remove_users**](#remove_users) | **PUT** /api/2.0/people/delete | Delete users
@@ -392,7 +392,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     api_instance = docspace_api_sdk.ProfilesApi(api_client)
 
     try:
-        # Returns the user claims.
+        # Get user claims
         api_response = api_instance.get_claims()
         print("The response of ProfilesApi->get_claims:\n")
         pprint(api_response)
@@ -500,7 +500,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **get_profile_by_user_id**
 > EmployeeFullWrapper get_profile_by_user_id(userid)
 
-Returns the detailed information about a profile of the user with the name specified in the request.
+Returns the detailed information about a profile of the user with the ID specified in the request.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -549,7 +549,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     userid = '9846' # str | The user ID.
 
     try:
-        # Get a profile by user name
+        # Get a profile by user ID
         api_response = api_instance.get_profile_by_user_id(userid)
         print("The response of ProfilesApi->get_profile_by_user_id:\n")
         pprint(api_response)

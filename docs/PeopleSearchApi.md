@@ -12,7 +12,7 @@ Method | HTTP request | Description
 [**get_users_with_files_shared**](#get_users_with_files_shared) | **GET** /api/2.0/people/file/{id} | Get users with file sharing settings
 [**get_users_with_folders_shared**](#get_users_with_folders_shared) | **GET** /api/2.0/people/folder/{id} | Get users with folder sharing settings
 [**get_users_with_room_shared**](#get_users_with_room_shared) | **GET** /api/2.0/people/room/{id} | Get users with room sharing settings
-[**search_users_by_extended_filter**](#search_users_by_extended_filter) | **GET** /api/2.0/people/filter | Search users with detaailed information by extended filter
+[**search_users_by_extended_filter**](#search_users_by_extended_filter) | **GET** /api/2.0/people/filter | Search users with detailed information by extended filter
 [**search_users_by_query**](#search_users_by_query) | **GET** /api/2.0/people/search | Search users (using query parameters)
 [**search_users_by_status**](#search_users_by_status) | **GET** /api/2.0/people/status/{status}/search | Search users by status filter
 
@@ -957,7 +957,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     filter_value = 'some text' # str | The search text used to filter results based on user input. (optional)
 
     try:
-        # Search users with detaailed information by extended filter
+        # Search users with detailed information by extended filter
         api_response = api_instance.search_users_by_extended_filter(employee_status=employee_status, group_id=group_id, activation_status=activation_status, employee_type=employee_type, employee_types=employee_types, is_administrator=is_administrator, payments=payments, account_login_type=account_login_type, quota_filter=quota_filter, without_group=without_group, exclude_group=exclude_group, invited_by_me=invited_by_me, inviter_id=inviter_id, area=area, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_separator=filter_separator, filter_value=filter_value)
         print("The response of SearchApi->search_users_by_extended_filter:\n")
         pprint(api_response)

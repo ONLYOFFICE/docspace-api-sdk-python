@@ -1,12 +1,12 @@
 # ChangeWalletServiceStateRequestDto
-Tenant wallet service state request parameters
+The request parameters for changing the tenant wallet service state.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **service** | [**TenantWalletService**](TenantWalletService.md) |  | [optional] 
-**enabled** | **bool** | Service state | [optional] 
+**enabled** | **bool** | Specifies whether the wallet service is enabled. | [optional] 
 
 ## Example
 

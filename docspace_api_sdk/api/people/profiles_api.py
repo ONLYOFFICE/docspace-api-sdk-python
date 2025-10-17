@@ -1274,7 +1274,7 @@ class ProfilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ObjectWrapper:
-        """Returns the user claims.
+        """Get user claims
 
         Returns the user claims.
 
@@ -1338,7 +1338,7 @@ class ProfilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[ObjectWrapper]:
-        """Returns the user claims.
+        """Get user claims
 
         Returns the user claims.
 
@@ -1402,7 +1402,7 @@ class ProfilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Returns the user claims.
+        """Get user claims
 
         Returns the user claims.
 
@@ -1820,9 +1820,9 @@ class ProfilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> EmployeeFullWrapper:
-        """Get a profile by user name
+        """Get a profile by user ID
 
-        Returns the detailed information about a profile of the user with the name specified in the request.
+        Returns the detailed information about a profile of the user with the ID specified in the request.
 
         :param userid: The user ID. (required)
         :type userid: str
@@ -1890,9 +1890,9 @@ class ProfilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[EmployeeFullWrapper]:
-        """Get a profile by user name
+        """Get a profile by user ID
 
-        Returns the detailed information about a profile of the user with the name specified in the request.
+        Returns the detailed information about a profile of the user with the ID specified in the request.
 
         :param userid: The user ID. (required)
         :type userid: str
@@ -1960,9 +1960,9 @@ class ProfilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get a profile by user name
+        """Get a profile by user ID
 
-        Returns the detailed information about a profile of the user with the name specified in the request.
+        Returns the detailed information about a profile of the user with the ID specified in the request.
 
         :param userid: The user ID. (required)
         :type userid: str

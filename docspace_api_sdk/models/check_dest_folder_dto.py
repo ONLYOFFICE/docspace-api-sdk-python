@@ -30,10 +30,10 @@ from typing_extensions import Self
 
 class CheckDestFolderDto(BaseModel):
     """
-    The destination folder checking information.
+    The result of checking whether files can be moved or copied to the specified folder.
     """ # noqa: E501
     result: Optional[CheckDestFolderResult] = None
-    files: Optional[List[FileEntryBaseDto]] = Field(default=None, description="The list of files of the destination folder.")
+    files: Optional[List[FileEntryBaseDto]] = Field(default=None, description="The list of files in the destination folder.")
     __properties: ClassVar[List[str]] = ["result", "files"]
 
     model_config = ConfigDict(

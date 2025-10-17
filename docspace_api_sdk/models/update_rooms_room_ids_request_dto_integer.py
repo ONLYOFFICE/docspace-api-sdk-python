@@ -29,7 +29,7 @@ from typing_extensions import Self
 
 class UpdateRoomsRoomIdsRequestDtoInteger(BaseModel):
     """
-    The request parameters for updating the room.
+    The request parameters for updating the rooms.
     """ # noqa: E501
     room_ids: Optional[List[DuplicateRequestDtoAllOfFileIds]] = Field(default=None, description="The list of room IDs.", alias="roomIds")
     __properties: ClassVar[List[str]] = ["roomIds"]

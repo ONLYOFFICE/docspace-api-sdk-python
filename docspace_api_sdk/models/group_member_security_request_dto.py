@@ -30,7 +30,7 @@ from typing_extensions import Self
 
 class GroupMemberSecurityRequestDto(BaseModel):
     """
-    The security request parameters of the group member.
+    The group member security information.
     """ # noqa: E501
     user: EmployeeFullDto
     group_access: FileShare = Field(alias="groupAccess")

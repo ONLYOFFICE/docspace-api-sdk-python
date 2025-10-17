@@ -21,7 +21,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List, Optional
 from docspace_api_sdk.models.notification_channel_dto import NotificationChannelDto
 from typing import Optional, Set
@@ -29,9 +29,9 @@ from typing_extensions import Self
 
 class NotificationChannelStatusDto(BaseModel):
     """
-    NotificationChannelStatusDto
+    The notification channel settings.
     """ # noqa: E501
-    channels: Optional[List[NotificationChannelDto]] = None
+    channels: Optional[List[NotificationChannelDto]] = Field(default=None, description="The list of notification channels.")
     __properties: ClassVar[List[str]] = ["channels"]
 
     model_config = ConfigDict(

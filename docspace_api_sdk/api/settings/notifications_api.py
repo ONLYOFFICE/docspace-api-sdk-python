@@ -66,9 +66,9 @@ class NotificationsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> NotificationChannelStatusWrapper:
-        """Gets notification channel settings
+        """Get notification channels
 
-        Returns a list of notification channels
+        Returns a list of notification channels.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -130,9 +130,9 @@ class NotificationsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[NotificationChannelStatusWrapper]:
-        """Gets notification channel settings
+        """Get notification channels
 
-        Returns a list of notification channels
+        Returns a list of notification channels.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -194,9 +194,9 @@ class NotificationsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Gets notification channel settings
+        """Get notification channels
 
-        Returns a list of notification channels
+        Returns a list of notification channels.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request

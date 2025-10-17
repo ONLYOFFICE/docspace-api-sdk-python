@@ -443,7 +443,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **folder_id** | **int**| The folder ID of the session. | 
+ **folder_id** | **int**| The session folder ID. | 
  **session_request** | [**SessionRequest**](SessionRequest.md)| The session parameters. | 
 
 ### Return type
@@ -473,7 +473,7 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.OperationsApi(api_client)
-    folder_id = 9846 # int | The folder ID of the session.
+    folder_id = 9846 # int | The session folder ID.
     session_request = docspace_api_sdk.SessionRequest() # SessionRequest | The session parameters.
 
     try:
@@ -1188,7 +1188,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **str**| The operation ID of the request. | 
+ **id** | **str**| The operation unique identifier. | 
 
 ### Return type
 
@@ -1216,7 +1216,7 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.OperationsApi(api_client)
-    id = '9846' # str | The operation ID of the request.
+    id = '9846' # str | The operation unique identifier.
 
     try:
         api_response = api_instance.terminate_tasks(id)

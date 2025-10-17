@@ -6,16 +6,16 @@ Represents an operation.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **var_date** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] 
-**service** | **str** | Service related to the operation. | [optional] 
-**description** | **str** | Brief description of the operation. | [optional] 
-**details** | **str** | Brief details of the operation. | [optional] 
-**service_unit** | **str** | Unit of the service. | [optional] 
-**quantity** | **int** | Quantity of the service used. | [optional] 
+**service** | **str** | The service related to the operation. | [optional] 
+**description** | **str** | The brief operation description. | [optional] 
+**details** | **str** | The detailed information about the operation. | [optional] 
+**service_unit** | **str** | The service unit. | [optional] 
+**quantity** | **int** | The quantity of the service used. | [optional] 
 **currency** | **str** | The three-character ISO 4217 currency symbol of the operation. | [optional] 
-**credit** | **float** | Credit amount of the operation. | [optional] 
-**debit** | **float** | Debit amount of the operation. | [optional] 
-**participant_name** | **str** | Original name of the participant. | [optional] 
-**participant_display_name** | **str** | Display name of the participant. | [optional] 
+**credit** | **float** | The credit amount of the operation. | [optional] 
+**debit** | **float** | The debit amount of the operation. | [optional] 
+**participant_name** | **str** | The participant original name. | [optional] 
+**participant_display_name** | **str** | The participant display name. | [optional] 
 
 ## Example
 

@@ -2095,7 +2095,7 @@ class FoldersApi:
     @validate_call
     def get_folder(
         self,
-        folder_id: Annotated[StrictInt, Field(description="The request folder ID.")],
+        folder_id: Annotated[StrictInt, Field(description="The folder unique identifier.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2112,7 +2112,7 @@ class FoldersApi:
         """get_folder
 
 
-        :param folder_id: The request folder ID. (required)
+        :param folder_id: The folder unique identifier. (required)
         :type folder_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2161,7 +2161,7 @@ class FoldersApi:
     @validate_call
     def get_folder_with_http_info(
         self,
-        folder_id: Annotated[StrictInt, Field(description="The request folder ID.")],
+        folder_id: Annotated[StrictInt, Field(description="The folder unique identifier.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2178,7 +2178,7 @@ class FoldersApi:
         """get_folder
 
 
-        :param folder_id: The request folder ID. (required)
+        :param folder_id: The folder unique identifier. (required)
         :type folder_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2227,7 +2227,7 @@ class FoldersApi:
     @validate_call
     def get_folder_without_preload_content(
         self,
-        folder_id: Annotated[StrictInt, Field(description="The request folder ID.")],
+        folder_id: Annotated[StrictInt, Field(description="The folder unique identifier.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2244,7 +2244,7 @@ class FoldersApi:
         """get_folder
 
 
-        :param folder_id: The request folder ID. (required)
+        :param folder_id: The folder unique identifier. (required)
         :type folder_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2352,22 +2352,22 @@ class FoldersApi:
     @validate_call
     def get_folder_by_folder_id(
         self,
-        folder_id: Annotated[StrictInt, Field(description="The folder ID of the request.")],
+        folder_id: Annotated[StrictInt, Field(description="The folder ID.")],
         user_id_or_group_id: Annotated[Optional[StrictStr], Field(description="The user or group ID.")] = None,
         filter_type: Annotated[Optional[FilterType], Field(description="The filter type.")] = None,
         room_id: Annotated[Optional[StrictInt], Field(description="The room ID.")] = None,
         exclude_subject: Annotated[Optional[StrictBool], Field(description="Specifies whether to exclude search by user or group ID.")] = None,
-        apply_filter_option: Annotated[Optional[ApplyFilterOption], Field(description="Specifies whether to return only files, only folders or all elements from the specified folder.")] = None,
+        apply_filter_option: Annotated[Optional[ApplyFilterOption], Field(description="Specifies whether to return only files, only folders, or all elements from the specified folder.")] = None,
         extension: Annotated[Optional[StrictStr], Field(description="Specifies whether to search for the specific file extension.")] = None,
         search_area: Annotated[Optional[SearchArea], Field(description="The search area.")] = None,
         forms_item_key: Annotated[Optional[StrictStr], Field(description="The forms item key.")] = None,
         forms_item_type: Annotated[Optional[StrictStr], Field(description="The forms item type.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of items to retrieve in the request.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The zero-based index of the first item to retrieve in a paginated request.")] = None,
-        sort_by: Annotated[Optional[StrictStr], Field(description="Specifies the property used for sorting the folder request results.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="The property used for sorting the folder request results.")] = None,
         sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
         filter_value: Annotated[Optional[StrictStr], Field(description="The text value used as a filter parameter for folder content queries.")] = None,
-        location: Annotated[Optional[Location], Field(description="Represents the location context of the request, specifying the area  where the operation is performed, such as a room, documents, or a link.")] = None,
+        location: Annotated[Optional[Location], Field(description="The location context of the request, specifying the area  where the operation is performed, such as a room, documents, or a link.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2384,7 +2384,7 @@ class FoldersApi:
         """get_folder_by_folder_id
 
 
-        :param folder_id: The folder ID of the request. (required)
+        :param folder_id: The folder ID. (required)
         :type folder_id: int
         :param user_id_or_group_id: The user or group ID.
         :type user_id_or_group_id: str
@@ -2394,7 +2394,7 @@ class FoldersApi:
         :type room_id: int
         :param exclude_subject: Specifies whether to exclude search by user or group ID.
         :type exclude_subject: bool
-        :param apply_filter_option: Specifies whether to return only files, only folders or all elements from the specified folder.
+        :param apply_filter_option: Specifies whether to return only files, only folders, or all elements from the specified folder.
         :type apply_filter_option: ApplyFilterOption
         :param extension: Specifies whether to search for the specific file extension.
         :type extension: str
@@ -2408,13 +2408,13 @@ class FoldersApi:
         :type count: int
         :param start_index: The zero-based index of the first item to retrieve in a paginated request.
         :type start_index: int
-        :param sort_by: Specifies the property used for sorting the folder request results.
+        :param sort_by: The property used for sorting the folder request results.
         :type sort_by: str
         :param sort_order: The order in which the results are sorted.
         :type sort_order: SortOrder
         :param filter_value: The text value used as a filter parameter for folder content queries.
         :type filter_value: str
-        :param location: Represents the location context of the request, specifying the area  where the operation is performed, such as a room, documents, or a link.
+        :param location: The location context of the request, specifying the area  where the operation is performed, such as a room, documents, or a link.
         :type location: Location
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2480,22 +2480,22 @@ class FoldersApi:
     @validate_call
     def get_folder_by_folder_id_with_http_info(
         self,
-        folder_id: Annotated[StrictInt, Field(description="The folder ID of the request.")],
+        folder_id: Annotated[StrictInt, Field(description="The folder ID.")],
         user_id_or_group_id: Annotated[Optional[StrictStr], Field(description="The user or group ID.")] = None,
         filter_type: Annotated[Optional[FilterType], Field(description="The filter type.")] = None,
         room_id: Annotated[Optional[StrictInt], Field(description="The room ID.")] = None,
         exclude_subject: Annotated[Optional[StrictBool], Field(description="Specifies whether to exclude search by user or group ID.")] = None,
-        apply_filter_option: Annotated[Optional[ApplyFilterOption], Field(description="Specifies whether to return only files, only folders or all elements from the specified folder.")] = None,
+        apply_filter_option: Annotated[Optional[ApplyFilterOption], Field(description="Specifies whether to return only files, only folders, or all elements from the specified folder.")] = None,
         extension: Annotated[Optional[StrictStr], Field(description="Specifies whether to search for the specific file extension.")] = None,
         search_area: Annotated[Optional[SearchArea], Field(description="The search area.")] = None,
         forms_item_key: Annotated[Optional[StrictStr], Field(description="The forms item key.")] = None,
         forms_item_type: Annotated[Optional[StrictStr], Field(description="The forms item type.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of items to retrieve in the request.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The zero-based index of the first item to retrieve in a paginated request.")] = None,
-        sort_by: Annotated[Optional[StrictStr], Field(description="Specifies the property used for sorting the folder request results.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="The property used for sorting the folder request results.")] = None,
         sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
         filter_value: Annotated[Optional[StrictStr], Field(description="The text value used as a filter parameter for folder content queries.")] = None,
-        location: Annotated[Optional[Location], Field(description="Represents the location context of the request, specifying the area  where the operation is performed, such as a room, documents, or a link.")] = None,
+        location: Annotated[Optional[Location], Field(description="The location context of the request, specifying the area  where the operation is performed, such as a room, documents, or a link.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2512,7 +2512,7 @@ class FoldersApi:
         """get_folder_by_folder_id
 
 
-        :param folder_id: The folder ID of the request. (required)
+        :param folder_id: The folder ID. (required)
         :type folder_id: int
         :param user_id_or_group_id: The user or group ID.
         :type user_id_or_group_id: str
@@ -2522,7 +2522,7 @@ class FoldersApi:
         :type room_id: int
         :param exclude_subject: Specifies whether to exclude search by user or group ID.
         :type exclude_subject: bool
-        :param apply_filter_option: Specifies whether to return only files, only folders or all elements from the specified folder.
+        :param apply_filter_option: Specifies whether to return only files, only folders, or all elements from the specified folder.
         :type apply_filter_option: ApplyFilterOption
         :param extension: Specifies whether to search for the specific file extension.
         :type extension: str
@@ -2536,13 +2536,13 @@ class FoldersApi:
         :type count: int
         :param start_index: The zero-based index of the first item to retrieve in a paginated request.
         :type start_index: int
-        :param sort_by: Specifies the property used for sorting the folder request results.
+        :param sort_by: The property used for sorting the folder request results.
         :type sort_by: str
         :param sort_order: The order in which the results are sorted.
         :type sort_order: SortOrder
         :param filter_value: The text value used as a filter parameter for folder content queries.
         :type filter_value: str
-        :param location: Represents the location context of the request, specifying the area  where the operation is performed, such as a room, documents, or a link.
+        :param location: The location context of the request, specifying the area  where the operation is performed, such as a room, documents, or a link.
         :type location: Location
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2608,22 +2608,22 @@ class FoldersApi:
     @validate_call
     def get_folder_by_folder_id_without_preload_content(
         self,
-        folder_id: Annotated[StrictInt, Field(description="The folder ID of the request.")],
+        folder_id: Annotated[StrictInt, Field(description="The folder ID.")],
         user_id_or_group_id: Annotated[Optional[StrictStr], Field(description="The user or group ID.")] = None,
         filter_type: Annotated[Optional[FilterType], Field(description="The filter type.")] = None,
         room_id: Annotated[Optional[StrictInt], Field(description="The room ID.")] = None,
         exclude_subject: Annotated[Optional[StrictBool], Field(description="Specifies whether to exclude search by user or group ID.")] = None,
-        apply_filter_option: Annotated[Optional[ApplyFilterOption], Field(description="Specifies whether to return only files, only folders or all elements from the specified folder.")] = None,
+        apply_filter_option: Annotated[Optional[ApplyFilterOption], Field(description="Specifies whether to return only files, only folders, or all elements from the specified folder.")] = None,
         extension: Annotated[Optional[StrictStr], Field(description="Specifies whether to search for the specific file extension.")] = None,
         search_area: Annotated[Optional[SearchArea], Field(description="The search area.")] = None,
         forms_item_key: Annotated[Optional[StrictStr], Field(description="The forms item key.")] = None,
         forms_item_type: Annotated[Optional[StrictStr], Field(description="The forms item type.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of items to retrieve in the request.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The zero-based index of the first item to retrieve in a paginated request.")] = None,
-        sort_by: Annotated[Optional[StrictStr], Field(description="Specifies the property used for sorting the folder request results.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="The property used for sorting the folder request results.")] = None,
         sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
         filter_value: Annotated[Optional[StrictStr], Field(description="The text value used as a filter parameter for folder content queries.")] = None,
-        location: Annotated[Optional[Location], Field(description="Represents the location context of the request, specifying the area  where the operation is performed, such as a room, documents, or a link.")] = None,
+        location: Annotated[Optional[Location], Field(description="The location context of the request, specifying the area  where the operation is performed, such as a room, documents, or a link.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2640,7 +2640,7 @@ class FoldersApi:
         """get_folder_by_folder_id
 
 
-        :param folder_id: The folder ID of the request. (required)
+        :param folder_id: The folder ID. (required)
         :type folder_id: int
         :param user_id_or_group_id: The user or group ID.
         :type user_id_or_group_id: str
@@ -2650,7 +2650,7 @@ class FoldersApi:
         :type room_id: int
         :param exclude_subject: Specifies whether to exclude search by user or group ID.
         :type exclude_subject: bool
-        :param apply_filter_option: Specifies whether to return only files, only folders or all elements from the specified folder.
+        :param apply_filter_option: Specifies whether to return only files, only folders, or all elements from the specified folder.
         :type apply_filter_option: ApplyFilterOption
         :param extension: Specifies whether to search for the specific file extension.
         :type extension: str
@@ -2664,13 +2664,13 @@ class FoldersApi:
         :type count: int
         :param start_index: The zero-based index of the first item to retrieve in a paginated request.
         :type start_index: int
-        :param sort_by: Specifies the property used for sorting the folder request results.
+        :param sort_by: The property used for sorting the folder request results.
         :type sort_by: str
         :param sort_order: The order in which the results are sorted.
         :type sort_order: SortOrder
         :param filter_value: The text value used as a filter parameter for folder content queries.
         :type filter_value: str
-        :param location: Represents the location context of the request, specifying the area  where the operation is performed, such as a room, documents, or a link.
+        :param location: The location context of the request, specifying the area  where the operation is performed, such as a room, documents, or a link.
         :type location: Location
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3201,7 +3201,7 @@ class FoldersApi:
     @validate_call
     def get_folder_info(
         self,
-        folder_id: Annotated[StrictInt, Field(description="The request folder ID.")],
+        folder_id: Annotated[StrictInt, Field(description="The folder unique identifier.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3218,7 +3218,7 @@ class FoldersApi:
         """get_folder_info
 
 
-        :param folder_id: The request folder ID. (required)
+        :param folder_id: The folder unique identifier. (required)
         :type folder_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3267,7 +3267,7 @@ class FoldersApi:
     @validate_call
     def get_folder_info_with_http_info(
         self,
-        folder_id: Annotated[StrictInt, Field(description="The request folder ID.")],
+        folder_id: Annotated[StrictInt, Field(description="The folder unique identifier.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3284,7 +3284,7 @@ class FoldersApi:
         """get_folder_info
 
 
-        :param folder_id: The request folder ID. (required)
+        :param folder_id: The folder unique identifier. (required)
         :type folder_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3333,7 +3333,7 @@ class FoldersApi:
     @validate_call
     def get_folder_info_without_preload_content(
         self,
-        folder_id: Annotated[StrictInt, Field(description="The request folder ID.")],
+        folder_id: Annotated[StrictInt, Field(description="The folder unique identifier.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3350,7 +3350,7 @@ class FoldersApi:
         """get_folder_info
 
 
-        :param folder_id: The request folder ID. (required)
+        :param folder_id: The folder unique identifier. (required)
         :type folder_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3715,7 +3715,7 @@ class FoldersApi:
     @validate_call
     def get_folder_path(
         self,
-        folder_id: Annotated[StrictInt, Field(description="The request folder ID.")],
+        folder_id: Annotated[StrictInt, Field(description="The folder unique identifier.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3732,7 +3732,7 @@ class FoldersApi:
         """get_folder_path
 
 
-        :param folder_id: The request folder ID. (required)
+        :param folder_id: The folder unique identifier. (required)
         :type folder_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3782,7 +3782,7 @@ class FoldersApi:
     @validate_call
     def get_folder_path_with_http_info(
         self,
-        folder_id: Annotated[StrictInt, Field(description="The request folder ID.")],
+        folder_id: Annotated[StrictInt, Field(description="The folder unique identifier.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3799,7 +3799,7 @@ class FoldersApi:
         """get_folder_path
 
 
-        :param folder_id: The request folder ID. (required)
+        :param folder_id: The folder unique identifier. (required)
         :type folder_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3849,7 +3849,7 @@ class FoldersApi:
     @validate_call
     def get_folder_path_without_preload_content(
         self,
-        folder_id: Annotated[StrictInt, Field(description="The request folder ID.")],
+        folder_id: Annotated[StrictInt, Field(description="The folder unique identifier.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3866,7 +3866,7 @@ class FoldersApi:
         """get_folder_path
 
 
-        :param folder_id: The request folder ID. (required)
+        :param folder_id: The folder unique identifier. (required)
         :type folder_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3975,7 +3975,7 @@ class FoldersApi:
     @validate_call
     def get_folder_primary_external_link(
         self,
-        id: Annotated[StrictInt, Field(description="The request folder ID.")],
+        id: Annotated[StrictInt, Field(description="The folder unique identifier.")],
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of items to retrieve in the request.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The starting index for the query results.")] = None,
         _request_timeout: Union[
@@ -3994,7 +3994,7 @@ class FoldersApi:
         """get_folder_primary_external_link
 
 
-        :param id: The request folder ID. (required)
+        :param id: The folder unique identifier. (required)
         :type id: int
         :param count: The number of items to retrieve in the request.
         :type count: int
@@ -4050,7 +4050,7 @@ class FoldersApi:
     @validate_call
     def get_folder_primary_external_link_with_http_info(
         self,
-        id: Annotated[StrictInt, Field(description="The request folder ID.")],
+        id: Annotated[StrictInt, Field(description="The folder unique identifier.")],
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of items to retrieve in the request.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The starting index for the query results.")] = None,
         _request_timeout: Union[
@@ -4069,7 +4069,7 @@ class FoldersApi:
         """get_folder_primary_external_link
 
 
-        :param id: The request folder ID. (required)
+        :param id: The folder unique identifier. (required)
         :type id: int
         :param count: The number of items to retrieve in the request.
         :type count: int
@@ -4125,7 +4125,7 @@ class FoldersApi:
     @validate_call
     def get_folder_primary_external_link_without_preload_content(
         self,
-        id: Annotated[StrictInt, Field(description="The request folder ID.")],
+        id: Annotated[StrictInt, Field(description="The folder unique identifier.")],
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of items to retrieve in the request.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The starting index for the query results.")] = None,
         _request_timeout: Union[
@@ -4144,7 +4144,7 @@ class FoldersApi:
         """get_folder_primary_external_link
 
 
-        :param id: The request folder ID. (required)
+        :param id: The folder unique identifier. (required)
         :type id: int
         :param count: The number of items to retrieve in the request.
         :type count: int
@@ -4267,9 +4267,447 @@ class FoldersApi:
 
 
     @validate_call
+    def get_folder_recent(
+        self,
+        user_id_or_group_id: Annotated[Optional[StrictStr], Field(description="The user or group ID.")] = None,
+        filter_type: Annotated[Optional[FilterType], Field(description="The filter type.")] = None,
+        exclude_subject: Annotated[Optional[StrictBool], Field(description="Specifies whether to exclude search by user or group ID.")] = None,
+        apply_filter_option: Annotated[Optional[ApplyFilterOption], Field(description="Specifies whether to return only files, only folders or all elements.")] = None,
+        search_area: Annotated[Optional[SearchArea], Field(description="The search area.")] = None,
+        extension: Annotated[Optional[List[List[StrictStr]]], Field(description="Specifies whether to search for a specific file extension in the Recent folder.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of items to return.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The starting position of the results to be returned in the query response.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="Specifies the sorting criteria for the folder request.")] = None,
+        sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The text used for filtering or searching folder contents.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> FolderContentIntegerWrapper:
+        """get_folder_recent
+
+
+        :param user_id_or_group_id: The user or group ID.
+        :type user_id_or_group_id: str
+        :param filter_type: The filter type.
+        :type filter_type: FilterType
+        :param exclude_subject: Specifies whether to exclude search by user or group ID.
+        :type exclude_subject: bool
+        :param apply_filter_option: Specifies whether to return only files, only folders or all elements.
+        :type apply_filter_option: ApplyFilterOption
+        :param search_area: The search area.
+        :type search_area: SearchArea
+        :param extension: Specifies whether to search for a specific file extension in the Recent folder.
+        :type extension: List[str]
+        :param count: The maximum number of items to return.
+        :type count: int
+        :param start_index: The starting position of the results to be returned in the query response.
+        :type start_index: int
+        :param sort_by: Specifies the sorting criteria for the folder request.
+        :type sort_by: str
+        :param sort_order: The order in which the results are sorted.
+        :type sort_order: SortOrder
+        :param filter_value: The text used for filtering or searching folder contents.
+        :type filter_value: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_folder_recent_serialize(
+            user_id_or_group_id=user_id_or_group_id,
+            filter_type=filter_type,
+            exclude_subject=exclude_subject,
+            apply_filter_option=apply_filter_option,
+            search_area=search_area,
+            extension=extension,
+            count=count,
+            start_index=start_index,
+            sort_by=sort_by,
+            sort_order=sort_order,
+            filter_value=filter_value,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "FolderContentIntegerWrapper",
+            '403': None,
+            '404': None,
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def get_folder_recent_with_http_info(
+        self,
+        user_id_or_group_id: Annotated[Optional[StrictStr], Field(description="The user or group ID.")] = None,
+        filter_type: Annotated[Optional[FilterType], Field(description="The filter type.")] = None,
+        exclude_subject: Annotated[Optional[StrictBool], Field(description="Specifies whether to exclude search by user or group ID.")] = None,
+        apply_filter_option: Annotated[Optional[ApplyFilterOption], Field(description="Specifies whether to return only files, only folders or all elements.")] = None,
+        search_area: Annotated[Optional[SearchArea], Field(description="The search area.")] = None,
+        extension: Annotated[Optional[List[List[StrictStr]]], Field(description="Specifies whether to search for a specific file extension in the Recent folder.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of items to return.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The starting position of the results to be returned in the query response.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="Specifies the sorting criteria for the folder request.")] = None,
+        sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The text used for filtering or searching folder contents.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[FolderContentIntegerWrapper]:
+        """get_folder_recent
+
+
+        :param user_id_or_group_id: The user or group ID.
+        :type user_id_or_group_id: str
+        :param filter_type: The filter type.
+        :type filter_type: FilterType
+        :param exclude_subject: Specifies whether to exclude search by user or group ID.
+        :type exclude_subject: bool
+        :param apply_filter_option: Specifies whether to return only files, only folders or all elements.
+        :type apply_filter_option: ApplyFilterOption
+        :param search_area: The search area.
+        :type search_area: SearchArea
+        :param extension: Specifies whether to search for a specific file extension in the Recent folder.
+        :type extension: List[str]
+        :param count: The maximum number of items to return.
+        :type count: int
+        :param start_index: The starting position of the results to be returned in the query response.
+        :type start_index: int
+        :param sort_by: Specifies the sorting criteria for the folder request.
+        :type sort_by: str
+        :param sort_order: The order in which the results are sorted.
+        :type sort_order: SortOrder
+        :param filter_value: The text used for filtering or searching folder contents.
+        :type filter_value: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_folder_recent_serialize(
+            user_id_or_group_id=user_id_or_group_id,
+            filter_type=filter_type,
+            exclude_subject=exclude_subject,
+            apply_filter_option=apply_filter_option,
+            search_area=search_area,
+            extension=extension,
+            count=count,
+            start_index=start_index,
+            sort_by=sort_by,
+            sort_order=sort_order,
+            filter_value=filter_value,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "FolderContentIntegerWrapper",
+            '403': None,
+            '404': None,
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def get_folder_recent_without_preload_content(
+        self,
+        user_id_or_group_id: Annotated[Optional[StrictStr], Field(description="The user or group ID.")] = None,
+        filter_type: Annotated[Optional[FilterType], Field(description="The filter type.")] = None,
+        exclude_subject: Annotated[Optional[StrictBool], Field(description="Specifies whether to exclude search by user or group ID.")] = None,
+        apply_filter_option: Annotated[Optional[ApplyFilterOption], Field(description="Specifies whether to return only files, only folders or all elements.")] = None,
+        search_area: Annotated[Optional[SearchArea], Field(description="The search area.")] = None,
+        extension: Annotated[Optional[List[List[StrictStr]]], Field(description="Specifies whether to search for a specific file extension in the Recent folder.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of items to return.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The starting position of the results to be returned in the query response.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="Specifies the sorting criteria for the folder request.")] = None,
+        sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The text used for filtering or searching folder contents.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """get_folder_recent
+
+
+        :param user_id_or_group_id: The user or group ID.
+        :type user_id_or_group_id: str
+        :param filter_type: The filter type.
+        :type filter_type: FilterType
+        :param exclude_subject: Specifies whether to exclude search by user or group ID.
+        :type exclude_subject: bool
+        :param apply_filter_option: Specifies whether to return only files, only folders or all elements.
+        :type apply_filter_option: ApplyFilterOption
+        :param search_area: The search area.
+        :type search_area: SearchArea
+        :param extension: Specifies whether to search for a specific file extension in the Recent folder.
+        :type extension: List[str]
+        :param count: The maximum number of items to return.
+        :type count: int
+        :param start_index: The starting position of the results to be returned in the query response.
+        :type start_index: int
+        :param sort_by: Specifies the sorting criteria for the folder request.
+        :type sort_by: str
+        :param sort_order: The order in which the results are sorted.
+        :type sort_order: SortOrder
+        :param filter_value: The text used for filtering or searching folder contents.
+        :type filter_value: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_folder_recent_serialize(
+            user_id_or_group_id=user_id_or_group_id,
+            filter_type=filter_type,
+            exclude_subject=exclude_subject,
+            apply_filter_option=apply_filter_option,
+            search_area=search_area,
+            extension=extension,
+            count=count,
+            start_index=start_index,
+            sort_by=sort_by,
+            sort_order=sort_order,
+            filter_value=filter_value,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "FolderContentIntegerWrapper",
+            '403': None,
+            '404': None,
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _get_folder_recent_serialize(
+        self,
+        user_id_or_group_id,
+        filter_type,
+        exclude_subject,
+        apply_filter_option,
+        search_area,
+        extension,
+        count,
+        start_index,
+        sort_by,
+        sort_order,
+        filter_value,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+            'extension': 'csv',
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        if user_id_or_group_id is not None:
+            
+            _query_params.append(('userIdOrGroupId', user_id_or_group_id))
+            
+        if filter_type is not None:
+            
+            _query_params.append(('filterType', filter_type.value))
+            
+        if exclude_subject is not None:
+            
+            _query_params.append(('excludeSubject', exclude_subject))
+            
+        if apply_filter_option is not None:
+            
+            _query_params.append(('applyFilterOption', apply_filter_option.value))
+            
+        if search_area is not None:
+            
+            _query_params.append(('searchArea', search_area.value))
+            
+        if extension is not None:
+            
+            _query_params.append(('extension', extension))
+            
+        if count is not None:
+            
+            _query_params.append(('count', count))
+            
+        if start_index is not None:
+            
+            _query_params.append(('startIndex', start_index))
+            
+        if sort_by is not None:
+            
+            _query_params.append(('sortBy', sort_by))
+            
+        if sort_order is not None:
+            
+            _query_params.append(('sortOrder', sort_order.value))
+            
+        if filter_value is not None:
+            
+            _query_params.append(('filterValue', filter_value))
+            
+        # process the header parameters
+        if self._fields is not None:
+            _header_params['fields'] = self._fields
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+        ]
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/api/2.0/files/recent',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
     def get_folders(
         self,
-        folder_id: Annotated[StrictInt, Field(description="The request folder ID.")],
+        folder_id: Annotated[StrictInt, Field(description="The folder unique identifier.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4286,7 +4724,7 @@ class FoldersApi:
         """get_folders
 
 
-        :param folder_id: The request folder ID. (required)
+        :param folder_id: The folder unique identifier. (required)
         :type folder_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4336,7 +4774,7 @@ class FoldersApi:
     @validate_call
     def get_folders_with_http_info(
         self,
-        folder_id: Annotated[StrictInt, Field(description="The request folder ID.")],
+        folder_id: Annotated[StrictInt, Field(description="The folder unique identifier.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4353,7 +4791,7 @@ class FoldersApi:
         """get_folders
 
 
-        :param folder_id: The request folder ID. (required)
+        :param folder_id: The folder unique identifier. (required)
         :type folder_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4403,7 +4841,7 @@ class FoldersApi:
     @validate_call
     def get_folders_without_preload_content(
         self,
-        folder_id: Annotated[StrictInt, Field(description="The request folder ID.")],
+        folder_id: Annotated[StrictInt, Field(description="The folder unique identifier.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4420,7 +4858,7 @@ class FoldersApi:
         """get_folders
 
 
-        :param folder_id: The request folder ID. (required)
+        :param folder_id: The folder unique identifier. (required)
         :type folder_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4915,7 +5353,7 @@ class FoldersApi:
     @validate_call
     def get_new_folder_items(
         self,
-        folder_id: Annotated[StrictInt, Field(description="The request folder ID.")],
+        folder_id: Annotated[StrictInt, Field(description="The folder unique identifier.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4932,7 +5370,7 @@ class FoldersApi:
         """get_new_folder_items
 
 
-        :param folder_id: The request folder ID. (required)
+        :param folder_id: The folder unique identifier. (required)
         :type folder_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4982,7 +5420,7 @@ class FoldersApi:
     @validate_call
     def get_new_folder_items_with_http_info(
         self,
-        folder_id: Annotated[StrictInt, Field(description="The request folder ID.")],
+        folder_id: Annotated[StrictInt, Field(description="The folder unique identifier.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4999,7 +5437,7 @@ class FoldersApi:
         """get_new_folder_items
 
 
-        :param folder_id: The request folder ID. (required)
+        :param folder_id: The folder unique identifier. (required)
         :type folder_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -5049,7 +5487,7 @@ class FoldersApi:
     @validate_call
     def get_new_folder_items_without_preload_content(
         self,
-        folder_id: Annotated[StrictInt, Field(description="The request folder ID.")],
+        folder_id: Annotated[StrictInt, Field(description="The folder unique identifier.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5066,7 +5504,7 @@ class FoldersApi:
         """get_new_folder_items
 
 
-        :param folder_id: The request folder ID. (required)
+        :param folder_id: The folder unique identifier. (required)
         :type folder_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request

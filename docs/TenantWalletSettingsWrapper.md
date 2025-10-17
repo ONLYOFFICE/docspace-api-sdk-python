@@ -1,5 +1,5 @@
 # TenantWalletSettingsWrapper
-Tenant wallet settings
+The wrapper for the tenant wallet settings.
 
 ## Properties
 

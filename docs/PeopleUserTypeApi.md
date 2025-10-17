@@ -5,8 +5,8 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**get_user_type_update_progress**](#get_user_type_update_progress) | **GET** /api/2.0/people/type/progress/{userid} | Get the progress of updating user type
-[**star_user_typet_update**](#star_user_typet_update) | **POST** /api/2.0/people/type | Update user type
-[**terminate_user_type_update**](#terminate_user_type_update) | **PUT** /api/2.0/people/type/terminate | Terminate update user type
+[**star_user_typet_update**](#star_user_typet_update) | **POST** /api/2.0/people/type | Start updating user type
+[**terminate_user_type_update**](#terminate_user_type_update) | **PUT** /api/2.0/people/type/terminate | Terminate updating user type
 [**update_user_type**](#update_user_type) | **PUT** /api/2.0/people/type/{type} | Change a user type
 
 
@@ -140,7 +140,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     start_update_user_type_dto = docspace_api_sdk.StartUpdateUserTypeDto() # StartUpdateUserTypeDto |  (optional)
 
     try:
-        # Update user type
+        # Start updating user type
         api_response = api_instance.star_user_typet_update(start_update_user_type_dto=start_update_user_type_dto)
         print("The response of UserTypeApi->star_user_typet_update:\n")
         pprint(api_response)
@@ -219,7 +219,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     terminate_request_dto = docspace_api_sdk.TerminateRequestDto() # TerminateRequestDto |  (optional)
 
     try:
-        # Terminate update user type
+        # Terminate updating user type
         api_response = api_instance.terminate_user_type_update(terminate_request_dto=terminate_request_dto)
         print("The response of UserTypeApi->terminate_user_type_update:\n")
         pprint(api_response)

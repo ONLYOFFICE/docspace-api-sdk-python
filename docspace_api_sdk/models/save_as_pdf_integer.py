@@ -28,7 +28,7 @@ from typing_extensions import Self
 
 class SaveAsPdfInteger(BaseModel):
     """
-    The parameters for saving the file as PDF.
+    The parameters for saving a file as PDF.
     """ # noqa: E501
     folder_id: StrictInt = Field(description="The folder ID to save the file as PDF.", alias="folderId")
     title: Optional[StrictStr] = Field(description="The file title to save as PDF.")

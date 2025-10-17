@@ -3864,7 +3864,7 @@ class SearchApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> EmployeeFullArrayWrapper:
-        """Search users with detaailed information by extended filter
+        """Search users with detailed information by extended filter
 
         Returns a list of users with full information about them matching the parameters specified in the request.
 
@@ -4009,7 +4009,7 @@ class SearchApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[EmployeeFullArrayWrapper]:
-        """Search users with detaailed information by extended filter
+        """Search users with detailed information by extended filter
 
         Returns a list of users with full information about them matching the parameters specified in the request.
 
@@ -4154,7 +4154,7 @@ class SearchApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Search users with detaailed information by extended filter
+        """Search users with detailed information by extended filter
 
         Returns a list of users with full information about them matching the parameters specified in the request.
 

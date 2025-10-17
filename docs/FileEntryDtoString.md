@@ -37,6 +37,7 @@ Name | Type | Description | Notes
 **request_token** | **str** | The request token of the file entry. | [optional] 
 **external** | **bool** | Specifies if the folder can be accessed via an external link or not. | [optional] 
 **expiration_date** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] 
+**is_link_expired** | **bool** | Indicates whether the shareable link associated with the file or folder has expired. | [optional] 
 
 ## Example
 

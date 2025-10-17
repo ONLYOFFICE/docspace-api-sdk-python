@@ -54,6 +54,7 @@ class FileEntryDtoInteger(FileEntryBaseDto):
     request_token: Optional[StrictStr] = Field(default=None, description="The request token of the file entry.", alias="requestToken")
     external: Optional[StrictBool] = Field(default=None, description="Specifies if the folder can be accessed via an external link or not.")
     expiration_date: Optional[ApiDateTime] = Field(default=None, alias="expirationDate")
+    is_link_expired: Optional[StrictBool] = Field(default=None, description="Indicates whether the shareable link associated with the file or folder has expired.", alias="isLinkExpired")
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -190,6 +191,11 @@ class FileEntryDtoInteger(FileEntryBaseDto):
         if self.external is None and "external" in self.model_fields_set:
             _dict['external'] = None
 
+        # set to None if is_link_expired (nullable) is None
+        # and model_fields_set contains the field
+        if self.is_link_expired is None and "is_link_expired" in self.model_fields_set:
+            _dict['isLinkExpired'] = None
+
         return _dict
 
     @classmethod
@@ -215,7 +221,8 @@ class FileEntryDtoInteger(FileEntryBaseDto):
             "availableShareRights": FileEntryDtoIntegerAllOfAvailableShareRights.from_dict(obj["availableShareRights"]) if obj.get("availableShareRights") is not None else None,
             "requestToken": obj.get("requestToken"),
             "external": obj.get("external"),
-            "expirationDate": ApiDateTime.from_dict(obj["expirationDate"]) if obj.get("expirationDate") is not None else None
+            "expirationDate": ApiDateTime.from_dict(obj["expirationDate"]) if obj.get("expirationDate") is not None else None,
+            "isLinkExpired": obj.get("isLinkExpired")
         })
         return cls(**base_obj.model_dump(), **extra_fields)
 

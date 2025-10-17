@@ -336,7 +336,7 @@ class UserTypeApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> TaskProgressResponseWrapper:
-        """Update user type
+        """Start updating user type
 
         Starts updating the type of the user or guest when reassigning rooms and shared files.
 
@@ -405,7 +405,7 @@ class UserTypeApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[TaskProgressResponseWrapper]:
-        """Update user type
+        """Start updating user type
 
         Starts updating the type of the user or guest when reassigning rooms and shared files.
 
@@ -474,7 +474,7 @@ class UserTypeApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Update user type
+        """Start updating user type
 
         Starts updating the type of the user or guest when reassigning rooms and shared files.
 
@@ -621,7 +621,7 @@ class UserTypeApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> TaskProgressResponseWrapper:
-        """Terminate update user type
+        """Terminate updating user type
 
         Terminates the process of updating the type of the user or guest.
 
@@ -689,7 +689,7 @@ class UserTypeApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[TaskProgressResponseWrapper]:
-        """Terminate update user type
+        """Terminate updating user type
 
         Terminates the process of updating the type of the user or guest.
 
@@ -757,7 +757,7 @@ class UserTypeApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Terminate update user type
+        """Terminate updating user type
 
         Terminates the process of updating the type of the user or guest.
 

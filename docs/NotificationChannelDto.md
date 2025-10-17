@@ -1,11 +1,12 @@
 # NotificationChannelDto
+The notification channel information.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **str** |  | 
-**is_enabled** | **bool** |  | 
+**name** | **str** | The notification channel name. | 
+**is_enabled** | **bool** | Specifies whether the notification channel is enabled. | 
 
 ## Example
 

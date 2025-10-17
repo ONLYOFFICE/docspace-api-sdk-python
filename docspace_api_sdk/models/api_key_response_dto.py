@@ -32,7 +32,7 @@ class ApiKeyResponseDto(BaseModel):
     """
     The response data for the API key operations.
     """ # noqa: E501
-    id: StrictStr = Field(description="The unique identifier of the API key.")
+    id: StrictStr = Field(description="The API key unique identifier.")
     name: Optional[StrictStr] = Field(description="The API key name.")
     key: Optional[StrictStr] = Field(description="The full API key value (only returned when creating a new key).")
     key_postfix: Optional[StrictStr] = Field(default=None, description="The API key postfix (used for identification).", alias="keyPostfix")

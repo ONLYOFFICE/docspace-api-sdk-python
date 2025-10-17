@@ -909,7 +909,7 @@ class SharingApi:
     @validate_call
     def get_file_security_info(
         self,
-        id: Annotated[StrictInt, Field(description="The file ID of the request.")],
+        id: Annotated[StrictInt, Field(description="The file unique identifier.")],
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of items to retrieve in the request.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The starting index for the query results.")] = None,
         _request_timeout: Union[
@@ -928,7 +928,7 @@ class SharingApi:
         """get_file_security_info
 
 
-        :param id: The file ID of the request. (required)
+        :param id: The file unique identifier. (required)
         :type id: int
         :param count: The number of items to retrieve in the request.
         :type count: int
@@ -983,7 +983,7 @@ class SharingApi:
     @validate_call
     def get_file_security_info_with_http_info(
         self,
-        id: Annotated[StrictInt, Field(description="The file ID of the request.")],
+        id: Annotated[StrictInt, Field(description="The file unique identifier.")],
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of items to retrieve in the request.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The starting index for the query results.")] = None,
         _request_timeout: Union[
@@ -1002,7 +1002,7 @@ class SharingApi:
         """get_file_security_info
 
 
-        :param id: The file ID of the request. (required)
+        :param id: The file unique identifier. (required)
         :type id: int
         :param count: The number of items to retrieve in the request.
         :type count: int
@@ -1057,7 +1057,7 @@ class SharingApi:
     @validate_call
     def get_file_security_info_without_preload_content(
         self,
-        id: Annotated[StrictInt, Field(description="The file ID of the request.")],
+        id: Annotated[StrictInt, Field(description="The file unique identifier.")],
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of items to retrieve in the request.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The starting index for the query results.")] = None,
         _request_timeout: Union[
@@ -1076,7 +1076,7 @@ class SharingApi:
         """get_file_security_info
 
 
-        :param id: The file ID of the request. (required)
+        :param id: The file unique identifier. (required)
         :type id: int
         :param count: The number of items to retrieve in the request.
         :type count: int
@@ -1200,7 +1200,7 @@ class SharingApi:
     @validate_call
     def get_folder_security_info(
         self,
-        id: Annotated[StrictInt, Field(description="The request folder ID.")],
+        id: Annotated[StrictInt, Field(description="The folder unique identifier.")],
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of items to retrieve in the request.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The starting index for the query results.")] = None,
         _request_timeout: Union[
@@ -1219,7 +1219,7 @@ class SharingApi:
         """get_folder_security_info
 
 
-        :param id: The request folder ID. (required)
+        :param id: The folder unique identifier. (required)
         :type id: int
         :param count: The number of items to retrieve in the request.
         :type count: int
@@ -1274,7 +1274,7 @@ class SharingApi:
     @validate_call
     def get_folder_security_info_with_http_info(
         self,
-        id: Annotated[StrictInt, Field(description="The request folder ID.")],
+        id: Annotated[StrictInt, Field(description="The folder unique identifier.")],
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of items to retrieve in the request.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The starting index for the query results.")] = None,
         _request_timeout: Union[
@@ -1293,7 +1293,7 @@ class SharingApi:
         """get_folder_security_info
 
 
-        :param id: The request folder ID. (required)
+        :param id: The folder unique identifier. (required)
         :type id: int
         :param count: The number of items to retrieve in the request.
         :type count: int
@@ -1348,7 +1348,7 @@ class SharingApi:
     @validate_call
     def get_folder_security_info_without_preload_content(
         self,
-        id: Annotated[StrictInt, Field(description="The request folder ID.")],
+        id: Annotated[StrictInt, Field(description="The folder unique identifier.")],
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of items to retrieve in the request.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The starting index for the query results.")] = None,
         _request_timeout: Union[
@@ -1367,7 +1367,7 @@ class SharingApi:
         """get_folder_security_info
 
 
-        :param id: The request folder ID. (required)
+        :param id: The folder unique identifier. (required)
         :type id: int
         :param count: The number of items to retrieve in the request.
         :type count: int
@@ -2407,7 +2407,7 @@ class SharingApi:
     @validate_call
     def get_shared_users(
         self,
-        file_id: Annotated[StrictInt, Field(description="The file ID of the request.")],
+        file_id: Annotated[StrictInt, Field(description="The file unique identifier.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2424,7 +2424,7 @@ class SharingApi:
         """get_shared_users
 
 
-        :param file_id: The file ID of the request. (required)
+        :param file_id: The file unique identifier. (required)
         :type file_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2473,7 +2473,7 @@ class SharingApi:
     @validate_call
     def get_shared_users_with_http_info(
         self,
-        file_id: Annotated[StrictInt, Field(description="The file ID of the request.")],
+        file_id: Annotated[StrictInt, Field(description="The file unique identifier.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2490,7 +2490,7 @@ class SharingApi:
         """get_shared_users
 
 
-        :param file_id: The file ID of the request. (required)
+        :param file_id: The file unique identifier. (required)
         :type file_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2539,7 +2539,7 @@ class SharingApi:
     @validate_call
     def get_shared_users_without_preload_content(
         self,
-        file_id: Annotated[StrictInt, Field(description="The file ID of the request.")],
+        file_id: Annotated[StrictInt, Field(description="The file unique identifier.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2556,7 +2556,7 @@ class SharingApi:
         """get_shared_users
 
 
-        :param file_id: The file ID of the request. (required)
+        :param file_id: The file unique identifier. (required)
         :type file_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2934,7 +2934,7 @@ class SharingApi:
     @validate_call
     def send_editor_notify(
         self,
-        file_id: Annotated[StrictInt, Field(description="The file ID of the mention message.")],
+        file_id: Annotated[StrictInt, Field(description="The file ID with the mention message.")],
         mention_message_wrapper: Annotated[Optional[MentionMessageWrapper], Field(description="The mention message.")] = None,
         _request_timeout: Union[
             None,
@@ -2952,7 +2952,7 @@ class SharingApi:
         """send_editor_notify
 
 
-        :param file_id: The file ID of the mention message. (required)
+        :param file_id: The file ID with the mention message. (required)
         :type file_id: int
         :param mention_message_wrapper: The mention message.
         :type mention_message_wrapper: MentionMessageWrapper
@@ -3004,7 +3004,7 @@ class SharingApi:
     @validate_call
     def send_editor_notify_with_http_info(
         self,
-        file_id: Annotated[StrictInt, Field(description="The file ID of the mention message.")],
+        file_id: Annotated[StrictInt, Field(description="The file ID with the mention message.")],
         mention_message_wrapper: Annotated[Optional[MentionMessageWrapper], Field(description="The mention message.")] = None,
         _request_timeout: Union[
             None,
@@ -3022,7 +3022,7 @@ class SharingApi:
         """send_editor_notify
 
 
-        :param file_id: The file ID of the mention message. (required)
+        :param file_id: The file ID with the mention message. (required)
         :type file_id: int
         :param mention_message_wrapper: The mention message.
         :type mention_message_wrapper: MentionMessageWrapper
@@ -3074,7 +3074,7 @@ class SharingApi:
     @validate_call
     def send_editor_notify_without_preload_content(
         self,
-        file_id: Annotated[StrictInt, Field(description="The file ID of the mention message.")],
+        file_id: Annotated[StrictInt, Field(description="The file ID with the mention message.")],
         mention_message_wrapper: Annotated[Optional[MentionMessageWrapper], Field(description="The mention message.")] = None,
         _request_timeout: Union[
             None,
@@ -3092,7 +3092,7 @@ class SharingApi:
         """send_editor_notify
 
 
-        :param file_id: The file ID of the mention message. (required)
+        :param file_id: The file ID with the mention message. (required)
         :type file_id: int
         :param mention_message_wrapper: The mention message.
         :type mention_message_wrapper: MentionMessageWrapper

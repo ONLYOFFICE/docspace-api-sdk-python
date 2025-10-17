@@ -65,7 +65,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **file_id** | **int**| The file ID of the request. | 
+ **file_id** | **int**| The file unique identifier. | 
 
 ### Return type
 
@@ -93,7 +93,7 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.FilesApi(api_client)
-    file_id = 9846 # int | The file ID of the request.
+    file_id = 9846 # int | The file unique identifier.
 
     try:
         api_response = api_instance.add_file_to_recent(file_id)
@@ -1228,7 +1228,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **file_id** | **int**| The file ID of the request. | 
+ **file_id** | **int**| The file unique identifier. | 
 
 ### Return type
 
@@ -1256,7 +1256,7 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.FilesApi(api_client)
-    file_id = 9846 # int | The file ID of the request.
+    file_id = 9846 # int | The file unique identifier.
 
     try:
         api_response = api_instance.get_all_form_roles(file_id)
@@ -1363,7 +1363,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **file_id** | **int**| The file ID of the request. | 
+ **file_id** | **int**| The file unique identifier. | 
 
 ### Return type
 
@@ -1391,7 +1391,7 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.FilesApi(api_client)
-    file_id = 9846 # int | The file ID of the request.
+    file_id = 9846 # int | The file unique identifier.
 
     try:
         api_response = api_instance.get_edit_history(file_id)
@@ -1574,7 +1574,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**| The file ID of the request. | 
+ **id** | **int**| The file unique identifier. | 
  **count** | **int**| The number of items to retrieve in the request. | [optional] 
  **start_index** | **int**| The starting index for the query results. | [optional] 
 
@@ -1604,7 +1604,7 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.FilesApi(api_client)
-    id = 9846 # int | The file ID of the request.
+    id = 9846 # int | The file unique identifier.
     count = 1234 # int | The number of items to retrieve in the request. (optional)
     start_index = 1234 # int | The starting index for the query results. (optional)
 
@@ -1644,7 +1644,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**| The file ID of the request. | 
+ **id** | **int**| The file unique identifier. | 
  **count** | **int**| The number of items to retrieve in the request. | [optional] 
  **start_index** | **int**| The starting index for the query results. | [optional] 
 
@@ -1674,7 +1674,7 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.FilesApi(api_client)
-    id = 9846 # int | The file ID of the request.
+    id = 9846 # int | The file unique identifier.
     count = 1234 # int | The number of items to retrieve in the request. (optional)
     start_index = 1234 # int | The starting index for the query results. (optional)
 
@@ -1715,7 +1715,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **file_id** | **int**| The file ID of the request. | 
+ **file_id** | **int**| The file unique identifier. | 
 
 ### Return type
 
@@ -1743,7 +1743,7 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.FilesApi(api_client)
-    file_id = 9846 # int | The file ID of the request.
+    file_id = 9846 # int | The file unique identifier.
 
     try:
         api_response = api_instance.get_file_version_info(file_id)
@@ -1847,7 +1847,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **file_id** | **int**| The file ID of the request. | 
+ **file_id** | **int**| The file unique identifier. | 
 
 ### Return type
 
@@ -1875,7 +1875,7 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.FilesApi(api_client)
-    file_id = 9846 # int | The file ID of the request.
+    file_id = 9846 # int | The file unique identifier.
 
     try:
         api_response = api_instance.get_presigned_file_uri(file_id)
@@ -1913,7 +1913,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **file_id** | **int**| The file ID of the request. | 
+ **file_id** | **int**| The file unique identifier. | 
 
 ### Return type
 
@@ -1941,7 +1941,7 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.FilesApi(api_client)
-    file_id = 9846 # int | The file ID of the request.
+    file_id = 9846 # int | The file unique identifier.
 
     try:
         api_response = api_instance.get_presigned_uri(file_id)
@@ -1979,7 +1979,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **file_id** | **int**| The file ID of the request. | 
+ **file_id** | **int**| The file unique identifier. | 
 
 ### Return type
 
@@ -2007,7 +2007,7 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.FilesApi(api_client)
-    file_id = 9846 # int | The file ID of the request.
+    file_id = 9846 # int | The file unique identifier.
 
     try:
         api_response = api_instance.get_protected_file_users(file_id)
@@ -2112,7 +2112,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **file_id** | **int**| The file ID of the request. | 
+ **file_id** | **int**| The file unique identifier. | 
 
 ### Return type
 
@@ -2140,7 +2140,7 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.FilesApi(api_client)
-    file_id = 9846 # int | The file ID of the request.
+    file_id = 9846 # int | The file unique identifier.
 
     try:
         api_response = api_instance.is_form_pdf(file_id)
@@ -2541,7 +2541,7 @@ For more information, see [api.onlyoffice.com]().
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **int**| The file ID to save as PDF. | 
- **save_as_pdf_integer** | [**SaveAsPdfInteger**](SaveAsPdfInteger.md)| The parameters for saving file as PDF. | 
+ **save_as_pdf_integer** | [**SaveAsPdfInteger**](SaveAsPdfInteger.md)| The parameters for saving the file as PDF. | 
 
 ### Return type
 
@@ -2571,7 +2571,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.FilesApi(api_client)
     id = 9846 # int | The file ID to save as PDF.
-    save_as_pdf_integer = docspace_api_sdk.SaveAsPdfInteger() # SaveAsPdfInteger | The parameters for saving file as PDF.
+    save_as_pdf_integer = docspace_api_sdk.SaveAsPdfInteger() # SaveAsPdfInteger | The parameters for saving the file as PDF.
 
     try:
         api_response = api_instance.save_file_as_pdf(id, save_as_pdf_integer)

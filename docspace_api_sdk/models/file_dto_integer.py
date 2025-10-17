@@ -224,6 +224,11 @@ class FileDtoInteger(FileEntryDtoInteger):
         if self.external is None and "external" in self.model_fields_set:
             _dict['external'] = None
 
+        # set to None if is_link_expired (nullable) is None
+        # and model_fields_set contains the field
+        if self.is_link_expired is None and "is_link_expired" in self.model_fields_set:
+            _dict['isLinkExpired'] = None
+
         # set to None if content_length (nullable) is None
         # and model_fields_set contains the field
         if self.content_length is None and "content_length" in self.model_fields_set:

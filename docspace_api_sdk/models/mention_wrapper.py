@@ -29,14 +29,14 @@ from typing_extensions import Self
 
 class MentionWrapper(BaseModel):
     """
-    The mention message parameters.
+    The parameters of a user mentioned in a message.
     """ # noqa: E501
     user: Optional[UserInfo] = None
-    email: Optional[StrictStr] = Field(default=None, description="The email address of the user.")
-    id: Optional[StrictStr] = Field(default=None, description="The identification of the user.")
+    email: Optional[StrictStr] = Field(default=None, description="The user email address.")
+    id: Optional[StrictStr] = Field(default=None, description="The user unique identification.")
     image: Optional[StrictStr] = Field(default=None, description="The path to the user's avatar.")
-    has_access: Optional[StrictBool] = Field(default=None, description="Specifies if the user has the access to the file or not.", alias="hasAccess")
-    name: Optional[StrictStr] = Field(default=None, description="The full name of the user.")
+    has_access: Optional[StrictBool] = Field(default=None, description="Specifies whether the user has the access to the file where they are mentioned.", alias="hasAccess")
+    name: Optional[StrictStr] = Field(default=None, description="The user full name.")
     __properties: ClassVar[List[str]] = ["user", "email", "id", "image", "hasAccess", "name"]
 
     model_config = ConfigDict(

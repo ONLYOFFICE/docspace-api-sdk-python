@@ -1207,7 +1207,6 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantDeepLinkSettingsWrapper",
-            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1271,7 +1270,6 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantDeepLinkSettingsWrapper",
-            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1335,7 +1333,6 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantDeepLinkSettingsWrapper",
-            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1384,12 +1381,6 @@ class CommonSettingsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'Basic', 
-            'OAuth2', 
-            'ApiKeyBearer', 
-            'asc_auth_key', 
-            'Bearer', 
-            'OpenId'
         ]
 
         return self.api_client.param_serialize(
