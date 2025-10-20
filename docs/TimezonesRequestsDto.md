@@ -1,18 +1,17 @@
 # TimezonesRequestsDto
-
 The request parameters for managing the time zone configurations.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** | The IANA time zone identifier. | [optional] 
-**display_name** | **str** | The user-friendly name for the time zone. | [optional] 
+**id** | **str** | The IANA time zone identifier. | 
+**display_name** | **str** | The user-friendly name for the time zone. | 
 
 ## Example
 
 ```python
-from docspace.models.timezones_requests_dto import TimezonesRequestsDto
+from docspace_api_sdk.models.timezones_requests_dto import TimezonesRequestsDto
 
 # TODO update the JSON string below
 json = "{}"

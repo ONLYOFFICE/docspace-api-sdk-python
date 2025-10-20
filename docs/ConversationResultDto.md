@@ -1,14 +1,13 @@
 # ConversationResultDto
-
 The result of file convertion operation.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** | The conversion operation ID. | [optional] 
-**operation** | [**FileOperationType**](FileOperationType.md) |  | [optional] 
-**progress** | **int** | The conversion operation progress. | [optional] 
+**id** | **str** | The conversion operation ID. | 
+**operation** | [**FileOperationType**](FileOperationType.md) |  | 
+**progress** | **int** | The conversion operation progress. | 
 **source** | **str** | The source file for the conversion. | [optional] 
 **result** | **object** | The resulting file after the conversion. | [optional] 
 **error** | **str** | The conversion operation error message. | [optional] 
@@ -17,7 +16,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.conversation_result_dto import ConversationResultDto
+from docspace_api_sdk.models.conversation_result_dto import ConversationResultDto
 
 # TODO update the JSON string below
 json = "{}"

@@ -1,6 +1,5 @@
 # WebhooksLogWrapper
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.webhooks_log_wrapper import WebhooksLogWrapper
+from docspace_api_sdk.models.webhooks_log_wrapper import WebhooksLogWrapper
 
 # TODO update the JSON string below
 json = "{}"

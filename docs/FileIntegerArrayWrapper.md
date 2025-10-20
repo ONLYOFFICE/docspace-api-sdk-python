@@ -1,6 +1,5 @@
 # FileIntegerArrayWrapper
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.file_integer_array_wrapper import FileIntegerArrayWrapper
+from docspace_api_sdk.models.file_integer_array_wrapper import FileIntegerArrayWrapper
 
 # TODO update the JSON string below
 json = "{}"

@@ -1,5 +1,4 @@
 # CustomizationConfigDto
-
 The customization config parameters.
 
 ## Properties
@@ -12,16 +11,16 @@ Name | Type | Description | Notes
 **feedback** | [**FeedbackConfig**](FeedbackConfig.md) |  | [optional] 
 **forcesave** | **bool** | Specifies if the customization should be force saved. | [optional] 
 **goback** | [**GobackConfig**](GobackConfig.md) |  | [optional] 
+**review** | [**ReviewConfig**](ReviewConfig.md) |  | [optional] 
 **logo** | [**LogoConfigDto**](LogoConfigDto.md) |  | [optional] 
 **mention_share** | **bool** | Specifies if the share should be mentioned. | [optional] 
-**review_display** | **str** | The review display of the customization. | [optional] 
 **submit_form** | [**SubmitForm**](SubmitForm.md) |  | [optional] 
 **start_filling_form** | [**StartFillingForm**](StartFillingForm.md) |  | [optional] 
 
 ## Example
 
 ```python
-from docspace.models.customization_config_dto import CustomizationConfigDto
+from docspace_api_sdk.models.customization_config_dto import CustomizationConfigDto
 
 # TODO update the JSON string below
 json = "{}"

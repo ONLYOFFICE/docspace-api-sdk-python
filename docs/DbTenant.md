@@ -1,5 +1,4 @@
 # DbTenant
-
 The database tenant parameters.
 
 ## Properties
@@ -31,7 +30,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.db_tenant import DbTenant
+from docspace_api_sdk.models.db_tenant import DbTenant
 
 # TODO update the JSON string below
 json = "{}"

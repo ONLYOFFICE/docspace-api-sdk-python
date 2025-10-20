@@ -1,6 +1,5 @@
 # TariffWrapper
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.tariff_wrapper import TariffWrapper
+from docspace_api_sdk.models.tariff_wrapper import TariffWrapper
 
 # TODO update the JSON string below
 json = "{}"

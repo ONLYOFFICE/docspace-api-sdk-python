@@ -1,5 +1,4 @@
 # Quota
-
 The quota parameters.
 
 ## Properties
@@ -8,11 +7,15 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **int** | The quota ID. | [optional] 
 **quantity** | **int** | The quota quantity. | [optional] 
+**wallet** | **bool** | The quota applies to the wallet or not | [optional] 
+**due_date** | **datetime** | The quota due date. | [optional] 
+**next_quantity** | **int** | The quota next quantity. | [optional] 
+**state** | [**QuotaState**](QuotaState.md) |  | [optional] 
 
 ## Example
 
 ```python
-from docspace.models.quota import Quota
+from docspace_api_sdk.models.quota import Quota
 
 # TODO update the JSON string below
 json = "{}"

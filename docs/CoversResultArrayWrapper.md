@@ -1,6 +1,5 @@
 # CoversResultArrayWrapper
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.covers_result_array_wrapper import CoversResultArrayWrapper
+from docspace_api_sdk.models.covers_result_array_wrapper import CoversResultArrayWrapper
 
 # TODO update the JSON string below
 json = "{}"

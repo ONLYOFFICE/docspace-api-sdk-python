@@ -1,25 +1,24 @@
 # FileOperationDto
-
 The file operation information.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** | The file operation ID. | [optional] 
-**operation** | [**FileOperationType**](FileOperationType.md) |  | [optional] 
-**progress** | **int** | The file operation progress in percentage. | [optional] 
-**error** | **str** | The file operation error message. | [optional] 
-**processed** | **str** | The file operation processing status. | [optional] 
-**finished** | **bool** | Specifies if the file operation is finished or not. | [optional] 
+**id** | **str** | The file operation ID. | 
+**operation** | [**FileOperationType**](FileOperationType.md) |  | 
+**progress** | **int** | The file operation progress in percentage. | 
+**error** | **str** | The file operation error message. | 
+**processed** | **str** | The file operation processing status. | 
+**finished** | **bool** | Specifies if the file operation is finished or not. | 
 **url** | **str** | The file operation URL. | [optional] 
-**files** | [**List[FileEntryDto]**](FileEntryDto.md) | The list of files of the file operation. | [optional] 
-**folders** | [**List[FileEntryDto]**](FileEntryDto.md) | The list of folders of the file operation. | [optional] 
+**files** | [**List[FileEntryBaseDto]**](FileEntryBaseDto.md) | The list of files of the file operation. | [optional] 
+**folders** | [**List[FileEntryBaseDto]**](FileEntryBaseDto.md) | The list of folders of the file operation. | [optional] 
 
 ## Example
 
 ```python
-from docspace.models.file_operation_dto import FileOperationDto
+from docspace_api_sdk.models.file_operation_dto import FileOperationDto
 
 # TODO update the JSON string below
 json = "{}"

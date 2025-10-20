@@ -1,12 +1,11 @@
 # CheckDocServiceUrlRequestDto
-
 The request parameters for checking the document service location.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**doc_service_url** | **str** | The ONLYOFFICE Docs URL address. | [optional] 
+**doc_service_url** | **str** | The ONLYOFFICE Docs URL address. | 
 **doc_service_url_internal** | **str** | The ONLYOFFICE Docs URL address in the local private network. | [optional] 
 **doc_service_url_portal** | **str** | The ONLYOFFICE Docs URL address. | [optional] 
 **doc_service_signature_secret** | **str** | The signature secret of the ONLYOFFICE Docs. | [optional] 
@@ -16,7 +15,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.check_doc_service_url_request_dto import CheckDocServiceUrlRequestDto
+from docspace_api_sdk.models.check_doc_service_url_request_dto import CheckDocServiceUrlRequestDto
 
 # TODO update the JSON string below
 json = "{}"

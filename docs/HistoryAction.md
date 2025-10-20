@@ -1,5 +1,4 @@
 # HistoryAction
-
 The action performed on the file.
 
 ## Properties
@@ -12,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.history_action import HistoryAction
+from docspace_api_sdk.models.history_action import HistoryAction
 
 # TODO update the JSON string below
 json = "{}"

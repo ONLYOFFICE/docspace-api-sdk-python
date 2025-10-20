@@ -1,6 +1,5 @@
 # CapabilitiesWrapper
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.capabilities_wrapper import CapabilitiesWrapper
+from docspace_api_sdk.models.capabilities_wrapper import CapabilitiesWrapper
 
 # TODO update the JSON string below
 json = "{}"

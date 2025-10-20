@@ -1,17 +1,16 @@
 # AnonymousConfigDto
-
 The anonymous config parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**request** | **bool** | Specifies if the anonymous is a request. | [optional] 
+**request** | **bool** | Specifies if the anonymous is a request. | 
 
 ## Example
 
 ```python
-from docspace.models.anonymous_config_dto import AnonymousConfigDto
+from docspace_api_sdk.models.anonymous_config_dto import AnonymousConfigDto
 
 # TODO update the JSON string below
 json = "{}"

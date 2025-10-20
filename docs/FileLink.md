@@ -1,19 +1,18 @@
 # FileLink
-
 The file link properties.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**filetype** | **str** | The type of the file for the source viewed or edited document. | [optional] 
+**filetype** | **str** | The type of the file for the source viewed or edited document. | 
 **token** | **str** | The encrypted signature added to the config in the form of a token. | [optional] 
-**url** | **str** | The absolute URL where the source viewed or edited document is stored. | [optional] 
+**url** | **str** | The absolute URL where the source viewed or edited document is stored. | 
 
 ## Example
 
 ```python
-from docspace.models.file_link import FileLink
+from docspace_api_sdk.models.file_link import FileLink
 
 # TODO update the JSON string below
 json = "{}"

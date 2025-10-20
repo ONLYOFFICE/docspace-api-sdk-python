@@ -1,5 +1,4 @@
 # WizardSettings
-
 The Wizard settings.
 
 ## Properties
@@ -12,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.wizard_settings import WizardSettings
+from docspace_api_sdk.models.wizard_settings import WizardSettings
 
 # TODO update the JSON string below
 json = "{}"

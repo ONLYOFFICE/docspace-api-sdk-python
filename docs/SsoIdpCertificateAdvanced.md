@@ -1,5 +1,4 @@
 # SsoIdpCertificateAdvanced
-
 The IdP advanced certificate parameters.
 
 ## Properties
@@ -16,7 +15,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.sso_idp_certificate_advanced import SsoIdpCertificateAdvanced
+from docspace_api_sdk.models.sso_idp_certificate_advanced import SsoIdpCertificateAdvanced
 
 # TODO update the JSON string below
 json = "{}"

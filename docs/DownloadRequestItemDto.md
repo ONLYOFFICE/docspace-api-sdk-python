@@ -1,5 +1,4 @@
 # DownloadRequestItemDto
-
 The download request item with conversion parameters and security settings.
 
 ## Properties
@@ -13,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.download_request_item_dto import DownloadRequestItemDto
+from docspace_api_sdk.models.download_request_item_dto import DownloadRequestItemDto
 
 # TODO update the JSON string below
 json = "{}"

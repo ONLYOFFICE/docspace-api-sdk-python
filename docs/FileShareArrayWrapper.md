@@ -1,6 +1,5 @@
 # FileShareArrayWrapper
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.file_share_array_wrapper import FileShareArrayWrapper
+from docspace_api_sdk.models.file_share_array_wrapper import FileShareArrayWrapper
 
 # TODO update the JSON string below
 json = "{}"

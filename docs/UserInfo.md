@@ -1,5 +1,4 @@
 # UserInfo
-
 The user information.
 
 ## Properties
@@ -41,7 +40,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.user_info import UserInfo
+from docspace_api_sdk.models.user_info import UserInfo
 
 # TODO update the JSON string below
 json = "{}"

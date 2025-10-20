@@ -1,6 +1,5 @@
 # EmployeeArrayWrapper
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.employee_array_wrapper import EmployeeArrayWrapper
+from docspace_api_sdk.models.employee_array_wrapper import EmployeeArrayWrapper
 
 # TODO update the JSON string below
 json = "{}"

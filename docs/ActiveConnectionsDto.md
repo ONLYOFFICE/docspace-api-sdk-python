@@ -1,18 +1,17 @@
 # ActiveConnectionsDto
-
 The active connections parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**login_event** | **int** | The login event. | [optional] 
+**login_event** | **int** | The login event. | 
 **items** | [**List[ActiveConnectionsItemDto]**](ActiveConnectionsItemDto.md) | The list of active connection items. | [optional] 
 
 ## Example
 
 ```python
-from docspace.models.active_connections_dto import ActiveConnectionsDto
+from docspace_api_sdk.models.active_connections_dto import ActiveConnectionsDto
 
 # TODO update the JSON string below
 json = "{}"

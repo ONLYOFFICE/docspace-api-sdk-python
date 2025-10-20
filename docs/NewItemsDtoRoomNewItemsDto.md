@@ -1,18 +1,17 @@
 # NewItemsDtoRoomNewItemsDto
-
 The new item parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**var_date** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] 
-**items** | [**List[RoomNewItemsDto]**](RoomNewItemsDto.md) | The list of items. | [optional] 
+**var_date** | [**ApiDateTime**](ApiDateTime.md) |  | 
+**items** | [**List[RoomNewItemsDto]**](RoomNewItemsDto.md) | The list of items. | 
 
 ## Example
 
 ```python
-from docspace.models.new_items_dto_room_new_items_dto import NewItemsDtoRoomNewItemsDto
+from docspace_api_sdk.models.new_items_dto_room_new_items_dto import NewItemsDtoRoomNewItemsDto
 
 # TODO update the JSON string below
 json = "{}"

@@ -1,5 +1,4 @@
 # DarkThemeSettings
-
 The theme parameters.
 
 ## Properties
@@ -12,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.dark_theme_settings import DarkThemeSettings
+from docspace_api_sdk.models.dark_theme_settings import DarkThemeSettings
 
 # TODO update the JSON string below
 json = "{}"

@@ -1,19 +1,18 @@
 # ProductAdministratorDto
-
 The product administrator parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**product_id** | **str** | The product ID. | [optional] 
-**user_id** | **str** | The user unique identifier. | [optional] 
-**administrator** | **bool** | Indicates whether the user has administrator privileges for the product. | [optional] 
+**product_id** | **str** | The product ID. | 
+**user_id** | **str** | The user unique identifier. | 
+**administrator** | **bool** | Indicates whether the user has administrator privileges for the product. | 
 
 ## Example
 
 ```python
-from docspace.models.product_administrator_dto import ProductAdministratorDto
+from docspace_api_sdk.models.product_administrator_dto import ProductAdministratorDto
 
 # TODO update the JSON string below
 json = "{}"

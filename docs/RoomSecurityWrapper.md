@@ -1,6 +1,5 @@
 # RoomSecurityWrapper
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.room_security_wrapper import RoomSecurityWrapper
+from docspace_api_sdk.models.room_security_wrapper import RoomSecurityWrapper
 
 # TODO update the JSON string below
 json = "{}"

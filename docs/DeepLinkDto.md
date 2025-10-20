@@ -1,19 +1,18 @@
 # DeepLinkDto
-
 The deep link parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**android_package_name** | **str** | The Android package name. | [optional] 
-**url** | **str** | The deep link URL. | [optional] 
-**ios_package_id** | **str** | The deep link IOS package ID. | [optional] 
+**android_package_name** | **str** | The Android package name. | 
+**url** | **str** | The deep link URL. | 
+**ios_package_id** | **str** | The deep link IOS package ID. | 
 
 ## Example
 
 ```python
-from docspace.models.deep_link_dto import DeepLinkDto
+from docspace_api_sdk.models.deep_link_dto import DeepLinkDto
 
 # TODO update the JSON string below
 json = "{}"

@@ -1,6 +1,5 @@
 # AutoCleanupRequestDto
-
-The auto-clearing request parameters.
+The request parameters for updating the trash bin auto-clearing setting.
 
 ## Properties
 
@@ -12,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.auto_cleanup_request_dto import AutoCleanupRequestDto
+from docspace_api_sdk.models.auto_cleanup_request_dto import AutoCleanupRequestDto
 
 # TODO update the JSON string below
 json = "{}"

@@ -1,5 +1,4 @@
 # RoomDataLifetimePeriod
-
 [0 - Day, 1 - Month, 2 - Year]
 
 ## Enum

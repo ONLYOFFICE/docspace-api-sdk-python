@@ -1,20 +1,19 @@
 # RoomTemplateStatusDto
-
 The room template status.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**template_id** | **int** | The room template ID. | [optional] 
-**progress** | **float** | The progress of the room template creation process. | [optional] 
+**template_id** | **int** | The room template ID. | 
+**progress** | **float** | The progress of the room template creation process. | 
 **error** | **str** | The error message that is sent when the room template is not created successfully. | [optional] 
-**is_completed** | **bool** | Specifies whether the process of creating the room template is completed. | [optional] 
+**is_completed** | **bool** | Specifies whether the process of creating the room template is completed. | 
 
 ## Example
 
 ```python
-from docspace.models.room_template_status_dto import RoomTemplateStatusDto
+from docspace_api_sdk.models.room_template_status_dto import RoomTemplateStatusDto
 
 # TODO update the JSON string below
 json = "{}"

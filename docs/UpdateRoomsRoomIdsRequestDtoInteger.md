@@ -1,17 +1,16 @@
 # UpdateRoomsRoomIdsRequestDtoInteger
-
-The request parameters for updating the room.
+The request parameters for updating the rooms.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**room_ids** | [**List[BaseBatchRequestDtoFolderIdsInner]**](BaseBatchRequestDtoFolderIdsInner.md) | The list of room IDs. | [optional] 
+**room_ids** | [**List[DuplicateRequestDtoAllOfFileIds]**](DuplicateRequestDtoAllOfFileIds.md) | The list of room IDs. | [optional] 
 
 ## Example
 
 ```python
-from docspace.models.update_rooms_room_ids_request_dto_integer import UpdateRoomsRoomIdsRequestDtoInteger
+from docspace_api_sdk.models.update_rooms_room_ids_request_dto_integer import UpdateRoomsRoomIdsRequestDtoInteger
 
 # TODO update the JSON string below
 json = "{}"

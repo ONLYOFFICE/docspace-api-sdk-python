@@ -1,5 +1,4 @@
 # StartReassignRequestDto
-
 The request parameters for starting the reassignment process.
 
 ## Properties
@@ -13,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.start_reassign_request_dto import StartReassignRequestDto
+from docspace_api_sdk.models.start_reassign_request_dto import StartReassignRequestDto
 
 # TODO update the JSON string below
 json = "{}"

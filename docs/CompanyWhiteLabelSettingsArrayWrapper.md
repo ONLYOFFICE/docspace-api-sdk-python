@@ -1,6 +1,5 @@
 # CompanyWhiteLabelSettingsArrayWrapper
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.company_white_label_settings_array_wrapper import CompanyWhiteLabelSettingsArrayWrapper
+from docspace_api_sdk.models.company_white_label_settings_array_wrapper import CompanyWhiteLabelSettingsArrayWrapper
 
 # TODO update the JSON string below
 json = "{}"

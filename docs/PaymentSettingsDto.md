@@ -1,22 +1,21 @@
 # PaymentSettingsDto
-
 The payment settings parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**sales_email** | **str** | The email address for sales inquiries and support. | [optional] 
+**sales_email** | **str** | The email address for sales inquiries and support. | 
 **feedback_and_support_url** | **str** | The URL for accessing the feedback and support resources. | [optional] 
-**buy_url** | **str** | The URL for purchasing or upgrading the product. | [optional] 
-**standalone** | **bool** | Indicates whether the system is running in standalone mode. | [optional] 
-**current_license** | [**CurrentLicenseInfo**](CurrentLicenseInfo.md) |  | [optional] 
-**max** | **int** | The maximum quota quantity. | [optional] 
+**buy_url** | **str** | The URL for purchasing or upgrading the product. | 
+**standalone** | **bool** | Indicates whether the system is running in standalone mode. | 
+**current_license** | [**CurrentLicenseInfo**](CurrentLicenseInfo.md) |  | 
+**max** | **int** | The maximum quota quantity. | 
 
 ## Example
 
 ```python
-from docspace.models.payment_settings_dto import PaymentSettingsDto
+from docspace_api_sdk.models.payment_settings_dto import PaymentSettingsDto
 
 # TODO update the JSON string below
 json = "{}"

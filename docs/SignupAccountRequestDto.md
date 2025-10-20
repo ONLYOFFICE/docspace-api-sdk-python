@@ -1,5 +1,4 @@
 # SignupAccountRequestDto
-
 The request parameters for creating a third-party account.
 
 ## Properties
@@ -11,14 +10,14 @@ Name | Type | Description | Notes
 **last_name** | **str** | The user last name. | [optional] 
 **email** | **str** | The user email address. | [optional] 
 **password_hash** | **str** | The user password hash. | [optional] 
-**key** | **str** | The user link key. | [optional] 
+**key** | **str** | The user link key. | 
 **culture** | **str** | The user culture code. | [optional] 
-**serialized_profile** | **str** | Third-party profile in the serialized format | [optional] 
+**serialized_profile** | **str** | The third-party profile in the serialized format | 
 
 ## Example
 
 ```python
-from docspace.models.signup_account_request_dto import SignupAccountRequestDto
+from docspace_api_sdk.models.signup_account_request_dto import SignupAccountRequestDto
 
 # TODO update the JSON string below
 json = "{}"

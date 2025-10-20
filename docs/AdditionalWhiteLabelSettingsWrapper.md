@@ -1,5 +1,4 @@
 # AdditionalWhiteLabelSettingsWrapper
-
 The additional white label settings wrapper.
 
 ## Properties
@@ -11,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.additional_white_label_settings_wrapper import AdditionalWhiteLabelSettingsWrapper
+from docspace_api_sdk.models.additional_white_label_settings_wrapper import AdditionalWhiteLabelSettingsWrapper
 
 # TODO update the JSON string below
 json = "{}"

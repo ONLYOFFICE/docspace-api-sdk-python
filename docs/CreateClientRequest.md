@@ -1,28 +1,27 @@
 # CreateClientRequest
-
-Client creation request containing client details
+The request parameters for creating a client.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **str** | The name of the client | [optional] 
-**description** | **str** | The description of the client | [optional] 
-**logo** | **str** | The logo of the client in base64 format | [optional] 
-**scopes** | **List[str]** | The scopes for the client | [optional] 
-**allow_pkce** | **bool** | Indicates whether PKCE is allowed for the client | [optional] 
-**is_public** | **bool** | Indicates if the client is public | [optional] 
-**website_url** | **str** | The website URL of the client | [optional] 
-**terms_url** | **str** | The terms URL of the client | [optional] 
-**policy_url** | **str** | The policy URL of the client | [optional] 
-**redirect_uris** | **List[str]** | The redirect URIs for the client | 
-**allowed_origins** | **List[str]** | The allowed origins for the client | 
-**logout_redirect_uri** | **str** | The logout redirect URI for the client | [optional] 
+**name** | **str** | The client name. | [optional] 
+**description** | **str** | The client description. | [optional] 
+**logo** | **str** | The client logo in base64 format. | [optional] 
+**scopes** | **List[str]** | The client scopes. | [optional] 
+**allow_pkce** | **bool** | Indicates whether PKCE is allowed for the client. | [optional] 
+**is_public** | **bool** | Indicates whether the client is accessible by third-party tenants. | [optional] 
+**website_url** | **str** | The URL to the client&#39;s website. | [optional] 
+**terms_url** | **str** | The URL to the client&#39;s terms of service. | [optional] 
+**policy_url** | **str** | The URL to the client&#39;s privacy policy. | [optional] 
+**redirect_uris** | **List[str]** | The list of allowed redirect URIs. | 
+**allowed_origins** | **List[str]** | The list of allowed CORS origins. | 
+**logout_redirect_uri** | **str** | The list of allowed logout redirect URIs. | [optional] 
 
 ## Example
 
 ```python
-from docspace.models.create_client_request import CreateClientRequest
+from docspace_api_sdk.models.create_client_request import CreateClientRequest
 
 # TODO update the JSON string below
 json = "{}"

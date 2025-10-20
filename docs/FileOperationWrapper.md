@@ -1,6 +1,5 @@
 # FileOperationWrapper
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.file_operation_wrapper import FileOperationWrapper
+from docspace_api_sdk.models.file_operation_wrapper import FileOperationWrapper
 
 # TODO update the JSON string below
 json = "{}"

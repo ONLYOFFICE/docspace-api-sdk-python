@@ -1,6 +1,5 @@
 # IsDefaultWhiteLabelLogosWrapper
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.is_default_white_label_logos_wrapper import IsDefaultWhiteLabelLogosWrapper
+from docspace_api_sdk.models.is_default_white_label_logos_wrapper import IsDefaultWhiteLabelLogosWrapper
 
 # TODO update the JSON string below
 json = "{}"

@@ -1,6 +1,5 @@
 # StringWrapper
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.string_wrapper import StringWrapper
+from docspace_api_sdk.models.string_wrapper import StringWrapper
 
 # TODO update the JSON string below
 json = "{}"

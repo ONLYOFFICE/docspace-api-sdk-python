@@ -1,19 +1,19 @@
 # GroupSummaryDto
-
 The group summary parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** | The group ID. | [optional] 
-**name** | **str** | The group name. | [optional] 
+**id** | **str** | The group ID. | 
+**name** | **str** | The group name. | 
 **manager** | **str** | The group manager. | [optional] 
+**is_system** | **bool** | Indicates whether the group is a system group. | [optional] 
 
 ## Example
 
 ```python
-from docspace.models.group_summary_dto import GroupSummaryDto
+from docspace_api_sdk.models.group_summary_dto import GroupSummaryDto
 
 # TODO update the JSON string below
 json = "{}"

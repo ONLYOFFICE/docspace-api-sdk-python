@@ -1,6 +1,5 @@
 # EmployeeFullWrapper
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.employee_full_wrapper import EmployeeFullWrapper
+from docspace_api_sdk.models.employee_full_wrapper import EmployeeFullWrapper
 
 # TODO update the JSON string below
 json = "{}"

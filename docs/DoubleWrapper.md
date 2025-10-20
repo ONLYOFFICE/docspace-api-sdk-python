@@ -1,6 +1,5 @@
 # DoubleWrapper
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.double_wrapper import DoubleWrapper
+from docspace_api_sdk.models.double_wrapper import DoubleWrapper
 
 # TODO update the JSON string below
 json = "{}"

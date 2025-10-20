@@ -1,19 +1,18 @@
 # AuthKey
-
-The authentication key parameters.
+The authorization key parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **str** | The authentication key name. | [optional] 
-**value** | **str** | The authentication key value. | [optional] 
-**title** | **str** | The authentication key title. | [optional] 
+**name** | **str** | The authorization key name. | 
+**value** | **str** | The authorization key value. | 
+**title** | **str** | The authorization key title. | [optional] 
 
 ## Example
 
 ```python
-from docspace.models.auth_key import AuthKey
+from docspace_api_sdk.models.auth_key import AuthKey
 
 # TODO update the JSON string below
 json = "{}"

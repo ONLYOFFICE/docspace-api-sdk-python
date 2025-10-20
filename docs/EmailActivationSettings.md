@@ -1,18 +1,17 @@
 # EmailActivationSettings
-
 The email activation settings.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**show** | **bool** | Specifies whether the email activation settings is shown or hidden. | [optional] 
+**show** | **bool** | Specifies whether the email activation settings are shown or hidden. | [optional] 
 **last_modified** | **datetime** |  | [optional] 
 
 ## Example
 
 ```python
-from docspace.models.email_activation_settings import EmailActivationSettings
+from docspace_api_sdk.models.email_activation_settings import EmailActivationSettings
 
 # TODO update the JSON string below
 json = "{}"

@@ -1,5 +1,4 @@
 # ThumbnailsRequest
-
 The thumbnail request.
 
 ## Properties
@@ -15,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.thumbnails_request import ThumbnailsRequest
+from docspace_api_sdk.models.thumbnails_request import ThumbnailsRequest
 
 # TODO update the JSON string below
 json = "{}"

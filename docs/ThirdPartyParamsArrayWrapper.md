@@ -1,6 +1,5 @@
 # ThirdPartyParamsArrayWrapper
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.third_party_params_array_wrapper import ThirdPartyParamsArrayWrapper
+from docspace_api_sdk.models.third_party_params_array_wrapper import ThirdPartyParamsArrayWrapper
 
 # TODO update the JSON string below
 json = "{}"

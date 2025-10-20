@@ -1,5 +1,4 @@
 # EmailValidationKeyModel
-
 The confirmation email parameters.
 
 ## Properties
@@ -9,6 +8,7 @@ Name | Type | Description | Notes
 **key** | **str** | The email validation key. | [optional] 
 **empl_type** | [**EmployeeType**](EmployeeType.md) |  | [optional] 
 **email** | **str** | The email address. | [optional] 
+**enc_email** | **str** | The encrypted email address. | [optional] 
 **ui_d** | **str** | The user ID. | [optional] 
 **type** | [**ConfirmType**](ConfirmType.md) |  | [optional] 
 **first** | **str** | Specifies whether it is the first time account access or not. | [optional] 
@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.email_validation_key_model import EmailValidationKeyModel
+from docspace_api_sdk.models.email_validation_key_model import EmailValidationKeyModel
 
 # TODO update the JSON string below
 json = "{}"

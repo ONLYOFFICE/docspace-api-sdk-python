@@ -1,5 +1,4 @@
 # FilesStatisticsResultDto
-
 The file statistics result parameters.
 
 ## Properties
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.files_statistics_result_dto import FilesStatisticsResultDto
+from docspace_api_sdk.models.files_statistics_result_dto import FilesStatisticsResultDto
 
 # TODO update the JSON string below
 json = "{}"

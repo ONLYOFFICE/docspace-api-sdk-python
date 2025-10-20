@@ -1,5 +1,4 @@
 # DnsSettingsRequestsDto
-
 The request parameters for managing the DNS (Domain Name System) settings.
 
 ## Properties
@@ -12,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.dns_settings_requests_dto import DnsSettingsRequestsDto
+from docspace_api_sdk.models.dns_settings_requests_dto import DnsSettingsRequestsDto
 
 # TODO update the JSON string below
 json = "{}"

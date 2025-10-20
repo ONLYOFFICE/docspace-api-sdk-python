@@ -1,5 +1,4 @@
 # WhiteLabelItemPathDto
-
 The white label item path parameters.
 
 ## Properties
@@ -12,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.white_label_item_path_dto import WhiteLabelItemPathDto
+from docspace_api_sdk.models.white_label_item_path_dto import WhiteLabelItemPathDto
 
 # TODO update the JSON string below
 json = "{}"

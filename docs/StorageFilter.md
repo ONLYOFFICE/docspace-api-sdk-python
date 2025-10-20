@@ -1,5 +1,4 @@
 # StorageFilter
-
 [0 - None, 1 - Internal, 2 - ThirdParty]
 
 ## Enum

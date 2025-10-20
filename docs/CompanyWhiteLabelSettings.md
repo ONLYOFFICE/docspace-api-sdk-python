@@ -1,5 +1,4 @@
 # CompanyWhiteLabelSettings
-
 The company white label settings.
 
 ## Properties
@@ -12,12 +11,13 @@ Name | Type | Description | Notes
 **address** | **str** | The company address. | [optional] 
 **phone** | **str** | The company phone number. | [optional] 
 **is_licensor** | **bool** | Specifies if a company is a licensor or not. | [optional] 
+**hide_about** | **bool** | Specifies if the About page is visible or not | [optional] 
 **last_modified** | **datetime** |  | [optional] 
 
 ## Example
 
 ```python
-from docspace.models.company_white_label_settings import CompanyWhiteLabelSettings
+from docspace_api_sdk.models.company_white_label_settings import CompanyWhiteLabelSettings
 
 # TODO update the JSON string below
 json = "{}"

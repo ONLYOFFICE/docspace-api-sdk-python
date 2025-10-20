@@ -1,5 +1,4 @@
 # ThirdPartyRequestDto
-
 The third-party request parameters.
 
 ## Properties
@@ -10,14 +9,14 @@ Name | Type | Description | Notes
 **login** | **str** | The third-party request login. | [optional] 
 **password** | **str** | The third-party request password. | [optional] 
 **token** | **str** | The authentication token. | [optional] 
-**customer_title** | **str** | The customer title. | [optional] 
-**provider_key** | **str** | The provider key. | [optional] 
+**customer_title** | **str** | The customer title. | 
+**provider_key** | **str** | The provider key. | 
 **provider_id** | **int** | The provider ID. | [optional] 
 
 ## Example
 
 ```python
-from docspace.models.third_party_request_dto import ThirdPartyRequestDto
+from docspace_api_sdk.models.third_party_request_dto import ThirdPartyRequestDto
 
 # TODO update the JSON string below
 json = "{}"

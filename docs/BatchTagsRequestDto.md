@@ -1,6 +1,5 @@
 # BatchTagsRequestDto
-
-The parameters for adding tags.
+The parameters for managing room tags.
 
 ## Properties
 
@@ -11,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.batch_tags_request_dto import BatchTagsRequestDto
+from docspace_api_sdk.models.batch_tags_request_dto import BatchTagsRequestDto
 
 # TODO update the JSON string below
 json = "{}"

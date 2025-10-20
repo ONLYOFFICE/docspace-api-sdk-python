@@ -1,5 +1,4 @@
 # FileUploadResultDto
-
 The file upload result.
 
 ## Properties
@@ -13,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.file_upload_result_dto import FileUploadResultDto
+from docspace_api_sdk.models.file_upload_result_dto import FileUploadResultDto
 
 # TODO update the JSON string below
 json = "{}"

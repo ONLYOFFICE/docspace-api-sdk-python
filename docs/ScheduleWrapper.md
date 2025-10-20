@@ -1,11 +1,10 @@
 # ScheduleWrapper
 
-
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**response** | [**Schedule**](Schedule.md) |  | [optional] 
+**response** | [**ScheduleDto**](ScheduleDto.md) |  | [optional] 
 **count** | **int** |  | [optional] 
 **links** | [**List[ActiveConnectionsWrapperLinksInner]**](ActiveConnectionsWrapperLinksInner.md) |  | [optional] 
 **status** | **int** |  | [optional] 
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.schedule_wrapper import ScheduleWrapper
+from docspace_api_sdk.models.schedule_wrapper import ScheduleWrapper
 
 # TODO update the JSON string below
 json = "{}"

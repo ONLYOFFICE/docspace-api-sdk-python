@@ -1,5 +1,4 @@
 # LogoConfigDto
-
 The logo config parameters.
 
 ## Properties
@@ -8,6 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **image** | **str** | The image of the logo. | [optional] 
 **image_dark** | **str** | The dark image of the logo. | [optional] 
+**image_light** | **str** | The light image of the logo. | [optional] 
 **image_embedded** | **str** | The embedded image of the logo. | [optional] 
 **url** | **str** | The url link of the logo. | [optional] 
 **visible** | **bool** | Specifies if the logo is visible. | [optional] 
@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.logo_config_dto import LogoConfigDto
+from docspace_api_sdk.models.logo_config_dto import LogoConfigDto
 
 # TODO update the JSON string below
 json = "{}"

@@ -1,6 +1,5 @@
 # ICompressWrapper
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.i_compress_wrapper import ICompressWrapper
+from docspace_api_sdk.models.i_compress_wrapper import ICompressWrapper
 
 # TODO update the JSON string below
 json = "{}"

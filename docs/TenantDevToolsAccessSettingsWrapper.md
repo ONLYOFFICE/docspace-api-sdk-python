@@ -1,6 +1,5 @@
 # TenantDevToolsAccessSettingsWrapper
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.tenant_dev_tools_access_settings_wrapper import TenantDevToolsAccessSettingsWrapper
+from docspace_api_sdk.models.tenant_dev_tools_access_settings_wrapper import TenantDevToolsAccessSettingsWrapper
 
 # TODO update the JSON string below
 json = "{}"

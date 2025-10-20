@@ -1,93 +1,27 @@
-# docspace.PeopleUserDataApi
+# docspace_api_sdk.UserDataApi
 
-All URIs are relative to *http://localhost:8092*
+All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get_delete_personal_folder_progress**](PeopleUserDataApi.md#get_delete_personal_folder_progress) | **GET** /api/2.0/people/delete/personal/progress | Get the progress of deleting the personal folder
-[**get_reassign_progress**](PeopleUserDataApi.md#get_reassign_progress) | **GET** /api/2.0/people/reassign/progress/{userid} | Get the reassignment progress
-[**get_remove_progress**](PeopleUserDataApi.md#get_remove_progress) | **GET** /api/2.0/people/remove/progress/{userid} | Get the deletion progress
-[**necessary_reassign**](PeopleUserDataApi.md#necessary_reassign) | **GET** /api/2.0/people/reassign/necessary | Check the data reassignment need
-[**send_instructions_to_delete**](PeopleUserDataApi.md#send_instructions_to_delete) | **PUT** /api/2.0/people/self/delete | Send the deletion instructions
-[**start_delete_personal_folder**](PeopleUserDataApi.md#start_delete_personal_folder) | **POST** /api/2.0/people/delete/personal/start | Delete the personal folder
-[**start_reassign**](PeopleUserDataApi.md#start_reassign) | **POST** /api/2.0/people/reassign/start | Start the data reassignment
-[**start_remove**](PeopleUserDataApi.md#start_remove) | **POST** /api/2.0/people/remove/start | Start the data deletion
-[**terminate_reassign**](PeopleUserDataApi.md#terminate_reassign) | **PUT** /api/2.0/people/reassign/terminate | Terminate the data reassignment
-[**terminate_remove**](PeopleUserDataApi.md#terminate_remove) | **PUT** /api/2.0/people/remove/terminate | Terminate the data deletion
+[**get_delete_personal_folder_progress**](#get_delete_personal_folder_progress) | **GET** /api/2.0/people/delete/personal/progress | Get the progress of deleting the personal folder
+[**get_reassign_progress**](#get_reassign_progress) | **GET** /api/2.0/people/reassign/progress/{userid} | Get the reassignment progress
+[**get_remove_progress**](#get_remove_progress) | **GET** /api/2.0/people/remove/progress/{userid} | Get the deletion progress
+[**necessary_reassign**](#necessary_reassign) | **GET** /api/2.0/people/reassign/necessary | Check data for reassignment need
+[**send_instructions_to_delete**](#send_instructions_to_delete) | **PUT** /api/2.0/people/self/delete | Send the deletion instructions
+[**start_delete_personal_folder**](#start_delete_personal_folder) | **POST** /api/2.0/people/delete/personal/start | Delete the personal folder
+[**start_reassign**](#start_reassign) | **POST** /api/2.0/people/reassign/start | Start the data reassignment
+[**start_remove**](#start_remove) | **POST** /api/2.0/people/remove/start | Start the data deletion
+[**terminate_reassign**](#terminate_reassign) | **PUT** /api/2.0/people/reassign/terminate | Terminate the data reassignment
+[**terminate_remove**](#terminate_remove) | **PUT** /api/2.0/people/remove/terminate | Terminate the data deletion
 
 
 # **get_delete_personal_folder_progress**
 > TaskProgressResponseWrapper get_delete_personal_folder_progress()
 
-Get the progress of deleting the personal folder
-
 Returns the progress of deleting the personal folder.
 
-### Example
-
-* Basic Authentication (Basic):
-* OAuth Authentication (OAuth2):
-* Api Key Authentication (ApiKeyBearer):
-* Api Key Authentication (asc_auth_key):
-* Bearer (JWT) Authentication (Bearer):
-
-```python
-import docspace
-from docspace.models.task_progress_response_wrapper import TaskProgressResponseWrapper
-from docspace.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace.Configuration(
-    host = "http://localhost:8092"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure HTTP basic authorization: Basic
-configuration = docspace.Configuration(
-    username = os.environ["USERNAME"],
-    password = os.environ["PASSWORD"]
-)
-
-configuration.access_token = os.environ["ACCESS_TOKEN"]
-
-# Configure API key authorization: ApiKeyBearer
-configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-
-# Enter a context with an instance of the API client
-with docspace.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace.PeopleUserDataApi(api_client)
-
-    try:
-        # Get the progress of deleting the personal folder
-        api_response = api_instance.get_delete_personal_folder_progress()
-        print("The response of PeopleUserDataApi->get_delete_personal_folder_progress:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling PeopleUserDataApi->get_delete_personal_folder_progress: %s\n" % e)
-```
-
-
+For more information, see [api.onlyoffice.com]().
 
 ### Parameters
 
@@ -101,10 +35,50 @@ This endpoint does not need any parameter.
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
+### Example
+
+
+```python
+import docspace_api_sdk
+from docspace_api_sdk.models.task_progress_response_wrapper import TaskProgressResponseWrapper
+from docspace_api_sdk.rest import ApiException
+from pprint import pprint
+
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with docspace_api_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace_api_sdk.UserDataApi(api_client)
+
+    try:
+        # Get the progress of deleting the personal folder
+        api_response = api_instance.get_delete_personal_folder_progress()
+        print("The response of UserDataApi->get_delete_personal_folder_progress:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling UserDataApi->get_delete_personal_folder_progress: %s\n" % e)
+```
+
+
+
 ### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
+
 
 ### HTTP response details
 
@@ -118,76 +92,9 @@ This endpoint does not need any parameter.
 # **get_reassign_progress**
 > TaskProgressResponseWrapper get_reassign_progress(userid)
 
-Get the reassignment progress
-
 Returns the progress of the started data reassignment for the user with the ID specified in the request.
 
-### Example
-
-* Basic Authentication (Basic):
-* OAuth Authentication (OAuth2):
-* Api Key Authentication (ApiKeyBearer):
-* Api Key Authentication (asc_auth_key):
-* Bearer (JWT) Authentication (Bearer):
-
-```python
-import docspace
-from docspace.models.task_progress_response_wrapper import TaskProgressResponseWrapper
-from docspace.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace.Configuration(
-    host = "http://localhost:8092"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure HTTP basic authorization: Basic
-configuration = docspace.Configuration(
-    username = os.environ["USERNAME"],
-    password = os.environ["PASSWORD"]
-)
-
-configuration.access_token = os.environ["ACCESS_TOKEN"]
-
-# Configure API key authorization: ApiKeyBearer
-configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-
-# Enter a context with an instance of the API client
-with docspace.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace.PeopleUserDataApi(api_client)
-    userid = 'aae1e103-bca5-9fa1-ba8c-42058b4abf28' # str | The user ID.
-
-    try:
-        # Get the reassignment progress
-        api_response = api_instance.get_reassign_progress(userid)
-        print("The response of PeopleUserDataApi->get_reassign_progress:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling PeopleUserDataApi->get_reassign_progress: %s\n" % e)
-```
-
-
+For more information, see [api.onlyoffice.com]().
 
 ### Parameters
 
@@ -204,10 +111,51 @@ Name | Type | Description  | Notes
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
+### Example
+
+
+```python
+import docspace_api_sdk
+from docspace_api_sdk.models.task_progress_response_wrapper import TaskProgressResponseWrapper
+from docspace_api_sdk.rest import ApiException
+from pprint import pprint
+
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with docspace_api_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace_api_sdk.UserDataApi(api_client)
+    userid = 'aae1e103-bca5-9fa1-ba8c-42058b4abf28' # str | The user ID.
+
+    try:
+        # Get the reassignment progress
+        api_response = api_instance.get_reassign_progress(userid)
+        print("The response of UserDataApi->get_reassign_progress:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling UserDataApi->get_reassign_progress: %s\n" % e)
+```
+
+
+
 ### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
+
 
 ### HTTP response details
 
@@ -221,76 +169,9 @@ Name | Type | Description  | Notes
 # **get_remove_progress**
 > TaskProgressResponseWrapper get_remove_progress(userid)
 
-Get the deletion progress
-
 Returns the progress of the started data deletion for the user with the ID specified in the request.
 
-### Example
-
-* Basic Authentication (Basic):
-* OAuth Authentication (OAuth2):
-* Api Key Authentication (ApiKeyBearer):
-* Api Key Authentication (asc_auth_key):
-* Bearer (JWT) Authentication (Bearer):
-
-```python
-import docspace
-from docspace.models.task_progress_response_wrapper import TaskProgressResponseWrapper
-from docspace.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace.Configuration(
-    host = "http://localhost:8092"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure HTTP basic authorization: Basic
-configuration = docspace.Configuration(
-    username = os.environ["USERNAME"],
-    password = os.environ["PASSWORD"]
-)
-
-configuration.access_token = os.environ["ACCESS_TOKEN"]
-
-# Configure API key authorization: ApiKeyBearer
-configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-
-# Enter a context with an instance of the API client
-with docspace.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace.PeopleUserDataApi(api_client)
-    userid = 'aae1e103-bca5-9fa1-ba8c-42058b4abf28' # str | The user ID.
-
-    try:
-        # Get the deletion progress
-        api_response = api_instance.get_remove_progress(userid)
-        print("The response of PeopleUserDataApi->get_remove_progress:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling PeopleUserDataApi->get_remove_progress: %s\n" % e)
-```
-
-
+For more information, see [api.onlyoffice.com]().
 
 ### Parameters
 
@@ -307,10 +188,51 @@ Name | Type | Description  | Notes
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
+### Example
+
+
+```python
+import docspace_api_sdk
+from docspace_api_sdk.models.task_progress_response_wrapper import TaskProgressResponseWrapper
+from docspace_api_sdk.rest import ApiException
+from pprint import pprint
+
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with docspace_api_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace_api_sdk.UserDataApi(api_client)
+    userid = 'aae1e103-bca5-9fa1-ba8c-42058b4abf28' # str | The user ID.
+
+    try:
+        # Get the deletion progress
+        api_response = api_instance.get_remove_progress(userid)
+        print("The response of UserDataApi->get_remove_progress:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling UserDataApi->get_remove_progress: %s\n" % e)
+```
+
+
+
 ### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
+
 
 ### HTTP response details
 
@@ -324,78 +246,9 @@ Name | Type | Description  | Notes
 # **necessary_reassign**
 > BooleanWrapper necessary_reassign(user_id=user_id, type=type)
 
-Check the data reassignment need
+Checks whether the reassignment of rooms and shared files is required.
 
-Checks if the reassignment of rooms and shared files is necessary or not.
-
-### Example
-
-* Basic Authentication (Basic):
-* OAuth Authentication (OAuth2):
-* Api Key Authentication (ApiKeyBearer):
-* Api Key Authentication (asc_auth_key):
-* Bearer (JWT) Authentication (Bearer):
-
-```python
-import docspace
-from docspace.models.boolean_wrapper import BooleanWrapper
-from docspace.models.employee_type import EmployeeType
-from docspace.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace.Configuration(
-    host = "http://localhost:8092"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure HTTP basic authorization: Basic
-configuration = docspace.Configuration(
-    username = os.environ["USERNAME"],
-    password = os.environ["PASSWORD"]
-)
-
-configuration.access_token = os.environ["ACCESS_TOKEN"]
-
-# Configure API key authorization: ApiKeyBearer
-configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-
-# Enter a context with an instance of the API client
-with docspace.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace.PeopleUserDataApi(api_client)
-    user_id = 'aae1e103-bca5-9fa1-ba8c-42058b4abf28' # str | The user ID. (optional)
-    type = docspace.EmployeeType() # EmployeeType | The expected user type. (optional)
-
-    try:
-        # Check the data reassignment need
-        api_response = api_instance.necessary_reassign(user_id=user_id, type=type)
-        print("The response of PeopleUserDataApi->necessary_reassign:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling PeopleUserDataApi->necessary_reassign: %s\n" % e)
-```
-
-
+For more information, see [api.onlyoffice.com]().
 
 ### Parameters
 
@@ -413,10 +266,53 @@ Name | Type | Description  | Notes
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
+### Example
+
+
+```python
+import docspace_api_sdk
+from docspace_api_sdk.models.boolean_wrapper import BooleanWrapper
+from docspace_api_sdk.models.employee_type import EmployeeType
+from docspace_api_sdk.rest import ApiException
+from pprint import pprint
+
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with docspace_api_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace_api_sdk.UserDataApi(api_client)
+    user_id = 'aae1e103-bca5-9fa1-ba8c-42058b4abf28' # str | The user ID. (optional)
+    type = docspace_api_sdk.EmployeeType() # EmployeeType | The expected user type. (optional)
+
+    try:
+        # Check data for reassignment need
+        api_response = api_instance.necessary_reassign(user_id=user_id, type=type)
+        print("The response of UserDataApi->necessary_reassign:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling UserDataApi->necessary_reassign: %s\n" % e)
+```
+
+
+
 ### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
+
 
 ### HTTP response details
 
@@ -430,75 +326,9 @@ Name | Type | Description  | Notes
 # **send_instructions_to_delete**
 > StringWrapper send_instructions_to_delete()
 
-Send the deletion instructions
-
 Sends the instructions for deleting a user profile.
 
-### Example
-
-* Basic Authentication (Basic):
-* OAuth Authentication (OAuth2):
-* Api Key Authentication (ApiKeyBearer):
-* Api Key Authentication (asc_auth_key):
-* Bearer (JWT) Authentication (Bearer):
-
-```python
-import docspace
-from docspace.models.string_wrapper import StringWrapper
-from docspace.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace.Configuration(
-    host = "http://localhost:8092"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure HTTP basic authorization: Basic
-configuration = docspace.Configuration(
-    username = os.environ["USERNAME"],
-    password = os.environ["PASSWORD"]
-)
-
-configuration.access_token = os.environ["ACCESS_TOKEN"]
-
-# Configure API key authorization: ApiKeyBearer
-configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-
-# Enter a context with an instance of the API client
-with docspace.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace.PeopleUserDataApi(api_client)
-
-    try:
-        # Send the deletion instructions
-        api_response = api_instance.send_instructions_to_delete()
-        print("The response of PeopleUserDataApi->send_instructions_to_delete:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling PeopleUserDataApi->send_instructions_to_delete: %s\n" % e)
-```
-
-
+For more information, see [api.onlyoffice.com]().
 
 ### Parameters
 
@@ -512,10 +342,50 @@ This endpoint does not need any parameter.
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
+### Example
+
+
+```python
+import docspace_api_sdk
+from docspace_api_sdk.models.string_wrapper import StringWrapper
+from docspace_api_sdk.rest import ApiException
+from pprint import pprint
+
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with docspace_api_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace_api_sdk.UserDataApi(api_client)
+
+    try:
+        # Send the deletion instructions
+        api_response = api_instance.send_instructions_to_delete()
+        print("The response of UserDataApi->send_instructions_to_delete:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling UserDataApi->send_instructions_to_delete: %s\n" % e)
+```
+
+
+
 ### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
+
 
 ### HTTP response details
 
@@ -530,75 +400,9 @@ This endpoint does not need any parameter.
 # **start_delete_personal_folder**
 > TaskProgressResponseWrapper start_delete_personal_folder()
 
-Delete the personal folder
-
 Starts deleting the personal folder.
 
-### Example
-
-* Basic Authentication (Basic):
-* OAuth Authentication (OAuth2):
-* Api Key Authentication (ApiKeyBearer):
-* Api Key Authentication (asc_auth_key):
-* Bearer (JWT) Authentication (Bearer):
-
-```python
-import docspace
-from docspace.models.task_progress_response_wrapper import TaskProgressResponseWrapper
-from docspace.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace.Configuration(
-    host = "http://localhost:8092"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure HTTP basic authorization: Basic
-configuration = docspace.Configuration(
-    username = os.environ["USERNAME"],
-    password = os.environ["PASSWORD"]
-)
-
-configuration.access_token = os.environ["ACCESS_TOKEN"]
-
-# Configure API key authorization: ApiKeyBearer
-configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-
-# Enter a context with an instance of the API client
-with docspace.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace.PeopleUserDataApi(api_client)
-
-    try:
-        # Delete the personal folder
-        api_response = api_instance.start_delete_personal_folder()
-        print("The response of PeopleUserDataApi->start_delete_personal_folder:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling PeopleUserDataApi->start_delete_personal_folder: %s\n" % e)
-```
-
-
+For more information, see [api.onlyoffice.com]().
 
 ### Parameters
 
@@ -612,10 +416,50 @@ This endpoint does not need any parameter.
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
+### Example
+
+
+```python
+import docspace_api_sdk
+from docspace_api_sdk.models.task_progress_response_wrapper import TaskProgressResponseWrapper
+from docspace_api_sdk.rest import ApiException
+from pprint import pprint
+
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with docspace_api_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace_api_sdk.UserDataApi(api_client)
+
+    try:
+        # Delete the personal folder
+        api_response = api_instance.start_delete_personal_folder()
+        print("The response of UserDataApi->start_delete_personal_folder:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling UserDataApi->start_delete_personal_folder: %s\n" % e)
+```
+
+
+
 ### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
+
 
 ### HTTP response details
 
@@ -630,77 +474,9 @@ This endpoint does not need any parameter.
 # **start_reassign**
 > TaskProgressResponseWrapper start_reassign(start_reassign_request_dto=start_reassign_request_dto)
 
-Start the data reassignment
-
 Starts the data reassignment for the user with the ID specified in the request.
 
-### Example
-
-* Basic Authentication (Basic):
-* OAuth Authentication (OAuth2):
-* Api Key Authentication (ApiKeyBearer):
-* Api Key Authentication (asc_auth_key):
-* Bearer (JWT) Authentication (Bearer):
-
-```python
-import docspace
-from docspace.models.start_reassign_request_dto import StartReassignRequestDto
-from docspace.models.task_progress_response_wrapper import TaskProgressResponseWrapper
-from docspace.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace.Configuration(
-    host = "http://localhost:8092"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure HTTP basic authorization: Basic
-configuration = docspace.Configuration(
-    username = os.environ["USERNAME"],
-    password = os.environ["PASSWORD"]
-)
-
-configuration.access_token = os.environ["ACCESS_TOKEN"]
-
-# Configure API key authorization: ApiKeyBearer
-configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-
-# Enter a context with an instance of the API client
-with docspace.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace.PeopleUserDataApi(api_client)
-    start_reassign_request_dto = docspace.StartReassignRequestDto() # StartReassignRequestDto |  (optional)
-
-    try:
-        # Start the data reassignment
-        api_response = api_instance.start_reassign(start_reassign_request_dto=start_reassign_request_dto)
-        print("The response of PeopleUserDataApi->start_reassign:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling PeopleUserDataApi->start_reassign: %s\n" % e)
-```
-
-
+For more information, see [api.onlyoffice.com]().
 
 ### Parameters
 
@@ -717,10 +493,52 @@ Name | Type | Description  | Notes
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
+### Example
+
+
+```python
+import docspace_api_sdk
+from docspace_api_sdk.models.start_reassign_request_dto import StartReassignRequestDto
+from docspace_api_sdk.models.task_progress_response_wrapper import TaskProgressResponseWrapper
+from docspace_api_sdk.rest import ApiException
+from pprint import pprint
+
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with docspace_api_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace_api_sdk.UserDataApi(api_client)
+    start_reassign_request_dto = docspace_api_sdk.StartReassignRequestDto() # StartReassignRequestDto |  (optional)
+
+    try:
+        # Start the data reassignment
+        api_response = api_instance.start_reassign(start_reassign_request_dto=start_reassign_request_dto)
+        print("The response of UserDataApi->start_reassign:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling UserDataApi->start_reassign: %s\n" % e)
+```
+
+
+
 ### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json
+
 
 ### HTTP response details
 
@@ -735,77 +553,9 @@ Name | Type | Description  | Notes
 # **start_remove**
 > TaskProgressResponseWrapper start_remove(terminate_request_dto=terminate_request_dto)
 
-Start the data deletion
-
 Starts the data deletion for the user with the ID specified in the request.
 
-### Example
-
-* Basic Authentication (Basic):
-* OAuth Authentication (OAuth2):
-* Api Key Authentication (ApiKeyBearer):
-* Api Key Authentication (asc_auth_key):
-* Bearer (JWT) Authentication (Bearer):
-
-```python
-import docspace
-from docspace.models.task_progress_response_wrapper import TaskProgressResponseWrapper
-from docspace.models.terminate_request_dto import TerminateRequestDto
-from docspace.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace.Configuration(
-    host = "http://localhost:8092"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure HTTP basic authorization: Basic
-configuration = docspace.Configuration(
-    username = os.environ["USERNAME"],
-    password = os.environ["PASSWORD"]
-)
-
-configuration.access_token = os.environ["ACCESS_TOKEN"]
-
-# Configure API key authorization: ApiKeyBearer
-configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-
-# Enter a context with an instance of the API client
-with docspace.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace.PeopleUserDataApi(api_client)
-    terminate_request_dto = docspace.TerminateRequestDto() # TerminateRequestDto |  (optional)
-
-    try:
-        # Start the data deletion
-        api_response = api_instance.start_remove(terminate_request_dto=terminate_request_dto)
-        print("The response of PeopleUserDataApi->start_remove:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling PeopleUserDataApi->start_remove: %s\n" % e)
-```
-
-
+For more information, see [api.onlyoffice.com]().
 
 ### Parameters
 
@@ -822,10 +572,52 @@ Name | Type | Description  | Notes
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
+### Example
+
+
+```python
+import docspace_api_sdk
+from docspace_api_sdk.models.task_progress_response_wrapper import TaskProgressResponseWrapper
+from docspace_api_sdk.models.terminate_request_dto import TerminateRequestDto
+from docspace_api_sdk.rest import ApiException
+from pprint import pprint
+
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with docspace_api_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace_api_sdk.UserDataApi(api_client)
+    terminate_request_dto = docspace_api_sdk.TerminateRequestDto() # TerminateRequestDto |  (optional)
+
+    try:
+        # Start the data deletion
+        api_response = api_instance.start_remove(terminate_request_dto=terminate_request_dto)
+        print("The response of UserDataApi->start_remove:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling UserDataApi->start_remove: %s\n" % e)
+```
+
+
+
 ### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json
+
 
 ### HTTP response details
 
@@ -842,77 +634,9 @@ Name | Type | Description  | Notes
 # **terminate_reassign**
 > TaskProgressResponseWrapper terminate_reassign(terminate_request_dto=terminate_request_dto)
 
-Terminate the data reassignment
-
 Terminates the data reassignment for the user with the ID specified in the request.
 
-### Example
-
-* Basic Authentication (Basic):
-* OAuth Authentication (OAuth2):
-* Api Key Authentication (ApiKeyBearer):
-* Api Key Authentication (asc_auth_key):
-* Bearer (JWT) Authentication (Bearer):
-
-```python
-import docspace
-from docspace.models.task_progress_response_wrapper import TaskProgressResponseWrapper
-from docspace.models.terminate_request_dto import TerminateRequestDto
-from docspace.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace.Configuration(
-    host = "http://localhost:8092"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure HTTP basic authorization: Basic
-configuration = docspace.Configuration(
-    username = os.environ["USERNAME"],
-    password = os.environ["PASSWORD"]
-)
-
-configuration.access_token = os.environ["ACCESS_TOKEN"]
-
-# Configure API key authorization: ApiKeyBearer
-configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-
-# Enter a context with an instance of the API client
-with docspace.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace.PeopleUserDataApi(api_client)
-    terminate_request_dto = docspace.TerminateRequestDto() # TerminateRequestDto |  (optional)
-
-    try:
-        # Terminate the data reassignment
-        api_response = api_instance.terminate_reassign(terminate_request_dto=terminate_request_dto)
-        print("The response of PeopleUserDataApi->terminate_reassign:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling PeopleUserDataApi->terminate_reassign: %s\n" % e)
-```
-
-
+For more information, see [api.onlyoffice.com]().
 
 ### Parameters
 
@@ -929,10 +653,52 @@ Name | Type | Description  | Notes
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
+### Example
+
+
+```python
+import docspace_api_sdk
+from docspace_api_sdk.models.task_progress_response_wrapper import TaskProgressResponseWrapper
+from docspace_api_sdk.models.terminate_request_dto import TerminateRequestDto
+from docspace_api_sdk.rest import ApiException
+from pprint import pprint
+
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with docspace_api_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace_api_sdk.UserDataApi(api_client)
+    terminate_request_dto = docspace_api_sdk.TerminateRequestDto() # TerminateRequestDto |  (optional)
+
+    try:
+        # Terminate the data reassignment
+        api_response = api_instance.terminate_reassign(terminate_request_dto=terminate_request_dto)
+        print("The response of UserDataApi->terminate_reassign:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling UserDataApi->terminate_reassign: %s\n" % e)
+```
+
+
+
 ### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json
+
 
 ### HTTP response details
 
@@ -946,74 +712,9 @@ Name | Type | Description  | Notes
 # **terminate_remove**
 > terminate_remove(terminate_request_dto=terminate_request_dto)
 
-Terminate the data deletion
-
 Terminates the data deletion for the user with the ID specified in the request.
 
-### Example
-
-* Basic Authentication (Basic):
-* OAuth Authentication (OAuth2):
-* Api Key Authentication (ApiKeyBearer):
-* Api Key Authentication (asc_auth_key):
-* Bearer (JWT) Authentication (Bearer):
-
-```python
-import docspace
-from docspace.models.terminate_request_dto import TerminateRequestDto
-from docspace.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace.Configuration(
-    host = "http://localhost:8092"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure HTTP basic authorization: Basic
-configuration = docspace.Configuration(
-    username = os.environ["USERNAME"],
-    password = os.environ["PASSWORD"]
-)
-
-configuration.access_token = os.environ["ACCESS_TOKEN"]
-
-# Configure API key authorization: ApiKeyBearer
-configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-
-# Enter a context with an instance of the API client
-with docspace.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace.PeopleUserDataApi(api_client)
-    terminate_request_dto = docspace.TerminateRequestDto() # TerminateRequestDto |  (optional)
-
-    try:
-        # Terminate the data deletion
-        api_instance.terminate_remove(terminate_request_dto=terminate_request_dto)
-    except Exception as e:
-        print("Exception when calling PeopleUserDataApi->terminate_remove: %s\n" % e)
-```
-
-
+For more information, see [api.onlyoffice.com]().
 
 ### Parameters
 
@@ -1030,10 +731,49 @@ void (empty response body)
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
+### Example
+
+
+```python
+import docspace_api_sdk
+from docspace_api_sdk.models.terminate_request_dto import TerminateRequestDto
+from docspace_api_sdk.rest import ApiException
+from pprint import pprint
+
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with docspace_api_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace_api_sdk.UserDataApi(api_client)
+    terminate_request_dto = docspace_api_sdk.TerminateRequestDto() # TerminateRequestDto |  (optional)
+
+    try:
+        # Terminate the data deletion
+        api_instance.terminate_remove(terminate_request_dto=terminate_request_dto)
+    except Exception as e:
+        print("Exception when calling UserDataApi->terminate_remove: %s\n" % e)
+```
+
+
+
 ### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: Not defined
+
 
 ### HTTP response details
 

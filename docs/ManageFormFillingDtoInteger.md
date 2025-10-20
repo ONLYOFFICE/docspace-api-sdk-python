@@ -1,18 +1,17 @@
 # ManageFormFillingDtoInteger
-
 The parameters for managing form filling.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**form_id** | **int** | The ID of the form to manage. | [optional] 
+**form_id** | **int** | The ID of the form to manage. | 
 **action** | [**FormFillingManageAction**](FormFillingManageAction.md) |  | [optional] 
 
 ## Example
 
 ```python
-from docspace.models.manage_form_filling_dto_integer import ManageFormFillingDtoInteger
+from docspace_api_sdk.models.manage_form_filling_dto_integer import ManageFormFillingDtoInteger
 
 # TODO update the JSON string below
 json = "{}"

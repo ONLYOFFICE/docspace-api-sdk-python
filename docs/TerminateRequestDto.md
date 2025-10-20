@@ -1,5 +1,4 @@
 # TerminateRequestDto
-
 The request parameters for terminating the reassignment/deletion process.
 
 ## Properties
@@ -11,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.terminate_request_dto import TerminateRequestDto
+from docspace_api_sdk.models.terminate_request_dto import TerminateRequestDto
 
 # TODO update the JSON string below
 json = "{}"

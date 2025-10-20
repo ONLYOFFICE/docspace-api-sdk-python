@@ -1,5 +1,4 @@
 # ChangeHistory
-
 The parameters for changing version history.
 
 ## Properties
@@ -12,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.change_history import ChangeHistory
+from docspace_api_sdk.models.change_history import ChangeHistory
 
 # TODO update the JSON string below
 json = "{}"

@@ -1,5 +1,4 @@
 # OwnerChangeInstructionsDto
-
 The owner change instructions parameters.
 
 ## Properties
@@ -12,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.owner_change_instructions_dto import OwnerChangeInstructionsDto
+from docspace_api_sdk.models.owner_change_instructions_dto import OwnerChangeInstructionsDto
 
 # TODO update the JSON string below
 json = "{}"

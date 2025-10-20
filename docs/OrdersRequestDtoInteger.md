@@ -1,17 +1,16 @@
 # OrdersRequestDtoInteger
-
 The collection of items to be ordered.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**items** | [**List[OrdersItemRequestDtoInteger]**](OrdersItemRequestDtoInteger.md) | The list of items with their ordering information. | [optional] 
+**items** | [**List[OrdersItemRequestDtoInteger]**](OrdersItemRequestDtoInteger.md) | The list of items with their ordering information. | 
 
 ## Example
 
 ```python
-from docspace.models.orders_request_dto_integer import OrdersRequestDtoInteger
+from docspace_api_sdk.models.orders_request_dto_integer import OrdersRequestDtoInteger
 
 # TODO update the JSON string below
 json = "{}"

@@ -1,6 +1,5 @@
 # NotificationSettingsWrapper
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.notification_settings_wrapper import NotificationSettingsWrapper
+from docspace_api_sdk.models.notification_settings_wrapper import NotificationSettingsWrapper
 
 # TODO update the JSON string below
 json = "{}"

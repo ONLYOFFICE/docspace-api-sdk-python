@@ -1,20 +1,19 @@
 # LoginSettingsDto
-
 The login settings parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**attempt_count** | **int** | The maximum number of consecutive failed login attempts allowed before triggering account suspension. | [optional] 
-**block_time** | **int** | The duration (in minutes) for which an account remains suspended after exceeding maximum login attempts. | [optional] 
-**check_period** | **int** | The maximum time (in seconds) allowed for server to process and respond to login requests. | [optional] 
-**is_default** | **bool** | Specifies if these settings are default or not | [optional] 
+**attempt_count** | **int** | The maximum number of consecutive failed login attempts allowed before triggering account suspension. | 
+**block_time** | **int** | The duration (in minutes) for which an account remains suspended after exceeding maximum login attempts. | 
+**check_period** | **int** | The maximum time (in seconds) allowed for server to process and respond to login requests. | 
+**is_default** | **bool** | Specifies if these settings are default or not | 
 
 ## Example
 
 ```python
-from docspace.models.login_settings_dto import LoginSettingsDto
+from docspace_api_sdk.models.login_settings_dto import LoginSettingsDto
 
 # TODO update the JSON string below
 json = "{}"

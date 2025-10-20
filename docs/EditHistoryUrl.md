@@ -1,5 +1,4 @@
 # EditHistoryUrl
-
 The file editing history URL parameters.
 
 ## Properties
@@ -13,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.edit_history_url import EditHistoryUrl
+from docspace_api_sdk.models.edit_history_url import EditHistoryUrl
 
 # TODO update the JSON string below
 json = "{}"

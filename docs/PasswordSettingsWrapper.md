@@ -1,6 +1,5 @@
 # PasswordSettingsWrapper
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.password_settings_wrapper import PasswordSettingsWrapper
+from docspace_api_sdk.models.password_settings_wrapper import PasswordSettingsWrapper
 
 # TODO update the JSON string below
 json = "{}"

@@ -1,5 +1,4 @@
 # Culture
-
 The culture code parameters.
 
 ## Properties
@@ -11,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.culture import Culture
+from docspace_api_sdk.models.culture import Culture
 
 # TODO update the JSON string below
 json = "{}"

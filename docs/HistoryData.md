@@ -1,5 +1,4 @@
 # HistoryData
-
 The history data.
 
 ## Properties
@@ -11,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.history_data import HistoryData
+from docspace_api_sdk.models.history_data import HistoryData
 
 # TODO update the JSON string below
 json = "{}"

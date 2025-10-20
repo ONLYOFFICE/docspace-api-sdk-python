@@ -1,6 +1,5 @@
 # SecurityArrayWrapper
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.security_array_wrapper import SecurityArrayWrapper
+from docspace_api_sdk.models.security_array_wrapper import SecurityArrayWrapper
 
 # TODO update the JSON string below
 json = "{}"

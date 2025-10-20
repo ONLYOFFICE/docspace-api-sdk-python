@@ -1,5 +1,4 @@
 # ArchiveRoomRequest
-
 The parameters for archiving a room.
 
 ## Properties
@@ -11,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.archive_room_request import ArchiveRoomRequest
+from docspace_api_sdk.models.archive_room_request import ArchiveRoomRequest
 
 # TODO update the JSON string below
 json = "{}"

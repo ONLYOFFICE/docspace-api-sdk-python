@@ -1,5 +1,4 @@
 # ThirdPartyParams
-
 The third-party account parameters.
 
 ## Properties
@@ -16,7 +15,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.third_party_params import ThirdPartyParams
+from docspace_api_sdk.models.third_party_params import ThirdPartyParams
 
 # TODO update the JSON string below
 json = "{}"

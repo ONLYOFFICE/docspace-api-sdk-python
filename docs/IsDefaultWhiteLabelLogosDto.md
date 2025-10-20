@@ -1,18 +1,17 @@
 # IsDefaultWhiteLabelLogosDto
-
-The default white label logos parameters.
+The default white label logo parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **str** | The white label logo name. | [optional] 
-**default** | **bool** | Specifies if the white label logo is default or not. | [optional] 
+**name** | **str** | The white label logo name. | 
+**default** | **bool** | Specifies if the white label logo is default or not. | 
 
 ## Example
 
 ```python
-from docspace.models.is_default_white_label_logos_dto import IsDefaultWhiteLabelLogosDto
+from docspace_api_sdk.models.is_default_white_label_logos_dto import IsDefaultWhiteLabelLogosDto
 
 # TODO update the JSON string below
 json = "{}"

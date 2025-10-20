@@ -1,5 +1,4 @@
 # AdminMessageSettingsRequestsDto
-
 The request parameters for configuring the administrator message content.
 
 ## Properties
@@ -9,11 +8,13 @@ Name | Type | Description | Notes
 **message** | **str** | The content of the administrator message to be sent. | 
 **email** | **str** | Email | 
 **culture** | **str** | Culture | [optional] 
+**recaptcha_type** | [**RecaptchaType**](RecaptchaType.md) |  | [optional] 
+**recaptcha_response** | **str** | The user&#39;s response to the CAPTCHA challenge. | [optional] 
 
 ## Example
 
 ```python
-from docspace.models.admin_message_settings_requests_dto import AdminMessageSettingsRequestsDto
+from docspace_api_sdk.models.admin_message_settings_requests_dto import AdminMessageSettingsRequestsDto
 
 # TODO update the JSON string below
 json = "{}"

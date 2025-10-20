@@ -1,5 +1,4 @@
 # MobileRequestsDto
-
 The parameters required for the mobile phone verification.
 
 ## Properties
@@ -11,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.mobile_requests_dto import MobileRequestsDto
+from docspace_api_sdk.models.mobile_requests_dto import MobileRequestsDto
 
 # TODO update the JSON string below
 json = "{}"

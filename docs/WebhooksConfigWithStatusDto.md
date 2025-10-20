@@ -1,5 +1,4 @@
 # WebhooksConfigWithStatusDto
-
 The webhook configuration with its status.
 
 ## Properties
@@ -12,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.webhooks_config_with_status_dto import WebhooksConfigWithStatusDto
+from docspace_api_sdk.models.webhooks_config_with_status_dto import WebhooksConfigWithStatusDto
 
 # TODO update the JSON string below
 json = "{}"

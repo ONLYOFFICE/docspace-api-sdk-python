@@ -1,6 +1,5 @@
 # ConfigurationIntegerWrapper
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.configuration_integer_wrapper import ConfigurationIntegerWrapper
+from docspace_api_sdk.models.configuration_integer_wrapper import ConfigurationIntegerWrapper
 
 # TODO update the JSON string below
 json = "{}"

@@ -1,5 +1,4 @@
 # DownloadRequestItemDtoKey
-
 The unique identifier or reference key for the file to be downloaded.
 
 ## Properties
@@ -10,7 +9,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.download_request_item_dto_key import DownloadRequestItemDtoKey
+from docspace_api_sdk.models.download_request_item_dto_key import DownloadRequestItemDtoKey
 
 # TODO update the JSON string below
 json = "{}"

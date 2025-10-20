@@ -1,5 +1,4 @@
 # ApiDateTime
-
 The API date and time parameters.
 
 ## Properties
@@ -12,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.api_date_time import ApiDateTime
+from docspace_api_sdk.models.api_date_time import ApiDateTime
 
 # TODO update the JSON string below
 json = "{}"

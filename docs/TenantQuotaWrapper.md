@@ -1,6 +1,5 @@
 # TenantQuotaWrapper
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.tenant_quota_wrapper import TenantQuotaWrapper
+from docspace_api_sdk.models.tenant_quota_wrapper import TenantQuotaWrapper
 
 # TODO update the JSON string below
 json = "{}"

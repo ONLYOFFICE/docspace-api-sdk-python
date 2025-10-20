@@ -1,5 +1,4 @@
 # ProviderDto
-
 The provider information.
 
 ## Properties
@@ -17,7 +16,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.provider_dto import ProviderDto
+from docspace_api_sdk.models.provider_dto import ProviderDto
 
 # TODO update the JSON string below
 json = "{}"

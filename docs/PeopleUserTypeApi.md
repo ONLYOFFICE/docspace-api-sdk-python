@@ -1,88 +1,21 @@
-# docspace.PeopleUserTypeApi
+# docspace_api_sdk.UserTypeApi
 
-All URIs are relative to *http://localhost:8092*
+All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get_change_type_progress**](PeopleUserTypeApi.md#get_change_type_progress) | **GET** /api/2.0/people/type/progress/{userid} | Get the progress of updating user type
-[**start_update_user_type**](PeopleUserTypeApi.md#start_update_user_type) | **POST** /api/2.0/people/type | Update user type
-[**terminate_change_type**](PeopleUserTypeApi.md#terminate_change_type) | **PUT** /api/2.0/people/type/terminate | Terminate update user type
-[**update_user_type**](PeopleUserTypeApi.md#update_user_type) | **PUT** /api/2.0/people/type/{type} | Change a user type
+[**get_user_type_update_progress**](#get_user_type_update_progress) | **GET** /api/2.0/people/type/progress/{userid} | Get the progress of updating user type
+[**star_user_typet_update**](#star_user_typet_update) | **POST** /api/2.0/people/type | Start updating user type
+[**terminate_user_type_update**](#terminate_user_type_update) | **PUT** /api/2.0/people/type/terminate | Terminate updating user type
+[**update_user_type**](#update_user_type) | **PUT** /api/2.0/people/type/{type} | Change a user type
 
 
-# **get_change_type_progress**
-> TaskProgressResponseWrapper get_change_type_progress(userid)
-
-Get the progress of updating user type
+# **get_user_type_update_progress**
+> TaskProgressResponseWrapper get_user_type_update_progress(userid)
 
 Returns the progress of updating the user type.
 
-### Example
-
-* Basic Authentication (Basic):
-* OAuth Authentication (OAuth2):
-* Api Key Authentication (ApiKeyBearer):
-* Api Key Authentication (asc_auth_key):
-* Bearer (JWT) Authentication (Bearer):
-
-```python
-import docspace
-from docspace.models.task_progress_response_wrapper import TaskProgressResponseWrapper
-from docspace.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace.Configuration(
-    host = "http://localhost:8092"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure HTTP basic authorization: Basic
-configuration = docspace.Configuration(
-    username = os.environ["USERNAME"],
-    password = os.environ["PASSWORD"]
-)
-
-configuration.access_token = os.environ["ACCESS_TOKEN"]
-
-# Configure API key authorization: ApiKeyBearer
-configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-
-# Enter a context with an instance of the API client
-with docspace.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace.PeopleUserTypeApi(api_client)
-    userid = 'aae1e103-bca5-9fa1-ba8c-42058b4abf28' # str | The user ID.
-
-    try:
-        # Get the progress of updating user type
-        api_response = api_instance.get_change_type_progress(userid)
-        print("The response of PeopleUserTypeApi->get_change_type_progress:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling PeopleUserTypeApi->get_change_type_progress: %s\n" % e)
-```
-
-
+For more information, see [api.onlyoffice.com]().
 
 ### Parameters
 
@@ -99,10 +32,51 @@ Name | Type | Description  | Notes
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
+### Example
+
+
+```python
+import docspace_api_sdk
+from docspace_api_sdk.models.task_progress_response_wrapper import TaskProgressResponseWrapper
+from docspace_api_sdk.rest import ApiException
+from pprint import pprint
+
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with docspace_api_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace_api_sdk.UserTypeApi(api_client)
+    userid = 'aae1e103-bca5-9fa1-ba8c-42058b4abf28' # str | The user ID.
+
+    try:
+        # Get the progress of updating user type
+        api_response = api_instance.get_user_type_update_progress(userid)
+        print("The response of UserTypeApi->get_user_type_update_progress:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling UserTypeApi->get_user_type_update_progress: %s\n" % e)
+```
+
+
+
 ### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
+
 
 ### HTTP response details
 
@@ -113,80 +87,12 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **start_update_user_type**
-> TaskProgressResponseWrapper start_update_user_type(start_update_user_type_dto=start_update_user_type_dto)
-
-Update user type
+# **star_user_typet_update**
+> TaskProgressResponseWrapper star_user_typet_update(start_update_user_type_dto=start_update_user_type_dto)
 
 Starts updating the type of the user or guest when reassigning rooms and shared files.
 
-### Example
-
-* Basic Authentication (Basic):
-* OAuth Authentication (OAuth2):
-* Api Key Authentication (ApiKeyBearer):
-* Api Key Authentication (asc_auth_key):
-* Bearer (JWT) Authentication (Bearer):
-
-```python
-import docspace
-from docspace.models.start_update_user_type_dto import StartUpdateUserTypeDto
-from docspace.models.task_progress_response_wrapper import TaskProgressResponseWrapper
-from docspace.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace.Configuration(
-    host = "http://localhost:8092"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure HTTP basic authorization: Basic
-configuration = docspace.Configuration(
-    username = os.environ["USERNAME"],
-    password = os.environ["PASSWORD"]
-)
-
-configuration.access_token = os.environ["ACCESS_TOKEN"]
-
-# Configure API key authorization: ApiKeyBearer
-configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-
-# Enter a context with an instance of the API client
-with docspace.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace.PeopleUserTypeApi(api_client)
-    start_update_user_type_dto = docspace.StartUpdateUserTypeDto() # StartUpdateUserTypeDto |  (optional)
-
-    try:
-        # Update user type
-        api_response = api_instance.start_update_user_type(start_update_user_type_dto=start_update_user_type_dto)
-        print("The response of PeopleUserTypeApi->start_update_user_type:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling PeopleUserTypeApi->start_update_user_type: %s\n" % e)
-```
-
-
+For more information, see [api.onlyoffice.com]().
 
 ### Parameters
 
@@ -203,10 +109,52 @@ Name | Type | Description  | Notes
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
+### Example
+
+
+```python
+import docspace_api_sdk
+from docspace_api_sdk.models.start_update_user_type_dto import StartUpdateUserTypeDto
+from docspace_api_sdk.models.task_progress_response_wrapper import TaskProgressResponseWrapper
+from docspace_api_sdk.rest import ApiException
+from pprint import pprint
+
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with docspace_api_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace_api_sdk.UserTypeApi(api_client)
+    start_update_user_type_dto = docspace_api_sdk.StartUpdateUserTypeDto() # StartUpdateUserTypeDto |  (optional)
+
+    try:
+        # Start updating user type
+        api_response = api_instance.star_user_typet_update(start_update_user_type_dto=start_update_user_type_dto)
+        print("The response of UserTypeApi->star_user_typet_update:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling UserTypeApi->star_user_typet_update: %s\n" % e)
+```
+
+
+
 ### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json
+
 
 ### HTTP response details
 
@@ -218,80 +166,12 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **terminate_change_type**
-> TaskProgressResponseWrapper terminate_change_type(terminate_request_dto=terminate_request_dto)
-
-Terminate update user type
+# **terminate_user_type_update**
+> TaskProgressResponseWrapper terminate_user_type_update(terminate_request_dto=terminate_request_dto)
 
 Terminates the process of updating the type of the user or guest.
 
-### Example
-
-* Basic Authentication (Basic):
-* OAuth Authentication (OAuth2):
-* Api Key Authentication (ApiKeyBearer):
-* Api Key Authentication (asc_auth_key):
-* Bearer (JWT) Authentication (Bearer):
-
-```python
-import docspace
-from docspace.models.task_progress_response_wrapper import TaskProgressResponseWrapper
-from docspace.models.terminate_request_dto import TerminateRequestDto
-from docspace.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace.Configuration(
-    host = "http://localhost:8092"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure HTTP basic authorization: Basic
-configuration = docspace.Configuration(
-    username = os.environ["USERNAME"],
-    password = os.environ["PASSWORD"]
-)
-
-configuration.access_token = os.environ["ACCESS_TOKEN"]
-
-# Configure API key authorization: ApiKeyBearer
-configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-
-# Enter a context with an instance of the API client
-with docspace.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace.PeopleUserTypeApi(api_client)
-    terminate_request_dto = docspace.TerminateRequestDto() # TerminateRequestDto |  (optional)
-
-    try:
-        # Terminate update user type
-        api_response = api_instance.terminate_change_type(terminate_request_dto=terminate_request_dto)
-        print("The response of PeopleUserTypeApi->terminate_change_type:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling PeopleUserTypeApi->terminate_change_type: %s\n" % e)
-```
-
-
+For more information, see [api.onlyoffice.com]().
 
 ### Parameters
 
@@ -308,10 +188,52 @@ Name | Type | Description  | Notes
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
+### Example
+
+
+```python
+import docspace_api_sdk
+from docspace_api_sdk.models.task_progress_response_wrapper import TaskProgressResponseWrapper
+from docspace_api_sdk.models.terminate_request_dto import TerminateRequestDto
+from docspace_api_sdk.rest import ApiException
+from pprint import pprint
+
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with docspace_api_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace_api_sdk.UserTypeApi(api_client)
+    terminate_request_dto = docspace_api_sdk.TerminateRequestDto() # TerminateRequestDto |  (optional)
+
+    try:
+        # Terminate updating user type
+        api_response = api_instance.terminate_user_type_update(terminate_request_dto=terminate_request_dto)
+        print("The response of UserTypeApi->terminate_user_type_update:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling UserTypeApi->terminate_user_type_update: %s\n" % e)
+```
+
+
+
 ### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json
+
 
 ### HTTP response details
 
@@ -323,81 +245,11 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update_user_type**
-> EmployeeFullArrayWrapper update_user_type(type, update_members_request_dto=update_members_request_dto)
-
-Change a user type
+> EmployeeFullArrayWrapper update_user_type(type, update_members_request_dto)
 
 Changes a type of the users with the IDs specified in the request.
 
-### Example
-
-* Basic Authentication (Basic):
-* OAuth Authentication (OAuth2):
-* Api Key Authentication (ApiKeyBearer):
-* Api Key Authentication (asc_auth_key):
-* Bearer (JWT) Authentication (Bearer):
-
-```python
-import docspace
-from docspace.models.employee_full_array_wrapper import EmployeeFullArrayWrapper
-from docspace.models.employee_type import EmployeeType
-from docspace.models.update_members_request_dto import UpdateMembersRequestDto
-from docspace.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace.Configuration(
-    host = "http://localhost:8092"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure HTTP basic authorization: Basic
-configuration = docspace.Configuration(
-    username = os.environ["USERNAME"],
-    password = os.environ["PASSWORD"]
-)
-
-configuration.access_token = os.environ["ACCESS_TOKEN"]
-
-# Configure API key authorization: ApiKeyBearer
-configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-
-# Enter a context with an instance of the API client
-with docspace.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace.PeopleUserTypeApi(api_client)
-    type = docspace.EmployeeType() # EmployeeType | The new user type.
-    update_members_request_dto = docspace.UpdateMembersRequestDto() # UpdateMembersRequestDto | The request parameters for updating the user information. (optional)
-
-    try:
-        # Change a user type
-        api_response = api_instance.update_user_type(type, update_members_request_dto=update_members_request_dto)
-        print("The response of PeopleUserTypeApi->update_user_type:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling PeopleUserTypeApi->update_user_type: %s\n" % e)
-```
-
-
+For more information, see [api.onlyoffice.com]().
 
 ### Parameters
 
@@ -405,7 +257,7 @@ with docspace.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **type** | [**EmployeeType**](.md)| The new user type. | 
- **update_members_request_dto** | [**UpdateMembersRequestDto**](UpdateMembersRequestDto.md)| The request parameters for updating the user information. | [optional] 
+ **update_members_request_dto** | [**UpdateMembersRequestDto**](UpdateMembersRequestDto.md)| The request parameters for updating the user information. | 
 
 ### Return type
 
@@ -415,10 +267,54 @@ Name | Type | Description  | Notes
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
+### Example
+
+
+```python
+import docspace_api_sdk
+from docspace_api_sdk.models.employee_full_array_wrapper import EmployeeFullArrayWrapper
+from docspace_api_sdk.models.employee_type import EmployeeType
+from docspace_api_sdk.models.update_members_request_dto import UpdateMembersRequestDto
+from docspace_api_sdk.rest import ApiException
+from pprint import pprint
+
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with docspace_api_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace_api_sdk.UserTypeApi(api_client)
+    type = docspace_api_sdk.EmployeeType() # EmployeeType | The new user type.
+    update_members_request_dto = docspace_api_sdk.UpdateMembersRequestDto() # UpdateMembersRequestDto | The request parameters for updating the user information.
+
+    try:
+        # Change a user type
+        api_response = api_instance.update_user_type(type, update_members_request_dto)
+        print("The response of UserTypeApi->update_user_type:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling UserTypeApi->update_user_type: %s\n" % e)
+```
+
+
+
 ### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json
+
 
 ### HTTP response details
 

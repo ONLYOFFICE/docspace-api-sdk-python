@@ -1,23 +1,22 @@
 # AdditionalWhiteLabelSettingsDto
-
 The additional white label settings parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**start_docs_enabled** | **bool** | Specifies if the sample documents are displayed or hidden. | [optional] 
-**help_center_enabled** | **bool** | Specifies if the Help Center link is available or not. | [optional] 
-**feedback_and_support_enabled** | **bool** | Specifies if the \&quot;Feedback &amp; Support\&quot; link is available or not. | [optional] 
-**user_forum_enabled** | **bool** | Specifies if the user forum is available or not. | [optional] 
-**video_guides_enabled** | **bool** | Specifies if the Video Guides link is available or not. | [optional] 
-**license_agreements_enabled** | **bool** | Specifies if the License Agreements link is available or not. | [optional] 
-**is_default** | **bool** | Specifies if the additional white label settings are default or not. | [optional] 
+**start_docs_enabled** | **bool** | Specifies if the sample documents are displayed or hidden. | 
+**help_center_enabled** | **bool** | Specifies if the Help Center link is available or not. | 
+**feedback_and_support_enabled** | **bool** | Specifies if the Feedback &amp; Support link is available or not. | 
+**user_forum_enabled** | **bool** | Specifies if the user forum is available or not. | 
+**video_guides_enabled** | **bool** | Specifies if the Video Guides link is available or not. | 
+**license_agreements_enabled** | **bool** | Specifies if the License Agreements link is available or not. | 
+**is_default** | **bool** | Specifies if the additional white label settings are default or not. | 
 
 ## Example
 
 ```python
-from docspace.models.additional_white_label_settings_dto import AdditionalWhiteLabelSettingsDto
+from docspace_api_sdk.models.additional_white_label_settings_dto import AdditionalWhiteLabelSettingsDto
 
 # TODO update the JSON string below
 json = "{}"

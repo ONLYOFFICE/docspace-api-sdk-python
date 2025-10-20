@@ -1,5 +1,4 @@
 # FileLinkRequest
-
 The external link request parameters.
 
 ## Properties
@@ -9,13 +8,16 @@ Name | Type | Description | Notes
 **link_id** | **str** | The external link ID. | [optional] 
 **access** | [**FileShare**](FileShare.md) |  | [optional] 
 **expiration_date** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] 
+**title** | **str** | The link name. | [optional] 
 **internal** | **bool** | The link scope, whether it is internal or not. | [optional] 
 **primary** | **bool** | Specifies whether the file link is primary or not. | [optional] 
+**deny_download** | **bool** | Specifies whether to deny downloading the file or not. | [optional] 
+**password** | **str** | Password for access via link. | [optional] 
 
 ## Example
 
 ```python
-from docspace.models.file_link_request import FileLinkRequest
+from docspace_api_sdk.models.file_link_request import FileLinkRequest
 
 # TODO update the JSON string below
 json = "{}"

@@ -1,5 +1,4 @@
 # GroupRequestDto
-
 The group request parameters.
 
 ## Properties
@@ -7,13 +6,13 @@ The group request parameters.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **members** | **List[str]** | The list of group member IDs. | [optional] 
-**group_manager** | **str** | Group manager ID | 
-**group_name** | **str** | Group name | [optional] 
+**group_manager** | **str** | The group manager ID. | 
+**group_name** | **str** | The group name. | [optional] 
 
 ## Example
 
 ```python
-from docspace.models.group_request_dto import GroupRequestDto
+from docspace_api_sdk.models.group_request_dto import GroupRequestDto
 
 # TODO update the JSON string below
 json = "{}"

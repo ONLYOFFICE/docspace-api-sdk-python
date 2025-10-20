@@ -1,22 +1,21 @@
 # Logo
-
 The room logo information.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**original** | **str** | The original logo. | [optional] 
-**large** | **str** | The large logo. | [optional] 
-**medium** | **str** | The medium logo. | [optional] 
-**small** | **str** | The small logo. | [optional] 
+**original** | **str** | The original logo. | 
+**large** | **str** | The large logo. | 
+**medium** | **str** | The medium logo. | 
+**small** | **str** | The small logo. | 
 **color** | **str** | The logo color. | [optional] 
 **cover** | [**LogoCover**](LogoCover.md) |  | [optional] 
 
 ## Example
 
 ```python
-from docspace.models.logo import Logo
+from docspace_api_sdk.models.logo import Logo
 
 # TODO update the JSON string below
 json = "{}"

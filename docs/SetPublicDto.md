@@ -1,5 +1,4 @@
 # SetPublicDto
-
 The public settings of the room template to set.
 
 ## Properties
@@ -12,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.set_public_dto import SetPublicDto
+from docspace_api_sdk.models.set_public_dto import SetPublicDto
 
 # TODO update the JSON string below
 json = "{}"

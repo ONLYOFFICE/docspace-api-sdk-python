@@ -1,23 +1,22 @@
 # CapabilitiesDto
-
 The capabilities parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ldap_enabled** | **bool** | Specifies if the LDAP settings are enabled or not. | [optional] 
+**ldap_enabled** | **bool** | Specifies if the LDAP settings are enabled or not. | 
 **ldap_domain** | **str** | The LDAP domain. | [optional] 
-**providers** | **List[str]** | The list of providers. | [optional] 
-**sso_label** | **str** | The SP login label. | [optional] 
-**oauth_enabled** | **bool** | Specifies if OAuth is enabled or not. | [optional] 
-**sso_url** | **str** | The SSO URL. If this parameter is empty, then the SSO settings are disabled. | [optional] 
-**identity_server_enabled** | **bool** | Specifies if identity server is enabled or not | [optional] 
+**providers** | **List[str]** | The list of providers. | 
+**sso_label** | **str** | The SP login label. | 
+**oauth_enabled** | **bool** | Specifies if OAuth is enabled or not. | 
+**sso_url** | **str** | The SSO URL. If this parameter is empty, then the SSO settings are disabled. | 
+**identity_server_enabled** | **bool** | Specifies if identity server is enabled or not | 
 
 ## Example
 
 ```python
-from docspace.models.capabilities_dto import CapabilitiesDto
+from docspace_api_sdk.models.capabilities_dto import CapabilitiesDto
 
 # TODO update the JSON string below
 json = "{}"

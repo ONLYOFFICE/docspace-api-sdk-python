@@ -1,5 +1,4 @@
 # TenantQuota
-
 The current tenant quota.
 
 ## Properties
@@ -10,8 +9,11 @@ Name | Type | Description | Notes
 **name** | **str** | The tenant name. | [optional] 
 **price** | **float** | The tenant price. | [optional] 
 **price_currency_symbol** | **str** | The tenant price currency symbol. | [optional] 
+**price_iso_currency_symbol** | **str** | The tenant price three-character ISO 4217 currency symbol. | [optional] 
 **product_id** | **str** | The tenant product ID. | [optional] 
 **visible** | **bool** | Specifies if the tenant quota is visible or not. | [optional] 
+**wallet** | **bool** | Specifies if the tenant quota applies to the wallet or not | [optional] 
+**due_date** | **datetime** | The quota due date. | [optional] 
 **features** | **str** | The tenant quota features. | [optional] 
 **max_file_size** | **int** | The tenant maximum file size. | [optional] 
 **max_total_size** | **int** | The tenant maximum total size. | [optional] 
@@ -32,16 +34,18 @@ Name | Type | Description | Notes
 **customization** | **bool** | Specifies if the customization settings are available or not. | [optional] 
 **lifetime** | **bool** | Specifies if the license has the lifetime settings or not. | [optional] 
 **custom** | **bool** | Specifies if the custom domain URL is available or not. | [optional] 
-**auto_backup_restore** | **bool** | Specifies if the automatic backup option is enabled or not. | [optional] 
+**restore** | **bool** | Specifies if the restore is enabled or not. | [optional] 
 **oauth** | **bool** | Specifies if Oauth is available or not. | [optional] 
 **content_search** | **bool** | Specifies if the content search is available or not. | [optional] 
 **third_party** | **bool** | Specifies if the third-party accounts linking is available or not. | [optional] 
 **year** | **bool** | Specifies if the tenant quota is yearly subscription or not. | [optional] 
+**count_free_backup** | **int** | The number of free backups within a month. | [optional] 
+**backup** | **bool** | Specifies if the backup anabled as a wallet service or not. | [optional] 
 
 ## Example
 
 ```python
-from docspace.models.tenant_quota import TenantQuota
+from docspace_api_sdk.models.tenant_quota import TenantQuota
 
 # TODO update the JSON string below
 json = "{}"

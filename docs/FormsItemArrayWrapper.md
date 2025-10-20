@@ -1,6 +1,5 @@
 # FormsItemArrayWrapper
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.forms_item_array_wrapper import FormsItemArrayWrapper
+from docspace_api_sdk.models.forms_item_array_wrapper import FormsItemArrayWrapper
 
 # TODO update the JSON string below
 json = "{}"

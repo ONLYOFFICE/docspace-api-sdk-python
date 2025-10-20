@@ -1,21 +1,20 @@
 # TaskProgressResponseDto
-
 The task progress response parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** | The task progress ID. | [optional] 
+**id** | **str** | The task progress ID. | 
 **error** | **str** | The task progress error message. | [optional] 
-**percentage** | **int** | The percentage of the task progress. | [optional] 
-**is_completed** | **bool** | Specifies if the task peogress is completed or not. | [optional] 
-**status** | [**DistributedTaskStatus**](DistributedTaskStatus.md) |  | [optional] 
+**percentage** | **int** | The percentage of the task progress. | 
+**is_completed** | **bool** | Specifies if the task peogress is completed or not. | 
+**status** | [**DistributedTaskStatus**](DistributedTaskStatus.md) |  | 
 
 ## Example
 
 ```python
-from docspace.models.task_progress_response_dto import TaskProgressResponseDto
+from docspace_api_sdk.models.task_progress_response_dto import TaskProgressResponseDto
 
 # TODO update the JSON string below
 json = "{}"

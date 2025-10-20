@@ -1,18 +1,18 @@
 # CdnStorageSettings
 
-
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **module** | **str** |  | [optional] 
 **props** | **Dict[str, Optional[str]]** |  | [optional] 
+**id** | **str** |  | [optional] [readonly] 
 **last_modified** | **datetime** |  | [optional] 
 
 ## Example
 
 ```python
-from docspace.models.cdn_storage_settings import CdnStorageSettings
+from docspace_api_sdk.models.cdn_storage_settings import CdnStorageSettings
 
 # TODO update the JSON string below
 json = "{}"

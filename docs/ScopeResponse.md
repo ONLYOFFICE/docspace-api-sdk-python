@@ -1,18 +1,18 @@
 # ScopeResponse
-
+The response containing the scope information.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **str** |  | [optional] 
-**group** | **str** |  | [optional] 
-**type** | **str** |  | [optional] 
+**name** | **str** | The scope name. | [optional] 
+**group** | **str** | The group the scope belongs to. | [optional] 
+**type** | **str** | The scope type. | [optional] 
 
 ## Example
 
 ```python
-from docspace.models.scope_response import ScopeResponse
+from docspace_api_sdk.models.scope_response import ScopeResponse
 
 # TODO update the JSON string below
 json = "{}"

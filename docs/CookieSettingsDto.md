@@ -1,18 +1,17 @@
 # CookieSettingsDto
-
 The cookie settings.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**life_time** | **int** | The cookie lifetime value in minutes. | [optional] 
-**enabled** | **bool** | Specifies if the cookie settings are enabled or not. | [optional] 
+**life_time** | **int** | The cookie lifetime value in minutes. | 
+**enabled** | **bool** | Specifies if the cookie settings are enabled or not. | 
 
 ## Example
 
 ```python
-from docspace.models.cookie_settings_dto import CookieSettingsDto
+from docspace_api_sdk.models.cookie_settings_dto import CookieSettingsDto
 
 # TODO update the JSON string below
 json = "{}"

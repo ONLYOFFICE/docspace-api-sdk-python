@@ -1,12 +1,11 @@
 # BackupRestoreDto
-
 The backup restoring parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**backup_id** | **str** | The backup ID. | [optional] 
+**backup_id** | **str** | The backup ID. | 
 **storage_type** | [**BackupStorageType**](BackupStorageType.md) |  | [optional] 
 **storage_params** | [**List[ItemKeyValuePairObjectObject]**](ItemKeyValuePairObjectObject.md) | The backup storage parameters. | [optional] 
 **notify** | **bool** | Notifies users about the portal restoring process or not. | [optional] 
@@ -15,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.backup_restore_dto import BackupRestoreDto
+from docspace_api_sdk.models.backup_restore_dto import BackupRestoreDto
 
 # TODO update the JSON string below
 json = "{}"

@@ -1,11 +1,10 @@
 # FormRoleArrayWrapper
 
-
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**response** | [**List[FormRole]**](FormRole.md) |  | [optional] 
+**response** | [**List[FormRoleDto]**](FormRoleDto.md) |  | [optional] 
 **count** | **int** |  | [optional] 
 **links** | [**List[ActiveConnectionsWrapperLinksInner]**](ActiveConnectionsWrapperLinksInner.md) |  | [optional] 
 **status** | **int** |  | [optional] 
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.form_role_array_wrapper import FormRoleArrayWrapper
+from docspace_api_sdk.models.form_role_array_wrapper import FormRoleArrayWrapper
 
 # TODO update the JSON string below
 json = "{}"

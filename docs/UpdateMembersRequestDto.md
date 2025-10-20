@@ -1,5 +1,4 @@
 # UpdateMembersRequestDto
-
 The request parameters for updating the user information.
 
 ## Properties
@@ -12,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.update_members_request_dto import UpdateMembersRequestDto
+from docspace_api_sdk.models.update_members_request_dto import UpdateMembersRequestDto
 
 # TODO update the JSON string below
 json = "{}"

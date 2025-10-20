@@ -1,17 +1,16 @@
 # ErrorResponse
-
-Error response containing a human-readable explanation of the error
+The error response containing the human-readable error explanation.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**reason** | **str** |  | [optional] 
+**reason** | **str** | The human-readable error explanation. | [optional] 
 
 ## Example
 
 ```python
-from docspace.models.error_response import ErrorResponse
+from docspace_api_sdk.models.error_response import ErrorResponse
 
 # TODO update the JSON string below
 json = "{}"

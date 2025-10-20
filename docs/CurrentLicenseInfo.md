@@ -1,18 +1,17 @@
 # CurrentLicenseInfo
-
 The current license information.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**trial** | **bool** | Specifies whether the license is trial or not. | [optional] 
-**due_date** | **datetime** | The date when the license expires. | [optional] 
+**trial** | **bool** | Specifies whether the license is trial or not. | 
+**due_date** | **datetime** | The date when the license expires. | 
 
 ## Example
 
 ```python
-from docspace.models.current_license_info import CurrentLicenseInfo
+from docspace_api_sdk.models.current_license_info import CurrentLicenseInfo
 
 # TODO update the JSON string below
 json = "{}"

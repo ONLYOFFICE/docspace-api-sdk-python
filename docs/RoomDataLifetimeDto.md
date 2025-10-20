@@ -1,20 +1,19 @@
 # RoomDataLifetimeDto
-
 The room data lifetime information.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**delete_permanently** | **bool** | Specifies whether to permanently delete the room data or not. | [optional] 
-**period** | [**RoomDataLifetimePeriod**](RoomDataLifetimePeriod.md) |  | [optional] 
+**delete_permanently** | **bool** | Specifies whether to permanently delete the room data or not. | 
+**period** | [**RoomDataLifetimePeriod**](RoomDataLifetimePeriod.md) |  | 
 **value** | **int** | Specifies the time period value of the room data lifetime. | [optional] 
 **enabled** | **bool** | Specifies whether the room data lifetime setting is enabled or not. | [optional] 
 
 ## Example
 
 ```python
-from docspace.models.room_data_lifetime_dto import RoomDataLifetimeDto
+from docspace_api_sdk.models.room_data_lifetime_dto import RoomDataLifetimeDto
 
 # TODO update the JSON string below
 json = "{}"

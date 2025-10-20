@@ -1,5 +1,4 @@
 # WizardRequestsDto
-
 The request parameters for initial configuration of the setup wizard.
 
 ## Properties
@@ -16,7 +15,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.wizard_requests_dto import WizardRequestsDto
+from docspace_api_sdk.models.wizard_requests_dto import WizardRequestsDto
 
 # TODO update the JSON string below
 json = "{}"

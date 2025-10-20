@@ -1,5 +1,4 @@
 # MemberBaseRequestDto
-
 The request parameters for the user generic information.
 
 ## Properties
@@ -9,11 +8,12 @@ Name | Type | Description | Notes
 **password** | **str** | The user password. | [optional] 
 **password_hash** | **str** | The user password hash. | [optional] 
 **email** | **str** | The user email address. | [optional] 
+**enc_email** | **str** | The user encrypted email address. | [optional] 
 
 ## Example
 
 ```python
-from docspace.models.member_base_request_dto import MemberBaseRequestDto
+from docspace_api_sdk.models.member_base_request_dto import MemberBaseRequestDto
 
 # TODO update the JSON string below
 json = "{}"

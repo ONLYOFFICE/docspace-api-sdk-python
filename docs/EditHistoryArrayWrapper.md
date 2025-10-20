@@ -1,6 +1,5 @@
 # EditHistoryArrayWrapper
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.edit_history_array_wrapper import EditHistoryArrayWrapper
+from docspace_api_sdk.models.edit_history_array_wrapper import EditHistoryArrayWrapper
 
 # TODO update the JSON string below
 json = "{}"

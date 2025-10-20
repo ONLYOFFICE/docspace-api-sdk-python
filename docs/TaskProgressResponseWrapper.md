@@ -1,6 +1,5 @@
 # TaskProgressResponseWrapper
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.task_progress_response_wrapper import TaskProgressResponseWrapper
+from docspace_api_sdk.models.task_progress_response_wrapper import TaskProgressResponseWrapper
 
 # TODO update the JSON string below
 json = "{}"

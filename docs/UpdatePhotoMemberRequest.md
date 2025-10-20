@@ -1,5 +1,4 @@
 # UpdatePhotoMemberRequest
-
 The request parameters for updating a photo.
 
 ## Properties
@@ -11,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.update_photo_member_request import UpdatePhotoMemberRequest
+from docspace_api_sdk.models.update_photo_member_request import UpdatePhotoMemberRequest
 
 # TODO update the JSON string below
 json = "{}"

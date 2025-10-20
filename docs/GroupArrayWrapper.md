@@ -1,6 +1,5 @@
 # GroupArrayWrapper
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.group_array_wrapper import GroupArrayWrapper
+from docspace_api_sdk.models.group_array_wrapper import GroupArrayWrapper
 
 # TODO update the JSON string below
 json = "{}"

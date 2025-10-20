@@ -1,14 +1,14 @@
 # BatchRequestDto
-
 The request parameters for copying/moving files.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**folder_ids** | [**List[BaseBatchRequestDtoFolderIdsInner]**](BaseBatchRequestDtoFolderIdsInner.md) | The list of folder IDs to be copied/moved. | [optional] 
-**file_ids** | [**List[BaseBatchRequestDtoFolderIdsInner]**](BaseBatchRequestDtoFolderIdsInner.md) | The list of file IDs to be copied/moved. | [optional] 
-**dest_folder_id** | [**BatchRequestDtoDestFolderId**](BatchRequestDtoDestFolderId.md) |  | [optional] 
+**return_single_operation** | **bool** | Specifies whether to return only the current operation | [optional] 
+**folder_ids** | [**List[BatchRequestDtoAllOfFolderIds]**](BatchRequestDtoAllOfFolderIds.md) | The list of folder IDs to be copied/moved. | [optional] 
+**file_ids** | [**List[BatchRequestDtoAllOfFileIds]**](BatchRequestDtoAllOfFileIds.md) | The list of file IDs to be copied/moved. | [optional] 
+**dest_folder_id** | [**BatchRequestDtoAllOfDestFolderId**](BatchRequestDtoAllOfDestFolderId.md) |  | [optional] 
 **conflict_resolve_type** | [**FileConflictResolveType**](FileConflictResolveType.md) |  | [optional] 
 **delete_after** | **bool** | Specifies whether to delete the source files/folders after they are moved or copied to the destination folder. | [optional] 
 **content** | **bool** | Specifies whether to copy or move the folder content or not. | [optional] 
@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.batch_request_dto import BatchRequestDto
+from docspace_api_sdk.models.batch_request_dto import BatchRequestDto
 
 # TODO update the JSON string below
 json = "{}"

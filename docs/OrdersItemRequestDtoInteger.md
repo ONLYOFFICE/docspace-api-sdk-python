@@ -1,19 +1,18 @@
 # OrdersItemRequestDtoInteger
-
 An item in the ordering request with its entry type and ID.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**entry_id** | **int** | The entry unique identifier (file or folder). | [optional] 
-**entry_type** | [**FileEntryType**](FileEntryType.md) |  | [optional] 
-**order** | **int** | The order value. | [optional] 
+**entry_id** | **int** | The entry unique identifier (file or folder). | 
+**entry_type** | [**FileEntryType**](FileEntryType.md) |  | 
+**order** | **int** | The order value. | 
 
 ## Example
 
 ```python
-from docspace.models.orders_item_request_dto_integer import OrdersItemRequestDtoInteger
+from docspace_api_sdk.models.orders_item_request_dto_integer import OrdersItemRequestDtoInteger
 
 # TODO update the JSON string below
 json = "{}"

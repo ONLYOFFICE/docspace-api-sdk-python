@@ -1,5 +1,4 @@
 # UpdateComment
-
 The parameters for updating a comment.
 
 ## Properties
@@ -12,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.update_comment import UpdateComment
+from docspace_api_sdk.models.update_comment import UpdateComment
 
 # TODO update the JSON string below
 json = "{}"

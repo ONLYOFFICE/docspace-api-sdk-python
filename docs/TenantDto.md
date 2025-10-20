@@ -1,5 +1,4 @@
 # TenantDto
-
 The tenant parameters.
 
 ## Properties
@@ -34,7 +33,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.tenant_dto import TenantDto
+from docspace_api_sdk.models.tenant_dto import TenantDto
 
 # TODO update the JSON string below
 json = "{}"

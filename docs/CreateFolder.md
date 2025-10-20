@@ -1,5 +1,4 @@
 # CreateFolder
-
 The parameters for creating a folder.
 
 ## Properties
@@ -11,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.create_folder import CreateFolder
+from docspace_api_sdk.models.create_folder import CreateFolder
 
 # TODO update the JSON string below
 json = "{}"

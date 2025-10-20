@@ -1,11 +1,11 @@
 # WhiteLabelItemDto
-
 The white label item parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**type** | [**WhiteLabelLogoType**](WhiteLabelLogoType.md) |  | [optional] 
 **name** | **str** | The white label file name. | [optional] 
 **size** | [**IMagickGeometry**](IMagickGeometry.md) |  | [optional] 
 **path** | [**WhiteLabelItemPathDto**](WhiteLabelItemPathDto.md) |  | [optional] 
@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.white_label_item_dto import WhiteLabelItemDto
+from docspace_api_sdk.models.white_label_item_dto import WhiteLabelItemDto
 
 # TODO update the JSON string below
 json = "{}"

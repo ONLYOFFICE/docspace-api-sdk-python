@@ -1,21 +1,20 @@
 # HistoryDto
-
 The file history information.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**action** | [**HistoryAction**](HistoryAction.md) |  | [optional] 
-**initiator** | [**EmployeeDto**](EmployeeDto.md) |  | [optional] 
-**var_date** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] 
-**data** | [**HistoryData**](HistoryData.md) |  | [optional] 
+**action** | [**HistoryAction**](HistoryAction.md) |  | 
+**initiator** | [**EmployeeDto**](EmployeeDto.md) |  | 
+**var_date** | [**ApiDateTime**](ApiDateTime.md) |  | 
+**data** | [**HistoryData**](HistoryData.md) |  | 
 **related** | [**List[HistoryDto]**](HistoryDto.md) | The list of related history. | [optional] 
 
 ## Example
 
 ```python
-from docspace.models.history_dto import HistoryDto
+from docspace_api_sdk.models.history_dto import HistoryDto
 
 # TODO update the JSON string below
 json = "{}"

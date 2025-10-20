@@ -1,5 +1,4 @@
 # FilesSettingsDto
-
 The file settings parameters.
 
 ## Properties
@@ -16,7 +15,6 @@ Name | Type | Description | Notes
 **exts_web_restricted_editing** | **List[str]** | The list of extensions of the files that are restricted for editing. | [optional] 
 **exts_web_commented** | **List[str]** | The list of extensions of the commented files. | [optional] 
 **exts_web_template** | **List[str]** | The list of extensions of the template files. | [optional] 
-**exts_co_authoring** | **List[str]** | The list of extensions of the co-authoring files. | [optional] 
 **exts_must_convert** | **List[str]** | The list of extensions of the files that must be converted. | [optional] 
 **exts_convertible** | **Dict[str, Optional[List[str]]]** | The list of the convertible extensions. | [optional] 
 **exts_uploadable** | **List[str]** | The list of the uploadable extensions. | [optional] 
@@ -27,6 +25,7 @@ Name | Type | Description | Notes
 **exts_spreadsheet** | **List[str]** | The list of the spreadsheet extensions. | [optional] 
 **exts_presentation** | **List[str]** | The list of the presentation extensions. | [optional] 
 **exts_document** | **List[str]** | The list of the text document extensions. | [optional] 
+**exts_diagram** | **List[str]** | The list of the diagram extensions. | [optional] 
 **internal_formats** | [**FilesSettingsDtoInternalFormats**](FilesSettingsDtoInternalFormats.md) |  | [optional] 
 **master_form_extension** | **str** | The master form extension. | [optional] 
 **param_version** | **str** | The URL parameter which specifies the file version. | [optional] 
@@ -53,9 +52,9 @@ Name | Type | Description | Notes
 **default_order** | [**OrderBy**](OrderBy.md) |  | [optional] 
 **forcesave** | **bool** | Specifies whether to forcesave the files or not. | [optional] 
 **store_forcesave** | **bool** | Specifies whether to store the forcesaved file versions or not. | [optional] 
-**recent_section** | **bool** | Specifies if the \&quot;Recent\&quot; section is displayed or not. | [optional] 
-**favorites_section** | **bool** | Specifies if the \&quot;Favorites\&quot; section is displayed or not. | [optional] 
-**templates_section** | **bool** | Specifies if the \&quot;Templates\&quot; section is displayed or not. | [optional] 
+**recent_section** | **bool** | Specifies if the Recent section is displayed or not. | [optional] 
+**favorites_section** | **bool** | Specifies if the Favorites section is displayed or not. | [optional] 
+**templates_section** | **bool** | Specifies if the Templates section is displayed or not. | [optional] 
 **download_tar_gz** | **bool** | Specifies whether to download the .tar.gz files or not. | [optional] 
 **automatically_clean_up** | [**AutoCleanUpData**](AutoCleanUpData.md) |  | [optional] 
 **can_search_by_content** | **bool** | Specifies whether the file can be searched by its content or not. | [optional] 
@@ -67,7 +66,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.files_settings_dto import FilesSettingsDto
+from docspace_api_sdk.models.files_settings_dto import FilesSettingsDto
 
 # TODO update the JSON string below
 json = "{}"

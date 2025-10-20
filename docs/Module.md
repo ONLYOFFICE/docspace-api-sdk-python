@@ -1,5 +1,4 @@
 # Module
-
 The module information.
 
 ## Properties
@@ -19,7 +18,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.module import Module
+from docspace_api_sdk.models.module import Module
 
 # TODO update the JSON string below
 json = "{}"

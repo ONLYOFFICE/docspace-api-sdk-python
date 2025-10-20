@@ -1,6 +1,5 @@
 # WebPluginWrapper
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.web_plugin_wrapper import WebPluginWrapper
+from docspace_api_sdk.models.web_plugin_wrapper import WebPluginWrapper
 
 # TODO update the JSON string below
 json = "{}"

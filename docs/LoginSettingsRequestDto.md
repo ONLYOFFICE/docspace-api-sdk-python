@@ -1,5 +1,4 @@
 # LoginSettingsRequestDto
-
 The request parameters for configuring login security and performance settings.
 
 ## Properties
@@ -13,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.login_settings_request_dto import LoginSettingsRequestDto
+from docspace_api_sdk.models.login_settings_request_dto import LoginSettingsRequestDto
 
 # TODO update the JSON string below
 json = "{}"

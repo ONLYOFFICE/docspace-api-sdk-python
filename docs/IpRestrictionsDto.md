@@ -1,18 +1,17 @@
 # IpRestrictionsDto
-
 The parameters for configuring new IP restriction settings.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ip_restrictions** | [**List[IpRestrictionBase]**](IpRestrictionBase.md) | The list of IP restriction addresses. | [optional] 
+**ip_restrictions** | [**List[IpRestrictionBase]**](IpRestrictionBase.md) | The list of IP restriction addresses. | 
 **enable** | **bool** | Specifies whether to enable IP restrictions or not. | [optional] 
 
 ## Example
 
 ```python
-from docspace.models.ip_restrictions_dto import IpRestrictionsDto
+from docspace_api_sdk.models.ip_restrictions_dto import IpRestrictionsDto
 
 # TODO update the JSON string below
 json = "{}"

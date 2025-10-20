@@ -1,5 +1,4 @@
 # SettingsRequestDto
-
 The settings request parameters.
 
 ## Properties
@@ -11,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.settings_request_dto import SettingsRequestDto
+from docspace_api_sdk.models.settings_request_dto import SettingsRequestDto
 
 # TODO update the JSON string below
 json = "{}"

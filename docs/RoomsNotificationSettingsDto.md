@@ -1,5 +1,4 @@
 # RoomsNotificationSettingsDto
-
 The rooms notification settings.
 
 ## Properties
@@ -11,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.rooms_notification_settings_dto import RoomsNotificationSettingsDto
+from docspace_api_sdk.models.rooms_notification_settings_dto import RoomsNotificationSettingsDto
 
 # TODO update the JSON string below
 json = "{}"

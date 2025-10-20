@@ -1,6 +1,5 @@
 # DocServiceUrlWrapper
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.doc_service_url_wrapper import DocServiceUrlWrapper
+from docspace_api_sdk.models.doc_service_url_wrapper import DocServiceUrlWrapper
 
 # TODO update the JSON string below
 json = "{}"

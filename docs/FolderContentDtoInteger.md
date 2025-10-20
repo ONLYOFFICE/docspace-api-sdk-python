@@ -1,24 +1,23 @@
 # FolderContentDtoInteger
-
 The folder content information.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**files** | [**List[FileEntryDto]**](FileEntryDto.md) | The list of files in the folder. | [optional] 
-**folders** | [**List[FileEntryDto]**](FileEntryDto.md) | The list of folders in the folder. | [optional] 
+**files** | [**List[FileEntryBaseDto]**](FileEntryBaseDto.md) | The list of files in the folder. | [optional] 
+**folders** | [**List[FileEntryBaseDto]**](FileEntryBaseDto.md) | The list of folders in the folder. | [optional] 
 **current** | [**FolderDtoInteger**](FolderDtoInteger.md) |  | [optional] 
-**path_parts** | **object** | The folder path. | [optional] 
+**path_parts** | **object** | The folder path. | 
 **start_index** | **int** | The folder start index. | [optional] 
 **count** | **int** | The number of folder elements. | [optional] 
-**total** | **int** | The total number of elements in the folder. | [optional] 
+**total** | **int** | The total number of elements in the folder. | 
 **new** | **int** | The new element index in the folder. | [optional] 
 
 ## Example
 
 ```python
-from docspace.models.folder_content_dto_integer import FolderContentDtoInteger
+from docspace_api_sdk.models.folder_content_dto_integer import FolderContentDtoInteger
 
 # TODO update the JSON string below
 json = "{}"

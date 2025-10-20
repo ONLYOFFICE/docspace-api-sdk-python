@@ -1,12 +1,11 @@
 # WebhooksLogDto
-
 The webhook log parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **int** | The webhook log ID. | [optional] 
+**id** | **int** | The webhook log ID. | 
 **config_name** | **str** | The webhook configuration name. | [optional] 
 **trigger** | [**WebhookTrigger**](WebhookTrigger.md) |  | [optional] 
 **creation_time** | **datetime** | The webhook creation time. | [optional] 
@@ -22,7 +21,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.webhooks_log_dto import WebhooksLogDto
+from docspace_api_sdk.models.webhooks_log_dto import WebhooksLogDto
 
 # TODO update the JSON string below
 json = "{}"

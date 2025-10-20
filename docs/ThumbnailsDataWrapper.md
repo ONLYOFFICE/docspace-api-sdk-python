@@ -1,6 +1,5 @@
 # ThumbnailsDataWrapper
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.thumbnails_data_wrapper import ThumbnailsDataWrapper
+from docspace_api_sdk.models.thumbnails_data_wrapper import ThumbnailsDataWrapper
 
 # TODO update the JSON string below
 json = "{}"

@@ -1,24 +1,23 @@
 # FirebaseDto
-
 The Firebase parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**api_key** | **str** | The Firebase API key. | [optional] 
-**auth_domain** | **str** | The Firebase authentication domain. | [optional] 
-**project_id** | **str** | The Firebase project ID. | [optional] 
-**storage_bucket** | **str** | The Firebase storage bucket. | [optional] 
-**messaging_sender_id** | **str** | The Firebase messaging sender ID. | [optional] 
-**app_id** | **str** | The Firebase application ID. | [optional] 
-**measurement_id** | **str** | The Firebase measurement ID. | [optional] 
-**database_url** | **str** | The Firebase database URL. | [optional] 
+**api_key** | **str** | The Firebase API key. | 
+**auth_domain** | **str** | The Firebase authentication domain. | 
+**project_id** | **str** | The Firebase project ID. | 
+**storage_bucket** | **str** | The Firebase storage bucket. | 
+**messaging_sender_id** | **str** | The Firebase messaging sender ID. | 
+**app_id** | **str** | The Firebase application ID. | 
+**measurement_id** | **str** | The Firebase measurement ID. | 
+**database_url** | **str** | The Firebase database URL. | 
 
 ## Example
 
 ```python
-from docspace.models.firebase_dto import FirebaseDto
+from docspace_api_sdk.models.firebase_dto import FirebaseDto
 
 # TODO update the JSON string below
 json = "{}"

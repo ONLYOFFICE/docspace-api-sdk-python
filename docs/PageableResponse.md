@@ -1,19 +1,19 @@
 # PageableResponse
-
+The response containing paginated data.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**data** | **object** |  | [optional] 
-**limit** | **int** |  | [optional] 
-**last_client_id** | **str** |  | [optional] 
-**last_created_on** | **datetime** |  | [optional] 
+**data** | **object** | The paginated data. | [optional] 
+**limit** | **int** | The maximum number of results returned per page. | [optional] 
+**last_client_id** | **str** | The identifier of the last retrieved client. | [optional] 
+**last_created_on** | **datetime** | The creation date of the last retrieved client. | [optional] 
 
 ## Example
 
 ```python
-from docspace.models.pageable_response import PageableResponse
+from docspace_api_sdk.models.pageable_response import PageableResponse
 
 # TODO update the JSON string below
 json = "{}"

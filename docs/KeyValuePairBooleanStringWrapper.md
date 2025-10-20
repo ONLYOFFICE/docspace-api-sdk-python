@@ -1,6 +1,5 @@
 # KeyValuePairBooleanStringWrapper
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.key_value_pair_boolean_string_wrapper import KeyValuePairBooleanStringWrapper
+from docspace_api_sdk.models.key_value_pair_boolean_string_wrapper import KeyValuePairBooleanStringWrapper
 
 # TODO update the JSON string below
 json = "{}"

@@ -1,19 +1,19 @@
 # DownloadRequestDto
-
 The request parameters for downloading files.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**folder_ids** | [**List[BaseBatchRequestDtoFolderIdsInner]**](BaseBatchRequestDtoFolderIdsInner.md) | The list of folder IDs to be downloaded. | [optional] 
-**file_ids** | [**List[BaseBatchRequestDtoFolderIdsInner]**](BaseBatchRequestDtoFolderIdsInner.md) | The list of file IDs to be downloaded. | [optional] 
+**return_single_operation** | **bool** | Specifies whether to return only the current operation | [optional] 
+**folder_ids** | [**List[DownloadRequestDtoAllOfFolderIds]**](DownloadRequestDtoAllOfFolderIds.md) | The list of folder IDs to be downloaded. | [optional] 
+**file_ids** | [**List[DownloadRequestDtoAllOfFileIds]**](DownloadRequestDtoAllOfFileIds.md) | The list of file IDs to be downloaded. | [optional] 
 **file_convert_ids** | [**List[DownloadRequestItemDto]**](DownloadRequestItemDto.md) | The list of file IDs which will be converted. | [optional] 
 
 ## Example
 
 ```python
-from docspace.models.download_request_dto import DownloadRequestDto
+from docspace_api_sdk.models.download_request_dto import DownloadRequestDto
 
 # TODO update the JSON string below
 json = "{}"

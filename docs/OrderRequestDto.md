@@ -1,5 +1,4 @@
 # OrderRequestDto
-
 The parameters for ordering requests.
 
 ## Properties
@@ -11,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.order_request_dto import OrderRequestDto
+from docspace_api_sdk.models.order_request_dto import OrderRequestDto
 
 # TODO update the JSON string below
 json = "{}"

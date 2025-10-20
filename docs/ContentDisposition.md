@@ -1,6 +1,5 @@
 # ContentDisposition
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -17,7 +16,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.content_disposition import ContentDisposition
+from docspace_api_sdk.models.content_disposition import ContentDisposition
 
 # TODO update the JSON string below
 json = "{}"

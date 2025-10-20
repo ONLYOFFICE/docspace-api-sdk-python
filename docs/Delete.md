@@ -1,5 +1,4 @@
 # Delete
-
 The parameters for deleting a file.
 
 ## Properties
@@ -7,12 +6,12 @@ The parameters for deleting a file.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **delete_after** | **bool** | Specifies whether to delete a file after the editing session is finished or not. | [optional] 
-**immediately** | **bool** | Specifies whether to move a file to the \\\&quot;Trash\\\&quot; folder or delete it immediately. | [optional] 
+**immediately** | **bool** | Specifies whether to move a file to the \\Trash\\ folder or delete it immediately. | [optional] 
 
 ## Example
 
 ```python
-from docspace.models.delete import Delete
+from docspace_api_sdk.models.delete import Delete
 
 # TODO update the JSON string below
 json = "{}"

@@ -1,5 +1,4 @@
 # Contact
-
 The contact information.
 
 ## Properties
@@ -12,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.contact import Contact
+from docspace_api_sdk.models.contact import Contact
 
 # TODO update the JSON string below
 json = "{}"

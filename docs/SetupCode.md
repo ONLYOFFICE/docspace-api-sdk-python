@@ -1,6 +1,5 @@
 # SetupCode
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -12,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.setup_code import SetupCode
+from docspace_api_sdk.models.setup_code import SetupCode
 
 # TODO update the JSON string below
 json = "{}"

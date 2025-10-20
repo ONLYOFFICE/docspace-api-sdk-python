@@ -1,6 +1,5 @@
 # FolderContentIntegerWrapper
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.folder_content_integer_wrapper import FolderContentIntegerWrapper
+from docspace_api_sdk.models.folder_content_integer_wrapper import FolderContentIntegerWrapper
 
 # TODO update the JSON string below
 json = "{}"

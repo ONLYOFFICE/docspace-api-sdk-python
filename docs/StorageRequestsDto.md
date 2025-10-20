@@ -1,5 +1,4 @@
 # StorageRequestsDto
-
 The request parameters for configuring the storage module settings.
 
 ## Properties
@@ -12,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.storage_requests_dto import StorageRequestsDto
+from docspace_api_sdk.models.storage_requests_dto import StorageRequestsDto
 
 # TODO update the JSON string below
 json = "{}"

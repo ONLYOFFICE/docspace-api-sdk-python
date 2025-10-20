@@ -1,18 +1,17 @@
 # CoversResultDto
-
 The result of the cover request containing the cover image data.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** | The cover unique identifier. | [optional] 
-**data** | **str** | The cover image data. | [optional] 
+**id** | **str** | The cover unique identifier. | 
+**data** | **str** | The cover image data. | 
 
 ## Example
 
 ```python
-from docspace.models.covers_result_dto import CoversResultDto
+from docspace_api_sdk.models.covers_result_dto import CoversResultDto
 
 # TODO update the JSON string below
 json = "{}"

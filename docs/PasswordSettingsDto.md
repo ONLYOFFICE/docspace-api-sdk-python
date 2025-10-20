@@ -1,24 +1,23 @@
 # PasswordSettingsDto
-
 The password settings parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**min_length** | **int** | The minimum number of characters required for valid passwords. | [optional] 
-**upper_case** | **bool** | Specifies whether the password should contain the uppercase letters or not. | [optional] 
-**digits** | **bool** | Specifies whether the password should contain the digits or not. | [optional] 
-**spec_symbols** | **bool** | Specifies whether the password should contain the special symbols or not. | [optional] 
-**allowed_characters_regex_str** | **str** | The allowed password characters in the regex string format. | [optional] 
-**digits_regex_str** | **str** | The password digits in the regex string format. | [optional] 
-**upper_case_regex_str** | **str** | The password uppercase letters in the regex string format. | [optional] 
-**spec_symbols_regex_str** | **str** | The passaword special symbols in the regex string format. | [optional] 
+**min_length** | **int** | The minimum number of characters required for valid passwords. | 
+**upper_case** | **bool** | Specifies whether the password should contain the uppercase letters or not. | 
+**digits** | **bool** | Specifies whether the password should contain the digits or not. | 
+**spec_symbols** | **bool** | Specifies whether the password should contain the special symbols or not. | 
+**allowed_characters_regex_str** | **str** | The allowed password characters in the regex string format. | 
+**digits_regex_str** | **str** | The password digits in the regex string format. | 
+**upper_case_regex_str** | **str** | The password uppercase letters in the regex string format. | 
+**spec_symbols_regex_str** | **str** | The passaword special symbols in the regex string format. | 
 
 ## Example
 
 ```python
-from docspace.models.password_settings_dto import PasswordSettingsDto
+from docspace_api_sdk.models.password_settings_dto import PasswordSettingsDto
 
 # TODO update the JSON string below
 json = "{}"

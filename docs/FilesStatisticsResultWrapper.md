@@ -1,6 +1,5 @@
 # FilesStatisticsResultWrapper
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.files_statistics_result_wrapper import FilesStatisticsResultWrapper
+from docspace_api_sdk.models.files_statistics_result_wrapper import FilesStatisticsResultWrapper
 
 # TODO update the JSON string below
 json = "{}"

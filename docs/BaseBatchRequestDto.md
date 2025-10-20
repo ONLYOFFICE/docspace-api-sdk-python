@@ -1,18 +1,18 @@
 # BaseBatchRequestDto
-
 The base batch request parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**folder_ids** | [**List[BaseBatchRequestDtoFolderIdsInner]**](BaseBatchRequestDtoFolderIdsInner.md) | The list of folder IDs of the base batch request. | [optional] 
-**file_ids** | [**List[BaseBatchRequestDtoFolderIdsInner]**](BaseBatchRequestDtoFolderIdsInner.md) | The list of file IDs of the base batch request. | [optional] 
+**return_single_operation** | **bool** | Specifies whether to return only the current operation | [optional] 
+**folder_ids** | [**List[BaseBatchRequestDtoAllOfFolderIds]**](BaseBatchRequestDtoAllOfFolderIds.md) | The list of folder IDs of the base batch request. | [optional] 
+**file_ids** | [**List[BaseBatchRequestDtoAllOfFileIds]**](BaseBatchRequestDtoAllOfFileIds.md) | The list of file IDs of the base batch request. | [optional] 
 
 ## Example
 
 ```python
-from docspace.models.base_batch_request_dto import BaseBatchRequestDto
+from docspace_api_sdk.models.base_batch_request_dto import BaseBatchRequestDto
 
 # TODO update the JSON string below
 json = "{}"

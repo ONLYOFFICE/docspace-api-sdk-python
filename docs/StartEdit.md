@@ -1,5 +1,4 @@
 # StartEdit
-
 The parameters for starting file editing.
 
 ## Properties
@@ -11,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.start_edit import StartEdit
+from docspace_api_sdk.models.start_edit import StartEdit
 
 # TODO update the JSON string below
 json = "{}"

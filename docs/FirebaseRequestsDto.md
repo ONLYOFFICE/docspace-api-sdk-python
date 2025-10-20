@@ -1,5 +1,4 @@
 # FirebaseRequestsDto
-
 The Firebase-related request parameters.
 
 ## Properties
@@ -12,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.firebase_requests_dto import FirebaseRequestsDto
+from docspace_api_sdk.models.firebase_requests_dto import FirebaseRequestsDto
 
 # TODO update the JSON string below
 json = "{}"

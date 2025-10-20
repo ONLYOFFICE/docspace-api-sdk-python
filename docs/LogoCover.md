@@ -1,18 +1,17 @@
 # LogoCover
-
 The logo cover information.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** | The logo cover ID. | [optional] 
-**data** | **str** | The logo cover data. | [optional] 
+**id** | **str** | The logo cover ID. | 
+**data** | **str** | The logo cover data. | 
 
 ## Example
 
 ```python
-from docspace.models.logo_cover import LogoCover
+from docspace_api_sdk.models.logo_cover import LogoCover
 
 # TODO update the JSON string below
 json = "{}"

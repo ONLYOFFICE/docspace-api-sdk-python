@@ -1,5 +1,4 @@
 # TfaRequestsDto
-
 The request parameters for configuring the Two-Factor Authentication (TFA) settings.
 
 ## Properties
@@ -15,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.tfa_requests_dto import TfaRequestsDto
+from docspace_api_sdk.models.tfa_requests_dto import TfaRequestsDto
 
 # TODO update the JSON string below
 json = "{}"

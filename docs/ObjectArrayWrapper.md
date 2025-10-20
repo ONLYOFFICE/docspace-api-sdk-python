@@ -1,6 +1,5 @@
 # ObjectArrayWrapper
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.object_array_wrapper import ObjectArrayWrapper
+from docspace_api_sdk.models.object_array_wrapper import ObjectArrayWrapper
 
 # TODO update the JSON string below
 json = "{}"

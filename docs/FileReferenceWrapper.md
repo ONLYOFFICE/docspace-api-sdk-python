@@ -1,6 +1,5 @@
 # FileReferenceWrapper
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.file_reference_wrapper import FileReferenceWrapper
+from docspace_api_sdk.models.file_reference_wrapper import FileReferenceWrapper
 
 # TODO update the JSON string below
 json = "{}"

@@ -1,58 +1,24 @@
-# docspace.AuthenticationApi
+# docspace_api_sdk.AuthenticationApi
 
-All URIs are relative to *http://localhost:8092*
+All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**authenticate_me**](AuthenticationApi.md#authenticate_me) | **POST** /api/2.0/authentication | Authenticate a user
-[**authenticate_me_from_body_with_code**](AuthenticationApi.md#authenticate_me_from_body_with_code) | **POST** /api/2.0/authentication/{code} | Authenticate a user by code
-[**check_confirm**](AuthenticationApi.md#check_confirm) | **POST** /api/2.0/authentication/confirm | Open confirmation email URL
-[**get_is_authentificated**](AuthenticationApi.md#get_is_authentificated) | **GET** /api/2.0/authentication | Check authentication
-[**logout**](AuthenticationApi.md#logout) | **POST** /api/2.0/authentication/logout | Log out
-[**save_mobile_phone**](AuthenticationApi.md#save_mobile_phone) | **POST** /api/2.0/authentication/setphone | Set a mobile phone
-[**send_sms_code**](AuthenticationApi.md#send_sms_code) | **POST** /api/2.0/authentication/sendsms | Send SMS code
+[**authenticate_me**](#authenticate_me) | **POST** /api/2.0/authentication | Authenticate a user
+[**authenticate_me_from_body_with_code**](#authenticate_me_from_body_with_code) | **POST** /api/2.0/authentication/{code} | Authenticate a user by code
+[**check_confirm**](#check_confirm) | **POST** /api/2.0/authentication/confirm | Open confirmation email URL
+[**get_is_authentificated**](#get_is_authentificated) | **GET** /api/2.0/authentication | Check authentication
+[**logout**](#logout) | **POST** /api/2.0/authentication/logout | Log out
+[**save_mobile_phone**](#save_mobile_phone) | **POST** /api/2.0/authentication/setphone | Set a mobile phone
+[**send_sms_code**](#send_sms_code) | **POST** /api/2.0/authentication/sendsms | Send SMS code
 
 
 # **authenticate_me**
 > AuthenticationTokenWrapper authenticate_me(auth_requests_dto=auth_requests_dto)
 
-Authenticate a user
-
 Authenticates the current user by SMS, authenticator app, or without two-factor authentication.
 
-### Example
-
-
-```python
-import docspace
-from docspace.models.auth_requests_dto import AuthRequestsDto
-from docspace.models.authentication_token_wrapper import AuthenticationTokenWrapper
-from docspace.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace.Configuration(
-    host = "http://localhost:8092"
-)
-
-
-# Enter a context with an instance of the API client
-with docspace.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace.AuthenticationApi(api_client)
-    auth_requests_dto = docspace.AuthRequestsDto() # AuthRequestsDto |  (optional)
-
-    try:
-        # Authenticate a user
-        api_response = api_instance.authenticate_me(auth_requests_dto=auth_requests_dto)
-        print("The response of AuthenticationApi->authenticate_me:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling AuthenticationApi->authenticate_me: %s\n" % e)
-```
-
-
+For more information, see [api.onlyoffice.com]().
 
 ### Parameters
 
@@ -69,10 +35,43 @@ Name | Type | Description  | Notes
 
 No authorization required
 
+### Example
+
+
+```python
+import docspace_api_sdk
+from docspace_api_sdk.models.auth_requests_dto import AuthRequestsDto
+from docspace_api_sdk.models.authentication_token_wrapper import AuthenticationTokenWrapper
+from docspace_api_sdk.rest import ApiException
+from pprint import pprint
+
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
+)
+
+
+# Enter a context with an instance of the API client
+with docspace_api_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace_api_sdk.AuthenticationApi(api_client)
+    auth_requests_dto = docspace_api_sdk.AuthRequestsDto() # AuthRequestsDto |  (optional)
+
+    try:
+        # Authenticate a user
+        api_response = api_instance.authenticate_me(auth_requests_dto=auth_requests_dto)
+        print("The response of AuthenticationApi->authenticate_me:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AuthenticationApi->authenticate_me: %s\n" % e)
+```
+
+
+
 ### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json
+
 
 ### HTTP response details
 
@@ -89,44 +88,9 @@ No authorization required
 # **authenticate_me_from_body_with_code**
 > AuthenticationTokenWrapper authenticate_me_from_body_with_code(code, auth_requests_dto=auth_requests_dto)
 
-Authenticate a user by code
-
 Authenticates the current user by SMS or two-factor authentication code.
 
-### Example
-
-
-```python
-import docspace
-from docspace.models.auth_requests_dto import AuthRequestsDto
-from docspace.models.authentication_token_wrapper import AuthenticationTokenWrapper
-from docspace.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace.Configuration(
-    host = "http://localhost:8092"
-)
-
-
-# Enter a context with an instance of the API client
-with docspace.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace.AuthenticationApi(api_client)
-    code = 'code_example' # str | 
-    auth_requests_dto = docspace.AuthRequestsDto() # AuthRequestsDto |  (optional)
-
-    try:
-        # Authenticate a user by code
-        api_response = api_instance.authenticate_me_from_body_with_code(code, auth_requests_dto=auth_requests_dto)
-        print("The response of AuthenticationApi->authenticate_me_from_body_with_code:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling AuthenticationApi->authenticate_me_from_body_with_code: %s\n" % e)
-```
-
-
+For more information, see [api.onlyoffice.com]().
 
 ### Parameters
 
@@ -144,10 +108,44 @@ Name | Type | Description  | Notes
 
 No authorization required
 
+### Example
+
+
+```python
+import docspace_api_sdk
+from docspace_api_sdk.models.auth_requests_dto import AuthRequestsDto
+from docspace_api_sdk.models.authentication_token_wrapper import AuthenticationTokenWrapper
+from docspace_api_sdk.rest import ApiException
+from pprint import pprint
+
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
+)
+
+
+# Enter a context with an instance of the API client
+with docspace_api_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace_api_sdk.AuthenticationApi(api_client)
+    code = 'code_example' # str | 
+    auth_requests_dto = docspace_api_sdk.AuthRequestsDto() # AuthRequestsDto |  (optional)
+
+    try:
+        # Authenticate a user by code
+        api_response = api_instance.authenticate_me_from_body_with_code(code, auth_requests_dto=auth_requests_dto)
+        print("The response of AuthenticationApi->authenticate_me_from_body_with_code:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AuthenticationApi->authenticate_me_from_body_with_code: %s\n" % e)
+```
+
+
+
 ### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json
+
 
 ### HTTP response details
 
@@ -164,43 +162,9 @@ No authorization required
 # **check_confirm**
 > ConfirmWrapper check_confirm(email_validation_key_model=email_validation_key_model)
 
-Open confirmation email URL
-
 Opens a confirmation email URL to validate a certain action (employee invitation, portal removal, phone activation, etc.).
 
-### Example
-
-
-```python
-import docspace
-from docspace.models.confirm_wrapper import ConfirmWrapper
-from docspace.models.email_validation_key_model import EmailValidationKeyModel
-from docspace.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace.Configuration(
-    host = "http://localhost:8092"
-)
-
-
-# Enter a context with an instance of the API client
-with docspace.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace.AuthenticationApi(api_client)
-    email_validation_key_model = docspace.EmailValidationKeyModel() # EmailValidationKeyModel |  (optional)
-
-    try:
-        # Open confirmation email URL
-        api_response = api_instance.check_confirm(email_validation_key_model=email_validation_key_model)
-        print("The response of AuthenticationApi->check_confirm:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling AuthenticationApi->check_confirm: %s\n" % e)
-```
-
-
+For more information, see [api.onlyoffice.com]().
 
 ### Parameters
 
@@ -217,10 +181,43 @@ Name | Type | Description  | Notes
 
 No authorization required
 
+### Example
+
+
+```python
+import docspace_api_sdk
+from docspace_api_sdk.models.confirm_wrapper import ConfirmWrapper
+from docspace_api_sdk.models.email_validation_key_model import EmailValidationKeyModel
+from docspace_api_sdk.rest import ApiException
+from pprint import pprint
+
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
+)
+
+
+# Enter a context with an instance of the API client
+with docspace_api_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace_api_sdk.AuthenticationApi(api_client)
+    email_validation_key_model = docspace_api_sdk.EmailValidationKeyModel() # EmailValidationKeyModel |  (optional)
+
+    try:
+        # Open confirmation email URL
+        api_response = api_instance.check_confirm(email_validation_key_model=email_validation_key_model)
+        print("The response of AuthenticationApi->check_confirm:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AuthenticationApi->check_confirm: %s\n" % e)
+```
+
+
+
 ### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json
+
 
 ### HTTP response details
 
@@ -233,41 +230,9 @@ No authorization required
 # **get_is_authentificated**
 > BooleanWrapper get_is_authentificated()
 
-Check authentication
-
 Checks if the current user is authenticated or not.
 
-### Example
-
-
-```python
-import docspace
-from docspace.models.boolean_wrapper import BooleanWrapper
-from docspace.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace.Configuration(
-    host = "http://localhost:8092"
-)
-
-
-# Enter a context with an instance of the API client
-with docspace.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace.AuthenticationApi(api_client)
-
-    try:
-        # Check authentication
-        api_response = api_instance.get_is_authentificated()
-        print("The response of AuthenticationApi->get_is_authentificated:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling AuthenticationApi->get_is_authentificated: %s\n" % e)
-```
-
-
+For more information, see [api.onlyoffice.com]().
 
 ### Parameters
 
@@ -281,10 +246,41 @@ This endpoint does not need any parameter.
 
 No authorization required
 
+### Example
+
+
+```python
+import docspace_api_sdk
+from docspace_api_sdk.models.boolean_wrapper import BooleanWrapper
+from docspace_api_sdk.rest import ApiException
+from pprint import pprint
+
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
+)
+
+
+# Enter a context with an instance of the API client
+with docspace_api_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace_api_sdk.AuthenticationApi(api_client)
+
+    try:
+        # Check authentication
+        api_response = api_instance.get_is_authentificated()
+        print("The response of AuthenticationApi->get_is_authentificated:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AuthenticationApi->get_is_authentificated: %s\n" % e)
+```
+
+
+
 ### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
+
 
 ### HTTP response details
 
@@ -297,41 +293,9 @@ No authorization required
 # **logout**
 > StringWrapper logout()
 
-Log out
-
 Logs out of the current user account.
 
-### Example
-
-
-```python
-import docspace
-from docspace.models.string_wrapper import StringWrapper
-from docspace.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace.Configuration(
-    host = "http://localhost:8092"
-)
-
-
-# Enter a context with an instance of the API client
-with docspace.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace.AuthenticationApi(api_client)
-
-    try:
-        # Log out
-        api_response = api_instance.logout()
-        print("The response of AuthenticationApi->logout:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling AuthenticationApi->logout: %s\n" % e)
-```
-
-
+For more information, see [api.onlyoffice.com]().
 
 ### Parameters
 
@@ -345,10 +309,41 @@ This endpoint does not need any parameter.
 
 No authorization required
 
+### Example
+
+
+```python
+import docspace_api_sdk
+from docspace_api_sdk.models.string_wrapper import StringWrapper
+from docspace_api_sdk.rest import ApiException
+from pprint import pprint
+
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
+)
+
+
+# Enter a context with an instance of the API client
+with docspace_api_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace_api_sdk.AuthenticationApi(api_client)
+
+    try:
+        # Log out
+        api_response = api_instance.logout()
+        print("The response of AuthenticationApi->logout:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AuthenticationApi->logout: %s\n" % e)
+```
+
+
+
 ### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
+
 
 ### HTTP response details
 
@@ -361,77 +356,9 @@ No authorization required
 # **save_mobile_phone**
 > AuthenticationTokenWrapper save_mobile_phone(mobile_requests_dto=mobile_requests_dto)
 
-Set a mobile phone
-
 Sets a mobile phone for the current user.
 
-### Example
-
-* Basic Authentication (Basic):
-* OAuth Authentication (OAuth2):
-* Api Key Authentication (ApiKeyBearer):
-* Api Key Authentication (asc_auth_key):
-* Bearer (JWT) Authentication (Bearer):
-
-```python
-import docspace
-from docspace.models.authentication_token_wrapper import AuthenticationTokenWrapper
-from docspace.models.mobile_requests_dto import MobileRequestsDto
-from docspace.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace.Configuration(
-    host = "http://localhost:8092"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure HTTP basic authorization: Basic
-configuration = docspace.Configuration(
-    username = os.environ["USERNAME"],
-    password = os.environ["PASSWORD"]
-)
-
-configuration.access_token = os.environ["ACCESS_TOKEN"]
-
-# Configure API key authorization: ApiKeyBearer
-configuration.api_key['ApiKeyBearer'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-# Configure API key authorization: asc_auth_key
-configuration.api_key['asc_auth_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['asc_auth_key'] = 'Bearer'
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-
-# Enter a context with an instance of the API client
-with docspace.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace.AuthenticationApi(api_client)
-    mobile_requests_dto = docspace.MobileRequestsDto() # MobileRequestsDto |  (optional)
-
-    try:
-        # Set a mobile phone
-        api_response = api_instance.save_mobile_phone(mobile_requests_dto=mobile_requests_dto)
-        print("The response of AuthenticationApi->save_mobile_phone:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling AuthenticationApi->save_mobile_phone: %s\n" % e)
-```
-
-
+For more information, see [api.onlyoffice.com]().
 
 ### Parameters
 
@@ -448,10 +375,52 @@ Name | Type | Description  | Notes
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
+### Example
+
+
+```python
+import docspace_api_sdk
+from docspace_api_sdk.models.authentication_token_wrapper import AuthenticationTokenWrapper
+from docspace_api_sdk.models.mobile_requests_dto import MobileRequestsDto
+from docspace_api_sdk.rest import ApiException
+from pprint import pprint
+
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with docspace_api_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace_api_sdk.AuthenticationApi(api_client)
+    mobile_requests_dto = docspace_api_sdk.MobileRequestsDto() # MobileRequestsDto |  (optional)
+
+    try:
+        # Set a mobile phone
+        api_response = api_instance.save_mobile_phone(mobile_requests_dto=mobile_requests_dto)
+        print("The response of AuthenticationApi->save_mobile_phone:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AuthenticationApi->save_mobile_phone: %s\n" % e)
+```
+
+
+
 ### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json
+
 
 ### HTTP response details
 
@@ -465,43 +434,9 @@ Name | Type | Description  | Notes
 # **send_sms_code**
 > AuthenticationTokenWrapper send_sms_code(auth_requests_dto=auth_requests_dto)
 
-Send SMS code
-
 Sends SMS with an authentication code.
 
-### Example
-
-
-```python
-import docspace
-from docspace.models.auth_requests_dto import AuthRequestsDto
-from docspace.models.authentication_token_wrapper import AuthenticationTokenWrapper
-from docspace.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost:8092
-# See configuration.py for a list of all supported configuration parameters.
-configuration = docspace.Configuration(
-    host = "http://localhost:8092"
-)
-
-
-# Enter a context with an instance of the API client
-with docspace.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace.AuthenticationApi(api_client)
-    auth_requests_dto = docspace.AuthRequestsDto() # AuthRequestsDto |  (optional)
-
-    try:
-        # Send SMS code
-        api_response = api_instance.send_sms_code(auth_requests_dto=auth_requests_dto)
-        print("The response of AuthenticationApi->send_sms_code:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling AuthenticationApi->send_sms_code: %s\n" % e)
-```
-
-
+For more information, see [api.onlyoffice.com]().
 
 ### Parameters
 
@@ -518,10 +453,43 @@ Name | Type | Description  | Notes
 
 No authorization required
 
+### Example
+
+
+```python
+import docspace_api_sdk
+from docspace_api_sdk.models.auth_requests_dto import AuthRequestsDto
+from docspace_api_sdk.models.authentication_token_wrapper import AuthenticationTokenWrapper
+from docspace_api_sdk.rest import ApiException
+from pprint import pprint
+
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
+)
+
+
+# Enter a context with an instance of the API client
+with docspace_api_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace_api_sdk.AuthenticationApi(api_client)
+    auth_requests_dto = docspace_api_sdk.AuthRequestsDto() # AuthRequestsDto |  (optional)
+
+    try:
+        # Send SMS code
+        api_response = api_instance.send_sms_code(auth_requests_dto=auth_requests_dto)
+        print("The response of AuthenticationApi->send_sms_code:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AuthenticationApi->send_sms_code: %s\n" % e)
+```
+
+
+
 ### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json
+
 
 ### HTTP response details
 

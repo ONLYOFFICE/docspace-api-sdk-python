@@ -1,5 +1,4 @@
 # EmployeeDto
-
 The user parameters.
 
 ## Properties
@@ -21,7 +20,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.employee_dto import EmployeeDto
+from docspace_api_sdk.models.employee_dto import EmployeeDto
 
 # TODO update the JSON string below
 json = "{}"

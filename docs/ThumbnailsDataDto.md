@@ -1,5 +1,4 @@
 # ThumbnailsDataDto
-
 The thumbnails data parameters.
 
 ## Properties
@@ -16,7 +15,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.thumbnails_data_dto import ThumbnailsDataDto
+from docspace_api_sdk.models.thumbnails_data_dto import ThumbnailsDataDto
 
 # TODO update the JSON string below
 json = "{}"

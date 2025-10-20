@@ -1,5 +1,4 @@
 # StartFillingForm
-
 The parameters of the button that starts filling out the form.
 
 ## Properties
@@ -11,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.start_filling_form import StartFillingForm
+from docspace_api_sdk.models.start_filling_form import StartFillingForm
 
 # TODO update the JSON string below
 json = "{}"

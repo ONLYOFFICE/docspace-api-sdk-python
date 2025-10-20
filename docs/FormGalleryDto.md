@@ -1,23 +1,22 @@
 # FormGalleryDto
-
 The form gallery parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**path** | **str** | The form gallery path. | [optional] 
-**domain** | **str** | The form gallery domain. | [optional] 
-**ext** | **str** | The form gallery extension. | [optional] 
-**upload_path** | **str** | The form gallery upload path. | [optional] 
-**upload_domain** | **str** | The form gallery upload domain. | [optional] 
-**upload_ext** | **str** | The form gallery upload extension. | [optional] 
-**upload_dashboard** | **str** | The form gallery upload dashboard. | [optional] 
+**path** | **str** | The form gallery path. | 
+**domain** | **str** | The form gallery domain. | 
+**ext** | **str** | The form gallery extension. | 
+**upload_path** | **str** | The form gallery upload path. | 
+**upload_domain** | **str** | The form gallery upload domain. | 
+**upload_ext** | **str** | The form gallery upload extension. | 
+**upload_dashboard** | **str** | The form gallery upload dashboard. | 
 
 ## Example
 
 ```python
-from docspace.models.form_gallery_dto import FormGalleryDto
+from docspace_api_sdk.models.form_gallery_dto import FormGalleryDto
 
 # TODO update the JSON string below
 json = "{}"

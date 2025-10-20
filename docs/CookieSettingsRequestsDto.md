@@ -1,5 +1,4 @@
 # CookieSettingsRequestsDto
-
 The request parameters for managing cookie settings.
 
 ## Properties
@@ -12,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.cookie_settings_requests_dto import CookieSettingsRequestsDto
+from docspace_api_sdk.models.cookie_settings_requests_dto import CookieSettingsRequestsDto
 
 # TODO update the JSON string below
 json = "{}"

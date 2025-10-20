@@ -1,18 +1,18 @@
 # DuplicateRequestDto
-
-The duplicate request parameters.
+The request parameters for duplicating files and fodlers.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**folder_ids** | [**List[BaseBatchRequestDtoFolderIdsInner]**](BaseBatchRequestDtoFolderIdsInner.md) | The list of folder IDs. | [optional] 
-**file_ids** | [**List[BaseBatchRequestDtoFolderIdsInner]**](BaseBatchRequestDtoFolderIdsInner.md) | The list of file IDs. | [optional] 
+**return_single_operation** | **bool** | Specifies whether to return only the current operation | [optional] 
+**folder_ids** | [**List[DuplicateRequestDtoAllOfFolderIds]**](DuplicateRequestDtoAllOfFolderIds.md) | The list of folder IDs. | [optional] 
+**file_ids** | [**List[DuplicateRequestDtoAllOfFileIds]**](DuplicateRequestDtoAllOfFileIds.md) | The list of file IDs. | [optional] 
 
 ## Example
 
 ```python
-from docspace.models.duplicate_request_dto import DuplicateRequestDto
+from docspace_api_sdk.models.duplicate_request_dto import DuplicateRequestDto
 
 # TODO update the JSON string below
 json = "{}"

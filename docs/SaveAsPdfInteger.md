@@ -1,6 +1,5 @@
 # SaveAsPdfInteger
-
-The parameters for saving the file as PDF.
+The parameters for saving a file as PDF.
 
 ## Properties
 
@@ -12,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.save_as_pdf_integer import SaveAsPdfInteger
+from docspace_api_sdk.models.save_as_pdf_integer import SaveAsPdfInteger
 
 # TODO update the JSON string below
 json = "{}"

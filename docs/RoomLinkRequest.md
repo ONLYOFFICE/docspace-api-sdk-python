@@ -1,5 +1,4 @@
 # RoomLinkRequest
-
 The room link parameters.
 
 ## Properties
@@ -9,6 +8,7 @@ Name | Type | Description | Notes
 **link_id** | **str** | The room link ID. | [optional] 
 **access** | [**FileShare**](FileShare.md) |  | [optional] 
 **expiration_date** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] 
+**internal** | **bool** | The link scope, whether it is internal or not. | [optional] 
 **title** | **str** | The link name. | [optional] 
 **link_type** | [**LinkType**](LinkType.md) |  | [optional] 
 **password** | **str** | The link password. | [optional] 
@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.room_link_request import RoomLinkRequest
+from docspace_api_sdk.models.room_link_request import RoomLinkRequest
 
 # TODO update the JSON string below
 json = "{}"

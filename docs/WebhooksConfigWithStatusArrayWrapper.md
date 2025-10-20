@@ -1,6 +1,5 @@
 # WebhooksConfigWithStatusArrayWrapper
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.webhooks_config_with_status_array_wrapper import WebhooksConfigWithStatusArrayWrapper
+from docspace_api_sdk.models.webhooks_config_with_status_array_wrapper import WebhooksConfigWithStatusArrayWrapper
 
 # TODO update the JSON string below
 json = "{}"

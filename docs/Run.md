@@ -1,5 +1,4 @@
 # Run
-
 The text run parameters.
 
 ## Properties
@@ -13,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.run import Run
+from docspace_api_sdk.models.run import Run
 
 # TODO update the JSON string below
 json = "{}"

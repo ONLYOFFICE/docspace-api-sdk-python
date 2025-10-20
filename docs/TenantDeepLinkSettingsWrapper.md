@@ -1,6 +1,5 @@
 # TenantDeepLinkSettingsWrapper
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace.models.tenant_deep_link_settings_wrapper import TenantDeepLinkSettingsWrapper
+from docspace_api_sdk.models.tenant_deep_link_settings_wrapper import TenantDeepLinkSettingsWrapper
 
 # TODO update the JSON string below
 json = "{}"

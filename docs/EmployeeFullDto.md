@@ -1,5 +1,4 @@
 # EmployeeFullDto
-
 The full list of user parameters.
 
 ## Properties
@@ -52,11 +51,12 @@ Name | Type | Description | Notes
 **created_by** | [**EmployeeDto**](EmployeeDto.md) |  | [optional] 
 **registration_date** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] 
 **has_personal_folder** | **bool** | Specifies if the user has a personal folder or not. | [optional] 
+**tfa_app_enabled** | **bool** | Indicates whether the user has enabled two-factor authentication (TFA) using an authentication app. | [optional] 
 
 ## Example
 
 ```python
-from docspace.models.employee_full_dto import EmployeeFullDto
+from docspace_api_sdk.models.employee_full_dto import EmployeeFullDto
 
 # TODO update the JSON string below
 json = "{}"
