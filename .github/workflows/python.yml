@@ -5,7 +5,12 @@
 
 name: docspace_api_sdk Python package
 
-on: [push, pull_request]
+on:
+  workflow_dispatch:
+  push:
+    branches: [master, develop]
+  pull_request:
+    branches: [master, develop]
 
 permissions:
   contents: read
