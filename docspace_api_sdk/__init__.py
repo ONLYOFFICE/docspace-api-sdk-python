@@ -16,7 +16,7 @@
 
 
 
-__version__ = "3.5.0-preview.1"
+__version__ = "3.5.0"
 
 # import apis into sdk package
 from docspace_api_sdk.api.ApiKeys.api_keys_api import ApiKeysApi
