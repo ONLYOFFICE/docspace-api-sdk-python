@@ -31,8 +31,8 @@ class SaveFormRoleMappingDtoInteger(BaseModel):
     """
     The parameters for saving form role mapping.
     """ # noqa: E501
-    form_id: Optional[StrictInt] = Field(default=None, description="The form ID.", alias="formId")
-    roles: Optional[List[FormRole]] = Field(default=None, description="The collection of roles.")
+    form_id: StrictInt = Field(description="The form ID.", alias="formId")
+    roles: Optional[List[FormRole]] = Field(description="The collection of roles.")
     __properties: ClassVar[List[str]] = ["formId", "roles"]
 
     model_config = ConfigDict(

@@ -32,8 +32,8 @@ class NewItemsDtoRoomNewItemsDto(BaseModel):
     """
     The new item parameters.
     """ # noqa: E501
-    var_date: Optional[ApiDateTime] = Field(default=None, alias="date")
-    items: Optional[List[RoomNewItemsDto]] = Field(default=None, description="The list of items.")
+    var_date: ApiDateTime = Field(alias="date")
+    items: Optional[List[RoomNewItemsDto]] = Field(description="The list of items.")
     __properties: ClassVar[List[str]] = ["date", "items"]
 
     model_config = ConfigDict(

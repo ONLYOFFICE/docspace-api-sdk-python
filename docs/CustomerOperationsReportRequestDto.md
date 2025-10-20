@@ -1,14 +1,15 @@
 # CustomerOperationsReportRequestDto
-Parameters of the request for generating the report on client operations
+The request parameters for generating a report on client operations.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**start_date** | **datetime** | Start date | [optional] 
-**end_date** | **datetime** | End date | [optional] 
-**credit** | **bool** | Include credit operations | [optional] 
-**withdrawal** | **bool** | Include withdrawal operations | [optional] 
+**start_date** | **datetime** | The report start date. | [optional] 
+**end_date** | **datetime** | The report end date. | [optional] 
+**participant_name** | **str** | The participant name. | [optional] 
+**credit** | **bool** | Specifies whether to include credit operations in the report. | [optional] 
+**debit** | **bool** | Specifies whether to include debit operations in the report. | [optional] 
 
 ## Example
 

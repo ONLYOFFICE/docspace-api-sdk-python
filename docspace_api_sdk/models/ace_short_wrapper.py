@@ -31,7 +31,7 @@ class AceShortWrapper(BaseModel):
     The information about the settings which allow to share the document with other users.
     """ # noqa: E501
     user: Optional[StrictStr] = Field(default=None, description="The name of the user the document will be shared with.")
-    permissions: Optional[StrictStr] = Field(default=None, description="The access rights for the user with the name above.  Can be \"Full Access\", \"Read Only\", or \"Deny Access\".")
+    permissions: Optional[StrictStr] = Field(default=None, description="The access rights for the user with the name above.  Can be Full Access, Read Only, or Deny Access.")
     is_link: Optional[StrictBool] = Field(default=None, description="Specifies whether to change the user icon to the link icon.", alias="isLink")
     __properties: ClassVar[List[str]] = ["user", "permissions", "isLink"]
 

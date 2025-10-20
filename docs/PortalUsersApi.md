@@ -310,7 +310,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **send_congratulations**
-> send_congratulations(userid=userid, key=key)
+> send_congratulations(userid, key)
 
 Sends congratulations to the user after registering a portal.
 
@@ -321,8 +321,8 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **userid** | **str**| The user ID to receive the congratulatory message. | [optional] 
- **key** | **str**| The template identifier or email configuration key. | [optional] 
+ **userid** | **str**| The user ID to receive the congratulatory message. | 
+ **key** | **str**| The template identifier or email configuration key. | 
 
 ### Return type
 
@@ -349,12 +349,12 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.UsersApi(api_client)
-    userid = '75a5f745-f697-4418-b38d-0fe0d277e258' # str | The user ID to receive the congratulatory message. (optional)
-    key = 'some text' # str | The template identifier or email configuration key. (optional)
+    userid = '75a5f745-f697-4418-b38d-0fe0d277e258' # str | The user ID to receive the congratulatory message.
+    key = 'some text' # str | The template identifier or email configuration key.
 
     try:
         # Send congratulations
-        api_instance.send_congratulations(userid=userid, key=key)
+        api_instance.send_congratulations(userid, key)
     except Exception as e:
         print("Exception when calling UsersApi->send_congratulations: %s\n" % e)
 ```

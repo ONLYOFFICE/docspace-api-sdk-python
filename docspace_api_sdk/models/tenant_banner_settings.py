@@ -29,7 +29,7 @@ from typing_extensions import Self
 
 class TenantBannerSettings(BaseModel):
     """
-    The promotional banners visibility settings.
+    The visibility settings of the promotional banners.
     """ # noqa: E501
     hidden: Optional[StrictBool] = Field(default=None, description="The banners visibility flag.")
     last_modified: Optional[datetime] = Field(default=None, alias="lastModified")

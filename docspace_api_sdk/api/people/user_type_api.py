@@ -49,6 +49,7 @@ class UserTypeApi:
         self.api_client = api_client
 
 
+
     @validate_call
     def get_user_type_update_progress(
         self,
@@ -335,7 +336,7 @@ class UserTypeApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> TaskProgressResponseWrapper:
-        """Update user type
+        """Start updating user type
 
         Starts updating the type of the user or guest when reassigning rooms and shared files.
 
@@ -404,7 +405,7 @@ class UserTypeApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[TaskProgressResponseWrapper]:
-        """Update user type
+        """Start updating user type
 
         Starts updating the type of the user or guest when reassigning rooms and shared files.
 
@@ -473,7 +474,7 @@ class UserTypeApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Update user type
+        """Start updating user type
 
         Starts updating the type of the user or guest when reassigning rooms and shared files.
 
@@ -620,7 +621,7 @@ class UserTypeApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> TaskProgressResponseWrapper:
-        """Terminate update user type
+        """Terminate updating user type
 
         Terminates the process of updating the type of the user or guest.
 
@@ -688,7 +689,7 @@ class UserTypeApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[TaskProgressResponseWrapper]:
-        """Terminate update user type
+        """Terminate updating user type
 
         Terminates the process of updating the type of the user or guest.
 
@@ -756,7 +757,7 @@ class UserTypeApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Terminate update user type
+        """Terminate updating user type
 
         Terminates the process of updating the type of the user or guest.
 
@@ -889,7 +890,7 @@ class UserTypeApi:
     def update_user_type(
         self,
         type: Annotated[EmployeeType, Field(description="The new user type.")],
-        update_members_request_dto: Annotated[Optional[UpdateMembersRequestDto], Field(description="The request parameters for updating the user information.")] = None,
+        update_members_request_dto: Annotated[UpdateMembersRequestDto, Field(description="The request parameters for updating the user information.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -909,7 +910,7 @@ class UserTypeApi:
 
         :param type: The new user type. (required)
         :type type: EmployeeType
-        :param update_members_request_dto: The request parameters for updating the user information.
+        :param update_members_request_dto: The request parameters for updating the user information. (required)
         :type update_members_request_dto: UpdateMembersRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -961,7 +962,7 @@ class UserTypeApi:
     def update_user_type_with_http_info(
         self,
         type: Annotated[EmployeeType, Field(description="The new user type.")],
-        update_members_request_dto: Annotated[Optional[UpdateMembersRequestDto], Field(description="The request parameters for updating the user information.")] = None,
+        update_members_request_dto: Annotated[UpdateMembersRequestDto, Field(description="The request parameters for updating the user information.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -981,7 +982,7 @@ class UserTypeApi:
 
         :param type: The new user type. (required)
         :type type: EmployeeType
-        :param update_members_request_dto: The request parameters for updating the user information.
+        :param update_members_request_dto: The request parameters for updating the user information. (required)
         :type update_members_request_dto: UpdateMembersRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1033,7 +1034,7 @@ class UserTypeApi:
     def update_user_type_without_preload_content(
         self,
         type: Annotated[EmployeeType, Field(description="The new user type.")],
-        update_members_request_dto: Annotated[Optional[UpdateMembersRequestDto], Field(description="The request parameters for updating the user information.")] = None,
+        update_members_request_dto: Annotated[UpdateMembersRequestDto, Field(description="The request parameters for updating the user information.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1053,7 +1054,7 @@ class UserTypeApi:
 
         :param type: The new user type. (required)
         :type type: EmployeeType
-        :param update_members_request_dto: The request parameters for updating the user information.
+        :param update_members_request_dto: The request parameters for updating the user information. (required)
         :type update_members_request_dto: UpdateMembersRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request

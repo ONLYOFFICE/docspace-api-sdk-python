@@ -38,10 +38,9 @@ class FileDtoIntegerAllOfViewAccessibility(BaseModel):
     web_custom_filter_editing: Optional[StrictBool] = Field(default=None, alias="WebCustomFilterEditing")
     web_restricted_editing: Optional[StrictBool] = Field(default=None, alias="WebRestrictedEditing")
     web_comment: Optional[StrictBool] = Field(default=None, alias="WebComment")
-    co_auhtoring: Optional[StrictBool] = Field(default=None, alias="CoAuhtoring")
     can_convert: Optional[StrictBool] = Field(default=None, alias="CanConvert")
     must_convert: Optional[StrictBool] = Field(default=None, alias="MustConvert")
-    __properties: ClassVar[List[str]] = ["ImageView", "MediaView", "WebView", "WebEdit", "WebReview", "WebCustomFilterEditing", "WebRestrictedEditing", "WebComment", "CoAuhtoring", "CanConvert", "MustConvert"]
+    __properties: ClassVar[List[str]] = ["ImageView", "MediaView", "WebView", "WebEdit", "WebReview", "WebCustomFilterEditing", "WebRestrictedEditing", "WebComment", "CanConvert", "MustConvert"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -103,7 +102,6 @@ class FileDtoIntegerAllOfViewAccessibility(BaseModel):
             "WebCustomFilterEditing": obj.get("WebCustomFilterEditing"),
             "WebRestrictedEditing": obj.get("WebRestrictedEditing"),
             "WebComment": obj.get("WebComment"),
-            "CoAuhtoring": obj.get("CoAuhtoring"),
             "CanConvert": obj.get("CanConvert"),
             "MustConvert": obj.get("MustConvert")
         })

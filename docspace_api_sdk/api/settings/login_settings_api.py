@@ -43,6 +43,7 @@ class LoginSettingsApi:
         self.api_client = api_client
 
 
+
     @validate_call
     def get_login_settings(
         self,

@@ -32,22 +32,23 @@ class WebPluginDto(BaseModel):
     """
     The web plugin information.
     """ # noqa: E501
-    name: Optional[StrictStr] = Field(default=None, description="The web plugin name.")
-    version: Optional[StrictStr] = Field(default=None, description="The web plugin version.")
-    description: Optional[StrictStr] = Field(default=None, description="The web plugin description.")
-    license: Optional[StrictStr] = Field(default=None, description="The web plugin license.")
-    author: Optional[StrictStr] = Field(default=None, description="The web plugin author.")
-    home_page: Optional[StrictStr] = Field(default=None, description="The web plugin home page URL.", alias="homePage")
-    plugin_name: Optional[StrictStr] = Field(default=None, description="The name by which the web plugin is registered in the window object.", alias="pluginName")
-    scopes: Optional[StrictStr] = Field(default=None, description="The web plugin scopes.")
-    image: Optional[StrictStr] = Field(default=None, description="The web plugin image.")
-    create_by: Optional[EmployeeDto] = Field(default=None, alias="createBy")
-    create_on: Optional[datetime] = Field(default=None, description="The date and time when the web plugin was created.", alias="createOn")
-    enabled: Optional[StrictBool] = Field(default=None, description="Specifies if the web plugin is enabled or not.")
-    system: Optional[StrictBool] = Field(default=None, description="Specifies if the web plugin is system or not.")
-    url: Optional[StrictStr] = Field(default=None, description="The web plugin URL.")
-    settings: Optional[StrictStr] = Field(default=None, description="The web plugin settings.")
-    __properties: ClassVar[List[str]] = ["name", "version", "description", "license", "author", "homePage", "pluginName", "scopes", "image", "createBy", "createOn", "enabled", "system", "url", "settings"]
+    name: Optional[StrictStr] = Field(description="The web plugin name.")
+    version: Optional[StrictStr] = Field(description="The web plugin version.")
+    min_doc_space_version: Optional[StrictStr] = Field(default=None, description="The minimum version of DocSpace with which the plugin is guaranteed to work.", alias="minDocSpaceVersion")
+    description: Optional[StrictStr] = Field(description="The web plugin description.")
+    license: Optional[StrictStr] = Field(description="The web plugin license.")
+    author: Optional[StrictStr] = Field(description="The web plugin author.")
+    home_page: Optional[StrictStr] = Field(description="The web plugin home page URL.", alias="homePage")
+    plugin_name: Optional[StrictStr] = Field(description="The name by which the web plugin is registered in the window object.", alias="pluginName")
+    scopes: Optional[StrictStr] = Field(description="The web plugin scopes.")
+    image: Optional[StrictStr] = Field(description="The web plugin image.")
+    create_by: EmployeeDto = Field(alias="createBy")
+    create_on: datetime = Field(description="The date and time when the web plugin was created.", alias="createOn")
+    enabled: StrictBool = Field(description="Specifies if the web plugin is enabled or not.")
+    system: StrictBool = Field(description="Specifies if the web plugin is system or not.")
+    url: Optional[StrictStr] = Field(description="The web plugin URL.")
+    settings: Optional[StrictStr] = Field(description="The web plugin settings.")
+    __properties: ClassVar[List[str]] = ["name", "version", "minDocSpaceVersion", "description", "license", "author", "homePage", "pluginName", "scopes", "image", "createBy", "createOn", "enabled", "system", "url", "settings"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -100,6 +101,11 @@ class WebPluginDto(BaseModel):
         # and model_fields_set contains the field
         if self.version is None and "version" in self.model_fields_set:
             _dict['version'] = None
+
+        # set to None if min_doc_space_version (nullable) is None
+        # and model_fields_set contains the field
+        if self.min_doc_space_version is None and "min_doc_space_version" in self.model_fields_set:
+            _dict['minDocSpaceVersion'] = None
 
         # set to None if description (nullable) is None
         # and model_fields_set contains the field
@@ -161,6 +167,7 @@ class WebPluginDto(BaseModel):
         _obj = cls.model_validate({
             "name": obj.get("name"),
             "version": obj.get("version"),
+            "minDocSpaceVersion": obj.get("minDocSpaceVersion"),
             "description": obj.get("description"),
             "license": obj.get("license"),
             "author": obj.get("author"),

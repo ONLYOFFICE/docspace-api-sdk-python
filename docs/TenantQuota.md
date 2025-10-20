@@ -34,11 +34,13 @@ Name | Type | Description | Notes
 **customization** | **bool** | Specifies if the customization settings are available or not. | [optional] 
 **lifetime** | **bool** | Specifies if the license has the lifetime settings or not. | [optional] 
 **custom** | **bool** | Specifies if the custom domain URL is available or not. | [optional] 
-**auto_backup_restore** | **bool** | Specifies if the automatic backup option is enabled or not. | [optional] 
+**restore** | **bool** | Specifies if the restore is enabled or not. | [optional] 
 **oauth** | **bool** | Specifies if Oauth is available or not. | [optional] 
 **content_search** | **bool** | Specifies if the content search is available or not. | [optional] 
 **third_party** | **bool** | Specifies if the third-party accounts linking is available or not. | [optional] 
 **year** | **bool** | Specifies if the tenant quota is yearly subscription or not. | [optional] 
+**count_free_backup** | **int** | The number of free backups within a month. | [optional] 
+**backup** | **bool** | Specifies if the backup anabled as a wallet service or not. | [optional] 
 
 ## Example
 

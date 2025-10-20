@@ -31,12 +31,12 @@ class AuthServiceRequestsDto(BaseModel):
     """
     The request parameters for handling the authorization service.
     """ # noqa: E501
-    name: Optional[StrictStr] = Field(default=None, description="The name of the authentication service.")
-    title: Optional[StrictStr] = Field(default=None, description="The user-friendly display title of the authentication service.")
-    description: Optional[StrictStr] = Field(default=None, description="The brief description of the authentication service.")
-    instruction: Optional[StrictStr] = Field(default=None, description="The detailed instructions for configuring or using the authentication service.")
-    can_set: Optional[StrictBool] = Field(default=None, description="Specifies whether the authentication service can be configured by the user.", alias="canSet")
-    props: Optional[List[AuthKey]] = Field(default=None, description="The collection of authorization keys associated with the authentication service.")
+    name: Optional[StrictStr] = Field(default=None, description="The name of the authorization service.")
+    title: Optional[StrictStr] = Field(default=None, description="The user-friendly display title of the authorization service.")
+    description: Optional[StrictStr] = Field(default=None, description="The brief description of the authorization service.")
+    instruction: Optional[StrictStr] = Field(default=None, description="The detailed instructions for configuring or using the authorization service.")
+    can_set: Optional[StrictBool] = Field(default=None, description="Specifies whether the authorization service can be configured by the user.", alias="canSet")
+    props: Optional[List[AuthKey]] = Field(default=None, description="The collection of authorization keys associated with the authorization service.")
     __properties: ClassVar[List[str]] = ["name", "title", "description", "instruction", "canSet", "props"]
 
     model_config = ConfigDict(

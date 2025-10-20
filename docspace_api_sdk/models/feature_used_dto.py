@@ -30,7 +30,7 @@ class FeatureUsedDto(BaseModel):
     """
     The used space parameters of the tenant quota feature.
     """ # noqa: E501
-    value: Optional[Any] = Field(default=None, description="The used space value.")
+    value: Optional[Any] = Field(description="The used space value.")
     title: Optional[StrictStr] = Field(default=None, description="The used space title.")
     __properties: ClassVar[List[str]] = ["value", "title"]
 

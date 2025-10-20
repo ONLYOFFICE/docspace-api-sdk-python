@@ -30,8 +30,8 @@ class LogoCover(BaseModel):
     """
     The logo cover information.
     """ # noqa: E501
-    id: Optional[StrictStr] = Field(default=None, description="The logo cover ID.")
-    data: Optional[StrictStr] = Field(default=None, description="The logo cover data.")
+    id: Optional[StrictStr] = Field(description="The logo cover ID.")
+    data: Optional[StrictStr] = Field(description="The logo cover data.")
     __properties: ClassVar[List[str]] = ["id", "data"]
 
     model_config = ConfigDict(

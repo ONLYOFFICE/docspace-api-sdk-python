@@ -43,6 +43,7 @@ class BannersVisibilityApi:
         self.api_client = api_client
 
 
+
     @validate_call
     def set_tenant_banner_settings(
         self,
@@ -60,9 +61,9 @@ class BannersVisibilityApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> TenantBannerSettingsWrapper:
-        """Set the promotional banners visibility settings
+        """Set the banners visibility
 
-        Sets the promotional banners visibility settings settings for the portal.
+        Sets the visibility settings of the promotional banners in the portal.
 
         :param tenant_banner_settings_dto:
         :type tenant_banner_settings_dto: TenantBannerSettingsDto
@@ -128,9 +129,9 @@ class BannersVisibilityApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[TenantBannerSettingsWrapper]:
-        """Set the promotional banners visibility settings
+        """Set the banners visibility
 
-        Sets the promotional banners visibility settings settings for the portal.
+        Sets the visibility settings of the promotional banners in the portal.
 
         :param tenant_banner_settings_dto:
         :type tenant_banner_settings_dto: TenantBannerSettingsDto
@@ -196,9 +197,9 @@ class BannersVisibilityApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Set the promotional banners visibility settings
+        """Set the banners visibility
 
-        Sets the promotional banners visibility settings settings for the portal.
+        Sets the visibility settings of the promotional banners in the portal.
 
         :param tenant_banner_settings_dto:
         :type tenant_banner_settings_dto: TenantBannerSettingsDto

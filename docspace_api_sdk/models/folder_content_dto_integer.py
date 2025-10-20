@@ -35,10 +35,10 @@ class FolderContentDtoInteger(BaseModel):
     files: Optional[List[FileEntryBaseDto]] = Field(default=None, description="The list of files in the folder.")
     folders: Optional[List[FileEntryBaseDto]] = Field(default=None, description="The list of folders in the folder.")
     current: Optional[FolderDtoInteger] = None
-    path_parts: Optional[Any] = Field(default=None, description="The folder path.", alias="pathParts")
+    path_parts: Optional[Any] = Field(description="The folder path.", alias="pathParts")
     start_index: Optional[StrictInt] = Field(default=None, description="The folder start index.", alias="startIndex")
     count: Optional[StrictInt] = Field(default=None, description="The number of folder elements.")
-    total: Optional[StrictInt] = Field(default=None, description="The total number of elements in the folder.")
+    total: StrictInt = Field(description="The total number of elements in the folder.")
     new: Optional[StrictInt] = Field(default=None, description="The new element index in the folder.")
     __properties: ClassVar[List[str]] = ["files", "folders", "current", "pathParts", "startIndex", "count", "total", "new"]
 

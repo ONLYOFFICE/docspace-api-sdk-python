@@ -48,6 +48,7 @@ class ClientManagementApi:
         self.api_client = api_client
 
 
+
     @validate_call
     def change_activation(
         self,

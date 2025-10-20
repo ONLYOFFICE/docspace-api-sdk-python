@@ -34,10 +34,10 @@ class HistoryDto(BaseModel):
     """
     The file history information.
     """ # noqa: E501
-    action: Optional[HistoryAction] = None
-    initiator: Optional[EmployeeDto] = None
-    var_date: Optional[ApiDateTime] = Field(default=None, alias="date")
-    data: Optional[HistoryData] = None
+    action: HistoryAction
+    initiator: EmployeeDto
+    var_date: ApiDateTime = Field(alias="date")
+    data: HistoryData
     related: Optional[List[HistoryDto]] = Field(default=None, description="The list of related history.")
     __properties: ClassVar[List[str]] = ["action", "initiator", "date", "data", "related"]
 

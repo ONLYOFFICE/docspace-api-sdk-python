@@ -36,9 +36,9 @@ class SignupAccountRequestDto(BaseModel):
     last_name: Optional[StrictStr] = Field(default=None, description="The user last name.", alias="lastName")
     email: Optional[StrictStr] = Field(default=None, description="The user email address.")
     password_hash: Optional[StrictStr] = Field(default=None, description="The user password hash.", alias="passwordHash")
-    key: Optional[StrictStr] = Field(default=None, description="The user link key.")
+    key: Optional[StrictStr] = Field(description="The user link key.")
     culture: Optional[StrictStr] = Field(default=None, description="The user culture code.")
-    serialized_profile: Optional[StrictStr] = Field(default=None, description="Third-party profile in the serialized format", alias="serializedProfile")
+    serialized_profile: Optional[StrictStr] = Field(description="The third-party profile in the serialized format", alias="serializedProfile")
     __properties: ClassVar[List[str]] = ["employeeType", "firstName", "lastName", "email", "passwordHash", "key", "culture", "serializedProfile"]
 
     model_config = ConfigDict(

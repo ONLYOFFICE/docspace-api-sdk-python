@@ -22,7 +22,7 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -30,9 +30,9 @@ class ProductAdministratorDto(BaseModel):
     """
     The product administrator parameters.
     """ # noqa: E501
-    product_id: Optional[StrictStr] = Field(default=None, description="The product ID.", alias="productId")
-    user_id: Optional[StrictStr] = Field(default=None, description="The user unique identifier.", alias="userId")
-    administrator: Optional[StrictBool] = Field(default=None, description="Indicates whether the user has administrator privileges for the product.")
+    product_id: StrictStr = Field(description="The product ID.", alias="productId")
+    user_id: StrictStr = Field(description="The user unique identifier.", alias="userId")
+    administrator: StrictBool = Field(description="Indicates whether the user has administrator privileges for the product.")
     __properties: ClassVar[List[str]] = ["productId", "userId", "administrator"]
 
     model_config = ConfigDict(

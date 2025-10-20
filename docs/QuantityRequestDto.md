@@ -1,11 +1,11 @@
 # QuantityRequestDto
-The request parameters for the payment quantity specifications.
+The request parameters for specifying payment quantity.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**quantity** | **Dict[str, int]** | The mapping of item identifiers with their respective quantities in the payment. | [optional] 
+**quantity** | **Dict[str, int]** | The mapping of item identifiers to their respective quantities in the payment. | [optional] 
 
 ## Example
 

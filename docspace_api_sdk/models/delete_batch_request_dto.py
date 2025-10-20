@@ -38,7 +38,7 @@ class DeleteBatchRequestDto(FileOperationRequestBaseDto):
     folder_ids: Optional[List[DeleteBatchRequestDtoAllOfFolderIds]] = Field(default=None, description="The list of folder IDs to be deleted.", alias="folderIds")
     file_ids: Optional[List[DeleteBatchRequestDtoAllOfFileIds]] = Field(default=None, description="The list of file IDs to be deleted.", alias="fileIds")
     delete_after: Optional[StrictBool] = Field(default=None, description="Specifies whether to delete a file after the editing session is finished or not", alias="deleteAfter")
-    immediately: Optional[StrictBool] = Field(default=None, description="Specifies whether to move a file to the \\\"Trash\\\" folder or delete it immediately.")
+    immediately: Optional[StrictBool] = Field(default=None, description="Specifies whether to move a file to the \\Trash\\ folder or delete it immediately.")
 
     model_config = ConfigDict(
         populate_by_name=True,

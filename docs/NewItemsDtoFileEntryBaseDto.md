@@ -5,8 +5,8 @@ The new item parameters.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**var_date** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] 
-**items** | [**List[FileEntryBaseDto]**](FileEntryBaseDto.md) | The list of items. | [optional] 
+**var_date** | [**ApiDateTime**](ApiDateTime.md) |  | 
+**items** | [**List[FileEntryBaseDto]**](FileEntryBaseDto.md) | The list of items. | 
 
 ## Example
 

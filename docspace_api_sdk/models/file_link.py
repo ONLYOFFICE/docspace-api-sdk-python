@@ -30,9 +30,9 @@ class FileLink(BaseModel):
     """
     The file link properties.
     """ # noqa: E501
-    filetype: Optional[StrictStr] = Field(default=None, description="The type of the file for the source viewed or edited document.")
+    filetype: Optional[StrictStr] = Field(description="The type of the file for the source viewed or edited document.")
     token: Optional[StrictStr] = Field(default=None, description="The encrypted signature added to the config in the form of a token.")
-    url: Optional[StrictStr] = Field(default=None, description="The absolute URL where the source viewed or edited document is stored.")
+    url: Optional[StrictStr] = Field(description="The absolute URL where the source viewed or edited document is stored.")
     __properties: ClassVar[List[str]] = ["filetype", "token", "url"]
 
     model_config = ConfigDict(

@@ -46,6 +46,7 @@ class WebpluginsApi:
         self.api_client = api_client
 
 
+
     @validate_call
     def add_web_plugin_from_file(
         self,
@@ -1138,7 +1139,7 @@ class WebpluginsApi:
     def update_web_plugin(
         self,
         name: Annotated[StrictStr, Field(description="The web plugin name.")],
-        web_plugin_requests: Annotated[Optional[WebPluginRequests], Field(description="The configuration settings for the web plugin instance.")] = None,
+        web_plugin_requests: Annotated[WebPluginRequests, Field(description="The configuration settings for the web plugin instance.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1158,7 +1159,7 @@ class WebpluginsApi:
 
         :param name: The web plugin name. (required)
         :type name: str
-        :param web_plugin_requests: The configuration settings for the web plugin instance.
+        :param web_plugin_requests: The configuration settings for the web plugin instance. (required)
         :type web_plugin_requests: WebPluginRequests
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1211,7 +1212,7 @@ class WebpluginsApi:
     def update_web_plugin_with_http_info(
         self,
         name: Annotated[StrictStr, Field(description="The web plugin name.")],
-        web_plugin_requests: Annotated[Optional[WebPluginRequests], Field(description="The configuration settings for the web plugin instance.")] = None,
+        web_plugin_requests: Annotated[WebPluginRequests, Field(description="The configuration settings for the web plugin instance.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1231,7 +1232,7 @@ class WebpluginsApi:
 
         :param name: The web plugin name. (required)
         :type name: str
-        :param web_plugin_requests: The configuration settings for the web plugin instance.
+        :param web_plugin_requests: The configuration settings for the web plugin instance. (required)
         :type web_plugin_requests: WebPluginRequests
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1284,7 +1285,7 @@ class WebpluginsApi:
     def update_web_plugin_without_preload_content(
         self,
         name: Annotated[StrictStr, Field(description="The web plugin name.")],
-        web_plugin_requests: Annotated[Optional[WebPluginRequests], Field(description="The configuration settings for the web plugin instance.")] = None,
+        web_plugin_requests: Annotated[WebPluginRequests, Field(description="The configuration settings for the web plugin instance.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1304,7 +1305,7 @@ class WebpluginsApi:
 
         :param name: The web plugin name. (required)
         :type name: str
-        :param web_plugin_requests: The configuration settings for the web plugin instance.
+        :param web_plugin_requests: The configuration settings for the web plugin instance. (required)
         :type web_plugin_requests: WebPluginRequests
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request

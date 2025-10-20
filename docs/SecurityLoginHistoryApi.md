@@ -158,7 +158,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_login_events_by_filter**
-> LoginEventArrayWrapper get_login_events_by_filter(user_id=user_id, action=action, var_from=var_from, to=to, count=count, start_index=start_index, fields=fields)
+> LoginEventArrayWrapper get_login_events_by_filter(user_id=user_id, action=action, var_from=var_from, to=to, count=count, start_index=start_index)
 
 Returns a list of the login events by the parameters specified in the request.
 
@@ -175,7 +175,6 @@ Name | Type | Description  | Notes
  **to** | [**ApiDateTime**](.md)| The ending date and time for filtering login events. | [optional] 
  **count** | **int**| The number of login events to retrieve in the query. | [optional] 
  **start_index** | **int**| The starting index for fetching a subset of login events from the query results. | [optional] 
- **fields** | **string**| Comma-separated list of fields to include in the response | [optional] 
 
 ### Return type
 
@@ -220,11 +219,10 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     to = docspace_api_sdk.ApiDateTime() # ApiDateTime | The ending date and time for filtering login events. (optional)
     count = 1234 # int | The number of login events to retrieve in the query. (optional)
     start_index = 1234 # int | The starting index for fetching a subset of login events from the query results. (optional)
-    fields =  # string | Comma-separated list of fields to include in the response (optional)
 
     try:
         # Get filtered login events
-        api_response = api_instance.get_login_events_by_filter(user_id=user_id, action=action, var_from=var_from, to=to, count=count, start_index=start_index, fields=fields)
+        api_response = api_instance.get_login_events_by_filter(user_id=user_id, action=action, var_from=var_from, to=to, count=count, start_index=start_index)
         print("The response of LoginHistoryApi->get_login_events_by_filter:\n")
         pprint(api_response)
     except Exception as e:

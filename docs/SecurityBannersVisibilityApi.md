@@ -4,13 +4,13 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**set_tenant_banner_settings**](#set_tenant_banner_settings) | **POST** /api/2.0/settings/banner | Set the promotional banners visibility settings
+[**set_tenant_banner_settings**](#set_tenant_banner_settings) | **POST** /api/2.0/settings/banner | Set the banners visibility
 
 
 # **set_tenant_banner_settings**
 > TenantBannerSettingsWrapper set_tenant_banner_settings(tenant_banner_settings_dto=tenant_banner_settings_dto)
 
-Sets the promotional banners visibility settings settings for the portal.
+Sets the visibility settings of the promotional banners in the portal.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -60,7 +60,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     tenant_banner_settings_dto = docspace_api_sdk.TenantBannerSettingsDto() # TenantBannerSettingsDto |  (optional)
 
     try:
-        # Set the promotional banners visibility settings
+        # Set the banners visibility
         api_response = api_instance.set_tenant_banner_settings(tenant_banner_settings_dto=tenant_banner_settings_dto)
         print("The response of BannersVisibilityApi->set_tenant_banner_settings:\n")
         pprint(api_response)

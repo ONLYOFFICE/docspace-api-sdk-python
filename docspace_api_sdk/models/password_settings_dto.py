@@ -30,14 +30,14 @@ class PasswordSettingsDto(BaseModel):
     """
     The password settings parameters.
     """ # noqa: E501
-    min_length: Optional[StrictInt] = Field(default=None, description="The minimum number of characters required for valid passwords.", alias="minLength")
-    upper_case: Optional[StrictBool] = Field(default=None, description="Specifies whether the password should contain the uppercase letters or not.", alias="upperCase")
-    digits: Optional[StrictBool] = Field(default=None, description="Specifies whether the password should contain the digits or not.")
-    spec_symbols: Optional[StrictBool] = Field(default=None, description="Specifies whether the password should contain the special symbols or not.", alias="specSymbols")
-    allowed_characters_regex_str: Optional[StrictStr] = Field(default=None, description="The allowed password characters in the regex string format.", alias="allowedCharactersRegexStr")
-    digits_regex_str: Optional[StrictStr] = Field(default=None, description="The password digits in the regex string format.", alias="digitsRegexStr")
-    upper_case_regex_str: Optional[StrictStr] = Field(default=None, description="The password uppercase letters in the regex string format.", alias="upperCaseRegexStr")
-    spec_symbols_regex_str: Optional[StrictStr] = Field(default=None, description="The passaword special symbols in the regex string format.", alias="specSymbolsRegexStr")
+    min_length: StrictInt = Field(description="The minimum number of characters required for valid passwords.", alias="minLength")
+    upper_case: StrictBool = Field(description="Specifies whether the password should contain the uppercase letters or not.", alias="upperCase")
+    digits: StrictBool = Field(description="Specifies whether the password should contain the digits or not.")
+    spec_symbols: StrictBool = Field(description="Specifies whether the password should contain the special symbols or not.", alias="specSymbols")
+    allowed_characters_regex_str: Optional[StrictStr] = Field(description="The allowed password characters in the regex string format.", alias="allowedCharactersRegexStr")
+    digits_regex_str: Optional[StrictStr] = Field(description="The password digits in the regex string format.", alias="digitsRegexStr")
+    upper_case_regex_str: Optional[StrictStr] = Field(description="The password uppercase letters in the regex string format.", alias="upperCaseRegexStr")
+    spec_symbols_regex_str: Optional[StrictStr] = Field(description="The passaword special symbols in the regex string format.", alias="specSymbolsRegexStr")
     __properties: ClassVar[List[str]] = ["minLength", "upperCase", "digits", "specSymbols", "allowedCharactersRegexStr", "digitsRegexStr", "upperCaseRegexStr", "specSymbolsRegexStr"]
 
     model_config = ConfigDict(

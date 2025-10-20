@@ -103,7 +103,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update_user_activation_status**
-> EmployeeFullArrayWrapper update_user_activation_status(activationstatus, update_members_request_dto=update_members_request_dto)
+> EmployeeFullArrayWrapper update_user_activation_status(activationstatus, update_members_request_dto)
 
 Sets the required activation status to the list of users with the IDs specified in the request.
 
@@ -115,7 +115,7 @@ For more information, see [api.onlyoffice.com]().
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **activationstatus** | [**EmployeeActivationStatus**](.md)| The new user activation status. | 
- **update_members_request_dto** | [**UpdateMembersRequestDto**](UpdateMembersRequestDto.md)| The request parameters for updating the user information. | [optional] 
+ **update_members_request_dto** | [**UpdateMembersRequestDto**](UpdateMembersRequestDto.md)| The request parameters for updating the user information. | 
 
 ### Return type
 
@@ -155,11 +155,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.UserStatusApi(api_client)
     activationstatus = docspace_api_sdk.EmployeeActivationStatus() # EmployeeActivationStatus | The new user activation status.
-    update_members_request_dto = docspace_api_sdk.UpdateMembersRequestDto() # UpdateMembersRequestDto | The request parameters for updating the user information. (optional)
+    update_members_request_dto = docspace_api_sdk.UpdateMembersRequestDto() # UpdateMembersRequestDto | The request parameters for updating the user information.
 
     try:
         # Set an activation status to the users
-        api_response = api_instance.update_user_activation_status(activationstatus, update_members_request_dto=update_members_request_dto)
+        api_response = api_instance.update_user_activation_status(activationstatus, update_members_request_dto)
         print("The response of UserStatusApi->update_user_activation_status:\n")
         pprint(api_response)
     except Exception as e:
@@ -184,7 +184,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update_user_status**
-> EmployeeFullArrayWrapper update_user_status(status, update_members_request_dto=update_members_request_dto)
+> EmployeeFullArrayWrapper update_user_status(status, update_members_request_dto)
 
 Changes a status of the users with the IDs specified in the request.
 
@@ -196,7 +196,7 @@ For more information, see [api.onlyoffice.com]().
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **status** | [**EmployeeStatus**](.md)| The new user status. | 
- **update_members_request_dto** | [**UpdateMembersRequestDto**](UpdateMembersRequestDto.md)| The request parameters for updating the user information. | [optional] 
+ **update_members_request_dto** | [**UpdateMembersRequestDto**](UpdateMembersRequestDto.md)| The request parameters for updating the user information. | 
 
 ### Return type
 
@@ -236,11 +236,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.UserStatusApi(api_client)
     status = docspace_api_sdk.EmployeeStatus() # EmployeeStatus | The new user status.
-    update_members_request_dto = docspace_api_sdk.UpdateMembersRequestDto() # UpdateMembersRequestDto | The request parameters for updating the user information. (optional)
+    update_members_request_dto = docspace_api_sdk.UpdateMembersRequestDto() # UpdateMembersRequestDto | The request parameters for updating the user information.
 
     try:
         # Change a user status
-        api_response = api_instance.update_user_status(status, update_members_request_dto=update_members_request_dto)
+        api_response = api_instance.update_user_status(status, update_members_request_dto)
         print("The response of UserStatusApi->update_user_status:\n")
         pprint(api_response)
     except Exception as e:

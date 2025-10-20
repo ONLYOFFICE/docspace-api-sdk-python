@@ -5,8 +5,8 @@ The CSP (Content Security Policy) parameters.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**domains** | **List[str]** | The list of CSP domains. | [optional] 
-**header** | **str** | The CSP header. | [optional] 
+**domains** | **List[str]** | The list of CSP domains. | 
+**header** | **str** | The CSP header. | 
 
 ## Example
 

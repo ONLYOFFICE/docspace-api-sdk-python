@@ -5,8 +5,8 @@ The current license information.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**trial** | **bool** | Specifies whether the license is trial or not. | [optional] 
-**due_date** | **datetime** | The date when the license expires. | [optional] 
+**trial** | **bool** | Specifies whether the license is trial or not. | 
+**due_date** | **datetime** | The date when the license expires. | 
 
 ## Example
 

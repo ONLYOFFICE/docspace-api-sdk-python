@@ -20,6 +20,7 @@ import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
+from __future__ import annotations
 
 from pydantic import Field, StrictBool, StrictInt, StrictStr
 from typing import Optional
@@ -50,6 +51,11 @@ class GroupApi:
         if api_client is None:
             api_client = ApiClient.get_default()
         self.api_client = api_client
+        self._fields = None
+
+    def with_fields(self, fields: str) -> GroupApi:
+        self._fields = fields
+        return self
 
 
     @validate_call
@@ -338,7 +344,7 @@ class GroupApi:
     def add_members_to(
         self,
         id: Annotated[StrictStr, Field(description="The group ID.")],
-        members_request: Annotated[Optional[MembersRequest], Field(description="The member request.")] = None,
+        members_request: Annotated[MembersRequest, Field(description="The member request.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -358,7 +364,7 @@ class GroupApi:
 
         :param id: The group ID. (required)
         :type id: str
-        :param members_request: The member request.
+        :param members_request: The member request. (required)
         :type members_request: MembersRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -411,7 +417,7 @@ class GroupApi:
     def add_members_to_with_http_info(
         self,
         id: Annotated[StrictStr, Field(description="The group ID.")],
-        members_request: Annotated[Optional[MembersRequest], Field(description="The member request.")] = None,
+        members_request: Annotated[MembersRequest, Field(description="The member request.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -431,7 +437,7 @@ class GroupApi:
 
         :param id: The group ID. (required)
         :type id: str
-        :param members_request: The member request.
+        :param members_request: The member request. (required)
         :type members_request: MembersRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -484,7 +490,7 @@ class GroupApi:
     def add_members_to_without_preload_content(
         self,
         id: Annotated[StrictStr, Field(description="The group ID.")],
-        members_request: Annotated[Optional[MembersRequest], Field(description="The member request.")] = None,
+        members_request: Annotated[MembersRequest, Field(description="The member request.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -504,7 +510,7 @@ class GroupApi:
 
         :param id: The group ID. (required)
         :type id: str
-        :param members_request: The member request.
+        :param members_request: The member request. (required)
         :type members_request: MembersRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1474,7 +1480,6 @@ class GroupApi:
         sort_by: Annotated[Optional[StrictStr], Field(description="Specifies the property used to sort the query results.")] = None,
         sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
         filter_value: Annotated[Optional[StrictStr], Field(description="The text used for filtering or searching group data.")] = None,
-        fields:  = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1506,8 +1511,6 @@ class GroupApi:
         :type sort_order: SortOrder
         :param filter_value: The text used for filtering or searching group data.
         :type filter_value: str
-        :param fields: Comma-separated list of fields to include in the response
-        :type fields: string
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1538,7 +1541,6 @@ class GroupApi:
             sort_by=sort_by,
             sort_order=sort_order,
             filter_value=filter_value,
-            fields=fields,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1570,7 +1572,6 @@ class GroupApi:
         sort_by: Annotated[Optional[StrictStr], Field(description="Specifies the property used to sort the query results.")] = None,
         sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
         filter_value: Annotated[Optional[StrictStr], Field(description="The text used for filtering or searching group data.")] = None,
-        fields:  = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1602,8 +1603,6 @@ class GroupApi:
         :type sort_order: SortOrder
         :param filter_value: The text used for filtering or searching group data.
         :type filter_value: str
-        :param fields: Comma-separated list of fields to include in the response
-        :type fields: string
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1634,7 +1633,6 @@ class GroupApi:
             sort_by=sort_by,
             sort_order=sort_order,
             filter_value=filter_value,
-            fields=fields,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1666,7 +1664,6 @@ class GroupApi:
         sort_by: Annotated[Optional[StrictStr], Field(description="Specifies the property used to sort the query results.")] = None,
         sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
         filter_value: Annotated[Optional[StrictStr], Field(description="The text used for filtering or searching group data.")] = None,
-        fields:  = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1698,8 +1695,6 @@ class GroupApi:
         :type sort_order: SortOrder
         :param filter_value: The text used for filtering or searching group data.
         :type filter_value: str
-        :param fields: Comma-separated list of fields to include in the response
-        :type fields: string
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1730,7 +1725,6 @@ class GroupApi:
             sort_by=sort_by,
             sort_order=sort_order,
             filter_value=filter_value,
-            fields=fields,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1757,7 +1751,6 @@ class GroupApi:
         sort_by,
         sort_order,
         filter_value,
-        fields,
         _request_auth,
         _content_type,
         _headers,
@@ -1808,11 +1801,9 @@ class GroupApi:
             
             _query_params.append(('filterValue', filter_value))
             
-        if fields is not None:
-            
-            _query_params.append(('fields', fields))
-            
         # process the header parameters
+        if self._fields is not None:
+            _header_params['fields'] = self._fields
         # process the form parameters
         # process the body parameter
 
@@ -2145,7 +2136,7 @@ class GroupApi:
     def remove_members_from(
         self,
         id: Annotated[StrictStr, Field(description="The group ID.")],
-        members_request: Annotated[Optional[MembersRequest], Field(description="The member request.")] = None,
+        members_request: Annotated[MembersRequest, Field(description="The member request.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2165,7 +2156,7 @@ class GroupApi:
 
         :param id: The group ID. (required)
         :type id: str
-        :param members_request: The member request.
+        :param members_request: The member request. (required)
         :type members_request: MembersRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2218,7 +2209,7 @@ class GroupApi:
     def remove_members_from_with_http_info(
         self,
         id: Annotated[StrictStr, Field(description="The group ID.")],
-        members_request: Annotated[Optional[MembersRequest], Field(description="The member request.")] = None,
+        members_request: Annotated[MembersRequest, Field(description="The member request.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2238,7 +2229,7 @@ class GroupApi:
 
         :param id: The group ID. (required)
         :type id: str
-        :param members_request: The member request.
+        :param members_request: The member request. (required)
         :type members_request: MembersRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2291,7 +2282,7 @@ class GroupApi:
     def remove_members_from_without_preload_content(
         self,
         id: Annotated[StrictStr, Field(description="The group ID.")],
-        members_request: Annotated[Optional[MembersRequest], Field(description="The member request.")] = None,
+        members_request: Annotated[MembersRequest, Field(description="The member request.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2311,7 +2302,7 @@ class GroupApi:
 
         :param id: The group ID. (required)
         :type id: str
-        :param members_request: The member request.
+        :param members_request: The member request. (required)
         :type members_request: MembersRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2445,7 +2436,7 @@ class GroupApi:
     def set_group_manager(
         self,
         id: Annotated[StrictStr, Field(description="The group ID.")],
-        set_manager_request: Annotated[Optional[SetManagerRequest], Field(description="The request for setting a group manager.")] = None,
+        set_manager_request: Annotated[SetManagerRequest, Field(description="The request for setting a group manager.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2465,7 +2456,7 @@ class GroupApi:
 
         :param id: The group ID. (required)
         :type id: str
-        :param set_manager_request: The request for setting a group manager.
+        :param set_manager_request: The request for setting a group manager. (required)
         :type set_manager_request: SetManagerRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2518,7 +2509,7 @@ class GroupApi:
     def set_group_manager_with_http_info(
         self,
         id: Annotated[StrictStr, Field(description="The group ID.")],
-        set_manager_request: Annotated[Optional[SetManagerRequest], Field(description="The request for setting a group manager.")] = None,
+        set_manager_request: Annotated[SetManagerRequest, Field(description="The request for setting a group manager.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2538,7 +2529,7 @@ class GroupApi:
 
         :param id: The group ID. (required)
         :type id: str
-        :param set_manager_request: The request for setting a group manager.
+        :param set_manager_request: The request for setting a group manager. (required)
         :type set_manager_request: SetManagerRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2591,7 +2582,7 @@ class GroupApi:
     def set_group_manager_without_preload_content(
         self,
         id: Annotated[StrictStr, Field(description="The group ID.")],
-        set_manager_request: Annotated[Optional[SetManagerRequest], Field(description="The request for setting a group manager.")] = None,
+        set_manager_request: Annotated[SetManagerRequest, Field(description="The request for setting a group manager.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2611,7 +2602,7 @@ class GroupApi:
 
         :param id: The group ID. (required)
         :type id: str
-        :param set_manager_request: The request for setting a group manager.
+        :param set_manager_request: The request for setting a group manager. (required)
         :type set_manager_request: SetManagerRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2745,7 +2736,7 @@ class GroupApi:
     def set_members_to(
         self,
         id: Annotated[StrictStr, Field(description="The group ID.")],
-        members_request: Annotated[Optional[MembersRequest], Field(description="The member request.")] = None,
+        members_request: Annotated[MembersRequest, Field(description="The member request.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2765,7 +2756,7 @@ class GroupApi:
 
         :param id: The group ID. (required)
         :type id: str
-        :param members_request: The member request.
+        :param members_request: The member request. (required)
         :type members_request: MembersRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2817,7 +2808,7 @@ class GroupApi:
     def set_members_to_with_http_info(
         self,
         id: Annotated[StrictStr, Field(description="The group ID.")],
-        members_request: Annotated[Optional[MembersRequest], Field(description="The member request.")] = None,
+        members_request: Annotated[MembersRequest, Field(description="The member request.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2837,7 +2828,7 @@ class GroupApi:
 
         :param id: The group ID. (required)
         :type id: str
-        :param members_request: The member request.
+        :param members_request: The member request. (required)
         :type members_request: MembersRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2889,7 +2880,7 @@ class GroupApi:
     def set_members_to_without_preload_content(
         self,
         id: Annotated[StrictStr, Field(description="The group ID.")],
-        members_request: Annotated[Optional[MembersRequest], Field(description="The member request.")] = None,
+        members_request: Annotated[MembersRequest, Field(description="The member request.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2909,7 +2900,7 @@ class GroupApi:
 
         :param id: The group ID. (required)
         :type id: str
-        :param members_request: The member request.
+        :param members_request: The member request. (required)
         :type members_request: MembersRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3042,7 +3033,7 @@ class GroupApi:
     def update_group(
         self,
         id: Annotated[StrictStr, Field(description="The group ID.")],
-        update_group_request: Annotated[Optional[UpdateGroupRequest], Field(description="The request for updating a group.")] = None,
+        update_group_request: Annotated[UpdateGroupRequest, Field(description="The request for updating a group.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3062,7 +3053,7 @@ class GroupApi:
 
         :param id: The group ID. (required)
         :type id: str
-        :param update_group_request: The request for updating a group.
+        :param update_group_request: The request for updating a group. (required)
         :type update_group_request: UpdateGroupRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3115,7 +3106,7 @@ class GroupApi:
     def update_group_with_http_info(
         self,
         id: Annotated[StrictStr, Field(description="The group ID.")],
-        update_group_request: Annotated[Optional[UpdateGroupRequest], Field(description="The request for updating a group.")] = None,
+        update_group_request: Annotated[UpdateGroupRequest, Field(description="The request for updating a group.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3135,7 +3126,7 @@ class GroupApi:
 
         :param id: The group ID. (required)
         :type id: str
-        :param update_group_request: The request for updating a group.
+        :param update_group_request: The request for updating a group. (required)
         :type update_group_request: UpdateGroupRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3188,7 +3179,7 @@ class GroupApi:
     def update_group_without_preload_content(
         self,
         id: Annotated[StrictStr, Field(description="The group ID.")],
-        update_group_request: Annotated[Optional[UpdateGroupRequest], Field(description="The request for updating a group.")] = None,
+        update_group_request: Annotated[UpdateGroupRequest, Field(description="The request for updating a group.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3208,7 +3199,7 @@ class GroupApi:
 
         :param id: The group ID. (required)
         :type id: str
-        :param update_group_request: The request for updating a group.
+        :param update_group_request: The request for updating a group. (required)
         :type update_group_request: UpdateGroupRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request

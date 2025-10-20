@@ -25,7 +25,9 @@ from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, Strict
 from typing import Any, ClassVar, Dict, List, Optional
 from docspace_api_sdk.models.api_date_time import ApiDateTime
 from docspace_api_sdk.models.employee_dto import EmployeeDto
+from docspace_api_sdk.models.file_entry_dto_integer_all_of_available_share_rights import FileEntryDtoIntegerAllOfAvailableShareRights
 from docspace_api_sdk.models.file_entry_dto_integer_all_of_security import FileEntryDtoIntegerAllOfSecurity
+from docspace_api_sdk.models.file_entry_dto_integer_all_of_share_settings import FileEntryDtoIntegerAllOfShareSettings
 from docspace_api_sdk.models.file_entry_type import FileEntryType
 from docspace_api_sdk.models.file_share import FileShare
 from docspace_api_sdk.models.folder_type import FolderType
@@ -47,7 +49,6 @@ class FolderDtoInteger(FileEntryDtoInteger):
     files_count: Optional[StrictInt] = Field(default=None, description="The number of files that the folder contains.", alias="filesCount")
     folders_count: Optional[StrictInt] = Field(default=None, description="The number of folders that the folder contains.", alias="foldersCount")
     is_shareable: Optional[StrictBool] = Field(default=None, description="Specifies if the folder can be shared or not.", alias="isShareable")
-    is_favorite: Optional[StrictBool] = Field(default=None, description="Specifies if the folder is favorite or not.", alias="isFavorite")
     new: Optional[StrictInt] = Field(default=None, description="The new element index in the folder.")
     mute: Optional[StrictBool] = Field(default=None, description="Specifies if the folder notifications are enabled or not.")
     tags: Optional[List[StrictStr]] = Field(default=None, description="The list of tags of the folder.")
@@ -64,7 +65,6 @@ class FolderDtoInteger(FileEntryDtoInteger):
     quota_limit: Optional[StrictInt] = Field(default=None, description="The folder quota limit.", alias="quotaLimit")
     is_custom_quota: Optional[StrictBool] = Field(default=None, description="Specifies if the folder room has a custom quota or not.", alias="isCustomQuota")
     used_space: Optional[StrictInt] = Field(default=None, description="How much folder space is used (counter).", alias="usedSpace")
-    external: Optional[StrictBool] = Field(default=None, description="Specifies if the folder can be accessed via an external link or not.")
     password_protected: Optional[StrictBool] = Field(default=None, description="Specifies if the folder is password protected or not.", alias="passwordProtected")
     expired: Optional[StrictBool] = Field(default=None, description="Specifies if an external link to the folder is expired or not.")
 
@@ -121,9 +121,18 @@ class FolderDtoInteger(FileEntryDtoInteger):
         # override the default output from pydantic by calling `to_dict()` of updated_by
         if self.updated_by:
             _dict['updatedBy'] = self.updated_by.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of share_settings
+        if self.share_settings:
+            _dict['shareSettings'] = self.share_settings.to_dict()
         # override the default output from pydantic by calling `to_dict()` of security
         if self.security:
             _dict['security'] = self.security.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of available_share_rights
+        if self.available_share_rights:
+            _dict['availableShareRights'] = self.available_share_rights.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of expiration_date
+        if self.expiration_date:
+            _dict['expirationDate'] = self.expiration_date.to_dict()
         # override the default output from pydantic by calling `to_dict()` of logo
         if self.logo:
             _dict['logo'] = self.logo.to_dict()
@@ -137,6 +146,11 @@ class FolderDtoInteger(FileEntryDtoInteger):
         # and model_fields_set contains the field
         if self.title is None and "title" in self.model_fields_set:
             _dict['title'] = None
+
+        # set to None if short_web_url (nullable) is None
+        # and model_fields_set contains the field
+        if self.short_web_url is None and "short_web_url" in self.model_fields_set:
+            _dict['shortWebUrl'] = None
 
         # set to None if provider_item (nullable) is None
         # and model_fields_set contains the field
@@ -158,6 +172,11 @@ class FolderDtoInteger(FileEntryDtoInteger):
         if self.order is None and "order" in self.model_fields_set:
             _dict['order'] = None
 
+        # set to None if is_favorite (nullable) is None
+        # and model_fields_set contains the field
+        if self.is_favorite is None and "is_favorite" in self.model_fields_set:
+            _dict['isFavorite'] = None
+
         # set to None if origin_title (nullable) is None
         # and model_fields_set contains the field
         if self.origin_title is None and "origin_title" in self.model_fields_set:
@@ -168,25 +187,40 @@ class FolderDtoInteger(FileEntryDtoInteger):
         if self.origin_room_title is None and "origin_room_title" in self.model_fields_set:
             _dict['originRoomTitle'] = None
 
+        # set to None if share_settings (nullable) is None
+        # and model_fields_set contains the field
+        if self.share_settings is None and "share_settings" in self.model_fields_set:
+            _dict['shareSettings'] = None
+
         # set to None if security (nullable) is None
         # and model_fields_set contains the field
         if self.security is None and "security" in self.model_fields_set:
             _dict['security'] = None
+
+        # set to None if available_share_rights (nullable) is None
+        # and model_fields_set contains the field
+        if self.available_share_rights is None and "available_share_rights" in self.model_fields_set:
+            _dict['availableShareRights'] = None
 
         # set to None if request_token (nullable) is None
         # and model_fields_set contains the field
         if self.request_token is None and "request_token" in self.model_fields_set:
             _dict['requestToken'] = None
 
+        # set to None if external (nullable) is None
+        # and model_fields_set contains the field
+        if self.external is None and "external" in self.model_fields_set:
+            _dict['external'] = None
+
+        # set to None if is_link_expired (nullable) is None
+        # and model_fields_set contains the field
+        if self.is_link_expired is None and "is_link_expired" in self.model_fields_set:
+            _dict['isLinkExpired'] = None
+
         # set to None if is_shareable (nullable) is None
         # and model_fields_set contains the field
         if self.is_shareable is None and "is_shareable" in self.model_fields_set:
             _dict['isShareable'] = None
-
-        # set to None if is_favorite (nullable) is None
-        # and model_fields_set contains the field
-        if self.is_favorite is None and "is_favorite" in self.model_fields_set:
-            _dict['isFavorite'] = None
 
         # set to None if tags (nullable) is None
         # and model_fields_set contains the field
@@ -212,11 +246,6 @@ class FolderDtoInteger(FileEntryDtoInteger):
         # and model_fields_set contains the field
         if self.used_space is None and "used_space" in self.model_fields_set:
             _dict['usedSpace'] = None
-
-        # set to None if external (nullable) is None
-        # and model_fields_set contains the field
-        if self.external is None and "external" in self.model_fields_set:
-            _dict['external'] = None
 
         # set to None if password_protected (nullable) is None
         # and model_fields_set contains the field
@@ -245,7 +274,6 @@ class FolderDtoInteger(FileEntryDtoInteger):
             "filesCount": obj.get("filesCount"),
             "foldersCount": obj.get("foldersCount"),
             "isShareable": obj.get("isShareable"),
-            "isFavorite": obj.get("isFavorite"),
             "new": obj.get("new"),
             "mute": obj.get("mute"),
             "tags": obj.get("tags"),
@@ -262,7 +290,6 @@ class FolderDtoInteger(FileEntryDtoInteger):
             "quotaLimit": obj.get("quotaLimit"),
             "isCustomQuota": obj.get("isCustomQuota"),
             "usedSpace": obj.get("usedSpace"),
-            "external": obj.get("external"),
             "passwordProtected": obj.get("passwordProtected"),
             "expired": obj.get("expired")
         })

@@ -43,6 +43,7 @@ class StatisticsApi:
         self.api_client = api_client
 
 
+
     @validate_call
     def get_space_usage_statistics(
         self,

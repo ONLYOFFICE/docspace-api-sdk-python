@@ -22,7 +22,7 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict
-from typing import Any, ClassVar, Dict, List, Optional
+from typing import Any, ClassVar, Dict, List
 from docspace_api_sdk.models.dark_theme_settings_type import DarkThemeSettingsType
 from typing import Optional, Set
 from typing_extensions import Self
@@ -31,7 +31,7 @@ class DarkThemeSettingsRequestDto(BaseModel):
     """
     The theme settings request parameters.
     """ # noqa: E501
-    theme: Optional[DarkThemeSettingsType] = None
+    theme: DarkThemeSettingsType
     __properties: ClassVar[List[str]] = ["theme"]
 
     model_config = ConfigDict(

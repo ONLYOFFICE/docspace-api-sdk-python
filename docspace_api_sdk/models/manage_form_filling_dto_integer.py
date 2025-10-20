@@ -31,7 +31,7 @@ class ManageFormFillingDtoInteger(BaseModel):
     """
     The parameters for managing form filling.
     """ # noqa: E501
-    form_id: Optional[StrictInt] = Field(default=None, description="The ID of the form to manage.", alias="formId")
+    form_id: StrictInt = Field(description="The ID of the form to manage.", alias="formId")
     action: Optional[FormFillingManageAction] = None
     __properties: ClassVar[List[str]] = ["formId", "action"]
 

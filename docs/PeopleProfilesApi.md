@@ -8,9 +8,9 @@ Method | HTTP request | Description
 [**delete_member**](#delete_member) | **DELETE** /api/2.0/people/{userid} | Delete a user
 [**delete_profile**](#delete_profile) | **DELETE** /api/2.0/people/@self | Delete my profile
 [**get_all_profiles**](#get_all_profiles) | **GET** /api/2.0/people | Get profiles
-[**get_claims**](#get_claims) | **GET** /api/2.0/people/tokendiagnostics | Returns the user claims.
+[**get_claims**](#get_claims) | **GET** /api/2.0/people/tokendiagnostics | Get user claims
 [**get_profile_by_email**](#get_profile_by_email) | **GET** /api/2.0/people/email | Get a profile by user email
-[**get_profile_by_user_id**](#get_profile_by_user_id) | **GET** /api/2.0/people/{userid} | Get a profile by user name
+[**get_profile_by_user_id**](#get_profile_by_user_id) | **GET** /api/2.0/people/{userid} | Get a profile by user ID
 [**get_self_profile**](#get_self_profile) | **GET** /api/2.0/people/@self | Get my profile
 [**invite_users**](#invite_users) | **POST** /api/2.0/people/invite | Invite users
 [**remove_users**](#remove_users) | **PUT** /api/2.0/people/delete | Delete users
@@ -255,7 +255,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_all_profiles**
-> EmployeeFullArrayWrapper get_all_profiles(count=count, start_index=start_index, filter_by=filter_by, sort_by=sort_by, sort_order=sort_order, filter_separator=filter_separator, filter_value=filter_value, fields=fields)
+> EmployeeFullArrayWrapper get_all_profiles(count=count, start_index=start_index, filter_by=filter_by, sort_by=sort_by, sort_order=sort_order, filter_separator=filter_separator, filter_value=filter_value)
 
 Returns a list of profiles for all the portal users.
 
@@ -273,7 +273,6 @@ Name | Type | Description  | Notes
  **sort_order** | [**SortOrder**](.md)| The order in which the results are sorted. | [optional] 
  **filter_separator** | **str**| The character or string used to separate multiple filter values in a filtering query. | [optional] 
  **filter_value** | **str**| The text value used as an additional filter criterion for profiles retrieval. | [optional] 
- **fields** | **string**| Comma-separated list of fields to include in the response | [optional] 
 
 ### Return type
 
@@ -318,11 +317,10 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     sort_order = docspace_api_sdk.SortOrder() # SortOrder | The order in which the results are sorted. (optional)
     filter_separator = 'some text' # str | The character or string used to separate multiple filter values in a filtering query. (optional)
     filter_value = 'some text' # str | The text value used as an additional filter criterion for profiles retrieval. (optional)
-    fields =  # string | Comma-separated list of fields to include in the response (optional)
 
     try:
         # Get profiles
-        api_response = api_instance.get_all_profiles(count=count, start_index=start_index, filter_by=filter_by, sort_by=sort_by, sort_order=sort_order, filter_separator=filter_separator, filter_value=filter_value, fields=fields)
+        api_response = api_instance.get_all_profiles(count=count, start_index=start_index, filter_by=filter_by, sort_by=sort_by, sort_order=sort_order, filter_separator=filter_separator, filter_value=filter_value)
         print("The response of ProfilesApi->get_all_profiles:\n")
         pprint(api_response)
     except Exception as e:
@@ -394,7 +392,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     api_instance = docspace_api_sdk.ProfilesApi(api_client)
 
     try:
-        # Returns the user claims.
+        # Get user claims
         api_response = api_instance.get_claims()
         print("The response of ProfilesApi->get_claims:\n")
         pprint(api_response)
@@ -502,7 +500,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **get_profile_by_user_id**
 > EmployeeFullWrapper get_profile_by_user_id(userid)
 
-Returns the detailed information about a profile of the user with the name specified in the request.
+Returns the detailed information about a profile of the user with the ID specified in the request.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -551,7 +549,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     userid = '9846' # str | The user ID.
 
     try:
-        # Get a profile by user name
+        # Get a profile by user ID
         api_response = api_instance.get_profile_by_user_id(userid)
         print("The response of ProfilesApi->get_profile_by_user_id:\n")
         pprint(api_response)
@@ -970,7 +968,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update_member**
-> EmployeeFullWrapper update_member(userid, update_member_request_dto=update_member_request_dto)
+> EmployeeFullWrapper update_member(userid, update_member_request_dto)
 
 Updates the data for the selected portal user with the first name, last name, email address, and/or optional parameters specified in the request.
 
@@ -982,7 +980,7 @@ For more information, see [api.onlyoffice.com]().
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **userid** | **str**| The user ID. | 
- **update_member_request_dto** | [**UpdateMemberRequestDto**](UpdateMemberRequestDto.md)| The request parameters for updating the user information. | [optional] 
+ **update_member_request_dto** | [**UpdateMemberRequestDto**](UpdateMemberRequestDto.md)| The request parameters for updating the user information. | 
 
 ### Return type
 
@@ -1021,11 +1019,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.ProfilesApi(api_client)
     userid = '9846' # str | The user ID.
-    update_member_request_dto = docspace_api_sdk.UpdateMemberRequestDto() # UpdateMemberRequestDto | The request parameters for updating the user information. (optional)
+    update_member_request_dto = docspace_api_sdk.UpdateMemberRequestDto() # UpdateMemberRequestDto | The request parameters for updating the user information.
 
     try:
         # Update a user
-        api_response = api_instance.update_member(userid, update_member_request_dto=update_member_request_dto)
+        api_response = api_instance.update_member(userid, update_member_request_dto)
         print("The response of ProfilesApi->update_member:\n")
         pprint(api_response)
     except Exception as e:

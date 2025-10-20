@@ -43,6 +43,7 @@ class GuestsApi:
         self.api_client = api_client
 
 
+
     @validate_call
     def get_guest_sharing_link(
         self,

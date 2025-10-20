@@ -22,7 +22,7 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool
-from typing import Any, ClassVar, Dict, List, Optional
+from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -30,7 +30,7 @@ class FinishDto(BaseModel):
     """
     The parameters for terminating a process or operation.
     """ # noqa: E501
-    is_send_welcome_email: Optional[StrictBool] = Field(default=None, description="Specifies whether to send a welcome email or not.", alias="isSendWelcomeEmail")
+    is_send_welcome_email: StrictBool = Field(description="Specifies whether to send a welcome email or not.", alias="isSendWelcomeEmail")
     __properties: ClassVar[List[str]] = ["isSendWelcomeEmail"]
 
     model_config = ConfigDict(

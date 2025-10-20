@@ -61,6 +61,7 @@ class CommonSettingsApi:
         self.api_client = api_client
 
 
+
     @validate_call
     def close_admin_helper(
         self,
@@ -887,7 +888,7 @@ class CommonSettingsApi:
     @validate_call
     def delete_portal_color_theme(
         self,
-        id: Annotated[Optional[StrictInt], Field(description="The ID of the portal theme to delete.")] = None,
+        id: Annotated[StrictInt, Field(description="The ID of the portal theme to delete.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -905,7 +906,7 @@ class CommonSettingsApi:
 
         Deletes the portal color theme with the ID specified in the request.
 
-        :param id: The ID of the portal theme to delete.
+        :param id: The ID of the portal theme to delete. (required)
         :type id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -955,7 +956,7 @@ class CommonSettingsApi:
     @validate_call
     def delete_portal_color_theme_with_http_info(
         self,
-        id: Annotated[Optional[StrictInt], Field(description="The ID of the portal theme to delete.")] = None,
+        id: Annotated[StrictInt, Field(description="The ID of the portal theme to delete.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -973,7 +974,7 @@ class CommonSettingsApi:
 
         Deletes the portal color theme with the ID specified in the request.
 
-        :param id: The ID of the portal theme to delete.
+        :param id: The ID of the portal theme to delete. (required)
         :type id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1023,7 +1024,7 @@ class CommonSettingsApi:
     @validate_call
     def delete_portal_color_theme_without_preload_content(
         self,
-        id: Annotated[Optional[StrictInt], Field(description="The ID of the portal theme to delete.")] = None,
+        id: Annotated[StrictInt, Field(description="The ID of the portal theme to delete.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1041,7 +1042,7 @@ class CommonSettingsApi:
 
         Deletes the portal color theme with the ID specified in the request.
 
-        :param id: The ID of the portal theme to delete.
+        :param id: The ID of the portal theme to delete. (required)
         :type id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1206,7 +1207,6 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantDeepLinkSettingsWrapper",
-            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1270,7 +1270,6 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantDeepLinkSettingsWrapper",
-            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1334,7 +1333,6 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantDeepLinkSettingsWrapper",
-            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1383,12 +1381,6 @@ class CommonSettingsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'Basic', 
-            'OAuth2', 
-            'ApiKeyBearer', 
-            'asc_auth_key', 
-            'Bearer', 
-            'OpenId'
         ]
 
         return self.api_client.param_serialize(
@@ -2950,7 +2942,7 @@ class CommonSettingsApi:
     ) -> STRINGArrayWrapper:
         """Get supported languages
 
-        Returns a list of all the available portal languages in the format of a two-letter or four-letter language code (e.g. \"de\", \"en-US\", etc.).
+        Returns a list of all the available portal languages in the format of a two-letter or four-letter language code (e.g. de, en-US, etc.).
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3013,7 +3005,7 @@ class CommonSettingsApi:
     ) -> ApiResponse[STRINGArrayWrapper]:
         """Get supported languages
 
-        Returns a list of all the available portal languages in the format of a two-letter or four-letter language code (e.g. \"de\", \"en-US\", etc.).
+        Returns a list of all the available portal languages in the format of a two-letter or four-letter language code (e.g. de, en-US, etc.).
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3076,7 +3068,7 @@ class CommonSettingsApi:
     ) -> RESTResponseType:
         """Get supported languages
 
-        Returns a list of all the available portal languages in the format of a two-letter or four-letter language code (e.g. \"de\", \"en-US\", etc.).
+        Returns a list of all the available portal languages in the format of a two-letter or four-letter language code (e.g. de, en-US, etc.).
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request

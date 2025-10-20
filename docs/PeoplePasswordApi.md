@@ -9,7 +9,7 @@ Method | HTTP request | Description
 
 
 # **change_user_password**
-> EmployeeFullWrapper change_user_password(userid, member_base_request_dto=member_base_request_dto)
+> EmployeeFullWrapper change_user_password(userid, member_base_request_dto)
 
 Sets a new password to the user with the ID specified in the request.
 
@@ -21,7 +21,7 @@ For more information, see [api.onlyoffice.com]().
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **userid** | **str**| The user ID. | 
- **member_base_request_dto** | [**MemberBaseRequestDto**](MemberBaseRequestDto.md)| The request parameters for the user generic information. | [optional] 
+ **member_base_request_dto** | [**MemberBaseRequestDto**](MemberBaseRequestDto.md)| The request parameters for the user generic information. | 
 
 ### Return type
 
@@ -60,11 +60,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.PasswordApi(api_client)
     userid = 'aae1e103-bca5-9fa1-ba8c-42058b4abf28' # str | The user ID.
-    member_base_request_dto = docspace_api_sdk.MemberBaseRequestDto() # MemberBaseRequestDto | The request parameters for the user generic information. (optional)
+    member_base_request_dto = docspace_api_sdk.MemberBaseRequestDto() # MemberBaseRequestDto | The request parameters for the user generic information.
 
     try:
         # Change a user password
-        api_response = api_instance.change_user_password(userid, member_base_request_dto=member_base_request_dto)
+        api_response = api_instance.change_user_password(userid, member_base_request_dto)
         print("The response of PasswordApi->change_user_password:\n")
         pprint(api_response)
     except Exception as e:

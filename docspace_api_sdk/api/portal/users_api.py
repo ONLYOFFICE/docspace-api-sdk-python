@@ -22,7 +22,6 @@ from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
 from pydantic import Field, StrictStr
-from typing import Optional
 from typing_extensions import Annotated
 from docspace_api_sdk.models.employee_type import EmployeeType
 from docspace_api_sdk.models.int64_wrapper import Int64Wrapper
@@ -45,6 +44,7 @@ class UsersApi:
         if api_client is None:
             api_client = ApiClient.get_default()
         self.api_client = api_client
+
 
 
     @validate_call
@@ -1089,8 +1089,8 @@ class UsersApi:
     @validate_call
     def send_congratulations(
         self,
-        userid: Annotated[Optional[StrictStr], Field(description="The user ID to receive the congratulatory message.")] = None,
-        key: Annotated[Optional[StrictStr], Field(description="The template identifier or email configuration key.")] = None,
+        userid: Annotated[StrictStr, Field(description="The user ID to receive the congratulatory message.")],
+        key: Annotated[StrictStr, Field(description="The template identifier or email configuration key.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1108,9 +1108,9 @@ class UsersApi:
 
         Sends congratulations to the user after registering a portal.
 
-        :param userid: The user ID to receive the congratulatory message.
+        :param userid: The user ID to receive the congratulatory message. (required)
         :type userid: str
-        :param key: The template identifier or email configuration key.
+        :param key: The template identifier or email configuration key. (required)
         :type key: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1161,8 +1161,8 @@ class UsersApi:
     @validate_call
     def send_congratulations_with_http_info(
         self,
-        userid: Annotated[Optional[StrictStr], Field(description="The user ID to receive the congratulatory message.")] = None,
-        key: Annotated[Optional[StrictStr], Field(description="The template identifier or email configuration key.")] = None,
+        userid: Annotated[StrictStr, Field(description="The user ID to receive the congratulatory message.")],
+        key: Annotated[StrictStr, Field(description="The template identifier or email configuration key.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1180,9 +1180,9 @@ class UsersApi:
 
         Sends congratulations to the user after registering a portal.
 
-        :param userid: The user ID to receive the congratulatory message.
+        :param userid: The user ID to receive the congratulatory message. (required)
         :type userid: str
-        :param key: The template identifier or email configuration key.
+        :param key: The template identifier or email configuration key. (required)
         :type key: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1233,8 +1233,8 @@ class UsersApi:
     @validate_call
     def send_congratulations_without_preload_content(
         self,
-        userid: Annotated[Optional[StrictStr], Field(description="The user ID to receive the congratulatory message.")] = None,
-        key: Annotated[Optional[StrictStr], Field(description="The template identifier or email configuration key.")] = None,
+        userid: Annotated[StrictStr, Field(description="The user ID to receive the congratulatory message.")],
+        key: Annotated[StrictStr, Field(description="The template identifier or email configuration key.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1252,9 +1252,9 @@ class UsersApi:
 
         Sends congratulations to the user after registering a portal.
 
-        :param userid: The user ID to receive the congratulatory message.
+        :param userid: The user ID to receive the congratulatory message. (required)
         :type userid: str
-        :param key: The template identifier or email configuration key.
+        :param key: The template identifier or email configuration key. (required)
         :type key: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request

@@ -393,7 +393,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **get_is_default_white_label_logo_text**
 > IsDefaultWhiteLabelLogosWrapper get_is_default_white_label_logo_text(is_dark=is_dark, is_default=is_default)
 
-Specifies if the white label logo text are default or not.
+Specifies if the white label logo text is default or not.
 
 For more information, see [api.onlyoffice.com]().
 

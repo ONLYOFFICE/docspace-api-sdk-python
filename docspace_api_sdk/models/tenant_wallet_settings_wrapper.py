@@ -29,7 +29,7 @@ from typing_extensions import Self
 
 class TenantWalletSettingsWrapper(BaseModel):
     """
-    Tenant wallet settings
+    The wrapper for the tenant wallet settings.
     """ # noqa: E501
     settings: Optional[TenantWalletSettings] = None
     __properties: ClassVar[List[str]] = ["settings"]

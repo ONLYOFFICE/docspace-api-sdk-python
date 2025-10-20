@@ -31,11 +31,11 @@ class TaskProgressResponseDto(BaseModel):
     """
     The task progress response parameters.
     """ # noqa: E501
-    id: Optional[StrictStr] = Field(default=None, description="The task progress ID.")
+    id: Optional[StrictStr] = Field(description="The task progress ID.")
     error: Optional[StrictStr] = Field(default=None, description="The task progress error message.")
-    percentage: Optional[StrictInt] = Field(default=None, description="The percentage of the task progress.")
-    is_completed: Optional[StrictBool] = Field(default=None, description="Specifies if the task peogress is completed or not.", alias="isCompleted")
-    status: Optional[DistributedTaskStatus] = None
+    percentage: StrictInt = Field(description="The percentage of the task progress.")
+    is_completed: StrictBool = Field(description="Specifies if the task peogress is completed or not.", alias="isCompleted")
+    status: DistributedTaskStatus
     __properties: ClassVar[List[str]] = ["id", "error", "percentage", "isCompleted", "status"]
 
     model_config = ConfigDict(

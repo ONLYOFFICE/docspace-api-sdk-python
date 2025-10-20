@@ -34,7 +34,7 @@ class EmbeddedConfig(BaseModel):
     save_url: Optional[StrictStr] = Field(default=None, description="The absolute URL that will allow the document to be saved onto the user personal computer.", alias="saveUrl")
     share_link_param: Optional[StrictStr] = Field(default=None, description="The shared URL parameter.", alias="shareLinkParam")
     share_url: Optional[StrictStr] = Field(default=None, description="The absolute URL that will allow other users to share this document.", alias="shareUrl")
-    toolbar_docked: Optional[StrictStr] = Field(default=None, description="The place for the embedded viewer toolbar, can be either \"top\" or \"bottom\".", alias="toolbarDocked")
+    toolbar_docked: Optional[StrictStr] = Field(default=None, description="The place for the embedded viewer toolbar, can be either top or bottom.", alias="toolbarDocked")
     __properties: ClassVar[List[str]] = ["embedUrl", "saveUrl", "shareLinkParam", "shareUrl", "toolbarDocked"]
 
     model_config = ConfigDict(

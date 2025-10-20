@@ -41,6 +41,7 @@ class BannersVisibilityApi:
         self.api_client = api_client
 
 
+
     @validate_call
     def get_tenant_banner_settings(
         self,
@@ -57,9 +58,9 @@ class BannersVisibilityApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> TenantBannerSettingsWrapper:
-        """Get the promotional banners visibility settings
+        """Get the banners visibility
 
-        Returns the promotional banners visibility settings settings for the portal.
+        Returns the visibility settings of the promotional banners in the portal.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -121,9 +122,9 @@ class BannersVisibilityApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[TenantBannerSettingsWrapper]:
-        """Get the promotional banners visibility settings
+        """Get the banners visibility
 
-        Returns the promotional banners visibility settings settings for the portal.
+        Returns the visibility settings of the promotional banners in the portal.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -185,9 +186,9 @@ class BannersVisibilityApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get the promotional banners visibility settings
+        """Get the banners visibility
 
-        Returns the promotional banners visibility settings settings for the portal.
+        Returns the visibility settings of the promotional banners in the portal.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request

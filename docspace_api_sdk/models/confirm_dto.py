@@ -31,10 +31,11 @@ class ConfirmDto(BaseModel):
     """
     The confirmation parameters.
     """ # noqa: E501
-    result: Optional[ValidationResult] = None
+    result: ValidationResult
     room_id: Optional[StrictStr] = Field(default=None, description="The confirmation room ID.", alias="roomId")
     title: Optional[StrictStr] = Field(default=None, description="The confirmation title.")
-    __properties: ClassVar[List[str]] = ["result", "roomId", "title"]
+    email: Optional[StrictStr] = Field(default=None, description="The confirmation email.")
+    __properties: ClassVar[List[str]] = ["result", "roomId", "title", "email"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -85,6 +86,11 @@ class ConfirmDto(BaseModel):
         if self.title is None and "title" in self.model_fields_set:
             _dict['title'] = None
 
+        # set to None if email (nullable) is None
+        # and model_fields_set contains the field
+        if self.email is None and "email" in self.model_fields_set:
+            _dict['email'] = None
+
         return _dict
 
     @classmethod
@@ -100,7 +106,8 @@ class ConfirmDto(BaseModel):
         _obj = cls.model_validate({
             "result": obj.get("result"),
             "roomId": obj.get("roomId"),
-            "title": obj.get("title")
+            "title": obj.get("title"),
+            "email": obj.get("email")
         })
         return _obj
 

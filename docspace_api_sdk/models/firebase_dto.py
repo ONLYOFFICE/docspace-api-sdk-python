@@ -30,14 +30,14 @@ class FirebaseDto(BaseModel):
     """
     The Firebase parameters.
     """ # noqa: E501
-    api_key: Optional[StrictStr] = Field(default=None, description="The Firebase API key.", alias="apiKey")
-    auth_domain: Optional[StrictStr] = Field(default=None, description="The Firebase authentication domain.", alias="authDomain")
-    project_id: Optional[StrictStr] = Field(default=None, description="The Firebase project ID.", alias="projectId")
-    storage_bucket: Optional[StrictStr] = Field(default=None, description="The Firebase storage bucket.", alias="storageBucket")
-    messaging_sender_id: Optional[StrictStr] = Field(default=None, description="The Firebase messaging sender ID.", alias="messagingSenderId")
-    app_id: Optional[StrictStr] = Field(default=None, description="The Firebase application ID.", alias="appId")
-    measurement_id: Optional[StrictStr] = Field(default=None, description="The Firebase measurement ID.", alias="measurementId")
-    database_url: Optional[StrictStr] = Field(default=None, description="The Firebase database URL.", alias="databaseURL")
+    api_key: Optional[StrictStr] = Field(description="The Firebase API key.", alias="apiKey")
+    auth_domain: Optional[StrictStr] = Field(description="The Firebase authentication domain.", alias="authDomain")
+    project_id: Optional[StrictStr] = Field(description="The Firebase project ID.", alias="projectId")
+    storage_bucket: Optional[StrictStr] = Field(description="The Firebase storage bucket.", alias="storageBucket")
+    messaging_sender_id: Optional[StrictStr] = Field(description="The Firebase messaging sender ID.", alias="messagingSenderId")
+    app_id: Optional[StrictStr] = Field(description="The Firebase application ID.", alias="appId")
+    measurement_id: Optional[StrictStr] = Field(description="The Firebase measurement ID.", alias="measurementId")
+    database_url: Optional[StrictStr] = Field(description="The Firebase database URL.", alias="databaseURL")
     __properties: ClassVar[List[str]] = ["apiKey", "authDomain", "projectId", "storageBucket", "messagingSenderId", "appId", "measurementId", "databaseURL"]
 
     model_config = ConfigDict(

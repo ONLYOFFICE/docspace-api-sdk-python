@@ -21,9 +21,10 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field
-from typing import Any, ClassVar, Dict, List
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
+from docspace_api_sdk.models.recaptcha_type import RecaptchaType
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -32,7 +33,9 @@ class EmailMemberRequestDto(BaseModel):
     The request parameters for the user email.
     """ # noqa: E501
     email: Annotated[str, Field(min_length=0, strict=True, max_length=255)] = Field(description="The user email address.")
-    __properties: ClassVar[List[str]] = ["email"]
+    recaptcha_type: Optional[RecaptchaType] = Field(default=None, alias="recaptchaType")
+    recaptcha_response: Optional[StrictStr] = Field(default=None, description="The user's response to the CAPTCHA challenge.", alias="recaptchaResponse")
+    __properties: ClassVar[List[str]] = ["email", "recaptchaType", "recaptchaResponse"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -73,6 +76,11 @@ class EmailMemberRequestDto(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if recaptcha_response (nullable) is None
+        # and model_fields_set contains the field
+        if self.recaptcha_response is None and "recaptcha_response" in self.model_fields_set:
+            _dict['recaptchaResponse'] = None
+
         return _dict
 
     @classmethod
@@ -86,7 +94,9 @@ class EmailMemberRequestDto(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "email": obj.get("email")
+            "email": obj.get("email"),
+            "recaptchaType": obj.get("recaptchaType"),
+            "recaptchaResponse": obj.get("recaptchaResponse")
         })
         return _obj
 

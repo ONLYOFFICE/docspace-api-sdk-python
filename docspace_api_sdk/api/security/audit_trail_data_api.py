@@ -20,6 +20,7 @@ import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
+from __future__ import annotations
 
 from pydantic import Field, StrictInt, StrictStr
 from typing import Optional
@@ -28,8 +29,8 @@ from docspace_api_sdk.models.action_type import ActionType
 from docspace_api_sdk.models.api_date_time import ApiDateTime
 from docspace_api_sdk.models.audit_event_array_wrapper import AuditEventArrayWrapper
 from docspace_api_sdk.models.entry_type import EntryType
+from docspace_api_sdk.models.location_type import LocationType
 from docspace_api_sdk.models.message_action import MessageAction
-from docspace_api_sdk.models.module_type import ModuleType
 from docspace_api_sdk.models.object_wrapper import ObjectWrapper
 from docspace_api_sdk.models.product_type import ProductType
 from docspace_api_sdk.models.string_wrapper import StringWrapper
@@ -51,6 +52,11 @@ class AuditTrailDataApi:
         if api_client is None:
             api_client = ApiClient.get_default()
         self.api_client = api_client
+        self._fields = None
+
+    def with_fields(self, fields: str) -> AuditTrailDataApi:
+        self._fields = fields
+        return self
 
 
     @validate_call
@@ -317,8 +323,7 @@ class AuditTrailDataApi:
     def get_audit_events_by_filter(
         self,
         user_id: Annotated[Optional[StrictStr], Field(description="The ID of the user who triggered the audit event.")] = None,
-        product_type: Annotated[Optional[ProductType], Field(description="The type of product related to the audit event.")] = None,
-        module_type: Annotated[Optional[ModuleType], Field(description="The module within the product where the audit event occurred.")] = None,
+        module_type: Annotated[Optional[LocationType], Field(description="The location where the audit event occurred.")] = None,
         action_type: Annotated[Optional[ActionType], Field(description="The type of action performed in the audit event (e.g., Create, Update, Delete).")] = None,
         action: Annotated[Optional[MessageAction], Field(description="The specific action that occurred within the audit event.")] = None,
         entry_type: Annotated[Optional[EntryType], Field(description="The type of audit entry (e.g., Folder, User, File).")] = None,
@@ -327,7 +332,6 @@ class AuditTrailDataApi:
         to: Annotated[Optional[ApiDateTime], Field(description="The ending date and time for filtering audit events.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of audit event records to retrieve.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The index of the first audit event record to retrieve in a paged query.")] = None,
-        fields:  = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -347,10 +351,8 @@ class AuditTrailDataApi:
 
         :param user_id: The ID of the user who triggered the audit event.
         :type user_id: str
-        :param product_type: The type of product related to the audit event.
-        :type product_type: ProductType
-        :param module_type: The module within the product where the audit event occurred.
-        :type module_type: ModuleType
+        :param module_type: The location where the audit event occurred.
+        :type module_type: LocationType
         :param action_type: The type of action performed in the audit event (e.g., Create, Update, Delete).
         :type action_type: ActionType
         :param action: The specific action that occurred within the audit event.
@@ -367,8 +369,6 @@ class AuditTrailDataApi:
         :type count: int
         :param start_index: The index of the first audit event record to retrieve in a paged query.
         :type start_index: int
-        :param fields: Comma-separated list of fields to include in the response
-        :type fields: string
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -393,7 +393,6 @@ class AuditTrailDataApi:
 
         _param = self._get_audit_events_by_filter_serialize(
             user_id=user_id,
-            product_type=product_type,
             module_type=module_type,
             action_type=action_type,
             action=action,
@@ -403,7 +402,6 @@ class AuditTrailDataApi:
             to=to,
             count=count,
             start_index=start_index,
-            fields=fields,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -430,8 +428,7 @@ class AuditTrailDataApi:
     def get_audit_events_by_filter_with_http_info(
         self,
         user_id: Annotated[Optional[StrictStr], Field(description="The ID of the user who triggered the audit event.")] = None,
-        product_type: Annotated[Optional[ProductType], Field(description="The type of product related to the audit event.")] = None,
-        module_type: Annotated[Optional[ModuleType], Field(description="The module within the product where the audit event occurred.")] = None,
+        module_type: Annotated[Optional[LocationType], Field(description="The location where the audit event occurred.")] = None,
         action_type: Annotated[Optional[ActionType], Field(description="The type of action performed in the audit event (e.g., Create, Update, Delete).")] = None,
         action: Annotated[Optional[MessageAction], Field(description="The specific action that occurred within the audit event.")] = None,
         entry_type: Annotated[Optional[EntryType], Field(description="The type of audit entry (e.g., Folder, User, File).")] = None,
@@ -440,7 +437,6 @@ class AuditTrailDataApi:
         to: Annotated[Optional[ApiDateTime], Field(description="The ending date and time for filtering audit events.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of audit event records to retrieve.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The index of the first audit event record to retrieve in a paged query.")] = None,
-        fields:  = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -460,10 +456,8 @@ class AuditTrailDataApi:
 
         :param user_id: The ID of the user who triggered the audit event.
         :type user_id: str
-        :param product_type: The type of product related to the audit event.
-        :type product_type: ProductType
-        :param module_type: The module within the product where the audit event occurred.
-        :type module_type: ModuleType
+        :param module_type: The location where the audit event occurred.
+        :type module_type: LocationType
         :param action_type: The type of action performed in the audit event (e.g., Create, Update, Delete).
         :type action_type: ActionType
         :param action: The specific action that occurred within the audit event.
@@ -480,8 +474,6 @@ class AuditTrailDataApi:
         :type count: int
         :param start_index: The index of the first audit event record to retrieve in a paged query.
         :type start_index: int
-        :param fields: Comma-separated list of fields to include in the response
-        :type fields: string
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -506,7 +498,6 @@ class AuditTrailDataApi:
 
         _param = self._get_audit_events_by_filter_serialize(
             user_id=user_id,
-            product_type=product_type,
             module_type=module_type,
             action_type=action_type,
             action=action,
@@ -516,7 +507,6 @@ class AuditTrailDataApi:
             to=to,
             count=count,
             start_index=start_index,
-            fields=fields,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -543,8 +533,7 @@ class AuditTrailDataApi:
     def get_audit_events_by_filter_without_preload_content(
         self,
         user_id: Annotated[Optional[StrictStr], Field(description="The ID of the user who triggered the audit event.")] = None,
-        product_type: Annotated[Optional[ProductType], Field(description="The type of product related to the audit event.")] = None,
-        module_type: Annotated[Optional[ModuleType], Field(description="The module within the product where the audit event occurred.")] = None,
+        module_type: Annotated[Optional[LocationType], Field(description="The location where the audit event occurred.")] = None,
         action_type: Annotated[Optional[ActionType], Field(description="The type of action performed in the audit event (e.g., Create, Update, Delete).")] = None,
         action: Annotated[Optional[MessageAction], Field(description="The specific action that occurred within the audit event.")] = None,
         entry_type: Annotated[Optional[EntryType], Field(description="The type of audit entry (e.g., Folder, User, File).")] = None,
@@ -553,7 +542,6 @@ class AuditTrailDataApi:
         to: Annotated[Optional[ApiDateTime], Field(description="The ending date and time for filtering audit events.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of audit event records to retrieve.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The index of the first audit event record to retrieve in a paged query.")] = None,
-        fields:  = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -573,10 +561,8 @@ class AuditTrailDataApi:
 
         :param user_id: The ID of the user who triggered the audit event.
         :type user_id: str
-        :param product_type: The type of product related to the audit event.
-        :type product_type: ProductType
-        :param module_type: The module within the product where the audit event occurred.
-        :type module_type: ModuleType
+        :param module_type: The location where the audit event occurred.
+        :type module_type: LocationType
         :param action_type: The type of action performed in the audit event (e.g., Create, Update, Delete).
         :type action_type: ActionType
         :param action: The specific action that occurred within the audit event.
@@ -593,8 +579,6 @@ class AuditTrailDataApi:
         :type count: int
         :param start_index: The index of the first audit event record to retrieve in a paged query.
         :type start_index: int
-        :param fields: Comma-separated list of fields to include in the response
-        :type fields: string
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -619,7 +603,6 @@ class AuditTrailDataApi:
 
         _param = self._get_audit_events_by_filter_serialize(
             user_id=user_id,
-            product_type=product_type,
             module_type=module_type,
             action_type=action_type,
             action=action,
@@ -629,7 +612,6 @@ class AuditTrailDataApi:
             to=to,
             count=count,
             start_index=start_index,
-            fields=fields,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -651,7 +633,6 @@ class AuditTrailDataApi:
     def _get_audit_events_by_filter_serialize(
         self,
         user_id,
-        product_type,
         module_type,
         action_type,
         action,
@@ -661,7 +642,6 @@ class AuditTrailDataApi:
         to,
         count,
         start_index,
-        fields,
         _request_auth,
         _content_type,
         _headers,
@@ -687,10 +667,6 @@ class AuditTrailDataApi:
         if user_id is not None:
             
             _query_params.append(('userId', user_id))
-            
-        if product_type is not None:
-            
-            _query_params.append(('productType', product_type.value))
             
         if module_type is not None:
             
@@ -728,11 +704,9 @@ class AuditTrailDataApi:
             
             _query_params.append(('startIndex', start_index))
             
-        if fields is not None:
-            
-            _query_params.append(('fields', fields))
-            
         # process the header parameters
+        if self._fields is not None:
+            _header_params['fields'] = self._fields
         # process the form parameters
         # process the body parameter
 
@@ -1035,7 +1009,7 @@ class AuditTrailDataApi:
     def get_audit_trail_mappers(
         self,
         product_type: Annotated[Optional[ProductType], Field(description="The type of product related to the audit trail.")] = None,
-        module_type: Annotated[Optional[ModuleType], Field(description="The module within the product associated with the audit trail.")] = None,
+        module_type: Annotated[Optional[LocationType], Field(description="The location associated with the audit trail.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1055,8 +1029,8 @@ class AuditTrailDataApi:
 
         :param product_type: The type of product related to the audit trail.
         :type product_type: ProductType
-        :param module_type: The module within the product associated with the audit trail.
-        :type module_type: ModuleType
+        :param module_type: The location associated with the audit trail.
+        :type module_type: LocationType
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1106,7 +1080,7 @@ class AuditTrailDataApi:
     def get_audit_trail_mappers_with_http_info(
         self,
         product_type: Annotated[Optional[ProductType], Field(description="The type of product related to the audit trail.")] = None,
-        module_type: Annotated[Optional[ModuleType], Field(description="The module within the product associated with the audit trail.")] = None,
+        module_type: Annotated[Optional[LocationType], Field(description="The location associated with the audit trail.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1126,8 +1100,8 @@ class AuditTrailDataApi:
 
         :param product_type: The type of product related to the audit trail.
         :type product_type: ProductType
-        :param module_type: The module within the product associated with the audit trail.
-        :type module_type: ModuleType
+        :param module_type: The location associated with the audit trail.
+        :type module_type: LocationType
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1177,7 +1151,7 @@ class AuditTrailDataApi:
     def get_audit_trail_mappers_without_preload_content(
         self,
         product_type: Annotated[Optional[ProductType], Field(description="The type of product related to the audit trail.")] = None,
-        module_type: Annotated[Optional[ModuleType], Field(description="The module within the product associated with the audit trail.")] = None,
+        module_type: Annotated[Optional[LocationType], Field(description="The location associated with the audit trail.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1197,8 +1171,8 @@ class AuditTrailDataApi:
 
         :param product_type: The type of product related to the audit trail.
         :type product_type: ProductType
-        :param module_type: The module within the product associated with the audit trail.
-        :type module_type: ModuleType
+        :param module_type: The location associated with the audit trail.
+        :type module_type: LocationType
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of

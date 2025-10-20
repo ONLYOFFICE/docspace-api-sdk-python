@@ -22,7 +22,7 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt
-from typing import Any, ClassVar, Dict, List, Optional
+from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -30,10 +30,10 @@ class LoginSettingsDto(BaseModel):
     """
     The login settings parameters.
     """ # noqa: E501
-    attempt_count: Optional[StrictInt] = Field(default=None, description="The maximum number of consecutive failed login attempts allowed before triggering account suspension.", alias="attemptCount")
-    block_time: Optional[StrictInt] = Field(default=None, description="The duration (in minutes) for which an account remains suspended after exceeding maximum login attempts.", alias="blockTime")
-    check_period: Optional[StrictInt] = Field(default=None, description="The maximum time (in seconds) allowed for server to process and respond to login requests.", alias="checkPeriod")
-    is_default: Optional[StrictBool] = Field(default=None, description="Specifies if these settings are default or not", alias="isDefault")
+    attempt_count: StrictInt = Field(description="The maximum number of consecutive failed login attempts allowed before triggering account suspension.", alias="attemptCount")
+    block_time: StrictInt = Field(description="The duration (in minutes) for which an account remains suspended after exceeding maximum login attempts.", alias="blockTime")
+    check_period: StrictInt = Field(description="The maximum time (in seconds) allowed for server to process and respond to login requests.", alias="checkPeriod")
+    is_default: StrictBool = Field(description="Specifies if these settings are default or not", alias="isDefault")
     __properties: ClassVar[List[str]] = ["attemptCount", "blockTime", "checkPeriod", "isDefault"]
 
     model_config = ConfigDict(

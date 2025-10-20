@@ -60,12 +60,14 @@ class TenantQuota(BaseModel):
     customization: Optional[StrictBool] = Field(default=None, description="Specifies if the customization settings are available or not.")
     lifetime: Optional[StrictBool] = Field(default=None, description="Specifies if the license has the lifetime settings or not.")
     custom: Optional[StrictBool] = Field(default=None, description="Specifies if the custom domain URL is available or not.")
-    auto_backup_restore: Optional[StrictBool] = Field(default=None, description="Specifies if the automatic backup option is enabled or not.", alias="autoBackupRestore")
+    restore: Optional[StrictBool] = Field(default=None, description="Specifies if the restore is enabled or not.")
     oauth: Optional[StrictBool] = Field(default=None, description="Specifies if Oauth is available or not.")
     content_search: Optional[StrictBool] = Field(default=None, description="Specifies if the content search is available or not.", alias="contentSearch")
     third_party: Optional[StrictBool] = Field(default=None, description="Specifies if the third-party accounts linking is available or not.", alias="thirdParty")
     year: Optional[StrictBool] = Field(default=None, description="Specifies if the tenant quota is yearly subscription or not.")
-    __properties: ClassVar[List[str]] = ["tenantId", "name", "price", "priceCurrencySymbol", "priceISOCurrencySymbol", "productId", "visible", "wallet", "dueDate", "features", "maxFileSize", "maxTotalSize", "countUser", "countRoomAdmin", "usersInRoom", "countRoom", "nonProfit", "trial", "free", "update", "audit", "docsEdition", "ldap", "sso", "statistic", "branding", "customization", "lifetime", "custom", "autoBackupRestore", "oauth", "contentSearch", "thirdParty", "year"]
+    count_free_backup: Optional[StrictInt] = Field(default=None, description="The number of free backups within a month.", alias="countFreeBackup")
+    backup: Optional[StrictBool] = Field(default=None, description="Specifies if the backup anabled as a wallet service or not.")
+    __properties: ClassVar[List[str]] = ["tenantId", "name", "price", "priceCurrencySymbol", "priceISOCurrencySymbol", "productId", "visible", "wallet", "dueDate", "features", "maxFileSize", "maxTotalSize", "countUser", "countRoomAdmin", "usersInRoom", "countRoom", "nonProfit", "trial", "free", "update", "audit", "docsEdition", "ldap", "sso", "statistic", "branding", "customization", "lifetime", "custom", "restore", "oauth", "contentSearch", "thirdParty", "year", "countFreeBackup", "backup"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -178,11 +180,13 @@ class TenantQuota(BaseModel):
             "customization": obj.get("customization"),
             "lifetime": obj.get("lifetime"),
             "custom": obj.get("custom"),
-            "autoBackupRestore": obj.get("autoBackupRestore"),
+            "restore": obj.get("restore"),
             "oauth": obj.get("oauth"),
             "contentSearch": obj.get("contentSearch"),
             "thirdParty": obj.get("thirdParty"),
-            "year": obj.get("year")
+            "year": obj.get("year"),
+            "countFreeBackup": obj.get("countFreeBackup"),
+            "backup": obj.get("backup")
         })
         return _obj
 

@@ -31,13 +31,13 @@ class WatermarkDto(BaseModel):
     """
     The watermark settings.
     """ # noqa: E501
-    additions: Optional[WatermarkAdditions] = None
+    additions: WatermarkAdditions
     text: Optional[StrictStr] = Field(default=None, description="The watermark text.")
-    rotate: Optional[StrictInt] = Field(default=None, description="The watermark text and image rotate.")
-    image_scale: Optional[StrictInt] = Field(default=None, description="The watermark image scale.", alias="imageScale")
+    rotate: StrictInt = Field(description="The watermark text and image rotate.")
+    image_scale: StrictInt = Field(description="The watermark image scale.", alias="imageScale")
     image_url: Optional[StrictStr] = Field(default=None, description="The watermark image url.", alias="imageUrl")
-    image_height: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The watermark image height.", alias="imageHeight")
-    image_width: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The watermark image width.", alias="imageWidth")
+    image_height: Union[StrictFloat, StrictInt] = Field(description="The watermark image height.", alias="imageHeight")
+    image_width: Union[StrictFloat, StrictInt] = Field(description="The watermark image width.", alias="imageWidth")
     __properties: ClassVar[List[str]] = ["additions", "text", "rotate", "imageScale", "imageUrl", "imageHeight", "imageWidth"]
 
     model_config = ConfigDict(

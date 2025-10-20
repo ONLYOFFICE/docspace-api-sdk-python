@@ -30,13 +30,13 @@ from typing_extensions import Self
 
 class TenantWalletSettings(BaseModel):
     """
-    TenantWalletSettings
+    The tenant wallet settings.
     """ # noqa: E501
-    enabled: Optional[StrictBool] = Field(default=None, description="Enabled")
-    min_balance: Optional[Annotated[int, Field(le=1000, strict=True, ge=5)]] = Field(default=None, description="Minimun balance", alias="minBalance")
-    up_to_balance: Optional[Annotated[int, Field(le=5000, strict=True, ge=6)]] = Field(default=None, description="Up to balance", alias="upToBalance")
+    enabled: Optional[StrictBool] = Field(default=None, description="Specifies whether automatic top-up for the tenant wallet is enabled.")
+    min_balance: Optional[Annotated[int, Field(le=1000, strict=True, ge=5)]] = Field(default=None, description="The minimum wallet balance at which automatic top-up will be triggered. Must be between 5 and 1000.", alias="minBalance")
+    up_to_balance: Optional[Annotated[int, Field(le=5000, strict=True, ge=6)]] = Field(default=None, description="The maximum wallet balance at which automatic top-up will be triggered. Must be between 6 and 5000.", alias="upToBalance")
     currency: Optional[StrictStr] = Field(default=None, description="The three-character ISO 4217 currency symbol.")
-    last_modified: Optional[datetime] = Field(default=None, alias="lastModified")
+    last_modified: Optional[datetime] = Field(default=None, description="The date and time when the tenant wallet settings were last modified.", alias="lastModified")
     __properties: ClassVar[List[str]] = ["enabled", "minBalance", "upToBalance", "currency", "lastModified"]
 
     model_config = ConfigDict(

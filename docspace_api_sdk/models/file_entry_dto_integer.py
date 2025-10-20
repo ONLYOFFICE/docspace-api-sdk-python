@@ -25,7 +25,9 @@ from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, Strict
 from typing import Any, ClassVar, Dict, List, Optional
 from docspace_api_sdk.models.api_date_time import ApiDateTime
 from docspace_api_sdk.models.employee_dto import EmployeeDto
+from docspace_api_sdk.models.file_entry_dto_integer_all_of_available_share_rights import FileEntryDtoIntegerAllOfAvailableShareRights
 from docspace_api_sdk.models.file_entry_dto_integer_all_of_security import FileEntryDtoIntegerAllOfSecurity
+from docspace_api_sdk.models.file_entry_dto_integer_all_of_share_settings import FileEntryDtoIntegerAllOfShareSettings
 from docspace_api_sdk.models.file_entry_type import FileEntryType
 from docspace_api_sdk.models.file_share import FileShare
 from docspace_api_sdk.models.folder_type import FolderType
@@ -46,8 +48,13 @@ class FileEntryDtoInteger(FileEntryBaseDto):
     origin_title: Optional[StrictStr] = Field(default=None, description="The origin title of the file entry.", alias="originTitle")
     origin_room_title: Optional[StrictStr] = Field(default=None, description="The origin room title of the file entry.", alias="originRoomTitle")
     can_share: Optional[StrictBool] = Field(default=None, description="Specifies if the file entry can be shared or not.", alias="canShare")
+    share_settings: Optional[FileEntryDtoIntegerAllOfShareSettings] = Field(default=None, alias="shareSettings")
     security: Optional[FileEntryDtoIntegerAllOfSecurity] = None
+    available_share_rights: Optional[FileEntryDtoIntegerAllOfAvailableShareRights] = Field(default=None, alias="availableShareRights")
     request_token: Optional[StrictStr] = Field(default=None, description="The request token of the file entry.", alias="requestToken")
+    external: Optional[StrictBool] = Field(default=None, description="Specifies if the folder can be accessed via an external link or not.")
+    expiration_date: Optional[ApiDateTime] = Field(default=None, alias="expirationDate")
+    is_link_expired: Optional[StrictBool] = Field(default=None, description="Indicates whether the shareable link associated with the file or folder has expired.", alias="isLinkExpired")
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -102,13 +109,27 @@ class FileEntryDtoInteger(FileEntryBaseDto):
         # override the default output from pydantic by calling `to_dict()` of updated_by
         if self.updated_by:
             _dict['updatedBy'] = self.updated_by.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of share_settings
+        if self.share_settings:
+            _dict['shareSettings'] = self.share_settings.to_dict()
         # override the default output from pydantic by calling `to_dict()` of security
         if self.security:
             _dict['security'] = self.security.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of available_share_rights
+        if self.available_share_rights:
+            _dict['availableShareRights'] = self.available_share_rights.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of expiration_date
+        if self.expiration_date:
+            _dict['expirationDate'] = self.expiration_date.to_dict()
         # set to None if title (nullable) is None
         # and model_fields_set contains the field
         if self.title is None and "title" in self.model_fields_set:
             _dict['title'] = None
+
+        # set to None if short_web_url (nullable) is None
+        # and model_fields_set contains the field
+        if self.short_web_url is None and "short_web_url" in self.model_fields_set:
+            _dict['shortWebUrl'] = None
 
         # set to None if provider_item (nullable) is None
         # and model_fields_set contains the field
@@ -130,6 +151,11 @@ class FileEntryDtoInteger(FileEntryBaseDto):
         if self.order is None and "order" in self.model_fields_set:
             _dict['order'] = None
 
+        # set to None if is_favorite (nullable) is None
+        # and model_fields_set contains the field
+        if self.is_favorite is None and "is_favorite" in self.model_fields_set:
+            _dict['isFavorite'] = None
+
         # set to None if origin_title (nullable) is None
         # and model_fields_set contains the field
         if self.origin_title is None and "origin_title" in self.model_fields_set:
@@ -140,15 +166,35 @@ class FileEntryDtoInteger(FileEntryBaseDto):
         if self.origin_room_title is None and "origin_room_title" in self.model_fields_set:
             _dict['originRoomTitle'] = None
 
+        # set to None if share_settings (nullable) is None
+        # and model_fields_set contains the field
+        if self.share_settings is None and "share_settings" in self.model_fields_set:
+            _dict['shareSettings'] = None
+
         # set to None if security (nullable) is None
         # and model_fields_set contains the field
         if self.security is None and "security" in self.model_fields_set:
             _dict['security'] = None
 
+        # set to None if available_share_rights (nullable) is None
+        # and model_fields_set contains the field
+        if self.available_share_rights is None and "available_share_rights" in self.model_fields_set:
+            _dict['availableShareRights'] = None
+
         # set to None if request_token (nullable) is None
         # and model_fields_set contains the field
         if self.request_token is None and "request_token" in self.model_fields_set:
             _dict['requestToken'] = None
+
+        # set to None if external (nullable) is None
+        # and model_fields_set contains the field
+        if self.external is None and "external" in self.model_fields_set:
+            _dict['external'] = None
+
+        # set to None if is_link_expired (nullable) is None
+        # and model_fields_set contains the field
+        if self.is_link_expired is None and "is_link_expired" in self.model_fields_set:
+            _dict['isLinkExpired'] = None
 
         return _dict
 
@@ -170,8 +216,13 @@ class FileEntryDtoInteger(FileEntryBaseDto):
             "originTitle": obj.get("originTitle"),
             "originRoomTitle": obj.get("originRoomTitle"),
             "canShare": obj.get("canShare"),
+            "shareSettings": FileEntryDtoIntegerAllOfShareSettings.from_dict(obj["shareSettings"]) if obj.get("shareSettings") is not None else None,
             "security": FileEntryDtoIntegerAllOfSecurity.from_dict(obj["security"]) if obj.get("security") is not None else None,
-            "requestToken": obj.get("requestToken")
+            "availableShareRights": FileEntryDtoIntegerAllOfAvailableShareRights.from_dict(obj["availableShareRights"]) if obj.get("availableShareRights") is not None else None,
+            "requestToken": obj.get("requestToken"),
+            "external": obj.get("external"),
+            "expirationDate": ApiDateTime.from_dict(obj["expirationDate"]) if obj.get("expirationDate") is not None else None,
+            "isLinkExpired": obj.get("isLinkExpired")
         })
         return cls(**base_obj.model_dump(), **extra_fields)
 

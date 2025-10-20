@@ -34,7 +34,7 @@ class CustomerInfoDto(BaseModel):
     """ # noqa: E501
     portal_id: Optional[StrictStr] = Field(default=None, description="The portal ID.", alias="portalId")
     payment_method_status: Optional[PaymentMethodStatus] = Field(default=None, alias="paymentMethodStatus")
-    email: Optional[StrictStr] = Field(default=None, description="The email address of the customer.")
+    email: Optional[StrictStr] = Field(default=None, description="The customer email address.")
     payer: Optional[EmployeeDto] = None
     __properties: ClassVar[List[str]] = ["portalId", "paymentMethodStatus", "email", "payer"]
 

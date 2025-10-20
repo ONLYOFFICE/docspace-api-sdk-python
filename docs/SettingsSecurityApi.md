@@ -90,7 +90,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_is_product_administrator**
-> ProductAdministratorWrapper get_is_product_administrator(productid=productid, userid=userid)
+> ProductAdministratorWrapper get_is_product_administrator(productid, userid)
 
 Checks if the selected user is an administrator of a product with the ID specified in the request.
 
@@ -101,8 +101,8 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **productid** | **str**| The ID of the product extracted from the query parameters. | [optional] 
- **userid** | **str**| The user ID extracted from the query parameters. | [optional] 
+ **productid** | **str**| The ID of the product extracted from the query parameters. | 
+ **userid** | **str**| The user ID extracted from the query parameters. | 
 
 ### Return type
 
@@ -139,12 +139,12 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.SecurityApi(api_client)
-    productid = 'aae1e103-bca5-9fa1-ba8c-42058b4abf28' # str | The ID of the product extracted from the query parameters. (optional)
-    userid = 'aae1e103-bca5-9fa1-ba8c-42058b4abf28' # str | The user ID extracted from the query parameters. (optional)
+    productid = 'aae1e103-bca5-9fa1-ba8c-42058b4abf28' # str | The ID of the product extracted from the query parameters.
+    userid = 'aae1e103-bca5-9fa1-ba8c-42058b4abf28' # str | The user ID extracted from the query parameters.
 
     try:
         # Check a product administrator
-        api_response = api_instance.get_is_product_administrator(productid=productid, userid=userid)
+        api_response = api_instance.get_is_product_administrator(productid, userid)
         print("The response of SecurityApi->get_is_product_administrator:\n")
         pprint(api_response)
     except Exception as e:

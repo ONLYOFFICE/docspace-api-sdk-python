@@ -47,6 +47,7 @@ class MigrationApi:
         self.api_client = api_client
 
 
+
     @validate_call
     def cancel_migration(
         self,

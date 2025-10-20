@@ -31,9 +31,9 @@ class ActiveConnectionsItemDto(BaseModel):
     """
     The active connection item parameters.
     """ # noqa: E501
-    id: Optional[StrictInt] = Field(default=None, description="The active connection ID.")
-    tenant_id: Optional[StrictInt] = Field(default=None, description="The tenant ID.", alias="tenantId")
-    user_id: Optional[StrictStr] = Field(default=None, description="The user ID.", alias="userId")
+    id: StrictInt = Field(description="The active connection ID.")
+    tenant_id: StrictInt = Field(description="The tenant ID.", alias="tenantId")
+    user_id: StrictStr = Field(description="The user ID.", alias="userId")
     mobile: Optional[StrictBool] = Field(default=None, description="Specifies if the active connection has a mobile phone or not.")
     ip: Optional[StrictStr] = Field(default=None, description="The IP address of the active connection.")
     country: Optional[StrictStr] = Field(default=None, description="The active connection country.")

@@ -28,10 +28,10 @@ from typing_extensions import Self
 
 class SubAccount(BaseModel):
     """
-    Represents a sub-account with a specific currency and amount.
+    Represents a sub-account with a specific currency and balance.
     """ # noqa: E501
     currency: Optional[StrictStr] = Field(default=None, description="The three-character ISO 4217 currency symbol of the sub-account.")
-    amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The amount of the sub-account.")
+    amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The balance of the sub-account in the specified currency.")
     __properties: ClassVar[List[str]] = ["currency", "amount"]
 
     model_config = ConfigDict(

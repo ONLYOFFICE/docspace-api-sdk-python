@@ -31,9 +31,9 @@ class ConversationResultDto(BaseModel):
     """
     The result of file convertion operation.
     """ # noqa: E501
-    id: Optional[StrictStr] = Field(default=None, description="The conversion operation ID.")
-    operation: Optional[FileOperationType] = Field(default=None, alias="Operation")
-    progress: Optional[StrictInt] = Field(default=None, description="The conversion operation progress.")
+    id: Optional[StrictStr] = Field(description="The conversion operation ID.")
+    operation: FileOperationType = Field(alias="Operation")
+    progress: StrictInt = Field(description="The conversion operation progress.")
     source: Optional[StrictStr] = Field(default=None, description="The source file for the conversion.")
     result: Optional[Any] = Field(default=None, description="The resulting file after the conversion.")
     error: Optional[StrictStr] = Field(default=None, description="The conversion operation error message.")

@@ -28,7 +28,7 @@ from typing_extensions import Self
 
 class BatchTagsRequestDto(BaseModel):
     """
-    The parameters for adding tags.
+    The parameters for managing room tags.
     """ # noqa: E501
     names: Optional[List[StrictStr]] = Field(default=None, description="The list of tag names.")
     __properties: ClassVar[List[str]] = ["names"]

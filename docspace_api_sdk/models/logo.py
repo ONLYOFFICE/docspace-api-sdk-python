@@ -31,10 +31,10 @@ class Logo(BaseModel):
     """
     The room logo information.
     """ # noqa: E501
-    original: Optional[StrictStr] = Field(default=None, description="The original logo.")
-    large: Optional[StrictStr] = Field(default=None, description="The large logo.")
-    medium: Optional[StrictStr] = Field(default=None, description="The medium logo.")
-    small: Optional[StrictStr] = Field(default=None, description="The small logo.")
+    original: Optional[StrictStr] = Field(description="The original logo.")
+    large: Optional[StrictStr] = Field(description="The large logo.")
+    medium: Optional[StrictStr] = Field(description="The medium logo.")
+    small: Optional[StrictStr] = Field(description="The small logo.")
     color: Optional[StrictStr] = Field(default=None, description="The logo color.")
     cover: Optional[LogoCover] = None
     __properties: ClassVar[List[str]] = ["original", "large", "medium", "small", "color", "cover"]

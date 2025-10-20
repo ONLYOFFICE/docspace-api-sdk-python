@@ -5,8 +5,8 @@ The logo cover information.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** | The logo cover ID. | [optional] 
-**data** | **str** | The logo cover data. | [optional] 
+**id** | **str** | The logo cover ID. | 
+**data** | **str** | The logo cover data. | 
 
 ## Example
 

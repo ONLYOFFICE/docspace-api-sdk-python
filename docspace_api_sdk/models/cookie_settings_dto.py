@@ -22,7 +22,7 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt
-from typing import Any, ClassVar, Dict, List, Optional
+from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -30,8 +30,8 @@ class CookieSettingsDto(BaseModel):
     """
     The cookie settings.
     """ # noqa: E501
-    life_time: Optional[StrictInt] = Field(default=None, description="The cookie lifetime value in minutes.", alias="lifeTime")
-    enabled: Optional[StrictBool] = Field(default=None, description="Specifies if the cookie settings are enabled or not.")
+    life_time: StrictInt = Field(description="The cookie lifetime value in minutes.", alias="lifeTime")
+    enabled: StrictBool = Field(description="Specifies if the cookie settings are enabled or not.")
     __properties: ClassVar[List[str]] = ["lifeTime", "enabled"]
 
     model_config = ConfigDict(

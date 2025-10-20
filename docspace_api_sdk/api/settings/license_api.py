@@ -45,6 +45,7 @@ class LicenseApi:
         self.api_client = api_client
 
 
+
     @validate_call
     def accept_license(
         self,

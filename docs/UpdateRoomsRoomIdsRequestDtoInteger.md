@@ -1,5 +1,5 @@
 # UpdateRoomsRoomIdsRequestDtoInteger
-The request parameters for updating the room.
+The request parameters for updating the rooms.
 
 ## Properties
 

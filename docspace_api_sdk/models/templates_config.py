@@ -28,10 +28,10 @@ from typing_extensions import Self
 
 class TemplatesConfig(BaseModel):
     """
-    The presence or absence of the templates in the \"Create New...\" menu option.
+    The presence or absence of the templates in the Create New... menu option.
     """ # noqa: E501
     image: Optional[StrictStr] = Field(default=None, description="The absolute URL to the image for template.")
-    title: Optional[StrictStr] = Field(default=None, description="The template title that will be displayed in the \"Create New...\" menu option.")
+    title: Optional[StrictStr] = Field(default=None, description="The template title that will be displayed in the Create New... menu option.")
     url: Optional[StrictStr] = Field(default=None, description="The absolute URL to the document where it will be created and available after creation.")
     __properties: ClassVar[List[str]] = ["image", "title", "url"]
 

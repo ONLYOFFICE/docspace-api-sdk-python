@@ -33,7 +33,7 @@ class WebhooksConfigDto(BaseModel):
     """
     The webhook configuration parameters.
     """ # noqa: E501
-    id: Optional[StrictInt] = Field(default=None, description="The webhook ID.")
+    id: StrictInt = Field(description="The webhook ID.")
     name: Optional[StrictStr] = Field(default=None, description="The webhook name.")
     uri: Optional[StrictStr] = Field(default=None, description="The webhook URI.")
     enabled: Optional[StrictBool] = Field(default=None, description="Specifies if the webhooks are enabled or not.")

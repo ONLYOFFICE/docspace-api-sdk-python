@@ -1,13 +1,13 @@
 # PaymentCalculation
-The payment calculation.
+The parameters of the calculated payment amount.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**operation_id** | **int** | Unique identifier of the operation. | [optional] 
-**amount** | **float** | The amount of the payment calculation. | [optional] 
-**currency** | **str** | The three-character ISO 4217 currency symbol of the payment calculation. | [optional] 
+**operation_id** | **int** | The operation unique identifier. | [optional] 
+**amount** | **float** | The calculated payment amount. | [optional] 
+**currency** | **str** | The three-character ISO 4217 currency symbol used for the payment calculation. | [optional] 
 **quantity** | **int** | The quantity associated with the payment calculation. | [optional] 
 
 ## Example

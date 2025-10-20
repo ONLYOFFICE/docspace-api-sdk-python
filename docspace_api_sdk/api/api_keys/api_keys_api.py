@@ -49,6 +49,7 @@ class ApiKeysApi:
         self.api_client = api_client
 
 
+
     @validate_call
     def create_api_key(
         self,
@@ -350,7 +351,7 @@ class ApiKeysApi:
     ) -> BooleanWrapper:
         """Delete a user API key
 
-        Delete a user API key by its ID.
+        Deletes a user API key by its ID.
 
         :param key_id: The API key ID. (required)
         :type key_id: str
@@ -418,7 +419,7 @@ class ApiKeysApi:
     ) -> ApiResponse[BooleanWrapper]:
         """Delete a user API key
 
-        Delete a user API key by its ID.
+        Deletes a user API key by its ID.
 
         :param key_id: The API key ID. (required)
         :type key_id: str
@@ -486,7 +487,7 @@ class ApiKeysApi:
     ) -> RESTResponseType:
         """Delete a user API key
 
-        Delete a user API key by its ID.
+        Deletes a user API key by its ID.
 
         :param key_id: The API key ID. (required)
         :type key_id: str
@@ -870,9 +871,9 @@ class ApiKeysApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiKeyResponseWrapper:
-        """Get user API key info
+        """Get current user's API key
 
-        Returns current user API key info.
+        Returns information about the current user's API key.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -934,9 +935,9 @@ class ApiKeysApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[ApiKeyResponseWrapper]:
-        """Get user API key info
+        """Get current user's API key
 
-        Returns current user API key info.
+        Returns information about the current user's API key.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -998,9 +999,9 @@ class ApiKeysApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get user API key info
+        """Get current user's API key
 
-        Returns current user API key info.
+        Returns information about the current user's API key.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1124,7 +1125,7 @@ class ApiKeysApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiKeyResponseArrayWrapper:
-        """Get user API keys
+        """Get current user's API keys
 
         Returns a list of all API keys for the current user.
 
@@ -1188,7 +1189,7 @@ class ApiKeysApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[ApiKeyResponseArrayWrapper]:
-        """Get user API keys
+        """Get current user's API keys
 
         Returns a list of all API keys for the current user.
 
@@ -1252,7 +1253,7 @@ class ApiKeysApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get user API keys
+        """Get current user's API keys
 
         Returns a list of all API keys for the current user.
 
@@ -1366,7 +1367,7 @@ class ApiKeysApi:
     def update_api_key(
         self,
         key_id: Annotated[StrictStr, Field(description="The unique identifier of the API key to update.")],
-        update_api_key_request: Annotated[Optional[UpdateApiKeyRequest], Field(description="The request parameters for updating an existing API key.")] = None,
+        update_api_key_request: Annotated[UpdateApiKeyRequest, Field(description="The request parameters for updating an existing API key.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1382,11 +1383,11 @@ class ApiKeysApi:
     ) -> BooleanWrapper:
         """Update an API key
 
-        Updates an existing API key changing its name, permissions and status.
+        Updates an existing API key changing its name, permissions, and status.
 
         :param key_id: The unique identifier of the API key to update. (required)
         :type key_id: str
-        :param update_api_key_request: The request parameters for updating an existing API key.
+        :param update_api_key_request: The request parameters for updating an existing API key. (required)
         :type update_api_key_request: UpdateApiKeyRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1438,7 +1439,7 @@ class ApiKeysApi:
     def update_api_key_with_http_info(
         self,
         key_id: Annotated[StrictStr, Field(description="The unique identifier of the API key to update.")],
-        update_api_key_request: Annotated[Optional[UpdateApiKeyRequest], Field(description="The request parameters for updating an existing API key.")] = None,
+        update_api_key_request: Annotated[UpdateApiKeyRequest, Field(description="The request parameters for updating an existing API key.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1454,11 +1455,11 @@ class ApiKeysApi:
     ) -> ApiResponse[BooleanWrapper]:
         """Update an API key
 
-        Updates an existing API key changing its name, permissions and status.
+        Updates an existing API key changing its name, permissions, and status.
 
         :param key_id: The unique identifier of the API key to update. (required)
         :type key_id: str
-        :param update_api_key_request: The request parameters for updating an existing API key.
+        :param update_api_key_request: The request parameters for updating an existing API key. (required)
         :type update_api_key_request: UpdateApiKeyRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1510,7 +1511,7 @@ class ApiKeysApi:
     def update_api_key_without_preload_content(
         self,
         key_id: Annotated[StrictStr, Field(description="The unique identifier of the API key to update.")],
-        update_api_key_request: Annotated[Optional[UpdateApiKeyRequest], Field(description="The request parameters for updating an existing API key.")] = None,
+        update_api_key_request: Annotated[UpdateApiKeyRequest, Field(description="The request parameters for updating an existing API key.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1526,11 +1527,11 @@ class ApiKeysApi:
     ) -> RESTResponseType:
         """Update an API key
 
-        Updates an existing API key changing its name, permissions and status.
+        Updates an existing API key changing its name, permissions, and status.
 
         :param key_id: The unique identifier of the API key to update. (required)
         :type key_id: str
-        :param update_api_key_request: The request parameters for updating an existing API key.
+        :param update_api_key_request: The request parameters for updating an existing API key. (required)
         :type update_api_key_request: UpdateApiKeyRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request

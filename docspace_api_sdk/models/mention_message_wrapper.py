@@ -32,8 +32,8 @@ class MentionMessageWrapper(BaseModel):
     The mention message parameters.
     """ # noqa: E501
     action_link: Optional[ActionLinkConfig] = Field(default=None, alias="actionLink")
-    emails: Optional[List[StrictStr]] = Field(default=None, description="A list of emails which will receive the mention message.")
-    message: Optional[StrictStr] = Field(default=None, description="The comment message.")
+    emails: Optional[List[StrictStr]] = Field(default=None, description="A list of emails that will receive the mention message.")
+    message: Optional[StrictStr] = Field(default=None, description="The mention message.")
     __properties: ClassVar[List[str]] = ["actionLink", "emails", "message"]
 
     model_config = ConfigDict(

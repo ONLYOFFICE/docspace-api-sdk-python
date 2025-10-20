@@ -32,7 +32,7 @@ class WebPluginRequests(BaseModel):
     The configuration settings for the web plugin instance.
     """ # noqa: E501
     enabled: Optional[StrictBool] = Field(default=None, description="Controls whether the web plugin is active and operational.")
-    settings: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The JSON-formatted configuration settings for the web plugin.")
+    settings: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(description="The JSON-formatted configuration settings for the web plugin.")
     __properties: ClassVar[List[str]] = ["enabled", "settings"]
 
     model_config = ConfigDict(

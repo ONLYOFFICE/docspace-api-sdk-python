@@ -6,8 +6,8 @@ The mention message parameters.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **action_link** | [**ActionLinkConfig**](ActionLinkConfig.md) |  | [optional] 
-**emails** | **List[str]** | A list of emails which will receive the mention message. | [optional] 
-**message** | **str** | The comment message. | [optional] 
+**emails** | **List[str]** | A list of emails that will receive the mention message. | [optional] 
+**message** | **str** | The mention message. | [optional] 
 
 ## Example
 

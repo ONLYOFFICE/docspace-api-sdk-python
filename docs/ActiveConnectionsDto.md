@@ -5,7 +5,7 @@ The active connections parameters.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**login_event** | **int** | The login event. | [optional] 
+**login_event** | **int** | The login event. | 
 **items** | [**List[ActiveConnectionsItemDto]**](ActiveConnectionsItemDto.md) | The list of active connection items. | [optional] 
 
 ## Example

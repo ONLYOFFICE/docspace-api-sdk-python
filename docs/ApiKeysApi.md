@@ -7,8 +7,8 @@ Method | HTTP request | Description
 [**create_api_key**](#create_api_key) | **POST** /api/2.0/keys | Create a user API key
 [**delete_api_key**](#delete_api_key) | **DELETE** /api/2.0/keys/{keyId} | Delete a user API key
 [**get_all_permissions**](#get_all_permissions) | **GET** /api/2.0/keys/permissions | Get API key permissions
-[**get_api_key**](#get_api_key) | **GET** /api/2.0/keys/@self | Get user API key info
-[**get_api_keys**](#get_api_keys) | **GET** /api/2.0/keys | Get user API keys
+[**get_api_key**](#get_api_key) | **GET** /api/2.0/keys/@self | Get current user&#39;s API key
+[**get_api_keys**](#get_api_keys) | **GET** /api/2.0/keys | Get current user&#39;s API keys
 [**update_api_key**](#update_api_key) | **PUT** /api/2.0/keys/{keyId} | Update an API key
 
 
@@ -93,7 +93,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **delete_api_key**
 > BooleanWrapper delete_api_key(key_id)
 
-Delete a user API key by its ID.
+Deletes a user API key by its ID.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -243,7 +243,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **get_api_key**
 > ApiKeyResponseWrapper get_api_key()
 
-Returns current user API key info.
+Returns information about the current user's API key.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -288,7 +288,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     api_instance = docspace_api_sdk.ApiKeysApi(api_client)
 
     try:
-        # Get user API key info
+        # Get current user's API key
         api_response = api_instance.get_api_key()
         print("The response of ApiKeysApi->get_api_key:\n")
         pprint(api_response)
@@ -361,7 +361,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     api_instance = docspace_api_sdk.ApiKeysApi(api_client)
 
     try:
-        # Get user API keys
+        # Get current user's API keys
         api_response = api_instance.get_api_keys()
         print("The response of ApiKeysApi->get_api_keys:\n")
         pprint(api_response)
@@ -387,9 +387,9 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update_api_key**
-> BooleanWrapper update_api_key(key_id, update_api_key_request=update_api_key_request)
+> BooleanWrapper update_api_key(key_id, update_api_key_request)
 
-Updates an existing API key changing its name, permissions and status.
+Updates an existing API key changing its name, permissions, and status.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -399,7 +399,7 @@ For more information, see [api.onlyoffice.com]().
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **key_id** | **str**| The unique identifier of the API key to update. | 
- **update_api_key_request** | [**UpdateApiKeyRequest**](UpdateApiKeyRequest.md)| The request parameters for updating an existing API key. | [optional] 
+ **update_api_key_request** | [**UpdateApiKeyRequest**](UpdateApiKeyRequest.md)| The request parameters for updating an existing API key. | 
 
 ### Return type
 
@@ -438,11 +438,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.ApiKeysApi(api_client)
     key_id = '75a5f745-f697-4418-b38d-0fe0d277e258' # str | The unique identifier of the API key to update.
-    update_api_key_request = docspace_api_sdk.UpdateApiKeyRequest() # UpdateApiKeyRequest | The request parameters for updating an existing API key. (optional)
+    update_api_key_request = docspace_api_sdk.UpdateApiKeyRequest() # UpdateApiKeyRequest | The request parameters for updating an existing API key.
 
     try:
         # Update an API key
-        api_response = api_instance.update_api_key(key_id, update_api_key_request=update_api_key_request)
+        api_response = api_instance.update_api_key(key_id, update_api_key_request)
         print("The response of ApiKeysApi->update_api_key:\n")
         pprint(api_response)
     except Exception as e:

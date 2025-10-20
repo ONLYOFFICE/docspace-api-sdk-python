@@ -48,6 +48,7 @@ class StorageApi:
         self.api_client = api_client
 
 
+
     @validate_call
     def get_all_backup_storages(
         self,

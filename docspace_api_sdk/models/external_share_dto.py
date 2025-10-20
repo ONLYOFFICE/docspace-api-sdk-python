@@ -23,6 +23,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from docspace_api_sdk.models.file_entry_type import FileEntryType
 from docspace_api_sdk.models.status import Status
 from typing import Optional, Set
 from typing_extensions import Self
@@ -31,16 +32,20 @@ class ExternalShareDto(BaseModel):
     """
     The external sharing information and validation data.
     """ # noqa: E501
-    status: Optional[Status] = None
-    id: Optional[StrictStr] = Field(default=None, description="The external data ID.")
-    title: Optional[StrictStr] = Field(default=None, description="The external data title.")
-    tenant_id: Optional[StrictInt] = Field(default=None, description="The tenant ID.", alias="tenantId")
+    status: Status
+    id: Optional[StrictStr] = Field(description="The external data ID.")
+    title: Optional[StrictStr] = Field(description="The external data title.")
+    type: Optional[FileEntryType] = None
+    tenant_id: StrictInt = Field(description="The tenant ID.", alias="tenantId")
     entity_id: Optional[StrictStr] = Field(default=None, description="The unique identifier of the shared entity.", alias="entityId")
-    entry_title: Optional[StrictStr] = Field(default=None, description="The title of the shared entry.", alias="entryTitle")
-    shared: Optional[StrictBool] = Field(default=None, description="Specifies whether to share the external data or not.")
-    link_id: Optional[StrictStr] = Field(default=None, description="The link ID of the external data.", alias="linkId")
-    is_authenticated: Optional[StrictBool] = Field(default=None, description="Specifies whether the user is authenticated or not.", alias="isAuthenticated")
-    __properties: ClassVar[List[str]] = ["status", "id", "title", "tenantId", "entityId", "entryTitle", "shared", "linkId", "isAuthenticated"]
+    entity_title: Optional[StrictStr] = Field(default=None, description="The title of the shared entity.", alias="entityTitle")
+    entity_type: Optional[FileEntryType] = Field(default=None, alias="entityType")
+    is_room: Optional[StrictBool] = Field(default=None, description="Indicates whether the entity represents a room.", alias="isRoom")
+    shared: StrictBool = Field(description="Specifies whether to share the external data or not.")
+    link_id: StrictStr = Field(description="The link ID of the external data.", alias="linkId")
+    is_authenticated: StrictBool = Field(description="Specifies whether the user is authenticated or not.", alias="isAuthenticated")
+    is_room_member: Optional[StrictBool] = Field(default=None, description="The room ID of the external data.", alias="isRoomMember")
+    __properties: ClassVar[List[str]] = ["status", "id", "title", "type", "tenantId", "entityId", "entityTitle", "entityType", "isRoom", "shared", "linkId", "isAuthenticated", "isRoomMember"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -96,10 +101,15 @@ class ExternalShareDto(BaseModel):
         if self.entity_id is None and "entity_id" in self.model_fields_set:
             _dict['entityId'] = None
 
-        # set to None if entry_title (nullable) is None
+        # set to None if entity_title (nullable) is None
         # and model_fields_set contains the field
-        if self.entry_title is None and "entry_title" in self.model_fields_set:
-            _dict['entryTitle'] = None
+        if self.entity_title is None and "entity_title" in self.model_fields_set:
+            _dict['entityTitle'] = None
+
+        # set to None if is_room (nullable) is None
+        # and model_fields_set contains the field
+        if self.is_room is None and "is_room" in self.model_fields_set:
+            _dict['isRoom'] = None
 
         return _dict
 
@@ -117,12 +127,16 @@ class ExternalShareDto(BaseModel):
             "status": obj.get("status"),
             "id": obj.get("id"),
             "title": obj.get("title"),
+            "type": obj.get("type"),
             "tenantId": obj.get("tenantId"),
             "entityId": obj.get("entityId"),
-            "entryTitle": obj.get("entryTitle"),
+            "entityTitle": obj.get("entityTitle"),
+            "entityType": obj.get("entityType"),
+            "isRoom": obj.get("isRoom"),
             "shared": obj.get("shared"),
             "linkId": obj.get("linkId"),
-            "isAuthenticated": obj.get("isAuthenticated")
+            "isAuthenticated": obj.get("isAuthenticated"),
+            "isRoomMember": obj.get("isRoomMember")
         })
         return _obj
 

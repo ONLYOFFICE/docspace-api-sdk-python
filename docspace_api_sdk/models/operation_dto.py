@@ -32,14 +32,17 @@ class OperationDto(BaseModel):
     Represents an operation.
     """ # noqa: E501
     var_date: Optional[ApiDateTime] = Field(default=None, alias="date")
-    service: Optional[StrictStr] = Field(default=None, description="Service related to the operation.")
-    description: Optional[StrictStr] = Field(default=None, description="Brief description of the operation.")
-    service_unit: Optional[StrictStr] = Field(default=None, description="Unit of the service.", alias="serviceUnit")
-    quantity: Optional[StrictInt] = Field(default=None, description="Quantity of the service used.")
+    service: Optional[StrictStr] = Field(default=None, description="The service related to the operation.")
+    description: Optional[StrictStr] = Field(default=None, description="The brief operation description.")
+    details: Optional[StrictStr] = Field(default=None, description="The detailed information about the operation.")
+    service_unit: Optional[StrictStr] = Field(default=None, description="The service unit.", alias="serviceUnit")
+    quantity: Optional[StrictInt] = Field(default=None, description="The quantity of the service used.")
     currency: Optional[StrictStr] = Field(default=None, description="The three-character ISO 4217 currency symbol of the operation.")
-    credit: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Credit amount of the operation.")
-    withdrawal: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Withdrawal amount of the operation.")
-    __properties: ClassVar[List[str]] = ["date", "service", "description", "serviceUnit", "quantity", "currency", "credit", "withdrawal"]
+    credit: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The credit amount of the operation.")
+    debit: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The debit amount of the operation.")
+    participant_name: Optional[StrictStr] = Field(default=None, description="The participant original name.", alias="participantName")
+    participant_display_name: Optional[StrictStr] = Field(default=None, description="The participant display name.", alias="participantDisplayName")
+    __properties: ClassVar[List[str]] = ["date", "service", "description", "details", "serviceUnit", "quantity", "currency", "credit", "debit", "participantName", "participantDisplayName"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -93,6 +96,11 @@ class OperationDto(BaseModel):
         if self.description is None and "description" in self.model_fields_set:
             _dict['description'] = None
 
+        # set to None if details (nullable) is None
+        # and model_fields_set contains the field
+        if self.details is None and "details" in self.model_fields_set:
+            _dict['details'] = None
+
         # set to None if service_unit (nullable) is None
         # and model_fields_set contains the field
         if self.service_unit is None and "service_unit" in self.model_fields_set:
@@ -102,6 +110,16 @@ class OperationDto(BaseModel):
         # and model_fields_set contains the field
         if self.currency is None and "currency" in self.model_fields_set:
             _dict['currency'] = None
+
+        # set to None if participant_name (nullable) is None
+        # and model_fields_set contains the field
+        if self.participant_name is None and "participant_name" in self.model_fields_set:
+            _dict['participantName'] = None
+
+        # set to None if participant_display_name (nullable) is None
+        # and model_fields_set contains the field
+        if self.participant_display_name is None and "participant_display_name" in self.model_fields_set:
+            _dict['participantDisplayName'] = None
 
         return _dict
 
@@ -119,11 +137,14 @@ class OperationDto(BaseModel):
             "date": ApiDateTime.from_dict(obj["date"]) if obj.get("date") is not None else None,
             "service": obj.get("service"),
             "description": obj.get("description"),
+            "details": obj.get("details"),
             "serviceUnit": obj.get("serviceUnit"),
             "quantity": obj.get("quantity"),
             "currency": obj.get("currency"),
             "credit": obj.get("credit"),
-            "withdrawal": obj.get("withdrawal")
+            "debit": obj.get("debit"),
+            "participantName": obj.get("participantName"),
+            "participantDisplayName": obj.get("participantDisplayName")
         })
         return _obj
 

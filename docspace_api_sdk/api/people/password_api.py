@@ -47,11 +47,12 @@ class PasswordApi:
         self.api_client = api_client
 
 
+
     @validate_call
     def change_user_password(
         self,
         userid: Annotated[StrictStr, Field(description="The user ID.")],
-        member_base_request_dto: Annotated[Optional[MemberBaseRequestDto], Field(description="The request parameters for the user generic information.")] = None,
+        member_base_request_dto: Annotated[MemberBaseRequestDto, Field(description="The request parameters for the user generic information.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -71,7 +72,7 @@ class PasswordApi:
 
         :param userid: The user ID. (required)
         :type userid: str
-        :param member_base_request_dto: The request parameters for the user generic information.
+        :param member_base_request_dto: The request parameters for the user generic information. (required)
         :type member_base_request_dto: MemberBaseRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -126,7 +127,7 @@ class PasswordApi:
     def change_user_password_with_http_info(
         self,
         userid: Annotated[StrictStr, Field(description="The user ID.")],
-        member_base_request_dto: Annotated[Optional[MemberBaseRequestDto], Field(description="The request parameters for the user generic information.")] = None,
+        member_base_request_dto: Annotated[MemberBaseRequestDto, Field(description="The request parameters for the user generic information.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -146,7 +147,7 @@ class PasswordApi:
 
         :param userid: The user ID. (required)
         :type userid: str
-        :param member_base_request_dto: The request parameters for the user generic information.
+        :param member_base_request_dto: The request parameters for the user generic information. (required)
         :type member_base_request_dto: MemberBaseRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -201,7 +202,7 @@ class PasswordApi:
     def change_user_password_without_preload_content(
         self,
         userid: Annotated[StrictStr, Field(description="The user ID.")],
-        member_base_request_dto: Annotated[Optional[MemberBaseRequestDto], Field(description="The request parameters for the user generic information.")] = None,
+        member_base_request_dto: Annotated[MemberBaseRequestDto, Field(description="The request parameters for the user generic information.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -221,7 +222,7 @@ class PasswordApi:
 
         :param userid: The user ID. (required)
         :type userid: str
-        :param member_base_request_dto: The request parameters for the user generic information.
+        :param member_base_request_dto: The request parameters for the user generic information. (required)
         :type member_base_request_dto: MemberBaseRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request

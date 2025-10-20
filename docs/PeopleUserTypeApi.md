@@ -5,8 +5,8 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**get_user_type_update_progress**](#get_user_type_update_progress) | **GET** /api/2.0/people/type/progress/{userid} | Get the progress of updating user type
-[**star_user_typet_update**](#star_user_typet_update) | **POST** /api/2.0/people/type | Update user type
-[**terminate_user_type_update**](#terminate_user_type_update) | **PUT** /api/2.0/people/type/terminate | Terminate update user type
+[**star_user_typet_update**](#star_user_typet_update) | **POST** /api/2.0/people/type | Start updating user type
+[**terminate_user_type_update**](#terminate_user_type_update) | **PUT** /api/2.0/people/type/terminate | Terminate updating user type
 [**update_user_type**](#update_user_type) | **PUT** /api/2.0/people/type/{type} | Change a user type
 
 
@@ -140,7 +140,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     start_update_user_type_dto = docspace_api_sdk.StartUpdateUserTypeDto() # StartUpdateUserTypeDto |  (optional)
 
     try:
-        # Update user type
+        # Start updating user type
         api_response = api_instance.star_user_typet_update(start_update_user_type_dto=start_update_user_type_dto)
         print("The response of UserTypeApi->star_user_typet_update:\n")
         pprint(api_response)
@@ -219,7 +219,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     terminate_request_dto = docspace_api_sdk.TerminateRequestDto() # TerminateRequestDto |  (optional)
 
     try:
-        # Terminate update user type
+        # Terminate updating user type
         api_response = api_instance.terminate_user_type_update(terminate_request_dto=terminate_request_dto)
         print("The response of UserTypeApi->terminate_user_type_update:\n")
         pprint(api_response)
@@ -245,7 +245,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update_user_type**
-> EmployeeFullArrayWrapper update_user_type(type, update_members_request_dto=update_members_request_dto)
+> EmployeeFullArrayWrapper update_user_type(type, update_members_request_dto)
 
 Changes a type of the users with the IDs specified in the request.
 
@@ -257,7 +257,7 @@ For more information, see [api.onlyoffice.com]().
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **type** | [**EmployeeType**](.md)| The new user type. | 
- **update_members_request_dto** | [**UpdateMembersRequestDto**](UpdateMembersRequestDto.md)| The request parameters for updating the user information. | [optional] 
+ **update_members_request_dto** | [**UpdateMembersRequestDto**](UpdateMembersRequestDto.md)| The request parameters for updating the user information. | 
 
 ### Return type
 
@@ -297,11 +297,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.UserTypeApi(api_client)
     type = docspace_api_sdk.EmployeeType() # EmployeeType | The new user type.
-    update_members_request_dto = docspace_api_sdk.UpdateMembersRequestDto() # UpdateMembersRequestDto | The request parameters for updating the user information. (optional)
+    update_members_request_dto = docspace_api_sdk.UpdateMembersRequestDto() # UpdateMembersRequestDto | The request parameters for updating the user information.
 
     try:
         # Change a user type
-        api_response = api_instance.update_user_type(type, update_members_request_dto=update_members_request_dto)
+        api_response = api_instance.update_user_type(type, update_members_request_dto)
         print("The response of UserTypeApi->update_user_type:\n")
         pprint(api_response)
     except Exception as e:

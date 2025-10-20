@@ -1,12 +1,12 @@
 # CheckDestFolderDto
-The destination folder checking information.
+The result of checking whether files can be moved or copied to the specified folder.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **result** | [**CheckDestFolderResult**](CheckDestFolderResult.md) |  | [optional] 
-**files** | [**List[FileEntryBaseDto]**](FileEntryBaseDto.md) | The list of files of the destination folder. | [optional] 
+**files** | [**List[FileEntryBaseDto]**](FileEntryBaseDto.md) | The list of files in the destination folder. | [optional] 
 
 ## Example
 

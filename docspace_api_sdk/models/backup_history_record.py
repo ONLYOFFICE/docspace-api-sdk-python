@@ -32,11 +32,11 @@ class BackupHistoryRecord(BaseModel):
     """
     BackupHistoryRecord
     """ # noqa: E501
-    id: Optional[StrictStr] = None
-    file_name: Optional[StrictStr] = Field(default=None, alias="fileName")
-    storage_type: Optional[BackupStorageType] = Field(default=None, alias="storageType")
-    created_on: Optional[datetime] = Field(default=None, alias="createdOn")
-    expires_on: Optional[datetime] = Field(default=None, alias="expiresOn")
+    id: StrictStr
+    file_name: Optional[StrictStr] = Field(alias="fileName")
+    storage_type: BackupStorageType = Field(alias="storageType")
+    created_on: datetime = Field(alias="createdOn")
+    expires_on: datetime = Field(alias="expiresOn")
     __properties: ClassVar[List[str]] = ["id", "fileName", "storageType", "createdOn", "expiresOn"]
 
     model_config = ConfigDict(

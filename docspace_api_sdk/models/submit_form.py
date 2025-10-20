@@ -28,9 +28,9 @@ from typing_extensions import Self
 
 class SubmitForm(BaseModel):
     """
-    The \"Complete & Submit\" button settings.
+    The Complete & Submit button settings.
     """ # noqa: E501
-    visible: Optional[StrictBool] = Field(default=None, description="Specifies whether the \"Complete  & Submit\" button will be displayed or hidden on the top toolbar.")
+    visible: Optional[StrictBool] = Field(default=None, description="Specifies whether the Complete  & Submit button will be displayed or hidden on the top toolbar.")
     result_message: Optional[StrictStr] = Field(default=None, description="A message displayed after forms are submitted.", alias="resultMessage")
     __properties: ClassVar[List[str]] = ["visible", "resultMessage"]
 

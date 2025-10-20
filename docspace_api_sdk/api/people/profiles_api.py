@@ -20,6 +20,7 @@ import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
+from __future__ import annotations
 
 from pydantic import Field, StrictInt, StrictStr
 from typing import Optional
@@ -52,6 +53,11 @@ class ProfilesApi:
         if api_client is None:
             api_client = ApiClient.get_default()
         self.api_client = api_client
+        self._fields = None
+
+    def with_fields(self, fields: str) -> ProfilesApi:
+        self._fields = fields
+        return self
 
 
     @validate_call
@@ -887,7 +893,6 @@ class ProfilesApi:
         sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
         filter_separator: Annotated[Optional[StrictStr], Field(description="The character or string used to separate multiple filter values in a filtering query.")] = None,
         filter_value: Annotated[Optional[StrictStr], Field(description="The text value used as an additional filter criterion for profiles retrieval.")] = None,
-        fields:  = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -919,8 +924,6 @@ class ProfilesApi:
         :type filter_separator: str
         :param filter_value: The text value used as an additional filter criterion for profiles retrieval.
         :type filter_value: str
-        :param fields: Comma-separated list of fields to include in the response
-        :type fields: string
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -951,7 +954,6 @@ class ProfilesApi:
             sort_order=sort_order,
             filter_separator=filter_separator,
             filter_value=filter_value,
-            fields=fields,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -983,7 +985,6 @@ class ProfilesApi:
         sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
         filter_separator: Annotated[Optional[StrictStr], Field(description="The character or string used to separate multiple filter values in a filtering query.")] = None,
         filter_value: Annotated[Optional[StrictStr], Field(description="The text value used as an additional filter criterion for profiles retrieval.")] = None,
-        fields:  = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1015,8 +1016,6 @@ class ProfilesApi:
         :type filter_separator: str
         :param filter_value: The text value used as an additional filter criterion for profiles retrieval.
         :type filter_value: str
-        :param fields: Comma-separated list of fields to include in the response
-        :type fields: string
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1047,7 +1046,6 @@ class ProfilesApi:
             sort_order=sort_order,
             filter_separator=filter_separator,
             filter_value=filter_value,
-            fields=fields,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1079,7 +1077,6 @@ class ProfilesApi:
         sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
         filter_separator: Annotated[Optional[StrictStr], Field(description="The character or string used to separate multiple filter values in a filtering query.")] = None,
         filter_value: Annotated[Optional[StrictStr], Field(description="The text value used as an additional filter criterion for profiles retrieval.")] = None,
-        fields:  = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1111,8 +1108,6 @@ class ProfilesApi:
         :type filter_separator: str
         :param filter_value: The text value used as an additional filter criterion for profiles retrieval.
         :type filter_value: str
-        :param fields: Comma-separated list of fields to include in the response
-        :type fields: string
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1143,7 +1138,6 @@ class ProfilesApi:
             sort_order=sort_order,
             filter_separator=filter_separator,
             filter_value=filter_value,
-            fields=fields,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1170,7 +1164,6 @@ class ProfilesApi:
         sort_order,
         filter_separator,
         filter_value,
-        fields,
         _request_auth,
         _content_type,
         _headers,
@@ -1221,11 +1214,9 @@ class ProfilesApi:
             
             _query_params.append(('filterValue', filter_value))
             
-        if fields is not None:
-            
-            _query_params.append(('fields', fields))
-            
         # process the header parameters
+        if self._fields is not None:
+            _header_params['fields'] = self._fields
         # process the form parameters
         # process the body parameter
 
@@ -1283,7 +1274,7 @@ class ProfilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ObjectWrapper:
-        """Returns the user claims.
+        """Get user claims
 
         Returns the user claims.
 
@@ -1347,7 +1338,7 @@ class ProfilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[ObjectWrapper]:
-        """Returns the user claims.
+        """Get user claims
 
         Returns the user claims.
 
@@ -1411,7 +1402,7 @@ class ProfilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Returns the user claims.
+        """Get user claims
 
         Returns the user claims.
 
@@ -1829,9 +1820,9 @@ class ProfilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> EmployeeFullWrapper:
-        """Get a profile by user name
+        """Get a profile by user ID
 
-        Returns the detailed information about a profile of the user with the name specified in the request.
+        Returns the detailed information about a profile of the user with the ID specified in the request.
 
         :param userid: The user ID. (required)
         :type userid: str
@@ -1899,9 +1890,9 @@ class ProfilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[EmployeeFullWrapper]:
-        """Get a profile by user name
+        """Get a profile by user ID
 
-        Returns the detailed information about a profile of the user with the name specified in the request.
+        Returns the detailed information about a profile of the user with the ID specified in the request.
 
         :param userid: The user ID. (required)
         :type userid: str
@@ -1969,9 +1960,9 @@ class ProfilesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get a profile by user name
+        """Get a profile by user ID
 
-        Returns the detailed information about a profile of the user with the name specified in the request.
+        Returns the detailed information about a profile of the user with the ID specified in the request.
 
         :param userid: The user ID. (required)
         :type userid: str
@@ -3491,7 +3482,7 @@ class ProfilesApi:
     def update_member(
         self,
         userid: Annotated[StrictStr, Field(description="The user ID.")],
-        update_member_request_dto: Annotated[Optional[UpdateMemberRequestDto], Field(description="The request parameters for updating the user information.")] = None,
+        update_member_request_dto: Annotated[UpdateMemberRequestDto, Field(description="The request parameters for updating the user information.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3511,7 +3502,7 @@ class ProfilesApi:
 
         :param userid: The user ID. (required)
         :type userid: str
-        :param update_member_request_dto: The request parameters for updating the user information.
+        :param update_member_request_dto: The request parameters for updating the user information. (required)
         :type update_member_request_dto: UpdateMemberRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3566,7 +3557,7 @@ class ProfilesApi:
     def update_member_with_http_info(
         self,
         userid: Annotated[StrictStr, Field(description="The user ID.")],
-        update_member_request_dto: Annotated[Optional[UpdateMemberRequestDto], Field(description="The request parameters for updating the user information.")] = None,
+        update_member_request_dto: Annotated[UpdateMemberRequestDto, Field(description="The request parameters for updating the user information.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3586,7 +3577,7 @@ class ProfilesApi:
 
         :param userid: The user ID. (required)
         :type userid: str
-        :param update_member_request_dto: The request parameters for updating the user information.
+        :param update_member_request_dto: The request parameters for updating the user information. (required)
         :type update_member_request_dto: UpdateMemberRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3641,7 +3632,7 @@ class ProfilesApi:
     def update_member_without_preload_content(
         self,
         userid: Annotated[StrictStr, Field(description="The user ID.")],
-        update_member_request_dto: Annotated[Optional[UpdateMemberRequestDto], Field(description="The request parameters for updating the user information.")] = None,
+        update_member_request_dto: Annotated[UpdateMemberRequestDto, Field(description="The request parameters for updating the user information.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3661,7 +3652,7 @@ class ProfilesApi:
 
         :param userid: The user ID. (required)
         :type userid: str
-        :param update_member_request_dto: The request parameters for updating the user information.
+        :param update_member_request_dto: The request parameters for updating the user information. (required)
         :type update_member_request_dto: UpdateMemberRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request

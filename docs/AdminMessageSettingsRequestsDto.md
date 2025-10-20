@@ -8,6 +8,8 @@ Name | Type | Description | Notes
 **message** | **str** | The content of the administrator message to be sent. | 
 **email** | **str** | Email | 
 **culture** | **str** | Culture | [optional] 
+**recaptcha_type** | [**RecaptchaType**](RecaptchaType.md) |  | [optional] 
+**recaptcha_response** | **str** | The user&#39;s response to the CAPTCHA challenge. | [optional] 
 
 ## Example
 

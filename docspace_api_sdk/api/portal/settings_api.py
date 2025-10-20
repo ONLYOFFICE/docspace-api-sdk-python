@@ -46,6 +46,7 @@ class SettingsApi:
         self.api_client = api_client
 
 
+
     @validate_call
     def continue_portal(
         self,

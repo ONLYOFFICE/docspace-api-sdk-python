@@ -49,6 +49,7 @@ class UserDataApi:
         self.api_client = api_client
 
 
+
     @validate_call
     def get_delete_personal_folder_progress(
         self,
@@ -859,9 +860,9 @@ class UserDataApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> BooleanWrapper:
-        """Check the data reassignment need
+        """Check data for reassignment need
 
-        Checks if the reassignment of rooms and shared files is necessary or not.
+        Checks whether the reassignment of rooms and shared files is required.
 
         :param user_id: The user ID.
         :type user_id: str
@@ -931,9 +932,9 @@ class UserDataApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[BooleanWrapper]:
-        """Check the data reassignment need
+        """Check data for reassignment need
 
-        Checks if the reassignment of rooms and shared files is necessary or not.
+        Checks whether the reassignment of rooms and shared files is required.
 
         :param user_id: The user ID.
         :type user_id: str
@@ -1003,9 +1004,9 @@ class UserDataApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Check the data reassignment need
+        """Check data for reassignment need
 
-        Checks if the reassignment of rooms and shared files is necessary or not.
+        Checks whether the reassignment of rooms and shared files is required.
 
         :param user_id: The user ID.
         :type user_id: str

@@ -30,7 +30,7 @@ class CheckDocServiceUrlRequestDto(BaseModel):
     """
     The request parameters for checking the document service location.
     """ # noqa: E501
-    doc_service_url: Optional[StrictStr] = Field(default=None, description="The ONLYOFFICE Docs URL address.", alias="docServiceUrl")
+    doc_service_url: Optional[StrictStr] = Field(description="The ONLYOFFICE Docs URL address.", alias="docServiceUrl")
     doc_service_url_internal: Optional[StrictStr] = Field(default=None, description="The ONLYOFFICE Docs URL address in the local private network.", alias="docServiceUrlInternal")
     doc_service_url_portal: Optional[StrictStr] = Field(default=None, description="The ONLYOFFICE Docs URL address.", alias="docServiceUrlPortal")
     doc_service_signature_secret: Optional[StrictStr] = Field(default=None, description="The signature secret of the ONLYOFFICE Docs.", alias="docServiceSignatureSecret")

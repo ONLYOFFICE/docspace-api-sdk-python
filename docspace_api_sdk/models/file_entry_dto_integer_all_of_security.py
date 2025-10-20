@@ -28,7 +28,7 @@ from typing_extensions import Self
 
 class FileEntryDtoIntegerAllOfSecurity(BaseModel):
     """
-    The actions that can be perforrmed with the file entry.
+    The actions that can be performed with the file entry.
     """ # noqa: E501
     read: Optional[StrictBool] = Field(default=None, alias="Read")
     comment: Optional[StrictBool] = Field(default=None, alias="Comment")
@@ -68,7 +68,9 @@ class FileEntryDtoIntegerAllOfSecurity(BaseModel):
     reset_filling: Optional[StrictBool] = Field(default=None, alias="ResetFilling")
     stop_filling: Optional[StrictBool] = Field(default=None, alias="StopFilling")
     open_form: Optional[StrictBool] = Field(default=None, alias="OpenForm")
-    __properties: ClassVar[List[str]] = ["Read", "Comment", "FillForms", "Review", "Create", "CreateFrom", "Edit", "Delete", "CustomFilter", "EditRoom", "Rename", "ReadHistory", "Lock", "EditHistory", "CopyTo", "Copy", "MoveTo", "Move", "Pin", "Mute", "EditAccess", "Duplicate", "SubmitToFormGallery", "Download", "Convert", "CopySharedLink", "ReadLinks", "Reconnect", "CreateRoomFrom", "CopyLink", "Embed", "ChangeOwner", "IndexExport", "StartFilling", "FillingStatus", "ResetFilling", "StopFilling", "OpenForm"]
+    edit_internal: Optional[StrictBool] = Field(default=None, alias="EditInternal")
+    edit_expiration: Optional[StrictBool] = Field(default=None, alias="EditExpiration")
+    __properties: ClassVar[List[str]] = ["Read", "Comment", "FillForms", "Review", "Create", "CreateFrom", "Edit", "Delete", "CustomFilter", "EditRoom", "Rename", "ReadHistory", "Lock", "EditHistory", "CopyTo", "Copy", "MoveTo", "Move", "Pin", "Mute", "EditAccess", "Duplicate", "SubmitToFormGallery", "Download", "Convert", "CopySharedLink", "ReadLinks", "Reconnect", "CreateRoomFrom", "CopyLink", "Embed", "ChangeOwner", "IndexExport", "StartFilling", "FillingStatus", "ResetFilling", "StopFilling", "OpenForm", "EditInternal", "EditExpiration"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -159,7 +161,9 @@ class FileEntryDtoIntegerAllOfSecurity(BaseModel):
             "FillingStatus": obj.get("FillingStatus"),
             "ResetFilling": obj.get("ResetFilling"),
             "StopFilling": obj.get("StopFilling"),
-            "OpenForm": obj.get("OpenForm")
+            "OpenForm": obj.get("OpenForm"),
+            "EditInternal": obj.get("EditInternal"),
+            "EditExpiration": obj.get("EditExpiration")
         })
         return _obj
 

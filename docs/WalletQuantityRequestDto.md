@@ -1,11 +1,11 @@
 # WalletQuantityRequestDto
-The request parameters for the wallet payment quantity specifications.
+The request parameters for specifying wallet payment quantity.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**quantity** | **Dict[str, Optional[int]]** | The mapping of item identifiers with their respective quantities in the payment. | [optional] 
+**quantity** | **Dict[str, Optional[int]]** | The mapping of item identifiers to their respective quantities in the payment. | [optional] 
 **product_quantity_type** | [**ProductQuantityType**](ProductQuantityType.md) |  | [optional] 
 
 ## Example

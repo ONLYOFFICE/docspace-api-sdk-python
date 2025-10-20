@@ -23,7 +23,7 @@ import json
 
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool
-from typing import Any, ClassVar, Dict, List, Optional
+from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -31,8 +31,8 @@ class CurrentLicenseInfo(BaseModel):
     """
     The current license information.
     """ # noqa: E501
-    trial: Optional[StrictBool] = Field(default=None, description="Specifies whether the license is trial or not.")
-    due_date: Optional[datetime] = Field(default=None, description="The date when the license expires.", alias="dueDate")
+    trial: StrictBool = Field(description="Specifies whether the license is trial or not.")
+    due_date: datetime = Field(description="The date when the license expires.", alias="dueDate")
     __properties: ClassVar[List[str]] = ["trial", "dueDate"]
 
     model_config = ConfigDict(

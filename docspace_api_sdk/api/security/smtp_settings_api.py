@@ -44,6 +44,7 @@ class SMTPSettingsApi:
         self.api_client = api_client
 
 
+
     @validate_call
     def get_smtp_operation_status(
         self,

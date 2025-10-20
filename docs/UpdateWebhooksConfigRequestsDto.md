@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **ssl** | **bool** | Specifies whether the SSL certificate verification is required or not. | [optional] 
 **triggers** | [**WebhookTrigger**](WebhookTrigger.md) |  | [optional] 
 **target_id** | **str** | Target ID | [optional] 
-**id** | **int** | The webhook configuration ID. | [optional] 
+**id** | **int** | The webhook configuration ID. | 
 
 ## Example
 

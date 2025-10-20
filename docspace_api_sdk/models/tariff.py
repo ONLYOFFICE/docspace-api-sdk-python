@@ -35,11 +35,11 @@ class Tariff(BaseModel):
     """ # noqa: E501
     id: Optional[StrictInt] = Field(default=None, description="The tariff ID.")
     state: Optional[TariffState] = None
-    due_date: Optional[datetime] = Field(default=None, description="The tariff due date.", alias="dueDate")
+    due_date: datetime = Field(description="The tariff due date.", alias="dueDate")
     delay_due_date: Optional[datetime] = Field(default=None, description="The tariff delay due date.", alias="delayDueDate")
     license_date: Optional[datetime] = Field(default=None, description="The tariff license date.", alias="licenseDate")
     customer_id: Optional[StrictStr] = Field(default=None, description="The tariff customer ID.", alias="customerId")
-    quotas: Optional[List[Quota]] = Field(default=None, description="The list of tariff quotas.")
+    quotas: Optional[List[Quota]] = Field(description="The list of tariff quotas.")
     overdue_quotas: Optional[List[Quota]] = Field(default=None, description="The list of overdue tariff quotas.", alias="overdueQuotas")
     __properties: ClassVar[List[str]] = ["id", "state", "dueDate", "delayDueDate", "licenseDate", "customerId", "quotas", "overdueQuotas"]
 

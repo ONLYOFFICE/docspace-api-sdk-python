@@ -33,12 +33,12 @@ class ScheduleDto(BaseModel):
     """
     ScheduleDto
     """ # noqa: E501
-    storage_type: Optional[BackupStorageType] = Field(default=None, alias="storageType")
-    storage_params: Optional[Dict[str, Optional[StrictStr]]] = Field(default=None, alias="storageParams")
-    cron_params: Optional[CronParams] = Field(default=None, alias="cronParams")
+    storage_type: BackupStorageType = Field(alias="storageType")
+    storage_params: Optional[Dict[str, Optional[StrictStr]]] = Field(alias="storageParams")
+    cron_params: CronParams = Field(alias="cronParams")
     backups_stored: Optional[StrictInt] = Field(default=None, alias="backupsStored")
-    last_backup_time: Optional[datetime] = Field(default=None, alias="lastBackupTime")
-    dump: Optional[StrictBool] = None
+    last_backup_time: datetime = Field(alias="lastBackupTime")
+    dump: StrictBool
     __properties: ClassVar[List[str]] = ["storageType", "storageParams", "cronParams", "backupsStored", "lastBackupTime", "dump"]
 
     model_config = ConfigDict(

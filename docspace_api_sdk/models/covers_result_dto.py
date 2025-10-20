@@ -30,8 +30,8 @@ class CoversResultDto(BaseModel):
     """
     The result of the cover request containing the cover image data.
     """ # noqa: E501
-    id: Optional[StrictStr] = Field(default=None, description="The cover unique identifier.")
-    data: Optional[StrictStr] = Field(default=None, description="The cover image data.")
+    id: Optional[StrictStr] = Field(description="The cover unique identifier.")
+    data: Optional[StrictStr] = Field(description="The cover image data.")
     __properties: ClassVar[List[str]] = ["id", "data"]
 
     model_config = ConfigDict(

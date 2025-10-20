@@ -45,6 +45,7 @@ class ActiveConnectionsApi:
         self.api_client = api_client
 
 
+
     @validate_call
     def get_all_active_connections(
         self,

@@ -5,11 +5,12 @@ The group parameters.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **str** | The group name. | [optional] 
+**name** | **str** | The group name. | 
 **parent** | **str** | The parent group ID. | [optional] 
-**category** | **str** | The group category ID. | [optional] 
-**id** | **str** | The group ID. | [optional] 
-**is_ldap** | **bool** | Specifies if the LDAP settings are enabled for the group or not. | [optional] 
+**category** | **str** | The group category ID. | 
+**id** | **str** | The group ID. | 
+**is_ldap** | **bool** | Specifies if the LDAP settings are enabled for the group or not. | 
+**is_system** | **bool** | Indicates whether the group is a system group. | [optional] 
 **manager** | [**EmployeeFullDto**](EmployeeFullDto.md) |  | [optional] 
 **members** | [**List[EmployeeFullDto]**](EmployeeFullDto.md) | The list of group members. | [optional] 
 **shared** | **bool** | Specifies whether the group can be shared or not. | [optional] 

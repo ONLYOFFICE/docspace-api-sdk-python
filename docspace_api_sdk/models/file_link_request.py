@@ -23,6 +23,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Annotated
 from docspace_api_sdk.models.api_date_time import ApiDateTime
 from docspace_api_sdk.models.file_share import FileShare
 from typing import Optional, Set
@@ -35,9 +36,12 @@ class FileLinkRequest(BaseModel):
     link_id: Optional[StrictStr] = Field(default=None, description="The external link ID.", alias="linkId")
     access: Optional[FileShare] = None
     expiration_date: Optional[ApiDateTime] = Field(default=None, alias="expirationDate")
+    title: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The link name.")
     internal: Optional[StrictBool] = Field(default=None, description="The link scope, whether it is internal or not.")
     primary: Optional[StrictBool] = Field(default=None, description="Specifies whether the file link is primary or not.")
-    __properties: ClassVar[List[str]] = ["linkId", "access", "expirationDate", "internal", "primary"]
+    deny_download: Optional[StrictBool] = Field(default=None, description="Specifies whether to deny downloading the file or not.", alias="denyDownload")
+    password: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="Password for access via link.")
+    __properties: ClassVar[List[str]] = ["linkId", "access", "expirationDate", "title", "internal", "primary", "denyDownload", "password"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -81,6 +85,16 @@ class FileLinkRequest(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of expiration_date
         if self.expiration_date:
             _dict['expirationDate'] = self.expiration_date.to_dict()
+        # set to None if title (nullable) is None
+        # and model_fields_set contains the field
+        if self.title is None and "title" in self.model_fields_set:
+            _dict['title'] = None
+
+        # set to None if password (nullable) is None
+        # and model_fields_set contains the field
+        if self.password is None and "password" in self.model_fields_set:
+            _dict['password'] = None
+
         return _dict
 
     @classmethod
@@ -97,8 +111,11 @@ class FileLinkRequest(BaseModel):
             "linkId": obj.get("linkId"),
             "access": obj.get("access"),
             "expirationDate": ApiDateTime.from_dict(obj["expirationDate"]) if obj.get("expirationDate") is not None else None,
+            "title": obj.get("title"),
             "internal": obj.get("internal"),
-            "primary": obj.get("primary")
+            "primary": obj.get("primary"),
+            "denyDownload": obj.get("denyDownload"),
+            "password": obj.get("password")
         })
         return _obj
 

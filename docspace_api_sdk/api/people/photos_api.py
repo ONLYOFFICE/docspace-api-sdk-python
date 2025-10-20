@@ -22,7 +22,7 @@ from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
 from pydantic import Field, StrictStr
-from typing import List, Optional
+from typing import List
 from typing_extensions import Annotated
 from docspace_api_sdk.models.file_upload_result_wrapper import FileUploadResultWrapper
 from docspace_api_sdk.models.key_value_pair_string_string_values import KeyValuePairStringStringValues
@@ -48,11 +48,12 @@ class PhotosApi:
         self.api_client = api_client
 
 
+
     @validate_call
     def create_member_photo_thumbnails(
         self,
         userid: Annotated[StrictStr, Field(description="The user ID.")],
-        thumbnails_request: Annotated[Optional[ThumbnailsRequest], Field(description="The thumbnail request.")] = None,
+        thumbnails_request: Annotated[ThumbnailsRequest, Field(description="The thumbnail request.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -72,7 +73,7 @@ class PhotosApi:
 
         :param userid: The user ID. (required)
         :type userid: str
-        :param thumbnails_request: The thumbnail request.
+        :param thumbnails_request: The thumbnail request. (required)
         :type thumbnails_request: ThumbnailsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -126,7 +127,7 @@ class PhotosApi:
     def create_member_photo_thumbnails_with_http_info(
         self,
         userid: Annotated[StrictStr, Field(description="The user ID.")],
-        thumbnails_request: Annotated[Optional[ThumbnailsRequest], Field(description="The thumbnail request.")] = None,
+        thumbnails_request: Annotated[ThumbnailsRequest, Field(description="The thumbnail request.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -146,7 +147,7 @@ class PhotosApi:
 
         :param userid: The user ID. (required)
         :type userid: str
-        :param thumbnails_request: The thumbnail request.
+        :param thumbnails_request: The thumbnail request. (required)
         :type thumbnails_request: ThumbnailsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -200,7 +201,7 @@ class PhotosApi:
     def create_member_photo_thumbnails_without_preload_content(
         self,
         userid: Annotated[StrictStr, Field(description="The user ID.")],
-        thumbnails_request: Annotated[Optional[ThumbnailsRequest], Field(description="The thumbnail request.")] = None,
+        thumbnails_request: Annotated[ThumbnailsRequest, Field(description="The thumbnail request.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -220,7 +221,7 @@ class PhotosApi:
 
         :param userid: The user ID. (required)
         :type userid: str
-        :param thumbnails_request: The thumbnail request.
+        :param thumbnails_request: The thumbnail request. (required)
         :type thumbnails_request: ThumbnailsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -905,7 +906,7 @@ class PhotosApi:
     def update_member_photo(
         self,
         userid: Annotated[StrictStr, Field(description="The user ID.")],
-        update_photo_member_request: Annotated[Optional[UpdatePhotoMemberRequest], Field(description="The request parameters for updating a photo.")] = None,
+        update_photo_member_request: Annotated[UpdatePhotoMemberRequest, Field(description="The request parameters for updating a photo.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -925,7 +926,7 @@ class PhotosApi:
 
         :param userid: The user ID. (required)
         :type userid: str
-        :param update_photo_member_request: The request parameters for updating a photo.
+        :param update_photo_member_request: The request parameters for updating a photo. (required)
         :type update_photo_member_request: UpdatePhotoMemberRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -979,7 +980,7 @@ class PhotosApi:
     def update_member_photo_with_http_info(
         self,
         userid: Annotated[StrictStr, Field(description="The user ID.")],
-        update_photo_member_request: Annotated[Optional[UpdatePhotoMemberRequest], Field(description="The request parameters for updating a photo.")] = None,
+        update_photo_member_request: Annotated[UpdatePhotoMemberRequest, Field(description="The request parameters for updating a photo.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -999,7 +1000,7 @@ class PhotosApi:
 
         :param userid: The user ID. (required)
         :type userid: str
-        :param update_photo_member_request: The request parameters for updating a photo.
+        :param update_photo_member_request: The request parameters for updating a photo. (required)
         :type update_photo_member_request: UpdatePhotoMemberRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1053,7 +1054,7 @@ class PhotosApi:
     def update_member_photo_without_preload_content(
         self,
         userid: Annotated[StrictStr, Field(description="The user ID.")],
-        update_photo_member_request: Annotated[Optional[UpdatePhotoMemberRequest], Field(description="The request parameters for updating a photo.")] = None,
+        update_photo_member_request: Annotated[UpdatePhotoMemberRequest, Field(description="The request parameters for updating a photo.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1073,7 +1074,7 @@ class PhotosApi:
 
         :param userid: The user ID. (required)
         :type userid: str
-        :param update_photo_member_request: The request parameters for updating a photo.
+        :param update_photo_member_request: The request parameters for updating a photo. (required)
         :type update_photo_member_request: UpdatePhotoMemberRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request

@@ -4,11 +4,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** |  | [optional] 
-**file_name** | **str** |  | [optional] 
-**storage_type** | [**BackupStorageType**](BackupStorageType.md) |  | [optional] 
-**created_on** | **datetime** |  | [optional] 
-**expires_on** | **datetime** |  | [optional] 
+**id** | **str** |  | 
+**file_name** | **str** |  | 
+**storage_type** | [**BackupStorageType**](BackupStorageType.md) |  | 
+**created_on** | **datetime** |  | 
+**expires_on** | **datetime** |  | 
 
 ## Example
 

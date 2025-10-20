@@ -30,7 +30,7 @@ class IpRestrictionBase(BaseModel):
     """
     IpRestrictionBase
     """ # noqa: E501
-    ip: Optional[StrictStr] = None
+    ip: Optional[StrictStr]
     for_admin: Optional[StrictBool] = Field(default=None, alias="forAdmin")
     __properties: ClassVar[List[str]] = ["ip", "forAdmin"]
 

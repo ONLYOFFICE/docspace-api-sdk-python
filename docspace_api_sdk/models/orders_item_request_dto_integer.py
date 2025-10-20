@@ -22,7 +22,7 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictInt
-from typing import Any, ClassVar, Dict, List, Optional
+from typing import Any, ClassVar, Dict, List
 from typing_extensions import Annotated
 from docspace_api_sdk.models.file_entry_type import FileEntryType
 from typing import Optional, Set
@@ -32,9 +32,9 @@ class OrdersItemRequestDtoInteger(BaseModel):
     """
     An item in the ordering request with its entry type and ID.
     """ # noqa: E501
-    entry_id: Optional[StrictInt] = Field(default=None, description="The entry unique identifier (file or folder).", alias="entryId")
-    entry_type: Optional[FileEntryType] = Field(default=None, alias="entryType")
-    order: Optional[Annotated[int, Field(le=2147483647, strict=True, ge=1)]] = Field(default=None, description="The order value.")
+    entry_id: StrictInt = Field(description="The entry unique identifier (file or folder).", alias="entryId")
+    entry_type: FileEntryType = Field(alias="entryType")
+    order: Annotated[int, Field(le=2147483647, strict=True, ge=1)] = Field(description="The order value.")
     __properties: ClassVar[List[str]] = ["entryId", "entryType", "order"]
 
     model_config = ConfigDict(

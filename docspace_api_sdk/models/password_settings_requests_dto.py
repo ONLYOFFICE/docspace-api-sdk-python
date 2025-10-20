@@ -30,7 +30,7 @@ class PasswordSettingsRequestsDto(BaseModel):
     """
     The request parameters for configuring the password complexity requirements.
     """ # noqa: E501
-    min_length: Optional[StrictInt] = Field(default=None, description="The minimum number of characters required for valid passwords.", alias="minLength")
+    min_length: StrictInt = Field(description="The minimum number of characters required for valid passwords.", alias="minLength")
     upper_case: Optional[StrictBool] = Field(default=None, description="Specifies whether the password should contain the uppercase letters or not.", alias="upperCase")
     digits: Optional[StrictBool] = Field(default=None, description="Specifies whether the password should contain the digits or not.")
     spec_symbols: Optional[StrictBool] = Field(default=None, description="Specifies whether the password should contain the special symbols or not.", alias="specSymbols")

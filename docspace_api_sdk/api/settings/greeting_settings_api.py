@@ -45,6 +45,7 @@ class GreetingSettingsApi:
         self.api_client = api_client
 
 
+
     @validate_call
     def get_greeting_settings(
         self,

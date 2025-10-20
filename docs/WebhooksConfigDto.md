@@ -5,7 +5,7 @@ The webhook configuration parameters.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **int** | The webhook ID. | [optional] 
+**id** | **int** | The webhook ID. | 
 **name** | **str** | The webhook name. | [optional] 
 **uri** | **str** | The webhook URI. | [optional] 
 **enabled** | **bool** | Specifies if the webhooks are enabled or not. | [optional] 

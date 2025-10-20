@@ -43,6 +43,7 @@ class QuotaApi:
         self.api_client = api_client
 
 
+
     @validate_call
     def reset_users_quota(
         self,

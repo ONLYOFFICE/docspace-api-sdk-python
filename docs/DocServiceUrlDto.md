@@ -8,10 +8,11 @@ Name | Type | Description | Notes
 **version** | **str** | The version of the document service. | 
 **doc_service_url_api** | **str** | The document service URL API. | 
 **doc_service_url** | **str** | The document service URL. | 
+**doc_service_preload_url** | **str** | The URL used to preload the document service scripts. | 
 **doc_service_url_internal** | **str** | The internal document service URL. | 
 **doc_service_portal_url** | **str** | The document service portal URL. | 
-**doc_service_signature_header** | **str** | The document service signature header. | [optional] 
-**doc_service_ssl_verification** | **bool** | Specifies if the document service SSL verification is enabled. | [optional] 
+**doc_service_signature_header** | **str** | The document service signature header. | 
+**doc_service_ssl_verification** | **bool** | Specifies if the document service SSL verification is enabled. | 
 **is_default** | **bool** | Specifies if the document service is default. | 
 
 ## Example

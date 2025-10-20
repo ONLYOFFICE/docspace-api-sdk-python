@@ -32,7 +32,7 @@ from docspace_api_sdk.models.file_operation_request_base_dto import FileOperatio
 
 class DuplicateRequestDto(FileOperationRequestBaseDto):
     """
-    The duplicate request parameters.
+    The request parameters for duplicating files and fodlers.
     """
 
     folder_ids: Optional[List[DuplicateRequestDtoAllOfFolderIds]] = Field(default=None, description="The list of folder IDs.", alias="folderIds")

@@ -5,16 +5,16 @@ The response data for the API key operations.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** | The unique identifier of the API key. | [optional] 
-**name** | **str** | The API key name. | [optional] 
-**key** | **str** | The full API key value (only returned when creating a new key). | [optional] 
+**id** | **str** | The API key unique identifier. | 
+**name** | **str** | The API key name. | 
+**key** | **str** | The full API key value (only returned when creating a new key). | 
 **key_postfix** | **str** | The API key postfix (used for identification). | [optional] 
-**permissions** | **List[str]** | The list of permissions granted to the API key. | [optional] 
+**permissions** | **List[str]** | The list of permissions granted to the API key. | 
 **last_used** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] 
 **create_on** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] 
 **create_by** | [**EmployeeDto**](EmployeeDto.md) |  | [optional] 
 **expires_at** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] 
-**is_active** | **bool** | Indicates whether the API key is active or not. | [optional] 
+**is_active** | **bool** | Indicates whether the API key is active or not. | 
 
 ## Example
 

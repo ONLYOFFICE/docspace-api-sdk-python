@@ -43,7 +43,6 @@ class FilesSettingsDto(BaseModel):
     exts_web_restricted_editing: Optional[List[StrictStr]] = Field(default=None, description="The list of extensions of the files that are restricted for editing.", alias="extsWebRestrictedEditing")
     exts_web_commented: Optional[List[StrictStr]] = Field(default=None, description="The list of extensions of the commented files.", alias="extsWebCommented")
     exts_web_template: Optional[List[StrictStr]] = Field(default=None, description="The list of extensions of the template files.", alias="extsWebTemplate")
-    exts_co_authoring: Optional[List[StrictStr]] = Field(default=None, description="The list of extensions of the co-authoring files.", alias="extsCoAuthoring")
     exts_must_convert: Optional[List[StrictStr]] = Field(default=None, description="The list of extensions of the files that must be converted.", alias="extsMustConvert")
     exts_convertible: Optional[Dict[str, Optional[List[StrictStr]]]] = Field(default=None, description="The list of the convertible extensions.", alias="extsConvertible")
     exts_uploadable: Optional[List[StrictStr]] = Field(default=None, description="The list of the uploadable extensions.", alias="extsUploadable")
@@ -81,9 +80,9 @@ class FilesSettingsDto(BaseModel):
     default_order: Optional[OrderBy] = Field(default=None, alias="defaultOrder")
     forcesave: Optional[StrictBool] = Field(default=None, description="Specifies whether to forcesave the files or not.")
     store_forcesave: Optional[StrictBool] = Field(default=None, description="Specifies whether to store the forcesaved file versions or not.", alias="storeForcesave")
-    recent_section: Optional[StrictBool] = Field(default=None, description="Specifies if the \"Recent\" section is displayed or not.", alias="recentSection")
-    favorites_section: Optional[StrictBool] = Field(default=None, description="Specifies if the \"Favorites\" section is displayed or not.", alias="favoritesSection")
-    templates_section: Optional[StrictBool] = Field(default=None, description="Specifies if the \"Templates\" section is displayed or not.", alias="templatesSection")
+    recent_section: Optional[StrictBool] = Field(default=None, description="Specifies if the Recent section is displayed or not.", alias="recentSection")
+    favorites_section: Optional[StrictBool] = Field(default=None, description="Specifies if the Favorites section is displayed or not.", alias="favoritesSection")
+    templates_section: Optional[StrictBool] = Field(default=None, description="Specifies if the Templates section is displayed or not.", alias="templatesSection")
     download_tar_gz: Optional[StrictBool] = Field(default=None, description="Specifies whether to download the .tar.gz files or not.", alias="downloadTarGz")
     automatically_clean_up: Optional[AutoCleanUpData] = Field(default=None, alias="automaticallyCleanUp")
     can_search_by_content: Optional[StrictBool] = Field(default=None, description="Specifies whether the file can be searched by its content or not.", alias="canSearchByContent")
@@ -91,7 +90,7 @@ class FilesSettingsDto(BaseModel):
     max_upload_thread_count: Optional[StrictInt] = Field(default=None, description="The maximum number of upload threads.", alias="maxUploadThreadCount")
     chunk_upload_size: Optional[StrictInt] = Field(default=None, description="The size of a large file that is uploaded in chunks.", alias="chunkUploadSize")
     open_editor_in_same_tab: Optional[StrictBool] = Field(default=None, description="Specifies whether to open the editor in the same tab or not.", alias="openEditorInSameTab")
-    __properties: ClassVar[List[str]] = ["extsImagePreviewed", "extsMediaPreviewed", "extsWebPreviewed", "extsWebEdited", "extsWebEncrypt", "extsWebReviewed", "extsWebCustomFilterEditing", "extsWebRestrictedEditing", "extsWebCommented", "extsWebTemplate", "extsCoAuthoring", "extsMustConvert", "extsConvertible", "extsUploadable", "extsArchive", "extsVideo", "extsAudio", "extsImage", "extsSpreadsheet", "extsPresentation", "extsDocument", "extsDiagram", "internalFormats", "masterFormExtension", "paramVersion", "paramOutType", "fileDownloadUrlString", "fileWebViewerUrlString", "fileWebViewerExternalUrlString", "fileWebEditorUrlString", "fileWebEditorExternalUrlString", "fileRedirectPreviewUrlString", "fileThumbnailUrlString", "confirmDelete", "enableThirdParty", "externalShare", "externalShareSocialMedia", "storeOriginalFiles", "keepNewFileName", "displayFileExtension", "convertNotify", "hideConfirmCancelOperation", "hideConfirmConvertSave", "hideConfirmConvertOpen", "hideConfirmRoomLifetime", "defaultOrder", "forcesave", "storeForcesave", "recentSection", "favoritesSection", "templatesSection", "downloadTarGz", "automaticallyCleanUp", "canSearchByContent", "defaultSharingAccessRights", "maxUploadThreadCount", "chunkUploadSize", "openEditorInSameTab"]
+    __properties: ClassVar[List[str]] = ["extsImagePreviewed", "extsMediaPreviewed", "extsWebPreviewed", "extsWebEdited", "extsWebEncrypt", "extsWebReviewed", "extsWebCustomFilterEditing", "extsWebRestrictedEditing", "extsWebCommented", "extsWebTemplate", "extsMustConvert", "extsConvertible", "extsUploadable", "extsArchive", "extsVideo", "extsAudio", "extsImage", "extsSpreadsheet", "extsPresentation", "extsDocument", "extsDiagram", "internalFormats", "masterFormExtension", "paramVersion", "paramOutType", "fileDownloadUrlString", "fileWebViewerUrlString", "fileWebViewerExternalUrlString", "fileWebEditorUrlString", "fileWebEditorExternalUrlString", "fileRedirectPreviewUrlString", "fileThumbnailUrlString", "confirmDelete", "enableThirdParty", "externalShare", "externalShareSocialMedia", "storeOriginalFiles", "keepNewFileName", "displayFileExtension", "convertNotify", "hideConfirmCancelOperation", "hideConfirmConvertSave", "hideConfirmConvertOpen", "hideConfirmRoomLifetime", "defaultOrder", "forcesave", "storeForcesave", "recentSection", "favoritesSection", "templatesSection", "downloadTarGz", "automaticallyCleanUp", "canSearchByContent", "defaultSharingAccessRights", "maxUploadThreadCount", "chunkUploadSize", "openEditorInSameTab"]
 
     @field_validator('default_sharing_access_rights')
     def default_sharing_access_rights_validate_enum(cls, value):
@@ -201,11 +200,6 @@ class FilesSettingsDto(BaseModel):
         # and model_fields_set contains the field
         if self.exts_web_template is None and "exts_web_template" in self.model_fields_set:
             _dict['extsWebTemplate'] = None
-
-        # set to None if exts_co_authoring (nullable) is None
-        # and model_fields_set contains the field
-        if self.exts_co_authoring is None and "exts_co_authoring" in self.model_fields_set:
-            _dict['extsCoAuthoring'] = None
 
         # set to None if exts_must_convert (nullable) is None
         # and model_fields_set contains the field
@@ -345,7 +339,6 @@ class FilesSettingsDto(BaseModel):
             "extsWebRestrictedEditing": obj.get("extsWebRestrictedEditing"),
             "extsWebCommented": obj.get("extsWebCommented"),
             "extsWebTemplate": obj.get("extsWebTemplate"),
-            "extsCoAuthoring": obj.get("extsCoAuthoring"),
             "extsMustConvert": obj.get("extsMustConvert"),
             "extsConvertible": obj.get("extsConvertible"),
             "extsUploadable": obj.get("extsUploadable"),

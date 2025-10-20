@@ -35,11 +35,12 @@ class EmailValidationKeyModel(BaseModel):
     key: Optional[StrictStr] = Field(default=None, description="The email validation key.")
     empl_type: Optional[EmployeeType] = Field(default=None, alias="emplType")
     email: Optional[StrictStr] = Field(default=None, description="The email address.")
+    enc_email: Optional[StrictStr] = Field(default=None, description="The encrypted email address.", alias="encEmail")
     ui_d: Optional[StrictStr] = Field(default=None, description="The user ID.", alias="uiD")
     type: Optional[ConfirmType] = None
     first: Optional[StrictStr] = Field(default=None, description="Specifies whether it is the first time account access or not.")
     room_id: Optional[StrictStr] = Field(default=None, description="The room ID.", alias="roomId")
-    __properties: ClassVar[List[str]] = ["key", "emplType", "email", "uiD", "type", "first", "roomId"]
+    __properties: ClassVar[List[str]] = ["key", "emplType", "email", "encEmail", "uiD", "type", "first", "roomId"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -90,6 +91,11 @@ class EmailValidationKeyModel(BaseModel):
         if self.email is None and "email" in self.model_fields_set:
             _dict['email'] = None
 
+        # set to None if enc_email (nullable) is None
+        # and model_fields_set contains the field
+        if self.enc_email is None and "enc_email" in self.model_fields_set:
+            _dict['encEmail'] = None
+
         # set to None if ui_d (nullable) is None
         # and model_fields_set contains the field
         if self.ui_d is None and "ui_d" in self.model_fields_set:
@@ -121,6 +127,7 @@ class EmailValidationKeyModel(BaseModel):
             "key": obj.get("key"),
             "emplType": obj.get("emplType"),
             "email": obj.get("email"),
+            "encEmail": obj.get("encEmail"),
             "uiD": obj.get("uiD"),
             "type": obj.get("type"),
             "first": obj.get("first"),

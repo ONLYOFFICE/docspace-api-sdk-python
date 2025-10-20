@@ -48,6 +48,7 @@ class TFASettingsApi:
         self.api_client = api_client
 
 
+
     @validate_call
     def get_tfa_app_codes(
         self,

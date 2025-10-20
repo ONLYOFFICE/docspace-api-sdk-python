@@ -5,7 +5,7 @@ The parameters for terminating a process or operation.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**is_send_welcome_email** | **bool** | Specifies whether to send a welcome email or not. | [optional] 
+**is_send_welcome_email** | **bool** | Specifies whether to send a welcome email or not. | 
 
 ## Example
 

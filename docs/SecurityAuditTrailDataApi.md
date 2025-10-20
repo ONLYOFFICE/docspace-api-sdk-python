@@ -89,7 +89,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_audit_events_by_filter**
-> AuditEventArrayWrapper get_audit_events_by_filter(user_id=user_id, product_type=product_type, module_type=module_type, action_type=action_type, action=action, entry_type=entry_type, target=target, var_from=var_from, to=to, count=count, start_index=start_index, fields=fields)
+> AuditEventArrayWrapper get_audit_events_by_filter(user_id=user_id, module_type=module_type, action_type=action_type, action=action, entry_type=entry_type, target=target, var_from=var_from, to=to, count=count, start_index=start_index)
 
 Returns a list of the audit events by the parameters specified in the request.
 
@@ -101,8 +101,7 @@ For more information, see [api.onlyoffice.com]().
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **user_id** | **str**| The ID of the user who triggered the audit event. | [optional] 
- **product_type** | [**ProductType**](.md)| The type of product related to the audit event. | [optional] 
- **module_type** | [**ModuleType**](.md)| The module within the product where the audit event occurred. | [optional] 
+ **module_type** | [**LocationType**](.md)| The location where the audit event occurred. | [optional] 
  **action_type** | [**ActionType**](.md)| The type of action performed in the audit event (e.g., Create, Update, Delete). | [optional] 
  **action** | [**MessageAction**](.md)| The specific action that occurred within the audit event. | [optional] 
  **entry_type** | [**EntryType**](.md)| The type of audit entry (e.g., Folder, User, File). | [optional] 
@@ -111,7 +110,6 @@ Name | Type | Description  | Notes
  **to** | [**ApiDateTime**](.md)| The ending date and time for filtering audit events. | [optional] 
  **count** | **int**| The maximum number of audit event records to retrieve. | [optional] 
  **start_index** | **int**| The index of the first audit event record to retrieve in a paged query. | [optional] 
- **fields** | **string**| Comma-separated list of fields to include in the response | [optional] 
 
 ### Return type
 
@@ -130,9 +128,8 @@ from docspace_api_sdk.models.action_type import ActionType
 from docspace_api_sdk.models.api_date_time import ApiDateTime
 from docspace_api_sdk.models.audit_event_array_wrapper import AuditEventArrayWrapper
 from docspace_api_sdk.models.entry_type import EntryType
+from docspace_api_sdk.models.location_type import LocationType
 from docspace_api_sdk.models.message_action import MessageAction
-from docspace_api_sdk.models.module_type import ModuleType
-from docspace_api_sdk.models.product_type import ProductType
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -155,8 +152,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.AuditTrailDataApi(api_client)
     user_id = 'aae1e103-bca5-9fa1-ba8c-42058b4abf28' # str | The ID of the user who triggered the audit event. (optional)
-    product_type = docspace_api_sdk.ProductType() # ProductType | The type of product related to the audit event. (optional)
-    module_type = docspace_api_sdk.ModuleType() # ModuleType | The module within the product where the audit event occurred. (optional)
+    module_type = docspace_api_sdk.LocationType() # LocationType | The location where the audit event occurred. (optional)
     action_type = docspace_api_sdk.ActionType() # ActionType | The type of action performed in the audit event (e.g., Create, Update, Delete). (optional)
     action = docspace_api_sdk.MessageAction() # MessageAction | The specific action that occurred within the audit event. (optional)
     entry_type = docspace_api_sdk.EntryType() # EntryType | The type of audit entry (e.g., Folder, User, File). (optional)
@@ -165,11 +161,10 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     to = docspace_api_sdk.ApiDateTime() # ApiDateTime | The ending date and time for filtering audit events. (optional)
     count = 1234 # int | The maximum number of audit event records to retrieve. (optional)
     start_index = 1234 # int | The index of the first audit event record to retrieve in a paged query. (optional)
-    fields =  # string | Comma-separated list of fields to include in the response (optional)
 
     try:
         # Get filtered audit trail data
-        api_response = api_instance.get_audit_events_by_filter(user_id=user_id, product_type=product_type, module_type=module_type, action_type=action_type, action=action, entry_type=entry_type, target=target, var_from=var_from, to=to, count=count, start_index=start_index, fields=fields)
+        api_response = api_instance.get_audit_events_by_filter(user_id=user_id, module_type=module_type, action_type=action_type, action=action, entry_type=entry_type, target=target, var_from=var_from, to=to, count=count, start_index=start_index)
         print("The response of AuditTrailDataApi->get_audit_events_by_filter:\n")
         pprint(api_response)
     except Exception as e:
@@ -281,7 +276,7 @@ For more information, see [api.onlyoffice.com]().
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **product_type** | [**ProductType**](.md)| The type of product related to the audit trail. | [optional] 
- **module_type** | [**ModuleType**](.md)| The module within the product associated with the audit trail. | [optional] 
+ **module_type** | [**LocationType**](.md)| The location associated with the audit trail. | [optional] 
 
 ### Return type
 
@@ -296,7 +291,7 @@ No authorization required
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.module_type import ModuleType
+from docspace_api_sdk.models.location_type import LocationType
 from docspace_api_sdk.models.object_wrapper import ObjectWrapper
 from docspace_api_sdk.models.product_type import ProductType
 from docspace_api_sdk.rest import ApiException
@@ -312,7 +307,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.AuditTrailDataApi(api_client)
     product_type = docspace_api_sdk.ProductType() # ProductType | The type of product related to the audit trail. (optional)
-    module_type = docspace_api_sdk.ModuleType() # ModuleType | The module within the product associated with the audit trail. (optional)
+    module_type = docspace_api_sdk.LocationType() # LocationType | The location associated with the audit trail. (optional)
 
     try:
         # Get audit trail mappers

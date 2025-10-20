@@ -20,6 +20,7 @@ import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
+from __future__ import annotations
 
 from pydantic import Field, StrictInt, StrictStr
 from typing import Optional
@@ -45,6 +46,11 @@ class LoginHistoryApi:
         if api_client is None:
             api_client = ApiClient.get_default()
         self.api_client = api_client
+        self._fields = None
+
+    def with_fields(self, fields: str) -> LoginHistoryApi:
+        self._fields = fields
+        return self
 
 
     @validate_call
@@ -570,7 +576,6 @@ class LoginHistoryApi:
         to: Annotated[Optional[ApiDateTime], Field(description="The ending date and time for filtering login events.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of login events to retrieve in the query.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The starting index for fetching a subset of login events from the query results.")] = None,
-        fields:  = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -600,8 +605,6 @@ class LoginHistoryApi:
         :type count: int
         :param start_index: The starting index for fetching a subset of login events from the query results.
         :type start_index: int
-        :param fields: Comma-separated list of fields to include in the response
-        :type fields: string
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -631,7 +634,6 @@ class LoginHistoryApi:
             to=to,
             count=count,
             start_index=start_index,
-            fields=fields,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -663,7 +665,6 @@ class LoginHistoryApi:
         to: Annotated[Optional[ApiDateTime], Field(description="The ending date and time for filtering login events.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of login events to retrieve in the query.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The starting index for fetching a subset of login events from the query results.")] = None,
-        fields:  = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -693,8 +694,6 @@ class LoginHistoryApi:
         :type count: int
         :param start_index: The starting index for fetching a subset of login events from the query results.
         :type start_index: int
-        :param fields: Comma-separated list of fields to include in the response
-        :type fields: string
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -724,7 +723,6 @@ class LoginHistoryApi:
             to=to,
             count=count,
             start_index=start_index,
-            fields=fields,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -756,7 +754,6 @@ class LoginHistoryApi:
         to: Annotated[Optional[ApiDateTime], Field(description="The ending date and time for filtering login events.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of login events to retrieve in the query.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The starting index for fetching a subset of login events from the query results.")] = None,
-        fields:  = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -786,8 +783,6 @@ class LoginHistoryApi:
         :type count: int
         :param start_index: The starting index for fetching a subset of login events from the query results.
         :type start_index: int
-        :param fields: Comma-separated list of fields to include in the response
-        :type fields: string
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -817,7 +812,6 @@ class LoginHistoryApi:
             to=to,
             count=count,
             start_index=start_index,
-            fields=fields,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -844,7 +838,6 @@ class LoginHistoryApi:
         to,
         count,
         start_index,
-        fields,
         _request_auth,
         _content_type,
         _headers,
@@ -891,11 +884,9 @@ class LoginHistoryApi:
             
             _query_params.append(('startIndex', start_index))
             
-        if fields is not None:
-            
-            _query_params.append(('fields', fields))
-            
         # process the header parameters
+        if self._fields is not None:
+            _header_params['fields'] = self._fields
         # process the form parameters
         # process the body parameter
 

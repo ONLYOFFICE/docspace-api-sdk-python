@@ -5,7 +5,7 @@ The request parameters for checking the document service location.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**doc_service_url** | **str** | The ONLYOFFICE Docs URL address. | [optional] 
+**doc_service_url** | **str** | The ONLYOFFICE Docs URL address. | 
 **doc_service_url_internal** | **str** | The ONLYOFFICE Docs URL address in the local private network. | [optional] 
 **doc_service_url_portal** | **str** | The ONLYOFFICE Docs URL address. | [optional] 
 **doc_service_signature_secret** | **str** | The signature secret of the ONLYOFFICE Docs. | [optional] 

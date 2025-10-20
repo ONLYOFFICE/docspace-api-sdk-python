@@ -29,9 +29,9 @@ from typing_extensions import Self
 
 class WalletQuantityRequestDto(BaseModel):
     """
-    The request parameters for the wallet payment quantity specifications.
+    The request parameters for specifying wallet payment quantity.
     """ # noqa: E501
-    quantity: Optional[Dict[str, Optional[StrictInt]]] = Field(default=None, description="The mapping of item identifiers with their respective quantities in the payment.")
+    quantity: Optional[Dict[str, Optional[StrictInt]]] = Field(default=None, description="The mapping of item identifiers to their respective quantities in the payment.")
     product_quantity_type: Optional[ProductQuantityType] = Field(default=None, alias="productQuantityType")
     __properties: ClassVar[List[str]] = ["quantity", "productQuantityType"]
 

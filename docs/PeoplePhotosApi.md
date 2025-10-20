@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 
 # **create_member_photo_thumbnails**
-> ThumbnailsDataWrapper create_member_photo_thumbnails(userid, thumbnails_request=thumbnails_request)
+> ThumbnailsDataWrapper create_member_photo_thumbnails(userid, thumbnails_request)
 
 Creates the user photo thumbnails by coordinates of the original image specified in the request.
 
@@ -24,7 +24,7 @@ For more information, see [api.onlyoffice.com]().
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **userid** | **str**| The user ID. | 
- **thumbnails_request** | [**ThumbnailsRequest**](ThumbnailsRequest.md)| The thumbnail request. | [optional] 
+ **thumbnails_request** | [**ThumbnailsRequest**](ThumbnailsRequest.md)| The thumbnail request. | 
 
 ### Return type
 
@@ -63,11 +63,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.PhotosApi(api_client)
     userid = '9846' # str | The user ID.
-    thumbnails_request = docspace_api_sdk.ThumbnailsRequest() # ThumbnailsRequest | The thumbnail request. (optional)
+    thumbnails_request = docspace_api_sdk.ThumbnailsRequest() # ThumbnailsRequest | The thumbnail request.
 
     try:
         # Create photo thumbnails
-        api_response = api_instance.create_member_photo_thumbnails(userid, thumbnails_request=thumbnails_request)
+        api_response = api_instance.create_member_photo_thumbnails(userid, thumbnails_request)
         print("The response of PhotosApi->create_member_photo_thumbnails:\n")
         pprint(api_response)
     except Exception as e:
@@ -252,7 +252,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update_member_photo**
-> ThumbnailsDataWrapper update_member_photo(userid, update_photo_member_request=update_photo_member_request)
+> ThumbnailsDataWrapper update_member_photo(userid, update_photo_member_request)
 
 Updates a photo of the user with the ID specified in the request.
 
@@ -264,7 +264,7 @@ For more information, see [api.onlyoffice.com]().
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **userid** | **str**| The user ID. | 
- **update_photo_member_request** | [**UpdatePhotoMemberRequest**](UpdatePhotoMemberRequest.md)| The request parameters for updating a photo. | [optional] 
+ **update_photo_member_request** | [**UpdatePhotoMemberRequest**](UpdatePhotoMemberRequest.md)| The request parameters for updating a photo. | 
 
 ### Return type
 
@@ -303,11 +303,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.PhotosApi(api_client)
     userid = '9846' # str | The user ID.
-    update_photo_member_request = docspace_api_sdk.UpdatePhotoMemberRequest() # UpdatePhotoMemberRequest | The request parameters for updating a photo. (optional)
+    update_photo_member_request = docspace_api_sdk.UpdatePhotoMemberRequest() # UpdatePhotoMemberRequest | The request parameters for updating a photo.
 
     try:
         # Update a user photo
-        api_response = api_instance.update_member_photo(userid, update_photo_member_request=update_photo_member_request)
+        api_response = api_instance.update_member_photo(userid, update_photo_member_request)
         print("The response of PhotosApi->update_member_photo:\n")
         pprint(api_response)
     except Exception as e:

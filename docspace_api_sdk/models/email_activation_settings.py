@@ -31,7 +31,7 @@ class EmailActivationSettings(BaseModel):
     """
     The email activation settings.
     """ # noqa: E501
-    show: Optional[StrictBool] = Field(default=None, description="Specifies whether the email activation settings is shown or hidden.")
+    show: Optional[StrictBool] = Field(default=None, description="Specifies whether the email activation settings are shown or hidden.")
     last_modified: Optional[datetime] = Field(default=None, alias="lastModified")
     __properties: ClassVar[List[str]] = ["show", "lastModified"]
 

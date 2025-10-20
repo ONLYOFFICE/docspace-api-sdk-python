@@ -45,6 +45,7 @@ class IPRestrictionsApi:
         self.api_client = api_client
 
 
+
     @validate_call
     def get_ip_restrictions(
         self,

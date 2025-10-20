@@ -4,12 +4,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**storage_type** | [**BackupStorageType**](BackupStorageType.md) |  | [optional] 
-**storage_params** | **Dict[str, Optional[str]]** |  | [optional] 
-**cron_params** | [**CronParams**](CronParams.md) |  | [optional] 
+**storage_type** | [**BackupStorageType**](BackupStorageType.md) |  | 
+**storage_params** | **Dict[str, Optional[str]]** |  | 
+**cron_params** | [**CronParams**](CronParams.md) |  | 
 **backups_stored** | **int** |  | [optional] 
-**last_backup_time** | **datetime** |  | [optional] 
-**dump** | **bool** |  | [optional] 
+**last_backup_time** | **datetime** |  | 
+**dump** | **bool** |  | 
 
 ## Example
 

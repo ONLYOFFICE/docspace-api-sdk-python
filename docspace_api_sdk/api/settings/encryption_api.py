@@ -45,6 +45,7 @@ class EncryptionApi:
         self.api_client = api_client
 
 
+
     @validate_call
     def get_storage_encryption_progress(
         self,

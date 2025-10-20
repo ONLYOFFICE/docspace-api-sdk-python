@@ -30,8 +30,8 @@ class TimezonesRequestsDto(BaseModel):
     """
     The request parameters for managing the time zone configurations.
     """ # noqa: E501
-    id: Optional[StrictStr] = Field(default=None, description="The IANA time zone identifier.")
-    display_name: Optional[StrictStr] = Field(default=None, description="The user-friendly name for the time zone.", alias="displayName")
+    id: Optional[StrictStr] = Field(description="The IANA time zone identifier.")
+    display_name: Optional[StrictStr] = Field(description="The user-friendly name for the time zone.", alias="displayName")
     __properties: ClassVar[List[str]] = ["id", "displayName"]
 
     model_config = ConfigDict(
