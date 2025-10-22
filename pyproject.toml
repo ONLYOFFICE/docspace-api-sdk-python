@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "docspace_api_sdk"
-version = "3.5.0"
+version = "3.5.1"
 description = "A simple Python SDK for integrating with the ONLYOFFICE DocSpace API"
 authors = ["Ascensio System SIA <integration@onlyoffice.com>"]
 homepage = "https://www.onlyoffice.com"
