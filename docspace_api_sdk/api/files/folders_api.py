@@ -15,12 +15,11 @@
 #
 
 
-
+from __future__ import annotations
 import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
-from __future__ import annotations
 
 from pydantic import Field, StrictBool, StrictBytes, StrictInt, StrictStr
 from typing import List, Optional, Tuple, Union

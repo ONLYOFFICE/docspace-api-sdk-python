@@ -30,7 +30,7 @@ class FormFillingStatus(int, Enum):
     """
     allowed enum values
     """
-    None = 0
+    None_ = 0
     Draft = 1
     YouTurn = 2
     InProgress = 3

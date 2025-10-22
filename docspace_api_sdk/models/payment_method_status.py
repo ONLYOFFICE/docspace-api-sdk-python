@@ -30,7 +30,7 @@ class PaymentMethodStatus(int, Enum):
     """
     allowed enum values
     """
-    None = 0
+    None_ = 0
     Set = 1
     Expired = 2
 

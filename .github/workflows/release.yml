@@ -20,17 +20,18 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Install build tools
-        run: |
-          python -m pip install --upgrade pip
-          pip install build
+      - name: Install Poetry
+        run: pip install poetry
+
+      - name: Install dependencies
+        run: poetry install --no-root
 
       - name: Build package
-        run: python -m build
+        run: poetry build
 
       - name: Generate Changelog
         run: |
-          awk '/## [0-9]/{p++} p; /## [0-9]/{if (p > 1) exit}' CHANGELOG.md | awk 'NR>2 {print last} {last=$0}' > RELEASE.md
+          awk 'BEGIN {found=0} /^## [0-9]/ {if (!found) {found=1; next} else exit} found {print}' CHANGELOG.md > RELEASE.md
 
       - name: Create Release
         uses: ncipollo/release-action@v1

@@ -595,7 +595,7 @@ conf = docspace_api_sdk.Configuration(
         return "Python SDK Debug Report:\n"\
                "OS: {env}\n"\
                "Python Version: {pyversion}\n"\
-               "SDK Package Version: 3.5.0".\
+               "SDK Package Version: 3.5.1".\
                format(env=sys.platform, pyversion=sys.version)
 
     def get_host_settings(self) -> List[HostSetting]:
@@ -610,7 +610,7 @@ conf = docspace_api_sdk.Configuration(
                 'variables': {
                     'baseUrl': {
                         'description': "Default URL",
-                        'default_value': "http://localhost:8092/",
+                        'default_value': "http://localhost:8092",
                         }
                     }
             }

@@ -30,7 +30,7 @@ class EntryType(int, Enum):
     """
     allowed enum values
     """
-    None = 0
+    None_ = 0
     File = 1
     Folder = 2
     User = 23

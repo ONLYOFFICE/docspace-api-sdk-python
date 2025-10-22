@@ -30,7 +30,7 @@ class ProviderFilter(int, Enum):
     """
     allowed enum values
     """
-    None = 0
+    None_ = 0
     Box = 1
     DropBox = 2
     GoogleDrive = 3

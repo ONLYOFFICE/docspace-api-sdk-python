@@ -30,7 +30,7 @@ class StartFillingMode(int, Enum):
     """
     allowed enum values
     """
-    None = 0
+    None_ = 0
     ShareToFillOut = 1
     StartFilling = 2
 

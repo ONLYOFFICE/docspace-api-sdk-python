@@ -96,8 +96,10 @@ class StorageSettings(BaseStorageSettingsStorageSettings):
             return cls.model_validate(obj)
 
         base_obj = super().from_dict(obj)
+        base_dict = base_obj.model_dump() if hasattr(base_obj, "model_dump") else dict(base_obj or {})
 
-        extra_fields = cls.model_validate({
-        })
-        return cls(**base_obj.model_dump(), **extra_fields)
+        extra_fields = {
+        }
+        all_fields = {**base_dict, **extra_fields}
+        return cls.model_validate(all_fields)
 
