@@ -30,7 +30,7 @@ class ProductType(int, Enum):
     """
     allowed enum values
     """
-    None = 0
+    None_ = 0
     Documents = 2
     Login = 3
     Others = 4

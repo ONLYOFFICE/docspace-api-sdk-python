@@ -291,8 +291,9 @@ class EmployeeFullDto(EmployeeDto):
             return cls.model_validate(obj)
 
         base_obj = super().from_dict(obj)
+        base_dict = base_obj.model_dump() if hasattr(base_obj, "model_dump") else dict(base_obj or {})
 
-        extra_fields = cls.model_validate({
+        extra_fields = {
             "firstName": obj.get("firstName"),
             "lastName": obj.get("lastName"),
             "userName": obj.get("userName"),
@@ -329,6 +330,7 @@ class EmployeeFullDto(EmployeeDto):
             "registrationDate": ApiDateTime.from_dict(obj["registrationDate"]) if obj.get("registrationDate") is not None else None,
             "hasPersonalFolder": obj.get("hasPersonalFolder"),
             "tfaAppEnabled": obj.get("tfaAppEnabled")
-        })
-        return cls(**base_obj.model_dump(), **extra_fields)
+        }
+        all_fields = {**base_dict, **extra_fields}
+        return cls.model_validate(all_fields)
 
