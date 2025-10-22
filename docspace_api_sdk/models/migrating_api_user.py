@@ -120,8 +120,9 @@ class MigratingApiUser(ImportableApiEntity):
             return cls.model_validate(obj)
 
         base_obj = super().from_dict(obj)
+        base_dict = base_obj.model_dump() if hasattr(base_obj, "model_dump") else dict(base_obj or {})
 
-        extra_fields = cls.model_validate({
+        extra_fields = {
             "key": obj.get("key"),
             "email": obj.get("email"),
             "displayName": obj.get("displayName"),
@@ -129,6 +130,7 @@ class MigratingApiUser(ImportableApiEntity):
             "lastName": obj.get("lastName"),
             "userType": obj.get("userType"),
             "migratingFiles": MigratingApiFiles.from_dict(obj["migratingFiles"]) if obj.get("migratingFiles") is not None else None
-        })
-        return cls(**base_obj.model_dump(), **extra_fields)
+        }
+        all_fields = {**base_dict, **extra_fields}
+        return cls.model_validate(all_fields)
 

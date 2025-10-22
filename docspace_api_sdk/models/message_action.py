@@ -311,7 +311,7 @@ class MessageAction(int, Enum):
     RevokeUserClient = 9907
     GenerateAuthorizationCodeToken = 9908
     GeneratePersonalAccessToken = 9909
-    None = -1
+    None_ = -1
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:

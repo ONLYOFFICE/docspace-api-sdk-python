@@ -30,7 +30,7 @@ class ActionType(int, Enum):
     """
     allowed enum values
     """
-    None = 0
+    None_ = 0
     Create = 1
     Update = 2
     Delete = 3

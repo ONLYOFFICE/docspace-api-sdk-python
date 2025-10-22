@@ -330,8 +330,9 @@ class FileDtoInteger(FileEntryDtoInteger):
             return cls.model_validate(obj)
 
         base_obj = super().from_dict(obj)
+        base_dict = base_obj.model_dump() if hasattr(base_obj, "model_dump") else dict(base_obj or {})
 
-        extra_fields = cls.model_validate({
+        extra_fields = {
             "folderId": obj.get("folderId"),
             "version": obj.get("version"),
             "versionGroup": obj.get("versionGroup"),
@@ -361,6 +362,7 @@ class FileDtoInteger(FileEntryDtoInteger):
             "viewAccessibility": FileDtoIntegerAllOfViewAccessibility.from_dict(obj["viewAccessibility"]) if obj.get("viewAccessibility") is not None else None,
             "lastOpened": ApiDateTime.from_dict(obj["lastOpened"]) if obj.get("lastOpened") is not None else None,
             "expired": ApiDateTime.from_dict(obj["expired"]) if obj.get("expired") is not None else None
-        })
-        return cls(**base_obj.model_dump(), **extra_fields)
+        }
+        all_fields = {**base_dict, **extra_fields}
+        return cls.model_validate(all_fields)
 

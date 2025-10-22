@@ -610,7 +610,7 @@ conf = docspace_api_sdk.Configuration(
                 'variables': {
                     'baseUrl': {
                         'description': "Default URL",
-                        'default_value': "http://localhost:8092/",
+                        'default_value': "http://localhost:8092",
                         }
                     }
             }

@@ -111,10 +111,12 @@ class DuplicateRequestDto(FileOperationRequestBaseDto):
             return cls.model_validate(obj)
 
         base_obj = super().from_dict(obj)
+        base_dict = base_obj.model_dump() if hasattr(base_obj, "model_dump") else dict(base_obj or {})
 
-        extra_fields = cls.model_validate({
+        extra_fields = {
             "folderIds": [DuplicateRequestDtoAllOfFolderIds.from_dict(_item) for _item in obj["folderIds"]] if obj.get("folderIds") is not None else None,
             "fileIds": [DuplicateRequestDtoAllOfFileIds.from_dict(_item) for _item in obj["fileIds"]] if obj.get("fileIds") is not None else None
-        })
-        return cls(**base_obj.model_dump(), **extra_fields)
+        }
+        all_fields = {**base_dict, **extra_fields}
+        return cls.model_validate(all_fields)
 

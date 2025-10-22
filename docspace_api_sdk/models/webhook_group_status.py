@@ -30,7 +30,7 @@ class WebhookGroupStatus(int, Enum):
     """
     allowed enum values
     """
-    None = 0
+    None_ = 0
     NotSent = 1
     Status2xx = 2
     Status3xx = 4
