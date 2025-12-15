@@ -24,6 +24,7 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
+from docspace_api_sdk.models.chat_settings import ChatSettings
 from docspace_api_sdk.models.file_share_params import FileShareParams
 from docspace_api_sdk.models.logo_request import LogoRequest
 from docspace_api_sdk.models.room_data_lifetime_dto import RoomDataLifetimeDto
@@ -49,7 +50,8 @@ class CreateRoomRequestDto(BaseModel):
     room_type: RoomType = Field(alias="roomType")
     private: Optional[StrictBool] = Field(default=None, description="Specifies whether the room to be created is private or not.")
     share: Optional[List[FileShareParams]] = Field(default=None, description="The collection of sharing parameters.")
-    __properties: ClassVar[List[str]] = ["title", "quota", "indexing", "denyDownload", "lifetime", "watermark", "logo", "tags", "color", "cover", "roomType", "private", "share"]
+    chat_settings: Optional[ChatSettings] = Field(default=None, alias="chatSettings")
+    __properties: ClassVar[List[str]] = ["title", "quota", "indexing", "denyDownload", "lifetime", "watermark", "logo", "tags", "color", "cover", "roomType", "private", "share", "chatSettings"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -106,6 +108,9 @@ class CreateRoomRequestDto(BaseModel):
                 if _item_share:
                     _items.append(_item_share.to_dict())
             _dict['share'] = _items
+        # override the default output from pydantic by calling `to_dict()` of chat_settings
+        if self.chat_settings:
+            _dict['chatSettings'] = self.chat_settings.to_dict()
         # set to None if title (nullable) is None
         # and model_fields_set contains the field
         if self.title is None and "title" in self.model_fields_set:
@@ -171,7 +176,8 @@ class CreateRoomRequestDto(BaseModel):
             "cover": obj.get("cover"),
             "roomType": obj.get("roomType"),
             "private": obj.get("private"),
-            "share": [FileShareParams.from_dict(_item) for _item in obj["share"]] if obj.get("share") is not None else None
+            "share": [FileShareParams.from_dict(_item) for _item in obj["share"]] if obj.get("share") is not None else None,
+            "chatSettings": ChatSettings.from_dict(obj["chatSettings"]) if obj.get("chatSettings") is not None else None
         })
         return _obj
 

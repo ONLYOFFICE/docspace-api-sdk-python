@@ -44,9 +44,10 @@ class QuotaDto(BaseModel):
     features: Optional[List[TenantQuotaFeatureDto]] = Field(description="The list of tenant quota features.")
     users_quota: Optional[TenantEntityQuotaSettings] = Field(default=None, alias="usersQuota")
     rooms_quota: Optional[TenantEntityQuotaSettings] = Field(default=None, alias="roomsQuota")
+    ai_agents_quota: Optional[TenantEntityQuotaSettings] = Field(default=None, alias="aiAgentsQuota")
     tenant_custom_quota: Optional[TenantQuotaSettings] = Field(default=None, alias="tenantCustomQuota")
     due_date: Optional[datetime] = Field(default=None, description="The due date.", alias="dueDate")
-    __properties: ClassVar[List[str]] = ["id", "title", "price", "nonProfit", "free", "trial", "features", "usersQuota", "roomsQuota", "tenantCustomQuota", "dueDate"]
+    __properties: ClassVar[List[str]] = ["id", "title", "price", "nonProfit", "free", "trial", "features", "usersQuota", "roomsQuota", "aiAgentsQuota", "tenantCustomQuota", "dueDate"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -103,6 +104,9 @@ class QuotaDto(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of rooms_quota
         if self.rooms_quota:
             _dict['roomsQuota'] = self.rooms_quota.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of ai_agents_quota
+        if self.ai_agents_quota:
+            _dict['aiAgentsQuota'] = self.ai_agents_quota.to_dict()
         # override the default output from pydantic by calling `to_dict()` of tenant_custom_quota
         if self.tenant_custom_quota:
             _dict['tenantCustomQuota'] = self.tenant_custom_quota.to_dict()
@@ -143,6 +147,7 @@ class QuotaDto(BaseModel):
             "features": [TenantQuotaFeatureDto.from_dict(_item) for _item in obj["features"]] if obj.get("features") is not None else None,
             "usersQuota": TenantEntityQuotaSettings.from_dict(obj["usersQuota"]) if obj.get("usersQuota") is not None else None,
             "roomsQuota": TenantEntityQuotaSettings.from_dict(obj["roomsQuota"]) if obj.get("roomsQuota") is not None else None,
+            "aiAgentsQuota": TenantEntityQuotaSettings.from_dict(obj["aiAgentsQuota"]) if obj.get("aiAgentsQuota") is not None else None,
             "tenantCustomQuota": TenantQuotaSettings.from_dict(obj["tenantCustomQuota"]) if obj.get("tenantCustomQuota") is not None else None,
             "dueDate": obj.get("dueDate")
         })

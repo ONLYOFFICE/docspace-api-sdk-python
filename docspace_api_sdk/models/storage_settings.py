@@ -64,10 +64,8 @@ class StorageSettings(BaseStorageSettingsStorageSettings):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
-        * OpenAPI `readOnly` fields are excluded.
         """
         excluded_fields: Set[str] = set([
-            "id",
         ])
 
         _dict = self.model_dump(
@@ -102,4 +100,5 @@ class StorageSettings(BaseStorageSettingsStorageSettings):
         }
         all_fields = {**base_dict, **extra_fields}
         return cls.model_validate(all_fields)
+
 

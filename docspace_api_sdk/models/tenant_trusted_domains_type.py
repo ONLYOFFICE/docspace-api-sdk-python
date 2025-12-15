@@ -30,7 +30,7 @@ class TenantTrustedDomainsType(int, Enum):
     """
     allowed enum values
     """
-    None_ = 0
+    None = 0
     Custom = 1
     All = 2
 

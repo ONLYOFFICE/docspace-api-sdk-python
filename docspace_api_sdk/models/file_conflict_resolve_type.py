@@ -22,17 +22,17 @@ from enum import Enum
 from typing_extensions import Self
 
 
-class FileConflictResolveType(int, Enum):
+class FileConflictResolveType(str, Enum):
     """
-    [0 - Skip, 1 - Overwrite, 2 - Duplicate]
+    [Skip - Skip, Overwrite - Overwrite, Duplicate - Duplicate]
     """
 
     """
     allowed enum values
     """
-    Skip = 0
-    Overwrite = 1
-    Duplicate = 2
+    SKIP = 'Skip'
+    OVERWRITE = 'Overwrite'
+    DUPLICATE = 'Duplicate'
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:

@@ -22,33 +22,33 @@ from enum import Enum
 from typing_extensions import Self
 
 
-class ConfirmType(int, Enum):
+class ConfirmType(str, Enum):
     """
-    [0 - Emp invite, 1 - Link invite, 2 - Portal suspend, 3 - Portal continue, 4 - Portal remove, 5 - Dns change, 6 - Portal owner change, 7 - Activation, 8 - Email change, 9 - Email activation, 10 - Password change, 11 - Profile remove, 12 - Phone activation, 13 - Phone auth, 14 - Auth, 15 - Tfa activation, 16 - Tfa auth, 17 - Wizard, 18 - Guest share link]
+    [EmpInvite - Emp invite, LinkInvite - Link invite, PortalSuspend - Portal suspend, PortalContinue - Portal continue, PortalRemove - Portal remove, DnsChange - Dns change, PortalOwnerChange - Portal owner change, Activation - Activation, EmailChange - Email change, EmailActivation - Email activation, PasswordChange - Password change, ProfileRemove - Profile remove, PhoneActivation - Phone activation, PhoneAuth - Phone auth, Auth - Auth, TfaActivation - Tfa activation, TfaAuth - Tfa auth, Wizard - Wizard, GuestShareLink - Guest share link]
     """
 
     """
     allowed enum values
     """
-    EmpInvite = 0
-    LinkInvite = 1
-    PortalSuspend = 2
-    PortalContinue = 3
-    PortalRemove = 4
-    DnsChange = 5
-    PortalOwnerChange = 6
-    Activation = 7
-    EmailChange = 8
-    EmailActivation = 9
-    PasswordChange = 10
-    ProfileRemove = 11
-    PhoneActivation = 12
-    PhoneAuth = 13
-    Auth = 14
-    TfaActivation = 15
-    TfaAuth = 16
-    Wizard = 17
-    GuestShareLink = 18
+    EMPINVITE = 'EmpInvite'
+    LINKINVITE = 'LinkInvite'
+    PORTALSUSPEND = 'PortalSuspend'
+    PORTALCONTINUE = 'PortalContinue'
+    PORTALREMOVE = 'PortalRemove'
+    DNSCHANGE = 'DnsChange'
+    PORTALOWNERCHANGE = 'PortalOwnerChange'
+    ACTIVATION = 'Activation'
+    EMAILCHANGE = 'EmailChange'
+    EMAILACTIVATION = 'EmailActivation'
+    PASSWORDCHANGE = 'PasswordChange'
+    PROFILEREMOVE = 'ProfileRemove'
+    PHONEACTIVATION = 'PhoneActivation'
+    PHONEAUTH = 'PhoneAuth'
+    AUTH = 'Auth'
+    TFAACTIVATION = 'TfaActivation'
+    TFAAUTH = 'TfaAuth'
+    WIZARD = 'Wizard'
+    GUESTSHARELINK = 'GuestShareLink'
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:

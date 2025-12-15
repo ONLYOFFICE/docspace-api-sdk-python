@@ -94,6 +94,12 @@ class FileEntryDtoInteger(FileEntryBaseDto):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of shared_by
+        if self.shared_by:
+            _dict['sharedBy'] = self.shared_by.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of owned_by
+        if self.owned_by:
+            _dict['ownedBy'] = self.owned_by.to_dict()
         # override the default output from pydantic by calling `to_dict()` of created
         if self.created:
             _dict['created'] = self.created.to_dict()
@@ -227,4 +233,5 @@ class FileEntryDtoInteger(FileEntryBaseDto):
         }
         all_fields = {**base_dict, **extra_fields}
         return cls.model_validate(all_fields)
+
 

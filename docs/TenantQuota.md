@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **price_currency_symbol** | **str** | The tenant price currency symbol. | [optional] 
 **price_iso_currency_symbol** | **str** | The tenant price three-character ISO 4217 currency symbol. | [optional] 
 **product_id** | **str** | The tenant product ID. | [optional] 
+**service_name** | **str** | The service name. | [optional] 
 **visible** | **bool** | Specifies if the tenant quota is visible or not. | [optional] 
 **wallet** | **bool** | Specifies if the tenant quota applies to the wallet or not | [optional] 
 **due_date** | **datetime** | The quota due date. | [optional] 
@@ -41,6 +42,7 @@ Name | Type | Description | Notes
 **year** | **bool** | Specifies if the tenant quota is yearly subscription or not. | [optional] 
 **count_free_backup** | **int** | The number of free backups within a month. | [optional] 
 **backup** | **bool** | Specifies if the backup anabled as a wallet service or not. | [optional] 
+**count_ai_agent** | **int** | The number of AI agents. | [optional] 
 
 ## Example
 

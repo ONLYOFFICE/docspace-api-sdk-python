@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **tags** | **List[str]** | The list of tags. | [optional] 
 **color** | **str** | The room color. | [optional] 
 **cover** | **str** | The room cover. | [optional] 
+**chat_settings** | [**ChatSettings**](ChatSettings.md) |  | [optional] 
 
 ## Example
 

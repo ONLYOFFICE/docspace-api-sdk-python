@@ -75,8 +75,9 @@ class SharingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ExternalShareWrapper:
-        """apply_external_share_password
+        """Apply external data password
 
+        Applies a password specified in the request to get the external data.
 
         :param key: The unique document identifier. (required)
         :type key: str
@@ -146,8 +147,9 @@ class SharingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[ExternalShareWrapper]:
-        """apply_external_share_password
+        """Apply external data password
 
+        Applies a password specified in the request to get the external data.
 
         :param key: The unique document identifier. (required)
         :type key: str
@@ -217,8 +219,9 @@ class SharingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """apply_external_share_password
+        """Apply external data password
 
+        Applies a password specified in the request to get the external data.
 
         :param key: The unique document identifier. (required)
         :type key: str
@@ -362,8 +365,9 @@ class SharingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FileEntryBaseArrayWrapper:
-        """change_file_owner
+        """Change the file owner
 
+        Changes the owner of the file with the ID specified in the request.
 
         :param change_owner_request_dto:
         :type change_owner_request_dto: ChangeOwnerRequestDto
@@ -399,6 +403,7 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileEntryBaseArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -428,8 +433,9 @@ class SharingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FileEntryBaseArrayWrapper]:
-        """change_file_owner
+        """Change the file owner
 
+        Changes the owner of the file with the ID specified in the request.
 
         :param change_owner_request_dto:
         :type change_owner_request_dto: ChangeOwnerRequestDto
@@ -465,6 +471,7 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileEntryBaseArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -494,8 +501,9 @@ class SharingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """change_file_owner
+        """Change the file owner
 
+        Changes the owner of the file with the ID specified in the request.
 
         :param change_owner_request_dto:
         :type change_owner_request_dto: ChangeOwnerRequestDto
@@ -531,6 +539,7 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileEntryBaseArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -595,6 +604,12 @@ class SharingApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
 
         return self.api_client.param_serialize(
@@ -634,8 +649,9 @@ class SharingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ExternalShareWrapper:
-        """get_external_share_data
+        """Get the external data
 
+        Returns the external data by the key specified in the request.
 
         :param key: The unique key of the external shared data. (required)
         :type key: str
@@ -708,8 +724,9 @@ class SharingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[ExternalShareWrapper]:
-        """get_external_share_data
+        """Get the external data
 
+        Returns the external data by the key specified in the request.
 
         :param key: The unique key of the external shared data. (required)
         :type key: str
@@ -782,8 +799,9 @@ class SharingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_external_share_data
+        """Get the external data
 
+        Returns the external data by the key specified in the request.
 
         :param key: The unique key of the external shared data. (required)
         :type key: str
@@ -925,8 +943,9 @@ class SharingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FileShareArrayWrapper:
-        """get_file_security_info
+        """Get the shared file information
 
+        Returns the detailed information about the shared file with the ID specified in the request.
 
         :param id: The file unique identifier. (required)
         :type id: int
@@ -968,6 +987,7 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -999,8 +1019,9 @@ class SharingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FileShareArrayWrapper]:
-        """get_file_security_info
+        """Get the shared file information
 
+        Returns the detailed information about the shared file with the ID specified in the request.
 
         :param id: The file unique identifier. (required)
         :type id: int
@@ -1042,6 +1063,7 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1073,8 +1095,9 @@ class SharingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_file_security_info
+        """Get the shared file information
 
+        Returns the detailed information about the shared file with the ID specified in the request.
 
         :param id: The file unique identifier. (required)
         :type id: int
@@ -1116,6 +1139,7 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1177,6 +1201,12 @@ class SharingApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
 
         return self.api_client.param_serialize(
@@ -1216,8 +1246,9 @@ class SharingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FileShareArrayWrapper:
-        """get_folder_security_info
+        """Get the shared folder information
 
+        Returns the detailed information about the shared folder with the ID specified in the request.
 
         :param id: The folder unique identifier. (required)
         :type id: int
@@ -1259,6 +1290,7 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1290,8 +1322,9 @@ class SharingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FileShareArrayWrapper]:
-        """get_folder_security_info
+        """Get the shared folder information
 
+        Returns the detailed information about the shared folder with the ID specified in the request.
 
         :param id: The folder unique identifier. (required)
         :type id: int
@@ -1333,6 +1366,7 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1364,8 +1398,9 @@ class SharingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_folder_security_info
+        """Get the shared folder information
 
+        Returns the detailed information about the shared folder with the ID specified in the request.
 
         :param id: The folder unique identifier. (required)
         :type id: int
@@ -1407,6 +1442,7 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1468,6 +1504,12 @@ class SharingApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
 
         return self.api_client.param_serialize(
@@ -1509,8 +1551,9 @@ class SharingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> GroupMemberSecurityRequestArrayWrapper:
-        """get_groups_members_with_file_security
+        """Get group members with security information
 
+        Returns the group members with their file security information.
 
         :param file_id: The file ID. (required)
         :type file_id: int
@@ -1558,6 +1601,7 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupMemberSecurityRequestArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1591,8 +1635,9 @@ class SharingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[GroupMemberSecurityRequestArrayWrapper]:
-        """get_groups_members_with_file_security
+        """Get group members with security information
 
+        Returns the group members with their file security information.
 
         :param file_id: The file ID. (required)
         :type file_id: int
@@ -1640,6 +1685,7 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupMemberSecurityRequestArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1673,8 +1719,9 @@ class SharingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_groups_members_with_file_security
+        """Get group members with security information
 
+        Returns the group members with their file security information.
 
         :param file_id: The file ID. (required)
         :type file_id: int
@@ -1722,6 +1769,7 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupMemberSecurityRequestArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1791,6 +1839,12 @@ class SharingApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
 
         return self.api_client.param_serialize(
@@ -1832,8 +1886,9 @@ class SharingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> GroupMemberSecurityRequestArrayWrapper:
-        """get_groups_members_with_folder_security
+        """Get group members with security information
 
+        Returns the group members with their folder security information.
 
         :param folder_id: The folder ID. (required)
         :type folder_id: int
@@ -1881,6 +1936,7 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupMemberSecurityRequestArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1914,8 +1970,9 @@ class SharingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[GroupMemberSecurityRequestArrayWrapper]:
-        """get_groups_members_with_folder_security
+        """Get group members with security information
 
+        Returns the group members with their folder security information.
 
         :param folder_id: The folder ID. (required)
         :type folder_id: int
@@ -1963,6 +2020,7 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupMemberSecurityRequestArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1996,8 +2054,9 @@ class SharingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_groups_members_with_folder_security
+        """Get group members with security information
 
+        Returns the group members with their folder security information.
 
         :param folder_id: The folder ID. (required)
         :type folder_id: int
@@ -2045,6 +2104,7 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupMemberSecurityRequestArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2114,6 +2174,12 @@ class SharingApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
 
         return self.api_client.param_serialize(
@@ -2151,8 +2217,9 @@ class SharingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FileShareArrayWrapper:
-        """get_security_info
+        """Get the sharing rights
 
+        Returns the sharing rights for all the files and folders specified in the request.
 
         :param base_batch_request_dto:
         :type base_batch_request_dto: BaseBatchRequestDto
@@ -2188,6 +2255,7 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2217,8 +2285,9 @@ class SharingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FileShareArrayWrapper]:
-        """get_security_info
+        """Get the sharing rights
 
+        Returns the sharing rights for all the files and folders specified in the request.
 
         :param base_batch_request_dto:
         :type base_batch_request_dto: BaseBatchRequestDto
@@ -2254,6 +2323,7 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2283,8 +2353,9 @@ class SharingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_security_info
+        """Get the sharing rights
 
+        Returns the sharing rights for all the files and folders specified in the request.
 
         :param base_batch_request_dto:
         :type base_batch_request_dto: BaseBatchRequestDto
@@ -2320,6 +2391,7 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2384,6 +2456,12 @@ class SharingApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
 
         return self.api_client.param_serialize(
@@ -2421,8 +2499,9 @@ class SharingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> MentionWrapperArrayWrapper:
-        """get_shared_users
+        """Get user access rights by file ID
 
+        Returns a list of users with their access rights to the file with the ID specified in the request.
 
         :param file_id: The file unique identifier. (required)
         :type file_id: int
@@ -2458,6 +2537,7 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "MentionWrapperArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2487,8 +2567,9 @@ class SharingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[MentionWrapperArrayWrapper]:
-        """get_shared_users
+        """Get user access rights by file ID
 
+        Returns a list of users with their access rights to the file with the ID specified in the request.
 
         :param file_id: The file unique identifier. (required)
         :type file_id: int
@@ -2524,6 +2605,7 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "MentionWrapperArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2553,8 +2635,9 @@ class SharingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_shared_users
+        """Get user access rights by file ID
 
+        Returns a list of users with their access rights to the file with the ID specified in the request.
 
         :param file_id: The file unique identifier. (required)
         :type file_id: int
@@ -2590,6 +2673,7 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "MentionWrapperArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2641,6 +2725,12 @@ class SharingApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
 
         return self.api_client.param_serialize(
@@ -2678,8 +2768,9 @@ class SharingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> BooleanWrapper:
-        """remove_security_info
+        """Remove the sharing rights
 
+        Removes the sharing rights from all the files and folders specified in the request.
 
         :param base_batch_request_dto:
         :type base_batch_request_dto: BaseBatchRequestDto
@@ -2715,6 +2806,7 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2744,8 +2836,9 @@ class SharingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[BooleanWrapper]:
-        """remove_security_info
+        """Remove the sharing rights
 
+        Removes the sharing rights from all the files and folders specified in the request.
 
         :param base_batch_request_dto:
         :type base_batch_request_dto: BaseBatchRequestDto
@@ -2781,6 +2874,7 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2810,8 +2904,9 @@ class SharingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """remove_security_info
+        """Remove the sharing rights
 
+        Removes the sharing rights from all the files and folders specified in the request.
 
         :param base_batch_request_dto:
         :type base_batch_request_dto: BaseBatchRequestDto
@@ -2847,6 +2942,7 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2911,6 +3007,12 @@ class SharingApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
 
         return self.api_client.param_serialize(
@@ -2949,8 +3051,9 @@ class SharingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> AceShortWrapperArrayWrapper:
-        """send_editor_notify
+        """Send the mention message
 
+        Sends a message to the users who are mentioned in the file with the ID specified in the request.
 
         :param file_id: The file ID with the mention message. (required)
         :type file_id: int
@@ -2989,6 +3092,7 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AceShortWrapperArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3019,8 +3123,9 @@ class SharingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[AceShortWrapperArrayWrapper]:
-        """send_editor_notify
+        """Send the mention message
 
+        Sends a message to the users who are mentioned in the file with the ID specified in the request.
 
         :param file_id: The file ID with the mention message. (required)
         :type file_id: int
@@ -3059,6 +3164,7 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AceShortWrapperArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3089,8 +3195,9 @@ class SharingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """send_editor_notify
+        """Send the mention message
 
+        Sends a message to the users who are mentioned in the file with the ID specified in the request.
 
         :param file_id: The file ID with the mention message. (required)
         :type file_id: int
@@ -3129,6 +3236,7 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AceShortWrapperArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3196,6 +3304,12 @@ class SharingApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
 
         return self.api_client.param_serialize(
@@ -3234,8 +3348,9 @@ class SharingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FileShareArrayWrapper:
-        """set_file_security_info
+        """Share a file
 
+        Sets the sharing settings to a file with the ID specified in the request.
 
         :param file_id: The file ID. (required)
         :type file_id: int
@@ -3274,6 +3389,7 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3304,8 +3420,9 @@ class SharingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FileShareArrayWrapper]:
-        """set_file_security_info
+        """Share a file
 
+        Sets the sharing settings to a file with the ID specified in the request.
 
         :param file_id: The file ID. (required)
         :type file_id: int
@@ -3344,6 +3461,7 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3374,8 +3492,9 @@ class SharingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """set_file_security_info
+        """Share a file
 
+        Sets the sharing settings to a file with the ID specified in the request.
 
         :param file_id: The file ID. (required)
         :type file_id: int
@@ -3414,6 +3533,7 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3481,6 +3601,12 @@ class SharingApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
 
         return self.api_client.param_serialize(
@@ -3519,8 +3645,9 @@ class SharingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FileShareArrayWrapper:
-        """set_folder_security_info
+        """Share a folder
 
+        Sets the sharing settings to a folder with the ID specified in the request.
 
         :param folder_id: The folder ID. (required)
         :type folder_id: int
@@ -3559,6 +3686,7 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3589,8 +3717,9 @@ class SharingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FileShareArrayWrapper]:
-        """set_folder_security_info
+        """Share a folder
 
+        Sets the sharing settings to a folder with the ID specified in the request.
 
         :param folder_id: The folder ID. (required)
         :type folder_id: int
@@ -3629,6 +3758,7 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3659,8 +3789,9 @@ class SharingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """set_folder_security_info
+        """Share a folder
 
+        Sets the sharing settings to a folder with the ID specified in the request.
 
         :param folder_id: The folder ID. (required)
         :type folder_id: int
@@ -3699,6 +3830,7 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3766,6 +3898,12 @@ class SharingApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
 
         return self.api_client.param_serialize(
@@ -3803,8 +3941,9 @@ class SharingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FileShareArrayWrapper:
-        """set_security_info
+        """Set the sharing rights
 
+        Sets the sharing rights to all the files and folders specified in the request.
 
         :param security_info_request_dto:
         :type security_info_request_dto: SecurityInfoRequestDto
@@ -3840,6 +3979,7 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3869,8 +4009,9 @@ class SharingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FileShareArrayWrapper]:
-        """set_security_info
+        """Set the sharing rights
 
+        Sets the sharing rights to all the files and folders specified in the request.
 
         :param security_info_request_dto:
         :type security_info_request_dto: SecurityInfoRequestDto
@@ -3906,6 +4047,7 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3935,8 +4077,9 @@ class SharingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """set_security_info
+        """Set the sharing rights
 
+        Sets the sharing rights to all the files and folders specified in the request.
 
         :param security_info_request_dto:
         :type security_info_request_dto: SecurityInfoRequestDto
@@ -3972,6 +4115,7 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4036,6 +4180,12 @@ class SharingApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
 
         return self.api_client.param_serialize(

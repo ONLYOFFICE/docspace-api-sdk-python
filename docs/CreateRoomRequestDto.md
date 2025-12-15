@@ -18,6 +18,7 @@ Name | Type | Description | Notes
 **room_type** | [**RoomType**](RoomType.md) |  | 
 **private** | **bool** | Specifies whether the room to be created is private or not. | [optional] 
 **share** | [**List[FileShareParams]**](FileShareParams.md) | The collection of sharing parameters. | [optional] 
+**chat_settings** | [**ChatSettings**](ChatSettings.md) |  | [optional] 
 
 ## Example
 

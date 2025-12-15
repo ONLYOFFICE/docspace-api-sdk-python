@@ -34,7 +34,8 @@ class UserConfig(BaseModel):
     name: Optional[StrictStr] = Field(default=None, description="The full name of the user.")
     image: Optional[StrictStr] = Field(default=None, description="The path to the user's avatar.")
     roles: Optional[List[StrictStr]] = Field(default=None, description="Roles")
-    __properties: ClassVar[List[str]] = ["id", "name", "image", "roles"]
+    customer_id: Optional[StrictStr] = Field(default=None, alias="customerId")
+    __properties: ClassVar[List[str]] = ["id", "name", "image", "roles", "customerId"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -95,6 +96,11 @@ class UserConfig(BaseModel):
         if self.roles is None and "roles" in self.model_fields_set:
             _dict['roles'] = None
 
+        # set to None if customer_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.customer_id is None and "customer_id" in self.model_fields_set:
+            _dict['customerId'] = None
+
         return _dict
 
     @classmethod
@@ -111,7 +117,8 @@ class UserConfig(BaseModel):
             "id": obj.get("id"),
             "name": obj.get("name"),
             "image": obj.get("image"),
-            "roles": obj.get("roles")
+            "roles": obj.get("roles"),
+            "customerId": obj.get("customerId")
         })
         return _obj
 

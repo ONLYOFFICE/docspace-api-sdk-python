@@ -42,8 +42,8 @@ class TenantWalletServiceSettings(BaseModel):
             return value
 
         for i in value:
-            if i not in set([-12, -11]):
-                raise ValueError("each list item must be one of (-12, -11)")
+            if i not in set([-14, -13, -12, -11]):
+                raise ValueError("each list item must be one of (-14, -13, -12, -11)")
         return value
 
     model_config = ConfigDict(

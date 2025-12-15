@@ -36,7 +36,9 @@ from docspace_api_sdk.models.file_status import FileStatus
 from docspace_api_sdk.models.file_type import FileType
 from docspace_api_sdk.models.folder_type import FolderType
 from docspace_api_sdk.models.form_filling_status import FormFillingStatus
+from docspace_api_sdk.models.size import Size
 from docspace_api_sdk.models.thumbnail import Thumbnail
+from docspace_api_sdk.models.vectorization_status import VectorizationStatus
 from typing import Union, Any, List, Set, TYPE_CHECKING, Optional, Dict
 from typing_extensions import Literal, Self
 from pydantic import Field
@@ -76,6 +78,8 @@ class FileDtoInteger(FileEntryDtoInteger):
     view_accessibility: Optional[FileDtoIntegerAllOfViewAccessibility] = Field(default=None, alias="viewAccessibility")
     last_opened: Optional[ApiDateTime] = Field(default=None, alias="lastOpened")
     expired: Optional[ApiDateTime] = None
+    vectorization_status: Optional[VectorizationStatus] = Field(default=None, alias="vectorizationStatus")
+    dimensions: Optional[Size] = None
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -115,6 +119,12 @@ class FileDtoInteger(FileEntryDtoInteger):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of shared_by
+        if self.shared_by:
+            _dict['sharedBy'] = self.shared_by.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of owned_by
+        if self.owned_by:
+            _dict['ownedBy'] = self.owned_by.to_dict()
         # override the default output from pydantic by calling `to_dict()` of created
         if self.created:
             _dict['created'] = self.created.to_dict()
@@ -154,6 +164,9 @@ class FileDtoInteger(FileEntryDtoInteger):
         # override the default output from pydantic by calling `to_dict()` of expired
         if self.expired:
             _dict['expired'] = self.expired.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of dimensions
+        if self.dimensions:
+            _dict['dimensions'] = self.dimensions.to_dict()
         # set to None if title (nullable) is None
         # and model_fields_set contains the field
         if self.title is None and "title" in self.model_fields_set:
@@ -361,8 +374,11 @@ class FileDtoInteger(FileEntryDtoInteger):
             "draftLocation": DraftLocationInteger.from_dict(obj["draftLocation"]) if obj.get("draftLocation") is not None else None,
             "viewAccessibility": FileDtoIntegerAllOfViewAccessibility.from_dict(obj["viewAccessibility"]) if obj.get("viewAccessibility") is not None else None,
             "lastOpened": ApiDateTime.from_dict(obj["lastOpened"]) if obj.get("lastOpened") is not None else None,
-            "expired": ApiDateTime.from_dict(obj["expired"]) if obj.get("expired") is not None else None
+            "expired": ApiDateTime.from_dict(obj["expired"]) if obj.get("expired") is not None else None,
+            "vectorizationStatus": obj.get("vectorizationStatus"),
+            "dimensions": Size.from_dict(obj["dimensions"]) if obj.get("dimensions") is not None else None
         }
         all_fields = {**base_dict, **extra_fields}
         return cls.model_validate(all_fields)
+
 

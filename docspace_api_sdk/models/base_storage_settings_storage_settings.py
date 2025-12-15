@@ -33,9 +33,8 @@ class BaseStorageSettingsStorageSettings(BaseModel):
     """ # noqa: E501
     module: Optional[StrictStr] = None
     props: Optional[Dict[str, Optional[StrictStr]]] = None
-    id: Optional[StrictStr] = None
     last_modified: Optional[datetime] = Field(default=None, alias="lastModified")
-    __properties: ClassVar[List[str]] = ["module", "props", "id", "lastModified"]
+    __properties: ClassVar[List[str]] = ["module", "props", "lastModified"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -67,10 +66,8 @@ class BaseStorageSettingsStorageSettings(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
-        * OpenAPI `readOnly` fields are excluded.
         """
         excluded_fields: Set[str] = set([
-            "id",
         ])
 
         _dict = self.model_dump(
@@ -103,7 +100,6 @@ class BaseStorageSettingsStorageSettings(BaseModel):
         _obj = cls.model_validate({
             "module": obj.get("module"),
             "props": obj.get("props"),
-            "id": obj.get("id"),
             "lastModified": obj.get("lastModified")
         })
         return _obj

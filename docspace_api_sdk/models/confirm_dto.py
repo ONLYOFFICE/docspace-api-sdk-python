@@ -21,7 +21,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from docspace_api_sdk.models.validation_result import ValidationResult
 from typing import Optional, Set
@@ -35,7 +35,8 @@ class ConfirmDto(BaseModel):
     room_id: Optional[StrictStr] = Field(default=None, description="The confirmation room ID.", alias="roomId")
     title: Optional[StrictStr] = Field(default=None, description="The confirmation title.")
     email: Optional[StrictStr] = Field(default=None, description="The confirmation email.")
-    __properties: ClassVar[List[str]] = ["result", "roomId", "title", "email"]
+    is_agent: Optional[StrictBool] = Field(default=None, description="The confirmation is agent.", alias="isAgent")
+    __properties: ClassVar[List[str]] = ["result", "roomId", "title", "email", "isAgent"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -107,7 +108,8 @@ class ConfirmDto(BaseModel):
             "result": obj.get("result"),
             "roomId": obj.get("roomId"),
             "title": obj.get("title"),
-            "email": obj.get("email")
+            "email": obj.get("email"),
+            "isAgent": obj.get("isAgent")
         })
         return _obj
 

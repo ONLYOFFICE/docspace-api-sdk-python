@@ -15,6 +15,7 @@
 #
 
 
+
 from __future__ import annotations
 import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
@@ -1515,6 +1516,7 @@ class ProfilesApi:
     def get_profile_by_email(
         self,
         email: Annotated[Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]], Field(description="The user email address.")] = None,
+        encemail: Annotated[Optional[StrictStr], Field(description="The user encrypted email address.")] = None,
         culture: Annotated[Optional[StrictStr], Field(description="Culture")] = None,
         _request_timeout: Union[
             None,
@@ -1535,6 +1537,8 @@ class ProfilesApi:
 
         :param email: The user email address.
         :type email: str
+        :param encemail: The user encrypted email address.
+        :type encemail: str
         :param culture: Culture
         :type culture: str
         :param _request_timeout: timeout setting for this request. If one
@@ -1561,6 +1565,7 @@ class ProfilesApi:
 
         _param = self._get_profile_by_email_serialize(
             email=email,
+            encemail=encemail,
             culture=culture,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1588,6 +1593,7 @@ class ProfilesApi:
     def get_profile_by_email_with_http_info(
         self,
         email: Annotated[Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]], Field(description="The user email address.")] = None,
+        encemail: Annotated[Optional[StrictStr], Field(description="The user encrypted email address.")] = None,
         culture: Annotated[Optional[StrictStr], Field(description="Culture")] = None,
         _request_timeout: Union[
             None,
@@ -1608,6 +1614,8 @@ class ProfilesApi:
 
         :param email: The user email address.
         :type email: str
+        :param encemail: The user encrypted email address.
+        :type encemail: str
         :param culture: Culture
         :type culture: str
         :param _request_timeout: timeout setting for this request. If one
@@ -1634,6 +1642,7 @@ class ProfilesApi:
 
         _param = self._get_profile_by_email_serialize(
             email=email,
+            encemail=encemail,
             culture=culture,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1661,6 +1670,7 @@ class ProfilesApi:
     def get_profile_by_email_without_preload_content(
         self,
         email: Annotated[Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]], Field(description="The user email address.")] = None,
+        encemail: Annotated[Optional[StrictStr], Field(description="The user encrypted email address.")] = None,
         culture: Annotated[Optional[StrictStr], Field(description="Culture")] = None,
         _request_timeout: Union[
             None,
@@ -1681,6 +1691,8 @@ class ProfilesApi:
 
         :param email: The user email address.
         :type email: str
+        :param encemail: The user encrypted email address.
+        :type encemail: str
         :param culture: Culture
         :type culture: str
         :param _request_timeout: timeout setting for this request. If one
@@ -1707,6 +1719,7 @@ class ProfilesApi:
 
         _param = self._get_profile_by_email_serialize(
             email=email,
+            encemail=encemail,
             culture=culture,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1729,6 +1742,7 @@ class ProfilesApi:
     def _get_profile_by_email_serialize(
         self,
         email,
+        encemail,
         culture,
         _request_auth,
         _content_type,
@@ -1755,6 +1769,10 @@ class ProfilesApi:
         if email is not None:
             
             _query_params.append(('email', email))
+            
+        if encemail is not None:
+            
+            _query_params.append(('encemail', encemail))
             
         if culture is not None:
             

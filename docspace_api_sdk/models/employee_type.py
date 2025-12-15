@@ -22,19 +22,19 @@ from enum import Enum
 from typing_extensions import Self
 
 
-class EmployeeType(int, Enum):
+class EmployeeType(str, Enum):
     """
-    [0 - All, 1 - Room admin, 2 - Guest, 3 - DocSpace admin, 4 - User]
+    [All - All, RoomAdmin - Room admin, Guest - Guest, DocSpaceAdmin - DocSpace admin, User - User]
     """
 
     """
     allowed enum values
     """
-    All = 0
-    RoomAdmin = 1
-    Guest = 2
-    DocSpaceAdmin = 3
-    User = 4
+    ALL = 'All'
+    ROOMADMIN = 'RoomAdmin'
+    GUEST = 'Guest'
+    DOCSPACEADMIN = 'DocSpaceAdmin'
+    USER = 'User'
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:

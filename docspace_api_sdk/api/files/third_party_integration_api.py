@@ -21,7 +21,7 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictInt
+from pydantic import Field, StrictBool, StrictInt
 from typing import Optional
 from typing_extensions import Annotated
 from docspace_api_sdk.models.array_array_wrapper import ArrayArrayWrapper
@@ -69,8 +69,9 @@ class ThirdPartyIntegrationApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> StringWrapper:
-        """delete_third_party
+        """Remove a third-party account
 
+        Removes the third-party storage service account with the ID specified in the request.
 
         :param provider_id: The provider ID. (required)
         :type provider_id: int
@@ -106,6 +107,7 @@ class ThirdPartyIntegrationApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -135,8 +137,9 @@ class ThirdPartyIntegrationApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[StringWrapper]:
-        """delete_third_party
+        """Remove a third-party account
 
+        Removes the third-party storage service account with the ID specified in the request.
 
         :param provider_id: The provider ID. (required)
         :type provider_id: int
@@ -172,6 +175,7 @@ class ThirdPartyIntegrationApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -201,8 +205,9 @@ class ThirdPartyIntegrationApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """delete_third_party
+        """Remove a third-party account
 
+        Removes the third-party storage service account with the ID specified in the request.
 
         :param provider_id: The provider ID. (required)
         :type provider_id: int
@@ -238,6 +243,7 @@ class ThirdPartyIntegrationApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -289,6 +295,12 @@ class ThirdPartyIntegrationApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
 
         return self.api_client.param_serialize(
@@ -312,6 +324,7 @@ class ThirdPartyIntegrationApi:
     @validate_call
     def get_all_providers(
         self,
+        excludewebdav: Annotated[Optional[StrictBool], Field(description="Specifies whether WebDAV resources should be excluded from the result..")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -325,9 +338,12 @@ class ThirdPartyIntegrationApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ProviderArrayWrapper:
-        """get_all_providers
+        """Get all providers
 
+        Returns a list of all providers.   **Note**: Available provider keys: Dropbox, Box, WebDav, OneDrive, GoogleDrive, kDrive, ownCloud, Nextcloud.
 
+        :param excludewebdav: Specifies whether WebDAV resources should be excluded from the result..
+        :type excludewebdav: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -351,6 +367,7 @@ class ThirdPartyIntegrationApi:
         """ # noqa: E501
 
         _param = self._get_all_providers_serialize(
+            excludewebdav=excludewebdav,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -359,6 +376,7 @@ class ThirdPartyIntegrationApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ProviderArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -374,6 +392,7 @@ class ThirdPartyIntegrationApi:
     @validate_call
     def get_all_providers_with_http_info(
         self,
+        excludewebdav: Annotated[Optional[StrictBool], Field(description="Specifies whether WebDAV resources should be excluded from the result..")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -387,9 +406,12 @@ class ThirdPartyIntegrationApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[ProviderArrayWrapper]:
-        """get_all_providers
+        """Get all providers
 
+        Returns a list of all providers.   **Note**: Available provider keys: Dropbox, Box, WebDav, OneDrive, GoogleDrive, kDrive, ownCloud, Nextcloud.
 
+        :param excludewebdav: Specifies whether WebDAV resources should be excluded from the result..
+        :type excludewebdav: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -413,6 +435,7 @@ class ThirdPartyIntegrationApi:
         """ # noqa: E501
 
         _param = self._get_all_providers_serialize(
+            excludewebdav=excludewebdav,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -421,6 +444,7 @@ class ThirdPartyIntegrationApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ProviderArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -436,6 +460,7 @@ class ThirdPartyIntegrationApi:
     @validate_call
     def get_all_providers_without_preload_content(
         self,
+        excludewebdav: Annotated[Optional[StrictBool], Field(description="Specifies whether WebDAV resources should be excluded from the result..")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -449,9 +474,12 @@ class ThirdPartyIntegrationApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_all_providers
+        """Get all providers
 
+        Returns a list of all providers.   **Note**: Available provider keys: Dropbox, Box, WebDav, OneDrive, GoogleDrive, kDrive, ownCloud, Nextcloud.
 
+        :param excludewebdav: Specifies whether WebDAV resources should be excluded from the result..
+        :type excludewebdav: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -475,6 +503,7 @@ class ThirdPartyIntegrationApi:
         """ # noqa: E501
 
         _param = self._get_all_providers_serialize(
+            excludewebdav=excludewebdav,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -483,6 +512,7 @@ class ThirdPartyIntegrationApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ProviderArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -493,6 +523,7 @@ class ThirdPartyIntegrationApi:
 
     def _get_all_providers_serialize(
         self,
+        excludewebdav,
         _request_auth,
         _content_type,
         _headers,
@@ -515,6 +546,10 @@ class ThirdPartyIntegrationApi:
 
         # process the path parameters
         # process the query parameters
+        if excludewebdav is not None:
+            
+            _query_params.append(('excludewebdav', excludewebdav))
+            
         # process the header parameters
         # process the form parameters
         # process the body parameter
@@ -531,6 +566,12 @@ class ThirdPartyIntegrationApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
 
         return self.api_client.param_serialize(
@@ -567,8 +608,9 @@ class ThirdPartyIntegrationApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FolderStringWrapper:
-        """get_backup_third_party_account
+        """Get a third-party account backup
 
+        Returns a backup of the connected third-party account.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -601,6 +643,7 @@ class ThirdPartyIntegrationApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderStringWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -629,8 +672,9 @@ class ThirdPartyIntegrationApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FolderStringWrapper]:
-        """get_backup_third_party_account
+        """Get a third-party account backup
 
+        Returns a backup of the connected third-party account.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -663,6 +707,7 @@ class ThirdPartyIntegrationApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderStringWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -691,8 +736,9 @@ class ThirdPartyIntegrationApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_backup_third_party_account
+        """Get a third-party account backup
 
+        Returns a backup of the connected third-party account.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -725,6 +771,7 @@ class ThirdPartyIntegrationApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderStringWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -773,6 +820,12 @@ class ThirdPartyIntegrationApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
 
         return self.api_client.param_serialize(
@@ -809,8 +862,9 @@ class ThirdPartyIntegrationApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ArrayArrayWrapper:
-        """get_capabilities
+        """Get providers
 
+        Returns the list of the available providers.   **Note**: Available provider keys: DropboxV2, Box, WebDav, Yandex, OneDrive, SharePoint, GoogleDrive, kDrive.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -843,6 +897,7 @@ class ThirdPartyIntegrationApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ArrayArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -871,8 +926,9 @@ class ThirdPartyIntegrationApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[ArrayArrayWrapper]:
-        """get_capabilities
+        """Get providers
 
+        Returns the list of the available providers.   **Note**: Available provider keys: DropboxV2, Box, WebDav, Yandex, OneDrive, SharePoint, GoogleDrive, kDrive.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -905,6 +961,7 @@ class ThirdPartyIntegrationApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ArrayArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -933,8 +990,9 @@ class ThirdPartyIntegrationApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_capabilities
+        """Get providers
 
+        Returns the list of the available providers.   **Note**: Available provider keys: DropboxV2, Box, WebDav, Yandex, OneDrive, SharePoint, GoogleDrive, kDrive.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -967,6 +1025,7 @@ class ThirdPartyIntegrationApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ArrayArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1015,6 +1074,12 @@ class ThirdPartyIntegrationApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
 
         return self.api_client.param_serialize(
@@ -1051,8 +1116,9 @@ class ThirdPartyIntegrationApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FolderStringArrayWrapper:
-        """get_common_third_party_folders
+        """Get the common third-party services
 
+        Returns a list of the third-party services connected to the Common section.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1085,6 +1151,7 @@ class ThirdPartyIntegrationApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderStringArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1113,8 +1180,9 @@ class ThirdPartyIntegrationApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FolderStringArrayWrapper]:
-        """get_common_third_party_folders
+        """Get the common third-party services
 
+        Returns a list of the third-party services connected to the Common section.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1147,6 +1215,7 @@ class ThirdPartyIntegrationApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderStringArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1175,8 +1244,9 @@ class ThirdPartyIntegrationApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_common_third_party_folders
+        """Get the common third-party services
 
+        Returns a list of the third-party services connected to the Common section.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1209,6 +1279,7 @@ class ThirdPartyIntegrationApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderStringArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1257,6 +1328,12 @@ class ThirdPartyIntegrationApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
 
         return self.api_client.param_serialize(
@@ -1293,8 +1370,9 @@ class ThirdPartyIntegrationApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ThirdPartyParamsArrayWrapper:
-        """get_third_party_accounts
+        """Get the third-party accounts
 
+        Returns a list of all the connected third-party accounts.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1327,6 +1405,7 @@ class ThirdPartyIntegrationApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ThirdPartyParamsArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1355,8 +1434,9 @@ class ThirdPartyIntegrationApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[ThirdPartyParamsArrayWrapper]:
-        """get_third_party_accounts
+        """Get the third-party accounts
 
+        Returns a list of all the connected third-party accounts.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1389,6 +1469,7 @@ class ThirdPartyIntegrationApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ThirdPartyParamsArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1417,8 +1498,9 @@ class ThirdPartyIntegrationApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_third_party_accounts
+        """Get the third-party accounts
 
+        Returns a list of all the connected third-party accounts.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1451,6 +1533,7 @@ class ThirdPartyIntegrationApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ThirdPartyParamsArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1499,6 +1582,12 @@ class ThirdPartyIntegrationApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
 
         return self.api_client.param_serialize(
@@ -1536,8 +1625,9 @@ class ThirdPartyIntegrationApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FolderStringWrapper:
-        """save_third_party
+        """Save a third-party account
 
+        Saves the third-party storage service account. For WebDav, Yandex, kDrive and SharePoint, the login and password are used for authentication. For other providers, the authentication is performed using a token received via OAuth 2.0.   **Note**: List of provider keys: DropboxV2, Box, WebDav, Yandex, OneDrive, SharePoint, GoogleDrive, kDrive.
 
         :param third_party_request_dto:
         :type third_party_request_dto: ThirdPartyRequestDto
@@ -1573,6 +1663,7 @@ class ThirdPartyIntegrationApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderStringWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1602,8 +1693,9 @@ class ThirdPartyIntegrationApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FolderStringWrapper]:
-        """save_third_party
+        """Save a third-party account
 
+        Saves the third-party storage service account. For WebDav, Yandex, kDrive and SharePoint, the login and password are used for authentication. For other providers, the authentication is performed using a token received via OAuth 2.0.   **Note**: List of provider keys: DropboxV2, Box, WebDav, Yandex, OneDrive, SharePoint, GoogleDrive, kDrive.
 
         :param third_party_request_dto:
         :type third_party_request_dto: ThirdPartyRequestDto
@@ -1639,6 +1731,7 @@ class ThirdPartyIntegrationApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderStringWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1668,8 +1761,9 @@ class ThirdPartyIntegrationApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """save_third_party
+        """Save a third-party account
 
+        Saves the third-party storage service account. For WebDav, Yandex, kDrive and SharePoint, the login and password are used for authentication. For other providers, the authentication is performed using a token received via OAuth 2.0.   **Note**: List of provider keys: DropboxV2, Box, WebDav, Yandex, OneDrive, SharePoint, GoogleDrive, kDrive.
 
         :param third_party_request_dto:
         :type third_party_request_dto: ThirdPartyRequestDto
@@ -1705,6 +1799,7 @@ class ThirdPartyIntegrationApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderStringWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1769,6 +1864,12 @@ class ThirdPartyIntegrationApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
 
         return self.api_client.param_serialize(
@@ -1806,8 +1907,9 @@ class ThirdPartyIntegrationApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FolderStringWrapper:
-        """save_third_party_backup
+        """Save a third-party account backup
 
+        Saves a backup of the connected third-party account.   **Note**: List of provider keys: DropboxV2, Box, WebDav, Yandex, OneDrive, SharePoint, GoogleDrive, kDrive.
 
         :param third_party_backup_request_dto:
         :type third_party_backup_request_dto: ThirdPartyBackupRequestDto
@@ -1843,6 +1945,7 @@ class ThirdPartyIntegrationApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderStringWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1872,8 +1975,9 @@ class ThirdPartyIntegrationApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FolderStringWrapper]:
-        """save_third_party_backup
+        """Save a third-party account backup
 
+        Saves a backup of the connected third-party account.   **Note**: List of provider keys: DropboxV2, Box, WebDav, Yandex, OneDrive, SharePoint, GoogleDrive, kDrive.
 
         :param third_party_backup_request_dto:
         :type third_party_backup_request_dto: ThirdPartyBackupRequestDto
@@ -1909,6 +2013,7 @@ class ThirdPartyIntegrationApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderStringWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1938,8 +2043,9 @@ class ThirdPartyIntegrationApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """save_third_party_backup
+        """Save a third-party account backup
 
+        Saves a backup of the connected third-party account.   **Note**: List of provider keys: DropboxV2, Box, WebDav, Yandex, OneDrive, SharePoint, GoogleDrive, kDrive.
 
         :param third_party_backup_request_dto:
         :type third_party_backup_request_dto: ThirdPartyBackupRequestDto
@@ -1975,6 +2081,7 @@ class ThirdPartyIntegrationApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderStringWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2039,6 +2146,12 @@ class ThirdPartyIntegrationApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
 
         return self.api_client.param_serialize(

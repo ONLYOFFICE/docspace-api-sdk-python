@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **name** | **str** | The full name of the user. | [optional] 
 **image** | **str** | The path to the user&#39;s avatar. | [optional] 
 **roles** | **List[str]** | Roles | [optional] 
+**customer_id** | **str** |  | [optional] 
 
 ## Example
 

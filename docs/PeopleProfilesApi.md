@@ -418,7 +418,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_profile_by_email**
-> EmployeeFullWrapper get_profile_by_email(email=email, culture=culture)
+> EmployeeFullWrapper get_profile_by_email(email=email, encemail=encemail, culture=culture)
 
 Returns the detailed information about a profile of the user with the email specified in the request.
 
@@ -430,6 +430,7 @@ For more information, see [api.onlyoffice.com]().
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **email** | **str**| The user email address. | [optional] 
+ **encemail** | **str**| The user encrypted email address. | [optional] 
  **culture** | **str**| Culture | [optional] 
 
 ### Return type
@@ -468,11 +469,12 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.ProfilesApi(api_client)
     email = 'Sydney_Roberts4@hotmail.com' # str | The user email address. (optional)
+    encemail = 'some text' # str | The user encrypted email address. (optional)
     culture = 'some text' # str | Culture (optional)
 
     try:
         # Get a profile by user email
-        api_response = api_instance.get_profile_by_email(email=email, culture=culture)
+        api_response = api_instance.get_profile_by_email(email=email, encemail=encemail, culture=culture)
         print("The response of ProfilesApi->get_profile_by_email:\n")
         pprint(api_response)
     except Exception as e:
@@ -1018,7 +1020,7 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.ProfilesApi(api_client)
-    userid = '9846' # str | The user ID.
+    userid = '9079' # str | The user ID.
     update_member_request_dto = docspace_api_sdk.UpdateMemberRequestDto() # UpdateMemberRequestDto | The request parameters for updating the user information.
 
     try:

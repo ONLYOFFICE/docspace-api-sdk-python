@@ -30,7 +30,7 @@ class StorageFilter(int, Enum):
     """
     allowed enum values
     """
-    None_ = 0
+    None = 0
     Internal = 1
     ThirdParty = 2
 

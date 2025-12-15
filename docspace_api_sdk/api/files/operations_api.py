@@ -79,8 +79,9 @@ class OperationsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> BooleanWrapper:
-        """add_favorites
+        """Add favorite files and folders
 
+        Adds files and folders with the IDs specified in the request to the favorite list.
 
         :param base_batch_request_dto:
         :type base_batch_request_dto: BaseBatchRequestDto
@@ -116,6 +117,7 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '401': None,
             '403': None,
         }
         response_data = self.api_client.call_api(
@@ -146,8 +148,9 @@ class OperationsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[BooleanWrapper]:
-        """add_favorites
+        """Add favorite files and folders
 
+        Adds files and folders with the IDs specified in the request to the favorite list.
 
         :param base_batch_request_dto:
         :type base_batch_request_dto: BaseBatchRequestDto
@@ -183,6 +186,7 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '401': None,
             '403': None,
         }
         response_data = self.api_client.call_api(
@@ -213,8 +217,9 @@ class OperationsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """add_favorites
+        """Add favorite files and folders
 
+        Adds files and folders with the IDs specified in the request to the favorite list.
 
         :param base_batch_request_dto:
         :type base_batch_request_dto: BaseBatchRequestDto
@@ -250,6 +255,7 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '401': None,
             '403': None,
         }
         response_data = self.api_client.call_api(
@@ -315,6 +321,12 @@ class OperationsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
 
         return self.api_client.param_serialize(
@@ -352,8 +364,9 @@ class OperationsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FileOperationArrayWrapper:
-        """bulk_download
+        """Bulk download
 
+        Starts the download process of files and folders with the IDs specified in the request.
 
         :param download_request_dto:
         :type download_request_dto: DownloadRequestDto
@@ -419,8 +432,9 @@ class OperationsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FileOperationArrayWrapper]:
-        """bulk_download
+        """Bulk download
 
+        Starts the download process of files and folders with the IDs specified in the request.
 
         :param download_request_dto:
         :type download_request_dto: DownloadRequestDto
@@ -486,8 +500,9 @@ class OperationsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """bulk_download
+        """Bulk download
 
+        Starts the download process of files and folders with the IDs specified in the request.
 
         :param download_request_dto:
         :type download_request_dto: DownloadRequestDto
@@ -626,8 +641,9 @@ class OperationsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ConversationResultArrayWrapper:
-        """check_conversion_status
+        """Get conversion status
 
+        Checks the conversion status of a file with the ID specified in the request.
 
         :param file_id: The file ID to check conversion status. (required)
         :type file_id: int
@@ -666,6 +682,7 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ConversationResultArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -696,8 +713,9 @@ class OperationsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[ConversationResultArrayWrapper]:
-        """check_conversion_status
+        """Get conversion status
 
+        Checks the conversion status of a file with the ID specified in the request.
 
         :param file_id: The file ID to check conversion status. (required)
         :type file_id: int
@@ -736,6 +754,7 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ConversationResultArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -766,8 +785,9 @@ class OperationsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """check_conversion_status
+        """Get conversion status
 
+        Checks the conversion status of a file with the ID specified in the request.
 
         :param file_id: The file ID to check conversion status. (required)
         :type file_id: int
@@ -806,6 +826,7 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ConversationResultArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -862,6 +883,12 @@ class OperationsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
 
         return self.api_client.param_serialize(
@@ -899,8 +926,9 @@ class OperationsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FileEntryBaseArrayWrapper:
-        """check_move_or_copy_batch_items
+        """Move or copy files to a folder
 
+        Checks if files or folders can be moved or copied to the specified folder, moves or copies them, and returns their information.
 
         :param in_dto: The request parameters for copying/moving files.
         :type in_dto: BatchRequestDto
@@ -936,6 +964,7 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileEntryBaseArrayWrapper",
+            '401': None,
             '403': None,
         }
         response_data = self.api_client.call_api(
@@ -966,8 +995,9 @@ class OperationsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FileEntryBaseArrayWrapper]:
-        """check_move_or_copy_batch_items
+        """Move or copy files to a folder
 
+        Checks if files or folders can be moved or copied to the specified folder, moves or copies them, and returns their information.
 
         :param in_dto: The request parameters for copying/moving files.
         :type in_dto: BatchRequestDto
@@ -1003,6 +1033,7 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileEntryBaseArrayWrapper",
+            '401': None,
             '403': None,
         }
         response_data = self.api_client.call_api(
@@ -1033,8 +1064,9 @@ class OperationsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """check_move_or_copy_batch_items
+        """Move or copy files to a folder
 
+        Checks if files or folders can be moved or copied to the specified folder, moves or copies them, and returns their information.
 
         :param in_dto: The request parameters for copying/moving files.
         :type in_dto: BatchRequestDto
@@ -1070,6 +1102,7 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileEntryBaseArrayWrapper",
+            '401': None,
             '403': None,
         }
         response_data = self.api_client.call_api(
@@ -1124,6 +1157,12 @@ class OperationsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
 
         return self.api_client.param_serialize(
@@ -1161,8 +1200,9 @@ class OperationsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> CheckDestFolderWrapper:
-        """check_move_or_copy_dest_folder
+        """Check for moving or copying files to a folder
 
+        Checks if files can be moved or copied to the specified folder.
 
         :param in_dto: The request parameters for copying/moving files.
         :type in_dto: BatchRequestDto
@@ -1198,6 +1238,7 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CheckDestFolderWrapper",
+            '401': None,
             '403': None,
         }
         response_data = self.api_client.call_api(
@@ -1228,8 +1269,9 @@ class OperationsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[CheckDestFolderWrapper]:
-        """check_move_or_copy_dest_folder
+        """Check for moving or copying files to a folder
 
+        Checks if files can be moved or copied to the specified folder.
 
         :param in_dto: The request parameters for copying/moving files.
         :type in_dto: BatchRequestDto
@@ -1265,6 +1307,7 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CheckDestFolderWrapper",
+            '401': None,
             '403': None,
         }
         response_data = self.api_client.call_api(
@@ -1295,8 +1338,9 @@ class OperationsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """check_move_or_copy_dest_folder
+        """Check for moving or copying files to a folder
 
+        Checks if files can be moved or copied to the specified folder.
 
         :param in_dto: The request parameters for copying/moving files.
         :type in_dto: BatchRequestDto
@@ -1332,6 +1376,7 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CheckDestFolderWrapper",
+            '401': None,
             '403': None,
         }
         response_data = self.api_client.call_api(
@@ -1386,6 +1431,12 @@ class OperationsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
 
         return self.api_client.param_serialize(
@@ -1423,8 +1474,9 @@ class OperationsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FileOperationArrayWrapper:
-        """copy_batch_items
+        """Copy to the folder
 
+        Copies all the selected files and folders to the folder with the ID specified in the request.
 
         :param batch_request_dto:
         :type batch_request_dto: BatchRequestDto
@@ -1460,6 +1512,7 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
+            '401': None,
             '403': None,
         }
         response_data = self.api_client.call_api(
@@ -1490,8 +1543,9 @@ class OperationsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FileOperationArrayWrapper]:
-        """copy_batch_items
+        """Copy to the folder
 
+        Copies all the selected files and folders to the folder with the ID specified in the request.
 
         :param batch_request_dto:
         :type batch_request_dto: BatchRequestDto
@@ -1527,6 +1581,7 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
+            '401': None,
             '403': None,
         }
         response_data = self.api_client.call_api(
@@ -1557,8 +1612,9 @@ class OperationsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """copy_batch_items
+        """Copy to the folder
 
+        Copies all the selected files and folders to the folder with the ID specified in the request.
 
         :param batch_request_dto:
         :type batch_request_dto: BatchRequestDto
@@ -1594,6 +1650,7 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
+            '401': None,
             '403': None,
         }
         response_data = self.api_client.call_api(
@@ -1659,6 +1716,12 @@ class OperationsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
 
         return self.api_client.param_serialize(
@@ -1697,8 +1760,9 @@ class OperationsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ObjectWrapper:
-        """create_upload_session
+        """Chunked upload
 
+        Creates the session to upload large files in multiple chunks to the folder with the ID specified in the request.   **Note**: Each chunk can have different length but the length should be multiple of <b>512</b> and greater or equal to <b>10 mb</b>. Last chunk can have any size.  After the initial response to the request with the <b>200 OK</b> status, you must get the <em>location</em> field value from the response. Send all your chunks to this location.  Each chunk must be sent in the exact order the chunks appear in the file.  After receiving each chunk, the server will respond with the current information about the upload session if no errors occurred.  When the number of bytes uploaded is equal to the number of bytes you sent in the initial request, the server responds with the <b>201 Created</b> status and sends you information about the uploaded file.  Information about created session which includes:  <ul>  <li><b>id:</b> unique ID of this upload session,</li>  <li><b>created:</b> UTC time when the session was created,</li>  <li><b>expired:</b> UTC time when the session will expire if no chunks are sent before that time,</li>  <li><b>location:</b> URL where you should send your next chunk,</li>  <li><b>bytes_uploaded:</b> number of bytes uploaded for the specific upload ID,</li>  <li><b>bytes_total:</b> total number of bytes which will be uploaded.</li>  </ul>
 
         :param folder_id: The session folder ID. (required)
         :type folder_id: int
@@ -1737,6 +1801,7 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectWrapper",
+            '401': None,
             '403': None,
         }
         response_data = self.api_client.call_api(
@@ -1768,8 +1833,9 @@ class OperationsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[ObjectWrapper]:
-        """create_upload_session
+        """Chunked upload
 
+        Creates the session to upload large files in multiple chunks to the folder with the ID specified in the request.   **Note**: Each chunk can have different length but the length should be multiple of <b>512</b> and greater or equal to <b>10 mb</b>. Last chunk can have any size.  After the initial response to the request with the <b>200 OK</b> status, you must get the <em>location</em> field value from the response. Send all your chunks to this location.  Each chunk must be sent in the exact order the chunks appear in the file.  After receiving each chunk, the server will respond with the current information about the upload session if no errors occurred.  When the number of bytes uploaded is equal to the number of bytes you sent in the initial request, the server responds with the <b>201 Created</b> status and sends you information about the uploaded file.  Information about created session which includes:  <ul>  <li><b>id:</b> unique ID of this upload session,</li>  <li><b>created:</b> UTC time when the session was created,</li>  <li><b>expired:</b> UTC time when the session will expire if no chunks are sent before that time,</li>  <li><b>location:</b> URL where you should send your next chunk,</li>  <li><b>bytes_uploaded:</b> number of bytes uploaded for the specific upload ID,</li>  <li><b>bytes_total:</b> total number of bytes which will be uploaded.</li>  </ul>
 
         :param folder_id: The session folder ID. (required)
         :type folder_id: int
@@ -1808,6 +1874,7 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectWrapper",
+            '401': None,
             '403': None,
         }
         response_data = self.api_client.call_api(
@@ -1839,8 +1906,9 @@ class OperationsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """create_upload_session
+        """Chunked upload
 
+        Creates the session to upload large files in multiple chunks to the folder with the ID specified in the request.   **Note**: Each chunk can have different length but the length should be multiple of <b>512</b> and greater or equal to <b>10 mb</b>. Last chunk can have any size.  After the initial response to the request with the <b>200 OK</b> status, you must get the <em>location</em> field value from the response. Send all your chunks to this location.  Each chunk must be sent in the exact order the chunks appear in the file.  After receiving each chunk, the server will respond with the current information about the upload session if no errors occurred.  When the number of bytes uploaded is equal to the number of bytes you sent in the initial request, the server responds with the <b>201 Created</b> status and sends you information about the uploaded file.  Information about created session which includes:  <ul>  <li><b>id:</b> unique ID of this upload session,</li>  <li><b>created:</b> UTC time when the session was created,</li>  <li><b>expired:</b> UTC time when the session will expire if no chunks are sent before that time,</li>  <li><b>location:</b> URL where you should send your next chunk,</li>  <li><b>bytes_uploaded:</b> number of bytes uploaded for the specific upload ID,</li>  <li><b>bytes_total:</b> total number of bytes which will be uploaded.</li>  </ul>
 
         :param folder_id: The session folder ID. (required)
         :type folder_id: int
@@ -1879,6 +1947,7 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectWrapper",
+            '401': None,
             '403': None,
         }
         response_data = self.api_client.call_api(
@@ -1947,6 +2016,12 @@ class OperationsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
 
         return self.api_client.param_serialize(
@@ -1984,8 +2059,9 @@ class OperationsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FileOperationArrayWrapper:
-        """delete_batch_items
+        """Delete files and folders
 
+        Deletes the files and folders with the IDs specified in the request.
 
         :param delete_batch_request_dto:
         :type delete_batch_request_dto: DeleteBatchRequestDto
@@ -2021,6 +2097,7 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
+            '401': None,
             '403': None,
         }
         response_data = self.api_client.call_api(
@@ -2051,8 +2128,9 @@ class OperationsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FileOperationArrayWrapper]:
-        """delete_batch_items
+        """Delete files and folders
 
+        Deletes the files and folders with the IDs specified in the request.
 
         :param delete_batch_request_dto:
         :type delete_batch_request_dto: DeleteBatchRequestDto
@@ -2088,6 +2166,7 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
+            '401': None,
             '403': None,
         }
         response_data = self.api_client.call_api(
@@ -2118,8 +2197,9 @@ class OperationsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """delete_batch_items
+        """Delete files and folders
 
+        Deletes the files and folders with the IDs specified in the request.
 
         :param delete_batch_request_dto:
         :type delete_batch_request_dto: DeleteBatchRequestDto
@@ -2155,6 +2235,7 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
+            '401': None,
             '403': None,
         }
         response_data = self.api_client.call_api(
@@ -2220,6 +2301,12 @@ class OperationsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
 
         return self.api_client.param_serialize(
@@ -2257,8 +2344,9 @@ class OperationsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> BooleanWrapper:
-        """delete_favorites_from_body
+        """Delete favorite files and folders (using body parameters)
 
+        Removes files and folders with the IDs specified in the request from the favorite list. This method uses the body parameters.
 
         :param base_batch_request_dto:
         :type base_batch_request_dto: BaseBatchRequestDto
@@ -2294,6 +2382,7 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2323,8 +2412,9 @@ class OperationsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[BooleanWrapper]:
-        """delete_favorites_from_body
+        """Delete favorite files and folders (using body parameters)
 
+        Removes files and folders with the IDs specified in the request from the favorite list. This method uses the body parameters.
 
         :param base_batch_request_dto:
         :type base_batch_request_dto: BaseBatchRequestDto
@@ -2360,6 +2450,7 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2389,8 +2480,9 @@ class OperationsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """delete_favorites_from_body
+        """Delete favorite files and folders (using body parameters)
 
+        Removes files and folders with the IDs specified in the request from the favorite list. This method uses the body parameters.
 
         :param base_batch_request_dto:
         :type base_batch_request_dto: BaseBatchRequestDto
@@ -2426,6 +2518,7 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2490,6 +2583,12 @@ class OperationsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
 
         return self.api_client.param_serialize(
@@ -2527,8 +2626,9 @@ class OperationsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FileOperationWrapper:
-        """delete_file_versions
+        """Delete file versions
 
+        Deletes the file versions with the IDs specified in the request.
 
         :param delete_version_batch_request_dto:
         :type delete_version_batch_request_dto: DeleteVersionBatchRequestDto
@@ -2564,6 +2664,7 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2593,8 +2694,9 @@ class OperationsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FileOperationWrapper]:
-        """delete_file_versions
+        """Delete file versions
 
+        Deletes the file versions with the IDs specified in the request.
 
         :param delete_version_batch_request_dto:
         :type delete_version_batch_request_dto: DeleteVersionBatchRequestDto
@@ -2630,6 +2732,7 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2659,8 +2762,9 @@ class OperationsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """delete_file_versions
+        """Delete file versions
 
+        Deletes the file versions with the IDs specified in the request.
 
         :param delete_version_batch_request_dto:
         :type delete_version_batch_request_dto: DeleteVersionBatchRequestDto
@@ -2696,6 +2800,7 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2760,6 +2865,12 @@ class OperationsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
 
         return self.api_client.param_serialize(
@@ -2797,8 +2908,9 @@ class OperationsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FileOperationArrayWrapper:
-        """duplicate_batch_items
+        """Duplicate files and folders
 
+        Duplicates all the selected files and folders.
 
         :param duplicate_request_dto:
         :type duplicate_request_dto: DuplicateRequestDto
@@ -2834,6 +2946,7 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
+            '401': None,
             '403': None,
         }
         response_data = self.api_client.call_api(
@@ -2864,8 +2977,9 @@ class OperationsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FileOperationArrayWrapper]:
-        """duplicate_batch_items
+        """Duplicate files and folders
 
+        Duplicates all the selected files and folders.
 
         :param duplicate_request_dto:
         :type duplicate_request_dto: DuplicateRequestDto
@@ -2901,6 +3015,7 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
+            '401': None,
             '403': None,
         }
         response_data = self.api_client.call_api(
@@ -2931,8 +3046,9 @@ class OperationsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """duplicate_batch_items
+        """Duplicate files and folders
 
+        Duplicates all the selected files and folders.
 
         :param duplicate_request_dto:
         :type duplicate_request_dto: DuplicateRequestDto
@@ -2968,6 +3084,7 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
+            '401': None,
             '403': None,
         }
         response_data = self.api_client.call_api(
@@ -3033,6 +3150,12 @@ class OperationsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
 
         return self.api_client.param_serialize(
@@ -3070,8 +3193,9 @@ class OperationsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FileOperationArrayWrapper:
-        """empty_trash
+        """Empty the Trash folder
 
+        Deletes all the files and folders from the Trash folder.
 
         :param single: Specifies whether to return only the current operation
         :type single: bool
@@ -3107,6 +3231,7 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3136,8 +3261,9 @@ class OperationsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FileOperationArrayWrapper]:
-        """empty_trash
+        """Empty the Trash folder
 
+        Deletes all the files and folders from the Trash folder.
 
         :param single: Specifies whether to return only the current operation
         :type single: bool
@@ -3173,6 +3299,7 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3202,8 +3329,9 @@ class OperationsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """empty_trash
+        """Empty the Trash folder
 
+        Deletes all the files and folders from the Trash folder.
 
         :param single: Specifies whether to return only the current operation
         :type single: bool
@@ -3239,6 +3367,7 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3292,6 +3421,12 @@ class OperationsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
 
         return self.api_client.param_serialize(
@@ -3329,8 +3464,9 @@ class OperationsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FileOperationArrayWrapper:
-        """get_operation_statuses
+        """Get active file operations
 
+        Returns a list of all the active file operations.
 
         :param id: The ID of the file operation.
         :type id: str
@@ -3395,8 +3531,9 @@ class OperationsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FileOperationArrayWrapper]:
-        """get_operation_statuses
+        """Get active file operations
 
+        Returns a list of all the active file operations.
 
         :param id: The ID of the file operation.
         :type id: str
@@ -3461,8 +3598,9 @@ class OperationsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_operation_statuses
+        """Get active file operations
 
+        Returns a list of all the active file operations.
 
         :param id: The ID of the file operation.
         :type id: str
@@ -3589,8 +3727,9 @@ class OperationsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FileOperationArrayWrapper:
-        """get_operation_statuses_by_type
+        """Get file operation statuses
 
+        Retrieves the statuses of operations filtered by the specified operation type.
 
         :param operation_type: Specifies the type of file operation to be retrieved. (required)
         :type operation_type: FileOperationType
@@ -3659,8 +3798,9 @@ class OperationsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FileOperationArrayWrapper]:
-        """get_operation_statuses_by_type
+        """Get file operation statuses
 
+        Retrieves the statuses of operations filtered by the specified operation type.
 
         :param operation_type: Specifies the type of file operation to be retrieved. (required)
         :type operation_type: FileOperationType
@@ -3729,8 +3869,9 @@ class OperationsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_operation_statuses_by_type
+        """Get file operation statuses
 
+        Retrieves the statuses of operations filtered by the specified operation type.
 
         :param operation_type: Specifies the type of file operation to be retrieved. (required)
         :type operation_type: FileOperationType
@@ -3862,8 +4003,9 @@ class OperationsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FileOperationArrayWrapper:
-        """mark_as_read
+        """Mark as read
 
+        Marks the files and folders with the IDs specified in the request as read.
 
         :param base_batch_request_dto:
         :type base_batch_request_dto: BaseBatchRequestDto
@@ -3899,6 +4041,7 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3928,8 +4071,9 @@ class OperationsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FileOperationArrayWrapper]:
-        """mark_as_read
+        """Mark as read
 
+        Marks the files and folders with the IDs specified in the request as read.
 
         :param base_batch_request_dto:
         :type base_batch_request_dto: BaseBatchRequestDto
@@ -3965,6 +4109,7 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3994,8 +4139,9 @@ class OperationsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """mark_as_read
+        """Mark as read
 
+        Marks the files and folders with the IDs specified in the request as read.
 
         :param base_batch_request_dto:
         :type base_batch_request_dto: BaseBatchRequestDto
@@ -4031,6 +4177,7 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4095,6 +4242,12 @@ class OperationsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
 
         return self.api_client.param_serialize(
@@ -4132,8 +4285,9 @@ class OperationsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FileOperationArrayWrapper:
-        """move_batch_items
+        """Move or copy to a folder
 
+        Moves or copies all the selected files and folders to the folder with the ID specified in the request.
 
         :param batch_request_dto:
         :type batch_request_dto: BatchRequestDto
@@ -4169,6 +4323,7 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
+            '401': None,
             '403': None,
         }
         response_data = self.api_client.call_api(
@@ -4199,8 +4354,9 @@ class OperationsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FileOperationArrayWrapper]:
-        """move_batch_items
+        """Move or copy to a folder
 
+        Moves or copies all the selected files and folders to the folder with the ID specified in the request.
 
         :param batch_request_dto:
         :type batch_request_dto: BatchRequestDto
@@ -4236,6 +4392,7 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
+            '401': None,
             '403': None,
         }
         response_data = self.api_client.call_api(
@@ -4266,8 +4423,9 @@ class OperationsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """move_batch_items
+        """Move or copy to a folder
 
+        Moves or copies all the selected files and folders to the folder with the ID specified in the request.
 
         :param batch_request_dto:
         :type batch_request_dto: BatchRequestDto
@@ -4303,6 +4461,7 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
+            '401': None,
             '403': None,
         }
         response_data = self.api_client.call_api(
@@ -4368,6 +4527,12 @@ class OperationsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
 
         return self.api_client.param_serialize(
@@ -4406,8 +4571,9 @@ class OperationsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ConversationResultArrayWrapper:
-        """start_file_conversion
+        """Start file conversion
 
+        Starts a conversion operation of a file with the ID specified in the request.
 
         :param file_id: The file ID to start conversion proccess. (required)
         :type file_id: int
@@ -4446,6 +4612,7 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ConversationResultArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4476,8 +4643,9 @@ class OperationsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[ConversationResultArrayWrapper]:
-        """start_file_conversion
+        """Start file conversion
 
+        Starts a conversion operation of a file with the ID specified in the request.
 
         :param file_id: The file ID to start conversion proccess. (required)
         :type file_id: int
@@ -4516,6 +4684,7 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ConversationResultArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4546,8 +4715,9 @@ class OperationsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """start_file_conversion
+        """Start file conversion
 
+        Starts a conversion operation of a file with the ID specified in the request.
 
         :param file_id: The file ID to start conversion proccess. (required)
         :type file_id: int
@@ -4586,6 +4756,7 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ConversationResultArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4653,6 +4824,12 @@ class OperationsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
 
         return self.api_client.param_serialize(
@@ -4690,8 +4867,9 @@ class OperationsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FileOperationArrayWrapper:
-        """terminate_tasks
+        """Finish active operations
 
+        Finishes an operation with the ID specified in the request or all the active operations.
 
         :param id: The operation unique identifier. (required)
         :type id: str
@@ -4756,8 +4934,9 @@ class OperationsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FileOperationArrayWrapper]:
-        """terminate_tasks
+        """Finish active operations
 
+        Finishes an operation with the ID specified in the request or all the active operations.
 
         :param id: The operation unique identifier. (required)
         :type id: str
@@ -4822,8 +5001,9 @@ class OperationsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """terminate_tasks
+        """Finish active operations
 
+        Finishes an operation with the ID specified in the request or all the active operations.
 
         :param id: The operation unique identifier. (required)
         :type id: str
@@ -4948,8 +5128,9 @@ class OperationsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> StringWrapper:
-        """update_file_comment
+        """Update a comment
 
+        Updates a comment in a file with the ID specified in the request.
 
         :param file_id: The file ID where the comment is located. (required)
         :type file_id: int
@@ -4988,6 +5169,7 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -5018,8 +5200,9 @@ class OperationsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[StringWrapper]:
-        """update_file_comment
+        """Update a comment
 
+        Updates a comment in a file with the ID specified in the request.
 
         :param file_id: The file ID where the comment is located. (required)
         :type file_id: int
@@ -5058,6 +5241,7 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -5088,8 +5272,9 @@ class OperationsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """update_file_comment
+        """Update a comment
 
+        Updates a comment in a file with the ID specified in the request.
 
         :param file_id: The file ID where the comment is located. (required)
         :type file_id: int
@@ -5128,6 +5313,7 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -5195,6 +5381,12 @@ class OperationsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
 
         return self.api_client.param_serialize(

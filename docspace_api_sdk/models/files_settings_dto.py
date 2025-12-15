@@ -90,7 +90,9 @@ class FilesSettingsDto(BaseModel):
     max_upload_thread_count: Optional[StrictInt] = Field(default=None, description="The maximum number of upload threads.", alias="maxUploadThreadCount")
     chunk_upload_size: Optional[StrictInt] = Field(default=None, description="The size of a large file that is uploaded in chunks.", alias="chunkUploadSize")
     open_editor_in_same_tab: Optional[StrictBool] = Field(default=None, description="Specifies whether to open the editor in the same tab or not.", alias="openEditorInSameTab")
-    __properties: ClassVar[List[str]] = ["extsImagePreviewed", "extsMediaPreviewed", "extsWebPreviewed", "extsWebEdited", "extsWebEncrypt", "extsWebReviewed", "extsWebCustomFilterEditing", "extsWebRestrictedEditing", "extsWebCommented", "extsWebTemplate", "extsMustConvert", "extsConvertible", "extsUploadable", "extsArchive", "extsVideo", "extsAudio", "extsImage", "extsSpreadsheet", "extsPresentation", "extsDocument", "extsDiagram", "internalFormats", "masterFormExtension", "paramVersion", "paramOutType", "fileDownloadUrlString", "fileWebViewerUrlString", "fileWebViewerExternalUrlString", "fileWebEditorUrlString", "fileWebEditorExternalUrlString", "fileRedirectPreviewUrlString", "fileThumbnailUrlString", "confirmDelete", "enableThirdParty", "externalShare", "externalShareSocialMedia", "storeOriginalFiles", "keepNewFileName", "displayFileExtension", "convertNotify", "hideConfirmCancelOperation", "hideConfirmConvertSave", "hideConfirmConvertOpen", "hideConfirmRoomLifetime", "defaultOrder", "forcesave", "storeForcesave", "recentSection", "favoritesSection", "templatesSection", "downloadTarGz", "automaticallyCleanUp", "canSearchByContent", "defaultSharingAccessRights", "maxUploadThreadCount", "chunkUploadSize", "openEditorInSameTab"]
+    exts_files_vectorized: Optional[List[StrictStr]] = Field(default=None, description="List of extensions available for vectorization", alias="extsFilesVectorized")
+    max_vectorization_file_size: Optional[StrictInt] = Field(default=None, description="The maximum file size for vectorization", alias="maxVectorizationFileSize")
+    __properties: ClassVar[List[str]] = ["extsImagePreviewed", "extsMediaPreviewed", "extsWebPreviewed", "extsWebEdited", "extsWebEncrypt", "extsWebReviewed", "extsWebCustomFilterEditing", "extsWebRestrictedEditing", "extsWebCommented", "extsWebTemplate", "extsMustConvert", "extsConvertible", "extsUploadable", "extsArchive", "extsVideo", "extsAudio", "extsImage", "extsSpreadsheet", "extsPresentation", "extsDocument", "extsDiagram", "internalFormats", "masterFormExtension", "paramVersion", "paramOutType", "fileDownloadUrlString", "fileWebViewerUrlString", "fileWebViewerExternalUrlString", "fileWebEditorUrlString", "fileWebEditorExternalUrlString", "fileRedirectPreviewUrlString", "fileThumbnailUrlString", "confirmDelete", "enableThirdParty", "externalShare", "externalShareSocialMedia", "storeOriginalFiles", "keepNewFileName", "displayFileExtension", "convertNotify", "hideConfirmCancelOperation", "hideConfirmConvertSave", "hideConfirmConvertOpen", "hideConfirmRoomLifetime", "defaultOrder", "forcesave", "storeForcesave", "recentSection", "favoritesSection", "templatesSection", "downloadTarGz", "automaticallyCleanUp", "canSearchByContent", "defaultSharingAccessRights", "maxUploadThreadCount", "chunkUploadSize", "openEditorInSameTab", "extsFilesVectorized", "maxVectorizationFileSize"]
 
     @field_validator('default_sharing_access_rights')
     def default_sharing_access_rights_validate_enum(cls, value):
@@ -316,6 +318,11 @@ class FilesSettingsDto(BaseModel):
         if self.default_sharing_access_rights is None and "default_sharing_access_rights" in self.model_fields_set:
             _dict['defaultSharingAccessRights'] = None
 
+        # set to None if exts_files_vectorized (nullable) is None
+        # and model_fields_set contains the field
+        if self.exts_files_vectorized is None and "exts_files_vectorized" in self.model_fields_set:
+            _dict['extsFilesVectorized'] = None
+
         return _dict
 
     @classmethod
@@ -385,7 +392,9 @@ class FilesSettingsDto(BaseModel):
             "defaultSharingAccessRights": obj.get("defaultSharingAccessRights"),
             "maxUploadThreadCount": obj.get("maxUploadThreadCount"),
             "chunkUploadSize": obj.get("chunkUploadSize"),
-            "openEditorInSameTab": obj.get("openEditorInSameTab")
+            "openEditorInSameTab": obj.get("openEditorInSameTab"),
+            "extsFilesVectorized": obj.get("extsFilesVectorized"),
+            "maxVectorizationFileSize": obj.get("maxVectorizationFileSize")
         })
         return _obj
 

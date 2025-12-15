@@ -48,6 +48,7 @@ Name | Type | Description | Notes
 **shared** | **bool** | Specifies if the user has access rights. | [optional] 
 **is_custom_quota** | **bool** | Specifies if the user has a custom quota or not. | [optional] 
 **login_event_id** | **int** | The current login event ID. | [optional] 
+**auth_cookie_lifetime** | **float** | The auth cookie lifetime in seconds. | [optional] 
 **created_by** | [**EmployeeDto**](EmployeeDto.md) |  | [optional] 
 **registration_date** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] 
 **has_personal_folder** | **bool** | Specifies if the user has a personal folder or not. | [optional] 

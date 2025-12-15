@@ -101,3 +101,4 @@ class DeleteVersionBatchRequestDto(FileOperationRequestBaseDto):
         all_fields = {**base_dict, **extra_fields}
         return cls.model_validate(all_fields)
 
+

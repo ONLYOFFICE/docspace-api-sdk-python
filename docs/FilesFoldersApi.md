@@ -4,41 +4,41 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**check_upload**](#check_upload) | **POST** /api/2.0/files/{folderId}/upload/check | 
-[**create_folder**](#create_folder) | **POST** /api/2.0/files/folder/{folderId} | 
-[**create_folder_primary_external_link**](#create_folder_primary_external_link) | **POST** /api/2.0/files/folder/{id}/link | 
-[**create_report_folder_history**](#create_report_folder_history) | **POST** /api/2.0/files/folder/{folderId}/log/report | 
-[**delete_folder**](#delete_folder) | **DELETE** /api/2.0/files/folder/{folderId} | 
-[**get_favorites_folder**](#get_favorites_folder) | **GET** /api/2.0/files/@favorites | 
-[**get_files_used_space**](#get_files_used_space) | **GET** /api/2.0/files/filesusedspace | 
-[**get_folder**](#get_folder) | **GET** /api/2.0/files/{folderId}/formfilter | 
-[**get_folder_by_folder_id**](#get_folder_by_folder_id) | **GET** /api/2.0/files/{folderId} | 
-[**get_folder_history**](#get_folder_history) | **GET** /api/2.0/files/folder/{folderId}/log | 
-[**get_folder_info**](#get_folder_info) | **GET** /api/2.0/files/folder/{folderId} | 
-[**get_folder_links**](#get_folder_links) | **GET** /api/2.0/files/folder/{id}/links | 
-[**get_folder_path**](#get_folder_path) | **GET** /api/2.0/files/folder/{folderId}/path | 
-[**get_folder_primary_external_link**](#get_folder_primary_external_link) | **GET** /api/2.0/files/folder/{id}/link | 
-[**get_folder_recent**](#get_folder_recent) | **GET** /api/2.0/files/recent | 
-[**get_folders**](#get_folders) | **GET** /api/2.0/files/{folderId}/subfolders | 
-[**get_my_folder**](#get_my_folder) | **GET** /api/2.0/files/@my | 
-[**get_new_folder_items**](#get_new_folder_items) | **GET** /api/2.0/files/{folderId}/news | 
-[**get_privacy_folder**](#get_privacy_folder) | **GET** /api/2.0/files/@privacy | 
-[**get_recent_folder**](#get_recent_folder) | **GET** /api/2.0/files/@recent | 
-[**get_root_folders**](#get_root_folders) | **GET** /api/2.0/files/@root | 
-[**get_trash_folder**](#get_trash_folder) | **GET** /api/2.0/files/@trash | 
-[**insert_file**](#insert_file) | **POST** /api/2.0/files/{folderId}/insert | 
-[**insert_file_to_my_from_body**](#insert_file_to_my_from_body) | **POST** /api/2.0/files/@my/insert | 
-[**rename_folder**](#rename_folder) | **PUT** /api/2.0/files/folder/{folderId} | 
-[**set_folder_order**](#set_folder_order) | **PUT** /api/2.0/files/folder/{folderId}/order | 
-[**set_folder_primary_external_link**](#set_folder_primary_external_link) | **PUT** /api/2.0/files/folder/{id}/links | 
-[**upload_file**](#upload_file) | **POST** /api/2.0/files/{folderId}/upload | 
-[**upload_file_to_my**](#upload_file_to_my) | **POST** /api/2.0/files/@my/upload | 
+[**check_upload**](#check_upload) | **POST** /api/2.0/files/{folderId}/upload/check | Check file uploads
+[**create_folder**](#create_folder) | **POST** /api/2.0/files/folder/{folderId} | Create a folder
+[**create_folder_primary_external_link**](#create_folder_primary_external_link) | **POST** /api/2.0/files/folder/{id}/link | Create primary external link
+[**create_report_folder_history**](#create_report_folder_history) | **POST** /api/2.0/files/folder/{folderId}/log/report | Generates folder history
+[**delete_folder**](#delete_folder) | **DELETE** /api/2.0/files/folder/{folderId} | Delete a folder
+[**get_favorites_folder**](#get_favorites_folder) | **GET** /api/2.0/files/@favorites | Get the Favorites section
+[**get_files_used_space**](#get_files_used_space) | **GET** /api/2.0/files/filesusedspace | Get used space of files
+[**get_folder**](#get_folder) | **GET** /api/2.0/files/{folderId}/formfilter | Get folder form filter
+[**get_folder_by_folder_id**](#get_folder_by_folder_id) | **GET** /api/2.0/files/{folderId} | Get a folder by ID
+[**get_folder_history**](#get_folder_history) | **GET** /api/2.0/files/folder/{folderId}/log | Get folder history
+[**get_folder_info**](#get_folder_info) | **GET** /api/2.0/files/folder/{folderId} | Get folder information
+[**get_folder_links**](#get_folder_links) | **GET** /api/2.0/files/folder/{id}/links | Get the folder links
+[**get_folder_path**](#get_folder_path) | **GET** /api/2.0/files/folder/{folderId}/path | Get the folder path
+[**get_folder_primary_external_link**](#get_folder_primary_external_link) | **GET** /api/2.0/files/folder/{id}/link | Get primary external link
+[**get_folder_recent**](#get_folder_recent) | **GET** /api/2.0/files/recent | Get the Recent section
+[**get_folders**](#get_folders) | **GET** /api/2.0/files/{folderId}/subfolders | Get subfolders
+[**get_my_folder**](#get_my_folder) | **GET** /api/2.0/files/@my | Get the My documents section
+[**get_new_folder_items**](#get_new_folder_items) | **GET** /api/2.0/files/{folderId}/news | Get new folder items
+[**get_privacy_folder**](#get_privacy_folder) | **GET** /api/2.0/files/@privacy | Get the Private Room section
+[**get_recent_folder**](#get_recent_folder) | **GET** /api/2.0/files/@recent | Get the Recent section
+[**get_root_folders**](#get_root_folders) | **GET** /api/2.0/files/@root | Get filtered sections
+[**get_trash_folder**](#get_trash_folder) | **GET** /api/2.0/files/@trash | Get the Trash section
+[**insert_file**](#insert_file) | **POST** /api/2.0/files/{folderId}/insert | Insert a file
+[**insert_file_to_my_from_body**](#insert_file_to_my_from_body) | **POST** /api/2.0/files/@my/insert | Insert a file to the My documents section
+[**rename_folder**](#rename_folder) | **PUT** /api/2.0/files/folder/{folderId} | Rename a folder
+[**set_folder_order**](#set_folder_order) | **PUT** /api/2.0/files/folder/{folderId}/order | Set folder order
+[**set_folder_primary_external_link**](#set_folder_primary_external_link) | **PUT** /api/2.0/files/folder/{id}/links | Set the folder external link
+[**upload_file**](#upload_file) | **POST** /api/2.0/files/{folderId}/upload | Upload a file
+[**upload_file_to_my**](#upload_file_to_my) | **POST** /api/2.0/files/@my/upload | Upload a file to the My documents section
 
 
 # **check_upload**
 > STRINGArrayWrapper check_upload(folder_id, check_upload_request)
 
-
+Checks the file uploads to the folder with the ID specified in the request.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -56,7 +56,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -72,6 +72,15 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
@@ -81,6 +90,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     check_upload_request = docspace_api_sdk.CheckUploadRequest() # CheckUploadRequest | The request parameters for checking file uploads.
 
     try:
+        # Check file uploads
         api_response = api_instance.check_upload(folder_id, check_upload_request)
         print("The response of FoldersApi->check_upload:\n")
         pprint(api_response)
@@ -101,13 +111,14 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Inserted file |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_folder**
 > FolderIntegerWrapper create_folder(folder_id, create_folder)
 
-
+Creates a new folder with the title specified in the request. The parent folder ID can be also specified.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -125,7 +136,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -141,6 +152,15 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
@@ -150,6 +170,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     create_folder = docspace_api_sdk.CreateFolder() # CreateFolder | The parameters for creating a folder.
 
     try:
+        # Create a folder
         api_response = api_instance.create_folder(folder_id, create_folder)
         print("The response of FoldersApi->create_folder:\n")
         pprint(api_response)
@@ -170,13 +191,14 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | New folder parameters |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_folder_primary_external_link**
 > FileShareWrapper create_folder_primary_external_link(id, folder_link_request)
 
-
+Creates a primary external link by the identifier specified in the request.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -194,7 +216,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -210,6 +232,15 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
@@ -219,6 +250,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     folder_link_request = docspace_api_sdk.FolderLinkRequest() # FolderLinkRequest | The folder link parameters.
 
     try:
+        # Create primary external link
         api_response = api_instance.create_folder_primary_external_link(id, folder_link_request)
         print("The response of FoldersApi->create_folder_primary_external_link:\n")
         pprint(api_response)
@@ -239,6 +271,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Folders security information |  -  |
+**401** | Unauthorized |  -  |
 **404** | Not Found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -246,7 +279,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **create_report_folder_history**
 > StringWrapper create_report_folder_history(folder_id)
 
-
+Generates the activity history of a folder.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -263,7 +296,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -278,6 +311,15 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
@@ -286,6 +328,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     folder_id = 56 # int | 
 
     try:
+        # Generates folder history
         api_response = api_instance.create_report_folder_history(folder_id)
         print("The response of FoldersApi->create_report_folder_history:\n")
         pprint(api_response)
@@ -306,6 +349,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | URL to the report file |  -  |
+**401** | Unauthorized |  -  |
 **403** | You don&#39;t have enough permission to perform the operation |  -  |
 **404** | The required folder was not found |  -  |
 
@@ -314,7 +358,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **delete_folder**
 > FileOperationArrayWrapper delete_folder(folder_id, delete_folder)
 
-
+Deletes a folder with the ID specified in the request.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -332,7 +376,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -348,6 +392,15 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
@@ -357,6 +410,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     delete_folder = docspace_api_sdk.DeleteFolder() # DeleteFolder | The parameters for deleting a folder.
 
     try:
+        # Delete a folder
         api_response = api_instance.delete_folder(folder_id, delete_folder)
         print("The response of FoldersApi->delete_folder:\n")
         pprint(api_response)
@@ -377,13 +431,14 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | List of file operations |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_favorites_folder**
 > FolderContentIntegerWrapper get_favorites_folder(user_id_or_group_id=user_id_or_group_id, filter_type=filter_type, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value)
 
-
+Returns the detailed list of files and folders located in the Favorites section.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -406,7 +461,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -423,6 +478,15 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
@@ -437,6 +501,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     filter_value = 'some text' # str | The text used as a filter or search criterion for folder content queries. (optional)
 
     try:
+        # Get the Favorites section
         api_response = api_instance.get_favorites_folder(user_id_or_group_id=user_id_or_group_id, filter_type=filter_type, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value)
         print("The response of FoldersApi->get_favorites_folder:\n")
         pprint(api_response)
@@ -457,6 +522,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The Favorites section contents |  -  |
+**401** | Unauthorized |  -  |
 **403** | You don&#39;t have enough permission to view the folder content |  -  |
 **404** | The required folder was not found |  -  |
 
@@ -465,7 +531,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **get_files_used_space**
 > FilesStatisticsResultWrapper get_files_used_space()
 
-
+Returns the used space of files in the root folders.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -479,7 +545,7 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -494,6 +560,15 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
@@ -501,6 +576,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     api_instance = docspace_api_sdk.FoldersApi(api_client)
 
     try:
+        # Get used space of files
         api_response = api_instance.get_files_used_space()
         print("The response of FoldersApi->get_files_used_space:\n")
         pprint(api_response)
@@ -521,13 +597,14 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Used space of files in the root folders |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_folder**
 > FormsItemArrayWrapper get_folder(folder_id)
 
-
+Returns the form filter of a folder with the ID specified in the request.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -567,6 +644,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     folder_id = 9846 # int | The folder unique identifier.
 
     try:
+        # Get folder form filter
         api_response = api_instance.get_folder(folder_id)
         print("The response of FoldersApi->get_folder:\n")
         pprint(api_response)
@@ -591,9 +669,9 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_folder_by_folder_id**
-> FolderContentIntegerWrapper get_folder_by_folder_id(folder_id, user_id_or_group_id=user_id_or_group_id, filter_type=filter_type, room_id=room_id, exclude_subject=exclude_subject, apply_filter_option=apply_filter_option, extension=extension, search_area=search_area, forms_item_key=forms_item_key, forms_item_type=forms_item_type, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value, location=location)
+> FolderContentIntegerWrapper get_folder_by_folder_id(folder_id, user_id_or_group_id=user_id_or_group_id, shared_by=shared_by, filter_type=filter_type, room_id=room_id, exclude_subject=exclude_subject, apply_filter_option=apply_filter_option, extension=extension, search_area=search_area, forms_item_key=forms_item_key, forms_item_type=forms_item_type, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value, location=location)
 
-
+Returns the detailed list of files and folders located in the folder with the ID specified in the request.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -604,6 +682,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **folder_id** | **int**| The folder ID. | 
  **user_id_or_group_id** | **str**| The user or group ID. | [optional] 
+ **shared_by** | **str**| The identifier of the user who shared the folder or file. | [optional] 
  **filter_type** | [**FilterType**](.md)| The filter type. | [optional] 
  **room_id** | **int**| The room ID. | [optional] 
  **exclude_subject** | **bool**| Specifies whether to exclude search by user or group ID. | [optional] 
@@ -652,6 +731,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     api_instance = docspace_api_sdk.FoldersApi(api_client)
     folder_id = 9846 # int | The folder ID.
     user_id_or_group_id = '75a5f745-f697-4418-b38d-0fe0d277e258' # str | The user or group ID. (optional)
+    shared_by = '75a5f745-f697-4418-b38d-0fe0d277e258' # str | The identifier of the user who shared the folder or file. (optional)
     filter_type = docspace_api_sdk.FilterType() # FilterType | The filter type. (optional)
     room_id = 9846 # int | The room ID. (optional)
     exclude_subject = true # bool | Specifies whether to exclude search by user or group ID. (optional)
@@ -668,7 +748,8 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     location = docspace_api_sdk.Location() # Location | The location context of the request, specifying the area  where the operation is performed, such as a room, documents, or a link. (optional)
 
     try:
-        api_response = api_instance.get_folder_by_folder_id(folder_id, user_id_or_group_id=user_id_or_group_id, filter_type=filter_type, room_id=room_id, exclude_subject=exclude_subject, apply_filter_option=apply_filter_option, extension=extension, search_area=search_area, forms_item_key=forms_item_key, forms_item_type=forms_item_type, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value, location=location)
+        # Get a folder by ID
+        api_response = api_instance.get_folder_by_folder_id(folder_id, user_id_or_group_id=user_id_or_group_id, shared_by=shared_by, filter_type=filter_type, room_id=room_id, exclude_subject=exclude_subject, apply_filter_option=apply_filter_option, extension=extension, search_area=search_area, forms_item_key=forms_item_key, forms_item_type=forms_item_type, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value, location=location)
         print("The response of FoldersApi->get_folder_by_folder_id:\n")
         pprint(api_response)
     except Exception as e:
@@ -696,7 +777,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **get_folder_history**
 > HistoryArrayWrapper get_folder_history(folder_id, from_date=from_date, to_date=to_date, count=count, start_index=start_index)
 
-
+Returns the activity history of a folder with a specified identifier.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -717,7 +798,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -733,6 +814,15 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
@@ -745,6 +835,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     start_index = 1234 # int | The starting index from which the history records are retrieved in the request. (optional)
 
     try:
+        # Get folder history
         api_response = api_instance.get_folder_history(folder_id, from_date=from_date, to_date=to_date, count=count, start_index=start_index)
         print("The response of FoldersApi->get_folder_history:\n")
         pprint(api_response)
@@ -765,6 +856,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | List of actions in the folder |  -  |
+**401** | Unauthorized |  -  |
 **403** | You don&#39;t have enough permission to perform the operation |  -  |
 **404** | The required folder was not found |  -  |
 
@@ -773,7 +865,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **get_folder_info**
 > FolderIntegerWrapper get_folder_info(folder_id)
 
-
+Returns the detailed information about a folder with the ID specified in the request.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -813,6 +905,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     folder_id = 9846 # int | The folder unique identifier.
 
     try:
+        # Get folder information
         api_response = api_instance.get_folder_info(folder_id)
         print("The response of FoldersApi->get_folder_info:\n")
         pprint(api_response)
@@ -839,7 +932,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **get_folder_links**
 > FileShareArrayWrapper get_folder_links(id)
 
-
+Returns the links of the folder with the ID specified in the request.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -856,7 +949,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -871,6 +964,15 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
@@ -879,6 +981,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     id = 9846 # int | The folder ID.
 
     try:
+        # Get the folder links
         api_response = api_instance.get_folder_links(id)
         print("The response of FoldersApi->get_folder_links:\n")
         pprint(api_response)
@@ -899,13 +1002,14 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Folder security information |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_folder_path**
 > FileEntryBaseArrayWrapper get_folder_path(folder_id)
 
-
+Returns a path to the folder with the ID specified in the request.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -922,7 +1026,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -937,6 +1041,15 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
@@ -945,6 +1058,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     folder_id = 9846 # int | The folder unique identifier.
 
     try:
+        # Get the folder path
         api_response = api_instance.get_folder_path(folder_id)
         print("The response of FoldersApi->get_folder_path:\n")
         pprint(api_response)
@@ -965,6 +1079,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | List of file entry information |  -  |
+**401** | Unauthorized |  -  |
 **403** | You don&#39;t have enough permission to view the folder content |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -972,7 +1087,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **get_folder_primary_external_link**
 > FileShareWrapper get_folder_primary_external_link(id, count=count, start_index=start_index)
 
-
+Returns the primary external link by the identifier specified in the request.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -1016,6 +1131,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     start_index = 1234 # int | The starting index for the query results. (optional)
 
     try:
+        # Get primary external link
         api_response = api_instance.get_folder_primary_external_link(id, count=count, start_index=start_index)
         print("The response of FoldersApi->get_folder_primary_external_link:\n")
         pprint(api_response)
@@ -1043,7 +1159,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **get_folder_recent**
 > FolderContentIntegerWrapper get_folder_recent(user_id_or_group_id=user_id_or_group_id, filter_type=filter_type, exclude_subject=exclude_subject, apply_filter_option=apply_filter_option, search_area=search_area, extension=extension, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value)
 
-
+Returns the detailed list of files located in the Recent section.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -1070,7 +1186,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -1089,6 +1205,15 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
@@ -1107,6 +1232,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     filter_value = 'some text' # str | The text used for filtering or searching folder contents. (optional)
 
     try:
+        # Get the Recent section
         api_response = api_instance.get_folder_recent(user_id_or_group_id=user_id_or_group_id, filter_type=filter_type, exclude_subject=exclude_subject, apply_filter_option=apply_filter_option, search_area=search_area, extension=extension, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value)
         print("The response of FoldersApi->get_folder_recent:\n")
         pprint(api_response)
@@ -1127,6 +1253,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The Recent section contents |  -  |
+**401** | Unauthorized |  -  |
 **403** | You don&#39;t have enough permission to view the folder content |  -  |
 **404** | The required folder was not found |  -  |
 
@@ -1135,7 +1262,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **get_folders**
 > FileEntryBaseArrayWrapper get_folders(folder_id)
 
-
+Returns a list of all the subfolders from a folder with the ID specified in the request.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -1152,7 +1279,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -1167,6 +1294,15 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
@@ -1175,6 +1311,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     folder_id = 9846 # int | The folder unique identifier.
 
     try:
+        # Get subfolders
         api_response = api_instance.get_folders(folder_id)
         print("The response of FoldersApi->get_folders:\n")
         pprint(api_response)
@@ -1195,6 +1332,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | List of file entry information |  -  |
+**401** | Unauthorized |  -  |
 **403** | You don&#39;t have enough permission to view the folder content |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -1202,7 +1340,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **get_my_folder**
 > FolderContentIntegerWrapper get_my_folder(user_id_or_group_id=user_id_or_group_id, filter_type=filter_type, apply_filter_option=apply_filter_option, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value)
 
-
+Returns the detailed list of files and folders located in the My documents section.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -1226,7 +1364,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -1244,6 +1382,15 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
@@ -1259,6 +1406,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     filter_value = 'some text' # str | The text used for filtering or searching folder contents. (optional)
 
     try:
+        # Get the My documents section
         api_response = api_instance.get_my_folder(user_id_or_group_id=user_id_or_group_id, filter_type=filter_type, apply_filter_option=apply_filter_option, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value)
         print("The response of FoldersApi->get_my_folder:\n")
         pprint(api_response)
@@ -1279,6 +1427,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The My documents section contents |  -  |
+**401** | Unauthorized |  -  |
 **403** | You don&#39;t have enough permission to view the folder content |  -  |
 **404** | The required folder was not found |  -  |
 
@@ -1287,7 +1436,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **get_new_folder_items**
 > FileEntryBaseArrayWrapper get_new_folder_items(folder_id)
 
-
+Returns a list of all the new items from a folder with the ID specified in the request.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -1304,7 +1453,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -1319,6 +1468,15 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
@@ -1327,6 +1485,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     folder_id = 9846 # int | The folder unique identifier.
 
     try:
+        # Get new folder items
         api_response = api_instance.get_new_folder_items(folder_id)
         print("The response of FoldersApi->get_new_folder_items:\n")
         pprint(api_response)
@@ -1347,6 +1506,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | List of file entry information |  -  |
+**401** | Unauthorized |  -  |
 **403** | You don&#39;t have enough permission to view the folder content |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -1354,7 +1514,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **get_privacy_folder**
 > FolderContentIntegerWrapper get_privacy_folder(user_id_or_group_id=user_id_or_group_id, filter_type=filter_type, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value)
 
-
+Returns the detailed list of files and folders located in the Private Room section.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -1377,7 +1537,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -1394,6 +1554,15 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
@@ -1408,6 +1577,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     filter_value = 'some text' # str | The text used as a filter or search criterion for folder content queries. (optional)
 
     try:
+        # Get the Private Room section
         api_response = api_instance.get_privacy_folder(user_id_or_group_id=user_id_or_group_id, filter_type=filter_type, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value)
         print("The response of FoldersApi->get_privacy_folder:\n")
         pprint(api_response)
@@ -1428,6 +1598,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The Private Room section contents |  -  |
+**401** | Unauthorized |  -  |
 **403** | You don&#39;t have enough permission to view the folder content |  -  |
 **404** | The required folder was not found |  -  |
 
@@ -1436,7 +1607,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **get_recent_folder**
 > FolderContentIntegerWrapper get_recent_folder(user_id_or_group_id=user_id_or_group_id, filter_type=filter_type, exclude_subject=exclude_subject, apply_filter_option=apply_filter_option, search_area=search_area, extension=extension, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value)
 
-
+Returns the detailed list of files located in the Recent section.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -1463,7 +1634,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -1482,6 +1653,15 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
@@ -1500,6 +1680,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     filter_value = 'some text' # str | The text used for filtering or searching folder contents. (optional)
 
     try:
+        # Get the Recent section
         api_response = api_instance.get_recent_folder(user_id_or_group_id=user_id_or_group_id, filter_type=filter_type, exclude_subject=exclude_subject, apply_filter_option=apply_filter_option, search_area=search_area, extension=extension, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value)
         print("The response of FoldersApi->get_recent_folder:\n")
         pprint(api_response)
@@ -1520,6 +1701,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The Recent section contents |  -  |
+**401** | Unauthorized |  -  |
 **403** | You don&#39;t have enough permission to view the folder content |  -  |
 **404** | The required folder was not found |  -  |
 
@@ -1528,7 +1710,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **get_root_folders**
 > FolderContentIntegerArrayWrapper get_root_folders(user_id_or_group_id=user_id_or_group_id, filter_type=filter_type, without_trash=without_trash, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value)
 
-
+Returns all the sections matching the parameters specified in the request.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -1552,7 +1734,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -1569,6 +1751,15 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
@@ -1584,6 +1775,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     filter_value = 'some text' # str | The text used as a filter for searching or retrieving folder contents. (optional)
 
     try:
+        # Get filtered sections
         api_response = api_instance.get_root_folders(user_id_or_group_id=user_id_or_group_id, filter_type=filter_type, without_trash=without_trash, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value)
         print("The response of FoldersApi->get_root_folders:\n")
         pprint(api_response)
@@ -1604,6 +1796,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | List of section contents with the following parameters |  -  |
+**401** | Unauthorized |  -  |
 **403** | You don&#39;t have enough permission to view the folder content |  -  |
 **404** | The required folder was not found |  -  |
 
@@ -1612,7 +1805,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **get_trash_folder**
 > FolderContentIntegerWrapper get_trash_folder(user_id_or_group_id=user_id_or_group_id, filter_type=filter_type, apply_filter_option=apply_filter_option, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value)
 
-
+Returns the detailed list of files and folders located in the Trash section.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -1636,7 +1829,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -1654,6 +1847,15 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
@@ -1669,6 +1871,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     filter_value = 'some text' # str | The text used for filtering or searching folder contents. (optional)
 
     try:
+        # Get the Trash section
         api_response = api_instance.get_trash_folder(user_id_or_group_id=user_id_or_group_id, filter_type=filter_type, apply_filter_option=apply_filter_option, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value)
         print("The response of FoldersApi->get_trash_folder:\n")
         pprint(api_response)
@@ -1689,6 +1892,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The Trash section contents |  -  |
+**401** | Unauthorized |  -  |
 **403** | You don&#39;t have enough permission to view the folder content |  -  |
 **404** | The required folder was not found |  -  |
 
@@ -1697,7 +1901,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **insert_file**
 > FileIntegerWrapper insert_file(folder_id, insert_file_file=insert_file_file, insert_file_title=insert_file_title, insert_file_create_new_if_exist=insert_file_create_new_if_exist, insert_file_keep_convert_status=insert_file_keep_convert_status, insert_file_stream_can_read=insert_file_stream_can_read, insert_file_stream_can_write=insert_file_stream_can_write, insert_file_stream_can_seek=insert_file_stream_can_seek, insert_file_stream_can_timeout=insert_file_stream_can_timeout, insert_file_stream_length=insert_file_stream_length, insert_file_stream_position=insert_file_stream_position, insert_file_stream_read_timeout=insert_file_stream_read_timeout, insert_file_stream_write_timeout=insert_file_stream_write_timeout)
 
-
+Inserts a file specified in the request to the selected folder by single file uploading.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -1726,7 +1930,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -1741,6 +1945,15 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
@@ -1761,6 +1974,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     insert_file_stream_write_timeout = 56 # int |  (optional)
 
     try:
+        # Insert a file
         api_response = api_instance.insert_file(folder_id, insert_file_file=insert_file_file, insert_file_title=insert_file_title, insert_file_create_new_if_exist=insert_file_create_new_if_exist, insert_file_keep_convert_status=insert_file_keep_convert_status, insert_file_stream_can_read=insert_file_stream_can_read, insert_file_stream_can_write=insert_file_stream_can_write, insert_file_stream_can_seek=insert_file_stream_can_seek, insert_file_stream_can_timeout=insert_file_stream_can_timeout, insert_file_stream_length=insert_file_stream_length, insert_file_stream_position=insert_file_stream_position, insert_file_stream_read_timeout=insert_file_stream_read_timeout, insert_file_stream_write_timeout=insert_file_stream_write_timeout)
         print("The response of FoldersApi->insert_file:\n")
         pprint(api_response)
@@ -1781,6 +1995,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Inserted file |  -  |
+**401** | Unauthorized |  -  |
 **403** | You don&#39;t have enough permission to create |  -  |
 **404** | Folder not found |  -  |
 
@@ -1789,7 +2004,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **insert_file_to_my_from_body**
 > FileIntegerWrapper insert_file_to_my_from_body(file=file, title=title, create_new_if_exist=create_new_if_exist, keep_convert_status=keep_convert_status, stream_can_read=stream_can_read, stream_can_write=stream_can_write, stream_can_seek=stream_can_seek, stream_can_timeout=stream_can_timeout, stream_length=stream_length, stream_position=stream_position, stream_read_timeout=stream_read_timeout, stream_write_timeout=stream_write_timeout)
 
-
+Inserts a file specified in the request to the My documents section by single file uploading.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -1817,7 +2032,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -1832,6 +2047,15 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
@@ -1851,6 +2075,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     stream_write_timeout = 56 # int |  (optional)
 
     try:
+        # Insert a file to the My documents section
         api_response = api_instance.insert_file_to_my_from_body(file=file, title=title, create_new_if_exist=create_new_if_exist, keep_convert_status=keep_convert_status, stream_can_read=stream_can_read, stream_can_write=stream_can_write, stream_can_seek=stream_can_seek, stream_can_timeout=stream_can_timeout, stream_length=stream_length, stream_position=stream_position, stream_read_timeout=stream_read_timeout, stream_write_timeout=stream_write_timeout)
         print("The response of FoldersApi->insert_file_to_my_from_body:\n")
         pprint(api_response)
@@ -1871,6 +2096,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Inserted file |  -  |
+**401** | Unauthorized |  -  |
 **403** | You don&#39;t have enough permission to create |  -  |
 **404** | Folder not found |  -  |
 
@@ -1879,7 +2105,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **rename_folder**
 > FolderIntegerWrapper rename_folder(folder_id, create_folder)
 
-
+Renames the selected folder with a new title specified in the request.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -1897,7 +2123,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -1913,6 +2139,15 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
@@ -1922,6 +2157,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     create_folder = docspace_api_sdk.CreateFolder() # CreateFolder | The parameters for creating a folder.
 
     try:
+        # Rename a folder
         api_response = api_instance.rename_folder(folder_id, create_folder)
         print("The response of FoldersApi->rename_folder:\n")
         pprint(api_response)
@@ -1942,6 +2178,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Folder parameters |  -  |
+**401** | Unauthorized |  -  |
 **403** | You don&#39;t have enough permission to rename the folder |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -1949,7 +2186,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **set_folder_order**
 > FolderIntegerWrapper set_folder_order(folder_id, order_request_dto=order_request_dto)
 
-
+Sets the order of a folder with ID specified in the request.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -1967,7 +2204,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -1983,6 +2220,15 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
@@ -1992,6 +2238,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     order_request_dto = docspace_api_sdk.OrderRequestDto() # OrderRequestDto | The folder order information. (optional)
 
     try:
+        # Set folder order
         api_response = api_instance.set_folder_order(folder_id, order_request_dto=order_request_dto)
         print("The response of FoldersApi->set_folder_order:\n")
         pprint(api_response)
@@ -2012,13 +2259,14 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | List of file operations |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **set_folder_primary_external_link**
 > FileShareWrapper set_folder_primary_external_link(id, folder_link_request)
 
-
+Sets the folder external link with the ID specified in the request.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -2036,7 +2284,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -2052,6 +2300,15 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
@@ -2061,6 +2318,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     folder_link_request = docspace_api_sdk.FolderLinkRequest() # FolderLinkRequest | The folder link parameters.
 
     try:
+        # Set the folder external link
         api_response = api_instance.set_folder_primary_external_link(id, folder_link_request)
         print("The response of FoldersApi->set_folder_primary_external_link:\n")
         pprint(api_response)
@@ -2081,13 +2339,20 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Folder information |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **upload_file**
 > ObjectWrapper upload_file(folder_id, upload_request_dto=upload_request_dto)
 
+Uploads a file specified in the request to the selected folder by single file uploading or standart multipart/form-data method.
 
+ **Note**:  You can upload files in two different ways:
+ <ol>
+<li>Using single file upload. You should set the Content-Type and Content-Disposition headers to specify a file name and content type, and send the file to the request body.</li>
+<li>Using standart multipart/form-data method.</li>
+</ol>
 
 For more information, see [api.onlyoffice.com]().
 
@@ -2105,7 +2370,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -2121,6 +2386,15 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
@@ -2130,6 +2404,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     upload_request_dto = docspace_api_sdk.UploadRequestDto() # UploadRequestDto | The request parameters for uploading a file. (optional)
 
     try:
+        # Upload a file
         api_response = api_instance.upload_file(folder_id, upload_request_dto=upload_request_dto)
         print("The response of FoldersApi->upload_file:\n")
         pprint(api_response)
@@ -2150,6 +2425,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Inserted file |  -  |
+**401** | Unauthorized |  -  |
 **403** | You don&#39;t have enough permission to create |  -  |
 **404** | Folder not found |  -  |
 
@@ -2158,7 +2434,13 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **upload_file_to_my**
 > ObjectWrapper upload_file_to_my(in_dto=in_dto)
 
+Uploads a file specified in the request to the My documents section by single file uploading or standart multipart/form-data method.
 
+ **Note**:  You can upload files in two different ways:
+ <ol>
+<li>Using single file upload. You should set the Content-Type and Content-Disposition headers to specify a file name and content type, and send the file to the request body.</li>
+<li>Using standart multipart/form-data method.</li>
+</ol>
 
 For more information, see [api.onlyoffice.com]().
 
@@ -2175,7 +2457,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -2191,6 +2473,15 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
@@ -2199,6 +2490,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     in_dto = docspace_api_sdk.UploadRequestDto() # UploadRequestDto | The request parameters for uploading a file. (optional)
 
     try:
+        # Upload a file to the My documents section
         api_response = api_instance.upload_file_to_my(in_dto=in_dto)
         print("The response of FoldersApi->upload_file_to_my:\n")
         pprint(api_response)
@@ -2219,6 +2511,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Uploaded file(s) |  -  |
+**401** | Unauthorized |  -  |
 **403** | You don&#39;t have enough permission to create |  -  |
 **404** | File not found |  -  |
 
