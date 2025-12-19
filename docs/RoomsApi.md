@@ -2614,7 +2614,7 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.RoomsApi(api_client)
-    id = 9079 # int | The room ID.
+    id = 9846 # int | The room ID.
 
     try:
         # Start the room index export
@@ -2921,7 +2921,7 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.RoomsApi(api_client)
-    id = 9079 # int | The room ID.
+    id = 9846 # int | The room ID.
     update_room_request = docspace_api_sdk.UpdateRoomRequest() # UpdateRoomRequest | The request parameters for updating a room.
 
     try:

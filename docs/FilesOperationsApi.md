@@ -553,7 +553,7 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.OperationsApi(api_client)
-    folder_id = 9846 # int | The session folder ID.
+    folder_id = 9079 # int | The session folder ID.
     session_request = docspace_api_sdk.SessionRequest() # SessionRequest | The session parameters.
 
     try:
@@ -1084,7 +1084,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.OperationsApi(api_client)
     operation_type = docspace_api_sdk.FileOperationType() # FileOperationType | Specifies the type of file operation to be retrieved.
-    id = '9846' # str | The ID of the file operation. (optional)
+    id = '9079' # str | The ID of the file operation. (optional)
 
     try:
         # Get file operation statuses

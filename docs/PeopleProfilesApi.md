@@ -1020,7 +1020,7 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.ProfilesApi(api_client)
-    userid = '9079' # str | The user ID.
+    userid = '9846' # str | The user ID.
     update_member_request_dto = docspace_api_sdk.UpdateMemberRequestDto() # UpdateMemberRequestDto | The request parameters for updating the user information.
 
     try:

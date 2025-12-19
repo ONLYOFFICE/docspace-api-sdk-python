@@ -18,12 +18,11 @@ Method | HTTP request | Description
 [**get_folder_links**](#get_folder_links) | **GET** /api/2.0/files/folder/{id}/links | Get the folder links
 [**get_folder_path**](#get_folder_path) | **GET** /api/2.0/files/folder/{folderId}/path | Get the folder path
 [**get_folder_primary_external_link**](#get_folder_primary_external_link) | **GET** /api/2.0/files/folder/{id}/link | Get primary external link
-[**get_folder_recent**](#get_folder_recent) | **GET** /api/2.0/files/recent | Get the Recent section
 [**get_folders**](#get_folders) | **GET** /api/2.0/files/{folderId}/subfolders | Get subfolders
 [**get_my_folder**](#get_my_folder) | **GET** /api/2.0/files/@my | Get the My documents section
 [**get_new_folder_items**](#get_new_folder_items) | **GET** /api/2.0/files/{folderId}/news | Get new folder items
 [**get_privacy_folder**](#get_privacy_folder) | **GET** /api/2.0/files/@privacy | Get the Private Room section
-[**get_recent_folder**](#get_recent_folder) | **GET** /api/2.0/files/@recent | Get the Recent section
+[**get_recent_folder**](#get_recent_folder) | **GET** /api/2.0/files/recent | Get the Recent section
 [**get_root_folders**](#get_root_folders) | **GET** /api/2.0/files/@root | Get filtered sections
 [**get_trash_folder**](#get_trash_folder) | **GET** /api/2.0/files/@trash | Get the Trash section
 [**insert_file**](#insert_file) | **POST** /api/2.0/files/{folderId}/insert | Insert a file
@@ -1153,109 +1152,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 |-------------|-------------|------------------|
 **200** | Folder security information |  -  |
 **404** | Not Found |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **get_folder_recent**
-> FolderContentIntegerWrapper get_folder_recent(user_id_or_group_id=user_id_or_group_id, filter_type=filter_type, exclude_subject=exclude_subject, apply_filter_option=apply_filter_option, search_area=search_area, extension=extension, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value)
-
-Returns the detailed list of files located in the Recent section.
-
-For more information, see [api.onlyoffice.com]().
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **user_id_or_group_id** | **str**| The user or group ID. | [optional] 
- **filter_type** | [**FilterType**](.md)| The filter type. | [optional] 
- **exclude_subject** | **bool**| Specifies whether to exclude search by user or group ID. | [optional] 
- **apply_filter_option** | [**ApplyFilterOption**](.md)| Specifies whether to return only files, only folders or all elements. | [optional] 
- **search_area** | [**SearchArea**](.md)| The search area. | [optional] 
- **extension** | [**List[str]**](str.md)| Specifies whether to search for a specific file extension in the Recent folder. | [optional] 
- **count** | **int**| The maximum number of items to return. | [optional] 
- **start_index** | **int**| The starting position of the results to be returned in the query response. | [optional] 
- **sort_by** | **str**| Specifies the sorting criteria for the folder request. | [optional] 
- **sort_order** | [**SortOrder**](.md)| The order in which the results are sorted. | [optional] 
- **filter_value** | **str**| The text used for filtering or searching folder contents. | [optional] 
-
-### Return type
-
-[**FolderContentIntegerWrapper**](FolderContentIntegerWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### Example
-
-
-```python
-import docspace_api_sdk
-from docspace_api_sdk.models.apply_filter_option import ApplyFilterOption
-from docspace_api_sdk.models.filter_type import FilterType
-from docspace_api_sdk.models.folder_content_integer_wrapper import FolderContentIntegerWrapper
-from docspace_api_sdk.models.search_area import SearchArea
-from docspace_api_sdk.models.sort_order import SortOrder
-from docspace_api_sdk.rest import ApiException
-from pprint import pprint
-
-configuration = docspace_api_sdk.Configuration(
-    host = "https://your-docspace.onlyoffice.com"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace_api_sdk.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-
-# Enter a context with an instance of the API client
-with docspace_api_sdk.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace_api_sdk.FoldersApi(api_client)
-    user_id_or_group_id = '75a5f745-f697-4418-b38d-0fe0d277e258' # str | The user or group ID. (optional)
-    filter_type = docspace_api_sdk.FilterType() # FilterType | The filter type. (optional)
-    exclude_subject = true # bool | Specifies whether to exclude search by user or group ID. (optional)
-    apply_filter_option = docspace_api_sdk.ApplyFilterOption() # ApplyFilterOption | Specifies whether to return only files, only folders or all elements. (optional)
-    search_area = docspace_api_sdk.SearchArea() # SearchArea | The search area. (optional)
-    extension = ['.txt'] # List[str] | Specifies whether to search for a specific file extension in the Recent folder. (optional)
-    count = 1234 # int | The maximum number of items to return. (optional)
-    start_index = 1234 # int | The starting position of the results to be returned in the query response. (optional)
-    sort_by = 'some text' # str | Specifies the sorting criteria for the folder request. (optional)
-    sort_order = docspace_api_sdk.SortOrder() # SortOrder | The order in which the results are sorted. (optional)
-    filter_value = 'some text' # str | The text used for filtering or searching folder contents. (optional)
-
-    try:
-        # Get the Recent section
-        api_response = api_instance.get_folder_recent(user_id_or_group_id=user_id_or_group_id, filter_type=filter_type, exclude_subject=exclude_subject, apply_filter_option=apply_filter_option, search_area=search_area, extension=extension, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value)
-        print("The response of FoldersApi->get_folder_recent:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling FoldersApi->get_folder_recent: %s\n" % e)
-```
-
-
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | The Recent section contents |  -  |
-**401** | Unauthorized |  -  |
-**403** | You don&#39;t have enough permission to view the folder content |  -  |
-**404** | The required folder was not found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

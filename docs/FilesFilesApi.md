@@ -2805,7 +2805,7 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.FilesApi(api_client)
-    file_id = 9846 # int | The editing file ID from the request.
+    file_id = 9079 # int | The editing file ID from the request.
     file_extension = 'file_extension_example' # str | The editing file extension from the request. (optional)
     download_uri = 'download_uri_example' # str | The URI to download the editing file. (optional)
     file = None # bytearray | The request file stream. (optional)
@@ -3517,7 +3517,7 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.FilesApi(api_client)
-    file_id = 9079 # int | The file ID.
+    file_id = 9846 # int | The file ID.
     favorite = true # bool | Specifies if the file is marked as favorite or not. (optional)
 
     try:

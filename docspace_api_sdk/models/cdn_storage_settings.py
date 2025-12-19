@@ -64,8 +64,10 @@ class CdnStorageSettings(BaseStorageSettingsCdnStorageSettings):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * OpenAPI `readOnly` fields are excluded.
         """
         excluded_fields: Set[str] = set([
+            "id",
         ])
 
         _dict = self.model_dump(

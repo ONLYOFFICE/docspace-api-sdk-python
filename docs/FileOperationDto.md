@@ -14,7 +14,6 @@ Name | Type | Description | Notes
 **url** | **str** | The file operation URL. | [optional] 
 **files** | [**List[FileEntryBaseDto]**](FileEntryBaseDto.md) | The list of files of the file operation. | [optional] 
 **folders** | [**List[FileEntryBaseDto]**](FileEntryBaseDto.md) | The list of folders of the file operation. | [optional] 
-**status** | [**DistributedTaskStatus**](DistributedTaskStatus.md) |  | [optional] 
 
 ## Example
 

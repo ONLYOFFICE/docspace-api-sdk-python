@@ -9,8 +9,8 @@ Method | HTTP request | Description
 [**get_external_share_data**](#get_external_share_data) | **GET** /api/2.0/files/share/{key} | Get the external data
 [**get_file_security_info**](#get_file_security_info) | **GET** /api/2.0/files/file/{id}/share | Get the shared file information
 [**get_folder_security_info**](#get_folder_security_info) | **GET** /api/2.0/files/folder/{id}/share | Get the shared folder information
-[**get_groups_members_with_file_security**](#get_groups_members_with_file_security) | **GET** /api/2.0/files/file/{fileId}/group/{groupId}/share | Get group members with security information
-[**get_groups_members_with_folder_security**](#get_groups_members_with_folder_security) | **GET** /api/2.0/files/folder/{folderId}/group/{groupId}/share | Get group members with security information
+[**get_groups_members_with_file_security**](#get_groups_members_with_file_security) | **GET** /api/2.0/files/file/{fileId}/group/{groupId}/share | Get file group members with security information
+[**get_groups_members_with_folder_security**](#get_groups_members_with_folder_security) | **GET** /api/2.0/files/folder/{folderId}/group/{groupId}/share | Get folder group members with security information
 [**get_security_info**](#get_security_info) | **POST** /api/2.0/files/share | Get the sharing rights
 [**get_shared_users**](#get_shared_users) | **GET** /api/2.0/files/file/{fileId}/sharedusers | Get user access rights by file ID
 [**remove_security_info**](#remove_security_info) | **DELETE** /api/2.0/files/share | Remove the sharing rights
@@ -462,7 +462,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     filter_value = 'some text' # str | The filter value used for searching or querying group members based on text input. (optional)
 
     try:
-        # Get group members with security information
+        # Get file group members with security information
         api_response = api_instance.get_groups_members_with_file_security(file_id, group_id, count=count, start_index=start_index, filter_value=filter_value)
         print("The response of SharingApi->get_groups_members_with_file_security:\n")
         pprint(api_response)
@@ -547,7 +547,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     filter_value = 'some text' # str | The filter value used for searching or querying group members based on text input. (optional)
 
     try:
-        # Get group members with security information
+        # Get folder group members with security information
         api_response = api_instance.get_groups_members_with_folder_security(folder_id, group_id, count=count, start_index=start_index, filter_value=filter_value)
         print("The response of SharingApi->get_groups_members_with_folder_security:\n")
         pprint(api_response)

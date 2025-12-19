@@ -24,15 +24,15 @@ from typing_extensions import Self
 
 class VectorizationStatus(int, Enum):
     """
-    VectorizationStatus
+    [0 - In Progress, 1 - Completed, 2 - Failed]
     """
 
     """
     allowed enum values
     """
-    NUMBER_0 = 0
-    NUMBER_1 = 1
-    NUMBER_2 = 2
+    InProgress = 0
+    Completed = 1
+    Failed = 2
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:

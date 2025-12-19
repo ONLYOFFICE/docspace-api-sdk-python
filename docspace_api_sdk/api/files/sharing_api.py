@@ -1551,7 +1551,7 @@ class SharingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> GroupMemberSecurityRequestArrayWrapper:
-        """Get group members with security information
+        """Get file group members with security information
 
         Returns the group members with their file security information.
 
@@ -1635,7 +1635,7 @@ class SharingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[GroupMemberSecurityRequestArrayWrapper]:
-        """Get group members with security information
+        """Get file group members with security information
 
         Returns the group members with their file security information.
 
@@ -1719,7 +1719,7 @@ class SharingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get group members with security information
+        """Get file group members with security information
 
         Returns the group members with their file security information.
 
@@ -1886,7 +1886,7 @@ class SharingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> GroupMemberSecurityRequestArrayWrapper:
-        """Get group members with security information
+        """Get folder group members with security information
 
         Returns the group members with their folder security information.
 
@@ -1970,7 +1970,7 @@ class SharingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[GroupMemberSecurityRequestArrayWrapper]:
-        """Get group members with security information
+        """Get folder group members with security information
 
         Returns the group members with their folder security information.
 
@@ -2054,7 +2054,7 @@ class SharingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get group members with security information
+        """Get folder group members with security information
 
         Returns the group members with their folder security information.
 
