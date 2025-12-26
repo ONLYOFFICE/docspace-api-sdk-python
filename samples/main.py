@@ -30,12 +30,13 @@ import time
 
 def main():
     config = Configuration()
+    config.host = "https://your-docspace.onlyoffice.com"
     with ApiClient(config) as api_client:
         auth_instance = AuthenticationApi(api_client)
         
         auth_request_data = AuthRequestsDto()
-        auth_request_data.password = ""
-        auth_request_data.user_name = ""
+        auth_request_data.password = "11111111"
+        auth_request_data.user_name = "example@onlyoffice.com"
         
         try:
             auth_response = auth_instance.authenticate_me(auth_request_data)
@@ -46,8 +47,7 @@ def main():
             print(responseFolderMy.response.current.id)
 
             folderMyId = responseFolderMy.response.current.id
-            folderData = CreateFolder()
-            folderData.title = "TestTitle"
+            folderData = CreateFolder(title="TestTitle")
             createFolder = folder_instance.create_folder(folder_id=folderMyId, create_folder=folderData, _headers=custom_headers)
             print(createFolder.response.id)
 
@@ -55,8 +55,7 @@ def main():
             getFolder = folder_instance.get_folder_by_folder_id(folder_id=newFolderId, _headers=custom_headers)
             print(getFolder.status_code)
 
-            newFolderData = CreateFolder()
-            newFolderData.title = "Updated title"
+            newFolderData = CreateFolder(title="Updated title")
             updateFolder = folder_instance.rename_folder(folder_id=newFolderId, create_folder=newFolderData, _headers=custom_headers)
             print(updateFolder.status_code)
 
@@ -66,10 +65,8 @@ def main():
             deleteFolder = folder_instance.delete_folder(folder_id=newFolderId, delete_folder=deleteFolderData, _headers=custom_headers)
             print(deleteFolder.status_code)
 
-            sort = SortedByType.DateAndTime
-
             room_instance = RoomsApi(api_client)
-            getRoom = room_instance.with_fields("current.security,folders.id").get_rooms_folder(None, None, 0, None, None, None, None, None, None, None, 100, None, sort, "descending", None)
+            getRoom = room_instance.with_fields("current.security,folders.id").get_rooms_folder(None, None, 0, None, None, None, None, None, None, None, 100, None, "DateAndTime", 1, None, _headers=custom_headers)
             print(getRoom.status_code)
 
             backup_instanse = BackupApi(api_client)
