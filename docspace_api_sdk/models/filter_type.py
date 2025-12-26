@@ -30,7 +30,7 @@ class FilterType(int, Enum):
     """
     allowed enum values
     """
-    None = 0
+    _None = 0
     FilesOnly = 1
     FoldersOnly = 2
     DocumentsOnly = 3
