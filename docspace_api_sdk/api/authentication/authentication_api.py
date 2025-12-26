@@ -50,6 +50,7 @@ class AuthenticationApi:
 
 
 
+
     @validate_call
     def authenticate_me(
         self,
@@ -317,9 +318,12 @@ class AuthenticationApi:
         _auth_settings: List[str] = [
         ]
 
+
+        resource_path = "/api/2.0/authentication"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/authentication',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -617,9 +621,12 @@ class AuthenticationApi:
         _auth_settings: List[str] = [
         ]
 
+
+        resource_path = "/api/2.0/authentication/{code}"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/authentication/{code}',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -890,9 +897,12 @@ class AuthenticationApi:
         _auth_settings: List[str] = [
         ]
 
+
+        resource_path = "/api/2.0/authentication/confirm"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/authentication/confirm',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1135,9 +1145,12 @@ class AuthenticationApi:
         _auth_settings: List[str] = [
         ]
 
+
+        resource_path = "/api/2.0/authentication"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/authentication',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1380,9 +1393,12 @@ class AuthenticationApi:
         _auth_settings: List[str] = [
         ]
 
+
+        resource_path = "/api/2.0/authentication/logout"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/authentication/logout',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1662,9 +1678,12 @@ class AuthenticationApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/authentication/setphone"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/authentication/setphone',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1941,9 +1960,12 @@ class AuthenticationApi:
         _auth_settings: List[str] = [
         ]
 
+
+        resource_path = "/api/2.0/authentication/sendsms"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/authentication/sendsms',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

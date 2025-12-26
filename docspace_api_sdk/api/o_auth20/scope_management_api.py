@@ -42,6 +42,7 @@ class ScopeManagementApi:
 
 
 
+
     @validate_call
     def get_scopes(
         self,
@@ -282,9 +283,12 @@ class ScopeManagementApi:
             'asc_auth_key'
         ]
 
+
+        resource_path = "/api/2.0/scopes"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/scopes',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

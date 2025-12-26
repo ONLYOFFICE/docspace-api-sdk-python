@@ -49,6 +49,7 @@ class PhotosApi:
 
 
 
+
     @validate_call
     def create_member_photo_thumbnails(
         self,
@@ -334,9 +335,12 @@ class PhotosApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/people/{userid}/photo/thumbnails"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/people/{userid}/photo/thumbnails',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -609,9 +613,12 @@ class PhotosApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/people/{userid}/photo"
+
         return self.api_client.param_serialize(
             method='DELETE',
-            resource_path='/api/2.0/people/{userid}/photo',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -884,9 +891,12 @@ class PhotosApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/people/{userid}/photo"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/people/{userid}/photo',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1187,9 +1197,12 @@ class PhotosApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/people/{userid}/photo"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/people/{userid}/photo',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1497,9 +1510,12 @@ class PhotosApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/people/{userid}/photo"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/people/{userid}/photo',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

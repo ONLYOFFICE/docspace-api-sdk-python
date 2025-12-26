@@ -53,6 +53,7 @@ class GroupApi:
         self.api_client = api_client
         self._fields = None
 
+
     def with_fields(self, fields: str) -> GroupApi:
         self._fields = fields
         return self
@@ -322,9 +323,12 @@ class GroupApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/group"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/group',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -622,9 +626,12 @@ class GroupApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/group/{id}/members"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/group/{id}/members',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -894,9 +901,12 @@ class GroupApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/group/{id}"
+
         return self.api_client.param_serialize(
             method='DELETE',
-            resource_path='/api/2.0/group/{id}',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1183,9 +1193,12 @@ class GroupApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/group/{id}"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/group/{id}',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1452,9 +1465,12 @@ class GroupApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/group/user/{userid}"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/group/user/{userid}',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1827,9 +1843,12 @@ class GroupApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/group"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/group',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2114,9 +2133,12 @@ class GroupApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/group/{fromId}/members/{toId}"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/group/{fromId}/members/{toId}',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2414,9 +2436,12 @@ class GroupApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/group/{id}/members"
+
         return self.api_client.param_serialize(
             method='DELETE',
-            resource_path='/api/2.0/group/{id}/members',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2714,9 +2739,12 @@ class GroupApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/group/{id}/manager"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/group/{id}/manager',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3011,9 +3039,12 @@ class GroupApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/group/{id}/members"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/group/{id}/members',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3311,9 +3342,12 @@ class GroupApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/group/{id}"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/group/{id}',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

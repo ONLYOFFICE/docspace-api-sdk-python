@@ -49,6 +49,7 @@ class StorageApi:
 
 
 
+
     @validate_call
     def get_all_backup_storages(
         self,
@@ -305,9 +306,12 @@ class StorageApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/storage/backup"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/settings/storage/backup',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -562,9 +566,12 @@ class StorageApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/storage/cdn"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/settings/storage/cdn',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -819,9 +826,12 @@ class StorageApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/storage"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/settings/storage',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1073,9 +1083,12 @@ class StorageApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/storage/s3/regions"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/settings/storage/s3/regions',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1327,9 +1340,12 @@ class StorageApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/storage/progress"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/settings/storage/progress',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1577,9 +1593,12 @@ class StorageApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/storage/cdn"
+
         return self.api_client.param_serialize(
             method='DELETE',
-            resource_path='/api/2.0/settings/storage/cdn',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1827,9 +1846,12 @@ class StorageApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/storage"
+
         return self.api_client.param_serialize(
             method='DELETE',
-            resource_path='/api/2.0/settings/storage',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2115,9 +2137,12 @@ class StorageApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/storage/cdn"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/settings/storage/cdn',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2403,9 +2428,12 @@ class StorageApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/storage"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/settings/storage',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

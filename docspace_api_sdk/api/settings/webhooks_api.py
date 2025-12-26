@@ -55,6 +55,7 @@ class WebhooksApi:
         self.api_client = api_client
         self._fields = None
 
+
     def with_fields(self, fields: str) -> WebhooksApi:
         self._fields = fields
         return self
@@ -324,9 +325,12 @@ class WebhooksApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/webhook"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/settings/webhook',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -606,9 +610,12 @@ class WebhooksApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/webhook/enable"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/settings/webhook/enable',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -860,9 +867,12 @@ class WebhooksApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/webhook"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/settings/webhook',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1114,9 +1124,12 @@ class WebhooksApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/webhook/triggers"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/settings/webhook/triggers',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1558,9 +1571,12 @@ class WebhooksApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/webhooks/log"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/settings/webhooks/log',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1827,9 +1843,12 @@ class WebhooksApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/webhook/{id}"
+
         return self.api_client.param_serialize(
             method='DELETE',
-            resource_path='/api/2.0/settings/webhook/{id}',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2102,9 +2121,12 @@ class WebhooksApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/webhook/{id}/retry"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/settings/webhook/{id}/retry',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2384,9 +2406,12 @@ class WebhooksApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/webhook/retry"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/settings/webhook/retry',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2666,9 +2691,12 @@ class WebhooksApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/webhook"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/settings/webhook',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

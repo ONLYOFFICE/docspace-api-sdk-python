@@ -52,6 +52,7 @@ class ThirdPartyIntegrationApi:
 
 
 
+
     @validate_call
     def delete_third_party(
         self,
@@ -303,9 +304,12 @@ class ThirdPartyIntegrationApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/thirdparty/{providerId}"
+
         return self.api_client.param_serialize(
             method='DELETE',
-            resource_path='/api/2.0/files/thirdparty/{providerId}',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -574,9 +578,12 @@ class ThirdPartyIntegrationApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/thirdparty/providers"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/thirdparty/providers',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -828,9 +835,12 @@ class ThirdPartyIntegrationApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/thirdparty/backup"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/thirdparty/backup',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1082,9 +1092,12 @@ class ThirdPartyIntegrationApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/thirdparty/capabilities"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/thirdparty/capabilities',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1336,9 +1349,12 @@ class ThirdPartyIntegrationApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/thirdparty/common"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/thirdparty/common',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1590,9 +1606,12 @@ class ThirdPartyIntegrationApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/thirdparty"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/thirdparty',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1872,9 +1891,12 @@ class ThirdPartyIntegrationApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/thirdparty"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/files/thirdparty',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2154,9 +2176,12 @@ class ThirdPartyIntegrationApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/thirdparty/backup"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/files/thirdparty/backup',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

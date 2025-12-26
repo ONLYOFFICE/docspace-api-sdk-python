@@ -49,6 +49,7 @@ class TFASettingsApi:
 
 
 
+
     @validate_call
     def get_tfa_app_codes(
         self,
@@ -288,9 +289,12 @@ class TFASettingsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/tfaappcodes"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/settings/tfaappcodes',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -542,9 +546,12 @@ class TFASettingsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/tfaapp/confirm"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/settings/tfaapp/confirm',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -796,9 +803,12 @@ class TFASettingsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/tfaapp"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/settings/tfaapp',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1053,9 +1063,12 @@ class TFASettingsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/tfaapp/setup"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/settings/tfaapp/setup',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1335,9 +1348,12 @@ class TFASettingsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/tfaapp/validate"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/settings/tfaapp/validate',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1623,9 +1639,12 @@ class TFASettingsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/tfaappnewapp"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/settings/tfaappnewapp',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1880,9 +1899,12 @@ class TFASettingsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/tfaappnewcodes"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/settings/tfaappnewcodes',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2165,9 +2187,12 @@ class TFASettingsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/tfaapp"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/settings/tfaapp',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2453,9 +2478,12 @@ class TFASettingsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/tfaappwithlink"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/settings/tfaappwithlink',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

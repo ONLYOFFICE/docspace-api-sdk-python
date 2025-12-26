@@ -56,6 +56,7 @@ class SettingsApi:
 
 
 
+
     @validate_call
     def change_access_to_thirdparty(
         self,
@@ -320,9 +321,12 @@ class SettingsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/thirdparty"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/files/thirdparty',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -602,9 +606,12 @@ class SettingsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/settings/autocleanup"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/files/settings/autocleanup',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -885,9 +892,12 @@ class SettingsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/settings/dafaultaccessrights"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/files/settings/dafaultaccessrights',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1167,9 +1177,12 @@ class SettingsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/changedeleteconfrim"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/files/changedeleteconfrim',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1449,9 +1462,12 @@ class SettingsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/settings/downloadtargz"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/files/settings/downloadtargz',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1734,9 +1750,12 @@ class SettingsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/docservice"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/files/docservice',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2016,9 +2035,12 @@ class SettingsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/displayfileextension"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/files/displayfileextension',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2301,9 +2323,12 @@ class SettingsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/displayrecent"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/files/displayrecent',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2583,9 +2608,12 @@ class SettingsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/settings/external"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/files/settings/external',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2865,9 +2893,12 @@ class SettingsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/settings/externalsocialmedia"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/files/settings/externalsocialmedia',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3119,9 +3150,12 @@ class SettingsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/forcesave"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/files/forcesave',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3373,9 +3407,12 @@ class SettingsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/settings/autocleanup"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/settings/autocleanup',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3635,9 +3672,12 @@ class SettingsApi:
         _auth_settings: List[str] = [
         ]
 
+
+        resource_path = "/api/2.0/files/docservice"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/docservice',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3889,9 +3929,12 @@ class SettingsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/info"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/info',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -4134,9 +4177,12 @@ class SettingsApi:
         _auth_settings: List[str] = [
         ]
 
+
+        resource_path = "/api/2.0/files/settings"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/settings',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -4416,9 +4462,12 @@ class SettingsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/hideconfirmcanceloperation"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/files/hideconfirmcanceloperation',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -4698,9 +4747,12 @@ class SettingsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/hideconfirmconvert"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/files/hideconfirmconvert',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -4980,9 +5032,12 @@ class SettingsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/hideconfirmroomlifetime"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/files/hideconfirmroomlifetime',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -5234,9 +5289,12 @@ class SettingsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/@privacy/available"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/@privacy/available',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -5516,9 +5574,12 @@ class SettingsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/keepnewfilename"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/files/keepnewfilename',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -5798,9 +5859,12 @@ class SettingsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/settings/openeditorinsametab"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/files/settings/openeditorinsametab',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -6052,9 +6116,12 @@ class SettingsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/storeforcesave"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/files/storeforcesave',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -6334,9 +6401,12 @@ class SettingsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/storeoriginal"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/files/storeoriginal',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -6616,9 +6686,12 @@ class SettingsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/updateifexist"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/files/updateifexist',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

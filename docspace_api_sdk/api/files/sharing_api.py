@@ -57,6 +57,7 @@ class SharingApi:
 
 
 
+
     @validate_call
     def apply_external_share_password(
         self,
@@ -330,9 +331,12 @@ class SharingApi:
         _auth_settings: List[str] = [
         ]
 
+
+        resource_path = "/api/2.0/files/share/{key}/password"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/files/share/{key}/password',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -612,9 +616,12 @@ class SharingApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/owner"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/files/owner',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -906,9 +913,12 @@ class SharingApi:
         _auth_settings: List[str] = [
         ]
 
+
+        resource_path = "/api/2.0/files/share/{key}"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/share/{key}',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1209,9 +1219,12 @@ class SharingApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/file/{id}/share"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/file/{id}/share',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1512,9 +1525,12 @@ class SharingApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/folder/{id}/share"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/folder/{id}/share',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1847,9 +1863,12 @@ class SharingApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/file/{fileId}/group/{groupId}/share"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/file/{fileId}/group/{groupId}/share',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2182,9 +2201,12 @@ class SharingApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/folder/{folderId}/group/{groupId}/share"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/folder/{folderId}/group/{groupId}/share',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2464,9 +2486,12 @@ class SharingApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/share"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/files/share',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2733,9 +2758,12 @@ class SharingApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/file/{fileId}/sharedusers"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/file/{fileId}/sharedusers',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3015,9 +3043,12 @@ class SharingApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/share"
+
         return self.api_client.param_serialize(
             method='DELETE',
-            resource_path='/api/2.0/files/share',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3312,9 +3343,12 @@ class SharingApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/file/{fileId}/sendeditornotify"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/files/file/{fileId}/sendeditornotify',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3609,9 +3643,12 @@ class SharingApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/file/{fileId}/share"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/files/file/{fileId}/share',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3906,9 +3943,12 @@ class SharingApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/folder/{folderId}/share"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/files/folder/{folderId}/share',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -4188,9 +4228,12 @@ class SharingApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/share"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/files/share',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

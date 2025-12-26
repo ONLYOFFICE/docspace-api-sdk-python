@@ -69,9 +69,18 @@ class FoldersApi:
             api_client = ApiClient.get_default()
         self.api_client = api_client
         self._fields = None
+        self._use_at_recent = False
+
 
     def with_fields(self, fields: str) -> FoldersApi:
         self._fields = fields
+        return self
+    
+    def with_at_recent(self):
+        """
+        Use legacy /@recent path for the next request
+        """
+        self._use_at_recent = True
         return self
 
 
@@ -354,9 +363,12 @@ class FoldersApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/{folderId}/upload/check"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/files/{folderId}/upload/check',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -651,9 +663,12 @@ class FoldersApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/folder/{folderId}"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/files/folder/{folderId}',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -951,9 +966,12 @@ class FoldersApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/folder/{id}/link"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/files/folder/{id}/link',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1226,9 +1244,12 @@ class FoldersApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/folder/{folderId}/log/report"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/files/folder/{folderId}/log/report',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1523,9 +1544,12 @@ class FoldersApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/folder/{folderId}"
+
         return self.api_client.param_serialize(
             method='DELETE',
-            resource_path='/api/2.0/files/folder/{folderId}',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1904,9 +1928,12 @@ class FoldersApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/@favorites"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/@favorites',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2158,9 +2185,12 @@ class FoldersApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/filesusedspace"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/filesusedspace',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2418,9 +2448,12 @@ class FoldersApi:
         _auth_settings: List[str] = [
         ]
 
+
+        resource_path = "/api/2.0/files/{folderId}/formfilter"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/{folderId}/formfilter',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2956,9 +2989,12 @@ class FoldersApi:
         _auth_settings: List[str] = [
         ]
 
+
+        resource_path = "/api/2.0/files/{folderId}"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/{folderId}',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3299,9 +3335,12 @@ class FoldersApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/folder/{folderId}/log"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/folder/{folderId}/log',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3559,9 +3598,12 @@ class FoldersApi:
         _auth_settings: List[str] = [
         ]
 
+
+        resource_path = "/api/2.0/files/folder/{folderId}"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/folder/{folderId}',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3828,9 +3870,12 @@ class FoldersApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/folder/{id}/links"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/folder/{id}/links',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -4100,9 +4145,12 @@ class FoldersApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/folder/{folderId}/path"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/folder/{folderId}/path',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -4397,9 +4445,12 @@ class FoldersApi:
         _auth_settings: List[str] = [
         ]
 
+
+        resource_path = "/api/2.0/files/folder/{id}/link"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/folder/{id}/link',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -4669,9 +4720,12 @@ class FoldersApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/{folderId}/subfolders"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/{folderId}/subfolders',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -5067,9 +5121,12 @@ class FoldersApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/@my"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/@my',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -5339,9 +5396,12 @@ class FoldersApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/{folderId}/news"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/{folderId}/news',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -5720,9 +5780,12 @@ class FoldersApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/@privacy"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/@privacy',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -6170,9 +6233,14 @@ class FoldersApi:
             'OpenId'
         ]
 
+        recent_prefix = '@' if self._use_at_recent else ''
+        resource_path = '/api/2.0/files/{recent_prefix}recent'
+        self._use_at_recent = False
+
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/recent',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -6568,9 +6636,12 @@ class FoldersApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/@root"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/@root',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -6966,9 +7037,12 @@ class FoldersApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/@trash"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/@trash',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -7434,9 +7508,12 @@ class FoldersApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/{folderId}/insert"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/files/{folderId}/insert',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -7887,9 +7964,12 @@ class FoldersApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/@my/insert"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/files/@my/insert',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -8187,9 +8267,12 @@ class FoldersApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/folder/{folderId}"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/files/folder/{folderId}',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -8484,9 +8567,12 @@ class FoldersApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/folder/{folderId}/order"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/files/folder/{folderId}/order',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -8781,9 +8867,12 @@ class FoldersApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/folder/{id}/links"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/files/folder/{id}/links',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -9084,9 +9173,12 @@ class FoldersApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/{folderId}/upload"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/files/{folderId}/upload',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -9361,9 +9453,12 @@ class FoldersApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/@my/upload"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/files/@my/upload',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

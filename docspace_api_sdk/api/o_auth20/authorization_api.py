@@ -45,6 +45,7 @@ class AuthorizationApi:
 
 
 
+
     @validate_call
     def authorize_o_auth(
         self,
@@ -337,9 +338,12 @@ class AuthorizationApi:
             'asc_auth_key'
         ]
 
+
+        resource_path = "/oauth2/authorize"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/oauth2/authorize',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -673,9 +677,12 @@ class AuthorizationApi:
         _auth_settings: List[str] = [
         ]
 
+
+        resource_path = "/oauth2/token"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/oauth2/token',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -973,9 +980,12 @@ class AuthorizationApi:
             'asc_auth_key'
         ]
 
+
+        resource_path = "/oauth2/authorize"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/oauth2/authorize',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

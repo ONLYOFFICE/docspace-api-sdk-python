@@ -49,6 +49,7 @@ class ClientManagementApi:
 
 
 
+
     @validate_call
     def change_activation(
         self,
@@ -335,9 +336,12 @@ class ClientManagementApi:
             'asc_auth_key'
         ]
 
+
+        resource_path = "/api/2.0/clients/{clientId}/activation"
+
         return self.api_client.param_serialize(
             method='PATCH',
-            resource_path='/api/2.0/clients/{clientId}/activation',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -621,9 +625,12 @@ class ClientManagementApi:
             'asc_auth_key'
         ]
 
+
+        resource_path = "/api/2.0/clients"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/clients',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -897,9 +904,12 @@ class ClientManagementApi:
             'asc_auth_key'
         ]
 
+
+        resource_path = "/api/2.0/clients/{clientId}"
+
         return self.api_client.param_serialize(
             method='DELETE',
-            resource_path='/api/2.0/clients/{clientId}',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1173,9 +1183,12 @@ class ClientManagementApi:
             'asc_auth_key'
         ]
 
+
+        resource_path = "/api/2.0/clients/{clientId}/regenerate"
+
         return self.api_client.param_serialize(
             method='PATCH',
-            resource_path='/api/2.0/clients/{clientId}/regenerate',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1452,9 +1465,12 @@ class ClientManagementApi:
             'asc_auth_key'
         ]
 
+
+        resource_path = "/api/2.0/clients/{clientId}/revoke"
+
         return self.api_client.param_serialize(
             method='DELETE',
-            resource_path='/api/2.0/clients/{clientId}/revoke',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1756,9 +1772,12 @@ class ClientManagementApi:
             'asc_auth_key'
         ]
 
+
+        resource_path = "/api/2.0/clients/{clientId}"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/clients/{clientId}',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

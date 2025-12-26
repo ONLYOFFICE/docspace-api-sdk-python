@@ -86,6 +86,7 @@ class RoomsApi:
         self.api_client = api_client
         self._fields = None
 
+
     def with_fields(self, fields: str) -> RoomsApi:
         self._fields = fields
         return self
@@ -373,9 +374,12 @@ class RoomsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/rooms/{id}/tags"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/files/rooms/{id}/tags',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -670,9 +674,12 @@ class RoomsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/rooms/{id}/archive"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/files/rooms/{id}/archive',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -973,9 +980,12 @@ class RoomsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/rooms/{id}/cover"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/files/rooms/{id}/cover',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1255,9 +1265,12 @@ class RoomsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/rooms"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/files/rooms',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1537,9 +1550,12 @@ class RoomsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/rooms/fromtemplate"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/files/rooms/fromtemplate',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1837,9 +1853,12 @@ class RoomsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/rooms/{id}/logo"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/files/rooms/{id}/logo',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2122,9 +2141,12 @@ class RoomsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/tags"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/files/tags',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2404,9 +2426,12 @@ class RoomsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/roomtemplate"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/files/roomtemplate',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2701,9 +2726,12 @@ class RoomsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/rooms/thirdparty/{id}"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/files/rooms/thirdparty/{id}',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2979,9 +3007,12 @@ class RoomsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/tags"
+
         return self.api_client.param_serialize(
             method='DELETE',
-            resource_path='/api/2.0/files/tags',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3276,9 +3307,12 @@ class RoomsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/rooms/{id}"
+
         return self.api_client.param_serialize(
             method='DELETE',
-            resource_path='/api/2.0/files/rooms/{id}',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3545,9 +3579,12 @@ class RoomsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/rooms/{id}/logo"
+
         return self.api_client.param_serialize(
             method='DELETE',
-            resource_path='/api/2.0/files/rooms/{id}/logo',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3845,9 +3882,12 @@ class RoomsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/rooms/{id}/tags"
+
         return self.api_client.param_serialize(
             method='DELETE',
-            resource_path='/api/2.0/files/rooms/{id}/tags',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -4114,9 +4154,12 @@ class RoomsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/rooms/{id}/news"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/rooms/{id}/news',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -4383,9 +4426,12 @@ class RoomsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/roomtemplate/{id}/public"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/roomtemplate/{id}/public',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -4637,9 +4683,12 @@ class RoomsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/rooms/covers"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/rooms/covers',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -4891,9 +4940,12 @@ class RoomsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/rooms/fromtemplate/status"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/rooms/fromtemplate/status',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -5145,9 +5197,12 @@ class RoomsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/rooms/indexexport"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/rooms/indexexport',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -5405,9 +5460,12 @@ class RoomsApi:
         _auth_settings: List[str] = [
         ]
 
+
+        resource_path = "/api/2.0/files/rooms/{id}"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/rooms/{id}',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -5691,9 +5749,12 @@ class RoomsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/rooms/{id}/links"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/rooms/{id}/links',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -6028,9 +6089,12 @@ class RoomsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/rooms/{id}/share"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/rooms/{id}/share',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -6335,9 +6399,12 @@ class RoomsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/tags"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/tags',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -6589,9 +6656,12 @@ class RoomsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/roomtemplate/status"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/roomtemplate/status',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -7104,9 +7174,12 @@ class RoomsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/rooms"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/rooms',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -7358,9 +7431,12 @@ class RoomsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/rooms/news"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/rooms/news',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -7630,9 +7706,12 @@ class RoomsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/rooms/{id}/link"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/rooms/{id}/link',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -7899,9 +7978,12 @@ class RoomsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/rooms/{id}/pin"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/files/rooms/{id}/pin',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -8168,9 +8250,12 @@ class RoomsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/rooms/{id}/reorder"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/files/rooms/{id}/reorder',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -8458,9 +8543,12 @@ class RoomsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/rooms/{id}/resend"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/files/rooms/{id}/resend',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -8733,9 +8821,12 @@ class RoomsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/roomtemplate/public"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/files/roomtemplate/public',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -9030,9 +9121,12 @@ class RoomsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/rooms/{id}/links"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/files/rooms/{id}/links',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -9327,9 +9421,12 @@ class RoomsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/rooms/{id}/share"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/files/rooms/{id}/share',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -9599,9 +9696,12 @@ class RoomsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/rooms/{id}/indexexport"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/files/rooms/{id}/indexexport',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -9846,9 +9946,12 @@ class RoomsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/rooms/indexexport"
+
         return self.api_client.param_serialize(
             method='DELETE',
-            resource_path='/api/2.0/files/rooms/indexexport',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -10143,9 +10246,12 @@ class RoomsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/rooms/{id}/unarchive"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/files/rooms/{id}/unarchive',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -10412,9 +10518,12 @@ class RoomsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/rooms/{id}/unpin"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/files/rooms/{id}/unpin',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -10709,9 +10818,12 @@ class RoomsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/rooms/{id}"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/files/rooms/{id}',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -10995,9 +11107,12 @@ class RoomsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/logos"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/files/logos',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

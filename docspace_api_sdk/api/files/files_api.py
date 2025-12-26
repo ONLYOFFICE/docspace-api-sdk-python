@@ -87,6 +87,7 @@ class FilesApi:
 
 
 
+
     @validate_call
     def add_file_to_recent(
         self,
@@ -338,9 +339,12 @@ class FilesApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/file/{fileId}/recent"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/files/file/{fileId}/recent',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -620,9 +624,12 @@ class FilesApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/templates"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/files/templates',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -920,9 +927,12 @@ class FilesApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/file/{fileId}/history"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/files/file/{fileId}/history',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1211,9 +1221,12 @@ class FilesApi:
         _auth_settings: List[str] = [
         ]
 
+
+        resource_path = "/api/2.0/files/masterform/{fileId}/checkfillformdraft"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/files/masterform/{fileId}/checkfillformdraft',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1517,9 +1530,12 @@ class FilesApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/file/{fileId}/copyas"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/files/file/{fileId}/copyas',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1806,9 +1822,12 @@ class FilesApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/file/{fileId}/edit_session"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/files/file/{fileId}/edit_session',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2103,9 +2122,12 @@ class FilesApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/{folderId}/file"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/files/{folderId}/file',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2385,9 +2407,12 @@ class FilesApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/@my/file"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/files/@my/file',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2685,9 +2710,12 @@ class FilesApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/file/{id}/link"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/files/file/{id}/link',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2985,9 +3013,12 @@ class FilesApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/{folderId}/html"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/files/{folderId}/html',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3270,9 +3301,12 @@ class FilesApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/@my/html"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/files/@my/html',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3567,9 +3601,12 @@ class FilesApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/{folderId}/text"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/files/{folderId}/text',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3849,9 +3886,12 @@ class FilesApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/@my/text"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/files/@my/text',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -4122,9 +4162,12 @@ class FilesApi:
         _auth_settings: List[str] = [
         ]
 
+
+        resource_path = "/api/2.0/files/thumbnails"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/files/thumbnails',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -4419,9 +4462,12 @@ class FilesApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/file/{fileId}"
+
         return self.api_client.param_serialize(
             method='DELETE',
-            resource_path='/api/2.0/files/file/{fileId}',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -4701,9 +4747,12 @@ class FilesApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/recent"
+
         return self.api_client.param_serialize(
             method='DELETE',
-            resource_path='/api/2.0/files/recent',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -4984,9 +5033,12 @@ class FilesApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/templates"
+
         return self.api_client.param_serialize(
             method='DELETE',
-            resource_path='/api/2.0/files/templates',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -5256,9 +5308,12 @@ class FilesApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/file/{fileId}/formroles"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/file/{fileId}/formroles',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -5533,9 +5588,12 @@ class FilesApi:
         _auth_settings: List[str] = [
         ]
 
+
+        resource_path = "/api/2.0/files/file/{fileId}/edit/diff"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/file/{fileId}/edit/diff',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -5793,9 +5851,12 @@ class FilesApi:
         _auth_settings: List[str] = [
         ]
 
+
+        resource_path = "/api/2.0/files/file/{fileId}/edit/history"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/file/{fileId}/edit/history',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -6136,9 +6197,12 @@ class FilesApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/file/{fileId}/log"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/file/{fileId}/log',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -6413,9 +6477,12 @@ class FilesApi:
         _auth_settings: List[str] = [
         ]
 
+
+        resource_path = "/api/2.0/files/file/{fileId}"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/file/{fileId}',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -6716,9 +6783,12 @@ class FilesApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/file/{id}/links"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/file/{id}/links',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -7013,9 +7083,12 @@ class FilesApi:
         _auth_settings: List[str] = [
         ]
 
+
+        resource_path = "/api/2.0/files/file/{id}/link"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/file/{id}/link',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -7273,9 +7346,12 @@ class FilesApi:
         _auth_settings: List[str] = [
         ]
 
+
+        resource_path = "/api/2.0/files/file/{fileId}/history"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/file/{fileId}/history',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -7535,9 +7611,12 @@ class FilesApi:
         _auth_settings: List[str] = [
         ]
 
+
+        resource_path = "/api/2.0/files/file/fillresult"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/file/fillresult',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -7804,9 +7883,12 @@ class FilesApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/file/{fileId}/presigned"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/file/{fileId}/presigned',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -8073,9 +8155,12 @@ class FilesApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/file/{fileId}/presigneduri"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/file/{fileId}/presigneduri',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -8342,9 +8427,12 @@ class FilesApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/file/{fileId}/protectusers"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/file/{fileId}/protectusers',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -8624,9 +8712,12 @@ class FilesApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/file/referencedata"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/files/file/referencedata',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -8893,9 +8984,12 @@ class FilesApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/file/{fileId}/isformpdf"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/file/{fileId}/isformpdf',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -9190,9 +9284,12 @@ class FilesApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/file/{fileId}/lock"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/files/file/{fileId}/lock',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -9483,9 +9580,12 @@ class FilesApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/file/{fileId}/manageformfilling"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/files/file/{fileId}/manageformfilling',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -9831,9 +9931,12 @@ class FilesApi:
         _auth_settings: List[str] = [
         ]
 
+
+        resource_path = "/api/2.0/files/file/{fileId}/openedit"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/file/{fileId}/openedit',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -10131,9 +10234,12 @@ class FilesApi:
         _auth_settings: List[str] = [
         ]
 
+
+        resource_path = "/api/2.0/files/file/{fileId}/restoreversion"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/files/file/{fileId}/restoreversion',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -10479,9 +10585,12 @@ class FilesApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/file/{fileId}/saveediting"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/files/file/{fileId}/saveediting',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -10779,9 +10888,12 @@ class FilesApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/file/{id}/saveaspdf"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/files/file/{id}/saveaspdf',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -11072,9 +11184,12 @@ class FilesApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/file/{fileId}/formrolemapping"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/files/file/{fileId}/formrolemapping',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -11369,9 +11484,12 @@ class FilesApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/file/{fileId}/customfilter"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/files/file/{fileId}/customfilter',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -11666,9 +11784,12 @@ class FilesApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/file/{id}/links"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/files/file/{id}/links',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -11969,9 +12090,12 @@ class FilesApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/{fileId}/order"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/files/{fileId}/order',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -12251,9 +12375,12 @@ class FilesApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/order"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/files/order',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -12542,9 +12669,12 @@ class FilesApi:
         _auth_settings: List[str] = [
         ]
 
+
+        resource_path = "/api/2.0/files/file/{fileId}/startedit"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/files/file/{fileId}/startedit',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -12814,9 +12944,12 @@ class FilesApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/file/{fileId}/startfilling"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/files/file/{fileId}/startfilling',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -13103,9 +13236,12 @@ class FilesApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/favorites/{fileId}"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/favorites/{fileId}',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -13417,9 +13553,12 @@ class FilesApi:
         _auth_settings: List[str] = [
         ]
 
+
+        resource_path = "/api/2.0/files/file/{fileId}/trackeditfile"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/file/{fileId}/trackeditfile',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -13708,9 +13847,12 @@ class FilesApi:
         _auth_settings: List[str] = [
         ]
 
+
+        resource_path = "/api/2.0/files/file/{fileId}"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/files/file/{fileId}',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

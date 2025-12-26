@@ -55,6 +55,7 @@ class SearchApi:
         self.api_client = api_client
         self._fields = None
 
+
     def with_fields(self, fields: str) -> SearchApi:
         self._fields = fields
         return self
@@ -519,9 +520,12 @@ class SearchApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/accounts/file/{id}/search"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/accounts/file/{id}/search',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -996,9 +1000,12 @@ class SearchApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/accounts/folder/{id}/search"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/accounts/folder/{id}/search',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1473,9 +1480,12 @@ class SearchApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/accounts/room/{id}/search"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/accounts/room/{id}/search',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1779,9 +1789,12 @@ class SearchApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/people/@search/{query}"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/people/@search/{query}',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2379,9 +2392,12 @@ class SearchApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/people/simple/filter"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/people/simple/filter',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2856,9 +2872,12 @@ class SearchApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/people/file/{id}"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/people/file/{id}',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3333,9 +3352,12 @@ class SearchApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/people/folder/{id}"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/people/folder/{id}',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3810,9 +3832,12 @@ class SearchApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/people/room/{id}"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/people/room/{id}',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -4410,9 +4435,12 @@ class SearchApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/people/filter"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/people/filter',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -4681,9 +4709,12 @@ class SearchApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/people/search"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/people/search',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -5004,9 +5035,12 @@ class SearchApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/people/status/{status}/search"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/people/status/{status}/search',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

@@ -44,6 +44,7 @@ class OwnerApi:
 
 
 
+
     @validate_call
     def send_owner_change_instructions(
         self,
@@ -314,9 +315,12 @@ class OwnerApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/owner"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/settings/owner',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -595,9 +599,12 @@ class OwnerApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/owner"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/settings/owner',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

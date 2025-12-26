@@ -44,6 +44,7 @@ class BannersVisibilityApi:
 
 
 
+
     @validate_call
     def set_tenant_banner_settings(
         self,
@@ -308,9 +309,12 @@ class BannersVisibilityApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/banner"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/settings/banner',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

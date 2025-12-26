@@ -46,6 +46,7 @@ class LicenseApi:
 
 
 
+
     @validate_call
     def accept_license(
         self,
@@ -282,9 +283,12 @@ class LicenseApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/license/accept"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/settings/license/accept',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -527,9 +531,12 @@ class LicenseApi:
         _auth_settings: List[str] = [
         ]
 
+
+        resource_path = "/api/2.0/settings/license/required"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/settings/license/required',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -781,9 +788,12 @@ class LicenseApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/license/refresh"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/settings/license/refresh',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1073,9 +1083,12 @@ class LicenseApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/license"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/settings/license',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

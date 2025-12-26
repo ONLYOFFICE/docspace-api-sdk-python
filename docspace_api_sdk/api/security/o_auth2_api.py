@@ -42,6 +42,7 @@ class OAuth2Api:
 
 
 
+
     @validate_call
     def generate_jwt_token(
         self,
@@ -278,9 +279,12 @@ class OAuth2Api:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/security/oauth2/token"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/security/oauth2/token',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

@@ -45,6 +45,7 @@ class QuotaApi:
 
 
 
+
     @validate_call
     def reset_room_quota(
         self,
@@ -309,9 +310,12 @@ class QuotaApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/rooms/resetquota"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/files/rooms/resetquota',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -591,9 +595,12 @@ class QuotaApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/files/rooms/roomquota"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/files/rooms/roomquota',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

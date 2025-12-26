@@ -54,6 +54,7 @@ class AuditTrailDataApi:
         self.api_client = api_client
         self._fields = None
 
+
     def with_fields(self, fields: str) -> AuditTrailDataApi:
         self._fields = fields
         return self
@@ -301,9 +302,12 @@ class AuditTrailDataApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/security/audit/events/report"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/security/audit/events/report',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -730,9 +734,12 @@ class AuditTrailDataApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/security/audit/events/filter"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/security/audit/events/filter',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -987,9 +994,12 @@ class AuditTrailDataApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/security/audit/settings/lifetime"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/security/audit/settings/lifetime',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1266,9 +1276,12 @@ class AuditTrailDataApi:
         _auth_settings: List[str] = [
         ]
 
+
+        resource_path = "/api/2.0/security/audit/mappers"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/security/audit/mappers',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1511,9 +1524,12 @@ class AuditTrailDataApi:
         _auth_settings: List[str] = [
         ]
 
+
+        resource_path = "/api/2.0/security/audit/types"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/security/audit/types',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1768,9 +1784,12 @@ class AuditTrailDataApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/security/audit/events/last"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/security/audit/events/last',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2056,9 +2075,12 @@ class AuditTrailDataApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/security/audit/settings/lifetime"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/security/audit/settings/lifetime',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

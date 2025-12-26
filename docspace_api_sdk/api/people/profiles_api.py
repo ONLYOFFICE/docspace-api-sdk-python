@@ -55,6 +55,7 @@ class ProfilesApi:
         self.api_client = api_client
         self._fields = None
 
+
     def with_fields(self, fields: str) -> ProfilesApi:
         self._fields = fields
         return self
@@ -327,9 +328,12 @@ class ProfilesApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/people"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/people',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -605,9 +609,12 @@ class ProfilesApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/people/{userid}"
+
         return self.api_client.param_serialize(
             method='DELETE',
-            resource_path='/api/2.0/people/{userid}',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -865,9 +872,12 @@ class ProfilesApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/people/@self"
+
         return self.api_client.param_serialize(
             method='DELETE',
-            resource_path='/api/2.0/people/@self',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1240,9 +1250,12 @@ class ProfilesApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/people"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/people',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1494,9 +1507,12 @@ class ProfilesApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/people/tokendiagnostics"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/people/tokendiagnostics',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1802,9 +1818,12 @@ class ProfilesApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/people/email"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/people/email',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2077,9 +2096,12 @@ class ProfilesApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/people/{userid}"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/people/{userid}',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2331,9 +2353,12 @@ class ProfilesApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/people/@self"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/people/@self',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2616,9 +2641,12 @@ class ProfilesApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/people/invite"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/people/invite',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2901,9 +2929,12 @@ class ProfilesApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/people/delete"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/people/delete',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3186,9 +3217,12 @@ class ProfilesApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/people/invite"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/people/invite',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3477,9 +3511,12 @@ class ProfilesApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/people/email"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/people/email',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3783,9 +3820,12 @@ class ProfilesApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/people/{userid}"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/people/{userid}',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -4086,9 +4126,12 @@ class ProfilesApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/people/{userid}/culture"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/people/{userid}/culture',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

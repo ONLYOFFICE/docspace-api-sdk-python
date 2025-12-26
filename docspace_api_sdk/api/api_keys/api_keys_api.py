@@ -50,6 +50,7 @@ class ApiKeysApi:
 
 
 
+
     @validate_call
     def create_api_key(
         self,
@@ -314,9 +315,12 @@ class ApiKeysApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/keys"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/keys',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -583,9 +587,12 @@ class ApiKeysApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/keys/{keyId}"
+
         return self.api_client.param_serialize(
             method='DELETE',
-            resource_path='/api/2.0/keys/{keyId}',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -837,9 +844,12 @@ class ApiKeysApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/keys/permissions"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/keys/permissions',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1091,9 +1101,12 @@ class ApiKeysApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/keys/@self"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/keys/@self',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1345,9 +1358,12 @@ class ApiKeysApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/keys"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/keys',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1642,9 +1658,12 @@ class ApiKeysApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/keys/{keyId}"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/keys/{keyId}',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

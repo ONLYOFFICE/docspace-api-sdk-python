@@ -50,6 +50,7 @@ class UserTypeApi:
 
 
 
+
     @validate_call
     def get_user_type_update_progress(
         self,
@@ -301,9 +302,12 @@ class UserTypeApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/people/type/progress/{userid}"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/people/type/progress/{userid}',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -586,9 +590,12 @@ class UserTypeApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/people/type"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/people/type',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -868,9 +875,12 @@ class UserTypeApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/people/type/terminate"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/people/type/terminate',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1165,9 +1175,12 @@ class UserTypeApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/people/type/{type}"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/people/type/{type}',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
