@@ -1,13 +1,13 @@
 # FileConflictResolveType
-[0 - Skip, 1 - Overwrite, 2 - Duplicate]
+[Skip - Skip, Overwrite - Overwrite, Duplicate - Duplicate]
 
 ## Enum
 
-* `Skip` (value: `0`)
+* `SKIP` (value: `'Skip'`)
 
-* `Overwrite` (value: `1`)
+* `OVERWRITE` (value: `'Overwrite'`)
 
-* `Duplicate` (value: `2`)
+* `DUPLICATE` (value: `'Duplicate'`)
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

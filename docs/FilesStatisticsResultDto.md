@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **trash_used_space** | [**FilesStatisticsFolder**](FilesStatisticsFolder.md) |  | [optional] 
 **archive_used_space** | [**FilesStatisticsFolder**](FilesStatisticsFolder.md) |  | [optional] 
 **rooms_used_space** | [**FilesStatisticsFolder**](FilesStatisticsFolder.md) |  | [optional] 
+**ai_agents_used_space** | [**FilesStatisticsFolder**](FilesStatisticsFolder.md) |  | [optional] 
 
 ## Example
 

@@ -70,7 +70,10 @@ class FileEntryDtoIntegerAllOfSecurity(BaseModel):
     open_form: Optional[StrictBool] = Field(default=None, alias="OpenForm")
     edit_internal: Optional[StrictBool] = Field(default=None, alias="EditInternal")
     edit_expiration: Optional[StrictBool] = Field(default=None, alias="EditExpiration")
-    __properties: ClassVar[List[str]] = ["Read", "Comment", "FillForms", "Review", "Create", "CreateFrom", "Edit", "Delete", "CustomFilter", "EditRoom", "Rename", "ReadHistory", "Lock", "EditHistory", "CopyTo", "Copy", "MoveTo", "Move", "Pin", "Mute", "EditAccess", "Duplicate", "SubmitToFormGallery", "Download", "Convert", "CopySharedLink", "ReadLinks", "Reconnect", "CreateRoomFrom", "CopyLink", "Embed", "ChangeOwner", "IndexExport", "StartFilling", "FillingStatus", "ResetFilling", "StopFilling", "OpenForm", "EditInternal", "EditExpiration"]
+    vectorization: Optional[StrictBool] = Field(default=None, alias="Vectorization")
+    ask_ai: Optional[StrictBool] = Field(default=None, alias="AskAi")
+    use_chat: Optional[StrictBool] = Field(default=None, alias="UseChat")
+    __properties: ClassVar[List[str]] = ["Read", "Comment", "FillForms", "Review", "Create", "CreateFrom", "Edit", "Delete", "CustomFilter", "EditRoom", "Rename", "ReadHistory", "Lock", "EditHistory", "CopyTo", "Copy", "MoveTo", "Move", "Pin", "Mute", "EditAccess", "Duplicate", "SubmitToFormGallery", "Download", "Convert", "CopySharedLink", "ReadLinks", "Reconnect", "CreateRoomFrom", "CopyLink", "Embed", "ChangeOwner", "IndexExport", "StartFilling", "FillingStatus", "ResetFilling", "StopFilling", "OpenForm", "EditInternal", "EditExpiration", "Vectorization", "AskAi", "UseChat"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -163,7 +166,10 @@ class FileEntryDtoIntegerAllOfSecurity(BaseModel):
             "StopFilling": obj.get("StopFilling"),
             "OpenForm": obj.get("OpenForm"),
             "EditInternal": obj.get("EditInternal"),
-            "EditExpiration": obj.get("EditExpiration")
+            "EditExpiration": obj.get("EditExpiration"),
+            "Vectorization": obj.get("Vectorization"),
+            "AskAi": obj.get("AskAi"),
+            "UseChat": obj.get("UseChat")
         })
         return _obj
 

@@ -30,7 +30,7 @@ class TfaRequestsDtoType(int, Enum):
     """
     allowed enum values
     """
-    None_ = 0
+    _None = 0
     Sms = 1
     App = 2
 

@@ -47,6 +47,7 @@ class QuotaApi:
 
 
 
+
     @validate_call
     def get_portal_quota(
         self,
@@ -286,9 +287,12 @@ class QuotaApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/portal/quota"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/portal/quota',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -557,9 +561,12 @@ class QuotaApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/portal/tariff"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/portal/tariff',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -811,9 +818,12 @@ class QuotaApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/portal/usedspace"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/portal/usedspace',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1065,9 +1075,12 @@ class QuotaApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/portal/quota/right"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/portal/quota/right',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

@@ -45,6 +45,7 @@ class SMTPSettingsApi:
 
 
 
+
     @validate_call
     def get_smtp_operation_status(
         self,
@@ -284,9 +285,12 @@ class SMTPSettingsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/smtpsettings/smtp/test/status"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/smtpsettings/smtp/test/status',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -541,9 +545,12 @@ class SMTPSettingsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/smtpsettings/smtp"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/smtpsettings/smtp',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -798,9 +805,12 @@ class SMTPSettingsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/smtpsettings/smtp"
+
         return self.api_client.param_serialize(
             method='DELETE',
-            resource_path='/api/2.0/smtpsettings/smtp',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1083,9 +1093,12 @@ class SMTPSettingsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/smtpsettings/smtp"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/smtpsettings/smtp',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1340,9 +1353,12 @@ class SMTPSettingsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/smtpsettings/smtp/test"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/smtpsettings/smtp/test',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

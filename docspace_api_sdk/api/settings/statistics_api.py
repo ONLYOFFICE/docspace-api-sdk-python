@@ -44,6 +44,7 @@ class StatisticsApi:
 
 
 
+
     @validate_call
     def get_space_usage_statistics(
         self,
@@ -295,9 +296,12 @@ class StatisticsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/statistics/spaceusage/{id}"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/settings/statistics/spaceusage/{id}',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

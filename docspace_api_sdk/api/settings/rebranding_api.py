@@ -53,6 +53,7 @@ class RebrandingApi:
 
 
 
+
     @validate_call
     def delete_additional_white_label_settings(
         self,
@@ -292,9 +293,12 @@ class RebrandingApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/rebranding/additional"
+
         return self.api_client.param_serialize(
             method='DELETE',
-            resource_path='/api/2.0/settings/rebranding/additional',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -549,9 +553,12 @@ class RebrandingApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/rebranding/company"
+
         return self.api_client.param_serialize(
             method='DELETE',
-            resource_path='/api/2.0/settings/rebranding/company',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -803,9 +810,12 @@ class RebrandingApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/rebranding/additional"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/settings/rebranding/additional',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1057,9 +1067,12 @@ class RebrandingApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/rebranding/company"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/settings/rebranding/company',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1311,9 +1324,12 @@ class RebrandingApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/enablewhitelabel"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/settings/enablewhitelabel',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1599,9 +1615,12 @@ class RebrandingApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/whitelabel/logotext/isdefault"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/settings/whitelabel/logotext/isdefault',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1887,9 +1906,12 @@ class RebrandingApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/whitelabel/logos/isdefault"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/settings/whitelabel/logos/isdefault',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2141,9 +2163,12 @@ class RebrandingApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/companywhitelabel"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/settings/companywhitelabel',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2429,9 +2454,12 @@ class RebrandingApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/whitelabel/logotext"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/settings/whitelabel/logotext',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2708,9 +2736,12 @@ class RebrandingApi:
         _auth_settings: List[str] = [
         ]
 
+
+        resource_path = "/api/2.0/settings/whitelabel/logos"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/settings/whitelabel/logos',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2999,9 +3030,12 @@ class RebrandingApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/whitelabel/logotext/restore"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/settings/whitelabel/logotext/restore',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3290,9 +3324,12 @@ class RebrandingApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/whitelabel/logos/restore"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/settings/whitelabel/logos/restore',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3578,9 +3615,12 @@ class RebrandingApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/rebranding/additional"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/settings/rebranding/additional',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3866,9 +3906,12 @@ class RebrandingApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/rebranding/company"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/settings/rebranding/company',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -4185,9 +4228,12 @@ class RebrandingApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/whitelabel/logotext/save"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/settings/whitelabel/logotext/save',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -4504,9 +4550,12 @@ class RebrandingApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/whitelabel/logos/save"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/settings/whitelabel/logos/save',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -4798,9 +4847,12 @@ class RebrandingApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/whitelabel/logos/savefromfiles"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/settings/whitelabel/logos/savefromfiles',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

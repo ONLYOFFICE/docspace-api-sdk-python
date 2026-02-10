@@ -34,11 +34,12 @@ class BackupProgress(BaseModel):
     is_completed: Optional[StrictBool] = Field(default=None, alias="isCompleted")
     progress: Optional[StrictInt] = None
     error: Optional[StrictStr] = None
+    warning: Optional[StrictStr] = None
     link: Optional[StrictStr] = None
     tenant_id: Optional[StrictInt] = Field(default=None, alias="tenantId")
     backup_progress_enum: Optional[BackupProgressEnum] = Field(default=None, alias="backupProgressEnum")
     task_id: Optional[StrictStr] = Field(default=None, alias="taskId")
-    __properties: ClassVar[List[str]] = ["isCompleted", "progress", "error", "link", "tenantId", "backupProgressEnum", "taskId"]
+    __properties: ClassVar[List[str]] = ["isCompleted", "progress", "error", "warning", "link", "tenantId", "backupProgressEnum", "taskId"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -84,6 +85,11 @@ class BackupProgress(BaseModel):
         if self.error is None and "error" in self.model_fields_set:
             _dict['error'] = None
 
+        # set to None if warning (nullable) is None
+        # and model_fields_set contains the field
+        if self.warning is None and "warning" in self.model_fields_set:
+            _dict['warning'] = None
+
         # set to None if link (nullable) is None
         # and model_fields_set contains the field
         if self.link is None and "link" in self.model_fields_set:
@@ -110,6 +116,7 @@ class BackupProgress(BaseModel):
             "isCompleted": obj.get("isCompleted"),
             "progress": obj.get("progress"),
             "error": obj.get("error"),
+            "warning": obj.get("warning"),
             "link": obj.get("link"),
             "tenantId": obj.get("tenantId"),
             "backupProgressEnum": obj.get("backupProgressEnum"),

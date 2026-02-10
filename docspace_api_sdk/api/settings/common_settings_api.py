@@ -62,6 +62,7 @@ class CommonSettingsApi:
 
 
 
+
     @validate_call
     def close_admin_helper(
         self,
@@ -294,9 +295,12 @@ class CommonSettingsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/closeadminhelper"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/settings/closeadminhelper',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -582,9 +586,12 @@ class CommonSettingsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/wizard/complete"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/settings/wizard/complete',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -867,9 +874,12 @@ class CommonSettingsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/deeplink"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/settings/deeplink',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1138,9 +1148,12 @@ class CommonSettingsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/colortheme"
+
         return self.api_client.param_serialize(
             method='DELETE',
-            resource_path='/api/2.0/settings/colortheme',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1383,9 +1396,12 @@ class CommonSettingsApi:
         _auth_settings: List[str] = [
         ]
 
+
+        resource_path = "/api/2.0/settings/deeplink"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/settings/deeplink',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1637,9 +1653,12 @@ class CommonSettingsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/payment"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/settings/payment',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1882,9 +1901,12 @@ class CommonSettingsApi:
         _auth_settings: List[str] = [
         ]
 
+
+        resource_path = "/api/2.0/settings/colortheme"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/settings/colortheme',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2136,9 +2158,12 @@ class CommonSettingsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/machine"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/settings/machine',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2390,9 +2415,12 @@ class CommonSettingsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/logo"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/settings/logo',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2652,9 +2680,12 @@ class CommonSettingsApi:
         _auth_settings: List[str] = [
         ]
 
+
+        resource_path = "/api/2.0/settings"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/settings',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2906,9 +2937,12 @@ class CommonSettingsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/socket"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/settings/socket',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3151,9 +3185,12 @@ class CommonSettingsApi:
         _auth_settings: List[str] = [
         ]
 
+
+        resource_path = "/api/2.0/settings/cultures"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/settings/cultures',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3396,9 +3433,12 @@ class CommonSettingsApi:
         _auth_settings: List[str] = [
         ]
 
+
+        resource_path = "/api/2.0/settings/invitationsettings"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/settings/invitationsettings',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3650,9 +3690,12 @@ class CommonSettingsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/timezones"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/settings/timezones',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3941,9 +3984,12 @@ class CommonSettingsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/dns"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/settings/dns',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -4223,9 +4269,12 @@ class CommonSettingsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/maildomainsettings"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/settings/maildomainsettings',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -4505,9 +4554,12 @@ class CommonSettingsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/colortheme"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/settings/colortheme',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -4787,9 +4839,12 @@ class CommonSettingsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/emailactivation"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/settings/emailactivation',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -5069,9 +5124,12 @@ class CommonSettingsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/invitationsettings"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/settings/invitationsettings',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

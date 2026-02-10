@@ -49,6 +49,7 @@ class UserStatusApi:
 
 
 
+
     @validate_call
     def get_by_status(
         self,
@@ -419,9 +420,12 @@ class UserStatusApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/people/status/{status}"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/people/status/{status}',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -716,9 +720,12 @@ class UserStatusApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/people/activationstatus/{activationstatus}"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/people/activationstatus/{activationstatus}',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1013,9 +1020,12 @@ class UserStatusApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/people/status/{status}"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/people/status/{status}',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

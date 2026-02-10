@@ -45,6 +45,7 @@ class SSOApi:
 
 
 
+
     @validate_call
     def get_default_sso_settings_v2(
         self,
@@ -281,9 +282,12 @@ class SSOApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/ssov2/default"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/settings/ssov2/default',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -526,9 +530,12 @@ class SSOApi:
         _auth_settings: List[str] = [
         ]
 
+
+        resource_path = "/api/2.0/settings/ssov2"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/settings/ssov2',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -780,9 +787,12 @@ class SSOApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/ssov2/constants"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/settings/ssov2/constants',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1034,9 +1044,12 @@ class SSOApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/ssov2"
+
         return self.api_client.param_serialize(
             method='DELETE',
-            resource_path='/api/2.0/settings/ssov2',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1319,9 +1332,12 @@ class SSOApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/ssov2"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/settings/ssov2',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

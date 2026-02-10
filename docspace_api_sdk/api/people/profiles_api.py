@@ -15,6 +15,7 @@
 #
 
 
+
 from __future__ import annotations
 import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
@@ -53,6 +54,7 @@ class ProfilesApi:
             api_client = ApiClient.get_default()
         self.api_client = api_client
         self._fields = None
+
 
     def with_fields(self, fields: str) -> ProfilesApi:
         self._fields = fields
@@ -326,9 +328,12 @@ class ProfilesApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/people"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/people',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -604,9 +609,12 @@ class ProfilesApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/people/{userid}"
+
         return self.api_client.param_serialize(
             method='DELETE',
-            resource_path='/api/2.0/people/{userid}',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -864,9 +872,12 @@ class ProfilesApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/people/@self"
+
         return self.api_client.param_serialize(
             method='DELETE',
-            resource_path='/api/2.0/people/@self',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1239,9 +1250,12 @@ class ProfilesApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/people"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/people',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1493,9 +1507,12 @@ class ProfilesApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/people/tokendiagnostics"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/people/tokendiagnostics',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1515,6 +1532,7 @@ class ProfilesApi:
     def get_profile_by_email(
         self,
         email: Annotated[Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]], Field(description="The user email address.")] = None,
+        encemail: Annotated[Optional[StrictStr], Field(description="The user encrypted email address.")] = None,
         culture: Annotated[Optional[StrictStr], Field(description="Culture")] = None,
         _request_timeout: Union[
             None,
@@ -1535,6 +1553,8 @@ class ProfilesApi:
 
         :param email: The user email address.
         :type email: str
+        :param encemail: The user encrypted email address.
+        :type encemail: str
         :param culture: Culture
         :type culture: str
         :param _request_timeout: timeout setting for this request. If one
@@ -1561,6 +1581,7 @@ class ProfilesApi:
 
         _param = self._get_profile_by_email_serialize(
             email=email,
+            encemail=encemail,
             culture=culture,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1588,6 +1609,7 @@ class ProfilesApi:
     def get_profile_by_email_with_http_info(
         self,
         email: Annotated[Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]], Field(description="The user email address.")] = None,
+        encemail: Annotated[Optional[StrictStr], Field(description="The user encrypted email address.")] = None,
         culture: Annotated[Optional[StrictStr], Field(description="Culture")] = None,
         _request_timeout: Union[
             None,
@@ -1608,6 +1630,8 @@ class ProfilesApi:
 
         :param email: The user email address.
         :type email: str
+        :param encemail: The user encrypted email address.
+        :type encemail: str
         :param culture: Culture
         :type culture: str
         :param _request_timeout: timeout setting for this request. If one
@@ -1634,6 +1658,7 @@ class ProfilesApi:
 
         _param = self._get_profile_by_email_serialize(
             email=email,
+            encemail=encemail,
             culture=culture,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1661,6 +1686,7 @@ class ProfilesApi:
     def get_profile_by_email_without_preload_content(
         self,
         email: Annotated[Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]], Field(description="The user email address.")] = None,
+        encemail: Annotated[Optional[StrictStr], Field(description="The user encrypted email address.")] = None,
         culture: Annotated[Optional[StrictStr], Field(description="Culture")] = None,
         _request_timeout: Union[
             None,
@@ -1681,6 +1707,8 @@ class ProfilesApi:
 
         :param email: The user email address.
         :type email: str
+        :param encemail: The user encrypted email address.
+        :type encemail: str
         :param culture: Culture
         :type culture: str
         :param _request_timeout: timeout setting for this request. If one
@@ -1707,6 +1735,7 @@ class ProfilesApi:
 
         _param = self._get_profile_by_email_serialize(
             email=email,
+            encemail=encemail,
             culture=culture,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1729,6 +1758,7 @@ class ProfilesApi:
     def _get_profile_by_email_serialize(
         self,
         email,
+        encemail,
         culture,
         _request_auth,
         _content_type,
@@ -1755,6 +1785,10 @@ class ProfilesApi:
         if email is not None:
             
             _query_params.append(('email', email))
+            
+        if encemail is not None:
+            
+            _query_params.append(('encemail', encemail))
             
         if culture is not None:
             
@@ -1784,9 +1818,12 @@ class ProfilesApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/people/email"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/people/email',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2059,9 +2096,12 @@ class ProfilesApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/people/{userid}"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/people/{userid}',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2313,9 +2353,12 @@ class ProfilesApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/people/@self"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/people/@self',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2598,9 +2641,12 @@ class ProfilesApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/people/invite"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/people/invite',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2883,9 +2929,12 @@ class ProfilesApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/people/delete"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/people/delete',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3168,9 +3217,12 @@ class ProfilesApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/people/invite"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/people/invite',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3459,9 +3511,12 @@ class ProfilesApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/people/email"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/people/email',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3765,9 +3820,12 @@ class ProfilesApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/people/{userid}"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/people/{userid}',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -4068,9 +4126,12 @@ class ProfilesApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/people/{userid}/culture"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/people/{userid}/culture',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

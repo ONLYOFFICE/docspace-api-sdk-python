@@ -15,6 +15,7 @@
 #
 
 
+
 from __future__ import annotations
 import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
@@ -85,6 +86,7 @@ class RoomsApi:
         self.api_client = api_client
         self._fields = None
 
+
     def with_fields(self, fields: str) -> RoomsApi:
         self._fields = fields
         return self
@@ -108,8 +110,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FolderIntegerWrapper:
-        """add_room_tags
+        """Add the room tags
 
+        Adds the tags to a room with the ID specified in the request.
 
         :param id: The room Id. (required)
         :type id: int
@@ -148,6 +151,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
+            '401': None,
             '403': None,
         }
         response_data = self.api_client.call_api(
@@ -179,8 +183,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FolderIntegerWrapper]:
-        """add_room_tags
+        """Add the room tags
 
+        Adds the tags to a room with the ID specified in the request.
 
         :param id: The room Id. (required)
         :type id: int
@@ -219,6 +224,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
+            '401': None,
             '403': None,
         }
         response_data = self.api_client.call_api(
@@ -250,8 +256,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """add_room_tags
+        """Add the room tags
 
+        Adds the tags to a room with the ID specified in the request.
 
         :param id: The room Id. (required)
         :type id: int
@@ -290,6 +297,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
+            '401': None,
             '403': None,
         }
         response_data = self.api_client.call_api(
@@ -358,11 +366,20 @@ class RoomsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
+
+
+        resource_path = "/api/2.0/files/rooms/{id}/tags"
 
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/files/rooms/{id}/tags',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -396,8 +413,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FileOperationWrapper:
-        """archive_room
+        """Archive a room
 
+        Moves a room with the ID specified in the request to the Archive section.
 
         :param id: The room ID. (required)
         :type id: int
@@ -436,6 +454,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -466,8 +485,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FileOperationWrapper]:
-        """archive_room
+        """Archive a room
 
+        Moves a room with the ID specified in the request to the Archive section.
 
         :param id: The room ID. (required)
         :type id: int
@@ -506,6 +526,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -536,8 +557,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """archive_room
+        """Archive a room
 
+        Moves a room with the ID specified in the request to the Archive section.
 
         :param id: The room ID. (required)
         :type id: int
@@ -576,6 +598,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -643,11 +666,20 @@ class RoomsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
+
+
+        resource_path = "/api/2.0/files/rooms/{id}/archive"
 
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/files/rooms/{id}/archive',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -681,8 +713,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FolderIntegerWrapper:
-        """change_room_cover
+        """Change the room cover
 
+        Changes a cover of a room with the ID specified in the request.
 
         :param id: The room ID. (required)
         :type id: int
@@ -721,6 +754,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
+            '401': None,
             '403': None,
             '404': None,
         }
@@ -753,8 +787,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FolderIntegerWrapper]:
-        """change_room_cover
+        """Change the room cover
 
+        Changes a cover of a room with the ID specified in the request.
 
         :param id: The room ID. (required)
         :type id: int
@@ -793,6 +828,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
+            '401': None,
             '403': None,
             '404': None,
         }
@@ -825,8 +861,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """change_room_cover
+        """Change the room cover
 
+        Changes a cover of a room with the ID specified in the request.
 
         :param id: The room ID. (required)
         :type id: int
@@ -865,6 +902,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
+            '401': None,
             '403': None,
             '404': None,
         }
@@ -934,11 +972,20 @@ class RoomsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
+
+
+        resource_path = "/api/2.0/files/rooms/{id}/cover"
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/files/rooms/{id}/cover',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -971,8 +1018,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FolderIntegerWrapper:
-        """create_room
+        """Create a room
 
+        Creates a room in the Rooms section.
 
         :param create_room_request_dto:
         :type create_room_request_dto: CreateRoomRequestDto
@@ -1008,6 +1056,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1037,8 +1086,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FolderIntegerWrapper]:
-        """create_room
+        """Create a room
 
+        Creates a room in the Rooms section.
 
         :param create_room_request_dto:
         :type create_room_request_dto: CreateRoomRequestDto
@@ -1074,6 +1124,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1103,8 +1154,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """create_room
+        """Create a room
 
+        Creates a room in the Rooms section.
 
         :param create_room_request_dto:
         :type create_room_request_dto: CreateRoomRequestDto
@@ -1140,6 +1192,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1204,11 +1257,20 @@ class RoomsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
+
+
+        resource_path = "/api/2.0/files/rooms"
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/files/rooms',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1241,8 +1303,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RoomFromTemplateStatusWrapper:
-        """create_room_from_template
+        """Create a room from the template
 
+        Creates a room in the Rooms section based on the template.
 
         :param create_room_from_template_dto:
         :type create_room_from_template_dto: CreateRoomFromTemplateDto
@@ -1278,6 +1341,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomFromTemplateStatusWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1307,8 +1371,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[RoomFromTemplateStatusWrapper]:
-        """create_room_from_template
+        """Create a room from the template
 
+        Creates a room in the Rooms section based on the template.
 
         :param create_room_from_template_dto:
         :type create_room_from_template_dto: CreateRoomFromTemplateDto
@@ -1344,6 +1409,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomFromTemplateStatusWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1373,8 +1439,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """create_room_from_template
+        """Create a room from the template
 
+        Creates a room in the Rooms section based on the template.
 
         :param create_room_from_template_dto:
         :type create_room_from_template_dto: CreateRoomFromTemplateDto
@@ -1410,6 +1477,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomFromTemplateStatusWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1474,11 +1542,20 @@ class RoomsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
+
+
+        resource_path = "/api/2.0/files/rooms/fromtemplate"
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/files/rooms/fromtemplate',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1512,8 +1589,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FolderIntegerWrapper:
-        """create_room_logo
+        """Create a room logo
 
+        Creates a logo for a room with the ID specified in the request.
 
         :param id: The room ID. (required)
         :type id: int
@@ -1552,6 +1630,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
+            '401': None,
             '404': None,
         }
         response_data = self.api_client.call_api(
@@ -1583,8 +1662,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FolderIntegerWrapper]:
-        """create_room_logo
+        """Create a room logo
 
+        Creates a logo for a room with the ID specified in the request.
 
         :param id: The room ID. (required)
         :type id: int
@@ -1623,6 +1703,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
+            '401': None,
             '404': None,
         }
         response_data = self.api_client.call_api(
@@ -1654,8 +1735,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """create_room_logo
+        """Create a room logo
 
+        Creates a logo for a room with the ID specified in the request.
 
         :param id: The room ID. (required)
         :type id: int
@@ -1694,6 +1776,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
+            '401': None,
             '404': None,
         }
         response_data = self.api_client.call_api(
@@ -1762,11 +1845,20 @@ class RoomsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
+
+
+        resource_path = "/api/2.0/files/rooms/{id}/logo"
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/files/rooms/{id}/logo',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1799,8 +1891,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ObjectWrapper:
-        """create_room_tag
+        """Create a room tag
 
+        Creates a custom room tag with the parameters specified in the request.
 
         :param create_tag_request_dto:
         :type create_tag_request_dto: CreateTagRequestDto
@@ -1836,6 +1929,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectWrapper",
+            '401': None,
             '403': None,
         }
         response_data = self.api_client.call_api(
@@ -1866,8 +1960,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[ObjectWrapper]:
-        """create_room_tag
+        """Create a room tag
 
+        Creates a custom room tag with the parameters specified in the request.
 
         :param create_tag_request_dto:
         :type create_tag_request_dto: CreateTagRequestDto
@@ -1903,6 +1998,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectWrapper",
+            '401': None,
             '403': None,
         }
         response_data = self.api_client.call_api(
@@ -1933,8 +2029,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """create_room_tag
+        """Create a room tag
 
+        Creates a custom room tag with the parameters specified in the request.
 
         :param create_tag_request_dto:
         :type create_tag_request_dto: CreateTagRequestDto
@@ -1970,6 +2067,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectWrapper",
+            '401': None,
             '403': None,
         }
         response_data = self.api_client.call_api(
@@ -2035,11 +2133,20 @@ class RoomsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
+
+
+        resource_path = "/api/2.0/files/tags"
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/files/tags',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2072,8 +2179,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RoomTemplateStatusWrapper:
-        """create_room_template
+        """Start creating room template
 
+        Starts creating the room template.
 
         :param room_template_dto:
         :type room_template_dto: RoomTemplateDto
@@ -2109,6 +2217,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomTemplateStatusWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2138,8 +2247,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[RoomTemplateStatusWrapper]:
-        """create_room_template
+        """Start creating room template
 
+        Starts creating the room template.
 
         :param room_template_dto:
         :type room_template_dto: RoomTemplateDto
@@ -2175,6 +2285,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomTemplateStatusWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2204,8 +2315,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """create_room_template
+        """Start creating room template
 
+        Starts creating the room template.
 
         :param room_template_dto:
         :type room_template_dto: RoomTemplateDto
@@ -2241,6 +2353,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomTemplateStatusWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2305,11 +2418,20 @@ class RoomsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
+
+
+        resource_path = "/api/2.0/files/roomtemplate"
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/files/roomtemplate',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2343,8 +2465,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FolderStringWrapper:
-        """create_room_third_party
+        """Create a third-party room
 
+        Creates a room in the Rooms section stored in a third-party storage.
 
         :param id: The ID of the folder in the third-party storage in which the contents of the room will be stored. (required)
         :type id: str
@@ -2383,6 +2506,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderStringWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2413,8 +2537,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FolderStringWrapper]:
-        """create_room_third_party
+        """Create a third-party room
 
+        Creates a room in the Rooms section stored in a third-party storage.
 
         :param id: The ID of the folder in the third-party storage in which the contents of the room will be stored. (required)
         :type id: str
@@ -2453,6 +2578,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderStringWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2483,8 +2609,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """create_room_third_party
+        """Create a third-party room
 
+        Creates a room in the Rooms section stored in a third-party storage.
 
         :param id: The ID of the folder in the third-party storage in which the contents of the room will be stored. (required)
         :type id: str
@@ -2523,6 +2650,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderStringWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2590,11 +2718,20 @@ class RoomsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
+
+
+        resource_path = "/api/2.0/files/rooms/thirdparty/{id}"
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/files/rooms/thirdparty/{id}',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2627,8 +2764,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
-        """delete_custom_tags
+        """Delete the custom room tags
 
+        Deletes a bunch of custom room tags specified in the request.
 
         :param batch_tags_request_dto:
         :type batch_tags_request_dto: BatchTagsRequestDto
@@ -2664,6 +2802,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
+            '401': None,
             '403': None,
         }
         response_data = self.api_client.call_api(
@@ -2694,8 +2833,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[None]:
-        """delete_custom_tags
+        """Delete the custom room tags
 
+        Deletes a bunch of custom room tags specified in the request.
 
         :param batch_tags_request_dto:
         :type batch_tags_request_dto: BatchTagsRequestDto
@@ -2731,6 +2871,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
+            '401': None,
             '403': None,
         }
         response_data = self.api_client.call_api(
@@ -2761,8 +2902,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """delete_custom_tags
+        """Delete the custom room tags
 
+        Deletes a bunch of custom room tags specified in the request.
 
         :param batch_tags_request_dto:
         :type batch_tags_request_dto: BatchTagsRequestDto
@@ -2798,6 +2940,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
+            '401': None,
             '403': None,
         }
         response_data = self.api_client.call_api(
@@ -2856,11 +2999,20 @@ class RoomsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
+
+
+        resource_path = "/api/2.0/files/tags"
 
         return self.api_client.param_serialize(
             method='DELETE',
-            resource_path='/api/2.0/files/tags',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2894,8 +3046,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FileOperationWrapper:
-        """delete_room
+        """Remove a room
 
+        Removes a room with the ID specified in the request.
 
         :param id: The room ID. (required)
         :type id: int
@@ -2934,6 +3087,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2964,8 +3118,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FileOperationWrapper]:
-        """delete_room
+        """Remove a room
 
+        Removes a room with the ID specified in the request.
 
         :param id: The room ID. (required)
         :type id: int
@@ -3004,6 +3159,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3034,8 +3190,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """delete_room
+        """Remove a room
 
+        Removes a room with the ID specified in the request.
 
         :param id: The room ID. (required)
         :type id: int
@@ -3074,6 +3231,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3141,11 +3299,20 @@ class RoomsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
+
+
+        resource_path = "/api/2.0/files/rooms/{id}"
 
         return self.api_client.param_serialize(
             method='DELETE',
-            resource_path='/api/2.0/files/rooms/{id}',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3178,8 +3345,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FolderIntegerWrapper:
-        """delete_room_logo
+        """Remove a room logo
 
+        Removes a logo from a room with the ID specified in the request.
 
         :param id: The room ID. (required)
         :type id: int
@@ -3215,6 +3383,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3244,8 +3413,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FolderIntegerWrapper]:
-        """delete_room_logo
+        """Remove a room logo
 
+        Removes a logo from a room with the ID specified in the request.
 
         :param id: The room ID. (required)
         :type id: int
@@ -3281,6 +3451,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3310,8 +3481,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """delete_room_logo
+        """Remove a room logo
 
+        Removes a logo from a room with the ID specified in the request.
 
         :param id: The room ID. (required)
         :type id: int
@@ -3347,6 +3519,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3398,11 +3571,20 @@ class RoomsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
+
+
+        resource_path = "/api/2.0/files/rooms/{id}/logo"
 
         return self.api_client.param_serialize(
             method='DELETE',
-            resource_path='/api/2.0/files/rooms/{id}/logo',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3436,8 +3618,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FolderIntegerWrapper:
-        """delete_room_tags
+        """Remove the room tags
 
+        Removes the tags from a room with the ID specified in the request.
 
         :param id: The room Id. (required)
         :type id: int
@@ -3476,6 +3659,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
+            '401': None,
             '403': None,
         }
         response_data = self.api_client.call_api(
@@ -3507,8 +3691,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FolderIntegerWrapper]:
-        """delete_room_tags
+        """Remove the room tags
 
+        Removes the tags from a room with the ID specified in the request.
 
         :param id: The room Id. (required)
         :type id: int
@@ -3547,6 +3732,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
+            '401': None,
             '403': None,
         }
         response_data = self.api_client.call_api(
@@ -3578,8 +3764,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """delete_room_tags
+        """Remove the room tags
 
+        Removes the tags from a room with the ID specified in the request.
 
         :param id: The room Id. (required)
         :type id: int
@@ -3618,6 +3805,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
+            '401': None,
             '403': None,
         }
         response_data = self.api_client.call_api(
@@ -3686,11 +3874,20 @@ class RoomsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
+
+
+        resource_path = "/api/2.0/files/rooms/{id}/tags"
 
         return self.api_client.param_serialize(
             method='DELETE',
-            resource_path='/api/2.0/files/rooms/{id}/tags',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3723,8 +3920,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> NewItemsFileEntryBaseArrayWrapper:
-        """get_new_room_items
+        """Get the new room items
 
+        Returns a list of all the new items from a room with the ID specified in the request.
 
         :param id: The room ID. (required)
         :type id: int
@@ -3760,6 +3958,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "NewItemsFileEntryBaseArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3789,8 +3988,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[NewItemsFileEntryBaseArrayWrapper]:
-        """get_new_room_items
+        """Get the new room items
 
+        Returns a list of all the new items from a room with the ID specified in the request.
 
         :param id: The room ID. (required)
         :type id: int
@@ -3826,6 +4026,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "NewItemsFileEntryBaseArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3855,8 +4056,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_new_room_items
+        """Get the new room items
 
+        Returns a list of all the new items from a room with the ID specified in the request.
 
         :param id: The room ID. (required)
         :type id: int
@@ -3892,6 +4094,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "NewItemsFileEntryBaseArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3943,11 +4146,20 @@ class RoomsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
+
+
+        resource_path = "/api/2.0/files/rooms/{id}/news"
 
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/rooms/{id}/news',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3980,8 +4192,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> BooleanWrapper:
-        """get_public_settings
+        """Get public settings
 
+        Returns the public settings of the room template with the ID specified in the request.
 
         :param id: The room template ID. (required)
         :type id: int
@@ -4017,6 +4230,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4046,8 +4260,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[BooleanWrapper]:
-        """get_public_settings
+        """Get public settings
 
+        Returns the public settings of the room template with the ID specified in the request.
 
         :param id: The room template ID. (required)
         :type id: int
@@ -4083,6 +4298,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4112,8 +4328,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_public_settings
+        """Get public settings
 
+        Returns the public settings of the room template with the ID specified in the request.
 
         :param id: The room template ID. (required)
         :type id: int
@@ -4149,6 +4366,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4200,11 +4418,20 @@ class RoomsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
+
+
+        resource_path = "/api/2.0/files/roomtemplate/{id}/public"
 
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/roomtemplate/{id}/public',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -4236,8 +4463,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> CoversResultArrayWrapper:
-        """get_room_covers
+        """Get covers
 
+        Returns a list of all covers.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4270,6 +4498,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CoversResultArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4298,8 +4527,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[CoversResultArrayWrapper]:
-        """get_room_covers
+        """Get covers
 
+        Returns a list of all covers.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4332,6 +4562,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CoversResultArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4360,8 +4591,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_room_covers
+        """Get covers
 
+        Returns a list of all covers.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4394,6 +4626,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CoversResultArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4442,11 +4675,20 @@ class RoomsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
+
+
+        resource_path = "/api/2.0/files/rooms/covers"
 
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/rooms/covers',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -4478,8 +4720,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RoomFromTemplateStatusWrapper:
-        """get_room_creating_status
+        """Get the room creation progress
 
+        Returns the progress of creating a room from the template.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4512,6 +4755,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomFromTemplateStatusWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4540,8 +4784,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[RoomFromTemplateStatusWrapper]:
-        """get_room_creating_status
+        """Get the room creation progress
 
+        Returns the progress of creating a room from the template.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4574,6 +4819,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomFromTemplateStatusWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4602,8 +4848,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_room_creating_status
+        """Get the room creation progress
 
+        Returns the progress of creating a room from the template.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4636,6 +4883,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomFromTemplateStatusWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4684,11 +4932,20 @@ class RoomsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
+
+
+        resource_path = "/api/2.0/files/rooms/fromtemplate/status"
 
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/rooms/fromtemplate/status',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -4720,8 +4977,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> DocumentBuilderTaskWrapper:
-        """get_room_index_export
+        """Get the room index export
 
+        Returns the room index export.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4754,6 +5012,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocumentBuilderTaskWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4782,8 +5041,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[DocumentBuilderTaskWrapper]:
-        """get_room_index_export
+        """Get the room index export
 
+        Returns the room index export.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4816,6 +5076,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocumentBuilderTaskWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4844,8 +5105,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_room_index_export
+        """Get the room index export
 
+        Returns the room index export.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4878,6 +5140,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocumentBuilderTaskWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4926,11 +5189,20 @@ class RoomsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
+
+
+        resource_path = "/api/2.0/files/rooms/indexexport"
 
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/rooms/indexexport',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -4963,8 +5235,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FolderIntegerWrapper:
-        """get_room_info
+        """Get room information
 
+        Returns the room information.
 
         :param id: The room ID. (required)
         :type id: int
@@ -5029,8 +5302,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FolderIntegerWrapper]:
-        """get_room_info
+        """Get room information
 
+        Returns the room information.
 
         :param id: The room ID. (required)
         :type id: int
@@ -5095,8 +5369,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_room_info
+        """Get room information
 
+        Returns the room information.
 
         :param id: The room ID. (required)
         :type id: int
@@ -5185,9 +5460,12 @@ class RoomsApi:
         _auth_settings: List[str] = [
         ]
 
+
+        resource_path = "/api/2.0/files/rooms/{id}"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/rooms/{id}',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -5221,8 +5499,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FileShareArrayWrapper:
-        """get_room_links
+        """Get the room links
 
+        Returns the links of the room with the ID specified in the request.
 
         :param id: The room ID. (required)
         :type id: int
@@ -5261,6 +5540,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -5291,8 +5571,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FileShareArrayWrapper]:
-        """get_room_links
+        """Get the room links
 
+        Returns the links of the room with the ID specified in the request.
 
         :param id: The room ID. (required)
         :type id: int
@@ -5331,6 +5612,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -5361,8 +5643,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_room_links
+        """Get the room links
 
+        Returns the links of the room with the ID specified in the request.
 
         :param id: The room ID. (required)
         :type id: int
@@ -5401,6 +5684,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -5457,11 +5741,20 @@ class RoomsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
+
+
+        resource_path = "/api/2.0/files/rooms/{id}/links"
 
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/rooms/{id}/links',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -5498,8 +5791,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FileShareArrayWrapper:
-        """get_room_security_info
+        """Get the room access rights
 
+        Returns the access rights of a room with the ID specified in the request.
 
         :param id: The room ID. (required)
         :type id: int
@@ -5547,6 +5841,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -5580,8 +5875,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FileShareArrayWrapper]:
-        """get_room_security_info
+        """Get the room access rights
 
+        Returns the access rights of a room with the ID specified in the request.
 
         :param id: The room ID. (required)
         :type id: int
@@ -5629,6 +5925,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -5662,8 +5959,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_room_security_info
+        """Get the room access rights
 
+        Returns the access rights of a room with the ID specified in the request.
 
         :param id: The room ID. (required)
         :type id: int
@@ -5711,6 +6009,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -5782,11 +6081,20 @@ class RoomsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
+
+
+        resource_path = "/api/2.0/files/rooms/{id}/share"
 
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/rooms/{id}/share',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -5821,8 +6129,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ObjectArrayWrapper:
-        """get_room_tags_info
+        """Get the room tags
 
+        Returns a list of custom room tags.
 
         :param count: Gets or sets the number of tag results to retrieve.  This property specifies the maximum amount of tag data to be included in the result set.
         :type count: int
@@ -5864,6 +6173,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -5895,8 +6205,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[ObjectArrayWrapper]:
-        """get_room_tags_info
+        """Get the room tags
 
+        Returns a list of custom room tags.
 
         :param count: Gets or sets the number of tag results to retrieve.  This property specifies the maximum amount of tag data to be included in the result set.
         :type count: int
@@ -5938,6 +6249,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -5969,8 +6281,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_room_tags_info
+        """Get the room tags
 
+        Returns a list of custom room tags.
 
         :param count: Gets or sets the number of tag results to retrieve.  This property specifies the maximum amount of tag data to be included in the result set.
         :type count: int
@@ -6012,6 +6325,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -6077,11 +6391,20 @@ class RoomsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
+
+
+        resource_path = "/api/2.0/files/tags"
 
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/tags',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -6113,8 +6436,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RoomTemplateStatusWrapper:
-        """get_room_template_creating_status
+        """Get status of room template creation
 
+        Returns the progress status of the room template creation process.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -6147,6 +6471,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomTemplateStatusWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -6175,8 +6500,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[RoomTemplateStatusWrapper]:
-        """get_room_template_creating_status
+        """Get status of room template creation
 
+        Returns the progress status of the room template creation process.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -6209,6 +6535,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomTemplateStatusWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -6237,8 +6564,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_room_template_creating_status
+        """Get status of room template creation
 
+        Returns the progress status of the room template creation process.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -6271,6 +6599,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomTemplateStatusWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -6319,11 +6648,20 @@ class RoomsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
+
+
+        resource_path = "/api/2.0/files/roomtemplate/status"
 
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/roomtemplate/status',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -6370,8 +6708,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FolderContentIntegerWrapper:
-        """get_rooms_folder
+        """Get rooms
 
+        Returns the contents of the Rooms section by the parameters specified in the request.
 
         :param type: The filter by room type.
         :type type: List[RoomType]
@@ -6449,6 +6788,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderContentIntegerWrapper",
+            '401': None,
             '403': None,
         }
         response_data = self.api_client.call_api(
@@ -6493,8 +6833,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FolderContentIntegerWrapper]:
-        """get_rooms_folder
+        """Get rooms
 
+        Returns the contents of the Rooms section by the parameters specified in the request.
 
         :param type: The filter by room type.
         :type type: List[RoomType]
@@ -6572,6 +6913,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderContentIntegerWrapper",
+            '401': None,
             '403': None,
         }
         response_data = self.api_client.call_api(
@@ -6616,8 +6958,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_rooms_folder
+        """Get rooms
 
+        Returns the contents of the Rooms section by the parameters specified in the request.
 
         :param type: The filter by room type.
         :type type: List[RoomType]
@@ -6695,6 +7038,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderContentIntegerWrapper",
+            '401': None,
             '403': None,
         }
         response_data = self.api_client.call_api(
@@ -6822,11 +7166,20 @@ class RoomsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
+
+
+        resource_path = "/api/2.0/files/rooms"
 
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/rooms',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -6858,8 +7211,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> NewItemsRoomNewItemsArrayWrapper:
-        """get_rooms_new_items
+        """Get the room new items
 
+        Returns the room new items.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -6892,6 +7246,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "NewItemsRoomNewItemsArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -6920,8 +7275,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[NewItemsRoomNewItemsArrayWrapper]:
-        """get_rooms_new_items
+        """Get the room new items
 
+        Returns the room new items.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -6954,6 +7310,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "NewItemsRoomNewItemsArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -6982,8 +7339,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_rooms_new_items
+        """Get the room new items
 
+        Returns the room new items.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -7016,6 +7374,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "NewItemsRoomNewItemsArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -7064,11 +7423,20 @@ class RoomsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
+
+
+        resource_path = "/api/2.0/files/rooms/news"
 
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/rooms/news',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -7101,8 +7469,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FileShareWrapper:
-        """get_rooms_primary_external_link
+        """Get the room primary external link
 
+        Returns the primary external link of the room with the ID specified in the request.
 
         :param id: The room ID. (required)
         :type id: int
@@ -7138,6 +7507,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
+            '401': None,
             '404': None,
         }
         response_data = self.api_client.call_api(
@@ -7168,8 +7538,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FileShareWrapper]:
-        """get_rooms_primary_external_link
+        """Get the room primary external link
 
+        Returns the primary external link of the room with the ID specified in the request.
 
         :param id: The room ID. (required)
         :type id: int
@@ -7205,6 +7576,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
+            '401': None,
             '404': None,
         }
         response_data = self.api_client.call_api(
@@ -7235,8 +7607,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_rooms_primary_external_link
+        """Get the room primary external link
 
+        Returns the primary external link of the room with the ID specified in the request.
 
         :param id: The room ID. (required)
         :type id: int
@@ -7272,6 +7645,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
+            '401': None,
             '404': None,
         }
         response_data = self.api_client.call_api(
@@ -7324,11 +7698,20 @@ class RoomsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
+
+
+        resource_path = "/api/2.0/files/rooms/{id}/link"
 
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/rooms/{id}/link',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -7361,8 +7744,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FolderIntegerWrapper:
-        """pin_room
+        """Pin a room
 
+        Pins a room with the ID specified in the request to the top of the list.
 
         :param id: The room ID. (required)
         :type id: int
@@ -7398,6 +7782,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -7427,8 +7812,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FolderIntegerWrapper]:
-        """pin_room
+        """Pin a room
 
+        Pins a room with the ID specified in the request to the top of the list.
 
         :param id: The room ID. (required)
         :type id: int
@@ -7464,6 +7850,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -7493,8 +7880,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """pin_room
+        """Pin a room
 
+        Pins a room with the ID specified in the request to the top of the list.
 
         :param id: The room ID. (required)
         :type id: int
@@ -7530,6 +7918,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -7581,11 +7970,20 @@ class RoomsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
+
+
+        resource_path = "/api/2.0/files/rooms/{id}/pin"
 
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/files/rooms/{id}/pin',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -7618,8 +8016,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FolderIntegerWrapper:
-        """reorder_room
+        """Reorder the room
 
+        Reorders the room with ID specified in the request.
 
         :param id: The room ID. (required)
         :type id: int
@@ -7655,6 +8054,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -7684,8 +8084,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FolderIntegerWrapper]:
-        """reorder_room
+        """Reorder the room
 
+        Reorders the room with ID specified in the request.
 
         :param id: The room ID. (required)
         :type id: int
@@ -7721,6 +8122,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -7750,8 +8152,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """reorder_room
+        """Reorder the room
 
+        Reorders the room with ID specified in the request.
 
         :param id: The room ID. (required)
         :type id: int
@@ -7787,6 +8190,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -7838,11 +8242,20 @@ class RoomsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
+
+
+        resource_path = "/api/2.0/files/rooms/{id}/reorder"
 
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/files/rooms/{id}/reorder',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -7876,8 +8289,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
-        """resend_email_invitations
+        """Resend the room invitations
 
+        Resends the email invitations to a room with the ID specified in the request to the selected users.
 
         :param id: The room ID. (required)
         :type id: int
@@ -7916,6 +8330,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -7946,8 +8361,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[None]:
-        """resend_email_invitations
+        """Resend the room invitations
 
+        Resends the email invitations to a room with the ID specified in the request to the selected users.
 
         :param id: The room ID. (required)
         :type id: int
@@ -7986,6 +8402,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -8016,8 +8433,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """resend_email_invitations
+        """Resend the room invitations
 
+        Resends the email invitations to a room with the ID specified in the request to the selected users.
 
         :param id: The room ID. (required)
         :type id: int
@@ -8056,6 +8474,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -8116,11 +8535,20 @@ class RoomsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
+
+
+        resource_path = "/api/2.0/files/rooms/{id}/resend"
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/files/rooms/{id}/resend',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -8153,8 +8581,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
-        """set_public_settings
+        """Set public settings
 
+        Sets the public settings for the room template with the ID specified in the request.
 
         :param set_public_dto:
         :type set_public_dto: SetPublicDto
@@ -8190,6 +8619,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -8219,8 +8649,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[None]:
-        """set_public_settings
+        """Set public settings
 
+        Sets the public settings for the room template with the ID specified in the request.
 
         :param set_public_dto:
         :type set_public_dto: SetPublicDto
@@ -8256,6 +8687,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -8285,8 +8717,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """set_public_settings
+        """Set public settings
 
+        Sets the public settings for the room template with the ID specified in the request.
 
         :param set_public_dto:
         :type set_public_dto: SetPublicDto
@@ -8322,6 +8755,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -8379,11 +8813,20 @@ class RoomsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
+
+
+        resource_path = "/api/2.0/files/roomtemplate/public"
 
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/files/roomtemplate/public',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -8417,8 +8860,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FileShareWrapper:
-        """set_room_link
+        """Set the room external or invitation link
 
+        Sets the room external or invitation link with the ID specified in the request.
 
         :param id: The room ID. (required)
         :type id: int
@@ -8457,6 +8901,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -8487,8 +8932,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FileShareWrapper]:
-        """set_room_link
+        """Set the room external or invitation link
 
+        Sets the room external or invitation link with the ID specified in the request.
 
         :param id: The room ID. (required)
         :type id: int
@@ -8527,6 +8973,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -8557,8 +9004,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """set_room_link
+        """Set the room external or invitation link
 
+        Sets the room external or invitation link with the ID specified in the request.
 
         :param id: The room ID. (required)
         :type id: int
@@ -8597,6 +9045,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -8664,11 +9113,20 @@ class RoomsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
+
+
+        resource_path = "/api/2.0/files/rooms/{id}/links"
 
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/files/rooms/{id}/links',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -8702,8 +9160,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RoomSecurityWrapper:
-        """set_room_security
+        """Set the room access rights
 
+        Sets the access rights to the room with the ID specified in the request.
 
         :param id: The room ID. (required)
         :type id: int
@@ -8742,6 +9201,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomSecurityWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -8772,8 +9232,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[RoomSecurityWrapper]:
-        """set_room_security
+        """Set the room access rights
 
+        Sets the access rights to the room with the ID specified in the request.
 
         :param id: The room ID. (required)
         :type id: int
@@ -8812,6 +9273,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomSecurityWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -8842,8 +9304,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """set_room_security
+        """Set the room access rights
 
+        Sets the access rights to the room with the ID specified in the request.
 
         :param id: The room ID. (required)
         :type id: int
@@ -8882,6 +9345,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomSecurityWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -8949,11 +9413,20 @@ class RoomsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
+
+
+        resource_path = "/api/2.0/files/rooms/{id}/share"
 
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/files/rooms/{id}/share',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -8986,8 +9459,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> DocumentBuilderTaskWrapper:
-        """start_room_index_export
+        """Start the room index export
 
+        Starts the index export of a room with the ID specified in the request.
 
         :param id: The room ID. (required)
         :type id: int
@@ -9023,6 +9497,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocumentBuilderTaskWrapper",
+            '401': None,
             '501': None,
         }
         response_data = self.api_client.call_api(
@@ -9053,8 +9528,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[DocumentBuilderTaskWrapper]:
-        """start_room_index_export
+        """Start the room index export
 
+        Starts the index export of a room with the ID specified in the request.
 
         :param id: The room ID. (required)
         :type id: int
@@ -9090,6 +9566,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocumentBuilderTaskWrapper",
+            '401': None,
             '501': None,
         }
         response_data = self.api_client.call_api(
@@ -9120,8 +9597,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """start_room_index_export
+        """Start the room index export
 
+        Starts the index export of a room with the ID specified in the request.
 
         :param id: The room ID. (required)
         :type id: int
@@ -9157,6 +9635,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocumentBuilderTaskWrapper",
+            '401': None,
             '501': None,
         }
         response_data = self.api_client.call_api(
@@ -9209,11 +9688,20 @@ class RoomsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
+
+
+        resource_path = "/api/2.0/files/rooms/{id}/indexexport"
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/files/rooms/{id}/indexexport',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -9245,8 +9733,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
-        """terminate_room_index_export
+        """Terminate the room index export
 
+        Terminates the room index export.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -9279,6 +9768,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -9307,8 +9797,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[None]:
-        """terminate_room_index_export
+        """Terminate the room index export
 
+        Terminates the room index export.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -9341,6 +9832,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -9369,8 +9861,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """terminate_room_index_export
+        """Terminate the room index export
 
+        Terminates the room index export.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -9403,6 +9896,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -9444,11 +9938,20 @@ class RoomsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
+
+
+        resource_path = "/api/2.0/files/rooms/indexexport"
 
         return self.api_client.param_serialize(
             method='DELETE',
-            resource_path='/api/2.0/files/rooms/indexexport',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -9482,8 +9985,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FileOperationWrapper:
-        """unarchive_room
+        """Unarchive a room
 
+        Moves a room with the ID specified in the request from the Archive section to the Rooms section.
 
         :param id: The room ID. (required)
         :type id: int
@@ -9522,6 +10026,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -9552,8 +10057,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FileOperationWrapper]:
-        """unarchive_room
+        """Unarchive a room
 
+        Moves a room with the ID specified in the request from the Archive section to the Rooms section.
 
         :param id: The room ID. (required)
         :type id: int
@@ -9592,6 +10098,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -9622,8 +10129,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """unarchive_room
+        """Unarchive a room
 
+        Moves a room with the ID specified in the request from the Archive section to the Rooms section.
 
         :param id: The room ID. (required)
         :type id: int
@@ -9662,6 +10170,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -9729,11 +10238,20 @@ class RoomsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
+
+
+        resource_path = "/api/2.0/files/rooms/{id}/unarchive"
 
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/files/rooms/{id}/unarchive',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -9766,8 +10284,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FolderIntegerWrapper:
-        """unpin_room
+        """Unpin a room
 
+        Unpins a room with the ID specified in the request from the top of the list.
 
         :param id: The room ID. (required)
         :type id: int
@@ -9803,6 +10322,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -9832,8 +10352,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FolderIntegerWrapper]:
-        """unpin_room
+        """Unpin a room
 
+        Unpins a room with the ID specified in the request from the top of the list.
 
         :param id: The room ID. (required)
         :type id: int
@@ -9869,6 +10390,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -9898,8 +10420,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """unpin_room
+        """Unpin a room
 
+        Unpins a room with the ID specified in the request from the top of the list.
 
         :param id: The room ID. (required)
         :type id: int
@@ -9935,6 +10458,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -9986,11 +10510,20 @@ class RoomsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
+
+
+        resource_path = "/api/2.0/files/rooms/{id}/unpin"
 
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/files/rooms/{id}/unpin',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -10024,8 +10557,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FolderIntegerWrapper:
-        """update_room
+        """Update a room
 
+        Updates a room with the ID specified in the request.
 
         :param id: The room ID. (required)
         :type id: int
@@ -10064,6 +10598,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -10094,8 +10629,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FolderIntegerWrapper]:
-        """update_room
+        """Update a room
 
+        Updates a room with the ID specified in the request.
 
         :param id: The room ID. (required)
         :type id: int
@@ -10134,6 +10670,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -10164,8 +10701,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """update_room
+        """Update a room
 
+        Updates a room with the ID specified in the request.
 
         :param id: The room ID. (required)
         :type id: int
@@ -10204,6 +10742,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -10271,11 +10810,20 @@ class RoomsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
+
+
+        resource_path = "/api/2.0/files/rooms/{id}"
 
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/files/rooms/{id}',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -10308,8 +10856,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> UploadResultWrapper:
-        """upload_room_logo
+        """Upload a room logo image
 
+        Uploads a temporary image to create a room logo.
 
         :param form_collection: The image data.
         :type form_collection: List[KeyValuePairStringStringValues]
@@ -10345,6 +10894,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "UploadResultWrapper",
+            '401': None,
             '403': None,
         }
         response_data = self.api_client.call_api(
@@ -10375,8 +10925,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[UploadResultWrapper]:
-        """upload_room_logo
+        """Upload a room logo image
 
+        Uploads a temporary image to create a room logo.
 
         :param form_collection: The image data.
         :type form_collection: List[KeyValuePairStringStringValues]
@@ -10412,6 +10963,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "UploadResultWrapper",
+            '401': None,
             '403': None,
         }
         response_data = self.api_client.call_api(
@@ -10442,8 +10994,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """upload_room_logo
+        """Upload a room logo image
 
+        Uploads a temporary image to create a room logo.
 
         :param form_collection: The image data.
         :type form_collection: List[KeyValuePairStringStringValues]
@@ -10479,6 +11032,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "UploadResultWrapper",
+            '401': None,
             '403': None,
         }
         response_data = self.api_client.call_api(
@@ -10545,11 +11099,20 @@ class RoomsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
+
+
+        resource_path = "/api/2.0/files/logos"
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/files/logos',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

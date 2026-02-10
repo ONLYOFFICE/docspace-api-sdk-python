@@ -48,6 +48,7 @@ class ThirdPartyAccountsApi:
 
 
 
+
     @validate_call
     def get_third_party_auth_providers(
         self,
@@ -343,9 +344,12 @@ class ThirdPartyAccountsApi:
         _auth_settings: List[str] = [
         ]
 
+
+        resource_path = "/api/2.0/people/thirdparty/providers"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/people/thirdparty/providers',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -621,9 +625,12 @@ class ThirdPartyAccountsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/people/thirdparty/linkaccount"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/people/thirdparty/linkaccount',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -900,9 +907,12 @@ class ThirdPartyAccountsApi:
         _auth_settings: List[str] = [
         ]
 
+
+        resource_path = "/api/2.0/people/thirdparty/signup"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/people/thirdparty/signup',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1164,9 +1174,12 @@ class ThirdPartyAccountsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/people/thirdparty/unlinkaccount"
+
         return self.api_client.param_serialize(
             method='DELETE',
-            resource_path='/api/2.0/people/thirdparty/unlinkaccount',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

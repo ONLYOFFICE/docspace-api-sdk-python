@@ -30,7 +30,7 @@ class FileShare(int, Enum):
     """
     allowed enum values
     """
-    None_ = 0
+    _None = 0
     ReadWrite = 1
     Read = 2
     Restrict = 3

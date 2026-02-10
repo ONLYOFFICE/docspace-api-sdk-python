@@ -45,6 +45,7 @@ class GuestsApi:
 
 
 
+
     @validate_call
     def approve_guest_share_link(
         self,
@@ -315,9 +316,12 @@ class GuestsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/people/guests/share/approve"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/people/guests/share/approve',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -593,9 +597,12 @@ class GuestsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/people/guests"
+
         return self.api_client.param_serialize(
             method='DELETE',
-            resource_path='/api/2.0/people/guests',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

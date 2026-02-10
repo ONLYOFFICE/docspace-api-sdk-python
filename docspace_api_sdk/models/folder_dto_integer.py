@@ -24,6 +24,7 @@ import re  # noqa: F401
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from docspace_api_sdk.models.api_date_time import ApiDateTime
+from docspace_api_sdk.models.chat_settings import ChatSettings
 from docspace_api_sdk.models.employee_dto import EmployeeDto
 from docspace_api_sdk.models.file_entry_dto_integer_all_of_available_share_rights import FileEntryDtoIntegerAllOfAvailableShareRights
 from docspace_api_sdk.models.file_entry_dto_integer_all_of_security import FileEntryDtoIntegerAllOfSecurity
@@ -67,6 +68,8 @@ class FolderDtoInteger(FileEntryDtoInteger):
     used_space: Optional[StrictInt] = Field(default=None, description="How much folder space is used (counter).", alias="usedSpace")
     password_protected: Optional[StrictBool] = Field(default=None, description="Specifies if the folder is password protected or not.", alias="passwordProtected")
     expired: Optional[StrictBool] = Field(default=None, description="Specifies if an external link to the folder is expired or not.")
+    chat_settings: Optional[ChatSettings] = Field(default=None, alias="chatSettings")
+    root_room_type: Optional[RoomType] = Field(default=None, alias="rootRoomType")
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -106,6 +109,12 @@ class FolderDtoInteger(FileEntryDtoInteger):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of shared_by
+        if self.shared_by:
+            _dict['sharedBy'] = self.shared_by.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of owned_by
+        if self.owned_by:
+            _dict['ownedBy'] = self.owned_by.to_dict()
         # override the default output from pydantic by calling `to_dict()` of created
         if self.created:
             _dict['created'] = self.created.to_dict()
@@ -142,6 +151,9 @@ class FolderDtoInteger(FileEntryDtoInteger):
         # override the default output from pydantic by calling `to_dict()` of watermark
         if self.watermark:
             _dict['watermark'] = self.watermark.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of chat_settings
+        if self.chat_settings:
+            _dict['chatSettings'] = self.chat_settings.to_dict()
         # set to None if title (nullable) is None
         # and model_fields_set contains the field
         if self.title is None and "title" in self.model_fields_set:
@@ -292,8 +304,11 @@ class FolderDtoInteger(FileEntryDtoInteger):
             "isCustomQuota": obj.get("isCustomQuota"),
             "usedSpace": obj.get("usedSpace"),
             "passwordProtected": obj.get("passwordProtected"),
-            "expired": obj.get("expired")
+            "expired": obj.get("expired"),
+            "chatSettings": ChatSettings.from_dict(obj["chatSettings"]) if obj.get("chatSettings") is not None else None,
+            "rootRoomType": obj.get("rootRoomType")
         }
         all_fields = {**base_dict, **extra_fields}
         return cls.model_validate(all_fields)
+
 

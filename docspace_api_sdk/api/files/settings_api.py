@@ -56,6 +56,7 @@ class SettingsApi:
 
 
 
+
     @validate_call
     def change_access_to_thirdparty(
         self,
@@ -73,8 +74,9 @@ class SettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> BooleanWrapper:
-        """change_access_to_thirdparty
+        """Change the third-party settings access
 
+        Changes the access to the third-party settings.
 
         :param settings_request_dto:
         :type settings_request_dto: SettingsRequestDto
@@ -110,6 +112,7 @@ class SettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -139,8 +142,9 @@ class SettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[BooleanWrapper]:
-        """change_access_to_thirdparty
+        """Change the third-party settings access
 
+        Changes the access to the third-party settings.
 
         :param settings_request_dto:
         :type settings_request_dto: SettingsRequestDto
@@ -176,6 +180,7 @@ class SettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -205,8 +210,9 @@ class SettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """change_access_to_thirdparty
+        """Change the third-party settings access
 
+        Changes the access to the third-party settings.
 
         :param settings_request_dto:
         :type settings_request_dto: SettingsRequestDto
@@ -242,6 +248,7 @@ class SettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -306,11 +313,20 @@ class SettingsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
+
+
+        resource_path = "/api/2.0/files/thirdparty"
 
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/files/thirdparty',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -343,8 +359,9 @@ class SettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> AutoCleanUpDataWrapper:
-        """change_automatically_clean_up
+        """Update the trash bin auto-clearing setting
 
+        Updates the trash bin auto-clearing setting.
 
         :param auto_cleanup_request_dto:
         :type auto_cleanup_request_dto: AutoCleanupRequestDto
@@ -380,6 +397,7 @@ class SettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AutoCleanUpDataWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -409,8 +427,9 @@ class SettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[AutoCleanUpDataWrapper]:
-        """change_automatically_clean_up
+        """Update the trash bin auto-clearing setting
 
+        Updates the trash bin auto-clearing setting.
 
         :param auto_cleanup_request_dto:
         :type auto_cleanup_request_dto: AutoCleanupRequestDto
@@ -446,6 +465,7 @@ class SettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AutoCleanUpDataWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -475,8 +495,9 @@ class SettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """change_automatically_clean_up
+        """Update the trash bin auto-clearing setting
 
+        Updates the trash bin auto-clearing setting.
 
         :param auto_cleanup_request_dto:
         :type auto_cleanup_request_dto: AutoCleanupRequestDto
@@ -512,6 +533,7 @@ class SettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AutoCleanUpDataWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -576,11 +598,20 @@ class SettingsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
+
+
+        resource_path = "/api/2.0/files/settings/autocleanup"
 
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/files/settings/autocleanup',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -613,8 +644,9 @@ class SettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FileShareArrayWrapper:
-        """change_default_access_rights
+        """Change the default access rights
 
+        Changes the default access rights in the sharing settings.
 
         :param request_body: Sharing rights (None, ReadWrite, Read, Restrict, Varies, Review, Comment, FillForms, CustomFilter, RoomAdmin, Editing, Collaborator).
         :type request_body: List[int]
@@ -650,6 +682,7 @@ class SettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -679,8 +712,9 @@ class SettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FileShareArrayWrapper]:
-        """change_default_access_rights
+        """Change the default access rights
 
+        Changes the default access rights in the sharing settings.
 
         :param request_body: Sharing rights (None, ReadWrite, Read, Restrict, Varies, Review, Comment, FillForms, CustomFilter, RoomAdmin, Editing, Collaborator).
         :type request_body: List[int]
@@ -716,6 +750,7 @@ class SettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -745,8 +780,9 @@ class SettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """change_default_access_rights
+        """Change the default access rights
 
+        Changes the default access rights in the sharing settings.
 
         :param request_body: Sharing rights (None, ReadWrite, Read, Restrict, Varies, Review, Comment, FillForms, CustomFilter, RoomAdmin, Editing, Collaborator).
         :type request_body: List[int]
@@ -782,6 +818,7 @@ class SettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -847,11 +884,20 @@ class SettingsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
+
+
+        resource_path = "/api/2.0/files/settings/dafaultaccessrights"
 
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/files/settings/dafaultaccessrights',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -884,8 +930,9 @@ class SettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> BooleanWrapper:
-        """change_delete_confirm
+        """Confirm the file deletion
 
+        Specifies whether to confirm the file deletion or not.
 
         :param settings_request_dto:
         :type settings_request_dto: SettingsRequestDto
@@ -921,6 +968,7 @@ class SettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -950,8 +998,9 @@ class SettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[BooleanWrapper]:
-        """change_delete_confirm
+        """Confirm the file deletion
 
+        Specifies whether to confirm the file deletion or not.
 
         :param settings_request_dto:
         :type settings_request_dto: SettingsRequestDto
@@ -987,6 +1036,7 @@ class SettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1016,8 +1066,9 @@ class SettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """change_delete_confirm
+        """Confirm the file deletion
 
+        Specifies whether to confirm the file deletion or not.
 
         :param settings_request_dto:
         :type settings_request_dto: SettingsRequestDto
@@ -1053,6 +1104,7 @@ class SettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1117,11 +1169,20 @@ class SettingsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
+
+
+        resource_path = "/api/2.0/files/changedeleteconfrim"
 
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/files/changedeleteconfrim',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1154,8 +1215,9 @@ class SettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ICompressWrapper:
-        """change_download_zip_from_body
+        """Change the archive format (using body parameters)
 
+        Changes the format of the downloaded archive from .zip to .tar.gz. This method uses the body parameters.
 
         :param display_request_dto:
         :type display_request_dto: DisplayRequestDto
@@ -1191,6 +1253,7 @@ class SettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ICompressWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1220,8 +1283,9 @@ class SettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[ICompressWrapper]:
-        """change_download_zip_from_body
+        """Change the archive format (using body parameters)
 
+        Changes the format of the downloaded archive from .zip to .tar.gz. This method uses the body parameters.
 
         :param display_request_dto:
         :type display_request_dto: DisplayRequestDto
@@ -1257,6 +1321,7 @@ class SettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ICompressWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1286,8 +1351,9 @@ class SettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """change_download_zip_from_body
+        """Change the archive format (using body parameters)
 
+        Changes the format of the downloaded archive from .zip to .tar.gz. This method uses the body parameters.
 
         :param display_request_dto:
         :type display_request_dto: DisplayRequestDto
@@ -1323,6 +1389,7 @@ class SettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ICompressWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1387,11 +1454,20 @@ class SettingsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
+
+
+        resource_path = "/api/2.0/files/settings/downloadtargz"
 
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/files/settings/downloadtargz',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1424,8 +1500,9 @@ class SettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> DocServiceUrlWrapper:
-        """check_doc_service_url
+        """Check the document service URL
 
+        Checks the document service location URL.
 
         :param check_doc_service_url_request_dto:
         :type check_doc_service_url_request_dto: CheckDocServiceUrlRequestDto
@@ -1462,6 +1539,7 @@ class SettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocServiceUrlWrapper",
             '400': None,
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1491,8 +1569,9 @@ class SettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[DocServiceUrlWrapper]:
-        """check_doc_service_url
+        """Check the document service URL
 
+        Checks the document service location URL.
 
         :param check_doc_service_url_request_dto:
         :type check_doc_service_url_request_dto: CheckDocServiceUrlRequestDto
@@ -1529,6 +1608,7 @@ class SettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocServiceUrlWrapper",
             '400': None,
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1558,8 +1638,9 @@ class SettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """check_doc_service_url
+        """Check the document service URL
 
+        Checks the document service location URL.
 
         :param check_doc_service_url_request_dto:
         :type check_doc_service_url_request_dto: CheckDocServiceUrlRequestDto
@@ -1596,6 +1677,7 @@ class SettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocServiceUrlWrapper",
             '400': None,
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1660,11 +1742,20 @@ class SettingsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
+
+
+        resource_path = "/api/2.0/files/docservice"
 
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/files/docservice',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1697,8 +1788,9 @@ class SettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> BooleanWrapper:
-        """display_file_extension
+        """Display a file extension
 
+        Specifies whether to display a file extension or not.
 
         :param settings_request_dto:
         :type settings_request_dto: SettingsRequestDto
@@ -1734,6 +1826,7 @@ class SettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1763,8 +1856,9 @@ class SettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[BooleanWrapper]:
-        """display_file_extension
+        """Display a file extension
 
+        Specifies whether to display a file extension or not.
 
         :param settings_request_dto:
         :type settings_request_dto: SettingsRequestDto
@@ -1800,6 +1894,7 @@ class SettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1829,8 +1924,9 @@ class SettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """display_file_extension
+        """Display a file extension
 
+        Specifies whether to display a file extension or not.
 
         :param settings_request_dto:
         :type settings_request_dto: SettingsRequestDto
@@ -1866,6 +1962,7 @@ class SettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1930,11 +2027,20 @@ class SettingsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
+
+
+        resource_path = "/api/2.0/files/displayfileextension"
 
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/files/displayfileextension',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1967,8 +2073,9 @@ class SettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> BooleanWrapper:
-        """display_recent
+        """Display the Recent folder
 
+        Displays the Recent folder.
 
         :param display_request_dto:
         :type display_request_dto: DisplayRequestDto
@@ -2004,6 +2111,7 @@ class SettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '401': None,
             '403': None,
         }
         response_data = self.api_client.call_api(
@@ -2034,8 +2142,9 @@ class SettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[BooleanWrapper]:
-        """display_recent
+        """Display the Recent folder
 
+        Displays the Recent folder.
 
         :param display_request_dto:
         :type display_request_dto: DisplayRequestDto
@@ -2071,6 +2180,7 @@ class SettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '401': None,
             '403': None,
         }
         response_data = self.api_client.call_api(
@@ -2101,8 +2211,9 @@ class SettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """display_recent
+        """Display the Recent folder
 
+        Displays the Recent folder.
 
         :param display_request_dto:
         :type display_request_dto: DisplayRequestDto
@@ -2138,6 +2249,7 @@ class SettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '401': None,
             '403': None,
         }
         response_data = self.api_client.call_api(
@@ -2203,11 +2315,20 @@ class SettingsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
+
+
+        resource_path = "/api/2.0/files/displayrecent"
 
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/files/displayrecent',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2240,8 +2361,9 @@ class SettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> BooleanWrapper:
-        """external_share
+        """Change the external sharing ability
 
+        Changes the ability to share a file externally.
 
         :param display_request_dto:
         :type display_request_dto: DisplayRequestDto
@@ -2277,6 +2399,7 @@ class SettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2306,8 +2429,9 @@ class SettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[BooleanWrapper]:
-        """external_share
+        """Change the external sharing ability
 
+        Changes the ability to share a file externally.
 
         :param display_request_dto:
         :type display_request_dto: DisplayRequestDto
@@ -2343,6 +2467,7 @@ class SettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2372,8 +2497,9 @@ class SettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """external_share
+        """Change the external sharing ability
 
+        Changes the ability to share a file externally.
 
         :param display_request_dto:
         :type display_request_dto: DisplayRequestDto
@@ -2409,6 +2535,7 @@ class SettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2473,11 +2600,20 @@ class SettingsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
+
+
+        resource_path = "/api/2.0/files/settings/external"
 
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/files/settings/external',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2510,8 +2646,9 @@ class SettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> BooleanWrapper:
-        """external_share_social_media
+        """Change the external sharing ability on social networks
 
+        Changes the ability to share a file externally on social networks.
 
         :param display_request_dto:
         :type display_request_dto: DisplayRequestDto
@@ -2547,6 +2684,7 @@ class SettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2576,8 +2714,9 @@ class SettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[BooleanWrapper]:
-        """external_share_social_media
+        """Change the external sharing ability on social networks
 
+        Changes the ability to share a file externally on social networks.
 
         :param display_request_dto:
         :type display_request_dto: DisplayRequestDto
@@ -2613,6 +2752,7 @@ class SettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2642,8 +2782,9 @@ class SettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """external_share_social_media
+        """Change the external sharing ability on social networks
 
+        Changes the ability to share a file externally on social networks.
 
         :param display_request_dto:
         :type display_request_dto: DisplayRequestDto
@@ -2679,6 +2820,7 @@ class SettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2743,11 +2885,20 @@ class SettingsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
+
+
+        resource_path = "/api/2.0/files/settings/externalsocialmedia"
 
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/files/settings/externalsocialmedia',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2779,8 +2930,9 @@ class SettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> BooleanWrapper:
-        """forcesave
+        """Change the forcesaving ability
 
+        Specifies if the file forcesaving is enabled or not.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2813,6 +2965,7 @@ class SettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2841,8 +2994,9 @@ class SettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[BooleanWrapper]:
-        """forcesave
+        """Change the forcesaving ability
 
+        Specifies if the file forcesaving is enabled or not.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2875,6 +3029,7 @@ class SettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2903,8 +3058,9 @@ class SettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """forcesave
+        """Change the forcesaving ability
 
+        Specifies if the file forcesaving is enabled or not.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2937,6 +3093,7 @@ class SettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2985,11 +3142,20 @@ class SettingsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
+
+
+        resource_path = "/api/2.0/files/forcesave"
 
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/files/forcesave',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3021,8 +3187,9 @@ class SettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> AutoCleanUpDataWrapper:
-        """get_automatically_clean_up
+        """Get the trash bin auto-clearing setting
 
+        Returns the trash bin auto-clearing setting.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3055,6 +3222,7 @@ class SettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AutoCleanUpDataWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3083,8 +3251,9 @@ class SettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[AutoCleanUpDataWrapper]:
-        """get_automatically_clean_up
+        """Get the trash bin auto-clearing setting
 
+        Returns the trash bin auto-clearing setting.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3117,6 +3286,7 @@ class SettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AutoCleanUpDataWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3145,8 +3315,9 @@ class SettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_automatically_clean_up
+        """Get the trash bin auto-clearing setting
 
+        Returns the trash bin auto-clearing setting.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3179,6 +3350,7 @@ class SettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AutoCleanUpDataWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3227,11 +3399,20 @@ class SettingsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
+
+
+        resource_path = "/api/2.0/files/settings/autocleanup"
 
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/settings/autocleanup',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3264,8 +3445,9 @@ class SettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> DocServiceUrlWrapper:
-        """get_doc_service_url
+        """Get the document service URL
 
+        Returns the URL address of the connected editors.
 
         :param version: Specifies whether to return the editor version or not.
         :type version: bool
@@ -3330,8 +3512,9 @@ class SettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[DocServiceUrlWrapper]:
-        """get_doc_service_url
+        """Get the document service URL
 
+        Returns the URL address of the connected editors.
 
         :param version: Specifies whether to return the editor version or not.
         :type version: bool
@@ -3396,8 +3579,9 @@ class SettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_doc_service_url
+        """Get the document service URL
 
+        Returns the URL address of the connected editors.
 
         :param version: Specifies whether to return the editor version or not.
         :type version: bool
@@ -3488,9 +3672,12 @@ class SettingsApi:
         _auth_settings: List[str] = [
         ]
 
+
+        resource_path = "/api/2.0/files/docservice"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/docservice',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3522,8 +3709,9 @@ class SettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ModuleWrapper:
-        """get_files_module
+        """Get the Documents information
 
+        Returns the information about the Documents module.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3556,6 +3744,7 @@ class SettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ModuleWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3584,8 +3773,9 @@ class SettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[ModuleWrapper]:
-        """get_files_module
+        """Get the Documents information
 
+        Returns the information about the Documents module.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3618,6 +3808,7 @@ class SettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ModuleWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3646,8 +3837,9 @@ class SettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_files_module
+        """Get the Documents information
 
+        Returns the information about the Documents module.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3680,6 +3872,7 @@ class SettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ModuleWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3728,11 +3921,20 @@ class SettingsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
+
+
+        resource_path = "/api/2.0/files/info"
 
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/info',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3764,8 +3966,9 @@ class SettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FilesSettingsWrapper:
-        """get_files_settings
+        """Get file settings
 
+        Returns all the file settings.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3826,8 +4029,9 @@ class SettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FilesSettingsWrapper]:
-        """get_files_settings
+        """Get file settings
 
+        Returns all the file settings.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3888,8 +4092,9 @@ class SettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_files_settings
+        """Get file settings
 
+        Returns all the file settings.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3972,9 +4177,12 @@ class SettingsApi:
         _auth_settings: List[str] = [
         ]
 
+
+        resource_path = "/api/2.0/files/settings"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/settings',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -4007,8 +4215,9 @@ class SettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> BooleanWrapper:
-        """hide_confirm_cancel_operation
+        """Hide confirmation dialog when canceling operations
 
+        Hides the confirmation dialog when canceling operations.
 
         :param settings_request_dto:
         :type settings_request_dto: SettingsRequestDto
@@ -4044,6 +4253,7 @@ class SettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4073,8 +4283,9 @@ class SettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[BooleanWrapper]:
-        """hide_confirm_cancel_operation
+        """Hide confirmation dialog when canceling operations
 
+        Hides the confirmation dialog when canceling operations.
 
         :param settings_request_dto:
         :type settings_request_dto: SettingsRequestDto
@@ -4110,6 +4321,7 @@ class SettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4139,8 +4351,9 @@ class SettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """hide_confirm_cancel_operation
+        """Hide confirmation dialog when canceling operations
 
+        Hides the confirmation dialog when canceling operations.
 
         :param settings_request_dto:
         :type settings_request_dto: SettingsRequestDto
@@ -4176,6 +4389,7 @@ class SettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4240,11 +4454,20 @@ class SettingsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
+
+
+        resource_path = "/api/2.0/files/hideconfirmcanceloperation"
 
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/files/hideconfirmcanceloperation',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -4277,8 +4500,9 @@ class SettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ModuleWrapper:
-        """hide_confirm_convert
+        """Hide the confirmation dialog when converting
 
+        Hides the confirmation dialog for saving the file copy in the original format when converting a file.
 
         :param hide_confirm_convert_request_dto:
         :type hide_confirm_convert_request_dto: HideConfirmConvertRequestDto
@@ -4314,6 +4538,7 @@ class SettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ModuleWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4343,8 +4568,9 @@ class SettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[ModuleWrapper]:
-        """hide_confirm_convert
+        """Hide the confirmation dialog when converting
 
+        Hides the confirmation dialog for saving the file copy in the original format when converting a file.
 
         :param hide_confirm_convert_request_dto:
         :type hide_confirm_convert_request_dto: HideConfirmConvertRequestDto
@@ -4380,6 +4606,7 @@ class SettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ModuleWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4409,8 +4636,9 @@ class SettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """hide_confirm_convert
+        """Hide the confirmation dialog when converting
 
+        Hides the confirmation dialog for saving the file copy in the original format when converting a file.
 
         :param hide_confirm_convert_request_dto:
         :type hide_confirm_convert_request_dto: HideConfirmConvertRequestDto
@@ -4446,6 +4674,7 @@ class SettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ModuleWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4510,11 +4739,20 @@ class SettingsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
+
+
+        resource_path = "/api/2.0/files/hideconfirmconvert"
 
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/files/hideconfirmconvert',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -4547,8 +4785,9 @@ class SettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> BooleanWrapper:
-        """hide_confirm_room_lifetime
+        """Hide confirmation dialog when changing room lifetime settings
 
+        Hides the confirmation dialog when changing the room lifetime settings.
 
         :param settings_request_dto:
         :type settings_request_dto: SettingsRequestDto
@@ -4584,6 +4823,7 @@ class SettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4613,8 +4853,9 @@ class SettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[BooleanWrapper]:
-        """hide_confirm_room_lifetime
+        """Hide confirmation dialog when changing room lifetime settings
 
+        Hides the confirmation dialog when changing the room lifetime settings.
 
         :param settings_request_dto:
         :type settings_request_dto: SettingsRequestDto
@@ -4650,6 +4891,7 @@ class SettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4679,8 +4921,9 @@ class SettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """hide_confirm_room_lifetime
+        """Hide confirmation dialog when changing room lifetime settings
 
+        Hides the confirmation dialog when changing the room lifetime settings.
 
         :param settings_request_dto:
         :type settings_request_dto: SettingsRequestDto
@@ -4716,6 +4959,7 @@ class SettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4780,11 +5024,20 @@ class SettingsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
+
+
+        resource_path = "/api/2.0/files/hideconfirmroomlifetime"
 
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/files/hideconfirmroomlifetime',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -4816,8 +5069,9 @@ class SettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> BooleanWrapper:
-        """is_available_privacy_room_settings
+        """Check the Private Room availability
 
+        Checks if the Private Room settings are available or not.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4850,6 +5104,7 @@ class SettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4878,8 +5133,9 @@ class SettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[BooleanWrapper]:
-        """is_available_privacy_room_settings
+        """Check the Private Room availability
 
+        Checks if the Private Room settings are available or not.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4912,6 +5168,7 @@ class SettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4940,8 +5197,9 @@ class SettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """is_available_privacy_room_settings
+        """Check the Private Room availability
 
+        Checks if the Private Room settings are available or not.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4974,6 +5232,7 @@ class SettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -5022,11 +5281,20 @@ class SettingsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
+
+
+        resource_path = "/api/2.0/files/@privacy/available"
 
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/@privacy/available',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -5059,8 +5327,9 @@ class SettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> BooleanWrapper:
-        """keep_new_file_name
+        """Ask a new file name
 
+        Specifies whether to ask a user for a file name on creation or not.
 
         :param settings_request_dto:
         :type settings_request_dto: SettingsRequestDto
@@ -5096,6 +5365,7 @@ class SettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -5125,8 +5395,9 @@ class SettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[BooleanWrapper]:
-        """keep_new_file_name
+        """Ask a new file name
 
+        Specifies whether to ask a user for a file name on creation or not.
 
         :param settings_request_dto:
         :type settings_request_dto: SettingsRequestDto
@@ -5162,6 +5433,7 @@ class SettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -5191,8 +5463,9 @@ class SettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """keep_new_file_name
+        """Ask a new file name
 
+        Specifies whether to ask a user for a file name on creation or not.
 
         :param settings_request_dto:
         :type settings_request_dto: SettingsRequestDto
@@ -5228,6 +5501,7 @@ class SettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -5292,11 +5566,20 @@ class SettingsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
+
+
+        resource_path = "/api/2.0/files/keepnewfilename"
 
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/files/keepnewfilename',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -5329,8 +5612,9 @@ class SettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> BooleanWrapper:
-        """set_open_editor_in_same_tab
+        """Open document in the same browser tab
 
+        Changes the ability to open the document in the same browser tab.
 
         :param settings_request_dto:
         :type settings_request_dto: SettingsRequestDto
@@ -5366,6 +5650,7 @@ class SettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -5395,8 +5680,9 @@ class SettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[BooleanWrapper]:
-        """set_open_editor_in_same_tab
+        """Open document in the same browser tab
 
+        Changes the ability to open the document in the same browser tab.
 
         :param settings_request_dto:
         :type settings_request_dto: SettingsRequestDto
@@ -5432,6 +5718,7 @@ class SettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -5461,8 +5748,9 @@ class SettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """set_open_editor_in_same_tab
+        """Open document in the same browser tab
 
+        Changes the ability to open the document in the same browser tab.
 
         :param settings_request_dto:
         :type settings_request_dto: SettingsRequestDto
@@ -5498,6 +5786,7 @@ class SettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -5562,11 +5851,20 @@ class SettingsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
+
+
+        resource_path = "/api/2.0/files/settings/openeditorinsametab"
 
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/files/settings/openeditorinsametab',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -5598,8 +5896,9 @@ class SettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> BooleanWrapper:
-        """store_forcesave
+        """Change the ability to store the forcesaved files
 
+        Changes the ability to store the forcesaved file versions.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -5632,6 +5931,7 @@ class SettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -5660,8 +5960,9 @@ class SettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[BooleanWrapper]:
-        """store_forcesave
+        """Change the ability to store the forcesaved files
 
+        Changes the ability to store the forcesaved file versions.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -5694,6 +5995,7 @@ class SettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -5722,8 +6024,9 @@ class SettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """store_forcesave
+        """Change the ability to store the forcesaved files
 
+        Changes the ability to store the forcesaved file versions.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -5756,6 +6059,7 @@ class SettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -5804,11 +6108,20 @@ class SettingsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
+
+
+        resource_path = "/api/2.0/files/storeforcesave"
 
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/files/storeforcesave',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -5841,8 +6154,9 @@ class SettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> BooleanWrapper:
-        """store_original
+        """Change the ability to upload original formats
 
+        Changes the ability to upload documents in the original formats as well.
 
         :param settings_request_dto:
         :type settings_request_dto: SettingsRequestDto
@@ -5878,6 +6192,7 @@ class SettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -5907,8 +6222,9 @@ class SettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[BooleanWrapper]:
-        """store_original
+        """Change the ability to upload original formats
 
+        Changes the ability to upload documents in the original formats as well.
 
         :param settings_request_dto:
         :type settings_request_dto: SettingsRequestDto
@@ -5944,6 +6260,7 @@ class SettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -5973,8 +6290,9 @@ class SettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """store_original
+        """Change the ability to upload original formats
 
+        Changes the ability to upload documents in the original formats as well.
 
         :param settings_request_dto:
         :type settings_request_dto: SettingsRequestDto
@@ -6010,6 +6328,7 @@ class SettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -6074,11 +6393,20 @@ class SettingsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
+
+
+        resource_path = "/api/2.0/files/storeoriginal"
 
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/files/storeoriginal',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -6111,8 +6439,9 @@ class SettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> BooleanWrapper:
-        """update_file_if_exist
+        """Update a file version if it exists
 
+        Updates a file version if a file with such a name already exists.
 
         :param settings_request_dto:
         :type settings_request_dto: SettingsRequestDto
@@ -6148,6 +6477,7 @@ class SettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -6177,8 +6507,9 @@ class SettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[BooleanWrapper]:
-        """update_file_if_exist
+        """Update a file version if it exists
 
+        Updates a file version if a file with such a name already exists.
 
         :param settings_request_dto:
         :type settings_request_dto: SettingsRequestDto
@@ -6214,6 +6545,7 @@ class SettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -6243,8 +6575,9 @@ class SettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """update_file_if_exist
+        """Update a file version if it exists
 
+        Updates a file version if a file with such a name already exists.
 
         :param settings_request_dto:
         :type settings_request_dto: SettingsRequestDto
@@ -6280,6 +6613,7 @@ class SettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -6344,11 +6678,20 @@ class SettingsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
+
+
+        resource_path = "/api/2.0/files/updateifexist"
 
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/files/updateifexist',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

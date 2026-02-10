@@ -37,6 +37,8 @@ class FileEntryBaseDto(BaseModel):
     """ # noqa: E501
     title: Optional[StrictStr] = Field(default=None, description="The file entry title.")
     access: Optional[FileShare] = None
+    shared_by: Optional[EmployeeDto] = Field(default=None, alias="sharedBy")
+    owned_by: Optional[EmployeeDto] = Field(default=None, alias="ownedBy")
     shared: Optional[StrictBool] = Field(default=None, description="Specifies if the file entry is shared via link or not.")
     shared_for_user: Optional[StrictBool] = Field(default=None, description="Specifies if the file entry is shared for user or not.", alias="sharedForUser")
     parent_shared: Optional[StrictBool] = Field(default=None, description="Indicates whether the parent entity is shared.", alias="parentShared")
@@ -54,7 +56,7 @@ class FileEntryBaseDto(BaseModel):
     order: Optional[StrictStr] = Field(default=None, description="The order of the file entry.")
     is_favorite: Optional[StrictBool] = Field(default=None, description="Specifies if the file is a favorite or not.", alias="isFavorite")
     file_entry_type: Optional[FileEntryType] = Field(default=None, alias="fileEntryType")
-    __properties: ClassVar[List[str]] = ["title", "access", "shared", "sharedForUser", "parentShared", "shortWebUrl", "created", "createdBy", "updated", "autoDelete", "rootFolderType", "parentRoomType", "updatedBy", "providerItem", "providerKey", "providerId", "order", "isFavorite", "fileEntryType"]
+    __properties: ClassVar[List[str]] = ["title", "access", "sharedBy", "ownedBy", "shared", "sharedForUser", "parentShared", "shortWebUrl", "created", "createdBy", "updated", "autoDelete", "rootFolderType", "parentRoomType", "updatedBy", "providerItem", "providerKey", "providerId", "order", "isFavorite", "fileEntryType"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -95,6 +97,12 @@ class FileEntryBaseDto(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of shared_by
+        if self.shared_by:
+            _dict['sharedBy'] = self.shared_by.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of owned_by
+        if self.owned_by:
+            _dict['ownedBy'] = self.owned_by.to_dict()
         # override the default output from pydantic by calling `to_dict()` of created
         if self.created:
             _dict['created'] = self.created.to_dict()
@@ -160,6 +168,8 @@ class FileEntryBaseDto(BaseModel):
         _obj = cls.model_validate({
             "title": obj.get("title"),
             "access": obj.get("access"),
+            "sharedBy": EmployeeDto.from_dict(obj["sharedBy"]) if obj.get("sharedBy") is not None else None,
+            "ownedBy": EmployeeDto.from_dict(obj["ownedBy"]) if obj.get("ownedBy") is not None else None,
             "shared": obj.get("shared"),
             "sharedForUser": obj.get("sharedForUser"),
             "parentShared": obj.get("parentShared"),

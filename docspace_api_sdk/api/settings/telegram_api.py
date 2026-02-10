@@ -44,6 +44,7 @@ class TelegramApi:
 
 
 
+
     @validate_call
     def check_telegram(
         self,
@@ -280,9 +281,12 @@ class TelegramApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/telegram/check"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/settings/telegram/check',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -534,9 +538,12 @@ class TelegramApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/telegram/link"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/settings/telegram/link',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -788,9 +795,12 @@ class TelegramApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/telegram/link"
+
         return self.api_client.param_serialize(
             method='DELETE',
-            resource_path='/api/2.0/settings/telegram/link',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

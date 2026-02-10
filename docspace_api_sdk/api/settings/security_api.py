@@ -54,6 +54,7 @@ class SecurityApi:
 
 
 
+
     @validate_call
     def get_enabled_modules(
         self,
@@ -290,9 +291,12 @@ class SecurityApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/security/modules"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/settings/security/modules',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -578,9 +582,12 @@ class SecurityApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/security/administrator"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/settings/security/administrator',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -832,9 +839,12 @@ class SecurityApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/security/password"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/settings/security/password',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1101,9 +1111,12 @@ class SecurityApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/security/administrator/{productid}"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/settings/security/administrator/{productid}',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1370,9 +1383,12 @@ class SecurityApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/security/{id}"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/settings/security/{id}',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1642,9 +1658,12 @@ class SecurityApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/security"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/settings/security',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1927,9 +1946,12 @@ class SecurityApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/security/access"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/settings/security/access',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2215,9 +2237,12 @@ class SecurityApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/security/administrator"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/settings/security/administrator',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2500,9 +2525,12 @@ class SecurityApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/security"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/settings/security',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2785,9 +2813,12 @@ class SecurityApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/security/password"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/settings/security/password',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

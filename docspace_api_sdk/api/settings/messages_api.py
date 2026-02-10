@@ -46,6 +46,7 @@ class MessagesApi:
 
 
 
+
     @validate_call
     def enable_admin_message_settings(
         self,
@@ -310,9 +311,12 @@ class MessagesApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/messagesettings"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/settings/messagesettings',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -589,9 +593,12 @@ class MessagesApi:
         _auth_settings: List[str] = [
         ]
 
+
+        resource_path = "/api/2.0/settings/sendadmmail"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/settings/sendadmmail',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -871,9 +878,12 @@ class MessagesApi:
         _auth_settings: List[str] = [
         ]
 
+
+        resource_path = "/api/2.0/settings/sendjoininvite"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/settings/sendjoininvite',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

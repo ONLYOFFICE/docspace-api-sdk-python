@@ -42,6 +42,7 @@ class AccessToDevToolsApi:
 
 
 
+
     @validate_call
     def get_tenant_access_dev_tools_settings(
         self,
@@ -278,9 +279,12 @@ class AccessToDevToolsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/devtoolsaccess"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/settings/devtoolsaccess',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

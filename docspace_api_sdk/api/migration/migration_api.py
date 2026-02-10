@@ -48,6 +48,7 @@ class MigrationApi:
 
 
 
+
     @validate_call
     def cancel_migration(
         self,
@@ -280,9 +281,12 @@ class MigrationApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/migration/cancel"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/migration/cancel',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -530,9 +534,12 @@ class MigrationApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/migration/clear"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/migration/clear',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -808,9 +815,12 @@ class MigrationApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/migration/finish"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/migration/finish',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1058,9 +1068,12 @@ class MigrationApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/migration/logs"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/migration/logs',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1315,9 +1328,12 @@ class MigrationApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/migration/status"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/migration/status',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1572,9 +1588,12 @@ class MigrationApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/migration/list"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/migration/list',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1850,9 +1869,12 @@ class MigrationApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/migration/migrate"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/migration/migrate',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2115,9 +2137,12 @@ class MigrationApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/migration/init/{migratorName}"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/migration/init/{migratorName}',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

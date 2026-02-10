@@ -21,7 +21,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, StrictInt
 from typing import Any, ClassVar, Dict, List, Optional
 from docspace_api_sdk.models.api_date_time import ApiDateTime
 from docspace_api_sdk.models.employee_dto import EmployeeDto
@@ -34,12 +34,13 @@ class HistoryDto(BaseModel):
     """
     The file history information.
     """ # noqa: E501
+    id: StrictInt = Field(description="The unique identifier for the file history entry.")
     action: HistoryAction
     initiator: EmployeeDto
     var_date: ApiDateTime = Field(alias="date")
     data: HistoryData
     related: Optional[List[HistoryDto]] = Field(default=None, description="The list of related history.")
-    __properties: ClassVar[List[str]] = ["action", "initiator", "date", "data", "related"]
+    __properties: ClassVar[List[str]] = ["id", "action", "initiator", "date", "data", "related"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -117,6 +118,7 @@ class HistoryDto(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "id": obj.get("id"),
             "action": HistoryAction.from_dict(obj["action"]) if obj.get("action") is not None else None,
             "initiator": EmployeeDto.from_dict(obj["initiator"]) if obj.get("initiator") is not None else None,
             "date": ApiDateTime.from_dict(obj["date"]) if obj.get("date") is not None else None,

@@ -24,7 +24,7 @@ from typing_extensions import Self
 
 class SearchArea(int, Enum):
     """
-    [0 - Active, 1 - Archive, 2 - Any, 3 - Recent by links, 4 - Template]
+    [0 - Active, 1 - Archive, 2 - Any, 3 - Recent by links, 4 - Template, 5 - Knowledge, 6 - Result storage, 7 - AiAgents]
     """
 
     """
@@ -35,6 +35,9 @@ class SearchArea(int, Enum):
     Any = 2
     RecentByLinks = 3
     Templates = 4
+    Knowledge = 5
+    ResultStorage = 6
+    AiAgents = 7
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:

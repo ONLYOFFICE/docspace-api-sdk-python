@@ -45,6 +45,9 @@ Name | Type | Description | Notes
 **open_form** | **bool** |  | [optional] 
 **edit_internal** | **bool** |  | [optional] 
 **edit_expiration** | **bool** |  | [optional] 
+**vectorization** | **bool** |  | [optional] 
+**ask_ai** | **bool** |  | [optional] 
+**use_chat** | **bool** |  | [optional] 
 
 ## Example
 

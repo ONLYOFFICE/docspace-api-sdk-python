@@ -66,6 +66,7 @@ class PaymentApi:
 
 
 
+
     @validate_call
     def calculate_wallet_payment(
         self,
@@ -333,9 +334,12 @@ class PaymentApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/portal/payment/calculatewallet"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/portal/payment/calculatewallet',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -618,9 +622,12 @@ class PaymentApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/portal/payment/servicestate"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/portal/payment/servicestate',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -900,9 +907,12 @@ class PaymentApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/portal/payment/customer/operationsreport"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/portal/payment/customer/operationsreport',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1174,9 +1184,12 @@ class PaymentApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/portal/payment/chechoutsetupurl"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/portal/payment/chechoutsetupurl',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1448,9 +1461,12 @@ class PaymentApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/portal/payment/customer/balance"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/portal/payment/customer/balance',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1722,9 +1738,12 @@ class PaymentApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/portal/payment/customerinfo"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/portal/payment/customerinfo',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2116,9 +2135,12 @@ class PaymentApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/portal/payment/customer/operations"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/portal/payment/customer/operations',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2370,9 +2392,12 @@ class PaymentApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/portal/payment/customer/operationsreport"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/portal/payment/customer/operationsreport',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2644,9 +2669,12 @@ class PaymentApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/portal/payment/account"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/portal/payment/account',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2898,9 +2926,12 @@ class PaymentApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/portal/payment/currencies"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/portal/payment/currencies',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3169,9 +3200,12 @@ class PaymentApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/portal/payment/quotas"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/portal/payment/quotas',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3454,9 +3488,12 @@ class PaymentApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/portal/payment/url"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/portal/payment/url',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3708,9 +3745,12 @@ class PaymentApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/portal/payment/prices"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/portal/payment/prices',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3982,9 +4022,12 @@ class PaymentApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/portal/payment/quota"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/portal/payment/quota',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -4239,9 +4282,12 @@ class PaymentApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/portal/payment/servicessettings"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/portal/payment/servicessettings',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -4496,9 +4542,12 @@ class PaymentApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/portal/payment/topupsettings"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/portal/payment/topupsettings',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -4767,9 +4816,12 @@ class PaymentApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/portal/payment/walletservice"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/portal/payment/walletservice',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -5021,9 +5073,12 @@ class PaymentApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/portal/payment/walletservices"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/portal/payment/walletservices',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -5302,9 +5357,12 @@ class PaymentApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/portal/payment/request"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/portal/payment/request',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -5587,9 +5645,12 @@ class PaymentApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/portal/payment/topupsettings"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/portal/payment/topupsettings',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -5834,9 +5895,12 @@ class PaymentApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/portal/payment/customer/operationsreport"
+
         return self.api_client.param_serialize(
             method='DELETE',
-            resource_path='/api/2.0/portal/payment/customer/operationsreport',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -6119,9 +6183,12 @@ class PaymentApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/portal/payment/deposit"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/portal/payment/deposit',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -6404,9 +6471,12 @@ class PaymentApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/portal/payment/update"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/portal/payment/update',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -6689,9 +6759,12 @@ class PaymentApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/portal/payment/updatewallet"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/portal/payment/updatewallet',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

@@ -46,6 +46,7 @@ class EncryptionApi:
 
 
 
+
     @validate_call
     def get_storage_encryption_progress(
         self,
@@ -285,9 +286,12 @@ class EncryptionApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/encryption/progress"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/settings/encryption/progress',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -545,9 +549,12 @@ class EncryptionApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/encryption/settings"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/settings/encryption/settings',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -836,9 +843,12 @@ class EncryptionApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/encryption/start"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/settings/encryption/start',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

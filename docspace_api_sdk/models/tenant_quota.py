@@ -37,6 +37,7 @@ class TenantQuota(BaseModel):
     price_currency_symbol: Optional[StrictStr] = Field(default=None, description="The tenant price currency symbol.", alias="priceCurrencySymbol")
     price_iso_currency_symbol: Optional[StrictStr] = Field(default=None, description="The tenant price three-character ISO 4217 currency symbol.", alias="priceISOCurrencySymbol")
     product_id: Optional[StrictStr] = Field(default=None, description="The tenant product ID.", alias="productId")
+    service_name: Optional[StrictStr] = Field(default=None, description="The service name.", alias="serviceName")
     visible: Optional[StrictBool] = Field(default=None, description="Specifies if the tenant quota is visible or not.")
     wallet: Optional[StrictBool] = Field(default=None, description="Specifies if the tenant quota applies to the wallet or not")
     due_date: Optional[datetime] = Field(default=None, description="The quota due date.", alias="dueDate")
@@ -67,7 +68,8 @@ class TenantQuota(BaseModel):
     year: Optional[StrictBool] = Field(default=None, description="Specifies if the tenant quota is yearly subscription or not.")
     count_free_backup: Optional[StrictInt] = Field(default=None, description="The number of free backups within a month.", alias="countFreeBackup")
     backup: Optional[StrictBool] = Field(default=None, description="Specifies if the backup anabled as a wallet service or not.")
-    __properties: ClassVar[List[str]] = ["tenantId", "name", "price", "priceCurrencySymbol", "priceISOCurrencySymbol", "productId", "visible", "wallet", "dueDate", "features", "maxFileSize", "maxTotalSize", "countUser", "countRoomAdmin", "usersInRoom", "countRoom", "nonProfit", "trial", "free", "update", "audit", "docsEdition", "ldap", "sso", "statistic", "branding", "customization", "lifetime", "custom", "restore", "oauth", "contentSearch", "thirdParty", "year", "countFreeBackup", "backup"]
+    count_ai_agent: Optional[StrictInt] = Field(default=None, description="The number of AI agents.", alias="countAIAgent")
+    __properties: ClassVar[List[str]] = ["tenantId", "name", "price", "priceCurrencySymbol", "priceISOCurrencySymbol", "productId", "serviceName", "visible", "wallet", "dueDate", "features", "maxFileSize", "maxTotalSize", "countUser", "countRoomAdmin", "usersInRoom", "countRoom", "nonProfit", "trial", "free", "update", "audit", "docsEdition", "ldap", "sso", "statistic", "branding", "customization", "lifetime", "custom", "restore", "oauth", "contentSearch", "thirdParty", "year", "countFreeBackup", "backup", "countAIAgent"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -128,6 +130,11 @@ class TenantQuota(BaseModel):
         if self.product_id is None and "product_id" in self.model_fields_set:
             _dict['productId'] = None
 
+        # set to None if service_name (nullable) is None
+        # and model_fields_set contains the field
+        if self.service_name is None and "service_name" in self.model_fields_set:
+            _dict['serviceName'] = None
+
         # set to None if due_date (nullable) is None
         # and model_fields_set contains the field
         if self.due_date is None and "due_date" in self.model_fields_set:
@@ -157,6 +164,7 @@ class TenantQuota(BaseModel):
             "priceCurrencySymbol": obj.get("priceCurrencySymbol"),
             "priceISOCurrencySymbol": obj.get("priceISOCurrencySymbol"),
             "productId": obj.get("productId"),
+            "serviceName": obj.get("serviceName"),
             "visible": obj.get("visible"),
             "wallet": obj.get("wallet"),
             "dueDate": obj.get("dueDate"),
@@ -186,7 +194,8 @@ class TenantQuota(BaseModel):
             "thirdParty": obj.get("thirdParty"),
             "year": obj.get("year"),
             "countFreeBackup": obj.get("countFreeBackup"),
-            "backup": obj.get("backup")
+            "backup": obj.get("backup"),
+            "countAIAgent": obj.get("countAIAgent")
         })
         return _obj
 

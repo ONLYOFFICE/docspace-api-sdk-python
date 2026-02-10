@@ -54,6 +54,7 @@ class BackupApi:
 
 
 
+
     @validate_call
     def create_backup_schedule(
         self,
@@ -330,9 +331,12 @@ class BackupApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/backup/createbackupschedule"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/backup/createbackupschedule',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -602,9 +606,12 @@ class BackupApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/backup/deletebackup/{id}"
+
         return self.api_client.param_serialize(
             method='DELETE',
-            resource_path='/api/2.0/backup/deletebackup/{id}',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -876,9 +883,12 @@ class BackupApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/backup/deletebackuphistory"
+
         return self.api_client.param_serialize(
             method='DELETE',
-            resource_path='/api/2.0/backup/deletebackuphistory',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1150,9 +1160,12 @@ class BackupApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/backup/deletebackupschedule"
+
         return self.api_client.param_serialize(
             method='DELETE',
-            resource_path='/api/2.0/backup/deletebackupschedule',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1424,9 +1437,12 @@ class BackupApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/backup/getbackuphistory"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/backup/getbackuphistory',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1698,9 +1714,12 @@ class BackupApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/backup/getbackupprogress"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/backup/getbackupprogress',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1972,9 +1991,12 @@ class BackupApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/backup/getbackupschedule"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/backup/getbackupschedule',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2295,9 +2317,12 @@ class BackupApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/backup/getbackupscount"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/backup/getbackupscount',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2549,9 +2574,12 @@ class BackupApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/backup/getservicestate"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/backup/getservicestate',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2811,9 +2839,12 @@ class BackupApi:
         _auth_settings: List[str] = [
         ]
 
+
+        resource_path = "/api/2.0/backup/getrestoreprogress"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/backup/getrestoreprogress',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3105,9 +3136,12 @@ class BackupApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/backup/startbackup"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/backup/startbackup',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3399,9 +3433,12 @@ class BackupApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/backup/startrestore"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/backup/startrestore',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

@@ -1,5 +1,5 @@
 # EntryType
-[0 - None, 1 - File, 2 - Folder, 23 - User, 24 - Group, 25 - Room, 26 - Tag]
+[0 - None, 1 - File, 2 - Folder, 23 - User, 24 - Group, 25 - Room, 26 - Tag, 27 - Agent]
 
 ## Enum
 
@@ -16,6 +16,8 @@
 * `Room` (value: `25`)
 
 * `Tag` (value: `26`)
+
+* `Agent` (value: `27`)
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

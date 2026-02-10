@@ -24,6 +24,7 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
+from docspace_api_sdk.models.chat_settings import ChatSettings
 from docspace_api_sdk.models.logo_request import LogoRequest
 from docspace_api_sdk.models.room_data_lifetime_dto import RoomDataLifetimeDto
 from docspace_api_sdk.models.watermark_request_dto import WatermarkRequestDto
@@ -44,7 +45,8 @@ class UpdateRoomRequest(BaseModel):
     tags: Optional[List[StrictStr]] = Field(default=None, description="The list of tags.")
     color: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=6)]] = Field(default=None, description="The room color.")
     cover: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=50)]] = Field(default=None, description="The room cover.")
-    __properties: ClassVar[List[str]] = ["title", "quota", "indexing", "denyDownload", "lifetime", "watermark", "logo", "tags", "color", "cover"]
+    chat_settings: Optional[ChatSettings] = Field(default=None, alias="chatSettings")
+    __properties: ClassVar[List[str]] = ["title", "quota", "indexing", "denyDownload", "lifetime", "watermark", "logo", "tags", "color", "cover", "chatSettings"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -94,6 +96,9 @@ class UpdateRoomRequest(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of logo
         if self.logo:
             _dict['logo'] = self.logo.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of chat_settings
+        if self.chat_settings:
+            _dict['chatSettings'] = self.chat_settings.to_dict()
         # set to None if title (nullable) is None
         # and model_fields_set contains the field
         if self.title is None and "title" in self.model_fields_set:
@@ -151,7 +156,8 @@ class UpdateRoomRequest(BaseModel):
             "logo": LogoRequest.from_dict(obj["logo"]) if obj.get("logo") is not None else None,
             "tags": obj.get("tags"),
             "color": obj.get("color"),
-            "cover": obj.get("cover")
+            "cover": obj.get("cover"),
+            "chatSettings": ChatSettings.from_dict(obj["chatSettings"]) if obj.get("chatSettings") is not None else None
         })
         return _obj
 

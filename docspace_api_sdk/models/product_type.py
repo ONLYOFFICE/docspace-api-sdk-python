@@ -24,18 +24,16 @@ from typing_extensions import Self
 
 class ProductType(int, Enum):
     """
-    [0 - None, 2 - Documents, 3 - Login, 4 - Others, 5 - People, 7 - Settings]
+    [2 - Documents, 3 - Login, 7 - Settings, 8 - Contacts]
     """
 
     """
     allowed enum values
     """
-    None_ = 0
     Documents = 2
     Login = 3
-    Others = 4
-    People = 5
     Settings = 7
+    Contacts = 8
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:

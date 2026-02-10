@@ -73,6 +73,7 @@ class EmployeeFullDto(EmployeeDto):
     shared: Optional[StrictBool] = Field(default=None, description="Specifies if the user has access rights.")
     is_custom_quota: Optional[StrictBool] = Field(default=None, description="Specifies if the user has a custom quota or not.", alias="isCustomQuota")
     login_event_id: Optional[StrictInt] = Field(default=None, description="The current login event ID.", alias="loginEventId")
+    auth_cookie_lifetime: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The auth cookie lifetime in seconds.", alias="authCookieLifetime")
     created_by: Optional[EmployeeDto] = Field(default=None, alias="createdBy")
     registration_date: Optional[ApiDateTime] = Field(default=None, alias="registrationDate")
     has_personal_folder: Optional[StrictBool] = Field(default=None, description="Specifies if the user has a personal folder or not.", alias="hasPersonalFolder")
@@ -275,6 +276,11 @@ class EmployeeFullDto(EmployeeDto):
         if self.login_event_id is None and "login_event_id" in self.model_fields_set:
             _dict['loginEventId'] = None
 
+        # set to None if auth_cookie_lifetime (nullable) is None
+        # and model_fields_set contains the field
+        if self.auth_cookie_lifetime is None and "auth_cookie_lifetime" in self.model_fields_set:
+            _dict['authCookieLifetime'] = None
+
         # set to None if tfa_app_enabled (nullable) is None
         # and model_fields_set contains the field
         if self.tfa_app_enabled is None and "tfa_app_enabled" in self.model_fields_set:
@@ -326,6 +332,7 @@ class EmployeeFullDto(EmployeeDto):
             "shared": obj.get("shared"),
             "isCustomQuota": obj.get("isCustomQuota"),
             "loginEventId": obj.get("loginEventId"),
+            "authCookieLifetime": obj.get("authCookieLifetime"),
             "createdBy": EmployeeDto.from_dict(obj["createdBy"]) if obj.get("createdBy") is not None else None,
             "registrationDate": ApiDateTime.from_dict(obj["registrationDate"]) if obj.get("registrationDate") is not None else None,
             "hasPersonalFolder": obj.get("hasPersonalFolder"),
@@ -333,4 +340,5 @@ class EmployeeFullDto(EmployeeDto):
         }
         all_fields = {**base_dict, **extra_fields}
         return cls.model_validate(all_fields)
+
 

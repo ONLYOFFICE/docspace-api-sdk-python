@@ -45,6 +45,7 @@ class QuotaApi:
 
 
 
+
     @validate_call
     def reset_room_quota(
         self,
@@ -62,8 +63,9 @@ class QuotaApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FolderIntegerArrayWrapper:
-        """reset_room_quota
+        """Reset the room quota limit
 
+        Resets the quota limit for the rooms with the IDs specified in the request.
 
         :param update_rooms_room_ids_request_dto_integer:
         :type update_rooms_room_ids_request_dto_integer: UpdateRoomsRoomIdsRequestDtoInteger
@@ -99,6 +101,7 @@ class QuotaApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -128,8 +131,9 @@ class QuotaApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FolderIntegerArrayWrapper]:
-        """reset_room_quota
+        """Reset the room quota limit
 
+        Resets the quota limit for the rooms with the IDs specified in the request.
 
         :param update_rooms_room_ids_request_dto_integer:
         :type update_rooms_room_ids_request_dto_integer: UpdateRoomsRoomIdsRequestDtoInteger
@@ -165,6 +169,7 @@ class QuotaApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -194,8 +199,9 @@ class QuotaApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """reset_room_quota
+        """Reset the room quota limit
 
+        Resets the quota limit for the rooms with the IDs specified in the request.
 
         :param update_rooms_room_ids_request_dto_integer:
         :type update_rooms_room_ids_request_dto_integer: UpdateRoomsRoomIdsRequestDtoInteger
@@ -231,6 +237,7 @@ class QuotaApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -295,11 +302,20 @@ class QuotaApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
+
+
+        resource_path = "/api/2.0/files/rooms/resetquota"
 
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/files/rooms/resetquota',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -332,8 +348,9 @@ class QuotaApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FolderIntegerArrayWrapper:
-        """update_rooms_quota
+        """Change the room quota limit
 
+        Changes the quota limit for the rooms with the IDs specified in the request.
 
         :param update_rooms_quota_request_dto_integer:
         :type update_rooms_quota_request_dto_integer: UpdateRoomsQuotaRequestDtoInteger
@@ -369,6 +386,7 @@ class QuotaApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -398,8 +416,9 @@ class QuotaApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FolderIntegerArrayWrapper]:
-        """update_rooms_quota
+        """Change the room quota limit
 
+        Changes the quota limit for the rooms with the IDs specified in the request.
 
         :param update_rooms_quota_request_dto_integer:
         :type update_rooms_quota_request_dto_integer: UpdateRoomsQuotaRequestDtoInteger
@@ -435,6 +454,7 @@ class QuotaApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -464,8 +484,9 @@ class QuotaApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """update_rooms_quota
+        """Change the room quota limit
 
+        Changes the quota limit for the rooms with the IDs specified in the request.
 
         :param update_rooms_quota_request_dto_integer:
         :type update_rooms_quota_request_dto_integer: UpdateRoomsQuotaRequestDtoInteger
@@ -501,6 +522,7 @@ class QuotaApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -565,11 +587,20 @@ class QuotaApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
+
+
+        resource_path = "/api/2.0/files/rooms/roomquota"
 
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/files/rooms/roomquota',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

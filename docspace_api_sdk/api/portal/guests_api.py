@@ -44,6 +44,7 @@ class GuestsApi:
 
 
 
+
     @validate_call
     def get_guest_sharing_link(
         self,
@@ -301,9 +302,12 @@ class GuestsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/people/guests/{userid}/share"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/people/guests/{userid}/share',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

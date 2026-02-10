@@ -7,6 +7,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **title** | **str** | The file entry title. | [optional] 
 **access** | [**FileShare**](FileShare.md) |  | [optional] 
+**shared_by** | [**EmployeeDto**](EmployeeDto.md) |  | [optional] 
+**owned_by** | [**EmployeeDto**](EmployeeDto.md) |  | [optional] 
 **shared** | **bool** | Specifies if the file entry is shared via link or not. | [optional] 
 **shared_for_user** | **bool** | Specifies if the file entry is shared for user or not. | [optional] 
 **parent_shared** | **bool** | Indicates whether the parent entity is shared. | [optional] 
@@ -67,6 +69,8 @@ Name | Type | Description | Notes
 **view_accessibility** | [**FileDtoIntegerAllOfViewAccessibility**](FileDtoIntegerAllOfViewAccessibility.md) |  | [optional] 
 **last_opened** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] 
 **expired** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] 
+**vectorization_status** | [**VectorizationStatus**](VectorizationStatus.md) |  | [optional] 
+**dimensions** | [**Size**](Size.md) |  | [optional] 
 
 ## Example
 

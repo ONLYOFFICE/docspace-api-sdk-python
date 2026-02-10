@@ -15,6 +15,7 @@
 #
 
 
+
 from __future__ import annotations
 import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
@@ -68,9 +69,18 @@ class FoldersApi:
             api_client = ApiClient.get_default()
         self.api_client = api_client
         self._fields = None
+        self._use_at_recent = False
+
 
     def with_fields(self, fields: str) -> FoldersApi:
         self._fields = fields
+        return self
+    
+    def with_at_recent(self):
+        """
+        Use legacy /@recent path for the next request
+        """
+        self._use_at_recent = True
         return self
 
 
@@ -92,8 +102,9 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> STRINGArrayWrapper:
-        """check_upload
+        """Check file uploads
 
+        Checks the file uploads to the folder with the ID specified in the request.
 
         :param folder_id: The folder ID. (required)
         :type folder_id: int
@@ -132,6 +143,7 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "STRINGArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -162,8 +174,9 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[STRINGArrayWrapper]:
-        """check_upload
+        """Check file uploads
 
+        Checks the file uploads to the folder with the ID specified in the request.
 
         :param folder_id: The folder ID. (required)
         :type folder_id: int
@@ -202,6 +215,7 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "STRINGArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -232,8 +246,9 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """check_upload
+        """Check file uploads
 
+        Checks the file uploads to the folder with the ID specified in the request.
 
         :param folder_id: The folder ID. (required)
         :type folder_id: int
@@ -272,6 +287,7 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "STRINGArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -339,11 +355,20 @@ class FoldersApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
+
+
+        resource_path = "/api/2.0/files/{folderId}/upload/check"
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/files/{folderId}/upload/check',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -377,8 +402,9 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FolderIntegerWrapper:
-        """create_folder
+        """Create a folder
 
+        Creates a new folder with the title specified in the request. The parent folder ID can be also specified.
 
         :param folder_id: The folder ID for the folder creation. (required)
         :type folder_id: int
@@ -417,6 +443,7 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -447,8 +474,9 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FolderIntegerWrapper]:
-        """create_folder
+        """Create a folder
 
+        Creates a new folder with the title specified in the request. The parent folder ID can be also specified.
 
         :param folder_id: The folder ID for the folder creation. (required)
         :type folder_id: int
@@ -487,6 +515,7 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -517,8 +546,9 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """create_folder
+        """Create a folder
 
+        Creates a new folder with the title specified in the request. The parent folder ID can be also specified.
 
         :param folder_id: The folder ID for the folder creation. (required)
         :type folder_id: int
@@ -557,6 +587,7 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -624,11 +655,20 @@ class FoldersApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
+
+
+        resource_path = "/api/2.0/files/folder/{folderId}"
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/files/folder/{folderId}',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -662,8 +702,9 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FileShareWrapper:
-        """create_folder_primary_external_link
+        """Create primary external link
 
+        Creates a primary external link by the identifier specified in the request.
 
         :param id: The folder ID. (required)
         :type id: int
@@ -702,6 +743,7 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
+            '401': None,
             '404': None,
         }
         response_data = self.api_client.call_api(
@@ -733,8 +775,9 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FileShareWrapper]:
-        """create_folder_primary_external_link
+        """Create primary external link
 
+        Creates a primary external link by the identifier specified in the request.
 
         :param id: The folder ID. (required)
         :type id: int
@@ -773,6 +816,7 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
+            '401': None,
             '404': None,
         }
         response_data = self.api_client.call_api(
@@ -804,8 +848,9 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """create_folder_primary_external_link
+        """Create primary external link
 
+        Creates a primary external link by the identifier specified in the request.
 
         :param id: The folder ID. (required)
         :type id: int
@@ -844,6 +889,7 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
+            '401': None,
             '404': None,
         }
         response_data = self.api_client.call_api(
@@ -912,11 +958,20 @@ class FoldersApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
+
+
+        resource_path = "/api/2.0/files/folder/{id}/link"
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/files/folder/{id}/link',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -949,8 +1004,9 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> StringWrapper:
-        """create_report_folder_history
+        """Generates folder history
 
+        Generates the activity history of a folder.
 
         :param folder_id: (required)
         :type folder_id: int
@@ -986,6 +1042,7 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
+            '401': None,
             '403': None,
             '404': None,
         }
@@ -1017,8 +1074,9 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[StringWrapper]:
-        """create_report_folder_history
+        """Generates folder history
 
+        Generates the activity history of a folder.
 
         :param folder_id: (required)
         :type folder_id: int
@@ -1054,6 +1112,7 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
+            '401': None,
             '403': None,
             '404': None,
         }
@@ -1085,8 +1144,9 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """create_report_folder_history
+        """Generates folder history
 
+        Generates the activity history of a folder.
 
         :param folder_id: (required)
         :type folder_id: int
@@ -1122,6 +1182,7 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
+            '401': None,
             '403': None,
             '404': None,
         }
@@ -1175,11 +1236,20 @@ class FoldersApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
+
+
+        resource_path = "/api/2.0/files/folder/{folderId}/log/report"
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/files/folder/{folderId}/log/report',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1213,8 +1283,9 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FileOperationArrayWrapper:
-        """delete_folder
+        """Delete a folder
 
+        Deletes a folder with the ID specified in the request.
 
         :param folder_id: The folder ID to delete. (required)
         :type folder_id: int
@@ -1253,6 +1324,7 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1283,8 +1355,9 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FileOperationArrayWrapper]:
-        """delete_folder
+        """Delete a folder
 
+        Deletes a folder with the ID specified in the request.
 
         :param folder_id: The folder ID to delete. (required)
         :type folder_id: int
@@ -1323,6 +1396,7 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1353,8 +1427,9 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """delete_folder
+        """Delete a folder
 
+        Deletes a folder with the ID specified in the request.
 
         :param folder_id: The folder ID to delete. (required)
         :type folder_id: int
@@ -1393,6 +1468,7 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1460,11 +1536,20 @@ class FoldersApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
+
+
+        resource_path = "/api/2.0/files/folder/{folderId}"
 
         return self.api_client.param_serialize(
             method='DELETE',
-            resource_path='/api/2.0/files/folder/{folderId}',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1503,8 +1588,9 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FolderContentIntegerWrapper:
-        """get_favorites_folder
+        """Get the Favorites section
 
+        Returns the detailed list of files and folders located in the Favorites section.
 
         :param user_id_or_group_id: The user or group ID.
         :type user_id_or_group_id: str
@@ -1558,6 +1644,7 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderContentIntegerWrapper",
+            '401': None,
             '403': None,
             '404': None,
         }
@@ -1595,8 +1682,9 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FolderContentIntegerWrapper]:
-        """get_favorites_folder
+        """Get the Favorites section
 
+        Returns the detailed list of files and folders located in the Favorites section.
 
         :param user_id_or_group_id: The user or group ID.
         :type user_id_or_group_id: str
@@ -1650,6 +1738,7 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderContentIntegerWrapper",
+            '401': None,
             '403': None,
             '404': None,
         }
@@ -1687,8 +1776,9 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_favorites_folder
+        """Get the Favorites section
 
+        Returns the detailed list of files and folders located in the Favorites section.
 
         :param user_id_or_group_id: The user or group ID.
         :type user_id_or_group_id: str
@@ -1742,6 +1832,7 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderContentIntegerWrapper",
+            '401': None,
             '403': None,
             '404': None,
         }
@@ -1829,11 +1920,20 @@ class FoldersApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
+
+
+        resource_path = "/api/2.0/files/@favorites"
 
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/@favorites',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1865,8 +1965,9 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FilesStatisticsResultWrapper:
-        """get_files_used_space
+        """Get used space of files
 
+        Returns the used space of files in the root folders.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1899,6 +2000,7 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FilesStatisticsResultWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1927,8 +2029,9 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FilesStatisticsResultWrapper]:
-        """get_files_used_space
+        """Get used space of files
 
+        Returns the used space of files in the root folders.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1961,6 +2064,7 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FilesStatisticsResultWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1989,8 +2093,9 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_files_used_space
+        """Get used space of files
 
+        Returns the used space of files in the root folders.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2023,6 +2128,7 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FilesStatisticsResultWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2071,11 +2177,20 @@ class FoldersApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
+
+
+        resource_path = "/api/2.0/files/filesusedspace"
 
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/filesusedspace',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2108,8 +2223,9 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FormsItemArrayWrapper:
-        """get_folder
+        """Get folder form filter
 
+        Returns the form filter of a folder with the ID specified in the request.
 
         :param folder_id: The folder unique identifier. (required)
         :type folder_id: int
@@ -2174,8 +2290,9 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FormsItemArrayWrapper]:
-        """get_folder
+        """Get folder form filter
 
+        Returns the form filter of a folder with the ID specified in the request.
 
         :param folder_id: The folder unique identifier. (required)
         :type folder_id: int
@@ -2240,8 +2357,9 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_folder
+        """Get folder form filter
 
+        Returns the form filter of a folder with the ID specified in the request.
 
         :param folder_id: The folder unique identifier. (required)
         :type folder_id: int
@@ -2330,9 +2448,12 @@ class FoldersApi:
         _auth_settings: List[str] = [
         ]
 
+
+        resource_path = "/api/2.0/files/{folderId}/formfilter"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/{folderId}/formfilter',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2353,6 +2474,7 @@ class FoldersApi:
         self,
         folder_id: Annotated[StrictInt, Field(description="The folder ID.")],
         user_id_or_group_id: Annotated[Optional[StrictStr], Field(description="The user or group ID.")] = None,
+        shared_by: Annotated[Optional[StrictStr], Field(description="The identifier of the user who shared the folder or file.")] = None,
         filter_type: Annotated[Optional[FilterType], Field(description="The filter type.")] = None,
         room_id: Annotated[Optional[StrictInt], Field(description="The room ID.")] = None,
         exclude_subject: Annotated[Optional[StrictBool], Field(description="Specifies whether to exclude search by user or group ID.")] = None,
@@ -2380,13 +2502,16 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FolderContentIntegerWrapper:
-        """get_folder_by_folder_id
+        """Get a folder by ID
 
+        Returns the detailed list of files and folders located in the folder with the ID specified in the request.
 
         :param folder_id: The folder ID. (required)
         :type folder_id: int
         :param user_id_or_group_id: The user or group ID.
         :type user_id_or_group_id: str
+        :param shared_by: The identifier of the user who shared the folder or file.
+        :type shared_by: str
         :param filter_type: The filter type.
         :type filter_type: FilterType
         :param room_id: The room ID.
@@ -2440,6 +2565,7 @@ class FoldersApi:
         _param = self._get_folder_by_folder_id_serialize(
             folder_id=folder_id,
             user_id_or_group_id=user_id_or_group_id,
+            shared_by=shared_by,
             filter_type=filter_type,
             room_id=room_id,
             exclude_subject=exclude_subject,
@@ -2481,6 +2607,7 @@ class FoldersApi:
         self,
         folder_id: Annotated[StrictInt, Field(description="The folder ID.")],
         user_id_or_group_id: Annotated[Optional[StrictStr], Field(description="The user or group ID.")] = None,
+        shared_by: Annotated[Optional[StrictStr], Field(description="The identifier of the user who shared the folder or file.")] = None,
         filter_type: Annotated[Optional[FilterType], Field(description="The filter type.")] = None,
         room_id: Annotated[Optional[StrictInt], Field(description="The room ID.")] = None,
         exclude_subject: Annotated[Optional[StrictBool], Field(description="Specifies whether to exclude search by user or group ID.")] = None,
@@ -2508,13 +2635,16 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FolderContentIntegerWrapper]:
-        """get_folder_by_folder_id
+        """Get a folder by ID
 
+        Returns the detailed list of files and folders located in the folder with the ID specified in the request.
 
         :param folder_id: The folder ID. (required)
         :type folder_id: int
         :param user_id_or_group_id: The user or group ID.
         :type user_id_or_group_id: str
+        :param shared_by: The identifier of the user who shared the folder or file.
+        :type shared_by: str
         :param filter_type: The filter type.
         :type filter_type: FilterType
         :param room_id: The room ID.
@@ -2568,6 +2698,7 @@ class FoldersApi:
         _param = self._get_folder_by_folder_id_serialize(
             folder_id=folder_id,
             user_id_or_group_id=user_id_or_group_id,
+            shared_by=shared_by,
             filter_type=filter_type,
             room_id=room_id,
             exclude_subject=exclude_subject,
@@ -2609,6 +2740,7 @@ class FoldersApi:
         self,
         folder_id: Annotated[StrictInt, Field(description="The folder ID.")],
         user_id_or_group_id: Annotated[Optional[StrictStr], Field(description="The user or group ID.")] = None,
+        shared_by: Annotated[Optional[StrictStr], Field(description="The identifier of the user who shared the folder or file.")] = None,
         filter_type: Annotated[Optional[FilterType], Field(description="The filter type.")] = None,
         room_id: Annotated[Optional[StrictInt], Field(description="The room ID.")] = None,
         exclude_subject: Annotated[Optional[StrictBool], Field(description="Specifies whether to exclude search by user or group ID.")] = None,
@@ -2636,13 +2768,16 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_folder_by_folder_id
+        """Get a folder by ID
 
+        Returns the detailed list of files and folders located in the folder with the ID specified in the request.
 
         :param folder_id: The folder ID. (required)
         :type folder_id: int
         :param user_id_or_group_id: The user or group ID.
         :type user_id_or_group_id: str
+        :param shared_by: The identifier of the user who shared the folder or file.
+        :type shared_by: str
         :param filter_type: The filter type.
         :type filter_type: FilterType
         :param room_id: The room ID.
@@ -2696,6 +2831,7 @@ class FoldersApi:
         _param = self._get_folder_by_folder_id_serialize(
             folder_id=folder_id,
             user_id_or_group_id=user_id_or_group_id,
+            shared_by=shared_by,
             filter_type=filter_type,
             room_id=room_id,
             exclude_subject=exclude_subject,
@@ -2732,6 +2868,7 @@ class FoldersApi:
         self,
         folder_id,
         user_id_or_group_id,
+        shared_by,
         filter_type,
         room_id,
         exclude_subject,
@@ -2773,6 +2910,10 @@ class FoldersApi:
         if user_id_or_group_id is not None:
             
             _query_params.append(('userIdOrGroupId', user_id_or_group_id))
+            
+        if shared_by is not None:
+            
+            _query_params.append(('sharedBy', shared_by))
             
         if filter_type is not None:
             
@@ -2848,9 +2989,12 @@ class FoldersApi:
         _auth_settings: List[str] = [
         ]
 
+
+        resource_path = "/api/2.0/files/{folderId}"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/{folderId}',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2887,8 +3031,9 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> HistoryArrayWrapper:
-        """get_folder_history
+        """Get folder history
 
+        Returns the activity history of a folder with a specified identifier.
 
         :param folder_id: The folder ID of the history request. (required)
         :type folder_id: int
@@ -2936,6 +3081,7 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "HistoryArrayWrapper",
+            '401': None,
             '403': None,
             '404': None,
         }
@@ -2971,8 +3117,9 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[HistoryArrayWrapper]:
-        """get_folder_history
+        """Get folder history
 
+        Returns the activity history of a folder with a specified identifier.
 
         :param folder_id: The folder ID of the history request. (required)
         :type folder_id: int
@@ -3020,6 +3167,7 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "HistoryArrayWrapper",
+            '401': None,
             '403': None,
             '404': None,
         }
@@ -3055,8 +3203,9 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_folder_history
+        """Get folder history
 
+        Returns the activity history of a folder with a specified identifier.
 
         :param folder_id: The folder ID of the history request. (required)
         :type folder_id: int
@@ -3104,6 +3253,7 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "HistoryArrayWrapper",
+            '401': None,
             '403': None,
             '404': None,
         }
@@ -3177,11 +3327,20 @@ class FoldersApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
+
+
+        resource_path = "/api/2.0/files/folder/{folderId}/log"
 
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/folder/{folderId}/log',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3214,8 +3373,9 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FolderIntegerWrapper:
-        """get_folder_info
+        """Get folder information
 
+        Returns the detailed information about a folder with the ID specified in the request.
 
         :param folder_id: The folder unique identifier. (required)
         :type folder_id: int
@@ -3280,8 +3440,9 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FolderIntegerWrapper]:
-        """get_folder_info
+        """Get folder information
 
+        Returns the detailed information about a folder with the ID specified in the request.
 
         :param folder_id: The folder unique identifier. (required)
         :type folder_id: int
@@ -3346,8 +3507,9 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_folder_info
+        """Get folder information
 
+        Returns the detailed information about a folder with the ID specified in the request.
 
         :param folder_id: The folder unique identifier. (required)
         :type folder_id: int
@@ -3436,9 +3598,12 @@ class FoldersApi:
         _auth_settings: List[str] = [
         ]
 
+
+        resource_path = "/api/2.0/files/folder/{folderId}"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/folder/{folderId}',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3471,8 +3636,9 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FileShareArrayWrapper:
-        """get_folder_links
+        """Get the folder links
 
+        Returns the links of the folder with the ID specified in the request.
 
         :param id: The folder ID. (required)
         :type id: int
@@ -3508,6 +3674,7 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3537,8 +3704,9 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FileShareArrayWrapper]:
-        """get_folder_links
+        """Get the folder links
 
+        Returns the links of the folder with the ID specified in the request.
 
         :param id: The folder ID. (required)
         :type id: int
@@ -3574,6 +3742,7 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3603,8 +3772,9 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_folder_links
+        """Get the folder links
 
+        Returns the links of the folder with the ID specified in the request.
 
         :param id: The folder ID. (required)
         :type id: int
@@ -3640,6 +3810,7 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3691,11 +3862,20 @@ class FoldersApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
+
+
+        resource_path = "/api/2.0/files/folder/{id}/links"
 
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/folder/{id}/links',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3728,8 +3908,9 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FileEntryBaseArrayWrapper:
-        """get_folder_path
+        """Get the folder path
 
+        Returns a path to the folder with the ID specified in the request.
 
         :param folder_id: The folder unique identifier. (required)
         :type folder_id: int
@@ -3765,6 +3946,7 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileEntryBaseArrayWrapper",
+            '401': None,
             '403': None,
         }
         response_data = self.api_client.call_api(
@@ -3795,8 +3977,9 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FileEntryBaseArrayWrapper]:
-        """get_folder_path
+        """Get the folder path
 
+        Returns a path to the folder with the ID specified in the request.
 
         :param folder_id: The folder unique identifier. (required)
         :type folder_id: int
@@ -3832,6 +4015,7 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileEntryBaseArrayWrapper",
+            '401': None,
             '403': None,
         }
         response_data = self.api_client.call_api(
@@ -3862,8 +4046,9 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_folder_path
+        """Get the folder path
 
+        Returns a path to the folder with the ID specified in the request.
 
         :param folder_id: The folder unique identifier. (required)
         :type folder_id: int
@@ -3899,6 +4084,7 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileEntryBaseArrayWrapper",
+            '401': None,
             '403': None,
         }
         response_data = self.api_client.call_api(
@@ -3951,11 +4137,20 @@ class FoldersApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
+
+
+        resource_path = "/api/2.0/files/folder/{folderId}/path"
 
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/folder/{folderId}/path',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3990,8 +4185,9 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FileShareWrapper:
-        """get_folder_primary_external_link
+        """Get primary external link
 
+        Returns the primary external link by the identifier specified in the request.
 
         :param id: The folder unique identifier. (required)
         :type id: int
@@ -4065,8 +4261,9 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FileShareWrapper]:
-        """get_folder_primary_external_link
+        """Get primary external link
 
+        Returns the primary external link by the identifier specified in the request.
 
         :param id: The folder unique identifier. (required)
         :type id: int
@@ -4140,8 +4337,9 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_folder_primary_external_link
+        """Get primary external link
 
+        Returns the primary external link by the identifier specified in the request.
 
         :param id: The folder unique identifier. (required)
         :type id: int
@@ -4247,447 +4445,12 @@ class FoldersApi:
         _auth_settings: List[str] = [
         ]
 
-        return self.api_client.param_serialize(
-            method='GET',
-            resource_path='/api/2.0/files/folder/{id}/link',
-            path_params=_path_params,
-            query_params=_query_params,
-            header_params=_header_params,
-            body=_body_params,
-            post_params=_form_params,
-            files=_files,
-            auth_settings=_auth_settings,
-            collection_formats=_collection_formats,
-            _host=_host,
-            _request_auth=_request_auth
-        )
 
-
-
-
-    @validate_call
-    def get_folder_recent(
-        self,
-        user_id_or_group_id: Annotated[Optional[StrictStr], Field(description="The user or group ID.")] = None,
-        filter_type: Annotated[Optional[FilterType], Field(description="The filter type.")] = None,
-        exclude_subject: Annotated[Optional[StrictBool], Field(description="Specifies whether to exclude search by user or group ID.")] = None,
-        apply_filter_option: Annotated[Optional[ApplyFilterOption], Field(description="Specifies whether to return only files, only folders or all elements.")] = None,
-        search_area: Annotated[Optional[SearchArea], Field(description="The search area.")] = None,
-        extension: Annotated[Optional[List[List[StrictStr]]], Field(description="Specifies whether to search for a specific file extension in the Recent folder.")] = None,
-        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of items to return.")] = None,
-        start_index: Annotated[Optional[StrictInt], Field(description="The starting position of the results to be returned in the query response.")] = None,
-        sort_by: Annotated[Optional[StrictStr], Field(description="Specifies the sorting criteria for the folder request.")] = None,
-        sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
-        filter_value: Annotated[Optional[StrictStr], Field(description="The text used for filtering or searching folder contents.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> FolderContentIntegerWrapper:
-        """get_folder_recent
-
-
-        :param user_id_or_group_id: The user or group ID.
-        :type user_id_or_group_id: str
-        :param filter_type: The filter type.
-        :type filter_type: FilterType
-        :param exclude_subject: Specifies whether to exclude search by user or group ID.
-        :type exclude_subject: bool
-        :param apply_filter_option: Specifies whether to return only files, only folders or all elements.
-        :type apply_filter_option: ApplyFilterOption
-        :param search_area: The search area.
-        :type search_area: SearchArea
-        :param extension: Specifies whether to search for a specific file extension in the Recent folder.
-        :type extension: List[str]
-        :param count: The maximum number of items to return.
-        :type count: int
-        :param start_index: The starting position of the results to be returned in the query response.
-        :type start_index: int
-        :param sort_by: Specifies the sorting criteria for the folder request.
-        :type sort_by: str
-        :param sort_order: The order in which the results are sorted.
-        :type sort_order: SortOrder
-        :param filter_value: The text used for filtering or searching folder contents.
-        :type filter_value: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._get_folder_recent_serialize(
-            user_id_or_group_id=user_id_or_group_id,
-            filter_type=filter_type,
-            exclude_subject=exclude_subject,
-            apply_filter_option=apply_filter_option,
-            search_area=search_area,
-            extension=extension,
-            count=count,
-            start_index=start_index,
-            sort_by=sort_by,
-            sort_order=sort_order,
-            filter_value=filter_value,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderContentIntegerWrapper",
-            '403': None,
-            '404': None,
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        ).data
-
-
-    @validate_call
-    def get_folder_recent_with_http_info(
-        self,
-        user_id_or_group_id: Annotated[Optional[StrictStr], Field(description="The user or group ID.")] = None,
-        filter_type: Annotated[Optional[FilterType], Field(description="The filter type.")] = None,
-        exclude_subject: Annotated[Optional[StrictBool], Field(description="Specifies whether to exclude search by user or group ID.")] = None,
-        apply_filter_option: Annotated[Optional[ApplyFilterOption], Field(description="Specifies whether to return only files, only folders or all elements.")] = None,
-        search_area: Annotated[Optional[SearchArea], Field(description="The search area.")] = None,
-        extension: Annotated[Optional[List[List[StrictStr]]], Field(description="Specifies whether to search for a specific file extension in the Recent folder.")] = None,
-        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of items to return.")] = None,
-        start_index: Annotated[Optional[StrictInt], Field(description="The starting position of the results to be returned in the query response.")] = None,
-        sort_by: Annotated[Optional[StrictStr], Field(description="Specifies the sorting criteria for the folder request.")] = None,
-        sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
-        filter_value: Annotated[Optional[StrictStr], Field(description="The text used for filtering or searching folder contents.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[FolderContentIntegerWrapper]:
-        """get_folder_recent
-
-
-        :param user_id_or_group_id: The user or group ID.
-        :type user_id_or_group_id: str
-        :param filter_type: The filter type.
-        :type filter_type: FilterType
-        :param exclude_subject: Specifies whether to exclude search by user or group ID.
-        :type exclude_subject: bool
-        :param apply_filter_option: Specifies whether to return only files, only folders or all elements.
-        :type apply_filter_option: ApplyFilterOption
-        :param search_area: The search area.
-        :type search_area: SearchArea
-        :param extension: Specifies whether to search for a specific file extension in the Recent folder.
-        :type extension: List[str]
-        :param count: The maximum number of items to return.
-        :type count: int
-        :param start_index: The starting position of the results to be returned in the query response.
-        :type start_index: int
-        :param sort_by: Specifies the sorting criteria for the folder request.
-        :type sort_by: str
-        :param sort_order: The order in which the results are sorted.
-        :type sort_order: SortOrder
-        :param filter_value: The text used for filtering or searching folder contents.
-        :type filter_value: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._get_folder_recent_serialize(
-            user_id_or_group_id=user_id_or_group_id,
-            filter_type=filter_type,
-            exclude_subject=exclude_subject,
-            apply_filter_option=apply_filter_option,
-            search_area=search_area,
-            extension=extension,
-            count=count,
-            start_index=start_index,
-            sort_by=sort_by,
-            sort_order=sort_order,
-            filter_value=filter_value,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderContentIntegerWrapper",
-            '403': None,
-            '404': None,
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        )
-
-
-    @validate_call
-    def get_folder_recent_without_preload_content(
-        self,
-        user_id_or_group_id: Annotated[Optional[StrictStr], Field(description="The user or group ID.")] = None,
-        filter_type: Annotated[Optional[FilterType], Field(description="The filter type.")] = None,
-        exclude_subject: Annotated[Optional[StrictBool], Field(description="Specifies whether to exclude search by user or group ID.")] = None,
-        apply_filter_option: Annotated[Optional[ApplyFilterOption], Field(description="Specifies whether to return only files, only folders or all elements.")] = None,
-        search_area: Annotated[Optional[SearchArea], Field(description="The search area.")] = None,
-        extension: Annotated[Optional[List[List[StrictStr]]], Field(description="Specifies whether to search for a specific file extension in the Recent folder.")] = None,
-        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of items to return.")] = None,
-        start_index: Annotated[Optional[StrictInt], Field(description="The starting position of the results to be returned in the query response.")] = None,
-        sort_by: Annotated[Optional[StrictStr], Field(description="Specifies the sorting criteria for the folder request.")] = None,
-        sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
-        filter_value: Annotated[Optional[StrictStr], Field(description="The text used for filtering or searching folder contents.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> RESTResponseType:
-        """get_folder_recent
-
-
-        :param user_id_or_group_id: The user or group ID.
-        :type user_id_or_group_id: str
-        :param filter_type: The filter type.
-        :type filter_type: FilterType
-        :param exclude_subject: Specifies whether to exclude search by user or group ID.
-        :type exclude_subject: bool
-        :param apply_filter_option: Specifies whether to return only files, only folders or all elements.
-        :type apply_filter_option: ApplyFilterOption
-        :param search_area: The search area.
-        :type search_area: SearchArea
-        :param extension: Specifies whether to search for a specific file extension in the Recent folder.
-        :type extension: List[str]
-        :param count: The maximum number of items to return.
-        :type count: int
-        :param start_index: The starting position of the results to be returned in the query response.
-        :type start_index: int
-        :param sort_by: Specifies the sorting criteria for the folder request.
-        :type sort_by: str
-        :param sort_order: The order in which the results are sorted.
-        :type sort_order: SortOrder
-        :param filter_value: The text used for filtering or searching folder contents.
-        :type filter_value: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._get_folder_recent_serialize(
-            user_id_or_group_id=user_id_or_group_id,
-            filter_type=filter_type,
-            exclude_subject=exclude_subject,
-            apply_filter_option=apply_filter_option,
-            search_area=search_area,
-            extension=extension,
-            count=count,
-            start_index=start_index,
-            sort_by=sort_by,
-            sort_order=sort_order,
-            filter_value=filter_value,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderContentIntegerWrapper",
-            '403': None,
-            '404': None,
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        return response_data.response
-
-
-    def _get_folder_recent_serialize(
-        self,
-        user_id_or_group_id,
-        filter_type,
-        exclude_subject,
-        apply_filter_option,
-        search_area,
-        extension,
-        count,
-        start_index,
-        sort_by,
-        sort_order,
-        filter_value,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
-    ) -> RequestSerialized:
-
-        _host = None
-
-        _collection_formats: Dict[str, str] = {
-            'extension': 'csv',
-        }
-
-        _path_params: Dict[str, str] = {}
-        _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
-        _form_params: List[Tuple[str, str]] = []
-        _files: Dict[
-            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
-        ] = {}
-        _body_params: Optional[bytes] = None
-
-        # process the path parameters
-        # process the query parameters
-        if user_id_or_group_id is not None:
-            
-            _query_params.append(('userIdOrGroupId', user_id_or_group_id))
-            
-        if filter_type is not None:
-            
-            _query_params.append(('filterType', filter_type.value))
-            
-        if exclude_subject is not None:
-            
-            _query_params.append(('excludeSubject', exclude_subject))
-            
-        if apply_filter_option is not None:
-            
-            _query_params.append(('applyFilterOption', apply_filter_option.value))
-            
-        if search_area is not None:
-            
-            _query_params.append(('searchArea', search_area.value))
-            
-        if extension is not None:
-            
-            _query_params.append(('extension', extension))
-            
-        if count is not None:
-            
-            _query_params.append(('count', count))
-            
-        if start_index is not None:
-            
-            _query_params.append(('startIndex', start_index))
-            
-        if sort_by is not None:
-            
-            _query_params.append(('sortBy', sort_by))
-            
-        if sort_order is not None:
-            
-            _query_params.append(('sortOrder', sort_order.value))
-            
-        if filter_value is not None:
-            
-            _query_params.append(('filterValue', filter_value))
-            
-        # process the header parameters
-        if self._fields is not None:
-            _header_params['fields'] = self._fields
-        # process the form parameters
-        # process the body parameter
-
-
-        # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
-            _header_params['Accept'] = self.api_client.select_header_accept(
-                [
-                    'application/json'
-                ]
-            )
-
-
-        # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        resource_path = "/api/2.0/files/folder/{id}/link"
 
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/recent',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -4720,8 +4483,9 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FileEntryBaseArrayWrapper:
-        """get_folders
+        """Get subfolders
 
+        Returns a list of all the subfolders from a folder with the ID specified in the request.
 
         :param folder_id: The folder unique identifier. (required)
         :type folder_id: int
@@ -4757,6 +4521,7 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileEntryBaseArrayWrapper",
+            '401': None,
             '403': None,
         }
         response_data = self.api_client.call_api(
@@ -4787,8 +4552,9 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FileEntryBaseArrayWrapper]:
-        """get_folders
+        """Get subfolders
 
+        Returns a list of all the subfolders from a folder with the ID specified in the request.
 
         :param folder_id: The folder unique identifier. (required)
         :type folder_id: int
@@ -4824,6 +4590,7 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileEntryBaseArrayWrapper",
+            '401': None,
             '403': None,
         }
         response_data = self.api_client.call_api(
@@ -4854,8 +4621,9 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_folders
+        """Get subfolders
 
+        Returns a list of all the subfolders from a folder with the ID specified in the request.
 
         :param folder_id: The folder unique identifier. (required)
         :type folder_id: int
@@ -4891,6 +4659,7 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileEntryBaseArrayWrapper",
+            '401': None,
             '403': None,
         }
         response_data = self.api_client.call_api(
@@ -4943,11 +4712,20 @@ class FoldersApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
+
+
+        resource_path = "/api/2.0/files/{folderId}/subfolders"
 
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/{folderId}/subfolders',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -4987,8 +4765,9 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FolderContentIntegerWrapper:
-        """get_my_folder
+        """Get the My documents section
 
+        Returns the detailed list of files and folders located in the My documents section.
 
         :param user_id_or_group_id: The user or group ID.
         :type user_id_or_group_id: str
@@ -5045,6 +4824,7 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderContentIntegerWrapper",
+            '401': None,
             '403': None,
             '404': None,
         }
@@ -5083,8 +4863,9 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FolderContentIntegerWrapper]:
-        """get_my_folder
+        """Get the My documents section
 
+        Returns the detailed list of files and folders located in the My documents section.
 
         :param user_id_or_group_id: The user or group ID.
         :type user_id_or_group_id: str
@@ -5141,6 +4922,7 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderContentIntegerWrapper",
+            '401': None,
             '403': None,
             '404': None,
         }
@@ -5179,8 +4961,9 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_my_folder
+        """Get the My documents section
 
+        Returns the detailed list of files and folders located in the My documents section.
 
         :param user_id_or_group_id: The user or group ID.
         :type user_id_or_group_id: str
@@ -5237,6 +5020,7 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderContentIntegerWrapper",
+            '401': None,
             '403': None,
             '404': None,
         }
@@ -5329,11 +5113,20 @@ class FoldersApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
+
+
+        resource_path = "/api/2.0/files/@my"
 
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/@my',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -5366,8 +5159,9 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FileEntryBaseArrayWrapper:
-        """get_new_folder_items
+        """Get new folder items
 
+        Returns a list of all the new items from a folder with the ID specified in the request.
 
         :param folder_id: The folder unique identifier. (required)
         :type folder_id: int
@@ -5403,6 +5197,7 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileEntryBaseArrayWrapper",
+            '401': None,
             '403': None,
         }
         response_data = self.api_client.call_api(
@@ -5433,8 +5228,9 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FileEntryBaseArrayWrapper]:
-        """get_new_folder_items
+        """Get new folder items
 
+        Returns a list of all the new items from a folder with the ID specified in the request.
 
         :param folder_id: The folder unique identifier. (required)
         :type folder_id: int
@@ -5470,6 +5266,7 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileEntryBaseArrayWrapper",
+            '401': None,
             '403': None,
         }
         response_data = self.api_client.call_api(
@@ -5500,8 +5297,9 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_new_folder_items
+        """Get new folder items
 
+        Returns a list of all the new items from a folder with the ID specified in the request.
 
         :param folder_id: The folder unique identifier. (required)
         :type folder_id: int
@@ -5537,6 +5335,7 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileEntryBaseArrayWrapper",
+            '401': None,
             '403': None,
         }
         response_data = self.api_client.call_api(
@@ -5589,11 +5388,20 @@ class FoldersApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
+
+
+        resource_path = "/api/2.0/files/{folderId}/news"
 
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/{folderId}/news',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -5632,8 +5440,9 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FolderContentIntegerWrapper:
-        """get_privacy_folder
+        """Get the Private Room section
 
+        Returns the detailed list of files and folders located in the Private Room section.
 
         :param user_id_or_group_id: The user or group ID.
         :type user_id_or_group_id: str
@@ -5687,6 +5496,7 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderContentIntegerWrapper",
+            '401': None,
             '403': None,
             '404': None,
         }
@@ -5724,8 +5534,9 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FolderContentIntegerWrapper]:
-        """get_privacy_folder
+        """Get the Private Room section
 
+        Returns the detailed list of files and folders located in the Private Room section.
 
         :param user_id_or_group_id: The user or group ID.
         :type user_id_or_group_id: str
@@ -5779,6 +5590,7 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderContentIntegerWrapper",
+            '401': None,
             '403': None,
             '404': None,
         }
@@ -5816,8 +5628,9 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_privacy_folder
+        """Get the Private Room section
 
+        Returns the detailed list of files and folders located in the Private Room section.
 
         :param user_id_or_group_id: The user or group ID.
         :type user_id_or_group_id: str
@@ -5871,6 +5684,7 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderContentIntegerWrapper",
+            '401': None,
             '403': None,
             '404': None,
         }
@@ -5958,11 +5772,20 @@ class FoldersApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
+
+
+        resource_path = "/api/2.0/files/@privacy"
 
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/@privacy',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -6005,8 +5828,9 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FolderContentIntegerWrapper:
-        """get_recent_folder
+        """Get the Recent section
 
+        Returns the detailed list of files located in the Recent section.
 
         :param user_id_or_group_id: The user or group ID.
         :type user_id_or_group_id: str
@@ -6072,6 +5896,7 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderContentIntegerWrapper",
+            '401': None,
             '403': None,
             '404': None,
         }
@@ -6113,8 +5938,9 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FolderContentIntegerWrapper]:
-        """get_recent_folder
+        """Get the Recent section
 
+        Returns the detailed list of files located in the Recent section.
 
         :param user_id_or_group_id: The user or group ID.
         :type user_id_or_group_id: str
@@ -6180,6 +6006,7 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderContentIntegerWrapper",
+            '401': None,
             '403': None,
             '404': None,
         }
@@ -6221,8 +6048,9 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_recent_folder
+        """Get the Recent section
 
+        Returns the detailed list of files located in the Recent section.
 
         :param user_id_or_group_id: The user or group ID.
         :type user_id_or_group_id: str
@@ -6288,6 +6116,7 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderContentIntegerWrapper",
+            '401': None,
             '403': None,
             '404': None,
         }
@@ -6396,11 +6225,22 @@ class FoldersApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
+
+        recent_prefix = '@' if self._use_at_recent else ''
+        resource_path = '/api/2.0/files/{recent_prefix}recent'
+        self._use_at_recent = False
+
 
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/@recent',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -6440,8 +6280,9 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FolderContentIntegerArrayWrapper:
-        """get_root_folders
+        """Get filtered sections
 
+        Returns all the sections matching the parameters specified in the request.
 
         :param user_id_or_group_id: The user or group ID.
         :type user_id_or_group_id: str
@@ -6498,6 +6339,7 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderContentIntegerArrayWrapper",
+            '401': None,
             '403': None,
             '404': None,
         }
@@ -6536,8 +6378,9 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FolderContentIntegerArrayWrapper]:
-        """get_root_folders
+        """Get filtered sections
 
+        Returns all the sections matching the parameters specified in the request.
 
         :param user_id_or_group_id: The user or group ID.
         :type user_id_or_group_id: str
@@ -6594,6 +6437,7 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderContentIntegerArrayWrapper",
+            '401': None,
             '403': None,
             '404': None,
         }
@@ -6632,8 +6476,9 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_root_folders
+        """Get filtered sections
 
+        Returns all the sections matching the parameters specified in the request.
 
         :param user_id_or_group_id: The user or group ID.
         :type user_id_or_group_id: str
@@ -6690,6 +6535,7 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderContentIntegerArrayWrapper",
+            '401': None,
             '403': None,
             '404': None,
         }
@@ -6782,11 +6628,20 @@ class FoldersApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
+
+
+        resource_path = "/api/2.0/files/@root"
 
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/@root',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -6826,8 +6681,9 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FolderContentIntegerWrapper:
-        """get_trash_folder
+        """Get the Trash section
 
+        Returns the detailed list of files and folders located in the Trash section.
 
         :param user_id_or_group_id: The user or group ID.
         :type user_id_or_group_id: str
@@ -6884,6 +6740,7 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderContentIntegerWrapper",
+            '401': None,
             '403': None,
             '404': None,
         }
@@ -6922,8 +6779,9 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FolderContentIntegerWrapper]:
-        """get_trash_folder
+        """Get the Trash section
 
+        Returns the detailed list of files and folders located in the Trash section.
 
         :param user_id_or_group_id: The user or group ID.
         :type user_id_or_group_id: str
@@ -6980,6 +6838,7 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderContentIntegerWrapper",
+            '401': None,
             '403': None,
             '404': None,
         }
@@ -7018,8 +6877,9 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_trash_folder
+        """Get the Trash section
 
+        Returns the detailed list of files and folders located in the Trash section.
 
         :param user_id_or_group_id: The user or group ID.
         :type user_id_or_group_id: str
@@ -7076,6 +6936,7 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderContentIntegerWrapper",
+            '401': None,
             '403': None,
             '404': None,
         }
@@ -7168,11 +7029,20 @@ class FoldersApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
+
+
+        resource_path = "/api/2.0/files/@trash"
 
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/files/@trash',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -7217,8 +7087,9 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FileIntegerWrapper:
-        """insert_file
+        """Insert a file
 
+        Inserts a file specified in the request to the selected folder by single file uploading.
 
         :param folder_id: The folder ID for inserting a file. (required)
         :type folder_id: int
@@ -7290,6 +7161,7 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
+            '401': None,
             '403': None,
             '404': None,
         }
@@ -7333,8 +7205,9 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FileIntegerWrapper]:
-        """insert_file
+        """Insert a file
 
+        Inserts a file specified in the request to the selected folder by single file uploading.
 
         :param folder_id: The folder ID for inserting a file. (required)
         :type folder_id: int
@@ -7406,6 +7279,7 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
+            '401': None,
             '403': None,
             '404': None,
         }
@@ -7449,8 +7323,9 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """insert_file
+        """Insert a file
 
+        Inserts a file specified in the request to the selected folder by single file uploading.
 
         :param folder_id: The folder ID for inserting a file. (required)
         :type folder_id: int
@@ -7522,6 +7397,7 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
+            '401': None,
             '403': None,
             '404': None,
         }
@@ -7624,11 +7500,20 @@ class FoldersApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
+
+
+        resource_path = "/api/2.0/files/{folderId}/insert"
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/files/{folderId}/insert',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -7672,8 +7557,9 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FileIntegerWrapper:
-        """insert_file_to_my_from_body
+        """Insert a file to the My documents section
 
+        Inserts a file specified in the request to the My documents section by single file uploading.
 
         :param file: The file to be inserted.
         :type file: bytearray
@@ -7742,6 +7628,7 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
+            '401': None,
             '403': None,
             '404': None,
         }
@@ -7784,8 +7671,9 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FileIntegerWrapper]:
-        """insert_file_to_my_from_body
+        """Insert a file to the My documents section
 
+        Inserts a file specified in the request to the My documents section by single file uploading.
 
         :param file: The file to be inserted.
         :type file: bytearray
@@ -7854,6 +7742,7 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
+            '401': None,
             '403': None,
             '404': None,
         }
@@ -7896,8 +7785,9 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """insert_file_to_my_from_body
+        """Insert a file to the My documents section
 
+        Inserts a file specified in the request to the My documents section by single file uploading.
 
         :param file: The file to be inserted.
         :type file: bytearray
@@ -7966,6 +7856,7 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
+            '401': None,
             '403': None,
             '404': None,
         }
@@ -8065,11 +7956,20 @@ class FoldersApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
+
+
+        resource_path = "/api/2.0/files/@my/insert"
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/files/@my/insert',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -8103,8 +8003,9 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FolderIntegerWrapper:
-        """rename_folder
+        """Rename a folder
 
+        Renames the selected folder with a new title specified in the request.
 
         :param folder_id: The folder ID for the folder creation. (required)
         :type folder_id: int
@@ -8143,6 +8044,7 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
+            '401': None,
             '403': None,
         }
         response_data = self.api_client.call_api(
@@ -8174,8 +8076,9 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FolderIntegerWrapper]:
-        """rename_folder
+        """Rename a folder
 
+        Renames the selected folder with a new title specified in the request.
 
         :param folder_id: The folder ID for the folder creation. (required)
         :type folder_id: int
@@ -8214,6 +8117,7 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
+            '401': None,
             '403': None,
         }
         response_data = self.api_client.call_api(
@@ -8245,8 +8149,9 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """rename_folder
+        """Rename a folder
 
+        Renames the selected folder with a new title specified in the request.
 
         :param folder_id: The folder ID for the folder creation. (required)
         :type folder_id: int
@@ -8285,6 +8190,7 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
+            '401': None,
             '403': None,
         }
         response_data = self.api_client.call_api(
@@ -8353,11 +8259,20 @@ class FoldersApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
+
+
+        resource_path = "/api/2.0/files/folder/{folderId}"
 
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/files/folder/{folderId}',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -8391,8 +8306,9 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FolderIntegerWrapper:
-        """set_folder_order
+        """Set folder order
 
+        Sets the order of a folder with ID specified in the request.
 
         :param folder_id: The folder unique identifier. (required)
         :type folder_id: int
@@ -8431,6 +8347,7 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -8461,8 +8378,9 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FolderIntegerWrapper]:
-        """set_folder_order
+        """Set folder order
 
+        Sets the order of a folder with ID specified in the request.
 
         :param folder_id: The folder unique identifier. (required)
         :type folder_id: int
@@ -8501,6 +8419,7 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -8531,8 +8450,9 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """set_folder_order
+        """Set folder order
 
+        Sets the order of a folder with ID specified in the request.
 
         :param folder_id: The folder unique identifier. (required)
         :type folder_id: int
@@ -8571,6 +8491,7 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -8638,11 +8559,20 @@ class FoldersApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
+
+
+        resource_path = "/api/2.0/files/folder/{folderId}/order"
 
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/files/folder/{folderId}/order',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -8676,8 +8606,9 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FileShareWrapper:
-        """set_folder_primary_external_link
+        """Set the folder external link
 
+        Sets the folder external link with the ID specified in the request.
 
         :param id: The folder ID. (required)
         :type id: int
@@ -8716,6 +8647,7 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -8746,8 +8678,9 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FileShareWrapper]:
-        """set_folder_primary_external_link
+        """Set the folder external link
 
+        Sets the folder external link with the ID specified in the request.
 
         :param id: The folder ID. (required)
         :type id: int
@@ -8786,6 +8719,7 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -8816,8 +8750,9 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """set_folder_primary_external_link
+        """Set the folder external link
 
+        Sets the folder external link with the ID specified in the request.
 
         :param id: The folder ID. (required)
         :type id: int
@@ -8856,6 +8791,7 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
+            '401': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -8923,11 +8859,20 @@ class FoldersApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
+
+
+        resource_path = "/api/2.0/files/folder/{id}/links"
 
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/files/folder/{id}/links',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -8961,8 +8906,9 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ObjectWrapper:
-        """upload_file
+        """Upload a file
 
+        Uploads a file specified in the request to the selected folder by single file uploading or standart multipart/form-data method.   **Note**:  You can upload files in two different ways:   <ol>  <li>Using single file upload. You should set the Content-Type and Content-Disposition headers to specify a file name and content type, and send the file to the request body.</li>  <li>Using standart multipart/form-data method.</li>  </ol>
 
         :param folder_id: The folder ID to upload a file. (required)
         :type folder_id: int
@@ -9001,6 +8947,7 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectWrapper",
+            '401': None,
             '403': None,
             '404': None,
         }
@@ -9033,8 +8980,9 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[ObjectWrapper]:
-        """upload_file
+        """Upload a file
 
+        Uploads a file specified in the request to the selected folder by single file uploading or standart multipart/form-data method.   **Note**:  You can upload files in two different ways:   <ol>  <li>Using single file upload. You should set the Content-Type and Content-Disposition headers to specify a file name and content type, and send the file to the request body.</li>  <li>Using standart multipart/form-data method.</li>  </ol>
 
         :param folder_id: The folder ID to upload a file. (required)
         :type folder_id: int
@@ -9073,6 +9021,7 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectWrapper",
+            '401': None,
             '403': None,
             '404': None,
         }
@@ -9105,8 +9054,9 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """upload_file
+        """Upload a file
 
+        Uploads a file specified in the request to the selected folder by single file uploading or standart multipart/form-data method.   **Note**:  You can upload files in two different ways:   <ol>  <li>Using single file upload. You should set the Content-Type and Content-Disposition headers to specify a file name and content type, and send the file to the request body.</li>  <li>Using standart multipart/form-data method.</li>  </ol>
 
         :param folder_id: The folder ID to upload a file. (required)
         :type folder_id: int
@@ -9145,6 +9095,7 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectWrapper",
+            '401': None,
             '403': None,
             '404': None,
         }
@@ -9214,11 +9165,20 @@ class FoldersApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
+
+
+        resource_path = "/api/2.0/files/{folderId}/upload"
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/files/{folderId}/upload',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -9251,8 +9211,9 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ObjectWrapper:
-        """upload_file_to_my
+        """Upload a file to the My documents section
 
+        Uploads a file specified in the request to the My documents section by single file uploading or standart multipart/form-data method.   **Note**:  You can upload files in two different ways:   <ol>  <li>Using single file upload. You should set the Content-Type and Content-Disposition headers to specify a file name and content type, and send the file to the request body.</li>  <li>Using standart multipart/form-data method.</li>  </ol>
 
         :param in_dto: The request parameters for uploading a file.
         :type in_dto: UploadRequestDto
@@ -9288,6 +9249,7 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectWrapper",
+            '401': None,
             '403': None,
             '404': None,
         }
@@ -9319,8 +9281,9 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[ObjectWrapper]:
-        """upload_file_to_my
+        """Upload a file to the My documents section
 
+        Uploads a file specified in the request to the My documents section by single file uploading or standart multipart/form-data method.   **Note**:  You can upload files in two different ways:   <ol>  <li>Using single file upload. You should set the Content-Type and Content-Disposition headers to specify a file name and content type, and send the file to the request body.</li>  <li>Using standart multipart/form-data method.</li>  </ol>
 
         :param in_dto: The request parameters for uploading a file.
         :type in_dto: UploadRequestDto
@@ -9356,6 +9319,7 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectWrapper",
+            '401': None,
             '403': None,
             '404': None,
         }
@@ -9387,8 +9351,9 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """upload_file_to_my
+        """Upload a file to the My documents section
 
+        Uploads a file specified in the request to the My documents section by single file uploading or standart multipart/form-data method.   **Note**:  You can upload files in two different ways:   <ol>  <li>Using single file upload. You should set the Content-Type and Content-Disposition headers to specify a file name and content type, and send the file to the request body.</li>  <li>Using standart multipart/form-data method.</li>  </ol>
 
         :param in_dto: The request parameters for uploading a file.
         :type in_dto: UploadRequestDto
@@ -9424,6 +9389,7 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectWrapper",
+            '401': None,
             '403': None,
             '404': None,
         }
@@ -9479,11 +9445,20 @@ class FoldersApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
+
+
+        resource_path = "/api/2.0/files/@my/upload"
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/files/@my/upload',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

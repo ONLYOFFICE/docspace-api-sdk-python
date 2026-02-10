@@ -48,6 +48,7 @@ class PasswordApi:
 
 
 
+
     @validate_call
     def change_user_password(
         self,
@@ -336,9 +337,12 @@ class PasswordApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/people/{userid}/password"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/people/{userid}/password',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -612,9 +616,12 @@ class PasswordApi:
         _auth_settings: List[str] = [
         ]
 
+
+        resource_path = "/api/2.0/people/password"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/people/password',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

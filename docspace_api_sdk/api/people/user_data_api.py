@@ -50,6 +50,7 @@ class UserDataApi:
 
 
 
+
     @validate_call
     def get_delete_personal_folder_progress(
         self,
@@ -286,9 +287,12 @@ class UserDataApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/people/delete/personal/progress"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/people/delete/personal/progress',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -555,9 +559,12 @@ class UserDataApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/people/reassign/progress/{userid}"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/people/reassign/progress/{userid}',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -824,9 +831,12 @@ class UserDataApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/people/remove/progress/{userid}"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/people/remove/progress/{userid}',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1112,9 +1122,12 @@ class UserDataApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/people/reassign/necessary"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/people/reassign/necessary',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1369,9 +1382,12 @@ class UserDataApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/people/self/delete"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/people/self/delete',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1626,9 +1642,12 @@ class UserDataApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/people/delete/personal/start"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/people/delete/personal/start',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1911,9 +1930,12 @@ class UserDataApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/people/reassign/start"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/people/reassign/start',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2202,9 +2224,12 @@ class UserDataApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/people/remove/start"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/people/remove/start',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2484,9 +2509,12 @@ class UserDataApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/people/reassign/terminate"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/people/reassign/terminate',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2759,9 +2787,12 @@ class UserDataApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/people/remove/terminate"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/people/remove/terminate',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

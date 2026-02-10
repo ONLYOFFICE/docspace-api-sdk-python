@@ -46,6 +46,7 @@ class IPRestrictionsApi:
 
 
 
+
     @validate_call
     def get_ip_restrictions(
         self,
@@ -282,9 +283,12 @@ class IPRestrictionsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/iprestrictions"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/settings/iprestrictions',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -536,9 +540,12 @@ class IPRestrictionsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/iprestrictions/settings"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/settings/iprestrictions/settings',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -818,9 +825,12 @@ class IPRestrictionsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/iprestrictions"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/settings/iprestrictions',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1100,9 +1110,12 @@ class IPRestrictionsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/iprestrictions/settings"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/settings/iprestrictions/settings',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

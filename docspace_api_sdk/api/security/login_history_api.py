@@ -15,6 +15,7 @@
 #
 
 
+
 from __future__ import annotations
 import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
@@ -46,6 +47,7 @@ class LoginHistoryApi:
             api_client = ApiClient.get_default()
         self.api_client = api_client
         self._fields = None
+
 
     def with_fields(self, fields: str) -> LoginHistoryApi:
         self._fields = fields
@@ -291,9 +293,12 @@ class LoginHistoryApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/security/audit/login/report"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/security/audit/login/report',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -548,9 +553,12 @@ class LoginHistoryApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/security/audit/login/last"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/security/audit/login/last',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -909,9 +917,12 @@ class LoginHistoryApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/security/audit/login/filter"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/security/audit/login/filter',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

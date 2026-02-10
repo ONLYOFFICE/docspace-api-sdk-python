@@ -4,26 +4,26 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**apply_external_share_password**](#apply_external_share_password) | **POST** /api/2.0/files/share/{key}/password | 
-[**change_file_owner**](#change_file_owner) | **POST** /api/2.0/files/owner | 
-[**get_external_share_data**](#get_external_share_data) | **GET** /api/2.0/files/share/{key} | 
-[**get_file_security_info**](#get_file_security_info) | **GET** /api/2.0/files/file/{id}/share | 
-[**get_folder_security_info**](#get_folder_security_info) | **GET** /api/2.0/files/folder/{id}/share | 
-[**get_groups_members_with_file_security**](#get_groups_members_with_file_security) | **GET** /api/2.0/files/file/{fileId}/group/{groupId}/share | 
-[**get_groups_members_with_folder_security**](#get_groups_members_with_folder_security) | **GET** /api/2.0/files/folder/{folderId}/group/{groupId}/share | 
-[**get_security_info**](#get_security_info) | **POST** /api/2.0/files/share | 
-[**get_shared_users**](#get_shared_users) | **GET** /api/2.0/files/file/{fileId}/sharedusers | 
-[**remove_security_info**](#remove_security_info) | **DELETE** /api/2.0/files/share | 
-[**send_editor_notify**](#send_editor_notify) | **POST** /api/2.0/files/file/{fileId}/sendeditornotify | 
-[**set_file_security_info**](#set_file_security_info) | **PUT** /api/2.0/files/file/{fileId}/share | 
-[**set_folder_security_info**](#set_folder_security_info) | **PUT** /api/2.0/files/folder/{folderId}/share | 
-[**set_security_info**](#set_security_info) | **PUT** /api/2.0/files/share | 
+[**apply_external_share_password**](#apply_external_share_password) | **POST** /api/2.0/files/share/{key}/password | Apply external data password
+[**change_file_owner**](#change_file_owner) | **POST** /api/2.0/files/owner | Change the file owner
+[**get_external_share_data**](#get_external_share_data) | **GET** /api/2.0/files/share/{key} | Get the external data
+[**get_file_security_info**](#get_file_security_info) | **GET** /api/2.0/files/file/{id}/share | Get the shared file information
+[**get_folder_security_info**](#get_folder_security_info) | **GET** /api/2.0/files/folder/{id}/share | Get the shared folder information
+[**get_groups_members_with_file_security**](#get_groups_members_with_file_security) | **GET** /api/2.0/files/file/{fileId}/group/{groupId}/share | Get file group members with security information
+[**get_groups_members_with_folder_security**](#get_groups_members_with_folder_security) | **GET** /api/2.0/files/folder/{folderId}/group/{groupId}/share | Get folder group members with security information
+[**get_security_info**](#get_security_info) | **POST** /api/2.0/files/share | Get the sharing rights
+[**get_shared_users**](#get_shared_users) | **GET** /api/2.0/files/file/{fileId}/sharedusers | Get user access rights by file ID
+[**remove_security_info**](#remove_security_info) | **DELETE** /api/2.0/files/share | Remove the sharing rights
+[**send_editor_notify**](#send_editor_notify) | **POST** /api/2.0/files/file/{fileId}/sendeditornotify | Send the mention message
+[**set_file_security_info**](#set_file_security_info) | **PUT** /api/2.0/files/file/{fileId}/share | Share a file
+[**set_folder_security_info**](#set_folder_security_info) | **PUT** /api/2.0/files/folder/{folderId}/share | Share a folder
+[**set_security_info**](#set_security_info) | **PUT** /api/2.0/files/share | Set the sharing rights
 
 
 # **apply_external_share_password**
 > ExternalShareWrapper apply_external_share_password(key, external_share_request_param)
 
-
+Applies a password specified in the request to get the external data.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -66,6 +66,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     external_share_request_param = docspace_api_sdk.ExternalShareRequestParam() # ExternalShareRequestParam | The external data share request parameters.
 
     try:
+        # Apply external data password
         api_response = api_instance.apply_external_share_password(key, external_share_request_param)
         print("The response of SharingApi->apply_external_share_password:\n")
         pprint(api_response)
@@ -93,7 +94,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **change_file_owner**
 > FileEntryBaseArrayWrapper change_file_owner(change_owner_request_dto=change_owner_request_dto)
 
-
+Changes the owner of the file with the ID specified in the request.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -110,7 +111,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -126,6 +127,15 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
@@ -134,6 +144,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     change_owner_request_dto = docspace_api_sdk.ChangeOwnerRequestDto() # ChangeOwnerRequestDto |  (optional)
 
     try:
+        # Change the file owner
         api_response = api_instance.change_file_owner(change_owner_request_dto=change_owner_request_dto)
         print("The response of SharingApi->change_file_owner:\n")
         pprint(api_response)
@@ -154,13 +165,14 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | File entry information |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_external_share_data**
 > ExternalShareWrapper get_external_share_data(key, file_id=file_id, folder_id=folder_id)
 
-
+Returns the external data by the key specified in the request.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -204,6 +216,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     folder_id = '9846' # str | The unique folder identifier. (optional)
 
     try:
+        # Get the external data
         api_response = api_instance.get_external_share_data(key, file_id=file_id, folder_id=folder_id)
         print("The response of SharingApi->get_external_share_data:\n")
         pprint(api_response)
@@ -230,7 +243,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **get_file_security_info**
 > FileShareArrayWrapper get_file_security_info(id, count=count, start_index=start_index)
 
-
+Returns the detailed information about the shared file with the ID specified in the request.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -249,7 +262,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -264,6 +277,15 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
@@ -274,6 +296,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     start_index = 1234 # int | The starting index for the query results. (optional)
 
     try:
+        # Get the shared file information
         api_response = api_instance.get_file_security_info(id, count=count, start_index=start_index)
         print("The response of SharingApi->get_file_security_info:\n")
         pprint(api_response)
@@ -294,13 +317,14 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | List of shared file information |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_folder_security_info**
 > FileShareArrayWrapper get_folder_security_info(id, count=count, start_index=start_index)
 
-
+Returns the detailed information about the shared folder with the ID specified in the request.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -319,7 +343,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -334,6 +358,15 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
@@ -344,6 +377,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     start_index = 1234 # int | The starting index for the query results. (optional)
 
     try:
+        # Get the shared folder information
         api_response = api_instance.get_folder_security_info(id, count=count, start_index=start_index)
         print("The response of SharingApi->get_folder_security_info:\n")
         pprint(api_response)
@@ -364,13 +398,14 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | List of shared file information |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_groups_members_with_file_security**
 > GroupMemberSecurityRequestArrayWrapper get_groups_members_with_file_security(file_id, group_id, count=count, start_index=start_index, filter_value=filter_value)
 
-
+Returns the group members with their file security information.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -391,7 +426,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -406,6 +441,15 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
@@ -418,6 +462,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     filter_value = 'some text' # str | The filter value used for searching or querying group members based on text input. (optional)
 
     try:
+        # Get file group members with security information
         api_response = api_instance.get_groups_members_with_file_security(file_id, group_id, count=count, start_index=start_index, filter_value=filter_value)
         print("The response of SharingApi->get_groups_members_with_file_security:\n")
         pprint(api_response)
@@ -438,13 +483,14 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Ok |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_groups_members_with_folder_security**
 > GroupMemberSecurityRequestArrayWrapper get_groups_members_with_folder_security(folder_id, group_id, count=count, start_index=start_index, filter_value=filter_value)
 
-
+Returns the group members with their folder security information.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -465,7 +511,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -480,6 +526,15 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
@@ -492,6 +547,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     filter_value = 'some text' # str | The filter value used for searching or querying group members based on text input. (optional)
 
     try:
+        # Get folder group members with security information
         api_response = api_instance.get_groups_members_with_folder_security(folder_id, group_id, count=count, start_index=start_index, filter_value=filter_value)
         print("The response of SharingApi->get_groups_members_with_folder_security:\n")
         pprint(api_response)
@@ -512,13 +568,14 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Ok |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_security_info**
 > FileShareArrayWrapper get_security_info(base_batch_request_dto=base_batch_request_dto)
 
-
+Returns the sharing rights for all the files and folders specified in the request.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -535,7 +592,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -551,6 +608,15 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
@@ -559,6 +625,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     base_batch_request_dto = docspace_api_sdk.BaseBatchRequestDto() # BaseBatchRequestDto |  (optional)
 
     try:
+        # Get the sharing rights
         api_response = api_instance.get_security_info(base_batch_request_dto=base_batch_request_dto)
         print("The response of SharingApi->get_security_info:\n")
         pprint(api_response)
@@ -579,13 +646,14 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | List of shared files and folders information |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_shared_users**
 > MentionWrapperArrayWrapper get_shared_users(file_id)
 
-
+Returns a list of users with their access rights to the file with the ID specified in the request.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -602,7 +670,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -617,6 +685,15 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
@@ -625,6 +702,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     file_id = 9846 # int | The file unique identifier.
 
     try:
+        # Get user access rights by file ID
         api_response = api_instance.get_shared_users(file_id)
         print("The response of SharingApi->get_shared_users:\n")
         pprint(api_response)
@@ -645,13 +723,14 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | List of users with their access rights to the file |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **remove_security_info**
 > BooleanWrapper remove_security_info(base_batch_request_dto=base_batch_request_dto)
 
-
+Removes the sharing rights from all the files and folders specified in the request.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -668,7 +747,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -684,6 +763,15 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
@@ -692,6 +780,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     base_batch_request_dto = docspace_api_sdk.BaseBatchRequestDto() # BaseBatchRequestDto |  (optional)
 
     try:
+        # Remove the sharing rights
         api_response = api_instance.remove_security_info(base_batch_request_dto=base_batch_request_dto)
         print("The response of SharingApi->remove_security_info:\n")
         pprint(api_response)
@@ -712,13 +801,14 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Boolean value: true if the operation is successful |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **send_editor_notify**
 > AceShortWrapperArrayWrapper send_editor_notify(file_id, mention_message_wrapper=mention_message_wrapper)
 
-
+Sends a message to the users who are mentioned in the file with the ID specified in the request.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -736,7 +826,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -752,6 +842,15 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
@@ -761,6 +860,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     mention_message_wrapper = docspace_api_sdk.MentionMessageWrapper() # MentionMessageWrapper | The mention message. (optional)
 
     try:
+        # Send the mention message
         api_response = api_instance.send_editor_notify(file_id, mention_message_wrapper=mention_message_wrapper)
         print("The response of SharingApi->send_editor_notify:\n")
         pprint(api_response)
@@ -781,13 +881,14 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | List of access rights information |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **set_file_security_info**
 > FileShareArrayWrapper set_file_security_info(file_id, security_info_simple_request_dto)
 
-
+Sets the sharing settings to a file with the ID specified in the request.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -805,7 +906,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -821,6 +922,15 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
@@ -830,6 +940,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     security_info_simple_request_dto = docspace_api_sdk.SecurityInfoSimpleRequestDto() # SecurityInfoSimpleRequestDto | The parameters of the security information simple request.
 
     try:
+        # Share a file
         api_response = api_instance.set_file_security_info(file_id, security_info_simple_request_dto)
         print("The response of SharingApi->set_file_security_info:\n")
         pprint(api_response)
@@ -850,13 +961,14 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | List of shared file information: sharing rights, a user who has the access to the specified file, the file is locked by this user or not, this user is an owner of the specified file or not, this user can edit the access to the specified file or not |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **set_folder_security_info**
 > FileShareArrayWrapper set_folder_security_info(folder_id, security_info_simple_request_dto)
 
-
+Sets the sharing settings to a folder with the ID specified in the request.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -874,7 +986,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -890,6 +1002,15 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
@@ -899,6 +1020,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     security_info_simple_request_dto = docspace_api_sdk.SecurityInfoSimpleRequestDto() # SecurityInfoSimpleRequestDto | The parameters of the security information simple request.
 
     try:
+        # Share a folder
         api_response = api_instance.set_folder_security_info(folder_id, security_info_simple_request_dto)
         print("The response of SharingApi->set_folder_security_info:\n")
         pprint(api_response)
@@ -919,13 +1041,14 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | List of shared folder information: sharing rights, a user who has the access to the specified folder, the folder is locked by this user or not, this user is an owner of the specified folder or not, this user can edit the access to the specified folder or not |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **set_security_info**
 > FileShareArrayWrapper set_security_info(security_info_request_dto=security_info_request_dto)
 
-
+Sets the sharing rights to all the files and folders specified in the request.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -942,7 +1065,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -958,6 +1081,15 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
@@ -966,6 +1098,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     security_info_request_dto = docspace_api_sdk.SecurityInfoRequestDto() # SecurityInfoRequestDto |  (optional)
 
     try:
+        # Set the sharing rights
         api_response = api_instance.set_security_info(security_info_request_dto=security_info_request_dto)
         print("The response of SharingApi->set_security_info:\n")
         pprint(api_response)
@@ -986,6 +1119,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | List of shared files and folders information: sharing rights, a user who has the access to the specified folder, the folder is locked by this user or not, this user is an owner of the specified folder or not, this user can edit the access to the specified folder or not |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

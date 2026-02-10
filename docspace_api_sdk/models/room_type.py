@@ -24,7 +24,7 @@ from typing_extensions import Self
 
 class RoomType(int, Enum):
     """
-    [1 - Form filling room, 2 - Collaboration room, 5 - Custom room, 6 - Public room, 8 - Virtual data room]
+    [1 - Form filling room, 2 - Collaboration room, 5 - Custom room, 6 - Public room, 8 - Virtual data room, 9 - AI Room]
     """
 
     """
@@ -35,6 +35,7 @@ class RoomType(int, Enum):
     CustomRoom = 5
     PublicRoom = 6
     VirtualDataRoom = 8
+    AiRoom = 9
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:

@@ -46,6 +46,7 @@ class GreetingSettingsApi:
 
 
 
+
     @validate_call
     def get_greeting_settings(
         self,
@@ -282,9 +283,12 @@ class GreetingSettingsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/greetingsettings"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/settings/greetingsettings',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -536,9 +540,12 @@ class GreetingSettingsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/greetingsettings/isdefault"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/settings/greetingsettings/isdefault',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -790,9 +797,12 @@ class GreetingSettingsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/greetingsettings/restore"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/settings/greetingsettings/restore',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1072,9 +1082,12 @@ class GreetingSettingsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/greetingsettings"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/settings/greetingsettings',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

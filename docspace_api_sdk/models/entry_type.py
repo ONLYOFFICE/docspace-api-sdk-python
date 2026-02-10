@@ -24,19 +24,20 @@ from typing_extensions import Self
 
 class EntryType(int, Enum):
     """
-    [0 - None, 1 - File, 2 - Folder, 23 - User, 24 - Group, 25 - Room, 26 - Tag]
+    [0 - None, 1 - File, 2 - Folder, 23 - User, 24 - Group, 25 - Room, 26 - Tag, 27 - Agent]
     """
 
     """
     allowed enum values
     """
-    None_ = 0
+    _None = 0
     File = 1
     Folder = 2
     User = 23
     Group = 24
     Room = 25
     Tag = 26
+    Agent = 27
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:

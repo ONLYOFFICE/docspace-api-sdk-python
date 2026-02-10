@@ -30,7 +30,7 @@ class FileStatus(int, Enum):
     """
     allowed enum values
     """
-    None_ = 0
+    _None = 0
     IsEditing = 1
     IsNew = 2
     IsConverting = 4

@@ -50,6 +50,7 @@ class ClientQueryingApi:
 
 
 
+
     @validate_call
     def get_client(
         self,
@@ -308,9 +309,12 @@ class ClientQueryingApi:
             'asc_auth_key'
         ]
 
+
+        resource_path = "/api/2.0/clients/{clientId}"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/clients/{clientId}',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -578,9 +582,12 @@ class ClientQueryingApi:
             'asc_auth_key'
         ]
 
+
+        resource_path = "/api/2.0/clients/{clientId}/info"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/clients/{clientId}/info',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -896,9 +903,12 @@ class ClientQueryingApi:
             'asc_auth_key'
         ]
 
+
+        resource_path = "/api/2.0/clients"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/clients',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1211,9 +1221,12 @@ class ClientQueryingApi:
             'asc_auth_key'
         ]
 
+
+        resource_path = "/api/2.0/clients/info"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/clients/info',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1500,9 +1513,12 @@ class ClientQueryingApi:
             'asc_auth_key'
         ]
 
+
+        resource_path = "/api/2.0/clients/consents"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/clients/consents',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1769,9 +1785,12 @@ class ClientQueryingApi:
         _auth_settings: List[str] = [
         ]
 
+
+        resource_path = "/api/2.0/clients/{clientId}/public/info"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/clients/{clientId}/public/info',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

@@ -50,6 +50,7 @@ class NotificationsApi:
 
 
 
+
     @validate_call
     def get_notification_channels(
         self,
@@ -286,9 +287,12 @@ class NotificationsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/notification/channels"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/settings/notification/channels',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -555,9 +559,12 @@ class NotificationsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/notification/{type}"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/settings/notification/{type}',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -809,9 +816,12 @@ class NotificationsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/notification/rooms"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/settings/notification/rooms',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1091,9 +1101,12 @@ class NotificationsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/notification"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/settings/notification',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1373,9 +1386,12 @@ class NotificationsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/settings/notification/rooms"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/settings/notification/rooms',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

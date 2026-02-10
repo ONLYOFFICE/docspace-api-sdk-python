@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **room_id** | **str** | The confirmation room ID. | [optional] 
 **title** | **str** | The confirmation title. | [optional] 
 **email** | **str** | The confirmation email. | [optional] 
+**is_agent** | **bool** | The confirmation is agent. | [optional] 
 
 ## Example
 

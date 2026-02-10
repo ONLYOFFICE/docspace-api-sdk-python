@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **is_completed** | **bool** |  | [optional] 
 **progress** | **int** |  | [optional] 
 **error** | **str** |  | [optional] 
+**warning** | **str** |  | [optional] 
 **link** | **str** |  | [optional] 
 **tenant_id** | **int** |  | [optional] 
 **backup_progress_enum** | [**BackupProgressEnum**](BackupProgressEnum.md) |  | [optional] 

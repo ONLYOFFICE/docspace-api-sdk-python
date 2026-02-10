@@ -36,8 +36,9 @@ class AuthServiceRequestsDto(BaseModel):
     description: Optional[StrictStr] = Field(default=None, description="The brief description of the authorization service.")
     instruction: Optional[StrictStr] = Field(default=None, description="The detailed instructions for configuring or using the authorization service.")
     can_set: Optional[StrictBool] = Field(default=None, description="Specifies whether the authorization service can be configured by the user.", alias="canSet")
+    paid: Optional[StrictBool] = Field(default=None, description="Specifies whether the authorization service is paid or not.")
     props: Optional[List[AuthKey]] = Field(default=None, description="The collection of authorization keys associated with the authorization service.")
-    __properties: ClassVar[List[str]] = ["name", "title", "description", "instruction", "canSet", "props"]
+    __properties: ClassVar[List[str]] = ["name", "title", "description", "instruction", "canSet", "paid", "props"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -128,6 +129,7 @@ class AuthServiceRequestsDto(BaseModel):
             "description": obj.get("description"),
             "instruction": obj.get("instruction"),
             "canSet": obj.get("canSet"),
+            "paid": obj.get("paid"),
             "props": [AuthKey.from_dict(_item) for _item in obj["props"]] if obj.get("props") is not None else None
         })
         return _obj

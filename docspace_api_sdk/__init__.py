@@ -16,7 +16,7 @@
 
 
 
-__version__ = "3.5.1"
+__version__ = "3.6.0"
 
 # import apis into sdk package
 from docspace_api_sdk.api.api_keys.api_keys_api import ApiKeysApi
@@ -171,6 +171,7 @@ from docspace_api_sdk.models.change_client_activation_request import ChangeClien
 from docspace_api_sdk.models.change_history import ChangeHistory
 from docspace_api_sdk.models.change_owner_request_dto import ChangeOwnerRequestDto
 from docspace_api_sdk.models.change_wallet_service_state_request_dto import ChangeWalletServiceStateRequestDto
+from docspace_api_sdk.models.chat_settings import ChatSettings
 from docspace_api_sdk.models.check_conversion_request_dto_integer import CheckConversionRequestDtoInteger
 from docspace_api_sdk.models.check_dest_folder_dto import CheckDestFolderDto
 from docspace_api_sdk.models.check_dest_folder_result import CheckDestFolderResult
@@ -563,6 +564,7 @@ from docspace_api_sdk.models.setup_code_wrapper import SetupCodeWrapper
 from docspace_api_sdk.models.sex_enum import SexEnum
 from docspace_api_sdk.models.share_filter_type import ShareFilterType
 from docspace_api_sdk.models.signup_account_request_dto import SignupAccountRequestDto
+from docspace_api_sdk.models.size import Size
 from docspace_api_sdk.models.smtp_operation_status_requests_dto import SmtpOperationStatusRequestsDto
 from docspace_api_sdk.models.smtp_operation_status_requests_wrapper import SmtpOperationStatusRequestsWrapper
 from docspace_api_sdk.models.smtp_settings_dto import SmtpSettingsDto
@@ -605,6 +607,8 @@ from docspace_api_sdk.models.telegram_status_dto import TelegramStatusDto
 from docspace_api_sdk.models.telegram_status_wrapper import TelegramStatusWrapper
 from docspace_api_sdk.models.templates_config import TemplatesConfig
 from docspace_api_sdk.models.templates_request_dto import TemplatesRequestDto
+from docspace_api_sdk.models.tenant_ai_agent_quota_settings import TenantAiAgentQuotaSettings
+from docspace_api_sdk.models.tenant_ai_agent_quota_settings_wrapper import TenantAiAgentQuotaSettingsWrapper
 from docspace_api_sdk.models.tenant_audit_settings import TenantAuditSettings
 from docspace_api_sdk.models.tenant_audit_settings_wrapper import TenantAuditSettingsWrapper
 from docspace_api_sdk.models.tenant_banner_settings import TenantBannerSettings
@@ -684,6 +688,7 @@ from docspace_api_sdk.models.user_info_wrapper import UserInfoWrapper
 from docspace_api_sdk.models.user_invitation import UserInvitation
 from docspace_api_sdk.models.user_invitation_request_dto import UserInvitationRequestDto
 from docspace_api_sdk.models.validation_result import ValidationResult
+from docspace_api_sdk.models.vectorization_status import VectorizationStatus
 from docspace_api_sdk.models.wallet_quantity_request_dto import WalletQuantityRequestDto
 from docspace_api_sdk.models.watermark_additions import WatermarkAdditions
 from docspace_api_sdk.models.watermark_dto import WatermarkDto

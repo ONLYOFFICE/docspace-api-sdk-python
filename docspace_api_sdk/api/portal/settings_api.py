@@ -47,6 +47,7 @@ class SettingsApi:
 
 
 
+
     @validate_call
     def continue_portal(
         self,
@@ -276,9 +277,12 @@ class SettingsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/portal/continue"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/portal/continue',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -530,9 +534,12 @@ class SettingsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/portal/delete"
+
         return self.api_client.param_serialize(
             method='DELETE',
-            resource_path='/api/2.0/portal/delete',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -784,9 +791,12 @@ class SettingsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/portal"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/portal',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1055,9 +1065,12 @@ class SettingsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/portal/path"
+
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/2.0/portal/path',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1302,9 +1315,12 @@ class SettingsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/portal/delete"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/portal/delete',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1549,9 +1565,12 @@ class SettingsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/portal/suspend"
+
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/2.0/portal/suspend',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1796,9 +1815,12 @@ class SettingsApi:
             'OpenId'
         ]
 
+
+        resource_path = "/api/2.0/portal/suspend"
+
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/2.0/portal/suspend',
+            resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

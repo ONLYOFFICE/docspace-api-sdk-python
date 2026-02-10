@@ -22,17 +22,17 @@ from enum import Enum
 from typing_extensions import Self
 
 
-class DarkThemeSettingsType(int, Enum):
+class DarkThemeSettingsType(str, Enum):
     """
-    [0 - Base, 1 - Dark, 2 - System]
+    [Base - Base, Dark - Dark, System - System]
     """
 
     """
     allowed enum values
     """
-    Base = 0
-    Dark = 1
-    System = 2
+    BASE = 'Base'
+    DARK = 'Dark'
+    SYSTEM = 'System'
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:
