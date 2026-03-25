@@ -52,7 +52,6 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -68,7 +67,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 ```
 
 
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -80,8 +78,8 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | SMTP operation status |  -  |
-**401** | Unauthorized |  -  |
 **402** | Your pricing plan does not support this option |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -126,7 +124,6 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -142,7 +139,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 ```
 
 
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -154,8 +150,8 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | SMTP settings |  -  |
-**401** | Unauthorized |  -  |
 **402** | Your pricing plan does not support this option |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -200,7 +196,6 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -216,7 +211,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 ```
 
 
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -228,8 +222,8 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Default SMTP settings |  -  |
-**401** | Unauthorized |  -  |
 **402** | Your pricing plan does not support this option |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -278,7 +272,6 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -295,7 +288,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 ```
 
 
-
 ### HTTP request headers
 
  - **Content-Type**: application/json
@@ -307,8 +299,8 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | SMTP settings |  -  |
-**401** | Unauthorized |  -  |
 **402** | Your pricing plan does not support this option |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -353,7 +345,6 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -369,7 +360,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 ```
 
 
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -381,8 +371,8 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | SMTP operation status |  -  |
-**401** | Unauthorized |  -  |
 **402** | Your pricing plan does not support this option |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

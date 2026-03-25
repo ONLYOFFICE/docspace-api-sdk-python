@@ -62,19 +62,18 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.UserStatusApi(api_client)
     status = docspace_api_sdk.EmployeeStatus() # EmployeeStatus | The user status.
-    filter_by = 'some text' # str | Specifies the criteria used to filter the profiles in the request. (optional)
-    count = 1234 # int | The maximum number of user profiles to retrieve. (optional)
-    start_index = 1234 # int | The starting index for retrieving data in a paginated request. (optional)
-    sort_by = 'some text' # str | Specifies the property or field name by which the results should be sorted. (optional)
+    filter_by = 'displayName' # str | Specifies the criteria used to filter the profiles in the request. (optional)
+    count = 25 # int | The maximum number of user profiles to retrieve. (optional)
+    start_index = 0 # int | The starting index for retrieving data in a paginated request. (optional)
+    sort_by = 'displayName' # str | Specifies the property or field name by which the results should be sorted. (optional)
     sort_order = docspace_api_sdk.SortOrder() # SortOrder | The order in which the results are sorted. (optional)
-    filter_separator = 'some text' # str | Represents the separator used to split multiple filter criteria in a query string. (optional)
-    filter_value = 'some text' # str | A string value representing additional filter criteria used in query parameters. (optional)
+    filter_separator = ',' # str | Represents the separator used to split multiple filter criteria in a query string. (optional)
+    filter_value = 'John' # str | A string value representing additional filter criteria used in query parameters. (optional)
 
     try:
         # Get profiles by status
@@ -84,7 +83,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling UserStatusApi->get_by_status: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -149,7 +147,6 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -165,7 +162,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling UserStatusApi->update_user_activation_status: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -230,7 +226,6 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -248,7 +243,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 ```
 
 
-
 ### HTTP request headers
 
  - **Content-Type**: application/json
@@ -260,6 +254,8 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | List of users with the detailed information |  -  |
+**400** | Incorrect status |  -  |
+**403** | No permissions to perform this action or cannot change status for a specific user (yourself, owner, LDAP ...) |  -  |
 **401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

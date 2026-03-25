@@ -6,7 +6,7 @@ The room invitation parameters.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **email** | **str** | The email address. | [optional] 
-**id** | **str** | The ID of the user to share a room with. | [optional] 
+**id** | **UUID** | The ID of the user to share a room with. | [optional] 
 **access** | [**FileShare**](FileShare.md) |  | [optional] 
 
 ## Example

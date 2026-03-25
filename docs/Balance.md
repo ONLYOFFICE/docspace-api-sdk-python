@@ -6,7 +6,11 @@ Represents a balance with an account number and a list of sub-accounts.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **account_number** | **int** | The account number. | [optional] 
+**sub_account_number** | **int** | The sub-account number. | [optional] 
+**account_name** | **str** | The account name. | [optional] 
+**account_currency** | **str** | The account currency. | [optional] 
 **sub_accounts** | [**List[SubAccount]**](SubAccount.md) | A list of sub-accounts. | [optional] 
+**last_credit** | [**TransactionInfo**](TransactionInfo.md) |  | [optional] 
 
 ## Example
 

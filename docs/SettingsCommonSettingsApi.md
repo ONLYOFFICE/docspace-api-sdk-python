@@ -16,11 +16,14 @@ Method | HTTP request | Description
 [**get_portal_settings**](#get_portal_settings) | **GET** /api/2.0/settings | Get the portal settings
 [**get_socket_settings**](#get_socket_settings) | **GET** /api/2.0/settings/socket | Get the socket settings
 [**get_supported_cultures**](#get_supported_cultures) | **GET** /api/2.0/settings/cultures | Get supported languages
+[**get_tenant_ai_access_settings**](#get_tenant_ai_access_settings) | **GET** /api/2.0/settings/ai-access | Get the AI access settings for the portal
 [**get_tenant_user_invitation_settings**](#get_tenant_user_invitation_settings) | **GET** /api/2.0/settings/invitationsettings | Get the user invitation settings
 [**get_time_zones**](#get_time_zones) | **GET** /api/2.0/settings/timezones | Get time zones
+[**save_default_folder**](#save_default_folder) | **PUT** /api/2.0/settings/defaultfolder | Set the default folder
 [**save_dns_settings**](#save_dns_settings) | **PUT** /api/2.0/settings/dns | Save the DNS settings
 [**save_mail_domain_settings**](#save_mail_domain_settings) | **POST** /api/2.0/settings/maildomainsettings | Save the mail domain settings
 [**save_portal_color_theme**](#save_portal_color_theme) | **PUT** /api/2.0/settings/colortheme | Save a color theme
+[**set_tenant_ai_access_settings**](#set_tenant_ai_access_settings) | **POST** /api/2.0/settings/ai-access | Set the AI access for the portal
 [**update_email_activation_settings**](#update_email_activation_settings) | **PUT** /api/2.0/settings/emailactivation | Update the email activation settings
 [**update_invitation_settings**](#update_invitation_settings) | **PUT** /api/2.0/settings/invitationsettings | Update user invitation settings
 
@@ -65,7 +68,6 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -79,7 +81,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 ```
 
 
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -91,8 +92,8 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Ok |  -  |
-**401** | Unauthorized |  -  |
 **405** | Not available |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -141,7 +142,6 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -158,7 +158,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 ```
 
 
-
 ### HTTP request headers
 
  - **Content-Type**: application/json
@@ -171,8 +170,8 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 |-------------|-------------|------------------|
 **200** | Wizard settings |  -  |
 **400** | Incorrect email address/The password is empty |  -  |
-**401** | Unauthorized |  -  |
 **402** | You must enter a license key or license key is not correct or license expired or user quota does not match the license |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -221,7 +220,6 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -236,7 +234,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling CommonSettingsApi->configure_deep_link: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -299,12 +296,11 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.CommonSettingsApi(api_client)
-    id = 9846 # int | The ID of the portal theme to delete.
+    id = 1 # int | The ID of the portal theme to delete.
 
     try:
         # Delete a color theme
@@ -314,7 +310,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling CommonSettingsApi->delete_portal_color_theme: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -364,7 +359,6 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -378,7 +372,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling CommonSettingsApi->get_deep_link_settings: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -436,7 +429,6 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -450,7 +442,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling CommonSettingsApi->get_payment_settings: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -500,7 +491,6 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -514,7 +504,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling CommonSettingsApi->get_portal_color_theme: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -572,7 +561,6 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -586,7 +574,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling CommonSettingsApi->get_portal_hostname: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -645,7 +632,6 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -659,7 +645,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling CommonSettingsApi->get_portal_logo: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -712,7 +697,6 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -727,7 +711,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling CommonSettingsApi->get_portal_settings: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -785,7 +768,6 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -799,7 +781,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling CommonSettingsApi->get_socket_settings: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -849,7 +830,6 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -865,7 +845,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 ```
 
 
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -877,6 +856,78 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | List of all the available portal languages |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_tenant_ai_access_settings**
+> TenantAiAccessSettingsWrapper get_tenant_ai_access_settings()
+
+Returns the current portal-level AI access settings that control whether all AI functionality
+(chat, agents, vectorization) is available for the portal. AI is enabled by default.
+
+For more information, see [api.onlyoffice.com]().
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**TenantAiAccessSettingsWrapper**](TenantAiAccessSettingsWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+
+```python
+import docspace_api_sdk
+from docspace_api_sdk.models.tenant_ai_access_settings_wrapper import TenantAiAccessSettingsWrapper
+from docspace_api_sdk.rest import ApiException
+from pprint import pprint
+
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+# Enter a context with an instance of the API client
+with docspace_api_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace_api_sdk.CommonSettingsApi(api_client)
+
+    try:
+        # Get the AI access settings for the portal
+        api_response = api_instance.get_tenant_ai_access_settings()
+        print("The response of CommonSettingsApi->get_tenant_ai_access_settings:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling CommonSettingsApi->get_tenant_ai_access_settings: %s\n" % e)
+```
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | AI access settings |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -912,7 +963,6 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -926,7 +976,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling CommonSettingsApi->get_tenant_user_invitation_settings: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -984,7 +1033,6 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -1000,7 +1048,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 ```
 
 
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -1012,6 +1059,82 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | List of all the available time zones with their IDs and display names |  -  |
+**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **save_default_folder**
+> StudioDefaultPageSettingsWrapper save_default_folder(default_product_request_dto=default_product_request_dto)
+
+Sets the default folder.
+
+For more information, see [api.onlyoffice.com]().
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **default_product_request_dto** | [**DefaultProductRequestDto**](DefaultProductRequestDto.md)|  | [optional] 
+
+### Return type
+
+[**StudioDefaultPageSettingsWrapper**](StudioDefaultPageSettingsWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+
+```python
+import docspace_api_sdk
+from docspace_api_sdk.models.default_product_request_dto import DefaultProductRequestDto
+from docspace_api_sdk.models.studio_default_page_settings_wrapper import StudioDefaultPageSettingsWrapper
+from docspace_api_sdk.rest import ApiException
+from pprint import pprint
+
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+# Enter a context with an instance of the API client
+with docspace_api_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace_api_sdk.CommonSettingsApi(api_client)
+    default_product_request_dto = docspace_api_sdk.DefaultProductRequestDto() # DefaultProductRequestDto |  (optional)
+
+    try:
+        # Set the default folder
+        api_response = api_instance.save_default_folder(default_product_request_dto=default_product_request_dto)
+        print("The response of CommonSettingsApi->save_default_folder:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling CommonSettingsApi->save_default_folder: %s\n" % e)
+```
+
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Message about saving settings successfully |  -  |
 **401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -1061,7 +1184,6 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -1078,7 +1200,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 ```
 
 
-
 ### HTTP request headers
 
  - **Content-Type**: application/json
@@ -1091,9 +1212,9 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 |-------------|-------------|------------------|
 **200** | Message about changing DNS |  -  |
 **400** | Invalid domain name/incorrect length of doman name |  -  |
-**401** | Unauthorized |  -  |
 **402** | Your pricing plan does not support this option |  -  |
 **405** | Method not allowed |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1142,7 +1263,6 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -1157,7 +1277,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling CommonSettingsApi->save_mail_domain_settings: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -1220,7 +1339,6 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -1237,7 +1355,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 ```
 
 
-
 ### HTTP request headers
 
  - **Content-Type**: application/json
@@ -1249,6 +1366,86 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Portal theme settings |  -  |
+**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **set_tenant_ai_access_settings**
+> TenantAiAccessSettingsWrapper set_tenant_ai_access_settings(tenant_ai_access_settings_dto=tenant_ai_access_settings_dto)
+
+Updates the portal-level AI access settings. When AI is disabled, all AI features are turned off:
+the AI Agents folder is hidden from root folder listings, AI status checks immediately return disabled,
+and AI chat endpoints become inaccessible. Only users with the DocSpaceAdmin role
+(EditPortalSettings permission) can change this setting.
+
+For more information, see [api.onlyoffice.com]().
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **tenant_ai_access_settings_dto** | [**TenantAiAccessSettingsDto**](TenantAiAccessSettingsDto.md)|  | [optional] 
+
+### Return type
+
+[**TenantAiAccessSettingsWrapper**](TenantAiAccessSettingsWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+
+```python
+import docspace_api_sdk
+from docspace_api_sdk.models.tenant_ai_access_settings_dto import TenantAiAccessSettingsDto
+from docspace_api_sdk.models.tenant_ai_access_settings_wrapper import TenantAiAccessSettingsWrapper
+from docspace_api_sdk.rest import ApiException
+from pprint import pprint
+
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+# Enter a context with an instance of the API client
+with docspace_api_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace_api_sdk.CommonSettingsApi(api_client)
+    tenant_ai_access_settings_dto = docspace_api_sdk.TenantAiAccessSettingsDto() # TenantAiAccessSettingsDto |  (optional)
+
+    try:
+        # Set the AI access for the portal
+        api_response = api_instance.set_tenant_ai_access_settings(tenant_ai_access_settings_dto=tenant_ai_access_settings_dto)
+        print("The response of CommonSettingsApi->set_tenant_ai_access_settings:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling CommonSettingsApi->set_tenant_ai_access_settings: %s\n" % e)
+```
+
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Updated AI access settings |  -  |
+**403** | You don&#39;t have enough permission to change the AI access settings |  -  |
 **401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -1298,7 +1495,6 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -1313,7 +1509,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling CommonSettingsApi->update_email_activation_settings: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -1376,7 +1571,6 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -1391,7 +1585,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling CommonSettingsApi->update_invitation_settings: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers

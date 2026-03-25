@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -33,7 +33,7 @@ class LoginSettingsDto(BaseModel):
     attempt_count: StrictInt = Field(description="The maximum number of consecutive failed login attempts allowed before triggering account suspension.", alias="attemptCount")
     block_time: StrictInt = Field(description="The duration (in minutes) for which an account remains suspended after exceeding maximum login attempts.", alias="blockTime")
     check_period: StrictInt = Field(description="The maximum time (in seconds) allowed for server to process and respond to login requests.", alias="checkPeriod")
-    is_default: StrictBool = Field(description="Specifies if these settings are default or not", alias="isDefault")
+    is_default: StrictBool = Field(description="Specifies whether the login settings are default or not.", alias="isDefault")
     __properties: ClassVar[List[str]] = ["attemptCount", "blockTime", "checkPeriod", "isDefault"]
 
     model_config = ConfigDict(

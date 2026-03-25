@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -25,6 +25,7 @@ from typing_extensions import Annotated
 from pydantic import Field, StrictBool, StrictBytes, StrictInt, StrictStr
 from typing import List, Optional, Tuple, Union
 from typing_extensions import Annotated
+from uuid import UUID
 from docspace_api_sdk.models.api_date_time import ApiDateTime
 from docspace_api_sdk.models.apply_filter_option import ApplyFilterOption
 from docspace_api_sdk.models.check_upload_request import CheckUploadRequest
@@ -71,11 +72,10 @@ class FoldersApi:
         self._fields = None
         self._use_at_recent = False
 
-
     def with_fields(self, fields: str) -> FoldersApi:
         self._fields = fields
         return self
-    
+
     def with_at_recent(self):
         """
         Use legacy /@recent path for the next request
@@ -144,8 +144,7 @@ class FoldersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "STRINGArrayWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -216,8 +215,7 @@ class FoldersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "STRINGArrayWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -288,8 +286,7 @@ class FoldersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "STRINGArrayWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -444,8 +441,7 @@ class FoldersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -516,8 +512,7 @@ class FoldersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -588,8 +583,7 @@ class FoldersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -743,10 +737,9 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
-            '401': None,
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -816,10 +809,9 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
-            '401': None,
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -889,10 +881,9 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
-            '401': None,
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1042,11 +1033,10 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
-            '401': None,
             '403': None,
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1112,11 +1102,10 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
-            '401': None,
             '403': None,
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1182,11 +1171,10 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
-            '401': None,
             '403': None,
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1325,8 +1313,7 @@ class FoldersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1397,8 +1384,7 @@ class FoldersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1469,8 +1455,7 @@ class FoldersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1568,7 +1553,7 @@ class FoldersApi:
     @validate_call
     def get_favorites_folder(
         self,
-        user_id_or_group_id: Annotated[Optional[StrictStr], Field(description="The user or group ID.")] = None,
+        user_id_or_group_id: Annotated[Optional[UUID], Field(description="The user or group ID.")] = None,
         filter_type: Annotated[Optional[FilterType], Field(description="The filter type.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of items to retrieve in the request.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The zero-based index of the first item to retrieve in a paginated list.")] = None,
@@ -1593,7 +1578,7 @@ class FoldersApi:
         Returns the detailed list of files and folders located in the Favorites section.
 
         :param user_id_or_group_id: The user or group ID.
-        :type user_id_or_group_id: str
+        :type user_id_or_group_id: UUID
         :param filter_type: The filter type.
         :type filter_type: FilterType
         :param count: The maximum number of items to retrieve in the request.
@@ -1644,11 +1629,10 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderContentIntegerWrapper",
-            '401': None,
             '403': None,
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1662,7 +1646,7 @@ class FoldersApi:
     @validate_call
     def get_favorites_folder_with_http_info(
         self,
-        user_id_or_group_id: Annotated[Optional[StrictStr], Field(description="The user or group ID.")] = None,
+        user_id_or_group_id: Annotated[Optional[UUID], Field(description="The user or group ID.")] = None,
         filter_type: Annotated[Optional[FilterType], Field(description="The filter type.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of items to retrieve in the request.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The zero-based index of the first item to retrieve in a paginated list.")] = None,
@@ -1687,7 +1671,7 @@ class FoldersApi:
         Returns the detailed list of files and folders located in the Favorites section.
 
         :param user_id_or_group_id: The user or group ID.
-        :type user_id_or_group_id: str
+        :type user_id_or_group_id: UUID
         :param filter_type: The filter type.
         :type filter_type: FilterType
         :param count: The maximum number of items to retrieve in the request.
@@ -1738,11 +1722,10 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderContentIntegerWrapper",
-            '401': None,
             '403': None,
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1756,7 +1739,7 @@ class FoldersApi:
     @validate_call
     def get_favorites_folder_without_preload_content(
         self,
-        user_id_or_group_id: Annotated[Optional[StrictStr], Field(description="The user or group ID.")] = None,
+        user_id_or_group_id: Annotated[Optional[UUID], Field(description="The user or group ID.")] = None,
         filter_type: Annotated[Optional[FilterType], Field(description="The filter type.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of items to retrieve in the request.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The zero-based index of the first item to retrieve in a paginated list.")] = None,
@@ -1781,7 +1764,7 @@ class FoldersApi:
         Returns the detailed list of files and folders located in the Favorites section.
 
         :param user_id_or_group_id: The user or group ID.
-        :type user_id_or_group_id: str
+        :type user_id_or_group_id: UUID
         :param filter_type: The filter type.
         :type filter_type: FilterType
         :param count: The maximum number of items to retrieve in the request.
@@ -1832,11 +1815,10 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderContentIntegerWrapper",
-            '401': None,
             '403': None,
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2001,8 +1983,7 @@ class FoldersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FilesStatisticsResultWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2065,8 +2046,7 @@ class FoldersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FilesStatisticsResultWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2129,8 +2109,7 @@ class FoldersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FilesStatisticsResultWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2261,8 +2240,7 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FormsItemArrayWrapper",
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2328,8 +2306,7 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FormsItemArrayWrapper",
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2395,8 +2372,7 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FormsItemArrayWrapper",
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2473,8 +2449,8 @@ class FoldersApi:
     def get_folder_by_folder_id(
         self,
         folder_id: Annotated[StrictInt, Field(description="The folder ID.")],
-        user_id_or_group_id: Annotated[Optional[StrictStr], Field(description="The user or group ID.")] = None,
-        shared_by: Annotated[Optional[StrictStr], Field(description="The identifier of the user who shared the folder or file.")] = None,
+        user_id_or_group_id: Annotated[Optional[UUID], Field(description="The user or group ID.")] = None,
+        shared_by: Annotated[Optional[UUID], Field(description="The identifier of the user who shared the folder or file.")] = None,
         filter_type: Annotated[Optional[FilterType], Field(description="The filter type.")] = None,
         room_id: Annotated[Optional[StrictInt], Field(description="The room ID.")] = None,
         exclude_subject: Annotated[Optional[StrictBool], Field(description="Specifies whether to exclude search by user or group ID.")] = None,
@@ -2509,9 +2485,9 @@ class FoldersApi:
         :param folder_id: The folder ID. (required)
         :type folder_id: int
         :param user_id_or_group_id: The user or group ID.
-        :type user_id_or_group_id: str
+        :type user_id_or_group_id: UUID
         :param shared_by: The identifier of the user who shared the folder or file.
-        :type shared_by: str
+        :type shared_by: UUID
         :param filter_type: The filter type.
         :type filter_type: FilterType
         :param room_id: The room ID.
@@ -2590,8 +2566,7 @@ class FoldersApi:
             '200': "FolderContentIntegerWrapper",
             '403': None,
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2606,8 +2581,8 @@ class FoldersApi:
     def get_folder_by_folder_id_with_http_info(
         self,
         folder_id: Annotated[StrictInt, Field(description="The folder ID.")],
-        user_id_or_group_id: Annotated[Optional[StrictStr], Field(description="The user or group ID.")] = None,
-        shared_by: Annotated[Optional[StrictStr], Field(description="The identifier of the user who shared the folder or file.")] = None,
+        user_id_or_group_id: Annotated[Optional[UUID], Field(description="The user or group ID.")] = None,
+        shared_by: Annotated[Optional[UUID], Field(description="The identifier of the user who shared the folder or file.")] = None,
         filter_type: Annotated[Optional[FilterType], Field(description="The filter type.")] = None,
         room_id: Annotated[Optional[StrictInt], Field(description="The room ID.")] = None,
         exclude_subject: Annotated[Optional[StrictBool], Field(description="Specifies whether to exclude search by user or group ID.")] = None,
@@ -2642,9 +2617,9 @@ class FoldersApi:
         :param folder_id: The folder ID. (required)
         :type folder_id: int
         :param user_id_or_group_id: The user or group ID.
-        :type user_id_or_group_id: str
+        :type user_id_or_group_id: UUID
         :param shared_by: The identifier of the user who shared the folder or file.
-        :type shared_by: str
+        :type shared_by: UUID
         :param filter_type: The filter type.
         :type filter_type: FilterType
         :param room_id: The room ID.
@@ -2723,8 +2698,7 @@ class FoldersApi:
             '200': "FolderContentIntegerWrapper",
             '403': None,
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2739,8 +2713,8 @@ class FoldersApi:
     def get_folder_by_folder_id_without_preload_content(
         self,
         folder_id: Annotated[StrictInt, Field(description="The folder ID.")],
-        user_id_or_group_id: Annotated[Optional[StrictStr], Field(description="The user or group ID.")] = None,
-        shared_by: Annotated[Optional[StrictStr], Field(description="The identifier of the user who shared the folder or file.")] = None,
+        user_id_or_group_id: Annotated[Optional[UUID], Field(description="The user or group ID.")] = None,
+        shared_by: Annotated[Optional[UUID], Field(description="The identifier of the user who shared the folder or file.")] = None,
         filter_type: Annotated[Optional[FilterType], Field(description="The filter type.")] = None,
         room_id: Annotated[Optional[StrictInt], Field(description="The room ID.")] = None,
         exclude_subject: Annotated[Optional[StrictBool], Field(description="Specifies whether to exclude search by user or group ID.")] = None,
@@ -2775,9 +2749,9 @@ class FoldersApi:
         :param folder_id: The folder ID. (required)
         :type folder_id: int
         :param user_id_or_group_id: The user or group ID.
-        :type user_id_or_group_id: str
+        :type user_id_or_group_id: UUID
         :param shared_by: The identifier of the user who shared the folder or file.
-        :type shared_by: str
+        :type shared_by: UUID
         :param filter_type: The filter type.
         :type filter_type: FilterType
         :param room_id: The room ID.
@@ -2856,8 +2830,7 @@ class FoldersApi:
             '200': "FolderContentIntegerWrapper",
             '403': None,
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -3081,11 +3054,10 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "HistoryArrayWrapper",
-            '401': None,
             '403': None,
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -3167,11 +3139,10 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "HistoryArrayWrapper",
-            '401': None,
             '403': None,
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -3253,11 +3224,10 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "HistoryArrayWrapper",
-            '401': None,
             '403': None,
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -3411,8 +3381,7 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -3478,8 +3447,7 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -3545,8 +3513,7 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -3675,8 +3642,7 @@ class FoldersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -3743,8 +3709,7 @@ class FoldersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -3811,8 +3776,7 @@ class FoldersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -3946,10 +3910,9 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileEntryBaseArrayWrapper",
-            '401': None,
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -4015,10 +3978,9 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileEntryBaseArrayWrapper",
-            '401': None,
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -4084,10 +4046,9 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileEntryBaseArrayWrapper",
-            '401': None,
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -4230,8 +4191,7 @@ class FoldersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -4306,8 +4266,7 @@ class FoldersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -4382,8 +4341,7 @@ class FoldersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -4521,10 +4479,9 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileEntryBaseArrayWrapper",
-            '401': None,
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -4590,10 +4547,9 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileEntryBaseArrayWrapper",
-            '401': None,
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -4659,10 +4615,9 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileEntryBaseArrayWrapper",
-            '401': None,
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -4744,7 +4699,7 @@ class FoldersApi:
     @validate_call
     def get_my_folder(
         self,
-        user_id_or_group_id: Annotated[Optional[StrictStr], Field(description="The user or group ID.")] = None,
+        user_id_or_group_id: Annotated[Optional[UUID], Field(description="The user or group ID.")] = None,
         filter_type: Annotated[Optional[FilterType], Field(description="The filter type.")] = None,
         apply_filter_option: Annotated[Optional[ApplyFilterOption], Field(description="Specifies whether to return only files, only folders or all elements.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of items to retrieve in the response.")] = None,
@@ -4770,7 +4725,7 @@ class FoldersApi:
         Returns the detailed list of files and folders located in the My documents section.
 
         :param user_id_or_group_id: The user or group ID.
-        :type user_id_or_group_id: str
+        :type user_id_or_group_id: UUID
         :param filter_type: The filter type.
         :type filter_type: FilterType
         :param apply_filter_option: Specifies whether to return only files, only folders or all elements.
@@ -4824,11 +4779,10 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderContentIntegerWrapper",
-            '401': None,
             '403': None,
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -4842,7 +4796,7 @@ class FoldersApi:
     @validate_call
     def get_my_folder_with_http_info(
         self,
-        user_id_or_group_id: Annotated[Optional[StrictStr], Field(description="The user or group ID.")] = None,
+        user_id_or_group_id: Annotated[Optional[UUID], Field(description="The user or group ID.")] = None,
         filter_type: Annotated[Optional[FilterType], Field(description="The filter type.")] = None,
         apply_filter_option: Annotated[Optional[ApplyFilterOption], Field(description="Specifies whether to return only files, only folders or all elements.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of items to retrieve in the response.")] = None,
@@ -4868,7 +4822,7 @@ class FoldersApi:
         Returns the detailed list of files and folders located in the My documents section.
 
         :param user_id_or_group_id: The user or group ID.
-        :type user_id_or_group_id: str
+        :type user_id_or_group_id: UUID
         :param filter_type: The filter type.
         :type filter_type: FilterType
         :param apply_filter_option: Specifies whether to return only files, only folders or all elements.
@@ -4922,11 +4876,10 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderContentIntegerWrapper",
-            '401': None,
             '403': None,
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -4940,7 +4893,7 @@ class FoldersApi:
     @validate_call
     def get_my_folder_without_preload_content(
         self,
-        user_id_or_group_id: Annotated[Optional[StrictStr], Field(description="The user or group ID.")] = None,
+        user_id_or_group_id: Annotated[Optional[UUID], Field(description="The user or group ID.")] = None,
         filter_type: Annotated[Optional[FilterType], Field(description="The filter type.")] = None,
         apply_filter_option: Annotated[Optional[ApplyFilterOption], Field(description="Specifies whether to return only files, only folders or all elements.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of items to retrieve in the response.")] = None,
@@ -4966,7 +4919,7 @@ class FoldersApi:
         Returns the detailed list of files and folders located in the My documents section.
 
         :param user_id_or_group_id: The user or group ID.
-        :type user_id_or_group_id: str
+        :type user_id_or_group_id: UUID
         :param filter_type: The filter type.
         :type filter_type: FilterType
         :param apply_filter_option: Specifies whether to return only files, only folders or all elements.
@@ -5020,11 +4973,10 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderContentIntegerWrapper",
-            '401': None,
             '403': None,
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -5197,10 +5149,9 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileEntryBaseArrayWrapper",
-            '401': None,
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -5266,10 +5217,9 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileEntryBaseArrayWrapper",
-            '401': None,
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -5335,10 +5285,9 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileEntryBaseArrayWrapper",
-            '401': None,
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -5420,7 +5369,7 @@ class FoldersApi:
     @validate_call
     def get_privacy_folder(
         self,
-        user_id_or_group_id: Annotated[Optional[StrictStr], Field(description="The user or group ID.")] = None,
+        user_id_or_group_id: Annotated[Optional[UUID], Field(description="The user or group ID.")] = None,
         filter_type: Annotated[Optional[FilterType], Field(description="The filter type.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of items to retrieve in the request.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The zero-based index of the first item to retrieve in a paginated list.")] = None,
@@ -5445,7 +5394,7 @@ class FoldersApi:
         Returns the detailed list of files and folders located in the Private Room section.
 
         :param user_id_or_group_id: The user or group ID.
-        :type user_id_or_group_id: str
+        :type user_id_or_group_id: UUID
         :param filter_type: The filter type.
         :type filter_type: FilterType
         :param count: The maximum number of items to retrieve in the request.
@@ -5496,11 +5445,10 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderContentIntegerWrapper",
-            '401': None,
             '403': None,
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -5514,7 +5462,7 @@ class FoldersApi:
     @validate_call
     def get_privacy_folder_with_http_info(
         self,
-        user_id_or_group_id: Annotated[Optional[StrictStr], Field(description="The user or group ID.")] = None,
+        user_id_or_group_id: Annotated[Optional[UUID], Field(description="The user or group ID.")] = None,
         filter_type: Annotated[Optional[FilterType], Field(description="The filter type.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of items to retrieve in the request.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The zero-based index of the first item to retrieve in a paginated list.")] = None,
@@ -5539,7 +5487,7 @@ class FoldersApi:
         Returns the detailed list of files and folders located in the Private Room section.
 
         :param user_id_or_group_id: The user or group ID.
-        :type user_id_or_group_id: str
+        :type user_id_or_group_id: UUID
         :param filter_type: The filter type.
         :type filter_type: FilterType
         :param count: The maximum number of items to retrieve in the request.
@@ -5590,11 +5538,10 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderContentIntegerWrapper",
-            '401': None,
             '403': None,
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -5608,7 +5555,7 @@ class FoldersApi:
     @validate_call
     def get_privacy_folder_without_preload_content(
         self,
-        user_id_or_group_id: Annotated[Optional[StrictStr], Field(description="The user or group ID.")] = None,
+        user_id_or_group_id: Annotated[Optional[UUID], Field(description="The user or group ID.")] = None,
         filter_type: Annotated[Optional[FilterType], Field(description="The filter type.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of items to retrieve in the request.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The zero-based index of the first item to retrieve in a paginated list.")] = None,
@@ -5633,7 +5580,7 @@ class FoldersApi:
         Returns the detailed list of files and folders located in the Private Room section.
 
         :param user_id_or_group_id: The user or group ID.
-        :type user_id_or_group_id: str
+        :type user_id_or_group_id: UUID
         :param filter_type: The filter type.
         :type filter_type: FilterType
         :param count: The maximum number of items to retrieve in the request.
@@ -5684,11 +5631,10 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderContentIntegerWrapper",
-            '401': None,
             '403': None,
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -5804,7 +5750,7 @@ class FoldersApi:
     @validate_call
     def get_recent_folder(
         self,
-        user_id_or_group_id: Annotated[Optional[StrictStr], Field(description="The user or group ID.")] = None,
+        user_id_or_group_id: Annotated[Optional[UUID], Field(description="The user or group ID.")] = None,
         filter_type: Annotated[Optional[FilterType], Field(description="The filter type.")] = None,
         exclude_subject: Annotated[Optional[StrictBool], Field(description="Specifies whether to exclude search by user or group ID.")] = None,
         apply_filter_option: Annotated[Optional[ApplyFilterOption], Field(description="Specifies whether to return only files, only folders or all elements.")] = None,
@@ -5833,7 +5779,7 @@ class FoldersApi:
         Returns the detailed list of files located in the Recent section.
 
         :param user_id_or_group_id: The user or group ID.
-        :type user_id_or_group_id: str
+        :type user_id_or_group_id: UUID
         :param filter_type: The filter type.
         :type filter_type: FilterType
         :param exclude_subject: Specifies whether to exclude search by user or group ID.
@@ -5896,11 +5842,10 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderContentIntegerWrapper",
-            '401': None,
             '403': None,
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -5914,7 +5859,7 @@ class FoldersApi:
     @validate_call
     def get_recent_folder_with_http_info(
         self,
-        user_id_or_group_id: Annotated[Optional[StrictStr], Field(description="The user or group ID.")] = None,
+        user_id_or_group_id: Annotated[Optional[UUID], Field(description="The user or group ID.")] = None,
         filter_type: Annotated[Optional[FilterType], Field(description="The filter type.")] = None,
         exclude_subject: Annotated[Optional[StrictBool], Field(description="Specifies whether to exclude search by user or group ID.")] = None,
         apply_filter_option: Annotated[Optional[ApplyFilterOption], Field(description="Specifies whether to return only files, only folders or all elements.")] = None,
@@ -5943,7 +5888,7 @@ class FoldersApi:
         Returns the detailed list of files located in the Recent section.
 
         :param user_id_or_group_id: The user or group ID.
-        :type user_id_or_group_id: str
+        :type user_id_or_group_id: UUID
         :param filter_type: The filter type.
         :type filter_type: FilterType
         :param exclude_subject: Specifies whether to exclude search by user or group ID.
@@ -6006,11 +5951,10 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderContentIntegerWrapper",
-            '401': None,
             '403': None,
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -6024,7 +5968,7 @@ class FoldersApi:
     @validate_call
     def get_recent_folder_without_preload_content(
         self,
-        user_id_or_group_id: Annotated[Optional[StrictStr], Field(description="The user or group ID.")] = None,
+        user_id_or_group_id: Annotated[Optional[UUID], Field(description="The user or group ID.")] = None,
         filter_type: Annotated[Optional[FilterType], Field(description="The filter type.")] = None,
         exclude_subject: Annotated[Optional[StrictBool], Field(description="Specifies whether to exclude search by user or group ID.")] = None,
         apply_filter_option: Annotated[Optional[ApplyFilterOption], Field(description="Specifies whether to return only files, only folders or all elements.")] = None,
@@ -6053,7 +5997,7 @@ class FoldersApi:
         Returns the detailed list of files located in the Recent section.
 
         :param user_id_or_group_id: The user or group ID.
-        :type user_id_or_group_id: str
+        :type user_id_or_group_id: UUID
         :param filter_type: The filter type.
         :type filter_type: FilterType
         :param exclude_subject: Specifies whether to exclude search by user or group ID.
@@ -6116,11 +6060,10 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderContentIntegerWrapper",
-            '401': None,
             '403': None,
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -6259,7 +6202,7 @@ class FoldersApi:
     @validate_call
     def get_root_folders(
         self,
-        user_id_or_group_id: Annotated[Optional[StrictStr], Field(description="The user or group ID.")] = None,
+        user_id_or_group_id: Annotated[Optional[UUID], Field(description="The user or group ID.")] = None,
         filter_type: Annotated[Optional[FilterType], Field(description="The filter type.")] = None,
         without_trash: Annotated[Optional[StrictBool], Field(description="Specifies whether to return the Trash section or not.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of items to retrieve in the response.")] = None,
@@ -6285,7 +6228,7 @@ class FoldersApi:
         Returns all the sections matching the parameters specified in the request.
 
         :param user_id_or_group_id: The user or group ID.
-        :type user_id_or_group_id: str
+        :type user_id_or_group_id: UUID
         :param filter_type: The filter type.
         :type filter_type: FilterType
         :param without_trash: Specifies whether to return the Trash section or not.
@@ -6339,11 +6282,10 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderContentIntegerArrayWrapper",
-            '401': None,
             '403': None,
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -6357,7 +6299,7 @@ class FoldersApi:
     @validate_call
     def get_root_folders_with_http_info(
         self,
-        user_id_or_group_id: Annotated[Optional[StrictStr], Field(description="The user or group ID.")] = None,
+        user_id_or_group_id: Annotated[Optional[UUID], Field(description="The user or group ID.")] = None,
         filter_type: Annotated[Optional[FilterType], Field(description="The filter type.")] = None,
         without_trash: Annotated[Optional[StrictBool], Field(description="Specifies whether to return the Trash section or not.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of items to retrieve in the response.")] = None,
@@ -6383,7 +6325,7 @@ class FoldersApi:
         Returns all the sections matching the parameters specified in the request.
 
         :param user_id_or_group_id: The user or group ID.
-        :type user_id_or_group_id: str
+        :type user_id_or_group_id: UUID
         :param filter_type: The filter type.
         :type filter_type: FilterType
         :param without_trash: Specifies whether to return the Trash section or not.
@@ -6437,11 +6379,10 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderContentIntegerArrayWrapper",
-            '401': None,
             '403': None,
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -6455,7 +6396,7 @@ class FoldersApi:
     @validate_call
     def get_root_folders_without_preload_content(
         self,
-        user_id_or_group_id: Annotated[Optional[StrictStr], Field(description="The user or group ID.")] = None,
+        user_id_or_group_id: Annotated[Optional[UUID], Field(description="The user or group ID.")] = None,
         filter_type: Annotated[Optional[FilterType], Field(description="The filter type.")] = None,
         without_trash: Annotated[Optional[StrictBool], Field(description="Specifies whether to return the Trash section or not.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of items to retrieve in the response.")] = None,
@@ -6481,7 +6422,7 @@ class FoldersApi:
         Returns all the sections matching the parameters specified in the request.
 
         :param user_id_or_group_id: The user or group ID.
-        :type user_id_or_group_id: str
+        :type user_id_or_group_id: UUID
         :param filter_type: The filter type.
         :type filter_type: FilterType
         :param without_trash: Specifies whether to return the Trash section or not.
@@ -6535,11 +6476,10 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderContentIntegerArrayWrapper",
-            '401': None,
             '403': None,
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -6660,7 +6600,7 @@ class FoldersApi:
     @validate_call
     def get_trash_folder(
         self,
-        user_id_or_group_id: Annotated[Optional[StrictStr], Field(description="The user or group ID.")] = None,
+        user_id_or_group_id: Annotated[Optional[UUID], Field(description="The user or group ID.")] = None,
         filter_type: Annotated[Optional[FilterType], Field(description="The filter type.")] = None,
         apply_filter_option: Annotated[Optional[ApplyFilterOption], Field(description="Specifies whether to return only files, only folders or all elements.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of items to retrieve in the response.")] = None,
@@ -6686,7 +6626,7 @@ class FoldersApi:
         Returns the detailed list of files and folders located in the Trash section.
 
         :param user_id_or_group_id: The user or group ID.
-        :type user_id_or_group_id: str
+        :type user_id_or_group_id: UUID
         :param filter_type: The filter type.
         :type filter_type: FilterType
         :param apply_filter_option: Specifies whether to return only files, only folders or all elements.
@@ -6740,11 +6680,10 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderContentIntegerWrapper",
-            '401': None,
             '403': None,
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -6758,7 +6697,7 @@ class FoldersApi:
     @validate_call
     def get_trash_folder_with_http_info(
         self,
-        user_id_or_group_id: Annotated[Optional[StrictStr], Field(description="The user or group ID.")] = None,
+        user_id_or_group_id: Annotated[Optional[UUID], Field(description="The user or group ID.")] = None,
         filter_type: Annotated[Optional[FilterType], Field(description="The filter type.")] = None,
         apply_filter_option: Annotated[Optional[ApplyFilterOption], Field(description="Specifies whether to return only files, only folders or all elements.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of items to retrieve in the response.")] = None,
@@ -6784,7 +6723,7 @@ class FoldersApi:
         Returns the detailed list of files and folders located in the Trash section.
 
         :param user_id_or_group_id: The user or group ID.
-        :type user_id_or_group_id: str
+        :type user_id_or_group_id: UUID
         :param filter_type: The filter type.
         :type filter_type: FilterType
         :param apply_filter_option: Specifies whether to return only files, only folders or all elements.
@@ -6838,11 +6777,10 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderContentIntegerWrapper",
-            '401': None,
             '403': None,
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -6856,7 +6794,7 @@ class FoldersApi:
     @validate_call
     def get_trash_folder_without_preload_content(
         self,
-        user_id_or_group_id: Annotated[Optional[StrictStr], Field(description="The user or group ID.")] = None,
+        user_id_or_group_id: Annotated[Optional[UUID], Field(description="The user or group ID.")] = None,
         filter_type: Annotated[Optional[FilterType], Field(description="The filter type.")] = None,
         apply_filter_option: Annotated[Optional[ApplyFilterOption], Field(description="Specifies whether to return only files, only folders or all elements.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of items to retrieve in the response.")] = None,
@@ -6882,7 +6820,7 @@ class FoldersApi:
         Returns the detailed list of files and folders located in the Trash section.
 
         :param user_id_or_group_id: The user or group ID.
-        :type user_id_or_group_id: str
+        :type user_id_or_group_id: UUID
         :param filter_type: The filter type.
         :type filter_type: FilterType
         :param apply_filter_option: Specifies whether to return only files, only folders or all elements.
@@ -6936,11 +6874,10 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderContentIntegerWrapper",
-            '401': None,
             '403': None,
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -7161,11 +7098,10 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
-            '401': None,
             '403': None,
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -7279,11 +7215,10 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
-            '401': None,
             '403': None,
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -7397,11 +7332,10 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
-            '401': None,
             '403': None,
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -7628,11 +7562,10 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
-            '401': None,
             '403': None,
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -7742,11 +7675,10 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
-            '401': None,
             '403': None,
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -7856,11 +7788,10 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
-            '401': None,
             '403': None,
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -8044,10 +7975,9 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
-            '401': None,
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -8117,10 +8047,9 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
-            '401': None,
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -8190,10 +8119,9 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
-            '401': None,
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -8348,8 +8276,7 @@ class FoldersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -8420,8 +8347,7 @@ class FoldersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -8492,8 +8418,7 @@ class FoldersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -8648,8 +8573,7 @@ class FoldersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -8720,8 +8644,7 @@ class FoldersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -8792,8 +8715,7 @@ class FoldersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -8908,7 +8830,7 @@ class FoldersApi:
     ) -> ObjectWrapper:
         """Upload a file
 
-        Uploads a file specified in the request to the selected folder by single file uploading or standart multipart/form-data method.   **Note**:  You can upload files in two different ways:   <ol>  <li>Using single file upload. You should set the Content-Type and Content-Disposition headers to specify a file name and content type, and send the file to the request body.</li>  <li>Using standart multipart/form-data method.</li>  </ol>
+        Uploads a file specified in the request to the selected folder by single file uploading or standart multipart/form-data method.
 
         :param folder_id: The folder ID to upload a file. (required)
         :type folder_id: int
@@ -8947,11 +8869,10 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectWrapper",
-            '401': None,
             '403': None,
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -8982,7 +8903,7 @@ class FoldersApi:
     ) -> ApiResponse[ObjectWrapper]:
         """Upload a file
 
-        Uploads a file specified in the request to the selected folder by single file uploading or standart multipart/form-data method.   **Note**:  You can upload files in two different ways:   <ol>  <li>Using single file upload. You should set the Content-Type and Content-Disposition headers to specify a file name and content type, and send the file to the request body.</li>  <li>Using standart multipart/form-data method.</li>  </ol>
+        Uploads a file specified in the request to the selected folder by single file uploading or standart multipart/form-data method.
 
         :param folder_id: The folder ID to upload a file. (required)
         :type folder_id: int
@@ -9021,11 +8942,10 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectWrapper",
-            '401': None,
             '403': None,
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -9056,7 +8976,7 @@ class FoldersApi:
     ) -> RESTResponseType:
         """Upload a file
 
-        Uploads a file specified in the request to the selected folder by single file uploading or standart multipart/form-data method.   **Note**:  You can upload files in two different ways:   <ol>  <li>Using single file upload. You should set the Content-Type and Content-Disposition headers to specify a file name and content type, and send the file to the request body.</li>  <li>Using standart multipart/form-data method.</li>  </ol>
+        Uploads a file specified in the request to the selected folder by single file uploading or standart multipart/form-data method.
 
         :param folder_id: The folder ID to upload a file. (required)
         :type folder_id: int
@@ -9095,11 +9015,10 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectWrapper",
-            '401': None,
             '403': None,
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -9213,7 +9132,7 @@ class FoldersApi:
     ) -> ObjectWrapper:
         """Upload a file to the My documents section
 
-        Uploads a file specified in the request to the My documents section by single file uploading or standart multipart/form-data method.   **Note**:  You can upload files in two different ways:   <ol>  <li>Using single file upload. You should set the Content-Type and Content-Disposition headers to specify a file name and content type, and send the file to the request body.</li>  <li>Using standart multipart/form-data method.</li>  </ol>
+        Uploads a file specified in the request to the My documents section by single file uploading or standart multipart/form-data method.
 
         :param in_dto: The request parameters for uploading a file.
         :type in_dto: UploadRequestDto
@@ -9249,11 +9168,10 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectWrapper",
-            '401': None,
             '403': None,
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -9283,7 +9201,7 @@ class FoldersApi:
     ) -> ApiResponse[ObjectWrapper]:
         """Upload a file to the My documents section
 
-        Uploads a file specified in the request to the My documents section by single file uploading or standart multipart/form-data method.   **Note**:  You can upload files in two different ways:   <ol>  <li>Using single file upload. You should set the Content-Type and Content-Disposition headers to specify a file name and content type, and send the file to the request body.</li>  <li>Using standart multipart/form-data method.</li>  </ol>
+        Uploads a file specified in the request to the My documents section by single file uploading or standart multipart/form-data method.
 
         :param in_dto: The request parameters for uploading a file.
         :type in_dto: UploadRequestDto
@@ -9319,11 +9237,10 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectWrapper",
-            '401': None,
             '403': None,
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -9353,7 +9270,7 @@ class FoldersApi:
     ) -> RESTResponseType:
         """Upload a file to the My documents section
 
-        Uploads a file specified in the request to the My documents section by single file uploading or standart multipart/form-data method.   **Note**:  You can upload files in two different ways:   <ol>  <li>Using single file upload. You should set the Content-Type and Content-Disposition headers to specify a file name and content type, and send the file to the request body.</li>  <li>Using standart multipart/form-data method.</li>  </ol>
+        Uploads a file specified in the request to the My documents section by single file uploading or standart multipart/form-data method.
 
         :param in_dto: The request parameters for uploading a file.
         :type in_dto: UploadRequestDto
@@ -9389,11 +9306,10 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectWrapper",
-            '401': None,
             '403': None,
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )

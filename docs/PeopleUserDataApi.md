@@ -57,7 +57,6 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -71,7 +70,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling UserDataApi->get_delete_personal_folder_progress: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -101,7 +99,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **userid** | **str**| The user ID. | 
+ **userid** | **UUID**| The user ID. | 
 
 ### Return type
 
@@ -133,12 +131,11 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.UserDataApi(api_client)
-    userid = 'aae1e103-bca5-9fa1-ba8c-42058b4abf28' # str | The user ID.
+    userid = UUID('00000000-0000-0000-0000-000000000000') # UUID | The user ID.
 
     try:
         # Get the reassignment progress
@@ -148,7 +145,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling UserDataApi->get_reassign_progress: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -178,7 +174,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **userid** | **str**| The user ID. | 
+ **userid** | **UUID**| The user ID. | 
 
 ### Return type
 
@@ -210,12 +206,11 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.UserDataApi(api_client)
-    userid = 'aae1e103-bca5-9fa1-ba8c-42058b4abf28' # str | The user ID.
+    userid = UUID('00000000-0000-0000-0000-000000000000') # UUID | The user ID.
 
     try:
         # Get the deletion progress
@@ -225,7 +220,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling UserDataApi->get_remove_progress: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -255,7 +249,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **user_id** | **str**| The user ID. | [optional] 
+ **user_id** | **UUID**| The user ID. | [optional] 
  **type** | [**EmployeeType**](.md)| The expected user type. | [optional] 
 
 ### Return type
@@ -289,12 +283,11 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.UserDataApi(api_client)
-    user_id = 'aae1e103-bca5-9fa1-ba8c-42058b4abf28' # str | The user ID. (optional)
+    user_id = UUID('00000000-0000-0000-0000-000000000000') # UUID | The user ID. (optional)
     type = docspace_api_sdk.EmployeeType() # EmployeeType | The expected user type. (optional)
 
     try:
@@ -305,7 +298,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling UserDataApi->necessary_reassign: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -364,7 +356,6 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -380,7 +371,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 ```
 
 
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -392,8 +382,8 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Information message |  -  |
-**401** | Unauthorized |  -  |
 **403** | No permissions to perform this action |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -438,7 +428,6 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -452,7 +441,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling UserDataApi->start_delete_personal_folder: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -516,7 +504,6 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -531,7 +518,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling UserDataApi->start_reassign: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -595,7 +581,6 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -612,7 +597,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 ```
 
 
-
 ### HTTP request headers
 
  - **Content-Type**: application/json
@@ -625,9 +609,9 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 |-------------|-------------|------------------|
 **200** | Deletion progress |  -  |
 **400** | User exception |  -  |
-**401** | Unauthorized |  -  |
 **403** | No permissions to perform this action |  -  |
 **404** | User not found |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -676,7 +660,6 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -691,7 +674,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling UserDataApi->terminate_reassign: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -753,7 +735,6 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -766,7 +747,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling UserDataApi->terminate_remove: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers

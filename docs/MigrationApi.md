@@ -54,7 +54,6 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -68,7 +67,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 ```
 
 
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -80,8 +78,8 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Ok |  -  |
-**401** | Unauthorized |  -  |
 **403** | No permissions to perform this action |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -125,7 +123,6 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -139,7 +136,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 ```
 
 
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -151,8 +147,8 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Ok |  -  |
-**401** | Unauthorized |  -  |
 **403** | No permissions to perform this action |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -200,7 +196,6 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -215,7 +210,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 ```
 
 
-
 ### HTTP request headers
 
  - **Content-Type**: application/json
@@ -227,8 +221,8 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Ok |  -  |
-**401** | Unauthorized |  -  |
 **403** | No permissions to perform this action |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -272,7 +266,6 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -286,7 +279,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 ```
 
 
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -298,8 +290,8 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Ok |  -  |
-**401** | Unauthorized |  -  |
 **403** | No permissions to perform this action |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -344,7 +336,6 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -360,7 +351,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 ```
 
 
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -372,8 +362,8 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Ok |  -  |
-**401** | Unauthorized |  -  |
 **403** | No permissions to perform this action |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -418,7 +408,6 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -434,7 +423,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 ```
 
 
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -446,8 +434,8 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Ok |  -  |
-**401** | Unauthorized |  -  |
 **403** | No permissions to perform this action |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -495,7 +483,6 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -510,7 +497,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 ```
 
 
-
 ### HTTP request headers
 
  - **Content-Type**: application/json
@@ -522,8 +508,8 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Ok |  -  |
-**401** | Unauthorized |  -  |
 **403** | No permissions to perform this action |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -570,12 +556,11 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.MigrationApi(api_client)
-    migrator_name = 'some text' # str | The migrator name extracted from the route parameters.
+    migrator_name = 'GoogleWorkspace' # str | The migrator name extracted from the route parameters.
 
     try:
         # Upload and initialize migration
@@ -583,7 +568,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling MigrationApi->upload_and_initialize_migration: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -597,8 +581,8 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Ok |  -  |
-**401** | Unauthorized |  -  |
 **403** | No permissions to perform this action |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,9 +21,10 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
+from uuid import UUID
 from docspace_api_sdk.models.db_tenant import DbTenant
 from typing import Optional, Set
 from typing_extensions import Self
@@ -33,7 +34,7 @@ class FireBaseUser(BaseModel):
     The Firebase user parameters.
     """ # noqa: E501
     id: Optional[StrictInt] = Field(default=None, description="The Firebase user ID.")
-    user_id: Optional[StrictStr] = Field(default=None, description="The user ID.", alias="userId")
+    user_id: Optional[UUID] = Field(default=None, description="The user ID.", alias="userId")
     tenant_id: Optional[StrictInt] = Field(default=None, description="The tenant ID.", alias="tenantId")
     firebase_device_token: Optional[Annotated[str, Field(strict=True, max_length=255)]] = Field(default=None, description="The Firebase device token.", alias="firebaseDeviceToken")
     application: Optional[Annotated[str, Field(strict=True, max_length=20)]] = Field(default=None, description="The Firebase application.")

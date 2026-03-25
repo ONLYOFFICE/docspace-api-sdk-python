@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,9 +21,10 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictStr
+from pydantic import Field
 from typing import Optional
 from typing_extensions import Annotated
+from uuid import UUID
 from docspace_api_sdk.models.api_key_response_array_wrapper import ApiKeyResponseArrayWrapper
 from docspace_api_sdk.models.api_key_response_wrapper import ApiKeyResponseWrapper
 from docspace_api_sdk.models.boolean_wrapper import BooleanWrapper
@@ -47,7 +48,6 @@ class ApiKeysApi:
         if api_client is None:
             api_client = ApiClient.get_default()
         self.api_client = api_client
-
 
 
 
@@ -107,8 +107,7 @@ class ApiKeysApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ApiKeyResponseWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -175,8 +174,7 @@ class ApiKeysApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ApiKeyResponseWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -243,8 +241,7 @@ class ApiKeysApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ApiKeyResponseWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -339,7 +336,7 @@ class ApiKeysApi:
     @validate_call
     def delete_api_key(
         self,
-        key_id: Annotated[StrictStr, Field(description="The API key ID.")],
+        key_id: Annotated[UUID, Field(description="The API key ID.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -358,7 +355,7 @@ class ApiKeysApi:
         Deletes a user API key by its ID.
 
         :param key_id: The API key ID. (required)
-        :type key_id: str
+        :type key_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -392,8 +389,7 @@ class ApiKeysApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -407,7 +403,7 @@ class ApiKeysApi:
     @validate_call
     def delete_api_key_with_http_info(
         self,
-        key_id: Annotated[StrictStr, Field(description="The API key ID.")],
+        key_id: Annotated[UUID, Field(description="The API key ID.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -426,7 +422,7 @@ class ApiKeysApi:
         Deletes a user API key by its ID.
 
         :param key_id: The API key ID. (required)
-        :type key_id: str
+        :type key_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -460,8 +456,7 @@ class ApiKeysApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -475,7 +470,7 @@ class ApiKeysApi:
     @validate_call
     def delete_api_key_without_preload_content(
         self,
-        key_id: Annotated[StrictStr, Field(description="The API key ID.")],
+        key_id: Annotated[UUID, Field(description="The API key ID.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -494,7 +489,7 @@ class ApiKeysApi:
         Deletes a user API key by its ID.
 
         :param key_id: The API key ID. (required)
-        :type key_id: str
+        :type key_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -528,8 +523,7 @@ class ApiKeysApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -660,8 +654,7 @@ class ApiKeysApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "STRINGArrayWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -724,8 +717,7 @@ class ApiKeysApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "STRINGArrayWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -788,8 +780,7 @@ class ApiKeysApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "STRINGArrayWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -917,8 +908,7 @@ class ApiKeysApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ApiKeyResponseWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -981,8 +971,7 @@ class ApiKeysApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ApiKeyResponseWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1045,8 +1034,7 @@ class ApiKeysApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ApiKeyResponseWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1174,8 +1162,7 @@ class ApiKeysApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ApiKeyResponseArrayWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1238,8 +1225,7 @@ class ApiKeysApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ApiKeyResponseArrayWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1302,8 +1288,7 @@ class ApiKeysApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ApiKeyResponseArrayWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1382,7 +1367,7 @@ class ApiKeysApi:
     @validate_call
     def update_api_key(
         self,
-        key_id: Annotated[StrictStr, Field(description="The unique identifier of the API key to update.")],
+        key_id: Annotated[UUID, Field(description="The unique identifier of the API key to update.")],
         update_api_key_request: Annotated[UpdateApiKeyRequest, Field(description="The request parameters for updating an existing API key.")],
         _request_timeout: Union[
             None,
@@ -1402,7 +1387,7 @@ class ApiKeysApi:
         Updates an existing API key changing its name, permissions, and status.
 
         :param key_id: The unique identifier of the API key to update. (required)
-        :type key_id: str
+        :type key_id: UUID
         :param update_api_key_request: The request parameters for updating an existing API key. (required)
         :type update_api_key_request: UpdateApiKeyRequest
         :param _request_timeout: timeout setting for this request. If one
@@ -1439,8 +1424,7 @@ class ApiKeysApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1454,7 +1438,7 @@ class ApiKeysApi:
     @validate_call
     def update_api_key_with_http_info(
         self,
-        key_id: Annotated[StrictStr, Field(description="The unique identifier of the API key to update.")],
+        key_id: Annotated[UUID, Field(description="The unique identifier of the API key to update.")],
         update_api_key_request: Annotated[UpdateApiKeyRequest, Field(description="The request parameters for updating an existing API key.")],
         _request_timeout: Union[
             None,
@@ -1474,7 +1458,7 @@ class ApiKeysApi:
         Updates an existing API key changing its name, permissions, and status.
 
         :param key_id: The unique identifier of the API key to update. (required)
-        :type key_id: str
+        :type key_id: UUID
         :param update_api_key_request: The request parameters for updating an existing API key. (required)
         :type update_api_key_request: UpdateApiKeyRequest
         :param _request_timeout: timeout setting for this request. If one
@@ -1511,8 +1495,7 @@ class ApiKeysApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1526,7 +1509,7 @@ class ApiKeysApi:
     @validate_call
     def update_api_key_without_preload_content(
         self,
-        key_id: Annotated[StrictStr, Field(description="The unique identifier of the API key to update.")],
+        key_id: Annotated[UUID, Field(description="The unique identifier of the API key to update.")],
         update_api_key_request: Annotated[UpdateApiKeyRequest, Field(description="The request parameters for updating an existing API key.")],
         _request_timeout: Union[
             None,
@@ -1546,7 +1529,7 @@ class ApiKeysApi:
         Updates an existing API key changing its name, permissions, and status.
 
         :param key_id: The unique identifier of the API key to update. (required)
-        :type key_id: str
+        :type key_id: UUID
         :param update_api_key_request: The request parameters for updating an existing API key. (required)
         :type update_api_key_request: UpdateApiKeyRequest
         :param _request_timeout: timeout setting for this request. If one
@@ -1583,8 +1566,7 @@ class ApiKeysApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )

@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -25,6 +25,7 @@ from typing_extensions import Annotated
 from pydantic import Field, StrictBool, StrictInt, StrictStr
 from typing import Optional
 from typing_extensions import Annotated
+from uuid import UUID
 from docspace_api_sdk.models.group_array_wrapper import GroupArrayWrapper
 from docspace_api_sdk.models.group_request_dto import GroupRequestDto
 from docspace_api_sdk.models.group_summary_array_wrapper import GroupSummaryArrayWrapper
@@ -52,7 +53,6 @@ class GroupApi:
             api_client = ApiClient.get_default()
         self.api_client = api_client
         self._fields = None
-
 
     def with_fields(self, fields: str) -> GroupApi:
         self._fields = fields
@@ -115,8 +115,7 @@ class GroupApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -183,8 +182,7 @@ class GroupApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -251,8 +249,7 @@ class GroupApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -347,7 +344,7 @@ class GroupApi:
     @validate_call
     def add_members_to(
         self,
-        id: Annotated[StrictStr, Field(description="The group ID.")],
+        id: Annotated[UUID, Field(description="The group ID.")],
         members_request: Annotated[MembersRequest, Field(description="The member request.")],
         _request_timeout: Union[
             None,
@@ -367,7 +364,7 @@ class GroupApi:
         Adds new group members to the group with the ID specified in the request.
 
         :param id: The group ID. (required)
-        :type id: str
+        :type id: UUID
         :param members_request: The member request. (required)
         :type members_request: MembersRequest
         :param _request_timeout: timeout setting for this request. If one
@@ -403,10 +400,9 @@ class GroupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupWrapper",
-            '401': None,
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -420,7 +416,7 @@ class GroupApi:
     @validate_call
     def add_members_to_with_http_info(
         self,
-        id: Annotated[StrictStr, Field(description="The group ID.")],
+        id: Annotated[UUID, Field(description="The group ID.")],
         members_request: Annotated[MembersRequest, Field(description="The member request.")],
         _request_timeout: Union[
             None,
@@ -440,7 +436,7 @@ class GroupApi:
         Adds new group members to the group with the ID specified in the request.
 
         :param id: The group ID. (required)
-        :type id: str
+        :type id: UUID
         :param members_request: The member request. (required)
         :type members_request: MembersRequest
         :param _request_timeout: timeout setting for this request. If one
@@ -476,10 +472,9 @@ class GroupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupWrapper",
-            '401': None,
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -493,7 +488,7 @@ class GroupApi:
     @validate_call
     def add_members_to_without_preload_content(
         self,
-        id: Annotated[StrictStr, Field(description="The group ID.")],
+        id: Annotated[UUID, Field(description="The group ID.")],
         members_request: Annotated[MembersRequest, Field(description="The member request.")],
         _request_timeout: Union[
             None,
@@ -513,7 +508,7 @@ class GroupApi:
         Adds new group members to the group with the ID specified in the request.
 
         :param id: The group ID. (required)
-        :type id: str
+        :type id: UUID
         :param members_request: The member request. (required)
         :type members_request: MembersRequest
         :param _request_timeout: timeout setting for this request. If one
@@ -549,10 +544,9 @@ class GroupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupWrapper",
-            '401': None,
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -650,7 +644,7 @@ class GroupApi:
     @validate_call
     def delete_group(
         self,
-        id: Annotated[StrictStr, Field(description="The group ID.")],
+        id: Annotated[UUID, Field(description="The group ID.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -669,7 +663,7 @@ class GroupApi:
         Deletes a group with the ID specified in the request from the list of groups on the portal.
 
         :param id: The group ID. (required)
-        :type id: str
+        :type id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -702,10 +696,9 @@ class GroupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "NoContentResultWrapper",
-            '401': None,
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -719,7 +712,7 @@ class GroupApi:
     @validate_call
     def delete_group_with_http_info(
         self,
-        id: Annotated[StrictStr, Field(description="The group ID.")],
+        id: Annotated[UUID, Field(description="The group ID.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -738,7 +731,7 @@ class GroupApi:
         Deletes a group with the ID specified in the request from the list of groups on the portal.
 
         :param id: The group ID. (required)
-        :type id: str
+        :type id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -771,10 +764,9 @@ class GroupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "NoContentResultWrapper",
-            '401': None,
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -788,7 +780,7 @@ class GroupApi:
     @validate_call
     def delete_group_without_preload_content(
         self,
-        id: Annotated[StrictStr, Field(description="The group ID.")],
+        id: Annotated[UUID, Field(description="The group ID.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -807,7 +799,7 @@ class GroupApi:
         Deletes a group with the ID specified in the request from the list of groups on the portal.
 
         :param id: The group ID. (required)
-        :type id: str
+        :type id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -840,10 +832,9 @@ class GroupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "NoContentResultWrapper",
-            '401': None,
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -925,7 +916,7 @@ class GroupApi:
     @validate_call
     def get_group(
         self,
-        id: Annotated[StrictStr, Field(description="The group ID.")],
+        id: Annotated[UUID, Field(description="The group ID.")],
         include_members: Annotated[Optional[StrictBool], Field(description="Specifies whether to include the group members or not.")] = None,
         _request_timeout: Union[
             None,
@@ -942,10 +933,10 @@ class GroupApi:
     ) -> GroupWrapper:
         """Get a group
 
-        Returns the detailed information about the selected group.   **Note**: This method returns full group information.
+        Returns the detailed information about the selected group.
 
         :param id: The group ID. (required)
-        :type id: str
+        :type id: UUID
         :param include_members: Specifies whether to include the group members or not.
         :type include_members: bool
         :param _request_timeout: timeout setting for this request. If one
@@ -981,10 +972,9 @@ class GroupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupWrapper",
-            '401': None,
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -998,7 +988,7 @@ class GroupApi:
     @validate_call
     def get_group_with_http_info(
         self,
-        id: Annotated[StrictStr, Field(description="The group ID.")],
+        id: Annotated[UUID, Field(description="The group ID.")],
         include_members: Annotated[Optional[StrictBool], Field(description="Specifies whether to include the group members or not.")] = None,
         _request_timeout: Union[
             None,
@@ -1015,10 +1005,10 @@ class GroupApi:
     ) -> ApiResponse[GroupWrapper]:
         """Get a group
 
-        Returns the detailed information about the selected group.   **Note**: This method returns full group information.
+        Returns the detailed information about the selected group.
 
         :param id: The group ID. (required)
-        :type id: str
+        :type id: UUID
         :param include_members: Specifies whether to include the group members or not.
         :type include_members: bool
         :param _request_timeout: timeout setting for this request. If one
@@ -1054,10 +1044,9 @@ class GroupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupWrapper",
-            '401': None,
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1071,7 +1060,7 @@ class GroupApi:
     @validate_call
     def get_group_without_preload_content(
         self,
-        id: Annotated[StrictStr, Field(description="The group ID.")],
+        id: Annotated[UUID, Field(description="The group ID.")],
         include_members: Annotated[Optional[StrictBool], Field(description="Specifies whether to include the group members or not.")] = None,
         _request_timeout: Union[
             None,
@@ -1088,10 +1077,10 @@ class GroupApi:
     ) -> RESTResponseType:
         """Get a group
 
-        Returns the detailed information about the selected group.   **Note**: This method returns full group information.
+        Returns the detailed information about the selected group.
 
         :param id: The group ID. (required)
-        :type id: str
+        :type id: UUID
         :param include_members: Specifies whether to include the group members or not.
         :type include_members: bool
         :param _request_timeout: timeout setting for this request. If one
@@ -1127,10 +1116,9 @@ class GroupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupWrapper",
-            '401': None,
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1217,7 +1205,7 @@ class GroupApi:
     @validate_call
     def get_group_by_user_id(
         self,
-        userid: Annotated[StrictStr, Field(description="The user ID.")],
+        userid: Annotated[UUID, Field(description="The user ID.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1236,7 +1224,7 @@ class GroupApi:
         Returns a list of groups for the user with the ID specified in the request.
 
         :param userid: The user ID. (required)
-        :type userid: str
+        :type userid: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1270,8 +1258,7 @@ class GroupApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupSummaryArrayWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1285,7 +1272,7 @@ class GroupApi:
     @validate_call
     def get_group_by_user_id_with_http_info(
         self,
-        userid: Annotated[StrictStr, Field(description="The user ID.")],
+        userid: Annotated[UUID, Field(description="The user ID.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1304,7 +1291,7 @@ class GroupApi:
         Returns a list of groups for the user with the ID specified in the request.
 
         :param userid: The user ID. (required)
-        :type userid: str
+        :type userid: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1338,8 +1325,7 @@ class GroupApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupSummaryArrayWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1353,7 +1339,7 @@ class GroupApi:
     @validate_call
     def get_group_by_user_id_without_preload_content(
         self,
-        userid: Annotated[StrictStr, Field(description="The user ID.")],
+        userid: Annotated[UUID, Field(description="The user ID.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1372,7 +1358,7 @@ class GroupApi:
         Returns a list of groups for the user with the ID specified in the request.
 
         :param userid: The user ID. (required)
-        :type userid: str
+        :type userid: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1406,8 +1392,7 @@ class GroupApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupSummaryArrayWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1489,7 +1474,7 @@ class GroupApi:
     @validate_call
     def get_groups(
         self,
-        user_id: Annotated[Optional[StrictStr], Field(description="The user ID.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="The user ID.")] = None,
         manager: Annotated[Optional[StrictBool], Field(description="Specifies if the user is a manager or not.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of records to retrieve.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The starting index for paginated results.")] = None,
@@ -1511,10 +1496,10 @@ class GroupApi:
     ) -> GroupArrayWrapper:
         """Get groups
 
-        Returns the general information about all the groups, such as group ID and group manager.   **Note**: This method returns partial group information.
+        Returns the general information about all the groups, such as group ID and group manager.
 
         :param user_id: The user ID.
-        :type user_id: str
+        :type user_id: UUID
         :param manager: Specifies if the user is a manager or not.
         :type manager: bool
         :param count: The number of records to retrieve.
@@ -1566,8 +1551,7 @@ class GroupApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupArrayWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1581,7 +1565,7 @@ class GroupApi:
     @validate_call
     def get_groups_with_http_info(
         self,
-        user_id: Annotated[Optional[StrictStr], Field(description="The user ID.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="The user ID.")] = None,
         manager: Annotated[Optional[StrictBool], Field(description="Specifies if the user is a manager or not.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of records to retrieve.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The starting index for paginated results.")] = None,
@@ -1603,10 +1587,10 @@ class GroupApi:
     ) -> ApiResponse[GroupArrayWrapper]:
         """Get groups
 
-        Returns the general information about all the groups, such as group ID and group manager.   **Note**: This method returns partial group information.
+        Returns the general information about all the groups, such as group ID and group manager.
 
         :param user_id: The user ID.
-        :type user_id: str
+        :type user_id: UUID
         :param manager: Specifies if the user is a manager or not.
         :type manager: bool
         :param count: The number of records to retrieve.
@@ -1658,8 +1642,7 @@ class GroupApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupArrayWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1673,7 +1656,7 @@ class GroupApi:
     @validate_call
     def get_groups_without_preload_content(
         self,
-        user_id: Annotated[Optional[StrictStr], Field(description="The user ID.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="The user ID.")] = None,
         manager: Annotated[Optional[StrictBool], Field(description="Specifies if the user is a manager or not.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of records to retrieve.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The starting index for paginated results.")] = None,
@@ -1695,10 +1678,10 @@ class GroupApi:
     ) -> RESTResponseType:
         """Get groups
 
-        Returns the general information about all the groups, such as group ID and group manager.   **Note**: This method returns partial group information.
+        Returns the general information about all the groups, such as group ID and group manager.
 
         :param user_id: The user ID.
-        :type user_id: str
+        :type user_id: UUID
         :param manager: Specifies if the user is a manager or not.
         :type manager: bool
         :param count: The number of records to retrieve.
@@ -1750,8 +1733,7 @@ class GroupApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupArrayWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1867,8 +1849,8 @@ class GroupApi:
     @validate_call
     def move_members_to(
         self,
-        from_id: Annotated[StrictStr, Field(description="The group ID to move from.")],
-        to_id: Annotated[StrictStr, Field(description="The group ID to move to.")],
+        from_id: Annotated[UUID, Field(description="The group ID to move from.")],
+        to_id: Annotated[UUID, Field(description="The group ID to move to.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1887,9 +1869,9 @@ class GroupApi:
         Moves all the members from the selected group to another one specified in the request.
 
         :param from_id: The group ID to move from. (required)
-        :type from_id: str
+        :type from_id: UUID
         :param to_id: The group ID to move to. (required)
-        :type to_id: str
+        :type to_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1923,10 +1905,9 @@ class GroupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupWrapper",
-            '401': None,
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1940,8 +1921,8 @@ class GroupApi:
     @validate_call
     def move_members_to_with_http_info(
         self,
-        from_id: Annotated[StrictStr, Field(description="The group ID to move from.")],
-        to_id: Annotated[StrictStr, Field(description="The group ID to move to.")],
+        from_id: Annotated[UUID, Field(description="The group ID to move from.")],
+        to_id: Annotated[UUID, Field(description="The group ID to move to.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1960,9 +1941,9 @@ class GroupApi:
         Moves all the members from the selected group to another one specified in the request.
 
         :param from_id: The group ID to move from. (required)
-        :type from_id: str
+        :type from_id: UUID
         :param to_id: The group ID to move to. (required)
-        :type to_id: str
+        :type to_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1996,10 +1977,9 @@ class GroupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupWrapper",
-            '401': None,
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2013,8 +1993,8 @@ class GroupApi:
     @validate_call
     def move_members_to_without_preload_content(
         self,
-        from_id: Annotated[StrictStr, Field(description="The group ID to move from.")],
-        to_id: Annotated[StrictStr, Field(description="The group ID to move to.")],
+        from_id: Annotated[UUID, Field(description="The group ID to move from.")],
+        to_id: Annotated[UUID, Field(description="The group ID to move to.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2033,9 +2013,9 @@ class GroupApi:
         Moves all the members from the selected group to another one specified in the request.
 
         :param from_id: The group ID to move from. (required)
-        :type from_id: str
+        :type from_id: UUID
         :param to_id: The group ID to move to. (required)
-        :type to_id: str
+        :type to_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2069,10 +2049,9 @@ class GroupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupWrapper",
-            '401': None,
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2157,7 +2136,7 @@ class GroupApi:
     @validate_call
     def remove_members_from(
         self,
-        id: Annotated[StrictStr, Field(description="The group ID.")],
+        id: Annotated[UUID, Field(description="The group ID.")],
         members_request: Annotated[MembersRequest, Field(description="The member request.")],
         _request_timeout: Union[
             None,
@@ -2177,7 +2156,7 @@ class GroupApi:
         Removes the group members specified in the request from the selected group.
 
         :param id: The group ID. (required)
-        :type id: str
+        :type id: UUID
         :param members_request: The member request. (required)
         :type members_request: MembersRequest
         :param _request_timeout: timeout setting for this request. If one
@@ -2213,10 +2192,9 @@ class GroupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupWrapper",
-            '401': None,
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2230,7 +2208,7 @@ class GroupApi:
     @validate_call
     def remove_members_from_with_http_info(
         self,
-        id: Annotated[StrictStr, Field(description="The group ID.")],
+        id: Annotated[UUID, Field(description="The group ID.")],
         members_request: Annotated[MembersRequest, Field(description="The member request.")],
         _request_timeout: Union[
             None,
@@ -2250,7 +2228,7 @@ class GroupApi:
         Removes the group members specified in the request from the selected group.
 
         :param id: The group ID. (required)
-        :type id: str
+        :type id: UUID
         :param members_request: The member request. (required)
         :type members_request: MembersRequest
         :param _request_timeout: timeout setting for this request. If one
@@ -2286,10 +2264,9 @@ class GroupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupWrapper",
-            '401': None,
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2303,7 +2280,7 @@ class GroupApi:
     @validate_call
     def remove_members_from_without_preload_content(
         self,
-        id: Annotated[StrictStr, Field(description="The group ID.")],
+        id: Annotated[UUID, Field(description="The group ID.")],
         members_request: Annotated[MembersRequest, Field(description="The member request.")],
         _request_timeout: Union[
             None,
@@ -2323,7 +2300,7 @@ class GroupApi:
         Removes the group members specified in the request from the selected group.
 
         :param id: The group ID. (required)
-        :type id: str
+        :type id: UUID
         :param members_request: The member request. (required)
         :type members_request: MembersRequest
         :param _request_timeout: timeout setting for this request. If one
@@ -2359,10 +2336,9 @@ class GroupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupWrapper",
-            '401': None,
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2460,7 +2436,7 @@ class GroupApi:
     @validate_call
     def set_group_manager(
         self,
-        id: Annotated[StrictStr, Field(description="The group ID.")],
+        id: Annotated[UUID, Field(description="The group ID.")],
         set_manager_request: Annotated[SetManagerRequest, Field(description="The request for setting a group manager.")],
         _request_timeout: Union[
             None,
@@ -2480,7 +2456,7 @@ class GroupApi:
         Sets a user with the ID specified in the request as a group manager.
 
         :param id: The group ID. (required)
-        :type id: str
+        :type id: UUID
         :param set_manager_request: The request for setting a group manager. (required)
         :type set_manager_request: SetManagerRequest
         :param _request_timeout: timeout setting for this request. If one
@@ -2516,10 +2492,9 @@ class GroupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupWrapper",
-            '401': None,
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2533,7 +2508,7 @@ class GroupApi:
     @validate_call
     def set_group_manager_with_http_info(
         self,
-        id: Annotated[StrictStr, Field(description="The group ID.")],
+        id: Annotated[UUID, Field(description="The group ID.")],
         set_manager_request: Annotated[SetManagerRequest, Field(description="The request for setting a group manager.")],
         _request_timeout: Union[
             None,
@@ -2553,7 +2528,7 @@ class GroupApi:
         Sets a user with the ID specified in the request as a group manager.
 
         :param id: The group ID. (required)
-        :type id: str
+        :type id: UUID
         :param set_manager_request: The request for setting a group manager. (required)
         :type set_manager_request: SetManagerRequest
         :param _request_timeout: timeout setting for this request. If one
@@ -2589,10 +2564,9 @@ class GroupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupWrapper",
-            '401': None,
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2606,7 +2580,7 @@ class GroupApi:
     @validate_call
     def set_group_manager_without_preload_content(
         self,
-        id: Annotated[StrictStr, Field(description="The group ID.")],
+        id: Annotated[UUID, Field(description="The group ID.")],
         set_manager_request: Annotated[SetManagerRequest, Field(description="The request for setting a group manager.")],
         _request_timeout: Union[
             None,
@@ -2626,7 +2600,7 @@ class GroupApi:
         Sets a user with the ID specified in the request as a group manager.
 
         :param id: The group ID. (required)
-        :type id: str
+        :type id: UUID
         :param set_manager_request: The request for setting a group manager. (required)
         :type set_manager_request: SetManagerRequest
         :param _request_timeout: timeout setting for this request. If one
@@ -2662,10 +2636,9 @@ class GroupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupWrapper",
-            '401': None,
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2763,7 +2736,7 @@ class GroupApi:
     @validate_call
     def set_members_to(
         self,
-        id: Annotated[StrictStr, Field(description="The group ID.")],
+        id: Annotated[UUID, Field(description="The group ID.")],
         members_request: Annotated[MembersRequest, Field(description="The member request.")],
         _request_timeout: Union[
             None,
@@ -2783,7 +2756,7 @@ class GroupApi:
         Replaces the group members with those specified in the request.
 
         :param id: The group ID. (required)
-        :type id: str
+        :type id: UUID
         :param members_request: The member request. (required)
         :type members_request: MembersRequest
         :param _request_timeout: timeout setting for this request. If one
@@ -2820,8 +2793,7 @@ class GroupApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2835,7 +2807,7 @@ class GroupApi:
     @validate_call
     def set_members_to_with_http_info(
         self,
-        id: Annotated[StrictStr, Field(description="The group ID.")],
+        id: Annotated[UUID, Field(description="The group ID.")],
         members_request: Annotated[MembersRequest, Field(description="The member request.")],
         _request_timeout: Union[
             None,
@@ -2855,7 +2827,7 @@ class GroupApi:
         Replaces the group members with those specified in the request.
 
         :param id: The group ID. (required)
-        :type id: str
+        :type id: UUID
         :param members_request: The member request. (required)
         :type members_request: MembersRequest
         :param _request_timeout: timeout setting for this request. If one
@@ -2892,8 +2864,7 @@ class GroupApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2907,7 +2878,7 @@ class GroupApi:
     @validate_call
     def set_members_to_without_preload_content(
         self,
-        id: Annotated[StrictStr, Field(description="The group ID.")],
+        id: Annotated[UUID, Field(description="The group ID.")],
         members_request: Annotated[MembersRequest, Field(description="The member request.")],
         _request_timeout: Union[
             None,
@@ -2927,7 +2898,7 @@ class GroupApi:
         Replaces the group members with those specified in the request.
 
         :param id: The group ID. (required)
-        :type id: str
+        :type id: UUID
         :param members_request: The member request. (required)
         :type members_request: MembersRequest
         :param _request_timeout: timeout setting for this request. If one
@@ -2964,8 +2935,7 @@ class GroupApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -3063,7 +3033,7 @@ class GroupApi:
     @validate_call
     def update_group(
         self,
-        id: Annotated[StrictStr, Field(description="The group ID.")],
+        id: Annotated[UUID, Field(description="The group ID.")],
         update_group_request: Annotated[UpdateGroupRequest, Field(description="The request for updating a group.")],
         _request_timeout: Union[
             None,
@@ -3083,7 +3053,7 @@ class GroupApi:
         Updates the existing group changing the group manager, name, and/or members.
 
         :param id: The group ID. (required)
-        :type id: str
+        :type id: UUID
         :param update_group_request: The request for updating a group. (required)
         :type update_group_request: UpdateGroupRequest
         :param _request_timeout: timeout setting for this request. If one
@@ -3119,10 +3089,9 @@ class GroupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupWrapper",
-            '401': None,
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -3136,7 +3105,7 @@ class GroupApi:
     @validate_call
     def update_group_with_http_info(
         self,
-        id: Annotated[StrictStr, Field(description="The group ID.")],
+        id: Annotated[UUID, Field(description="The group ID.")],
         update_group_request: Annotated[UpdateGroupRequest, Field(description="The request for updating a group.")],
         _request_timeout: Union[
             None,
@@ -3156,7 +3125,7 @@ class GroupApi:
         Updates the existing group changing the group manager, name, and/or members.
 
         :param id: The group ID. (required)
-        :type id: str
+        :type id: UUID
         :param update_group_request: The request for updating a group. (required)
         :type update_group_request: UpdateGroupRequest
         :param _request_timeout: timeout setting for this request. If one
@@ -3192,10 +3161,9 @@ class GroupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupWrapper",
-            '401': None,
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -3209,7 +3177,7 @@ class GroupApi:
     @validate_call
     def update_group_without_preload_content(
         self,
-        id: Annotated[StrictStr, Field(description="The group ID.")],
+        id: Annotated[UUID, Field(description="The group ID.")],
         update_group_request: Annotated[UpdateGroupRequest, Field(description="The request for updating a group.")],
         _request_timeout: Union[
             None,
@@ -3229,7 +3197,7 @@ class GroupApi:
         Updates the existing group changing the group manager, name, and/or members.
 
         :param id: The group ID. (required)
-        :type id: str
+        :type id: UUID
         :param update_group_request: The request for updating a group. (required)
         :type update_group_request: UpdateGroupRequest
         :param _request_timeout: timeout setting for this request. If one
@@ -3265,10 +3233,9 @@ class GroupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupWrapper",
-            '401': None,
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )

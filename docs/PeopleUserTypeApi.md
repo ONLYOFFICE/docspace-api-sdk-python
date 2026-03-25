@@ -5,7 +5,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**get_user_type_update_progress**](#get_user_type_update_progress) | **GET** /api/2.0/people/type/progress/{userid} | Get the progress of updating user type
-[**star_user_typet_update**](#star_user_typet_update) | **POST** /api/2.0/people/type | Start updating user type
+[**start_user_type_update**](#start_user_type_update) | **POST** /api/2.0/people/type | Start updating user type
 [**terminate_user_type_update**](#terminate_user_type_update) | **PUT** /api/2.0/people/type/terminate | Terminate updating user type
 [**update_user_type**](#update_user_type) | **PUT** /api/2.0/people/type/{type} | Change a user type
 
@@ -22,7 +22,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **userid** | **str**| The user ID. | 
+ **userid** | **UUID**| The user ID. | 
 
 ### Return type
 
@@ -54,12 +54,11 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.UserTypeApi(api_client)
-    userid = 'aae1e103-bca5-9fa1-ba8c-42058b4abf28' # str | The user ID.
+    userid = UUID('00000000-0000-0000-0000-000000000000') # UUID | The user ID.
 
     try:
         # Get the progress of updating user type
@@ -69,7 +68,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling UserTypeApi->get_user_type_update_progress: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -87,8 +85,8 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **star_user_typet_update**
-> TaskProgressResponseWrapper star_user_typet_update(start_update_user_type_dto=start_update_user_type_dto)
+# **start_user_type_update**
+> TaskProgressResponseWrapper start_user_type_update(start_update_user_type_dto=start_update_user_type_dto)
 
 Starts updating the type of the user or guest when reassigning rooms and shared files.
 
@@ -132,7 +130,6 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -141,13 +138,12 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
     try:
         # Start updating user type
-        api_response = api_instance.star_user_typet_update(start_update_user_type_dto=start_update_user_type_dto)
-        print("The response of UserTypeApi->star_user_typet_update:\n")
+        api_response = api_instance.start_user_type_update(start_update_user_type_dto=start_update_user_type_dto)
+        print("The response of UserTypeApi->start_user_type_update:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling UserTypeApi->star_user_typet_update: %s\n" % e)
+        print("Exception when calling UserTypeApi->start_user_type_update: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -211,7 +207,6 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -226,7 +221,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling UserTypeApi->terminate_user_type_update: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -291,7 +285,6 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -309,7 +302,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 ```
 
 
-
 ### HTTP request headers
 
  - **Content-Type**: application/json
@@ -321,6 +313,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | List of users with the detailed information |  -  |
+**403** | No permissions to perform this action |  -  |
 **401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

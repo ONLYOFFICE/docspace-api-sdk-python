@@ -5,7 +5,7 @@ A shareable link for a file with its configuration and status.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** | The unique identifier of the shared link. | [optional] 
+**id** | **UUID** | The unique identifier of the shared link. | [optional] 
 **title** | **str** | The title of the shared content. | [optional] 
 **share_link** | **str** | The URL for accessing the shared content. | [optional] 
 **expiration_date** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] 
@@ -16,6 +16,8 @@ Name | Type | Description | Notes
 **primary** | **bool** | Indicates whether this is the primary shared link. | [optional] 
 **internal** | **bool** | Indicates whether the link is for the internal sharing only. | [optional] 
 **request_token** | **str** | The token for validating access requests. | [optional] 
+**max_use_count** | **int** | The maximum number of times the invitation link can be used. | [optional] 
+**current_use_count** | **int** | The current number of times the invitation link has been used. | [optional] 
 
 ## Example
 

@@ -48,15 +48,14 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.ThirdPartyAccountsApi(api_client)
-    invite_view = true # bool | Specifies whether to return providers that are available for invitation links, i.e. the user can login or register through these providers. (optional)
-    settings_view = true # bool | Specifies whether to display the provider settings in a pop-up window (true) or redirect them to the desktop application (false). (optional)
-    client_callback = 'some text' # str | The method that is called after authentication. (optional)
-    from_only = 'some text' # str | The provider name if a response is required only from this provider. (optional)
+    invite_view = false # bool | Specifies whether to return providers that are available for invitation links, i.e. the user can login or register through these providers. (optional)
+    settings_view = false # bool | Specifies whether to display the provider settings in a pop-up window (true) or redirect them to the desktop application (false). (optional)
+    client_callback = 'onAuthCallback' # str | The method that is called after authentication. (optional)
+    from_only = 'Google' # str | The provider name if a response is required only from this provider. (optional)
 
     try:
         # Get third-party accounts
@@ -66,7 +65,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling ThirdPartyAccountsApi->get_third_party_auth_providers: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -127,7 +125,6 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -142,7 +139,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 ```
 
 
-
 ### HTTP request headers
 
  - **Content-Type**: application/json
@@ -154,8 +150,8 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Ok |  -  |
-**401** | Unauthorized |  -  |
 **405** | Error not allowed option |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -195,7 +191,6 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -210,7 +205,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling ThirdPartyAccountsApi->signup_third_party_account: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -272,12 +266,11 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.ThirdPartyAccountsApi(api_client)
-    provider = 'some text' # str | The provider name. (optional)
+    provider = 'Google' # str | The provider name. (optional)
 
     try:
         # Unlink a third-pary account
@@ -285,7 +278,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling ThirdPartyAccountsApi->unlink_third_party_account: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers

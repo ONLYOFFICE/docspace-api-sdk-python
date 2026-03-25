@@ -5,7 +5,7 @@ The request parameters for updating a user quota.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**user_ids** | **List[str]** | The list of user IDs. | [optional] 
+**user_ids** | **List[UUID]** | The list of user IDs. | [optional] 
 **quota** | [**UpdateMembersQuotaRequestDtoQuota**](UpdateMembersQuotaRequestDtoQuota.md) |  | [optional] 
 
 ## Example

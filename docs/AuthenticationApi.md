@@ -49,7 +49,6 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -64,7 +63,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling AuthenticationApi->authenticate_me: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -86,7 +84,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **authenticate_me_from_body_with_code**
-> AuthenticationTokenWrapper authenticate_me_from_body_with_code(code, auth_requests_dto=auth_requests_dto)
+> AuthenticationTokenWrapper authenticate_me_from_body_with_code(code, auth_with_code_requests_dto=auth_with_code_requests_dto)
 
 Authenticates the current user by SMS or two-factor authentication code.
 
@@ -98,7 +96,7 @@ For more information, see [api.onlyoffice.com]().
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **code** | **str**|  | 
- **auth_requests_dto** | [**AuthRequestsDto**](AuthRequestsDto.md)|  | [optional] 
+ **auth_with_code_requests_dto** | [**AuthWithCodeRequestsDto**](AuthWithCodeRequestsDto.md)|  | [optional] 
 
 ### Return type
 
@@ -113,7 +111,7 @@ No authorization required
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.auth_requests_dto import AuthRequestsDto
+from docspace_api_sdk.models.auth_with_code_requests_dto import AuthWithCodeRequestsDto
 from docspace_api_sdk.models.authentication_token_wrapper import AuthenticationTokenWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
@@ -122,23 +120,21 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.AuthenticationApi(api_client)
     code = 'code_example' # str | 
-    auth_requests_dto = docspace_api_sdk.AuthRequestsDto() # AuthRequestsDto |  (optional)
+    auth_with_code_requests_dto = docspace_api_sdk.AuthWithCodeRequestsDto() # AuthWithCodeRequestsDto |  (optional)
 
     try:
         # Authenticate a user by code
-        api_response = api_instance.authenticate_me_from_body_with_code(code, auth_requests_dto=auth_requests_dto)
+        api_response = api_instance.authenticate_me_from_body_with_code(code, auth_with_code_requests_dto=auth_with_code_requests_dto)
         print("The response of AuthenticationApi->authenticate_me_from_body_with_code:\n")
         pprint(api_response)
     except Exception as e:
         print("Exception when calling AuthenticationApi->authenticate_me_from_body_with_code: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -195,7 +191,6 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -210,7 +205,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling AuthenticationApi->check_confirm: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -259,7 +253,6 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -273,7 +266,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling AuthenticationApi->get_is_authentificated: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -322,7 +314,6 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -336,7 +327,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling AuthenticationApi->logout: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -398,7 +388,6 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -413,7 +402,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling AuthenticationApi->save_mobile_phone: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -467,7 +455,6 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -482,7 +469,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling AuthenticationApi->send_sms_code: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers

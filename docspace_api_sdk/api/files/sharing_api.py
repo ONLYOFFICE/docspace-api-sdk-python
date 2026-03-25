@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,6 +24,7 @@ from typing_extensions import Annotated
 from pydantic import Field, StrictInt, StrictStr
 from typing import Optional
 from typing_extensions import Annotated
+from uuid import UUID
 from docspace_api_sdk.models.ace_short_wrapper_array_wrapper import AceShortWrapperArrayWrapper
 from docspace_api_sdk.models.base_batch_request_dto import BaseBatchRequestDto
 from docspace_api_sdk.models.boolean_wrapper import BooleanWrapper
@@ -54,7 +55,6 @@ class SharingApi:
         if api_client is None:
             api_client = ApiClient.get_default()
         self.api_client = api_client
-
 
 
 
@@ -118,8 +118,7 @@ class SharingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ExternalShareWrapper",
             '429': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -190,8 +189,7 @@ class SharingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ExternalShareWrapper",
             '429': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -262,8 +260,7 @@ class SharingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ExternalShareWrapper",
             '429': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -408,8 +405,7 @@ class SharingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileEntryBaseArrayWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -476,8 +472,7 @@ class SharingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileEntryBaseArrayWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -544,8 +539,7 @@ class SharingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileEntryBaseArrayWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -700,8 +694,7 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ExternalShareWrapper",
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -775,8 +768,7 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ExternalShareWrapper",
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -850,8 +842,7 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ExternalShareWrapper",
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -998,8 +989,7 @@ class SharingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1074,8 +1064,7 @@ class SharingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1150,8 +1139,7 @@ class SharingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1304,8 +1292,7 @@ class SharingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1380,8 +1367,7 @@ class SharingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1456,8 +1442,7 @@ class SharingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1550,7 +1535,7 @@ class SharingApi:
     def get_groups_members_with_file_security(
         self,
         file_id: Annotated[StrictInt, Field(description="The file ID.")],
-        group_id: Annotated[StrictStr, Field(description="The group ID.")],
+        group_id: Annotated[UUID, Field(description="The group ID.")],
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of items to be retrieved in the current query.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The starting index for the query result set.")] = None,
         filter_value: Annotated[Optional[StrictStr], Field(description="The filter value used for searching or querying group members based on text input.")] = None,
@@ -1574,7 +1559,7 @@ class SharingApi:
         :param file_id: The file ID. (required)
         :type file_id: int
         :param group_id: The group ID. (required)
-        :type group_id: str
+        :type group_id: UUID
         :param count: The number of items to be retrieved in the current query.
         :type count: int
         :param start_index: The starting index for the query result set.
@@ -1618,8 +1603,7 @@ class SharingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupMemberSecurityRequestArrayWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1634,7 +1618,7 @@ class SharingApi:
     def get_groups_members_with_file_security_with_http_info(
         self,
         file_id: Annotated[StrictInt, Field(description="The file ID.")],
-        group_id: Annotated[StrictStr, Field(description="The group ID.")],
+        group_id: Annotated[UUID, Field(description="The group ID.")],
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of items to be retrieved in the current query.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The starting index for the query result set.")] = None,
         filter_value: Annotated[Optional[StrictStr], Field(description="The filter value used for searching or querying group members based on text input.")] = None,
@@ -1658,7 +1642,7 @@ class SharingApi:
         :param file_id: The file ID. (required)
         :type file_id: int
         :param group_id: The group ID. (required)
-        :type group_id: str
+        :type group_id: UUID
         :param count: The number of items to be retrieved in the current query.
         :type count: int
         :param start_index: The starting index for the query result set.
@@ -1702,8 +1686,7 @@ class SharingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupMemberSecurityRequestArrayWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1718,7 +1701,7 @@ class SharingApi:
     def get_groups_members_with_file_security_without_preload_content(
         self,
         file_id: Annotated[StrictInt, Field(description="The file ID.")],
-        group_id: Annotated[StrictStr, Field(description="The group ID.")],
+        group_id: Annotated[UUID, Field(description="The group ID.")],
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of items to be retrieved in the current query.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The starting index for the query result set.")] = None,
         filter_value: Annotated[Optional[StrictStr], Field(description="The filter value used for searching or querying group members based on text input.")] = None,
@@ -1742,7 +1725,7 @@ class SharingApi:
         :param file_id: The file ID. (required)
         :type file_id: int
         :param group_id: The group ID. (required)
-        :type group_id: str
+        :type group_id: UUID
         :param count: The number of items to be retrieved in the current query.
         :type count: int
         :param start_index: The starting index for the query result set.
@@ -1786,8 +1769,7 @@ class SharingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupMemberSecurityRequestArrayWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1888,7 +1870,7 @@ class SharingApi:
     def get_groups_members_with_folder_security(
         self,
         folder_id: Annotated[StrictInt, Field(description="The folder ID.")],
-        group_id: Annotated[StrictStr, Field(description="The group ID.")],
+        group_id: Annotated[UUID, Field(description="The group ID.")],
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of items to be retrieved in the current query.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The starting index for the query result set.")] = None,
         filter_value: Annotated[Optional[StrictStr], Field(description="The filter value used for searching or querying group members based on text input.")] = None,
@@ -1912,7 +1894,7 @@ class SharingApi:
         :param folder_id: The folder ID. (required)
         :type folder_id: int
         :param group_id: The group ID. (required)
-        :type group_id: str
+        :type group_id: UUID
         :param count: The number of items to be retrieved in the current query.
         :type count: int
         :param start_index: The starting index for the query result set.
@@ -1956,8 +1938,7 @@ class SharingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupMemberSecurityRequestArrayWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1972,7 +1953,7 @@ class SharingApi:
     def get_groups_members_with_folder_security_with_http_info(
         self,
         folder_id: Annotated[StrictInt, Field(description="The folder ID.")],
-        group_id: Annotated[StrictStr, Field(description="The group ID.")],
+        group_id: Annotated[UUID, Field(description="The group ID.")],
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of items to be retrieved in the current query.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The starting index for the query result set.")] = None,
         filter_value: Annotated[Optional[StrictStr], Field(description="The filter value used for searching or querying group members based on text input.")] = None,
@@ -1996,7 +1977,7 @@ class SharingApi:
         :param folder_id: The folder ID. (required)
         :type folder_id: int
         :param group_id: The group ID. (required)
-        :type group_id: str
+        :type group_id: UUID
         :param count: The number of items to be retrieved in the current query.
         :type count: int
         :param start_index: The starting index for the query result set.
@@ -2040,8 +2021,7 @@ class SharingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupMemberSecurityRequestArrayWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2056,7 +2036,7 @@ class SharingApi:
     def get_groups_members_with_folder_security_without_preload_content(
         self,
         folder_id: Annotated[StrictInt, Field(description="The folder ID.")],
-        group_id: Annotated[StrictStr, Field(description="The group ID.")],
+        group_id: Annotated[UUID, Field(description="The group ID.")],
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of items to be retrieved in the current query.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The starting index for the query result set.")] = None,
         filter_value: Annotated[Optional[StrictStr], Field(description="The filter value used for searching or querying group members based on text input.")] = None,
@@ -2080,7 +2060,7 @@ class SharingApi:
         :param folder_id: The folder ID. (required)
         :type folder_id: int
         :param group_id: The group ID. (required)
-        :type group_id: str
+        :type group_id: UUID
         :param count: The number of items to be retrieved in the current query.
         :type count: int
         :param start_index: The starting index for the query result set.
@@ -2124,8 +2104,7 @@ class SharingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupMemberSecurityRequestArrayWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2278,8 +2257,7 @@ class SharingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2346,8 +2324,7 @@ class SharingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2414,8 +2391,7 @@ class SharingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2563,8 +2539,7 @@ class SharingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "MentionWrapperArrayWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2631,8 +2606,7 @@ class SharingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "MentionWrapperArrayWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2699,8 +2673,7 @@ class SharingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "MentionWrapperArrayWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2835,8 +2808,7 @@ class SharingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2903,8 +2875,7 @@ class SharingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2971,8 +2942,7 @@ class SharingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -3123,9 +3093,11 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AceShortWrapperArrayWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -3195,9 +3167,11 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AceShortWrapperArrayWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -3267,9 +3241,11 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AceShortWrapperArrayWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -3424,8 +3400,7 @@ class SharingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -3496,8 +3471,7 @@ class SharingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -3568,8 +3542,7 @@ class SharingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -3724,8 +3697,7 @@ class SharingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -3796,8 +3768,7 @@ class SharingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -3868,8 +3839,7 @@ class SharingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -4020,8 +3990,7 @@ class SharingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -4088,8 +4057,7 @@ class SharingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -4156,8 +4124,7 @@ class SharingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )

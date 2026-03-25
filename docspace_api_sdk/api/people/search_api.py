@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -25,6 +25,7 @@ from typing_extensions import Annotated
 from pydantic import Field, StrictBool, StrictInt, StrictStr, field_validator
 from typing import List, Optional
 from typing_extensions import Annotated
+from uuid import UUID
 from docspace_api_sdk.models.account_login_type import AccountLoginType
 from docspace_api_sdk.models.area import Area
 from docspace_api_sdk.models.employee_activation_status import EmployeeActivationStatus
@@ -55,7 +56,6 @@ class SearchApi:
         self.api_client = api_client
         self._fields = None
 
-
     def with_fields(self, fields: str) -> SearchApi:
         self._fields = fields
         return self
@@ -70,7 +70,7 @@ class SearchApi:
         exclude_shared: Annotated[Optional[StrictBool], Field(description="Specifies whether to exclude the account sharing settings from the response.")] = None,
         include_shared: Annotated[Optional[StrictBool], Field(description="Specifies whether to include the account sharing settings in the response.")] = None,
         invited_by_me: Annotated[Optional[StrictBool], Field(description="Specifies whether the user is invited by the current user or not.")] = None,
-        inviter_id: Annotated[Optional[StrictStr], Field(description="The inviter ID.")] = None,
+        inviter_id: Annotated[Optional[UUID], Field(description="The inviter ID.")] = None,
         area: Annotated[Optional[Area], Field(description="The area of the account entries.")] = None,
         employee_types: Annotated[Optional[List[List[EmployeeType]]], Field(description="The list of the user types.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of items to retrieve in a request.")] = None,
@@ -107,7 +107,7 @@ class SearchApi:
         :param invited_by_me: Specifies whether the user is invited by the current user or not.
         :type invited_by_me: bool
         :param inviter_id: The inviter ID.
-        :type inviter_id: str
+        :type inviter_id: UUID
         :param area: The area of the account entries.
         :type area: Area
         :param employee_types: The list of the user types.
@@ -164,10 +164,9 @@ class SearchApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectArrayWrapper",
-            '401': None,
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -187,7 +186,7 @@ class SearchApi:
         exclude_shared: Annotated[Optional[StrictBool], Field(description="Specifies whether to exclude the account sharing settings from the response.")] = None,
         include_shared: Annotated[Optional[StrictBool], Field(description="Specifies whether to include the account sharing settings in the response.")] = None,
         invited_by_me: Annotated[Optional[StrictBool], Field(description="Specifies whether the user is invited by the current user or not.")] = None,
-        inviter_id: Annotated[Optional[StrictStr], Field(description="The inviter ID.")] = None,
+        inviter_id: Annotated[Optional[UUID], Field(description="The inviter ID.")] = None,
         area: Annotated[Optional[Area], Field(description="The area of the account entries.")] = None,
         employee_types: Annotated[Optional[List[List[EmployeeType]]], Field(description="The list of the user types.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of items to retrieve in a request.")] = None,
@@ -224,7 +223,7 @@ class SearchApi:
         :param invited_by_me: Specifies whether the user is invited by the current user or not.
         :type invited_by_me: bool
         :param inviter_id: The inviter ID.
-        :type inviter_id: str
+        :type inviter_id: UUID
         :param area: The area of the account entries.
         :type area: Area
         :param employee_types: The list of the user types.
@@ -281,10 +280,9 @@ class SearchApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectArrayWrapper",
-            '401': None,
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -304,7 +302,7 @@ class SearchApi:
         exclude_shared: Annotated[Optional[StrictBool], Field(description="Specifies whether to exclude the account sharing settings from the response.")] = None,
         include_shared: Annotated[Optional[StrictBool], Field(description="Specifies whether to include the account sharing settings in the response.")] = None,
         invited_by_me: Annotated[Optional[StrictBool], Field(description="Specifies whether the user is invited by the current user or not.")] = None,
-        inviter_id: Annotated[Optional[StrictStr], Field(description="The inviter ID.")] = None,
+        inviter_id: Annotated[Optional[UUID], Field(description="The inviter ID.")] = None,
         area: Annotated[Optional[Area], Field(description="The area of the account entries.")] = None,
         employee_types: Annotated[Optional[List[List[EmployeeType]]], Field(description="The list of the user types.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of items to retrieve in a request.")] = None,
@@ -341,7 +339,7 @@ class SearchApi:
         :param invited_by_me: Specifies whether the user is invited by the current user or not.
         :type invited_by_me: bool
         :param inviter_id: The inviter ID.
-        :type inviter_id: str
+        :type inviter_id: UUID
         :param area: The area of the account entries.
         :type area: Area
         :param employee_types: The list of the user types.
@@ -398,10 +396,9 @@ class SearchApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectArrayWrapper",
-            '401': None,
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -550,7 +547,7 @@ class SearchApi:
         exclude_shared: Annotated[Optional[StrictBool], Field(description="Specifies whether to exclude the account sharing settings from the response.")] = None,
         include_shared: Annotated[Optional[StrictBool], Field(description="Specifies whether to include the account sharing settings in the response.")] = None,
         invited_by_me: Annotated[Optional[StrictBool], Field(description="Specifies whether the user is invited by the current user or not.")] = None,
-        inviter_id: Annotated[Optional[StrictStr], Field(description="The inviter ID.")] = None,
+        inviter_id: Annotated[Optional[UUID], Field(description="The inviter ID.")] = None,
         area: Annotated[Optional[Area], Field(description="The area of the account entries.")] = None,
         employee_types: Annotated[Optional[List[List[EmployeeType]]], Field(description="The list of the user types.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of items to retrieve in a request.")] = None,
@@ -587,7 +584,7 @@ class SearchApi:
         :param invited_by_me: Specifies whether the user is invited by the current user or not.
         :type invited_by_me: bool
         :param inviter_id: The inviter ID.
-        :type inviter_id: str
+        :type inviter_id: UUID
         :param area: The area of the account entries.
         :type area: Area
         :param employee_types: The list of the user types.
@@ -644,10 +641,9 @@ class SearchApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectArrayWrapper",
-            '401': None,
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -667,7 +663,7 @@ class SearchApi:
         exclude_shared: Annotated[Optional[StrictBool], Field(description="Specifies whether to exclude the account sharing settings from the response.")] = None,
         include_shared: Annotated[Optional[StrictBool], Field(description="Specifies whether to include the account sharing settings in the response.")] = None,
         invited_by_me: Annotated[Optional[StrictBool], Field(description="Specifies whether the user is invited by the current user or not.")] = None,
-        inviter_id: Annotated[Optional[StrictStr], Field(description="The inviter ID.")] = None,
+        inviter_id: Annotated[Optional[UUID], Field(description="The inviter ID.")] = None,
         area: Annotated[Optional[Area], Field(description="The area of the account entries.")] = None,
         employee_types: Annotated[Optional[List[List[EmployeeType]]], Field(description="The list of the user types.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of items to retrieve in a request.")] = None,
@@ -704,7 +700,7 @@ class SearchApi:
         :param invited_by_me: Specifies whether the user is invited by the current user or not.
         :type invited_by_me: bool
         :param inviter_id: The inviter ID.
-        :type inviter_id: str
+        :type inviter_id: UUID
         :param area: The area of the account entries.
         :type area: Area
         :param employee_types: The list of the user types.
@@ -761,10 +757,9 @@ class SearchApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectArrayWrapper",
-            '401': None,
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -784,7 +779,7 @@ class SearchApi:
         exclude_shared: Annotated[Optional[StrictBool], Field(description="Specifies whether to exclude the account sharing settings from the response.")] = None,
         include_shared: Annotated[Optional[StrictBool], Field(description="Specifies whether to include the account sharing settings in the response.")] = None,
         invited_by_me: Annotated[Optional[StrictBool], Field(description="Specifies whether the user is invited by the current user or not.")] = None,
-        inviter_id: Annotated[Optional[StrictStr], Field(description="The inviter ID.")] = None,
+        inviter_id: Annotated[Optional[UUID], Field(description="The inviter ID.")] = None,
         area: Annotated[Optional[Area], Field(description="The area of the account entries.")] = None,
         employee_types: Annotated[Optional[List[List[EmployeeType]]], Field(description="The list of the user types.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of items to retrieve in a request.")] = None,
@@ -821,7 +816,7 @@ class SearchApi:
         :param invited_by_me: Specifies whether the user is invited by the current user or not.
         :type invited_by_me: bool
         :param inviter_id: The inviter ID.
-        :type inviter_id: str
+        :type inviter_id: UUID
         :param area: The area of the account entries.
         :type area: Area
         :param employee_types: The list of the user types.
@@ -878,10 +873,9 @@ class SearchApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectArrayWrapper",
-            '401': None,
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1030,7 +1024,7 @@ class SearchApi:
         exclude_shared: Annotated[Optional[StrictBool], Field(description="Specifies whether to exclude the account sharing settings from the response.")] = None,
         include_shared: Annotated[Optional[StrictBool], Field(description="Specifies whether to include the account sharing settings in the response.")] = None,
         invited_by_me: Annotated[Optional[StrictBool], Field(description="Specifies whether the user is invited by the current user or not.")] = None,
-        inviter_id: Annotated[Optional[StrictStr], Field(description="The inviter ID.")] = None,
+        inviter_id: Annotated[Optional[UUID], Field(description="The inviter ID.")] = None,
         area: Annotated[Optional[Area], Field(description="The area of the account entries.")] = None,
         employee_types: Annotated[Optional[List[List[EmployeeType]]], Field(description="The list of the user types.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of items to retrieve in a request.")] = None,
@@ -1067,7 +1061,7 @@ class SearchApi:
         :param invited_by_me: Specifies whether the user is invited by the current user or not.
         :type invited_by_me: bool
         :param inviter_id: The inviter ID.
-        :type inviter_id: str
+        :type inviter_id: UUID
         :param area: The area of the account entries.
         :type area: Area
         :param employee_types: The list of the user types.
@@ -1124,10 +1118,9 @@ class SearchApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectArrayWrapper",
-            '401': None,
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1147,7 +1140,7 @@ class SearchApi:
         exclude_shared: Annotated[Optional[StrictBool], Field(description="Specifies whether to exclude the account sharing settings from the response.")] = None,
         include_shared: Annotated[Optional[StrictBool], Field(description="Specifies whether to include the account sharing settings in the response.")] = None,
         invited_by_me: Annotated[Optional[StrictBool], Field(description="Specifies whether the user is invited by the current user or not.")] = None,
-        inviter_id: Annotated[Optional[StrictStr], Field(description="The inviter ID.")] = None,
+        inviter_id: Annotated[Optional[UUID], Field(description="The inviter ID.")] = None,
         area: Annotated[Optional[Area], Field(description="The area of the account entries.")] = None,
         employee_types: Annotated[Optional[List[List[EmployeeType]]], Field(description="The list of the user types.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of items to retrieve in a request.")] = None,
@@ -1184,7 +1177,7 @@ class SearchApi:
         :param invited_by_me: Specifies whether the user is invited by the current user or not.
         :type invited_by_me: bool
         :param inviter_id: The inviter ID.
-        :type inviter_id: str
+        :type inviter_id: UUID
         :param area: The area of the account entries.
         :type area: Area
         :param employee_types: The list of the user types.
@@ -1241,10 +1234,9 @@ class SearchApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectArrayWrapper",
-            '401': None,
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1264,7 +1256,7 @@ class SearchApi:
         exclude_shared: Annotated[Optional[StrictBool], Field(description="Specifies whether to exclude the account sharing settings from the response.")] = None,
         include_shared: Annotated[Optional[StrictBool], Field(description="Specifies whether to include the account sharing settings in the response.")] = None,
         invited_by_me: Annotated[Optional[StrictBool], Field(description="Specifies whether the user is invited by the current user or not.")] = None,
-        inviter_id: Annotated[Optional[StrictStr], Field(description="The inviter ID.")] = None,
+        inviter_id: Annotated[Optional[UUID], Field(description="The inviter ID.")] = None,
         area: Annotated[Optional[Area], Field(description="The area of the account entries.")] = None,
         employee_types: Annotated[Optional[List[List[EmployeeType]]], Field(description="The list of the user types.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of items to retrieve in a request.")] = None,
@@ -1301,7 +1293,7 @@ class SearchApi:
         :param invited_by_me: Specifies whether the user is invited by the current user or not.
         :type invited_by_me: bool
         :param inviter_id: The inviter ID.
-        :type inviter_id: str
+        :type inviter_id: UUID
         :param area: The area of the account entries.
         :type area: Area
         :param employee_types: The list of the user types.
@@ -1358,10 +1350,9 @@ class SearchApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectArrayWrapper",
-            '401': None,
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1564,10 +1555,9 @@ class SearchApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeFullArrayWrapper",
-            '401': None,
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1641,10 +1631,9 @@ class SearchApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeFullArrayWrapper",
-            '401': None,
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1718,10 +1707,9 @@ class SearchApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeFullArrayWrapper",
-            '401': None,
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1814,7 +1802,7 @@ class SearchApi:
     def get_simple_by_filter(
         self,
         employee_status: Annotated[Optional[EmployeeStatus], Field(description="The user status.")] = None,
-        group_id: Annotated[Optional[StrictStr], Field(description="The group ID.")] = None,
+        group_id: Annotated[Optional[UUID], Field(description="The group ID.")] = None,
         activation_status: Annotated[Optional[EmployeeActivationStatus], Field(description="The user activation status.")] = None,
         employee_type: Annotated[Optional[EmployeeType], Field(description="The user type.")] = None,
         employee_types: Annotated[Optional[List[List[StrictInt]]], Field(description="The list of user types.")] = None,
@@ -1825,7 +1813,7 @@ class SearchApi:
         without_group: Annotated[Optional[StrictBool], Field(description="Specifies whether the user should be a member of a group or not.")] = None,
         exclude_group: Annotated[Optional[StrictBool], Field(description="Specifies whether the user should be a member of the group with the specified ID.")] = None,
         invited_by_me: Annotated[Optional[StrictBool], Field(description="Specifies whether the user is invited by the current user or not.")] = None,
-        inviter_id: Annotated[Optional[StrictStr], Field(description="The inviter ID.")] = None,
+        inviter_id: Annotated[Optional[UUID], Field(description="The inviter ID.")] = None,
         area: Annotated[Optional[Area], Field(description="The filter area.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of items to be retrieved in the response.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The zero-based index of the first item to be retrieved in a filtered result set.")] = None,
@@ -1853,7 +1841,7 @@ class SearchApi:
         :param employee_status: The user status.
         :type employee_status: EmployeeStatus
         :param group_id: The group ID.
-        :type group_id: str
+        :type group_id: UUID
         :param activation_status: The user activation status.
         :type activation_status: EmployeeActivationStatus
         :param employee_type: The user type.
@@ -1875,7 +1863,7 @@ class SearchApi:
         :param invited_by_me: Specifies whether the user is invited by the current user or not.
         :type invited_by_me: bool
         :param inviter_id: The inviter ID.
-        :type inviter_id: str
+        :type inviter_id: UUID
         :param area: The filter area.
         :type area: Area
         :param count: The maximum number of items to be retrieved in the response.
@@ -1941,10 +1929,9 @@ class SearchApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeArrayWrapper",
-            '401': None,
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1959,7 +1946,7 @@ class SearchApi:
     def get_simple_by_filter_with_http_info(
         self,
         employee_status: Annotated[Optional[EmployeeStatus], Field(description="The user status.")] = None,
-        group_id: Annotated[Optional[StrictStr], Field(description="The group ID.")] = None,
+        group_id: Annotated[Optional[UUID], Field(description="The group ID.")] = None,
         activation_status: Annotated[Optional[EmployeeActivationStatus], Field(description="The user activation status.")] = None,
         employee_type: Annotated[Optional[EmployeeType], Field(description="The user type.")] = None,
         employee_types: Annotated[Optional[List[List[StrictInt]]], Field(description="The list of user types.")] = None,
@@ -1970,7 +1957,7 @@ class SearchApi:
         without_group: Annotated[Optional[StrictBool], Field(description="Specifies whether the user should be a member of a group or not.")] = None,
         exclude_group: Annotated[Optional[StrictBool], Field(description="Specifies whether the user should be a member of the group with the specified ID.")] = None,
         invited_by_me: Annotated[Optional[StrictBool], Field(description="Specifies whether the user is invited by the current user or not.")] = None,
-        inviter_id: Annotated[Optional[StrictStr], Field(description="The inviter ID.")] = None,
+        inviter_id: Annotated[Optional[UUID], Field(description="The inviter ID.")] = None,
         area: Annotated[Optional[Area], Field(description="The filter area.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of items to be retrieved in the response.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The zero-based index of the first item to be retrieved in a filtered result set.")] = None,
@@ -1998,7 +1985,7 @@ class SearchApi:
         :param employee_status: The user status.
         :type employee_status: EmployeeStatus
         :param group_id: The group ID.
-        :type group_id: str
+        :type group_id: UUID
         :param activation_status: The user activation status.
         :type activation_status: EmployeeActivationStatus
         :param employee_type: The user type.
@@ -2020,7 +2007,7 @@ class SearchApi:
         :param invited_by_me: Specifies whether the user is invited by the current user or not.
         :type invited_by_me: bool
         :param inviter_id: The inviter ID.
-        :type inviter_id: str
+        :type inviter_id: UUID
         :param area: The filter area.
         :type area: Area
         :param count: The maximum number of items to be retrieved in the response.
@@ -2086,10 +2073,9 @@ class SearchApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeArrayWrapper",
-            '401': None,
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2104,7 +2090,7 @@ class SearchApi:
     def get_simple_by_filter_without_preload_content(
         self,
         employee_status: Annotated[Optional[EmployeeStatus], Field(description="The user status.")] = None,
-        group_id: Annotated[Optional[StrictStr], Field(description="The group ID.")] = None,
+        group_id: Annotated[Optional[UUID], Field(description="The group ID.")] = None,
         activation_status: Annotated[Optional[EmployeeActivationStatus], Field(description="The user activation status.")] = None,
         employee_type: Annotated[Optional[EmployeeType], Field(description="The user type.")] = None,
         employee_types: Annotated[Optional[List[List[StrictInt]]], Field(description="The list of user types.")] = None,
@@ -2115,7 +2101,7 @@ class SearchApi:
         without_group: Annotated[Optional[StrictBool], Field(description="Specifies whether the user should be a member of a group or not.")] = None,
         exclude_group: Annotated[Optional[StrictBool], Field(description="Specifies whether the user should be a member of the group with the specified ID.")] = None,
         invited_by_me: Annotated[Optional[StrictBool], Field(description="Specifies whether the user is invited by the current user or not.")] = None,
-        inviter_id: Annotated[Optional[StrictStr], Field(description="The inviter ID.")] = None,
+        inviter_id: Annotated[Optional[UUID], Field(description="The inviter ID.")] = None,
         area: Annotated[Optional[Area], Field(description="The filter area.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of items to be retrieved in the response.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The zero-based index of the first item to be retrieved in a filtered result set.")] = None,
@@ -2143,7 +2129,7 @@ class SearchApi:
         :param employee_status: The user status.
         :type employee_status: EmployeeStatus
         :param group_id: The group ID.
-        :type group_id: str
+        :type group_id: UUID
         :param activation_status: The user activation status.
         :type activation_status: EmployeeActivationStatus
         :param employee_type: The user type.
@@ -2165,7 +2151,7 @@ class SearchApi:
         :param invited_by_me: Specifies whether the user is invited by the current user or not.
         :type invited_by_me: bool
         :param inviter_id: The inviter ID.
-        :type inviter_id: str
+        :type inviter_id: UUID
         :param area: The filter area.
         :type area: Area
         :param count: The maximum number of items to be retrieved in the response.
@@ -2231,10 +2217,9 @@ class SearchApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeArrayWrapper",
-            '401': None,
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2422,7 +2407,7 @@ class SearchApi:
         exclude_shared: Annotated[Optional[StrictBool], Field(description="Specifies whether to exclude the user sharing settings or not.")] = None,
         include_shared: Annotated[Optional[StrictBool], Field(description="Specifies whether to include the user sharing settings or not.")] = None,
         invited_by_me: Annotated[Optional[StrictBool], Field(description="Specifies whether the user was invited by the current user or not.")] = None,
-        inviter_id: Annotated[Optional[StrictStr], Field(description="The inviter ID.")] = None,
+        inviter_id: Annotated[Optional[UUID], Field(description="The inviter ID.")] = None,
         area: Annotated[Optional[Area], Field(description="The user area.")] = None,
         employee_types: Annotated[Optional[List[List[EmployeeType]]], Field(description="The list of user types.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of users to be retrieved in the request.")] = None,
@@ -2459,7 +2444,7 @@ class SearchApi:
         :param invited_by_me: Specifies whether the user was invited by the current user or not.
         :type invited_by_me: bool
         :param inviter_id: The inviter ID.
-        :type inviter_id: str
+        :type inviter_id: UUID
         :param area: The user area.
         :type area: Area
         :param employee_types: The list of user types.
@@ -2516,10 +2501,9 @@ class SearchApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeFullArrayWrapper",
-            '401': None,
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2539,7 +2523,7 @@ class SearchApi:
         exclude_shared: Annotated[Optional[StrictBool], Field(description="Specifies whether to exclude the user sharing settings or not.")] = None,
         include_shared: Annotated[Optional[StrictBool], Field(description="Specifies whether to include the user sharing settings or not.")] = None,
         invited_by_me: Annotated[Optional[StrictBool], Field(description="Specifies whether the user was invited by the current user or not.")] = None,
-        inviter_id: Annotated[Optional[StrictStr], Field(description="The inviter ID.")] = None,
+        inviter_id: Annotated[Optional[UUID], Field(description="The inviter ID.")] = None,
         area: Annotated[Optional[Area], Field(description="The user area.")] = None,
         employee_types: Annotated[Optional[List[List[EmployeeType]]], Field(description="The list of user types.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of users to be retrieved in the request.")] = None,
@@ -2576,7 +2560,7 @@ class SearchApi:
         :param invited_by_me: Specifies whether the user was invited by the current user or not.
         :type invited_by_me: bool
         :param inviter_id: The inviter ID.
-        :type inviter_id: str
+        :type inviter_id: UUID
         :param area: The user area.
         :type area: Area
         :param employee_types: The list of user types.
@@ -2633,10 +2617,9 @@ class SearchApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeFullArrayWrapper",
-            '401': None,
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2656,7 +2639,7 @@ class SearchApi:
         exclude_shared: Annotated[Optional[StrictBool], Field(description="Specifies whether to exclude the user sharing settings or not.")] = None,
         include_shared: Annotated[Optional[StrictBool], Field(description="Specifies whether to include the user sharing settings or not.")] = None,
         invited_by_me: Annotated[Optional[StrictBool], Field(description="Specifies whether the user was invited by the current user or not.")] = None,
-        inviter_id: Annotated[Optional[StrictStr], Field(description="The inviter ID.")] = None,
+        inviter_id: Annotated[Optional[UUID], Field(description="The inviter ID.")] = None,
         area: Annotated[Optional[Area], Field(description="The user area.")] = None,
         employee_types: Annotated[Optional[List[List[EmployeeType]]], Field(description="The list of user types.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of users to be retrieved in the request.")] = None,
@@ -2693,7 +2676,7 @@ class SearchApi:
         :param invited_by_me: Specifies whether the user was invited by the current user or not.
         :type invited_by_me: bool
         :param inviter_id: The inviter ID.
-        :type inviter_id: str
+        :type inviter_id: UUID
         :param area: The user area.
         :type area: Area
         :param employee_types: The list of user types.
@@ -2750,10 +2733,9 @@ class SearchApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeFullArrayWrapper",
-            '401': None,
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2902,7 +2884,7 @@ class SearchApi:
         exclude_shared: Annotated[Optional[StrictBool], Field(description="Specifies whether to exclude the user sharing settings or not.")] = None,
         include_shared: Annotated[Optional[StrictBool], Field(description="Specifies whether to include the user sharing settings or not.")] = None,
         invited_by_me: Annotated[Optional[StrictBool], Field(description="Specifies whether the user was invited by the current user or not.")] = None,
-        inviter_id: Annotated[Optional[StrictStr], Field(description="The inviter ID.")] = None,
+        inviter_id: Annotated[Optional[UUID], Field(description="The inviter ID.")] = None,
         area: Annotated[Optional[Area], Field(description="The user area.")] = None,
         employee_types: Annotated[Optional[List[List[EmployeeType]]], Field(description="The list of user types.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of users to be retrieved in the request.")] = None,
@@ -2939,7 +2921,7 @@ class SearchApi:
         :param invited_by_me: Specifies whether the user was invited by the current user or not.
         :type invited_by_me: bool
         :param inviter_id: The inviter ID.
-        :type inviter_id: str
+        :type inviter_id: UUID
         :param area: The user area.
         :type area: Area
         :param employee_types: The list of user types.
@@ -2996,10 +2978,9 @@ class SearchApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeFullArrayWrapper",
-            '401': None,
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -3019,7 +3000,7 @@ class SearchApi:
         exclude_shared: Annotated[Optional[StrictBool], Field(description="Specifies whether to exclude the user sharing settings or not.")] = None,
         include_shared: Annotated[Optional[StrictBool], Field(description="Specifies whether to include the user sharing settings or not.")] = None,
         invited_by_me: Annotated[Optional[StrictBool], Field(description="Specifies whether the user was invited by the current user or not.")] = None,
-        inviter_id: Annotated[Optional[StrictStr], Field(description="The inviter ID.")] = None,
+        inviter_id: Annotated[Optional[UUID], Field(description="The inviter ID.")] = None,
         area: Annotated[Optional[Area], Field(description="The user area.")] = None,
         employee_types: Annotated[Optional[List[List[EmployeeType]]], Field(description="The list of user types.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of users to be retrieved in the request.")] = None,
@@ -3056,7 +3037,7 @@ class SearchApi:
         :param invited_by_me: Specifies whether the user was invited by the current user or not.
         :type invited_by_me: bool
         :param inviter_id: The inviter ID.
-        :type inviter_id: str
+        :type inviter_id: UUID
         :param area: The user area.
         :type area: Area
         :param employee_types: The list of user types.
@@ -3113,10 +3094,9 @@ class SearchApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeFullArrayWrapper",
-            '401': None,
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -3136,7 +3116,7 @@ class SearchApi:
         exclude_shared: Annotated[Optional[StrictBool], Field(description="Specifies whether to exclude the user sharing settings or not.")] = None,
         include_shared: Annotated[Optional[StrictBool], Field(description="Specifies whether to include the user sharing settings or not.")] = None,
         invited_by_me: Annotated[Optional[StrictBool], Field(description="Specifies whether the user was invited by the current user or not.")] = None,
-        inviter_id: Annotated[Optional[StrictStr], Field(description="The inviter ID.")] = None,
+        inviter_id: Annotated[Optional[UUID], Field(description="The inviter ID.")] = None,
         area: Annotated[Optional[Area], Field(description="The user area.")] = None,
         employee_types: Annotated[Optional[List[List[EmployeeType]]], Field(description="The list of user types.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of users to be retrieved in the request.")] = None,
@@ -3173,7 +3153,7 @@ class SearchApi:
         :param invited_by_me: Specifies whether the user was invited by the current user or not.
         :type invited_by_me: bool
         :param inviter_id: The inviter ID.
-        :type inviter_id: str
+        :type inviter_id: UUID
         :param area: The user area.
         :type area: Area
         :param employee_types: The list of user types.
@@ -3230,10 +3210,9 @@ class SearchApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeFullArrayWrapper",
-            '401': None,
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -3382,7 +3361,7 @@ class SearchApi:
         exclude_shared: Annotated[Optional[StrictBool], Field(description="Specifies whether to exclude the user sharing settings or not.")] = None,
         include_shared: Annotated[Optional[StrictBool], Field(description="Specifies whether to include the user sharing settings or not.")] = None,
         invited_by_me: Annotated[Optional[StrictBool], Field(description="Specifies whether the user was invited by the current user or not.")] = None,
-        inviter_id: Annotated[Optional[StrictStr], Field(description="The inviter ID.")] = None,
+        inviter_id: Annotated[Optional[UUID], Field(description="The inviter ID.")] = None,
         area: Annotated[Optional[Area], Field(description="The user area.")] = None,
         employee_types: Annotated[Optional[List[List[EmployeeType]]], Field(description="The list of user types.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of users to be retrieved in the request.")] = None,
@@ -3419,7 +3398,7 @@ class SearchApi:
         :param invited_by_me: Specifies whether the user was invited by the current user or not.
         :type invited_by_me: bool
         :param inviter_id: The inviter ID.
-        :type inviter_id: str
+        :type inviter_id: UUID
         :param area: The user area.
         :type area: Area
         :param employee_types: The list of user types.
@@ -3476,10 +3455,9 @@ class SearchApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeFullArrayWrapper",
-            '401': None,
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -3499,7 +3477,7 @@ class SearchApi:
         exclude_shared: Annotated[Optional[StrictBool], Field(description="Specifies whether to exclude the user sharing settings or not.")] = None,
         include_shared: Annotated[Optional[StrictBool], Field(description="Specifies whether to include the user sharing settings or not.")] = None,
         invited_by_me: Annotated[Optional[StrictBool], Field(description="Specifies whether the user was invited by the current user or not.")] = None,
-        inviter_id: Annotated[Optional[StrictStr], Field(description="The inviter ID.")] = None,
+        inviter_id: Annotated[Optional[UUID], Field(description="The inviter ID.")] = None,
         area: Annotated[Optional[Area], Field(description="The user area.")] = None,
         employee_types: Annotated[Optional[List[List[EmployeeType]]], Field(description="The list of user types.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of users to be retrieved in the request.")] = None,
@@ -3536,7 +3514,7 @@ class SearchApi:
         :param invited_by_me: Specifies whether the user was invited by the current user or not.
         :type invited_by_me: bool
         :param inviter_id: The inviter ID.
-        :type inviter_id: str
+        :type inviter_id: UUID
         :param area: The user area.
         :type area: Area
         :param employee_types: The list of user types.
@@ -3593,10 +3571,9 @@ class SearchApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeFullArrayWrapper",
-            '401': None,
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -3616,7 +3593,7 @@ class SearchApi:
         exclude_shared: Annotated[Optional[StrictBool], Field(description="Specifies whether to exclude the user sharing settings or not.")] = None,
         include_shared: Annotated[Optional[StrictBool], Field(description="Specifies whether to include the user sharing settings or not.")] = None,
         invited_by_me: Annotated[Optional[StrictBool], Field(description="Specifies whether the user was invited by the current user or not.")] = None,
-        inviter_id: Annotated[Optional[StrictStr], Field(description="The inviter ID.")] = None,
+        inviter_id: Annotated[Optional[UUID], Field(description="The inviter ID.")] = None,
         area: Annotated[Optional[Area], Field(description="The user area.")] = None,
         employee_types: Annotated[Optional[List[List[EmployeeType]]], Field(description="The list of user types.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of users to be retrieved in the request.")] = None,
@@ -3653,7 +3630,7 @@ class SearchApi:
         :param invited_by_me: Specifies whether the user was invited by the current user or not.
         :type invited_by_me: bool
         :param inviter_id: The inviter ID.
-        :type inviter_id: str
+        :type inviter_id: UUID
         :param area: The user area.
         :type area: Area
         :param employee_types: The list of user types.
@@ -3710,10 +3687,9 @@ class SearchApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeFullArrayWrapper",
-            '401': None,
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -3857,7 +3833,7 @@ class SearchApi:
     def search_users_by_extended_filter(
         self,
         employee_status: Annotated[Optional[EmployeeStatus], Field(description="The user status.")] = None,
-        group_id: Annotated[Optional[StrictStr], Field(description="The group ID.")] = None,
+        group_id: Annotated[Optional[UUID], Field(description="The group ID.")] = None,
         activation_status: Annotated[Optional[EmployeeActivationStatus], Field(description="The user activation status.")] = None,
         employee_type: Annotated[Optional[EmployeeType], Field(description="The user type.")] = None,
         employee_types: Annotated[Optional[List[List[StrictInt]]], Field(description="The list of user types.")] = None,
@@ -3868,7 +3844,7 @@ class SearchApi:
         without_group: Annotated[Optional[StrictBool], Field(description="Specifies whether the user should be a member of a group or not.")] = None,
         exclude_group: Annotated[Optional[StrictBool], Field(description="Specifies whether the user should be a member of the group with the specified ID.")] = None,
         invited_by_me: Annotated[Optional[StrictBool], Field(description="Specifies whether the user is invited by the current user or not.")] = None,
-        inviter_id: Annotated[Optional[StrictStr], Field(description="The inviter ID.")] = None,
+        inviter_id: Annotated[Optional[UUID], Field(description="The inviter ID.")] = None,
         area: Annotated[Optional[Area], Field(description="The filter area.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of items to be retrieved in the response.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The zero-based index of the first item to be retrieved in a filtered result set.")] = None,
@@ -3896,7 +3872,7 @@ class SearchApi:
         :param employee_status: The user status.
         :type employee_status: EmployeeStatus
         :param group_id: The group ID.
-        :type group_id: str
+        :type group_id: UUID
         :param activation_status: The user activation status.
         :type activation_status: EmployeeActivationStatus
         :param employee_type: The user type.
@@ -3918,7 +3894,7 @@ class SearchApi:
         :param invited_by_me: Specifies whether the user is invited by the current user or not.
         :type invited_by_me: bool
         :param inviter_id: The inviter ID.
-        :type inviter_id: str
+        :type inviter_id: UUID
         :param area: The filter area.
         :type area: Area
         :param count: The maximum number of items to be retrieved in the response.
@@ -3984,10 +3960,9 @@ class SearchApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeFullArrayWrapper",
-            '401': None,
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -4002,7 +3977,7 @@ class SearchApi:
     def search_users_by_extended_filter_with_http_info(
         self,
         employee_status: Annotated[Optional[EmployeeStatus], Field(description="The user status.")] = None,
-        group_id: Annotated[Optional[StrictStr], Field(description="The group ID.")] = None,
+        group_id: Annotated[Optional[UUID], Field(description="The group ID.")] = None,
         activation_status: Annotated[Optional[EmployeeActivationStatus], Field(description="The user activation status.")] = None,
         employee_type: Annotated[Optional[EmployeeType], Field(description="The user type.")] = None,
         employee_types: Annotated[Optional[List[List[StrictInt]]], Field(description="The list of user types.")] = None,
@@ -4013,7 +3988,7 @@ class SearchApi:
         without_group: Annotated[Optional[StrictBool], Field(description="Specifies whether the user should be a member of a group or not.")] = None,
         exclude_group: Annotated[Optional[StrictBool], Field(description="Specifies whether the user should be a member of the group with the specified ID.")] = None,
         invited_by_me: Annotated[Optional[StrictBool], Field(description="Specifies whether the user is invited by the current user or not.")] = None,
-        inviter_id: Annotated[Optional[StrictStr], Field(description="The inviter ID.")] = None,
+        inviter_id: Annotated[Optional[UUID], Field(description="The inviter ID.")] = None,
         area: Annotated[Optional[Area], Field(description="The filter area.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of items to be retrieved in the response.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The zero-based index of the first item to be retrieved in a filtered result set.")] = None,
@@ -4041,7 +4016,7 @@ class SearchApi:
         :param employee_status: The user status.
         :type employee_status: EmployeeStatus
         :param group_id: The group ID.
-        :type group_id: str
+        :type group_id: UUID
         :param activation_status: The user activation status.
         :type activation_status: EmployeeActivationStatus
         :param employee_type: The user type.
@@ -4063,7 +4038,7 @@ class SearchApi:
         :param invited_by_me: Specifies whether the user is invited by the current user or not.
         :type invited_by_me: bool
         :param inviter_id: The inviter ID.
-        :type inviter_id: str
+        :type inviter_id: UUID
         :param area: The filter area.
         :type area: Area
         :param count: The maximum number of items to be retrieved in the response.
@@ -4129,10 +4104,9 @@ class SearchApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeFullArrayWrapper",
-            '401': None,
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -4147,7 +4121,7 @@ class SearchApi:
     def search_users_by_extended_filter_without_preload_content(
         self,
         employee_status: Annotated[Optional[EmployeeStatus], Field(description="The user status.")] = None,
-        group_id: Annotated[Optional[StrictStr], Field(description="The group ID.")] = None,
+        group_id: Annotated[Optional[UUID], Field(description="The group ID.")] = None,
         activation_status: Annotated[Optional[EmployeeActivationStatus], Field(description="The user activation status.")] = None,
         employee_type: Annotated[Optional[EmployeeType], Field(description="The user type.")] = None,
         employee_types: Annotated[Optional[List[List[StrictInt]]], Field(description="The list of user types.")] = None,
@@ -4158,7 +4132,7 @@ class SearchApi:
         without_group: Annotated[Optional[StrictBool], Field(description="Specifies whether the user should be a member of a group or not.")] = None,
         exclude_group: Annotated[Optional[StrictBool], Field(description="Specifies whether the user should be a member of the group with the specified ID.")] = None,
         invited_by_me: Annotated[Optional[StrictBool], Field(description="Specifies whether the user is invited by the current user or not.")] = None,
-        inviter_id: Annotated[Optional[StrictStr], Field(description="The inviter ID.")] = None,
+        inviter_id: Annotated[Optional[UUID], Field(description="The inviter ID.")] = None,
         area: Annotated[Optional[Area], Field(description="The filter area.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of items to be retrieved in the response.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The zero-based index of the first item to be retrieved in a filtered result set.")] = None,
@@ -4186,7 +4160,7 @@ class SearchApi:
         :param employee_status: The user status.
         :type employee_status: EmployeeStatus
         :param group_id: The group ID.
-        :type group_id: str
+        :type group_id: UUID
         :param activation_status: The user activation status.
         :type activation_status: EmployeeActivationStatus
         :param employee_type: The user type.
@@ -4208,7 +4182,7 @@ class SearchApi:
         :param invited_by_me: Specifies whether the user is invited by the current user or not.
         :type invited_by_me: bool
         :param inviter_id: The inviter ID.
-        :type inviter_id: str
+        :type inviter_id: UUID
         :param area: The filter area.
         :type area: Area
         :param count: The maximum number of items to be retrieved in the response.
@@ -4274,10 +4248,9 @@ class SearchApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeFullArrayWrapper",
-            '401': None,
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -4512,8 +4485,7 @@ class SearchApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeArrayWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -4580,8 +4552,7 @@ class SearchApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeArrayWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -4648,8 +4619,7 @@ class SearchApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeArrayWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -4797,10 +4767,9 @@ class SearchApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeFullArrayWrapper",
-            '401': None,
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -4878,10 +4847,9 @@ class SearchApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeFullArrayWrapper",
-            '401': None,
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -4959,10 +4927,9 @@ class SearchApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeFullArrayWrapper",
-            '401': None,
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )

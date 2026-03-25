@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **room_id** | **int** | The room ID. | [optional] 
 **role_name** | **str** | The role name. | [optional] 
 **role_color** | **str** | The role color. | [optional] 
-**user_id** | **str** | The user ID. | [optional] 
+**user_id** | **UUID** | The user ID. | [optional] 
 **sequence** | **int** | The role sequence. | [optional] 
 **submitted** | **bool** | Specifies if the role was submitted or not. | [optional] 
 **opened_at** | **datetime** | The date and time when the role was opened. | [optional] 

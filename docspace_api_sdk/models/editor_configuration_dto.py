@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -50,7 +50,7 @@ class EditorConfigurationDto(BaseModel):
     plugins: Optional[PluginsConfig] = None
     recent: Optional[List[RecentConfig]] = Field(default=None, description="The recent configuration of the editor.")
     templates: Optional[List[TemplatesConfig]] = Field(default=None, description="The templates of the editor configuration.")
-    user: UserConfig
+    user: Optional[UserConfig] = None
     __properties: ClassVar[List[str]] = ["callbackUrl", "coEditing", "createUrl", "customization", "embedded", "encryptionKeys", "lang", "mode", "modeWrite", "plugins", "recent", "templates", "user"]
 
     model_config = ConfigDict(

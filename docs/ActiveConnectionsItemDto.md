@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **int** | The active connection ID. | 
 **tenant_id** | **int** | The tenant ID. | 
-**user_id** | **str** | The user ID. | 
+**user_id** | **UUID** | The user ID. | 
 **mobile** | **bool** | Specifies if the active connection has a mobile phone or not. | [optional] 
 **ip** | **str** | The IP address of the active connection. | [optional] 
 **country** | **str** | The active connection country. | [optional] 

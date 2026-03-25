@@ -55,12 +55,11 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.WebpluginsApi(api_client)
-    system = true # bool | Specifies whether to load the system plugins or not. (optional)
+    system = false # bool | Specifies whether to load the system plugins or not. (optional)
 
     try:
         # Add a web plugin
@@ -70,7 +69,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling WebpluginsApi->add_web_plugin_from_file: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -85,8 +83,8 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 |-------------|-------------|------------------|
 **200** | Web plugin |  -  |
 **400** | bad request |  -  |
-**401** | Unauthorized |  -  |
 **403** | Plugins disabled |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -133,12 +131,11 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.WebpluginsApi(api_client)
-    name = 'Winfield Upton' # str | The web plugin name.
+    name = 'example-plugin' # str | The web plugin name.
 
     try:
         # Delete a web plugin
@@ -146,7 +143,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling WebpluginsApi->delete_web_plugin: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -160,8 +156,8 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Ok |  -  |
-**401** | Unauthorized |  -  |
 **403** | Plugins disabled |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -209,12 +205,11 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.WebpluginsApi(api_client)
-    name = 'Winfield Upton' # str | The web plugin name.
+    name = 'example-plugin' # str | The web plugin name.
 
     try:
         # Get a web plugin by name
@@ -224,7 +219,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling WebpluginsApi->get_web_plugin: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -238,8 +232,8 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Web plugin |  -  |
-**401** | Unauthorized |  -  |
 **403** | Plugins disabled |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -287,7 +281,6 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -304,7 +297,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 ```
 
 
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -316,8 +308,8 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Web plugin |  -  |
-**401** | Unauthorized |  -  |
 **403** | Plugins disabled |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -366,12 +358,11 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.WebpluginsApi(api_client)
-    name = 'Winfield Upton' # str | The web plugin name.
+    name = 'example-plugin' # str | The web plugin name.
     web_plugin_requests = docspace_api_sdk.WebPluginRequests() # WebPluginRequests | The configuration settings for the web plugin instance.
 
     try:
@@ -380,7 +371,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling WebpluginsApi->update_web_plugin: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -394,8 +384,8 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Ok |  -  |
-**401** | Unauthorized |  -  |
 **403** | Plugins disabled |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **str** | The module ID. | 
 **enabled** | **bool** | Controls whether the security restrictions are enforced for this module. | [optional] 
-**subjects** | **List[str]** | The collection of user and group identifiers granted access to the module. | [optional] 
+**subjects** | **List[UUID]** | The collection of user and group identifiers granted access to the module. | [optional] 
 
 ## Example
 

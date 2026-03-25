@@ -5,7 +5,7 @@ The request parameters for terminating the reassignment/deletion process.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**user_id** | **str** | The user ID whose data is reassigned/removed. | 
+**user_id** | **UUID** | The user ID whose data is reassigned/removed. | 
 
 ## Example
 

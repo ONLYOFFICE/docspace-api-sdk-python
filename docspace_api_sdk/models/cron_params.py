@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictInt
+from pydantic import BaseModel, ConfigDict, Field, StrictInt
 from typing import Any, ClassVar, Dict, List, Optional
 from docspace_api_sdk.models.backup_period import BackupPeriod
 from typing import Optional, Set
@@ -29,11 +29,11 @@ from typing_extensions import Self
 
 class CronParams(BaseModel):
     """
-    CronParams
+    The backup cron parameters.
     """ # noqa: E501
     period: Optional[BackupPeriod] = None
-    hour: Optional[StrictInt] = None
-    day: Optional[StrictInt] = None
+    hour: Optional[StrictInt] = Field(default=None, description="The time of the day to start the backup process.")
+    day: Optional[StrictInt] = Field(default=None, description="The day of the week to start the backup process.")
     __properties: ClassVar[List[str]] = ["period", "hour", "day"]
 
     model_config = ConfigDict(

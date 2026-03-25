@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **folder_ids** | [**List[BatchRequestDtoAllOfFileIds]**](BatchRequestDtoAllOfFileIds.md) | The list of folder IDs to change the owner. | [optional] 
 **file_ids** | [**List[BatchRequestDtoAllOfFileIds]**](BatchRequestDtoAllOfFileIds.md) | The list of file IDs to change the owner. | [optional] 
-**user_id** | **str** | The new file owner ID. | 
+**user_id** | **UUID** | The new file owner ID. | 
 
 ## Example
 

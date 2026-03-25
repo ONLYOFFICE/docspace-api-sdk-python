@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -30,7 +30,7 @@ class BatchTagsRequestDto(BaseModel):
     """
     The parameters for managing room tags.
     """ # noqa: E501
-    names: Optional[List[StrictStr]] = Field(default=None, description="The list of tag names.")
+    names: List[StrictStr] = Field(description="The list of tag names.")
     __properties: ClassVar[List[str]] = ["names"]
 
     model_config = ConfigDict(
@@ -72,11 +72,6 @@ class BatchTagsRequestDto(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # set to None if names (nullable) is None
-        # and model_fields_set contains the field
-        if self.names is None and "names" in self.model_fields_set:
-            _dict['names'] = None
-
         return _dict
 
     @classmethod

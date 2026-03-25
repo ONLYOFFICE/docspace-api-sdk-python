@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,7 +23,7 @@ from typing_extensions import Annotated
 
 from typing import Optional
 from docspace_api_sdk.models.boolean_wrapper import BooleanWrapper
-from docspace_api_sdk.models.double_wrapper import DoubleWrapper
+from docspace_api_sdk.models.double_nullable_wrapper import DoubleNullableWrapper
 from docspace_api_sdk.models.encryption_settings_wrapper import EncryptionSettingsWrapper
 from docspace_api_sdk.models.storage_encryption_requests_dto import StorageEncryptionRequestsDto
 
@@ -46,7 +46,6 @@ class EncryptionApi:
 
 
 
-
     @validate_call
     def get_storage_encryption_progress(
         self,
@@ -62,7 +61,7 @@ class EncryptionApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> DoubleWrapper:
+    ) -> DoubleNullableWrapper:
         """Get the storage encryption progress
 
         Returns the storage encryption progress.
@@ -97,11 +96,10 @@ class EncryptionApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "DoubleWrapper",
-            '401': None,
+            '200': "DoubleNullableWrapper",
             '405': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -127,7 +125,7 @@ class EncryptionApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[DoubleWrapper]:
+    ) -> ApiResponse[DoubleNullableWrapper]:
         """Get the storage encryption progress
 
         Returns the storage encryption progress.
@@ -162,11 +160,10 @@ class EncryptionApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "DoubleWrapper",
-            '401': None,
+            '200': "DoubleNullableWrapper",
             '405': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -227,11 +224,10 @@ class EncryptionApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "DoubleWrapper",
-            '401': None,
+            '200': "DoubleNullableWrapper",
             '405': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -358,11 +354,10 @@ class EncryptionApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EncryptionSettingsWrapper",
-            '401': None,
             '403': None,
             '405': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -424,11 +419,10 @@ class EncryptionApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EncryptionSettingsWrapper",
-            '401': None,
             '403': None,
             '405': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -490,11 +484,10 @@ class EncryptionApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EncryptionSettingsWrapper",
-            '401': None,
             '403': None,
             '405': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -625,12 +618,11 @@ class EncryptionApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
-            '401': None,
             '402': None,
             '403': None,
             '405': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -696,12 +688,11 @@ class EncryptionApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
-            '401': None,
             '402': None,
             '403': None,
             '405': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -767,12 +758,11 @@ class EncryptionApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
-            '401': None,
             '402': None,
             '403': None,
             '405': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )

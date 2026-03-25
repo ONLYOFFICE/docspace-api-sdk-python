@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,8 +21,9 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool
 from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Annotated
 from docspace_api_sdk.models.duplicate_request_dto_all_of_file_ids import DuplicateRequestDtoAllOfFileIds
 from docspace_api_sdk.models.file_share_params import FileShareParams
 from typing import Optional, Set
@@ -36,7 +37,7 @@ class SecurityInfoRequestDto(BaseModel):
     file_ids: Optional[List[DuplicateRequestDtoAllOfFileIds]] = Field(default=None, description="The list of the shared file IDs.", alias="fileIds")
     share: Optional[List[FileShareParams]] = Field(default=None, description="The collection of sharing parameters.")
     notify: Optional[StrictBool] = Field(default=None, description="Specifies whether to notify users about the shared file or not.")
-    sharing_message: Optional[StrictStr] = Field(default=None, description="The message to send when notifying about the shared file.", alias="sharingMessage")
+    sharing_message: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The message to send when notifying about the shared file.", alias="sharingMessage")
     __properties: ClassVar[List[str]] = ["folderIds", "fileIds", "share", "notify", "sharingMessage"]
 
     model_config = ConfigDict(

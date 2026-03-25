@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,9 +21,10 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictStr
+from pydantic import Field
 from typing import Optional
 from typing_extensions import Annotated
+from uuid import UUID
 from docspace_api_sdk.models.employee_full_array_wrapper import EmployeeFullArrayWrapper
 from docspace_api_sdk.models.employee_type import EmployeeType
 from docspace_api_sdk.models.start_update_user_type_dto import StartUpdateUserTypeDto
@@ -50,11 +51,10 @@ class UserTypeApi:
 
 
 
-
     @validate_call
     def get_user_type_update_progress(
         self,
-        userid: Annotated[StrictStr, Field(description="The user ID.")],
+        userid: Annotated[UUID, Field(description="The user ID.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -73,7 +73,7 @@ class UserTypeApi:
         Returns the progress of updating the user type.
 
         :param userid: The user ID. (required)
-        :type userid: str
+        :type userid: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -107,8 +107,7 @@ class UserTypeApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TaskProgressResponseWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -122,7 +121,7 @@ class UserTypeApi:
     @validate_call
     def get_user_type_update_progress_with_http_info(
         self,
-        userid: Annotated[StrictStr, Field(description="The user ID.")],
+        userid: Annotated[UUID, Field(description="The user ID.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -141,7 +140,7 @@ class UserTypeApi:
         Returns the progress of updating the user type.
 
         :param userid: The user ID. (required)
-        :type userid: str
+        :type userid: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -175,8 +174,7 @@ class UserTypeApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TaskProgressResponseWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -190,7 +188,7 @@ class UserTypeApi:
     @validate_call
     def get_user_type_update_progress_without_preload_content(
         self,
-        userid: Annotated[StrictStr, Field(description="The user ID.")],
+        userid: Annotated[UUID, Field(description="The user ID.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -209,7 +207,7 @@ class UserTypeApi:
         Returns the progress of updating the user type.
 
         :param userid: The user ID. (required)
-        :type userid: str
+        :type userid: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -243,8 +241,7 @@ class UserTypeApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TaskProgressResponseWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -324,7 +321,7 @@ class UserTypeApi:
 
 
     @validate_call
-    def star_user_typet_update(
+    def start_user_type_update(
         self,
         start_update_user_type_dto: Optional[StartUpdateUserTypeDto] = None,
         _request_timeout: Union[
@@ -368,7 +365,7 @@ class UserTypeApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._star_user_typet_update_serialize(
+        _param = self._start_user_type_update_serialize(
             start_update_user_type_dto=start_update_user_type_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -380,8 +377,7 @@ class UserTypeApi:
             '200': "TaskProgressResponseWrapper",
             '400': None,
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -393,7 +389,7 @@ class UserTypeApi:
 
 
     @validate_call
-    def star_user_typet_update_with_http_info(
+    def start_user_type_update_with_http_info(
         self,
         start_update_user_type_dto: Optional[StartUpdateUserTypeDto] = None,
         _request_timeout: Union[
@@ -437,7 +433,7 @@ class UserTypeApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._star_user_typet_update_serialize(
+        _param = self._start_user_type_update_serialize(
             start_update_user_type_dto=start_update_user_type_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -449,8 +445,7 @@ class UserTypeApi:
             '200': "TaskProgressResponseWrapper",
             '400': None,
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -462,7 +457,7 @@ class UserTypeApi:
 
 
     @validate_call
-    def star_user_typet_update_without_preload_content(
+    def start_user_type_update_without_preload_content(
         self,
         start_update_user_type_dto: Optional[StartUpdateUserTypeDto] = None,
         _request_timeout: Union[
@@ -506,7 +501,7 @@ class UserTypeApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._star_user_typet_update_serialize(
+        _param = self._start_user_type_update_serialize(
             start_update_user_type_dto=start_update_user_type_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -518,15 +513,14 @@ class UserTypeApi:
             '200': "TaskProgressResponseWrapper",
             '400': None,
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
         return response_data.response
 
 
-    def _star_user_typet_update_serialize(
+    def _start_user_type_update_serialize(
         self,
         start_update_user_type_dto,
         _request_auth,
@@ -667,8 +661,7 @@ class UserTypeApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TaskProgressResponseWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -735,8 +728,7 @@ class UserTypeApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TaskProgressResponseWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -803,8 +795,7 @@ class UserTypeApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TaskProgressResponseWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -955,9 +946,9 @@ class UserTypeApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeFullArrayWrapper",
+            '403': None,
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1027,9 +1018,9 @@ class UserTypeApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeFullArrayWrapper",
+            '403': None,
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1099,9 +1090,9 @@ class UserTypeApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeFullArrayWrapper",
+            '403': None,
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )

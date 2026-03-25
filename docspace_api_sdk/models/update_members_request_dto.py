@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,8 +21,9 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool
 from typing import Any, ClassVar, Dict, List, Optional
+from uuid import UUID
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -30,7 +31,7 @@ class UpdateMembersRequestDto(BaseModel):
     """
     The request parameters for updating the user information.
     """ # noqa: E501
-    user_ids: Optional[List[StrictStr]] = Field(default=None, description="The list of user IDs.", alias="userIds")
+    user_ids: Optional[List[UUID]] = Field(default=None, description="The list of user IDs.", alias="userIds")
     resend_all: Optional[StrictBool] = Field(default=None, description="Specifies whether to resend invitation letters to all the users or not.", alias="resendAll")
     __properties: ClassVar[List[str]] = ["userIds", "resendAll"]
 

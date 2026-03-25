@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,8 +21,9 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List, Optional
+from uuid import UUID
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -30,7 +31,7 @@ class MembersRequest(BaseModel):
     """
     The member request.
     """ # noqa: E501
-    members: Optional[List[StrictStr]] = Field(default=None, description="The list of group member IDs.")
+    members: Optional[List[UUID]] = Field(default=None, description="The list of group member IDs.")
     __properties: ClassVar[List[str]] = ["members"]
 
     model_config = ConfigDict(

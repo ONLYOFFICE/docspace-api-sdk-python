@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -45,7 +45,6 @@ class ThirdPartyApi:
 
 
 
-
     @validate_call
     def get_third_party_code(
         self,
@@ -65,7 +64,7 @@ class ThirdPartyApi:
     ) -> ObjectWrapper:
         """Get the code request
 
-        Returns a request to get the confirmation code from URL.   **Note**: List of providers: Google, Dropbox, Docusign, Box, OneDrive, Wordpress.
+        Returns a request to get the confirmation code from URL.
 
         :param provider: The identity provider used for authentication. (required)
         :type provider: LoginProvider
@@ -102,8 +101,7 @@ class ThirdPartyApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -133,7 +131,7 @@ class ThirdPartyApi:
     ) -> ApiResponse[ObjectWrapper]:
         """Get the code request
 
-        Returns a request to get the confirmation code from URL.   **Note**: List of providers: Google, Dropbox, Docusign, Box, OneDrive, Wordpress.
+        Returns a request to get the confirmation code from URL.
 
         :param provider: The identity provider used for authentication. (required)
         :type provider: LoginProvider
@@ -170,8 +168,7 @@ class ThirdPartyApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -201,7 +198,7 @@ class ThirdPartyApi:
     ) -> RESTResponseType:
         """Get the code request
 
-        Returns a request to get the confirmation code from URL.   **Note**: List of providers: Google, Dropbox, Docusign, Box, OneDrive, Wordpress.
+        Returns a request to get the confirmation code from URL.
 
         :param provider: The identity provider used for authentication. (required)
         :type provider: LoginProvider
@@ -238,8 +235,7 @@ class ThirdPartyApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )

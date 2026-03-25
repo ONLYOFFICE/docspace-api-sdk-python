@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,11 +24,13 @@ from typing_extensions import Annotated
 from pydantic import Field, StrictBool, StrictBytes, StrictInt, StrictStr
 from typing import List, Optional, Tuple, Union
 from typing_extensions import Annotated
+from uuid import UUID
 from docspace_api_sdk.models.api_date_time import ApiDateTime
 from docspace_api_sdk.models.base_batch_request_dto import BaseBatchRequestDto
 from docspace_api_sdk.models.boolean_wrapper import BooleanWrapper
 from docspace_api_sdk.models.change_history import ChangeHistory
 from docspace_api_sdk.models.check_fill_form_draft import CheckFillFormDraft
+from docspace_api_sdk.models.chunked_upload_session_response_wrapper_integer_wrapper import ChunkedUploadSessionResponseWrapperIntegerWrapper
 from docspace_api_sdk.models.configuration_integer_wrapper import ConfigurationIntegerWrapper
 from docspace_api_sdk.models.copy_as_json_element import CopyAsJsonElement
 from docspace_api_sdk.models.create_file_json_element import CreateFileJsonElement
@@ -50,6 +52,7 @@ from docspace_api_sdk.models.file_share_array_wrapper import FileShareArrayWrapp
 from docspace_api_sdk.models.file_share_wrapper import FileShareWrapper
 from docspace_api_sdk.models.filling_form_result_integer_wrapper import FillingFormResultIntegerWrapper
 from docspace_api_sdk.models.form_role_array_wrapper import FormRoleArrayWrapper
+from docspace_api_sdk.models.form_submissions_wrapper import FormSubmissionsWrapper
 from docspace_api_sdk.models.get_reference_data_dto_integer import GetReferenceDataDtoInteger
 from docspace_api_sdk.models.history_array_wrapper import HistoryArrayWrapper
 from docspace_api_sdk.models.key_value_pair_boolean_string_wrapper import KeyValuePairBooleanStringWrapper
@@ -58,7 +61,6 @@ from docspace_api_sdk.models.manage_form_filling_dto_integer import ManageFormFi
 from docspace_api_sdk.models.mention_wrapper_array_wrapper import MentionWrapperArrayWrapper
 from docspace_api_sdk.models.no_content_result_wrapper import NoContentResultWrapper
 from docspace_api_sdk.models.object_array_wrapper import ObjectArrayWrapper
-from docspace_api_sdk.models.object_wrapper import ObjectWrapper
 from docspace_api_sdk.models.order_request_dto import OrderRequestDto
 from docspace_api_sdk.models.orders_request_dto_integer import OrdersRequestDtoInteger
 from docspace_api_sdk.models.save_as_pdf_integer import SaveAsPdfInteger
@@ -84,7 +86,6 @@ class FilesApi:
         if api_client is None:
             api_client = ApiClient.get_default()
         self.api_client = api_client
-
 
 
 
@@ -144,8 +145,7 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -212,8 +212,7 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -280,8 +279,7 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -416,8 +414,7 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -484,8 +481,7 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -552,8 +548,7 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -704,10 +699,9 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerArrayWrapper",
-            '401': None,
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -777,10 +771,9 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerArrayWrapper",
-            '401': None,
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -850,10 +843,9 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerArrayWrapper",
-            '401': None,
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1008,8 +1000,7 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1080,8 +1071,7 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1152,8 +1142,7 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1302,11 +1291,10 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileEntryBaseWrapper",
             '400': None,
-            '401': None,
             '403': None,
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1377,11 +1365,10 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileEntryBaseWrapper",
             '400': None,
-            '401': None,
             '403': None,
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1452,11 +1439,10 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileEntryBaseWrapper",
             '400': None,
-            '401': None,
             '403': None,
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1568,10 +1554,10 @@ class FilesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ObjectWrapper:
+    ) -> ChunkedUploadSessionResponseWrapperIntegerWrapper:
         """Create the editing session
 
-        Creates a session to edit the existing file with multiple chunks (needed for WebDAV).   **Note**: Information about created session which includes:  <ul>  <li><b>id:</b> unique ID of this upload session,</li>  <li><b>created:</b> UTC time when the session was created,</li>  <li><b>expired:</b> UTC time when the session will expire if no chunks are sent before that time,</li>  <li><b>location:</b> URL where you should send your next chunk,</li>  <li><b>bytes_uploaded:</b> number of bytes uploaded for the specific upload ID,</li>  <li><b>bytes_total:</b> total number of bytes which will be uploaded.</li>  </ul>
+        Creates a session to edit the existing file with multiple chunks (needed for WebDAV).
 
         :param file_id: The file ID. (required)
         :type file_id: int
@@ -1609,11 +1595,10 @@ class FilesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ObjectWrapper",
-            '401': None,
+            '200': "ChunkedUploadSessionResponseWrapperIntegerWrapper",
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1641,10 +1626,10 @@ class FilesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[ObjectWrapper]:
+    ) -> ApiResponse[ChunkedUploadSessionResponseWrapperIntegerWrapper]:
         """Create the editing session
 
-        Creates a session to edit the existing file with multiple chunks (needed for WebDAV).   **Note**: Information about created session which includes:  <ul>  <li><b>id:</b> unique ID of this upload session,</li>  <li><b>created:</b> UTC time when the session was created,</li>  <li><b>expired:</b> UTC time when the session will expire if no chunks are sent before that time,</li>  <li><b>location:</b> URL where you should send your next chunk,</li>  <li><b>bytes_uploaded:</b> number of bytes uploaded for the specific upload ID,</li>  <li><b>bytes_total:</b> total number of bytes which will be uploaded.</li>  </ul>
+        Creates a session to edit the existing file with multiple chunks (needed for WebDAV).
 
         :param file_id: The file ID. (required)
         :type file_id: int
@@ -1682,11 +1667,10 @@ class FilesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ObjectWrapper",
-            '401': None,
+            '200': "ChunkedUploadSessionResponseWrapperIntegerWrapper",
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1717,7 +1701,7 @@ class FilesApi:
     ) -> RESTResponseType:
         """Create the editing session
 
-        Creates a session to edit the existing file with multiple chunks (needed for WebDAV).   **Note**: Information about created session which includes:  <ul>  <li><b>id:</b> unique ID of this upload session,</li>  <li><b>created:</b> UTC time when the session was created,</li>  <li><b>expired:</b> UTC time when the session will expire if no chunks are sent before that time,</li>  <li><b>location:</b> URL where you should send your next chunk,</li>  <li><b>bytes_uploaded:</b> number of bytes uploaded for the specific upload ID,</li>  <li><b>bytes_total:</b> total number of bytes which will be uploaded.</li>  </ul>
+        Creates a session to edit the existing file with multiple chunks (needed for WebDAV).
 
         :param file_id: The file ID. (required)
         :type file_id: int
@@ -1755,11 +1739,10 @@ class FilesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ObjectWrapper",
-            '401': None,
+            '200': "ChunkedUploadSessionResponseWrapperIntegerWrapper",
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1863,7 +1846,7 @@ class FilesApi:
     ) -> FileIntegerWrapper:
         """Create a file
 
-        Creates a new file in the specified folder with the title specified in the request.   **Note**: If a file extension is different from DOCX/XLSX/PPTX and refers to one of the known text, spreadsheet, or presentation formats, it will be changed to DOCX/XLSX/PPTX accordingly. If the file extension is not specified or is unknown, the DOCX extension will be added to the file title.
+        Creates a new file in the specified folder with the title specified in the request.
 
         :param folder_id: The folder ID for the file creation. (required)
         :type folder_id: int
@@ -1903,8 +1886,7 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1935,7 +1917,7 @@ class FilesApi:
     ) -> ApiResponse[FileIntegerWrapper]:
         """Create a file
 
-        Creates a new file in the specified folder with the title specified in the request.   **Note**: If a file extension is different from DOCX/XLSX/PPTX and refers to one of the known text, spreadsheet, or presentation formats, it will be changed to DOCX/XLSX/PPTX accordingly. If the file extension is not specified or is unknown, the DOCX extension will be added to the file title.
+        Creates a new file in the specified folder with the title specified in the request.
 
         :param folder_id: The folder ID for the file creation. (required)
         :type folder_id: int
@@ -1975,8 +1957,7 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2007,7 +1988,7 @@ class FilesApi:
     ) -> RESTResponseType:
         """Create a file
 
-        Creates a new file in the specified folder with the title specified in the request.   **Note**: If a file extension is different from DOCX/XLSX/PPTX and refers to one of the known text, spreadsheet, or presentation formats, it will be changed to DOCX/XLSX/PPTX accordingly. If the file extension is not specified or is unknown, the DOCX extension will be added to the file title.
+        Creates a new file in the specified folder with the title specified in the request.
 
         :param folder_id: The folder ID for the file creation. (required)
         :type folder_id: int
@@ -2047,8 +2028,7 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2162,7 +2142,7 @@ class FilesApi:
     ) -> FileIntegerWrapper:
         """Create a file in the My documents section
 
-        Creates a new file in the My documents section with the title specified in the request.   **Note**: If a file extension is different from DOCX/XLSX/PPTX and refers to one of the known text, spreadsheet, or presentation formats, it will be changed to DOCX/XLSX/PPTX accordingly. If the file extension is not specified or is unknown, the DOCX extension will be added to the file title.
+        Creates a new file in the My documents section with the title specified in the request.
 
         :param create_file_json_element:
         :type create_file_json_element: CreateFileJsonElement
@@ -2199,8 +2179,7 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2230,7 +2209,7 @@ class FilesApi:
     ) -> ApiResponse[FileIntegerWrapper]:
         """Create a file in the My documents section
 
-        Creates a new file in the My documents section with the title specified in the request.   **Note**: If a file extension is different from DOCX/XLSX/PPTX and refers to one of the known text, spreadsheet, or presentation formats, it will be changed to DOCX/XLSX/PPTX accordingly. If the file extension is not specified or is unknown, the DOCX extension will be added to the file title.
+        Creates a new file in the My documents section with the title specified in the request.
 
         :param create_file_json_element:
         :type create_file_json_element: CreateFileJsonElement
@@ -2267,8 +2246,7 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2298,7 +2276,7 @@ class FilesApi:
     ) -> RESTResponseType:
         """Create a file in the My documents section
 
-        Creates a new file in the My documents section with the title specified in the request.   **Note**: If a file extension is different from DOCX/XLSX/PPTX and refers to one of the known text, spreadsheet, or presentation formats, it will be changed to DOCX/XLSX/PPTX accordingly. If the file extension is not specified or is unknown, the DOCX extension will be added to the file title.
+        Creates a new file in the My documents section with the title specified in the request.
 
         :param create_file_json_element:
         :type create_file_json_element: CreateFileJsonElement
@@ -2335,8 +2313,7 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2487,10 +2464,9 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
-            '401': None,
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2560,10 +2536,9 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
-            '401': None,
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2633,10 +2608,9 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
-            '401': None,
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2790,10 +2764,9 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
-            '401': None,
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2863,10 +2836,9 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
-            '401': None,
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2936,10 +2908,9 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
-            '401': None,
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -3089,10 +3060,9 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
-            '401': None,
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -3158,10 +3128,9 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
-            '401': None,
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -3227,10 +3196,9 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
-            '401': None,
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -3382,8 +3350,7 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -3454,8 +3421,7 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -3526,8 +3492,7 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -3678,8 +3643,7 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -3746,8 +3710,7 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -3814,8 +3777,7 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -3962,8 +3924,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectArrayWrapper",
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -4029,8 +3990,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectArrayWrapper",
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -4096,8 +4056,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectArrayWrapper",
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -4188,6 +4147,7 @@ class FilesApi:
         self,
         file_id: Annotated[StrictInt, Field(description="The file ID to delete.")],
         delete: Annotated[Delete, Field(description="The parameters for deleting a file.")],
+        return_single_operation: Annotated[Optional[StrictBool], Field(description="Specifies whether to return only the current operation")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4209,6 +4169,8 @@ class FilesApi:
         :type file_id: int
         :param delete: The parameters for deleting a file. (required)
         :type delete: Delete
+        :param return_single_operation: Specifies whether to return only the current operation
+        :type return_single_operation: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4234,6 +4196,7 @@ class FilesApi:
         _param = self._delete_file_serialize(
             file_id=file_id,
             delete=delete,
+            return_single_operation=return_single_operation,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -4243,8 +4206,7 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -4260,6 +4222,7 @@ class FilesApi:
         self,
         file_id: Annotated[StrictInt, Field(description="The file ID to delete.")],
         delete: Annotated[Delete, Field(description="The parameters for deleting a file.")],
+        return_single_operation: Annotated[Optional[StrictBool], Field(description="Specifies whether to return only the current operation")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4281,6 +4244,8 @@ class FilesApi:
         :type file_id: int
         :param delete: The parameters for deleting a file. (required)
         :type delete: Delete
+        :param return_single_operation: Specifies whether to return only the current operation
+        :type return_single_operation: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4306,6 +4271,7 @@ class FilesApi:
         _param = self._delete_file_serialize(
             file_id=file_id,
             delete=delete,
+            return_single_operation=return_single_operation,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -4315,8 +4281,7 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -4332,6 +4297,7 @@ class FilesApi:
         self,
         file_id: Annotated[StrictInt, Field(description="The file ID to delete.")],
         delete: Annotated[Delete, Field(description="The parameters for deleting a file.")],
+        return_single_operation: Annotated[Optional[StrictBool], Field(description="Specifies whether to return only the current operation")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4353,6 +4319,8 @@ class FilesApi:
         :type file_id: int
         :param delete: The parameters for deleting a file. (required)
         :type delete: Delete
+        :param return_single_operation: Specifies whether to return only the current operation
+        :type return_single_operation: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4378,6 +4346,7 @@ class FilesApi:
         _param = self._delete_file_serialize(
             file_id=file_id,
             delete=delete,
+            return_single_operation=return_single_operation,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -4387,8 +4356,7 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -4399,6 +4367,7 @@ class FilesApi:
         self,
         file_id,
         delete,
+        return_single_operation,
         _request_auth,
         _content_type,
         _headers,
@@ -4423,6 +4392,10 @@ class FilesApi:
         if file_id is not None:
             _path_params['fileId'] = file_id
         # process the query parameters
+        if return_single_operation is not None:
+            
+            _query_params.append(('ReturnSingleOperation', return_single_operation))
+            
         # process the header parameters
         # process the form parameters
         # process the body parameter
@@ -4539,8 +4512,7 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "NoContentResultWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -4607,8 +4579,7 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "NoContentResultWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -4675,8 +4646,7 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "NoContentResultWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -4824,8 +4794,7 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -4892,8 +4861,7 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -4960,8 +4928,7 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -5055,6 +5022,274 @@ class FilesApi:
 
 
     @validate_call
+    def generate_xlsx(
+        self,
+        file_id: Annotated[StrictInt, Field(description="The file unique identifier.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> None:
+        """Generate XLSX report
+
+        Triggers asynchronous XLSX report generation for the specified form file.
+
+        :param file_id: The file unique identifier. (required)
+        :type file_id: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._generate_xlsx_serialize(
+            file_id=file_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': None,
+            '403': None,
+            '404': None,
+            '401': None,
+        }        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def generate_xlsx_with_http_info(
+        self,
+        file_id: Annotated[StrictInt, Field(description="The file unique identifier.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[None]:
+        """Generate XLSX report
+
+        Triggers asynchronous XLSX report generation for the specified form file.
+
+        :param file_id: The file unique identifier. (required)
+        :type file_id: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._generate_xlsx_serialize(
+            file_id=file_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': None,
+            '403': None,
+            '404': None,
+            '401': None,
+        }        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def generate_xlsx_without_preload_content(
+        self,
+        file_id: Annotated[StrictInt, Field(description="The file unique identifier.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Generate XLSX report
+
+        Triggers asynchronous XLSX report generation for the specified form file.
+
+        :param file_id: The file unique identifier. (required)
+        :type file_id: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._generate_xlsx_serialize(
+            file_id=file_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': None,
+            '403': None,
+            '404': None,
+            '401': None,
+        }        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _generate_xlsx_serialize(
+        self,
+        file_id,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if file_id is not None:
+            _path_params['fileId'] = file_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
+        ]
+
+
+        resource_path = "/api/2.0/files/file/{fileId}/xlsx"
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path=resource_path,
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
     def get_all_form_roles(
         self,
         file_id: Annotated[StrictInt, Field(description="The file unique identifier.")],
@@ -5109,10 +5344,9 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FormRoleArrayWrapper",
-            '401': None,
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -5178,10 +5412,9 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FormRoleArrayWrapper",
-            '401': None,
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -5247,10 +5480,9 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FormRoleArrayWrapper",
-            '401': None,
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -5388,8 +5620,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EditHistoryDataWrapper",
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -5459,8 +5690,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EditHistoryDataWrapper",
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -5530,8 +5760,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EditHistoryDataWrapper",
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -5664,8 +5893,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EditHistoryArrayWrapper",
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -5731,8 +5959,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EditHistoryArrayWrapper",
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -5798,8 +6025,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EditHistoryArrayWrapper",
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -5943,11 +6169,10 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "HistoryArrayWrapper",
-            '401': None,
             '403': None,
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -6029,11 +6254,10 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "HistoryArrayWrapper",
-            '401': None,
             '403': None,
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -6115,11 +6339,10 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "HistoryArrayWrapper",
-            '401': None,
             '403': None,
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -6277,8 +6500,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -6348,8 +6570,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -6419,8 +6640,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -6562,8 +6782,7 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -6638,8 +6857,7 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -6714,8 +6932,7 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -6868,8 +7085,7 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -6944,8 +7160,7 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -7020,8 +7235,7 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -7159,8 +7373,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerArrayWrapper",
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -7226,8 +7439,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerArrayWrapper",
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -7293,8 +7505,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerArrayWrapper",
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -7422,8 +7633,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FillingFormResultIntegerWrapper",
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -7489,8 +7699,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FillingFormResultIntegerWrapper",
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -7556,8 +7765,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FillingFormResultIntegerWrapper",
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -7633,6 +7841,278 @@ class FilesApi:
 
 
     @validate_call
+    def get_form_submissions(
+        self,
+        file_id: Annotated[StrictInt, Field(description="The file unique identifier.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> FormSubmissionsWrapper:
+        """Get form submission results
+
+        Returns the results of form submissions.
+
+        :param file_id: The file unique identifier. (required)
+        :type file_id: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_form_submissions_serialize(
+            file_id=file_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "FormSubmissionsWrapper",
+            '403': None,
+            '401': None,
+        }        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def get_form_submissions_with_http_info(
+        self,
+        file_id: Annotated[StrictInt, Field(description="The file unique identifier.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[FormSubmissionsWrapper]:
+        """Get form submission results
+
+        Returns the results of form submissions.
+
+        :param file_id: The file unique identifier. (required)
+        :type file_id: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_form_submissions_serialize(
+            file_id=file_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "FormSubmissionsWrapper",
+            '403': None,
+            '401': None,
+        }        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def get_form_submissions_without_preload_content(
+        self,
+        file_id: Annotated[StrictInt, Field(description="The file unique identifier.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Get form submission results
+
+        Returns the results of form submissions.
+
+        :param file_id: The file unique identifier. (required)
+        :type file_id: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_form_submissions_serialize(
+            file_id=file_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "FormSubmissionsWrapper",
+            '403': None,
+            '401': None,
+        }        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _get_form_submissions_serialize(
+        self,
+        file_id,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if file_id is not None:
+            _path_params['fileId'] = file_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
+        ]
+
+
+        resource_path = "/api/2.0/files/file/{fileId}/submissions"
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path=resource_path,
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
     def get_presigned_file_uri(
         self,
         file_id: Annotated[StrictInt, Field(description="The file unique identifier.")],
@@ -7688,8 +8168,7 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileLinkWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -7756,8 +8235,7 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileLinkWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -7824,8 +8302,7 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileLinkWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -7960,8 +8437,7 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -8028,8 +8504,7 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -8096,8 +8571,7 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -8232,8 +8706,7 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "MentionWrapperArrayWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -8300,8 +8773,7 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "MentionWrapperArrayWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -8368,8 +8840,7 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "MentionWrapperArrayWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -8504,8 +8975,7 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileReferenceWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -8572,8 +9042,7 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileReferenceWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -8640,8 +9109,7 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileReferenceWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -8789,8 +9257,7 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -8857,8 +9324,7 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -8925,8 +9391,7 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -9065,8 +9530,7 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -9137,8 +9601,7 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -9209,8 +9672,7 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -9364,10 +9826,9 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
-            '401': None,
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -9437,10 +9898,9 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
-            '401': None,
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -9510,10 +9970,9 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
-            '401': None,
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -9677,8 +10136,7 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ConfigurationIntegerWrapper",
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -9765,8 +10223,7 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ConfigurationIntegerWrapper",
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -9853,8 +10310,7 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ConfigurationIntegerWrapper",
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -10017,8 +10473,7 @@ class FilesApi:
             '200': "EditHistoryArrayWrapper",
             '400': None,
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -10094,8 +10549,7 @@ class FilesApi:
             '200': "EditHistoryArrayWrapper",
             '400': None,
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -10171,8 +10625,7 @@ class FilesApi:
             '200': "EditHistoryArrayWrapper",
             '400': None,
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -10259,9 +10712,9 @@ class FilesApi:
     def save_editing_file_from_form(
         self,
         file_id: Annotated[StrictInt, Field(description="The editing file ID from the request.")],
-        file_extension: Annotated[Optional[StrictStr], Field(description="The editing file extension from the request.")] = None,
         download_uri: Annotated[Optional[StrictStr], Field(description="The URI to download the editing file.")] = None,
-        file: Annotated[Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]], Field(description="The request file stream.")] = None,
+        file_extension: Annotated[Optional[StrictStr], Field(description="The editing file extension from the request.")] = None,
+        file: Annotated[Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]], Field(description="The edited file to be saved, uploaded as part of the multipart/form-data request.  This property represents the modified file content from the HTTP request form after editing operations.  The file is accessed via the IFormFile interface which provides access to the file name, content type, length, and stream.")] = None,
         forcesave: Annotated[Optional[StrictBool], Field(description="Specifies whether to force save the file or not.")] = None,
         _request_timeout: Union[
             None,
@@ -10282,11 +10735,11 @@ class FilesApi:
 
         :param file_id: The editing file ID from the request. (required)
         :type file_id: int
-        :param file_extension: The editing file extension from the request.
-        :type file_extension: str
         :param download_uri: The URI to download the editing file.
         :type download_uri: str
-        :param file: The request file stream.
+        :param file_extension: The editing file extension from the request.
+        :type file_extension: str
+        :param file: The edited file to be saved, uploaded as part of the multipart/form-data request.  This property represents the modified file content from the HTTP request form after editing operations.  The file is accessed via the IFormFile interface which provides access to the file name, content type, length, and stream.
         :type file: bytearray
         :param forcesave: Specifies whether to force save the file or not.
         :type forcesave: bool
@@ -10314,8 +10767,8 @@ class FilesApi:
 
         _param = self._save_editing_file_from_form_serialize(
             file_id=file_id,
-            file_extension=file_extension,
             download_uri=download_uri,
+            file_extension=file_extension,
             file=file,
             forcesave=forcesave,
             _request_auth=_request_auth,
@@ -10327,10 +10780,9 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
             '400': None,
-            '401': None,
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -10345,9 +10797,9 @@ class FilesApi:
     def save_editing_file_from_form_with_http_info(
         self,
         file_id: Annotated[StrictInt, Field(description="The editing file ID from the request.")],
-        file_extension: Annotated[Optional[StrictStr], Field(description="The editing file extension from the request.")] = None,
         download_uri: Annotated[Optional[StrictStr], Field(description="The URI to download the editing file.")] = None,
-        file: Annotated[Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]], Field(description="The request file stream.")] = None,
+        file_extension: Annotated[Optional[StrictStr], Field(description="The editing file extension from the request.")] = None,
+        file: Annotated[Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]], Field(description="The edited file to be saved, uploaded as part of the multipart/form-data request.  This property represents the modified file content from the HTTP request form after editing operations.  The file is accessed via the IFormFile interface which provides access to the file name, content type, length, and stream.")] = None,
         forcesave: Annotated[Optional[StrictBool], Field(description="Specifies whether to force save the file or not.")] = None,
         _request_timeout: Union[
             None,
@@ -10368,11 +10820,11 @@ class FilesApi:
 
         :param file_id: The editing file ID from the request. (required)
         :type file_id: int
-        :param file_extension: The editing file extension from the request.
-        :type file_extension: str
         :param download_uri: The URI to download the editing file.
         :type download_uri: str
-        :param file: The request file stream.
+        :param file_extension: The editing file extension from the request.
+        :type file_extension: str
+        :param file: The edited file to be saved, uploaded as part of the multipart/form-data request.  This property represents the modified file content from the HTTP request form after editing operations.  The file is accessed via the IFormFile interface which provides access to the file name, content type, length, and stream.
         :type file: bytearray
         :param forcesave: Specifies whether to force save the file or not.
         :type forcesave: bool
@@ -10400,8 +10852,8 @@ class FilesApi:
 
         _param = self._save_editing_file_from_form_serialize(
             file_id=file_id,
-            file_extension=file_extension,
             download_uri=download_uri,
+            file_extension=file_extension,
             file=file,
             forcesave=forcesave,
             _request_auth=_request_auth,
@@ -10413,10 +10865,9 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
             '400': None,
-            '401': None,
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -10431,9 +10882,9 @@ class FilesApi:
     def save_editing_file_from_form_without_preload_content(
         self,
         file_id: Annotated[StrictInt, Field(description="The editing file ID from the request.")],
-        file_extension: Annotated[Optional[StrictStr], Field(description="The editing file extension from the request.")] = None,
         download_uri: Annotated[Optional[StrictStr], Field(description="The URI to download the editing file.")] = None,
-        file: Annotated[Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]], Field(description="The request file stream.")] = None,
+        file_extension: Annotated[Optional[StrictStr], Field(description="The editing file extension from the request.")] = None,
+        file: Annotated[Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]], Field(description="The edited file to be saved, uploaded as part of the multipart/form-data request.  This property represents the modified file content from the HTTP request form after editing operations.  The file is accessed via the IFormFile interface which provides access to the file name, content type, length, and stream.")] = None,
         forcesave: Annotated[Optional[StrictBool], Field(description="Specifies whether to force save the file or not.")] = None,
         _request_timeout: Union[
             None,
@@ -10454,11 +10905,11 @@ class FilesApi:
 
         :param file_id: The editing file ID from the request. (required)
         :type file_id: int
-        :param file_extension: The editing file extension from the request.
-        :type file_extension: str
         :param download_uri: The URI to download the editing file.
         :type download_uri: str
-        :param file: The request file stream.
+        :param file_extension: The editing file extension from the request.
+        :type file_extension: str
+        :param file: The edited file to be saved, uploaded as part of the multipart/form-data request.  This property represents the modified file content from the HTTP request form after editing operations.  The file is accessed via the IFormFile interface which provides access to the file name, content type, length, and stream.
         :type file: bytearray
         :param forcesave: Specifies whether to force save the file or not.
         :type forcesave: bool
@@ -10486,8 +10937,8 @@ class FilesApi:
 
         _param = self._save_editing_file_from_form_serialize(
             file_id=file_id,
-            file_extension=file_extension,
             download_uri=download_uri,
+            file_extension=file_extension,
             file=file,
             forcesave=forcesave,
             _request_auth=_request_auth,
@@ -10499,10 +10950,9 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
             '400': None,
-            '401': None,
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -10512,8 +10962,8 @@ class FilesApi:
     def _save_editing_file_from_form_serialize(
         self,
         file_id,
-        file_extension,
         download_uri,
+        file_extension,
         file,
         forcesave,
         _request_auth,
@@ -10540,12 +10990,14 @@ class FilesApi:
         if file_id is not None:
             _path_params['fileId'] = file_id
         # process the query parameters
+        if download_uri is not None:
+            
+            _query_params.append(('DownloadUri', download_uri))
+            
         # process the header parameters
         # process the form parameters
         if file_extension is not None:
             _form_params.append(('FileExtension', file_extension))
-        if download_uri is not None:
-            _form_params.append(('DownloadUri', download_uri))
         if file is not None:
             _files['File'] = file
         if forcesave is not None:
@@ -10665,10 +11117,9 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
-            '401': None,
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -10738,10 +11189,9 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
-            '401': None,
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -10811,10 +11261,9 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
-            '401': None,
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -10968,10 +11417,9 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
-            '401': None,
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -11041,10 +11489,9 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
-            '401': None,
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -11114,10 +11561,9 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
-            '401': None,
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -11265,8 +11711,7 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -11337,8 +11782,7 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -11409,8 +11853,7 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -11565,8 +12008,7 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -11637,8 +12079,7 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -11709,8 +12150,7 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -11864,11 +12304,10 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
-            '401': None,
             '403': None,
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -11938,11 +12377,10 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
-            '401': None,
             '403': None,
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -12012,11 +12450,10 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
-            '401': None,
             '403': None,
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -12167,8 +12604,7 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileEntryIntegerArrayWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -12235,8 +12671,7 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileEntryIntegerArrayWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -12303,8 +12738,7 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileEntryIntegerArrayWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -12456,8 +12890,7 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -12528,8 +12961,7 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -12600,8 +13032,7 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -12745,10 +13176,9 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
-            '401': None,
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -12814,10 +13244,9 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
-            '401': None,
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -12883,10 +13312,9 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
-            '401': None,
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -13024,10 +13452,9 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
-            '401': None,
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -13097,10 +13524,9 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
-            '401': None,
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -13170,10 +13596,9 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
-            '401': None,
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -13261,7 +13686,7 @@ class FilesApi:
     def track_edit_file(
         self,
         file_id: Annotated[StrictInt, Field(description="The file ID to track editing changes.")],
-        tab_id: Annotated[Optional[StrictStr], Field(description="The tab ID to track editing changes.")] = None,
+        tab_id: Annotated[Optional[UUID], Field(description="The tab ID to track editing changes.")] = None,
         doc_key_for_track: Annotated[Optional[StrictStr], Field(description="The document key for tracking changes.")] = None,
         is_finish: Annotated[Optional[StrictBool], Field(description="Specifies whether to finish file tracking or not.")] = None,
         _request_timeout: Union[
@@ -13284,7 +13709,7 @@ class FilesApi:
         :param file_id: The file ID to track editing changes. (required)
         :type file_id: int
         :param tab_id: The tab ID to track editing changes.
-        :type tab_id: str
+        :type tab_id: UUID
         :param doc_key_for_track: The document key for tracking changes.
         :type doc_key_for_track: str
         :param is_finish: Specifies whether to finish file tracking or not.
@@ -13325,8 +13750,7 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "KeyValuePairBooleanStringWrapper",
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -13341,7 +13765,7 @@ class FilesApi:
     def track_edit_file_with_http_info(
         self,
         file_id: Annotated[StrictInt, Field(description="The file ID to track editing changes.")],
-        tab_id: Annotated[Optional[StrictStr], Field(description="The tab ID to track editing changes.")] = None,
+        tab_id: Annotated[Optional[UUID], Field(description="The tab ID to track editing changes.")] = None,
         doc_key_for_track: Annotated[Optional[StrictStr], Field(description="The document key for tracking changes.")] = None,
         is_finish: Annotated[Optional[StrictBool], Field(description="Specifies whether to finish file tracking or not.")] = None,
         _request_timeout: Union[
@@ -13364,7 +13788,7 @@ class FilesApi:
         :param file_id: The file ID to track editing changes. (required)
         :type file_id: int
         :param tab_id: The tab ID to track editing changes.
-        :type tab_id: str
+        :type tab_id: UUID
         :param doc_key_for_track: The document key for tracking changes.
         :type doc_key_for_track: str
         :param is_finish: Specifies whether to finish file tracking or not.
@@ -13405,8 +13829,7 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "KeyValuePairBooleanStringWrapper",
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -13421,7 +13844,7 @@ class FilesApi:
     def track_edit_file_without_preload_content(
         self,
         file_id: Annotated[StrictInt, Field(description="The file ID to track editing changes.")],
-        tab_id: Annotated[Optional[StrictStr], Field(description="The tab ID to track editing changes.")] = None,
+        tab_id: Annotated[Optional[UUID], Field(description="The tab ID to track editing changes.")] = None,
         doc_key_for_track: Annotated[Optional[StrictStr], Field(description="The document key for tracking changes.")] = None,
         is_finish: Annotated[Optional[StrictBool], Field(description="Specifies whether to finish file tracking or not.")] = None,
         _request_timeout: Union[
@@ -13444,7 +13867,7 @@ class FilesApi:
         :param file_id: The file ID to track editing changes. (required)
         :type file_id: int
         :param tab_id: The tab ID to track editing changes.
-        :type tab_id: str
+        :type tab_id: UUID
         :param doc_key_for_track: The document key for tracking changes.
         :type doc_key_for_track: str
         :param is_finish: Specifies whether to finish file tracking or not.
@@ -13485,8 +13908,7 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "KeyValuePairBooleanStringWrapper",
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -13634,8 +14056,7 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -13706,8 +14127,7 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -13778,8 +14198,7 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )

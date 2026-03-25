@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,16 +21,17 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from pydantic import BaseModel, ConfigDict, Field
+from typing import Any, ClassVar, Dict, List
+from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
 class Culture(BaseModel):
     """
-    The culture code parameters.
+    The culture name parameters.
     """ # noqa: E501
-    culture_name: Optional[StrictStr] = Field(default=None, description="The user language.", alias="cultureName")
+    culture_name: Annotated[str, Field(min_length=0, strict=True, max_length=85)] = Field(description="The user culture name (en-US, de, fr, es, ...).", alias="cultureName")
     __properties: ClassVar[List[str]] = ["cultureName"]
 
     model_config = ConfigDict(
@@ -72,11 +73,6 @@ class Culture(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # set to None if culture_name (nullable) is None
-        # and model_fields_set contains the field
-        if self.culture_name is None and "culture_name" in self.model_fields_set:
-            _dict['cultureName'] = None
-
         return _dict
 
     @classmethod

@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,8 +21,9 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool
 from typing import Any, ClassVar, Dict, List
+from uuid import UUID
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -30,8 +31,8 @@ class ProductAdministratorDto(BaseModel):
     """
     The product administrator parameters.
     """ # noqa: E501
-    product_id: StrictStr = Field(description="The product ID.", alias="productId")
-    user_id: StrictStr = Field(description="The user unique identifier.", alias="userId")
+    product_id: UUID = Field(description="The product ID.", alias="productId")
+    user_id: UUID = Field(description="The user unique identifier.", alias="userId")
     administrator: StrictBool = Field(description="Indicates whether the user has administrator privileges for the product.")
     __properties: ClassVar[List[str]] = ["productId", "userId", "administrator"]
 

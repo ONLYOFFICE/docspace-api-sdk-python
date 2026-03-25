@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **price_iso_currency_symbol** | **str** | The tenant price three-character ISO 4217 currency symbol. | [optional] 
 **product_id** | **str** | The tenant product ID. | [optional] 
 **service_name** | **str** | The service name. | [optional] 
+**service_group** | **str** | The service group. | [optional] 
 **visible** | **bool** | Specifies if the tenant quota is visible or not. | [optional] 
 **wallet** | **bool** | Specifies if the tenant quota applies to the wallet or not | [optional] 
 **due_date** | **datetime** | The quota due date. | [optional] 
@@ -34,6 +35,7 @@ Name | Type | Description | Notes
 **branding** | **bool** | Specifies if the branding settings are available or not. | [optional] 
 **customization** | **bool** | Specifies if the customization settings are available or not. | [optional] 
 **lifetime** | **bool** | Specifies if the license has the lifetime settings or not. | [optional] 
+**automation_api** | **bool** | Specifies if the Automation API is available or not. | [optional] 
 **custom** | **bool** | Specifies if the custom domain URL is available or not. | [optional] 
 **restore** | **bool** | Specifies if the restore is enabled or not. | [optional] 
 **oauth** | **bool** | Specifies if Oauth is available or not. | [optional] 
@@ -41,8 +43,9 @@ Name | Type | Description | Notes
 **third_party** | **bool** | Specifies if the third-party accounts linking is available or not. | [optional] 
 **year** | **bool** | Specifies if the tenant quota is yearly subscription or not. | [optional] 
 **count_free_backup** | **int** | The number of free backups within a month. | [optional] 
-**backup** | **bool** | Specifies if the backup anabled as a wallet service or not. | [optional] 
+**backup** | **bool** | Specifies if the backup enabled as a wallet service or not. | [optional] 
 **count_ai_agent** | **int** | The number of AI agents. | [optional] 
+**ai_tools** | **bool** | Specifies if the AI tools enabled as a wallet service or not. | [optional] 
 
 ## Example
 

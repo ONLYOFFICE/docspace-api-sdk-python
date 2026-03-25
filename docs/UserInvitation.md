@@ -5,7 +5,7 @@ The user invitation parameters.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**users_ids** | **List[str]** | The list of user IDs. | [optional] 
+**users_ids** | **List[UUID]** | The list of user IDs. | [optional] 
 **resend_all** | **bool** | Specifies whether to resend all user invitations or not. | [optional] 
 
 ## Example

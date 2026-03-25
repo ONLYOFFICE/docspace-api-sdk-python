@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,8 +21,9 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List
+from uuid import UUID
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -30,7 +31,7 @@ class OwnerIdSettingsRequestDto(BaseModel):
     """
     The request parameters for managing the owner-specific settings.
     """ # noqa: E501
-    owner_id: StrictStr = Field(description="The ID of the owner whose settings are being managed.", alias="ownerId")
+    owner_id: UUID = Field(description="The ID of the owner whose settings are being managed.", alias="ownerId")
     __properties: ClassVar[List[str]] = ["ownerId"]
 
     model_config = ConfigDict(

@@ -1,14 +1,15 @@
 # BackupHistoryRecord
+The backup history parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** |  | 
-**file_name** | **str** |  | 
+**id** | **UUID** | The backup ID. | 
+**file_name** | **str** | The backup file name. | 
 **storage_type** | [**BackupStorageType**](BackupStorageType.md) |  | 
-**created_on** | **datetime** |  | 
-**expires_on** | **datetime** |  | 
+**created_on** | **datetime** | The backup creation date. | 
+**expires_on** | **datetime** | The backup expiration date. | 
 
 ## Example
 

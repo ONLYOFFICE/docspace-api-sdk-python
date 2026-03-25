@@ -1,15 +1,16 @@
 # ScheduleDto
+The backup schedule parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **storage_type** | [**BackupStorageType**](BackupStorageType.md) |  | 
-**storage_params** | **Dict[str, Optional[str]]** |  | 
+**storage_params** | **Dict[str, Optional[str]]** | The backup storage parameters. | 
 **cron_params** | [**CronParams**](CronParams.md) |  | 
-**backups_stored** | **int** |  | [optional] 
-**last_backup_time** | **datetime** |  | 
-**dump** | **bool** |  | 
+**backups_stored** | **int** | The maximum number of the stored backup copies. | [optional] 
+**last_backup_time** | **datetime** | The date and time when the last backup was reated. | 
+**dump** | **bool** | Specifies if a dump will be created or not. | 
 
 ## Example
 

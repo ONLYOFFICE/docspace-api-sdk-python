@@ -62,8 +62,10 @@ Name | Type | Description | Notes
 **used_space** | **int** | How much folder space is used (counter). | [optional] 
 **password_protected** | **bool** | Specifies if the folder is password protected or not. | [optional] 
 **expired** | **bool** | Specifies if an external link to the folder is expired or not. | [optional] 
-**chat_settings** | [**ChatSettings**](ChatSettings.md) |  | [optional] 
+**chat_settings** | [**ChatSettingsDto**](ChatSettingsDto.md) |  | [optional] 
 **root_room_type** | [**RoomType**](RoomType.md) |  | [optional] 
+**save_form_as_xlsx** | **bool** | Specifies whether to save form data as XLSX file. | [optional] 
+**send_form_to_external_db** | **bool** | Specifies whether to send form data to external database. | [optional] 
 
 ## Example
 

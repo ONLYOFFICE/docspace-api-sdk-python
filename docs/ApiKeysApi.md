@@ -57,7 +57,6 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -72,7 +71,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling ApiKeysApi->create_api_key: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -102,7 +100,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **key_id** | **str**| The API key ID. | 
+ **key_id** | **UUID**| The API key ID. | 
 
 ### Return type
 
@@ -134,12 +132,11 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.ApiKeysApi(api_client)
-    key_id = 'key_id_example' # str | The API key ID.
+    key_id = UUID('00000000-0000-0000-0000-000000000000') # UUID | The API key ID.
 
     try:
         # Delete a user API key
@@ -149,7 +146,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling ApiKeysApi->delete_api_key: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -208,7 +204,6 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -222,7 +217,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling ApiKeysApi->get_all_permissions: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -281,7 +275,6 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -295,7 +288,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling ApiKeysApi->get_api_key: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -354,7 +346,6 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -368,7 +359,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling ApiKeysApi->get_api_keys: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -398,7 +388,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **key_id** | **str**| The unique identifier of the API key to update. | 
+ **key_id** | **UUID**| The unique identifier of the API key to update. | 
  **update_api_key_request** | [**UpdateApiKeyRequest**](UpdateApiKeyRequest.md)| The request parameters for updating an existing API key. | 
 
 ### Return type
@@ -432,12 +422,11 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.ApiKeysApi(api_client)
-    key_id = '75a5f745-f697-4418-b38d-0fe0d277e258' # str | The unique identifier of the API key to update.
+    key_id = UUID('00000000-0000-0000-0000-000000000000') # UUID | The unique identifier of the API key to update.
     update_api_key_request = docspace_api_sdk.UpdateApiKeyRequest() # UpdateApiKeyRequest | The request parameters for updating an existing API key.
 
     try:
@@ -448,7 +437,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling ApiKeysApi->update_api_key: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers

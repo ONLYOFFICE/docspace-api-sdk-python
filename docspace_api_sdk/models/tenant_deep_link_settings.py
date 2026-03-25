@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -33,7 +33,7 @@ class TenantDeepLinkSettings(BaseModel):
     The deep link settings.
     """ # noqa: E501
     handling_mode: Optional[DeepLinkHandlingMode] = Field(default=None, alias="handlingMode")
-    last_modified: Optional[datetime] = Field(default=None, alias="lastModified")
+    last_modified: Optional[datetime] = Field(default=None, description="The timestamp indicating when the settings were last modified.", alias="lastModified")
     __properties: ClassVar[List[str]] = ["handlingMode", "lastModified"]
 
     model_config = ConfigDict(

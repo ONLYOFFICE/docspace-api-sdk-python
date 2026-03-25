@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,9 +22,15 @@ from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
 from pydantic import Field, StrictStr
+from typing import Optional
 from typing_extensions import Annotated
+from uuid import UUID
 from docspace_api_sdk.models.employee_type import EmployeeType
 from docspace_api_sdk.models.int64_wrapper import Int64Wrapper
+from docspace_api_sdk.models.invitation_link_create_request_dto import InvitationLinkCreateRequestDto
+from docspace_api_sdk.models.invitation_link_delete_request_dto import InvitationLinkDeleteRequestDto
+from docspace_api_sdk.models.invitation_link_update_request_dto import InvitationLinkUpdateRequestDto
+from docspace_api_sdk.models.invitation_link_wrapper import InvitationLinkWrapper
 from docspace_api_sdk.models.string_wrapper import StringWrapper
 from docspace_api_sdk.models.user_info_wrapper import UserInfoWrapper
 
@@ -47,11 +53,10 @@ class UsersApi:
 
 
 
-
     @validate_call
-    def get_invitation_link(
+    def create_invitation_link(
         self,
-        employee_type: Annotated[EmployeeType, Field(description="The type of employee role for the invitation link (All, RoomAdmin, Guest, DocSpaceAdmin, User).")],
+        invitation_link_create_request_dto: Optional[InvitationLinkCreateRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -64,13 +69,13 @@ class UsersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> StringWrapper:
-        """Get an invitation link
+    ) -> InvitationLinkWrapper:
+        """Create an invitation link
 
         Returns an invitation link for joining the portal.
 
-        :param employee_type: The type of employee role for the invitation link (All, RoomAdmin, Guest, DocSpaceAdmin, User). (required)
-        :type employee_type: EmployeeType
+        :param invitation_link_create_request_dto:
+        :type invitation_link_create_request_dto: InvitationLinkCreateRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -93,8 +98,8 @@ class UsersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_invitation_link_serialize(
-            employee_type=employee_type,
+        _param = self._create_invitation_link_serialize(
+            invitation_link_create_request_dto=invitation_link_create_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -102,10 +107,9 @@ class UsersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "StringWrapper",
+            '200': "InvitationLinkWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -117,9 +121,9 @@ class UsersApi:
 
 
     @validate_call
-    def get_invitation_link_with_http_info(
+    def create_invitation_link_with_http_info(
         self,
-        employee_type: Annotated[EmployeeType, Field(description="The type of employee role for the invitation link (All, RoomAdmin, Guest, DocSpaceAdmin, User).")],
+        invitation_link_create_request_dto: Optional[InvitationLinkCreateRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -132,13 +136,13 @@ class UsersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[StringWrapper]:
-        """Get an invitation link
+    ) -> ApiResponse[InvitationLinkWrapper]:
+        """Create an invitation link
 
         Returns an invitation link for joining the portal.
 
-        :param employee_type: The type of employee role for the invitation link (All, RoomAdmin, Guest, DocSpaceAdmin, User). (required)
-        :type employee_type: EmployeeType
+        :param invitation_link_create_request_dto:
+        :type invitation_link_create_request_dto: InvitationLinkCreateRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -161,8 +165,8 @@ class UsersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_invitation_link_serialize(
-            employee_type=employee_type,
+        _param = self._create_invitation_link_serialize(
+            invitation_link_create_request_dto=invitation_link_create_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -170,10 +174,9 @@ class UsersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "StringWrapper",
+            '200': "InvitationLinkWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -185,9 +188,9 @@ class UsersApi:
 
 
     @validate_call
-    def get_invitation_link_without_preload_content(
+    def create_invitation_link_without_preload_content(
         self,
-        employee_type: Annotated[EmployeeType, Field(description="The type of employee role for the invitation link (All, RoomAdmin, Guest, DocSpaceAdmin, User).")],
+        invitation_link_create_request_dto: Optional[InvitationLinkCreateRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -201,12 +204,12 @@ class UsersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get an invitation link
+        """Create an invitation link
 
         Returns an invitation link for joining the portal.
 
-        :param employee_type: The type of employee role for the invitation link (All, RoomAdmin, Guest, DocSpaceAdmin, User). (required)
-        :type employee_type: EmployeeType
+        :param invitation_link_create_request_dto:
+        :type invitation_link_create_request_dto: InvitationLinkCreateRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -229,6 +232,437 @@ class UsersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
+        _param = self._create_invitation_link_serialize(
+            invitation_link_create_request_dto=invitation_link_create_request_dto,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "InvitationLinkWrapper",
+            '401': None,
+        }        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _create_invitation_link_serialize(
+        self,
+        invitation_link_create_request_dto,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if invitation_link_create_request_dto is not None:
+            _body_params = invitation_link_create_request_dto
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
+        ]
+
+
+        resource_path = "/api/2.0/portal/users/invitationlink"
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path=resource_path,
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def delete_invitation_link(
+        self,
+        invitation_link_delete_request_dto: Annotated[Optional[InvitationLinkDeleteRequestDto], Field(description="The data transfer object containing the details of the invitation link to be deleted.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> StringWrapper:
+        """Deletes an invitation link.
+
+        Ensures that the current user has permission to delete the specified invitation link.  Throws security or not-found exceptions if required conditions are not met.
+
+        :param invitation_link_delete_request_dto: The data transfer object containing the details of the invitation link to be deleted.
+        :type invitation_link_delete_request_dto: InvitationLinkDeleteRequestDto
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._delete_invitation_link_serialize(
+            invitation_link_delete_request_dto=invitation_link_delete_request_dto,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "StringWrapper",
+            '401': None,
+        }        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def delete_invitation_link_with_http_info(
+        self,
+        invitation_link_delete_request_dto: Annotated[Optional[InvitationLinkDeleteRequestDto], Field(description="The data transfer object containing the details of the invitation link to be deleted.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[StringWrapper]:
+        """Deletes an invitation link.
+
+        Ensures that the current user has permission to delete the specified invitation link.  Throws security or not-found exceptions if required conditions are not met.
+
+        :param invitation_link_delete_request_dto: The data transfer object containing the details of the invitation link to be deleted.
+        :type invitation_link_delete_request_dto: InvitationLinkDeleteRequestDto
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._delete_invitation_link_serialize(
+            invitation_link_delete_request_dto=invitation_link_delete_request_dto,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "StringWrapper",
+            '401': None,
+        }        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def delete_invitation_link_without_preload_content(
+        self,
+        invitation_link_delete_request_dto: Annotated[Optional[InvitationLinkDeleteRequestDto], Field(description="The data transfer object containing the details of the invitation link to be deleted.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Deletes an invitation link.
+
+        Ensures that the current user has permission to delete the specified invitation link.  Throws security or not-found exceptions if required conditions are not met.
+
+        :param invitation_link_delete_request_dto: The data transfer object containing the details of the invitation link to be deleted.
+        :type invitation_link_delete_request_dto: InvitationLinkDeleteRequestDto
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._delete_invitation_link_serialize(
+            invitation_link_delete_request_dto=invitation_link_delete_request_dto,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "StringWrapper",
+            '401': None,
+        }        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _delete_invitation_link_serialize(
+        self,
+        invitation_link_delete_request_dto,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if invitation_link_delete_request_dto is not None:
+            _body_params = invitation_link_delete_request_dto
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
+        ]
+
+
+        resource_path = "/api/2.0/portal/users/invitationlink"
+
+        return self.api_client.param_serialize(
+            method='DELETE',
+            resource_path=resource_path,
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def get_invitation_link(
+        self,
+        employee_type: Annotated[EmployeeType, Field(description="The type of employee role for the invitation link (DocSpaceAdmin, RoomAdmin or User).")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> StringWrapper:
+        """(Deprecated) Get an invitation link
+
+        Returns an invitation link for joining the portal.
+
+        :param employee_type: The type of employee role for the invitation link (DocSpaceAdmin, RoomAdmin or User). (required)
+        :type employee_type: EmployeeType
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+        warnings.warn("GET /api/2.0/portal/users/invite/{employeeType} is deprecated.", DeprecationWarning)
+
         _param = self._get_invitation_link_serialize(
             employee_type=employee_type,
             _request_auth=_request_auth,
@@ -240,8 +674,143 @@ class UsersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def get_invitation_link_with_http_info(
+        self,
+        employee_type: Annotated[EmployeeType, Field(description="The type of employee role for the invitation link (DocSpaceAdmin, RoomAdmin or User).")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[StringWrapper]:
+        """(Deprecated) Get an invitation link
+
+        Returns an invitation link for joining the portal.
+
+        :param employee_type: The type of employee role for the invitation link (DocSpaceAdmin, RoomAdmin or User). (required)
+        :type employee_type: EmployeeType
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+        warnings.warn("GET /api/2.0/portal/users/invite/{employeeType} is deprecated.", DeprecationWarning)
+
+        _param = self._get_invitation_link_serialize(
+            employee_type=employee_type,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "StringWrapper",
+            '401': None,
+        }        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def get_invitation_link_without_preload_content(
+        self,
+        employee_type: Annotated[EmployeeType, Field(description="The type of employee role for the invitation link (DocSpaceAdmin, RoomAdmin or User).")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """(Deprecated) Get an invitation link
+
+        Returns an invitation link for joining the portal.
+
+        :param employee_type: The type of employee role for the invitation link (DocSpaceAdmin, RoomAdmin or User). (required)
+        :type employee_type: EmployeeType
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+        warnings.warn("GET /api/2.0/portal/users/invite/{employeeType} is deprecated.", DeprecationWarning)
+
+        _param = self._get_invitation_link_serialize(
+            employee_type=employee_type,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "StringWrapper",
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -321,6 +890,275 @@ class UsersApi:
 
 
     @validate_call
+    def get_invitation_link_by_employee_type(
+        self,
+        employee_type: Annotated[EmployeeType, Field(description="The type of employee role for the invitation link (DocSpaceAdmin, RoomAdmin or User).")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> InvitationLinkWrapper:
+        """Get an invitation link
+
+        Returns an invitation link for joining the portal.
+
+        :param employee_type: The type of employee role for the invitation link (DocSpaceAdmin, RoomAdmin or User). (required)
+        :type employee_type: EmployeeType
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_invitation_link_by_employee_type_serialize(
+            employee_type=employee_type,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "InvitationLinkWrapper",
+            '401': None,
+        }        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def get_invitation_link_by_employee_type_with_http_info(
+        self,
+        employee_type: Annotated[EmployeeType, Field(description="The type of employee role for the invitation link (DocSpaceAdmin, RoomAdmin or User).")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[InvitationLinkWrapper]:
+        """Get an invitation link
+
+        Returns an invitation link for joining the portal.
+
+        :param employee_type: The type of employee role for the invitation link (DocSpaceAdmin, RoomAdmin or User). (required)
+        :type employee_type: EmployeeType
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_invitation_link_by_employee_type_serialize(
+            employee_type=employee_type,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "InvitationLinkWrapper",
+            '401': None,
+        }        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def get_invitation_link_by_employee_type_without_preload_content(
+        self,
+        employee_type: Annotated[EmployeeType, Field(description="The type of employee role for the invitation link (DocSpaceAdmin, RoomAdmin or User).")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Get an invitation link
+
+        Returns an invitation link for joining the portal.
+
+        :param employee_type: The type of employee role for the invitation link (DocSpaceAdmin, RoomAdmin or User). (required)
+        :type employee_type: EmployeeType
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_invitation_link_by_employee_type_serialize(
+            employee_type=employee_type,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "InvitationLinkWrapper",
+            '401': None,
+        }        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _get_invitation_link_by_employee_type_serialize(
+        self,
+        employee_type,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if employee_type is not None:
+            _path_params['employeeType'] = employee_type.value
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
+        ]
+
+
+        resource_path = "/api/2.0/portal/users/invitationlink/{employeeType}"
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path=resource_path,
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
     def get_portal_users_count(
         self,
         _request_timeout: Union[
@@ -372,8 +1210,7 @@ class UsersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Int64Wrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -436,8 +1273,7 @@ class UsersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Int64Wrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -500,8 +1336,7 @@ class UsersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Int64Wrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -580,7 +1415,7 @@ class UsersApi:
     @validate_call
     def get_user_by_id(
         self,
-        user_id: Annotated[StrictStr, Field(description="The user ID extracted from the route parameters.")],
+        user_id: Annotated[UUID, Field(description="The user ID extracted from the route parameters.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -599,7 +1434,7 @@ class UsersApi:
         Returns a user with the ID specified in the request from the current portal.
 
         :param user_id: The user ID extracted from the route parameters. (required)
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -633,8 +1468,7 @@ class UsersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "UserInfoWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -648,7 +1482,7 @@ class UsersApi:
     @validate_call
     def get_user_by_id_with_http_info(
         self,
-        user_id: Annotated[StrictStr, Field(description="The user ID extracted from the route parameters.")],
+        user_id: Annotated[UUID, Field(description="The user ID extracted from the route parameters.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -667,7 +1501,7 @@ class UsersApi:
         Returns a user with the ID specified in the request from the current portal.
 
         :param user_id: The user ID extracted from the route parameters. (required)
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -701,8 +1535,7 @@ class UsersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "UserInfoWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -716,7 +1549,7 @@ class UsersApi:
     @validate_call
     def get_user_by_id_without_preload_content(
         self,
-        user_id: Annotated[StrictStr, Field(description="The user ID extracted from the route parameters.")],
+        user_id: Annotated[UUID, Field(description="The user ID extracted from the route parameters.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -735,7 +1568,7 @@ class UsersApi:
         Returns a user with the ID specified in the request from the current portal.
 
         :param user_id: The user ID extracted from the route parameters. (required)
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -769,8 +1602,7 @@ class UsersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "UserInfoWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -901,8 +1733,7 @@ class UsersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -965,8 +1796,7 @@ class UsersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1029,8 +1859,7 @@ class UsersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1102,7 +1931,7 @@ class UsersApi:
     @validate_call
     def send_congratulations(
         self,
-        userid: Annotated[StrictStr, Field(description="The user ID to receive the congratulatory message.")],
+        userid: Annotated[UUID, Field(description="The user ID to receive the congratulatory message.")],
         key: Annotated[StrictStr, Field(description="The template identifier or email configuration key.")],
         _request_timeout: Union[
             None,
@@ -1122,7 +1951,7 @@ class UsersApi:
         Sends congratulations to the user after registering a portal.
 
         :param userid: The user ID to receive the congratulatory message. (required)
-        :type userid: str
+        :type userid: UUID
         :param key: The template identifier or email configuration key. (required)
         :type key: str
         :param _request_timeout: timeout setting for this request. If one
@@ -1159,8 +1988,7 @@ class UsersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1174,7 +2002,7 @@ class UsersApi:
     @validate_call
     def send_congratulations_with_http_info(
         self,
-        userid: Annotated[StrictStr, Field(description="The user ID to receive the congratulatory message.")],
+        userid: Annotated[UUID, Field(description="The user ID to receive the congratulatory message.")],
         key: Annotated[StrictStr, Field(description="The template identifier or email configuration key.")],
         _request_timeout: Union[
             None,
@@ -1194,7 +2022,7 @@ class UsersApi:
         Sends congratulations to the user after registering a portal.
 
         :param userid: The user ID to receive the congratulatory message. (required)
-        :type userid: str
+        :type userid: UUID
         :param key: The template identifier or email configuration key. (required)
         :type key: str
         :param _request_timeout: timeout setting for this request. If one
@@ -1231,8 +2059,7 @@ class UsersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1246,7 +2073,7 @@ class UsersApi:
     @validate_call
     def send_congratulations_without_preload_content(
         self,
-        userid: Annotated[StrictStr, Field(description="The user ID to receive the congratulatory message.")],
+        userid: Annotated[UUID, Field(description="The user ID to receive the congratulatory message.")],
         key: Annotated[StrictStr, Field(description="The template identifier or email configuration key.")],
         _request_timeout: Union[
             None,
@@ -1266,7 +2093,7 @@ class UsersApi:
         Sends congratulations to the user after registering a portal.
 
         :param userid: The user ID to receive the congratulatory message. (required)
-        :type userid: str
+        :type userid: UUID
         :param key: The template identifier or email configuration key. (required)
         :type key: str
         :param _request_timeout: timeout setting for this request. If one
@@ -1303,8 +2130,7 @@ class UsersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1361,6 +2187,288 @@ class UsersApi:
 
         return self.api_client.param_serialize(
             method='POST',
+            resource_path=resource_path,
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def update_invitation_link(
+        self,
+        invitation_link_update_request_dto: Optional[InvitationLinkUpdateRequestDto] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> InvitationLinkWrapper:
+        """Update an invitation link
+
+        Returns an invitation link for joining the portal.
+
+        :param invitation_link_update_request_dto:
+        :type invitation_link_update_request_dto: InvitationLinkUpdateRequestDto
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._update_invitation_link_serialize(
+            invitation_link_update_request_dto=invitation_link_update_request_dto,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "InvitationLinkWrapper",
+            '401': None,
+        }        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def update_invitation_link_with_http_info(
+        self,
+        invitation_link_update_request_dto: Optional[InvitationLinkUpdateRequestDto] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[InvitationLinkWrapper]:
+        """Update an invitation link
+
+        Returns an invitation link for joining the portal.
+
+        :param invitation_link_update_request_dto:
+        :type invitation_link_update_request_dto: InvitationLinkUpdateRequestDto
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._update_invitation_link_serialize(
+            invitation_link_update_request_dto=invitation_link_update_request_dto,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "InvitationLinkWrapper",
+            '401': None,
+        }        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def update_invitation_link_without_preload_content(
+        self,
+        invitation_link_update_request_dto: Optional[InvitationLinkUpdateRequestDto] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Update an invitation link
+
+        Returns an invitation link for joining the portal.
+
+        :param invitation_link_update_request_dto:
+        :type invitation_link_update_request_dto: InvitationLinkUpdateRequestDto
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._update_invitation_link_serialize(
+            invitation_link_update_request_dto=invitation_link_update_request_dto,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "InvitationLinkWrapper",
+            '401': None,
+        }        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _update_invitation_link_serialize(
+        self,
+        invitation_link_update_request_dto,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if invitation_link_update_request_dto is not None:
+            _body_params = invitation_link_update_request_dto
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
+        ]
+
+
+        resource_path = "/api/2.0/portal/users/invitationlink"
+
+        return self.api_client.param_serialize(
+            method='PUT',
             resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,

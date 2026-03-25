@@ -10,8 +10,8 @@ Name | Type | Description | Notes
 **enabled** | **bool** | Indicates whether the TFA configuration is currently active. | 
 **avaliable** | **bool** | Indicates whether the TFA configuration can be used. | 
 **trusted_ips** | **List[str]** | The list of IP addresses that are exempt from TFA requirements. | [optional] 
-**mandatory_users** | **List[str]** | The list of user IDs that are required to use TFA. | [optional] 
-**mandatory_groups** | **List[str]** | The list of group IDs whose members are required to use TFA. | [optional] 
+**mandatory_users** | **List[UUID]** | The list of user IDs that are required to use TFA. | [optional] 
+**mandatory_groups** | **List[UUID]** | The list of group IDs whose members are required to use TFA. | [optional] 
 
 ## Example
 

@@ -9,7 +9,7 @@ Method | HTTP request | Description
 
 
 # **change_user_password**
-> EmployeeFullWrapper change_user_password(userid, member_base_request_dto)
+> EmployeeFullWrapper change_user_password(userid, change_password_request)
 
 Sets a new password to the user with the ID specified in the request.
 
@@ -20,8 +20,8 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **userid** | **str**| The user ID. | 
- **member_base_request_dto** | [**MemberBaseRequestDto**](MemberBaseRequestDto.md)| The request parameters for the user generic information. | 
+ **userid** | **UUID**| The user ID. | 
+ **change_password_request** | [**ChangePasswordRequest**](ChangePasswordRequest.md)| The request parameters for updating a user password. | 
 
 ### Return type
 
@@ -36,8 +36,8 @@ Name | Type | Description  | Notes
 
 ```python
 import docspace_api_sdk
+from docspace_api_sdk.models.change_password_request import ChangePasswordRequest
 from docspace_api_sdk.models.employee_full_wrapper import EmployeeFullWrapper
-from docspace_api_sdk.models.member_base_request_dto import MemberBaseRequestDto
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -54,23 +54,21 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.PasswordApi(api_client)
-    userid = 'aae1e103-bca5-9fa1-ba8c-42058b4abf28' # str | The user ID.
-    member_base_request_dto = docspace_api_sdk.MemberBaseRequestDto() # MemberBaseRequestDto | The request parameters for the user generic information.
+    userid = UUID('00000000-0000-0000-0000-000000000000') # UUID | The user ID.
+    change_password_request = docspace_api_sdk.ChangePasswordRequest() # ChangePasswordRequest | The request parameters for updating a user password.
 
     try:
         # Change a user password
-        api_response = api_instance.change_user_password(userid, member_base_request_dto)
+        api_response = api_instance.change_user_password(userid, change_password_request)
         print("The response of PasswordApi->change_user_password:\n")
         pprint(api_response)
     except Exception as e:
         print("Exception when calling PasswordApi->change_user_password: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -84,10 +82,10 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Detailed user information |  -  |
-**400** | Incorrect email |  -  |
+**400** | Incorrect userId or password |  -  |
+**403** | The link is invalid or no permissions to perform this action |  -  |
+**404** | The user could not be found |  -  |
 **401** | Unauthorized |  -  |
-**403** | The invitation link is invalid or its validity has expired |  -  |
-**404** | User not found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -127,7 +125,6 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -142,7 +139,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling PasswordApi->send_user_password: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers

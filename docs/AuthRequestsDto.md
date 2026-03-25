@@ -11,7 +11,6 @@ Name | Type | Description | Notes
 **provider** | **str** | The type of authentication provider (e.g., internal, Google, Azure). | [optional] 
 **access_token** | **str** | The access token used for authentication with external providers. | [optional] 
 **serialized_profile** | **str** | The serialized user profile data, if applicable. | [optional] 
-**code** | **str** | The code for two-factor authentication. | [optional] 
 **code_o_auth** | **str** | The authorization code used for obtaining OAuth tokens. | [optional] 
 **session** | **bool** | Specifies whether the authentication is session-based. | [optional] 
 **confirm_data** | [**ConfirmData**](ConfirmData.md) |  | [optional] 

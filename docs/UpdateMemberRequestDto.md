@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **is_user** | **bool** | Specifies if this is a guest or a user. | [optional] 
 **first_name** | **str** | The user first name. | [optional] 
 **last_name** | **str** | The user last name. | [optional] 
-**department** | **List[str]** | The list of the user departments. | [optional] 
+**department** | **List[UUID]** | The list of the user departments. | [optional] 
 **title** | **str** | The user title. | [optional] 
 **location** | **str** | The user location. | [optional] 
 **sex** | [**SexEnum**](SexEnum.md) |  | [optional] 

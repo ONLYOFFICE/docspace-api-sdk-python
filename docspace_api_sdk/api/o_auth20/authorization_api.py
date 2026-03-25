@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -42,7 +42,6 @@ class AuthorizationApi:
         if api_client is None:
             api_client = ApiClient.get_default()
         self.api_client = api_client
-
 
 
 
@@ -114,8 +113,7 @@ class AuthorizationApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
             '400': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -194,8 +192,7 @@ class AuthorizationApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
             '400': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -274,8 +271,7 @@ class AuthorizationApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
             '400': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -431,8 +427,7 @@ class AuthorizationApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ExchangeToken200Response",
             '400': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -515,8 +510,7 @@ class AuthorizationApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ExchangeToken200Response",
             '400': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -599,8 +593,7 @@ class AuthorizationApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ExchangeToken200Response",
             '400': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -762,8 +755,7 @@ class AuthorizationApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '302': None,
             '400': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -838,8 +830,7 @@ class AuthorizationApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '302': None,
             '400': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -914,8 +905,7 @@ class AuthorizationApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '302': None,
             '400': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )

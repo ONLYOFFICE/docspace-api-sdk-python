@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,19 +24,18 @@ from typing_extensions import Self
 
 class Location(int, Enum):
     """
-    The location context of the request.
+    [1 - Room, 2 - Documents, 3 - Link]
     """
 
     """
     allowed enum values
     """
-    NUMBER_1 = 1
-    NUMBER_2 = 2
-    NUMBER_3 = 3
+    Room = 1
+    Documents = 2
+    Link = 3
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:
         """Create an instance of Location from a JSON string"""
         return cls(json.loads(json_str))
-
 

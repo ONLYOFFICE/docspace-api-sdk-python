@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -38,6 +38,7 @@ class TenantQuota(BaseModel):
     price_iso_currency_symbol: Optional[StrictStr] = Field(default=None, description="The tenant price three-character ISO 4217 currency symbol.", alias="priceISOCurrencySymbol")
     product_id: Optional[StrictStr] = Field(default=None, description="The tenant product ID.", alias="productId")
     service_name: Optional[StrictStr] = Field(default=None, description="The service name.", alias="serviceName")
+    service_group: Optional[StrictStr] = Field(default=None, description="The service group.", alias="serviceGroup")
     visible: Optional[StrictBool] = Field(default=None, description="Specifies if the tenant quota is visible or not.")
     wallet: Optional[StrictBool] = Field(default=None, description="Specifies if the tenant quota applies to the wallet or not")
     due_date: Optional[datetime] = Field(default=None, description="The quota due date.", alias="dueDate")
@@ -60,6 +61,7 @@ class TenantQuota(BaseModel):
     branding: Optional[StrictBool] = Field(default=None, description="Specifies if the branding settings are available or not.")
     customization: Optional[StrictBool] = Field(default=None, description="Specifies if the customization settings are available or not.")
     lifetime: Optional[StrictBool] = Field(default=None, description="Specifies if the license has the lifetime settings or not.")
+    automation_api: Optional[StrictBool] = Field(default=None, description="Specifies if the Automation API is available or not.", alias="automationApi")
     custom: Optional[StrictBool] = Field(default=None, description="Specifies if the custom domain URL is available or not.")
     restore: Optional[StrictBool] = Field(default=None, description="Specifies if the restore is enabled or not.")
     oauth: Optional[StrictBool] = Field(default=None, description="Specifies if Oauth is available or not.")
@@ -67,9 +69,10 @@ class TenantQuota(BaseModel):
     third_party: Optional[StrictBool] = Field(default=None, description="Specifies if the third-party accounts linking is available or not.", alias="thirdParty")
     year: Optional[StrictBool] = Field(default=None, description="Specifies if the tenant quota is yearly subscription or not.")
     count_free_backup: Optional[StrictInt] = Field(default=None, description="The number of free backups within a month.", alias="countFreeBackup")
-    backup: Optional[StrictBool] = Field(default=None, description="Specifies if the backup anabled as a wallet service or not.")
+    backup: Optional[StrictBool] = Field(default=None, description="Specifies if the backup enabled as a wallet service or not.")
     count_ai_agent: Optional[StrictInt] = Field(default=None, description="The number of AI agents.", alias="countAIAgent")
-    __properties: ClassVar[List[str]] = ["tenantId", "name", "price", "priceCurrencySymbol", "priceISOCurrencySymbol", "productId", "serviceName", "visible", "wallet", "dueDate", "features", "maxFileSize", "maxTotalSize", "countUser", "countRoomAdmin", "usersInRoom", "countRoom", "nonProfit", "trial", "free", "update", "audit", "docsEdition", "ldap", "sso", "statistic", "branding", "customization", "lifetime", "custom", "restore", "oauth", "contentSearch", "thirdParty", "year", "countFreeBackup", "backup", "countAIAgent"]
+    ai_tools: Optional[StrictBool] = Field(default=None, description="Specifies if the AI tools enabled as a wallet service or not.", alias="aiTools")
+    __properties: ClassVar[List[str]] = ["tenantId", "name", "price", "priceCurrencySymbol", "priceISOCurrencySymbol", "productId", "serviceName", "serviceGroup", "visible", "wallet", "dueDate", "features", "maxFileSize", "maxTotalSize", "countUser", "countRoomAdmin", "usersInRoom", "countRoom", "nonProfit", "trial", "free", "update", "audit", "docsEdition", "ldap", "sso", "statistic", "branding", "customization", "lifetime", "automationApi", "custom", "restore", "oauth", "contentSearch", "thirdParty", "year", "countFreeBackup", "backup", "countAIAgent", "aiTools"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -135,6 +138,11 @@ class TenantQuota(BaseModel):
         if self.service_name is None and "service_name" in self.model_fields_set:
             _dict['serviceName'] = None
 
+        # set to None if service_group (nullable) is None
+        # and model_fields_set contains the field
+        if self.service_group is None and "service_group" in self.model_fields_set:
+            _dict['serviceGroup'] = None
+
         # set to None if due_date (nullable) is None
         # and model_fields_set contains the field
         if self.due_date is None and "due_date" in self.model_fields_set:
@@ -165,6 +173,7 @@ class TenantQuota(BaseModel):
             "priceISOCurrencySymbol": obj.get("priceISOCurrencySymbol"),
             "productId": obj.get("productId"),
             "serviceName": obj.get("serviceName"),
+            "serviceGroup": obj.get("serviceGroup"),
             "visible": obj.get("visible"),
             "wallet": obj.get("wallet"),
             "dueDate": obj.get("dueDate"),
@@ -187,6 +196,7 @@ class TenantQuota(BaseModel):
             "branding": obj.get("branding"),
             "customization": obj.get("customization"),
             "lifetime": obj.get("lifetime"),
+            "automationApi": obj.get("automationApi"),
             "custom": obj.get("custom"),
             "restore": obj.get("restore"),
             "oauth": obj.get("oauth"),
@@ -195,7 +205,8 @@ class TenantQuota(BaseModel):
             "year": obj.get("year"),
             "countFreeBackup": obj.get("countFreeBackup"),
             "backup": obj.get("backup"),
-            "countAIAgent": obj.get("countAIAgent")
+            "countAIAgent": obj.get("countAIAgent"),
+            "aiTools": obj.get("aiTools")
         })
         return _obj
 

@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **phone** | **str** | The company phone number. | [optional] 
 **is_licensor** | **bool** | Specifies if a company is a licensor or not. | [optional] 
 **hide_about** | **bool** | Specifies if the About page is visible or not | [optional] 
-**last_modified** | **datetime** |  | [optional] 
+**last_modified** | **datetime** | The timestamp indicating when the settings were last modified. | [optional] 
 
 ## Example
 

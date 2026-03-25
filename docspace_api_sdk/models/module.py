@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,6 +23,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from uuid import UUID
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -30,7 +31,7 @@ class Module(BaseModel):
     """
     The module information.
     """ # noqa: E501
-    id: Optional[StrictStr] = Field(default=None, description="The module ID.")
+    id: Optional[UUID] = Field(default=None, description="The module ID.")
     app_name: Optional[StrictStr] = Field(default=None, description="The module product class name.", alias="appName")
     title: Optional[StrictStr] = Field(default=None, description="The module product class name.")
     link: Optional[StrictStr] = Field(default=None, description="The URL to the module start page.")

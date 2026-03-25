@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -90,9 +90,10 @@ class FilesSettingsDto(BaseModel):
     max_upload_thread_count: Optional[StrictInt] = Field(default=None, description="The maximum number of upload threads.", alias="maxUploadThreadCount")
     chunk_upload_size: Optional[StrictInt] = Field(default=None, description="The size of a large file that is uploaded in chunks.", alias="chunkUploadSize")
     open_editor_in_same_tab: Optional[StrictBool] = Field(default=None, description="Specifies whether to open the editor in the same tab or not.", alias="openEditorInSameTab")
+    organize_rooms_grouping: Optional[StrictBool] = Field(default=None, description="Specifies whether the grouping of rooms is enabled or not.", alias="organizeRoomsGrouping")
     exts_files_vectorized: Optional[List[StrictStr]] = Field(default=None, description="List of extensions available for vectorization", alias="extsFilesVectorized")
     max_vectorization_file_size: Optional[StrictInt] = Field(default=None, description="The maximum file size for vectorization", alias="maxVectorizationFileSize")
-    __properties: ClassVar[List[str]] = ["extsImagePreviewed", "extsMediaPreviewed", "extsWebPreviewed", "extsWebEdited", "extsWebEncrypt", "extsWebReviewed", "extsWebCustomFilterEditing", "extsWebRestrictedEditing", "extsWebCommented", "extsWebTemplate", "extsMustConvert", "extsConvertible", "extsUploadable", "extsArchive", "extsVideo", "extsAudio", "extsImage", "extsSpreadsheet", "extsPresentation", "extsDocument", "extsDiagram", "internalFormats", "masterFormExtension", "paramVersion", "paramOutType", "fileDownloadUrlString", "fileWebViewerUrlString", "fileWebViewerExternalUrlString", "fileWebEditorUrlString", "fileWebEditorExternalUrlString", "fileRedirectPreviewUrlString", "fileThumbnailUrlString", "confirmDelete", "enableThirdParty", "externalShare", "externalShareSocialMedia", "storeOriginalFiles", "keepNewFileName", "displayFileExtension", "convertNotify", "hideConfirmCancelOperation", "hideConfirmConvertSave", "hideConfirmConvertOpen", "hideConfirmRoomLifetime", "defaultOrder", "forcesave", "storeForcesave", "recentSection", "favoritesSection", "templatesSection", "downloadTarGz", "automaticallyCleanUp", "canSearchByContent", "defaultSharingAccessRights", "maxUploadThreadCount", "chunkUploadSize", "openEditorInSameTab", "extsFilesVectorized", "maxVectorizationFileSize"]
+    __properties: ClassVar[List[str]] = ["extsImagePreviewed", "extsMediaPreviewed", "extsWebPreviewed", "extsWebEdited", "extsWebEncrypt", "extsWebReviewed", "extsWebCustomFilterEditing", "extsWebRestrictedEditing", "extsWebCommented", "extsWebTemplate", "extsMustConvert", "extsConvertible", "extsUploadable", "extsArchive", "extsVideo", "extsAudio", "extsImage", "extsSpreadsheet", "extsPresentation", "extsDocument", "extsDiagram", "internalFormats", "masterFormExtension", "paramVersion", "paramOutType", "fileDownloadUrlString", "fileWebViewerUrlString", "fileWebViewerExternalUrlString", "fileWebEditorUrlString", "fileWebEditorExternalUrlString", "fileRedirectPreviewUrlString", "fileThumbnailUrlString", "confirmDelete", "enableThirdParty", "externalShare", "externalShareSocialMedia", "storeOriginalFiles", "keepNewFileName", "displayFileExtension", "convertNotify", "hideConfirmCancelOperation", "hideConfirmConvertSave", "hideConfirmConvertOpen", "hideConfirmRoomLifetime", "defaultOrder", "forcesave", "storeForcesave", "recentSection", "favoritesSection", "templatesSection", "downloadTarGz", "automaticallyCleanUp", "canSearchByContent", "defaultSharingAccessRights", "maxUploadThreadCount", "chunkUploadSize", "openEditorInSameTab", "organizeRoomsGrouping", "extsFilesVectorized", "maxVectorizationFileSize"]
 
     @field_validator('default_sharing_access_rights')
     def default_sharing_access_rights_validate_enum(cls, value):
@@ -393,6 +394,7 @@ class FilesSettingsDto(BaseModel):
             "maxUploadThreadCount": obj.get("maxUploadThreadCount"),
             "chunkUploadSize": obj.get("chunkUploadSize"),
             "openEditorInSameTab": obj.get("openEditorInSameTab"),
+            "organizeRoomsGrouping": obj.get("organizeRoomsGrouping"),
             "extsFilesVectorized": obj.get("extsFilesVectorized"),
             "maxVectorizationFileSize": obj.get("maxVectorizationFileSize")
         })

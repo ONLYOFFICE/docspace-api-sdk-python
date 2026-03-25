@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -41,5 +41,4 @@ class BackupStorageType(int, Enum):
     def from_json(cls, json_str: str) -> Self:
         """Create an instance of BackupStorageType from a JSON string"""
         return cls(json.loads(json_str))
-
 

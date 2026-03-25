@@ -60,7 +60,6 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -75,7 +74,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling WebhooksApi->create_webhook: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -138,7 +136,6 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -153,7 +150,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling WebhooksApi->enable_webhook: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -212,7 +208,6 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -226,7 +221,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling WebhooksApi->get_tenant_webhooks: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -245,7 +239,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_webhook_triggers**
-> UnknownWrapper get_webhook_triggers()
+> GetWebhookTriggers200Response get_webhook_triggers()
 
 Returns a list of triggers for a webhook.
 
@@ -257,7 +251,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**UnknownWrapper**](UnknownWrapper.md)
+[**GetWebhookTriggers200Response**](GetWebhookTriggers200Response.md)
 
 ### Authorization
 
@@ -268,7 +262,7 @@ This endpoint does not need any parameter.
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.unknown_wrapper import UnknownWrapper
+from docspace_api_sdk.models.get_webhook_triggers200_response import GetWebhookTriggers200Response
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -285,7 +279,6 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -299,7 +292,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling WebhooksApi->get_webhook_triggers: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -335,7 +327,7 @@ Name | Type | Description  | Notes
  **config_id** | **int**| The webhook configuration identifier. | [optional] 
  **event_id** | **int**| The unique identifier of the event that triggered the webhook. | [optional] 
  **group_status** | [**WebhookGroupStatus**](.md)| The status of the webhook delivery group. | [optional] 
- **user_id** | **str**| The identifier of the user associated with the webhook event. | [optional] 
+ **user_id** | **UUID**| The identifier of the user associated with the webhook event. | [optional] 
  **trigger** | [**WebhookTrigger**](.md)| The type of event that triggered the webhook. | [optional] 
  **count** | **int**| The maximum number of webhook log records to return in the query response. | [optional] 
  **start_index** | **int**| Specifies the starting index for retrieving webhook logs.  Used for pagination in the webhook delivery log queries. | [optional] 
@@ -372,21 +364,20 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.WebhooksApi(api_client)
-    delivery_from = '2008-04-10T06:30+04:00' # datetime | The delivery start time for filtering webhook logs. (optional)
-    delivery_to = '2008-04-10T06:30+04:00' # datetime | The delivery end time for filtering webhook logs. (optional)
-    hook_uri = 'some text' # str | The destination URL where webhooks are delivered. (optional)
-    config_id = 1234 # int | The webhook configuration identifier. (optional)
-    event_id = 1234 # int | The unique identifier of the event that triggered the webhook. (optional)
+    delivery_from = '2024-01-15T10:30Z' # datetime | The delivery start time for filtering webhook logs. (optional)
+    delivery_to = '2024-01-15T10:30Z' # datetime | The delivery end time for filtering webhook logs. (optional)
+    hook_uri = 'https://example.com/webhook' # str | The destination URL where webhooks are delivered. (optional)
+    config_id = 1 # int | The webhook configuration identifier. (optional)
+    event_id = 1 # int | The unique identifier of the event that triggered the webhook. (optional)
     group_status = docspace_api_sdk.WebhookGroupStatus() # WebhookGroupStatus | The status of the webhook delivery group. (optional)
-    user_id = 'aae1e103-bca5-9fa1-ba8c-42058b4abf28' # str | The identifier of the user associated with the webhook event. (optional)
+    user_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | The identifier of the user associated with the webhook event. (optional)
     trigger = docspace_api_sdk.WebhookTrigger() # WebhookTrigger | The type of event that triggered the webhook. (optional)
-    count = 1234 # int | The maximum number of webhook log records to return in the query response. (optional)
-    start_index = 1234 # int | Specifies the starting index for retrieving webhook logs.  Used for pagination in the webhook delivery log queries. (optional)
+    count = 1 # int | The maximum number of webhook log records to return in the query response. (optional)
+    start_index = 1 # int | Specifies the starting index for retrieving webhook logs.  Used for pagination in the webhook delivery log queries. (optional)
 
     try:
         # Get webhook logs
@@ -396,7 +387,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling WebhooksApi->get_webhooks_logs: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -458,12 +448,11 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.WebhooksApi(api_client)
-    id = 9846 # int | The ID extracted from the route parameters.
+    id = 1 # int | The ID extracted from the route parameters.
 
     try:
         # Remove a webhook
@@ -473,7 +462,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling WebhooksApi->remove_webhook: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -535,12 +523,11 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.WebhooksApi(api_client)
-    id = 9846 # int | The ID extracted from the route parameters.
+    id = 1 # int | The ID extracted from the route parameters.
 
     try:
         # Retry a webhook
@@ -550,7 +537,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling WebhooksApi->retry_webhook: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -565,8 +551,8 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 |-------------|-------------|------------------|
 **200** | Logs of the webhook activities |  -  |
 **400** | Id incorrect |  -  |
-**401** | Unauthorized |  -  |
 **404** | Item not found |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -615,7 +601,6 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -630,7 +615,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling WebhooksApi->retry_webhooks: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -693,7 +677,6 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -708,7 +691,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling WebhooksApi->update_webhook: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers

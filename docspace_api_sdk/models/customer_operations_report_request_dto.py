@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,6 +24,9 @@ import json
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from docspace_api_sdk.models.operation_order_type import OperationOrderType
+from docspace_api_sdk.models.operation_status import OperationStatus
+from docspace_api_sdk.models.operation_type import OperationType
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -31,12 +34,18 @@ class CustomerOperationsReportRequestDto(BaseModel):
     """
     The request parameters for generating a report on client operations.
     """ # noqa: E501
+    service_name: Optional[StrictStr] = Field(default=None, description="The service name.", alias="serviceName")
+    write_off_service_quota: Optional[StrictBool] = Field(default=None, description="Write-off of the quota for the service", alias="writeOffServiceQuota")
     start_date: Optional[datetime] = Field(default=None, description="The report start date.", alias="startDate")
     end_date: Optional[datetime] = Field(default=None, description="The report end date.", alias="endDate")
     participant_name: Optional[StrictStr] = Field(default=None, description="The participant name.", alias="participantName")
     credit: Optional[StrictBool] = Field(default=None, description="Specifies whether to include credit operations in the report.")
     debit: Optional[StrictBool] = Field(default=None, description="Specifies whether to include debit operations in the report.")
-    __properties: ClassVar[List[str]] = ["startDate", "endDate", "participantName", "credit", "debit"]
+    types: Optional[OperationType] = None
+    status: Optional[OperationStatus] = None
+    order_by: Optional[StrictStr] = Field(default=None, description="The field to order by.", alias="orderBy")
+    order_type: Optional[OperationOrderType] = Field(default=None, alias="orderType")
+    __properties: ClassVar[List[str]] = ["serviceName", "writeOffServiceQuota", "startDate", "endDate", "participantName", "credit", "debit", "types", "status", "orderBy", "orderType"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -77,6 +86,11 @@ class CustomerOperationsReportRequestDto(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if service_name (nullable) is None
+        # and model_fields_set contains the field
+        if self.service_name is None and "service_name" in self.model_fields_set:
+            _dict['serviceName'] = None
+
         # set to None if start_date (nullable) is None
         # and model_fields_set contains the field
         if self.start_date is None and "start_date" in self.model_fields_set:
@@ -102,6 +116,11 @@ class CustomerOperationsReportRequestDto(BaseModel):
         if self.debit is None and "debit" in self.model_fields_set:
             _dict['debit'] = None
 
+        # set to None if order_by (nullable) is None
+        # and model_fields_set contains the field
+        if self.order_by is None and "order_by" in self.model_fields_set:
+            _dict['orderBy'] = None
+
         return _dict
 
     @classmethod
@@ -115,11 +134,17 @@ class CustomerOperationsReportRequestDto(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "serviceName": obj.get("serviceName"),
+            "writeOffServiceQuota": obj.get("writeOffServiceQuota"),
             "startDate": obj.get("startDate"),
             "endDate": obj.get("endDate"),
             "participantName": obj.get("participantName"),
             "credit": obj.get("credit"),
-            "debit": obj.get("debit")
+            "debit": obj.get("debit"),
+            "types": obj.get("types"),
+            "status": obj.get("status"),
+            "orderBy": obj.get("orderBy"),
+            "orderType": obj.get("orderType")
         })
         return _obj
 

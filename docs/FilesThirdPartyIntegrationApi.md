@@ -58,12 +58,11 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.ThirdPartyIntegrationApi(api_client)
-    provider_id = 1234 # int | The provider ID.
+    provider_id = 1 # int | The provider ID.
 
     try:
         # Remove a third-party account
@@ -73,7 +72,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling ThirdPartyIntegrationApi->delete_third_party: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -95,8 +93,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 > ProviderArrayWrapper get_all_providers(excludewebdav=excludewebdav)
 
 Returns a list of all providers.
-
- **Note**: Available provider keys: Dropbox, Box, WebDav, OneDrive, GoogleDrive, kDrive, ownCloud, Nextcloud.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -137,12 +133,11 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.ThirdPartyIntegrationApi(api_client)
-    excludewebdav = true # bool | Specifies whether WebDAV resources should be excluded from the result.. (optional)
+    excludewebdav = false # bool | Specifies whether WebDAV resources should be excluded from the result.. (optional)
 
     try:
         # Get all providers
@@ -152,7 +147,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling ThirdPartyIntegrationApi->get_all_providers: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -211,7 +205,6 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -225,7 +218,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling ThirdPartyIntegrationApi->get_backup_third_party_account: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -247,8 +239,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 > ArrayArrayWrapper get_capabilities()
 
 Returns the list of the available providers.
-
- **Note**: Available provider keys: DropboxV2, Box, WebDav, Yandex, OneDrive, SharePoint, GoogleDrive, kDrive.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -286,7 +276,6 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -300,7 +289,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling ThirdPartyIntegrationApi->get_capabilities: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -359,7 +347,6 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -373,7 +360,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling ThirdPartyIntegrationApi->get_common_third_party_folders: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -432,7 +418,6 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -446,7 +431,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling ThirdPartyIntegrationApi->get_third_party_accounts: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -468,8 +452,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 > FolderStringWrapper save_third_party(third_party_request_dto=third_party_request_dto)
 
 Saves the third-party storage service account. For WebDav, Yandex, kDrive and SharePoint, the login and password are used for authentication. For other providers, the authentication is performed using a token received via OAuth 2.0.
-
- **Note**: List of provider keys: DropboxV2, Box, WebDav, Yandex, OneDrive, SharePoint, GoogleDrive, kDrive.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -511,7 +493,6 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -526,7 +507,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling ThirdPartyIntegrationApi->save_third_party: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -548,8 +528,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 > FolderStringWrapper save_third_party_backup(third_party_backup_request_dto=third_party_backup_request_dto)
 
 Saves a backup of the connected third-party account.
-
- **Note**: List of provider keys: DropboxV2, Box, WebDav, Yandex, OneDrive, SharePoint, GoogleDrive, kDrive.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -591,7 +569,6 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -606,7 +583,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling ThirdPartyIntegrationApi->save_third_party_backup: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers

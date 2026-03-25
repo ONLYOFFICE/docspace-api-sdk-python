@@ -13,6 +13,8 @@
 
 * `PrimaryExternalLink` (value: `8`)
 
+* `Link` (value: `15`)
+
 * `User` (value: `16`)
 
 * `Group` (value: `32`)

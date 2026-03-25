@@ -5,11 +5,17 @@ The request parameters for generating a report on client operations.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**service_name** | **str** | The service name. | [optional] 
+**write_off_service_quota** | **bool** | Write-off of the quota for the service | [optional] 
 **start_date** | **datetime** | The report start date. | [optional] 
 **end_date** | **datetime** | The report end date. | [optional] 
 **participant_name** | **str** | The participant name. | [optional] 
 **credit** | **bool** | Specifies whether to include credit operations in the report. | [optional] 
 **debit** | **bool** | Specifies whether to include debit operations in the report. | [optional] 
+**types** | [**OperationType**](OperationType.md) |  | [optional] 
+**status** | [**OperationStatus**](OperationStatus.md) |  | [optional] 
+**order_by** | **str** | The field to order by. | [optional] 
+**order_type** | [**OperationOrderType**](OperationOrderType.md) |  | [optional] 
 
 ## Example
 

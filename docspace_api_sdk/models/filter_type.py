@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -30,7 +30,7 @@ class FilterType(int, Enum):
     """
     allowed enum values
     """
-    _None = 0
+    None_ = 0
     FilesOnly = 1
     FoldersOnly = 2
     DocumentsOnly = 3
@@ -56,5 +56,4 @@ class FilterType(int, Enum):
     def from_json(cls, json_str: str) -> Self:
         """Create an instance of FilterType from a JSON string"""
         return cls(json.loads(json_str))
-
 

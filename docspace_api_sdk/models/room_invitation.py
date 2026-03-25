@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,8 +21,10 @@ from inspect import getfullargspec
 import json
 import pprint
 import re  # noqa: F401
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Annotated
+from uuid import UUID
 from docspace_api_sdk.models.file_share import FileShare
 from typing import Union, Any, List, Set, TYPE_CHECKING, Optional, Dict
 from typing_extensions import Literal, Self
@@ -34,7 +36,7 @@ class RoomInvitation(EmailInvitationDto):
     The room invitation parameters.
     """
 
-    id: Optional[StrictStr] = Field(default=None, description="The ID of the user to share a room with.")
+    id: Optional[UUID] = Field(default=None, description="The ID of the user to share a room with.")
     access: Optional[FileShare] = None
 
     model_config = ConfigDict(

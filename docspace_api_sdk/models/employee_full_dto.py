@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,6 +23,7 @@ import pprint
 import re  # noqa: F401
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
+from uuid import UUID
 from docspace_api_sdk.models.api_date_time import ApiDateTime
 from docspace_api_sdk.models.contact import Contact
 from docspace_api_sdk.models.dark_theme_settings_type import DarkThemeSettingsType
@@ -280,6 +281,11 @@ class EmployeeFullDto(EmployeeDto):
         # and model_fields_set contains the field
         if self.auth_cookie_lifetime is None and "auth_cookie_lifetime" in self.model_fields_set:
             _dict['authCookieLifetime'] = None
+
+        # set to None if has_personal_folder (nullable) is None
+        # and model_fields_set contains the field
+        if self.has_personal_folder is None and "has_personal_folder" in self.model_fields_set:
+            _dict['hasPersonalFolder'] = None
 
         # set to None if tfa_app_enabled (nullable) is None
         # and model_fields_set contains the field

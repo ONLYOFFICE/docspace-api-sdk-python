@@ -20,7 +20,10 @@ Name | Type | Description | Notes
 **enabled** | **bool** | Specifies if the web plugin is enabled or not. | 
 **system** | **bool** | Specifies if the web plugin is system or not. | 
 **url** | **str** | The web plugin URL. | 
+**css_url** | **str** | The web plugin css URL. | 
 **settings** | **str** | The web plugin settings. | 
+**name_locale** | **Dict[str, Optional[str]]** | The web plugin localized name. | [optional] 
+**description_locale** | **Dict[str, Optional[str]]** | The web plugin localized description. | [optional] 
 
 ## Example
 

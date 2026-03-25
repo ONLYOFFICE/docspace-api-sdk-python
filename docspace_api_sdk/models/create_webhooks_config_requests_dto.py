@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
 from docspace_api_sdk.models.webhook_trigger import WebhookTrigger
@@ -38,7 +38,7 @@ class CreateWebhooksConfigRequestsDto(BaseModel):
     enabled: Optional[StrictBool] = Field(default=None, description="Specifies whether the webhook configuration is active or not.")
     ssl: Optional[StrictBool] = Field(default=None, description="Specifies whether the SSL certificate verification is required or not.")
     triggers: Optional[WebhookTrigger] = None
-    target_id: Optional[StrictStr] = Field(default=None, description="Target ID", alias="targetId")
+    target_id: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="Target ID", alias="targetId")
     __properties: ClassVar[List[str]] = ["name", "uri", "secretKey", "enabled", "ssl", "triggers", "targetId"]
 
     model_config = ConfigDict(

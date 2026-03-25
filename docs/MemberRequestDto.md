@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **is_user** | **bool** | Specifies if this is a guest or a user. | [optional] 
 **first_name** | **str** | The user first name. | [optional] 
 **last_name** | **str** | The user last name. | [optional] 
-**department** | **List[str]** | The list of the user departments IDs. | [optional] 
+**department** | **List[UUID]** | The list of the user departments IDs. | [optional] 
 **title** | **str** | The user title. | [optional] 
 **location** | **str** | The user location. | [optional] 
 **sex** | [**SexEnum**](SexEnum.md) |  | [optional] 
@@ -24,7 +24,7 @@ Name | Type | Description | Notes
 **from_invite_link** | **bool** | Specifies if the user is added via the invitation link or not. | [optional] 
 **key** | **str** | The user key. | [optional] 
 **culture_name** | **str** | The user culture code. | [optional] 
-**target** | **str** | The user target ID. | [optional] 
+**target** | **UUID** | The user target ID. | [optional] 
 **spam** | **bool** | Specifies if tips, updates and offers are allowed to be sent to the user or not. | [optional] 
 
 ## Example

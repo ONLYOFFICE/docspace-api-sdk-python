@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,6 +23,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from uuid import UUID
 from docspace_api_sdk.models.api_date_time import ApiDateTime
 from typing import Optional, Set
 from typing_extensions import Self
@@ -33,7 +34,7 @@ class ActiveConnectionsItemDto(BaseModel):
     """ # noqa: E501
     id: StrictInt = Field(description="The active connection ID.")
     tenant_id: StrictInt = Field(description="The tenant ID.", alias="tenantId")
-    user_id: StrictStr = Field(description="The user ID.", alias="userId")
+    user_id: UUID = Field(description="The user ID.", alias="userId")
     mobile: Optional[StrictBool] = Field(default=None, description="Specifies if the active connection has a mobile phone or not.")
     ip: Optional[StrictStr] = Field(default=None, description="The IP address of the active connection.")
     country: Optional[StrictStr] = Field(default=None, description="The active connection country.")

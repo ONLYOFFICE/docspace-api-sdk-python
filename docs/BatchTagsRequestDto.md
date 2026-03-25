@@ -5,7 +5,7 @@ The parameters for managing room tags.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**names** | **List[str]** | The list of tag names. | [optional] 
+**names** | **List[str]** | The list of tag names. | 
 
 ## Example
 

@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -38,14 +38,13 @@ class AuthRequestsDto(BaseModel):
     provider: Optional[StrictStr] = Field(default=None, description="The type of authentication provider (e.g., internal, Google, Azure).")
     access_token: Optional[StrictStr] = Field(default=None, description="The access token used for authentication with external providers.", alias="accessToken")
     serialized_profile: Optional[StrictStr] = Field(default=None, description="The serialized user profile data, if applicable.", alias="serializedProfile")
-    code: Optional[StrictStr] = Field(default=None, description="The code for two-factor authentication.")
     code_o_auth: Optional[StrictStr] = Field(default=None, description="The authorization code used for obtaining OAuth tokens.", alias="codeOAuth")
     session: Optional[StrictBool] = Field(default=None, description="Specifies whether the authentication is session-based.")
     confirm_data: Optional[ConfirmData] = Field(default=None, alias="confirmData")
     recaptcha_type: Optional[RecaptchaType] = Field(default=None, alias="recaptchaType")
     recaptcha_response: Optional[StrictStr] = Field(default=None, description="The user's response to the CAPTCHA challenge.", alias="recaptchaResponse")
     culture: Optional[StrictStr] = Field(default=None, description="The culture code for localization during authentication.")
-    __properties: ClassVar[List[str]] = ["userName", "password", "passwordHash", "provider", "accessToken", "serializedProfile", "code", "codeOAuth", "session", "confirmData", "recaptchaType", "recaptchaResponse", "culture"]
+    __properties: ClassVar[List[str]] = ["userName", "password", "passwordHash", "provider", "accessToken", "serializedProfile", "codeOAuth", "session", "confirmData", "recaptchaType", "recaptchaResponse", "culture"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -119,11 +118,6 @@ class AuthRequestsDto(BaseModel):
         if self.serialized_profile is None and "serialized_profile" in self.model_fields_set:
             _dict['serializedProfile'] = None
 
-        # set to None if code (nullable) is None
-        # and model_fields_set contains the field
-        if self.code is None and "code" in self.model_fields_set:
-            _dict['code'] = None
-
         # set to None if code_o_auth (nullable) is None
         # and model_fields_set contains the field
         if self.code_o_auth is None and "code_o_auth" in self.model_fields_set:
@@ -158,7 +152,6 @@ class AuthRequestsDto(BaseModel):
             "provider": obj.get("provider"),
             "accessToken": obj.get("accessToken"),
             "serializedProfile": obj.get("serializedProfile"),
-            "code": obj.get("code"),
             "codeOAuth": obj.get("codeOAuth"),
             "session": obj.get("session"),
             "confirmData": ConfirmData.from_dict(obj["confirmData"]) if obj.get("confirmData") is not None else None,

@@ -52,7 +52,6 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -66,7 +65,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling ActiveConnectionsApi->get_all_active_connections: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -128,12 +126,11 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.ActiveConnectionsApi(api_client)
-    login_event_id = 9846 # int | The ID of the specific login event.
+    login_event_id = 12345 # int | The ID of the specific login event.
 
     try:
         # Log out from the connection
@@ -143,7 +140,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling ActiveConnectionsApi->log_out_active_connection: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -157,8 +153,8 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Boolean value: true if the operation is successful |  -  |
-**401** | Unauthorized |  -  |
 **403** | Method not available |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -203,7 +199,6 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -217,7 +212,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling ActiveConnectionsApi->log_out_all_active_connections_change_password: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -247,7 +241,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **user_id** | **str**| The user ID extracted from the route parameters. | 
+ **user_id** | **UUID**| The user ID extracted from the route parameters. | 
 
 ### Return type
 
@@ -278,12 +272,11 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.ActiveConnectionsApi(api_client)
-    user_id = 'aae1e103-bca5-9fa1-ba8c-42058b4abf28' # str | The user ID extracted from the route parameters.
+    user_id = UUID('00000000-0000-0000-0000-000000000000') # UUID | The user ID extracted from the route parameters.
 
     try:
         # Log out for the user by ID
@@ -291,7 +284,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling ActiveConnectionsApi->log_out_all_active_connections_for_user: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -305,8 +297,8 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Ok |  -  |
-**401** | Unauthorized |  -  |
 **403** | Method not available |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -351,7 +343,6 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -365,7 +356,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling ActiveConnectionsApi->log_out_all_except_this_connection: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers

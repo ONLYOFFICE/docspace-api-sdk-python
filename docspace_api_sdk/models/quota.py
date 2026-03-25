@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -30,7 +30,7 @@ from typing_extensions import Self
 
 class Quota(BaseModel):
     """
-    The quota parameters.
+    The quota parameters.  <example>  {    id: 1,    quantity: 50,    wallet: false,    dueDate: 2026-03-31T00:00:00Z,    nextQuantity: 100,    state: Active  }  </example>
     """ # noqa: E501
     id: Optional[StrictInt] = Field(default=None, description="The quota ID.")
     quantity: Optional[StrictInt] = Field(default=None, description="The quota quantity.")

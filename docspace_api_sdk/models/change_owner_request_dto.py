@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,8 +21,9 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List, Optional
+from uuid import UUID
 from docspace_api_sdk.models.batch_request_dto_all_of_file_ids import BatchRequestDtoAllOfFileIds
 from typing import Optional, Set
 from typing_extensions import Self
@@ -33,7 +34,7 @@ class ChangeOwnerRequestDto(BaseModel):
     """ # noqa: E501
     folder_ids: Optional[List[BatchRequestDtoAllOfFileIds]] = Field(default=None, description="The list of folder IDs to change the owner.", alias="folderIds")
     file_ids: Optional[List[BatchRequestDtoAllOfFileIds]] = Field(default=None, description="The list of file IDs to change the owner.", alias="fileIds")
-    user_id: StrictStr = Field(description="The new file owner ID.", alias="userId")
+    user_id: UUID = Field(description="The new file owner ID.", alias="userId")
     __properties: ClassVar[List[str]] = ["folderIds", "fileIds", "userId"]
 
     model_config = ConfigDict(

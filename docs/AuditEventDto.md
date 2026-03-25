@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **id** | **int** | The audit event ID. | [optional] 
 **var_date** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] 
 **user** | **str** | The name of the user who triggered the audit event. | [optional] 
-**user_id** | **str** | The ID of the user who triggered the audit event. | [optional] 
+**user_id** | **UUID** | The ID of the user who triggered the audit event. | [optional] 
 **action** | **str** | The audit event action. | [optional] 
 **action_id** | [**MessageAction**](MessageAction.md) |  | [optional] 
 **ip** | **str** | The audit event IP. | [optional] 

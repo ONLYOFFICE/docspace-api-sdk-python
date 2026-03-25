@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -26,8 +26,9 @@ from datetime import datetime
 from pydantic import Field, StrictInt, StrictStr
 from typing import Optional
 from typing_extensions import Annotated
+from uuid import UUID
 from docspace_api_sdk.models.create_webhooks_config_requests_dto import CreateWebhooksConfigRequestsDto
-from docspace_api_sdk.models.unknown_wrapper import UnknownWrapper
+from docspace_api_sdk.models.get_webhook_triggers200_response import GetWebhookTriggers200Response
 from docspace_api_sdk.models.update_webhooks_config_requests_dto import UpdateWebhooksConfigRequestsDto
 from docspace_api_sdk.models.webhook_group_status import WebhookGroupStatus
 from docspace_api_sdk.models.webhook_retry_requests_dto import WebhookRetryRequestsDto
@@ -54,7 +55,6 @@ class WebhooksApi:
             api_client = ApiClient.get_default()
         self.api_client = api_client
         self._fields = None
-
 
     def with_fields(self, fields: str) -> WebhooksApi:
         self._fields = fields
@@ -117,8 +117,7 @@ class WebhooksApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "WebhooksConfigWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -185,8 +184,7 @@ class WebhooksApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "WebhooksConfigWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -253,8 +251,7 @@ class WebhooksApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "WebhooksConfigWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -402,8 +399,7 @@ class WebhooksApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "WebhooksConfigWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -470,8 +466,7 @@ class WebhooksApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "WebhooksConfigWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -538,8 +533,7 @@ class WebhooksApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "WebhooksConfigWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -683,8 +677,7 @@ class WebhooksApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "WebhooksConfigWithStatusArrayWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -747,8 +740,7 @@ class WebhooksApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "WebhooksConfigWithStatusArrayWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -811,8 +803,7 @@ class WebhooksApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "WebhooksConfigWithStatusArrayWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -903,7 +894,7 @@ class WebhooksApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> UnknownWrapper:
+    ) -> GetWebhookTriggers200Response:
         """Get webhook triggers
 
         Returns a list of triggers for a webhook.
@@ -938,10 +929,9 @@ class WebhooksApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "UnknownWrapper",
+            '200': "GetWebhookTriggers200Response",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -967,7 +957,7 @@ class WebhooksApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[UnknownWrapper]:
+    ) -> ApiResponse[GetWebhookTriggers200Response]:
         """Get webhook triggers
 
         Returns a list of triggers for a webhook.
@@ -1002,10 +992,9 @@ class WebhooksApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "UnknownWrapper",
+            '200': "GetWebhookTriggers200Response",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1066,10 +1055,9 @@ class WebhooksApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "UnknownWrapper",
+            '200': "GetWebhookTriggers200Response",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1154,7 +1142,7 @@ class WebhooksApi:
         config_id: Annotated[Optional[StrictInt], Field(description="The webhook configuration identifier.")] = None,
         event_id: Annotated[Optional[StrictInt], Field(description="The unique identifier of the event that triggered the webhook.")] = None,
         group_status: Annotated[Optional[WebhookGroupStatus], Field(description="The status of the webhook delivery group.")] = None,
-        user_id: Annotated[Optional[StrictStr], Field(description="The identifier of the user associated with the webhook event.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="The identifier of the user associated with the webhook event.")] = None,
         trigger: Annotated[Optional[WebhookTrigger], Field(description="The type of event that triggered the webhook.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of webhook log records to return in the query response.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="Specifies the starting index for retrieving webhook logs.  Used for pagination in the webhook delivery log queries.")] = None,
@@ -1188,7 +1176,7 @@ class WebhooksApi:
         :param group_status: The status of the webhook delivery group.
         :type group_status: WebhookGroupStatus
         :param user_id: The identifier of the user associated with the webhook event.
-        :type user_id: str
+        :type user_id: UUID
         :param trigger: The type of event that triggered the webhook.
         :type trigger: WebhookTrigger
         :param count: The maximum number of webhook log records to return in the query response.
@@ -1237,8 +1225,7 @@ class WebhooksApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "WebhooksLogArrayWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1258,7 +1245,7 @@ class WebhooksApi:
         config_id: Annotated[Optional[StrictInt], Field(description="The webhook configuration identifier.")] = None,
         event_id: Annotated[Optional[StrictInt], Field(description="The unique identifier of the event that triggered the webhook.")] = None,
         group_status: Annotated[Optional[WebhookGroupStatus], Field(description="The status of the webhook delivery group.")] = None,
-        user_id: Annotated[Optional[StrictStr], Field(description="The identifier of the user associated with the webhook event.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="The identifier of the user associated with the webhook event.")] = None,
         trigger: Annotated[Optional[WebhookTrigger], Field(description="The type of event that triggered the webhook.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of webhook log records to return in the query response.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="Specifies the starting index for retrieving webhook logs.  Used for pagination in the webhook delivery log queries.")] = None,
@@ -1292,7 +1279,7 @@ class WebhooksApi:
         :param group_status: The status of the webhook delivery group.
         :type group_status: WebhookGroupStatus
         :param user_id: The identifier of the user associated with the webhook event.
-        :type user_id: str
+        :type user_id: UUID
         :param trigger: The type of event that triggered the webhook.
         :type trigger: WebhookTrigger
         :param count: The maximum number of webhook log records to return in the query response.
@@ -1341,8 +1328,7 @@ class WebhooksApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "WebhooksLogArrayWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1362,7 +1348,7 @@ class WebhooksApi:
         config_id: Annotated[Optional[StrictInt], Field(description="The webhook configuration identifier.")] = None,
         event_id: Annotated[Optional[StrictInt], Field(description="The unique identifier of the event that triggered the webhook.")] = None,
         group_status: Annotated[Optional[WebhookGroupStatus], Field(description="The status of the webhook delivery group.")] = None,
-        user_id: Annotated[Optional[StrictStr], Field(description="The identifier of the user associated with the webhook event.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="The identifier of the user associated with the webhook event.")] = None,
         trigger: Annotated[Optional[WebhookTrigger], Field(description="The type of event that triggered the webhook.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of webhook log records to return in the query response.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="Specifies the starting index for retrieving webhook logs.  Used for pagination in the webhook delivery log queries.")] = None,
@@ -1396,7 +1382,7 @@ class WebhooksApi:
         :param group_status: The status of the webhook delivery group.
         :type group_status: WebhookGroupStatus
         :param user_id: The identifier of the user associated with the webhook event.
-        :type user_id: str
+        :type user_id: UUID
         :param trigger: The type of event that triggered the webhook.
         :type trigger: WebhookTrigger
         :param count: The maximum number of webhook log records to return in the query response.
@@ -1445,8 +1431,7 @@ class WebhooksApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "WebhooksLogArrayWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1648,8 +1633,7 @@ class WebhooksApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "WebhooksConfigWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1716,8 +1700,7 @@ class WebhooksApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "WebhooksConfigWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1784,8 +1767,7 @@ class WebhooksApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "WebhooksConfigWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1920,10 +1902,9 @@ class WebhooksApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "WebhooksLogWrapper",
             '400': None,
-            '401': None,
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1990,10 +1971,9 @@ class WebhooksApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "WebhooksLogWrapper",
             '400': None,
-            '401': None,
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2060,10 +2040,9 @@ class WebhooksApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "WebhooksLogWrapper",
             '400': None,
-            '401': None,
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2198,8 +2177,7 @@ class WebhooksApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "WebhooksLogArrayWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2266,8 +2244,7 @@ class WebhooksApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "WebhooksLogArrayWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2334,8 +2311,7 @@ class WebhooksApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "WebhooksLogArrayWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2483,8 +2459,7 @@ class WebhooksApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "WebhooksConfigWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2551,8 +2526,7 @@ class WebhooksApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "WebhooksConfigWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2619,8 +2593,7 @@ class WebhooksApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "WebhooksConfigWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )

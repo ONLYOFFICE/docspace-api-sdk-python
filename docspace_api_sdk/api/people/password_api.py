@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,12 +21,13 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictStr
+from pydantic import Field
 from typing import Optional
 from typing_extensions import Annotated
+from uuid import UUID
+from docspace_api_sdk.models.change_password_request import ChangePasswordRequest
 from docspace_api_sdk.models.email_member_request_dto import EmailMemberRequestDto
 from docspace_api_sdk.models.employee_full_wrapper import EmployeeFullWrapper
-from docspace_api_sdk.models.member_base_request_dto import MemberBaseRequestDto
 from docspace_api_sdk.models.string_wrapper import StringWrapper
 
 from docspace_api_sdk.api_client import ApiClient, RequestSerialized
@@ -48,12 +49,11 @@ class PasswordApi:
 
 
 
-
     @validate_call
     def change_user_password(
         self,
-        userid: Annotated[StrictStr, Field(description="The user ID.")],
-        member_base_request_dto: Annotated[MemberBaseRequestDto, Field(description="The request parameters for the user generic information.")],
+        userid: Annotated[UUID, Field(description="The user ID.")],
+        change_password_request: Annotated[ChangePasswordRequest, Field(description="The request parameters for updating a user password.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -72,9 +72,9 @@ class PasswordApi:
         Sets a new password to the user with the ID specified in the request.
 
         :param userid: The user ID. (required)
-        :type userid: str
-        :param member_base_request_dto: The request parameters for the user generic information. (required)
-        :type member_base_request_dto: MemberBaseRequestDto
+        :type userid: UUID
+        :param change_password_request: The request parameters for updating a user password. (required)
+        :type change_password_request: ChangePasswordRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -99,7 +99,7 @@ class PasswordApi:
 
         _param = self._change_user_password_serialize(
             userid=userid,
-            member_base_request_dto=member_base_request_dto,
+            change_password_request=change_password_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -109,11 +109,10 @@ class PasswordApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeFullWrapper",
             '400': None,
-            '401': None,
             '403': None,
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -127,8 +126,8 @@ class PasswordApi:
     @validate_call
     def change_user_password_with_http_info(
         self,
-        userid: Annotated[StrictStr, Field(description="The user ID.")],
-        member_base_request_dto: Annotated[MemberBaseRequestDto, Field(description="The request parameters for the user generic information.")],
+        userid: Annotated[UUID, Field(description="The user ID.")],
+        change_password_request: Annotated[ChangePasswordRequest, Field(description="The request parameters for updating a user password.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -147,9 +146,9 @@ class PasswordApi:
         Sets a new password to the user with the ID specified in the request.
 
         :param userid: The user ID. (required)
-        :type userid: str
-        :param member_base_request_dto: The request parameters for the user generic information. (required)
-        :type member_base_request_dto: MemberBaseRequestDto
+        :type userid: UUID
+        :param change_password_request: The request parameters for updating a user password. (required)
+        :type change_password_request: ChangePasswordRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -174,7 +173,7 @@ class PasswordApi:
 
         _param = self._change_user_password_serialize(
             userid=userid,
-            member_base_request_dto=member_base_request_dto,
+            change_password_request=change_password_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -184,11 +183,10 @@ class PasswordApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeFullWrapper",
             '400': None,
-            '401': None,
             '403': None,
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -202,8 +200,8 @@ class PasswordApi:
     @validate_call
     def change_user_password_without_preload_content(
         self,
-        userid: Annotated[StrictStr, Field(description="The user ID.")],
-        member_base_request_dto: Annotated[MemberBaseRequestDto, Field(description="The request parameters for the user generic information.")],
+        userid: Annotated[UUID, Field(description="The user ID.")],
+        change_password_request: Annotated[ChangePasswordRequest, Field(description="The request parameters for updating a user password.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -222,9 +220,9 @@ class PasswordApi:
         Sets a new password to the user with the ID specified in the request.
 
         :param userid: The user ID. (required)
-        :type userid: str
-        :param member_base_request_dto: The request parameters for the user generic information. (required)
-        :type member_base_request_dto: MemberBaseRequestDto
+        :type userid: UUID
+        :param change_password_request: The request parameters for updating a user password. (required)
+        :type change_password_request: ChangePasswordRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -249,7 +247,7 @@ class PasswordApi:
 
         _param = self._change_user_password_serialize(
             userid=userid,
-            member_base_request_dto=member_base_request_dto,
+            change_password_request=change_password_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -259,11 +257,10 @@ class PasswordApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeFullWrapper",
             '400': None,
-            '401': None,
             '403': None,
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -273,7 +270,7 @@ class PasswordApi:
     def _change_user_password_serialize(
         self,
         userid,
-        member_base_request_dto,
+        change_password_request,
         _request_auth,
         _content_type,
         _headers,
@@ -301,8 +298,8 @@ class PasswordApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if member_base_request_dto is not None:
-            _body_params = member_base_request_dto
+        if change_password_request is not None:
+            _body_params = change_password_request
 
 
         # set the HTTP header `Accept`
@@ -414,8 +411,7 @@ class PasswordApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -482,8 +478,7 @@ class PasswordApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -550,8 +545,7 @@ class PasswordApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )

@@ -51,7 +51,6 @@ configuration = docspace_api_sdk.Configuration(
 # in accordance with the API server security policy.
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -66,7 +65,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling ClientQueryingApi->get_client: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -127,7 +125,6 @@ configuration = docspace_api_sdk.Configuration(
 # in accordance with the API server security policy.
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -142,7 +139,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling ClientQueryingApi->get_client_info: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -203,7 +199,6 @@ configuration = docspace_api_sdk.Configuration(
 # in accordance with the API server security policy.
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -220,7 +215,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling ClientQueryingApi->get_clients: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -282,7 +276,6 @@ configuration = docspace_api_sdk.Configuration(
 # in accordance with the API server security policy.
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -299,7 +292,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling ClientQueryingApi->get_clients_info: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -359,7 +351,6 @@ configuration = docspace_api_sdk.Configuration(
 # in accordance with the API server security policy.
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -375,7 +366,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling ClientQueryingApi->get_consents: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -427,7 +417,6 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -442,7 +431,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling ClientQueryingApi->get_public_client_info: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers

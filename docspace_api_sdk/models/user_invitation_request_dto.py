@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,30 +17,31 @@
 
 
 from __future__ import annotations
+from inspect import getfullargspec
+import json
 import pprint
 import re  # noqa: F401
-import json
-
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Annotated
 from docspace_api_sdk.models.employee_type import EmployeeType
-from typing import Optional, Set
-from typing_extensions import Self
+from typing import Union, Any, List, Set, TYPE_CHECKING, Optional, Dict
+from typing_extensions import Literal, Self
+from pydantic import Field
+from docspace_api_sdk.models.email_invitation_dto import EmailInvitationDto
 
-class UserInvitationRequestDto(BaseModel):
+class UserInvitationRequestDto(EmailInvitationDto):
     """
     The user invitation parameters.
-    """ # noqa: E501
+    """
+
     type: Optional[EmployeeType] = None
-    email: Optional[StrictStr] = Field(default=None, description="The user email address.")
-    __properties: ClassVar[List[str]] = ["type", "email"]
 
     model_config = ConfigDict(
         populate_by_name=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
-
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -83,18 +84,19 @@ class UserInvitationRequestDto(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of UserInvitationRequestDto from a dict"""
+        """Create an instance from a dict"""
         if obj is None:
             return None
-
-
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "type": obj.get("type"),
-            "email": obj.get("email")
-        })
-        return _obj
+        base_obj = super().from_dict(obj)
+        base_dict = base_obj.model_dump() if hasattr(base_obj, "model_dump") else dict(base_obj or {})
+
+        extra_fields = {
+            "type": obj.get("type")
+        }
+        all_fields = {**base_dict, **extra_fields}
+        return cls.model_validate(all_fields)
 
 

@@ -18,6 +18,8 @@ Name | Type | Description | Notes
 **filling_status** | **bool** | The file filling status. | [optional] 
 **start_filling_mode** | [**StartFillingMode**](StartFillingMode.md) |  | [optional] 
 **filling_session_id** | **str** | The file filling session ID. | [optional] 
+**quota_exceeded_scope** | [**QuotaScope**](QuotaScope.md) |  | [optional] 
+**generation_tool_call_state** | [**EditorToolCallStateDto**](EditorToolCallStateDto.md) |  | [optional] 
 
 ## Example
 

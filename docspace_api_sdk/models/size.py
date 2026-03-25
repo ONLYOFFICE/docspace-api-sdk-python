@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,17 +21,17 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictInt
+from pydantic import BaseModel, ConfigDict, Field, StrictInt
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
 class Size(BaseModel):
     """
-    Size
+    Represents dimensions with width and height values.
     """ # noqa: E501
-    height: Optional[StrictInt] = None
-    width: Optional[StrictInt] = None
+    height: Optional[StrictInt] = Field(default=None, description="Gets or sets the height dimension of an object, typically measured in pixels or other unit.  It defines the vertical size of the object.")
+    width: Optional[StrictInt] = Field(default=None, description="Gets or sets the width dimension of an object, typically measured in pixels or other unit.")
     __properties: ClassVar[List[str]] = ["height", "width"]
 
     model_config = ConfigDict(

@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,8 +21,9 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -30,8 +31,8 @@ class ActionConfig(BaseModel):
     """
     The information about the action in the document that will be scrolled to.
     """ # noqa: E501
-    data: Optional[StrictStr] = Field(default=None, description="The action data that will be scrolled to.")
-    type: Optional[StrictStr] = Field(default=None, description="The action type.")
+    data: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=256)]] = Field(default=None, description="The action data that will be scrolled to.")
+    type: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=128)]] = Field(default=None, description="The action type.")
     __properties: ClassVar[List[str]] = ["data", "type"]
 
     model_config = ConfigDict(

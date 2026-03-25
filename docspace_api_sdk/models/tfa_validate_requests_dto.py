@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -31,7 +31,8 @@ class TfaValidateRequestsDto(BaseModel):
     The request parameters for validating the two-factor authentication codes.
     """ # noqa: E501
     code: Optional[StrictStr] = Field(description="The verification code provided by the user.")
-    __properties: ClassVar[List[str]] = ["code"]
+    session: Optional[StrictBool] = Field(default=None, description="Specifies whether the authentication is session-based.")
+    __properties: ClassVar[List[str]] = ["code", "session"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -90,7 +91,8 @@ class TfaValidateRequestsDto(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "code": obj.get("code")
+            "code": obj.get("code"),
+            "session": obj.get("session")
         })
         return _obj
 

@@ -4,6 +4,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**abort_upload_session**](#abort_upload_session) | **DELETE** /api/2.0/files/{folderId}/session/{sessionId} | Aborts an in-progress file upload session.
 [**add_favorites**](#add_favorites) | **POST** /api/2.0/files/favorites | Add favorite files and folders
 [**bulk_download**](#bulk_download) | **PUT** /api/2.0/files/fileops/bulkdownload | Bulk download
 [**check_conversion_status**](#check_conversion_status) | **GET** /api/2.0/files/file/{fileId}/checkconversion | Get conversion status
@@ -11,11 +12,13 @@ Method | HTTP request | Description
 [**check_move_or_copy_dest_folder**](#check_move_or_copy_dest_folder) | **GET** /api/2.0/files/fileops/checkdestfolder | Check for moving or copying files to a folder
 [**copy_batch_items**](#copy_batch_items) | **PUT** /api/2.0/files/fileops/copy | Copy to the folder
 [**create_upload_session**](#create_upload_session) | **POST** /api/2.0/files/{folderId}/upload/create_session | Chunked upload
+[**create_upload_session_in_folder**](#create_upload_session_in_folder) | **POST** /api/2.0/files/{folderId}/session | Creates a session for uploading a file to a specific folder in chunks.
 [**delete_batch_items**](#delete_batch_items) | **PUT** /api/2.0/files/fileops/delete | Delete files and folders
 [**delete_favorites_from_body**](#delete_favorites_from_body) | **DELETE** /api/2.0/files/favorites | Delete favorite files and folders (using body parameters)
 [**delete_file_versions**](#delete_file_versions) | **PUT** /api/2.0/files/fileops/deleteversion | Delete file versions
 [**duplicate_batch_items**](#duplicate_batch_items) | **PUT** /api/2.0/files/fileops/duplicate | Duplicate files and folders
 [**empty_trash**](#empty_trash) | **PUT** /api/2.0/files/fileops/emptytrash | Empty the Trash folder
+[**finalize_session**](#finalize_session) | **PUT** /api/2.0/files/{folderId}/session/{sessionId}/finalize | Finalize an upload session
 [**get_operation_statuses**](#get_operation_statuses) | **GET** /api/2.0/files/fileops | Get active file operations
 [**get_operation_statuses_by_type**](#get_operation_statuses_by_type) | **GET** /api/2.0/files/fileops/{operationType} | Get file operation statuses
 [**mark_as_read**](#mark_as_read) | **PUT** /api/2.0/files/fileops/markasread | Mark as read
@@ -23,7 +26,84 @@ Method | HTTP request | Description
 [**start_file_conversion**](#start_file_conversion) | **PUT** /api/2.0/files/file/{fileId}/checkconversion | Start file conversion
 [**terminate_tasks**](#terminate_tasks) | **PUT** /api/2.0/files/fileops/terminate/{id} | Finish active operations
 [**update_file_comment**](#update_file_comment) | **PUT** /api/2.0/files/file/{fileId}/comment | Update a comment
+[**upload_async_session**](#upload_async_session) | **POST** /api/2.0/files/{folderId}/session/{sessionId}/upload | Handles the upload of a chunk for an existing upload session.
+[**upload_session**](#upload_session) | **POST** /api/2.0/files/{folderId}/session/{sessionId} | Resumes an ongoing file upload session for uploading additional chunks of data.
 
+
+# **abort_upload_session**
+> abort_upload_session(session_id, folder_id)
+
+This method allows users to cancel an ongoing upload session identified by the session ID.
+Once the session is aborted, the associated resources will be cleaned up, and the session will no longer accept further uploads.
+
+For more information, see [api.onlyoffice.com]().
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **session_id** | **str**| The session ID. | 
+ **folder_id** | **int**| The folder ID. | 
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+
+```python
+import docspace_api_sdk
+from docspace_api_sdk.rest import ApiException
+from pprint import pprint
+
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+# Enter a context with an instance of the API client
+with docspace_api_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace_api_sdk.OperationsApi(api_client)
+    session_id = 'session-123-abc' # str | The session ID.
+    folder_id = 1 # int | The folder ID.
+
+    try:
+        # Aborts an in-progress file upload session.
+        api_instance.abort_upload_session(session_id, folder_id)
+    except Exception as e:
+        print("Exception when calling OperationsApi->abort_upload_session: %s\n" % e)
+```
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **add_favorites**
 > BooleanWrapper add_favorites(base_batch_request_dto=base_batch_request_dto)
@@ -70,7 +150,6 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -87,7 +166,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 ```
 
 
-
 ### HTTP request headers
 
  - **Content-Type**: application/json
@@ -99,8 +177,8 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Boolean value: true if the operation is successful |  -  |
-**401** | Unauthorized |  -  |
 **403** | You don&#39;t have enough permission to perform the operation |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -140,7 +218,6 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -155,7 +232,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling OperationsApi->bulk_download: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -218,13 +294,12 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.OperationsApi(api_client)
-    file_id = 9846 # int | The file ID to check conversion status.
-    start = true # bool | Specifies whether a conversion operation is started or not. (optional)
+    file_id = 1 # int | The file ID to check conversion status.
+    start = false # bool | Specifies whether a conversion operation is started or not. (optional)
 
     try:
         # Get conversion status
@@ -234,7 +309,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling OperationsApi->check_conversion_status: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -296,7 +370,6 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -313,7 +386,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 ```
 
 
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -325,8 +397,8 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | List of file entry information |  -  |
-**401** | Unauthorized |  -  |
 **403** | You don&#39;t have enough permission to create |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -374,7 +446,6 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -391,7 +462,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 ```
 
 
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -403,8 +473,8 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Result |  -  |
-**401** | Unauthorized |  -  |
 **403** | You don&#39;t have enough permission to create |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -453,7 +523,6 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -470,7 +539,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 ```
 
 
-
 ### HTTP request headers
 
  - **Content-Type**: application/json
@@ -482,30 +550,15 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | List of file operations |  -  |
-**401** | Unauthorized |  -  |
 **403** | You don&#39;t have enough permission to copy |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_upload_session**
-> ObjectWrapper create_upload_session(folder_id, session_request)
+> ChunkedUploadSessionResponseWrapperIntegerWrapper create_upload_session(folder_id, session_request)
 
 Creates the session to upload large files in multiple chunks to the folder with the ID specified in the request.
-
- **Note**: Each chunk can have different length but the length should be multiple of <b>512</b> and greater or equal to <b>10 mb</b>. Last chunk can have any size.
-After the initial response to the request with the <b>200 OK</b> status, you must get the <em>location</em> field value from the response. Send all your chunks to this location.
-Each chunk must be sent in the exact order the chunks appear in the file.
-After receiving each chunk, the server will respond with the current information about the upload session if no errors occurred.
-When the number of bytes uploaded is equal to the number of bytes you sent in the initial request, the server responds with the <b>201 Created</b> status and sends you information about the uploaded file.
-Information about created session which includes:
-<ul>
-<li><b>id:</b> unique ID of this upload session,</li>
-<li><b>created:</b> UTC time when the session was created,</li>
-<li><b>expired:</b> UTC time when the session will expire if no chunks are sent before that time,</li>
-<li><b>location:</b> URL where you should send your next chunk,</li>
-<li><b>bytes_uploaded:</b> number of bytes uploaded for the specific upload ID,</li>
-<li><b>bytes_total:</b> total number of bytes which will be uploaded.</li>
-</ul>
 
 For more information, see [api.onlyoffice.com]().
 
@@ -519,7 +572,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ObjectWrapper**](ObjectWrapper.md)
+[**ChunkedUploadSessionResponseWrapperIntegerWrapper**](ChunkedUploadSessionResponseWrapperIntegerWrapper.md)
 
 ### Authorization
 
@@ -530,7 +583,7 @@ Name | Type | Description  | Notes
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.object_wrapper import ObjectWrapper
+from docspace_api_sdk.models.chunked_upload_session_response_wrapper_integer_wrapper import ChunkedUploadSessionResponseWrapperIntegerWrapper
 from docspace_api_sdk.models.session_request import SessionRequest
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
@@ -548,12 +601,11 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.OperationsApi(api_client)
-    folder_id = 9079 # int | The session folder ID.
+    folder_id = 1 # int | The session folder ID.
     session_request = docspace_api_sdk.SessionRequest() # SessionRequest | The session parameters.
 
     try:
@@ -564,7 +616,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling OperationsApi->create_upload_session: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -578,8 +629,88 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Information about created session |  -  |
-**401** | Unauthorized |  -  |
 **403** | You don&#39;t have enough permission to create |  -  |
+**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **create_upload_session_in_folder**
+> ChunkedUploadSessionResponseIntegerWrapper create_upload_session_in_folder(folder_id, session_request)
+
+The session allows the user to upload a file in smaller chunks to the folder identified by its ID.
+The file information, such as name, size, and additional metadata, must be provided in the request.
+This method facilitates large file upload scenarios by enabling chunked file uploads.
+
+For more information, see [api.onlyoffice.com]().
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **folder_id** | **int**| The session folder ID. | 
+ **session_request** | [**SessionRequest**](SessionRequest.md)| The session parameters. | 
+
+### Return type
+
+[**ChunkedUploadSessionResponseIntegerWrapper**](ChunkedUploadSessionResponseIntegerWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+
+```python
+import docspace_api_sdk
+from docspace_api_sdk.models.chunked_upload_session_response_integer_wrapper import ChunkedUploadSessionResponseIntegerWrapper
+from docspace_api_sdk.models.session_request import SessionRequest
+from docspace_api_sdk.rest import ApiException
+from pprint import pprint
+
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+# Enter a context with an instance of the API client
+with docspace_api_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace_api_sdk.OperationsApi(api_client)
+    folder_id = 1 # int | The session folder ID.
+    session_request = docspace_api_sdk.SessionRequest() # SessionRequest | The session parameters.
+
+    try:
+        # Creates a session for uploading a file to a specific folder in chunks.
+        api_response = api_instance.create_upload_session_in_folder(folder_id, session_request)
+        print("The response of OperationsApi->create_upload_session_in_folder:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling OperationsApi->create_upload_session_in_folder: %s\n" % e)
+```
+
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -628,7 +759,6 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -645,7 +775,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 ```
 
 
-
 ### HTTP request headers
 
  - **Content-Type**: application/json
@@ -657,8 +786,8 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | List of file operations |  -  |
-**401** | Unauthorized |  -  |
 **403** | You don&#39;t have enough permission to delete |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -707,7 +836,6 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -722,7 +850,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling OperationsApi->delete_favorites_from_body: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -785,7 +912,6 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -800,7 +926,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling OperationsApi->delete_file_versions: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -863,7 +988,6 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -880,7 +1004,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 ```
 
 
-
 ### HTTP request headers
 
  - **Content-Type**: application/json
@@ -892,8 +1015,8 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | List of file operations |  -  |
-**401** | Unauthorized |  -  |
 **403** | You don&#39;t have enough permission to duplicate |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -941,12 +1064,11 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.OperationsApi(api_client)
-    single = true # bool | Specifies whether to return only the current operation (optional)
+    single = false # bool | Specifies whether to return only the current operation (optional)
 
     try:
         # Empty the Trash folder
@@ -956,7 +1078,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling OperationsApi->empty_trash: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -970,6 +1091,85 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | List of file operations |  -  |
+**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **finalize_session**
+> UploadSessionResponseIntegerWrapper finalize_session(folder_id, session_id)
+
+Finalizes the upload session by processing the uploaded file chunks and marking the upload as complete.
+This method consolidates chunked uploads into a complete file if required, sends notifications about the upload event,
+and performs any additional cleanup or related actions, such as socket updates and webhook publishing.
+
+For more information, see [api.onlyoffice.com]().
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **folder_id** | **int**| The folder ID. | 
+ **session_id** | **str**| The session ID. | 
+
+### Return type
+
+[**UploadSessionResponseIntegerWrapper**](UploadSessionResponseIntegerWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+
+```python
+import docspace_api_sdk
+from docspace_api_sdk.models.upload_session_response_integer_wrapper import UploadSessionResponseIntegerWrapper
+from docspace_api_sdk.rest import ApiException
+from pprint import pprint
+
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+# Enter a context with an instance of the API client
+with docspace_api_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace_api_sdk.OperationsApi(api_client)
+    folder_id = 1 # int | The folder ID.
+    session_id = 'doc_key_123' # str | The session ID.
+
+    try:
+        # Finalize an upload session
+        api_response = api_instance.finalize_session(folder_id, session_id)
+        print("The response of OperationsApi->finalize_session:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling OperationsApi->finalize_session: %s\n" % e)
+```
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
 **401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -1009,12 +1209,11 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.OperationsApi(api_client)
-    id = '9846' # str | The ID of the file operation. (optional)
+    id = 'operation-123-abc' # str | The ID of the file operation. (optional)
 
     try:
         # Get active file operations
@@ -1024,7 +1223,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling OperationsApi->get_operation_statuses: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -1078,13 +1276,12 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.OperationsApi(api_client)
     operation_type = docspace_api_sdk.FileOperationType() # FileOperationType | Specifies the type of file operation to be retrieved.
-    id = '9079' # str | The ID of the file operation. (optional)
+    id = 'operation-123-abc' # str | The ID of the file operation. (optional)
 
     try:
         # Get file operation statuses
@@ -1094,7 +1291,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling OperationsApi->get_operation_statuses_by_type: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -1156,7 +1352,6 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -1171,7 +1366,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling OperationsApi->mark_as_read: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -1234,7 +1428,6 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -1251,7 +1444,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 ```
 
 
-
 ### HTTP request headers
 
  - **Content-Type**: application/json
@@ -1263,8 +1455,8 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | List of file operations |  -  |
-**401** | Unauthorized |  -  |
 **403** | You don&#39;t have enough permission to move |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1314,12 +1506,11 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.OperationsApi(api_client)
-    file_id = 9846 # int | The file ID to start conversion proccess.
+    file_id = 1 # int | The file ID to start conversion proccess.
     check_conversion_request_dto_integer = docspace_api_sdk.CheckConversionRequestDtoInteger() # CheckConversionRequestDtoInteger | The parameters for checking file conversion. (optional)
 
     try:
@@ -1330,7 +1521,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling OperationsApi->start_file_conversion: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -1383,12 +1573,11 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.OperationsApi(api_client)
-    id = '9846' # str | The operation unique identifier.
+    id = 'some-operation-id' # str | The operation unique identifier.
 
     try:
         # Finish active operations
@@ -1398,7 +1587,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling OperationsApi->terminate_tasks: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -1461,12 +1649,11 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.OperationsApi(api_client)
-    file_id = 9846 # int | The file ID where the comment is located.
+    file_id = 1 # int | The file ID where the comment is located.
     update_comment = docspace_api_sdk.UpdateComment() # UpdateComment | The parameters for updating a comment.
 
     try:
@@ -1477,7 +1664,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling OperationsApi->update_file_comment: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -1491,6 +1677,176 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Updated comment |  -  |
+**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **upload_async_session**
+> ChunkedUploadSessionResponseIntegerWrapper upload_async_session(folder_id, session_id, chunk_number=chunk_number, file=file)
+
+This method allows the caller to upload a specific chunk of a file to an ongoing upload session.
+The session is identified by the session ID provided in the request. The chunk can be of any size
+within the limits allowed during the session initialization. Each chunk must be uploaded in the
+correct order for the server to process it appropriately.
+The server updates the upload session status and stores the progress information after processing
+each chunk. The updated session details are returned in the response.
+
+For more information, see [api.onlyoffice.com]().
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **folder_id** | **int**| The folder ID. | 
+ **session_id** | **str**| The upload session ID. | 
+ **chunk_number** | **int**| The chunk number. | [optional] 
+ **file** | **bytearray**| The file chunk to be uploaded as part of the multipart/form-data request.  This property represents the uploaded file chunk content from the HTTP request form for chunked upload operations.  The file chunk is accessed via the IFormFile interface which provides access to the chunk content and length. | [optional] 
+
+### Return type
+
+[**ChunkedUploadSessionResponseIntegerWrapper**](ChunkedUploadSessionResponseIntegerWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+
+```python
+import docspace_api_sdk
+from docspace_api_sdk.models.chunked_upload_session_response_integer_wrapper import ChunkedUploadSessionResponseIntegerWrapper
+from docspace_api_sdk.rest import ApiException
+from pprint import pprint
+
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+# Enter a context with an instance of the API client
+with docspace_api_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace_api_sdk.OperationsApi(api_client)
+    folder_id = 1 # int | The folder ID.
+    session_id = 'session_abc123' # str | The upload session ID.
+    chunk_number = 1 # int | The chunk number. (optional)
+    file = None # bytearray | The file chunk to be uploaded as part of the multipart/form-data request.  This property represents the uploaded file chunk content from the HTTP request form for chunked upload operations.  The file chunk is accessed via the IFormFile interface which provides access to the chunk content and length. (optional)
+
+    try:
+        # Handles the upload of a chunk for an existing upload session.
+        api_response = api_instance.upload_async_session(folder_id, session_id, chunk_number=chunk_number, file=file)
+        print("The response of OperationsApi->upload_async_session:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling OperationsApi->upload_async_session: %s\n" % e)
+```
+
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **upload_session**
+> UploadSessionResponseIntegerWrapper upload_session(folder_id, session_id, file=file)
+
+This method allows continuing an interrupted or partially completed file upload session by uploading subsequent data chunks.
+The server will validate each uploaded chunk, update the session state, and respond with the status of the current upload. Once
+the total bytes uploaded match the total file size, the file upload process is finalized and related events are triggered.
+If the file is newly uploaded, the server responds with a 201 Created status upon completion. If it overwrites an existing file,
+versioning information is updated accordingly. The method also triggers associated webhooks and socket notifications to reflect
+the updated file state.
+
+For more information, see [api.onlyoffice.com]().
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **folder_id** | **int**| The folder ID. | 
+ **session_id** | **str**| The upload session ID. | 
+ **file** | **bytearray**| The file to be uploaded as part of the multipart/form-data request.  This property represents the uploaded file content from the HTTP request form.  The file is accessed via the IFormFile interface which provides access to the file name, content type, length, and stream. | [optional] 
+
+### Return type
+
+[**UploadSessionResponseIntegerWrapper**](UploadSessionResponseIntegerWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+
+```python
+import docspace_api_sdk
+from docspace_api_sdk.models.upload_session_response_integer_wrapper import UploadSessionResponseIntegerWrapper
+from docspace_api_sdk.rest import ApiException
+from pprint import pprint
+
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+# Enter a context with an instance of the API client
+with docspace_api_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace_api_sdk.OperationsApi(api_client)
+    folder_id = 1 # int | The folder ID.
+    session_id = 'session_abc123' # str | The upload session ID.
+    file = None # bytearray | The file to be uploaded as part of the multipart/form-data request.  This property represents the uploaded file content from the HTTP request form.  The file is accessed via the IFormFile interface which provides access to the file name, content type, length, and stream. (optional)
+
+    try:
+        # Resumes an ongoing file upload session for uploading additional chunks of data.
+        api_response = api_instance.upload_session(folder_id, session_id, file=file)
+        print("The response of OperationsApi->upload_session:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling OperationsApi->upload_session: %s\n" % e)
+```
+
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
 **401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

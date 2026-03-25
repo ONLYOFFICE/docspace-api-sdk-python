@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,6 +24,7 @@ from typing_extensions import Annotated
 from pydantic import Field, StrictStr
 from typing import List, Optional
 from typing_extensions import Annotated
+from uuid import UUID
 from docspace_api_sdk.models.boolean_wrapper import BooleanWrapper
 from docspace_api_sdk.models.employee_array_wrapper import EmployeeArrayWrapper
 from docspace_api_sdk.models.object_wrapper import ObjectWrapper
@@ -51,7 +52,6 @@ class SecurityApi:
         if api_client is None:
             api_client = ApiClient.get_default()
         self.api_client = api_client
-
 
 
 
@@ -107,8 +107,7 @@ class SecurityApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -171,8 +170,7 @@ class SecurityApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -235,8 +233,7 @@ class SecurityApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -315,8 +312,8 @@ class SecurityApi:
     @validate_call
     def get_is_product_administrator(
         self,
-        productid: Annotated[StrictStr, Field(description="The ID of the product extracted from the query parameters.")],
-        userid: Annotated[StrictStr, Field(description="The user ID extracted from the query parameters.")],
+        productid: Annotated[UUID, Field(description="The ID of the product extracted from the query parameters.")],
+        userid: Annotated[UUID, Field(description="The user ID extracted from the query parameters.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -335,9 +332,9 @@ class SecurityApi:
         Checks if the selected user is an administrator of a product with the ID specified in the request.
 
         :param productid: The ID of the product extracted from the query parameters. (required)
-        :type productid: str
+        :type productid: UUID
         :param userid: The user ID extracted from the query parameters. (required)
-        :type userid: str
+        :type userid: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -372,8 +369,7 @@ class SecurityApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ProductAdministratorWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -387,8 +383,8 @@ class SecurityApi:
     @validate_call
     def get_is_product_administrator_with_http_info(
         self,
-        productid: Annotated[StrictStr, Field(description="The ID of the product extracted from the query parameters.")],
-        userid: Annotated[StrictStr, Field(description="The user ID extracted from the query parameters.")],
+        productid: Annotated[UUID, Field(description="The ID of the product extracted from the query parameters.")],
+        userid: Annotated[UUID, Field(description="The user ID extracted from the query parameters.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -407,9 +403,9 @@ class SecurityApi:
         Checks if the selected user is an administrator of a product with the ID specified in the request.
 
         :param productid: The ID of the product extracted from the query parameters. (required)
-        :type productid: str
+        :type productid: UUID
         :param userid: The user ID extracted from the query parameters. (required)
-        :type userid: str
+        :type userid: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -444,8 +440,7 @@ class SecurityApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ProductAdministratorWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -459,8 +454,8 @@ class SecurityApi:
     @validate_call
     def get_is_product_administrator_without_preload_content(
         self,
-        productid: Annotated[StrictStr, Field(description="The ID of the product extracted from the query parameters.")],
-        userid: Annotated[StrictStr, Field(description="The user ID extracted from the query parameters.")],
+        productid: Annotated[UUID, Field(description="The ID of the product extracted from the query parameters.")],
+        userid: Annotated[UUID, Field(description="The user ID extracted from the query parameters.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -479,9 +474,9 @@ class SecurityApi:
         Checks if the selected user is an administrator of a product with the ID specified in the request.
 
         :param productid: The ID of the product extracted from the query parameters. (required)
-        :type productid: str
+        :type productid: UUID
         :param userid: The user ID extracted from the query parameters. (required)
-        :type userid: str
+        :type userid: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -516,8 +511,7 @@ class SecurityApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ProductAdministratorWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -655,8 +649,7 @@ class SecurityApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "PasswordSettingsWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -719,8 +712,7 @@ class SecurityApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "PasswordSettingsWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -783,8 +775,7 @@ class SecurityApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "PasswordSettingsWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -863,7 +854,7 @@ class SecurityApi:
     @validate_call
     def get_product_administrators(
         self,
-        productid: Annotated[StrictStr, Field(description="The ID of the product extracted from the route parameters.")],
+        productid: Annotated[UUID, Field(description="The ID of the product extracted from the route parameters.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -882,7 +873,7 @@ class SecurityApi:
         Returns a list of all the administrators of a product with the ID specified in the request.
 
         :param productid: The ID of the product extracted from the route parameters. (required)
-        :type productid: str
+        :type productid: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -916,8 +907,7 @@ class SecurityApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeArrayWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -931,7 +921,7 @@ class SecurityApi:
     @validate_call
     def get_product_administrators_with_http_info(
         self,
-        productid: Annotated[StrictStr, Field(description="The ID of the product extracted from the route parameters.")],
+        productid: Annotated[UUID, Field(description="The ID of the product extracted from the route parameters.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -950,7 +940,7 @@ class SecurityApi:
         Returns a list of all the administrators of a product with the ID specified in the request.
 
         :param productid: The ID of the product extracted from the route parameters. (required)
-        :type productid: str
+        :type productid: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -984,8 +974,7 @@ class SecurityApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeArrayWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -999,7 +988,7 @@ class SecurityApi:
     @validate_call
     def get_product_administrators_without_preload_content(
         self,
-        productid: Annotated[StrictStr, Field(description="The ID of the product extracted from the route parameters.")],
+        productid: Annotated[UUID, Field(description="The ID of the product extracted from the route parameters.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1018,7 +1007,7 @@ class SecurityApi:
         Returns a list of all the administrators of a product with the ID specified in the request.
 
         :param productid: The ID of the product extracted from the route parameters. (required)
-        :type productid: str
+        :type productid: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1052,8 +1041,7 @@ class SecurityApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeArrayWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1135,7 +1123,7 @@ class SecurityApi:
     @validate_call
     def get_web_item_security_info(
         self,
-        id: Annotated[StrictStr, Field(description="The ID extracted from the route parameters.")],
+        id: Annotated[UUID, Field(description="The ID extracted from the route parameters.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1154,7 +1142,7 @@ class SecurityApi:
         Returns the availability of the module with the ID specified in the request.
 
         :param id: The ID extracted from the route parameters. (required)
-        :type id: str
+        :type id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1188,8 +1176,7 @@ class SecurityApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1203,7 +1190,7 @@ class SecurityApi:
     @validate_call
     def get_web_item_security_info_with_http_info(
         self,
-        id: Annotated[StrictStr, Field(description="The ID extracted from the route parameters.")],
+        id: Annotated[UUID, Field(description="The ID extracted from the route parameters.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1222,7 +1209,7 @@ class SecurityApi:
         Returns the availability of the module with the ID specified in the request.
 
         :param id: The ID extracted from the route parameters. (required)
-        :type id: str
+        :type id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1256,8 +1243,7 @@ class SecurityApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1271,7 +1257,7 @@ class SecurityApi:
     @validate_call
     def get_web_item_security_info_without_preload_content(
         self,
-        id: Annotated[StrictStr, Field(description="The ID extracted from the route parameters.")],
+        id: Annotated[UUID, Field(description="The ID extracted from the route parameters.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1290,7 +1276,7 @@ class SecurityApi:
         Returns the availability of the module with the ID specified in the request.
 
         :param id: The ID extracted from the route parameters. (required)
-        :type id: str
+        :type id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1324,8 +1310,7 @@ class SecurityApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1460,8 +1445,7 @@ class SecurityApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "SecurityArrayWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1528,8 +1512,7 @@ class SecurityApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "SecurityArrayWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1596,8 +1579,7 @@ class SecurityApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "SecurityArrayWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1734,10 +1716,9 @@ class SecurityApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "SecurityArrayWrapper",
-            '401': None,
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1803,10 +1784,9 @@ class SecurityApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "SecurityArrayWrapper",
-            '401': None,
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1872,10 +1852,9 @@ class SecurityApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "SecurityArrayWrapper",
-            '401': None,
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2022,11 +2001,10 @@ class SecurityApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ProductAdministratorWrapper",
-            '401': None,
             '402': None,
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2092,11 +2070,10 @@ class SecurityApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ProductAdministratorWrapper",
-            '401': None,
             '402': None,
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2162,11 +2139,10 @@ class SecurityApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ProductAdministratorWrapper",
-            '401': None,
             '402': None,
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2313,10 +2289,9 @@ class SecurityApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "SecurityArrayWrapper",
-            '401': None,
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2382,10 +2357,9 @@ class SecurityApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "SecurityArrayWrapper",
-            '401': None,
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2451,10 +2425,9 @@ class SecurityApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "SecurityArrayWrapper",
-            '401': None,
             '403': None,
-        }
-        response_data = self.api_client.call_api(
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2603,8 +2576,7 @@ class SecurityApi:
             '200': "PasswordSettingsWrapper",
             '400': None,
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2672,8 +2644,7 @@ class SecurityApi:
             '200': "PasswordSettingsWrapper",
             '400': None,
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2741,8 +2712,7 @@ class SecurityApi:
             '200': "PasswordSettingsWrapper",
             '400': None,
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )

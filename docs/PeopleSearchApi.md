@@ -35,7 +35,7 @@ Name | Type | Description  | Notes
  **exclude_shared** | **bool**| Specifies whether to exclude the account sharing settings from the response. | [optional] 
  **include_shared** | **bool**| Specifies whether to include the account sharing settings in the response. | [optional] 
  **invited_by_me** | **bool**| Specifies whether the user is invited by the current user or not. | [optional] 
- **inviter_id** | **str**| The inviter ID. | [optional] 
+ **inviter_id** | **UUID**| The inviter ID. | [optional] 
  **area** | [**Area**](.md)| The area of the account entries. | [optional] 
  **employee_types** | [**List[EmployeeType]**](EmployeeType.md)| The list of the user types. | [optional] 
  **count** | **int**| The number of items to retrieve in a request. | [optional] 
@@ -77,24 +77,23 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.SearchApi(api_client)
-    id = 9846 # int | The user ID.
+    id = 56 # int | The user ID.
     employee_status = docspace_api_sdk.EmployeeStatus() # EmployeeStatus | The user status. (optional)
     activation_status = docspace_api_sdk.EmployeeActivationStatus() # EmployeeActivationStatus | The user activation status. (optional)
-    exclude_shared = true # bool | Specifies whether to exclude the account sharing settings from the response. (optional)
-    include_shared = true # bool | Specifies whether to include the account sharing settings in the response. (optional)
-    invited_by_me = true # bool | Specifies whether the user is invited by the current user or not. (optional)
-    inviter_id = '75a5f745-f697-4418-b38d-0fe0d277e258' # str | The inviter ID. (optional)
+    exclude_shared = false # bool | Specifies whether to exclude the account sharing settings from the response. (optional)
+    include_shared = false # bool | Specifies whether to include the account sharing settings in the response. (optional)
+    invited_by_me = false # bool | Specifies whether the user is invited by the current user or not. (optional)
+    inviter_id = UUID('00000000-0000-0000-0000-000000000000') # UUID | The inviter ID. (optional)
     area = docspace_api_sdk.Area() # Area | The area of the account entries. (optional)
     employee_types = [docspace_api_sdk.EmployeeType()] # List[EmployeeType] | The list of the user types. (optional)
-    count = 1234 # int | The number of items to retrieve in a request. (optional)
-    start_index = 1234 # int | The starting index for the query results. (optional)
-    filter_separator = 'some text' # str | Specifies the separator used in filter expressions. (optional)
-    filter_value = 'some text' # str | The text filter applied to the accounts search query. (optional)
+    count = 25 # int | The number of items to retrieve in a request. (optional)
+    start_index = 0 # int | The starting index for the query results. (optional)
+    filter_separator = ',' # str | Specifies the separator used in filter expressions. (optional)
+    filter_value = 'John' # str | The text filter applied to the accounts search query. (optional)
 
     try:
         # Get account entries with file sharing settings
@@ -104,7 +103,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling SearchApi->get_accounts_entries_with_files_shared: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -118,8 +116,8 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Ok |  -  |
-**401** | Unauthorized |  -  |
 **403** | No permissions to perform this action |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -141,7 +139,7 @@ Name | Type | Description  | Notes
  **exclude_shared** | **bool**| Specifies whether to exclude the account sharing settings from the response. | [optional] 
  **include_shared** | **bool**| Specifies whether to include the account sharing settings in the response. | [optional] 
  **invited_by_me** | **bool**| Specifies whether the user is invited by the current user or not. | [optional] 
- **inviter_id** | **str**| The inviter ID. | [optional] 
+ **inviter_id** | **UUID**| The inviter ID. | [optional] 
  **area** | [**Area**](.md)| The area of the account entries. | [optional] 
  **employee_types** | [**List[EmployeeType]**](EmployeeType.md)| The list of the user types. | [optional] 
  **count** | **int**| The number of items to retrieve in a request. | [optional] 
@@ -183,24 +181,23 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.SearchApi(api_client)
-    id = 9846 # int | The user ID.
+    id = 56 # int | The user ID.
     employee_status = docspace_api_sdk.EmployeeStatus() # EmployeeStatus | The user status. (optional)
     activation_status = docspace_api_sdk.EmployeeActivationStatus() # EmployeeActivationStatus | The user activation status. (optional)
-    exclude_shared = true # bool | Specifies whether to exclude the account sharing settings from the response. (optional)
-    include_shared = true # bool | Specifies whether to include the account sharing settings in the response. (optional)
-    invited_by_me = true # bool | Specifies whether the user is invited by the current user or not. (optional)
-    inviter_id = '75a5f745-f697-4418-b38d-0fe0d277e258' # str | The inviter ID. (optional)
+    exclude_shared = false # bool | Specifies whether to exclude the account sharing settings from the response. (optional)
+    include_shared = false # bool | Specifies whether to include the account sharing settings in the response. (optional)
+    invited_by_me = false # bool | Specifies whether the user is invited by the current user or not. (optional)
+    inviter_id = UUID('00000000-0000-0000-0000-000000000000') # UUID | The inviter ID. (optional)
     area = docspace_api_sdk.Area() # Area | The area of the account entries. (optional)
     employee_types = [docspace_api_sdk.EmployeeType()] # List[EmployeeType] | The list of the user types. (optional)
-    count = 1234 # int | The number of items to retrieve in a request. (optional)
-    start_index = 1234 # int | The starting index for the query results. (optional)
-    filter_separator = 'some text' # str | Specifies the separator used in filter expressions. (optional)
-    filter_value = 'some text' # str | The text filter applied to the accounts search query. (optional)
+    count = 25 # int | The number of items to retrieve in a request. (optional)
+    start_index = 0 # int | The starting index for the query results. (optional)
+    filter_separator = ',' # str | Specifies the separator used in filter expressions. (optional)
+    filter_value = 'John' # str | The text filter applied to the accounts search query. (optional)
 
     try:
         # Get account entries with folder sharing settings
@@ -210,7 +207,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling SearchApi->get_accounts_entries_with_folders_shared: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -224,8 +220,8 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Ok |  -  |
-**401** | Unauthorized |  -  |
 **403** | No permissions to perform this action |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -247,7 +243,7 @@ Name | Type | Description  | Notes
  **exclude_shared** | **bool**| Specifies whether to exclude the account sharing settings from the response. | [optional] 
  **include_shared** | **bool**| Specifies whether to include the account sharing settings in the response. | [optional] 
  **invited_by_me** | **bool**| Specifies whether the user is invited by the current user or not. | [optional] 
- **inviter_id** | **str**| The inviter ID. | [optional] 
+ **inviter_id** | **UUID**| The inviter ID. | [optional] 
  **area** | [**Area**](.md)| The area of the account entries. | [optional] 
  **employee_types** | [**List[EmployeeType]**](EmployeeType.md)| The list of the user types. | [optional] 
  **count** | **int**| The number of items to retrieve in a request. | [optional] 
@@ -289,24 +285,23 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.SearchApi(api_client)
-    id = 9846 # int | The user ID.
+    id = 56 # int | The user ID.
     employee_status = docspace_api_sdk.EmployeeStatus() # EmployeeStatus | The user status. (optional)
     activation_status = docspace_api_sdk.EmployeeActivationStatus() # EmployeeActivationStatus | The user activation status. (optional)
-    exclude_shared = true # bool | Specifies whether to exclude the account sharing settings from the response. (optional)
-    include_shared = true # bool | Specifies whether to include the account sharing settings in the response. (optional)
-    invited_by_me = true # bool | Specifies whether the user is invited by the current user or not. (optional)
-    inviter_id = '75a5f745-f697-4418-b38d-0fe0d277e258' # str | The inviter ID. (optional)
+    exclude_shared = false # bool | Specifies whether to exclude the account sharing settings from the response. (optional)
+    include_shared = false # bool | Specifies whether to include the account sharing settings in the response. (optional)
+    invited_by_me = false # bool | Specifies whether the user is invited by the current user or not. (optional)
+    inviter_id = UUID('00000000-0000-0000-0000-000000000000') # UUID | The inviter ID. (optional)
     area = docspace_api_sdk.Area() # Area | The area of the account entries. (optional)
     employee_types = [docspace_api_sdk.EmployeeType()] # List[EmployeeType] | The list of the user types. (optional)
-    count = 1234 # int | The number of items to retrieve in a request. (optional)
-    start_index = 1234 # int | The starting index for the query results. (optional)
-    filter_separator = 'some text' # str | Specifies the separator used in filter expressions. (optional)
-    filter_value = 'some text' # str | The text filter applied to the accounts search query. (optional)
+    count = 25 # int | The number of items to retrieve in a request. (optional)
+    start_index = 0 # int | The starting index for the query results. (optional)
+    filter_separator = ',' # str | Specifies the separator used in filter expressions. (optional)
+    filter_value = 'John' # str | The text filter applied to the accounts search query. (optional)
 
     try:
         # Get account entries
@@ -316,7 +311,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling SearchApi->get_accounts_entries_with_rooms_shared: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -330,8 +324,8 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Ok |  -  |
-**401** | Unauthorized |  -  |
 **403** | No permissions to perform this action |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -381,14 +375,13 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.SearchApi(api_client)
-    query = 'some text' # str | The search query.
-    filter_by = 'some text' # str | Specifies a filter criteria for the user search query. (optional)
-    filter_value = 'some text' # str | The value used for filtering users, allowing additional constraints for the query. (optional)
+    query = 'John' # str | The search query.
+    filter_by = 'displayName' # str | Specifies a filter criteria for the user search query. (optional)
+    filter_value = 'John' # str | The value used for filtering users, allowing additional constraints for the query. (optional)
 
     try:
         # Search users
@@ -398,7 +391,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling SearchApi->get_search: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -412,8 +404,8 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | List of users with the detailed information |  -  |
-**401** | Unauthorized |  -  |
 **403** | No permissions to perform this action |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -430,7 +422,7 @@ For more information, see [api.onlyoffice.com]().
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **employee_status** | [**EmployeeStatus**](.md)| The user status. | [optional] 
- **group_id** | **str**| The group ID. | [optional] 
+ **group_id** | **UUID**| The group ID. | [optional] 
  **activation_status** | [**EmployeeActivationStatus**](.md)| The user activation status. | [optional] 
  **employee_type** | [**EmployeeType**](.md)| The user type. | [optional] 
  **employee_types** | [**List[int]**](int.md)| The list of user types. | [optional] 
@@ -441,7 +433,7 @@ Name | Type | Description  | Notes
  **without_group** | **bool**| Specifies whether the user should be a member of a group or not. | [optional] 
  **exclude_group** | **bool**| Specifies whether the user should be a member of the group with the specified ID. | [optional] 
  **invited_by_me** | **bool**| Specifies whether the user is invited by the current user or not. | [optional] 
- **inviter_id** | **str**| The inviter ID. | [optional] 
+ **inviter_id** | **UUID**| The inviter ID. | [optional] 
  **area** | [**Area**](.md)| The filter area. | [optional] 
  **count** | **int**| The maximum number of items to be retrieved in the response. | [optional] 
  **start_index** | **int**| The zero-based index of the first item to be retrieved in a filtered result set. | [optional] 
@@ -488,31 +480,30 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.SearchApi(api_client)
     employee_status = docspace_api_sdk.EmployeeStatus() # EmployeeStatus | The user status. (optional)
-    group_id = '75a5f745-f697-4418-b38d-0fe0d277e258' # str | The group ID. (optional)
+    group_id = UUID('00000000-0000-0000-0000-000000000000') # UUID | The group ID. (optional)
     activation_status = docspace_api_sdk.EmployeeActivationStatus() # EmployeeActivationStatus | The user activation status. (optional)
     employee_type = docspace_api_sdk.EmployeeType() # EmployeeType | The user type. (optional)
-    employee_types = [56] # List[int] | The list of user types. (optional)
-    is_administrator = true # bool | Specifies if the user is an administrator or not. (optional)
+    employee_types = [[1,2]] # List[int] | The list of user types. (optional)
+    is_administrator = false # bool | Specifies if the user is an administrator or not. (optional)
     payments = docspace_api_sdk.Payments() # Payments | The user payment status. (optional)
     account_login_type = docspace_api_sdk.AccountLoginType() # AccountLoginType | The account login type. (optional)
     quota_filter = docspace_api_sdk.QuotaFilter() # QuotaFilter | The quota filter (All - 0, Default - 1, Custom - 2). (optional)
-    without_group = true # bool | Specifies whether the user should be a member of a group or not. (optional)
-    exclude_group = true # bool | Specifies whether the user should be a member of the group with the specified ID. (optional)
-    invited_by_me = true # bool | Specifies whether the user is invited by the current user or not. (optional)
-    inviter_id = '75a5f745-f697-4418-b38d-0fe0d277e258' # str | The inviter ID. (optional)
+    without_group = false # bool | Specifies whether the user should be a member of a group or not. (optional)
+    exclude_group = false # bool | Specifies whether the user should be a member of the group with the specified ID. (optional)
+    invited_by_me = false # bool | Specifies whether the user is invited by the current user or not. (optional)
+    inviter_id = UUID('00000000-0000-0000-0000-000000000000') # UUID | The inviter ID. (optional)
     area = docspace_api_sdk.Area() # Area | The filter area. (optional)
-    count = 1234 # int | The maximum number of items to be retrieved in the response. (optional)
-    start_index = 1234 # int | The zero-based index of the first item to be retrieved in a filtered result set. (optional)
-    sort_by = 'some text' # str | Specifies the property or field name by which the results should be sorted. (optional)
+    count = 25 # int | The maximum number of items to be retrieved in the response. (optional)
+    start_index = 0 # int | The zero-based index of the first item to be retrieved in a filtered result set. (optional)
+    sort_by = 'displayName' # str | Specifies the property or field name by which the results should be sorted. (optional)
     sort_order = docspace_api_sdk.SortOrder() # SortOrder | The order in which the results are sorted. (optional)
-    filter_separator = 'some text' # str | Represents the separator used to split filter criteria in query parameters. (optional)
-    filter_value = 'some text' # str | The search text used to filter results based on user input. (optional)
+    filter_separator = ',' # str | Represents the separator used to split filter criteria in query parameters. (optional)
+    filter_value = 'John' # str | The search text used to filter results based on user input. (optional)
 
     try:
         # Search users by extended filter
@@ -522,7 +513,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling SearchApi->get_simple_by_filter: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -536,8 +526,8 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | List of users |  -  |
-**401** | Unauthorized |  -  |
 **403** | No permissions to perform this action |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -559,7 +549,7 @@ Name | Type | Description  | Notes
  **exclude_shared** | **bool**| Specifies whether to exclude the user sharing settings or not. | [optional] 
  **include_shared** | **bool**| Specifies whether to include the user sharing settings or not. | [optional] 
  **invited_by_me** | **bool**| Specifies whether the user was invited by the current user or not. | [optional] 
- **inviter_id** | **str**| The inviter ID. | [optional] 
+ **inviter_id** | **UUID**| The inviter ID. | [optional] 
  **area** | [**Area**](.md)| The user area. | [optional] 
  **employee_types** | [**List[EmployeeType]**](EmployeeType.md)| The list of user types. | [optional] 
  **count** | **int**| The maximum number of users to be retrieved in the request. | [optional] 
@@ -601,24 +591,23 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.SearchApi(api_client)
-    id = 9846 # int | The user ID.
+    id = 56 # int | The user ID.
     employee_status = docspace_api_sdk.EmployeeStatus() # EmployeeStatus | The user status. (optional)
     activation_status = docspace_api_sdk.EmployeeActivationStatus() # EmployeeActivationStatus | The user activation status. (optional)
-    exclude_shared = true # bool | Specifies whether to exclude the user sharing settings or not. (optional)
-    include_shared = true # bool | Specifies whether to include the user sharing settings or not. (optional)
-    invited_by_me = true # bool | Specifies whether the user was invited by the current user or not. (optional)
-    inviter_id = '75a5f745-f697-4418-b38d-0fe0d277e258' # str | The inviter ID. (optional)
+    exclude_shared = false # bool | Specifies whether to exclude the user sharing settings or not. (optional)
+    include_shared = false # bool | Specifies whether to include the user sharing settings or not. (optional)
+    invited_by_me = false # bool | Specifies whether the user was invited by the current user or not. (optional)
+    inviter_id = UUID('00000000-0000-0000-0000-000000000000') # UUID | The inviter ID. (optional)
     area = docspace_api_sdk.Area() # Area | The user area. (optional)
     employee_types = [docspace_api_sdk.EmployeeType()] # List[EmployeeType] | The list of user types. (optional)
-    count = 1234 # int | The maximum number of users to be retrieved in the request. (optional)
-    start_index = 1234 # int | The zero-based index of the first record to retrieve in a paged query. (optional)
-    filter_separator = 'some text' # str | The character or string used to separate multiple filter values in a filtering query. (optional)
-    filter_value = 'some text' # str | The filter text value used for searching or filtering user results. (optional)
+    count = 25 # int | The maximum number of users to be retrieved in the request. (optional)
+    start_index = 0 # int | The zero-based index of the first record to retrieve in a paged query. (optional)
+    filter_separator = ',' # str | The character or string used to separate multiple filter values in a filtering query. (optional)
+    filter_value = 'John' # str | The filter text value used for searching or filtering user results. (optional)
 
     try:
         # Get users with file sharing settings
@@ -628,7 +617,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling SearchApi->get_users_with_files_shared: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -642,8 +630,8 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Ok |  -  |
-**401** | Unauthorized |  -  |
 **403** | No permissions to perform this action |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -665,7 +653,7 @@ Name | Type | Description  | Notes
  **exclude_shared** | **bool**| Specifies whether to exclude the user sharing settings or not. | [optional] 
  **include_shared** | **bool**| Specifies whether to include the user sharing settings or not. | [optional] 
  **invited_by_me** | **bool**| Specifies whether the user was invited by the current user or not. | [optional] 
- **inviter_id** | **str**| The inviter ID. | [optional] 
+ **inviter_id** | **UUID**| The inviter ID. | [optional] 
  **area** | [**Area**](.md)| The user area. | [optional] 
  **employee_types** | [**List[EmployeeType]**](EmployeeType.md)| The list of user types. | [optional] 
  **count** | **int**| The maximum number of users to be retrieved in the request. | [optional] 
@@ -707,24 +695,23 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.SearchApi(api_client)
-    id = 9846 # int | The user ID.
+    id = 56 # int | The user ID.
     employee_status = docspace_api_sdk.EmployeeStatus() # EmployeeStatus | The user status. (optional)
     activation_status = docspace_api_sdk.EmployeeActivationStatus() # EmployeeActivationStatus | The user activation status. (optional)
-    exclude_shared = true # bool | Specifies whether to exclude the user sharing settings or not. (optional)
-    include_shared = true # bool | Specifies whether to include the user sharing settings or not. (optional)
-    invited_by_me = true # bool | Specifies whether the user was invited by the current user or not. (optional)
-    inviter_id = '75a5f745-f697-4418-b38d-0fe0d277e258' # str | The inviter ID. (optional)
+    exclude_shared = false # bool | Specifies whether to exclude the user sharing settings or not. (optional)
+    include_shared = false # bool | Specifies whether to include the user sharing settings or not. (optional)
+    invited_by_me = false # bool | Specifies whether the user was invited by the current user or not. (optional)
+    inviter_id = UUID('00000000-0000-0000-0000-000000000000') # UUID | The inviter ID. (optional)
     area = docspace_api_sdk.Area() # Area | The user area. (optional)
     employee_types = [docspace_api_sdk.EmployeeType()] # List[EmployeeType] | The list of user types. (optional)
-    count = 1234 # int | The maximum number of users to be retrieved in the request. (optional)
-    start_index = 1234 # int | The zero-based index of the first record to retrieve in a paged query. (optional)
-    filter_separator = 'some text' # str | The character or string used to separate multiple filter values in a filtering query. (optional)
-    filter_value = 'some text' # str | The filter text value used for searching or filtering user results. (optional)
+    count = 25 # int | The maximum number of users to be retrieved in the request. (optional)
+    start_index = 0 # int | The zero-based index of the first record to retrieve in a paged query. (optional)
+    filter_separator = ',' # str | The character or string used to separate multiple filter values in a filtering query. (optional)
+    filter_value = 'John' # str | The filter text value used for searching or filtering user results. (optional)
 
     try:
         # Get users with folder sharing settings
@@ -734,7 +721,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling SearchApi->get_users_with_folders_shared: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -748,8 +734,8 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Ok |  -  |
-**401** | Unauthorized |  -  |
 **403** | No permissions to perform this action |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -771,7 +757,7 @@ Name | Type | Description  | Notes
  **exclude_shared** | **bool**| Specifies whether to exclude the user sharing settings or not. | [optional] 
  **include_shared** | **bool**| Specifies whether to include the user sharing settings or not. | [optional] 
  **invited_by_me** | **bool**| Specifies whether the user was invited by the current user or not. | [optional] 
- **inviter_id** | **str**| The inviter ID. | [optional] 
+ **inviter_id** | **UUID**| The inviter ID. | [optional] 
  **area** | [**Area**](.md)| The user area. | [optional] 
  **employee_types** | [**List[EmployeeType]**](EmployeeType.md)| The list of user types. | [optional] 
  **count** | **int**| The maximum number of users to be retrieved in the request. | [optional] 
@@ -813,24 +799,23 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.SearchApi(api_client)
-    id = 9846 # int | The user ID.
+    id = 56 # int | The user ID.
     employee_status = docspace_api_sdk.EmployeeStatus() # EmployeeStatus | The user status. (optional)
     activation_status = docspace_api_sdk.EmployeeActivationStatus() # EmployeeActivationStatus | The user activation status. (optional)
-    exclude_shared = true # bool | Specifies whether to exclude the user sharing settings or not. (optional)
-    include_shared = true # bool | Specifies whether to include the user sharing settings or not. (optional)
-    invited_by_me = true # bool | Specifies whether the user was invited by the current user or not. (optional)
-    inviter_id = '75a5f745-f697-4418-b38d-0fe0d277e258' # str | The inviter ID. (optional)
+    exclude_shared = false # bool | Specifies whether to exclude the user sharing settings or not. (optional)
+    include_shared = false # bool | Specifies whether to include the user sharing settings or not. (optional)
+    invited_by_me = false # bool | Specifies whether the user was invited by the current user or not. (optional)
+    inviter_id = UUID('00000000-0000-0000-0000-000000000000') # UUID | The inviter ID. (optional)
     area = docspace_api_sdk.Area() # Area | The user area. (optional)
     employee_types = [docspace_api_sdk.EmployeeType()] # List[EmployeeType] | The list of user types. (optional)
-    count = 1234 # int | The maximum number of users to be retrieved in the request. (optional)
-    start_index = 1234 # int | The zero-based index of the first record to retrieve in a paged query. (optional)
-    filter_separator = 'some text' # str | The character or string used to separate multiple filter values in a filtering query. (optional)
-    filter_value = 'some text' # str | The filter text value used for searching or filtering user results. (optional)
+    count = 25 # int | The maximum number of users to be retrieved in the request. (optional)
+    start_index = 0 # int | The zero-based index of the first record to retrieve in a paged query. (optional)
+    filter_separator = ',' # str | The character or string used to separate multiple filter values in a filtering query. (optional)
+    filter_value = 'John' # str | The filter text value used for searching or filtering user results. (optional)
 
     try:
         # Get users with room sharing settings
@@ -840,7 +825,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling SearchApi->get_users_with_room_shared: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -854,8 +838,8 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Ok |  -  |
-**401** | Unauthorized |  -  |
 **403** | No permissions to perform this action |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -872,7 +856,7 @@ For more information, see [api.onlyoffice.com]().
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **employee_status** | [**EmployeeStatus**](.md)| The user status. | [optional] 
- **group_id** | **str**| The group ID. | [optional] 
+ **group_id** | **UUID**| The group ID. | [optional] 
  **activation_status** | [**EmployeeActivationStatus**](.md)| The user activation status. | [optional] 
  **employee_type** | [**EmployeeType**](.md)| The user type. | [optional] 
  **employee_types** | [**List[int]**](int.md)| The list of user types. | [optional] 
@@ -883,7 +867,7 @@ Name | Type | Description  | Notes
  **without_group** | **bool**| Specifies whether the user should be a member of a group or not. | [optional] 
  **exclude_group** | **bool**| Specifies whether the user should be a member of the group with the specified ID. | [optional] 
  **invited_by_me** | **bool**| Specifies whether the user is invited by the current user or not. | [optional] 
- **inviter_id** | **str**| The inviter ID. | [optional] 
+ **inviter_id** | **UUID**| The inviter ID. | [optional] 
  **area** | [**Area**](.md)| The filter area. | [optional] 
  **count** | **int**| The maximum number of items to be retrieved in the response. | [optional] 
  **start_index** | **int**| The zero-based index of the first item to be retrieved in a filtered result set. | [optional] 
@@ -930,31 +914,30 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.SearchApi(api_client)
     employee_status = docspace_api_sdk.EmployeeStatus() # EmployeeStatus | The user status. (optional)
-    group_id = '75a5f745-f697-4418-b38d-0fe0d277e258' # str | The group ID. (optional)
+    group_id = UUID('00000000-0000-0000-0000-000000000000') # UUID | The group ID. (optional)
     activation_status = docspace_api_sdk.EmployeeActivationStatus() # EmployeeActivationStatus | The user activation status. (optional)
     employee_type = docspace_api_sdk.EmployeeType() # EmployeeType | The user type. (optional)
-    employee_types = [56] # List[int] | The list of user types. (optional)
-    is_administrator = true # bool | Specifies if the user is an administrator or not. (optional)
+    employee_types = [[1,2]] # List[int] | The list of user types. (optional)
+    is_administrator = false # bool | Specifies if the user is an administrator or not. (optional)
     payments = docspace_api_sdk.Payments() # Payments | The user payment status. (optional)
     account_login_type = docspace_api_sdk.AccountLoginType() # AccountLoginType | The account login type. (optional)
     quota_filter = docspace_api_sdk.QuotaFilter() # QuotaFilter | The quota filter (All - 0, Default - 1, Custom - 2). (optional)
-    without_group = true # bool | Specifies whether the user should be a member of a group or not. (optional)
-    exclude_group = true # bool | Specifies whether the user should be a member of the group with the specified ID. (optional)
-    invited_by_me = true # bool | Specifies whether the user is invited by the current user or not. (optional)
-    inviter_id = '75a5f745-f697-4418-b38d-0fe0d277e258' # str | The inviter ID. (optional)
+    without_group = false # bool | Specifies whether the user should be a member of a group or not. (optional)
+    exclude_group = false # bool | Specifies whether the user should be a member of the group with the specified ID. (optional)
+    invited_by_me = false # bool | Specifies whether the user is invited by the current user or not. (optional)
+    inviter_id = UUID('00000000-0000-0000-0000-000000000000') # UUID | The inviter ID. (optional)
     area = docspace_api_sdk.Area() # Area | The filter area. (optional)
-    count = 1234 # int | The maximum number of items to be retrieved in the response. (optional)
-    start_index = 1234 # int | The zero-based index of the first item to be retrieved in a filtered result set. (optional)
-    sort_by = 'some text' # str | Specifies the property or field name by which the results should be sorted. (optional)
+    count = 25 # int | The maximum number of items to be retrieved in the response. (optional)
+    start_index = 0 # int | The zero-based index of the first item to be retrieved in a filtered result set. (optional)
+    sort_by = 'displayName' # str | Specifies the property or field name by which the results should be sorted. (optional)
     sort_order = docspace_api_sdk.SortOrder() # SortOrder | The order in which the results are sorted. (optional)
-    filter_separator = 'some text' # str | Represents the separator used to split filter criteria in query parameters. (optional)
-    filter_value = 'some text' # str | The search text used to filter results based on user input. (optional)
+    filter_separator = ',' # str | Represents the separator used to split filter criteria in query parameters. (optional)
+    filter_value = 'John' # str | The search text used to filter results based on user input. (optional)
 
     try:
         # Search users with detailed information by extended filter
@@ -964,7 +947,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling SearchApi->search_users_by_extended_filter: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -978,8 +960,8 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | List of users with the detailed information |  -  |
-**401** | Unauthorized |  -  |
 **403** | No permissions to perform this action |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1027,12 +1009,11 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.SearchApi(api_client)
-    query = 'some text' # str | The search query. (optional)
+    query = 'John' # str | The search query. (optional)
 
     try:
         # Search users (using query parameters)
@@ -1042,7 +1023,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling SearchApi->search_users_by_query: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -1108,15 +1088,14 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.SearchApi(api_client)
     status = docspace_api_sdk.EmployeeStatus() # EmployeeStatus | The user status.
-    query = 'some text' # str | The advanced search query. (optional)
-    filter_by = 'some text' # str | Specifies the criteria used to filter search results in advanced queries. (optional)
-    filter_value = 'some text' # str | The value used to filter the search query. (optional)
+    query = 'John' # str | The advanced search query. (optional)
+    filter_by = 'displayName' # str | Specifies the criteria used to filter search results in advanced queries. (optional)
+    filter_value = 'John' # str | The value used to filter the search query. (optional)
 
     try:
         # Search users by status filter
@@ -1126,7 +1105,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling SearchApi->search_users_by_status: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -1140,8 +1118,8 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | List of users with the detailed information |  -  |
-**401** | Unauthorized |  -  |
 **403** | No permissions to perform this action |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -39,7 +39,7 @@ class CompanyWhiteLabelSettings(BaseModel):
     phone: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The company phone number.")
     is_licensor: Optional[StrictBool] = Field(default=None, description="Specifies if a company is a licensor or not.", alias="IsLicensor")
     hide_about: Optional[StrictBool] = Field(default=None, description="Specifies if the About page is visible or not", alias="hideAbout")
-    last_modified: Optional[datetime] = Field(default=None, alias="lastModified")
+    last_modified: Optional[datetime] = Field(default=None, description="The timestamp indicating when the settings were last modified.", alias="lastModified")
     __properties: ClassVar[List[str]] = ["companyName", "site", "email", "address", "phone", "IsLicensor", "hideAbout", "lastModified"]
 
     model_config = ConfigDict(

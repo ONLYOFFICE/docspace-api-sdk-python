@@ -5,12 +5,7 @@
 
 name: docspace_api_sdk Python package
 
-on:
-  workflow_dispatch:
-  push:
-    branches: [master, develop]
-  pull_request:
-    branches: [master, develop]
+on: [push, pull_request]
 
 permissions:
   contents: read
@@ -36,8 +31,4 @@ jobs:
           pip install -r test-requirements.txt
       - name: Test with pytest
         run: |
-            if [ -d "tests" ]; then
-                pytest --cov=docspace_api_sdk
-            else
-                echo "No tests directory found, skipping tests"
-            fi
+          pytest --cov=docspace_api_sdk

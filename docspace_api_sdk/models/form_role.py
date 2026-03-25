@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,6 +24,7 @@ import json
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from uuid import UUID
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -34,7 +35,7 @@ class FormRole(BaseModel):
     room_id: Optional[StrictInt] = Field(default=None, description="The room ID.", alias="roomId")
     role_name: Optional[StrictStr] = Field(default=None, description="The role name.", alias="roleName")
     role_color: Optional[StrictStr] = Field(default=None, description="The role color.", alias="roleColor")
-    user_id: Optional[StrictStr] = Field(default=None, description="The user ID.", alias="userId")
+    user_id: Optional[UUID] = Field(default=None, description="The user ID.", alias="userId")
     sequence: Optional[StrictInt] = Field(default=None, description="The role sequence.")
     submitted: Optional[StrictBool] = Field(default=None, description="Specifies if the role was submitted or not.")
     opened_at: Optional[datetime] = Field(default=None, description="The date and time when the role was opened.", alias="openedAt")

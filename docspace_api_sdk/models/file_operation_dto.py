@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,6 +23,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from docspace_api_sdk.models.distributed_task_status import DistributedTaskStatus
 from docspace_api_sdk.models.file_entry_base_dto import FileEntryBaseDto
 from docspace_api_sdk.models.file_operation_type import FileOperationType
 from typing import Optional, Set
@@ -41,7 +42,8 @@ class FileOperationDto(BaseModel):
     url: Optional[StrictStr] = Field(default=None, description="The file operation URL.")
     files: Optional[List[FileEntryBaseDto]] = Field(default=None, description="The list of files of the file operation.")
     folders: Optional[List[FileEntryBaseDto]] = Field(default=None, description="The list of folders of the file operation.")
-    __properties: ClassVar[List[str]] = ["id", "Operation", "progress", "error", "processed", "finished", "url", "files", "folders"]
+    status: Optional[DistributedTaskStatus] = None
+    __properties: ClassVar[List[str]] = ["id", "Operation", "progress", "error", "processed", "finished", "url", "files", "folders", "status"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -147,7 +149,8 @@ class FileOperationDto(BaseModel):
             "finished": obj.get("finished"),
             "url": obj.get("url"),
             "files": [FileEntryBaseDto.from_dict(_item) for _item in obj["files"]] if obj.get("files") is not None else None,
-            "folders": [FileEntryBaseDto.from_dict(_item) for _item in obj["folders"]] if obj.get("folders") is not None else None
+            "folders": [FileEntryBaseDto.from_dict(_item) for _item in obj["folders"]] if obj.get("folders") is not None else None,
+            "status": obj.get("status")
         })
         return _obj
 

@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,8 +21,9 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictStr
+from pydantic import Field
 from typing_extensions import Annotated
+from uuid import UUID
 from docspace_api_sdk.models.usage_space_stat_item_array_wrapper import UsageSpaceStatItemArrayWrapper
 
 from docspace_api_sdk.api_client import ApiClient, RequestSerialized
@@ -44,11 +45,10 @@ class StatisticsApi:
 
 
 
-
     @validate_call
     def get_space_usage_statistics(
         self,
-        id: Annotated[StrictStr, Field(description="The ID extracted from the route parameters.")],
+        id: Annotated[UUID, Field(description="The ID extracted from the route parameters.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -67,7 +67,7 @@ class StatisticsApi:
         Returns the space usage statistics for the module with the ID specified in the request.
 
         :param id: The ID extracted from the route parameters. (required)
-        :type id: str
+        :type id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -101,8 +101,7 @@ class StatisticsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "UsageSpaceStatItemArrayWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -116,7 +115,7 @@ class StatisticsApi:
     @validate_call
     def get_space_usage_statistics_with_http_info(
         self,
-        id: Annotated[StrictStr, Field(description="The ID extracted from the route parameters.")],
+        id: Annotated[UUID, Field(description="The ID extracted from the route parameters.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -135,7 +134,7 @@ class StatisticsApi:
         Returns the space usage statistics for the module with the ID specified in the request.
 
         :param id: The ID extracted from the route parameters. (required)
-        :type id: str
+        :type id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -169,8 +168,7 @@ class StatisticsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "UsageSpaceStatItemArrayWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -184,7 +182,7 @@ class StatisticsApi:
     @validate_call
     def get_space_usage_statistics_without_preload_content(
         self,
-        id: Annotated[StrictStr, Field(description="The ID extracted from the route parameters.")],
+        id: Annotated[UUID, Field(description="The ID extracted from the route parameters.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -203,7 +201,7 @@ class StatisticsApi:
         Returns the space usage statistics for the module with the ID specified in the request.
 
         :param id: The ID extracted from the route parameters. (required)
-        :type id: str
+        :type id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -237,8 +235,7 @@ class StatisticsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "UsageSpaceStatItemArrayWrapper",
             '401': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )

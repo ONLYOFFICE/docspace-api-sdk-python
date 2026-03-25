@@ -54,7 +54,6 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -70,7 +69,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 ```
 
 
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -82,9 +80,9 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | URL to the xlsx report file |  -  |
-**401** | Unauthorized |  -  |
 **402** | Your pricing plan does not support this option |  -  |
 **403** | You don&#39;t have enough permission to create |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -100,7 +98,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **user_id** | **str**| The ID of the user who triggered the audit event. | [optional] 
+ **user_id** | **UUID**| The ID of the user who triggered the audit event. | [optional] 
  **module_type** | [**LocationType**](.md)| The location where the audit event occurred. | [optional] 
  **action_type** | [**ActionType**](.md)| The type of action performed in the audit event (e.g., Create, Update, Delete). | [optional] 
  **action** | [**MessageAction**](.md)| The specific action that occurred within the audit event. | [optional] 
@@ -146,21 +144,20 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.AuditTrailDataApi(api_client)
-    user_id = 'aae1e103-bca5-9fa1-ba8c-42058b4abf28' # str | The ID of the user who triggered the audit event. (optional)
+    user_id = UUID('00000000-0000-0000-0000-000000000001') # UUID | The ID of the user who triggered the audit event. (optional)
     module_type = docspace_api_sdk.LocationType() # LocationType | The location where the audit event occurred. (optional)
     action_type = docspace_api_sdk.ActionType() # ActionType | The type of action performed in the audit event (e.g., Create, Update, Delete). (optional)
     action = docspace_api_sdk.MessageAction() # MessageAction | The specific action that occurred within the audit event. (optional)
     entry_type = docspace_api_sdk.EntryType() # EntryType | The type of audit entry (e.g., Folder, User, File). (optional)
-    target = 'some text' # str | The target object affected by the audit event (e.g., document ID, user account). (optional)
+    target = 'document.docx' # str | The target object affected by the audit event (e.g., document ID, user account). (optional)
     var_from = docspace_api_sdk.ApiDateTime() # ApiDateTime | The starting date and time for filtering audit events. (optional)
     to = docspace_api_sdk.ApiDateTime() # ApiDateTime | The ending date and time for filtering audit events. (optional)
-    count = 1234 # int | The maximum number of audit event records to retrieve. (optional)
-    start_index = 1234 # int | The index of the first audit event record to retrieve in a paged query. (optional)
+    count = 100 # int | The maximum number of audit event records to retrieve. (optional)
+    start_index = 0 # int | The index of the first audit event record to retrieve in a paged query. (optional)
 
     try:
         # Get filtered audit trail data
@@ -170,7 +167,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling AuditTrailDataApi->get_audit_events_by_filter: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -184,8 +180,8 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | List of filtered audit trail data |  -  |
-**401** | Unauthorized |  -  |
 **402** | Your pricing plan does not support this option |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -230,7 +226,6 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -246,7 +241,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 ```
 
 
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -258,8 +252,8 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Audit settings |  -  |
-**401** | Unauthorized |  -  |
 **402** | Your pricing plan does not support this option |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -301,7 +295,6 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -317,7 +310,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling AuditTrailDataApi->get_audit_trail_mappers: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -366,7 +358,6 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -380,7 +371,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling AuditTrailDataApi->get_audit_trail_types: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -438,7 +428,6 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -454,7 +443,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 ```
 
 
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -466,8 +454,8 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | List of audit trail data |  -  |
-**401** | Unauthorized |  -  |
 **402** | Your pricing plan does not support this option |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -515,7 +503,6 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -532,7 +519,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 ```
 
 
-
 ### HTTP request headers
 
  - **Content-Type**: application/json
@@ -545,8 +531,8 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 |-------------|-------------|------------------|
 **200** | Audit trail settings |  -  |
 **400** | Exception in LoginHistoryLifeTime or AuditTrailLifeTime |  -  |
-**401** | Unauthorized |  -  |
 **402** | Your pricing plan does not support this option |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

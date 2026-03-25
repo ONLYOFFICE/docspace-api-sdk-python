@@ -80,12 +80,11 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.FoldersApi(api_client)
-    folder_id = 9846 # int | The folder ID.
+    folder_id = 1 # int | The folder ID.
     check_upload_request = docspace_api_sdk.CheckUploadRequest() # CheckUploadRequest | The request parameters for checking file uploads.
 
     try:
@@ -96,7 +95,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling FoldersApi->check_upload: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -160,12 +158,11 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.FoldersApi(api_client)
-    folder_id = 9846 # int | The folder ID for the folder creation.
+    folder_id = 1 # int | The folder ID for the folder creation.
     create_folder = docspace_api_sdk.CreateFolder() # CreateFolder | The parameters for creating a folder.
 
     try:
@@ -176,7 +173,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling FoldersApi->create_folder: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -240,12 +236,11 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.FoldersApi(api_client)
-    id = 9846 # int | The folder ID.
+    id = 1 # int | The folder ID.
     folder_link_request = docspace_api_sdk.FolderLinkRequest() # FolderLinkRequest | The folder link parameters.
 
     try:
@@ -256,7 +251,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling FoldersApi->create_folder_primary_external_link: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -270,8 +264,8 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Folders security information |  -  |
-**401** | Unauthorized |  -  |
 **404** | Not Found |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -319,7 +313,6 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -336,7 +329,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 ```
 
 
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -348,9 +340,9 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | URL to the report file |  -  |
-**401** | Unauthorized |  -  |
 **403** | You don&#39;t have enough permission to perform the operation |  -  |
 **404** | The required folder was not found |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -400,12 +392,11 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.FoldersApi(api_client)
-    folder_id = 9846 # int | The folder ID to delete.
+    folder_id = 10 # int | The folder ID to delete.
     delete_folder = docspace_api_sdk.DeleteFolder() # DeleteFolder | The parameters for deleting a folder.
 
     try:
@@ -416,7 +407,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling FoldersApi->delete_folder: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -446,7 +436,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **user_id_or_group_id** | **str**| The user or group ID. | [optional] 
+ **user_id_or_group_id** | **UUID**| The user or group ID. | [optional] 
  **filter_type** | [**FilterType**](.md)| The filter type. | [optional] 
  **count** | **int**| The maximum number of items to retrieve in the request. | [optional] 
  **start_index** | **int**| The zero-based index of the first item to retrieve in a paginated list. | [optional] 
@@ -486,18 +476,17 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.FoldersApi(api_client)
-    user_id_or_group_id = '75a5f745-f697-4418-b38d-0fe0d277e258' # str | The user or group ID. (optional)
+    user_id_or_group_id = UUID('00000000-0000-0000-0000-000000000000') # UUID | The user or group ID. (optional)
     filter_type = docspace_api_sdk.FilterType() # FilterType | The filter type. (optional)
-    count = 1234 # int | The maximum number of items to retrieve in the request. (optional)
-    start_index = 1234 # int | The zero-based index of the first item to retrieve in a paginated list. (optional)
-    sort_by = 'some text' # str | Specifies the field by which the folder content should be sorted. (optional)
+    count = 25 # int | The maximum number of items to retrieve in the request. (optional)
+    start_index = 0 # int | The zero-based index of the first item to retrieve in a paginated list. (optional)
+    sort_by = 'DateAndTime' # str | Specifies the field by which the folder content should be sorted. (optional)
     sort_order = docspace_api_sdk.SortOrder() # SortOrder | The order in which the results are sorted. (optional)
-    filter_value = 'some text' # str | The text used as a filter or search criterion for folder content queries. (optional)
+    filter_value = 'My Document' # str | The text used as a filter or search criterion for folder content queries. (optional)
 
     try:
         # Get the Favorites section
@@ -507,7 +496,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling FoldersApi->get_favorites_folder: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -521,9 +509,9 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The Favorites section contents |  -  |
-**401** | Unauthorized |  -  |
 **403** | You don&#39;t have enough permission to view the folder content |  -  |
 **404** | The required folder was not found |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -568,7 +556,6 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -582,7 +569,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling FoldersApi->get_files_used_space: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -635,12 +621,11 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.FoldersApi(api_client)
-    folder_id = 9846 # int | The folder unique identifier.
+    folder_id = 1 # int | The folder unique identifier.
 
     try:
         # Get folder form filter
@@ -650,7 +635,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling FoldersApi->get_folder: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -680,8 +664,8 @@ For more information, see [api.onlyoffice.com]().
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **folder_id** | **int**| The folder ID. | 
- **user_id_or_group_id** | **str**| The user or group ID. | [optional] 
- **shared_by** | **str**| The identifier of the user who shared the folder or file. | [optional] 
+ **user_id_or_group_id** | **UUID**| The user or group ID. | [optional] 
+ **shared_by** | **UUID**| The identifier of the user who shared the folder or file. | [optional] 
  **filter_type** | [**FilterType**](.md)| The filter type. | [optional] 
  **room_id** | **int**| The room ID. | [optional] 
  **exclude_subject** | **bool**| Specifies whether to exclude search by user or group ID. | [optional] 
@@ -723,27 +707,26 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.FoldersApi(api_client)
-    folder_id = 9846 # int | The folder ID.
-    user_id_or_group_id = '75a5f745-f697-4418-b38d-0fe0d277e258' # str | The user or group ID. (optional)
-    shared_by = '75a5f745-f697-4418-b38d-0fe0d277e258' # str | The identifier of the user who shared the folder or file. (optional)
+    folder_id = 1 # int | The folder ID.
+    user_id_or_group_id = UUID('00000000-0000-0000-0000-000000000000') # UUID | The user or group ID. (optional)
+    shared_by = UUID('00000000-0000-0000-0000-000000000000') # UUID | The identifier of the user who shared the folder or file. (optional)
     filter_type = docspace_api_sdk.FilterType() # FilterType | The filter type. (optional)
-    room_id = 9846 # int | The room ID. (optional)
-    exclude_subject = true # bool | Specifies whether to exclude search by user or group ID. (optional)
+    room_id = 1 # int | The room ID. (optional)
+    exclude_subject = false # bool | Specifies whether to exclude search by user or group ID. (optional)
     apply_filter_option = docspace_api_sdk.ApplyFilterOption() # ApplyFilterOption | Specifies whether to return only files, only folders, or all elements from the specified folder. (optional)
-    extension = '.txt' # str | Specifies whether to search for the specific file extension. (optional)
+    extension = '.docx' # str | Specifies whether to search for the specific file extension. (optional)
     search_area = docspace_api_sdk.SearchArea() # SearchArea | The search area. (optional)
-    forms_item_key = 'some text' # str | The forms item key. (optional)
-    forms_item_type = 'some text' # str | The forms item type. (optional)
-    count = 1234 # int | The maximum number of items to retrieve in the request. (optional)
-    start_index = 1234 # int | The zero-based index of the first item to retrieve in a paginated request. (optional)
-    sort_by = 'some text' # str | The property used for sorting the folder request results. (optional)
+    forms_item_key = 'doc_key_123' # str | The forms item key. (optional)
+    forms_item_type = 'text' # str | The forms item type. (optional)
+    count = 25 # int | The maximum number of items to retrieve in the request. (optional)
+    start_index = 0 # int | The zero-based index of the first item to retrieve in a paginated request. (optional)
+    sort_by = 'DateAndTime' # str | The property used for sorting the folder request results. (optional)
     sort_order = docspace_api_sdk.SortOrder() # SortOrder | The order in which the results are sorted. (optional)
-    filter_value = 'some text' # str | The text value used as a filter parameter for folder content queries. (optional)
+    filter_value = 'My Document' # str | The text value used as a filter parameter for folder content queries. (optional)
     location = docspace_api_sdk.Location() # Location | The location context of the request, specifying the area  where the operation is performed, such as a room, documents, or a link. (optional)
 
     try:
@@ -754,7 +737,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling FoldersApi->get_folder_by_folder_id: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -822,16 +804,15 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.FoldersApi(api_client)
-    folder_id = 9846 # int | The folder ID of the history request.
+    folder_id = 1 # int | The folder ID of the history request.
     from_date = docspace_api_sdk.ApiDateTime() # ApiDateTime | The start date of the history request. (optional)
     to_date = docspace_api_sdk.ApiDateTime() # ApiDateTime | The end date of the history request. (optional)
-    count = 1234 # int | The number of records to retrieve for the folder history. (optional)
-    start_index = 1234 # int | The starting index from which the history records are retrieved in the request. (optional)
+    count = 25 # int | The number of records to retrieve for the folder history. (optional)
+    start_index = 0 # int | The starting index from which the history records are retrieved in the request. (optional)
 
     try:
         # Get folder history
@@ -841,7 +822,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling FoldersApi->get_folder_history: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -855,9 +835,9 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | List of actions in the folder |  -  |
-**401** | Unauthorized |  -  |
 **403** | You don&#39;t have enough permission to perform the operation |  -  |
 **404** | The required folder was not found |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -896,12 +876,11 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.FoldersApi(api_client)
-    folder_id = 9846 # int | The folder unique identifier.
+    folder_id = 1 # int | The folder unique identifier.
 
     try:
         # Get folder information
@@ -911,7 +890,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling FoldersApi->get_folder_info: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -972,12 +950,11 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.FoldersApi(api_client)
-    id = 9846 # int | The folder ID.
+    id = 1 # int | The folder ID.
 
     try:
         # Get the folder links
@@ -987,7 +964,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling FoldersApi->get_folder_links: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -1049,12 +1025,11 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.FoldersApi(api_client)
-    folder_id = 9846 # int | The folder unique identifier.
+    folder_id = 1 # int | The folder unique identifier.
 
     try:
         # Get the folder path
@@ -1064,7 +1039,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling FoldersApi->get_folder_path: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -1078,8 +1052,8 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | List of file entry information |  -  |
-**401** | Unauthorized |  -  |
 **403** | You don&#39;t have enough permission to view the folder content |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1120,14 +1094,13 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.FoldersApi(api_client)
-    id = 9846 # int | The folder unique identifier.
-    count = 1234 # int | The number of items to retrieve in the request. (optional)
-    start_index = 1234 # int | The starting index for the query results. (optional)
+    id = 10 # int | The folder unique identifier.
+    count = 25 # int | The number of items to retrieve in the request. (optional)
+    start_index = 0 # int | The starting index for the query results. (optional)
 
     try:
         # Get primary external link
@@ -1137,7 +1110,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling FoldersApi->get_folder_primary_external_link: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -1199,12 +1171,11 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.FoldersApi(api_client)
-    folder_id = 9846 # int | The folder unique identifier.
+    folder_id = 1 # int | The folder unique identifier.
 
     try:
         # Get subfolders
@@ -1214,7 +1185,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling FoldersApi->get_folders: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -1228,8 +1198,8 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | List of file entry information |  -  |
-**401** | Unauthorized |  -  |
 **403** | You don&#39;t have enough permission to view the folder content |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1245,7 +1215,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **user_id_or_group_id** | **str**| The user or group ID. | [optional] 
+ **user_id_or_group_id** | **UUID**| The user or group ID. | [optional] 
  **filter_type** | [**FilterType**](.md)| The filter type. | [optional] 
  **apply_filter_option** | [**ApplyFilterOption**](.md)| Specifies whether to return only files, only folders or all elements. | [optional] 
  **count** | **int**| The maximum number of items to retrieve in the response. | [optional] 
@@ -1287,19 +1257,18 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.FoldersApi(api_client)
-    user_id_or_group_id = '75a5f745-f697-4418-b38d-0fe0d277e258' # str | The user or group ID. (optional)
+    user_id_or_group_id = UUID('00000000-0000-0000-0000-000000000000') # UUID | The user or group ID. (optional)
     filter_type = docspace_api_sdk.FilterType() # FilterType | The filter type. (optional)
     apply_filter_option = docspace_api_sdk.ApplyFilterOption() # ApplyFilterOption | Specifies whether to return only files, only folders or all elements. (optional)
-    count = 1234 # int | The maximum number of items to retrieve in the response. (optional)
-    start_index = 1234 # int | The starting position of the items to be retrieved. (optional)
-    sort_by = 'some text' # str | The property used to specify the sorting criteria for folder contents. (optional)
+    count = 25 # int | The maximum number of items to retrieve in the response. (optional)
+    start_index = 0 # int | The starting position of the items to be retrieved. (optional)
+    sort_by = 'DateAndTime' # str | The property used to specify the sorting criteria for folder contents. (optional)
     sort_order = docspace_api_sdk.SortOrder() # SortOrder | The order in which the results are sorted. (optional)
-    filter_value = 'some text' # str | The text used for filtering or searching folder contents. (optional)
+    filter_value = 'My Document' # str | The text used for filtering or searching folder contents. (optional)
 
     try:
         # Get the My documents section
@@ -1309,7 +1278,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling FoldersApi->get_my_folder: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -1323,9 +1291,9 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The My documents section contents |  -  |
-**401** | Unauthorized |  -  |
 **403** | You don&#39;t have enough permission to view the folder content |  -  |
 **404** | The required folder was not found |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1373,12 +1341,11 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.FoldersApi(api_client)
-    folder_id = 9846 # int | The folder unique identifier.
+    folder_id = 1 # int | The folder unique identifier.
 
     try:
         # Get new folder items
@@ -1388,7 +1355,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling FoldersApi->get_new_folder_items: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -1402,8 +1368,8 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | List of file entry information |  -  |
-**401** | Unauthorized |  -  |
 **403** | You don&#39;t have enough permission to view the folder content |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1419,7 +1385,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **user_id_or_group_id** | **str**| The user or group ID. | [optional] 
+ **user_id_or_group_id** | **UUID**| The user or group ID. | [optional] 
  **filter_type** | [**FilterType**](.md)| The filter type. | [optional] 
  **count** | **int**| The maximum number of items to retrieve in the request. | [optional] 
  **start_index** | **int**| The zero-based index of the first item to retrieve in a paginated list. | [optional] 
@@ -1459,18 +1425,17 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.FoldersApi(api_client)
-    user_id_or_group_id = '75a5f745-f697-4418-b38d-0fe0d277e258' # str | The user or group ID. (optional)
+    user_id_or_group_id = UUID('00000000-0000-0000-0000-000000000000') # UUID | The user or group ID. (optional)
     filter_type = docspace_api_sdk.FilterType() # FilterType | The filter type. (optional)
-    count = 1234 # int | The maximum number of items to retrieve in the request. (optional)
-    start_index = 1234 # int | The zero-based index of the first item to retrieve in a paginated list. (optional)
-    sort_by = 'some text' # str | Specifies the field by which the folder content should be sorted. (optional)
+    count = 25 # int | The maximum number of items to retrieve in the request. (optional)
+    start_index = 0 # int | The zero-based index of the first item to retrieve in a paginated list. (optional)
+    sort_by = 'DateAndTime' # str | Specifies the field by which the folder content should be sorted. (optional)
     sort_order = docspace_api_sdk.SortOrder() # SortOrder | The order in which the results are sorted. (optional)
-    filter_value = 'some text' # str | The text used as a filter or search criterion for folder content queries. (optional)
+    filter_value = 'My Document' # str | The text used as a filter or search criterion for folder content queries. (optional)
 
     try:
         # Get the Private Room section
@@ -1480,7 +1445,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling FoldersApi->get_privacy_folder: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -1494,9 +1458,9 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The Private Room section contents |  -  |
-**401** | Unauthorized |  -  |
 **403** | You don&#39;t have enough permission to view the folder content |  -  |
 **404** | The required folder was not found |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1512,7 +1476,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **user_id_or_group_id** | **str**| The user or group ID. | [optional] 
+ **user_id_or_group_id** | **UUID**| The user or group ID. | [optional] 
  **filter_type** | [**FilterType**](.md)| The filter type. | [optional] 
  **exclude_subject** | **bool**| Specifies whether to exclude search by user or group ID. | [optional] 
  **apply_filter_option** | [**ApplyFilterOption**](.md)| Specifies whether to return only files, only folders or all elements. | [optional] 
@@ -1558,22 +1522,21 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.FoldersApi(api_client)
-    user_id_or_group_id = '75a5f745-f697-4418-b38d-0fe0d277e258' # str | The user or group ID. (optional)
+    user_id_or_group_id = UUID('00000000-0000-0000-0000-000000000000') # UUID | The user or group ID. (optional)
     filter_type = docspace_api_sdk.FilterType() # FilterType | The filter type. (optional)
-    exclude_subject = true # bool | Specifies whether to exclude search by user or group ID. (optional)
+    exclude_subject = false # bool | Specifies whether to exclude search by user or group ID. (optional)
     apply_filter_option = docspace_api_sdk.ApplyFilterOption() # ApplyFilterOption | Specifies whether to return only files, only folders or all elements. (optional)
     search_area = docspace_api_sdk.SearchArea() # SearchArea | The search area. (optional)
-    extension = ['.txt'] # List[str] | Specifies whether to search for a specific file extension in the Recent folder. (optional)
-    count = 1234 # int | The maximum number of items to return. (optional)
-    start_index = 1234 # int | The starting position of the results to be returned in the query response. (optional)
-    sort_by = 'some text' # str | Specifies the sorting criteria for the folder request. (optional)
+    extension = ['.docx'] # List[str] | Specifies whether to search for a specific file extension in the Recent folder. (optional)
+    count = 25 # int | The maximum number of items to return. (optional)
+    start_index = 0 # int | The starting position of the results to be returned in the query response. (optional)
+    sort_by = 'DateAndTime' # str | Specifies the sorting criteria for the folder request. (optional)
     sort_order = docspace_api_sdk.SortOrder() # SortOrder | The order in which the results are sorted. (optional)
-    filter_value = 'some text' # str | The text used for filtering or searching folder contents. (optional)
+    filter_value = 'My Document' # str | The text used for filtering or searching folder contents. (optional)
 
     try:
         # Get the Recent section
@@ -1583,7 +1546,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling FoldersApi->get_recent_folder: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -1597,9 +1559,9 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The Recent section contents |  -  |
-**401** | Unauthorized |  -  |
 **403** | You don&#39;t have enough permission to view the folder content |  -  |
 **404** | The required folder was not found |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1615,7 +1577,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **user_id_or_group_id** | **str**| The user or group ID. | [optional] 
+ **user_id_or_group_id** | **UUID**| The user or group ID. | [optional] 
  **filter_type** | [**FilterType**](.md)| The filter type. | [optional] 
  **without_trash** | **bool**| Specifies whether to return the Trash section or not. | [optional] 
  **count** | **int**| The maximum number of items to retrieve in the response. | [optional] 
@@ -1656,19 +1618,18 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.FoldersApi(api_client)
-    user_id_or_group_id = '75a5f745-f697-4418-b38d-0fe0d277e258' # str | The user or group ID. (optional)
+    user_id_or_group_id = UUID('00000000-0000-0000-0000-000000000000') # UUID | The user or group ID. (optional)
     filter_type = docspace_api_sdk.FilterType() # FilterType | The filter type. (optional)
-    without_trash = true # bool | Specifies whether to return the Trash section or not. (optional)
-    count = 1234 # int | The maximum number of items to retrieve in the response. (optional)
-    start_index = 1234 # int | The starting position of the items to be retrieved. (optional)
-    sort_by = 'some text' # str | Specifies the field by which the folder content should be sorted. (optional)
+    without_trash = false # bool | Specifies whether to return the Trash section or not. (optional)
+    count = 25 # int | The maximum number of items to retrieve in the response. (optional)
+    start_index = 0 # int | The starting position of the items to be retrieved. (optional)
+    sort_by = 'DateAndTime' # str | Specifies the field by which the folder content should be sorted. (optional)
     sort_order = docspace_api_sdk.SortOrder() # SortOrder | The order in which the results are sorted. (optional)
-    filter_value = 'some text' # str | The text used as a filter for searching or retrieving folder contents. (optional)
+    filter_value = 'My Document' # str | The text used as a filter for searching or retrieving folder contents. (optional)
 
     try:
         # Get filtered sections
@@ -1678,7 +1639,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling FoldersApi->get_root_folders: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -1692,9 +1652,9 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | List of section contents with the following parameters |  -  |
-**401** | Unauthorized |  -  |
 **403** | You don&#39;t have enough permission to view the folder content |  -  |
 **404** | The required folder was not found |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1710,7 +1670,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **user_id_or_group_id** | **str**| The user or group ID. | [optional] 
+ **user_id_or_group_id** | **UUID**| The user or group ID. | [optional] 
  **filter_type** | [**FilterType**](.md)| The filter type. | [optional] 
  **apply_filter_option** | [**ApplyFilterOption**](.md)| Specifies whether to return only files, only folders or all elements. | [optional] 
  **count** | **int**| The maximum number of items to retrieve in the response. | [optional] 
@@ -1752,19 +1712,18 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.FoldersApi(api_client)
-    user_id_or_group_id = '75a5f745-f697-4418-b38d-0fe0d277e258' # str | The user or group ID. (optional)
+    user_id_or_group_id = UUID('00000000-0000-0000-0000-000000000000') # UUID | The user or group ID. (optional)
     filter_type = docspace_api_sdk.FilterType() # FilterType | The filter type. (optional)
     apply_filter_option = docspace_api_sdk.ApplyFilterOption() # ApplyFilterOption | Specifies whether to return only files, only folders or all elements. (optional)
-    count = 1234 # int | The maximum number of items to retrieve in the response. (optional)
-    start_index = 1234 # int | The starting position of the items to be retrieved. (optional)
-    sort_by = 'some text' # str | The property used to specify the sorting criteria for folder contents. (optional)
+    count = 25 # int | The maximum number of items to retrieve in the response. (optional)
+    start_index = 0 # int | The starting position of the items to be retrieved. (optional)
+    sort_by = 'DateAndTime' # str | The property used to specify the sorting criteria for folder contents. (optional)
     sort_order = docspace_api_sdk.SortOrder() # SortOrder | The order in which the results are sorted. (optional)
-    filter_value = 'some text' # str | The text used for filtering or searching folder contents. (optional)
+    filter_value = 'My Document' # str | The text used for filtering or searching folder contents. (optional)
 
     try:
         # Get the Trash section
@@ -1774,7 +1733,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling FoldersApi->get_trash_folder: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -1788,9 +1746,9 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The Trash section contents |  -  |
-**401** | Unauthorized |  -  |
 **403** | You don&#39;t have enough permission to view the folder content |  -  |
 **404** | The required folder was not found |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1850,12 +1808,11 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.FoldersApi(api_client)
-    folder_id = 9846 # int | The folder ID for inserting a file.
+    folder_id = 1 # int | The folder ID for inserting a file.
     insert_file_file = None # bytearray | The file to be inserted. (optional)
     insert_file_title = 'insert_file_title_example' # str | The file title to be inserted. (optional)
     insert_file_create_new_if_exist = True # bool | Specifies whether to create a new file if it already exists or not. (optional)
@@ -1879,7 +1836,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 ```
 
 
-
 ### HTTP request headers
 
  - **Content-Type**: multipart/form-data
@@ -1891,9 +1847,9 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Inserted file |  -  |
-**401** | Unauthorized |  -  |
 **403** | You don&#39;t have enough permission to create |  -  |
 **404** | Folder not found |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1952,7 +1908,6 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -1980,7 +1935,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 ```
 
 
-
 ### HTTP request headers
 
  - **Content-Type**: multipart/form-data
@@ -1992,9 +1946,9 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Inserted file |  -  |
-**401** | Unauthorized |  -  |
 **403** | You don&#39;t have enough permission to create |  -  |
 **404** | Folder not found |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -2044,12 +1998,11 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.FoldersApi(api_client)
-    folder_id = 9846 # int | The folder ID for the folder creation.
+    folder_id = 1 # int | The folder ID for the folder creation.
     create_folder = docspace_api_sdk.CreateFolder() # CreateFolder | The parameters for creating a folder.
 
     try:
@@ -2060,7 +2013,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling FoldersApi->rename_folder: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -2074,8 +2026,8 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Folder parameters |  -  |
-**401** | Unauthorized |  -  |
 **403** | You don&#39;t have enough permission to rename the folder |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -2125,12 +2077,11 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.FoldersApi(api_client)
-    folder_id = 9846 # int | The folder unique identifier.
+    folder_id = 1 # int | The folder unique identifier.
     order_request_dto = docspace_api_sdk.OrderRequestDto() # OrderRequestDto | The folder order information. (optional)
 
     try:
@@ -2141,7 +2092,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling FoldersApi->set_folder_order: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -2205,12 +2155,11 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.FoldersApi(api_client)
-    id = 9846 # int | The folder ID.
+    id = 1 # int | The folder ID.
     folder_link_request = docspace_api_sdk.FolderLinkRequest() # FolderLinkRequest | The folder link parameters.
 
     try:
@@ -2221,7 +2170,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling FoldersApi->set_folder_primary_external_link: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -2243,12 +2191,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 > ObjectWrapper upload_file(folder_id, upload_request_dto=upload_request_dto)
 
 Uploads a file specified in the request to the selected folder by single file uploading or standart multipart/form-data method.
-
- **Note**:  You can upload files in two different ways:
- <ol>
-<li>Using single file upload. You should set the Content-Type and Content-Disposition headers to specify a file name and content type, and send the file to the request body.</li>
-<li>Using standart multipart/form-data method.</li>
-</ol>
 
 For more information, see [api.onlyoffice.com]().
 
@@ -2291,12 +2233,11 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.FoldersApi(api_client)
-    folder_id = 9846 # int | The folder ID to upload a file.
+    folder_id = 1 # int | The folder ID to upload a file.
     upload_request_dto = docspace_api_sdk.UploadRequestDto() # UploadRequestDto | The request parameters for uploading a file. (optional)
 
     try:
@@ -2307,7 +2248,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling FoldersApi->upload_file: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -2321,9 +2261,9 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Inserted file |  -  |
-**401** | Unauthorized |  -  |
 **403** | You don&#39;t have enough permission to create |  -  |
 **404** | Folder not found |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -2331,12 +2271,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 > ObjectWrapper upload_file_to_my(in_dto=in_dto)
 
 Uploads a file specified in the request to the My documents section by single file uploading or standart multipart/form-data method.
-
- **Note**:  You can upload files in two different ways:
- <ol>
-<li>Using single file upload. You should set the Content-Type and Content-Disposition headers to specify a file name and content type, and send the file to the request body.</li>
-<li>Using standart multipart/form-data method.</li>
-</ol>
 
 For more information, see [api.onlyoffice.com]().
 
@@ -2378,7 +2312,6 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -2395,7 +2328,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 ```
 
 
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -2407,9 +2339,9 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Uploaded file(s) |  -  |
-**401** | Unauthorized |  -  |
 **403** | You don&#39;t have enough permission to create |  -  |
 **404** | File not found |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

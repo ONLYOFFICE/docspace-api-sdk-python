@@ -5,7 +5,7 @@ The folder link parameters.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**link_id** | **str** | The folder link ID. | [optional] 
+**link_id** | **UUID** | The folder link ID. | [optional] 
 **access** | [**FileShare**](FileShare.md) |  | [optional] 
 **expiration_date** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] 
 **title** | **str** | The link name. | [optional] 

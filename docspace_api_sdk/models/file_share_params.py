@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,31 +17,33 @@
 
 
 from __future__ import annotations
+from inspect import getfullargspec
+import json
 import pprint
 import re  # noqa: F401
-import json
-
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Annotated
+from uuid import UUID
 from docspace_api_sdk.models.file_share import FileShare
-from typing import Optional, Set
-from typing_extensions import Self
+from typing import Union, Any, List, Set, TYPE_CHECKING, Optional, Dict
+from typing_extensions import Literal, Self
+from pydantic import Field
+from docspace_api_sdk.models.email_invitation_dto import EmailInvitationDto
 
-class FileShareParams(BaseModel):
+class FileShareParams(EmailInvitationDto):
     """
     The collection of file sharing parameters.
-    """ # noqa: E501
-    share_to: Optional[StrictStr] = Field(default=None, description="The ID of the user to whom the file will be shared.", alias="shareTo")
-    email: Optional[StrictStr] = Field(default=None, description="The user email address.")
+    """
+
+    share_to: Optional[UUID] = Field(default=None, description="The ID of the user to whom the file will be shared.", alias="shareTo")
     access: Optional[FileShare] = None
-    __properties: ClassVar[List[str]] = ["shareTo", "email", "access"]
 
     model_config = ConfigDict(
         populate_by_name=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
-
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -84,19 +86,20 @@ class FileShareParams(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of FileShareParams from a dict"""
+        """Create an instance from a dict"""
         if obj is None:
             return None
-
-
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
+        base_obj = super().from_dict(obj)
+        base_dict = base_obj.model_dump() if hasattr(base_obj, "model_dump") else dict(base_obj or {})
+
+        extra_fields = {
             "shareTo": obj.get("shareTo"),
-            "email": obj.get("email"),
             "access": obj.get("access")
-        })
-        return _obj
+        }
+        all_fields = {**base_dict, **extra_fields}
+        return cls.model_validate(all_fields)
 
 

@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **enable_quota** | **bool** | Specifies if the quota is enabled for the tenant entity or not. | [optional] 
 **default_quota** | **int** | The default quota of the tenant entity. | [optional] 
 **last_recalculate_date** | **datetime** | The date of the last quota recalculation. | [optional] 
-**last_modified** | **datetime** |  | [optional] 
+**last_modified** | **datetime** | The timestamp indicating when the settings were last modified. | [optional] 
 
 ## Example
 

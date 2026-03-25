@@ -12,8 +12,6 @@ Method | HTTP request | Description
 
 Returns a request to get the confirmation code from URL.
 
- **Note**: List of providers: Google, Dropbox, Docusign, Box, OneDrive, Wordpress.
-
 For more information, see [api.onlyoffice.com]().
 
 ### Parameters
@@ -54,7 +52,6 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -69,7 +66,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling ThirdPartyApi->get_third_party_code: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers

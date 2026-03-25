@@ -5,8 +5,8 @@ The request parameters for managing user security and access permissions.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**product_id** | **str** | The product ID for which permissions are being set. | 
-**user_id** | **str** | The ID of the user whose permissions are being configured. | 
+**product_id** | **UUID** | The product ID for which permissions are being set. | 
+**user_id** | **UUID** | The ID of the user whose permissions are being configured. | 
 **administrator** | **bool** | Specifies whether the user has administrative privileges. | [optional] 
 
 ## Example

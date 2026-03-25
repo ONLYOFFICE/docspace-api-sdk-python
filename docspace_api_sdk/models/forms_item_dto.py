@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -30,8 +30,8 @@ class FormsItemDto(BaseModel):
     """
     The forms item information.
     """ # noqa: E501
-    key: Optional[StrictStr] = None
-    type: Optional[StrictStr] = None
+    key: Optional[StrictStr] = Field(default=None, description="The form item key.              <example>field_name</example>")
+    type: Optional[StrictStr] = Field(default=None, description="The form item type.              <example>text</example>")
     __properties: ClassVar[List[str]] = ["key", "type"]
 
     model_config = ConfigDict(

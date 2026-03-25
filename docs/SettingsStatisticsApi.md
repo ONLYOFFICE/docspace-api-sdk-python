@@ -19,7 +19,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **str**| The ID extracted from the route parameters. | 
+ **id** | **UUID**| The ID extracted from the route parameters. | 
 
 ### Return type
 
@@ -51,12 +51,11 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.StatisticsApi(api_client)
-    id = 'aae1e103-bca5-9fa1-ba8c-42058b4abf28' # str | The ID extracted from the route parameters.
+    id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | The ID extracted from the route parameters.
 
     try:
         # Get the space usage statistics
@@ -66,7 +65,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling StatisticsApi->get_space_usage_statistics: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers

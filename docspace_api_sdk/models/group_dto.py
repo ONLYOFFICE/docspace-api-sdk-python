@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,6 +23,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from uuid import UUID
 from docspace_api_sdk.models.employee_full_dto import EmployeeFullDto
 from typing import Optional, Set
 from typing_extensions import Self
@@ -32,9 +33,9 @@ class GroupDto(BaseModel):
     The group parameters.
     """ # noqa: E501
     name: Optional[StrictStr] = Field(description="The group name.")
-    parent: Optional[StrictStr] = Field(default=None, description="The parent group ID.")
-    category: StrictStr = Field(description="The group category ID.")
-    id: StrictStr = Field(description="The group ID.")
+    parent: Optional[UUID] = Field(default=None, description="The parent group ID.")
+    category: UUID = Field(description="The group category ID.")
+    id: UUID = Field(description="The group ID.")
     is_ldap: StrictBool = Field(description="Specifies if the LDAP settings are enabled for the group or not.", alias="isLDAP")
     is_system: Optional[StrictBool] = Field(default=None, description="Indicates whether the group is a system group.", alias="isSystem")
     manager: Optional[EmployeeFullDto] = None

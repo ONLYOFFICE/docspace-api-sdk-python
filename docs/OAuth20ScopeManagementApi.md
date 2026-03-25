@@ -43,7 +43,6 @@ configuration = docspace_api_sdk.Configuration(
 # in accordance with the API server security policy.
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -57,7 +56,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling ScopeManagementApi->get_scopes: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers

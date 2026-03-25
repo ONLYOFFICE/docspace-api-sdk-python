@@ -8,6 +8,10 @@ Name | Type | Description | Notes
 **name** | **str** | The authorization key name. | 
 **value** | **str** | The authorization key value. | 
 **title** | **str** | The authorization key title. | [optional] 
+**type** | **str** | The field type: text, password, select, toggle. | [optional] 
+**options** | **List[str]** | The list of options for select type fields. | [optional] 
+**depends_on** | **str** | The name of another key this field depends on for visibility. | [optional] 
+**depends_on_value** | **str** | The value of ASC.Web.Studio.UserControls.Management.AuthKey.DependsOn key that makes this field visible. | [optional] 
 
 ## Example
 

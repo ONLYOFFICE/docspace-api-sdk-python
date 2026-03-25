@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,8 +21,9 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictStr
+from pydantic import Field
 from typing_extensions import Annotated
+from uuid import UUID
 from docspace_api_sdk.models.string_wrapper import StringWrapper
 
 from docspace_api_sdk.api_client import ApiClient, RequestSerialized
@@ -44,11 +45,10 @@ class GuestsApi:
 
 
 
-
     @validate_call
     def get_guest_sharing_link(
         self,
-        userid: Annotated[StrictStr, Field(description="The user ID.")],
+        userid: Annotated[UUID, Field(description="The user ID.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -67,7 +67,7 @@ class GuestsApi:
         Returns a link to share a guest with another user.
 
         :param userid: The user ID. (required)
-        :type userid: str
+        :type userid: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -100,11 +100,10 @@ class GuestsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
-            '401': None,
-            '403': None,
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+            '403': None,
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -118,7 +117,7 @@ class GuestsApi:
     @validate_call
     def get_guest_sharing_link_with_http_info(
         self,
-        userid: Annotated[StrictStr, Field(description="The user ID.")],
+        userid: Annotated[UUID, Field(description="The user ID.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -137,7 +136,7 @@ class GuestsApi:
         Returns a link to share a guest with another user.
 
         :param userid: The user ID. (required)
-        :type userid: str
+        :type userid: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -170,11 +169,10 @@ class GuestsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
-            '401': None,
-            '403': None,
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+            '403': None,
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -188,7 +186,7 @@ class GuestsApi:
     @validate_call
     def get_guest_sharing_link_without_preload_content(
         self,
-        userid: Annotated[StrictStr, Field(description="The user ID.")],
+        userid: Annotated[UUID, Field(description="The user ID.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -207,7 +205,7 @@ class GuestsApi:
         Returns a link to share a guest with another user.
 
         :param userid: The user ID. (required)
-        :type userid: str
+        :type userid: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -240,11 +238,10 @@ class GuestsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
-            '401': None,
-            '403': None,
             '404': None,
-        }
-        response_data = self.api_client.call_api(
+            '403': None,
+            '401': None,
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )

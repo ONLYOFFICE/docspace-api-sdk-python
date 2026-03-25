@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,6 +24,7 @@ import json
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from uuid import UUID
 from docspace_api_sdk.models.tenant_industry import TenantIndustry
 from docspace_api_sdk.models.tenant_status import TenantStatus
 from docspace_api_sdk.models.tenant_trusted_domains_type import TenantTrustedDomainsType
@@ -46,7 +47,7 @@ class TenantDto(BaseModel):
     last_modified: Optional[datetime] = Field(default=None, description="The date and time when the tenant was last modified.", alias="lastModified")
     mapped_domain: Optional[StrictStr] = Field(default=None, description="The tenant mapped domain.", alias="mappedDomain")
     name: Optional[StrictStr] = Field(default=None, description="The tenant name.")
-    owner_id: Optional[StrictStr] = Field(default=None, description="The tenant owner ID.", alias="ownerId")
+    owner_id: Optional[UUID] = Field(default=None, description="The tenant owner ID.", alias="ownerId")
     payment_id: Optional[StrictStr] = Field(default=None, description="The tenant payment ID.", alias="paymentId")
     spam: Optional[StrictBool] = Field(default=None, description="Specifies if the ONLYOFFICE newsletter is allowed or not.")
     status: Optional[TenantStatus] = None

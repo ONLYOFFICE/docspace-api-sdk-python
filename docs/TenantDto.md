@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 **last_modified** | **datetime** | The date and time when the tenant was last modified. | [optional] 
 **mapped_domain** | **str** | The tenant mapped domain. | [optional] 
 **name** | **str** | The tenant name. | [optional] 
-**owner_id** | **str** | The tenant owner ID. | [optional] 
+**owner_id** | **UUID** | The tenant owner ID. | [optional] 
 **payment_id** | **str** | The tenant payment ID. | [optional] 
 **spam** | **bool** | Specifies if the ONLYOFFICE newsletter is allowed or not. | [optional] 
 **status** | [**TenantStatus**](TenantStatus.md) |  | [optional] 

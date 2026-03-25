@@ -5,7 +5,7 @@ The request for setting a group manager.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**user_id** | **str** | The user ID. | 
+**user_id** | **UUID** | The user ID. | 
 
 ## Example
 
