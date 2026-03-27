@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **path** | **List[int]** | Represents the hierarchical path of folders associated with a chunked upload session. | [optional] 
 **created** | **datetime** | The timestamp indicating when the chunked upload session was created. | [optional] 
 **expired** | **datetime** | The date and time when the chunked upload session is set to expire. | [optional] 
-**location** | **str** | Represents the URI or path of the chunked upload session&#39;s current location. | [optional] 
+**location** | **str** | Represents the URI or path of the chunked upload session's current location. | [optional] 
 **bytes_total** | **int** | The total size, in bytes, of the file being uploaded in the chunked upload session. | [optional] 
 
 ## Example

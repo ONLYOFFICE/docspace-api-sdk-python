@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **UUID** | Unique identifier of the MCP server. | [optional] 
 **name** | **str** | Display name of the MCP server. | [optional] 
-**description** | **str** | Human-readable description of the server&#39;s purpose and capabilities. | [optional] 
+**description** | **str** | Human-readable description of the server's purpose and capabilities. | [optional] 
 **endpoint** | **str** | Base URL of the MCP server endpoint. | [optional] 
 **server_type** | [**ServerType**](ServerType.md) |  | [optional] 
 **headers** | **Dict[str, str]** | HTTP headers sent with every request to the server (e.g., authentication tokens). | [optional] 

@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **user** | [**UserInfo**](UserInfo.md) |  | [optional] 
 **email** | **str** | The user email address. | [optional] [readonly] 
 **id** | **str** | The user unique identification. | [optional] [readonly] 
-**image** | **str** | The path to the user&#39;s avatar. | [optional] [readonly] 
+**image** | **str** | The path to the user's avatar. | [optional] [readonly] 
 **has_access** | **bool** | Specifies whether the user has the access to the file where they are mentioned. | [optional] [readonly] 
 **name** | **str** | The user full name. | [optional] [readonly] 
 

@@ -80,7 +80,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Message about changing the portal owner |  -  |
-**400** | Owner&#39;s email is not activated |  -  |
+**400** | Owner's email is not activated |  -  |
 **403** | Collaborator can not be an owner |  -  |
 **401** | Unauthorized |  -  |
 

@@ -11,9 +11,9 @@ Name | Type | Description | Notes
 **scopes** | **List[str]** | The client scopes. | [optional] 
 **allow_pkce** | **bool** | Indicates whether PKCE is allowed for the client. | [optional] 
 **is_public** | **bool** | Indicates whether the client is accessible by third-party tenants. | [optional] 
-**website_url** | **str** | The URL to the client&#39;s website. | [optional] 
-**terms_url** | **str** | The URL to the client&#39;s terms of service. | [optional] 
-**policy_url** | **str** | The URL to the client&#39;s privacy policy. | [optional] 
+**website_url** | **str** | The URL to the client's website. | [optional] 
+**terms_url** | **str** | The URL to the client's terms of service. | [optional] 
+**policy_url** | **str** | The URL to the client's privacy policy. | [optional] 
 **redirect_uris** | **List[str]** | The list of allowed redirect URIs. | 
 **allowed_origins** | **List[str]** | The list of allowed CORS origins. | 
 **logout_redirect_uri** | **str** | The list of allowed logout redirect URIs. | [optional] 

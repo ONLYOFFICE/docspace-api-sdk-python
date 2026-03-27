@@ -5,8 +5,8 @@ The additional confirmation data required for authentication.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**email** | **str** | The email address to confirm the user&#39;s identity. | [optional] 
-**first** | **bool** | Specifies whether this is the first access to the user&#39;s account. | [optional] 
+**email** | **str** | The email address to confirm the user's identity. | [optional] 
+**first** | **bool** | Specifies whether this is the first access to the user's account. | [optional] 
 **key** | **str** | The unique confirmation key for validating user identity. | [optional] 
 
 ## Example

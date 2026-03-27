@@ -5,7 +5,7 @@ The request parameters for managing the tenant-level AI access settings.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**enabled** | **bool** | Specifies whether AI functionality is enabled for the tenant.  Set to &#x60;true&#x60; to enable all AI features or &#x60;false&#x60; to disable them tenant-wide. | [optional] 
+**enabled** | **bool** | Specifies whether AI functionality is enabled for the tenant.  Set to `true` to enable all AI features or `false` to disable them tenant-wide. | [optional] 
 
 ## Example
 

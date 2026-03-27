@@ -450,12 +450,12 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
       <tr>
         <td><a href="docs/ApiKeysApi.md#get_api_key"><strong>get_api_key</strong></a></td>
         <td><strong>GET</strong> /api/2.0/keys/@self</td>
-        <td>Get current user&#39;s API key</td>
+        <td>Get current user's API key</td>
       </tr>
       <tr>
         <td><a href="docs/ApiKeysApi.md#get_api_keys"><strong>get_api_keys</strong></a></td>
         <td><strong>GET</strong> /api/2.0/keys</td>
-        <td>Get current user&#39;s API keys</td>
+        <td>Get current user's API keys</td>
       </tr>
       <tr>
         <td><a href="docs/ApiKeysApi.md#update_api_key"><strong>update_api_key</strong></a></td>

@@ -340,7 +340,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | URL to the report file |  -  |
-**403** | You don&#39;t have enough permission to perform the operation |  -  |
+**403** | You don't have enough permission to perform the operation |  -  |
 **404** | The required folder was not found |  -  |
 **401** | Unauthorized |  -  |
 
@@ -509,7 +509,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The Favorites section contents |  -  |
-**403** | You don&#39;t have enough permission to view the folder content |  -  |
+**403** | You don't have enough permission to view the folder content |  -  |
 **404** | The required folder was not found |  -  |
 **401** | Unauthorized |  -  |
 
@@ -750,7 +750,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Folder contents |  -  |
-**403** | You don&#39;t have enough permission to view the folder content |  -  |
+**403** | You don't have enough permission to view the folder content |  -  |
 **404** | The required folder was not found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -835,7 +835,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | List of actions in the folder |  -  |
-**403** | You don&#39;t have enough permission to perform the operation |  -  |
+**403** | You don't have enough permission to perform the operation |  -  |
 **404** | The required folder was not found |  -  |
 **401** | Unauthorized |  -  |
 
@@ -1052,7 +1052,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | List of file entry information |  -  |
-**403** | You don&#39;t have enough permission to view the folder content |  -  |
+**403** | You don't have enough permission to view the folder content |  -  |
 **401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -1198,7 +1198,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | List of file entry information |  -  |
-**403** | You don&#39;t have enough permission to view the folder content |  -  |
+**403** | You don't have enough permission to view the folder content |  -  |
 **401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -1291,7 +1291,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The My documents section contents |  -  |
-**403** | You don&#39;t have enough permission to view the folder content |  -  |
+**403** | You don't have enough permission to view the folder content |  -  |
 **404** | The required folder was not found |  -  |
 **401** | Unauthorized |  -  |
 
@@ -1368,7 +1368,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | List of file entry information |  -  |
-**403** | You don&#39;t have enough permission to view the folder content |  -  |
+**403** | You don't have enough permission to view the folder content |  -  |
 **401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -1458,7 +1458,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The Private Room section contents |  -  |
-**403** | You don&#39;t have enough permission to view the folder content |  -  |
+**403** | You don't have enough permission to view the folder content |  -  |
 **404** | The required folder was not found |  -  |
 **401** | Unauthorized |  -  |
 
@@ -1559,7 +1559,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The Recent section contents |  -  |
-**403** | You don&#39;t have enough permission to view the folder content |  -  |
+**403** | You don't have enough permission to view the folder content |  -  |
 **404** | The required folder was not found |  -  |
 **401** | Unauthorized |  -  |
 
@@ -1652,7 +1652,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | List of section contents with the following parameters |  -  |
-**403** | You don&#39;t have enough permission to view the folder content |  -  |
+**403** | You don't have enough permission to view the folder content |  -  |
 **404** | The required folder was not found |  -  |
 **401** | Unauthorized |  -  |
 
@@ -1746,7 +1746,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The Trash section contents |  -  |
-**403** | You don&#39;t have enough permission to view the folder content |  -  |
+**403** | You don't have enough permission to view the folder content |  -  |
 **404** | The required folder was not found |  -  |
 **401** | Unauthorized |  -  |
 
@@ -1847,7 +1847,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Inserted file |  -  |
-**403** | You don&#39;t have enough permission to create |  -  |
+**403** | You don't have enough permission to create |  -  |
 **404** | Folder not found |  -  |
 **401** | Unauthorized |  -  |
 
@@ -1946,7 +1946,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Inserted file |  -  |
-**403** | You don&#39;t have enough permission to create |  -  |
+**403** | You don't have enough permission to create |  -  |
 **404** | Folder not found |  -  |
 **401** | Unauthorized |  -  |
 
@@ -2026,7 +2026,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Folder parameters |  -  |
-**403** | You don&#39;t have enough permission to rename the folder |  -  |
+**403** | You don't have enough permission to rename the folder |  -  |
 **401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -2261,7 +2261,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Inserted file |  -  |
-**403** | You don&#39;t have enough permission to create |  -  |
+**403** | You don't have enough permission to create |  -  |
 **404** | Folder not found |  -  |
 **401** | Unauthorized |  -  |
 
@@ -2339,7 +2339,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Uploaded file(s) |  -  |
-**403** | You don&#39;t have enough permission to create |  -  |
+**403** | You don't have enough permission to create |  -  |
 **404** | File not found |  -  |
 **401** | Unauthorized |  -  |
 

@@ -87,7 +87,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 |-------------|-------------|------------------|
 **200** | Created AI provider details |  -  |
 **400** | Invalid connection data or provider with this name already exists |  -  |
-**403** | You don&#39;t have enough permission to manage providers |  -  |
+**403** | You don't have enough permission to manage providers |  -  |
 **401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -162,7 +162,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **204** | The providers were successfully deleted |  -  |
-**403** | You don&#39;t have enough permission to manage providers |  -  |
+**403** | You don't have enough permission to manage providers |  -  |
 **401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -462,7 +462,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Default provider information |  -  |
-**403** | You don&#39;t have enough permission to manage providers |  -  |
+**403** | You don't have enough permission to manage providers |  -  |
 **404** | Provider not found |  -  |
 **401** | Unauthorized |  -  |
 
@@ -544,7 +544,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 |-------------|-------------|------------------|
 **200** | Updated AI provider details |  -  |
 **400** | Invalid connection data or provider with this name already exists |  -  |
-**403** | You don&#39;t have enough permission to manage providers |  -  |
+**403** | You don't have enough permission to manage providers |  -  |
 **404** | The provider with the specified ID was not found |  -  |
 **401** | Unauthorized |  -  |
 

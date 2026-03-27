@@ -5,7 +5,7 @@ Parameters for completing an OAuth connection to an MCP server.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**code** | **str** | OAuth authorization code received from the provider&#39;s redirect. Used to exchange for access and refresh tokens. | 
+**code** | **str** | OAuth authorization code received from the provider's redirect. Used to exchange for access and refresh tokens. | 
 
 ## Example
 
