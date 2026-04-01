@@ -1354,7 +1354,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **generate_xlsx**
-> generate_xlsx(file_id)
+> FileIntegerWrapper generate_xlsx(file_id)
 
 Triggers asynchronous XLSX report generation for the specified form file.
 
@@ -1369,7 +1369,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**FileIntegerWrapper**](FileIntegerWrapper.md)
 
 ### Authorization
 
@@ -1380,6 +1380,7 @@ void (empty response body)
 
 ```python
 import docspace_api_sdk
+from docspace_api_sdk.models.file_integer_wrapper import FileIntegerWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -1404,7 +1405,9 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
     try:
         # Generate XLSX report
-        api_instance.generate_xlsx(file_id)
+        api_response = api_instance.generate_xlsx(file_id)
+        print("The response of FilesApi->generate_xlsx:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling FilesApi->generate_xlsx: %s\n" % e)
 ```
@@ -1413,16 +1416,16 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | XLSX report generation has been queued |  -  |
+**200** | Original form file information |  -  |
 **403** | You do not have enough permissions to perform this action |  -  |
-**404** | Form file not found |  -  |
+**404** | File not found |  -  |
 **401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

@@ -52,7 +52,7 @@ class ClientManagementApi:
     @validate_call
     def change_activation(
         self,
-        client_id: Annotated[str, Field(min_length=1, strict=True, description="The client identifier.")],
+        client_id: Annotated[str, Field(min_length=1, strict=True, description="ID of the client to change activation for")],
         change_client_activation_request: ChangeClientActivationRequest,
         _request_timeout: Union[
             None,
@@ -67,11 +67,11 @@ class ClientManagementApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> object:
-        """Change the client activation status
+        """Change client activation status
 
         Activates or deactivates an OAuth2 client. When deactivated, the client cannot request new access tokens, but existing tokens will remain valid until they expire.
 
-        :param client_id: The client identifier. (required)
+        :param client_id: ID of the client to change activation for (required)
         :type client_id: str
         :param change_client_activation_request: (required)
         :type change_client_activation_request: ChangeClientActivationRequest
@@ -108,11 +108,12 @@ class ClientManagementApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "object",
-            '400': "ErrorResponse",
-            '403': "ErrorResponse",
-            '404': "ErrorResponse",
-            '429': "ErrorResponse",
-            '500': "ErrorResponse",
+            '400': "ProblemDetail",
+            '403': "ProblemDetail",
+            '404': "ProblemDetail",
+            '415': "ProblemDetail",
+            '429': "ProblemDetail",
+            '500': "ProblemDetail",
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -127,7 +128,7 @@ class ClientManagementApi:
     @validate_call
     def change_activation_with_http_info(
         self,
-        client_id: Annotated[str, Field(min_length=1, strict=True, description="The client identifier.")],
+        client_id: Annotated[str, Field(min_length=1, strict=True, description="ID of the client to change activation for")],
         change_client_activation_request: ChangeClientActivationRequest,
         _request_timeout: Union[
             None,
@@ -142,11 +143,11 @@ class ClientManagementApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[object]:
-        """Change the client activation status
+        """Change client activation status
 
         Activates or deactivates an OAuth2 client. When deactivated, the client cannot request new access tokens, but existing tokens will remain valid until they expire.
 
-        :param client_id: The client identifier. (required)
+        :param client_id: ID of the client to change activation for (required)
         :type client_id: str
         :param change_client_activation_request: (required)
         :type change_client_activation_request: ChangeClientActivationRequest
@@ -183,11 +184,12 @@ class ClientManagementApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "object",
-            '400': "ErrorResponse",
-            '403': "ErrorResponse",
-            '404': "ErrorResponse",
-            '429': "ErrorResponse",
-            '500': "ErrorResponse",
+            '400': "ProblemDetail",
+            '403': "ProblemDetail",
+            '404': "ProblemDetail",
+            '415': "ProblemDetail",
+            '429': "ProblemDetail",
+            '500': "ProblemDetail",
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -202,7 +204,7 @@ class ClientManagementApi:
     @validate_call
     def change_activation_without_preload_content(
         self,
-        client_id: Annotated[str, Field(min_length=1, strict=True, description="The client identifier.")],
+        client_id: Annotated[str, Field(min_length=1, strict=True, description="ID of the client to change activation for")],
         change_client_activation_request: ChangeClientActivationRequest,
         _request_timeout: Union[
             None,
@@ -217,11 +219,11 @@ class ClientManagementApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Change the client activation status
+        """Change client activation status
 
         Activates or deactivates an OAuth2 client. When deactivated, the client cannot request new access tokens, but existing tokens will remain valid until they expire.
 
-        :param client_id: The client identifier. (required)
+        :param client_id: ID of the client to change activation for (required)
         :type client_id: str
         :param change_client_activation_request: (required)
         :type change_client_activation_request: ChangeClientActivationRequest
@@ -258,11 +260,12 @@ class ClientManagementApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "object",
-            '400': "ErrorResponse",
-            '403': "ErrorResponse",
-            '404': "ErrorResponse",
-            '429': "ErrorResponse",
-            '500': "ErrorResponse",
+            '400': "ProblemDetail",
+            '403': "ProblemDetail",
+            '404': "ProblemDetail",
+            '415': "ProblemDetail",
+            '429': "ProblemDetail",
+            '500': "ProblemDetail",
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -329,7 +332,7 @@ class ClientManagementApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'asc_auth_key'
+            'x-signature'
         ]
 
 
@@ -408,10 +411,11 @@ class ClientManagementApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "ClientResponse",
-            '400': "ErrorResponse",
-            '403': "ErrorResponse",
-            '429': "ErrorResponse",
-            '500': "ErrorResponse",
+            '400': "ProblemDetail",
+            '403': "ProblemDetail",
+            '415': "ProblemDetail",
+            '429': "ProblemDetail",
+            '500': "ProblemDetail",
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -478,10 +482,11 @@ class ClientManagementApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "ClientResponse",
-            '400': "ErrorResponse",
-            '403': "ErrorResponse",
-            '429': "ErrorResponse",
-            '500': "ErrorResponse",
+            '400': "ProblemDetail",
+            '403': "ProblemDetail",
+            '415': "ProblemDetail",
+            '429': "ProblemDetail",
+            '500': "ProblemDetail",
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -548,10 +553,11 @@ class ClientManagementApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "ClientResponse",
-            '400': "ErrorResponse",
-            '403': "ErrorResponse",
-            '429': "ErrorResponse",
-            '500': "ErrorResponse",
+            '400': "ProblemDetail",
+            '403': "ProblemDetail",
+            '415': "ProblemDetail",
+            '429': "ProblemDetail",
+            '500': "ProblemDetail",
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -615,7 +621,7 @@ class ClientManagementApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'asc_auth_key'
+            'x-signature'
         ]
 
 
@@ -642,7 +648,7 @@ class ClientManagementApi:
     @validate_call
     def delete_client(
         self,
-        client_id: Annotated[str, Field(min_length=1, strict=True, description="The client identifier.")],
+        client_id: Annotated[str, Field(min_length=1, strict=True, description="ID of the client to delete")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -658,9 +664,9 @@ class ClientManagementApi:
     ) -> object:
         """Delete an OAuth2 client
 
-        Permanently deletes an OAuth2 client and all associated data. All access and refresh tokens issued to this client will be invalidated. This operation cannot be undone.
+        Permanently deletes an OAuth2 client and all associated data. This will invalidate all access tokens and refresh tokens issued to this client. This operation cannot be undone.
 
-        :param client_id: The client identifier. (required)
+        :param client_id: ID of the client to delete (required)
         :type client_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -694,11 +700,11 @@ class ClientManagementApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "object",
-            '400': "ErrorResponse",
-            '403': "ErrorResponse",
-            '404': "ErrorResponse",
-            '429': "ErrorResponse",
-            '500': "ErrorResponse",
+            '400': "ProblemDetail",
+            '403': "ProblemDetail",
+            '404': "ProblemDetail",
+            '429': "ProblemDetail",
+            '500': "ProblemDetail",
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -713,7 +719,7 @@ class ClientManagementApi:
     @validate_call
     def delete_client_with_http_info(
         self,
-        client_id: Annotated[str, Field(min_length=1, strict=True, description="The client identifier.")],
+        client_id: Annotated[str, Field(min_length=1, strict=True, description="ID of the client to delete")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -729,9 +735,9 @@ class ClientManagementApi:
     ) -> ApiResponse[object]:
         """Delete an OAuth2 client
 
-        Permanently deletes an OAuth2 client and all associated data. All access and refresh tokens issued to this client will be invalidated. This operation cannot be undone.
+        Permanently deletes an OAuth2 client and all associated data. This will invalidate all access tokens and refresh tokens issued to this client. This operation cannot be undone.
 
-        :param client_id: The client identifier. (required)
+        :param client_id: ID of the client to delete (required)
         :type client_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -765,11 +771,11 @@ class ClientManagementApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "object",
-            '400': "ErrorResponse",
-            '403': "ErrorResponse",
-            '404': "ErrorResponse",
-            '429': "ErrorResponse",
-            '500': "ErrorResponse",
+            '400': "ProblemDetail",
+            '403': "ProblemDetail",
+            '404': "ProblemDetail",
+            '429': "ProblemDetail",
+            '500': "ProblemDetail",
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -784,7 +790,7 @@ class ClientManagementApi:
     @validate_call
     def delete_client_without_preload_content(
         self,
-        client_id: Annotated[str, Field(min_length=1, strict=True, description="The client identifier.")],
+        client_id: Annotated[str, Field(min_length=1, strict=True, description="ID of the client to delete")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -800,9 +806,9 @@ class ClientManagementApi:
     ) -> RESTResponseType:
         """Delete an OAuth2 client
 
-        Permanently deletes an OAuth2 client and all associated data. All access and refresh tokens issued to this client will be invalidated. This operation cannot be undone.
+        Permanently deletes an OAuth2 client and all associated data. This will invalidate all access tokens and refresh tokens issued to this client. This operation cannot be undone.
 
-        :param client_id: The client identifier. (required)
+        :param client_id: ID of the client to delete (required)
         :type client_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -836,11 +842,11 @@ class ClientManagementApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "object",
-            '400': "ErrorResponse",
-            '403': "ErrorResponse",
-            '404': "ErrorResponse",
-            '429': "ErrorResponse",
-            '500': "ErrorResponse",
+            '400': "ProblemDetail",
+            '403': "ProblemDetail",
+            '404': "ProblemDetail",
+            '429': "ProblemDetail",
+            '500': "ProblemDetail",
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -891,7 +897,7 @@ class ClientManagementApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'asc_auth_key'
+            'x-signature'
         ]
 
 
@@ -916,9 +922,519 @@ class ClientManagementApi:
 
 
     @validate_call
+    def delete_tenant_clients(
+        self,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> object:
+        """Delete all tenant OAuth2 clients
+
+        Permanently deletes tenant OAuth2 clients and all associated data. This will invalidate all access tokens and refresh tokens issued to this client. This operation cannot be undone.
+
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._delete_tenant_clients_serialize(
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "object",
+            '403': "ProblemDetail",
+            '429': "ProblemDetail",
+            '500': "ProblemDetail",
+        }        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def delete_tenant_clients_with_http_info(
+        self,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[object]:
+        """Delete all tenant OAuth2 clients
+
+        Permanently deletes tenant OAuth2 clients and all associated data. This will invalidate all access tokens and refresh tokens issued to this client. This operation cannot be undone.
+
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._delete_tenant_clients_serialize(
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "object",
+            '403': "ProblemDetail",
+            '429': "ProblemDetail",
+            '500': "ProblemDetail",
+        }        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def delete_tenant_clients_without_preload_content(
+        self,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Delete all tenant OAuth2 clients
+
+        Permanently deletes tenant OAuth2 clients and all associated data. This will invalidate all access tokens and refresh tokens issued to this client. This operation cannot be undone.
+
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._delete_tenant_clients_serialize(
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "object",
+            '403': "ProblemDetail",
+            '429': "ProblemDetail",
+            '500': "ProblemDetail",
+        }        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _delete_tenant_clients_serialize(
+        self,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'x-signature'
+        ]
+
+
+        resource_path = "/api/2.0/clients/tenant"
+
+        return self.api_client.param_serialize(
+            method='DELETE',
+            resource_path=resource_path,
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def delete_user_clients(
+        self,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> object:
+        """Delete all user OAuth2 clients
+
+        Permanently deletes user OAuth2 clients and all associated data. This will invalidate all access tokens and refresh tokens issued to this client. This operation cannot be undone.
+
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._delete_user_clients_serialize(
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "object",
+            '403': "ProblemDetail",
+            '429': "ProblemDetail",
+            '500': "ProblemDetail",
+        }        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def delete_user_clients_with_http_info(
+        self,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[object]:
+        """Delete all user OAuth2 clients
+
+        Permanently deletes user OAuth2 clients and all associated data. This will invalidate all access tokens and refresh tokens issued to this client. This operation cannot be undone.
+
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._delete_user_clients_serialize(
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "object",
+            '403': "ProblemDetail",
+            '429': "ProblemDetail",
+            '500': "ProblemDetail",
+        }        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def delete_user_clients_without_preload_content(
+        self,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Delete all user OAuth2 clients
+
+        Permanently deletes user OAuth2 clients and all associated data. This will invalidate all access tokens and refresh tokens issued to this client. This operation cannot be undone.
+
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._delete_user_clients_serialize(
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "object",
+            '403': "ProblemDetail",
+            '429': "ProblemDetail",
+            '500': "ProblemDetail",
+        }        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _delete_user_clients_serialize(
+        self,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'x-signature'
+        ]
+
+
+        resource_path = "/api/2.0/clients"
+
+        return self.api_client.param_serialize(
+            method='DELETE',
+            resource_path=resource_path,
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
     def regenerate_secret(
         self,
-        client_id: Annotated[str, Field(min_length=1, strict=True, description="The client identifier.")],
+        client_id: Annotated[str, Field(min_length=1, strict=True, description="ID of the client to regenerate secret for")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -932,11 +1448,11 @@ class ClientManagementApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ClientSecretResponse:
-        """Regenerate the client secret
+        """Regenerate client secret
 
         Generates a new client secret for the specified OAuth2 client. The old secret will be immediately invalidated. This operation should be used with caution as it requires updating the secret in all client applications.
 
-        :param client_id: The client identifier. (required)
+        :param client_id: ID of the client to regenerate secret for (required)
         :type client_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -970,11 +1486,11 @@ class ClientManagementApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ClientSecretResponse",
-            '400': "ErrorResponse",
-            '403': "ErrorResponse",
-            '404': "ErrorResponse",
-            '429': "ErrorResponse",
-            '500': "ErrorResponse",
+            '400': "ProblemDetail",
+            '403': "ProblemDetail",
+            '404': "ProblemDetail",
+            '429': "ProblemDetail",
+            '500': "ProblemDetail",
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -989,7 +1505,7 @@ class ClientManagementApi:
     @validate_call
     def regenerate_secret_with_http_info(
         self,
-        client_id: Annotated[str, Field(min_length=1, strict=True, description="The client identifier.")],
+        client_id: Annotated[str, Field(min_length=1, strict=True, description="ID of the client to regenerate secret for")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1003,11 +1519,11 @@ class ClientManagementApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[ClientSecretResponse]:
-        """Regenerate the client secret
+        """Regenerate client secret
 
         Generates a new client secret for the specified OAuth2 client. The old secret will be immediately invalidated. This operation should be used with caution as it requires updating the secret in all client applications.
 
-        :param client_id: The client identifier. (required)
+        :param client_id: ID of the client to regenerate secret for (required)
         :type client_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1041,11 +1557,11 @@ class ClientManagementApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ClientSecretResponse",
-            '400': "ErrorResponse",
-            '403': "ErrorResponse",
-            '404': "ErrorResponse",
-            '429': "ErrorResponse",
-            '500': "ErrorResponse",
+            '400': "ProblemDetail",
+            '403': "ProblemDetail",
+            '404': "ProblemDetail",
+            '429': "ProblemDetail",
+            '500': "ProblemDetail",
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1060,7 +1576,7 @@ class ClientManagementApi:
     @validate_call
     def regenerate_secret_without_preload_content(
         self,
-        client_id: Annotated[str, Field(min_length=1, strict=True, description="The client identifier.")],
+        client_id: Annotated[str, Field(min_length=1, strict=True, description="ID of the client to regenerate secret for")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1074,11 +1590,11 @@ class ClientManagementApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Regenerate the client secret
+        """Regenerate client secret
 
         Generates a new client secret for the specified OAuth2 client. The old secret will be immediately invalidated. This operation should be used with caution as it requires updating the secret in all client applications.
 
-        :param client_id: The client identifier. (required)
+        :param client_id: ID of the client to regenerate secret for (required)
         :type client_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1112,11 +1628,11 @@ class ClientManagementApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ClientSecretResponse",
-            '400': "ErrorResponse",
-            '403': "ErrorResponse",
-            '404': "ErrorResponse",
-            '429': "ErrorResponse",
-            '500': "ErrorResponse",
+            '400': "ProblemDetail",
+            '403': "ProblemDetail",
+            '404': "ProblemDetail",
+            '429': "ProblemDetail",
+            '500': "ProblemDetail",
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1167,7 +1683,7 @@ class ClientManagementApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'asc_auth_key'
+            'x-signature'
         ]
 
 
@@ -1194,7 +1710,7 @@ class ClientManagementApi:
     @validate_call
     def revoke_user_client(
         self,
-        client_id: Annotated[str, Field(min_length=1, strict=True, description="The client identifier.")],
+        client_id: Annotated[str, Field(min_length=1, strict=True, description="ID of the client to revoke consent for")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1212,7 +1728,7 @@ class ClientManagementApi:
 
         Revokes all user consents for the specified OAuth2 client. This will invalidate all access tokens and refresh tokens issued to this client for the current user. The user will need to re-authorize the client to access their resources.
 
-        :param client_id: The client identifier. (required)
+        :param client_id: ID of the client to revoke consent for (required)
         :type client_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1246,12 +1762,12 @@ class ClientManagementApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "object",
-            '400': "ErrorResponse",
-            '403': "ErrorResponse",
-            '404': "ErrorResponse",
-            '429': "ErrorResponse",
-            '500': "ErrorResponse",
-            '503': "ErrorResponse",
+            '400': "ProblemDetail",
+            '403': "ProblemDetail",
+            '404': "ProblemDetail",
+            '429': "ProblemDetail",
+            '500': "ProblemDetail",
+            '503': "ProblemDetail",
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1266,7 +1782,7 @@ class ClientManagementApi:
     @validate_call
     def revoke_user_client_with_http_info(
         self,
-        client_id: Annotated[str, Field(min_length=1, strict=True, description="The client identifier.")],
+        client_id: Annotated[str, Field(min_length=1, strict=True, description="ID of the client to revoke consent for")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1284,7 +1800,7 @@ class ClientManagementApi:
 
         Revokes all user consents for the specified OAuth2 client. This will invalidate all access tokens and refresh tokens issued to this client for the current user. The user will need to re-authorize the client to access their resources.
 
-        :param client_id: The client identifier. (required)
+        :param client_id: ID of the client to revoke consent for (required)
         :type client_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1318,12 +1834,12 @@ class ClientManagementApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "object",
-            '400': "ErrorResponse",
-            '403': "ErrorResponse",
-            '404': "ErrorResponse",
-            '429': "ErrorResponse",
-            '500': "ErrorResponse",
-            '503': "ErrorResponse",
+            '400': "ProblemDetail",
+            '403': "ProblemDetail",
+            '404': "ProblemDetail",
+            '429': "ProblemDetail",
+            '500': "ProblemDetail",
+            '503': "ProblemDetail",
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1338,7 +1854,7 @@ class ClientManagementApi:
     @validate_call
     def revoke_user_client_without_preload_content(
         self,
-        client_id: Annotated[str, Field(min_length=1, strict=True, description="The client identifier.")],
+        client_id: Annotated[str, Field(min_length=1, strict=True, description="ID of the client to revoke consent for")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1356,7 +1872,7 @@ class ClientManagementApi:
 
         Revokes all user consents for the specified OAuth2 client. This will invalidate all access tokens and refresh tokens issued to this client for the current user. The user will need to re-authorize the client to access their resources.
 
-        :param client_id: The client identifier. (required)
+        :param client_id: ID of the client to revoke consent for (required)
         :type client_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1390,12 +1906,12 @@ class ClientManagementApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "object",
-            '400': "ErrorResponse",
-            '403': "ErrorResponse",
-            '404': "ErrorResponse",
-            '429': "ErrorResponse",
-            '500': "ErrorResponse",
-            '503': "ErrorResponse",
+            '400': "ProblemDetail",
+            '403': "ProblemDetail",
+            '404': "ProblemDetail",
+            '429': "ProblemDetail",
+            '500': "ProblemDetail",
+            '503': "ProblemDetail",
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1446,7 +1962,7 @@ class ClientManagementApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'asc_auth_key'
+            'x-signature'
         ]
 
 
@@ -1473,7 +1989,7 @@ class ClientManagementApi:
     @validate_call
     def update_client(
         self,
-        client_id: Annotated[str, Field(min_length=1, strict=True, description="The client identifier.")],
+        client_id: Annotated[str, Field(min_length=1, strict=True, description="ID of the client to update")],
         update_client_request: UpdateClientRequest,
         _request_timeout: Union[
             None,
@@ -1490,9 +2006,9 @@ class ClientManagementApi:
     ) -> object:
         """Update an existing OAuth2 client
 
-        Updates the configuration of an existing OAuth2 client, allowing modifications to the client name, description, redirect URIs, and other settings. The client ID cannot be modified.
+        Updates the configuration of an existing OAuth2 client. Allows modification of client name, description, redirect URIs, and other settings. The client ID cannot be modified.
 
-        :param client_id: The client identifier. (required)
+        :param client_id: ID of the client to update (required)
         :type client_id: str
         :param update_client_request: (required)
         :type update_client_request: UpdateClientRequest
@@ -1529,11 +2045,12 @@ class ClientManagementApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "object",
-            '400': "ErrorResponse",
-            '403': "ErrorResponse",
-            '404': "ErrorResponse",
-            '429': "ErrorResponse",
-            '500': "ErrorResponse",
+            '400': "ProblemDetail",
+            '403': "ProblemDetail",
+            '404': "ProblemDetail",
+            '415': "ProblemDetail",
+            '429': "ProblemDetail",
+            '500': "ProblemDetail",
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1548,7 +2065,7 @@ class ClientManagementApi:
     @validate_call
     def update_client_with_http_info(
         self,
-        client_id: Annotated[str, Field(min_length=1, strict=True, description="The client identifier.")],
+        client_id: Annotated[str, Field(min_length=1, strict=True, description="ID of the client to update")],
         update_client_request: UpdateClientRequest,
         _request_timeout: Union[
             None,
@@ -1565,9 +2082,9 @@ class ClientManagementApi:
     ) -> ApiResponse[object]:
         """Update an existing OAuth2 client
 
-        Updates the configuration of an existing OAuth2 client, allowing modifications to the client name, description, redirect URIs, and other settings. The client ID cannot be modified.
+        Updates the configuration of an existing OAuth2 client. Allows modification of client name, description, redirect URIs, and other settings. The client ID cannot be modified.
 
-        :param client_id: The client identifier. (required)
+        :param client_id: ID of the client to update (required)
         :type client_id: str
         :param update_client_request: (required)
         :type update_client_request: UpdateClientRequest
@@ -1604,11 +2121,12 @@ class ClientManagementApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "object",
-            '400': "ErrorResponse",
-            '403': "ErrorResponse",
-            '404': "ErrorResponse",
-            '429': "ErrorResponse",
-            '500': "ErrorResponse",
+            '400': "ProblemDetail",
+            '403': "ProblemDetail",
+            '404': "ProblemDetail",
+            '415': "ProblemDetail",
+            '429': "ProblemDetail",
+            '500': "ProblemDetail",
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1623,7 +2141,7 @@ class ClientManagementApi:
     @validate_call
     def update_client_without_preload_content(
         self,
-        client_id: Annotated[str, Field(min_length=1, strict=True, description="The client identifier.")],
+        client_id: Annotated[str, Field(min_length=1, strict=True, description="ID of the client to update")],
         update_client_request: UpdateClientRequest,
         _request_timeout: Union[
             None,
@@ -1640,9 +2158,9 @@ class ClientManagementApi:
     ) -> RESTResponseType:
         """Update an existing OAuth2 client
 
-        Updates the configuration of an existing OAuth2 client, allowing modifications to the client name, description, redirect URIs, and other settings. The client ID cannot be modified.
+        Updates the configuration of an existing OAuth2 client. Allows modification of client name, description, redirect URIs, and other settings. The client ID cannot be modified.
 
-        :param client_id: The client identifier. (required)
+        :param client_id: ID of the client to update (required)
         :type client_id: str
         :param update_client_request: (required)
         :type update_client_request: UpdateClientRequest
@@ -1679,11 +2197,12 @@ class ClientManagementApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "object",
-            '400': "ErrorResponse",
-            '403': "ErrorResponse",
-            '404': "ErrorResponse",
-            '429': "ErrorResponse",
-            '500': "ErrorResponse",
+            '400': "ProblemDetail",
+            '403': "ProblemDetail",
+            '404': "ProblemDetail",
+            '415': "ProblemDetail",
+            '429': "ProblemDetail",
+            '500': "ProblemDetail",
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1750,7 +2269,7 @@ class ClientManagementApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'asc_auth_key'
+            'x-signature'
         ]
 
 

@@ -4,8 +4,8 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**authorize_o_auth**](#authorize_o_auth) | **GET** /oauth2/authorize | OAuth2 authorization endpoint
-[**exchange_token**](#exchange_token) | **POST** /oauth2/token | OAuth2 token endpoint
+[**authorize_o_auth**](#authorize_o_auth) | **GET** /oauth2/authorize | OAuth2 Authorization Endpoint
+[**exchange_token**](#exchange_token) | **POST** /oauth2/token | OAuth2 Token Endpoint
 [**submit_consent**](#submit_consent) | **POST** /oauth2/authorize | OAuth2 consent endpoint
 
 
@@ -32,7 +32,7 @@ void (empty response body)
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[x-signature](../README.md#x-signature)
 
 ### Example
 
@@ -60,7 +60,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     scope = 'files:read' # str | The space-separated list of requested scope permissions.
 
     try:
-        # OAuth2 authorization endpoint
+        # OAuth2 Authorization Endpoint
         api_instance.authorize_o_auth(response_type, client_id, redirect_uri, scope)
     except Exception as e:
         print("Exception when calling AuthorizationApi->authorize_o_auth: %s\n" % e)
@@ -85,7 +85,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **exchange_token**
 > ExchangeToken200Response exchange_token(grant_type=grant_type, code=code, redirect_uri=redirect_uri, client_id=client_id, client_secret=client_secret)
 
-Exchanges an authorization code specified in the request for the access token.
+Exchange authorization code for access token
 
 For more information, see [api.onlyoffice.com]().
 
@@ -132,7 +132,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     client_secret = 'client_secret_example' # str | The client secret issued to the client during registration. (optional)
 
     try:
-        # OAuth2 token endpoint
+        # OAuth2 Token Endpoint
         api_response = api_instance.exchange_token(grant_type=grant_type, code=code, redirect_uri=redirect_uri, client_id=client_id, client_secret=client_secret)
         print("The response of AuthorizationApi->exchange_token:\n")
         pprint(api_response)
@@ -151,7 +151,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | The authorization code was successfully exchanged for the access token |  -  |
+**200** | Successfully exchanged authorization code for access token |  -  |
 **400** | Invalid request parameters |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -159,7 +159,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **submit_consent**
 > submit_consent(client_id=client_id, state=state, scope=scope)
 
-Sends a consent request with the specified parameters.
+Sends consent approval
 
 For more information, see [api.onlyoffice.com]().
 
@@ -178,7 +178,7 @@ void (empty response body)
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[x-signature](../README.md#x-signature)
 
 ### Example
 

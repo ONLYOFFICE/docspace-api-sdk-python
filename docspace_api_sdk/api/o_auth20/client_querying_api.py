@@ -53,7 +53,7 @@ class ClientQueryingApi:
     @validate_call
     def get_client(
         self,
-        client_id: Annotated[str, Field(min_length=1, strict=True, description="The client identifier.")],
+        client_id: Annotated[str, Field(min_length=1, strict=True, description="ID of the client to retrieve")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -71,7 +71,7 @@ class ClientQueryingApi:
 
         Retrieves detailed information about a specific OAuth2 client including its name, description, redirect URIs, and scopes.
 
-        :param client_id: The client identifier. (required)
+        :param client_id: ID of the client to retrieve (required)
         :type client_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -105,11 +105,11 @@ class ClientQueryingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ClientResponse",
-            '400': "ErrorResponse",
-            '403': "ErrorResponse",
-            '404': "ErrorResponse",
-            '429': "ErrorResponse",
-            '500': "ErrorResponse",
+            '400': "ProblemDetail",
+            '403': "ProblemDetail",
+            '404': "ProblemDetail",
+            '429': "ProblemDetail",
+            '500': "ProblemDetail",
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -124,7 +124,7 @@ class ClientQueryingApi:
     @validate_call
     def get_client_with_http_info(
         self,
-        client_id: Annotated[str, Field(min_length=1, strict=True, description="The client identifier.")],
+        client_id: Annotated[str, Field(min_length=1, strict=True, description="ID of the client to retrieve")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -142,7 +142,7 @@ class ClientQueryingApi:
 
         Retrieves detailed information about a specific OAuth2 client including its name, description, redirect URIs, and scopes.
 
-        :param client_id: The client identifier. (required)
+        :param client_id: ID of the client to retrieve (required)
         :type client_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -176,11 +176,11 @@ class ClientQueryingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ClientResponse",
-            '400': "ErrorResponse",
-            '403': "ErrorResponse",
-            '404': "ErrorResponse",
-            '429': "ErrorResponse",
-            '500': "ErrorResponse",
+            '400': "ProblemDetail",
+            '403': "ProblemDetail",
+            '404': "ProblemDetail",
+            '429': "ProblemDetail",
+            '500': "ProblemDetail",
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -195,7 +195,7 @@ class ClientQueryingApi:
     @validate_call
     def get_client_without_preload_content(
         self,
-        client_id: Annotated[str, Field(min_length=1, strict=True, description="The client identifier.")],
+        client_id: Annotated[str, Field(min_length=1, strict=True, description="ID of the client to retrieve")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -213,7 +213,7 @@ class ClientQueryingApi:
 
         Retrieves detailed information about a specific OAuth2 client including its name, description, redirect URIs, and scopes.
 
-        :param client_id: The client identifier. (required)
+        :param client_id: ID of the client to retrieve (required)
         :type client_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -247,11 +247,11 @@ class ClientQueryingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ClientResponse",
-            '400': "ErrorResponse",
-            '403': "ErrorResponse",
-            '404': "ErrorResponse",
-            '429': "ErrorResponse",
-            '500': "ErrorResponse",
+            '400': "ProblemDetail",
+            '403': "ProblemDetail",
+            '404': "ProblemDetail",
+            '429': "ProblemDetail",
+            '500': "ProblemDetail",
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -302,7 +302,7 @@ class ClientQueryingApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'asc_auth_key'
+            'x-signature'
         ]
 
 
@@ -329,7 +329,7 @@ class ClientQueryingApi:
     @validate_call
     def get_client_info(
         self,
-        client_id: Annotated[str, Field(min_length=1, strict=True, description="The client identifier.")],
+        client_id: Annotated[str, Field(min_length=1, strict=True, description="ID of the client to retrieve")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -343,11 +343,11 @@ class ClientQueryingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ClientInfoResponse:
-        """Get detailed client information
+        """Retrieves detailed information for a specific client
 
         Retrieves the detailed information for a client with the ID specified in the request.
 
-        :param client_id: The client identifier. (required)
+        :param client_id: ID of the client to retrieve (required)
         :type client_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -382,7 +382,7 @@ class ClientQueryingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ClientInfoResponse",
             '400': None,
-            '429': "ErrorResponse",
+            '429': "ProblemDetail",
             '500': None,
         }        response_data = self.api_client.call_api(
             *_param,
@@ -398,7 +398,7 @@ class ClientQueryingApi:
     @validate_call
     def get_client_info_with_http_info(
         self,
-        client_id: Annotated[str, Field(min_length=1, strict=True, description="The client identifier.")],
+        client_id: Annotated[str, Field(min_length=1, strict=True, description="ID of the client to retrieve")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -412,11 +412,11 @@ class ClientQueryingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[ClientInfoResponse]:
-        """Get detailed client information
+        """Retrieves detailed information for a specific client
 
         Retrieves the detailed information for a client with the ID specified in the request.
 
-        :param client_id: The client identifier. (required)
+        :param client_id: ID of the client to retrieve (required)
         :type client_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -451,7 +451,7 @@ class ClientQueryingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ClientInfoResponse",
             '400': None,
-            '429': "ErrorResponse",
+            '429': "ProblemDetail",
             '500': None,
         }        response_data = self.api_client.call_api(
             *_param,
@@ -467,7 +467,7 @@ class ClientQueryingApi:
     @validate_call
     def get_client_info_without_preload_content(
         self,
-        client_id: Annotated[str, Field(min_length=1, strict=True, description="The client identifier.")],
+        client_id: Annotated[str, Field(min_length=1, strict=True, description="ID of the client to retrieve")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -481,11 +481,11 @@ class ClientQueryingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get detailed client information
+        """Retrieves detailed information for a specific client
 
         Retrieves the detailed information for a client with the ID specified in the request.
 
-        :param client_id: The client identifier. (required)
+        :param client_id: ID of the client to retrieve (required)
         :type client_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -520,7 +520,7 @@ class ClientQueryingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ClientInfoResponse",
             '400': None,
-            '429': "ErrorResponse",
+            '429': "ProblemDetail",
             '500': None,
         }        response_data = self.api_client.call_api(
             *_param,
@@ -572,7 +572,7 @@ class ClientQueryingApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'asc_auth_key'
+            'x-signature'
         ]
 
 
@@ -599,9 +599,9 @@ class ClientQueryingApi:
     @validate_call
     def get_clients(
         self,
-        limit: Annotated[int, Field(le=50, strict=True, ge=1, description="The maximum number of results returned per page.")],
-        last_client_id: Annotated[Optional[StrictStr], Field(description="The ID of the last retrieved client.")] = None,
-        last_created_on: Annotated[Optional[datetime], Field(description="The creation date of the last retrieved client.")] = None,
+        limit: Annotated[int, Field(le=50, strict=True, ge=1, description="Pagination limit")],
+        last_client_id: Annotated[Optional[StrictStr], Field(description="ID of the last retrieved client")] = None,
+        last_created_on: Annotated[Optional[datetime], Field(description="Date of the last retrieved client")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -615,15 +615,15 @@ class ClientQueryingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> PageableResponse:
-        """Get clients
+        """List clients
 
-        Retrieves a paginated list of OAuth2 clients. The results can be paginated using the 'limit' parameter and the last seen client ID or creation date.
+        Retrieves a paginated list of OAuth2 clients. The results can be paginated using the limit parameter and last seen client ID/creation date.
 
-        :param limit: The maximum number of results returned per page. (required)
+        :param limit: Pagination limit (required)
         :type limit: int
-        :param last_client_id: The ID of the last retrieved client.
+        :param last_client_id: ID of the last retrieved client
         :type last_client_id: str
-        :param last_created_on: The creation date of the last retrieved client.
+        :param last_created_on: Date of the last retrieved client
         :type last_created_on: datetime
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -659,10 +659,10 @@ class ClientQueryingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "PageableResponse",
-            '400': "ErrorResponse",
-            '403': "ErrorResponse",
-            '429': "ErrorResponse",
-            '500': "ErrorResponse",
+            '400': "ProblemDetail",
+            '403': "ProblemDetail",
+            '429': "ProblemDetail",
+            '500': "ProblemDetail",
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -677,9 +677,9 @@ class ClientQueryingApi:
     @validate_call
     def get_clients_with_http_info(
         self,
-        limit: Annotated[int, Field(le=50, strict=True, ge=1, description="The maximum number of results returned per page.")],
-        last_client_id: Annotated[Optional[StrictStr], Field(description="The ID of the last retrieved client.")] = None,
-        last_created_on: Annotated[Optional[datetime], Field(description="The creation date of the last retrieved client.")] = None,
+        limit: Annotated[int, Field(le=50, strict=True, ge=1, description="Pagination limit")],
+        last_client_id: Annotated[Optional[StrictStr], Field(description="ID of the last retrieved client")] = None,
+        last_created_on: Annotated[Optional[datetime], Field(description="Date of the last retrieved client")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -693,15 +693,15 @@ class ClientQueryingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[PageableResponse]:
-        """Get clients
+        """List clients
 
-        Retrieves a paginated list of OAuth2 clients. The results can be paginated using the 'limit' parameter and the last seen client ID or creation date.
+        Retrieves a paginated list of OAuth2 clients. The results can be paginated using the limit parameter and last seen client ID/creation date.
 
-        :param limit: The maximum number of results returned per page. (required)
+        :param limit: Pagination limit (required)
         :type limit: int
-        :param last_client_id: The ID of the last retrieved client.
+        :param last_client_id: ID of the last retrieved client
         :type last_client_id: str
-        :param last_created_on: The creation date of the last retrieved client.
+        :param last_created_on: Date of the last retrieved client
         :type last_created_on: datetime
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -737,10 +737,10 @@ class ClientQueryingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "PageableResponse",
-            '400': "ErrorResponse",
-            '403': "ErrorResponse",
-            '429': "ErrorResponse",
-            '500': "ErrorResponse",
+            '400': "ProblemDetail",
+            '403': "ProblemDetail",
+            '429': "ProblemDetail",
+            '500': "ProblemDetail",
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -755,9 +755,9 @@ class ClientQueryingApi:
     @validate_call
     def get_clients_without_preload_content(
         self,
-        limit: Annotated[int, Field(le=50, strict=True, ge=1, description="The maximum number of results returned per page.")],
-        last_client_id: Annotated[Optional[StrictStr], Field(description="The ID of the last retrieved client.")] = None,
-        last_created_on: Annotated[Optional[datetime], Field(description="The creation date of the last retrieved client.")] = None,
+        limit: Annotated[int, Field(le=50, strict=True, ge=1, description="Pagination limit")],
+        last_client_id: Annotated[Optional[StrictStr], Field(description="ID of the last retrieved client")] = None,
+        last_created_on: Annotated[Optional[datetime], Field(description="Date of the last retrieved client")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -771,15 +771,15 @@ class ClientQueryingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get clients
+        """List clients
 
-        Retrieves a paginated list of OAuth2 clients. The results can be paginated using the 'limit' parameter and the last seen client ID or creation date.
+        Retrieves a paginated list of OAuth2 clients. The results can be paginated using the limit parameter and last seen client ID/creation date.
 
-        :param limit: The maximum number of results returned per page. (required)
+        :param limit: Pagination limit (required)
         :type limit: int
-        :param last_client_id: The ID of the last retrieved client.
+        :param last_client_id: ID of the last retrieved client
         :type last_client_id: str
-        :param last_created_on: The creation date of the last retrieved client.
+        :param last_created_on: Date of the last retrieved client
         :type last_created_on: datetime
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -815,10 +815,10 @@ class ClientQueryingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "PageableResponse",
-            '400': "ErrorResponse",
-            '403': "ErrorResponse",
-            '429': "ErrorResponse",
-            '500': "ErrorResponse",
+            '400': "ProblemDetail",
+            '403': "ProblemDetail",
+            '429': "ProblemDetail",
+            '500': "ProblemDetail",
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -890,7 +890,7 @@ class ClientQueryingApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'asc_auth_key'
+            'x-signature'
         ]
 
 
@@ -917,9 +917,9 @@ class ClientQueryingApi:
     @validate_call
     def get_clients_info(
         self,
-        limit: Annotated[int, Field(le=50, strict=True, ge=1, description="The maximum number of results returned per page.")],
-        last_client_id: Annotated[Optional[StrictStr], Field(description="The identifier of the last retrieved client.")] = None,
-        last_created_on: Annotated[Optional[datetime], Field(description="The creation date of the last retrieved client.")] = None,
+        limit: Annotated[int, Field(le=50, strict=True, ge=1, description="Pagination limit")],
+        last_client_id: Annotated[Optional[StrictStr], Field(description="ID of the last retrieved client")] = None,
+        last_created_on: Annotated[Optional[datetime], Field(description="Date of the last retrieved client")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -933,15 +933,15 @@ class ClientQueryingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> PageableResponseClientInfoResponse:
-        """Get detailed information of clients
+        """Retrieves a pageable list of client information
 
         Retrieves a paginated list of information for all clients.
 
-        :param limit: The maximum number of results returned per page. (required)
+        :param limit: Pagination limit (required)
         :type limit: int
-        :param last_client_id: The identifier of the last retrieved client.
+        :param last_client_id: ID of the last retrieved client
         :type last_client_id: str
-        :param last_created_on: The creation date of the last retrieved client.
+        :param last_created_on: Date of the last retrieved client
         :type last_created_on: datetime
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -978,7 +978,7 @@ class ClientQueryingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "PageableResponseClientInfoResponse",
             '400': None,
-            '429': "ErrorResponse",
+            '429': "ProblemDetail",
             '500': None,
         }        response_data = self.api_client.call_api(
             *_param,
@@ -994,9 +994,9 @@ class ClientQueryingApi:
     @validate_call
     def get_clients_info_with_http_info(
         self,
-        limit: Annotated[int, Field(le=50, strict=True, ge=1, description="The maximum number of results returned per page.")],
-        last_client_id: Annotated[Optional[StrictStr], Field(description="The identifier of the last retrieved client.")] = None,
-        last_created_on: Annotated[Optional[datetime], Field(description="The creation date of the last retrieved client.")] = None,
+        limit: Annotated[int, Field(le=50, strict=True, ge=1, description="Pagination limit")],
+        last_client_id: Annotated[Optional[StrictStr], Field(description="ID of the last retrieved client")] = None,
+        last_created_on: Annotated[Optional[datetime], Field(description="Date of the last retrieved client")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1010,15 +1010,15 @@ class ClientQueryingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[PageableResponseClientInfoResponse]:
-        """Get detailed information of clients
+        """Retrieves a pageable list of client information
 
         Retrieves a paginated list of information for all clients.
 
-        :param limit: The maximum number of results returned per page. (required)
+        :param limit: Pagination limit (required)
         :type limit: int
-        :param last_client_id: The identifier of the last retrieved client.
+        :param last_client_id: ID of the last retrieved client
         :type last_client_id: str
-        :param last_created_on: The creation date of the last retrieved client.
+        :param last_created_on: Date of the last retrieved client
         :type last_created_on: datetime
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1055,7 +1055,7 @@ class ClientQueryingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "PageableResponseClientInfoResponse",
             '400': None,
-            '429': "ErrorResponse",
+            '429': "ProblemDetail",
             '500': None,
         }        response_data = self.api_client.call_api(
             *_param,
@@ -1071,9 +1071,9 @@ class ClientQueryingApi:
     @validate_call
     def get_clients_info_without_preload_content(
         self,
-        limit: Annotated[int, Field(le=50, strict=True, ge=1, description="The maximum number of results returned per page.")],
-        last_client_id: Annotated[Optional[StrictStr], Field(description="The identifier of the last retrieved client.")] = None,
-        last_created_on: Annotated[Optional[datetime], Field(description="The creation date of the last retrieved client.")] = None,
+        limit: Annotated[int, Field(le=50, strict=True, ge=1, description="Pagination limit")],
+        last_client_id: Annotated[Optional[StrictStr], Field(description="ID of the last retrieved client")] = None,
+        last_created_on: Annotated[Optional[datetime], Field(description="Date of the last retrieved client")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1087,15 +1087,15 @@ class ClientQueryingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get detailed information of clients
+        """Retrieves a pageable list of client information
 
         Retrieves a paginated list of information for all clients.
 
-        :param limit: The maximum number of results returned per page. (required)
+        :param limit: Pagination limit (required)
         :type limit: int
-        :param last_client_id: The identifier of the last retrieved client.
+        :param last_client_id: ID of the last retrieved client
         :type last_client_id: str
-        :param last_created_on: The creation date of the last retrieved client.
+        :param last_created_on: Date of the last retrieved client
         :type last_created_on: datetime
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1132,7 +1132,7 @@ class ClientQueryingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "PageableResponseClientInfoResponse",
             '400': None,
-            '429': "ErrorResponse",
+            '429': "ProblemDetail",
             '500': None,
         }        response_data = self.api_client.call_api(
             *_param,
@@ -1205,7 +1205,7 @@ class ClientQueryingApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'asc_auth_key'
+            'x-signature'
         ]
 
 
@@ -1232,8 +1232,8 @@ class ClientQueryingApi:
     @validate_call
     def get_consents(
         self,
-        limit: Annotated[int, Field(le=50, strict=True, ge=1, description="The maximum number of results returned per page.")],
-        last_modified_on: Annotated[Optional[datetime], Field(description="The date when the user consent was last modified.")] = None,
+        limit: Annotated[int, Field(le=50, strict=True, ge=1, description="Pagination limit")],
+        last_modified_on: Annotated[Optional[datetime], Field(description="Date of the last retrieved consent")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1247,13 +1247,13 @@ class ClientQueryingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> PageableModificationResponse:
-        """Get user consents
+        """Retrieves a pageable list of consents
 
         Retrieves a paginated list of user consents.
 
-        :param limit: The maximum number of results returned per page. (required)
+        :param limit: Pagination limit (required)
         :type limit: int
-        :param last_modified_on: The date when the user consent was last modified.
+        :param last_modified_on: Date of the last retrieved consent
         :type last_modified_on: datetime
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1302,8 +1302,8 @@ class ClientQueryingApi:
     @validate_call
     def get_consents_with_http_info(
         self,
-        limit: Annotated[int, Field(le=50, strict=True, ge=1, description="The maximum number of results returned per page.")],
-        last_modified_on: Annotated[Optional[datetime], Field(description="The date when the user consent was last modified.")] = None,
+        limit: Annotated[int, Field(le=50, strict=True, ge=1, description="Pagination limit")],
+        last_modified_on: Annotated[Optional[datetime], Field(description="Date of the last retrieved consent")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1317,13 +1317,13 @@ class ClientQueryingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[PageableModificationResponse]:
-        """Get user consents
+        """Retrieves a pageable list of consents
 
         Retrieves a paginated list of user consents.
 
-        :param limit: The maximum number of results returned per page. (required)
+        :param limit: Pagination limit (required)
         :type limit: int
-        :param last_modified_on: The date when the user consent was last modified.
+        :param last_modified_on: Date of the last retrieved consent
         :type last_modified_on: datetime
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1372,8 +1372,8 @@ class ClientQueryingApi:
     @validate_call
     def get_consents_without_preload_content(
         self,
-        limit: Annotated[int, Field(le=50, strict=True, ge=1, description="The maximum number of results returned per page.")],
-        last_modified_on: Annotated[Optional[datetime], Field(description="The date when the user consent was last modified.")] = None,
+        limit: Annotated[int, Field(le=50, strict=True, ge=1, description="Pagination limit")],
+        last_modified_on: Annotated[Optional[datetime], Field(description="Date of the last retrieved consent")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1387,13 +1387,13 @@ class ClientQueryingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get user consents
+        """Retrieves a pageable list of consents
 
         Retrieves a paginated list of user consents.
 
-        :param limit: The maximum number of results returned per page. (required)
+        :param limit: Pagination limit (required)
         :type limit: int
-        :param last_modified_on: The date when the user consent was last modified.
+        :param last_modified_on: Date of the last retrieved consent
         :type last_modified_on: datetime
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1494,7 +1494,7 @@ class ClientQueryingApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'asc_auth_key'
+            'x-signature'
         ]
 
 
@@ -1521,7 +1521,7 @@ class ClientQueryingApi:
     @validate_call
     def get_public_client_info(
         self,
-        client_id: Annotated[str, Field(min_length=1, strict=True, description="The client identifier.")],
+        client_id: Annotated[str, Field(min_length=1, strict=True, description="ID of the client to retrieve")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1535,11 +1535,10 @@ class ClientQueryingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ClientInfoResponse:
-        """Get public client information
+        """Handles the GET request for public client information
 
-        Returns the public information for a client with the ID secified din the request.
 
-        :param client_id: The client identifier. (required)
+        :param client_id: ID of the client to retrieve (required)
         :type client_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1574,7 +1573,7 @@ class ClientQueryingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ClientInfoResponse",
             '400': None,
-            '429': "ErrorResponse",
+            '429': "ProblemDetail",
             '500': None,
         }        response_data = self.api_client.call_api(
             *_param,
@@ -1590,7 +1589,7 @@ class ClientQueryingApi:
     @validate_call
     def get_public_client_info_with_http_info(
         self,
-        client_id: Annotated[str, Field(min_length=1, strict=True, description="The client identifier.")],
+        client_id: Annotated[str, Field(min_length=1, strict=True, description="ID of the client to retrieve")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1604,11 +1603,10 @@ class ClientQueryingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[ClientInfoResponse]:
-        """Get public client information
+        """Handles the GET request for public client information
 
-        Returns the public information for a client with the ID secified din the request.
 
-        :param client_id: The client identifier. (required)
+        :param client_id: ID of the client to retrieve (required)
         :type client_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1643,7 +1641,7 @@ class ClientQueryingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ClientInfoResponse",
             '400': None,
-            '429': "ErrorResponse",
+            '429': "ProblemDetail",
             '500': None,
         }        response_data = self.api_client.call_api(
             *_param,
@@ -1659,7 +1657,7 @@ class ClientQueryingApi:
     @validate_call
     def get_public_client_info_without_preload_content(
         self,
-        client_id: Annotated[str, Field(min_length=1, strict=True, description="The client identifier.")],
+        client_id: Annotated[str, Field(min_length=1, strict=True, description="ID of the client to retrieve")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1673,11 +1671,10 @@ class ClientQueryingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get public client information
+        """Handles the GET request for public client information
 
-        Returns the public information for a client with the ID secified din the request.
 
-        :param client_id: The client identifier. (required)
+        :param client_id: ID of the client to retrieve (required)
         :type client_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1712,7 +1709,7 @@ class ClientQueryingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ClientInfoResponse",
             '400': None,
-            '429': "ErrorResponse",
+            '429': "ProblemDetail",
             '500': None,
         }        response_data = self.api_client.call_api(
             *_param,

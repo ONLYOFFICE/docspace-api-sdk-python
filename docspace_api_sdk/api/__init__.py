@@ -25,6 +25,7 @@ from docspace_api_sdk.api.migration.migration_api import MigrationApi
 from docspace_api_sdk.api.o_auth20.authorization_api import AuthorizationApi
 from docspace_api_sdk.api.o_auth20.client_management_api import ClientManagementApi
 from docspace_api_sdk.api.o_auth20.client_querying_api import ClientQueryingApi
+from docspace_api_sdk.api.o_auth20.discovery_api import DiscoveryApi
 from docspace_api_sdk.api.o_auth20.scope_management_api import ScopeManagementApi
 from docspace_api_sdk.api.people.email_api import EmailApi
 from docspace_api_sdk.api.people.guests_api import GuestsApi

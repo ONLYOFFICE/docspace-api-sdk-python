@@ -6612,6 +6612,7 @@ class RoomsApi:
         self,
         type: Annotated[Optional[List[List[RoomType]]], Field(description="The filter by room type.")] = None,
         subject_id: Annotated[Optional[StrictStr], Field(description="The filter by user ID.")] = None,
+        subject_owner_id: Annotated[Optional[StrictStr], Field(description="The filter by room owner ID.")] = None,
         search_area: Annotated[Optional[SearchArea], Field(description="The room search area (Active, Archive, Any, Recent by links).")] = None,
         without_tags: Annotated[Optional[StrictBool], Field(description="Specifies whether to search by tags or not.")] = None,
         tags: Annotated[Optional[StrictStr], Field(description="The tags in the serialized format.")] = None,
@@ -6647,6 +6648,8 @@ class RoomsApi:
         :type type: List[RoomType]
         :param subject_id: The filter by user ID.
         :type subject_id: str
+        :param subject_owner_id: The filter by room owner ID.
+        :type subject_owner_id: str
         :param search_area: The room search area (Active, Archive, Any, Recent by links).
         :type search_area: SearchArea
         :param without_tags: Specifies whether to search by tags or not.
@@ -6700,6 +6703,7 @@ class RoomsApi:
         _param = self._get_rooms_folder_serialize(
             type=type,
             subject_id=subject_id,
+            subject_owner_id=subject_owner_id,
             search_area=search_area,
             without_tags=without_tags,
             tags=tags,
@@ -6740,6 +6744,7 @@ class RoomsApi:
         self,
         type: Annotated[Optional[List[List[RoomType]]], Field(description="The filter by room type.")] = None,
         subject_id: Annotated[Optional[StrictStr], Field(description="The filter by user ID.")] = None,
+        subject_owner_id: Annotated[Optional[StrictStr], Field(description="The filter by room owner ID.")] = None,
         search_area: Annotated[Optional[SearchArea], Field(description="The room search area (Active, Archive, Any, Recent by links).")] = None,
         without_tags: Annotated[Optional[StrictBool], Field(description="Specifies whether to search by tags or not.")] = None,
         tags: Annotated[Optional[StrictStr], Field(description="The tags in the serialized format.")] = None,
@@ -6775,6 +6780,8 @@ class RoomsApi:
         :type type: List[RoomType]
         :param subject_id: The filter by user ID.
         :type subject_id: str
+        :param subject_owner_id: The filter by room owner ID.
+        :type subject_owner_id: str
         :param search_area: The room search area (Active, Archive, Any, Recent by links).
         :type search_area: SearchArea
         :param without_tags: Specifies whether to search by tags or not.
@@ -6828,6 +6835,7 @@ class RoomsApi:
         _param = self._get_rooms_folder_serialize(
             type=type,
             subject_id=subject_id,
+            subject_owner_id=subject_owner_id,
             search_area=search_area,
             without_tags=without_tags,
             tags=tags,
@@ -6868,6 +6876,7 @@ class RoomsApi:
         self,
         type: Annotated[Optional[List[List[RoomType]]], Field(description="The filter by room type.")] = None,
         subject_id: Annotated[Optional[StrictStr], Field(description="The filter by user ID.")] = None,
+        subject_owner_id: Annotated[Optional[StrictStr], Field(description="The filter by room owner ID.")] = None,
         search_area: Annotated[Optional[SearchArea], Field(description="The room search area (Active, Archive, Any, Recent by links).")] = None,
         without_tags: Annotated[Optional[StrictBool], Field(description="Specifies whether to search by tags or not.")] = None,
         tags: Annotated[Optional[StrictStr], Field(description="The tags in the serialized format.")] = None,
@@ -6903,6 +6912,8 @@ class RoomsApi:
         :type type: List[RoomType]
         :param subject_id: The filter by user ID.
         :type subject_id: str
+        :param subject_owner_id: The filter by room owner ID.
+        :type subject_owner_id: str
         :param search_area: The room search area (Active, Archive, Any, Recent by links).
         :type search_area: SearchArea
         :param without_tags: Specifies whether to search by tags or not.
@@ -6956,6 +6967,7 @@ class RoomsApi:
         _param = self._get_rooms_folder_serialize(
             type=type,
             subject_id=subject_id,
+            subject_owner_id=subject_owner_id,
             search_area=search_area,
             without_tags=without_tags,
             tags=tags,
@@ -6991,6 +7003,7 @@ class RoomsApi:
         self,
         type,
         subject_id,
+        subject_owner_id,
         search_area,
         without_tags,
         tags,
@@ -7035,6 +7048,10 @@ class RoomsApi:
         if subject_id is not None:
             
             _query_params.append(('subjectId', subject_id))
+            
+        if subject_owner_id is not None:
+            
+            _query_params.append(('subjectOwnerId', subject_owner_id))
             
         if search_area is not None:
             

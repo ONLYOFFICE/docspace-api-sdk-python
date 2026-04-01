@@ -20,7 +20,7 @@
 
 
 
-__version__ = "3.6.0"
+__version__ = "3.7.0"
 
 # Define package exports
 __all__ = [
@@ -48,6 +48,7 @@ __all__ = [
     "AuthorizationApi",
     "ClientManagementApi",
     "ClientQueryingApi",
+    "DiscoveryApi",
     "ScopeManagementApi",
     "EmailApi",
     "GuestsApi",
@@ -366,7 +367,6 @@ __all__ = [
     "EncryptionSettingsWrapper",
     "EngineType",
     "EntryType",
-    "ErrorResponse",
     "ExchangeToken200Response",
     "ExportChatRequestBodyInteger",
     "ExportMessageRequestBodyInteger",
@@ -601,6 +601,7 @@ __all__ = [
     "PluginsConfig",
     "PluginsDto",
     "PriceDto",
+    "ProblemDetail",
     "ProductAdministratorDto",
     "ProductAdministratorWrapper",
     "ProductQuantityType",
@@ -894,6 +895,7 @@ from docspace_api_sdk.api.migration.migration_api import MigrationApi as Migrati
 from docspace_api_sdk.api.o_auth20.authorization_api import AuthorizationApi as AuthorizationApi
 from docspace_api_sdk.api.o_auth20.client_management_api import ClientManagementApi as ClientManagementApi
 from docspace_api_sdk.api.o_auth20.client_querying_api import ClientQueryingApi as ClientQueryingApi
+from docspace_api_sdk.api.o_auth20.discovery_api import DiscoveryApi as DiscoveryApi
 from docspace_api_sdk.api.o_auth20.scope_management_api import ScopeManagementApi as ScopeManagementApi
 from docspace_api_sdk.api.people.email_api import EmailApi as EmailApi
 from docspace_api_sdk.api.people.guests_api import GuestsApi as GuestsApi
@@ -1216,7 +1218,6 @@ from docspace_api_sdk.models.encryption_settings import EncryptionSettings as En
 from docspace_api_sdk.models.encryption_settings_wrapper import EncryptionSettingsWrapper as EncryptionSettingsWrapper
 from docspace_api_sdk.models.engine_type import EngineType as EngineType
 from docspace_api_sdk.models.entry_type import EntryType as EntryType
-from docspace_api_sdk.models.error_response import ErrorResponse as ErrorResponse
 from docspace_api_sdk.models.exchange_token200_response import ExchangeToken200Response as ExchangeToken200Response
 from docspace_api_sdk.models.export_chat_request_body_integer import ExportChatRequestBodyInteger as ExportChatRequestBodyInteger
 from docspace_api_sdk.models.export_message_request_body_integer import ExportMessageRequestBodyInteger as ExportMessageRequestBodyInteger
@@ -1451,6 +1452,7 @@ from docspace_api_sdk.models.permissions_config import PermissionsConfig as Perm
 from docspace_api_sdk.models.plugins_config import PluginsConfig as PluginsConfig
 from docspace_api_sdk.models.plugins_dto import PluginsDto as PluginsDto
 from docspace_api_sdk.models.price_dto import PriceDto as PriceDto
+from docspace_api_sdk.models.problem_detail import ProblemDetail as ProblemDetail
 from docspace_api_sdk.models.product_administrator_dto import ProductAdministratorDto as ProductAdministratorDto
 from docspace_api_sdk.models.product_administrator_wrapper import ProductAdministratorWrapper as ProductAdministratorWrapper
 from docspace_api_sdk.models.product_quantity_type import ProductQuantityType as ProductQuantityType

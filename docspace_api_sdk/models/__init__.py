@@ -275,7 +275,6 @@ from docspace_api_sdk.models.encryption_settings import EncryptionSettings
 from docspace_api_sdk.models.encryption_settings_wrapper import EncryptionSettingsWrapper
 from docspace_api_sdk.models.engine_type import EngineType
 from docspace_api_sdk.models.entry_type import EntryType
-from docspace_api_sdk.models.error_response import ErrorResponse
 from docspace_api_sdk.models.exchange_token200_response import ExchangeToken200Response
 from docspace_api_sdk.models.export_chat_request_body_integer import ExportChatRequestBodyInteger
 from docspace_api_sdk.models.export_message_request_body_integer import ExportMessageRequestBodyInteger
@@ -510,6 +509,7 @@ from docspace_api_sdk.models.permissions_config import PermissionsConfig
 from docspace_api_sdk.models.plugins_config import PluginsConfig
 from docspace_api_sdk.models.plugins_dto import PluginsDto
 from docspace_api_sdk.models.price_dto import PriceDto
+from docspace_api_sdk.models.problem_detail import ProblemDetail
 from docspace_api_sdk.models.product_administrator_dto import ProductAdministratorDto
 from docspace_api_sdk.models.product_administrator_wrapper import ProductAdministratorWrapper
 from docspace_api_sdk.models.product_quantity_type import ProductQuantityType

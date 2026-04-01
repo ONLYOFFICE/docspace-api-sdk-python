@@ -21,34 +21,22 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr, field_validator
+from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
-class UpdateClientRequest(BaseModel):
+class ProblemDetail(BaseModel):
     """
-    Client update request containing modified client details
+    ProblemDetail
     """ # noqa: E501
-    name: Optional[Annotated[str, Field(min_length=1, strict=True)]] = Field(default=None, description="The name of the client")
-    description: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The description of the client")
-    logo: Optional[Annotated[str, Field(min_length=1, strict=True)]] = Field(default=None, description="The logo of the client in base64 format")
-    public: Optional[StrictBool] = None
-    allow_pkce: Optional[StrictBool] = Field(default=None, description="Indicates whether PKCE is allowed for the client")
-    is_public: Optional[StrictBool] = Field(default=None, description="Indicates whether client is accessible by third-party tenants")
-    allowed_origins: Optional[Annotated[List[StrictStr], Field(min_length=1, max_length=12)]] = Field(default=None, description="The allowed origins for the client")
-    __properties: ClassVar[List[str]] = ["name", "description", "logo", "public", "allow_pkce", "is_public", "allowed_origins"]
-
-    @field_validator('logo')
-    def logo_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^data:image\/(?:png|jpeg|jpg|svg\+xml);base64,.*.{1,}", value):
-            raise ValueError(r"must validate the regular expression /^data:image\/(?:png|jpeg|jpg|svg\+xml);base64,.*.{1,}/")
-        return value
+    type: Optional[StrictStr] = None
+    title: Optional[StrictStr] = None
+    status: Optional[StrictInt] = None
+    detail: Optional[StrictStr] = None
+    instance: Optional[StrictStr] = None
+    properties: Optional[Dict[str, Dict[str, Any]]] = None
+    __properties: ClassVar[List[str]] = ["type", "title", "status", "detail", "instance", "properties"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -68,7 +56,7 @@ class UpdateClientRequest(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of UpdateClientRequest from a JSON string"""
+        """Create an instance of ProblemDetail from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -93,7 +81,7 @@ class UpdateClientRequest(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of UpdateClientRequest from a dict"""
+        """Create an instance of ProblemDetail from a dict"""
         if obj is None:
             return None
 
@@ -102,13 +90,12 @@ class UpdateClientRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "name": obj.get("name"),
-            "description": obj.get("description"),
-            "logo": obj.get("logo"),
-            "public": obj.get("public"),
-            "allow_pkce": obj.get("allow_pkce"),
-            "is_public": obj.get("is_public"),
-            "allowed_origins": obj.get("allowed_origins")
+            "type": obj.get("type"),
+            "title": obj.get("title"),
+            "status": obj.get("status"),
+            "detail": obj.get("detail"),
+            "instance": obj.get("instance"),
+            "properties": obj.get("properties")
         })
         return _obj
 

@@ -339,7 +339,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **userid** | **str**| The user ID. | 
  **file** | **bytearray**| The image data. | 
- **autosave** | **bool**|  | [optional] 
+ **autosave** | **bool**| Specifies whether to autosave a photo or not. | [optional] 
 
 ### Return type
 
@@ -377,7 +377,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     api_instance = docspace_api_sdk.PhotosApi(api_client)
     userid = '00000000-0000-0000-0000-000000000000' # str | The user ID.
     file = None # bytearray | The image data.
-    autosave = True # bool |  (optional)
+    autosave = True # bool | Specifies whether to autosave a photo or not. (optional)
 
     try:
         # Upload a user photo

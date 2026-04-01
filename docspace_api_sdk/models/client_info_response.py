@@ -34,6 +34,7 @@ class ClientInfoResponse(BaseModel):
     name: Optional[StrictStr] = Field(default=None, description="The client name.")
     description: Optional[StrictStr] = Field(default=None, description="The client description.")
     scopes: Optional[List[StrictStr]] = Field(default=None, description="The client scopes.")
+    public: Optional[StrictBool] = None
     client_id: Optional[StrictStr] = Field(default=None, description="The client ID.")
     website_url: Optional[StrictStr] = Field(default=None, description="The URL to the client's website")
     terms_url: Optional[StrictStr] = Field(default=None, description="The URL to the client's terms of service.")
@@ -45,7 +46,7 @@ class ClientInfoResponse(BaseModel):
     created_by: Optional[StrictStr] = Field(default=None, description="The user who created the client.")
     modified_on: Optional[datetime] = Field(default=None, description="The date and time when the client was last modified.")
     modified_by: Optional[StrictStr] = Field(default=None, description="The user who last modified the client.")
-    __properties: ClassVar[List[str]] = ["name", "description", "scopes", "client_id", "website_url", "terms_url", "policy_url", "logo", "authentication_methods", "is_public", "created_on", "created_by", "modified_on", "modified_by"]
+    __properties: ClassVar[List[str]] = ["name", "description", "scopes", "public", "client_id", "website_url", "terms_url", "policy_url", "logo", "authentication_methods", "is_public", "created_on", "created_by", "modified_on", "modified_by"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -102,6 +103,7 @@ class ClientInfoResponse(BaseModel):
             "name": obj.get("name"),
             "description": obj.get("description"),
             "scopes": obj.get("scopes"),
+            "public": obj.get("public"),
             "client_id": obj.get("client_id"),
             "website_url": obj.get("website_url"),
             "terms_url": obj.get("terms_url"),

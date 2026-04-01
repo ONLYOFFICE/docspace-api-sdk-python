@@ -4,10 +4,12 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**change_activation**](#change_activation) | **PATCH** /api/2.0/clients/{clientId}/activation | Change the client activation status
+[**change_activation**](#change_activation) | **PATCH** /api/2.0/clients/{clientId}/activation | Change client activation status
 [**create_client**](#create_client) | **POST** /api/2.0/clients | Create a new OAuth2 client
 [**delete_client**](#delete_client) | **DELETE** /api/2.0/clients/{clientId} | Delete an OAuth2 client
-[**regenerate_secret**](#regenerate_secret) | **PATCH** /api/2.0/clients/{clientId}/regenerate | Regenerate the client secret
+[**delete_tenant_clients**](#delete_tenant_clients) | **DELETE** /api/2.0/clients/tenant | Delete all tenant OAuth2 clients
+[**delete_user_clients**](#delete_user_clients) | **DELETE** /api/2.0/clients | Delete all user OAuth2 clients
+[**regenerate_secret**](#regenerate_secret) | **PATCH** /api/2.0/clients/{clientId}/regenerate | Regenerate client secret
 [**revoke_user_client**](#revoke_user_client) | **DELETE** /api/2.0/clients/{clientId}/revoke | Revoke client consent
 [**update_client**](#update_client) | **PUT** /api/2.0/clients/{clientId} | Update an existing OAuth2 client
 
@@ -24,7 +26,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **client_id** | **str**| The client identifier. | 
+ **client_id** | **str**| ID of the client to change activation for | 
  **change_client_activation_request** | [**ChangeClientActivationRequest**](ChangeClientActivationRequest.md)|  | 
 
 ### Return type
@@ -33,7 +35,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[x-signature](../README.md#x-signature)
 
 ### Example
 
@@ -56,11 +58,11 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.ClientManagementApi(api_client)
-    client_id = '6c7cf17b-1bd3-47d5-94c6-be2d3570e168' # str | The client identifier.
+    client_id = '6c7cf17b-1bd3-47d5-94c6-be2d3570e168' # str | ID of the client to change activation for
     change_client_activation_request = docspace_api_sdk.ChangeClientActivationRequest() # ChangeClientActivationRequest | 
 
     try:
-        # Change the client activation status
+        # Change client activation status
         api_response = api_instance.change_activation(client_id, change_client_activation_request)
         print("The response of ClientManagementApi->change_activation:\n")
         pprint(api_response)
@@ -83,6 +85,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 **400** | Invalid client ID format or activation status |  -  |
 **403** | Insufficient permissions to change client activation |  -  |
 **404** | Client not found |  -  |
+**415** | Unsupported media type |  -  |
 **429** | Too many requests - rate limit exceeded |  -  |
 **500** | Internal server error occurred |  -  |
 
@@ -108,7 +111,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[x-signature](../README.md#x-signature)
 
 ### Example
 
@@ -156,7 +159,8 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 |-------------|-------------|------------------|
 **201** | Client successfully created |  -  |
 **400** | Invalid request - missing required fields or validation failed |  -  |
-**403** | Insufficient permissions to create a client |  -  |
+**403** | Insufficient permissions to create client |  -  |
+**415** | Unsupported media type |  -  |
 **429** | Too many requests - rate limit exceeded |  -  |
 **500** | Internal server error occurred |  -  |
 
@@ -165,7 +169,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **delete_client**
 > object delete_client(client_id)
 
-Permanently deletes an OAuth2 client and all associated data. All access and refresh tokens issued to this client will be invalidated. This operation cannot be undone.
+Permanently deletes an OAuth2 client and all associated data. This will invalidate all access tokens and refresh tokens issued to this client. This operation cannot be undone.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -174,7 +178,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **client_id** | **str**| The client identifier. | 
+ **client_id** | **str**| ID of the client to delete | 
 
 ### Return type
 
@@ -182,7 +186,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[x-signature](../README.md#x-signature)
 
 ### Example
 
@@ -204,7 +208,7 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.ClientManagementApi(api_client)
-    client_id = '6c7cf17b-1bd3-47d5-94c6-be2d3570e168' # str | The client identifier.
+    client_id = '6c7cf17b-1bd3-47d5-94c6-be2d3570e168' # str | ID of the client to delete
 
     try:
         # Delete an OAuth2 client
@@ -235,6 +239,140 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **delete_tenant_clients**
+> object delete_tenant_clients()
+
+Permanently deletes tenant OAuth2 clients and all associated data. This will invalidate all access tokens and refresh tokens issued to this client. This operation cannot be undone.
+
+For more information, see [api.onlyoffice.com]().
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+**object**
+
+### Authorization
+
+[x-signature](../README.md#x-signature)
+
+### Example
+
+
+```python
+import docspace_api_sdk
+from docspace_api_sdk.rest import ApiException
+from pprint import pprint
+
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+# Enter a context with an instance of the API client
+with docspace_api_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace_api_sdk.ClientManagementApi(api_client)
+
+    try:
+        # Delete all tenant OAuth2 clients
+        api_response = api_instance.delete_tenant_clients()
+        print("The response of ClientManagementApi->delete_tenant_clients:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ClientManagementApi->delete_tenant_clients: %s\n" % e)
+```
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Client successfully deleted |  -  |
+**403** | Insufficient permissions to delete tenant clients |  -  |
+**429** | Too many requests - rate limit exceeded |  -  |
+**500** | Internal server error occurred |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **delete_user_clients**
+> object delete_user_clients()
+
+Permanently deletes user OAuth2 clients and all associated data. This will invalidate all access tokens and refresh tokens issued to this client. This operation cannot be undone.
+
+For more information, see [api.onlyoffice.com]().
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+**object**
+
+### Authorization
+
+[x-signature](../README.md#x-signature)
+
+### Example
+
+
+```python
+import docspace_api_sdk
+from docspace_api_sdk.rest import ApiException
+from pprint import pprint
+
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+# Enter a context with an instance of the API client
+with docspace_api_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace_api_sdk.ClientManagementApi(api_client)
+
+    try:
+        # Delete all user OAuth2 clients
+        api_response = api_instance.delete_user_clients()
+        print("The response of ClientManagementApi->delete_user_clients:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ClientManagementApi->delete_user_clients: %s\n" % e)
+```
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Client successfully deleted |  -  |
+**403** | Insufficient permissions to delete user clients |  -  |
+**429** | Too many requests - rate limit exceeded |  -  |
+**500** | Internal server error occurred |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **regenerate_secret**
 > ClientSecretResponse regenerate_secret(client_id)
 
@@ -247,7 +385,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **client_id** | **str**| The client identifier. | 
+ **client_id** | **str**| ID of the client to regenerate secret for | 
 
 ### Return type
 
@@ -255,7 +393,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[x-signature](../README.md#x-signature)
 
 ### Example
 
@@ -278,10 +416,10 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.ClientManagementApi(api_client)
-    client_id = '6c7cf17b-1bd3-47d5-94c6-be2d3570e168' # str | The client identifier.
+    client_id = '6c7cf17b-1bd3-47d5-94c6-be2d3570e168' # str | ID of the client to regenerate secret for
 
     try:
-        # Regenerate the client secret
+        # Regenerate client secret
         api_response = api_instance.regenerate_secret(client_id)
         print("The response of ClientManagementApi->regenerate_secret:\n")
         pprint(api_response)
@@ -321,7 +459,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **client_id** | **str**| The client identifier. | 
+ **client_id** | **str**| ID of the client to revoke consent for | 
 
 ### Return type
 
@@ -329,7 +467,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[x-signature](../README.md#x-signature)
 
 ### Example
 
@@ -351,7 +489,7 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.ClientManagementApi(api_client)
-    client_id = '6c7cf17b-1bd3-47d5-94c6-be2d3570e168' # str | The client identifier.
+    client_id = '6c7cf17b-1bd3-47d5-94c6-be2d3570e168' # str | ID of the client to revoke consent for
 
     try:
         # Revoke client consent
@@ -386,7 +524,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **update_client**
 > object update_client(client_id, update_client_request)
 
-Updates the configuration of an existing OAuth2 client, allowing modifications to the client name, description, redirect URIs, and other settings. The client ID cannot be modified.
+Updates the configuration of an existing OAuth2 client. Allows modification of client name, description, redirect URIs, and other settings. The client ID cannot be modified.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -395,7 +533,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **client_id** | **str**| The client identifier. | 
+ **client_id** | **str**| ID of the client to update | 
  **update_client_request** | [**UpdateClientRequest**](UpdateClientRequest.md)|  | 
 
 ### Return type
@@ -404,7 +542,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[x-signature](../README.md#x-signature)
 
 ### Example
 
@@ -427,7 +565,7 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.ClientManagementApi(api_client)
-    client_id = '6c7cf17b-1bd3-47d5-94c6-be2d3570e168' # str | The client identifier.
+    client_id = '6c7cf17b-1bd3-47d5-94c6-be2d3570e168' # str | ID of the client to update
     update_client_request = docspace_api_sdk.UpdateClientRequest() # UpdateClientRequest | 
 
     try:
@@ -454,6 +592,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 **400** | Invalid request - missing required fields or validation failed |  -  |
 **403** | Insufficient permissions to update client |  -  |
 **404** | Client not found |  -  |
+**415** | Unsupported media type |  -  |
 **429** | Too many requests - rate limit exceeded |  -  |
 **500** | Internal server error occurred |  -  |
 

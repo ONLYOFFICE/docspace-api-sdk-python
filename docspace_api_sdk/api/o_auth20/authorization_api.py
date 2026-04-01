@@ -65,7 +65,7 @@ class AuthorizationApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
-        """OAuth2 authorization endpoint
+        """OAuth2 Authorization Endpoint
 
         Initiates the OAuth2 authorization flow.
 
@@ -144,7 +144,7 @@ class AuthorizationApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[None]:
-        """OAuth2 authorization endpoint
+        """OAuth2 Authorization Endpoint
 
         Initiates the OAuth2 authorization flow.
 
@@ -223,7 +223,7 @@ class AuthorizationApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """OAuth2 authorization endpoint
+        """OAuth2 Authorization Endpoint
 
         Initiates the OAuth2 authorization flow.
 
@@ -331,7 +331,7 @@ class AuthorizationApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'asc_auth_key'
+            'x-signature'
         ]
 
 
@@ -376,9 +376,9 @@ class AuthorizationApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ExchangeToken200Response:
-        """OAuth2 token endpoint
+        """OAuth2 Token Endpoint
 
-        Exchanges an authorization code specified in the request for the access token.
+        Exchange authorization code for access token
 
         :param grant_type: The OAuth2 grant type, must be 'authorization_code' for the authorization code flow.
         :type grant_type: str
@@ -459,9 +459,9 @@ class AuthorizationApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[ExchangeToken200Response]:
-        """OAuth2 token endpoint
+        """OAuth2 Token Endpoint
 
-        Exchanges an authorization code specified in the request for the access token.
+        Exchange authorization code for access token
 
         :param grant_type: The OAuth2 grant type, must be 'authorization_code' for the authorization code flow.
         :type grant_type: str
@@ -542,9 +542,9 @@ class AuthorizationApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """OAuth2 token endpoint
+        """OAuth2 Token Endpoint
 
-        Exchanges an authorization code specified in the request for the access token.
+        Exchange authorization code for access token
 
         :param grant_type: The OAuth2 grant type, must be 'authorization_code' for the authorization code flow.
         :type grant_type: str
@@ -712,7 +712,7 @@ class AuthorizationApi:
     ) -> None:
         """OAuth2 consent endpoint
 
-        Sends a consent request with the specified parameters.
+        Sends consent approval
 
         :param client_id: The client identifier issued to the client during registration.
         :type client_id: str
@@ -787,7 +787,7 @@ class AuthorizationApi:
     ) -> ApiResponse[None]:
         """OAuth2 consent endpoint
 
-        Sends a consent request with the specified parameters.
+        Sends consent approval
 
         :param client_id: The client identifier issued to the client during registration.
         :type client_id: str
@@ -862,7 +862,7 @@ class AuthorizationApi:
     ) -> RESTResponseType:
         """OAuth2 consent endpoint
 
-        Sends a consent request with the specified parameters.
+        Sends consent approval
 
         :param client_id: The client identifier issued to the client during registration.
         :type client_id: str
@@ -967,7 +967,7 @@ class AuthorizationApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'asc_auth_key'
+            'x-signature'
         ]
 
 

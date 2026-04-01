@@ -1209,7 +1209,7 @@ class PhotosApi:
         self,
         userid: Annotated[StrictStr, Field(description="The user ID.")],
         file: Annotated[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]], Field(description="The image data.")],
-        autosave: Optional[StrictBool] = None,
+        autosave: Annotated[Optional[StrictBool], Field(description="Specifies whether to autosave a photo or not.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1231,7 +1231,7 @@ class PhotosApi:
         :type userid: str
         :param file: The image data. (required)
         :type file: bytearray
-        :param autosave:
+        :param autosave: Specifies whether to autosave a photo or not.
         :type autosave: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1288,7 +1288,7 @@ class PhotosApi:
         self,
         userid: Annotated[StrictStr, Field(description="The user ID.")],
         file: Annotated[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]], Field(description="The image data.")],
-        autosave: Optional[StrictBool] = None,
+        autosave: Annotated[Optional[StrictBool], Field(description="Specifies whether to autosave a photo or not.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1310,7 +1310,7 @@ class PhotosApi:
         :type userid: str
         :param file: The image data. (required)
         :type file: bytearray
-        :param autosave:
+        :param autosave: Specifies whether to autosave a photo or not.
         :type autosave: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1367,7 +1367,7 @@ class PhotosApi:
         self,
         userid: Annotated[StrictStr, Field(description="The user ID.")],
         file: Annotated[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]], Field(description="The image data.")],
-        autosave: Optional[StrictBool] = None,
+        autosave: Annotated[Optional[StrictBool], Field(description="Specifies whether to autosave a photo or not.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1389,7 +1389,7 @@ class PhotosApi:
         :type userid: str
         :param file: The image data. (required)
         :type file: bytearray
-        :param autosave:
+        :param autosave: Specifies whether to autosave a photo or not.
         :type autosave: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request

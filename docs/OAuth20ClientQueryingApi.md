@@ -5,11 +5,11 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**get_client**](#get_client) | **GET** /api/2.0/clients/{clientId} | Get client details
-[**get_client_info**](#get_client_info) | **GET** /api/2.0/clients/{clientId}/info | Get detailed client information
-[**get_clients**](#get_clients) | **GET** /api/2.0/clients | Get clients
-[**get_clients_info**](#get_clients_info) | **GET** /api/2.0/clients/info | Get detailed information of clients
-[**get_consents**](#get_consents) | **GET** /api/2.0/clients/consents | Get user consents
-[**get_public_client_info**](#get_public_client_info) | **GET** /api/2.0/clients/{clientId}/public/info | Get public client information
+[**get_client_info**](#get_client_info) | **GET** /api/2.0/clients/{clientId}/info | Retrieves detailed information for a specific client
+[**get_clients**](#get_clients) | **GET** /api/2.0/clients | List clients
+[**get_clients_info**](#get_clients_info) | **GET** /api/2.0/clients/info | Retrieves a pageable list of client information
+[**get_consents**](#get_consents) | **GET** /api/2.0/clients/consents | Retrieves a pageable list of consents
+[**get_public_client_info**](#get_public_client_info) | **GET** /api/2.0/clients/{clientId}/public/info | Handles the GET request for public client information
 
 
 # **get_client**
@@ -24,7 +24,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **client_id** | **str**| The client identifier. | 
+ **client_id** | **str**| ID of the client to retrieve | 
 
 ### Return type
 
@@ -32,7 +32,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[x-signature](../README.md#x-signature)
 
 ### Example
 
@@ -55,7 +55,7 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.ClientQueryingApi(api_client)
-    client_id = '6c7cf17b-1bd3-47d5-94c6-be2d3570e168' # str | The client identifier.
+    client_id = '6c7cf17b-1bd3-47d5-94c6-be2d3570e168' # str | ID of the client to retrieve
 
     try:
         # Get client details
@@ -98,7 +98,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **client_id** | **str**| The client identifier. | 
+ **client_id** | **str**| ID of the client to retrieve | 
 
 ### Return type
 
@@ -106,7 +106,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[x-signature](../README.md#x-signature)
 
 ### Example
 
@@ -129,10 +129,10 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.ClientQueryingApi(api_client)
-    client_id = '6c7cf17b-1bd3-47d5-94c6-be2d3570e168' # str | The client identifier.
+    client_id = '6c7cf17b-1bd3-47d5-94c6-be2d3570e168' # str | ID of the client to retrieve
 
     try:
-        # Get detailed client information
+        # Retrieves detailed information for a specific client
         api_response = api_instance.get_client_info(client_id)
         print("The response of ClientQueryingApi->get_client_info:\n")
         pprint(api_response)
@@ -161,7 +161,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **get_clients**
 > PageableResponse get_clients(limit, last_client_id=last_client_id, last_created_on=last_created_on)
 
-Retrieves a paginated list of OAuth2 clients. The results can be paginated using the 'limit' parameter and the last seen client ID or creation date.
+Retrieves a paginated list of OAuth2 clients. The results can be paginated using the limit parameter and last seen client ID/creation date.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -170,9 +170,9 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **limit** | **int**| The maximum number of results returned per page. | 
- **last_client_id** | **str**| The ID of the last retrieved client. | [optional] 
- **last_created_on** | **datetime**| The creation date of the last retrieved client. | [optional] 
+ **limit** | **int**| Pagination limit | [default to 30]
+ **last_client_id** | **str**| ID of the last retrieved client | [optional] 
+ **last_created_on** | **datetime**| Date of the last retrieved client | [optional] 
 
 ### Return type
 
@@ -180,7 +180,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[x-signature](../README.md#x-signature)
 
 ### Example
 
@@ -203,12 +203,12 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.ClientQueryingApi(api_client)
-    limit = 1 # int | The maximum number of results returned per page.
-    last_client_id = '6c7cf17b-1bd3-47d5-94c6-be2d3570e168' # str | The ID of the last retrieved client. (optional)
-    last_created_on = '2024-04-04T12:00:00Z' # datetime | The creation date of the last retrieved client. (optional)
+    limit = 30 # int | Pagination limit (default to 30)
+    last_client_id = '6c7cf17b-1bd3-47d5-94c6-be2d3570e168' # str | ID of the last retrieved client (optional)
+    last_created_on = '2024-04-04T12:00:00Z' # datetime | Date of the last retrieved client (optional)
 
     try:
-        # Get clients
+        # List clients
         api_response = api_instance.get_clients(limit, last_client_id=last_client_id, last_created_on=last_created_on)
         print("The response of ClientQueryingApi->get_clients:\n")
         pprint(api_response)
@@ -229,7 +229,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 |-------------|-------------|------------------|
 **200** | Client list successfully retrieved |  -  |
 **400** | Invalid pagination parameters |  -  |
-**403** | Insufficient permissions to create a client list |  -  |
+**403** | Insufficient permissions to list clients |  -  |
 **429** | Too many requests - rate limit exceeded |  -  |
 **500** | Internal server error occurred |  -  |
 
@@ -247,9 +247,9 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **limit** | **int**| The maximum number of results returned per page. | 
- **last_client_id** | **str**| The identifier of the last retrieved client. | [optional] 
- **last_created_on** | **datetime**| The creation date of the last retrieved client. | [optional] 
+ **limit** | **int**| Pagination limit | 
+ **last_client_id** | **str**| ID of the last retrieved client | [optional] 
+ **last_created_on** | **datetime**| Date of the last retrieved client | [optional] 
 
 ### Return type
 
@@ -257,7 +257,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[x-signature](../README.md#x-signature)
 
 ### Example
 
@@ -280,12 +280,12 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.ClientQueryingApi(api_client)
-    limit = 1 # int | The maximum number of results returned per page.
-    last_client_id = '6c7cf17b-1bd3-47d5-94c6-be2d3570e168' # str | The identifier of the last retrieved client. (optional)
-    last_created_on = '2024-04-04T12:00:00Z' # datetime | The creation date of the last retrieved client. (optional)
+    limit = 1 # int | Pagination limit
+    last_client_id = '6c7cf17b-1bd3-47d5-94c6-be2d3570e168' # str | ID of the last retrieved client (optional)
+    last_created_on = '2024-04-04T12:00:00Z' # datetime | Date of the last retrieved client (optional)
 
     try:
-        # Get detailed information of clients
+        # Retrieves a pageable list of client information
         api_response = api_instance.get_clients_info(limit, last_client_id=last_client_id, last_created_on=last_created_on)
         print("The response of ClientQueryingApi->get_clients_info:\n")
         pprint(api_response)
@@ -323,8 +323,8 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **limit** | **int**| The maximum number of results returned per page. | 
- **last_modified_on** | **datetime**| The date when the user consent was last modified. | [optional] 
+ **limit** | **int**| Pagination limit | 
+ **last_modified_on** | **datetime**| Date of the last retrieved consent | [optional] 
 
 ### Return type
 
@@ -332,7 +332,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[x-signature](../README.md#x-signature)
 
 ### Example
 
@@ -355,11 +355,11 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.ClientQueryingApi(api_client)
-    limit = 1 # int | The maximum number of results returned per page.
-    last_modified_on = '2024-04-04T12:00:00Z' # datetime | The date when the user consent was last modified. (optional)
+    limit = 1 # int | Pagination limit
+    last_modified_on = '2024-04-04T12:00:00Z' # datetime | Date of the last retrieved consent (optional)
 
     try:
-        # Get user consents
+        # Retrieves a pageable list of consents
         api_response = api_instance.get_consents(limit, last_modified_on=last_modified_on)
         print("The response of ClientQueryingApi->get_consents:\n")
         pprint(api_response)
@@ -385,7 +385,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **get_public_client_info**
 > ClientInfoResponse get_public_client_info(client_id)
 
-Returns the public information for a client with the ID secified din the request.
+
 
 For more information, see [api.onlyoffice.com]().
 
@@ -394,7 +394,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **client_id** | **str**| The client identifier. | 
+ **client_id** | **str**| ID of the client to retrieve | 
 
 ### Return type
 
@@ -421,10 +421,10 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.ClientQueryingApi(api_client)
-    client_id = '6c7cf17b-1bd3-47d5-94c6-be2d3570e168' # str | The client identifier.
+    client_id = '6c7cf17b-1bd3-47d5-94c6-be2d3570e168' # str | ID of the client to retrieve
 
     try:
-        # Get public client information
+        # Handles the GET request for public client information
         api_response = api_instance.get_public_client_info(client_id)
         print("The response of ClientQueryingApi->get_public_client_info:\n")
         pprint(api_response)

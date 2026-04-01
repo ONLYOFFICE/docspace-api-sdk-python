@@ -244,7 +244,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_agents**
-> FolderContentIntegerWrapper get_agents(subject_id=subject_id, without_tags=without_tags, tags=tags, exclude_subject=exclude_subject, subject_filter=subject_filter, quota_filter=quota_filter, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value)
+> FolderContentIntegerWrapper get_agents(subject_id=subject_id, subject_owner_id=subject_owner_id, without_tags=without_tags, tags=tags, exclude_subject=exclude_subject, subject_filter=subject_filter, quota_filter=quota_filter, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value)
 
 Get ai agents
 
@@ -256,6 +256,7 @@ For more information, see [api.onlyoffice.com]().
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **subject_id** | **str**| The filter by user ID. | [optional] 
+ **subject_owner_id** | **str**| The filter by room owner ID. | [optional] 
  **without_tags** | **bool**| Specifies whether to search by tags or not. | [optional] 
  **tags** | **str**| The tags in the serialized format. | [optional] 
  **exclude_subject** | **bool**| Specifies whether to exclude search by user or group ID. | [optional] 
@@ -305,6 +306,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.AgentsApi(api_client)
     subject_id = '00000000-0000-0000-0000-000000000000' # str | The filter by user ID. (optional)
+    subject_owner_id = '00000000-0000-0000-0000-000000000000' # str | The filter by room owner ID. (optional)
     without_tags = false # bool | Specifies whether to search by tags or not. (optional)
     tags = 'ai,assistant' # str | The tags in the serialized format. (optional)
     exclude_subject = false # bool | Specifies whether to exclude search by user or group ID. (optional)
@@ -318,7 +320,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
     try:
         # Get ai agents
-        api_response = api_instance.get_agents(subject_id=subject_id, without_tags=without_tags, tags=tags, exclude_subject=exclude_subject, subject_filter=subject_filter, quota_filter=quota_filter, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value)
+        api_response = api_instance.get_agents(subject_id=subject_id, subject_owner_id=subject_owner_id, without_tags=without_tags, tags=tags, exclude_subject=exclude_subject, subject_filter=subject_filter, quota_filter=quota_filter, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value)
         print("The response of AgentsApi->get_agents:\n")
         pprint(api_response)
     except Exception as e:

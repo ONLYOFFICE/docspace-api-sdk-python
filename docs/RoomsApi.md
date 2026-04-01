@@ -1792,7 +1792,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_rooms_folder**
-> FolderContentIntegerWrapper get_rooms_folder(type=type, subject_id=subject_id, search_area=search_area, without_tags=without_tags, tags=tags, exclude_subject=exclude_subject, provider=provider, subject_filter=subject_filter, quota_filter=quota_filter, storage_filter=storage_filter, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value, group_id=group_id)
+> FolderContentIntegerWrapper get_rooms_folder(type=type, subject_id=subject_id, subject_owner_id=subject_owner_id, search_area=search_area, without_tags=without_tags, tags=tags, exclude_subject=exclude_subject, provider=provider, subject_filter=subject_filter, quota_filter=quota_filter, storage_filter=storage_filter, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value, group_id=group_id)
 
 Returns the contents of the Rooms section by the parameters specified in the request.
 
@@ -1805,6 +1805,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **type** | [**List[RoomType]**](RoomType.md)| The filter by room type. | [optional] 
  **subject_id** | **str**| The filter by user ID. | [optional] 
+ **subject_owner_id** | **str**| The filter by room owner ID. | [optional] 
  **search_area** | [**SearchArea**](.md)| The room search area (Active, Archive, Any, Recent by links). | [optional] 
  **without_tags** | **bool**| Specifies whether to search by tags or not. | [optional] 
  **tags** | **str**| The tags in the serialized format. | [optional] 
@@ -1863,6 +1864,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     api_instance = docspace_api_sdk.RoomsApi(api_client)
     type = [docspace_api_sdk.RoomType()] # List[RoomType] | The filter by room type. (optional)
     subject_id = '00000000-0000-0000-0000-000000000000' # str | The filter by user ID. (optional)
+    subject_owner_id = '00000000-0000-0000-0000-000000000000' # str | The filter by room owner ID. (optional)
     search_area = docspace_api_sdk.SearchArea() # SearchArea | The room search area (Active, Archive, Any, Recent by links). (optional)
     without_tags = false # bool | Specifies whether to search by tags or not. (optional)
     tags = 'tag1' # str | The tags in the serialized format. (optional)
@@ -1880,7 +1882,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
     try:
         # Get rooms
-        api_response = api_instance.get_rooms_folder(type=type, subject_id=subject_id, search_area=search_area, without_tags=without_tags, tags=tags, exclude_subject=exclude_subject, provider=provider, subject_filter=subject_filter, quota_filter=quota_filter, storage_filter=storage_filter, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value, group_id=group_id)
+        api_response = api_instance.get_rooms_folder(type=type, subject_id=subject_id, subject_owner_id=subject_owner_id, search_area=search_area, without_tags=without_tags, tags=tags, exclude_subject=exclude_subject, provider=provider, subject_filter=subject_filter, quota_filter=quota_filter, storage_filter=storage_filter, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value, group_id=group_id)
         print("The response of RoomsApi->get_rooms_folder:\n")
         pprint(api_response)
     except Exception as e:

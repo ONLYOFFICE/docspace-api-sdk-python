@@ -5037,7 +5037,7 @@ class FilesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> FileIntegerWrapper:
         """Generate XLSX report
 
         Triggers asynchronous XLSX report generation for the specified form file.
@@ -5075,7 +5075,7 @@ class FilesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '200': "FileIntegerWrapper",
             '403': None,
             '404': None,
             '401': None,
@@ -5106,7 +5106,7 @@ class FilesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[FileIntegerWrapper]:
         """Generate XLSX report
 
         Triggers asynchronous XLSX report generation for the specified form file.
@@ -5144,7 +5144,7 @@ class FilesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '200': "FileIntegerWrapper",
             '403': None,
             '404': None,
             '401': None,
@@ -5213,7 +5213,7 @@ class FilesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '200': "FileIntegerWrapper",
             '403': None,
             '404': None,
             '401': None,
@@ -5256,6 +5256,13 @@ class FilesApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
