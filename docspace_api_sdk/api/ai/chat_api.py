@@ -28,7 +28,7 @@ from uuid import UUID
 from docspace_api_sdk.models.chat_array_wrapper import ChatArrayWrapper
 from docspace_api_sdk.models.chat_wrapper import ChatWrapper
 from docspace_api_sdk.models.continue_chat_body import ContinueChatBody
-from docspace_api_sdk.models.export_chat_request_body_integer import ExportChatRequestBodyInteger
+from docspace_api_sdk.models.export_chat_request_body import ExportChatRequestBody
 from docspace_api_sdk.models.message_array_wrapper import MessageArrayWrapper
 from docspace_api_sdk.models.model_array_wrapper import ModelArrayWrapper
 from docspace_api_sdk.models.rename_chat_body import RenameChatBody
@@ -119,6 +119,9 @@ class ChatApi:
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -193,6 +196,9 @@ class ChatApi:
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -267,6 +273,9 @@ class ChatApi:
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -412,6 +421,9 @@ class ChatApi:
             '204': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -480,6 +492,9 @@ class ChatApi:
             '204': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -548,6 +563,9 @@ class ChatApi:
             '204': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -624,7 +642,7 @@ class ChatApi:
     def export_chat(
         self,
         chat_id: Annotated[UUID, Field(description="The unique identifier of the AI chat session to export.")],
-        export_chat_request_body_integer: Annotated[ExportChatRequestBodyInteger, Field(description="The export parameters including destination folder and file title.")],
+        export_chat_request_body: Annotated[ExportChatRequestBody, Field(description="The export parameters including destination folder and file title.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -644,8 +662,8 @@ class ChatApi:
 
         :param chat_id: The unique identifier of the AI chat session to export. (required)
         :type chat_id: UUID
-        :param export_chat_request_body_integer: The export parameters including destination folder and file title. (required)
-        :type export_chat_request_body_integer: ExportChatRequestBodyInteger
+        :param export_chat_request_body: The export parameters including destination folder and file title. (required)
+        :type export_chat_request_body: ExportChatRequestBody
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -670,7 +688,7 @@ class ChatApi:
 
         _param = self._export_chat_serialize(
             chat_id=chat_id,
-            export_chat_request_body_integer=export_chat_request_body_integer,
+            export_chat_request_body=export_chat_request_body,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -681,6 +699,9 @@ class ChatApi:
             '200': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -696,7 +717,7 @@ class ChatApi:
     def export_chat_with_http_info(
         self,
         chat_id: Annotated[UUID, Field(description="The unique identifier of the AI chat session to export.")],
-        export_chat_request_body_integer: Annotated[ExportChatRequestBodyInteger, Field(description="The export parameters including destination folder and file title.")],
+        export_chat_request_body: Annotated[ExportChatRequestBody, Field(description="The export parameters including destination folder and file title.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -716,8 +737,8 @@ class ChatApi:
 
         :param chat_id: The unique identifier of the AI chat session to export. (required)
         :type chat_id: UUID
-        :param export_chat_request_body_integer: The export parameters including destination folder and file title. (required)
-        :type export_chat_request_body_integer: ExportChatRequestBodyInteger
+        :param export_chat_request_body: The export parameters including destination folder and file title. (required)
+        :type export_chat_request_body: ExportChatRequestBody
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -742,7 +763,7 @@ class ChatApi:
 
         _param = self._export_chat_serialize(
             chat_id=chat_id,
-            export_chat_request_body_integer=export_chat_request_body_integer,
+            export_chat_request_body=export_chat_request_body,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -753,6 +774,9 @@ class ChatApi:
             '200': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -768,7 +792,7 @@ class ChatApi:
     def export_chat_without_preload_content(
         self,
         chat_id: Annotated[UUID, Field(description="The unique identifier of the AI chat session to export.")],
-        export_chat_request_body_integer: Annotated[ExportChatRequestBodyInteger, Field(description="The export parameters including destination folder and file title.")],
+        export_chat_request_body: Annotated[ExportChatRequestBody, Field(description="The export parameters including destination folder and file title.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -788,8 +812,8 @@ class ChatApi:
 
         :param chat_id: The unique identifier of the AI chat session to export. (required)
         :type chat_id: UUID
-        :param export_chat_request_body_integer: The export parameters including destination folder and file title. (required)
-        :type export_chat_request_body_integer: ExportChatRequestBodyInteger
+        :param export_chat_request_body: The export parameters including destination folder and file title. (required)
+        :type export_chat_request_body: ExportChatRequestBody
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -814,7 +838,7 @@ class ChatApi:
 
         _param = self._export_chat_serialize(
             chat_id=chat_id,
-            export_chat_request_body_integer=export_chat_request_body_integer,
+            export_chat_request_body=export_chat_request_body,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -825,6 +849,9 @@ class ChatApi:
             '200': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -835,7 +862,7 @@ class ChatApi:
     def _export_chat_serialize(
         self,
         chat_id,
-        export_chat_request_body_integer,
+        export_chat_request_body,
         _request_auth,
         _content_type,
         _headers,
@@ -863,8 +890,8 @@ class ChatApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if export_chat_request_body_integer is not None:
-            _body_params = export_chat_request_body_integer
+        if export_chat_request_body is not None:
+            _body_params = export_chat_request_body
 
 
 
@@ -970,6 +997,9 @@ class ChatApi:
             '200': "ChatWrapper",
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1038,6 +1068,9 @@ class ChatApi:
             '200': "ChatWrapper",
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1106,6 +1139,9 @@ class ChatApi:
             '200': "ChatWrapper",
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1241,6 +1277,9 @@ class ChatApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ModelArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1308,6 +1347,9 @@ class ChatApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ModelArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1375,6 +1417,9 @@ class ChatApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ModelArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1522,6 +1567,9 @@ class ChatApi:
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1599,6 +1647,9 @@ class ChatApi:
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1676,6 +1727,9 @@ class ChatApi:
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1830,6 +1884,9 @@ class ChatApi:
             '200': "MessageArrayWrapper",
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1906,6 +1963,9 @@ class ChatApi:
             '200': "MessageArrayWrapper",
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1982,6 +2042,9 @@ class ChatApi:
             '200': "MessageArrayWrapper",
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2129,6 +2192,9 @@ class ChatApi:
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2198,6 +2264,9 @@ class ChatApi:
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2267,6 +2336,9 @@ class ChatApi:
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2406,6 +2478,9 @@ class ChatApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2477,6 +2552,9 @@ class ChatApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2548,6 +2626,9 @@ class ChatApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2697,6 +2778,9 @@ class ChatApi:
             '200': "ChatWrapper",
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2769,6 +2853,9 @@ class ChatApi:
             '200': "ChatWrapper",
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2841,6 +2928,9 @@ class ChatApi:
             '200': "ChatWrapper",
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2998,6 +3088,9 @@ class ChatApi:
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3071,6 +3164,9 @@ class ChatApi:
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3144,6 +3240,9 @@ class ChatApi:
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3302,6 +3401,9 @@ class ChatApi:
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3376,6 +3478,9 @@ class ChatApi:
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3450,6 +3555,9 @@ class ChatApi:
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout

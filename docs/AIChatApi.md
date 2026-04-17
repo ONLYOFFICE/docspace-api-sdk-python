@@ -91,11 +91,14 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | SSE stream of ChatCompletion events (text/event-stream) |  -  |
+**200** | SSE stream of ChatCompletion events (text/event-stream) |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 **400** | The message is empty or one or more file attachments could not be processed |  -  |
 **403** | You don't have enough permission to access the chat in this room |  -  |
 **404** | The specified chat, room, or AI provider was not found |  -  |
 **401** | Unauthorized |  -  |
+**429** | Too Many Requests. |  * Retry-After -  <br>  |
+**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -170,11 +173,14 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 **204** | The chat was successfully deleted |  -  |
 **404** | The chat with the specified ID was not found or does not belong to the current user |  -  |
 **401** | Unauthorized |  -  |
+**429** | Too Many Requests. |  * Retry-After -  <br>  |
+**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **export_chat**
-> export_chat(chat_id, export_chat_request_body_integer)
+> export_chat(chat_id, export_chat_request_body)
 
 Exports the entire message history of an AI chat session and saves it as a document in the specified folder.
 The exported file is created with the provided title. Only the chat owner can export their own chat sessions.
@@ -187,7 +193,7 @@ For more information, see [api.onlyoffice.com]().
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **chat_id** | **UUID**| The unique identifier of the AI chat session to export. | 
- **export_chat_request_body_integer** | [**ExportChatRequestBodyInteger**](ExportChatRequestBodyInteger.md)| The export parameters including destination folder and file title. | 
+ **export_chat_request_body** | [**ExportChatRequestBody**](ExportChatRequestBody.md)| The export parameters including destination folder and file title. | 
 
 ### Return type
 
@@ -202,7 +208,7 @@ void (empty response body)
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.export_chat_request_body_integer import ExportChatRequestBodyInteger
+from docspace_api_sdk.models.export_chat_request_body import ExportChatRequestBody
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -224,11 +230,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.ChatApi(api_client)
     chat_id = UUID('00000000-0000-0000-0000-000000000000') # UUID | The unique identifier of the AI chat session to export.
-    export_chat_request_body_integer = docspace_api_sdk.ExportChatRequestBodyInteger() # ExportChatRequestBodyInteger | The export parameters including destination folder and file title.
+    export_chat_request_body = docspace_api_sdk.ExportChatRequestBody() # ExportChatRequestBody | The export parameters including destination folder and file title.
 
     try:
         # Export AI chat messages to a file
-        api_instance.export_chat(chat_id, export_chat_request_body_integer)
+        api_instance.export_chat(chat_id, export_chat_request_body)
     except Exception as e:
         print("Exception when calling ChatApi->export_chat: %s\n" % e)
 ```
@@ -244,9 +250,12 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | The chat messages were successfully exported to the specified folder |  -  |
+**200** | The chat messages were successfully exported to the specified folder |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 **404** | The chat with the specified ID was not found or does not belong to the current user |  -  |
 **401** | Unauthorized |  -  |
+**429** | Too Many Requests. |  * Retry-After -  <br>  |
+**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -321,9 +330,12 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Chat session details |  -  |
+**200** | Chat session details |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 **404** | The chat with the specified ID was not found or does not belong to the current user |  -  |
 **401** | Unauthorized |  -  |
+**429** | Too Many Requests. |  * Retry-After -  <br>  |
+**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -399,8 +411,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | List of available AI models |  -  |
+**200** | List of available AI models |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 **401** | Unauthorized |  -  |
+**429** | Too Many Requests. |  * Retry-After -  <br>  |
+**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -479,10 +494,13 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Paginated list of chat sessions in the room |  -  |
+**200** | Paginated list of chat sessions in the room |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 **403** | You don't have enough permission to access chats in this room |  -  |
 **404** | The room with the specified ID was not found |  -  |
 **401** | Unauthorized |  -  |
+**429** | Too Many Requests. |  * Retry-After -  <br>  |
+**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -562,9 +580,12 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Paginated list of messages in the chat |  -  |
+**200** | Paginated list of messages in the chat |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 **404** | The chat with the specified ID was not found or does not belong to the current user |  -  |
 **401** | Unauthorized |  -  |
+**429** | Too Many Requests. |  * Retry-After -  <br>  |
+**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -639,10 +660,13 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Current user chat settings |  -  |
+**200** | Current user chat settings |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 **403** | You don't have enough permission to access chats in this room |  -  |
 **404** | The room with the specified ID was not found |  -  |
 **401** | Unauthorized |  -  |
+**429** | Too Many Requests. |  * Retry-After -  <br>  |
+**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -719,8 +743,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | The permission decision was successfully recorded |  -  |
+**200** | The permission decision was successfully recorded |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 **401** | Unauthorized |  -  |
+**429** | Too Many Requests. |  * Retry-After -  <br>  |
+**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -798,9 +825,12 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Updated chat session details |  -  |
+**200** | Updated chat session details |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 **404** | The chat with the specified ID was not found or does not belong to the current user |  -  |
 **401** | Unauthorized |  -  |
+**429** | Too Many Requests. |  * Retry-After -  <br>  |
+**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -878,10 +908,13 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Updated user chat settings |  -  |
+**200** | Updated user chat settings |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 **403** | You don't have enough permission to access chats in this room |  -  |
 **404** | The room with the specified ID was not found |  -  |
 **401** | Unauthorized |  -  |
+**429** | Too Many Requests. |  * Retry-After -  <br>  |
+**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -957,11 +990,14 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | SSE stream of ChatCompletion events (text/event-stream) |  -  |
+**200** | SSE stream of ChatCompletion events (text/event-stream) |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 **400** | The message is empty or one or more file attachments could not be processed |  -  |
 **403** | You don't have enough permission to access the chat in this room |  -  |
 **404** | The specified room or AI provider was not found |  -  |
 **401** | Unauthorized |  -  |
+**429** | Too Many Requests. |  * Retry-After -  <br>  |
+**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

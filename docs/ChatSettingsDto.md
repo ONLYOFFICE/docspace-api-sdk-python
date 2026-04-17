@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **prompt** | **str** | The system prompt for the chat. | [optional] 
 **multimodal** | [**ChatMultimodalSettingsDto**](ChatMultimodalSettingsDto.md) |  | [optional] 
 **thinking** | **bool** | Indicates whether the model supports extended thinking mode. | [optional] 
+**capabilities** | [**AiModelCapabilities**](AiModelCapabilities.md) |  | [optional] 
 **internal** | **bool** | Indicates whether this is an internal AI gateway provider. | [optional] [readonly] 
 
 ## Example

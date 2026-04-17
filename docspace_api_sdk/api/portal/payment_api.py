@@ -134,6 +134,9 @@ class PaymentApi:
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -203,6 +206,9 @@ class PaymentApi:
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -272,6 +278,9 @@ class PaymentApi:
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -421,6 +430,9 @@ class PaymentApi:
             '200': "PaymentCalculationWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -489,6 +501,9 @@ class PaymentApi:
             '200': "PaymentCalculationWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -557,6 +572,9 @@ class PaymentApi:
             '200': "PaymentCalculationWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -706,6 +724,9 @@ class PaymentApi:
             '200': "TenantWalletServiceSettingsWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -774,6 +795,9 @@ class PaymentApi:
             '200': "TenantWalletServiceSettingsWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -842,6 +866,9 @@ class PaymentApi:
             '200': "TenantWalletServiceSettingsWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -992,6 +1019,9 @@ class PaymentApi:
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1061,6 +1091,9 @@ class PaymentApi:
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1130,6 +1163,9 @@ class PaymentApi:
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1275,6 +1311,9 @@ class PaymentApi:
             '200': "AiPricesResponseWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1339,6 +1378,9 @@ class PaymentApi:
             '200': "AiPricesResponseWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1403,6 +1445,9 @@ class PaymentApi:
             '200': "AiPricesResponseWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1536,6 +1581,9 @@ class PaymentApi:
             '200': "StringWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1604,6 +1652,9 @@ class PaymentApi:
             '200': "StringWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1672,6 +1723,9 @@ class PaymentApi:
             '200': "StringWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1810,6 +1864,9 @@ class PaymentApi:
             '200': "BalanceWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1878,6 +1935,9 @@ class PaymentApi:
             '200': "BalanceWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1946,6 +2006,9 @@ class PaymentApi:
             '200': "BalanceWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2084,6 +2147,9 @@ class PaymentApi:
             '200': "CustomerInfoWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2152,6 +2218,9 @@ class PaymentApi:
             '200': "CustomerInfoWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2220,6 +2289,9 @@ class PaymentApi:
             '200': "CustomerInfoWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2407,6 +2479,9 @@ class PaymentApi:
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2524,6 +2599,9 @@ class PaymentApi:
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2641,6 +2719,9 @@ class PaymentApi:
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2852,6 +2933,9 @@ class PaymentApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocumentBuilderTaskWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2915,6 +2999,9 @@ class PaymentApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocumentBuilderTaskWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2978,6 +3065,9 @@ class PaymentApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocumentBuilderTaskWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3116,6 +3206,9 @@ class PaymentApi:
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3189,6 +3282,9 @@ class PaymentApi:
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3262,6 +3358,9 @@ class PaymentApi:
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3405,6 +3504,9 @@ class PaymentApi:
             '200': "StringWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3473,6 +3575,9 @@ class PaymentApi:
             '200': "StringWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3541,6 +3646,9 @@ class PaymentApi:
             '200': "StringWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3674,6 +3782,9 @@ class PaymentApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CurrenciesArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3737,6 +3848,9 @@ class PaymentApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CurrenciesArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3800,6 +3914,9 @@ class PaymentApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CurrenciesArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3932,6 +4049,9 @@ class PaymentApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "QuotaArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3999,6 +4119,9 @@ class PaymentApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "QuotaArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4066,6 +4189,9 @@ class PaymentApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "QuotaArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4204,6 +4330,9 @@ class PaymentApi:
             '200': "StringWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4272,6 +4401,9 @@ class PaymentApi:
             '200': "StringWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4340,6 +4472,9 @@ class PaymentApi:
             '200': "StringWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4484,6 +4619,9 @@ class PaymentApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GetPortalPrices200Response",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4547,6 +4685,9 @@ class PaymentApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GetPortalPrices200Response",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4610,6 +4751,9 @@ class PaymentApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GetPortalPrices200Response",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4743,6 +4887,9 @@ class PaymentApi:
             '200': "QuotaWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4811,6 +4958,9 @@ class PaymentApi:
             '200': "QuotaWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4879,6 +5029,9 @@ class PaymentApi:
             '200': "QuotaWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5013,6 +5166,9 @@ class PaymentApi:
             '200': "RestrictedModelsResponseWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5077,6 +5233,9 @@ class PaymentApi:
             '200': "RestrictedModelsResponseWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5141,6 +5300,9 @@ class PaymentApi:
             '200': "RestrictedModelsResponseWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5270,6 +5432,9 @@ class PaymentApi:
             '200': "TenantWalletServiceSettingsWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5334,6 +5499,9 @@ class PaymentApi:
             '200': "TenantWalletServiceSettingsWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5398,6 +5566,9 @@ class PaymentApi:
             '200': "TenantWalletServiceSettingsWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5527,6 +5698,9 @@ class PaymentApi:
             '200': "TenantWalletSettingsWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5591,6 +5765,9 @@ class PaymentApi:
             '200': "TenantWalletSettingsWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5655,6 +5832,9 @@ class PaymentApi:
             '200': "TenantWalletSettingsWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5787,6 +5967,9 @@ class PaymentApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "WalletServiceWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5854,6 +6037,9 @@ class PaymentApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "WalletServiceWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5921,6 +6107,9 @@ class PaymentApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "WalletServiceWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -6054,6 +6243,9 @@ class PaymentApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "WalletServiceArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -6117,6 +6309,9 @@ class PaymentApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "WalletServiceArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -6180,6 +6375,9 @@ class PaymentApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "WalletServiceArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -6314,6 +6512,8 @@ class PaymentApi:
             '400': None,
             '429': None,
             '401': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -6383,6 +6583,8 @@ class PaymentApi:
             '400': None,
             '429': None,
             '401': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -6452,6 +6654,8 @@ class PaymentApi:
             '400': None,
             '429': None,
             '401': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -6594,6 +6798,9 @@ class PaymentApi:
             '200': "RestrictedModelsResponseWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -6662,6 +6869,9 @@ class PaymentApi:
             '200': "RestrictedModelsResponseWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -6730,6 +6940,9 @@ class PaymentApi:
             '200': "RestrictedModelsResponseWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -6879,6 +7092,9 @@ class PaymentApi:
             '200': "TenantWalletSettingsWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -6947,6 +7163,9 @@ class PaymentApi:
             '200': "TenantWalletSettingsWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -7015,6 +7234,9 @@ class PaymentApi:
             '200': "TenantWalletSettingsWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -7159,6 +7381,9 @@ class PaymentApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -7222,6 +7447,9 @@ class PaymentApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -7285,6 +7513,9 @@ class PaymentApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -7411,6 +7642,9 @@ class PaymentApi:
             '200': "BooleanWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -7479,6 +7713,9 @@ class PaymentApi:
             '200': "BooleanWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -7547,6 +7784,9 @@ class PaymentApi:
             '200': "BooleanWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -7696,6 +7936,9 @@ class PaymentApi:
             '200': "BooleanWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -7764,6 +8007,9 @@ class PaymentApi:
             '200': "BooleanWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -7832,6 +8078,9 @@ class PaymentApi:
             '200': "BooleanWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -7981,6 +8230,9 @@ class PaymentApi:
             '200': "BooleanWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -8049,6 +8301,9 @@ class PaymentApi:
             '200': "BooleanWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -8117,6 +8372,9 @@ class PaymentApi:
             '200': "BooleanWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout

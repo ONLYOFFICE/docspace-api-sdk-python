@@ -23,9 +23,9 @@ from typing_extensions import Annotated
 
 from typing import Optional
 from docspace_api_sdk.models.boolean_wrapper import BooleanWrapper
-from docspace_api_sdk.models.object_array_wrapper import ObjectArrayWrapper
 from docspace_api_sdk.models.setup_code_wrapper import SetupCodeWrapper
 from docspace_api_sdk.models.string_wrapper import StringWrapper
+from docspace_api_sdk.models.tfa_app_code_array_wrapper import TfaAppCodeArrayWrapper
 from docspace_api_sdk.models.tfa_requests_dto import TfaRequestsDto
 from docspace_api_sdk.models.tfa_settings_array_wrapper import TfaSettingsArrayWrapper
 from docspace_api_sdk.models.tfa_validate_requests_dto import TfaValidateRequestsDto
@@ -64,7 +64,7 @@ class TFASettingsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ObjectArrayWrapper:
+    ) -> TfaAppCodeArrayWrapper:
         """Get the TFA codes
 
         Returns the two-factor authentication application codes.
@@ -99,9 +99,12 @@ class TFASettingsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ObjectArrayWrapper",
+            '200': "TfaAppCodeArrayWrapper",
             '405': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -128,7 +131,7 @@ class TFASettingsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[ObjectArrayWrapper]:
+    ) -> ApiResponse[TfaAppCodeArrayWrapper]:
         """Get the TFA codes
 
         Returns the two-factor authentication application codes.
@@ -163,9 +166,12 @@ class TFASettingsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ObjectArrayWrapper",
+            '200': "TfaAppCodeArrayWrapper",
             '405': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -227,9 +233,12 @@ class TFASettingsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ObjectArrayWrapper",
+            '200': "TfaAppCodeArrayWrapper",
             '405': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -322,9 +331,9 @@ class TFASettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> StringWrapper:
-        """Get confirmation email
+        """Get TFA confirmation URL
 
-        Returns the confirmation email URL for authorization via SMS or TFA application.
+        Returns the confirmation URL for authorization via SMS or TFA application.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -358,6 +367,9 @@ class TFASettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -385,9 +397,9 @@ class TFASettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[StringWrapper]:
-        """Get confirmation email
+        """Get TFA confirmation URL
 
-        Returns the confirmation email URL for authorization via SMS or TFA application.
+        Returns the confirmation URL for authorization via SMS or TFA application.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -421,6 +433,9 @@ class TFASettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -448,9 +463,9 @@ class TFASettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get confirmation email
+        """Get TFA confirmation URL
 
-        Returns the confirmation email URL for authorization via SMS or TFA application.
+        Returns the confirmation URL for authorization via SMS or TFA application.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -484,6 +499,9 @@ class TFASettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -612,6 +630,9 @@ class TFASettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TfaSettingsArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -675,6 +696,9 @@ class TFASettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TfaSettingsArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -738,6 +762,9 @@ class TFASettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TfaSettingsArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -867,6 +894,9 @@ class TFASettingsApi:
             '200': "SetupCodeWrapper",
             '405': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -931,6 +961,9 @@ class TFASettingsApi:
             '200': "SetupCodeWrapper",
             '405': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -995,6 +1028,9 @@ class TFASettingsApi:
             '200': "SetupCodeWrapper",
             '405': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1127,6 +1163,9 @@ class TFASettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1194,6 +1233,9 @@ class TFASettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1261,6 +1303,9 @@ class TFASettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1411,6 +1456,9 @@ class TFASettingsApi:
             '403': None,
             '405': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1480,6 +1528,9 @@ class TFASettingsApi:
             '403': None,
             '405': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1549,6 +1600,9 @@ class TFASettingsApi:
             '403': None,
             '405': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1656,7 +1710,7 @@ class TFASettingsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ObjectArrayWrapper:
+    ) -> TfaAppCodeArrayWrapper:
         """Update the TFA codes
 
         Requests the new backup codes for the two-factor authentication application.
@@ -1691,9 +1745,12 @@ class TFASettingsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ObjectArrayWrapper",
+            '200': "TfaAppCodeArrayWrapper",
             '405': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1720,7 +1777,7 @@ class TFASettingsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[ObjectArrayWrapper]:
+    ) -> ApiResponse[TfaAppCodeArrayWrapper]:
         """Update the TFA codes
 
         Requests the new backup codes for the two-factor authentication application.
@@ -1755,9 +1812,12 @@ class TFASettingsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ObjectArrayWrapper",
+            '200': "TfaAppCodeArrayWrapper",
             '405': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1819,9 +1879,12 @@ class TFASettingsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ObjectArrayWrapper",
+            '200': "TfaAppCodeArrayWrapper",
             '405': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1955,6 +2018,9 @@ class TFASettingsApi:
             '200': "BooleanWrapper",
             '405': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2023,6 +2089,9 @@ class TFASettingsApi:
             '200': "BooleanWrapper",
             '405': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2091,6 +2160,9 @@ class TFASettingsApi:
             '200': "BooleanWrapper",
             '405': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2200,9 +2272,9 @@ class TFASettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> StringWrapper:
-        """Get a confirmation email for updating TFA settings
+        """Updates TFA settings
 
-        Returns the confirmation email URL for updating TFA settings.
+        Updates TFA settings and returns the confirmation URL for authorization via SMS or TFA application.
 
         :param tfa_requests_dto:
         :type tfa_requests_dto: TfaRequestsDto
@@ -2241,6 +2313,9 @@ class TFASettingsApi:
             '403': None,
             '405': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2269,9 +2344,9 @@ class TFASettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[StringWrapper]:
-        """Get a confirmation email for updating TFA settings
+        """Updates TFA settings
 
-        Returns the confirmation email URL for updating TFA settings.
+        Updates TFA settings and returns the confirmation URL for authorization via SMS or TFA application.
 
         :param tfa_requests_dto:
         :type tfa_requests_dto: TfaRequestsDto
@@ -2310,6 +2385,9 @@ class TFASettingsApi:
             '403': None,
             '405': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2338,9 +2416,9 @@ class TFASettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get a confirmation email for updating TFA settings
+        """Updates TFA settings
 
-        Returns the confirmation email URL for updating TFA settings.
+        Updates TFA settings and returns the confirmation URL for authorization via SMS or TFA application.
 
         :param tfa_requests_dto:
         :type tfa_requests_dto: TfaRequestsDto
@@ -2379,6 +2457,9 @@ class TFASettingsApi:
             '403': None,
             '405': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout

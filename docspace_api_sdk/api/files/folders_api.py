@@ -52,6 +52,7 @@ from docspace_api_sdk.models.search_area import SearchArea
 from docspace_api_sdk.models.sort_order import SortOrder
 from docspace_api_sdk.models.string_wrapper import StringWrapper
 from docspace_api_sdk.models.upload_request_dto import UploadRequestDto
+from docspace_api_sdk.models.xlsx_report_response_wrapper import XlsxReportResponseWrapper
 
 from docspace_api_sdk.api_client import ApiClient, RequestSerialized
 from docspace_api_sdk.api_response import ApiResponse
@@ -144,6 +145,9 @@ class FoldersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "STRINGArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -215,6 +219,9 @@ class FoldersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "STRINGArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -286,6 +293,9 @@ class FoldersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "STRINGArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -441,6 +451,9 @@ class FoldersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -512,6 +525,9 @@ class FoldersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -583,6 +599,9 @@ class FoldersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -739,6 +758,9 @@ class FoldersApi:
             '200': "FileShareWrapper",
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -811,6 +833,9 @@ class FoldersApi:
             '200': "FileShareWrapper",
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -883,6 +908,9 @@ class FoldersApi:
             '200': "FileShareWrapper",
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1036,6 +1064,9 @@ class FoldersApi:
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1105,6 +1136,9 @@ class FoldersApi:
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1174,6 +1208,9 @@ class FoldersApi:
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1313,6 +1350,9 @@ class FoldersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1384,6 +1424,9 @@ class FoldersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1455,6 +1498,9 @@ class FoldersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1566,7 +1612,7 @@ class FoldersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> FileIntegerWrapper:
+    ) -> XlsxReportResponseWrapper:
         """Generate XLSX report by folder
 
         Triggers asynchronous XLSX report generation for the specified form results folder.
@@ -1604,10 +1650,13 @@ class FoldersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FileIntegerWrapper",
+            '200': "XlsxReportResponseWrapper",
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1635,7 +1684,7 @@ class FoldersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[FileIntegerWrapper]:
+    ) -> ApiResponse[XlsxReportResponseWrapper]:
         """Generate XLSX report by folder
 
         Triggers asynchronous XLSX report generation for the specified form results folder.
@@ -1673,10 +1722,13 @@ class FoldersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FileIntegerWrapper",
+            '200': "XlsxReportResponseWrapper",
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1742,10 +1794,13 @@ class FoldersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FileIntegerWrapper",
+            '200': "XlsxReportResponseWrapper",
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1907,6 +1962,9 @@ class FoldersApi:
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2000,6 +2058,9 @@ class FoldersApi:
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2093,6 +2154,9 @@ class FoldersApi:
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2258,6 +2322,9 @@ class FoldersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FilesStatisticsResultWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2321,6 +2388,9 @@ class FoldersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FilesStatisticsResultWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2384,6 +2454,9 @@ class FoldersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FilesStatisticsResultWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2515,6 +2588,9 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FormsItemArrayWrapper",
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2581,6 +2657,9 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FormsItemArrayWrapper",
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2647,6 +2726,9 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FormsItemArrayWrapper",
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2841,6 +2923,9 @@ class FoldersApi:
             '200': "FolderContentIntegerWrapper",
             '403': None,
             '404': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2973,6 +3058,9 @@ class FoldersApi:
             '200': "FolderContentIntegerWrapper",
             '403': None,
             '404': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3105,6 +3193,9 @@ class FoldersApi:
             '200': "FolderContentIntegerWrapper",
             '403': None,
             '404': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3332,6 +3423,9 @@ class FoldersApi:
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3417,6 +3511,9 @@ class FoldersApi:
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3502,6 +3599,9 @@ class FoldersApi:
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3656,6 +3756,9 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3722,6 +3825,9 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3788,6 +3894,9 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3917,6 +4026,9 @@ class FoldersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3984,6 +4096,9 @@ class FoldersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4051,6 +4166,9 @@ class FoldersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4187,6 +4305,9 @@ class FoldersApi:
             '200': "FileEntryBaseArrayWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4255,6 +4376,9 @@ class FoldersApi:
             '200': "FileEntryBaseArrayWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4323,6 +4447,9 @@ class FoldersApi:
             '200': "FileEntryBaseArrayWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4466,6 +4593,9 @@ class FoldersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
             '404': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4541,6 +4671,9 @@ class FoldersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
             '404': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4616,6 +4749,9 @@ class FoldersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
             '404': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4756,6 +4892,9 @@ class FoldersApi:
             '200': "FileEntryBaseArrayWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4824,6 +4963,9 @@ class FoldersApi:
             '200': "FileEntryBaseArrayWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4892,6 +5034,9 @@ class FoldersApi:
             '200': "FileEntryBaseArrayWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5057,6 +5202,9 @@ class FoldersApi:
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5154,6 +5302,9 @@ class FoldersApi:
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5251,6 +5402,9 @@ class FoldersApi:
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5426,6 +5580,9 @@ class FoldersApi:
             '200': "FileEntryBaseArrayWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5494,6 +5651,9 @@ class FoldersApi:
             '200': "FileEntryBaseArrayWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5562,6 +5722,9 @@ class FoldersApi:
             '200': "FileEntryBaseArrayWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5723,6 +5886,9 @@ class FoldersApi:
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5816,6 +5982,9 @@ class FoldersApi:
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5909,6 +6078,9 @@ class FoldersApi:
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -6120,6 +6292,9 @@ class FoldersApi:
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -6229,6 +6404,9 @@ class FoldersApi:
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -6338,6 +6516,9 @@ class FoldersApi:
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -6560,6 +6741,9 @@ class FoldersApi:
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -6657,6 +6841,9 @@ class FoldersApi:
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -6754,6 +6941,9 @@ class FoldersApi:
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -6958,6 +7148,9 @@ class FoldersApi:
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -7055,6 +7248,9 @@ class FoldersApi:
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -7152,6 +7348,9 @@ class FoldersApi:
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -7306,7 +7505,7 @@ class FoldersApi:
         :param folder_id: The folder ID for inserting a file. (required)
         :type folder_id: int
         :param insert_file_file: The file to be inserted.
-        :type insert_file_file: bytearray
+        :type insert_file_file: bytes
         :param insert_file_title: The file title to be inserted.
         :type insert_file_title: str
         :param insert_file_create_new_if_exist: Specifies whether to create a new file if it already exists or not.
@@ -7376,6 +7575,9 @@ class FoldersApi:
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -7423,7 +7625,7 @@ class FoldersApi:
         :param folder_id: The folder ID for inserting a file. (required)
         :type folder_id: int
         :param insert_file_file: The file to be inserted.
-        :type insert_file_file: bytearray
+        :type insert_file_file: bytes
         :param insert_file_title: The file title to be inserted.
         :type insert_file_title: str
         :param insert_file_create_new_if_exist: Specifies whether to create a new file if it already exists or not.
@@ -7493,6 +7695,9 @@ class FoldersApi:
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -7540,7 +7745,7 @@ class FoldersApi:
         :param folder_id: The folder ID for inserting a file. (required)
         :type folder_id: int
         :param insert_file_file: The file to be inserted.
-        :type insert_file_file: bytearray
+        :type insert_file_file: bytes
         :param insert_file_title: The file title to be inserted.
         :type insert_file_title: str
         :param insert_file_create_new_if_exist: Specifies whether to create a new file if it already exists or not.
@@ -7610,6 +7815,9 @@ class FoldersApi:
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -7771,7 +7979,7 @@ class FoldersApi:
         Inserts a file specified in the request to the My documents section by single file uploading.
 
         :param file: The file to be inserted.
-        :type file: bytearray
+        :type file: bytes
         :param title: The file title to be inserted.
         :type title: str
         :param create_new_if_exist: Specifies whether to create a new file if it already exists or not.
@@ -7840,6 +8048,9 @@ class FoldersApi:
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -7884,7 +8095,7 @@ class FoldersApi:
         Inserts a file specified in the request to the My documents section by single file uploading.
 
         :param file: The file to be inserted.
-        :type file: bytearray
+        :type file: bytes
         :param title: The file title to be inserted.
         :type title: str
         :param create_new_if_exist: Specifies whether to create a new file if it already exists or not.
@@ -7953,6 +8164,9 @@ class FoldersApi:
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -7997,7 +8211,7 @@ class FoldersApi:
         Inserts a file specified in the request to the My documents section by single file uploading.
 
         :param file: The file to be inserted.
-        :type file: bytearray
+        :type file: bytes
         :param title: The file title to be inserted.
         :type title: str
         :param create_new_if_exist: Specifies whether to create a new file if it already exists or not.
@@ -8066,6 +8280,9 @@ class FoldersApi:
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -8252,6 +8469,9 @@ class FoldersApi:
             '200': "FolderIntegerWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -8324,6 +8544,9 @@ class FoldersApi:
             '200': "FolderIntegerWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -8396,6 +8619,9 @@ class FoldersApi:
             '200': "FolderIntegerWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -8551,6 +8777,9 @@ class FoldersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -8622,6 +8851,9 @@ class FoldersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -8693,6 +8925,9 @@ class FoldersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -8848,6 +9083,9 @@ class FoldersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -8919,6 +9157,9 @@ class FoldersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -8990,6 +9231,9 @@ class FoldersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -9147,6 +9391,9 @@ class FoldersApi:
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -9220,6 +9467,9 @@ class FoldersApi:
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -9293,6 +9543,9 @@ class FoldersApi:
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -9446,6 +9699,9 @@ class FoldersApi:
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -9515,6 +9771,9 @@ class FoldersApi:
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -9584,6 +9843,9 @@ class FoldersApi:
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout

@@ -42,7 +42,9 @@ class OperationDto(BaseModel):
     debit: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The debit amount of the operation.")
     participant_name: Optional[StrictStr] = Field(default=None, description="The participant original name.", alias="participantName")
     participant_display_name: Optional[StrictStr] = Field(default=None, description="The participant display name.", alias="participantDisplayName")
-    __properties: ClassVar[List[str]] = ["date", "service", "description", "details", "serviceUnit", "quantity", "currency", "credit", "debit", "participantName", "participantDisplayName"]
+    agent_id: Optional[StrictStr] = Field(default=None, description="AI Agent id.", alias="agentId")
+    agent_title: Optional[StrictStr] = Field(default=None, description="AI Agent name.", alias="agentTitle")
+    __properties: ClassVar[List[str]] = ["date", "service", "description", "details", "serviceUnit", "quantity", "currency", "credit", "debit", "participantName", "participantDisplayName", "agentId", "agentTitle"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -121,6 +123,16 @@ class OperationDto(BaseModel):
         if self.participant_display_name is None and "participant_display_name" in self.model_fields_set:
             _dict['participantDisplayName'] = None
 
+        # set to None if agent_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.agent_id is None and "agent_id" in self.model_fields_set:
+            _dict['agentId'] = None
+
+        # set to None if agent_title (nullable) is None
+        # and model_fields_set contains the field
+        if self.agent_title is None and "agent_title" in self.model_fields_set:
+            _dict['agentTitle'] = None
+
         return _dict
 
     @classmethod
@@ -144,7 +156,9 @@ class OperationDto(BaseModel):
             "credit": obj.get("credit"),
             "debit": obj.get("debit"),
             "participantName": obj.get("participantName"),
-            "participantDisplayName": obj.get("participantDisplayName")
+            "participantDisplayName": obj.get("participantDisplayName"),
+            "agentId": obj.get("agentId"),
+            "agentTitle": obj.get("agentTitle")
         })
         return _obj
 

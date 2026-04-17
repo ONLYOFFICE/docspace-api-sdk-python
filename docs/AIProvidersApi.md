@@ -8,7 +8,9 @@ Method | HTTP request | Description
 [**delete_providers**](#delete_providers) | **DELETE** /api/2.0/ai/providers | Delete AI providers
 [**get_available_providers**](#get_available_providers) | **GET** /api/2.0/ai/providers/available | Get available AI provider types
 [**get_default_provider**](#get_default_provider) | **GET** /api/2.0/ai/providers/default | Get the default AI provider
+[**get_provider_models**](#get_provider_models) | **GET** /api/2.0/ai/providers/{providerId}/models | Get all models for a provider with their settings
 [**get_providers**](#get_providers) | **GET** /api/2.0/ai/providers | Get AI providers
+[**preview_provider_models**](#preview_provider_models) | **POST** /api/2.0/ai/providers/models/preview | Preview models for a new AI provider
 [**set_default_provider**](#set_default_provider) | **PUT** /api/2.0/ai/providers/default | Set the default AI provider
 [**update_provider**](#update_provider) | **PUT** /api/2.0/ai/providers/{id} | Update an AI provider
 
@@ -85,10 +87,13 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Created AI provider details |  -  |
+**200** | Created AI provider details |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 **400** | Invalid connection data or provider with this name already exists |  -  |
 **403** | You don't have enough permission to manage providers |  -  |
 **401** | Unauthorized |  -  |
+**429** | Too Many Requests. |  * Retry-After -  <br>  |
+**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -164,6 +169,9 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 **204** | The providers were successfully deleted |  -  |
 **403** | You don't have enough permission to manage providers |  -  |
 **401** | Unauthorized |  -  |
+**429** | Too Many Requests. |  * Retry-After -  <br>  |
+**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -234,8 +242,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | List of available AI provider types |  -  |
+**200** | List of available AI provider types |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 **401** | Unauthorized |  -  |
+**429** | Too Many Requests. |  * Retry-After -  <br>  |
+**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -306,8 +317,94 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Default provider information or null if not set |  -  |
+**200** | Default provider information or null if not set |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 **401** | Unauthorized |  -  |
+**429** | Too Many Requests. |  * Retry-After -  <br>  |
+**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_provider_models**
+> ModelSettingsArrayWrapper get_provider_models(provider_id)
+
+Returns the full list of AI models available from a provider, including both recommended and additional models.
+Each model includes its current settings: enabled state, display alias, and capabilities (vision, tool calling, thinking).
+Recommended models are enabled by default and their alias and capabilities come from configuration.
+Additional models are disabled by default and can be configured by the admin.
+
+For more information, see [api.onlyoffice.com]().
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **provider_id** | **int**| The identifier of the AI provider. | 
+
+### Return type
+
+[**ModelSettingsArrayWrapper**](ModelSettingsArrayWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+
+```python
+import docspace_api_sdk
+from docspace_api_sdk.models.model_settings_array_wrapper import ModelSettingsArrayWrapper
+from docspace_api_sdk.rest import ApiException
+from pprint import pprint
+
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+# Enter a context with an instance of the API client
+with docspace_api_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace_api_sdk.ProvidersApi(api_client)
+    provider_id = 1 # int | The identifier of the AI provider.
+
+    try:
+        # Get all models for a provider with their settings
+        api_response = api_instance.get_provider_models(provider_id)
+        print("The response of ProvidersApi->get_provider_models:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ProvidersApi->get_provider_models: %s\n" % e)
+```
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | List of models with settings |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**403** | You don't have enough permission to manage providers |  -  |
+**404** | Provider not found |  -  |
+**401** | Unauthorized |  -  |
+**429** | Too Many Requests. |  * Retry-After -  <br>  |
+**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -384,8 +481,95 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Paginated list of AI providers |  -  |
+**200** | Paginated list of AI providers |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 **401** | Unauthorized |  -  |
+**429** | Too Many Requests. |  * Retry-After -  <br>  |
+**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **preview_provider_models**
+> ModelSettingsArrayWrapper preview_provider_models(preview_provider_models_request_dto=preview_provider_models_request_dto)
+
+Connects to the specified AI provider using the provided credentials and returns the available models
+with their default settings. This is used to preview models before saving the provider.
+Recommended models are enabled by default with configuration-defined settings.
+Additional models are disabled by default with empty capabilities.
+
+For more information, see [api.onlyoffice.com]().
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **preview_provider_models_request_dto** | [**PreviewProviderModelsRequestDto**](PreviewProviderModelsRequestDto.md)|  | [optional] 
+
+### Return type
+
+[**ModelSettingsArrayWrapper**](ModelSettingsArrayWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+
+```python
+import docspace_api_sdk
+from docspace_api_sdk.models.model_settings_array_wrapper import ModelSettingsArrayWrapper
+from docspace_api_sdk.models.preview_provider_models_request_dto import PreviewProviderModelsRequestDto
+from docspace_api_sdk.rest import ApiException
+from pprint import pprint
+
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+# Enter a context with an instance of the API client
+with docspace_api_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace_api_sdk.ProvidersApi(api_client)
+    preview_provider_models_request_dto = docspace_api_sdk.PreviewProviderModelsRequestDto() # PreviewProviderModelsRequestDto |  (optional)
+
+    try:
+        # Preview models for a new AI provider
+        api_response = api_instance.preview_provider_models(preview_provider_models_request_dto=preview_provider_models_request_dto)
+        print("The response of ProvidersApi->preview_provider_models:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ProvidersApi->preview_provider_models: %s\n" % e)
+```
+
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | List of models with default settings |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | Invalid connection data or unsupported provider type |  -  |
+**403** | You don't have enough permission to manage providers |  -  |
+**401** | Unauthorized |  -  |
+**429** | Too Many Requests. |  * Retry-After -  <br>  |
+**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -461,10 +645,13 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Default provider information |  -  |
+**200** | Default provider information |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 **403** | You don't have enough permission to manage providers |  -  |
 **404** | Provider not found |  -  |
 **401** | Unauthorized |  -  |
+**429** | Too Many Requests. |  * Retry-After -  <br>  |
+**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -542,11 +729,14 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Updated AI provider details |  -  |
+**200** | Updated AI provider details |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 **400** | Invalid connection data or provider with this name already exists |  -  |
 **403** | You don't have enough permission to manage providers |  -  |
 **404** | The provider with the specified ID was not found |  -  |
 **401** | Unauthorized |  -  |
+**429** | Too Many Requests. |  * Retry-After -  <br>  |
+**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

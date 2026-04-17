@@ -107,6 +107,9 @@ class SecurityApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -170,6 +173,9 @@ class SecurityApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -233,6 +239,9 @@ class SecurityApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -369,6 +378,9 @@ class SecurityApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ProductAdministratorWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -440,6 +452,9 @@ class SecurityApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ProductAdministratorWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -511,6 +526,9 @@ class SecurityApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ProductAdministratorWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -649,6 +667,9 @@ class SecurityApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "PasswordSettingsWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -712,6 +733,9 @@ class SecurityApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "PasswordSettingsWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -775,6 +799,9 @@ class SecurityApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "PasswordSettingsWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -907,6 +934,9 @@ class SecurityApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -974,6 +1004,9 @@ class SecurityApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1041,6 +1074,9 @@ class SecurityApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1176,6 +1212,9 @@ class SecurityApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1243,6 +1282,9 @@ class SecurityApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1310,6 +1352,9 @@ class SecurityApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1445,6 +1490,9 @@ class SecurityApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "SecurityArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1512,6 +1560,9 @@ class SecurityApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "SecurityArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1579,6 +1630,9 @@ class SecurityApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "SecurityArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1718,6 +1772,9 @@ class SecurityApi:
             '200': "SecurityArrayWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1786,6 +1843,9 @@ class SecurityApi:
             '200': "SecurityArrayWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1854,6 +1914,9 @@ class SecurityApi:
             '200': "SecurityArrayWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2004,6 +2067,9 @@ class SecurityApi:
             '402': None,
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2073,6 +2139,9 @@ class SecurityApi:
             '402': None,
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2142,6 +2211,9 @@ class SecurityApi:
             '402': None,
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2291,6 +2363,9 @@ class SecurityApi:
             '200': "SecurityArrayWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2359,6 +2434,9 @@ class SecurityApi:
             '200': "SecurityArrayWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2427,6 +2505,9 @@ class SecurityApi:
             '200': "SecurityArrayWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2576,6 +2657,9 @@ class SecurityApi:
             '200': "PasswordSettingsWrapper",
             '400': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2644,6 +2728,9 @@ class SecurityApi:
             '200': "PasswordSettingsWrapper",
             '400': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2712,6 +2799,9 @@ class SecurityApi:
             '200': "PasswordSettingsWrapper",
             '400': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout

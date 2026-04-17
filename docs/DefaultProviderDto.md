@@ -8,6 +8,8 @@ Name | Type | Description | Notes
 **provider_id** | **int** | AI provider identifier. | [optional] 
 **default_model** | **str** | Default model identifier used with this provider. | 
 **provider_title** | **str** | AI provider title. | [optional] 
+**provider_type** | [**ProviderType**](ProviderType.md) |  | [optional] 
+**default_model_alias** | **str** | Display alias of the default model. | [optional] 
 
 ## Example
 

@@ -102,6 +102,9 @@ class MessagesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -169,6 +172,9 @@ class MessagesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -236,6 +242,9 @@ class MessagesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -385,6 +394,8 @@ class MessagesApi:
             '200': "StringWrapper",
             '400': None,
             '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -453,6 +464,8 @@ class MessagesApi:
             '200': "StringWrapper",
             '400': None,
             '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -521,6 +534,8 @@ class MessagesApi:
             '200': "StringWrapper",
             '400': None,
             '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -665,6 +680,8 @@ class MessagesApi:
             '400': None,
             '403': None,
             '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -734,6 +751,8 @@ class MessagesApi:
             '400': None,
             '403': None,
             '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -803,6 +822,8 @@ class MessagesApi:
             '400': None,
             '403': None,
             '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout

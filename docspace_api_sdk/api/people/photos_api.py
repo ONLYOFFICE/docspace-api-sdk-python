@@ -110,6 +110,9 @@ class PhotosApi:
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -183,6 +186,9 @@ class PhotosApi:
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -256,6 +262,9 @@ class PhotosApi:
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -409,6 +418,9 @@ class PhotosApi:
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -478,6 +490,9 @@ class PhotosApi:
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -547,6 +562,9 @@ class PhotosApi:
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -684,6 +702,9 @@ class PhotosApi:
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -753,6 +774,9 @@ class PhotosApi:
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -822,6 +846,9 @@ class PhotosApi:
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -963,6 +990,9 @@ class PhotosApi:
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1036,6 +1066,9 @@ class PhotosApi:
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1109,6 +1142,9 @@ class PhotosApi:
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1230,7 +1266,7 @@ class PhotosApi:
         :param userid: The user ID. (required)
         :type userid: str
         :param file: The image data. (required)
-        :type file: bytearray
+        :type file: bytes
         :param autosave: Specifies whether to autosave a photo or not.
         :type autosave: bool
         :param _request_timeout: timeout setting for this request. If one
@@ -1272,6 +1308,9 @@ class PhotosApi:
             '413': None,
             '415': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1309,7 +1348,7 @@ class PhotosApi:
         :param userid: The user ID. (required)
         :type userid: str
         :param file: The image data. (required)
-        :type file: bytearray
+        :type file: bytes
         :param autosave: Specifies whether to autosave a photo or not.
         :type autosave: bool
         :param _request_timeout: timeout setting for this request. If one
@@ -1351,6 +1390,9 @@ class PhotosApi:
             '413': None,
             '415': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1388,7 +1430,7 @@ class PhotosApi:
         :param userid: The user ID. (required)
         :type userid: str
         :param file: The image data. (required)
-        :type file: bytearray
+        :type file: bytes
         :param autosave: Specifies whether to autosave a photo or not.
         :type autosave: bool
         :param _request_timeout: timeout setting for this request. If one
@@ -1430,6 +1472,9 @@ class PhotosApi:
             '413': None,
             '415': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout

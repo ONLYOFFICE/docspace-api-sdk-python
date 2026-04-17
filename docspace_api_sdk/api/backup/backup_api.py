@@ -107,6 +107,9 @@ class BackupApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -170,6 +173,9 @@ class BackupApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -233,6 +239,9 @@ class BackupApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -369,6 +378,9 @@ class BackupApi:
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -440,6 +452,9 @@ class BackupApi:
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -511,6 +526,9 @@ class BackupApi:
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -660,6 +678,9 @@ class BackupApi:
             '200': "BooleanWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -728,6 +749,9 @@ class BackupApi:
             '200': "BooleanWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -796,6 +820,9 @@ class BackupApi:
             '200': "BooleanWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -932,6 +959,9 @@ class BackupApi:
             '200': "BooleanWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1000,6 +1030,9 @@ class BackupApi:
             '200': "BooleanWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1068,6 +1101,9 @@ class BackupApi:
             '200': "BooleanWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1206,6 +1242,9 @@ class BackupApi:
             '200': "BooleanWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1274,6 +1313,9 @@ class BackupApi:
             '200': "BooleanWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1342,6 +1384,9 @@ class BackupApi:
             '200': "BooleanWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1480,6 +1525,9 @@ class BackupApi:
             '200': "BackupHistoryRecordArrayWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1548,6 +1596,9 @@ class BackupApi:
             '200': "BackupHistoryRecordArrayWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1616,6 +1667,9 @@ class BackupApi:
             '200': "BackupHistoryRecordArrayWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1754,6 +1808,9 @@ class BackupApi:
             '200': "BackupProgressWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1822,6 +1879,9 @@ class BackupApi:
             '200': "BackupProgressWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1890,6 +1950,9 @@ class BackupApi:
             '200': "BackupProgressWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2028,6 +2091,9 @@ class BackupApi:
             '200': "ScheduleWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2096,6 +2162,9 @@ class BackupApi:
             '200': "ScheduleWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2164,6 +2233,9 @@ class BackupApi:
             '200': "ScheduleWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2311,6 +2383,9 @@ class BackupApi:
             '400': None,
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2388,6 +2463,9 @@ class BackupApi:
             '400': None,
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2465,6 +2543,9 @@ class BackupApi:
             '400': None,
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2625,7 +2706,11 @@ class BackupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BackupServiceStateWrapper",
+            '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2688,7 +2773,11 @@ class BackupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BackupServiceStateWrapper",
+            '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2751,7 +2840,11 @@ class BackupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BackupServiceStateWrapper",
+            '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2883,6 +2976,9 @@ class BackupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BackupProgressWrapper",
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2949,6 +3045,9 @@ class BackupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BackupProgressWrapper",
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3015,6 +3114,9 @@ class BackupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BackupProgressWrapper",
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3150,6 +3252,9 @@ class BackupApi:
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3221,6 +3326,9 @@ class BackupApi:
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3292,6 +3400,9 @@ class BackupApi:
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3444,6 +3555,9 @@ class BackupApi:
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3515,6 +3629,9 @@ class BackupApi:
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3586,6 +3703,9 @@ class BackupApi:
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout

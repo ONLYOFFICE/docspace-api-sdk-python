@@ -124,6 +124,9 @@ class OperationsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -195,6 +198,9 @@ class OperationsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -266,6 +272,9 @@ class OperationsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -398,6 +407,9 @@ class OperationsApi:
             '200': "BooleanWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -466,6 +478,9 @@ class OperationsApi:
             '200': "BooleanWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -534,6 +549,9 @@ class OperationsApi:
             '200': "BooleanWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -682,6 +700,9 @@ class OperationsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
             '403': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -749,6 +770,9 @@ class OperationsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
             '403': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -816,6 +840,9 @@ class OperationsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
             '403': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -962,6 +989,9 @@ class OperationsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ConversationResultArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1033,6 +1063,9 @@ class OperationsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ConversationResultArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1104,6 +1137,9 @@ class OperationsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ConversationResultArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1245,6 +1281,9 @@ class OperationsApi:
             '200': "FileEntryBaseArrayWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1313,6 +1352,9 @@ class OperationsApi:
             '200': "FileEntryBaseArrayWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1381,6 +1423,9 @@ class OperationsApi:
             '200': "FileEntryBaseArrayWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1519,6 +1564,9 @@ class OperationsApi:
             '200': "CheckDestFolderWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1587,6 +1635,9 @@ class OperationsApi:
             '200': "CheckDestFolderWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1655,6 +1706,9 @@ class OperationsApi:
             '200': "CheckDestFolderWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1793,6 +1847,9 @@ class OperationsApi:
             '200': "FileOperationArrayWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1861,6 +1918,9 @@ class OperationsApi:
             '200': "FileOperationArrayWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1929,6 +1989,9 @@ class OperationsApi:
             '200': "FileOperationArrayWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2083,6 +2146,9 @@ class OperationsApi:
             '200': "ChunkedUploadSessionResponseWrapperIntegerWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2156,6 +2222,9 @@ class OperationsApi:
             '200': "ChunkedUploadSessionResponseWrapperIntegerWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2229,6 +2298,9 @@ class OperationsApi:
             '200': "ChunkedUploadSessionResponseWrapperIntegerWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2384,6 +2456,9 @@ class OperationsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ChunkedUploadSessionResponseIntegerWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2455,6 +2530,9 @@ class OperationsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ChunkedUploadSessionResponseIntegerWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2526,6 +2604,9 @@ class OperationsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ChunkedUploadSessionResponseIntegerWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2678,6 +2759,9 @@ class OperationsApi:
             '200': "FileOperationArrayWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2746,6 +2830,9 @@ class OperationsApi:
             '200': "FileOperationArrayWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2814,6 +2901,9 @@ class OperationsApi:
             '200': "FileOperationArrayWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2962,6 +3052,9 @@ class OperationsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3029,6 +3122,9 @@ class OperationsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3096,6 +3192,9 @@ class OperationsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3244,6 +3343,9 @@ class OperationsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3311,6 +3413,9 @@ class OperationsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3378,6 +3483,9 @@ class OperationsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3527,6 +3635,9 @@ class OperationsApi:
             '200': "FileOperationArrayWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3595,6 +3706,9 @@ class OperationsApi:
             '200': "FileOperationArrayWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3663,6 +3777,9 @@ class OperationsApi:
             '200': "FileOperationArrayWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3811,6 +3928,9 @@ class OperationsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3878,6 +3998,9 @@ class OperationsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3945,6 +4068,9 @@ class OperationsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4086,6 +4212,9 @@ class OperationsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "UploadSessionResponseIntegerWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4157,6 +4286,9 @@ class OperationsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "UploadSessionResponseIntegerWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4228,6 +4360,9 @@ class OperationsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "UploadSessionResponseIntegerWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4365,6 +4500,9 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4431,6 +4569,9 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4497,6 +4638,9 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4631,6 +4775,9 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4701,6 +4848,9 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4771,6 +4921,9 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4905,6 +5058,9 @@ class OperationsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4972,6 +5128,9 @@ class OperationsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5039,6 +5198,9 @@ class OperationsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5188,6 +5350,9 @@ class OperationsApi:
             '200': "FileOperationArrayWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5256,6 +5421,9 @@ class OperationsApi:
             '200': "FileOperationArrayWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5324,6 +5492,9 @@ class OperationsApi:
             '200': "FileOperationArrayWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5476,6 +5647,9 @@ class OperationsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ConversationResultArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5547,6 +5721,9 @@ class OperationsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ConversationResultArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5618,6 +5795,9 @@ class OperationsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ConversationResultArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5768,6 +5948,9 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5834,6 +6017,9 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5900,6 +6086,9 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -6033,6 +6222,9 @@ class OperationsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -6104,6 +6296,9 @@ class OperationsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -6175,6 +6370,9 @@ class OperationsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -6301,7 +6499,7 @@ class OperationsApi:
         :param chunk_number: The chunk number.
         :type chunk_number: int
         :param file: The file chunk to be uploaded as part of the multipart/form-data request.  This property represents the uploaded file chunk content from the HTTP request form for chunked upload operations.  The file chunk is accessed via the IFormFile interface which provides access to the chunk content and length.
-        :type file: bytearray
+        :type file: bytes
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -6338,6 +6536,9 @@ class OperationsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ChunkedUploadSessionResponseIntegerWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -6380,7 +6581,7 @@ class OperationsApi:
         :param chunk_number: The chunk number.
         :type chunk_number: int
         :param file: The file chunk to be uploaded as part of the multipart/form-data request.  This property represents the uploaded file chunk content from the HTTP request form for chunked upload operations.  The file chunk is accessed via the IFormFile interface which provides access to the chunk content and length.
-        :type file: bytearray
+        :type file: bytes
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -6417,6 +6618,9 @@ class OperationsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ChunkedUploadSessionResponseIntegerWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -6459,7 +6663,7 @@ class OperationsApi:
         :param chunk_number: The chunk number.
         :type chunk_number: int
         :param file: The file chunk to be uploaded as part of the multipart/form-data request.  This property represents the uploaded file chunk content from the HTTP request form for chunked upload operations.  The file chunk is accessed via the IFormFile interface which provides access to the chunk content and length.
-        :type file: bytearray
+        :type file: bytes
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -6496,6 +6700,9 @@ class OperationsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ChunkedUploadSessionResponseIntegerWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -6627,7 +6834,7 @@ class OperationsApi:
         :param session_id: The upload session ID. (required)
         :type session_id: str
         :param file: The file to be uploaded as part of the multipart/form-data request.  This property represents the uploaded file content from the HTTP request form.  The file is accessed via the IFormFile interface which provides access to the file name, content type, length, and stream.
-        :type file: bytearray
+        :type file: bytes
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -6663,6 +6870,9 @@ class OperationsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "UploadSessionResponseIntegerWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -6702,7 +6912,7 @@ class OperationsApi:
         :param session_id: The upload session ID. (required)
         :type session_id: str
         :param file: The file to be uploaded as part of the multipart/form-data request.  This property represents the uploaded file content from the HTTP request form.  The file is accessed via the IFormFile interface which provides access to the file name, content type, length, and stream.
-        :type file: bytearray
+        :type file: bytes
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -6738,6 +6948,9 @@ class OperationsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "UploadSessionResponseIntegerWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -6777,7 +6990,7 @@ class OperationsApi:
         :param session_id: The upload session ID. (required)
         :type session_id: str
         :param file: The file to be uploaded as part of the multipart/form-data request.  This property represents the uploaded file content from the HTTP request form.  The file is accessed via the IFormFile interface which provides access to the file name, content type, length, and stream.
-        :type file: bytearray
+        :type file: bytes
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -6813,6 +7026,9 @@ class OperationsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "UploadSessionResponseIntegerWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout

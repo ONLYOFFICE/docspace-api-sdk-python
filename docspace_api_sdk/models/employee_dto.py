@@ -33,7 +33,6 @@ class EmployeeDto(BaseModel):
     """ # noqa: E501
     id: Optional[UUID] = Field(default=None, description="The user ID.")
     display_name: Optional[StrictStr] = Field(default=None, description="The HTML-encoded user's display name formatted according to the default format for the current culture.", alias="displayName")
-    title: Optional[StrictStr] = Field(default=None, description="The user title.")
     avatar: Optional[StrictStr] = Field(default=None, description="The user avatar.")
     avatar_original: Optional[StrictStr] = Field(default=None, description="The user original size avatar.", alias="avatarOriginal")
     avatar_max: Optional[StrictStr] = Field(default=None, description="The user maximum size avatar.", alias="avatarMax")
@@ -42,7 +41,7 @@ class EmployeeDto(BaseModel):
     profile_url: Optional[StrictStr] = Field(default=None, description="The user profile URL.", alias="profileUrl")
     has_avatar: Optional[StrictBool] = Field(default=None, description="Specifies if the user has an avatar or not.", alias="hasAvatar")
     is_anonim: Optional[StrictBool] = Field(default=None, description="Specifies if the user is anonymous or not.", alias="isAnonim")
-    __properties: ClassVar[List[str]] = ["id", "displayName", "title", "avatar", "avatarOriginal", "avatarMax", "avatarMedium", "avatarSmall", "profileUrl", "hasAvatar", "isAnonim"]
+    __properties: ClassVar[List[str]] = ["id", "displayName", "avatar", "avatarOriginal", "avatarMax", "avatarMedium", "avatarSmall", "profileUrl", "hasAvatar", "isAnonim"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -87,11 +86,6 @@ class EmployeeDto(BaseModel):
         # and model_fields_set contains the field
         if self.display_name is None and "display_name" in self.model_fields_set:
             _dict['displayName'] = None
-
-        # set to None if title (nullable) is None
-        # and model_fields_set contains the field
-        if self.title is None and "title" in self.model_fields_set:
-            _dict['title'] = None
 
         # set to None if avatar (nullable) is None
         # and model_fields_set contains the field
@@ -138,7 +132,6 @@ class EmployeeDto(BaseModel):
         _obj = cls.model_validate({
             "id": obj.get("id"),
             "displayName": obj.get("displayName"),
-            "title": obj.get("title"),
             "avatar": obj.get("avatar"),
             "avatarOriginal": obj.get("avatarOriginal"),
             "avatarMax": obj.get("avatarMax"),

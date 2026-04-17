@@ -152,6 +152,9 @@ class RoomsApi:
             '200': "FolderIntegerWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -224,6 +227,9 @@ class RoomsApi:
             '200': "FolderIntegerWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -296,6 +302,9 @@ class RoomsApi:
             '200': "FolderIntegerWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -451,6 +460,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -522,6 +534,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -593,6 +608,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -750,6 +768,9 @@ class RoomsApi:
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -823,6 +844,9 @@ class RoomsApi:
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -896,6 +920,9 @@ class RoomsApi:
             '403': None,
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1047,6 +1074,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1114,6 +1144,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1181,6 +1214,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1329,6 +1365,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomFromTemplateStatusWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1396,6 +1435,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomFromTemplateStatusWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1463,6 +1505,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomFromTemplateStatusWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1616,6 +1661,9 @@ class RoomsApi:
             '200': "FolderIntegerWrapper",
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1688,6 +1736,9 @@ class RoomsApi:
             '200': "FolderIntegerWrapper",
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1760,6 +1811,9 @@ class RoomsApi:
             '200': "FolderIntegerWrapper",
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1912,6 +1966,9 @@ class RoomsApi:
             '200': "StringWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1980,6 +2037,9 @@ class RoomsApi:
             '200': "StringWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2048,6 +2108,9 @@ class RoomsApi:
             '200': "StringWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2196,6 +2259,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomTemplateStatusWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2263,6 +2329,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomTemplateStatusWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2330,6 +2399,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomTemplateStatusWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2482,6 +2554,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderStringWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2553,6 +2628,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderStringWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2624,6 +2702,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderStringWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2776,6 +2857,9 @@ class RoomsApi:
             '200': None,
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2844,6 +2928,9 @@ class RoomsApi:
             '200': None,
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2912,6 +2999,9 @@ class RoomsApi:
             '200': None,
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3057,6 +3147,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3128,6 +3221,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3199,6 +3295,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3350,6 +3449,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3417,6 +3519,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3484,6 +3589,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3624,6 +3732,9 @@ class RoomsApi:
             '200': "FolderIntegerWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3696,6 +3807,9 @@ class RoomsApi:
             '200': "FolderIntegerWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3768,6 +3882,9 @@ class RoomsApi:
             '200': "FolderIntegerWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3919,6 +4036,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "NewItemsFileEntryBaseArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3986,6 +4106,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "NewItemsFileEntryBaseArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4053,6 +4176,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "NewItemsFileEntryBaseArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4188,6 +4314,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4255,6 +4384,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4322,6 +4454,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4453,6 +4588,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CoversResultArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4516,6 +4654,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CoversResultArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4579,6 +4720,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CoversResultArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4707,6 +4851,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomFromTemplateStatusWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4770,6 +4917,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomFromTemplateStatusWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4833,6 +4983,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomFromTemplateStatusWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4961,6 +5114,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocumentBuilderTaskWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5024,6 +5180,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocumentBuilderTaskWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5087,6 +5246,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocumentBuilderTaskWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5218,6 +5380,9 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5284,6 +5449,9 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5350,6 +5518,9 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5483,6 +5654,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5554,6 +5728,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5625,6 +5802,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5781,6 +5961,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5864,6 +6047,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5947,6 +6133,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -6110,6 +6299,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -6185,6 +6377,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -6260,6 +6455,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -6405,6 +6603,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomTemplateStatusWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -6468,6 +6669,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomTemplateStatusWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -6531,6 +6735,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomTemplateStatusWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -6728,6 +6935,9 @@ class RoomsApi:
             '200': "FolderContentIntegerWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -6860,6 +7070,9 @@ class RoomsApi:
             '200': "FolderContentIntegerWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -6992,6 +7205,9 @@ class RoomsApi:
             '200': "FolderContentIntegerWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -7208,6 +7424,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "NewItemsRoomNewItemsArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -7271,6 +7490,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "NewItemsRoomNewItemsArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -7334,6 +7556,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "NewItemsRoomNewItemsArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -7467,6 +7692,9 @@ class RoomsApi:
             '200': "FileShareWrapper",
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -7535,6 +7763,9 @@ class RoomsApi:
             '200': "FileShareWrapper",
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -7603,6 +7834,9 @@ class RoomsApi:
             '200': "FileShareWrapper",
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -7743,6 +7977,9 @@ class RoomsApi:
             '200': "BooleanWrapper",
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -7815,6 +8052,9 @@ class RoomsApi:
             '200': "BooleanWrapper",
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -7887,6 +8127,9 @@ class RoomsApi:
             '200': "BooleanWrapper",
             '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -8027,6 +8270,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -8094,6 +8340,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -8161,6 +8410,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -8296,6 +8548,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -8363,6 +8618,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -8430,6 +8688,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -8569,6 +8830,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -8640,6 +8904,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -8711,6 +8978,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -8855,6 +9125,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -8922,6 +9195,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -8989,6 +9265,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -9134,6 +9413,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -9205,6 +9487,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -9276,6 +9561,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -9431,6 +9719,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomSecurityWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -9502,6 +9793,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomSecurityWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -9573,6 +9867,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomSecurityWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -9725,6 +10022,9 @@ class RoomsApi:
             '200': "DocumentBuilderTaskWrapper",
             '501': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -9793,6 +10093,9 @@ class RoomsApi:
             '200': "DocumentBuilderTaskWrapper",
             '501': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -9861,6 +10164,9 @@ class RoomsApi:
             '200': "DocumentBuilderTaskWrapper",
             '501': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -9992,6 +10298,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -10055,6 +10364,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -10118,6 +10430,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -10247,6 +10562,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -10318,6 +10636,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -10389,6 +10710,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -10540,6 +10864,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -10607,6 +10934,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -10674,6 +11004,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -10813,6 +11146,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -10884,6 +11220,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -10955,6 +11294,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -11107,6 +11449,9 @@ class RoomsApi:
             '200': "StringWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -11175,6 +11520,9 @@ class RoomsApi:
             '200': "StringWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -11243,6 +11591,9 @@ class RoomsApi:
             '200': "StringWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -11357,7 +11708,7 @@ class RoomsApi:
         Uploads a temporary image to create a room logo.
 
         :param file: The image data.
-        :type file: bytearray
+        :type file: bytes
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -11392,6 +11743,9 @@ class RoomsApi:
             '200': "UploadResultWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -11425,7 +11779,7 @@ class RoomsApi:
         Uploads a temporary image to create a room logo.
 
         :param file: The image data.
-        :type file: bytearray
+        :type file: bytes
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -11460,6 +11814,9 @@ class RoomsApi:
             '200': "UploadResultWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -11493,7 +11850,7 @@ class RoomsApi:
         Uploads a temporary image to create a room logo.
 
         :param file: The image data.
-        :type file: bytearray
+        :type file: bytes
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -11528,6 +11885,9 @@ class RoomsApi:
             '200': "UploadResultWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout

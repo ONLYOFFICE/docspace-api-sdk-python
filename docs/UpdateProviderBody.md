@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **title** | **str** | The new display title for the AI provider. If null, the title is not changed. | [optional] 
 **url** | **str** | The new API endpoint URL for the AI provider. If null, the URL is not changed. | [optional] 
 **key** | **str** | The new authentication API key for the AI provider. If null, the key is not changed. | [optional] 
+**model_settings** | [**List[ModelSettingsItemDto]**](ModelSettingsItemDto.md) | Optional list of model settings changes to apply atomically with the provider update. | [optional] 
 
 ## Example
 

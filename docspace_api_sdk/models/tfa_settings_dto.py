@@ -34,11 +34,11 @@ class TfaSettingsDto(BaseModel):
     id: Optional[StrictStr] = Field(description="The ID of the TFA configuration.")
     title: Optional[StrictStr] = Field(description="The display name or description of the TFA configuration.")
     enabled: StrictBool = Field(description="Indicates whether the TFA configuration is currently active.")
-    avaliable: StrictBool = Field(description="Indicates whether the TFA configuration can be used.")
+    available: StrictBool = Field(description="Indicates whether the TFA configuration can be used.")
     trusted_ips: Optional[List[StrictStr]] = Field(default=None, description="The list of IP addresses that are exempt from TFA requirements.", alias="trustedIps")
     mandatory_users: Optional[List[UUID]] = Field(default=None, description="The list of user IDs that are required to use TFA.", alias="mandatoryUsers")
     mandatory_groups: Optional[List[UUID]] = Field(default=None, description="The list of group IDs whose members are required to use TFA.", alias="mandatoryGroups")
-    __properties: ClassVar[List[str]] = ["id", "title", "enabled", "avaliable", "trustedIps", "mandatoryUsers", "mandatoryGroups"]
+    __properties: ClassVar[List[str]] = ["id", "title", "enabled", "available", "trustedIps", "mandatoryUsers", "mandatoryGroups"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -120,7 +120,7 @@ class TfaSettingsDto(BaseModel):
             "id": obj.get("id"),
             "title": obj.get("title"),
             "enabled": obj.get("enabled"),
-            "avaliable": obj.get("avaliable"),
+            "available": obj.get("available"),
             "trustedIps": obj.get("trustedIps"),
             "mandatoryUsers": obj.get("mandatoryUsers"),
             "mandatoryGroups": obj.get("mandatoryGroups")

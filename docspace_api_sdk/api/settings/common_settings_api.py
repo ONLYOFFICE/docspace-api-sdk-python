@@ -119,6 +119,9 @@ class CommonSettingsApi:
             '200': None,
             '405': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -183,6 +186,9 @@ class CommonSettingsApi:
             '200': None,
             '405': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -247,6 +253,9 @@ class CommonSettingsApi:
             '200': None,
             '405': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -374,6 +383,9 @@ class CommonSettingsApi:
             '400': None,
             '402': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -443,6 +455,9 @@ class CommonSettingsApi:
             '400': None,
             '402': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -512,6 +527,9 @@ class CommonSettingsApi:
             '400': None,
             '402': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -661,6 +679,9 @@ class CommonSettingsApi:
             '200': "TenantDeepLinkSettingsWrapper",
             '400': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -729,6 +750,9 @@ class CommonSettingsApi:
             '200': "TenantDeepLinkSettingsWrapper",
             '400': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -797,6 +821,9 @@ class CommonSettingsApi:
             '200': "TenantDeepLinkSettingsWrapper",
             '400': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -945,6 +972,9 @@ class CommonSettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CustomColorThemesSettingsWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1012,6 +1042,9 @@ class CommonSettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CustomColorThemesSettingsWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1079,6 +1112,9 @@ class CommonSettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CustomColorThemesSettingsWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1211,6 +1247,9 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantDeepLinkSettingsWrapper",
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1273,6 +1312,9 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantDeepLinkSettingsWrapper",
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1335,6 +1377,9 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantDeepLinkSettingsWrapper",
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1457,6 +1502,9 @@ class CommonSettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "PaymentSettingsWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1520,6 +1568,9 @@ class CommonSettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "PaymentSettingsWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1583,6 +1634,9 @@ class CommonSettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "PaymentSettingsWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1710,6 +1764,9 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CustomColorThemesSettingsWrapper",
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1772,6 +1829,9 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CustomColorThemesSettingsWrapper",
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1834,6 +1894,9 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CustomColorThemesSettingsWrapper",
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1956,6 +2019,9 @@ class CommonSettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2019,6 +2085,9 @@ class CommonSettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2082,6 +2151,9 @@ class CommonSettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2210,6 +2282,9 @@ class CommonSettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2273,6 +2348,9 @@ class CommonSettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2336,6 +2414,9 @@ class CommonSettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2467,6 +2548,9 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "SettingsWrapper",
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2533,6 +2617,9 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "SettingsWrapper",
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2599,6 +2686,9 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "SettingsWrapper",
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2726,6 +2816,9 @@ class CommonSettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2789,6 +2882,9 @@ class CommonSettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2852,6 +2948,9 @@ class CommonSettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2979,6 +3078,9 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "STRINGArrayWrapper",
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3041,6 +3143,9 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "STRINGArrayWrapper",
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3103,6 +3208,9 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "STRINGArrayWrapper",
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3225,6 +3333,9 @@ class CommonSettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantAiAccessSettingsWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3288,6 +3399,9 @@ class CommonSettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantAiAccessSettingsWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3351,6 +3465,9 @@ class CommonSettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantAiAccessSettingsWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3478,6 +3595,9 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantUserInvitationSettingsWrapper",
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3540,6 +3660,9 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantUserInvitationSettingsWrapper",
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3602,6 +3725,9 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantUserInvitationSettingsWrapper",
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3724,6 +3850,9 @@ class CommonSettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TimezonesRequestsArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3787,6 +3916,9 @@ class CommonSettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TimezonesRequestsArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3850,6 +3982,9 @@ class CommonSettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TimezonesRequestsArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3982,6 +4117,9 @@ class CommonSettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StudioDefaultPageSettingsWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4049,6 +4187,9 @@ class CommonSettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StudioDefaultPageSettingsWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4116,6 +4257,9 @@ class CommonSettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StudioDefaultPageSettingsWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4267,6 +4411,9 @@ class CommonSettingsApi:
             '402': None,
             '405': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4337,6 +4484,9 @@ class CommonSettingsApi:
             '402': None,
             '405': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4407,6 +4557,9 @@ class CommonSettingsApi:
             '402': None,
             '405': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4555,6 +4708,9 @@ class CommonSettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4622,6 +4778,9 @@ class CommonSettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4689,6 +4848,9 @@ class CommonSettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4837,6 +4999,9 @@ class CommonSettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CustomColorThemesSettingsWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4904,6 +5069,9 @@ class CommonSettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CustomColorThemesSettingsWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4971,6 +5139,9 @@ class CommonSettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CustomColorThemesSettingsWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5120,6 +5291,9 @@ class CommonSettingsApi:
             '200': "TenantAiAccessSettingsWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5188,6 +5362,9 @@ class CommonSettingsApi:
             '200': "TenantAiAccessSettingsWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5256,6 +5433,9 @@ class CommonSettingsApi:
             '200': "TenantAiAccessSettingsWrapper",
             '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5404,6 +5584,9 @@ class CommonSettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmailActivationSettingsWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5471,6 +5654,9 @@ class CommonSettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmailActivationSettingsWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5538,6 +5724,9 @@ class CommonSettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmailActivationSettingsWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5686,6 +5875,9 @@ class CommonSettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantUserInvitationSettingsWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5753,6 +5945,9 @@ class CommonSettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantUserInvitationSettingsWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5820,6 +6015,9 @@ class CommonSettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantUserInvitationSettingsWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout

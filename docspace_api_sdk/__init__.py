@@ -134,6 +134,7 @@ __all__ = [
     "AiChatPrice",
     "AiEmbeddingModelPricing",
     "AiEmbeddingPrice",
+    "AiModelCapabilities",
     "AiPricesResponse",
     "AiPricesResponseWrapper",
     "AiProviderArrayWrapper",
@@ -368,8 +369,9 @@ __all__ = [
     "EngineType",
     "EntryType",
     "ExchangeToken200Response",
-    "ExportChatRequestBodyInteger",
-    "ExportMessageRequestBodyInteger",
+    "ExportChatRequestBody",
+    "ExportChatRequestBodyFolderId",
+    "ExportMessageRequestBody",
     "ExternalDatabaseSettings",
     "ExternalDatabaseType",
     "ExternalShareDto",
@@ -379,15 +381,11 @@ __all__ = [
     "FeedbackConfig",
     "FileConflictResolveType",
     "FileDtoInteger",
-    "FileDtoIntegerAllOfViewAccessibility",
+    "FileDtoIntegerViewAccessibility",
     "FileEntryBaseArrayWrapper",
     "FileEntryBaseDto",
     "FileEntryBaseWrapper",
     "FileEntryDtoInteger",
-    "FileEntryDtoIntegerAllOfAvailableShareRights",
-    "FileEntryDtoIntegerAllOfSecurity",
-    "FileEntryDtoIntegerAllOfShareSettings",
-    "FileEntryDtoString",
     "FileEntryIntegerArrayWrapper",
     "FileEntryType",
     "FileIntegerArrayWrapper",
@@ -431,6 +429,9 @@ __all__ = [
     "FolderContentIntegerArrayWrapper",
     "FolderContentIntegerWrapper",
     "FolderDtoInteger",
+    "FolderDtoIntegerAvailableShareRights",
+    "FolderDtoIntegerSecurity",
+    "FolderDtoIntegerShareSettings",
     "FolderDtoString",
     "FolderIntegerArrayWrapper",
     "FolderIntegerWrapper",
@@ -549,6 +550,9 @@ __all__ = [
     "MobileRequestsDto",
     "ModelArrayWrapper",
     "ModelDto",
+    "ModelSettingsArrayWrapper",
+    "ModelSettingsDto",
+    "ModelSettingsItemDto",
     "Module",
     "ModuleWrapper",
     "MultiSizeLogoCover",
@@ -600,6 +604,7 @@ __all__ = [
     "PermissionsConfig",
     "PluginsConfig",
     "PluginsDto",
+    "PreviewProviderModelsRequestDto",
     "PriceDto",
     "ProblemDetail",
     "ProductAdministratorDto",
@@ -687,7 +692,6 @@ __all__ = [
     "SettingsWrapper",
     "SetupCode",
     "SetupCodeWrapper",
-    "SexEnum",
     "ShareFilterType",
     "SignupAccountRequestDto",
     "Size",
@@ -777,6 +781,8 @@ __all__ = [
     "TenantWalletSettingsWrapper",
     "TenantWrapper",
     "TerminateRequestDto",
+    "TfaAppCodeArrayWrapper",
+    "TfaAppCodeDto",
     "TfaRequestsDto",
     "TfaRequestsDtoType",
     "TfaSettingsArrayWrapper",
@@ -868,6 +874,8 @@ __all__ = [
     "WizardRequestsDto",
     "WizardSettings",
     "WizardSettingsWrapper",
+    "XlsxReportResponseDto",
+    "XlsxReportResponseWrapper",
 ]
 
 # import apis into sdk package
@@ -985,6 +993,7 @@ from docspace_api_sdk.models.ai_chat_model_pricing import AiChatModelPricing as 
 from docspace_api_sdk.models.ai_chat_price import AiChatPrice as AiChatPrice
 from docspace_api_sdk.models.ai_embedding_model_pricing import AiEmbeddingModelPricing as AiEmbeddingModelPricing
 from docspace_api_sdk.models.ai_embedding_price import AiEmbeddingPrice as AiEmbeddingPrice
+from docspace_api_sdk.models.ai_model_capabilities import AiModelCapabilities as AiModelCapabilities
 from docspace_api_sdk.models.ai_prices_response import AiPricesResponse as AiPricesResponse
 from docspace_api_sdk.models.ai_prices_response_wrapper import AiPricesResponseWrapper as AiPricesResponseWrapper
 from docspace_api_sdk.models.ai_provider_array_wrapper import AiProviderArrayWrapper as AiProviderArrayWrapper
@@ -1219,8 +1228,9 @@ from docspace_api_sdk.models.encryption_settings_wrapper import EncryptionSettin
 from docspace_api_sdk.models.engine_type import EngineType as EngineType
 from docspace_api_sdk.models.entry_type import EntryType as EntryType
 from docspace_api_sdk.models.exchange_token200_response import ExchangeToken200Response as ExchangeToken200Response
-from docspace_api_sdk.models.export_chat_request_body_integer import ExportChatRequestBodyInteger as ExportChatRequestBodyInteger
-from docspace_api_sdk.models.export_message_request_body_integer import ExportMessageRequestBodyInteger as ExportMessageRequestBodyInteger
+from docspace_api_sdk.models.export_chat_request_body import ExportChatRequestBody as ExportChatRequestBody
+from docspace_api_sdk.models.export_chat_request_body_folder_id import ExportChatRequestBodyFolderId as ExportChatRequestBodyFolderId
+from docspace_api_sdk.models.export_message_request_body import ExportMessageRequestBody as ExportMessageRequestBody
 from docspace_api_sdk.models.external_database_settings import ExternalDatabaseSettings as ExternalDatabaseSettings
 from docspace_api_sdk.models.external_database_type import ExternalDatabaseType as ExternalDatabaseType
 from docspace_api_sdk.models.external_share_dto import ExternalShareDto as ExternalShareDto
@@ -1230,15 +1240,11 @@ from docspace_api_sdk.models.feature_used_dto import FeatureUsedDto as FeatureUs
 from docspace_api_sdk.models.feedback_config import FeedbackConfig as FeedbackConfig
 from docspace_api_sdk.models.file_conflict_resolve_type import FileConflictResolveType as FileConflictResolveType
 from docspace_api_sdk.models.file_dto_integer import FileDtoInteger as FileDtoInteger
-from docspace_api_sdk.models.file_dto_integer_all_of_view_accessibility import FileDtoIntegerAllOfViewAccessibility as FileDtoIntegerAllOfViewAccessibility
+from docspace_api_sdk.models.file_dto_integer_view_accessibility import FileDtoIntegerViewAccessibility as FileDtoIntegerViewAccessibility
 from docspace_api_sdk.models.file_entry_base_array_wrapper import FileEntryBaseArrayWrapper as FileEntryBaseArrayWrapper
 from docspace_api_sdk.models.file_entry_base_dto import FileEntryBaseDto as FileEntryBaseDto
 from docspace_api_sdk.models.file_entry_base_wrapper import FileEntryBaseWrapper as FileEntryBaseWrapper
 from docspace_api_sdk.models.file_entry_dto_integer import FileEntryDtoInteger as FileEntryDtoInteger
-from docspace_api_sdk.models.file_entry_dto_integer_all_of_available_share_rights import FileEntryDtoIntegerAllOfAvailableShareRights as FileEntryDtoIntegerAllOfAvailableShareRights
-from docspace_api_sdk.models.file_entry_dto_integer_all_of_security import FileEntryDtoIntegerAllOfSecurity as FileEntryDtoIntegerAllOfSecurity
-from docspace_api_sdk.models.file_entry_dto_integer_all_of_share_settings import FileEntryDtoIntegerAllOfShareSettings as FileEntryDtoIntegerAllOfShareSettings
-from docspace_api_sdk.models.file_entry_dto_string import FileEntryDtoString as FileEntryDtoString
 from docspace_api_sdk.models.file_entry_integer_array_wrapper import FileEntryIntegerArrayWrapper as FileEntryIntegerArrayWrapper
 from docspace_api_sdk.models.file_entry_type import FileEntryType as FileEntryType
 from docspace_api_sdk.models.file_integer_array_wrapper import FileIntegerArrayWrapper as FileIntegerArrayWrapper
@@ -1282,6 +1288,9 @@ from docspace_api_sdk.models.folder_content_dto_integer import FolderContentDtoI
 from docspace_api_sdk.models.folder_content_integer_array_wrapper import FolderContentIntegerArrayWrapper as FolderContentIntegerArrayWrapper
 from docspace_api_sdk.models.folder_content_integer_wrapper import FolderContentIntegerWrapper as FolderContentIntegerWrapper
 from docspace_api_sdk.models.folder_dto_integer import FolderDtoInteger as FolderDtoInteger
+from docspace_api_sdk.models.folder_dto_integer_available_share_rights import FolderDtoIntegerAvailableShareRights as FolderDtoIntegerAvailableShareRights
+from docspace_api_sdk.models.folder_dto_integer_security import FolderDtoIntegerSecurity as FolderDtoIntegerSecurity
+from docspace_api_sdk.models.folder_dto_integer_share_settings import FolderDtoIntegerShareSettings as FolderDtoIntegerShareSettings
 from docspace_api_sdk.models.folder_dto_string import FolderDtoString as FolderDtoString
 from docspace_api_sdk.models.folder_integer_array_wrapper import FolderIntegerArrayWrapper as FolderIntegerArrayWrapper
 from docspace_api_sdk.models.folder_integer_wrapper import FolderIntegerWrapper as FolderIntegerWrapper
@@ -1400,6 +1409,9 @@ from docspace_api_sdk.models.mobile_phone_activation_status import MobilePhoneAc
 from docspace_api_sdk.models.mobile_requests_dto import MobileRequestsDto as MobileRequestsDto
 from docspace_api_sdk.models.model_array_wrapper import ModelArrayWrapper as ModelArrayWrapper
 from docspace_api_sdk.models.model_dto import ModelDto as ModelDto
+from docspace_api_sdk.models.model_settings_array_wrapper import ModelSettingsArrayWrapper as ModelSettingsArrayWrapper
+from docspace_api_sdk.models.model_settings_dto import ModelSettingsDto as ModelSettingsDto
+from docspace_api_sdk.models.model_settings_item_dto import ModelSettingsItemDto as ModelSettingsItemDto
 from docspace_api_sdk.models.module import Module as Module
 from docspace_api_sdk.models.module_wrapper import ModuleWrapper as ModuleWrapper
 from docspace_api_sdk.models.multi_size_logo_cover import MultiSizeLogoCover as MultiSizeLogoCover
@@ -1451,6 +1463,7 @@ from docspace_api_sdk.models.payments import Payments as Payments
 from docspace_api_sdk.models.permissions_config import PermissionsConfig as PermissionsConfig
 from docspace_api_sdk.models.plugins_config import PluginsConfig as PluginsConfig
 from docspace_api_sdk.models.plugins_dto import PluginsDto as PluginsDto
+from docspace_api_sdk.models.preview_provider_models_request_dto import PreviewProviderModelsRequestDto as PreviewProviderModelsRequestDto
 from docspace_api_sdk.models.price_dto import PriceDto as PriceDto
 from docspace_api_sdk.models.problem_detail import ProblemDetail as ProblemDetail
 from docspace_api_sdk.models.product_administrator_dto import ProductAdministratorDto as ProductAdministratorDto
@@ -1538,7 +1551,6 @@ from docspace_api_sdk.models.settings_request_dto import SettingsRequestDto as S
 from docspace_api_sdk.models.settings_wrapper import SettingsWrapper as SettingsWrapper
 from docspace_api_sdk.models.setup_code import SetupCode as SetupCode
 from docspace_api_sdk.models.setup_code_wrapper import SetupCodeWrapper as SetupCodeWrapper
-from docspace_api_sdk.models.sex_enum import SexEnum as SexEnum
 from docspace_api_sdk.models.share_filter_type import ShareFilterType as ShareFilterType
 from docspace_api_sdk.models.signup_account_request_dto import SignupAccountRequestDto as SignupAccountRequestDto
 from docspace_api_sdk.models.size import Size as Size
@@ -1628,6 +1640,8 @@ from docspace_api_sdk.models.tenant_wallet_settings import TenantWalletSettings 
 from docspace_api_sdk.models.tenant_wallet_settings_wrapper import TenantWalletSettingsWrapper as TenantWalletSettingsWrapper
 from docspace_api_sdk.models.tenant_wrapper import TenantWrapper as TenantWrapper
 from docspace_api_sdk.models.terminate_request_dto import TerminateRequestDto as TerminateRequestDto
+from docspace_api_sdk.models.tfa_app_code_array_wrapper import TfaAppCodeArrayWrapper as TfaAppCodeArrayWrapper
+from docspace_api_sdk.models.tfa_app_code_dto import TfaAppCodeDto as TfaAppCodeDto
 from docspace_api_sdk.models.tfa_requests_dto import TfaRequestsDto as TfaRequestsDto
 from docspace_api_sdk.models.tfa_requests_dto_type import TfaRequestsDtoType as TfaRequestsDtoType
 from docspace_api_sdk.models.tfa_settings_array_wrapper import TfaSettingsArrayWrapper as TfaSettingsArrayWrapper
@@ -1719,4 +1733,6 @@ from docspace_api_sdk.models.white_label_requests_dto import WhiteLabelRequestsD
 from docspace_api_sdk.models.wizard_requests_dto import WizardRequestsDto as WizardRequestsDto
 from docspace_api_sdk.models.wizard_settings import WizardSettings as WizardSettings
 from docspace_api_sdk.models.wizard_settings_wrapper import WizardSettingsWrapper as WizardSettingsWrapper
+from docspace_api_sdk.models.xlsx_report_response_dto import XlsxReportResponseDto as XlsxReportResponseDto
+from docspace_api_sdk.models.xlsx_report_response_wrapper import XlsxReportResponseWrapper as XlsxReportResponseWrapper
 
