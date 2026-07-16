@@ -19,8 +19,6 @@ Name | Type | Description | Notes
 **private** | **bool** | Specifies whether the room to be created is private or not. | [optional] 
 **share** | [**List[FileShareParams]**](FileShareParams.md) | The collection of sharing parameters. | [optional] 
 **chat_settings** | [**ChatSettings**](ChatSettings.md) |  | [optional] 
-**send_form_to_external_db** | **bool** | Specifies whether to send form data to external database. | [optional] 
-**save_form_as_xlsx** | **bool** | Specifies whether to save form data as XLSX file. | [optional] 
 
 ## Example
 

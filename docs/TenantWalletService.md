@@ -1,11 +1,7 @@
 # TenantWalletService
-[-18 - AISearch, -14 - Admin, -13 - AITools, -12 - Backup, -11 - Storage]
+[-13 - AITools, -12 - Backup, -11 - Storage]
 
 ## Enum
-
-* `AISearch` (value: `-18`)
-
-* `Admin` (value: `-14`)
 
 * `AITools` (value: `-13`)
 

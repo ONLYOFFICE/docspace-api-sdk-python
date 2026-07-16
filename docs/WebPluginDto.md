@@ -24,7 +24,6 @@ Name | Type | Description | Notes
 **settings** | **str** | The web plugin settings. | 
 **name_locale** | **Dict[str, Optional[str]]** | The web plugin localized name. | [optional] 
 **description_locale** | **Dict[str, Optional[str]]** | The web plugin localized description. | [optional] 
-**runtime** | **str** | The web plugin loading method | [optional] 
 
 ## Example
 

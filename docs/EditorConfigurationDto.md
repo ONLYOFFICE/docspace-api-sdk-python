@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **create_url** | **str** | The creation URL of the editor. | [optional] 
 **customization** | [**CustomizationConfigDto**](CustomizationConfigDto.md) |  | [optional] 
 **embedded** | [**EmbeddedConfig**](EmbeddedConfig.md) |  | [optional] 
-**encryption_keys** | [**List[EncryptionKeyDto]**](EncryptionKeyDto.md) | The encryption keys of the editor configuration. | [optional] 
+**encryption_keys** | [**EncryptionKeysConfig**](EncryptionKeysConfig.md) |  | [optional] 
 **lang** | **str** | The language of the editor configuration. | 
 **mode** | **str** | The mode of the editor configuration. | 
 **mode_write** | **bool** | Specifies if the mode is write of the editor configuration. | [optional] 

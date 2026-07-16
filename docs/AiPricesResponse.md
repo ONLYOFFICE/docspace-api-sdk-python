@@ -6,8 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **chat** | [**List[AiChatModelPricing]**](AiChatModelPricing.md) |  | 
 **embedding** | [**List[AiEmbeddingModelPricing]**](AiEmbeddingModelPricing.md) |  | 
-**image** | [**List[AiImageModelPricing]**](AiImageModelPricing.md) |  | 
-**search** | [**List[AiWebSearchPricing]**](AiWebSearchPricing.md) |  | 
+**web_search** | [**AiWebSearchPricing**](AiWebSearchPricing.md) |  | 
 **currency** | [**CurrencyInfo**](CurrencyInfo.md) |  | 
 
 ## Example

@@ -8,7 +8,6 @@ Name | Type | Description | Notes
 **alias** | **str** |  | [optional] 
 **owned_by** | **str** |  | [optional] 
 **provider** | **str** |  | [optional] 
-**link** | **str** |  | [optional] 
 **price** | [**AiChatPrice**](AiChatPrice.md) |  | 
 
 ## Example

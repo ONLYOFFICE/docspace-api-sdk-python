@@ -24,16 +24,17 @@ from typing_extensions import Self
 
 class OperationStatus(int, Enum):
     """
-    [0 - Pending, 1 - Completed, 2 - Rejected, 3 - Canceled]
+    [0 - Any, 1 - Pending, 2 - Completed, 4 - Rejected, 8 - Canceled]
     """
 
     """
     allowed enum values
     """
-    Pending = 0
-    Completed = 1
-    Rejected = 2
-    Canceled = 3
+    Any = 0
+    Pending = 1
+    Completed = 2
+    Rejected = 4
+    Canceled = 8
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:

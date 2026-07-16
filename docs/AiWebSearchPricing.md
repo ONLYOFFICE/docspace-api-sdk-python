@@ -4,10 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** |  | [optional] 
 **provider** | **str** |  | [optional] 
-**price** | **float** |  | [optional] 
-**link** | **str** |  | [optional] 
+**search** | **float** |  | [optional] 
+**contents** | **float** |  | [optional] 
 
 ## Example
 

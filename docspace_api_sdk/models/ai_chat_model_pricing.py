@@ -17,29 +17,33 @@
 
 
 from __future__ import annotations
-from inspect import getfullargspec
-import json
 import pprint
 import re  # noqa: F401
+import json
+
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from docspace_api_sdk.models.ai_chat_price import AiChatPrice
-from typing import Union, Any, List, Set, TYPE_CHECKING, Optional, Dict
-from typing_extensions import Literal, Self
-from pydantic import Field
-from docspace_api_sdk.models.ai_model_pricing_ai_chat_price import AiModelPricingAiChatPrice
+from typing import Optional, Set
+from typing_extensions import Self
 
-class AiChatModelPricing(AiModelPricingAiChatPrice):
+class AiChatModelPricing(BaseModel):
     """
     AiChatModelPricing
-    """
-
+    """ # noqa: E501
+    id: Optional[StrictStr]
+    alias: Optional[StrictStr] = None
+    owned_by: Optional[StrictStr] = Field(default=None, alias="ownedBy")
+    provider: Optional[StrictStr] = None
+    price: AiChatPrice
+    __properties: ClassVar[List[str]] = ["id", "alias", "ownedBy", "provider", "price"]
 
     model_config = ConfigDict(
         populate_by_name=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
+
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -96,27 +100,25 @@ class AiChatModelPricing(AiModelPricingAiChatPrice):
         if self.provider is None and "provider" in self.model_fields_set:
             _dict['provider'] = None
 
-        # set to None if link (nullable) is None
-        # and model_fields_set contains the field
-        if self.link is None and "link" in self.model_fields_set:
-            _dict['link'] = None
-
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance from a dict"""
+        """Create an instance of AiChatModelPricing from a dict"""
         if obj is None:
             return None
+
+
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        base_obj = super().from_dict(obj)
-        base_dict = base_obj.model_dump() if hasattr(base_obj, "model_dump") else dict(base_obj or {})
-
-        extra_fields = {
-        }
-        all_fields = {**base_dict, **extra_fields}
-        return cls.model_validate(all_fields)
+        _obj = cls.model_validate({
+            "id": obj.get("id"),
+            "alias": obj.get("alias"),
+            "ownedBy": obj.get("ownedBy"),
+            "provider": obj.get("provider"),
+            "price": AiChatPrice.from_dict(obj["price"]) if obj.get("price") is not None else None
+        })
+        return _obj
 
 

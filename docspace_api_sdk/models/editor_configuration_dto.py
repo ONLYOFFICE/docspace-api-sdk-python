@@ -26,7 +26,7 @@ from typing import Any, ClassVar, Dict, List, Optional
 from docspace_api_sdk.models.co_editing_config import CoEditingConfig
 from docspace_api_sdk.models.customization_config_dto import CustomizationConfigDto
 from docspace_api_sdk.models.embedded_config import EmbeddedConfig
-from docspace_api_sdk.models.encryption_key_dto import EncryptionKeyDto
+from docspace_api_sdk.models.encryption_keys_config import EncryptionKeysConfig
 from docspace_api_sdk.models.plugins_config import PluginsConfig
 from docspace_api_sdk.models.recent_config import RecentConfig
 from docspace_api_sdk.models.templates_config import TemplatesConfig
@@ -43,7 +43,7 @@ class EditorConfigurationDto(BaseModel):
     create_url: Optional[StrictStr] = Field(default=None, description="The creation URL of the editor.", alias="createUrl")
     customization: Optional[CustomizationConfigDto] = None
     embedded: Optional[EmbeddedConfig] = None
-    encryption_keys: Optional[List[EncryptionKeyDto]] = Field(default=None, description="The encryption keys of the editor configuration.", alias="encryptionKeys")
+    encryption_keys: Optional[EncryptionKeysConfig] = Field(default=None, alias="encryptionKeys")
     lang: Optional[StrictStr] = Field(description="The language of the editor configuration.")
     mode: Optional[StrictStr] = Field(description="The mode of the editor configuration.")
     mode_write: Optional[StrictBool] = Field(default=None, description="Specifies if the mode is write of the editor configuration.", alias="modeWrite")
@@ -101,13 +101,9 @@ class EditorConfigurationDto(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of embedded
         if self.embedded:
             _dict['embedded'] = self.embedded.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of each item in encryption_keys (list)
-        _items = []
+        # override the default output from pydantic by calling `to_dict()` of encryption_keys
         if self.encryption_keys:
-            for _item_encryption_keys in self.encryption_keys:
-                if _item_encryption_keys:
-                    _items.append(_item_encryption_keys.to_dict())
-            _dict['encryptionKeys'] = _items
+            _dict['encryptionKeys'] = self.encryption_keys.to_dict()
         # override the default output from pydantic by calling `to_dict()` of plugins
         if self.plugins:
             _dict['plugins'] = self.plugins.to_dict()
@@ -137,11 +133,6 @@ class EditorConfigurationDto(BaseModel):
         # and model_fields_set contains the field
         if self.create_url is None and "create_url" in self.model_fields_set:
             _dict['createUrl'] = None
-
-        # set to None if encryption_keys (nullable) is None
-        # and model_fields_set contains the field
-        if self.encryption_keys is None and "encryption_keys" in self.model_fields_set:
-            _dict['encryptionKeys'] = None
 
         # set to None if lang (nullable) is None
         # and model_fields_set contains the field
@@ -181,7 +172,7 @@ class EditorConfigurationDto(BaseModel):
             "createUrl": obj.get("createUrl"),
             "customization": CustomizationConfigDto.from_dict(obj["customization"]) if obj.get("customization") is not None else None,
             "embedded": EmbeddedConfig.from_dict(obj["embedded"]) if obj.get("embedded") is not None else None,
-            "encryptionKeys": [EncryptionKeyDto.from_dict(_item) for _item in obj["encryptionKeys"]] if obj.get("encryptionKeys") is not None else None,
+            "encryptionKeys": EncryptionKeysConfig.from_dict(obj["encryptionKeys"]) if obj.get("encryptionKeys") is not None else None,
             "lang": obj.get("lang"),
             "mode": obj.get("mode"),
             "modeWrite": obj.get("modeWrite"),

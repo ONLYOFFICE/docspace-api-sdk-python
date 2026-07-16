@@ -23,7 +23,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictInt
 from typing import Any, ClassVar, Dict, List, Optional
-from docspace_api_sdk.models.duplicate_request_dto_all_of_file_ids import DuplicateRequestDtoAllOfFileIds
+from docspace_api_sdk.models.continue_chat_body_files_inner import ContinueChatBodyFilesInner
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -31,7 +31,7 @@ class UpdateRoomsQuotaRequestDtoInteger(BaseModel):
     """
     The request parameters for updating the room quota.
     """ # noqa: E501
-    room_ids: Optional[List[DuplicateRequestDtoAllOfFileIds]] = Field(default=None, description="The list of room IDs.", alias="roomIds")
+    room_ids: Optional[List[ContinueChatBodyFilesInner]] = Field(default=None, description="The list of room IDs.", alias="roomIds")
     quota: Optional[StrictInt] = Field(default=None, description="The room quota.")
     __properties: ClassVar[List[str]] = ["roomIds", "quota"]
 
@@ -99,7 +99,7 @@ class UpdateRoomsQuotaRequestDtoInteger(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "roomIds": [DuplicateRequestDtoAllOfFileIds.from_dict(_item) for _item in obj["roomIds"]] if obj.get("roomIds") is not None else None,
+            "roomIds": [ContinueChatBodyFilesInner.from_dict(_item) for _item in obj["roomIds"]] if obj.get("roomIds") is not None else None,
             "quota": obj.get("quota")
         })
         return _obj

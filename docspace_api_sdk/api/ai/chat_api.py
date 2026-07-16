@@ -28,9 +28,7 @@ from uuid import UUID
 from docspace_api_sdk.models.chat_array_wrapper import ChatArrayWrapper
 from docspace_api_sdk.models.chat_wrapper import ChatWrapper
 from docspace_api_sdk.models.continue_chat_body import ContinueChatBody
-from docspace_api_sdk.models.editor_tool_decision_request_body import EditorToolDecisionRequestBody
 from docspace_api_sdk.models.export_chat_request_body import ExportChatRequestBody
-from docspace_api_sdk.models.generated_file_wrapper import GeneratedFileWrapper
 from docspace_api_sdk.models.message_array_wrapper import MessageArrayWrapper
 from docspace_api_sdk.models.model_array_wrapper import ModelArrayWrapper
 from docspace_api_sdk.models.rename_chat_body import RenameChatBody
@@ -124,8 +122,7 @@ class ChatApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -202,8 +199,7 @@ class ChatApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -280,8 +276,7 @@ class ChatApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -429,8 +424,7 @@ class ChatApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -501,8 +495,7 @@ class ChatApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -573,8 +566,7 @@ class ChatApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -710,8 +702,7 @@ class ChatApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -786,8 +777,7 @@ class ChatApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -862,8 +852,7 @@ class ChatApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1011,8 +1000,7 @@ class ChatApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1083,8 +1071,7 @@ class ChatApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1155,8 +1142,7 @@ class ChatApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1294,8 +1280,7 @@ class ChatApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1365,8 +1350,7 @@ class ChatApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1436,8 +1420,7 @@ class ChatApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1587,8 +1570,7 @@ class ChatApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1668,8 +1650,7 @@ class ChatApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1749,8 +1730,7 @@ class ChatApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1907,8 +1887,7 @@ class ChatApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1987,8 +1966,7 @@ class ChatApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2067,8 +2045,7 @@ class ChatApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2218,8 +2195,7 @@ class ChatApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2291,8 +2267,7 @@ class ChatApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2364,8 +2339,7 @@ class ChatApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2507,8 +2481,7 @@ class ChatApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2582,8 +2555,7 @@ class ChatApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2657,8 +2629,7 @@ class ChatApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2810,8 +2781,7 @@ class ChatApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2886,8 +2856,7 @@ class ChatApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2962,8 +2931,7 @@ class ChatApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -3059,315 +3027,6 @@ class ChatApi:
 
 
     @validate_call
-    def resolve_editor_tool(
-        self,
-        call_id: Annotated[StrictStr, Field(description="The unique identifier of the pending tool call awaiting the user's decision.")],
-        editor_tool_decision_request_body: Annotated[EditorToolDecisionRequestBody, Field(description="The decision parameters.")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> GeneratedFileWrapper:
-        """Resolve a pending editor file-generation tool
-
-        Submits the user's approval or denial for a pending editor generation tool call (docx, form, presentation).  On approval the file is created from the original tool arguments and information about it is returned,  while the suspended chat tool is resumed with the same result so the AI session can continue.
-
-        :param call_id: The unique identifier of the pending tool call awaiting the user's decision. (required)
-        :type call_id: str
-        :param editor_tool_decision_request_body: The decision parameters. (required)
-        :type editor_tool_decision_request_body: EditorToolDecisionRequestBody
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._resolve_editor_tool_serialize(
-            call_id=call_id,
-            editor_tool_decision_request_body=editor_tool_decision_request_body,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "GeneratedFileWrapper",
-            '401': None,
-            '429': None,
-            '502': None,
-            '503': None,
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        ).data
-
-
-    @validate_call
-    def resolve_editor_tool_with_http_info(
-        self,
-        call_id: Annotated[StrictStr, Field(description="The unique identifier of the pending tool call awaiting the user's decision.")],
-        editor_tool_decision_request_body: Annotated[EditorToolDecisionRequestBody, Field(description="The decision parameters.")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[GeneratedFileWrapper]:
-        """Resolve a pending editor file-generation tool
-
-        Submits the user's approval or denial for a pending editor generation tool call (docx, form, presentation).  On approval the file is created from the original tool arguments and information about it is returned,  while the suspended chat tool is resumed with the same result so the AI session can continue.
-
-        :param call_id: The unique identifier of the pending tool call awaiting the user's decision. (required)
-        :type call_id: str
-        :param editor_tool_decision_request_body: The decision parameters. (required)
-        :type editor_tool_decision_request_body: EditorToolDecisionRequestBody
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._resolve_editor_tool_serialize(
-            call_id=call_id,
-            editor_tool_decision_request_body=editor_tool_decision_request_body,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "GeneratedFileWrapper",
-            '401': None,
-            '429': None,
-            '502': None,
-            '503': None,
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        )
-
-
-    @validate_call
-    def resolve_editor_tool_without_preload_content(
-        self,
-        call_id: Annotated[StrictStr, Field(description="The unique identifier of the pending tool call awaiting the user's decision.")],
-        editor_tool_decision_request_body: Annotated[EditorToolDecisionRequestBody, Field(description="The decision parameters.")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> RESTResponseType:
-        """Resolve a pending editor file-generation tool
-
-        Submits the user's approval or denial for a pending editor generation tool call (docx, form, presentation).  On approval the file is created from the original tool arguments and information about it is returned,  while the suspended chat tool is resumed with the same result so the AI session can continue.
-
-        :param call_id: The unique identifier of the pending tool call awaiting the user's decision. (required)
-        :type call_id: str
-        :param editor_tool_decision_request_body: The decision parameters. (required)
-        :type editor_tool_decision_request_body: EditorToolDecisionRequestBody
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._resolve_editor_tool_serialize(
-            call_id=call_id,
-            editor_tool_decision_request_body=editor_tool_decision_request_body,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "GeneratedFileWrapper",
-            '401': None,
-            '429': None,
-            '502': None,
-            '503': None,
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        return response_data.response
-
-
-    def _resolve_editor_tool_serialize(
-        self,
-        call_id,
-        editor_tool_decision_request_body,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
-    ) -> RequestSerialized:
-
-        _host = None
-
-        _collection_formats: Dict[str, str] = {
-        }
-
-        _path_params: Dict[str, str] = {}
-        _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
-        _form_params: List[Tuple[str, str]] = []
-        _files: Dict[
-            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
-        ] = {}
-        _body_params: Optional[bytes] = None
-
-        # process the path parameters
-        if call_id is not None:
-            _path_params['callId'] = call_id
-        # process the query parameters
-        # process the header parameters
-        # process the form parameters
-        # process the body parameter
-        if editor_tool_decision_request_body is not None:
-            _body_params = editor_tool_decision_request_body
-
-
-        # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
-            _header_params['Accept'] = self.api_client.select_header_accept(
-                [
-                    'application/json'
-                ]
-            )
-
-        # set the HTTP header `Content-Type`
-        if _content_type:
-            _header_params['Content-Type'] = _content_type
-        else:
-            _default_content_type = (
-                self.api_client.select_header_content_type(
-                    [
-                        'application/json'
-                    ]
-                )
-            )
-            if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
-
-        # authentication setting
-        _auth_settings: List[str] = [
-            'Basic', 
-            'OAuth2', 
-            'ApiKeyBearer', 
-            'asc_auth_key', 
-            'Bearer', 
-            'OpenId'
-        ]
-
-
-        resource_path = "/api/2.0/ai/chats/tool-files/{callId}/decision"
-
-        return self.api_client.param_serialize(
-            method='POST',
-            resource_path=resource_path,
-            path_params=_path_params,
-            query_params=_query_params,
-            header_params=_header_params,
-            body=_body_params,
-            post_params=_form_params,
-            files=_files,
-            auth_settings=_auth_settings,
-            collection_formats=_collection_formats,
-            _host=_host,
-            _request_auth=_request_auth
-        )
-
-
-
-
-    @validate_call
     def set_user_chats_settings(
         self,
         room_id: Annotated[StrictInt, Field(description="The identifier of the room whose chat settings are to be updated.")],
@@ -3432,8 +3091,7 @@ class ChatApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -3509,8 +3167,7 @@ class ChatApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -3586,8 +3243,7 @@ class ChatApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -3748,8 +3404,7 @@ class ChatApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -3826,8 +3481,7 @@ class ChatApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -3904,8 +3558,7 @@ class ChatApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )

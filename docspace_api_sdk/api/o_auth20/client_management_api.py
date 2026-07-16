@@ -114,8 +114,7 @@ class ClientManagementApi:
             '415': "ProblemDetail",
             '429': "ProblemDetail",
             '500': "ProblemDetail",
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -191,8 +190,7 @@ class ClientManagementApi:
             '415': "ProblemDetail",
             '429': "ProblemDetail",
             '500': "ProblemDetail",
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -268,8 +266,7 @@ class ClientManagementApi:
             '415': "ProblemDetail",
             '429': "ProblemDetail",
             '500': "ProblemDetail",
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -419,8 +416,7 @@ class ClientManagementApi:
             '415': "ProblemDetail",
             '429': "ProblemDetail",
             '500': "ProblemDetail",
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -491,8 +487,7 @@ class ClientManagementApi:
             '415': "ProblemDetail",
             '429': "ProblemDetail",
             '500': "ProblemDetail",
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -563,8 +558,7 @@ class ClientManagementApi:
             '415': "ProblemDetail",
             '429': "ProblemDetail",
             '500': "ProblemDetail",
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -711,8 +705,7 @@ class ClientManagementApi:
             '404': "ProblemDetail",
             '429': "ProblemDetail",
             '500': "ProblemDetail",
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -783,8 +776,7 @@ class ClientManagementApi:
             '404': "ProblemDetail",
             '429': "ProblemDetail",
             '500': "ProblemDetail",
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -855,8 +847,7 @@ class ClientManagementApi:
             '404': "ProblemDetail",
             '429': "ProblemDetail",
             '500': "ProblemDetail",
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -984,8 +975,7 @@ class ClientManagementApi:
             '403': "ProblemDetail",
             '429': "ProblemDetail",
             '500': "ProblemDetail",
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1050,8 +1040,7 @@ class ClientManagementApi:
             '403': "ProblemDetail",
             '429': "ProblemDetail",
             '500': "ProblemDetail",
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1116,8 +1105,7 @@ class ClientManagementApi:
             '403': "ProblemDetail",
             '429': "ProblemDetail",
             '500': "ProblemDetail",
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1242,8 +1230,7 @@ class ClientManagementApi:
             '403': "ProblemDetail",
             '429': "ProblemDetail",
             '500': "ProblemDetail",
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1308,8 +1295,7 @@ class ClientManagementApi:
             '403': "ProblemDetail",
             '429': "ProblemDetail",
             '500': "ProblemDetail",
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1374,8 +1360,7 @@ class ClientManagementApi:
             '403': "ProblemDetail",
             '429': "ProblemDetail",
             '500': "ProblemDetail",
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1506,8 +1491,7 @@ class ClientManagementApi:
             '404': "ProblemDetail",
             '429': "ProblemDetail",
             '500': "ProblemDetail",
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1578,8 +1562,7 @@ class ClientManagementApi:
             '404': "ProblemDetail",
             '429': "ProblemDetail",
             '500': "ProblemDetail",
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1650,8 +1633,7 @@ class ClientManagementApi:
             '404': "ProblemDetail",
             '429': "ProblemDetail",
             '500': "ProblemDetail",
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1786,8 +1768,7 @@ class ClientManagementApi:
             '429': "ProblemDetail",
             '500': "ProblemDetail",
             '503': "ProblemDetail",
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1859,8 +1840,7 @@ class ClientManagementApi:
             '429': "ProblemDetail",
             '500': "ProblemDetail",
             '503': "ProblemDetail",
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1932,8 +1912,7 @@ class ClientManagementApi:
             '429': "ProblemDetail",
             '500': "ProblemDetail",
             '503': "ProblemDetail",
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2072,8 +2051,7 @@ class ClientManagementApi:
             '415': "ProblemDetail",
             '429': "ProblemDetail",
             '500': "ProblemDetail",
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2149,8 +2127,7 @@ class ClientManagementApi:
             '415': "ProblemDetail",
             '429': "ProblemDetail",
             '500': "ProblemDetail",
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2226,8 +2203,7 @@ class ClientManagementApi:
             '415': "ProblemDetail",
             '429': "ProblemDetail",
             '500': "ProblemDetail",
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )

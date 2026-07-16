@@ -34,7 +34,7 @@ class RoomTemplateDto(BaseModel):
     The room template parameters.
     """ # noqa: E501
     room_id: StrictInt = Field(description="The room template ID.", alias="roomId")
-    title: Annotated[str, Field(min_length=0, strict=True, max_length=400)] = Field(description="The room template title.")
+    title: Optional[StrictStr] = Field(default=None, description="The room template title.")
     logo: Optional[LogoRequest] = None
     copy_logo: Optional[StrictBool] = Field(default=None, description="Specifies whether to copy room logo or not.", alias="copyLogo")
     share: Optional[List[StrictStr]] = Field(default=None, description="The collection of email addresses of users with whom to share a room.")
@@ -88,6 +88,11 @@ class RoomTemplateDto(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of logo
         if self.logo:
             _dict['logo'] = self.logo.to_dict()
+        # set to None if title (nullable) is None
+        # and model_fields_set contains the field
+        if self.title is None and "title" in self.model_fields_set:
+            _dict['title'] = None
+
         # set to None if share (nullable) is None
         # and model_fields_set contains the field
         if self.share is None and "share" in self.model_fields_set:

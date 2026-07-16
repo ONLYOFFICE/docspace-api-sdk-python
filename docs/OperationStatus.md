@@ -1,15 +1,17 @@
 # OperationStatus
-[0 - Pending, 1 - Completed, 2 - Rejected, 3 - Canceled]
+[0 - Any, 1 - Pending, 2 - Completed, 4 - Rejected, 8 - Canceled]
 
 ## Enum
 
-* `Pending` (value: `0`)
+* `Any` (value: `0`)
 
-* `Completed` (value: `1`)
+* `Pending` (value: `1`)
 
-* `Rejected` (value: `2`)
+* `Completed` (value: `2`)
 
-* `Canceled` (value: `3`)
+* `Rejected` (value: `4`)
+
+* `Canceled` (value: `8`)
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

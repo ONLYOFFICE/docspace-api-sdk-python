@@ -28,11 +28,11 @@ from typing import Optional
 from typing_extensions import Annotated
 from uuid import UUID
 from docspace_api_sdk.models.create_webhooks_config_requests_dto import CreateWebhooksConfigRequestsDto
+from docspace_api_sdk.models.get_webhook_triggers200_response import GetWebhookTriggers200Response
 from docspace_api_sdk.models.update_webhooks_config_requests_dto import UpdateWebhooksConfigRequestsDto
 from docspace_api_sdk.models.webhook_group_status import WebhookGroupStatus
 from docspace_api_sdk.models.webhook_retry_requests_dto import WebhookRetryRequestsDto
 from docspace_api_sdk.models.webhook_trigger import WebhookTrigger
-from docspace_api_sdk.models.webhook_trigger_array_wrapper import WebhookTriggerArrayWrapper
 from docspace_api_sdk.models.webhooks_config_with_status_array_wrapper import WebhooksConfigWithStatusArrayWrapper
 from docspace_api_sdk.models.webhooks_config_wrapper import WebhooksConfigWrapper
 from docspace_api_sdk.models.webhooks_log_array_wrapper import WebhooksLogArrayWrapper
@@ -122,8 +122,7 @@ class WebhooksApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -195,8 +194,7 @@ class WebhooksApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -268,8 +266,7 @@ class WebhooksApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -423,8 +420,7 @@ class WebhooksApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -497,8 +493,7 @@ class WebhooksApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -571,8 +566,7 @@ class WebhooksApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -720,8 +714,7 @@ class WebhooksApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -788,8 +781,7 @@ class WebhooksApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -856,8 +848,7 @@ class WebhooksApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -948,10 +939,10 @@ class WebhooksApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> WebhookTriggerArrayWrapper:
+    ) -> GetWebhookTriggers200Response:
         """Get webhook triggers
 
-        Returns a list of triggers for a webhook with their availability for the current user.
+        Returns a list of triggers for a webhook.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -983,13 +974,12 @@ class WebhooksApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "WebhookTriggerArrayWrapper",
+            '200': "GetWebhookTriggers200Response",
             '401': None,
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1015,10 +1005,10 @@ class WebhooksApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[WebhookTriggerArrayWrapper]:
+    ) -> ApiResponse[GetWebhookTriggers200Response]:
         """Get webhook triggers
 
-        Returns a list of triggers for a webhook with their availability for the current user.
+        Returns a list of triggers for a webhook.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1050,13 +1040,12 @@ class WebhooksApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "WebhookTriggerArrayWrapper",
+            '200': "GetWebhookTriggers200Response",
             '401': None,
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1085,7 +1074,7 @@ class WebhooksApi:
     ) -> RESTResponseType:
         """Get webhook triggers
 
-        Returns a list of triggers for a webhook with their availability for the current user.
+        Returns a list of triggers for a webhook.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1117,13 +1106,12 @@ class WebhooksApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "WebhookTriggerArrayWrapper",
+            '200': "GetWebhookTriggers200Response",
             '401': None,
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1295,8 +1283,7 @@ class WebhooksApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1403,8 +1390,7 @@ class WebhooksApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1511,8 +1497,7 @@ class WebhooksApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1719,8 +1704,7 @@ class WebhooksApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1792,8 +1776,7 @@ class WebhooksApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1865,8 +1848,7 @@ class WebhooksApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2007,8 +1989,7 @@ class WebhooksApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2081,8 +2062,7 @@ class WebhooksApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2155,8 +2135,7 @@ class WebhooksApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2295,8 +2274,7 @@ class WebhooksApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2367,8 +2345,7 @@ class WebhooksApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2439,8 +2416,7 @@ class WebhooksApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2594,8 +2570,7 @@ class WebhooksApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2668,8 +2643,7 @@ class WebhooksApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2742,8 +2716,7 @@ class WebhooksApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )

@@ -110,8 +110,7 @@ class SecurityApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -177,8 +176,7 @@ class SecurityApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -244,8 +242,7 @@ class SecurityApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -384,8 +381,7 @@ class SecurityApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -459,8 +455,7 @@ class SecurityApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -534,8 +529,7 @@ class SecurityApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -676,8 +670,7 @@ class SecurityApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -743,8 +736,7 @@ class SecurityApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -810,8 +802,7 @@ class SecurityApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -946,8 +937,7 @@ class SecurityApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1017,8 +1007,7 @@ class SecurityApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1088,8 +1077,7 @@ class SecurityApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1227,8 +1215,7 @@ class SecurityApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1298,8 +1285,7 @@ class SecurityApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1369,8 +1355,7 @@ class SecurityApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1452,7 +1437,7 @@ class SecurityApi:
     @validate_call
     def get_web_item_settings_security_info(
         self,
-        ids: Annotated[Optional[List[StrictStr]], Field(description="The list of module identifiers for which to retrieve the security settings.")] = None,
+        ids: Annotated[Optional[List[List[StrictStr]]], Field(description="The list of module identifiers for which to retrieve the security settings.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1508,8 +1493,7 @@ class SecurityApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1523,7 +1507,7 @@ class SecurityApi:
     @validate_call
     def get_web_item_settings_security_info_with_http_info(
         self,
-        ids: Annotated[Optional[List[StrictStr]], Field(description="The list of module identifiers for which to retrieve the security settings.")] = None,
+        ids: Annotated[Optional[List[List[StrictStr]]], Field(description="The list of module identifiers for which to retrieve the security settings.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1579,8 +1563,7 @@ class SecurityApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1594,7 +1577,7 @@ class SecurityApi:
     @validate_call
     def get_web_item_settings_security_info_without_preload_content(
         self,
-        ids: Annotated[Optional[List[StrictStr]], Field(description="The list of module identifiers for which to retrieve the security settings.")] = None,
+        ids: Annotated[Optional[List[List[StrictStr]]], Field(description="The list of module identifiers for which to retrieve the security settings.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1650,8 +1633,7 @@ class SecurityApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1670,7 +1652,7 @@ class SecurityApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'ids': 'multi',
+            'ids': 'csv',
         }
 
         _path_params: Dict[str, str] = {}
@@ -1793,8 +1775,7 @@ class SecurityApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1865,8 +1846,7 @@ class SecurityApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1937,8 +1917,7 @@ class SecurityApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2091,8 +2070,7 @@ class SecurityApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2164,8 +2142,7 @@ class SecurityApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2237,8 +2214,7 @@ class SecurityApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2390,8 +2366,7 @@ class SecurityApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2462,8 +2437,7 @@ class SecurityApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2534,8 +2508,7 @@ class SecurityApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2687,8 +2660,7 @@ class SecurityApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2759,8 +2731,7 @@ class SecurityApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2831,8 +2802,7 @@ class SecurityApi:
             '429': None,
             '502': None,
             '503': None,
-        }
-        response_data = self.api_client.call_api(
+        }        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )

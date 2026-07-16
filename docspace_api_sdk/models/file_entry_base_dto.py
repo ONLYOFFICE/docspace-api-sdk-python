@@ -41,7 +41,6 @@ class FileEntryBaseDto(BaseModel):
     owned_by: Optional[EmployeeDto] = Field(default=None, alias="ownedBy")
     shared: Optional[StrictBool] = Field(default=None, description="Specifies if the file entry is shared via link or not.")
     shared_for_user: Optional[StrictBool] = Field(default=None, description="Specifies if the file entry is shared for user or not.", alias="sharedForUser")
-    shared_external: Optional[StrictBool] = Field(default=None, description="Specifies if the file entry is shared via a public (non-internal) external link.", alias="sharedExternal")
     parent_shared: Optional[StrictBool] = Field(default=None, description="Indicates whether the parent entity is shared.", alias="parentShared")
     short_web_url: Optional[StrictStr] = Field(default=None, description="The short Web URL.", alias="shortWebUrl")
     created: Optional[ApiDateTime] = None
@@ -57,7 +56,7 @@ class FileEntryBaseDto(BaseModel):
     order: Optional[StrictStr] = Field(default=None, description="The order of the file entry.")
     is_favorite: Optional[StrictBool] = Field(default=None, description="Specifies if the file is a favorite or not.", alias="isFavorite")
     file_entry_type: Optional[FileEntryType] = Field(default=None, alias="fileEntryType")
-    __properties: ClassVar[List[str]] = ["title", "access", "sharedBy", "ownedBy", "shared", "sharedForUser", "sharedExternal", "parentShared", "shortWebUrl", "created", "createdBy", "updated", "autoDelete", "rootFolderType", "parentRoomType", "updatedBy", "providerItem", "providerKey", "providerId", "order", "isFavorite", "fileEntryType"]
+    __properties: ClassVar[List[str]] = ["title", "access", "sharedBy", "ownedBy", "shared", "sharedForUser", "parentShared", "shortWebUrl", "created", "createdBy", "updated", "autoDelete", "rootFolderType", "parentRoomType", "updatedBy", "providerItem", "providerKey", "providerId", "order", "isFavorite", "fileEntryType"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -173,7 +172,6 @@ class FileEntryBaseDto(BaseModel):
             "ownedBy": EmployeeDto.from_dict(obj["ownedBy"]) if obj.get("ownedBy") is not None else None,
             "shared": obj.get("shared"),
             "sharedForUser": obj.get("sharedForUser"),
-            "sharedExternal": obj.get("sharedExternal"),
             "parentShared": obj.get("parentShared"),
             "shortWebUrl": obj.get("shortWebUrl"),
             "created": ApiDateTime.from_dict(obj["created"]) if obj.get("created") is not None else None,

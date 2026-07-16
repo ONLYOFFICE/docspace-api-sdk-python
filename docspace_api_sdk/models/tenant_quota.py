@@ -41,7 +41,6 @@ class TenantQuota(BaseModel):
     service_group: Optional[StrictStr] = Field(default=None, description="The service group.", alias="serviceGroup")
     visible: Optional[StrictBool] = Field(default=None, description="Specifies if the tenant quota is visible or not.")
     wallet: Optional[StrictBool] = Field(default=None, description="Specifies if the tenant quota applies to the wallet or not")
-    additional: Optional[StrictBool] = Field(default=None, description="Specifies if the tenant quota is primary or additional.")
     due_date: Optional[datetime] = Field(default=None, description="The quota due date.", alias="dueDate")
     features: Optional[StrictStr] = Field(default=None, description="The tenant quota features.")
     max_file_size: Optional[StrictInt] = Field(default=None, description="The tenant maximum file size.", alias="maxFileSize")
@@ -73,8 +72,7 @@ class TenantQuota(BaseModel):
     backup: Optional[StrictBool] = Field(default=None, description="Specifies if the backup enabled as a wallet service or not.")
     count_ai_agent: Optional[StrictInt] = Field(default=None, description="The number of AI agents.", alias="countAIAgent")
     ai_tools: Optional[StrictBool] = Field(default=None, description="Specifies if the AI tools enabled as a wallet service or not.", alias="aiTools")
-    ai_search: Optional[StrictBool] = Field(default=None, description="Specifies if the AI search enabled as a wallet service or not.", alias="aiSearch")
-    __properties: ClassVar[List[str]] = ["tenantId", "name", "price", "priceCurrencySymbol", "priceISOCurrencySymbol", "productId", "serviceName", "serviceGroup", "visible", "wallet", "additional", "dueDate", "features", "maxFileSize", "maxTotalSize", "countUser", "countRoomAdmin", "usersInRoom", "countRoom", "nonProfit", "trial", "free", "update", "audit", "docsEdition", "ldap", "sso", "statistic", "branding", "customization", "lifetime", "automationApi", "custom", "restore", "oauth", "contentSearch", "thirdParty", "year", "countFreeBackup", "backup", "countAIAgent", "aiTools", "aiSearch"]
+    __properties: ClassVar[List[str]] = ["tenantId", "name", "price", "priceCurrencySymbol", "priceISOCurrencySymbol", "productId", "serviceName", "serviceGroup", "visible", "wallet", "dueDate", "features", "maxFileSize", "maxTotalSize", "countUser", "countRoomAdmin", "usersInRoom", "countRoom", "nonProfit", "trial", "free", "update", "audit", "docsEdition", "ldap", "sso", "statistic", "branding", "customization", "lifetime", "automationApi", "custom", "restore", "oauth", "contentSearch", "thirdParty", "year", "countFreeBackup", "backup", "countAIAgent", "aiTools"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -178,7 +176,6 @@ class TenantQuota(BaseModel):
             "serviceGroup": obj.get("serviceGroup"),
             "visible": obj.get("visible"),
             "wallet": obj.get("wallet"),
-            "additional": obj.get("additional"),
             "dueDate": obj.get("dueDate"),
             "features": obj.get("features"),
             "maxFileSize": obj.get("maxFileSize"),
@@ -209,8 +206,7 @@ class TenantQuota(BaseModel):
             "countFreeBackup": obj.get("countFreeBackup"),
             "backup": obj.get("backup"),
             "countAIAgent": obj.get("countAIAgent"),
-            "aiTools": obj.get("aiTools"),
-            "aiSearch": obj.get("aiSearch")
+            "aiTools": obj.get("aiTools")
         })
         return _obj
 

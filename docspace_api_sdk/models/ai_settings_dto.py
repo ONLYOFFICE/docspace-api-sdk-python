@@ -47,8 +47,7 @@ class AiSettingsDto(BaseModel):
     generate_form_tool_name: Optional[StrictStr] = Field(description="The tool name used by the AI assistant to launch form creation in the editor.", alias="generateFormToolName")
     generate_presentation_tool_name: Optional[StrictStr] = Field(description="The tool name used by the AI assistant to launch presentation creation in the editor.", alias="generatePresentationToolName")
     system_ai_enabled: Optional[StrictBool] = Field(default=None, description="Indicates whether the system-level AI provider is enabled.", alias="systemAiEnabled")
-    recommended_model_for_forms: Optional[StrictStr] = Field(default=None, description="The identifier of the model recommended for form generation.", alias="recommendedModelForForms")
-    __properties: ClassVar[List[str]] = ["webSearchEnabled", "webSearchNeedReset", "vectorizationEnabled", "vectorizationNeedReset", "aiReady", "aiReadyNeedReset", "portalMcpServerId", "embeddingModel", "modelAliases", "knowledgeSearchToolName", "webSearchToolName", "webCrawlingToolName", "generateDocxToolName", "generateFormToolName", "generatePresentationToolName", "systemAiEnabled", "recommendedModelForForms"]
+    __properties: ClassVar[List[str]] = ["webSearchEnabled", "webSearchNeedReset", "vectorizationEnabled", "vectorizationNeedReset", "aiReady", "aiReadyNeedReset", "portalMcpServerId", "embeddingModel", "modelAliases", "knowledgeSearchToolName", "webSearchToolName", "webCrawlingToolName", "generateDocxToolName", "generateFormToolName", "generatePresentationToolName", "systemAiEnabled"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -134,11 +133,6 @@ class AiSettingsDto(BaseModel):
         if self.generate_presentation_tool_name is None and "generate_presentation_tool_name" in self.model_fields_set:
             _dict['generatePresentationToolName'] = None
 
-        # set to None if recommended_model_for_forms (nullable) is None
-        # and model_fields_set contains the field
-        if self.recommended_model_for_forms is None and "recommended_model_for_forms" in self.model_fields_set:
-            _dict['recommendedModelForForms'] = None
-
         return _dict
 
     @classmethod
@@ -167,8 +161,7 @@ class AiSettingsDto(BaseModel):
             "generateDocxToolName": obj.get("generateDocxToolName"),
             "generateFormToolName": obj.get("generateFormToolName"),
             "generatePresentationToolName": obj.get("generatePresentationToolName"),
-            "systemAiEnabled": obj.get("systemAiEnabled"),
-            "recommendedModelForForms": obj.get("recommendedModelForForms")
+            "systemAiEnabled": obj.get("systemAiEnabled")
         })
         return _obj
 

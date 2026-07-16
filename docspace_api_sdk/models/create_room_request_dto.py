@@ -51,9 +51,7 @@ class CreateRoomRequestDto(BaseModel):
     private: Optional[StrictBool] = Field(default=None, description="Specifies whether the room to be created is private or not.")
     share: Optional[List[FileShareParams]] = Field(default=None, description="The collection of sharing parameters.")
     chat_settings: Optional[ChatSettings] = Field(default=None, alias="chatSettings")
-    send_form_to_external_db: Optional[StrictBool] = Field(default=None, description="Specifies whether to send form data to external database.", alias="sendFormToExternalDB")
-    save_form_as_xlsx: Optional[StrictBool] = Field(default=None, description="Specifies whether to save form data as XLSX file.", alias="saveFormAsXLSX")
-    __properties: ClassVar[List[str]] = ["title", "quota", "indexing", "denyDownload", "lifetime", "watermark", "logo", "tags", "color", "cover", "roomType", "private", "share", "chatSettings", "sendFormToExternalDB", "saveFormAsXLSX"]
+    __properties: ClassVar[List[str]] = ["title", "quota", "indexing", "denyDownload", "lifetime", "watermark", "logo", "tags", "color", "cover", "roomType", "private", "share", "chatSettings"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -153,16 +151,6 @@ class CreateRoomRequestDto(BaseModel):
         if self.share is None and "share" in self.model_fields_set:
             _dict['share'] = None
 
-        # set to None if send_form_to_external_db (nullable) is None
-        # and model_fields_set contains the field
-        if self.send_form_to_external_db is None and "send_form_to_external_db" in self.model_fields_set:
-            _dict['sendFormToExternalDB'] = None
-
-        # set to None if save_form_as_xlsx (nullable) is None
-        # and model_fields_set contains the field
-        if self.save_form_as_xlsx is None and "save_form_as_xlsx" in self.model_fields_set:
-            _dict['saveFormAsXLSX'] = None
-
         return _dict
 
     @classmethod
@@ -189,9 +177,7 @@ class CreateRoomRequestDto(BaseModel):
             "roomType": obj.get("roomType"),
             "private": obj.get("private"),
             "share": [FileShareParams.from_dict(_item) for _item in obj["share"]] if obj.get("share") is not None else None,
-            "chatSettings": ChatSettings.from_dict(obj["chatSettings"]) if obj.get("chatSettings") is not None else None,
-            "sendFormToExternalDB": obj.get("sendFormToExternalDB"),
-            "saveFormAsXLSX": obj.get("saveFormAsXLSX")
+            "chatSettings": ChatSettings.from_dict(obj["chatSettings"]) if obj.get("chatSettings") is not None else None
         })
         return _obj
 
