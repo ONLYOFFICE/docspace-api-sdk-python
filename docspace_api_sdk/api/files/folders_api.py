@@ -32,6 +32,7 @@ from docspace_api_sdk.models.check_upload_request import CheckUploadRequest
 from docspace_api_sdk.models.create_folder import CreateFolder
 from docspace_api_sdk.models.delete_folder import DeleteFolder
 from docspace_api_sdk.models.file_entry_base_array_wrapper import FileEntryBaseArrayWrapper
+from docspace_api_sdk.models.file_integer_array_wrapper import FileIntegerArrayWrapper
 from docspace_api_sdk.models.file_integer_wrapper import FileIntegerWrapper
 from docspace_api_sdk.models.file_operation_array_wrapper import FileOperationArrayWrapper
 from docspace_api_sdk.models.file_share_array_wrapper import FileShareArrayWrapper
@@ -45,13 +46,11 @@ from docspace_api_sdk.models.folder_link_request import FolderLinkRequest
 from docspace_api_sdk.models.forms_item_array_wrapper import FormsItemArrayWrapper
 from docspace_api_sdk.models.history_array_wrapper import HistoryArrayWrapper
 from docspace_api_sdk.models.location import Location
-from docspace_api_sdk.models.object_wrapper import ObjectWrapper
 from docspace_api_sdk.models.order_request_dto import OrderRequestDto
 from docspace_api_sdk.models.string_array_wrapper import STRINGArrayWrapper
 from docspace_api_sdk.models.search_area import SearchArea
 from docspace_api_sdk.models.sort_order import SortOrder
 from docspace_api_sdk.models.string_wrapper import StringWrapper
-from docspace_api_sdk.models.upload_request_dto import UploadRequestDto
 from docspace_api_sdk.models.xlsx_report_response_wrapper import XlsxReportResponseWrapper
 
 from docspace_api_sdk.api_client import ApiClient, RequestSerialized
@@ -148,7 +147,8 @@ class FoldersApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -222,7 +222,8 @@ class FoldersApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -296,7 +297,8 @@ class FoldersApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -454,7 +456,8 @@ class FoldersApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -528,7 +531,8 @@ class FoldersApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -602,7 +606,8 @@ class FoldersApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -756,12 +761,14 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
+            '403': None,
             '404': None,
             '401': None,
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -831,12 +838,14 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
+            '403': None,
             '404': None,
             '401': None,
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -906,12 +915,14 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
+            '403': None,
             '404': None,
             '401': None,
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1067,7 +1078,8 @@ class FoldersApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1139,7 +1151,8 @@ class FoldersApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1211,7 +1224,8 @@ class FoldersApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1353,7 +1367,8 @@ class FoldersApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1427,7 +1442,8 @@ class FoldersApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1501,7 +1517,8 @@ class FoldersApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1657,7 +1674,8 @@ class FoldersApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1729,7 +1747,8 @@ class FoldersApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1801,7 +1820,8 @@ class FoldersApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1965,7 +1985,8 @@ class FoldersApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2061,7 +2082,8 @@ class FoldersApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2157,7 +2179,8 @@ class FoldersApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2325,7 +2348,8 @@ class FoldersApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2391,7 +2415,8 @@ class FoldersApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2457,7 +2482,8 @@ class FoldersApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2591,7 +2617,8 @@ class FoldersApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2660,7 +2687,8 @@ class FoldersApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2729,7 +2757,8 @@ class FoldersApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2812,6 +2841,7 @@ class FoldersApi:
         room_id: Annotated[Optional[StrictInt], Field(description="The room ID.")] = None,
         exclude_subject: Annotated[Optional[StrictBool], Field(description="Specifies whether to exclude search by user or group ID.")] = None,
         apply_filter_option: Annotated[Optional[ApplyFilterOption], Field(description="Specifies whether to return only files, only folders, or all elements from the specified folder.")] = None,
+        with_sub_folders: Annotated[Optional[StrictBool], Field(description="Specifies whether to include files from subfolders in the results.")] = None,
         extension: Annotated[Optional[StrictStr], Field(description="Specifies whether to search for the specific file extension.")] = None,
         search_area: Annotated[Optional[SearchArea], Field(description="The search area.")] = None,
         forms_item_key: Annotated[Optional[StrictStr], Field(description="The forms item key.")] = None,
@@ -2853,6 +2883,8 @@ class FoldersApi:
         :type exclude_subject: bool
         :param apply_filter_option: Specifies whether to return only files, only folders, or all elements from the specified folder.
         :type apply_filter_option: ApplyFilterOption
+        :param with_sub_folders: Specifies whether to include files from subfolders in the results.
+        :type with_sub_folders: bool
         :param extension: Specifies whether to search for the specific file extension.
         :type extension: str
         :param search_area: The search area.
@@ -2903,6 +2935,7 @@ class FoldersApi:
             room_id=room_id,
             exclude_subject=exclude_subject,
             apply_filter_option=apply_filter_option,
+            with_sub_folders=with_sub_folders,
             extension=extension,
             search_area=search_area,
             forms_item_key=forms_item_key,
@@ -2926,7 +2959,8 @@ class FoldersApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2947,6 +2981,7 @@ class FoldersApi:
         room_id: Annotated[Optional[StrictInt], Field(description="The room ID.")] = None,
         exclude_subject: Annotated[Optional[StrictBool], Field(description="Specifies whether to exclude search by user or group ID.")] = None,
         apply_filter_option: Annotated[Optional[ApplyFilterOption], Field(description="Specifies whether to return only files, only folders, or all elements from the specified folder.")] = None,
+        with_sub_folders: Annotated[Optional[StrictBool], Field(description="Specifies whether to include files from subfolders in the results.")] = None,
         extension: Annotated[Optional[StrictStr], Field(description="Specifies whether to search for the specific file extension.")] = None,
         search_area: Annotated[Optional[SearchArea], Field(description="The search area.")] = None,
         forms_item_key: Annotated[Optional[StrictStr], Field(description="The forms item key.")] = None,
@@ -2988,6 +3023,8 @@ class FoldersApi:
         :type exclude_subject: bool
         :param apply_filter_option: Specifies whether to return only files, only folders, or all elements from the specified folder.
         :type apply_filter_option: ApplyFilterOption
+        :param with_sub_folders: Specifies whether to include files from subfolders in the results.
+        :type with_sub_folders: bool
         :param extension: Specifies whether to search for the specific file extension.
         :type extension: str
         :param search_area: The search area.
@@ -3038,6 +3075,7 @@ class FoldersApi:
             room_id=room_id,
             exclude_subject=exclude_subject,
             apply_filter_option=apply_filter_option,
+            with_sub_folders=with_sub_folders,
             extension=extension,
             search_area=search_area,
             forms_item_key=forms_item_key,
@@ -3061,7 +3099,8 @@ class FoldersApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -3082,6 +3121,7 @@ class FoldersApi:
         room_id: Annotated[Optional[StrictInt], Field(description="The room ID.")] = None,
         exclude_subject: Annotated[Optional[StrictBool], Field(description="Specifies whether to exclude search by user or group ID.")] = None,
         apply_filter_option: Annotated[Optional[ApplyFilterOption], Field(description="Specifies whether to return only files, only folders, or all elements from the specified folder.")] = None,
+        with_sub_folders: Annotated[Optional[StrictBool], Field(description="Specifies whether to include files from subfolders in the results.")] = None,
         extension: Annotated[Optional[StrictStr], Field(description="Specifies whether to search for the specific file extension.")] = None,
         search_area: Annotated[Optional[SearchArea], Field(description="The search area.")] = None,
         forms_item_key: Annotated[Optional[StrictStr], Field(description="The forms item key.")] = None,
@@ -3123,6 +3163,8 @@ class FoldersApi:
         :type exclude_subject: bool
         :param apply_filter_option: Specifies whether to return only files, only folders, or all elements from the specified folder.
         :type apply_filter_option: ApplyFilterOption
+        :param with_sub_folders: Specifies whether to include files from subfolders in the results.
+        :type with_sub_folders: bool
         :param extension: Specifies whether to search for the specific file extension.
         :type extension: str
         :param search_area: The search area.
@@ -3173,6 +3215,7 @@ class FoldersApi:
             room_id=room_id,
             exclude_subject=exclude_subject,
             apply_filter_option=apply_filter_option,
+            with_sub_folders=with_sub_folders,
             extension=extension,
             search_area=search_area,
             forms_item_key=forms_item_key,
@@ -3196,7 +3239,8 @@ class FoldersApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -3212,6 +3256,7 @@ class FoldersApi:
         room_id,
         exclude_subject,
         apply_filter_option,
+        with_sub_folders,
         extension,
         search_area,
         forms_item_key,
@@ -3269,6 +3314,10 @@ class FoldersApi:
         if apply_filter_option is not None:
             
             _query_params.append(('applyFilterOption', apply_filter_option.value))
+            
+        if with_sub_folders is not None:
+            
+            _query_params.append(('withSubFolders', with_sub_folders))
             
         if extension is not None:
             
@@ -3426,7 +3475,8 @@ class FoldersApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -3514,7 +3564,8 @@ class FoldersApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -3602,7 +3653,8 @@ class FoldersApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -3759,7 +3811,8 @@ class FoldersApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -3828,7 +3881,8 @@ class FoldersApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -3897,7 +3951,8 @@ class FoldersApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -4029,7 +4084,8 @@ class FoldersApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -4099,7 +4155,8 @@ class FoldersApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -4169,7 +4226,8 @@ class FoldersApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -4308,7 +4366,8 @@ class FoldersApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -4379,7 +4438,8 @@ class FoldersApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -4450,7 +4510,8 @@ class FoldersApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -4592,11 +4653,13 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
+            '403': None,
             '404': None,
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -4670,11 +4733,13 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
+            '403': None,
             '404': None,
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -4748,11 +4813,13 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
+            '403': None,
             '404': None,
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -4895,7 +4962,8 @@ class FoldersApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -4966,7 +5034,8 @@ class FoldersApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -5037,7 +5106,8 @@ class FoldersApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -5205,7 +5275,8 @@ class FoldersApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -5305,7 +5376,8 @@ class FoldersApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -5405,7 +5477,8 @@ class FoldersApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -5583,7 +5656,8 @@ class FoldersApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -5654,7 +5728,8 @@ class FoldersApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -5725,7 +5800,8 @@ class FoldersApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -5889,7 +5965,8 @@ class FoldersApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -5985,7 +6062,8 @@ class FoldersApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -6081,7 +6159,8 @@ class FoldersApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -6295,7 +6374,8 @@ class FoldersApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -6407,7 +6487,8 @@ class FoldersApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -6519,7 +6600,8 @@ class FoldersApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -6744,7 +6826,8 @@ class FoldersApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -6844,7 +6927,8 @@ class FoldersApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -6944,7 +7028,8 @@ class FoldersApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -7151,7 +7236,8 @@ class FoldersApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -7251,7 +7337,8 @@ class FoldersApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -7351,7 +7438,8 @@ class FoldersApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -7578,7 +7666,8 @@ class FoldersApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -7698,7 +7787,8 @@ class FoldersApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -7818,7 +7908,8 @@ class FoldersApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -8051,7 +8142,8 @@ class FoldersApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -8167,7 +8259,8 @@ class FoldersApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -8283,7 +8376,8 @@ class FoldersApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -8472,7 +8566,8 @@ class FoldersApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -8547,7 +8642,8 @@ class FoldersApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -8622,7 +8718,8 @@ class FoldersApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -8780,7 +8877,8 @@ class FoldersApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -8854,7 +8952,8 @@ class FoldersApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -8928,7 +9027,8 @@ class FoldersApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -9086,7 +9186,8 @@ class FoldersApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -9160,7 +9261,8 @@ class FoldersApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -9234,7 +9336,8 @@ class FoldersApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -9333,7 +9436,10 @@ class FoldersApi:
     def upload_file(
         self,
         folder_id: Annotated[StrictInt, Field(description="The folder ID to upload a file.")],
-        upload_request_dto: Annotated[Optional[UploadRequestDto], Field(description="The request parameters for uploading a file.")] = None,
+        create_new_if_exist: Annotated[Optional[StrictBool], Field(description="Specifies whether to create the new file if it already exists or not.")] = None,
+        store_original_file: Annotated[Optional[StrictBool], Field(description="Specifies whether to upload documents in the original formats as well or not.")] = None,
+        keep_convert_status: Annotated[Optional[StrictBool], Field(description="Specifies whether to keep the file converting status or not.")] = None,
+        file: Annotated[Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]], Field(description="The file to be uploaded.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -9346,15 +9452,21 @@ class FoldersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ObjectWrapper:
+    ) -> FileIntegerArrayWrapper:
         """Upload a file
 
         Uploads a file specified in the request to the selected folder by single file uploading or standart multipart/form-data method.
 
         :param folder_id: The folder ID to upload a file. (required)
         :type folder_id: int
-        :param upload_request_dto: The request parameters for uploading a file.
-        :type upload_request_dto: UploadRequestDto
+        :param create_new_if_exist: Specifies whether to create the new file if it already exists or not.
+        :type create_new_if_exist: bool
+        :param store_original_file: Specifies whether to upload documents in the original formats as well or not.
+        :type store_original_file: bool
+        :param keep_convert_status: Specifies whether to keep the file converting status or not.
+        :type keep_convert_status: bool
+        :param file: The file to be uploaded.
+        :type file: bytes
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -9379,7 +9491,10 @@ class FoldersApi:
 
         _param = self._upload_file_serialize(
             folder_id=folder_id,
-            upload_request_dto=upload_request_dto,
+            create_new_if_exist=create_new_if_exist,
+            store_original_file=store_original_file,
+            keep_convert_status=keep_convert_status,
+            file=file,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -9387,14 +9502,15 @@ class FoldersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ObjectWrapper",
+            '200': "FileIntegerArrayWrapper",
             '403': None,
             '404': None,
             '401': None,
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -9409,7 +9525,10 @@ class FoldersApi:
     def upload_file_with_http_info(
         self,
         folder_id: Annotated[StrictInt, Field(description="The folder ID to upload a file.")],
-        upload_request_dto: Annotated[Optional[UploadRequestDto], Field(description="The request parameters for uploading a file.")] = None,
+        create_new_if_exist: Annotated[Optional[StrictBool], Field(description="Specifies whether to create the new file if it already exists or not.")] = None,
+        store_original_file: Annotated[Optional[StrictBool], Field(description="Specifies whether to upload documents in the original formats as well or not.")] = None,
+        keep_convert_status: Annotated[Optional[StrictBool], Field(description="Specifies whether to keep the file converting status or not.")] = None,
+        file: Annotated[Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]], Field(description="The file to be uploaded.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -9422,15 +9541,21 @@ class FoldersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[ObjectWrapper]:
+    ) -> ApiResponse[FileIntegerArrayWrapper]:
         """Upload a file
 
         Uploads a file specified in the request to the selected folder by single file uploading or standart multipart/form-data method.
 
         :param folder_id: The folder ID to upload a file. (required)
         :type folder_id: int
-        :param upload_request_dto: The request parameters for uploading a file.
-        :type upload_request_dto: UploadRequestDto
+        :param create_new_if_exist: Specifies whether to create the new file if it already exists or not.
+        :type create_new_if_exist: bool
+        :param store_original_file: Specifies whether to upload documents in the original formats as well or not.
+        :type store_original_file: bool
+        :param keep_convert_status: Specifies whether to keep the file converting status or not.
+        :type keep_convert_status: bool
+        :param file: The file to be uploaded.
+        :type file: bytes
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -9455,7 +9580,10 @@ class FoldersApi:
 
         _param = self._upload_file_serialize(
             folder_id=folder_id,
-            upload_request_dto=upload_request_dto,
+            create_new_if_exist=create_new_if_exist,
+            store_original_file=store_original_file,
+            keep_convert_status=keep_convert_status,
+            file=file,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -9463,14 +9591,15 @@ class FoldersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ObjectWrapper",
+            '200': "FileIntegerArrayWrapper",
             '403': None,
             '404': None,
             '401': None,
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -9485,7 +9614,10 @@ class FoldersApi:
     def upload_file_without_preload_content(
         self,
         folder_id: Annotated[StrictInt, Field(description="The folder ID to upload a file.")],
-        upload_request_dto: Annotated[Optional[UploadRequestDto], Field(description="The request parameters for uploading a file.")] = None,
+        create_new_if_exist: Annotated[Optional[StrictBool], Field(description="Specifies whether to create the new file if it already exists or not.")] = None,
+        store_original_file: Annotated[Optional[StrictBool], Field(description="Specifies whether to upload documents in the original formats as well or not.")] = None,
+        keep_convert_status: Annotated[Optional[StrictBool], Field(description="Specifies whether to keep the file converting status or not.")] = None,
+        file: Annotated[Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]], Field(description="The file to be uploaded.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -9505,8 +9637,14 @@ class FoldersApi:
 
         :param folder_id: The folder ID to upload a file. (required)
         :type folder_id: int
-        :param upload_request_dto: The request parameters for uploading a file.
-        :type upload_request_dto: UploadRequestDto
+        :param create_new_if_exist: Specifies whether to create the new file if it already exists or not.
+        :type create_new_if_exist: bool
+        :param store_original_file: Specifies whether to upload documents in the original formats as well or not.
+        :type store_original_file: bool
+        :param keep_convert_status: Specifies whether to keep the file converting status or not.
+        :type keep_convert_status: bool
+        :param file: The file to be uploaded.
+        :type file: bytes
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -9531,7 +9669,10 @@ class FoldersApi:
 
         _param = self._upload_file_serialize(
             folder_id=folder_id,
-            upload_request_dto=upload_request_dto,
+            create_new_if_exist=create_new_if_exist,
+            store_original_file=store_original_file,
+            keep_convert_status=keep_convert_status,
+            file=file,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -9539,14 +9680,15 @@ class FoldersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ObjectWrapper",
+            '200': "FileIntegerArrayWrapper",
             '403': None,
             '404': None,
             '401': None,
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -9556,7 +9698,10 @@ class FoldersApi:
     def _upload_file_serialize(
         self,
         folder_id,
-        upload_request_dto,
+        create_new_if_exist,
+        store_original_file,
+        keep_convert_status,
+        file,
         _request_auth,
         _content_type,
         _headers,
@@ -9581,11 +9726,23 @@ class FoldersApi:
         if folder_id is not None:
             _path_params['folderId'] = folder_id
         # process the query parameters
+        if create_new_if_exist is not None:
+            
+            _query_params.append(('createNewIfExist', create_new_if_exist))
+            
+        if store_original_file is not None:
+            
+            _query_params.append(('storeOriginalFile', store_original_file))
+            
+        if keep_convert_status is not None:
+            
+            _query_params.append(('keepConvertStatus', keep_convert_status))
+            
         # process the header parameters
         # process the form parameters
+        if file is not None:
+            _files['File'] = file
         # process the body parameter
-        if upload_request_dto is not None:
-            _body_params = upload_request_dto
 
 
         # set the HTTP header `Accept`
@@ -9603,7 +9760,7 @@ class FoldersApi:
             _default_content_type = (
                 self.api_client.select_header_content_type(
                     [
-                        'application/json'
+                        'multipart/form-data'
                     ]
                 )
             )
@@ -9644,7 +9801,10 @@ class FoldersApi:
     @validate_call
     def upload_file_to_my(
         self,
-        in_dto: Annotated[Optional[UploadRequestDto], Field(description="The request parameters for uploading a file.")] = None,
+        create_new_if_exist: Annotated[Optional[StrictBool], Field(description="Specifies whether to create the new file if it already exists or not.")] = None,
+        store_original_file: Annotated[Optional[StrictBool], Field(description="Specifies whether to upload documents in the original formats as well or not.")] = None,
+        keep_convert_status: Annotated[Optional[StrictBool], Field(description="Specifies whether to keep the file converting status or not.")] = None,
+        file: Annotated[Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]], Field(description="The file to be uploaded.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -9657,13 +9817,19 @@ class FoldersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ObjectWrapper:
+    ) -> FileIntegerArrayWrapper:
         """Upload a file to the My documents section
 
         Uploads a file specified in the request to the My documents section by single file uploading or standart multipart/form-data method.
 
-        :param in_dto: The request parameters for uploading a file.
-        :type in_dto: UploadRequestDto
+        :param create_new_if_exist: Specifies whether to create the new file if it already exists or not.
+        :type create_new_if_exist: bool
+        :param store_original_file: Specifies whether to upload documents in the original formats as well or not.
+        :type store_original_file: bool
+        :param keep_convert_status: Specifies whether to keep the file converting status or not.
+        :type keep_convert_status: bool
+        :param file: The file to be uploaded.
+        :type file: bytes
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -9687,7 +9853,10 @@ class FoldersApi:
         """ # noqa: E501
 
         _param = self._upload_file_to_my_serialize(
-            in_dto=in_dto,
+            create_new_if_exist=create_new_if_exist,
+            store_original_file=store_original_file,
+            keep_convert_status=keep_convert_status,
+            file=file,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -9695,14 +9864,15 @@ class FoldersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ObjectWrapper",
+            '200': "FileIntegerArrayWrapper",
             '403': None,
             '404': None,
             '401': None,
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -9716,7 +9886,10 @@ class FoldersApi:
     @validate_call
     def upload_file_to_my_with_http_info(
         self,
-        in_dto: Annotated[Optional[UploadRequestDto], Field(description="The request parameters for uploading a file.")] = None,
+        create_new_if_exist: Annotated[Optional[StrictBool], Field(description="Specifies whether to create the new file if it already exists or not.")] = None,
+        store_original_file: Annotated[Optional[StrictBool], Field(description="Specifies whether to upload documents in the original formats as well or not.")] = None,
+        keep_convert_status: Annotated[Optional[StrictBool], Field(description="Specifies whether to keep the file converting status or not.")] = None,
+        file: Annotated[Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]], Field(description="The file to be uploaded.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -9729,13 +9902,19 @@ class FoldersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[ObjectWrapper]:
+    ) -> ApiResponse[FileIntegerArrayWrapper]:
         """Upload a file to the My documents section
 
         Uploads a file specified in the request to the My documents section by single file uploading or standart multipart/form-data method.
 
-        :param in_dto: The request parameters for uploading a file.
-        :type in_dto: UploadRequestDto
+        :param create_new_if_exist: Specifies whether to create the new file if it already exists or not.
+        :type create_new_if_exist: bool
+        :param store_original_file: Specifies whether to upload documents in the original formats as well or not.
+        :type store_original_file: bool
+        :param keep_convert_status: Specifies whether to keep the file converting status or not.
+        :type keep_convert_status: bool
+        :param file: The file to be uploaded.
+        :type file: bytes
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -9759,7 +9938,10 @@ class FoldersApi:
         """ # noqa: E501
 
         _param = self._upload_file_to_my_serialize(
-            in_dto=in_dto,
+            create_new_if_exist=create_new_if_exist,
+            store_original_file=store_original_file,
+            keep_convert_status=keep_convert_status,
+            file=file,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -9767,14 +9949,15 @@ class FoldersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ObjectWrapper",
+            '200': "FileIntegerArrayWrapper",
             '403': None,
             '404': None,
             '401': None,
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -9788,7 +9971,10 @@ class FoldersApi:
     @validate_call
     def upload_file_to_my_without_preload_content(
         self,
-        in_dto: Annotated[Optional[UploadRequestDto], Field(description="The request parameters for uploading a file.")] = None,
+        create_new_if_exist: Annotated[Optional[StrictBool], Field(description="Specifies whether to create the new file if it already exists or not.")] = None,
+        store_original_file: Annotated[Optional[StrictBool], Field(description="Specifies whether to upload documents in the original formats as well or not.")] = None,
+        keep_convert_status: Annotated[Optional[StrictBool], Field(description="Specifies whether to keep the file converting status or not.")] = None,
+        file: Annotated[Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]], Field(description="The file to be uploaded.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -9806,8 +9992,14 @@ class FoldersApi:
 
         Uploads a file specified in the request to the My documents section by single file uploading or standart multipart/form-data method.
 
-        :param in_dto: The request parameters for uploading a file.
-        :type in_dto: UploadRequestDto
+        :param create_new_if_exist: Specifies whether to create the new file if it already exists or not.
+        :type create_new_if_exist: bool
+        :param store_original_file: Specifies whether to upload documents in the original formats as well or not.
+        :type store_original_file: bool
+        :param keep_convert_status: Specifies whether to keep the file converting status or not.
+        :type keep_convert_status: bool
+        :param file: The file to be uploaded.
+        :type file: bytes
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -9831,7 +10023,10 @@ class FoldersApi:
         """ # noqa: E501
 
         _param = self._upload_file_to_my_serialize(
-            in_dto=in_dto,
+            create_new_if_exist=create_new_if_exist,
+            store_original_file=store_original_file,
+            keep_convert_status=keep_convert_status,
+            file=file,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -9839,14 +10034,15 @@ class FoldersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ObjectWrapper",
+            '200': "FileIntegerArrayWrapper",
             '403': None,
             '404': None,
             '401': None,
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -9855,7 +10051,10 @@ class FoldersApi:
 
     def _upload_file_to_my_serialize(
         self,
-        in_dto,
+        create_new_if_exist,
+        store_original_file,
+        keep_convert_status,
+        file,
         _request_auth,
         _content_type,
         _headers,
@@ -9878,12 +10077,22 @@ class FoldersApi:
 
         # process the path parameters
         # process the query parameters
-        if in_dto is not None:
+        if create_new_if_exist is not None:
             
-            _query_params.append(('inDto', in_dto))
+            _query_params.append(('createNewIfExist', create_new_if_exist))
+            
+        if store_original_file is not None:
+            
+            _query_params.append(('storeOriginalFile', store_original_file))
+            
+        if keep_convert_status is not None:
+            
+            _query_params.append(('keepConvertStatus', keep_convert_status))
             
         # process the header parameters
         # process the form parameters
+        if file is not None:
+            _files['File'] = file
         # process the body parameter
 
 
@@ -9895,6 +10104,19 @@ class FoldersApi:
                 ]
             )
 
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'multipart/form-data'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
 
         # authentication setting
         _auth_settings: List[str] = [

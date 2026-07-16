@@ -4,17 +4,17 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**buy_wallet_service**](#buy_wallet_service) | **POST** /api/2.0/portal/payment/buywalletservice | Purchases a wallet service with the specified quantity.
 [**calculate_wallet_payment**](#calculate_wallet_payment) | **PUT** /api/2.0/portal/payment/calculatewallet | Calculate the wallet payment amount
 [**change_tenant_wallet_service_state**](#change_tenant_wallet_service_state) | **POST** /api/2.0/portal/payment/servicestate | Change tenant wallet service state
 [**create_customer_operations_report**](#create_customer_operations_report) | **POST** /api/2.0/portal/payment/customer/operationsreport | Start the customer operations report generation
+[**credit_ai_balance**](#credit_ai_balance) | **POST** /api/2.0/portal/payment/creditaibalance | Credit AI balance
 [**get_ai_prices**](#get_ai_prices) | **GET** /api/2.0/portal/payment/ai-prices | Get AI model prices
 [**get_checkout_setup_url**](#get_checkout_setup_url) | **GET** /api/2.0/portal/payment/checkoutsetupurl | Get the checkout setup page URL
+[**get_customer_ai_balance**](#get_customer_ai_balance) | **GET** /api/2.0/portal/payment/customer/aibalance | Get the customer AI balance
 [**get_customer_balance**](#get_customer_balance) | **GET** /api/2.0/portal/payment/customer/balance | Get the customer balance
 [**get_customer_info**](#get_customer_info) | **GET** /api/2.0/portal/payment/customerinfo | Get the customer information
 [**get_customer_operations**](#get_customer_operations) | **GET** /api/2.0/portal/payment/customer/operations | Get the customer operations
 [**get_customer_operations_report**](#get_customer_operations_report) | **GET** /api/2.0/portal/payment/customer/operationsreport | Get the status of the customer operations report generation
-[**get_customer_service_quota**](#get_customer_service_quota) | **GET** /api/2.0/portal/payment/customer/servicequota | Get the service quota
 [**get_payment_account**](#get_payment_account) | **GET** /api/2.0/portal/payment/account | Get the payment account
 [**get_payment_currencies**](#get_payment_currencies) | **GET** /api/2.0/portal/payment/currencies | Get currencies
 [**get_payment_quotas**](#get_payment_quotas) | **GET** /api/2.0/portal/payment/quotas | Get quotas
@@ -34,89 +34,6 @@ Method | HTTP request | Description
 [**update_payment**](#update_payment) | **PUT** /api/2.0/portal/payment/update | Update the payment quantity
 [**update_wallet_payment**](#update_wallet_payment) | **PUT** /api/2.0/portal/payment/updatewallet | Update the wallet payment quantity
 
-
-# **buy_wallet_service**
-> ServicePaymentWrapper buy_wallet_service(buy_wallet_service_request_dto=buy_wallet_service_request_dto)
-
-This method processes a payment for a wallet service using the configured payment method.
-Requires the tariff service to be configured and a valid payment method to be set for the customer.
-Rate limiting is applied according to the payments API policy.
-
-For more information, see [api.onlyoffice.com]().
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **buy_wallet_service_request_dto** | [**BuyWalletServiceRequestDto**](BuyWalletServiceRequestDto.md)|  | [optional] 
-
-### Return type
-
-[**ServicePaymentWrapper**](ServicePaymentWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### Example
-
-
-```python
-import docspace_api_sdk
-from docspace_api_sdk.models.buy_wallet_service_request_dto import BuyWalletServiceRequestDto
-from docspace_api_sdk.models.service_payment_wrapper import ServicePaymentWrapper
-from docspace_api_sdk.rest import ApiException
-from pprint import pprint
-
-configuration = docspace_api_sdk.Configuration(
-    host = "https://your-docspace.onlyoffice.com"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace_api_sdk.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-# Enter a context with an instance of the API client
-with docspace_api_sdk.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace_api_sdk.PaymentApi(api_client)
-    buy_wallet_service_request_dto = docspace_api_sdk.BuyWalletServiceRequestDto() # BuyWalletServiceRequestDto |  (optional)
-
-    try:
-        # Purchases a wallet service with the specified quantity.
-        api_response = api_instance.buy_wallet_service(buy_wallet_service_request_dto=buy_wallet_service_request_dto)
-        print("The response of PaymentApi->buy_wallet_service:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling PaymentApi->buy_wallet_service: %s\n" % e)
-```
-
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | The service payment information |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**403** | No permissions to perform this action |  -  |
-**404** | Service could not be found |  -  |
-**401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
-**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **calculate_wallet_payment**
 > PaymentCalculationWrapper calculate_wallet_payment(wallet_quantity_request_dto=wallet_quantity_request_dto)
@@ -189,10 +106,12 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Payment calculation |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**200** | Payment calculation |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
+**400** | Invalid request parameters |  -  |
 **403** | No permissions to perform this action |  -  |
+**404** | Customer could not be found |  -  |
 **401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
+**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -271,10 +190,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | The updated tenant wallet service settings |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**200** | The updated tenant wallet service settings |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
 **403** | No permissions to perform this action |  -  |
+**404** | Customer could not be found |  -  |
 **401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
+**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -351,11 +271,94 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Ok |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**200** | Operation execution status |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
 **403** | No permissions to perform this action |  -  |
-**404** | Service could not be found |  -  |
+**404** | Customer or service could not be found |  -  |
 **401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
+**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
+**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **credit_ai_balance**
+> ServicePaymentWrapper credit_ai_balance(credit_ai_balance_request_dto=credit_ai_balance_request_dto)
+
+Credits AI quota to the customer AI sub-account from their main balance.
+Requires the customer to have a configured payment method.
+
+For more information, see [api.onlyoffice.com]().
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **credit_ai_balance_request_dto** | [**CreditAiBalanceRequestDto**](CreditAiBalanceRequestDto.md)|  | [optional] 
+
+### Return type
+
+[**ServicePaymentWrapper**](ServicePaymentWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+
+```python
+import docspace_api_sdk
+from docspace_api_sdk.models.credit_ai_balance_request_dto import CreditAiBalanceRequestDto
+from docspace_api_sdk.models.service_payment_wrapper import ServicePaymentWrapper
+from docspace_api_sdk.rest import ApiException
+from pprint import pprint
+
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+# Enter a context with an instance of the API client
+with docspace_api_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace_api_sdk.PaymentApi(api_client)
+    credit_ai_balance_request_dto = docspace_api_sdk.CreditAiBalanceRequestDto() # CreditAiBalanceRequestDto |  (optional)
+
+    try:
+        # Credit AI balance
+        api_response = api_instance.credit_ai_balance(credit_ai_balance_request_dto=credit_ai_balance_request_dto)
+        print("The response of PaymentApi->credit_ai_balance:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PaymentApi->credit_ai_balance: %s\n" % e)
+```
+
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The AI credit operation result |  * X-RateLimit-Limit - Rate limit: 10 requests per 1 minutes per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
+**400** | Unsupported currency or insufficient balance |  -  |
+**403** | No permissions to perform this action |  -  |
+**404** | Customer or AiTools quota could not be found |  -  |
+**401** | Unauthorized |  -  |
+**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -429,17 +432,17 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Prices for AI models |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**200** | Prices for AI models |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
 **403** | No permissions to perform this action |  -  |
 **401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
+**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_checkout_setup_url**
-> StringWrapper get_checkout_setup_url(back_url=back_url)
+> StringWrapper get_checkout_setup_url(back_url, success_url)
 
 Returns the URL to the checkout setup page.
 
@@ -450,7 +453,8 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **back_url** | **str**| The URL where the user will be redirected after completing the setup. | [optional] 
+ **back_url** | **str**| The URL where the user will be redirected after setup cancellation. | 
+ **success_url** | **str**| The URL where the user will be redirected after successful payment. | 
 
 ### Return type
 
@@ -486,11 +490,12 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.PaymentApi(api_client)
-    back_url = 'https://example.com/setup/complete' # str | The URL where the user will be redirected after completing the setup. (optional)
+    back_url = 'https://example.com/payment/back' # str | The URL where the user will be redirected after setup cancellation.
+    success_url = 'https://example.com/payment/success' # str | The URL where the user will be redirected after successful payment.
 
     try:
         # Get the checkout setup page URL
-        api_response = api_instance.get_checkout_setup_url(back_url=back_url)
+        api_response = api_instance.get_checkout_setup_url(back_url, success_url)
         print("The response of PaymentApi->get_checkout_setup_url:\n")
         pprint(api_response)
     except Exception as e:
@@ -508,10 +513,89 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | The URL to the checkout setup page |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**200** | The URL to the checkout setup page |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
 **403** | No permissions to perform this action |  -  |
 **401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
+**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
+**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_customer_ai_balance**
+> BalanceWrapper get_customer_ai_balance(refresh=refresh)
+
+Returns the AI quota balance of a customer from the accounting service.
+
+For more information, see [api.onlyoffice.com]().
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **refresh** | **bool**| Specifies whether to refresh the payment information cache or not. | [optional] 
+
+### Return type
+
+[**BalanceWrapper**](BalanceWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+
+```python
+import docspace_api_sdk
+from docspace_api_sdk.models.balance_wrapper import BalanceWrapper
+from docspace_api_sdk.rest import ApiException
+from pprint import pprint
+
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+# Enter a context with an instance of the API client
+with docspace_api_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace_api_sdk.PaymentApi(api_client)
+    refresh = true # bool | Specifies whether to refresh the payment information cache or not. (optional)
+
+    try:
+        # Get the customer AI balance
+        api_response = api_instance.get_customer_ai_balance(refresh=refresh)
+        print("The response of PaymentApi->get_customer_ai_balance:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PaymentApi->get_customer_ai_balance: %s\n" % e)
+```
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The customer AI balance |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
+**403** | No permissions to perform this action |  -  |
+**401** | Unauthorized |  -  |
+**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -587,10 +671,10 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | The customer balance |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**200** | The customer balance |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
 **403** | No permissions to perform this action |  -  |
 **401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
+**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -666,17 +750,17 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | The customer info |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**200** | The customer info |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
 **403** | No permissions to perform this action |  -  |
 **401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
+**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_customer_operations**
-> ReportWrapper get_customer_operations(offset=offset, limit=limit, service_name=service_name, write_off_service_quota=write_off_service_quota, start_date=start_date, end_date=end_date, participant_name=participant_name, credit=credit, debit=debit, types=types, status=status, order_by=order_by, order_type=order_type)
+> ReportWrapper get_customer_operations(offset=offset, limit=limit, service_name=service_name, start_date=start_date, end_date=end_date, participant_name=participant_name, credit=credit, debit=debit, type=type, status=status, order_by=order_by, order_type=order_type)
 
 Returns the report of customer operations from the accounting service.
 
@@ -690,14 +774,13 @@ Name | Type | Description  | Notes
  **offset** | **int**| The number of items to skip for pagination. The default value is 0. | [optional] 
  **limit** | **int**| The maximum number of items to return for pagination. The default value is 25. | [optional] 
  **service_name** | **str**| The service name. | [optional] 
- **write_off_service_quota** | **bool**| Write-off of the quota for the service | [optional] 
  **start_date** | **datetime**| The report start date. | [optional] 
  **end_date** | **datetime**| The report end date. | [optional] 
  **participant_name** | **str**| The participant name. | [optional] 
  **credit** | **bool**| Specifies whether to include credit operations in the report. | [optional] 
  **debit** | **bool**| Specifies whether to include debit operations in the report. | [optional] 
- **types** | [**OperationType**](.md)| List of operation types to filter by. | [optional] 
- **status** | [**OperationStatus**](.md)| List of operation status to filter by. | [optional] 
+ **type** | [**OperationType**](.md)| The operation type to filter by. | [optional] 
+ **status** | [**OperationStatus**](.md)| The operation status to filter by. | [optional] 
  **order_by** | **str**| The field to order by. | [optional] 
  **order_type** | [**OperationOrderType**](.md)| Order direction: Ascending or Descending. | [optional] 
 
@@ -741,20 +824,19 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     offset = 0 # int | The number of items to skip for pagination. The default value is 0. (optional)
     limit = 25 # int | The maximum number of items to return for pagination. The default value is 25. (optional)
     service_name = 'backup' # str | The service name. (optional)
-    write_off_service_quota = false # bool | Write-off of the quota for the service (optional)
     start_date = '2024-01-01T00:00Z' # datetime | The report start date. (optional)
     end_date = '2024-01-31T23:59:59Z' # datetime | The report end date. (optional)
-    participant_name = 'ACME Corp' # str | The participant name. (optional)
+    participant_name = 'My Own Corporation' # str | The participant name. (optional)
     credit = true # bool | Specifies whether to include credit operations in the report. (optional)
     debit = false # bool | Specifies whether to include debit operations in the report. (optional)
-    types = docspace_api_sdk.OperationType() # OperationType | List of operation types to filter by. (optional)
-    status = docspace_api_sdk.OperationStatus() # OperationStatus | List of operation status to filter by. (optional)
+    type = docspace_api_sdk.OperationType() # OperationType | The operation type to filter by. (optional)
+    status = docspace_api_sdk.OperationStatus() # OperationStatus | The operation status to filter by. (optional)
     order_by = 'StartDate' # str | The field to order by. (optional)
     order_type = docspace_api_sdk.OperationOrderType() # OperationOrderType | Order direction: Ascending or Descending. (optional)
 
     try:
         # Get the customer operations
-        api_response = api_instance.get_customer_operations(offset=offset, limit=limit, service_name=service_name, write_off_service_quota=write_off_service_quota, start_date=start_date, end_date=end_date, participant_name=participant_name, credit=credit, debit=debit, types=types, status=status, order_by=order_by, order_type=order_type)
+        api_response = api_instance.get_customer_operations(offset=offset, limit=limit, service_name=service_name, start_date=start_date, end_date=end_date, participant_name=participant_name, credit=credit, debit=debit, type=type, status=status, order_by=order_by, order_type=order_type)
         print("The response of PaymentApi->get_customer_operations:\n")
         pprint(api_response)
     except Exception as e:
@@ -772,11 +854,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | The customer operations |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**200** | The customer operations |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
 **403** | No permissions to perform this action |  -  |
 **404** | Service could not be found |  -  |
 **401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
+**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -848,91 +930,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Ok |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
-**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **get_customer_service_quota**
-> BalanceWrapper get_customer_service_quota(service_name=service_name, refresh=refresh)
-
-Returns the service quota from the accounting service.
-
-For more information, see [api.onlyoffice.com]().
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **service_name** | **str**| The service name. | [optional] 
- **refresh** | **bool**| Specifies whether to refresh the payment information cache or not. | [optional] 
-
-### Return type
-
-[**BalanceWrapper**](BalanceWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### Example
-
-
-```python
-import docspace_api_sdk
-from docspace_api_sdk.models.balance_wrapper import BalanceWrapper
-from docspace_api_sdk.rest import ApiException
-from pprint import pprint
-
-configuration = docspace_api_sdk.Configuration(
-    host = "https://your-docspace.onlyoffice.com"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace_api_sdk.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-# Enter a context with an instance of the API client
-with docspace_api_sdk.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace_api_sdk.PaymentApi(api_client)
-    service_name = 'backup' # str | The service name. (optional)
-    refresh = true # bool | Specifies whether to refresh the payment information cache or not. (optional)
-
-    try:
-        # Get the service quota
-        api_response = api_instance.get_customer_service_quota(service_name=service_name, refresh=refresh)
-        print("The response of PaymentApi->get_customer_service_quota:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling PaymentApi->get_customer_service_quota: %s\n" % e)
-```
-
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | The service quota |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**200** | Operation execution status |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
 **403** | No permissions to perform this action |  -  |
-**404** | Service could not be found |  -  |
+**404** | Customer could not be found |  -  |
 **401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
+**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -1008,10 +1010,10 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | The URL to the payment account |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**200** | The URL to the payment account |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
 **403** | No permissions to perform this action |  -  |
 **401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
+**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -1083,9 +1085,10 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | List of available portal currencies |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**200** | List of available portal currencies |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
+**403** | No permissions to perform this action |  -  |
 **401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
+**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -1161,9 +1164,10 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | List of available portal quotas |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**200** | List of available portal quotas |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
+**403** | No permissions to perform this action |  -  |
 **401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
+**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -1240,10 +1244,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | The URL to the payment page |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**200** | The URL to the payment page |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
+**400** | Invalid request parameters |  -  |
 **403** | No permissions to perform this action |  -  |
 **401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
+**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -1315,9 +1320,10 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | List of available portal prices |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**200** | List of available portal prices |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
+**403** | No permissions to perform this action |  -  |
 **401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
+**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -1393,10 +1399,10 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Payment information about the current portal quota |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**200** | Payment information about the current portal quota |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
 **403** | No permissions to perform this action |  -  |
 **401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
+**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -1470,10 +1476,10 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | The list of restricted AI model IDs |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**200** | The list of restricted AI model IDs |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
 **403** | No permissions to perform this action |  -  |
 **401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
+**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -1545,10 +1551,10 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | The wallet service settings for the tenant |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**200** | The wallet service settings for the tenant |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
 **403** | No permissions to perform this action |  -  |
 **401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
+**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -1620,10 +1626,10 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | The wallet auto top up settings |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**200** | The wallet auto top up settings |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
 **403** | No permissions to perform this action |  -  |
 **401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
+**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -1700,9 +1706,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Wallet service |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**200** | Wallet service |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
+**403** | No permissions to perform this action |  -  |
+**404** | Service could not be found |  -  |
 **401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
+**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -1774,9 +1782,10 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | List of available wallet services |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**200** | List of available wallet services |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
+**403** | No permissions to perform this action |  -  |
 **401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
+**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -1850,9 +1859,10 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Ok |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**200** | Ok |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
 **400** | Incorrect email or message text is empty |  -  |
-**429** | Request limit is exceeded |  -  |
+**403** | No permissions to perform this action |  -  |
+**429** | Request limit is exceeded |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
 **401** | Unauthorized |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
@@ -1932,10 +1942,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | The updated list of restricted AI model IDs |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**200** | The updated list of restricted AI model IDs |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
 **403** | No permissions to perform this action |  -  |
+**404** | Customer could not be found |  -  |
 **401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
+**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -2013,10 +2024,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | The wallet auto top up settings |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**200** | The wallet auto top up settings |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
 **403** | No permissions to perform this action |  -  |
+**404** | Customer could not be found |  -  |
 **401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
+**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -2085,9 +2097,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Ok |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**200** | Ok |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
+**403** | No permissions to perform this action |  -  |
+**404** | Customer could not be found |  -  |
 **401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
+**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -2164,10 +2178,12 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Boolean value: true if the operation is successful |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**200** | Boolean value: true if the operation is successful |  * X-RateLimit-Limit - Rate limit: 10 requests per 1 minutes per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
+**400** | Invalid request parameters |  -  |
 **403** | No permissions to perform this action |  -  |
+**404** | Customer could not be found |  -  |
 **401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
+**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -2244,10 +2260,12 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Boolean value: true if the operation is successful |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**200** | Boolean value: true if the operation is successful |  * X-RateLimit-Limit - Rate limit: 10 requests per 1 minutes per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
+**400** | Invalid request parameters |  -  |
 **403** | No permissions to perform this action |  -  |
+**404** | Customer could not be found |  -  |
 **401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
+**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -2324,10 +2342,13 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Boolean value: true if the operation is successful |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**200** | Boolean value: true if the operation is successful |  * X-RateLimit-Limit - Rate limit: 10 requests per 1 minutes per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
+**400** | Invalid request parameters |  -  |
+**402** | Tariff is not paid |  -  |
 **403** | No permissions to perform this action |  -  |
+**404** | Customer could not be found |  -  |
 **401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
+**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 

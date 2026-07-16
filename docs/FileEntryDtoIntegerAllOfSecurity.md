@@ -49,6 +49,7 @@ Name | Type | Description | Notes
 **ask_ai** | **bool** |  | [optional] 
 **use_chat** | **bool** |  | [optional] 
 **update_xlsx** | **bool** |  | [optional] 
+**analyze_responses** | **bool** |  | [optional] 
 
 ## Example
 

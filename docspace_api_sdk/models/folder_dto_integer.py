@@ -17,66 +17,35 @@
 
 
 from __future__ import annotations
+from inspect import getfullargspec
+import json
 import pprint
 import re  # noqa: F401
-import json
-
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from docspace_api_sdk.models.api_date_time import ApiDateTime
 from docspace_api_sdk.models.chat_settings_dto import ChatSettingsDto
 from docspace_api_sdk.models.employee_dto import EmployeeDto
+from docspace_api_sdk.models.file_entry_dto_integer_all_of_available_share_rights import FileEntryDtoIntegerAllOfAvailableShareRights
+from docspace_api_sdk.models.file_entry_dto_integer_all_of_security import FileEntryDtoIntegerAllOfSecurity
+from docspace_api_sdk.models.file_entry_dto_integer_all_of_share_settings import FileEntryDtoIntegerAllOfShareSettings
 from docspace_api_sdk.models.file_entry_type import FileEntryType
 from docspace_api_sdk.models.file_share import FileShare
-from docspace_api_sdk.models.folder_dto_integer_available_share_rights import FolderDtoIntegerAvailableShareRights
-from docspace_api_sdk.models.folder_dto_integer_security import FolderDtoIntegerSecurity
-from docspace_api_sdk.models.folder_dto_integer_share_settings import FolderDtoIntegerShareSettings
 from docspace_api_sdk.models.folder_type import FolderType
 from docspace_api_sdk.models.logo import Logo
 from docspace_api_sdk.models.room_data_lifetime_dto import RoomDataLifetimeDto
 from docspace_api_sdk.models.room_type import RoomType
 from docspace_api_sdk.models.watermark_dto import WatermarkDto
-from typing import Optional, Set
-from typing_extensions import Self
+from typing import Union, Any, List, Set, TYPE_CHECKING, Optional, Dict
+from typing_extensions import Literal, Self
+from pydantic import Field
+from docspace_api_sdk.models.file_entry_dto_integer import FileEntryDtoInteger
 
-class FolderDtoInteger(BaseModel):
+class FolderDtoInteger(FileEntryDtoInteger):
     """
     The folder parameters.
-    """ # noqa: E501
-    title: Optional[StrictStr] = Field(default=None, description="The file entry title.")
-    access: Optional[FileShare] = None
-    shared_by: Optional[EmployeeDto] = Field(default=None, alias="sharedBy")
-    owned_by: Optional[EmployeeDto] = Field(default=None, alias="ownedBy")
-    shared: Optional[StrictBool] = Field(default=None, description="Specifies if the file entry is shared via link or not.")
-    shared_for_user: Optional[StrictBool] = Field(default=None, description="Specifies if the file entry is shared for user or not.", alias="sharedForUser")
-    parent_shared: Optional[StrictBool] = Field(default=None, description="Indicates whether the parent entity is shared.", alias="parentShared")
-    short_web_url: Optional[StrictStr] = Field(default=None, description="The short Web URL.", alias="shortWebUrl")
-    created: Optional[ApiDateTime] = None
-    created_by: Optional[EmployeeDto] = Field(default=None, alias="createdBy")
-    updated: Optional[ApiDateTime] = None
-    auto_delete: Optional[ApiDateTime] = Field(default=None, alias="autoDelete")
-    root_folder_type: Optional[FolderType] = Field(default=None, alias="rootFolderType")
-    parent_room_type: Optional[FolderType] = Field(default=None, alias="parentRoomType")
-    updated_by: Optional[EmployeeDto] = Field(default=None, alias="updatedBy")
-    provider_item: Optional[StrictBool] = Field(default=None, description="Specifies if the file entry provider is specified or not.", alias="providerItem")
-    provider_key: Optional[StrictStr] = Field(default=None, description="The provider key of the file entry.", alias="providerKey")
-    provider_id: Optional[StrictInt] = Field(default=None, description="The provider ID of the file entry.", alias="providerId")
-    order: Optional[StrictStr] = Field(default=None, description="The order of the file entry.")
-    is_favorite: Optional[StrictBool] = Field(default=None, description="Specifies if the file is a favorite or not.", alias="isFavorite")
-    id: Optional[StrictInt] = Field(default=None, description="The file entry ID.")
-    root_folder_id: Optional[StrictInt] = Field(default=None, description="The root folder ID of the file entry.", alias="rootFolderId")
-    origin_id: Optional[StrictInt] = Field(default=None, description="The origin ID of the file entry.", alias="originId")
-    origin_room_id: Optional[StrictInt] = Field(default=None, description="The origin room ID of the file entry.", alias="originRoomId")
-    origin_title: Optional[StrictStr] = Field(default=None, description="The origin title of the file entry.", alias="originTitle")
-    origin_room_title: Optional[StrictStr] = Field(default=None, description="The origin room title of the file entry.", alias="originRoomTitle")
-    can_share: Optional[StrictBool] = Field(default=None, description="Specifies if the file entry can be shared or not.", alias="canShare")
-    share_settings: Optional[FolderDtoIntegerShareSettings] = Field(default=None, alias="shareSettings")
-    security: Optional[FolderDtoIntegerSecurity] = None
-    available_share_rights: Optional[FolderDtoIntegerAvailableShareRights] = Field(default=None, alias="availableShareRights")
-    request_token: Optional[StrictStr] = Field(default=None, description="The request token of the file entry.", alias="requestToken")
-    external: Optional[StrictBool] = Field(default=None, description="Specifies if the folder can be accessed via an external link or not.")
-    expiration_date: Optional[ApiDateTime] = Field(default=None, alias="expirationDate")
-    is_link_expired: Optional[StrictBool] = Field(default=None, description="Indicates whether the shareable link associated with the file or folder has expired.", alias="isLinkExpired")
+    """
+
     parent_id: Optional[StrictInt] = Field(default=None, description="The parent folder ID of the folder.", alias="parentId")
     files_count: Optional[StrictInt] = Field(default=None, description="The number of files that the folder contains.", alias="filesCount")
     folders_count: Optional[StrictInt] = Field(default=None, description="The number of folders that the folder contains.", alias="foldersCount")
@@ -99,19 +68,17 @@ class FolderDtoInteger(BaseModel):
     used_space: Optional[StrictInt] = Field(default=None, description="How much folder space is used (counter).", alias="usedSpace")
     password_protected: Optional[StrictBool] = Field(default=None, description="Specifies if the folder is password protected or not.", alias="passwordProtected")
     expired: Optional[StrictBool] = Field(default=None, description="Specifies if an external link to the folder is expired or not.")
-    file_entry_type: Optional[FileEntryType] = Field(default=None, alias="fileEntryType")
     chat_settings: Optional[ChatSettingsDto] = Field(default=None, alias="chatSettings")
     root_room_type: Optional[RoomType] = Field(default=None, alias="rootRoomType")
     save_form_as_xlsx: Optional[StrictBool] = Field(default=None, description="Specifies whether to save form data as XLSX file.", alias="saveFormAsXLSX")
     send_form_to_external_db: Optional[StrictBool] = Field(default=None, description="Specifies whether to send form data to external database.", alias="sendFormToExternalDB")
-    __properties: ClassVar[List[str]] = ["title", "access", "sharedBy", "ownedBy", "shared", "sharedForUser", "parentShared", "shortWebUrl", "created", "createdBy", "updated", "autoDelete", "rootFolderType", "parentRoomType", "updatedBy", "providerItem", "providerKey", "providerId", "order", "isFavorite", "id", "rootFolderId", "originId", "originRoomId", "originTitle", "originRoomTitle", "canShare", "shareSettings", "security", "availableShareRights", "requestToken", "external", "expirationDate", "isLinkExpired", "parentId", "filesCount", "foldersCount", "isShareable", "new", "mute", "tags", "logo", "pinned", "roomType", "private", "indexing", "denyDownload", "lifetime", "watermark", "type", "inRoom", "quotaLimit", "isCustomQuota", "usedSpace", "passwordProtected", "expired", "fileEntryType", "chatSettings", "rootRoomType", "saveFormAsXLSX", "sendFormToExternalDB"]
+    original_form_id: Optional[StrictInt] = Field(default=None, description="The original form ID that corresponds to this FormFillingFolderDone folder.", alias="originalFormId")
 
     model_config = ConfigDict(
         populate_by_name=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
-
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -315,53 +282,25 @@ class FolderDtoInteger(BaseModel):
         if self.send_form_to_external_db is None and "send_form_to_external_db" in self.model_fields_set:
             _dict['sendFormToExternalDB'] = None
 
+        # set to None if original_form_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.original_form_id is None and "original_form_id" in self.model_fields_set:
+            _dict['originalFormId'] = None
+
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of FolderDtoInteger from a dict"""
+        """Create an instance from a dict"""
         if obj is None:
             return None
-
-
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "title": obj.get("title"),
-            "access": obj.get("access"),
-            "sharedBy": EmployeeDto.from_dict(obj["sharedBy"]) if obj.get("sharedBy") is not None else None,
-            "ownedBy": EmployeeDto.from_dict(obj["ownedBy"]) if obj.get("ownedBy") is not None else None,
-            "shared": obj.get("shared"),
-            "sharedForUser": obj.get("sharedForUser"),
-            "parentShared": obj.get("parentShared"),
-            "shortWebUrl": obj.get("shortWebUrl"),
-            "created": ApiDateTime.from_dict(obj["created"]) if obj.get("created") is not None else None,
-            "createdBy": EmployeeDto.from_dict(obj["createdBy"]) if obj.get("createdBy") is not None else None,
-            "updated": ApiDateTime.from_dict(obj["updated"]) if obj.get("updated") is not None else None,
-            "autoDelete": ApiDateTime.from_dict(obj["autoDelete"]) if obj.get("autoDelete") is not None else None,
-            "rootFolderType": obj.get("rootFolderType"),
-            "parentRoomType": obj.get("parentRoomType"),
-            "updatedBy": EmployeeDto.from_dict(obj["updatedBy"]) if obj.get("updatedBy") is not None else None,
-            "providerItem": obj.get("providerItem"),
-            "providerKey": obj.get("providerKey"),
-            "providerId": obj.get("providerId"),
-            "order": obj.get("order"),
-            "isFavorite": obj.get("isFavorite"),
-            "id": obj.get("id"),
-            "rootFolderId": obj.get("rootFolderId"),
-            "originId": obj.get("originId"),
-            "originRoomId": obj.get("originRoomId"),
-            "originTitle": obj.get("originTitle"),
-            "originRoomTitle": obj.get("originRoomTitle"),
-            "canShare": obj.get("canShare"),
-            "shareSettings": FolderDtoIntegerShareSettings.from_dict(obj["shareSettings"]) if obj.get("shareSettings") is not None else None,
-            "security": FolderDtoIntegerSecurity.from_dict(obj["security"]) if obj.get("security") is not None else None,
-            "availableShareRights": FolderDtoIntegerAvailableShareRights.from_dict(obj["availableShareRights"]) if obj.get("availableShareRights") is not None else None,
-            "requestToken": obj.get("requestToken"),
-            "external": obj.get("external"),
-            "expirationDate": ApiDateTime.from_dict(obj["expirationDate"]) if obj.get("expirationDate") is not None else None,
-            "isLinkExpired": obj.get("isLinkExpired"),
+        base_obj = super().from_dict(obj)
+        base_dict = base_obj.model_dump() if hasattr(base_obj, "model_dump") else dict(base_obj or {})
+
+        extra_fields = {
             "parentId": obj.get("parentId"),
             "filesCount": obj.get("filesCount"),
             "foldersCount": obj.get("foldersCount"),
@@ -384,12 +323,13 @@ class FolderDtoInteger(BaseModel):
             "usedSpace": obj.get("usedSpace"),
             "passwordProtected": obj.get("passwordProtected"),
             "expired": obj.get("expired"),
-            "fileEntryType": obj.get("fileEntryType"),
             "chatSettings": ChatSettingsDto.from_dict(obj["chatSettings"]) if obj.get("chatSettings") is not None else None,
             "rootRoomType": obj.get("rootRoomType"),
             "saveFormAsXLSX": obj.get("saveFormAsXLSX"),
-            "sendFormToExternalDB": obj.get("sendFormToExternalDB")
-        })
-        return _obj
+            "sendFormToExternalDB": obj.get("sendFormToExternalDB"),
+            "originalFormId": obj.get("originalFormId")
+        }
+        all_fields = {**base_dict, **extra_fields}
+        return cls.model_validate(all_fields)
 
 

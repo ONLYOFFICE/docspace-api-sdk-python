@@ -24,6 +24,7 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from docspace_api_sdk.models.api_date_time import ApiDateTime
+from docspace_api_sdk.models.operation_type import OperationType
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -44,7 +45,8 @@ class OperationDto(BaseModel):
     participant_display_name: Optional[StrictStr] = Field(default=None, description="The participant display name.", alias="participantDisplayName")
     agent_id: Optional[StrictStr] = Field(default=None, description="AI Agent id.", alias="agentId")
     agent_title: Optional[StrictStr] = Field(default=None, description="AI Agent name.", alias="agentTitle")
-    __properties: ClassVar[List[str]] = ["date", "service", "description", "details", "serviceUnit", "quantity", "currency", "credit", "debit", "participantName", "participantDisplayName", "agentId", "agentTitle"]
+    type: Optional[OperationType] = None
+    __properties: ClassVar[List[str]] = ["date", "service", "description", "details", "serviceUnit", "quantity", "currency", "credit", "debit", "participantName", "participantDisplayName", "agentId", "agentTitle", "type"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -158,7 +160,8 @@ class OperationDto(BaseModel):
             "participantName": obj.get("participantName"),
             "participantDisplayName": obj.get("participantDisplayName"),
             "agentId": obj.get("agentId"),
-            "agentTitle": obj.get("agentTitle")
+            "agentTitle": obj.get("agentTitle"),
+            "type": obj.get("type")
         })
         return _obj
 

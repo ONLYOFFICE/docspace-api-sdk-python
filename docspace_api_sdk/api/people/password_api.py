@@ -115,7 +115,8 @@ class PasswordApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -192,7 +193,8 @@ class PasswordApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -269,7 +271,8 @@ class PasswordApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -383,7 +386,7 @@ class PasswordApi:
     ) -> StringWrapper:
         """Remind a user password
 
-        Reminds a password to the user using the email address specified in the request.
+        Sends a password recovery email to the specified user address.  For unauthenticated requests, CAPTCHA validation is required when CAPTCHA is enabled in the configuration.
 
         :param email_member_request_dto:
         :type email_member_request_dto: EmailMemberRequestDto
@@ -423,7 +426,8 @@ class PasswordApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -453,7 +457,7 @@ class PasswordApi:
     ) -> ApiResponse[StringWrapper]:
         """Remind a user password
 
-        Reminds a password to the user using the email address specified in the request.
+        Sends a password recovery email to the specified user address.  For unauthenticated requests, CAPTCHA validation is required when CAPTCHA is enabled in the configuration.
 
         :param email_member_request_dto:
         :type email_member_request_dto: EmailMemberRequestDto
@@ -493,7 +497,8 @@ class PasswordApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -523,7 +528,7 @@ class PasswordApi:
     ) -> RESTResponseType:
         """Remind a user password
 
-        Reminds a password to the user using the email address specified in the request.
+        Sends a password recovery email to the specified user address.  For unauthenticated requests, CAPTCHA validation is required when CAPTCHA is enabled in the configuration.
 
         :param email_member_request_dto:
         :type email_member_request_dto: EmailMemberRequestDto
@@ -563,7 +568,8 @@ class PasswordApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
