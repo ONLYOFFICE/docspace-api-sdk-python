@@ -6,8 +6,8 @@ The group request parameters.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **members** | **List[UUID]** | The list of group member IDs. | [optional] 
-**group_manager** | **UUID** | The group manager ID. | 
-**group_name** | **str** | The group name. | [optional] 
+**group_manager** | **UUID** | The group manager ID. | [optional] 
+**group_name** | **str** | The group name. | 
 
 ## Example
 

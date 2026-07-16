@@ -33,8 +33,8 @@ class GroupRequestDto(BaseModel):
     The group request parameters.
     """ # noqa: E501
     members: Optional[List[UUID]] = Field(default=None, description="The list of group member IDs.")
-    group_manager: UUID = Field(description="The group manager ID.", alias="groupManager")
-    group_name: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=128)]] = Field(default=None, description="The group name.", alias="groupName")
+    group_manager: Optional[UUID] = Field(default=None, description="The group manager ID.", alias="groupManager")
+    group_name: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=128)]] = Field(description="The group name.", alias="groupName")
     __properties: ClassVar[List[str]] = ["members", "groupManager", "groupName"]
 
     model_config = ConfigDict(

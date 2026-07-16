@@ -1,0 +1,489 @@
+# docspace_api_sdk.PrivacyroomApi
+
+All URIs are relative to *https://your-docspace.onlyoffice.com*
+
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**delete_keys**](#delete_keys) | **DELETE** /api/2.0/privacyroom/keys/{id} | Deletes an encryption key and removes it from the system.
+[**get_user_keys**](#get_user_keys) | **GET** /api/2.0/privacyroom/keys | Retrieves encryption keys associated with the current user.
+[**get_user_keys_by_filter**](#get_user_keys_by_filter) | **GET** /api/2.0/privacyroom/keys/filter | Retrieves a specific user encryption key based on the provided filter conditions.
+[**get_user_keys_for_room**](#get_user_keys_for_room) | **GET** /api/2.0/privacyroom/{roomId}/access | Retrieves the encryption keys associated with a specific privacy room.
+[**replace_key**](#replace_key) | **PUT** /api/2.0/privacyroom/keys | Replaces an existing encryption key with a new one for the user.
+[**set_keys**](#set_keys) | **POST** /api/2.0/privacyroom/keys | Creates and sets encryption keys for the user.
+
+
+# **delete_keys**
+> EncryptionKeyArrayWrapper delete_keys(id)
+
+Deletes an encryption key and removes it from the system based on the provided key identifier.
+
+For more information, see [api.onlyoffice.com]().
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **UUID**| The unique identifier of the encryption key to be deleted. | 
+
+### Return type
+
+[**EncryptionKeyArrayWrapper**](EncryptionKeyArrayWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+
+```python
+import docspace_api_sdk
+from docspace_api_sdk.models.encryption_key_array_wrapper import EncryptionKeyArrayWrapper
+from docspace_api_sdk.rest import ApiException
+from pprint import pprint
+
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+# Enter a context with an instance of the API client
+with docspace_api_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace_api_sdk.PrivacyroomApi(api_client)
+    id = UUID('00000000-0000-0000-0000-000000000000') # UUID | The unique identifier of the encryption key to be deleted.
+
+    try:
+        # Deletes an encryption key and removes it from the system.
+        api_response = api_instance.delete_keys(id)
+        print("The response of PrivacyroomApi->delete_keys:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PrivacyroomApi->delete_keys: %s\n" % e)
+```
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
+**401** | Unauthorized |  -  |
+**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
+**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_user_keys**
+> EncryptionKeyArrayWrapper get_user_keys()
+
+Retrieves encryption keys associated with the current user.
+
+For more information, see [api.onlyoffice.com]().
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**EncryptionKeyArrayWrapper**](EncryptionKeyArrayWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+
+```python
+import docspace_api_sdk
+from docspace_api_sdk.models.encryption_key_array_wrapper import EncryptionKeyArrayWrapper
+from docspace_api_sdk.rest import ApiException
+from pprint import pprint
+
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+# Enter a context with an instance of the API client
+with docspace_api_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace_api_sdk.PrivacyroomApi(api_client)
+
+    try:
+        # Retrieves encryption keys associated with the current user.
+        api_response = api_instance.get_user_keys()
+        print("The response of PrivacyroomApi->get_user_keys:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PrivacyroomApi->get_user_keys: %s\n" % e)
+```
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
+**401** | Unauthorized |  -  |
+**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
+**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_user_keys_by_filter**
+> EncryptionKeyWrapper get_user_keys_by_filter(id=id, type=type, version=version, public_key=public_key, private_key_enc=private_key_enc)
+
+Retrieves a specific user encryption key based on the provided filter conditions.
+
+For more information, see [api.onlyoffice.com]().
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **UUID**| The optional identifier of the encryption key to filter by. | [optional] 
+ **type** | [**EncryptionKeyType**](.md)| The optional type of the encryption key to filter by. | [optional] 
+ **version** | **str**| The optional version of the encryption key to filter by. | [optional] 
+ **public_key** | **str**| The optional public key to filter by. | [optional] 
+ **private_key_enc** | **str**| The optional encrypted private key to filter by. | [optional] 
+
+### Return type
+
+[**EncryptionKeyWrapper**](EncryptionKeyWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+
+```python
+import docspace_api_sdk
+from docspace_api_sdk.models.encryption_key_type import EncryptionKeyType
+from docspace_api_sdk.models.encryption_key_wrapper import EncryptionKeyWrapper
+from docspace_api_sdk.rest import ApiException
+from pprint import pprint
+
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+# Enter a context with an instance of the API client
+with docspace_api_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace_api_sdk.PrivacyroomApi(api_client)
+    id = UUID('00000000-0000-0000-0000-000000000000') # UUID | The optional identifier of the encryption key to filter by. (optional)
+    type = docspace_api_sdk.EncryptionKeyType() # EncryptionKeyType | The optional type of the encryption key to filter by. (optional)
+    version = '1' # str | The optional version of the encryption key to filter by. (optional)
+    public_key = 'some public key' # str | The optional public key to filter by. (optional)
+    private_key_enc = 'some encrypted private key' # str | The optional encrypted private key to filter by. (optional)
+
+    try:
+        # Retrieves a specific user encryption key based on the provided filter conditions.
+        api_response = api_instance.get_user_keys_by_filter(id=id, type=type, version=version, public_key=public_key, private_key_enc=private_key_enc)
+        print("The response of PrivacyroomApi->get_user_keys_by_filter:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PrivacyroomApi->get_user_keys_by_filter: %s\n" % e)
+```
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
+**401** | Unauthorized |  -  |
+**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
+**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_user_keys_for_room**
+> EncryptionKeyArrayWrapper get_user_keys_for_room(room_id)
+
+Retrieves the encryption keys associated with a specific privacy room.
+
+For more information, see [api.onlyoffice.com]().
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **room_id** | **int**| The identifier of the privacy room. | 
+
+### Return type
+
+[**EncryptionKeyArrayWrapper**](EncryptionKeyArrayWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+
+```python
+import docspace_api_sdk
+from docspace_api_sdk.models.encryption_key_array_wrapper import EncryptionKeyArrayWrapper
+from docspace_api_sdk.rest import ApiException
+from pprint import pprint
+
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+# Enter a context with an instance of the API client
+with docspace_api_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace_api_sdk.PrivacyroomApi(api_client)
+    room_id = 56 # int | The identifier of the privacy room.
+
+    try:
+        # Retrieves the encryption keys associated with a specific privacy room.
+        api_response = api_instance.get_user_keys_for_room(room_id)
+        print("The response of PrivacyroomApi->get_user_keys_for_room:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PrivacyroomApi->get_user_keys_for_room: %s\n" % e)
+```
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
+**401** | Unauthorized |  -  |
+**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
+**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **replace_key**
+> EncryptionKeyArrayWrapper replace_key(encryption_key_request_dto=encryption_key_request_dto)
+
+Replaces an existing encryption key with a new one for the user.
+
+For more information, see [api.onlyoffice.com]().
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **encryption_key_request_dto** | [**EncryptionKeyRequestDto**](EncryptionKeyRequestDto.md)| The request object containing the public and private key information to replace the existing key. | [optional] 
+
+### Return type
+
+[**EncryptionKeyArrayWrapper**](EncryptionKeyArrayWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+
+```python
+import docspace_api_sdk
+from docspace_api_sdk.models.encryption_key_array_wrapper import EncryptionKeyArrayWrapper
+from docspace_api_sdk.models.encryption_key_request_dto import EncryptionKeyRequestDto
+from docspace_api_sdk.rest import ApiException
+from pprint import pprint
+
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+# Enter a context with an instance of the API client
+with docspace_api_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace_api_sdk.PrivacyroomApi(api_client)
+    encryption_key_request_dto = docspace_api_sdk.EncryptionKeyRequestDto() # EncryptionKeyRequestDto | The request object containing the public and private key information to replace the existing key. (optional)
+
+    try:
+        # Replaces an existing encryption key with a new one for the user.
+        api_response = api_instance.replace_key(encryption_key_request_dto=encryption_key_request_dto)
+        print("The response of PrivacyroomApi->replace_key:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PrivacyroomApi->replace_key: %s\n" % e)
+```
+
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
+**401** | Unauthorized |  -  |
+**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
+**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **set_keys**
+> EncryptionKeyArrayWrapper set_keys(encryption_key_request_dto=encryption_key_request_dto)
+
+Creates and sets encryption keys for the user.
+
+For more information, see [api.onlyoffice.com]().
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **encryption_key_request_dto** | [**EncryptionKeyRequestDto**](EncryptionKeyRequestDto.md)| The request object containing public and private key information. | [optional] 
+
+### Return type
+
+[**EncryptionKeyArrayWrapper**](EncryptionKeyArrayWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+
+```python
+import docspace_api_sdk
+from docspace_api_sdk.models.encryption_key_array_wrapper import EncryptionKeyArrayWrapper
+from docspace_api_sdk.models.encryption_key_request_dto import EncryptionKeyRequestDto
+from docspace_api_sdk.rest import ApiException
+from pprint import pprint
+
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+# Enter a context with an instance of the API client
+with docspace_api_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace_api_sdk.PrivacyroomApi(api_client)
+    encryption_key_request_dto = docspace_api_sdk.EncryptionKeyRequestDto() # EncryptionKeyRequestDto | The request object containing public and private key information. (optional)
+
+    try:
+        # Creates and sets encryption keys for the user.
+        api_response = api_instance.set_keys(encryption_key_request_dto=encryption_key_request_dto)
+        print("The response of PrivacyroomApi->set_keys:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PrivacyroomApi->set_keys: %s\n" % e)
+```
+
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
+**401** | Unauthorized |  -  |
+**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
+**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+

@@ -24,12 +24,14 @@ from typing_extensions import Self
 
 class TenantWalletService(int, Enum):
     """
-    [-13 - AITools, -12 - Backup, -11 - Storage]
+    [-18 - AISearch, -14 - Admin, -13 - AITools, -12 - Backup, -11 - Storage]
     """
 
     """
     allowed enum values
     """
+    AISearch = -18
+    Admin = -14
     AITools = -13
     Backup = -12
     Storage = -11

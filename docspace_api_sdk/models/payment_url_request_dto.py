@@ -21,8 +21,9 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictInt
 from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -30,9 +31,10 @@ class PaymentUrlRequestDto(BaseModel):
     """
     The request parameters for the payment URL configuration with quantity information.
     """ # noqa: E501
-    back_url: Optional[StrictStr] = Field(default=None, description="The URL where the user will be redirected after payment processing.", alias="backUrl")
+    back_url: Annotated[str, Field(min_length=0, strict=True, max_length=255)] = Field(description="The URL where the user will be redirected after payment cancellation.", alias="backUrl")
+    success_url: Annotated[str, Field(min_length=0, strict=True, max_length=255)] = Field(description="The URL where the user will be redirected after successful payment.", alias="successUrl")
     quantity: Optional[Dict[str, StrictInt]] = Field(default=None, description="The payment quantity.")
-    __properties: ClassVar[List[str]] = ["backUrl", "quantity"]
+    __properties: ClassVar[List[str]] = ["backUrl", "successUrl", "quantity"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -73,11 +75,6 @@ class PaymentUrlRequestDto(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # set to None if back_url (nullable) is None
-        # and model_fields_set contains the field
-        if self.back_url is None and "back_url" in self.model_fields_set:
-            _dict['backUrl'] = None
-
         # set to None if quantity (nullable) is None
         # and model_fields_set contains the field
         if self.quantity is None and "quantity" in self.model_fields_set:
@@ -97,6 +94,7 @@ class PaymentUrlRequestDto(BaseModel):
 
         _obj = cls.model_validate({
             "backUrl": obj.get("backUrl"),
+            "successUrl": obj.get("successUrl"),
             "quantity": obj.get("quantity")
         })
         return _obj

@@ -51,7 +51,8 @@ class WebPluginDto(BaseModel):
     settings: Optional[StrictStr] = Field(description="The web plugin settings.")
     name_locale: Optional[Dict[str, Optional[StrictStr]]] = Field(default=None, description="The web plugin localized name.", alias="nameLocale")
     description_locale: Optional[Dict[str, Optional[StrictStr]]] = Field(default=None, description="The web plugin localized description.", alias="descriptionLocale")
-    __properties: ClassVar[List[str]] = ["name", "version", "minDocSpaceVersion", "description", "license", "author", "homePage", "pluginName", "scopes", "image", "createBy", "createOn", "enabled", "system", "url", "cssUrl", "settings", "nameLocale", "descriptionLocale"]
+    runtime: Optional[StrictStr] = Field(default=None, description="The web plugin loading method")
+    __properties: ClassVar[List[str]] = ["name", "version", "minDocSpaceVersion", "description", "license", "author", "homePage", "pluginName", "scopes", "image", "createBy", "createOn", "enabled", "system", "url", "cssUrl", "settings", "nameLocale", "descriptionLocale", "runtime"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -170,6 +171,11 @@ class WebPluginDto(BaseModel):
         if self.description_locale is None and "description_locale" in self.model_fields_set:
             _dict['descriptionLocale'] = None
 
+        # set to None if runtime (nullable) is None
+        # and model_fields_set contains the field
+        if self.runtime is None and "runtime" in self.model_fields_set:
+            _dict['runtime'] = None
+
         return _dict
 
     @classmethod
@@ -201,7 +207,8 @@ class WebPluginDto(BaseModel):
             "cssUrl": obj.get("cssUrl"),
             "settings": obj.get("settings"),
             "nameLocale": obj.get("nameLocale"),
-            "descriptionLocale": obj.get("descriptionLocale")
+            "descriptionLocale": obj.get("descriptionLocale"),
+            "runtime": obj.get("runtime")
         })
         return _obj
 

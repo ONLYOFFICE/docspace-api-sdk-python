@@ -30,15 +30,16 @@ from typing_extensions import Self
 
 class Quota(BaseModel):
     """
-    The quota parameters.  <example>  {    id: 1,    quantity: 50,    wallet: false,    dueDate: 2026-03-31T00:00:00Z,    nextQuantity: 100,    state: Active  }  </example>
+    The quota parameters.  <example>  {    id: 1,    quantity: 50,    wallet: false,    additional: false,    dueDate: 2026-03-31T00:00:00Z,    nextQuantity: 100,    state: Active  }  </example>
     """ # noqa: E501
     id: Optional[StrictInt] = Field(default=None, description="The quota ID.")
     quantity: Optional[StrictInt] = Field(default=None, description="The quota quantity.")
     wallet: Optional[StrictBool] = Field(default=None, description="The quota applies to the wallet or not")
     due_date: Optional[datetime] = Field(default=None, description="The quota due date.", alias="dueDate")
     next_quantity: Optional[StrictInt] = Field(default=None, description="The quota next quantity.", alias="nextQuantity")
+    additional: Optional[StrictBool] = Field(default=None, description="Indicates whether the quota is primary or additional.")
     state: Optional[QuotaState] = None
-    __properties: ClassVar[List[str]] = ["id", "quantity", "wallet", "dueDate", "nextQuantity", "state"]
+    __properties: ClassVar[List[str]] = ["id", "quantity", "wallet", "dueDate", "nextQuantity", "additional", "state"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -107,6 +108,7 @@ class Quota(BaseModel):
             "wallet": obj.get("wallet"),
             "dueDate": obj.get("dueDate"),
             "nextQuantity": obj.get("nextQuantity"),
+            "additional": obj.get("additional"),
             "state": obj.get("state")
         })
         return _obj

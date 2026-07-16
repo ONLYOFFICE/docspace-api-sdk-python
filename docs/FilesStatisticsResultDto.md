@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **archive_used_space** | [**FilesStatisticsFolder**](FilesStatisticsFolder.md) |  | [optional] 
 **rooms_used_space** | [**FilesStatisticsFolder**](FilesStatisticsFolder.md) |  | [optional] 
 **ai_agents_used_space** | [**FilesStatisticsFolder**](FilesStatisticsFolder.md) |  | [optional] 
+**forms_used_space** | [**FilesStatisticsFolder**](FilesStatisticsFolder.md) |  | [optional] 
 
 ## Example
 

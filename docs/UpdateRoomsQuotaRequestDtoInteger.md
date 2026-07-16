@@ -5,7 +5,7 @@ The request parameters for updating the room quota.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**room_ids** | [**List[ContinueChatBodyFilesInner]**](ContinueChatBodyFilesInner.md) | The list of room IDs. | [optional] 
+**room_ids** | [**List[DuplicateRequestDtoAllOfFileIds]**](DuplicateRequestDtoAllOfFileIds.md) | The list of room IDs. | [optional] 
 **quota** | **int** | The room quota. | [optional] 
 
 ## Example

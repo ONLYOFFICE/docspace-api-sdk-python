@@ -26,6 +26,7 @@ from docspace_api_sdk.models.boolean_wrapper import BooleanWrapper
 from docspace_api_sdk.models.setup_code_wrapper import SetupCodeWrapper
 from docspace_api_sdk.models.string_wrapper import StringWrapper
 from docspace_api_sdk.models.tfa_app_code_array_wrapper import TfaAppCodeArrayWrapper
+from docspace_api_sdk.models.tfa_confirm_data_wrapper import TfaConfirmDataWrapper
 from docspace_api_sdk.models.tfa_requests_dto import TfaRequestsDto
 from docspace_api_sdk.models.tfa_settings_array_wrapper import TfaSettingsArrayWrapper
 from docspace_api_sdk.models.tfa_validate_requests_dto import TfaValidateRequestsDto
@@ -105,7 +106,8 @@ class TFASettingsApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -172,7 +174,8 @@ class TFASettingsApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -239,7 +242,8 @@ class TFASettingsApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -316,7 +320,7 @@ class TFASettingsApi:
 
 
     @validate_call
-    def get_tfa_confirm_url(
+    def get_tfa_confirm_data(
         self,
         _request_timeout: Union[
             None,
@@ -330,10 +334,10 @@ class TFASettingsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> StringWrapper:
-        """Get TFA confirmation URL
+    ) -> TfaConfirmDataWrapper:
+        """Get TFA confirmation data
 
-        Returns the confirmation URL for authorization via SMS or TFA application.
+        Returns the confirmation data for authorization via SMS or TFA application.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -357,7 +361,7 @@ class TFASettingsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_tfa_confirm_url_serialize(
+        _param = self._get_tfa_confirm_data_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -365,12 +369,13 @@ class TFASettingsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "StringWrapper",
+            '200': "TfaConfirmDataWrapper",
             '401': None,
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -382,7 +387,7 @@ class TFASettingsApi:
 
 
     @validate_call
-    def get_tfa_confirm_url_with_http_info(
+    def get_tfa_confirm_data_with_http_info(
         self,
         _request_timeout: Union[
             None,
@@ -396,10 +401,10 @@ class TFASettingsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[StringWrapper]:
-        """Get TFA confirmation URL
+    ) -> ApiResponse[TfaConfirmDataWrapper]:
+        """Get TFA confirmation data
 
-        Returns the confirmation URL for authorization via SMS or TFA application.
+        Returns the confirmation data for authorization via SMS or TFA application.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -423,7 +428,7 @@ class TFASettingsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_tfa_confirm_url_serialize(
+        _param = self._get_tfa_confirm_data_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -431,12 +436,13 @@ class TFASettingsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "StringWrapper",
+            '200': "TfaConfirmDataWrapper",
             '401': None,
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -448,7 +454,7 @@ class TFASettingsApi:
 
 
     @validate_call
-    def get_tfa_confirm_url_without_preload_content(
+    def get_tfa_confirm_data_without_preload_content(
         self,
         _request_timeout: Union[
             None,
@@ -463,9 +469,9 @@ class TFASettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get TFA confirmation URL
+        """Get TFA confirmation data
 
-        Returns the confirmation URL for authorization via SMS or TFA application.
+        Returns the confirmation data for authorization via SMS or TFA application.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -489,7 +495,7 @@ class TFASettingsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_tfa_confirm_url_serialize(
+        _param = self._get_tfa_confirm_data_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -497,19 +503,20 @@ class TFASettingsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "StringWrapper",
+            '200': "TfaConfirmDataWrapper",
             '401': None,
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
         return response_data.response
 
 
-    def _get_tfa_confirm_url_serialize(
+    def _get_tfa_confirm_data_serialize(
         self,
         _request_auth,
         _content_type,
@@ -633,7 +640,8 @@ class TFASettingsApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -699,7 +707,8 @@ class TFASettingsApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -765,7 +774,8 @@ class TFASettingsApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -897,7 +907,8 @@ class TFASettingsApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -964,7 +975,8 @@ class TFASettingsApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1031,7 +1043,8 @@ class TFASettingsApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1166,7 +1179,8 @@ class TFASettingsApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1236,7 +1250,8 @@ class TFASettingsApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1306,7 +1321,8 @@ class TFASettingsApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1459,7 +1475,8 @@ class TFASettingsApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1531,7 +1548,8 @@ class TFASettingsApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1603,7 +1621,8 @@ class TFASettingsApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1751,7 +1770,8 @@ class TFASettingsApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1818,7 +1838,8 @@ class TFASettingsApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1885,7 +1906,8 @@ class TFASettingsApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2021,7 +2043,8 @@ class TFASettingsApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2092,7 +2115,8 @@ class TFASettingsApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2163,7 +2187,8 @@ class TFASettingsApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2316,7 +2341,8 @@ class TFASettingsApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2388,7 +2414,8 @@ class TFASettingsApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2460,7 +2487,8 @@ class TFASettingsApi:
             '429': None,
             '502': None,
             '503': None,
-        }        response_data = self.api_client.call_api(
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )

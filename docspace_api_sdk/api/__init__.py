@@ -1,7 +1,6 @@
 # flake8: noqa
 
 # import apis into api package
-from docspace_api_sdk.api.ai.agents_api import AgentsApi
 from docspace_api_sdk.api.ai.chat_api import ChatApi
 from docspace_api_sdk.api.ai.mcp_api import MCPApi
 from docspace_api_sdk.api.ai.messages_api import MessagesApi
@@ -9,6 +8,7 @@ from docspace_api_sdk.api.ai.providers_api import ProvidersApi
 from docspace_api_sdk.api.ai.settings_api import SettingsApi
 from docspace_api_sdk.api.ai.vectorization_api import VectorizationApi
 from docspace_api_sdk.api.api_keys.api_keys_api import ApiKeysApi
+from docspace_api_sdk.api.apps.apps_api import AppsApi
 from docspace_api_sdk.api.authentication.authentication_api import AuthenticationApi
 from docspace_api_sdk.api.backup.backup_api import BackupApi
 from docspace_api_sdk.api.capabilities.capabilities_api import CapabilitiesApi
@@ -79,4 +79,5 @@ from docspace_api_sdk.api.settings.telegram_api import TelegramApi
 from docspace_api_sdk.api.settings.webhooks_api import WebhooksApi
 from docspace_api_sdk.api.settings.webplugins_api import WebpluginsApi
 from docspace_api_sdk.api.third_party.third_party_api import ThirdPartyApi
+from docspace_api_sdk.api.privacyroom.privacyroom_api import PrivacyroomApi
 

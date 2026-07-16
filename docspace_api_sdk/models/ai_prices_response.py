@@ -21,10 +21,11 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict
 from typing import Any, ClassVar, Dict, List, Optional
 from docspace_api_sdk.models.ai_chat_model_pricing import AiChatModelPricing
 from docspace_api_sdk.models.ai_embedding_model_pricing import AiEmbeddingModelPricing
+from docspace_api_sdk.models.ai_image_model_pricing import AiImageModelPricing
 from docspace_api_sdk.models.ai_web_search_pricing import AiWebSearchPricing
 from docspace_api_sdk.models.currency_info import CurrencyInfo
 from typing import Optional, Set
@@ -36,9 +37,10 @@ class AiPricesResponse(BaseModel):
     """ # noqa: E501
     chat: Optional[List[AiChatModelPricing]]
     embedding: Optional[List[AiEmbeddingModelPricing]]
-    web_search: AiWebSearchPricing = Field(alias="webSearch")
+    image: Optional[List[AiImageModelPricing]]
+    search: Optional[List[AiWebSearchPricing]]
     currency: CurrencyInfo
-    __properties: ClassVar[List[str]] = ["chat", "embedding", "webSearch", "currency"]
+    __properties: ClassVar[List[str]] = ["chat", "embedding", "image", "search", "currency"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -93,9 +95,20 @@ class AiPricesResponse(BaseModel):
                 if _item_embedding:
                     _items.append(_item_embedding.to_dict())
             _dict['embedding'] = _items
-        # override the default output from pydantic by calling `to_dict()` of web_search
-        if self.web_search:
-            _dict['webSearch'] = self.web_search.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in image (list)
+        _items = []
+        if self.image:
+            for _item_image in self.image:
+                if _item_image:
+                    _items.append(_item_image.to_dict())
+            _dict['image'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in search (list)
+        _items = []
+        if self.search:
+            for _item_search in self.search:
+                if _item_search:
+                    _items.append(_item_search.to_dict())
+            _dict['search'] = _items
         # override the default output from pydantic by calling `to_dict()` of currency
         if self.currency:
             _dict['currency'] = self.currency.to_dict()
@@ -108,6 +121,16 @@ class AiPricesResponse(BaseModel):
         # and model_fields_set contains the field
         if self.embedding is None and "embedding" in self.model_fields_set:
             _dict['embedding'] = None
+
+        # set to None if image (nullable) is None
+        # and model_fields_set contains the field
+        if self.image is None and "image" in self.model_fields_set:
+            _dict['image'] = None
+
+        # set to None if search (nullable) is None
+        # and model_fields_set contains the field
+        if self.search is None and "search" in self.model_fields_set:
+            _dict['search'] = None
 
         return _dict
 
@@ -124,7 +147,8 @@ class AiPricesResponse(BaseModel):
         _obj = cls.model_validate({
             "chat": [AiChatModelPricing.from_dict(_item) for _item in obj["chat"]] if obj.get("chat") is not None else None,
             "embedding": [AiEmbeddingModelPricing.from_dict(_item) for _item in obj["embedding"]] if obj.get("embedding") is not None else None,
-            "webSearch": AiWebSearchPricing.from_dict(obj["webSearch"]) if obj.get("webSearch") is not None else None,
+            "image": [AiImageModelPricing.from_dict(_item) for _item in obj["image"]] if obj.get("image") is not None else None,
+            "search": [AiWebSearchPricing.from_dict(_item) for _item in obj["search"]] if obj.get("search") is not None else None,
             "currency": CurrencyInfo.from_dict(obj["currency"]) if obj.get("currency") is not None else None
         })
         return _obj
