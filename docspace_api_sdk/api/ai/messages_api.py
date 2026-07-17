@@ -21,9 +21,9 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictInt
+from pydantic import Field
 from typing_extensions import Annotated
-from docspace_api_sdk.models.export_message_request_body_integer import ExportMessageRequestBodyInteger
+from docspace_api_sdk.models.export_message_request_body import ExportMessageRequestBody
 
 from docspace_api_sdk.api_client import ApiClient, RequestSerialized
 from docspace_api_sdk.api_response import ApiResponse
@@ -47,8 +47,8 @@ class MessagesApi:
     @validate_call
     def export_message(
         self,
-        message_id: Annotated[StrictInt, Field(description="The unique identifier of the AI chat message to export.")],
-        export_message_request_body_integer: Annotated[ExportMessageRequestBodyInteger, Field(description="The export parameters including destination folder and file title.")],
+        message_id: Annotated[int, Field(le=2147483647, strict=True, ge=1, description="The unique identifier of the AI chat message to export.")],
+        export_message_request_body: Annotated[ExportMessageRequestBody, Field(description="The export parameters including destination folder and file title.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -68,8 +68,8 @@ class MessagesApi:
 
         :param message_id: The unique identifier of the AI chat message to export. (required)
         :type message_id: int
-        :param export_message_request_body_integer: The export parameters including destination folder and file title. (required)
-        :type export_message_request_body_integer: ExportMessageRequestBodyInteger
+        :param export_message_request_body: The export parameters including destination folder and file title. (required)
+        :type export_message_request_body: ExportMessageRequestBody
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -94,7 +94,7 @@ class MessagesApi:
 
         _param = self._export_message_serialize(
             message_id=message_id,
-            export_message_request_body_integer=export_message_request_body_integer,
+            export_message_request_body=export_message_request_body,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -106,7 +106,11 @@ class MessagesApi:
             '400': None,
             '404': None,
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -120,8 +124,8 @@ class MessagesApi:
     @validate_call
     def export_message_with_http_info(
         self,
-        message_id: Annotated[StrictInt, Field(description="The unique identifier of the AI chat message to export.")],
-        export_message_request_body_integer: Annotated[ExportMessageRequestBodyInteger, Field(description="The export parameters including destination folder and file title.")],
+        message_id: Annotated[int, Field(le=2147483647, strict=True, ge=1, description="The unique identifier of the AI chat message to export.")],
+        export_message_request_body: Annotated[ExportMessageRequestBody, Field(description="The export parameters including destination folder and file title.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -141,8 +145,8 @@ class MessagesApi:
 
         :param message_id: The unique identifier of the AI chat message to export. (required)
         :type message_id: int
-        :param export_message_request_body_integer: The export parameters including destination folder and file title. (required)
-        :type export_message_request_body_integer: ExportMessageRequestBodyInteger
+        :param export_message_request_body: The export parameters including destination folder and file title. (required)
+        :type export_message_request_body: ExportMessageRequestBody
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -167,7 +171,7 @@ class MessagesApi:
 
         _param = self._export_message_serialize(
             message_id=message_id,
-            export_message_request_body_integer=export_message_request_body_integer,
+            export_message_request_body=export_message_request_body,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -179,7 +183,11 @@ class MessagesApi:
             '400': None,
             '404': None,
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -193,8 +201,8 @@ class MessagesApi:
     @validate_call
     def export_message_without_preload_content(
         self,
-        message_id: Annotated[StrictInt, Field(description="The unique identifier of the AI chat message to export.")],
-        export_message_request_body_integer: Annotated[ExportMessageRequestBodyInteger, Field(description="The export parameters including destination folder and file title.")],
+        message_id: Annotated[int, Field(le=2147483647, strict=True, ge=1, description="The unique identifier of the AI chat message to export.")],
+        export_message_request_body: Annotated[ExportMessageRequestBody, Field(description="The export parameters including destination folder and file title.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -214,8 +222,8 @@ class MessagesApi:
 
         :param message_id: The unique identifier of the AI chat message to export. (required)
         :type message_id: int
-        :param export_message_request_body_integer: The export parameters including destination folder and file title. (required)
-        :type export_message_request_body_integer: ExportMessageRequestBodyInteger
+        :param export_message_request_body: The export parameters including destination folder and file title. (required)
+        :type export_message_request_body: ExportMessageRequestBody
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -240,7 +248,7 @@ class MessagesApi:
 
         _param = self._export_message_serialize(
             message_id=message_id,
-            export_message_request_body_integer=export_message_request_body_integer,
+            export_message_request_body=export_message_request_body,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -252,7 +260,11 @@ class MessagesApi:
             '400': None,
             '404': None,
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -262,7 +274,7 @@ class MessagesApi:
     def _export_message_serialize(
         self,
         message_id,
-        export_message_request_body_integer,
+        export_message_request_body,
         _request_auth,
         _content_type,
         _headers,
@@ -290,8 +302,8 @@ class MessagesApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if export_message_request_body_integer is not None:
-            _body_params = export_message_request_body_integer
+        if export_message_request_body is not None:
+            _body_params = export_message_request_body
 
 
 

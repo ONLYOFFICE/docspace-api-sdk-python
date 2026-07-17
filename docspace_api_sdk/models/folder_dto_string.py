@@ -72,6 +72,7 @@ class FolderDtoString(FileEntryDtoString):
     root_room_type: Optional[RoomType] = Field(default=None, alias="rootRoomType")
     save_form_as_xlsx: Optional[StrictBool] = Field(default=None, description="Specifies whether to save form data as XLSX file.", alias="saveFormAsXLSX")
     send_form_to_external_db: Optional[StrictBool] = Field(default=None, description="Specifies whether to send form data to external database.", alias="sendFormToExternalDB")
+    original_form_id: Optional[StrictInt] = Field(default=None, description="The original form ID that corresponds to this FormFillingFolderDone folder.", alias="originalFormId")
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -306,6 +307,11 @@ class FolderDtoString(FileEntryDtoString):
         if self.send_form_to_external_db is None and "send_form_to_external_db" in self.model_fields_set:
             _dict['sendFormToExternalDB'] = None
 
+        # set to None if original_form_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.original_form_id is None and "original_form_id" in self.model_fields_set:
+            _dict['originalFormId'] = None
+
         return _dict
 
     @classmethod
@@ -345,7 +351,8 @@ class FolderDtoString(FileEntryDtoString):
             "chatSettings": ChatSettingsDto.from_dict(obj["chatSettings"]) if obj.get("chatSettings") is not None else None,
             "rootRoomType": obj.get("rootRoomType"),
             "saveFormAsXLSX": obj.get("saveFormAsXLSX"),
-            "sendFormToExternalDB": obj.get("sendFormToExternalDB")
+            "sendFormToExternalDB": obj.get("sendFormToExternalDB"),
+            "originalFormId": obj.get("originalFormId")
         }
         all_fields = {**base_dict, **extra_fields}
         return cls.model_validate(all_fields)

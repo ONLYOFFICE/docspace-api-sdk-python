@@ -24,6 +24,7 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from docspace_api_sdk.models.ai_chat_price import AiChatPrice
+from docspace_api_sdk.models.ai_model_capabilities import AiModelCapabilities
 from docspace_api_sdk.models.currency_info import CurrencyInfo
 from typing import Optional, Set
 from typing_extensions import Self
@@ -35,9 +36,11 @@ class ModelDto(BaseModel):
     provider_id: Optional[StrictInt] = Field(default=None, description="The unique identifier of the AI provider that offers this model.", alias="providerId")
     provider_title: Optional[StrictStr] = Field(description="The human-readable display name of the AI provider (e.g., OpenAI, Anthropic).", alias="providerTitle")
     model_id: Optional[StrictStr] = Field(description="The model identifier as recognized by the AI provider (e.g., gpt-4o, claude-sonnet-4-20250514).", alias="modelId")
+    alias: Optional[StrictStr] = Field(default=None, description="The display name for the model.")
+    capabilities: Optional[AiModelCapabilities] = None
     price: Optional[AiChatPrice] = None
     currency: Optional[CurrencyInfo] = None
-    __properties: ClassVar[List[str]] = ["providerId", "providerTitle", "modelId", "price", "currency"]
+    __properties: ClassVar[List[str]] = ["providerId", "providerTitle", "modelId", "alias", "capabilities", "price", "currency"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -78,6 +81,9 @@ class ModelDto(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of capabilities
+        if self.capabilities:
+            _dict['capabilities'] = self.capabilities.to_dict()
         # override the default output from pydantic by calling `to_dict()` of price
         if self.price:
             _dict['price'] = self.price.to_dict()
@@ -93,6 +99,11 @@ class ModelDto(BaseModel):
         # and model_fields_set contains the field
         if self.model_id is None and "model_id" in self.model_fields_set:
             _dict['modelId'] = None
+
+        # set to None if alias (nullable) is None
+        # and model_fields_set contains the field
+        if self.alias is None and "alias" in self.model_fields_set:
+            _dict['alias'] = None
 
         return _dict
 
@@ -110,6 +121,8 @@ class ModelDto(BaseModel):
             "providerId": obj.get("providerId"),
             "providerTitle": obj.get("providerTitle"),
             "modelId": obj.get("modelId"),
+            "alias": obj.get("alias"),
+            "capabilities": AiModelCapabilities.from_dict(obj["capabilities"]) if obj.get("capabilities") is not None else None,
             "price": AiChatPrice.from_dict(obj["price"]) if obj.get("price") is not None else None,
             "currency": CurrencyInfo.from_dict(obj["currency"]) if obj.get("currency") is not None else None
         })

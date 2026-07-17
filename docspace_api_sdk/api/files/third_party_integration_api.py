@@ -108,7 +108,11 @@ class ThirdPartyIntegrationApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -175,7 +179,11 @@ class ThirdPartyIntegrationApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -242,7 +250,11 @@ class ThirdPartyIntegrationApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -377,7 +389,11 @@ class ThirdPartyIntegrationApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ProviderArrayWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -444,7 +460,11 @@ class ThirdPartyIntegrationApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ProviderArrayWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -511,7 +531,11 @@ class ThirdPartyIntegrationApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ProviderArrayWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -644,7 +668,11 @@ class ThirdPartyIntegrationApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderStringWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -707,7 +735,11 @@ class ThirdPartyIntegrationApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderStringWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -770,7 +802,11 @@ class ThirdPartyIntegrationApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderStringWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -898,7 +934,11 @@ class ThirdPartyIntegrationApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ArrayArrayWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -961,7 +1001,11 @@ class ThirdPartyIntegrationApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ArrayArrayWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1024,7 +1068,11 @@ class ThirdPartyIntegrationApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ArrayArrayWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1152,7 +1200,11 @@ class ThirdPartyIntegrationApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderStringArrayWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1215,7 +1267,11 @@ class ThirdPartyIntegrationApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderStringArrayWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1278,7 +1334,11 @@ class ThirdPartyIntegrationApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderStringArrayWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1406,7 +1466,11 @@ class ThirdPartyIntegrationApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ThirdPartyParamsArrayWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1469,7 +1533,11 @@ class ThirdPartyIntegrationApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ThirdPartyParamsArrayWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1532,7 +1600,11 @@ class ThirdPartyIntegrationApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ThirdPartyParamsArrayWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1664,7 +1736,11 @@ class ThirdPartyIntegrationApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderStringWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1731,7 +1807,11 @@ class ThirdPartyIntegrationApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderStringWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1798,7 +1878,11 @@ class ThirdPartyIntegrationApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderStringWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1946,7 +2030,11 @@ class ThirdPartyIntegrationApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderStringWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2013,7 +2101,11 @@ class ThirdPartyIntegrationApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderStringWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2080,7 +2172,11 @@ class ThirdPartyIntegrationApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderStringWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )

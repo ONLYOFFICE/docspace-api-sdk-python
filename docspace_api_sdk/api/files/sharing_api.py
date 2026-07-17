@@ -118,7 +118,10 @@ class SharingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ExternalShareWrapper",
             '429': None,
-        }        response_data = self.api_client.call_api(
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -189,7 +192,10 @@ class SharingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ExternalShareWrapper",
             '429': None,
-        }        response_data = self.api_client.call_api(
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -260,7 +266,10 @@ class SharingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ExternalShareWrapper",
             '429': None,
-        }        response_data = self.api_client.call_api(
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -405,7 +414,11 @@ class SharingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileEntryBaseArrayWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -472,7 +485,11 @@ class SharingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileEntryBaseArrayWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -539,7 +556,11 @@ class SharingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileEntryBaseArrayWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -694,7 +715,11 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ExternalShareWrapper",
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -768,7 +793,11 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ExternalShareWrapper",
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -842,7 +871,11 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ExternalShareWrapper",
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -989,7 +1022,11 @@ class SharingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1064,7 +1101,11 @@ class SharingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1139,7 +1180,11 @@ class SharingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1292,7 +1337,11 @@ class SharingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1367,7 +1416,11 @@ class SharingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1442,7 +1495,11 @@ class SharingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1603,7 +1660,11 @@ class SharingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupMemberSecurityRequestArrayWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1686,7 +1747,11 @@ class SharingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupMemberSecurityRequestArrayWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1769,7 +1834,11 @@ class SharingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupMemberSecurityRequestArrayWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1938,7 +2007,11 @@ class SharingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupMemberSecurityRequestArrayWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2021,7 +2094,11 @@ class SharingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupMemberSecurityRequestArrayWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2104,7 +2181,11 @@ class SharingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupMemberSecurityRequestArrayWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2257,7 +2338,11 @@ class SharingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2324,7 +2409,11 @@ class SharingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2391,7 +2480,11 @@ class SharingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2539,7 +2632,11 @@ class SharingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "MentionWrapperArrayWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2606,7 +2703,11 @@ class SharingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "MentionWrapperArrayWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2673,7 +2774,11 @@ class SharingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "MentionWrapperArrayWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2808,7 +2913,11 @@ class SharingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2875,7 +2984,11 @@ class SharingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2942,7 +3055,11 @@ class SharingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -3097,7 +3214,11 @@ class SharingApi:
             '403': None,
             '404': None,
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -3171,7 +3292,11 @@ class SharingApi:
             '403': None,
             '404': None,
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -3245,7 +3370,11 @@ class SharingApi:
             '403': None,
             '404': None,
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -3400,7 +3529,11 @@ class SharingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -3471,7 +3604,11 @@ class SharingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -3542,7 +3679,11 @@ class SharingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -3697,7 +3838,11 @@ class SharingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -3768,7 +3913,11 @@ class SharingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -3839,7 +3988,11 @@ class SharingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -3990,7 +4143,11 @@ class SharingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -4057,7 +4214,11 @@ class SharingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -4124,7 +4285,11 @@ class SharingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )

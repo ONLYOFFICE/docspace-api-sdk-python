@@ -25,7 +25,6 @@ from typing_extensions import Annotated
 from pydantic import Field, StrictInt, StrictStr
 from typing import Optional
 from typing_extensions import Annotated
-from docspace_api_sdk.models.boolean_wrapper import BooleanWrapper
 from docspace_api_sdk.models.culture import Culture
 from docspace_api_sdk.models.employee_array_wrapper import EmployeeArrayWrapper
 from docspace_api_sdk.models.employee_full_array_wrapper import EmployeeFullArrayWrapper
@@ -36,6 +35,7 @@ from docspace_api_sdk.models.object_wrapper import ObjectWrapper
 from docspace_api_sdk.models.sort_order import SortOrder
 from docspace_api_sdk.models.update_member_request_dto import UpdateMemberRequestDto
 from docspace_api_sdk.models.update_members_request_dto import UpdateMembersRequestDto
+from docspace_api_sdk.models.user_exists_response_wrapper import UserExistsResponseWrapper
 
 from docspace_api_sdk.api_client import ApiClient, RequestSerialized
 from docspace_api_sdk.api_response import ApiResponse
@@ -117,7 +117,11 @@ class ProfilesApi:
             '200': "EmployeeFullWrapper",
             '403': None,
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -185,7 +189,11 @@ class ProfilesApi:
             '200': "EmployeeFullWrapper",
             '403': None,
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -253,7 +261,11 @@ class ProfilesApi:
             '200': "EmployeeFullWrapper",
             '403': None,
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -363,10 +375,10 @@ class ProfilesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> BooleanWrapper:
+    ) -> UserExistsResponseWrapper:
         """Check if a user exists by email
 
-        Returns a boolean indicating whether a user with the specified email exists on the portal.
+        Returns data indicating whether a user with the specified email exists on the portal.
 
         :param email: The user email address.
         :type email: str
@@ -407,10 +419,14 @@ class ProfilesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "BooleanWrapper",
+            '200': "UserExistsResponseWrapper",
             '400': None,
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -439,10 +455,10 @@ class ProfilesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[BooleanWrapper]:
+    ) -> ApiResponse[UserExistsResponseWrapper]:
         """Check if a user exists by email
 
-        Returns a boolean indicating whether a user with the specified email exists on the portal.
+        Returns data indicating whether a user with the specified email exists on the portal.
 
         :param email: The user email address.
         :type email: str
@@ -483,10 +499,14 @@ class ProfilesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "BooleanWrapper",
+            '200': "UserExistsResponseWrapper",
             '400': None,
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -518,7 +538,7 @@ class ProfilesApi:
     ) -> RESTResponseType:
         """Check if a user exists by email
 
-        Returns a boolean indicating whether a user with the specified email exists on the portal.
+        Returns data indicating whether a user with the specified email exists on the portal.
 
         :param email: The user email address.
         :type email: str
@@ -559,10 +579,14 @@ class ProfilesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "BooleanWrapper",
+            '200': "UserExistsResponseWrapper",
             '400': None,
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -711,7 +735,11 @@ class ProfilesApi:
             '403': None,
             '404': None,
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -780,7 +808,11 @@ class ProfilesApi:
             '403': None,
             '404': None,
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -849,7 +881,11 @@ class ProfilesApi:
             '403': None,
             '404': None,
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -982,7 +1018,11 @@ class ProfilesApi:
             '403': None,
             '404': None,
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1047,7 +1087,11 @@ class ProfilesApi:
             '403': None,
             '404': None,
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1112,7 +1156,11 @@ class ProfilesApi:
             '403': None,
             '404': None,
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1268,7 +1316,11 @@ class ProfilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeFullArrayWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1359,7 +1411,11 @@ class ProfilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeFullArrayWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1450,7 +1506,11 @@ class ProfilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeFullArrayWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1615,7 +1675,11 @@ class ProfilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1678,7 +1742,11 @@ class ProfilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1741,7 +1809,11 @@ class ProfilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1884,7 +1956,11 @@ class ProfilesApi:
             '403': None,
             '404': None,
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1962,7 +2038,11 @@ class ProfilesApi:
             '403': None,
             '404': None,
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2040,7 +2120,11 @@ class ProfilesApi:
             '403': None,
             '404': None,
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2189,7 +2273,11 @@ class ProfilesApi:
             '400': None,
             '404': None,
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2258,7 +2346,11 @@ class ProfilesApi:
             '400': None,
             '404': None,
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2327,7 +2419,11 @@ class ProfilesApi:
             '400': None,
             '404': None,
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2458,7 +2554,11 @@ class ProfilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeFullWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2521,7 +2621,11 @@ class ProfilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeFullWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2584,7 +2688,11 @@ class ProfilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeFullWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2719,7 +2827,10 @@ class ProfilesApi:
             '402': None,
             '403': None,
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2789,7 +2900,10 @@ class ProfilesApi:
             '402': None,
             '403': None,
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2859,7 +2973,10 @@ class ProfilesApi:
             '402': None,
             '403': None,
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -3010,7 +3127,11 @@ class ProfilesApi:
             '403': None,
             '409': None,
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -3080,7 +3201,11 @@ class ProfilesApi:
             '403': None,
             '409': None,
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -3150,7 +3275,11 @@ class ProfilesApi:
             '403': None,
             '409': None,
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -3299,7 +3428,11 @@ class ProfilesApi:
             '200': "EmployeeFullArrayWrapper",
             '403': None,
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -3367,7 +3500,11 @@ class ProfilesApi:
             '200': "EmployeeFullArrayWrapper",
             '403': None,
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -3435,7 +3572,11 @@ class ProfilesApi:
             '200': "EmployeeFullArrayWrapper",
             '403': None,
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -3590,7 +3731,11 @@ class ProfilesApi:
             '403': None,
             '404': None,
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -3664,7 +3809,11 @@ class ProfilesApi:
             '403': None,
             '404': None,
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -3738,7 +3887,11 @@ class ProfilesApi:
             '403': None,
             '404': None,
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -3896,7 +4049,11 @@ class ProfilesApi:
             '403': None,
             '404': None,
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -3970,7 +4127,11 @@ class ProfilesApi:
             '403': None,
             '404': None,
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -4044,7 +4205,11 @@ class ProfilesApi:
             '403': None,
             '404': None,
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )

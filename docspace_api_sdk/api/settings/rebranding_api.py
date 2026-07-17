@@ -106,7 +106,11 @@ class RebrandingApi:
             '200': "AdditionalWhiteLabelSettingsWrapper",
             '403': None,
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -170,7 +174,11 @@ class RebrandingApi:
             '200': "AdditionalWhiteLabelSettingsWrapper",
             '403': None,
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -234,7 +242,11 @@ class RebrandingApi:
             '200': "AdditionalWhiteLabelSettingsWrapper",
             '403': None,
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -363,7 +375,11 @@ class RebrandingApi:
             '200': "CompanyWhiteLabelSettingsWrapper",
             '403': None,
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -427,7 +443,11 @@ class RebrandingApi:
             '200': "CompanyWhiteLabelSettingsWrapper",
             '403': None,
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -491,7 +511,11 @@ class RebrandingApi:
             '200': "CompanyWhiteLabelSettingsWrapper",
             '403': None,
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -619,7 +643,11 @@ class RebrandingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AdditionalWhiteLabelSettingsWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -682,7 +710,11 @@ class RebrandingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AdditionalWhiteLabelSettingsWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -745,7 +777,11 @@ class RebrandingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AdditionalWhiteLabelSettingsWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -873,7 +909,11 @@ class RebrandingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CompanyWhiteLabelSettingsWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -936,7 +976,11 @@ class RebrandingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CompanyWhiteLabelSettingsWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -999,7 +1043,11 @@ class RebrandingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CompanyWhiteLabelSettingsWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1127,7 +1175,11 @@ class RebrandingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1190,7 +1242,11 @@ class RebrandingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1253,7 +1309,11 @@ class RebrandingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1389,7 +1449,11 @@ class RebrandingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "IsDefaultWhiteLabelLogosWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1460,7 +1524,11 @@ class RebrandingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "IsDefaultWhiteLabelLogosWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1531,7 +1599,11 @@ class RebrandingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "IsDefaultWhiteLabelLogosWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1677,7 +1749,11 @@ class RebrandingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "IsDefaultWhiteLabelLogosArrayWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1748,7 +1824,11 @@ class RebrandingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "IsDefaultWhiteLabelLogosArrayWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1819,7 +1899,11 @@ class RebrandingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "IsDefaultWhiteLabelLogosArrayWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1957,7 +2041,11 @@ class RebrandingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CompanyWhiteLabelSettingsArrayWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2020,7 +2108,11 @@ class RebrandingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CompanyWhiteLabelSettingsArrayWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2083,7 +2175,11 @@ class RebrandingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CompanyWhiteLabelSettingsArrayWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2219,7 +2315,11 @@ class RebrandingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2290,7 +2390,11 @@ class RebrandingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2361,7 +2465,11 @@ class RebrandingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2506,7 +2614,11 @@ class RebrandingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "WhiteLabelItemArrayWrapper",
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2576,7 +2688,11 @@ class RebrandingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "WhiteLabelItemArrayWrapper",
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2646,7 +2762,11 @@ class RebrandingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "WhiteLabelItemArrayWrapper",
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2787,7 +2907,11 @@ class RebrandingApi:
             '200': "BooleanWrapper",
             '403': None,
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2859,7 +2983,11 @@ class RebrandingApi:
             '200': "BooleanWrapper",
             '403': None,
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2931,7 +3059,11 @@ class RebrandingApi:
             '200': "BooleanWrapper",
             '403': None,
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -3078,7 +3210,11 @@ class RebrandingApi:
             '200': "BooleanWrapper",
             '403': None,
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -3150,7 +3286,11 @@ class RebrandingApi:
             '200': "BooleanWrapper",
             '403': None,
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -3222,7 +3362,11 @@ class RebrandingApi:
             '200': "BooleanWrapper",
             '403': None,
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -3366,7 +3510,11 @@ class RebrandingApi:
             '400': None,
             '403': None,
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -3435,7 +3583,11 @@ class RebrandingApi:
             '400': None,
             '403': None,
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -3504,7 +3656,11 @@ class RebrandingApi:
             '400': None,
             '403': None,
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -3654,7 +3810,11 @@ class RebrandingApi:
             '400': None,
             '403': None,
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -3723,7 +3883,11 @@ class RebrandingApi:
             '400': None,
             '403': None,
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -3792,7 +3956,11 @@ class RebrandingApi:
             '400': None,
             '403': None,
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -3949,7 +4117,11 @@ class RebrandingApi:
             '200': "BooleanWrapper",
             '403': None,
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -4025,7 +4197,11 @@ class RebrandingApi:
             '200': "BooleanWrapper",
             '403': None,
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -4101,7 +4277,11 @@ class RebrandingApi:
             '200': "BooleanWrapper",
             '403': None,
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -4268,7 +4448,11 @@ class RebrandingApi:
             '200': "BooleanWrapper",
             '403': None,
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -4344,7 +4528,11 @@ class RebrandingApi:
             '200': "BooleanWrapper",
             '403': None,
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -4420,7 +4608,11 @@ class RebrandingApi:
             '200': "BooleanWrapper",
             '403': None,
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -4584,7 +4776,11 @@ class RebrandingApi:
             '403': None,
             '409': None,
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -4657,7 +4853,11 @@ class RebrandingApi:
             '403': None,
             '409': None,
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -4730,7 +4930,11 @@ class RebrandingApi:
             '403': None,
             '409': None,
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )

@@ -58,7 +58,7 @@ class ScopeManagementApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ScopeResponse:
-        """Get available OAuth2 scopes
+        """List available OAuth2 scopes
 
         Retrieves a list of all available OAuth2 scopes for the specified tenant. The scopes define the permissions that can be requested by OAuth2 clients. The list is ordered alphabetically, with the 'openid' scope always appearing first.
 
@@ -93,11 +93,12 @@ class ScopeManagementApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ScopeResponse",
-            '400': "ErrorResponse",
-            '403': "ErrorResponse",
-            '429': "ErrorResponse",
-            '500': "ErrorResponse",
-        }        response_data = self.api_client.call_api(
+            '400': "ProblemDetail",
+            '403': "ProblemDetail",
+            '429': "ProblemDetail",
+            '500': "ProblemDetail",
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -124,7 +125,7 @@ class ScopeManagementApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[ScopeResponse]:
-        """Get available OAuth2 scopes
+        """List available OAuth2 scopes
 
         Retrieves a list of all available OAuth2 scopes for the specified tenant. The scopes define the permissions that can be requested by OAuth2 clients. The list is ordered alphabetically, with the 'openid' scope always appearing first.
 
@@ -159,11 +160,12 @@ class ScopeManagementApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ScopeResponse",
-            '400': "ErrorResponse",
-            '403': "ErrorResponse",
-            '429': "ErrorResponse",
-            '500': "ErrorResponse",
-        }        response_data = self.api_client.call_api(
+            '400': "ProblemDetail",
+            '403': "ProblemDetail",
+            '429': "ProblemDetail",
+            '500': "ProblemDetail",
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -190,7 +192,7 @@ class ScopeManagementApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get available OAuth2 scopes
+        """List available OAuth2 scopes
 
         Retrieves a list of all available OAuth2 scopes for the specified tenant. The scopes define the permissions that can be requested by OAuth2 clients. The list is ordered alphabetically, with the 'openid' scope always appearing first.
 
@@ -225,11 +227,12 @@ class ScopeManagementApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ScopeResponse",
-            '400': "ErrorResponse",
-            '403': "ErrorResponse",
-            '429': "ErrorResponse",
-            '500': "ErrorResponse",
-        }        response_data = self.api_client.call_api(
+            '400': "ProblemDetail",
+            '403': "ProblemDetail",
+            '429': "ProblemDetail",
+            '500': "ProblemDetail",
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -276,7 +279,7 @@ class ScopeManagementApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'asc_auth_key'
+            'x-signature'
         ]
 
 

@@ -100,7 +100,11 @@ class QuotaApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantUserQuotaSettingsWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -163,7 +167,11 @@ class QuotaApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantUserQuotaSettingsWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -226,7 +234,11 @@ class QuotaApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantUserQuotaSettingsWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -359,7 +371,11 @@ class QuotaApi:
             '200': "TenantAiAgentQuotaSettingsWrapper",
             '402': None,
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -427,7 +443,11 @@ class QuotaApi:
             '200': "TenantAiAgentQuotaSettingsWrapper",
             '402': None,
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -495,7 +515,11 @@ class QuotaApi:
             '200': "TenantAiAgentQuotaSettingsWrapper",
             '402': None,
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -644,7 +668,11 @@ class QuotaApi:
             '200': "TenantRoomQuotaSettingsWrapper",
             '402': None,
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -712,7 +740,11 @@ class QuotaApi:
             '200': "TenantRoomQuotaSettingsWrapper",
             '402': None,
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -780,7 +812,11 @@ class QuotaApi:
             '200': "TenantRoomQuotaSettingsWrapper",
             '402': None,
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -930,7 +966,11 @@ class QuotaApi:
             '402': None,
             '405': None,
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -999,7 +1039,11 @@ class QuotaApi:
             '402': None,
             '405': None,
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1068,7 +1112,11 @@ class QuotaApi:
             '402': None,
             '405': None,
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )

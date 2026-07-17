@@ -76,11 +76,13 @@ class FileDtoInteger(FileEntryDtoInteger):
     is_filling_preparing: Optional[StrictBool] = Field(default=None, description="Specifies if the form filling has started but the file is still being saved by the document editor. Filling and editing are not allowed.", alias="isFillingPreparing")
     in_process_folder_id: Optional[StrictInt] = Field(default=None, description="The InProcess folder ID of the file.", alias="inProcessFolderId")
     in_process_folder_title: Optional[StrictStr] = Field(default=None, description="The InProcess folder title of the file.", alias="inProcessFolderTitle")
+    results_folder_id: Optional[StrictInt] = Field(default=None, description="The ID of the FormFillingFolderDone folder that corresponds to this original form.", alias="resultsFolderId")
     draft_location: Optional[DraftLocationInteger] = Field(default=None, alias="draftLocation")
     view_accessibility: Optional[FileDtoIntegerAllOfViewAccessibility] = Field(default=None, alias="viewAccessibility")
     last_opened: Optional[ApiDateTime] = Field(default=None, alias="lastOpened")
     expired: Optional[ApiDateTime] = None
     vectorization_status: Optional[VectorizationStatus] = Field(default=None, alias="vectorizationStatus")
+    external_db_table_name: Optional[StrictStr] = Field(default=None, description="The name of the table in the external database that corresponds to this form.", alias="externalDbTableName")
     dimensions: Optional[Size] = None
 
     model_config = ConfigDict(
@@ -339,10 +341,20 @@ class FileDtoInteger(FileEntryDtoInteger):
         if self.in_process_folder_title is None and "in_process_folder_title" in self.model_fields_set:
             _dict['inProcessFolderTitle'] = None
 
+        # set to None if results_folder_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.results_folder_id is None and "results_folder_id" in self.model_fields_set:
+            _dict['resultsFolderId'] = None
+
         # set to None if view_accessibility (nullable) is None
         # and model_fields_set contains the field
         if self.view_accessibility is None and "view_accessibility" in self.model_fields_set:
             _dict['viewAccessibility'] = None
+
+        # set to None if external_db_table_name (nullable) is None
+        # and model_fields_set contains the field
+        if self.external_db_table_name is None and "external_db_table_name" in self.model_fields_set:
+            _dict['externalDbTableName'] = None
 
         return _dict
 
@@ -385,11 +397,13 @@ class FileDtoInteger(FileEntryDtoInteger):
             "isFillingPreparing": obj.get("isFillingPreparing"),
             "inProcessFolderId": obj.get("inProcessFolderId"),
             "inProcessFolderTitle": obj.get("inProcessFolderTitle"),
+            "resultsFolderId": obj.get("resultsFolderId"),
             "draftLocation": DraftLocationInteger.from_dict(obj["draftLocation"]) if obj.get("draftLocation") is not None else None,
             "viewAccessibility": FileDtoIntegerAllOfViewAccessibility.from_dict(obj["viewAccessibility"]) if obj.get("viewAccessibility") is not None else None,
             "lastOpened": ApiDateTime.from_dict(obj["lastOpened"]) if obj.get("lastOpened") is not None else None,
             "expired": ApiDateTime.from_dict(obj["expired"]) if obj.get("expired") is not None else None,
             "vectorizationStatus": obj.get("vectorizationStatus"),
+            "externalDbTableName": obj.get("externalDbTableName"),
             "dimensions": Size.from_dict(obj["dimensions"]) if obj.get("dimensions") is not None else None
         }
         all_fields = {**base_dict, **extra_fields}

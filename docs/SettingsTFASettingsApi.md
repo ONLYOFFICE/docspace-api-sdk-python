@@ -5,18 +5,18 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**get_tfa_app_codes**](#get_tfa_app_codes) | **GET** /api/2.0/settings/tfaappcodes | Get the TFA codes
-[**get_tfa_confirm_url**](#get_tfa_confirm_url) | **GET** /api/2.0/settings/tfaapp/confirm | Get confirmation email
+[**get_tfa_confirm_data**](#get_tfa_confirm_data) | **GET** /api/2.0/settings/tfaapp/confirm | Get TFA confirmation data
 [**get_tfa_settings**](#get_tfa_settings) | **GET** /api/2.0/settings/tfaapp | Get the TFA settings
 [**tfa_app_generate_setup_code**](#tfa_app_generate_setup_code) | **GET** /api/2.0/settings/tfaapp/setup | Generate setup code
 [**tfa_validate_auth_code**](#tfa_validate_auth_code) | **POST** /api/2.0/settings/tfaapp/validate | Validate the TFA code
 [**unlink_tfa_app**](#unlink_tfa_app) | **PUT** /api/2.0/settings/tfaappnewapp | Unlink the TFA application
 [**update_tfa_app_codes**](#update_tfa_app_codes) | **PUT** /api/2.0/settings/tfaappnewcodes | Update the TFA codes
 [**update_tfa_settings**](#update_tfa_settings) | **PUT** /api/2.0/settings/tfaapp | Update the TFA settings
-[**update_tfa_settings_link**](#update_tfa_settings_link) | **PUT** /api/2.0/settings/tfaappwithlink | Get a confirmation email for updating TFA settings
+[**update_tfa_settings_link**](#update_tfa_settings_link) | **PUT** /api/2.0/settings/tfaappwithlink | Updates TFA settings
 
 
 # **get_tfa_app_codes**
-> ObjectArrayWrapper get_tfa_app_codes()
+> TfaAppCodeArrayWrapper get_tfa_app_codes()
 
 Returns the two-factor authentication application codes.
 
@@ -28,7 +28,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**ObjectArrayWrapper**](ObjectArrayWrapper.md)
+[**TfaAppCodeArrayWrapper**](TfaAppCodeArrayWrapper.md)
 
 ### Authorization
 
@@ -39,7 +39,7 @@ This endpoint does not need any parameter.
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.object_array_wrapper import ObjectArrayWrapper
+from docspace_api_sdk.models.tfa_app_code_array_wrapper import TfaAppCodeArrayWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -81,16 +81,19 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | List of TFA application codes |  -  |
+**200** | List of TFA application codes |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
 **405** | TFA application settings are not available |  -  |
 **401** | Unauthorized |  -  |
+**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
+**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **get_tfa_confirm_url**
-> StringWrapper get_tfa_confirm_url()
+# **get_tfa_confirm_data**
+> TfaConfirmDataWrapper get_tfa_confirm_data()
 
-Returns the confirmation email URL for authorization via SMS or TFA application.
+Returns the confirmation data for authorization via SMS or TFA application.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -100,7 +103,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**StringWrapper**](StringWrapper.md)
+[**TfaConfirmDataWrapper**](TfaConfirmDataWrapper.md)
 
 ### Authorization
 
@@ -111,7 +114,7 @@ This endpoint does not need any parameter.
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.string_wrapper import StringWrapper
+from docspace_api_sdk.models.tfa_confirm_data_wrapper import TfaConfirmDataWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -134,12 +137,12 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     api_instance = docspace_api_sdk.TFASettingsApi(api_client)
 
     try:
-        # Get confirmation email
-        api_response = api_instance.get_tfa_confirm_url()
-        print("The response of TFASettingsApi->get_tfa_confirm_url:\n")
+        # Get TFA confirmation data
+        api_response = api_instance.get_tfa_confirm_data()
+        print("The response of TFASettingsApi->get_tfa_confirm_data:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling TFASettingsApi->get_tfa_confirm_url: %s\n" % e)
+        print("Exception when calling TFASettingsApi->get_tfa_confirm_data: %s\n" % e)
 ```
 
 
@@ -153,8 +156,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Confirmation email URL |  -  |
+**200** | TFA confirmation data |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
 **401** | Unauthorized |  -  |
+**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
+**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -224,8 +230,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | TFA settings |  -  |
+**200** | TFA settings |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
 **401** | Unauthorized |  -  |
+**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
+**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -295,9 +304,12 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Setup code |  -  |
+**200** | Setup code |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
 **405** | TFA application settings are not available |  -  |
 **401** | Unauthorized |  -  |
+**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
+**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -372,8 +384,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | True if the code is valid |  -  |
+**200** | True if the code is valid |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
 **401** | Unauthorized |  -  |
+**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
+**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -448,15 +463,18 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Login URL |  -  |
+**200** | Login URL |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
 **403** | No permissions to perform this action |  -  |
 **405** | TFA application settings are not available |  -  |
 **401** | Unauthorized |  -  |
+**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
+**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update_tfa_app_codes**
-> ObjectArrayWrapper update_tfa_app_codes()
+> TfaAppCodeArrayWrapper update_tfa_app_codes()
 
 Requests the new backup codes for the two-factor authentication application.
 
@@ -468,7 +486,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**ObjectArrayWrapper**](ObjectArrayWrapper.md)
+[**TfaAppCodeArrayWrapper**](TfaAppCodeArrayWrapper.md)
 
 ### Authorization
 
@@ -479,7 +497,7 @@ This endpoint does not need any parameter.
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.object_array_wrapper import ObjectArrayWrapper
+from docspace_api_sdk.models.tfa_app_code_array_wrapper import TfaAppCodeArrayWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -521,9 +539,12 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | New backup codes |  -  |
+**200** | New backup codes |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
 **405** | TFA application settings are not available |  -  |
 **401** | Unauthorized |  -  |
+**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
+**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -598,16 +619,19 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | True if the operation is successful |  -  |
+**200** | True if the operation is successful |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
 **405** | SMS settings are not available/TFA application settings are not available |  -  |
 **401** | Unauthorized |  -  |
+**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
+**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update_tfa_settings_link**
 > StringWrapper update_tfa_settings_link(tfa_requests_dto=tfa_requests_dto)
 
-Returns the confirmation email URL for updating TFA settings.
+Updates TFA settings and returns the confirmation URL for authorization via SMS or TFA application.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -656,7 +680,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     tfa_requests_dto = docspace_api_sdk.TfaRequestsDto() # TfaRequestsDto |  (optional)
 
     try:
-        # Get a confirmation email for updating TFA settings
+        # Updates TFA settings
         api_response = api_instance.update_tfa_settings_link(tfa_requests_dto=tfa_requests_dto)
         print("The response of TFASettingsApi->update_tfa_settings_link:\n")
         pprint(api_response)
@@ -675,10 +699,13 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Confirmation email URL |  -  |
+**200** | TFA confirmation URL |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
 **403** | No permissions to perform this action |  -  |
 **405** | SMS settings are not available/TFA application settings are not available |  -  |
 **401** | Unauthorized |  -  |
+**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
+**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

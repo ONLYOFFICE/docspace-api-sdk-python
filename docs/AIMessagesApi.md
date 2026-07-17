@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **export_message**
-> export_message(message_id, export_message_request_body_integer)
+> export_message(message_id, export_message_request_body)
 
 Exports a specific AI chat message as a document into the specified folder. The system verifies that the message exists
 and belongs to a chat accessible by the current user, then publishes an asynchronous export task to the event bus.
@@ -22,7 +22,7 @@ For more information, see [api.onlyoffice.com]().
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **message_id** | **int**| The unique identifier of the AI chat message to export. | 
- **export_message_request_body_integer** | [**ExportMessageRequestBodyInteger**](ExportMessageRequestBodyInteger.md)| The export parameters including destination folder and file title. | 
+ **export_message_request_body** | [**ExportMessageRequestBody**](ExportMessageRequestBody.md)| The export parameters including destination folder and file title. | 
 
 ### Return type
 
@@ -37,7 +37,7 @@ void (empty response body)
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.export_message_request_body_integer import ExportMessageRequestBodyInteger
+from docspace_api_sdk.models.export_message_request_body import ExportMessageRequestBody
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -59,11 +59,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.MessagesApi(api_client)
     message_id = 1 # int | The unique identifier of the AI chat message to export.
-    export_message_request_body_integer = docspace_api_sdk.ExportMessageRequestBodyInteger() # ExportMessageRequestBodyInteger | The export parameters including destination folder and file title.
+    export_message_request_body = docspace_api_sdk.ExportMessageRequestBody() # ExportMessageRequestBody | The export parameters including destination folder and file title.
 
     try:
         # Export a single AI message to a document
-        api_instance.export_message(message_id, export_message_request_body_integer)
+        api_instance.export_message(message_id, export_message_request_body)
     except Exception as e:
         print("Exception when calling MessagesApi->export_message: %s\n" % e)
 ```
@@ -79,10 +79,13 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | The message export task has been successfully queued for background processing |  -  |
+**200** | The message export task has been successfully queued for background processing |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
 **400** | The message identifier is invalid (must be greater than 0) |  -  |
 **404** | The specified message was not found or the current user does not have access to it |  -  |
 **401** | Unauthorized |  -  |
+**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
+**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

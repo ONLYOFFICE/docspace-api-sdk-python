@@ -106,8 +106,13 @@ class LoginHistoryApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
             '402': None,
+            '403': None,
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -170,8 +175,13 @@ class LoginHistoryApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
             '402': None,
+            '403': None,
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -234,8 +244,13 @@ class LoginHistoryApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
             '402': None,
+            '403': None,
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -363,8 +378,13 @@ class LoginHistoryApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "LoginEventArrayWrapper",
             '402': None,
+            '403': None,
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -427,8 +447,13 @@ class LoginHistoryApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "LoginEventArrayWrapper",
             '402': None,
+            '403': None,
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -491,8 +516,13 @@ class LoginHistoryApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "LoginEventArrayWrapper",
             '402': None,
+            '403': None,
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -644,8 +674,13 @@ class LoginHistoryApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "LoginEventArrayWrapper",
             '402': None,
+            '403': None,
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -732,8 +767,13 @@ class LoginHistoryApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "LoginEventArrayWrapper",
             '402': None,
+            '403': None,
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -820,8 +860,13 @@ class LoginHistoryApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "LoginEventArrayWrapper",
             '402': None,
+            '403': None,
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )

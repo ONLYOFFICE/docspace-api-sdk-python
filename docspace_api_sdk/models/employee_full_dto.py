@@ -47,13 +47,10 @@ class EmployeeFullDto(EmployeeDto):
     user_name: Optional[StrictStr] = Field(default=None, description="The user username.", alias="userName")
     email: Optional[StrictStr] = Field(default=None, description="The user email.")
     contacts: Optional[List[Contact]] = Field(default=None, description="The list of user contacts.")
-    birthday: Optional[ApiDateTime] = None
-    sex: Optional[StrictStr] = Field(default=None, description="The user sex.")
     status: Optional[EmployeeStatus] = None
     activation_status: Optional[EmployeeActivationStatus] = Field(default=None, alias="activationStatus")
     terminated: Optional[ApiDateTime] = None
     department: Optional[StrictStr] = Field(default=None, description="The user department.")
-    work_from: Optional[ApiDateTime] = Field(default=None, alias="workFrom")
     groups: Optional[List[GroupSummaryDto]] = Field(default=None, description="The list of user groups.")
     location: Optional[StrictStr] = Field(default=None, description="The user location.")
     notes: Optional[StrictStr] = Field(default=None, description="The user notes.")
@@ -125,15 +122,9 @@ class EmployeeFullDto(EmployeeDto):
                 if _item_contacts:
                     _items.append(_item_contacts.to_dict())
             _dict['contacts'] = _items
-        # override the default output from pydantic by calling `to_dict()` of birthday
-        if self.birthday:
-            _dict['birthday'] = self.birthday.to_dict()
         # override the default output from pydantic by calling `to_dict()` of terminated
         if self.terminated:
             _dict['terminated'] = self.terminated.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of work_from
-        if self.work_from:
-            _dict['workFrom'] = self.work_from.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in groups (list)
         _items = []
         if self.groups:
@@ -151,11 +142,6 @@ class EmployeeFullDto(EmployeeDto):
         # and model_fields_set contains the field
         if self.display_name is None and "display_name" in self.model_fields_set:
             _dict['displayName'] = None
-
-        # set to None if title (nullable) is None
-        # and model_fields_set contains the field
-        if self.title is None and "title" in self.model_fields_set:
-            _dict['title'] = None
 
         # set to None if avatar (nullable) is None
         # and model_fields_set contains the field
@@ -211,11 +197,6 @@ class EmployeeFullDto(EmployeeDto):
         # and model_fields_set contains the field
         if self.contacts is None and "contacts" in self.model_fields_set:
             _dict['contacts'] = None
-
-        # set to None if sex (nullable) is None
-        # and model_fields_set contains the field
-        if self.sex is None and "sex" in self.model_fields_set:
-            _dict['sex'] = None
 
         # set to None if department (nullable) is None
         # and model_fields_set contains the field
@@ -311,13 +292,10 @@ class EmployeeFullDto(EmployeeDto):
             "userName": obj.get("userName"),
             "email": obj.get("email"),
             "contacts": [Contact.from_dict(_item) for _item in obj["contacts"]] if obj.get("contacts") is not None else None,
-            "birthday": ApiDateTime.from_dict(obj["birthday"]) if obj.get("birthday") is not None else None,
-            "sex": obj.get("sex"),
             "status": obj.get("status"),
             "activationStatus": obj.get("activationStatus"),
             "terminated": ApiDateTime.from_dict(obj["terminated"]) if obj.get("terminated") is not None else None,
             "department": obj.get("department"),
-            "workFrom": ApiDateTime.from_dict(obj["workFrom"]) if obj.get("workFrom") is not None else None,
             "groups": [GroupSummaryDto.from_dict(_item) for _item in obj["groups"]] if obj.get("groups") is not None else None,
             "location": obj.get("location"),
             "notes": obj.get("notes"),

@@ -73,7 +73,9 @@ class FileEntryDtoIntegerAllOfSecurity(BaseModel):
     vectorization: Optional[StrictBool] = Field(default=None, alias="Vectorization")
     ask_ai: Optional[StrictBool] = Field(default=None, alias="AskAi")
     use_chat: Optional[StrictBool] = Field(default=None, alias="UseChat")
-    __properties: ClassVar[List[str]] = ["Read", "Comment", "FillForms", "Review", "Create", "CreateFrom", "Edit", "Delete", "CustomFilter", "EditRoom", "Rename", "ReadHistory", "Lock", "EditHistory", "CopyTo", "Copy", "MoveTo", "Move", "Pin", "Mute", "EditAccess", "Duplicate", "SubmitToFormGallery", "Download", "Convert", "CopySharedLink", "ReadLinks", "Reconnect", "CreateRoomFrom", "CopyLink", "Embed", "ChangeOwner", "IndexExport", "StartFilling", "FillingStatus", "ResetFilling", "StopFilling", "OpenForm", "EditInternal", "EditExpiration", "Vectorization", "AskAi", "UseChat"]
+    update_xlsx: Optional[StrictBool] = Field(default=None, alias="UpdateXlsx")
+    analyze_responses: Optional[StrictBool] = Field(default=None, alias="AnalyzeResponses")
+    __properties: ClassVar[List[str]] = ["Read", "Comment", "FillForms", "Review", "Create", "CreateFrom", "Edit", "Delete", "CustomFilter", "EditRoom", "Rename", "ReadHistory", "Lock", "EditHistory", "CopyTo", "Copy", "MoveTo", "Move", "Pin", "Mute", "EditAccess", "Duplicate", "SubmitToFormGallery", "Download", "Convert", "CopySharedLink", "ReadLinks", "Reconnect", "CreateRoomFrom", "CopyLink", "Embed", "ChangeOwner", "IndexExport", "StartFilling", "FillingStatus", "ResetFilling", "StopFilling", "OpenForm", "EditInternal", "EditExpiration", "Vectorization", "AskAi", "UseChat", "UpdateXlsx", "AnalyzeResponses"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -169,7 +171,9 @@ class FileEntryDtoIntegerAllOfSecurity(BaseModel):
             "EditExpiration": obj.get("EditExpiration"),
             "Vectorization": obj.get("Vectorization"),
             "AskAi": obj.get("AskAi"),
-            "UseChat": obj.get("UseChat")
+            "UseChat": obj.get("UseChat"),
+            "UpdateXlsx": obj.get("UpdateXlsx"),
+            "AnalyzeResponses": obj.get("AnalyzeResponses")
         })
         return _obj
 

@@ -23,6 +23,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from docspace_api_sdk.models.provider_type import ProviderType
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -33,7 +34,9 @@ class DefaultProviderDto(BaseModel):
     provider_id: Optional[StrictInt] = Field(default=None, description="AI provider identifier.", alias="providerId")
     default_model: Optional[StrictStr] = Field(description="Default model identifier used with this provider.", alias="defaultModel")
     provider_title: Optional[StrictStr] = Field(default=None, description="AI provider title.", alias="providerTitle")
-    __properties: ClassVar[List[str]] = ["providerId", "defaultModel", "providerTitle"]
+    provider_type: Optional[ProviderType] = Field(default=None, alias="providerType")
+    default_model_alias: Optional[StrictStr] = Field(default=None, description="Display alias of the default model.", alias="defaultModelAlias")
+    __properties: ClassVar[List[str]] = ["providerId", "defaultModel", "providerTitle", "providerType", "defaultModelAlias"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -84,6 +87,11 @@ class DefaultProviderDto(BaseModel):
         if self.provider_title is None and "provider_title" in self.model_fields_set:
             _dict['providerTitle'] = None
 
+        # set to None if default_model_alias (nullable) is None
+        # and model_fields_set contains the field
+        if self.default_model_alias is None and "default_model_alias" in self.model_fields_set:
+            _dict['defaultModelAlias'] = None
+
         return _dict
 
     @classmethod
@@ -99,7 +107,9 @@ class DefaultProviderDto(BaseModel):
         _obj = cls.model_validate({
             "providerId": obj.get("providerId"),
             "defaultModel": obj.get("defaultModel"),
-            "providerTitle": obj.get("providerTitle")
+            "providerTitle": obj.get("providerTitle"),
+            "providerType": obj.get("providerType"),
+            "defaultModelAlias": obj.get("defaultModelAlias")
         })
         return _obj
 

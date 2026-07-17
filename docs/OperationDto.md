@@ -16,6 +16,9 @@ Name | Type | Description | Notes
 **debit** | **float** | The debit amount of the operation. | [optional] 
 **participant_name** | **str** | The participant original name. | [optional] 
 **participant_display_name** | **str** | The participant display name. | [optional] 
+**agent_id** | **str** | AI Agent id. | [optional] 
+**agent_title** | **str** | AI Agent name. | [optional] 
+**type** | [**OperationType**](OperationType.md) |  | [optional] 
 
 ## Example
 

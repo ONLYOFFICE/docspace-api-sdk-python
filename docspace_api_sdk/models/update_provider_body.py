@@ -23,6 +23,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from docspace_api_sdk.models.model_settings_item_dto import ModelSettingsItemDto
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -33,7 +34,8 @@ class UpdateProviderBody(BaseModel):
     title: Optional[StrictStr] = Field(default=None, description="The new display title for the AI provider. If null, the title is not changed.")
     url: Optional[StrictStr] = Field(default=None, description="The new API endpoint URL for the AI provider. If null, the URL is not changed.")
     key: Optional[StrictStr] = Field(default=None, description="The new authentication API key for the AI provider. If null, the key is not changed.")
-    __properties: ClassVar[List[str]] = ["title", "url", "key"]
+    model_settings: Optional[List[ModelSettingsItemDto]] = Field(default=None, description="Optional list of model settings changes to apply atomically with the provider update.", alias="modelSettings")
+    __properties: ClassVar[List[str]] = ["title", "url", "key", "modelSettings"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -74,6 +76,13 @@ class UpdateProviderBody(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each item in model_settings (list)
+        _items = []
+        if self.model_settings:
+            for _item_model_settings in self.model_settings:
+                if _item_model_settings:
+                    _items.append(_item_model_settings.to_dict())
+            _dict['modelSettings'] = _items
         # set to None if title (nullable) is None
         # and model_fields_set contains the field
         if self.title is None and "title" in self.model_fields_set:
@@ -88,6 +97,11 @@ class UpdateProviderBody(BaseModel):
         # and model_fields_set contains the field
         if self.key is None and "key" in self.model_fields_set:
             _dict['key'] = None
+
+        # set to None if model_settings (nullable) is None
+        # and model_fields_set contains the field
+        if self.model_settings is None and "model_settings" in self.model_fields_set:
+            _dict['modelSettings'] = None
 
         return _dict
 
@@ -104,7 +118,8 @@ class UpdateProviderBody(BaseModel):
         _obj = cls.model_validate({
             "title": obj.get("title"),
             "url": obj.get("url"),
-            "key": obj.get("key")
+            "key": obj.get("key"),
+            "modelSettings": [ModelSettingsItemDto.from_dict(_item) for _item in obj["modelSettings"]] if obj.get("modelSettings") is not None else None
         })
         return _obj
 

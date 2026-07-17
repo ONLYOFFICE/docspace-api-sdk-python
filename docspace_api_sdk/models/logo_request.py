@@ -21,8 +21,9 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -30,11 +31,11 @@ class LogoRequest(BaseModel):
     """
     The logo request parameters.
     """ # noqa: E501
-    tmp_file: Optional[StrictStr] = Field(default=None, description="The path to the temporary image file.", alias="tmpFile")
-    x: Optional[StrictInt] = Field(default=None, description="The X coordinate of the rectangle starting point.")
-    y: Optional[StrictInt] = Field(default=None, description="The Y coordinate of the rectangle starting point.")
-    width: Optional[StrictInt] = Field(default=None, description="The rectangle width.")
-    height: Optional[StrictInt] = Field(default=None, description="The rectangle height.")
+    tmp_file: Annotated[str, Field(min_length=1, strict=True)] = Field(description="The path to the temporary image file.", alias="tmpFile")
+    x: Optional[Annotated[int, Field(le=1280, strict=True, ge=0)]] = Field(default=None, description="The X coordinate of the rectangle starting point.")
+    y: Optional[Annotated[int, Field(le=1280, strict=True, ge=0)]] = Field(default=None, description="The Y coordinate of the rectangle starting point.")
+    width: Optional[Annotated[int, Field(le=1280, strict=True, ge=1)]] = Field(default=None, description="The rectangle width.")
+    height: Optional[Annotated[int, Field(le=1280, strict=True, ge=1)]] = Field(default=None, description="The rectangle height.")
     __properties: ClassVar[List[str]] = ["tmpFile", "x", "y", "width", "height"]
 
     model_config = ConfigDict(
@@ -76,11 +77,6 @@ class LogoRequest(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # set to None if tmp_file (nullable) is None
-        # and model_fields_set contains the field
-        if self.tmp_file is None and "tmp_file" in self.model_fields_set:
-            _dict['tmpFile'] = None
-
         return _dict
 
     @classmethod

@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **title** | **str** | The display title for the AI provider. | 
 **url** | **str** | The API endpoint URL for the AI provider. Required for OpenAiCompatible type; optional for other types that have default URLs. | [optional] 
 **key** | **str** | The authentication API key for the AI provider. | 
+**model_settings** | [**List[ModelSettingsItemDto]**](ModelSettingsItemDto.md) | Optional list of model settings to configure atomically with the provider creation. | [optional] 
 
 ## Example
 

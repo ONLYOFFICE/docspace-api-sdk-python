@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **owned_by** | [**EmployeeDto**](EmployeeDto.md) |  | [optional] 
 **shared** | **bool** | Specifies if the file entry is shared via link or not. | [optional] 
 **shared_for_user** | **bool** | Specifies if the file entry is shared for user or not. | [optional] 
+**shared_external** | **bool** | Specifies if the file entry is shared via a public (non-internal) external link. | [optional] 
 **parent_shared** | **bool** | Indicates whether the parent entity is shared. | [optional] 
 **short_web_url** | **str** | The short Web URL. | [optional] 
 **created** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] 
@@ -67,11 +68,13 @@ Name | Type | Description | Notes
 **is_filling_preparing** | **bool** | Specifies if the form filling has started but the file is still being saved by the document editor. Filling and editing are not allowed. | [optional] 
 **in_process_folder_id** | **int** | The InProcess folder ID of the file. | [optional] 
 **in_process_folder_title** | **str** | The InProcess folder title of the file. | [optional] 
+**results_folder_id** | **int** | The ID of the FormFillingFolderDone folder that corresponds to this original form. | [optional] 
 **draft_location** | [**DraftLocationInteger**](DraftLocationInteger.md) |  | [optional] 
 **view_accessibility** | [**FileDtoIntegerAllOfViewAccessibility**](FileDtoIntegerAllOfViewAccessibility.md) |  | [optional] 
 **last_opened** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] 
 **expired** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] 
 **vectorization_status** | [**VectorizationStatus**](VectorizationStatus.md) |  | [optional] 
+**external_db_table_name** | **str** | The name of the table in the external database that corresponds to this form. | [optional] 
 **dimensions** | [**Size**](Size.md) |  | [optional] 
 
 ## Example

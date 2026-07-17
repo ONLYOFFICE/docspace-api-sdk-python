@@ -118,7 +118,11 @@ class AgentsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -185,7 +189,11 @@ class AgentsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -252,7 +260,11 @@ class AgentsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -404,7 +416,11 @@ class AgentsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -475,7 +491,11 @@ class AgentsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -546,7 +566,11 @@ class AgentsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -697,7 +721,11 @@ class AgentsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -764,7 +792,11 @@ class AgentsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -831,7 +863,11 @@ class AgentsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -914,6 +950,7 @@ class AgentsApi:
     def get_agents(
         self,
         subject_id: Annotated[Optional[StrictStr], Field(description="The filter by user ID.")] = None,
+        subject_owner_id: Annotated[Optional[StrictStr], Field(description="The filter by room owner ID.")] = None,
         without_tags: Annotated[Optional[StrictBool], Field(description="Specifies whether to search by tags or not.")] = None,
         tags: Annotated[Optional[StrictStr], Field(description="The tags in the serialized format.")] = None,
         exclude_subject: Annotated[Optional[StrictBool], Field(description="Specifies whether to exclude search by user or group ID.")] = None,
@@ -943,6 +980,8 @@ class AgentsApi:
 
         :param subject_id: The filter by user ID.
         :type subject_id: str
+        :param subject_owner_id: The filter by room owner ID.
+        :type subject_owner_id: str
         :param without_tags: Specifies whether to search by tags or not.
         :type without_tags: bool
         :param tags: The tags in the serialized format.
@@ -987,6 +1026,7 @@ class AgentsApi:
 
         _param = self._get_agents_serialize(
             subject_id=subject_id,
+            subject_owner_id=subject_owner_id,
             without_tags=without_tags,
             tags=tags,
             exclude_subject=exclude_subject,
@@ -1006,7 +1046,11 @@ class AgentsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderContentIntegerWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1021,6 +1065,7 @@ class AgentsApi:
     def get_agents_with_http_info(
         self,
         subject_id: Annotated[Optional[StrictStr], Field(description="The filter by user ID.")] = None,
+        subject_owner_id: Annotated[Optional[StrictStr], Field(description="The filter by room owner ID.")] = None,
         without_tags: Annotated[Optional[StrictBool], Field(description="Specifies whether to search by tags or not.")] = None,
         tags: Annotated[Optional[StrictStr], Field(description="The tags in the serialized format.")] = None,
         exclude_subject: Annotated[Optional[StrictBool], Field(description="Specifies whether to exclude search by user or group ID.")] = None,
@@ -1050,6 +1095,8 @@ class AgentsApi:
 
         :param subject_id: The filter by user ID.
         :type subject_id: str
+        :param subject_owner_id: The filter by room owner ID.
+        :type subject_owner_id: str
         :param without_tags: Specifies whether to search by tags or not.
         :type without_tags: bool
         :param tags: The tags in the serialized format.
@@ -1094,6 +1141,7 @@ class AgentsApi:
 
         _param = self._get_agents_serialize(
             subject_id=subject_id,
+            subject_owner_id=subject_owner_id,
             without_tags=without_tags,
             tags=tags,
             exclude_subject=exclude_subject,
@@ -1113,7 +1161,11 @@ class AgentsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderContentIntegerWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1128,6 +1180,7 @@ class AgentsApi:
     def get_agents_without_preload_content(
         self,
         subject_id: Annotated[Optional[StrictStr], Field(description="The filter by user ID.")] = None,
+        subject_owner_id: Annotated[Optional[StrictStr], Field(description="The filter by room owner ID.")] = None,
         without_tags: Annotated[Optional[StrictBool], Field(description="Specifies whether to search by tags or not.")] = None,
         tags: Annotated[Optional[StrictStr], Field(description="The tags in the serialized format.")] = None,
         exclude_subject: Annotated[Optional[StrictBool], Field(description="Specifies whether to exclude search by user or group ID.")] = None,
@@ -1157,6 +1210,8 @@ class AgentsApi:
 
         :param subject_id: The filter by user ID.
         :type subject_id: str
+        :param subject_owner_id: The filter by room owner ID.
+        :type subject_owner_id: str
         :param without_tags: Specifies whether to search by tags or not.
         :type without_tags: bool
         :param tags: The tags in the serialized format.
@@ -1201,6 +1256,7 @@ class AgentsApi:
 
         _param = self._get_agents_serialize(
             subject_id=subject_id,
+            subject_owner_id=subject_owner_id,
             without_tags=without_tags,
             tags=tags,
             exclude_subject=exclude_subject,
@@ -1220,7 +1276,11 @@ class AgentsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderContentIntegerWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1230,6 +1290,7 @@ class AgentsApi:
     def _get_agents_serialize(
         self,
         subject_id,
+        subject_owner_id,
         without_tags,
         tags,
         exclude_subject,
@@ -1265,6 +1326,10 @@ class AgentsApi:
         if subject_id is not None:
             
             _query_params.append(('subjectId', subject_id))
+            
+        if subject_owner_id is not None:
+            
+            _query_params.append(('subjectOwnerId', subject_owner_id))
             
         if without_tags is not None:
             
@@ -1405,7 +1470,11 @@ class AgentsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "NewItemsAgentNewItemsArrayWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1468,7 +1537,11 @@ class AgentsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "NewItemsAgentNewItemsArrayWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1531,7 +1604,11 @@ class AgentsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "NewItemsAgentNewItemsArrayWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1663,7 +1740,11 @@ class AgentsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerArrayWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1730,7 +1811,11 @@ class AgentsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerArrayWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1797,7 +1882,11 @@ class AgentsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerArrayWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -1949,7 +2038,11 @@ class AgentsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2020,7 +2113,11 @@ class AgentsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2091,7 +2188,11 @@ class AgentsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2242,7 +2343,11 @@ class AgentsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerArrayWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2309,7 +2414,11 @@ class AgentsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerArrayWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
@@ -2376,7 +2485,11 @@ class AgentsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerArrayWrapper",
             '401': None,
-        }        response_data = self.api_client.call_api(
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
         )
