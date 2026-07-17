@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,7 +23,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictInt
 from typing import Any, ClassVar, Dict, List, Optional
-from docspace_api_sdk.models.active_connections_wrapper_links_inner import ActiveConnectionsWrapperLinksInner
+from docspace_api_sdk.models.get_portal_prices200_response_links_inner import GetPortalPrices200ResponseLinksInner
 from docspace_api_sdk.models.rooms_notification_settings_dto import RoomsNotificationSettingsDto
 from typing import Optional, Set
 from typing_extensions import Self
@@ -33,10 +33,10 @@ class RoomsNotificationSettingsWrapper(BaseModel):
     RoomsNotificationSettingsWrapper
     """ # noqa: E501
     response: Optional[RoomsNotificationSettingsDto] = None
-    count: Optional[StrictInt] = None
-    links: Optional[List[ActiveConnectionsWrapperLinksInner]] = None
-    status: Optional[StrictInt] = None
-    status_code: Optional[StrictInt] = Field(default=None, alias="statusCode")
+    count: Optional[StrictInt] = Field(default=None, description="The total number of items in the response")
+    links: Optional[List[GetPortalPrices200ResponseLinksInner]] = Field(default=None, description="List of links related to the response")
+    status: Optional[StrictInt] = Field(default=None, description="HTTP status code of the response")
+    status_code: Optional[StrictInt] = Field(default=None, description="HTTP status code of the response (duplicate of status)", alias="statusCode")
     __properties: ClassVar[List[str]] = ["response", "count", "links", "status", "statusCode"]
 
     model_config = ConfigDict(
@@ -103,7 +103,7 @@ class RoomsNotificationSettingsWrapper(BaseModel):
         _obj = cls.model_validate({
             "response": RoomsNotificationSettingsDto.from_dict(obj["response"]) if obj.get("response") is not None else None,
             "count": obj.get("count"),
-            "links": [ActiveConnectionsWrapperLinksInner.from_dict(_item) for _item in obj["links"]] if obj.get("links") is not None else None,
+            "links": [GetPortalPrices200ResponseLinksInner.from_dict(_item) for _item in obj["links"]] if obj.get("links") is not None else None,
             "status": obj.get("status"),
             "statusCode": obj.get("statusCode")
         })

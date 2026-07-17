@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -27,6 +27,7 @@ from typing_extensions import Annotated
 from docspace_api_sdk.models.custom_color_themes_settings_requests_dto import CustomColorThemesSettingsRequestsDto
 from docspace_api_sdk.models.custom_color_themes_settings_wrapper import CustomColorThemesSettingsWrapper
 from docspace_api_sdk.models.deep_link_configuration_requests_dto import DeepLinkConfigurationRequestsDto
+from docspace_api_sdk.models.default_product_request_dto import DefaultProductRequestDto
 from docspace_api_sdk.models.dns_settings_requests_dto import DnsSettingsRequestsDto
 from docspace_api_sdk.models.email_activation_settings import EmailActivationSettings
 from docspace_api_sdk.models.email_activation_settings_wrapper import EmailActivationSettingsWrapper
@@ -36,6 +37,9 @@ from docspace_api_sdk.models.payment_settings_wrapper import PaymentSettingsWrap
 from docspace_api_sdk.models.string_array_wrapper import STRINGArrayWrapper
 from docspace_api_sdk.models.settings_wrapper import SettingsWrapper
 from docspace_api_sdk.models.string_wrapper import StringWrapper
+from docspace_api_sdk.models.studio_default_page_settings_wrapper import StudioDefaultPageSettingsWrapper
+from docspace_api_sdk.models.tenant_ai_access_settings_dto import TenantAiAccessSettingsDto
+from docspace_api_sdk.models.tenant_ai_access_settings_wrapper import TenantAiAccessSettingsWrapper
 from docspace_api_sdk.models.tenant_deep_link_settings_wrapper import TenantDeepLinkSettingsWrapper
 from docspace_api_sdk.models.tenant_user_invitation_settings_request_dto import TenantUserInvitationSettingsRequestDto
 from docspace_api_sdk.models.tenant_user_invitation_settings_wrapper import TenantUserInvitationSettingsWrapper
@@ -59,7 +63,6 @@ class CommonSettingsApi:
         if api_client is None:
             api_client = ApiClient.get_default()
         self.api_client = api_client
-
 
 
 
@@ -114,8 +117,11 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
-            '401': None,
             '405': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -179,8 +185,11 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
-            '401': None,
             '405': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -244,8 +253,11 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
-            '401': None,
             '405': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -372,8 +384,11 @@ class CommonSettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "WizardSettingsWrapper",
             '400': None,
-            '401': None,
             '402': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -442,8 +457,11 @@ class CommonSettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "WizardSettingsWrapper",
             '400': None,
-            '401': None,
             '402': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -512,8 +530,11 @@ class CommonSettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "WizardSettingsWrapper",
             '400': None,
-            '401': None,
             '402': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -664,6 +685,9 @@ class CommonSettingsApi:
             '200': "TenantDeepLinkSettingsWrapper",
             '400': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -733,6 +757,9 @@ class CommonSettingsApi:
             '200': "TenantDeepLinkSettingsWrapper",
             '400': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -802,6 +829,9 @@ class CommonSettingsApi:
             '200': "TenantDeepLinkSettingsWrapper",
             '400': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -951,6 +981,9 @@ class CommonSettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CustomColorThemesSettingsWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1019,6 +1052,9 @@ class CommonSettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CustomColorThemesSettingsWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1087,6 +1123,9 @@ class CommonSettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CustomColorThemesSettingsWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1220,6 +1259,9 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantDeepLinkSettingsWrapper",
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1283,6 +1325,9 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantDeepLinkSettingsWrapper",
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1346,6 +1391,9 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantDeepLinkSettingsWrapper",
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1469,6 +1517,9 @@ class CommonSettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "PaymentSettingsWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1533,6 +1584,9 @@ class CommonSettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "PaymentSettingsWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1597,6 +1651,9 @@ class CommonSettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "PaymentSettingsWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1725,6 +1782,9 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CustomColorThemesSettingsWrapper",
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1788,6 +1848,9 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CustomColorThemesSettingsWrapper",
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1851,6 +1914,9 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CustomColorThemesSettingsWrapper",
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1974,6 +2040,9 @@ class CommonSettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2038,6 +2107,9 @@ class CommonSettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2102,6 +2174,9 @@ class CommonSettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2231,6 +2306,9 @@ class CommonSettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2295,6 +2373,9 @@ class CommonSettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2359,6 +2440,9 @@ class CommonSettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2491,6 +2575,9 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "SettingsWrapper",
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2558,6 +2645,9 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "SettingsWrapper",
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2625,6 +2715,9 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "SettingsWrapper",
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2753,6 +2846,9 @@ class CommonSettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2817,6 +2913,9 @@ class CommonSettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2881,6 +2980,9 @@ class CommonSettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3009,6 +3111,9 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "STRINGArrayWrapper",
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3072,6 +3177,9 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "STRINGArrayWrapper",
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3135,6 +3243,9 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "STRINGArrayWrapper",
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3207,6 +3318,272 @@ class CommonSettingsApi:
 
 
     @validate_call
+    def get_tenant_ai_access_settings(
+        self,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> TenantAiAccessSettingsWrapper:
+        """Get the AI access settings for the portal
+
+        Returns the current portal-level AI access settings that control whether all AI functionality  (chat, agents, vectorization) is available for the portal. AI is enabled by default.
+
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_tenant_ai_access_settings_serialize(
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "TenantAiAccessSettingsWrapper",
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def get_tenant_ai_access_settings_with_http_info(
+        self,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[TenantAiAccessSettingsWrapper]:
+        """Get the AI access settings for the portal
+
+        Returns the current portal-level AI access settings that control whether all AI functionality  (chat, agents, vectorization) is available for the portal. AI is enabled by default.
+
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_tenant_ai_access_settings_serialize(
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "TenantAiAccessSettingsWrapper",
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def get_tenant_ai_access_settings_without_preload_content(
+        self,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Get the AI access settings for the portal
+
+        Returns the current portal-level AI access settings that control whether all AI functionality  (chat, agents, vectorization) is available for the portal. AI is enabled by default.
+
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_tenant_ai_access_settings_serialize(
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "TenantAiAccessSettingsWrapper",
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _get_tenant_ai_access_settings_serialize(
+        self,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
+        ]
+
+
+        resource_path = "/api/2.0/settings/ai-access"
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path=resource_path,
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
     def get_tenant_user_invitation_settings(
         self,
         _request_timeout: Union[
@@ -3257,6 +3634,9 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantUserInvitationSettingsWrapper",
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3320,6 +3700,9 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantUserInvitationSettingsWrapper",
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3383,6 +3766,9 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantUserInvitationSettingsWrapper",
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3506,6 +3892,9 @@ class CommonSettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TimezonesRequestsArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3570,6 +3959,9 @@ class CommonSettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TimezonesRequestsArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3634,6 +4026,9 @@ class CommonSettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TimezonesRequestsArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3712,6 +4107,300 @@ class CommonSettingsApi:
 
 
     @validate_call
+    def save_default_folder(
+        self,
+        default_product_request_dto: Optional[DefaultProductRequestDto] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> StudioDefaultPageSettingsWrapper:
+        """Set the default folder
+
+        Sets the default folder.
+
+        :param default_product_request_dto:
+        :type default_product_request_dto: DefaultProductRequestDto
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._save_default_folder_serialize(
+            default_product_request_dto=default_product_request_dto,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "StudioDefaultPageSettingsWrapper",
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def save_default_folder_with_http_info(
+        self,
+        default_product_request_dto: Optional[DefaultProductRequestDto] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[StudioDefaultPageSettingsWrapper]:
+        """Set the default folder
+
+        Sets the default folder.
+
+        :param default_product_request_dto:
+        :type default_product_request_dto: DefaultProductRequestDto
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._save_default_folder_serialize(
+            default_product_request_dto=default_product_request_dto,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "StudioDefaultPageSettingsWrapper",
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def save_default_folder_without_preload_content(
+        self,
+        default_product_request_dto: Optional[DefaultProductRequestDto] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Set the default folder
+
+        Sets the default folder.
+
+        :param default_product_request_dto:
+        :type default_product_request_dto: DefaultProductRequestDto
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._save_default_folder_serialize(
+            default_product_request_dto=default_product_request_dto,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "StudioDefaultPageSettingsWrapper",
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _save_default_folder_serialize(
+        self,
+        default_product_request_dto,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if default_product_request_dto is not None:
+            _body_params = default_product_request_dto
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
+        ]
+
+
+        resource_path = "/api/2.0/settings/defaultfolder"
+
+        return self.api_client.param_serialize(
+            method='PUT',
+            resource_path=resource_path,
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
     def save_dns_settings(
         self,
         dns_settings_requests_dto: Optional[DnsSettingsRequestsDto] = None,
@@ -3767,9 +4456,12 @@ class CommonSettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
             '400': None,
-            '401': None,
             '402': None,
             '405': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3838,9 +4530,12 @@ class CommonSettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
             '400': None,
-            '401': None,
             '402': None,
             '405': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3909,9 +4604,12 @@ class CommonSettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
             '400': None,
-            '401': None,
             '402': None,
             '405': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4061,6 +4759,9 @@ class CommonSettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4129,6 +4830,9 @@ class CommonSettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4197,6 +4901,9 @@ class CommonSettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4346,6 +5053,9 @@ class CommonSettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CustomColorThemesSettingsWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4414,6 +5124,9 @@ class CommonSettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CustomColorThemesSettingsWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4482,6 +5195,9 @@ class CommonSettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CustomColorThemesSettingsWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4576,6 +5292,303 @@ class CommonSettingsApi:
 
 
     @validate_call
+    def set_tenant_ai_access_settings(
+        self,
+        tenant_ai_access_settings_dto: Optional[TenantAiAccessSettingsDto] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> TenantAiAccessSettingsWrapper:
+        """Set the AI access for the portal
+
+        Updates the portal-level AI access settings. When AI is disabled, all AI features are turned off:  the AI Agents folder is hidden from root folder listings, AI status checks immediately return disabled,  and AI chat endpoints become inaccessible. Only users with the DocSpaceAdmin role  (EditPortalSettings permission) can change this setting.
+
+        :param tenant_ai_access_settings_dto:
+        :type tenant_ai_access_settings_dto: TenantAiAccessSettingsDto
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._set_tenant_ai_access_settings_serialize(
+            tenant_ai_access_settings_dto=tenant_ai_access_settings_dto,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "TenantAiAccessSettingsWrapper",
+            '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def set_tenant_ai_access_settings_with_http_info(
+        self,
+        tenant_ai_access_settings_dto: Optional[TenantAiAccessSettingsDto] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[TenantAiAccessSettingsWrapper]:
+        """Set the AI access for the portal
+
+        Updates the portal-level AI access settings. When AI is disabled, all AI features are turned off:  the AI Agents folder is hidden from root folder listings, AI status checks immediately return disabled,  and AI chat endpoints become inaccessible. Only users with the DocSpaceAdmin role  (EditPortalSettings permission) can change this setting.
+
+        :param tenant_ai_access_settings_dto:
+        :type tenant_ai_access_settings_dto: TenantAiAccessSettingsDto
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._set_tenant_ai_access_settings_serialize(
+            tenant_ai_access_settings_dto=tenant_ai_access_settings_dto,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "TenantAiAccessSettingsWrapper",
+            '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def set_tenant_ai_access_settings_without_preload_content(
+        self,
+        tenant_ai_access_settings_dto: Optional[TenantAiAccessSettingsDto] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Set the AI access for the portal
+
+        Updates the portal-level AI access settings. When AI is disabled, all AI features are turned off:  the AI Agents folder is hidden from root folder listings, AI status checks immediately return disabled,  and AI chat endpoints become inaccessible. Only users with the DocSpaceAdmin role  (EditPortalSettings permission) can change this setting.
+
+        :param tenant_ai_access_settings_dto:
+        :type tenant_ai_access_settings_dto: TenantAiAccessSettingsDto
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._set_tenant_ai_access_settings_serialize(
+            tenant_ai_access_settings_dto=tenant_ai_access_settings_dto,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "TenantAiAccessSettingsWrapper",
+            '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _set_tenant_ai_access_settings_serialize(
+        self,
+        tenant_ai_access_settings_dto,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if tenant_ai_access_settings_dto is not None:
+            _body_params = tenant_ai_access_settings_dto
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
+        ]
+
+
+        resource_path = "/api/2.0/settings/ai-access"
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path=resource_path,
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
     def update_email_activation_settings(
         self,
         email_activation_settings: Optional[EmailActivationSettings] = None,
@@ -4631,6 +5644,9 @@ class CommonSettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmailActivationSettingsWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4699,6 +5715,9 @@ class CommonSettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmailActivationSettingsWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4767,6 +5786,9 @@ class CommonSettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmailActivationSettingsWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4916,6 +5938,9 @@ class CommonSettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantUserInvitationSettingsWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4984,6 +6009,9 @@ class CommonSettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantUserInvitationSettingsWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -5052,6 +6080,9 @@ class CommonSettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantUserInvitationSettingsWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,

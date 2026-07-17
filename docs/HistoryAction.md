@@ -6,7 +6,7 @@ The action performed on the file.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | [**MessageAction**](MessageAction.md) |  | [optional] 
-**key** | **str** |  | [optional] 
+**key** | **str** | The action performed on the file. | [optional] 
 
 ## Example
 

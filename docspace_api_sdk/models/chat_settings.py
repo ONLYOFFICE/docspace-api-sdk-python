@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,19 +21,20 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
 class ChatSettings(BaseModel):
     """
-    ChatSettings
+    The chat settings.
     """ # noqa: E501
-    provider_id: Optional[StrictInt] = Field(default=None, alias="providerId")
-    model_id: Optional[StrictStr] = Field(default=None, alias="modelId")
-    prompt: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["providerId", "modelId", "prompt"]
+    provider_id: Optional[StrictInt] = Field(default=None, description="The provider ID.", alias="providerId")
+    model_id: Optional[StrictStr] = Field(default=None, description="The model ID.", alias="modelId")
+    prompt: Optional[StrictStr] = Field(default=None, description="The prompt.")
+    internal: Optional[StrictBool] = Field(default=None, description="Specifies whether the provider is internal or not.")
+    __properties: ClassVar[List[str]] = ["providerId", "modelId", "prompt", "internal"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -65,8 +66,10 @@ class ChatSettings(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * OpenAPI `readOnly` fields are excluded.
         """
         excluded_fields: Set[str] = set([
+            "internal",
         ])
 
         _dict = self.model_dump(
@@ -99,7 +102,8 @@ class ChatSettings(BaseModel):
         _obj = cls.model_validate({
             "providerId": obj.get("providerId"),
             "modelId": obj.get("modelId"),
-            "prompt": obj.get("prompt")
+            "prompt": obj.get("prompt"),
+            "internal": obj.get("internal")
         })
         return _obj
 

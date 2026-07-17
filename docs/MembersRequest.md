@@ -5,7 +5,7 @@ The member request.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**members** | **List[str]** | The list of group member IDs. | [optional] 
+**members** | **List[UUID]** | The list of group member IDs. | [optional] 
 
 ## Example
 

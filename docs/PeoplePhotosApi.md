@@ -57,12 +57,11 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.PhotosApi(api_client)
-    userid = '9846' # str | The user ID.
+    userid = '00000000-0000-0000-0000-000000000000' # str | The user ID.
     thumbnails_request = docspace_api_sdk.ThumbnailsRequest() # ThumbnailsRequest | The thumbnail request.
 
     try:
@@ -75,7 +74,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 ```
 
 
-
 ### HTTP request headers
 
  - **Content-Type**: application/json
@@ -86,10 +84,13 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Thumbnail parameters |  -  |
-**401** | Unauthorized |  -  |
+**200** | Thumbnail parameters |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
 **403** | No permissions to perform this action |  -  |
 **404** | User not found |  -  |
+**401** | Unauthorized |  -  |
+**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
+**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -137,12 +138,11 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.PhotosApi(api_client)
-    userid = '9846' # str | The user ID.
+    userid = '00000000-0000-0000-0000-000000000000' # str | The user ID.
 
     try:
         # Delete a user photo
@@ -152,7 +152,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling PhotosApi->delete_member_photo: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -165,10 +164,13 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Thumbnail parameters: original photo, retina, maximum size photo, big, medium, small |  -  |
-**401** | Unauthorized |  -  |
+**200** | Thumbnail parameters: original photo, retina, maximum size photo, big, medium, small |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
 **403** | No permissions to perform this action |  -  |
 **404** | User not found |  -  |
+**401** | Unauthorized |  -  |
+**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
+**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -216,12 +218,11 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.PhotosApi(api_client)
-    userid = '9846' # str | The user ID.
+    userid = '00000000-0000-0000-0000-000000000000' # str | The user ID.
 
     try:
         # Get a user photo
@@ -231,7 +232,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     except Exception as e:
         print("Exception when calling PhotosApi->get_member_photo: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -244,10 +244,13 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Thumbnail parameters: original photo, retina, maximum size photo, big, medium, small |  -  |
-**401** | Unauthorized |  -  |
+**200** | Thumbnail parameters: original photo, retina, maximum size photo, big, medium, small |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
 **403** | No permissions to perform this action |  -  |
 **404** | User not found |  -  |
+**401** | Unauthorized |  -  |
+**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
+**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -297,12 +300,11 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.PhotosApi(api_client)
-    userid = '9846' # str | The user ID.
+    userid = '00000000-0000-0000-0000-000000000000' # str | The user ID.
     update_photo_member_request = docspace_api_sdk.UpdatePhotoMemberRequest() # UpdatePhotoMemberRequest | The request parameters for updating a photo.
 
     try:
@@ -315,7 +317,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 ```
 
 
-
 ### HTTP request headers
 
  - **Content-Type**: application/json
@@ -326,15 +327,18 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Updated thumbnail parameters: original photo, retina, maximum size photo, big, medium, small |  -  |
-**401** | Unauthorized |  -  |
+**200** | Updated thumbnail parameters: original photo, retina, maximum size photo, big, medium, small |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
 **403** | No permissions to perform this action |  -  |
 **404** | User not found |  -  |
+**401** | Unauthorized |  -  |
+**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
+**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **upload_member_photo**
-> FileUploadResultWrapper upload_member_photo(userid, form_collection)
+> FileUploadResultWrapper upload_member_photo(userid, file, autosave=autosave)
 
 Uploads a photo of the user with the ID specified in the request.
 
@@ -346,7 +350,8 @@ For more information, see [api.onlyoffice.com]().
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **userid** | **str**| The user ID. | 
- **form_collection** | [**List[KeyValuePairStringStringValues]**](KeyValuePairStringStringValues.md)| The image data. | 
+ **file** | **bytes**| The image data. | 
+ **autosave** | **bool**| Specifies whether to autosave a photo or not. | [optional] 
 
 ### Return type
 
@@ -362,7 +367,6 @@ Name | Type | Description  | Notes
 ```python
 import docspace_api_sdk
 from docspace_api_sdk.models.file_upload_result_wrapper import FileUploadResultWrapper
-from docspace_api_sdk.models.key_value_pair_string_string_values import KeyValuePairStringStringValues
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -379,23 +383,22 @@ configuration = docspace_api_sdk.Configuration(
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
-
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.PhotosApi(api_client)
-    userid = '9846' # str | The user ID.
-    form_collection = [docspace_api_sdk.KeyValuePairStringStringValues()] # List[KeyValuePairStringStringValues] | The image data.
+    userid = '00000000-0000-0000-0000-000000000000' # str | The user ID.
+    file = None # bytes | The image data.
+    autosave = True # bool | Specifies whether to autosave a photo or not. (optional)
 
     try:
         # Upload a user photo
-        api_response = api_instance.upload_member_photo(userid, form_collection)
+        api_response = api_instance.upload_member_photo(userid, file, autosave=autosave)
         print("The response of PhotosApi->upload_member_photo:\n")
         pprint(api_response)
     except Exception as e:
         print("Exception when calling PhotosApi->upload_member_photo: %s\n" % e)
 ```
-
 
 
 ### HTTP request headers
@@ -408,12 +411,15 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Result of file uploading |  -  |
+**200** | Result of file uploading |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
 **400** | The uploaded file could not be found |  -  |
-**401** | Unauthorized |  -  |
 **403** | No permissions to perform this action |  -  |
 **413** | Image size is too large |  -  |
 **415** | Unknown image file type |  -  |
+**401** | Unauthorized |  -  |
+**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
+**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

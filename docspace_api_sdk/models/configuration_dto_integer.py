@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -25,8 +25,10 @@ from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from docspace_api_sdk.models.document_config_dto import DocumentConfigDto
 from docspace_api_sdk.models.editor_configuration_dto import EditorConfigurationDto
+from docspace_api_sdk.models.editor_tool_call_state_dto import EditorToolCallStateDto
 from docspace_api_sdk.models.editor_type import EditorType
 from docspace_api_sdk.models.file_dto_integer import FileDtoInteger
+from docspace_api_sdk.models.quota_scope import QuotaScope
 from docspace_api_sdk.models.start_filling_mode import StartFillingMode
 from typing import Optional, Set
 from typing_extensions import Self
@@ -48,7 +50,9 @@ class ConfigurationDtoInteger(BaseModel):
     filling_status: Optional[StrictBool] = Field(default=None, description="The file filling status.", alias="fillingStatus")
     start_filling_mode: Optional[StartFillingMode] = Field(default=None, alias="startFillingMode")
     filling_session_id: Optional[StrictStr] = Field(default=None, description="The file filling session ID.", alias="fillingSessionId")
-    __properties: ClassVar[List[str]] = ["document", "documentType", "editorConfig", "editorType", "editorUrl", "token", "type", "file", "errorMessage", "startFilling", "fillingStatus", "startFillingMode", "fillingSessionId"]
+    quota_exceeded_scope: Optional[QuotaScope] = Field(default=None, alias="quotaExceededScope")
+    generation_tool_call_state: Optional[EditorToolCallStateDto] = Field(default=None, alias="generationToolCallState")
+    __properties: ClassVar[List[str]] = ["document", "documentType", "editorConfig", "editorType", "editorUrl", "token", "type", "file", "errorMessage", "startFilling", "fillingStatus", "startFillingMode", "fillingSessionId", "quotaExceededScope", "generationToolCallState"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -98,6 +102,9 @@ class ConfigurationDtoInteger(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of file
         if self.file:
             _dict['file'] = self.file.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of generation_tool_call_state
+        if self.generation_tool_call_state:
+            _dict['generationToolCallState'] = self.generation_tool_call_state.to_dict()
         # set to None if document_type (nullable) is None
         # and model_fields_set contains the field
         if self.document_type is None and "document_type" in self.model_fields_set:
@@ -163,7 +170,9 @@ class ConfigurationDtoInteger(BaseModel):
             "startFilling": obj.get("startFilling"),
             "fillingStatus": obj.get("fillingStatus"),
             "startFillingMode": obj.get("startFillingMode"),
-            "fillingSessionId": obj.get("fillingSessionId")
+            "fillingSessionId": obj.get("fillingSessionId"),
+            "quotaExceededScope": obj.get("quotaExceededScope"),
+            "generationToolCallState": EditorToolCallStateDto.from_dict(obj["generationToolCallState"]) if obj.get("generationToolCallState") is not None else None
         })
         return _obj
 

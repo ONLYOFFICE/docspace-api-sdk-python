@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **login_history_life_time** | **int** | The login history lifetime. | [optional] 
 **audit_trail_life_time** | **int** | The audit trail lifetime. | [optional] 
-**last_modified** | **datetime** |  | [optional] 
+**last_modified** | **datetime** | The timestamp indicating when the settings were last modified. | [optional] 
 
 ## Example
 

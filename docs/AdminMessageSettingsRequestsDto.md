@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **email** | **str** | Email | 
 **culture** | **str** | Culture | [optional] 
 **recaptcha_type** | [**RecaptchaType**](RecaptchaType.md) |  | [optional] 
-**recaptcha_response** | **str** | The user&#39;s response to the CAPTCHA challenge. | [optional] 
+**recaptcha_response** | **str** | The user's response to the CAPTCHA challenge. | [optional] 
 
 ## Example
 

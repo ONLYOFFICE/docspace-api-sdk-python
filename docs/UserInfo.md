@@ -5,9 +5,9 @@ The user information.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** | The user ID. | [optional] 
-**first_name** | **str** | The user first name. | [optional] 
-**last_name** | **str** | The user last name. | [optional] 
+**id** | **UUID** | The user ID. | [optional] 
+**first_name** | **str** | The user's first name. | [optional] 
+**last_name** | **str** | The user's last name. | [optional] 
 **user_name** | **str** | The user username. | [optional] 
 **birth_date** | **datetime** | The user birthday. | [optional] 
 **sex** | **bool** | The user sex (male or female). | [optional] 
@@ -28,14 +28,14 @@ Name | Type | Description | Notes
 **culture_name** | **str** | The user culture code. | [optional] 
 **mobile_phone** | **str** | The user mobile phone. | [optional] 
 **mobile_phone_activation_status** | [**MobilePhoneActivationStatus**](MobilePhoneActivationStatus.md) |  | [optional] 
-**sid** | **str** | The LDAP user identificator. | [optional] 
+**sid** | **str** | The LDAP user identifier. | [optional] 
 **ldap_qouta** | **int** | The LDAP user quota attribute. | [optional] 
-**sso_name_id** | **str** | The SSO SAML user identificator. | [optional] 
-**sso_session_id** | **str** | The SSO SAML user session identificator. | [optional] 
+**sso_name_id** | **str** | The SSO SAML user identifier. | [optional] 
+**sso_session_id** | **str** | The SSO SAML user session identifier. | [optional] 
 **create_date** | **datetime** | The date and time when the user account was created. | [optional] 
-**created_by** | **str** | The ID of the user who created the current user account. | [optional] 
+**created_by** | **UUID** | The ID of the user who created the current user account. | [optional] 
 **spam** | **bool** | Specifies if tips, updates and offers are allowed to be sent to the user or not. | [optional] 
-**check_activation** | **bool** |  | [optional] [readonly] 
+**check_activation** | **bool** | Indicates whether the activation status of the employee or recipient is unchecked or inactive.  Depending on the context, this property evaluates the activation or eligibility status accordingly. | [optional] [readonly] 
 
 ## Example
 

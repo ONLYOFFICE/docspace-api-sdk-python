@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -28,9 +28,9 @@ from typing_extensions import Self
 
 class ReviewConfig(BaseModel):
     """
-    ReviewConfig
+    Configuration for review display settings.
     """ # noqa: E501
-    review_display: Optional[StrictStr] = Field(default=None, alias="reviewDisplay")
+    review_display: Optional[StrictStr] = Field(default=None, description="The review display string representation.", alias="reviewDisplay")
     __properties: ClassVar[List[str]] = ["reviewDisplay"]
 
     model_config = ConfigDict(

@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,8 +21,9 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictInt, StrictStr
+from pydantic import Field, StrictInt
 from typing_extensions import Annotated
+from uuid import UUID
 from docspace_api_sdk.models.active_connections_wrapper import ActiveConnectionsWrapper
 from docspace_api_sdk.models.boolean_wrapper import BooleanWrapper
 from docspace_api_sdk.models.string_wrapper import StringWrapper
@@ -43,7 +44,6 @@ class ActiveConnectionsApi:
         if api_client is None:
             api_client = ApiClient.get_default()
         self.api_client = api_client
-
 
 
 
@@ -99,6 +99,9 @@ class ActiveConnectionsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ActiveConnectionsWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -163,6 +166,9 @@ class ActiveConnectionsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ActiveConnectionsWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -227,6 +233,9 @@ class ActiveConnectionsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ActiveConnectionsWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -359,8 +368,11 @@ class ActiveConnectionsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
-            '401': None,
             '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -428,8 +440,11 @@ class ActiveConnectionsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
-            '401': None,
             '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -497,8 +512,11 @@ class ActiveConnectionsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
-            '401': None,
             '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -631,6 +649,9 @@ class ActiveConnectionsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -695,6 +716,9 @@ class ActiveConnectionsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -759,6 +783,9 @@ class ActiveConnectionsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -839,7 +866,7 @@ class ActiveConnectionsApi:
     @validate_call
     def log_out_all_active_connections_for_user(
         self,
-        user_id: Annotated[StrictStr, Field(description="The user ID extracted from the route parameters.")],
+        user_id: Annotated[UUID, Field(description="The user ID extracted from the route parameters.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -858,7 +885,7 @@ class ActiveConnectionsApi:
         Logs out from all the active connections for the user with the ID specified in the request.
 
         :param user_id: The user ID extracted from the route parameters. (required)
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -891,8 +918,11 @@ class ActiveConnectionsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
-            '401': None,
             '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -908,7 +938,7 @@ class ActiveConnectionsApi:
     @validate_call
     def log_out_all_active_connections_for_user_with_http_info(
         self,
-        user_id: Annotated[StrictStr, Field(description="The user ID extracted from the route parameters.")],
+        user_id: Annotated[UUID, Field(description="The user ID extracted from the route parameters.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -927,7 +957,7 @@ class ActiveConnectionsApi:
         Logs out from all the active connections for the user with the ID specified in the request.
 
         :param user_id: The user ID extracted from the route parameters. (required)
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -960,8 +990,11 @@ class ActiveConnectionsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
-            '401': None,
             '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -977,7 +1010,7 @@ class ActiveConnectionsApi:
     @validate_call
     def log_out_all_active_connections_for_user_without_preload_content(
         self,
-        user_id: Annotated[StrictStr, Field(description="The user ID extracted from the route parameters.")],
+        user_id: Annotated[UUID, Field(description="The user ID extracted from the route parameters.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -996,7 +1029,7 @@ class ActiveConnectionsApi:
         Logs out from all the active connections for the user with the ID specified in the request.
 
         :param user_id: The user ID extracted from the route parameters. (required)
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1029,8 +1062,11 @@ class ActiveConnectionsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
-            '401': None,
             '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1156,6 +1192,9 @@ class ActiveConnectionsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1220,6 +1259,9 @@ class ActiveConnectionsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1284,6 +1326,9 @@ class ActiveConnectionsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,

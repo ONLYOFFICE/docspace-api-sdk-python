@@ -5,7 +5,7 @@ The request parameters for managing the owner-specific settings.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**owner_id** | **str** | The ID of the owner whose settings are being managed. | 
+**owner_id** | **UUID** | The ID of the owner whose settings are being managed. | 
 
 ## Example
 

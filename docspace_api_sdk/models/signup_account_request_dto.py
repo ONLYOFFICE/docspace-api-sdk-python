@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -32,14 +32,10 @@ class SignupAccountRequestDto(BaseModel):
     The request parameters for creating a third-party account.
     """ # noqa: E501
     employee_type: Optional[EmployeeType] = Field(default=None, alias="employeeType")
-    first_name: Optional[StrictStr] = Field(default=None, description="The user first name.", alias="firstName")
-    last_name: Optional[StrictStr] = Field(default=None, description="The user last name.", alias="lastName")
-    email: Optional[StrictStr] = Field(default=None, description="The user email address.")
-    password_hash: Optional[StrictStr] = Field(default=None, description="The user password hash.", alias="passwordHash")
     key: Optional[StrictStr] = Field(description="The user link key.")
     culture: Optional[StrictStr] = Field(default=None, description="The user culture code.")
     serialized_profile: Optional[StrictStr] = Field(description="The third-party profile in the serialized format", alias="serializedProfile")
-    __properties: ClassVar[List[str]] = ["employeeType", "firstName", "lastName", "email", "passwordHash", "key", "culture", "serializedProfile"]
+    __properties: ClassVar[List[str]] = ["employeeType", "key", "culture", "serializedProfile"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -80,26 +76,6 @@ class SignupAccountRequestDto(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # set to None if first_name (nullable) is None
-        # and model_fields_set contains the field
-        if self.first_name is None and "first_name" in self.model_fields_set:
-            _dict['firstName'] = None
-
-        # set to None if last_name (nullable) is None
-        # and model_fields_set contains the field
-        if self.last_name is None and "last_name" in self.model_fields_set:
-            _dict['lastName'] = None
-
-        # set to None if email (nullable) is None
-        # and model_fields_set contains the field
-        if self.email is None and "email" in self.model_fields_set:
-            _dict['email'] = None
-
-        # set to None if password_hash (nullable) is None
-        # and model_fields_set contains the field
-        if self.password_hash is None and "password_hash" in self.model_fields_set:
-            _dict['passwordHash'] = None
-
         # set to None if key (nullable) is None
         # and model_fields_set contains the field
         if self.key is None and "key" in self.model_fields_set:
@@ -129,10 +105,6 @@ class SignupAccountRequestDto(BaseModel):
 
         _obj = cls.model_validate({
             "employeeType": obj.get("employeeType"),
-            "firstName": obj.get("firstName"),
-            "lastName": obj.get("lastName"),
-            "email": obj.get("email"),
-            "passwordHash": obj.get("passwordHash"),
             "key": obj.get("key"),
             "culture": obj.get("culture"),
             "serializedProfile": obj.get("serializedProfile")

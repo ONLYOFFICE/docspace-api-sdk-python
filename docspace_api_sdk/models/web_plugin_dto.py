@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -47,8 +47,11 @@ class WebPluginDto(BaseModel):
     enabled: StrictBool = Field(description="Specifies if the web plugin is enabled or not.")
     system: StrictBool = Field(description="Specifies if the web plugin is system or not.")
     url: Optional[StrictStr] = Field(description="The web plugin URL.")
+    css_url: Optional[StrictStr] = Field(description="The web plugin css URL.", alias="cssUrl")
     settings: Optional[StrictStr] = Field(description="The web plugin settings.")
-    __properties: ClassVar[List[str]] = ["name", "version", "minDocSpaceVersion", "description", "license", "author", "homePage", "pluginName", "scopes", "image", "createBy", "createOn", "enabled", "system", "url", "settings"]
+    name_locale: Optional[Dict[str, Optional[StrictStr]]] = Field(default=None, description="The web plugin localized name.", alias="nameLocale")
+    description_locale: Optional[Dict[str, Optional[StrictStr]]] = Field(default=None, description="The web plugin localized description.", alias="descriptionLocale")
+    __properties: ClassVar[List[str]] = ["name", "version", "minDocSpaceVersion", "description", "license", "author", "homePage", "pluginName", "scopes", "image", "createBy", "createOn", "enabled", "system", "url", "cssUrl", "settings", "nameLocale", "descriptionLocale"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -147,10 +150,25 @@ class WebPluginDto(BaseModel):
         if self.url is None and "url" in self.model_fields_set:
             _dict['url'] = None
 
+        # set to None if css_url (nullable) is None
+        # and model_fields_set contains the field
+        if self.css_url is None and "css_url" in self.model_fields_set:
+            _dict['cssUrl'] = None
+
         # set to None if settings (nullable) is None
         # and model_fields_set contains the field
         if self.settings is None and "settings" in self.model_fields_set:
             _dict['settings'] = None
+
+        # set to None if name_locale (nullable) is None
+        # and model_fields_set contains the field
+        if self.name_locale is None and "name_locale" in self.model_fields_set:
+            _dict['nameLocale'] = None
+
+        # set to None if description_locale (nullable) is None
+        # and model_fields_set contains the field
+        if self.description_locale is None and "description_locale" in self.model_fields_set:
+            _dict['descriptionLocale'] = None
 
         return _dict
 
@@ -180,7 +198,10 @@ class WebPluginDto(BaseModel):
             "enabled": obj.get("enabled"),
             "system": obj.get("system"),
             "url": obj.get("url"),
-            "settings": obj.get("settings")
+            "cssUrl": obj.get("cssUrl"),
+            "settings": obj.get("settings"),
+            "nameLocale": obj.get("nameLocale"),
+            "descriptionLocale": obj.get("descriptionLocale")
         })
         return _obj
 

@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,8 +22,8 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictBool, StrictInt, StrictStr
-from typing import List, Optional
+from pydantic import Field, StrictBool, StrictBytes, StrictInt, StrictStr
+from typing import List, Optional, Tuple, Union
 from typing_extensions import Annotated
 from docspace_api_sdk.models.archive_room_request import ArchiveRoomRequest
 from docspace_api_sdk.models.batch_tags_request_dto import BatchTagsRequestDto
@@ -36,19 +36,18 @@ from docspace_api_sdk.models.create_tag_request_dto import CreateTagRequestDto
 from docspace_api_sdk.models.create_third_party_room import CreateThirdPartyRoom
 from docspace_api_sdk.models.delete_room_request import DeleteRoomRequest
 from docspace_api_sdk.models.document_builder_task_wrapper import DocumentBuilderTaskWrapper
+from docspace_api_sdk.models.external_db_sync_task_wrapper import ExternalDbSyncTaskWrapper
 from docspace_api_sdk.models.file_operation_wrapper import FileOperationWrapper
 from docspace_api_sdk.models.file_share_array_wrapper import FileShareArrayWrapper
 from docspace_api_sdk.models.file_share_wrapper import FileShareWrapper
 from docspace_api_sdk.models.folder_content_integer_wrapper import FolderContentIntegerWrapper
 from docspace_api_sdk.models.folder_integer_wrapper import FolderIntegerWrapper
 from docspace_api_sdk.models.folder_string_wrapper import FolderStringWrapper
-from docspace_api_sdk.models.key_value_pair_string_string_values import KeyValuePairStringStringValues
 from docspace_api_sdk.models.link_type import LinkType
 from docspace_api_sdk.models.logo_request import LogoRequest
 from docspace_api_sdk.models.new_items_file_entry_base_array_wrapper import NewItemsFileEntryBaseArrayWrapper
 from docspace_api_sdk.models.new_items_room_new_items_array_wrapper import NewItemsRoomNewItemsArrayWrapper
 from docspace_api_sdk.models.object_array_wrapper import ObjectArrayWrapper
-from docspace_api_sdk.models.object_wrapper import ObjectWrapper
 from docspace_api_sdk.models.provider_filter import ProviderFilter
 from docspace_api_sdk.models.quota_filter import QuotaFilter
 from docspace_api_sdk.models.room_from_template_status_wrapper import RoomFromTemplateStatusWrapper
@@ -63,8 +62,10 @@ from docspace_api_sdk.models.set_public_dto import SetPublicDto
 from docspace_api_sdk.models.share_filter_type import ShareFilterType
 from docspace_api_sdk.models.sort_order import SortOrder
 from docspace_api_sdk.models.storage_filter import StorageFilter
+from docspace_api_sdk.models.string_wrapper import StringWrapper
 from docspace_api_sdk.models.subject_filter import SubjectFilter
 from docspace_api_sdk.models.update_room_request import UpdateRoomRequest
+from docspace_api_sdk.models.update_tag_request_dto import UpdateTagRequestDto
 from docspace_api_sdk.models.upload_result_wrapper import UploadResultWrapper
 from docspace_api_sdk.models.user_invitation import UserInvitation
 
@@ -85,7 +86,6 @@ class RoomsApi:
             api_client = ApiClient.get_default()
         self.api_client = api_client
         self._fields = None
-
 
     def with_fields(self, fields: str) -> RoomsApi:
         self._fields = fields
@@ -151,8 +151,11 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
-            '401': None,
             '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -224,8 +227,11 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
-            '401': None,
             '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -297,8 +303,11 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
-            '401': None,
             '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -455,6 +464,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -527,6 +539,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -599,6 +614,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -754,9 +772,12 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
-            '401': None,
             '403': None,
             '404': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -828,9 +849,12 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
-            '401': None,
             '403': None,
             '404': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -902,9 +926,12 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
-            '401': None,
             '403': None,
             '404': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1057,6 +1084,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1125,6 +1155,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1193,6 +1226,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1342,6 +1378,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomFromTemplateStatusWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1410,6 +1449,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomFromTemplateStatusWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1478,6 +1520,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomFromTemplateStatusWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1630,8 +1675,11 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
-            '401': None,
             '404': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1703,8 +1751,11 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
-            '401': None,
             '404': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1776,8 +1827,11 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
-            '401': None,
             '404': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1890,7 +1944,7 @@ class RoomsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ObjectWrapper:
+    ) -> StringWrapper:
         """Create a room tag
 
         Creates a custom room tag with the parameters specified in the request.
@@ -1928,9 +1982,12 @@ class RoomsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ObjectWrapper",
-            '401': None,
+            '200': "StringWrapper",
             '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1959,7 +2016,7 @@ class RoomsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[ObjectWrapper]:
+    ) -> ApiResponse[StringWrapper]:
         """Create a room tag
 
         Creates a custom room tag with the parameters specified in the request.
@@ -1997,9 +2054,12 @@ class RoomsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ObjectWrapper",
-            '401': None,
+            '200': "StringWrapper",
             '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2066,9 +2126,12 @@ class RoomsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ObjectWrapper",
-            '401': None,
+            '200': "StringWrapper",
             '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2218,6 +2281,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomTemplateStatusWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2286,6 +2352,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomTemplateStatusWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2354,6 +2423,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomTemplateStatusWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2507,6 +2579,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderStringWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2579,6 +2654,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderStringWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2651,6 +2729,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderStringWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2766,7 +2847,7 @@ class RoomsApi:
     ) -> None:
         """Delete the custom room tags
 
-        Deletes a bunch of custom room tags specified in the request.
+        Deletes a bunch of custom tags specified in the request.
 
         :param batch_tags_request_dto:
         :type batch_tags_request_dto: BatchTagsRequestDto
@@ -2802,8 +2883,11 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
-            '401': None,
             '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2835,7 +2919,7 @@ class RoomsApi:
     ) -> ApiResponse[None]:
         """Delete the custom room tags
 
-        Deletes a bunch of custom room tags specified in the request.
+        Deletes a bunch of custom tags specified in the request.
 
         :param batch_tags_request_dto:
         :type batch_tags_request_dto: BatchTagsRequestDto
@@ -2871,8 +2955,11 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
-            '401': None,
             '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2904,7 +2991,7 @@ class RoomsApi:
     ) -> RESTResponseType:
         """Delete the custom room tags
 
-        Deletes a bunch of custom room tags specified in the request.
+        Deletes a bunch of custom tags specified in the request.
 
         :param batch_tags_request_dto:
         :type batch_tags_request_dto: BatchTagsRequestDto
@@ -2940,8 +3027,11 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
-            '401': None,
             '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3088,6 +3178,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3160,6 +3253,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3232,6 +3328,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3384,6 +3483,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3452,6 +3554,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3520,6 +3625,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3659,8 +3767,11 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
-            '401': None,
             '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3732,8 +3843,11 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
-            '401': None,
             '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3805,8 +3919,11 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
-            '401': None,
             '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3904,6 +4021,290 @@ class RoomsApi:
 
 
     @validate_call
+    def get_external_db_sync_status(
+        self,
+        id: Annotated[StrictInt, Field(description="The room ID.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ExternalDbSyncTaskWrapper:
+        """Get external DB sync status
+
+        Returns the status of the external DB synchronization task for the specified filling forms room.
+
+        :param id: The room ID. (required)
+        :type id: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_external_db_sync_status_serialize(
+            id=id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ExternalDbSyncTaskWrapper",
+            '404': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def get_external_db_sync_status_with_http_info(
+        self,
+        id: Annotated[StrictInt, Field(description="The room ID.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[ExternalDbSyncTaskWrapper]:
+        """Get external DB sync status
+
+        Returns the status of the external DB synchronization task for the specified filling forms room.
+
+        :param id: The room ID. (required)
+        :type id: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_external_db_sync_status_serialize(
+            id=id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ExternalDbSyncTaskWrapper",
+            '404': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def get_external_db_sync_status_without_preload_content(
+        self,
+        id: Annotated[StrictInt, Field(description="The room ID.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Get external DB sync status
+
+        Returns the status of the external DB synchronization task for the specified filling forms room.
+
+        :param id: The room ID. (required)
+        :type id: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_external_db_sync_status_serialize(
+            id=id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ExternalDbSyncTaskWrapper",
+            '404': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _get_external_db_sync_status_serialize(
+        self,
+        id,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if id is not None:
+            _path_params['id'] = id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
+        ]
+
+
+        resource_path = "/api/2.0/files/rooms/{id}/externaldbsync"
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path=resource_path,
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
     def get_new_room_items(
         self,
         id: Annotated[StrictInt, Field(description="The room ID.")],
@@ -3959,6 +4360,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "NewItemsFileEntryBaseArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4027,6 +4431,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "NewItemsFileEntryBaseArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4095,6 +4502,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "NewItemsFileEntryBaseArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4231,6 +4641,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4299,6 +4712,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4367,6 +4783,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4499,6 +4918,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CoversResultArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4563,6 +4985,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CoversResultArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4627,6 +5052,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CoversResultArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4756,6 +5184,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomFromTemplateStatusWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4820,6 +5251,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomFromTemplateStatusWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4884,6 +5318,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomFromTemplateStatusWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -5013,6 +5450,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocumentBuilderTaskWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -5077,6 +5517,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocumentBuilderTaskWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -5141,6 +5584,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocumentBuilderTaskWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -5273,6 +5719,9 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -5340,6 +5789,9 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -5407,6 +5859,9 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -5541,6 +5996,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -5613,6 +6071,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -5685,6 +6146,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -5842,6 +6306,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -5926,6 +6393,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -6010,6 +6480,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -6131,7 +6604,7 @@ class RoomsApi:
     ) -> ObjectArrayWrapper:
         """Get the room tags
 
-        Returns a list of custom room tags.
+        Returns a list of custom tags.
 
         :param count: Gets or sets the number of tag results to retrieve.  This property specifies the maximum amount of tag data to be included in the result set.
         :type count: int
@@ -6174,6 +6647,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -6207,7 +6683,7 @@ class RoomsApi:
     ) -> ApiResponse[ObjectArrayWrapper]:
         """Get the room tags
 
-        Returns a list of custom room tags.
+        Returns a list of custom tags.
 
         :param count: Gets or sets the number of tag results to retrieve.  This property specifies the maximum amount of tag data to be included in the result set.
         :type count: int
@@ -6250,6 +6726,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -6283,7 +6762,7 @@ class RoomsApi:
     ) -> RESTResponseType:
         """Get the room tags
 
-        Returns a list of custom room tags.
+        Returns a list of custom tags.
 
         :param count: Gets or sets the number of tag results to retrieve.  This property specifies the maximum amount of tag data to be included in the result set.
         :type count: int
@@ -6326,6 +6805,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -6472,6 +6954,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomTemplateStatusWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -6536,6 +7021,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomTemplateStatusWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -6600,6 +7088,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomTemplateStatusWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -6682,6 +7173,7 @@ class RoomsApi:
         self,
         type: Annotated[Optional[List[List[RoomType]]], Field(description="The filter by room type.")] = None,
         subject_id: Annotated[Optional[StrictStr], Field(description="The filter by user ID.")] = None,
+        subject_owner_id: Annotated[Optional[StrictStr], Field(description="The filter by room owner ID.")] = None,
         search_area: Annotated[Optional[SearchArea], Field(description="The room search area (Active, Archive, Any, Recent by links).")] = None,
         without_tags: Annotated[Optional[StrictBool], Field(description="Specifies whether to search by tags or not.")] = None,
         tags: Annotated[Optional[StrictStr], Field(description="The tags in the serialized format.")] = None,
@@ -6695,6 +7187,7 @@ class RoomsApi:
         sort_by: Annotated[Optional[StrictStr], Field(description="Specifies the field by which the room content should be sorted.")] = None,
         sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
         filter_value: Annotated[Optional[StrictStr], Field(description="The text filter value used to refine search or query operations.")] = None,
+        group_id: Annotated[Optional[StrictInt], Field(description="The group ID")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6716,6 +7209,8 @@ class RoomsApi:
         :type type: List[RoomType]
         :param subject_id: The filter by user ID.
         :type subject_id: str
+        :param subject_owner_id: The filter by room owner ID.
+        :type subject_owner_id: str
         :param search_area: The room search area (Active, Archive, Any, Recent by links).
         :type search_area: SearchArea
         :param without_tags: Specifies whether to search by tags or not.
@@ -6742,6 +7237,8 @@ class RoomsApi:
         :type sort_order: SortOrder
         :param filter_value: The text filter value used to refine search or query operations.
         :type filter_value: str
+        :param group_id: The group ID
+        :type group_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -6767,6 +7264,7 @@ class RoomsApi:
         _param = self._get_rooms_folder_serialize(
             type=type,
             subject_id=subject_id,
+            subject_owner_id=subject_owner_id,
             search_area=search_area,
             without_tags=without_tags,
             tags=tags,
@@ -6780,6 +7278,7 @@ class RoomsApi:
             sort_by=sort_by,
             sort_order=sort_order,
             filter_value=filter_value,
+            group_id=group_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -6788,8 +7287,11 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderContentIntegerWrapper",
-            '401': None,
             '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -6807,6 +7309,7 @@ class RoomsApi:
         self,
         type: Annotated[Optional[List[List[RoomType]]], Field(description="The filter by room type.")] = None,
         subject_id: Annotated[Optional[StrictStr], Field(description="The filter by user ID.")] = None,
+        subject_owner_id: Annotated[Optional[StrictStr], Field(description="The filter by room owner ID.")] = None,
         search_area: Annotated[Optional[SearchArea], Field(description="The room search area (Active, Archive, Any, Recent by links).")] = None,
         without_tags: Annotated[Optional[StrictBool], Field(description="Specifies whether to search by tags or not.")] = None,
         tags: Annotated[Optional[StrictStr], Field(description="The tags in the serialized format.")] = None,
@@ -6820,6 +7323,7 @@ class RoomsApi:
         sort_by: Annotated[Optional[StrictStr], Field(description="Specifies the field by which the room content should be sorted.")] = None,
         sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
         filter_value: Annotated[Optional[StrictStr], Field(description="The text filter value used to refine search or query operations.")] = None,
+        group_id: Annotated[Optional[StrictInt], Field(description="The group ID")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6841,6 +7345,8 @@ class RoomsApi:
         :type type: List[RoomType]
         :param subject_id: The filter by user ID.
         :type subject_id: str
+        :param subject_owner_id: The filter by room owner ID.
+        :type subject_owner_id: str
         :param search_area: The room search area (Active, Archive, Any, Recent by links).
         :type search_area: SearchArea
         :param without_tags: Specifies whether to search by tags or not.
@@ -6867,6 +7373,8 @@ class RoomsApi:
         :type sort_order: SortOrder
         :param filter_value: The text filter value used to refine search or query operations.
         :type filter_value: str
+        :param group_id: The group ID
+        :type group_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -6892,6 +7400,7 @@ class RoomsApi:
         _param = self._get_rooms_folder_serialize(
             type=type,
             subject_id=subject_id,
+            subject_owner_id=subject_owner_id,
             search_area=search_area,
             without_tags=without_tags,
             tags=tags,
@@ -6905,6 +7414,7 @@ class RoomsApi:
             sort_by=sort_by,
             sort_order=sort_order,
             filter_value=filter_value,
+            group_id=group_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -6913,8 +7423,11 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderContentIntegerWrapper",
-            '401': None,
             '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -6932,6 +7445,7 @@ class RoomsApi:
         self,
         type: Annotated[Optional[List[List[RoomType]]], Field(description="The filter by room type.")] = None,
         subject_id: Annotated[Optional[StrictStr], Field(description="The filter by user ID.")] = None,
+        subject_owner_id: Annotated[Optional[StrictStr], Field(description="The filter by room owner ID.")] = None,
         search_area: Annotated[Optional[SearchArea], Field(description="The room search area (Active, Archive, Any, Recent by links).")] = None,
         without_tags: Annotated[Optional[StrictBool], Field(description="Specifies whether to search by tags or not.")] = None,
         tags: Annotated[Optional[StrictStr], Field(description="The tags in the serialized format.")] = None,
@@ -6945,6 +7459,7 @@ class RoomsApi:
         sort_by: Annotated[Optional[StrictStr], Field(description="Specifies the field by which the room content should be sorted.")] = None,
         sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
         filter_value: Annotated[Optional[StrictStr], Field(description="The text filter value used to refine search or query operations.")] = None,
+        group_id: Annotated[Optional[StrictInt], Field(description="The group ID")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6966,6 +7481,8 @@ class RoomsApi:
         :type type: List[RoomType]
         :param subject_id: The filter by user ID.
         :type subject_id: str
+        :param subject_owner_id: The filter by room owner ID.
+        :type subject_owner_id: str
         :param search_area: The room search area (Active, Archive, Any, Recent by links).
         :type search_area: SearchArea
         :param without_tags: Specifies whether to search by tags or not.
@@ -6992,6 +7509,8 @@ class RoomsApi:
         :type sort_order: SortOrder
         :param filter_value: The text filter value used to refine search or query operations.
         :type filter_value: str
+        :param group_id: The group ID
+        :type group_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -7017,6 +7536,7 @@ class RoomsApi:
         _param = self._get_rooms_folder_serialize(
             type=type,
             subject_id=subject_id,
+            subject_owner_id=subject_owner_id,
             search_area=search_area,
             without_tags=without_tags,
             tags=tags,
@@ -7030,6 +7550,7 @@ class RoomsApi:
             sort_by=sort_by,
             sort_order=sort_order,
             filter_value=filter_value,
+            group_id=group_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -7038,8 +7559,11 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderContentIntegerWrapper",
-            '401': None,
             '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -7052,6 +7576,7 @@ class RoomsApi:
         self,
         type,
         subject_id,
+        subject_owner_id,
         search_area,
         without_tags,
         tags,
@@ -7065,6 +7590,7 @@ class RoomsApi:
         sort_by,
         sort_order,
         filter_value,
+        group_id,
         _request_auth,
         _content_type,
         _headers,
@@ -7095,6 +7621,10 @@ class RoomsApi:
         if subject_id is not None:
             
             _query_params.append(('subjectId', subject_id))
+            
+        if subject_owner_id is not None:
+            
+            _query_params.append(('subjectOwnerId', subject_owner_id))
             
         if search_area is not None:
             
@@ -7147,6 +7677,10 @@ class RoomsApi:
         if filter_value is not None:
             
             _query_params.append(('filterValue', filter_value))
+            
+        if group_id is not None:
+            
+            _query_params.append(('groupId', group_id))
             
         # process the header parameters
         if self._fields is not None:
@@ -7247,6 +7781,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "NewItemsRoomNewItemsArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -7311,6 +7848,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "NewItemsRoomNewItemsArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -7375,6 +7915,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "NewItemsRoomNewItemsArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -7507,8 +8050,12 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
-            '401': None,
+            '403': None,
             '404': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -7576,8 +8123,12 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
-            '401': None,
+            '403': None,
             '404': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -7645,8 +8196,12 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
-            '401': None,
+            '403': None,
             '404': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -7728,6 +8283,307 @@ class RoomsApi:
 
 
     @validate_call
+    def has_tag_links(
+        self,
+        tag_name2: StrictStr,
+        tag_name: Annotated[Optional[StrictStr], Field(description="Represents the name of a tag")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> BooleanWrapper:
+        """Has tag links
+
+        Checks if a specific custom tag has linked items.
+
+        :param tag_name2: (required)
+        :type tag_name2: str
+        :param tag_name: Represents the name of a tag
+        :type tag_name: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._has_tag_links_serialize(
+            tag_name2=tag_name2,
+            tag_name=tag_name,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "BooleanWrapper",
+            '404': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def has_tag_links_with_http_info(
+        self,
+        tag_name2: StrictStr,
+        tag_name: Annotated[Optional[StrictStr], Field(description="Represents the name of a tag")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[BooleanWrapper]:
+        """Has tag links
+
+        Checks if a specific custom tag has linked items.
+
+        :param tag_name2: (required)
+        :type tag_name2: str
+        :param tag_name: Represents the name of a tag
+        :type tag_name: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._has_tag_links_serialize(
+            tag_name2=tag_name2,
+            tag_name=tag_name,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "BooleanWrapper",
+            '404': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def has_tag_links_without_preload_content(
+        self,
+        tag_name2: StrictStr,
+        tag_name: Annotated[Optional[StrictStr], Field(description="Represents the name of a tag")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Has tag links
+
+        Checks if a specific custom tag has linked items.
+
+        :param tag_name2: (required)
+        :type tag_name2: str
+        :param tag_name: Represents the name of a tag
+        :type tag_name: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._has_tag_links_serialize(
+            tag_name2=tag_name2,
+            tag_name=tag_name,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "BooleanWrapper",
+            '404': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _has_tag_links_serialize(
+        self,
+        tag_name2,
+        tag_name,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if tag_name2 is not None:
+            _path_params['tagName'] = tag_name2
+        # process the query parameters
+        if tag_name is not None:
+            
+            _query_params.append(('tagName', tag_name))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
+        ]
+
+
+        resource_path = "/api/2.0/files/tags/{tagName}/haslinks"
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path=resource_path,
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
     def pin_room(
         self,
         id: Annotated[StrictInt, Field(description="The room ID.")],
@@ -7783,6 +8639,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -7851,6 +8710,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -7919,6 +8781,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -8055,6 +8920,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -8123,6 +8991,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -8191,6 +9062,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -8331,6 +9205,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -8403,6 +9280,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -8475,6 +9355,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -8620,6 +9503,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -8688,6 +9574,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -8756,6 +9645,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -8902,6 +9794,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -8974,6 +9869,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -9046,6 +9944,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -9202,6 +10103,8 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomSecurityWrapper",
             '401': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -9274,6 +10177,8 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomSecurityWrapper",
             '401': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -9346,6 +10251,8 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomSecurityWrapper",
             '401': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -9443,6 +10350,296 @@ class RoomsApi:
 
 
     @validate_call
+    def start_external_db_sync(
+        self,
+        id: Annotated[StrictInt, Field(description="The room ID.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ExternalDbSyncTaskWrapper:
+        """Start external DB sync
+
+        Triggers external DB synchronization for all form templates in the specified filling forms room.
+
+        :param id: The room ID. (required)
+        :type id: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._start_external_db_sync_serialize(
+            id=id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ExternalDbSyncTaskWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def start_external_db_sync_with_http_info(
+        self,
+        id: Annotated[StrictInt, Field(description="The room ID.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[ExternalDbSyncTaskWrapper]:
+        """Start external DB sync
+
+        Triggers external DB synchronization for all form templates in the specified filling forms room.
+
+        :param id: The room ID. (required)
+        :type id: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._start_external_db_sync_serialize(
+            id=id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ExternalDbSyncTaskWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def start_external_db_sync_without_preload_content(
+        self,
+        id: Annotated[StrictInt, Field(description="The room ID.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Start external DB sync
+
+        Triggers external DB synchronization for all form templates in the specified filling forms room.
+
+        :param id: The room ID. (required)
+        :type id: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._start_external_db_sync_serialize(
+            id=id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ExternalDbSyncTaskWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _start_external_db_sync_serialize(
+        self,
+        id,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if id is not None:
+            _path_params['id'] = id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
+        ]
+
+
+        resource_path = "/api/2.0/files/rooms/{id}/externaldbsync"
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path=resource_path,
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
     def start_room_index_export(
         self,
         id: Annotated[StrictInt, Field(description="The room ID.")],
@@ -9497,8 +10694,11 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocumentBuilderTaskWrapper",
-            '401': None,
             '501': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -9566,8 +10766,11 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocumentBuilderTaskWrapper",
-            '401': None,
             '501': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -9635,8 +10838,11 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocumentBuilderTaskWrapper",
-            '401': None,
             '501': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -9769,6 +10975,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -9833,6 +11042,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -9897,6 +11109,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -10027,6 +11242,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -10099,6 +11317,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -10171,6 +11392,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -10323,6 +11547,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -10391,6 +11618,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -10459,6 +11689,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -10599,6 +11832,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -10671,6 +11907,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -10743,6 +11982,9 @@ class RoomsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -10840,9 +12082,306 @@ class RoomsApi:
 
 
     @validate_call
+    def update_room_tag(
+        self,
+        update_tag_request_dto: Optional[UpdateTagRequestDto] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> StringWrapper:
+        """Update tag
+
+        Updates the name of a custom tag.
+
+        :param update_tag_request_dto:
+        :type update_tag_request_dto: UpdateTagRequestDto
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._update_room_tag_serialize(
+            update_tag_request_dto=update_tag_request_dto,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "StringWrapper",
+            '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def update_room_tag_with_http_info(
+        self,
+        update_tag_request_dto: Optional[UpdateTagRequestDto] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[StringWrapper]:
+        """Update tag
+
+        Updates the name of a custom tag.
+
+        :param update_tag_request_dto:
+        :type update_tag_request_dto: UpdateTagRequestDto
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._update_room_tag_serialize(
+            update_tag_request_dto=update_tag_request_dto,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "StringWrapper",
+            '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def update_room_tag_without_preload_content(
+        self,
+        update_tag_request_dto: Optional[UpdateTagRequestDto] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Update tag
+
+        Updates the name of a custom tag.
+
+        :param update_tag_request_dto:
+        :type update_tag_request_dto: UpdateTagRequestDto
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._update_room_tag_serialize(
+            update_tag_request_dto=update_tag_request_dto,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "StringWrapper",
+            '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _update_room_tag_serialize(
+        self,
+        update_tag_request_dto,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if update_tag_request_dto is not None:
+            _body_params = update_tag_request_dto
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
+        ]
+
+
+        resource_path = "/api/2.0/files/tags"
+
+        return self.api_client.param_serialize(
+            method='PUT',
+            resource_path=resource_path,
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
     def upload_room_logo(
         self,
-        form_collection: Annotated[Optional[List[KeyValuePairStringStringValues]], Field(description="The image data.")] = None,
+        file: Annotated[Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]], Field(description="The image data.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -10860,8 +12399,8 @@ class RoomsApi:
 
         Uploads a temporary image to create a room logo.
 
-        :param form_collection: The image data.
-        :type form_collection: List[KeyValuePairStringStringValues]
+        :param file: The image data.
+        :type file: bytes
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -10885,7 +12424,7 @@ class RoomsApi:
         """ # noqa: E501
 
         _param = self._upload_room_logo_serialize(
-            form_collection=form_collection,
+            file=file,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -10894,8 +12433,11 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "UploadResultWrapper",
-            '401': None,
             '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -10911,7 +12453,7 @@ class RoomsApi:
     @validate_call
     def upload_room_logo_with_http_info(
         self,
-        form_collection: Annotated[Optional[List[KeyValuePairStringStringValues]], Field(description="The image data.")] = None,
+        file: Annotated[Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]], Field(description="The image data.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -10929,8 +12471,8 @@ class RoomsApi:
 
         Uploads a temporary image to create a room logo.
 
-        :param form_collection: The image data.
-        :type form_collection: List[KeyValuePairStringStringValues]
+        :param file: The image data.
+        :type file: bytes
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -10954,7 +12496,7 @@ class RoomsApi:
         """ # noqa: E501
 
         _param = self._upload_room_logo_serialize(
-            form_collection=form_collection,
+            file=file,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -10963,8 +12505,11 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "UploadResultWrapper",
-            '401': None,
             '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -10980,7 +12525,7 @@ class RoomsApi:
     @validate_call
     def upload_room_logo_without_preload_content(
         self,
-        form_collection: Annotated[Optional[List[KeyValuePairStringStringValues]], Field(description="The image data.")] = None,
+        file: Annotated[Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]], Field(description="The image data.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -10998,8 +12543,8 @@ class RoomsApi:
 
         Uploads a temporary image to create a room logo.
 
-        :param form_collection: The image data.
-        :type form_collection: List[KeyValuePairStringStringValues]
+        :param file: The image data.
+        :type file: bytes
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -11023,7 +12568,7 @@ class RoomsApi:
         """ # noqa: E501
 
         _param = self._upload_room_logo_serialize(
-            form_collection=form_collection,
+            file=file,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -11032,8 +12577,11 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "UploadResultWrapper",
-            '401': None,
             '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -11044,7 +12592,7 @@ class RoomsApi:
 
     def _upload_room_logo_serialize(
         self,
-        form_collection,
+        file,
         _request_auth,
         _content_type,
         _headers,
@@ -11054,7 +12602,6 @@ class RoomsApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'FormCollection': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -11070,8 +12617,8 @@ class RoomsApi:
         # process the query parameters
         # process the header parameters
         # process the form parameters
-        if form_collection is not None:
-            _form_params.append(('FormCollection', form_collection))
+        if file is not None:
+            _files['File'] = file
         # process the body parameter
 
 

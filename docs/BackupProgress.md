@@ -1,17 +1,19 @@
 # BackupProgress
+The backup progress parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**is_completed** | **bool** |  | [optional] 
-**progress** | **int** |  | [optional] 
-**error** | **str** |  | [optional] 
-**warning** | **str** |  | [optional] 
-**link** | **str** |  | [optional] 
-**tenant_id** | **int** |  | [optional] 
+**is_completed** | **bool** | Specifies if the backup is completed or not. | [optional] 
+**progress** | **int** | The backup progress in percentage. | [optional] 
+**error** | **str** | The backup error message. | [optional] 
+**warning** | **str** | The backup warning message. | [optional] 
+**link** | **str** | The backup link. | [optional] 
+**tenant_id** | **int** | The tenant ID. | [optional] 
 **backup_progress_enum** | [**BackupProgressEnum**](BackupProgressEnum.md) |  | [optional] 
-**task_id** | **str** |  | [optional] 
+**status** | [**DistributedTaskStatus**](DistributedTaskStatus.md) |  | [optional] 
+**task_id** | **str** | The task ID. | [optional] 
 
 ## Example
 

@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -29,21 +29,22 @@ from typing_extensions import Self
 
 class CreateClientRequest(BaseModel):
     """
-    The request parameters for creating a client.
+    Client creation request containing client details
     """ # noqa: E501
     name: Optional[Annotated[str, Field(min_length=3, strict=True, max_length=256)]] = Field(default=None, description="The client name.")
-    description: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The client description.")
-    logo: Optional[Annotated[str, Field(min_length=1, strict=True)]] = Field(default=None, description="The client logo in base64 format.")
-    scopes: Optional[Annotated[List[StrictStr], Field(min_length=1)]] = Field(default=None, description="The client scopes.")
-    allow_pkce: Optional[StrictBool] = Field(default=None, description="Indicates whether PKCE is allowed for the client.")
-    is_public: Optional[StrictBool] = Field(default=None, description="Indicates whether the client is accessible by third-party tenants.")
-    website_url: Optional[Annotated[str, Field(min_length=1, strict=True)]] = Field(default=None, description="The URL to the client's website.")
-    terms_url: Optional[Annotated[str, Field(min_length=1, strict=True)]] = Field(default=None, description="The URL to the client's terms of service.")
-    policy_url: Optional[Annotated[str, Field(min_length=1, strict=True)]] = Field(default=None, description="The URL to the client's privacy policy.")
-    redirect_uris: List[StrictStr] = Field(description="The list of allowed redirect URIs.")
-    allowed_origins: List[StrictStr] = Field(description="The list of allowed CORS origins.")
-    logout_redirect_uri: Optional[Annotated[str, Field(min_length=1, strict=True)]] = Field(default=None, description="The list of allowed logout redirect URIs.")
-    __properties: ClassVar[List[str]] = ["name", "description", "logo", "scopes", "allow_pkce", "is_public", "website_url", "terms_url", "policy_url", "redirect_uris", "allowed_origins", "logout_redirect_uri"]
+    description: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The description of the client")
+    logo: Optional[Annotated[str, Field(min_length=1, strict=True)]] = Field(default=None, description="The logo of the client in base64 format")
+    scopes: Optional[Annotated[List[StrictStr], Field(min_length=1)]] = Field(default=None, description="The scopes for the client")
+    public: Optional[StrictBool] = None
+    allow_pkce: Optional[StrictBool] = Field(default=None, description="Indicates whether PKCE is allowed for the client")
+    is_public: Optional[StrictBool] = Field(default=None, description="Indicates if the client is public")
+    website_url: Optional[Annotated[str, Field(min_length=1, strict=True)]] = Field(default=None, description="The website URL of the client")
+    terms_url: Optional[Annotated[str, Field(min_length=1, strict=True)]] = Field(default=None, description="The terms URL of the client")
+    policy_url: Optional[Annotated[str, Field(min_length=1, strict=True)]] = Field(default=None, description="The policy URL of the client")
+    redirect_uris: Annotated[List[StrictStr], Field(min_length=1, max_length=12)] = Field(description="The redirect URIs for the client")
+    allowed_origins: Annotated[List[StrictStr], Field(min_length=1, max_length=12)] = Field(description="The allowed origins for the client")
+    logout_redirect_uri: Optional[Annotated[str, Field(min_length=1, strict=True)]] = Field(default=None, description="The logout redirect URI for the client")
+    __properties: ClassVar[List[str]] = ["name", "description", "logo", "scopes", "public", "allow_pkce", "is_public", "website_url", "terms_url", "policy_url", "redirect_uris", "allowed_origins", "logout_redirect_uri"]
 
     @field_validator('logo')
     def logo_validate_regular_expression(cls, value):
@@ -61,8 +62,8 @@ class CreateClientRequest(BaseModel):
         if value is None:
             return value
 
-        if not re.match(r"^(https?:\/\/)?(([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}|localhost|[a-zA-Z0-9-]+)(:\d+)?(\/[a-zA-Z0-9-._~:\/?#\[\]@!$&\'()*+,;=]*)?$|^https?:\/\/(\d{1,3}\.){3}\d{1,3}(:\d+)?(\/[a-zA-Z0-9-._~:\/?#\[\]@!$&\'()*+,;=]*)?$", value):
-            raise ValueError(r"must validate the regular expression /^(https?:\/\/)?(([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}|localhost|[a-zA-Z0-9-]+)(:\d+)?(\/[a-zA-Z0-9-._~:\/?#\[\]@!$&'()*+,;=]*)?$|^https?:\/\/(\d{1,3}\.){3}\d{1,3}(:\d+)?(\/[a-zA-Z0-9-._~:\/?#\[\]@!$&'()*+,;=]*)?$/")
+        if not re.match(r"^(https?:\/\/)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(:\d+)?(\/[a-zA-Z0-9-._~:\/?#\[\]@!$&\'()*+,;=]*)?$|^https?:\/\/(\d{1,3}\.){3}\d{1,3}(:\d+)?(\/[a-zA-Z0-9-._~:\/?#\[\]@!$&\'()*+,;=]*)?$", value):
+            raise ValueError(r"must validate the regular expression /^(https?:\/\/)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(:\d+)?(\/[a-zA-Z0-9-._~:\/?#\[\]@!$&'()*+,;=]*)?$|^https?:\/\/(\d{1,3}\.){3}\d{1,3}(:\d+)?(\/[a-zA-Z0-9-._~:\/?#\[\]@!$&'()*+,;=]*)?$/")
         return value
 
     @field_validator('terms_url')
@@ -71,8 +72,8 @@ class CreateClientRequest(BaseModel):
         if value is None:
             return value
 
-        if not re.match(r"^(https?:\/\/)?(([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}|localhost|[a-zA-Z0-9-]+)(:\d+)?(\/[a-zA-Z0-9-._~:\/?#\[\]@!$&\'()*+,;=]*)?$|^https?:\/\/(\d{1,3}\.){3}\d{1,3}(:\d+)?(\/[a-zA-Z0-9-._~:\/?#\[\]@!$&\'()*+,;=]*)?$", value):
-            raise ValueError(r"must validate the regular expression /^(https?:\/\/)?(([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}|localhost|[a-zA-Z0-9-]+)(:\d+)?(\/[a-zA-Z0-9-._~:\/?#\[\]@!$&'()*+,;=]*)?$|^https?:\/\/(\d{1,3}\.){3}\d{1,3}(:\d+)?(\/[a-zA-Z0-9-._~:\/?#\[\]@!$&'()*+,;=]*)?$/")
+        if not re.match(r"^(https?:\/\/)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(:\d+)?(\/[a-zA-Z0-9-._~:\/?#\[\]@!$&\'()*+,;=]*)?$|^https?:\/\/(\d{1,3}\.){3}\d{1,3}(:\d+)?(\/[a-zA-Z0-9-._~:\/?#\[\]@!$&\'()*+,;=]*)?$", value):
+            raise ValueError(r"must validate the regular expression /^(https?:\/\/)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(:\d+)?(\/[a-zA-Z0-9-._~:\/?#\[\]@!$&'()*+,;=]*)?$|^https?:\/\/(\d{1,3}\.){3}\d{1,3}(:\d+)?(\/[a-zA-Z0-9-._~:\/?#\[\]@!$&'()*+,;=]*)?$/")
         return value
 
     @field_validator('policy_url')
@@ -81,8 +82,8 @@ class CreateClientRequest(BaseModel):
         if value is None:
             return value
 
-        if not re.match(r"^(https?:\/\/)?(([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}|localhost|[a-zA-Z0-9-]+)(:\d+)?(\/[a-zA-Z0-9-._~:\/?#\[\]@!$&\'()*+,;=]*)?$|^https?:\/\/(\d{1,3}\.){3}\d{1,3}(:\d+)?(\/[a-zA-Z0-9-._~:\/?#\[\]@!$&\'()*+,;=]*)?$", value):
-            raise ValueError(r"must validate the regular expression /^(https?:\/\/)?(([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}|localhost|[a-zA-Z0-9-]+)(:\d+)?(\/[a-zA-Z0-9-._~:\/?#\[\]@!$&'()*+,;=]*)?$|^https?:\/\/(\d{1,3}\.){3}\d{1,3}(:\d+)?(\/[a-zA-Z0-9-._~:\/?#\[\]@!$&'()*+,;=]*)?$/")
+        if not re.match(r"^(https?:\/\/)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(:\d+)?(\/[a-zA-Z0-9-._~:\/?#\[\]@!$&\'()*+,;=]*)?$|^https?:\/\/(\d{1,3}\.){3}\d{1,3}(:\d+)?(\/[a-zA-Z0-9-._~:\/?#\[\]@!$&\'()*+,;=]*)?$", value):
+            raise ValueError(r"must validate the regular expression /^(https?:\/\/)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(:\d+)?(\/[a-zA-Z0-9-._~:\/?#\[\]@!$&'()*+,;=]*)?$|^https?:\/\/(\d{1,3}\.){3}\d{1,3}(:\d+)?(\/[a-zA-Z0-9-._~:\/?#\[\]@!$&'()*+,;=]*)?$/")
         return value
 
     @field_validator('logout_redirect_uri')
@@ -91,8 +92,8 @@ class CreateClientRequest(BaseModel):
         if value is None:
             return value
 
-        if not re.match(r"^(https?:\/\/)?(([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}|localhost|[a-zA-Z0-9-]+)(:\d+)?(\/[a-zA-Z0-9-._~:\/?#\[\]@!$&\'()*+,;=]*)?$|^https?:\/\/(\d{1,3}\.){3}\d{1,3}(:\d+)?(\/[a-zA-Z0-9-._~:\/?#\[\]@!$&\'()*+,;=]*)?$", value):
-            raise ValueError(r"must validate the regular expression /^(https?:\/\/)?(([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}|localhost|[a-zA-Z0-9-]+)(:\d+)?(\/[a-zA-Z0-9-._~:\/?#\[\]@!$&'()*+,;=]*)?$|^https?:\/\/(\d{1,3}\.){3}\d{1,3}(:\d+)?(\/[a-zA-Z0-9-._~:\/?#\[\]@!$&'()*+,;=]*)?$/")
+        if not re.match(r"^(https?:\/\/)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(:\d+)?(\/[a-zA-Z0-9-._~:\/?#\[\]@!$&\'()*+,;=]*)?$|^https?:\/\/(\d{1,3}\.){3}\d{1,3}(:\d+)?(\/[a-zA-Z0-9-._~:\/?#\[\]@!$&\'()*+,;=]*)?$", value):
+            raise ValueError(r"must validate the regular expression /^(https?:\/\/)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(:\d+)?(\/[a-zA-Z0-9-._~:\/?#\[\]@!$&'()*+,;=]*)?$|^https?:\/\/(\d{1,3}\.){3}\d{1,3}(:\d+)?(\/[a-zA-Z0-9-._~:\/?#\[\]@!$&'()*+,;=]*)?$/")
         return value
 
     model_config = ConfigDict(
@@ -151,6 +152,7 @@ class CreateClientRequest(BaseModel):
             "description": obj.get("description"),
             "logo": obj.get("logo"),
             "scopes": obj.get("scopes"),
+            "public": obj.get("public"),
             "allow_pkce": obj.get("allow_pkce"),
             "is_public": obj.get("is_public"),
             "website_url": obj.get("website_url"),

@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,8 +21,9 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import StrictBool
+from pydantic import Field, StrictBool
 from typing import Optional
+from typing_extensions import Annotated
 from docspace_api_sdk.models.cdn_storage_settings_wrapper import CdnStorageSettingsWrapper
 from docspace_api_sdk.models.double_wrapper import DoubleWrapper
 from docspace_api_sdk.models.object_wrapper import ObjectWrapper
@@ -49,11 +50,10 @@ class StorageApi:
 
 
 
-
     @validate_call
     def get_all_backup_storages(
         self,
-        dump: Optional[StrictBool] = None,
+        dump: Annotated[Optional[StrictBool], Field(description="Indicates whether the operation should perform a dump of backup storage data.  This property is used as a parameter in backup-related API requests to specify  if additional details or data dumping is required during the process.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -71,7 +71,7 @@ class StorageApi:
 
         Returns a list of all the backup storages.
 
-        :param dump:
+        :param dump: Indicates whether the operation should perform a dump of backup storage data.  This property is used as a parameter in backup-related API requests to specify  if additional details or data dumping is required during the process.
         :type dump: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -105,8 +105,11 @@ class StorageApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StorageArrayWrapper",
+            '403': None,
             '401': None,
-            '402': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -122,7 +125,7 @@ class StorageApi:
     @validate_call
     def get_all_backup_storages_with_http_info(
         self,
-        dump: Optional[StrictBool] = None,
+        dump: Annotated[Optional[StrictBool], Field(description="Indicates whether the operation should perform a dump of backup storage data.  This property is used as a parameter in backup-related API requests to specify  if additional details or data dumping is required during the process.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -140,7 +143,7 @@ class StorageApi:
 
         Returns a list of all the backup storages.
 
-        :param dump:
+        :param dump: Indicates whether the operation should perform a dump of backup storage data.  This property is used as a parameter in backup-related API requests to specify  if additional details or data dumping is required during the process.
         :type dump: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -174,8 +177,11 @@ class StorageApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StorageArrayWrapper",
+            '403': None,
             '401': None,
-            '402': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -191,7 +197,7 @@ class StorageApi:
     @validate_call
     def get_all_backup_storages_without_preload_content(
         self,
-        dump: Optional[StrictBool] = None,
+        dump: Annotated[Optional[StrictBool], Field(description="Indicates whether the operation should perform a dump of backup storage data.  This property is used as a parameter in backup-related API requests to specify  if additional details or data dumping is required during the process.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -209,7 +215,7 @@ class StorageApi:
 
         Returns a list of all the backup storages.
 
-        :param dump:
+        :param dump: Indicates whether the operation should perform a dump of backup storage data.  This property is used as a parameter in backup-related API requests to specify  if additional details or data dumping is required during the process.
         :type dump: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -243,8 +249,11 @@ class StorageApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StorageArrayWrapper",
+            '403': None,
             '401': None,
-            '402': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -378,8 +387,11 @@ class StorageApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StorageArrayWrapper",
-            '401': None,
             '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -443,8 +455,11 @@ class StorageApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StorageArrayWrapper",
-            '401': None,
             '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -508,8 +523,11 @@ class StorageApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StorageArrayWrapper",
-            '401': None,
             '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -638,8 +656,11 @@ class StorageApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StorageArrayWrapper",
-            '401': None,
             '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -703,8 +724,11 @@ class StorageApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StorageArrayWrapper",
-            '401': None,
             '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -768,8 +792,11 @@ class StorageApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StorageArrayWrapper",
-            '401': None,
             '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -899,6 +926,9 @@ class StorageApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -963,6 +993,9 @@ class StorageApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1027,6 +1060,9 @@ class StorageApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1156,6 +1192,9 @@ class StorageApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DoubleWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1220,6 +1259,9 @@ class StorageApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DoubleWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1284,6 +1326,9 @@ class StorageApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DoubleWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1412,8 +1457,11 @@ class StorageApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
-            '401': None,
             '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1477,8 +1525,11 @@ class StorageApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
-            '401': None,
             '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1542,8 +1593,11 @@ class StorageApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
-            '401': None,
             '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1665,8 +1719,11 @@ class StorageApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
-            '401': None,
             '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1730,8 +1787,11 @@ class StorageApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
-            '401': None,
             '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1795,8 +1855,11 @@ class StorageApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
-            '401': None,
             '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1923,8 +1986,11 @@ class StorageApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CdnStorageSettingsWrapper",
             '400': None,
-            '401': None,
             '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1993,8 +2059,11 @@ class StorageApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CdnStorageSettingsWrapper",
             '400': None,
-            '401': None,
             '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2063,8 +2132,11 @@ class StorageApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CdnStorageSettingsWrapper",
             '400': None,
-            '401': None,
             '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2214,8 +2286,11 @@ class StorageApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StorageSettingsWrapper",
             '400': None,
-            '401': None,
             '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2284,8 +2359,11 @@ class StorageApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StorageSettingsWrapper",
             '400': None,
-            '401': None,
             '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2354,8 +2432,11 @@ class StorageApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StorageSettingsWrapper",
             '400': None,
-            '401': None,
             '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,

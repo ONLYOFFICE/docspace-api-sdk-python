@@ -1,22 +1,13 @@
-#
-# (c) Copyright Ascensio System SIA 2025
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-#
-
-
+# flake8: noqa
 
 # import apis into api package
+from docspace_api_sdk.api.ai.agents_api import AgentsApi
+from docspace_api_sdk.api.ai.chat_api import ChatApi
+from docspace_api_sdk.api.ai.mcp_api import MCPApi
+from docspace_api_sdk.api.ai.messages_api import MessagesApi
+from docspace_api_sdk.api.ai.providers_api import ProvidersApi
+from docspace_api_sdk.api.ai.settings_api import SettingsApi
+from docspace_api_sdk.api.ai.vectorization_api import VectorizationApi
 from docspace_api_sdk.api.api_keys.api_keys_api import ApiKeysApi
 from docspace_api_sdk.api.authentication.authentication_api import AuthenticationApi
 from docspace_api_sdk.api.backup.backup_api import BackupApi
@@ -34,7 +25,9 @@ from docspace_api_sdk.api.migration.migration_api import MigrationApi
 from docspace_api_sdk.api.o_auth20.authorization_api import AuthorizationApi
 from docspace_api_sdk.api.o_auth20.client_management_api import ClientManagementApi
 from docspace_api_sdk.api.o_auth20.client_querying_api import ClientQueryingApi
+from docspace_api_sdk.api.o_auth20.discovery_api import DiscoveryApi
 from docspace_api_sdk.api.o_auth20.scope_management_api import ScopeManagementApi
+from docspace_api_sdk.api.people.email_api import EmailApi
 from docspace_api_sdk.api.people.guests_api import GuestsApi
 from docspace_api_sdk.api.people.password_api import PasswordApi
 from docspace_api_sdk.api.people.photos_api import PhotosApi
@@ -52,6 +45,7 @@ from docspace_api_sdk.api.portal.quota_api import QuotaApi
 from docspace_api_sdk.api.portal.settings_api import SettingsApi
 from docspace_api_sdk.api.portal.users_api import UsersApi
 from docspace_api_sdk.api.rooms.rooms_api import RoomsApi
+from docspace_api_sdk.api.rooms.groups_api import GroupsApi
 from docspace_api_sdk.api.security.access_to_dev_tools_api import AccessToDevToolsApi
 from docspace_api_sdk.api.security.active_connections_api import ActiveConnectionsApi
 from docspace_api_sdk.api.security.audit_trail_data_api import AuditTrailDataApi

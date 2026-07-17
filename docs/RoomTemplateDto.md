@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **logo** | [**LogoRequest**](LogoRequest.md) |  | [optional] 
 **copy_logo** | **bool** | Specifies whether to copy room logo or not. | [optional] 
 **share** | **List[str]** | The collection of email addresses of users with whom to share a room. | [optional] 
-**groups** | **List[str]** | The collection of groups with whom to share a room. | [optional] 
+**groups** | **List[UUID]** | The collection of groups with whom to share a room. | [optional] 
 **public** | **bool** | Specifies whether the room template is public or not. | [optional] 
 **tags** | **List[str]** | The collection of tags. | [optional] 
 **color** | **str** | The color of the room template. | [optional] 

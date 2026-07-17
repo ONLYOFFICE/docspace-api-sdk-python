@@ -20,7 +20,7 @@ Name | Type | Description | Notes
 **status_changed** | **datetime** | The date and time when the tenant status was changed. | [optional] 
 **status_changed_hack** | **datetime** | The hacked date and time when the tenant status was changed. | [optional] 
 **creation_date_time** | **datetime** | The tenant creation date. | [optional] 
-**owner_id** | **str** | The tenant owner ID. | [optional] 
+**owner_id** | **UUID** | The tenant owner ID. | [optional] 
 **payment_id** | **str** | The tenant payment ID. | [optional] 
 **industry** | [**TenantIndustry**](TenantIndustry.md) |  | [optional] 
 **last_modified** | **datetime** | The date and time when the tenant was last modified. | [optional] 

@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,19 +24,20 @@ import json
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from uuid import UUID
 from docspace_api_sdk.models.backup_storage_type import BackupStorageType
 from typing import Optional, Set
 from typing_extensions import Self
 
 class BackupHistoryRecord(BaseModel):
     """
-    BackupHistoryRecord
+    The backup history parameters.
     """ # noqa: E501
-    id: StrictStr
-    file_name: Optional[StrictStr] = Field(alias="fileName")
+    id: UUID = Field(description="The backup ID.")
+    file_name: Optional[StrictStr] = Field(description="The backup file name.", alias="fileName")
     storage_type: BackupStorageType = Field(alias="storageType")
-    created_on: datetime = Field(alias="createdOn")
-    expires_on: datetime = Field(alias="expiresOn")
+    created_on: datetime = Field(description="The backup creation date.", alias="createdOn")
+    expires_on: datetime = Field(description="The backup expiration date.", alias="expiresOn")
     __properties: ClassVar[List[str]] = ["id", "fileName", "storageType", "createdOn", "expiresOn"]
 
     model_config = ConfigDict(

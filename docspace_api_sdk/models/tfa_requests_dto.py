@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,6 +23,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from uuid import UUID
 from docspace_api_sdk.models.tfa_requests_dto_type import TfaRequestsDtoType
 from typing import Optional, Set
 from typing_extensions import Self
@@ -32,10 +33,10 @@ class TfaRequestsDto(BaseModel):
     The request parameters for configuring the Two-Factor Authentication (TFA) settings.
     """ # noqa: E501
     type: Optional[TfaRequestsDtoType] = None
-    id: Optional[StrictStr] = Field(default=None, description="The ID of the user for whom the TFA settings are being configured.")
+    id: Optional[UUID] = Field(default=None, description="The ID of the user for whom the TFA settings are being configured.")
     trusted_ips: Optional[List[StrictStr]] = Field(default=None, description="The list of IP addresses that bypass TFA verification.", alias="trustedIps")
-    mandatory_users: Optional[List[StrictStr]] = Field(default=None, description="The list of user IDs for whom TFA is mandatory.", alias="mandatoryUsers")
-    mandatory_groups: Optional[List[StrictStr]] = Field(default=None, description="The list group IDs whose members must use TFA.", alias="mandatoryGroups")
+    mandatory_users: Optional[List[UUID]] = Field(default=None, description="The list of user IDs for whom TFA is mandatory.", alias="mandatoryUsers")
+    mandatory_groups: Optional[List[UUID]] = Field(default=None, description="The list group IDs whose members must use TFA.", alias="mandatoryGroups")
     __properties: ClassVar[List[str]] = ["type", "id", "trustedIps", "mandatoryUsers", "mandatoryGroups"]
 
     model_config = ConfigDict(

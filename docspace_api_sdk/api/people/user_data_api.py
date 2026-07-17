@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,9 +21,10 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictStr
+from pydantic import Field
 from typing import Optional
 from typing_extensions import Annotated
+from uuid import UUID
 from docspace_api_sdk.models.boolean_wrapper import BooleanWrapper
 from docspace_api_sdk.models.employee_type import EmployeeType
 from docspace_api_sdk.models.start_reassign_request_dto import StartReassignRequestDto
@@ -47,7 +48,6 @@ class UserDataApi:
         if api_client is None:
             api_client = ApiClient.get_default()
         self.api_client = api_client
-
 
 
 
@@ -103,6 +103,9 @@ class UserDataApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TaskProgressResponseWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -167,6 +170,9 @@ class UserDataApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TaskProgressResponseWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -231,6 +237,9 @@ class UserDataApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TaskProgressResponseWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -311,7 +320,7 @@ class UserDataApi:
     @validate_call
     def get_reassign_progress(
         self,
-        userid: Annotated[StrictStr, Field(description="The user ID.")],
+        userid: Annotated[UUID, Field(description="The user ID.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -330,7 +339,7 @@ class UserDataApi:
         Returns the progress of the started data reassignment for the user with the ID specified in the request.
 
         :param userid: The user ID. (required)
-        :type userid: str
+        :type userid: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -364,6 +373,9 @@ class UserDataApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TaskProgressResponseWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -379,7 +391,7 @@ class UserDataApi:
     @validate_call
     def get_reassign_progress_with_http_info(
         self,
-        userid: Annotated[StrictStr, Field(description="The user ID.")],
+        userid: Annotated[UUID, Field(description="The user ID.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -398,7 +410,7 @@ class UserDataApi:
         Returns the progress of the started data reassignment for the user with the ID specified in the request.
 
         :param userid: The user ID. (required)
-        :type userid: str
+        :type userid: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -432,6 +444,9 @@ class UserDataApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TaskProgressResponseWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -447,7 +462,7 @@ class UserDataApi:
     @validate_call
     def get_reassign_progress_without_preload_content(
         self,
-        userid: Annotated[StrictStr, Field(description="The user ID.")],
+        userid: Annotated[UUID, Field(description="The user ID.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -466,7 +481,7 @@ class UserDataApi:
         Returns the progress of the started data reassignment for the user with the ID specified in the request.
 
         :param userid: The user ID. (required)
-        :type userid: str
+        :type userid: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -500,6 +515,9 @@ class UserDataApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TaskProgressResponseWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -583,7 +601,7 @@ class UserDataApi:
     @validate_call
     def get_remove_progress(
         self,
-        userid: Annotated[StrictStr, Field(description="The user ID.")],
+        userid: Annotated[UUID, Field(description="The user ID.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -602,7 +620,7 @@ class UserDataApi:
         Returns the progress of the started data deletion for the user with the ID specified in the request.
 
         :param userid: The user ID. (required)
-        :type userid: str
+        :type userid: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -636,6 +654,9 @@ class UserDataApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TaskProgressResponseWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -651,7 +672,7 @@ class UserDataApi:
     @validate_call
     def get_remove_progress_with_http_info(
         self,
-        userid: Annotated[StrictStr, Field(description="The user ID.")],
+        userid: Annotated[UUID, Field(description="The user ID.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -670,7 +691,7 @@ class UserDataApi:
         Returns the progress of the started data deletion for the user with the ID specified in the request.
 
         :param userid: The user ID. (required)
-        :type userid: str
+        :type userid: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -704,6 +725,9 @@ class UserDataApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TaskProgressResponseWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -719,7 +743,7 @@ class UserDataApi:
     @validate_call
     def get_remove_progress_without_preload_content(
         self,
-        userid: Annotated[StrictStr, Field(description="The user ID.")],
+        userid: Annotated[UUID, Field(description="The user ID.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -738,7 +762,7 @@ class UserDataApi:
         Returns the progress of the started data deletion for the user with the ID specified in the request.
 
         :param userid: The user ID. (required)
-        :type userid: str
+        :type userid: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -772,6 +796,9 @@ class UserDataApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TaskProgressResponseWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -855,7 +882,7 @@ class UserDataApi:
     @validate_call
     def necessary_reassign(
         self,
-        user_id: Annotated[Optional[StrictStr], Field(description="The user ID.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="The user ID.")] = None,
         type: Annotated[Optional[EmployeeType], Field(description="The expected user type.")] = None,
         _request_timeout: Union[
             None,
@@ -875,7 +902,7 @@ class UserDataApi:
         Checks whether the reassignment of rooms and shared files is required.
 
         :param user_id: The user ID.
-        :type user_id: str
+        :type user_id: UUID
         :param type: The expected user type.
         :type type: EmployeeType
         :param _request_timeout: timeout setting for this request. If one
@@ -912,6 +939,9 @@ class UserDataApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -927,7 +957,7 @@ class UserDataApi:
     @validate_call
     def necessary_reassign_with_http_info(
         self,
-        user_id: Annotated[Optional[StrictStr], Field(description="The user ID.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="The user ID.")] = None,
         type: Annotated[Optional[EmployeeType], Field(description="The expected user type.")] = None,
         _request_timeout: Union[
             None,
@@ -947,7 +977,7 @@ class UserDataApi:
         Checks whether the reassignment of rooms and shared files is required.
 
         :param user_id: The user ID.
-        :type user_id: str
+        :type user_id: UUID
         :param type: The expected user type.
         :type type: EmployeeType
         :param _request_timeout: timeout setting for this request. If one
@@ -984,6 +1014,9 @@ class UserDataApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -999,7 +1032,7 @@ class UserDataApi:
     @validate_call
     def necessary_reassign_without_preload_content(
         self,
-        user_id: Annotated[Optional[StrictStr], Field(description="The user ID.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="The user ID.")] = None,
         type: Annotated[Optional[EmployeeType], Field(description="The expected user type.")] = None,
         _request_timeout: Union[
             None,
@@ -1019,7 +1052,7 @@ class UserDataApi:
         Checks whether the reassignment of rooms and shared files is required.
 
         :param user_id: The user ID.
-        :type user_id: str
+        :type user_id: UUID
         :param type: The expected user type.
         :type type: EmployeeType
         :param _request_timeout: timeout setting for this request. If one
@@ -1056,6 +1089,9 @@ class UserDataApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1194,8 +1230,11 @@ class UserDataApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
-            '401': None,
             '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1259,8 +1298,11 @@ class UserDataApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
-            '401': None,
             '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1324,8 +1366,11 @@ class UserDataApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
-            '401': None,
             '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1456,6 +1501,9 @@ class UserDataApi:
             '200': "TaskProgressResponseWrapper",
             '400': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1521,6 +1569,9 @@ class UserDataApi:
             '200': "TaskProgressResponseWrapper",
             '400': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1586,6 +1637,9 @@ class UserDataApi:
             '200': "TaskProgressResponseWrapper",
             '400': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1720,6 +1774,9 @@ class UserDataApi:
             '200': "TaskProgressResponseWrapper",
             '400': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1789,6 +1846,9 @@ class UserDataApi:
             '200': "TaskProgressResponseWrapper",
             '400': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1858,6 +1918,9 @@ class UserDataApi:
             '200': "TaskProgressResponseWrapper",
             '400': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2007,9 +2070,12 @@ class UserDataApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TaskProgressResponseWrapper",
             '400': None,
-            '401': None,
             '403': None,
             '404': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2078,9 +2144,12 @@ class UserDataApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TaskProgressResponseWrapper",
             '400': None,
-            '401': None,
             '403': None,
             '404': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2149,9 +2218,12 @@ class UserDataApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TaskProgressResponseWrapper",
             '400': None,
-            '401': None,
             '403': None,
             '404': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2301,6 +2373,9 @@ class UserDataApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TaskProgressResponseWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2369,6 +2444,9 @@ class UserDataApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TaskProgressResponseWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2437,6 +2515,9 @@ class UserDataApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TaskProgressResponseWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2586,6 +2667,9 @@ class UserDataApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2654,6 +2738,9 @@ class UserDataApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2722,6 +2809,9 @@ class UserDataApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,

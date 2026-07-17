@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **utc_offset** | **str** | The UTC offset in the TimeSpan format. | [optional] 
 **utc_hours_offset** | **float** | The UTC offset in hours. | [optional] 
 **greeting_settings** | **str** | The greeting settings. | [optional] 
-**owner_id** | **str** | The owner ID. | [optional] 
+**owner_id** | **UUID** | The owner ID. | [optional] 
 **name_schema_id** | **str** | The team template ID. | [optional] 
 **enabled_join** | **bool** | Specifies if a user can join the portal or not. | [optional] 
 **enable_adm_mess** | **bool** | Specifies if a user can send a message to the administrator when accessing the DocSpace portal or not. | [optional] 
@@ -39,6 +39,7 @@ Name | Type | Description | Notes
 **limited_access_space** | **bool** | Specifies whether the access to the space management is limited or not. | [optional] 
 **limited_access_dev_tools_for_users** | **bool** | Specifies whether the access to the Developer Tools is limited for users or not. | [optional] 
 **display_banners** | **bool** | Specifies whether to display the promotional banners. | [optional] 
+**ai_enabled** | **bool** | Specifies whether AI functionality (chat, agents, vectorization) is enabled for the current tenant.  When `false`, all AI features are disabled and the AI Agents folder is hidden. | [optional] 
 **user_name_regex** | **str** | The user name validation regex. | [optional] 
 **invitation_limit** | **int** | The maximum number of invitations to the portal. | [optional] 
 **plugins** | [**PluginsDto**](PluginsDto.md) |  | [optional] 
@@ -47,6 +48,8 @@ Name | Type | Description | Notes
 **max_image_upload_size** | **int** | The maximum image upload size. | [optional] 
 **logo_text** | **str** | The white label logo text. | [optional] 
 **external_resources** | [**CultureSpecificExternalResources**](CultureSpecificExternalResources.md) |  | [optional] 
+**default_folder_type** | [**FolderType**](FolderType.md) |  | [optional] 
+**external_db_enabled** | **bool** | Specifies if an external database is connected for storing form results. | [optional] 
 
 ## Example
 

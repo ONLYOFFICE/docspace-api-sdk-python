@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **owned_by** | [**EmployeeDto**](EmployeeDto.md) |  | [optional] 
 **shared** | **bool** | Specifies if the file entry is shared via link or not. | [optional] 
 **shared_for_user** | **bool** | Specifies if the file entry is shared for user or not. | [optional] 
+**shared_external** | **bool** | Specifies if the file entry is shared via a public (non-internal) external link. | [optional] 
 **parent_shared** | **bool** | Indicates whether the parent entity is shared. | [optional] 
 **short_web_url** | **str** | The short Web URL. | [optional] 
 **created** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] 
@@ -62,8 +63,11 @@ Name | Type | Description | Notes
 **used_space** | **int** | How much folder space is used (counter). | [optional] 
 **password_protected** | **bool** | Specifies if the folder is password protected or not. | [optional] 
 **expired** | **bool** | Specifies if an external link to the folder is expired or not. | [optional] 
-**chat_settings** | [**ChatSettings**](ChatSettings.md) |  | [optional] 
+**chat_settings** | [**ChatSettingsDto**](ChatSettingsDto.md) |  | [optional] 
 **root_room_type** | [**RoomType**](RoomType.md) |  | [optional] 
+**save_form_as_xlsx** | **bool** | Specifies whether to save form data as XLSX file. | [optional] 
+**send_form_to_external_db** | **bool** | Specifies whether to send form data to external database. | [optional] 
+**original_form_id** | **int** | The original form ID that corresponds to this FormFillingFolderDone folder. | [optional] 
 
 ## Example
 

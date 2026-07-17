@@ -6,7 +6,6 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **module** | **str** |  | [optional] 
 **props** | **Dict[str, Optional[str]]** |  | [optional] 
-**id** | **str** |  | [optional] [readonly] 
 **last_modified** | **datetime** |  | [optional] 
 
 ## Example

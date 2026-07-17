@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -42,8 +42,8 @@ class TenantWalletServiceSettings(BaseModel):
             return value
 
         for i in value:
-            if i not in set([-14, -13, -12, -11]):
-                raise ValueError("each list item must be one of (-14, -13, -12, -11)")
+            if i not in set([-13, -12, -11]):
+                raise ValueError("each list item must be one of (-13, -12, -11)")
         return value
 
     model_config = ConfigDict(

@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -30,7 +30,7 @@ class WebhookGroupStatus(int, Enum):
     """
     allowed enum values
     """
-    _None = 0
+    None_ = 0
     NotSent = 1
     Status2xx = 2
     Status3xx = 4
@@ -41,5 +41,4 @@ class WebhookGroupStatus(int, Enum):
     def from_json(cls, json_str: str) -> Self:
         """Create an instance of WebhookGroupStatus from a JSON string"""
         return cls(json.loads(json_str))
-
 

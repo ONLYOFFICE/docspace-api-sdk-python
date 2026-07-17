@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,6 +23,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from uuid import UUID
 from docspace_api_sdk.models.confirm_type import ConfirmType
 from docspace_api_sdk.models.employee_type import EmployeeType
 from typing import Optional, Set
@@ -36,7 +37,7 @@ class EmailValidationKeyModel(BaseModel):
     empl_type: Optional[EmployeeType] = Field(default=None, alias="emplType")
     email: Optional[StrictStr] = Field(default=None, description="The email address.")
     enc_email: Optional[StrictStr] = Field(default=None, description="The encrypted email address.", alias="encEmail")
-    ui_d: Optional[StrictStr] = Field(default=None, description="The user ID.", alias="uiD")
+    ui_d: Optional[UUID] = Field(default=None, description="The user ID.", alias="uiD")
     type: Optional[ConfirmType] = None
     first: Optional[StrictStr] = Field(default=None, description="Specifies whether it is the first time account access or not.")
     room_id: Optional[StrictStr] = Field(default=None, description="The room ID.", alias="roomId")

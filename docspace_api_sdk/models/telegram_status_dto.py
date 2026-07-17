@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from docspace_api_sdk.models.reg_status import RegStatus
 from typing import Optional, Set
@@ -29,10 +29,10 @@ from typing_extensions import Self
 
 class TelegramStatusDto(BaseModel):
     """
-    TelegramStatusDto
+    The Telegram connection status parameters.
     """ # noqa: E501
     status: RegStatus
-    username: Optional[StrictStr] = None
+    username: Optional[StrictStr] = Field(default=None, description="The Telegram username.")
     __properties: ClassVar[List[str]] = ["status", "username"]
 
     model_config = ConfigDict(

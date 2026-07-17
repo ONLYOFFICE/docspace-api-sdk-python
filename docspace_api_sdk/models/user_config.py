@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -34,7 +34,7 @@ class UserConfig(BaseModel):
     name: Optional[StrictStr] = Field(default=None, description="The full name of the user.")
     image: Optional[StrictStr] = Field(default=None, description="The path to the user's avatar.")
     roles: Optional[List[StrictStr]] = Field(default=None, description="Roles")
-    customer_id: Optional[StrictStr] = Field(default=None, alias="customerId")
+    customer_id: Optional[StrictStr] = Field(default=None, description="Customer identifier associated with the user.", alias="customerId")
     __properties: ClassVar[List[str]] = ["id", "name", "image", "roles", "customerId"]
 
     model_config = ConfigDict(

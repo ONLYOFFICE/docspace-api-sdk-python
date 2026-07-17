@@ -5,9 +5,8 @@ The user parameters.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** | The user ID. | [optional] 
-**display_name** | **str** | The user display name. | [optional] 
-**title** | **str** | The user title. | [optional] 
+**id** | **UUID** | The user ID. | [optional] 
+**display_name** | **str** | The HTML-encoded user's display name formatted according to the default format for the current culture. | [optional] 
 **avatar** | **str** | The user avatar. | [optional] 
 **avatar_original** | **str** | The user original size avatar. | [optional] 
 **avatar_max** | **str** | The user maximum size avatar. | [optional] 

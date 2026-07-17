@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -26,17 +26,19 @@ from docspace_api_sdk.models.delete_folder import DeleteFolder
 from docspace_api_sdk.models.backup_dto import BackupDto
 from docspace_api_sdk.models.backup_storage_type import BackupStorageType
 from docspace_api_sdk.models.sorted_by_type import SortedByType
+from docspace_api_sdk.models.sort_order import SortOrder
 import time
 
 def main():
     config = Configuration()
     config.host = "https://your-docspace.onlyoffice.com"
+    
     with ApiClient(config) as api_client:
         auth_instance = AuthenticationApi(api_client)
         
         auth_request_data = AuthRequestsDto()
-        auth_request_data.password = "11111111"
-        auth_request_data.user_name = "example@onlyoffice.com"
+        auth_request_data.password = ""
+        auth_request_data.user_name = ""
         
         try:
             auth_response = auth_instance.authenticate_me(auth_request_data)
@@ -66,7 +68,7 @@ def main():
             print(deleteFolder.status_code)
 
             room_instance = RoomsApi(api_client)
-            getRoom = room_instance.with_fields("current.security,folders.id").get_rooms_folder(None, None, 0, None, None, None, None, None, None, None, 100, None, "DateAndTime", 1, None, _headers=custom_headers)
+            getRoom = room_instance.with_fields("current.security,folders.id").get_rooms_folder(count=100, sort_by="DateAndTime", sort_order=SortOrder.Descending, _headers=custom_headers)
             print(getRoom.status_code)
 
             backup_instanse = BackupApi(api_client)

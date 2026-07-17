@@ -6,7 +6,7 @@ The Firebase user parameters.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **int** | The Firebase user ID. | [optional] 
-**user_id** | **str** | The user ID. | [optional] 
+**user_id** | **UUID** | The user ID. | [optional] 
 **tenant_id** | **int** | The tenant ID. | [optional] 
 **firebase_device_token** | **str** | The Firebase device token. | [optional] 
 **application** | **str** | The Firebase application. | [optional] 

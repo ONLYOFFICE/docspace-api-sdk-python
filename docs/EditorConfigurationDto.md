@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 **plugins** | [**PluginsConfig**](PluginsConfig.md) |  | [optional] 
 **recent** | [**List[RecentConfig]**](RecentConfig.md) | The recent configuration of the editor. | [optional] 
 **templates** | [**List[TemplatesConfig]**](TemplatesConfig.md) | The templates of the editor configuration. | [optional] 
-**user** | [**UserConfig**](UserConfig.md) |  | 
+**user** | [**UserConfig**](UserConfig.md) |  | [optional] 
 
 ## Example
 

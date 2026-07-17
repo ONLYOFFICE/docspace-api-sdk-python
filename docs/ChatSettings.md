@@ -1,12 +1,14 @@
 # ChatSettings
+The chat settings.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**provider_id** | **int** |  | [optional] 
-**model_id** | **str** |  | [optional] 
-**prompt** | **str** |  | [optional] 
+**provider_id** | **int** | The provider ID. | [optional] 
+**model_id** | **str** | The model ID. | [optional] 
+**prompt** | **str** | The prompt. | [optional] 
+**internal** | **bool** | Specifies whether the provider is internal or not. | [optional] [readonly] 
 
 ## Example
 

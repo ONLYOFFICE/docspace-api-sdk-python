@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,9 +22,10 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
+from uuid import UUID
 from docspace_api_sdk.models.db_tenant_partner import DbTenantPartner
 from docspace_api_sdk.models.tenant_industry import TenantIndustry
 from docspace_api_sdk.models.tenant_status import TenantStatus
@@ -51,7 +52,7 @@ class DbTenant(BaseModel):
     status_changed: Optional[datetime] = Field(default=None, description="The date and time when the tenant status was changed.", alias="statusChanged")
     status_changed_hack: Optional[datetime] = Field(default=None, description="The hacked date and time when the tenant status was changed.", alias="statusChangedHack")
     creation_date_time: Optional[datetime] = Field(default=None, description="The tenant creation date.", alias="creationDateTime")
-    owner_id: Optional[StrictStr] = Field(default=None, description="The tenant owner ID.", alias="ownerId")
+    owner_id: Optional[UUID] = Field(default=None, description="The tenant owner ID.", alias="ownerId")
     payment_id: Optional[Annotated[str, Field(strict=True, max_length=38)]] = Field(default=None, description="The tenant payment ID.", alias="paymentId")
     industry: Optional[TenantIndustry] = None
     last_modified: Optional[datetime] = Field(default=None, description="The date and time when the tenant was last modified.", alias="lastModified")

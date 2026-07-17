@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -31,14 +31,14 @@ from typing_extensions import Self
 
 class ScheduleDto(BaseModel):
     """
-    ScheduleDto
+    The backup schedule parameters.
     """ # noqa: E501
     storage_type: BackupStorageType = Field(alias="storageType")
-    storage_params: Optional[Dict[str, Optional[StrictStr]]] = Field(alias="storageParams")
+    storage_params: Optional[Dict[str, Optional[StrictStr]]] = Field(description="The backup storage parameters.", alias="storageParams")
     cron_params: CronParams = Field(alias="cronParams")
-    backups_stored: Optional[StrictInt] = Field(default=None, alias="backupsStored")
-    last_backup_time: datetime = Field(alias="lastBackupTime")
-    dump: StrictBool
+    backups_stored: Optional[StrictInt] = Field(default=None, description="The maximum number of the stored backup copies.", alias="backupsStored")
+    last_backup_time: datetime = Field(description="The date and time when the last backup was reated.", alias="lastBackupTime")
+    dump: StrictBool = Field(description="Specifies if a dump will be created or not.")
     __properties: ClassVar[List[str]] = ["storageType", "storageParams", "cronParams", "backupsStored", "lastBackupTime", "dump"]
 
     model_config = ConfigDict(

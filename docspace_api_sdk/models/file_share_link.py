@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,8 +21,9 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from uuid import UUID
 from docspace_api_sdk.models.api_date_time import ApiDateTime
 from docspace_api_sdk.models.link_type import LinkType
 from typing import Optional, Set
@@ -32,7 +33,7 @@ class FileShareLink(BaseModel):
     """
     A shareable link for a file with its configuration and status.
     """ # noqa: E501
-    id: Optional[StrictStr] = Field(default=None, description="The unique identifier of the shared link.")
+    id: Optional[UUID] = Field(default=None, description="The unique identifier of the shared link.")
     title: Optional[StrictStr] = Field(default=None, description="The title of the shared content.")
     share_link: Optional[StrictStr] = Field(default=None, description="The URL for accessing the shared content.", alias="shareLink")
     expiration_date: Optional[ApiDateTime] = Field(default=None, alias="expirationDate")
@@ -43,7 +44,9 @@ class FileShareLink(BaseModel):
     primary: Optional[StrictBool] = Field(default=None, description="Indicates whether this is the primary shared link.")
     internal: Optional[StrictBool] = Field(default=None, description="Indicates whether the link is for the internal sharing only.")
     request_token: Optional[StrictStr] = Field(default=None, description="The token for validating access requests.", alias="requestToken")
-    __properties: ClassVar[List[str]] = ["id", "title", "shareLink", "expirationDate", "linkType", "password", "denyDownload", "isExpired", "primary", "internal", "requestToken"]
+    max_use_count: Optional[StrictInt] = Field(default=None, description="The maximum number of times the invitation link can be used.", alias="maxUseCount")
+    current_use_count: Optional[StrictInt] = Field(default=None, description="The current number of times the invitation link has been used.", alias="currentUseCount")
+    __properties: ClassVar[List[str]] = ["id", "title", "shareLink", "expirationDate", "linkType", "password", "denyDownload", "isExpired", "primary", "internal", "requestToken", "maxUseCount", "currentUseCount"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -122,6 +125,16 @@ class FileShareLink(BaseModel):
         if self.request_token is None and "request_token" in self.model_fields_set:
             _dict['requestToken'] = None
 
+        # set to None if max_use_count (nullable) is None
+        # and model_fields_set contains the field
+        if self.max_use_count is None and "max_use_count" in self.model_fields_set:
+            _dict['maxUseCount'] = None
+
+        # set to None if current_use_count (nullable) is None
+        # and model_fields_set contains the field
+        if self.current_use_count is None and "current_use_count" in self.model_fields_set:
+            _dict['currentUseCount'] = None
+
         return _dict
 
     @classmethod
@@ -145,7 +158,9 @@ class FileShareLink(BaseModel):
             "isExpired": obj.get("isExpired"),
             "primary": obj.get("primary"),
             "internal": obj.get("internal"),
-            "requestToken": obj.get("requestToken")
+            "requestToken": obj.get("requestToken"),
+            "maxUseCount": obj.get("maxUseCount"),
+            "currentUseCount": obj.get("currentUseCount")
         })
         return _obj
 

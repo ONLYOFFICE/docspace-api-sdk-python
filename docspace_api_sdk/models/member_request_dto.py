@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,10 +24,9 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
-from docspace_api_sdk.models.api_date_time import ApiDateTime
+from uuid import UUID
 from docspace_api_sdk.models.contact import Contact
 from docspace_api_sdk.models.employee_type import EmployeeType
-from docspace_api_sdk.models.sex_enum import SexEnum
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -42,21 +41,17 @@ class MemberRequestDto(BaseModel):
     is_user: Optional[StrictBool] = Field(default=None, description="Specifies if this is a guest or a user.", alias="isUser")
     first_name: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The user first name.", alias="firstName")
     last_name: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The user last name.", alias="lastName")
-    department: Optional[List[StrictStr]] = Field(default=None, description="The list of the user departments IDs.")
-    title: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The user title.")
+    department: Optional[List[UUID]] = Field(default=None, description="The list of the user departments IDs.")
     location: Optional[StrictStr] = Field(default=None, description="The user location.")
-    sex: Optional[SexEnum] = None
-    birthday: Optional[ApiDateTime] = None
-    worksfrom: Optional[ApiDateTime] = None
     comment: Optional[StrictStr] = Field(default=None, description="The user comment.")
     contacts: Optional[List[Contact]] = Field(default=None, description="The list of the user contacts.")
     files: Optional[StrictStr] = Field(default=None, description="The avatar photo URL.")
     from_invite_link: Optional[StrictBool] = Field(default=None, description="Specifies if the user is added via the invitation link or not.", alias="fromInviteLink")
     key: Optional[StrictStr] = Field(default=None, description="The user key.")
     culture_name: Optional[StrictStr] = Field(default=None, description="The user culture code.", alias="cultureName")
-    target: Optional[StrictStr] = Field(default=None, description="The user target ID.")
+    target: Optional[UUID] = Field(default=None, description="The user target ID.")
     spam: Optional[StrictBool] = Field(default=None, description="Specifies if tips, updates and offers are allowed to be sent to the user or not.")
-    __properties: ClassVar[List[str]] = ["password", "passwordHash", "email", "type", "isUser", "firstName", "lastName", "department", "title", "location", "sex", "birthday", "worksfrom", "comment", "contacts", "files", "fromInviteLink", "key", "cultureName", "target", "spam"]
+    __properties: ClassVar[List[str]] = ["password", "passwordHash", "email", "type", "isUser", "firstName", "lastName", "department", "location", "comment", "contacts", "files", "fromInviteLink", "key", "cultureName", "target", "spam"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -97,12 +92,6 @@ class MemberRequestDto(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of birthday
-        if self.birthday:
-            _dict['birthday'] = self.birthday.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of worksfrom
-        if self.worksfrom:
-            _dict['worksfrom'] = self.worksfrom.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in contacts (list)
         _items = []
         if self.contacts:
@@ -144,11 +133,6 @@ class MemberRequestDto(BaseModel):
         # and model_fields_set contains the field
         if self.department is None and "department" in self.model_fields_set:
             _dict['department'] = None
-
-        # set to None if title (nullable) is None
-        # and model_fields_set contains the field
-        if self.title is None and "title" in self.model_fields_set:
-            _dict['title'] = None
 
         # set to None if location (nullable) is None
         # and model_fields_set contains the field
@@ -206,11 +190,7 @@ class MemberRequestDto(BaseModel):
             "firstName": obj.get("firstName"),
             "lastName": obj.get("lastName"),
             "department": obj.get("department"),
-            "title": obj.get("title"),
             "location": obj.get("location"),
-            "sex": obj.get("sex"),
-            "birthday": ApiDateTime.from_dict(obj["birthday"]) if obj.get("birthday") is not None else None,
-            "worksfrom": ApiDateTime.from_dict(obj["worksfrom"]) if obj.get("worksfrom") is not None else None,
             "comment": obj.get("comment"),
             "contacts": [Contact.from_dict(_item) for _item in obj["contacts"]] if obj.get("contacts") is not None else None,
             "files": obj.get("files"),

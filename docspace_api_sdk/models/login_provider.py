@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,7 +24,7 @@ from typing_extensions import Self
 
 class LoginProvider(int, Enum):
     """
-    [0 - Facebook, 1 - Google, 2 - Dropbox, 3 - Docusign, 4 - Box, 5 - OneDrive, 6 - GosUslugi, 7 - LinkedIn, 8 - MailRu, 9 - VK, 10 - Wordpress, 11 - Yahoo, 12 - Yandex, 13 - Github]
+    [0 - Facebook, 1 - Google, 2 - Dropbox, 3 - Docusign, 4 - Box, 5 - OneDrive, 6 - GosUslugi, 7 - LinkedIn, 8 - MailRu, 9 - VK, 10 - Wordpress, 11 - Yahoo, 12 - Yandex, 13 - Github, 14 - Nextcloud]
     """
 
     """
@@ -44,10 +44,10 @@ class LoginProvider(int, Enum):
     Yahoo = 11
     Yandex = 12
     Github = 13
+    Nextcloud = 14
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:
         """Create an instance of LoginProvider from a JSON string"""
         return cls(json.loads(json_str))
-
 

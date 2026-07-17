@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,6 +24,7 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
+from uuid import UUID
 from docspace_api_sdk.models.logo_request import LogoRequest
 from typing import Optional, Set
 from typing_extensions import Self
@@ -37,7 +38,7 @@ class RoomTemplateDto(BaseModel):
     logo: Optional[LogoRequest] = None
     copy_logo: Optional[StrictBool] = Field(default=None, description="Specifies whether to copy room logo or not.", alias="copyLogo")
     share: Optional[List[StrictStr]] = Field(default=None, description="The collection of email addresses of users with whom to share a room.")
-    groups: Optional[List[StrictStr]] = Field(default=None, description="The collection of groups with whom to share a room.")
+    groups: Optional[List[UUID]] = Field(default=None, description="The collection of groups with whom to share a room.")
     public: Optional[StrictBool] = Field(default=None, description="Specifies whether the room template is public or not.")
     tags: Optional[List[StrictStr]] = Field(default=None, description="The collection of tags.")
     color: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=6)]] = Field(default=None, description="The color of the room template.")

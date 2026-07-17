@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,6 +24,7 @@ import json
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from uuid import UUID
 from docspace_api_sdk.models.employee_activation_status import EmployeeActivationStatus
 from docspace_api_sdk.models.employee_status import EmployeeStatus
 from docspace_api_sdk.models.mobile_phone_activation_status import MobilePhoneActivationStatus
@@ -34,9 +35,9 @@ class UserInfo(BaseModel):
     """
     The user information.
     """ # noqa: E501
-    id: Optional[StrictStr] = Field(default=None, description="The user ID.")
-    first_name: Optional[StrictStr] = Field(default=None, description="The user first name.", alias="firstName")
-    last_name: Optional[StrictStr] = Field(default=None, description="The user last name.", alias="lastName")
+    id: Optional[UUID] = Field(default=None, description="The user ID.")
+    first_name: Optional[StrictStr] = Field(default=None, description="The user's first name.", alias="firstName")
+    last_name: Optional[StrictStr] = Field(default=None, description="The user's last name.", alias="lastName")
     user_name: Optional[StrictStr] = Field(default=None, description="The user username.", alias="userName")
     birth_date: Optional[datetime] = Field(default=None, description="The user birthday.", alias="birthDate")
     sex: Optional[StrictBool] = Field(default=None, description="The user sex (male or female).")
@@ -57,14 +58,14 @@ class UserInfo(BaseModel):
     culture_name: Optional[StrictStr] = Field(default=None, description="The user culture code.", alias="cultureName")
     mobile_phone: Optional[StrictStr] = Field(default=None, description="The user mobile phone.", alias="mobilePhone")
     mobile_phone_activation_status: Optional[MobilePhoneActivationStatus] = Field(default=None, alias="mobilePhoneActivationStatus")
-    sid: Optional[StrictStr] = Field(default=None, description="The LDAP user identificator.")
+    sid: Optional[StrictStr] = Field(default=None, description="The LDAP user identifier.")
     ldap_qouta: Optional[StrictInt] = Field(default=None, description="The LDAP user quota attribute.", alias="ldapQouta")
-    sso_name_id: Optional[StrictStr] = Field(default=None, description="The SSO SAML user identificator.", alias="ssoNameId")
-    sso_session_id: Optional[StrictStr] = Field(default=None, description="The SSO SAML user session identificator.", alias="ssoSessionId")
+    sso_name_id: Optional[StrictStr] = Field(default=None, description="The SSO SAML user identifier.", alias="ssoNameId")
+    sso_session_id: Optional[StrictStr] = Field(default=None, description="The SSO SAML user session identifier.", alias="ssoSessionId")
     create_date: Optional[datetime] = Field(default=None, description="The date and time when the user account was created.", alias="createDate")
-    created_by: Optional[StrictStr] = Field(default=None, description="The ID of the user who created the current user account.", alias="createdBy")
+    created_by: Optional[UUID] = Field(default=None, description="The ID of the user who created the current user account.", alias="createdBy")
     spam: Optional[StrictBool] = Field(default=None, description="Specifies if tips, updates and offers are allowed to be sent to the user or not.")
-    check_activation: Optional[StrictBool] = Field(default=None, alias="checkActivation")
+    check_activation: Optional[StrictBool] = Field(default=None, description="Indicates whether the activation status of the employee or recipient is unchecked or inactive.  Depending on the context, this property evaluates the activation or eligibility status accordingly.", alias="checkActivation")
     __properties: ClassVar[List[str]] = ["id", "firstName", "lastName", "userName", "birthDate", "sex", "status", "activationStatus", "terminatedDate", "title", "workFromDate", "email", "contacts", "contactsList", "location", "notes", "removed", "lastModified", "tenantId", "isActive", "cultureName", "mobilePhone", "mobilePhoneActivationStatus", "sid", "ldapQouta", "ssoNameId", "ssoSessionId", "createDate", "createdBy", "spam", "checkActivation"]
 
     model_config = ConfigDict(

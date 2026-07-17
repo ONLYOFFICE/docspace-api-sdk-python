@@ -6,6 +6,7 @@ The request parameters for validating the two-factor authentication codes.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **code** | **str** | The verification code provided by the user. | 
+**session** | **bool** | Specifies whether the authentication is session-based. | [optional] 
 
 ## Example
 

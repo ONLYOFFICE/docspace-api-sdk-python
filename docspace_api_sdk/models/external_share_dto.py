@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,6 +23,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from uuid import UUID
 from docspace_api_sdk.models.file_entry_type import FileEntryType
 from docspace_api_sdk.models.status import Status
 from typing import Optional, Set
@@ -33,8 +34,8 @@ class ExternalShareDto(BaseModel):
     The external sharing information and validation data.
     """ # noqa: E501
     status: Status
-    id: Optional[StrictStr] = Field(description="The external data ID.")
-    title: Optional[StrictStr] = Field(description="The external data title.")
+    id: Optional[StrictStr] = Field(default=None, description="The external data ID.")
+    title: Optional[StrictStr] = Field(default=None, description="The external data title.")
     type: Optional[FileEntryType] = None
     tenant_id: StrictInt = Field(description="The tenant ID.", alias="tenantId")
     entity_id: Optional[StrictStr] = Field(default=None, description="The unique identifier of the shared entity.", alias="entityId")
@@ -42,7 +43,7 @@ class ExternalShareDto(BaseModel):
     entity_type: Optional[FileEntryType] = Field(default=None, alias="entityType")
     is_room: Optional[StrictBool] = Field(default=None, description="Indicates whether the entity represents a room.", alias="isRoom")
     shared: StrictBool = Field(description="Specifies whether to share the external data or not.")
-    link_id: StrictStr = Field(description="The link ID of the external data.", alias="linkId")
+    link_id: UUID = Field(description="The link ID of the external data.", alias="linkId")
     is_authenticated: StrictBool = Field(description="Specifies whether the user is authenticated or not.", alias="isAuthenticated")
     is_room_member: Optional[StrictBool] = Field(default=None, description="The room ID of the external data.", alias="isRoomMember")
     __properties: ClassVar[List[str]] = ["status", "id", "title", "type", "tenantId", "entityId", "entityTitle", "entityType", "isRoom", "shared", "linkId", "isAuthenticated", "isRoomMember"]

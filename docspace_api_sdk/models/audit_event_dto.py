@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,6 +23,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from uuid import UUID
 from docspace_api_sdk.models.action_type import ActionType
 from docspace_api_sdk.models.api_date_time import ApiDateTime
 from docspace_api_sdk.models.entry_type import EntryType
@@ -39,7 +40,7 @@ class AuditEventDto(BaseModel):
     id: Optional[StrictInt] = Field(default=None, description="The audit event ID.")
     var_date: Optional[ApiDateTime] = Field(default=None, alias="date")
     user: Optional[StrictStr] = Field(default=None, description="The name of the user who triggered the audit event.")
-    user_id: Optional[StrictStr] = Field(default=None, description="The ID of the user who triggered the audit event.", alias="userId")
+    user_id: Optional[UUID] = Field(default=None, description="The ID of the user who triggered the audit event.", alias="userId")
     action: Optional[StrictStr] = Field(default=None, description="The audit event action.")
     action_id: Optional[MessageAction] = Field(default=None, alias="actionId")
     ip: Optional[StrictStr] = Field(default=None, description="The audit event IP.")

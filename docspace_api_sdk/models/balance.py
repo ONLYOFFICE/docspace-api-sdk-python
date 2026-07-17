@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,9 +21,10 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from docspace_api_sdk.models.sub_account import SubAccount
+from docspace_api_sdk.models.transaction_info import TransactionInfo
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -32,8 +33,12 @@ class Balance(BaseModel):
     Represents a balance with an account number and a list of sub-accounts.
     """ # noqa: E501
     account_number: Optional[StrictInt] = Field(default=None, description="The account number.", alias="accountNumber")
+    sub_account_number: Optional[StrictInt] = Field(default=None, description="The sub-account number.", alias="subAccountNumber")
+    account_name: Optional[StrictStr] = Field(default=None, description="The account name.", alias="accountName")
+    account_currency: Optional[StrictStr] = Field(default=None, description="The account currency.", alias="accountCurrency")
     sub_accounts: Optional[List[SubAccount]] = Field(default=None, description="A list of sub-accounts.", alias="subAccounts")
-    __properties: ClassVar[List[str]] = ["accountNumber", "subAccounts"]
+    last_credit: Optional[TransactionInfo] = Field(default=None, alias="lastCredit")
+    __properties: ClassVar[List[str]] = ["accountNumber", "subAccountNumber", "accountName", "accountCurrency", "subAccounts", "lastCredit"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -81,6 +86,19 @@ class Balance(BaseModel):
                 if _item_sub_accounts:
                     _items.append(_item_sub_accounts.to_dict())
             _dict['subAccounts'] = _items
+        # override the default output from pydantic by calling `to_dict()` of last_credit
+        if self.last_credit:
+            _dict['lastCredit'] = self.last_credit.to_dict()
+        # set to None if account_name (nullable) is None
+        # and model_fields_set contains the field
+        if self.account_name is None and "account_name" in self.model_fields_set:
+            _dict['accountName'] = None
+
+        # set to None if account_currency (nullable) is None
+        # and model_fields_set contains the field
+        if self.account_currency is None and "account_currency" in self.model_fields_set:
+            _dict['accountCurrency'] = None
+
         # set to None if sub_accounts (nullable) is None
         # and model_fields_set contains the field
         if self.sub_accounts is None and "sub_accounts" in self.model_fields_set:
@@ -100,7 +118,11 @@ class Balance(BaseModel):
 
         _obj = cls.model_validate({
             "accountNumber": obj.get("accountNumber"),
-            "subAccounts": [SubAccount.from_dict(_item) for _item in obj["subAccounts"]] if obj.get("subAccounts") is not None else None
+            "subAccountNumber": obj.get("subAccountNumber"),
+            "accountName": obj.get("accountName"),
+            "accountCurrency": obj.get("accountCurrency"),
+            "subAccounts": [SubAccount.from_dict(_item) for _item in obj["subAccounts"]] if obj.get("subAccounts") is not None else None,
+            "lastCredit": TransactionInfo.from_dict(obj["lastCredit"]) if obj.get("lastCredit") is not None else None
         })
         return _obj
 

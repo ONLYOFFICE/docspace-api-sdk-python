@@ -5,7 +5,7 @@ The Complete & Submit button settings.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**visible** | **bool** | Specifies whether the Complete  &amp; Submit button will be displayed or hidden on the top toolbar. | [optional] 
+**visible** | **bool** | Specifies whether the Complete  & Submit button will be displayed or hidden on the top toolbar. | [optional] 
 **result_message** | **str** | A message displayed after forms are submitted. | [optional] 
 
 ## Example

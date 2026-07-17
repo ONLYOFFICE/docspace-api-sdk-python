@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,6 +24,7 @@ from typing_extensions import Annotated
 from pydantic import StrictStr
 from typing import Optional
 from docspace_api_sdk.models.auth_requests_dto import AuthRequestsDto
+from docspace_api_sdk.models.auth_with_code_requests_dto import AuthWithCodeRequestsDto
 from docspace_api_sdk.models.authentication_token_wrapper import AuthenticationTokenWrapper
 from docspace_api_sdk.models.boolean_wrapper import BooleanWrapper
 from docspace_api_sdk.models.confirm_wrapper import ConfirmWrapper
@@ -47,7 +48,6 @@ class AuthenticationApi:
         if api_client is None:
             api_client = ApiClient.get_default()
         self.api_client = api_client
-
 
 
 
@@ -110,6 +110,8 @@ class AuthenticationApi:
             '401': None,
             '404': None,
             '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -181,6 +183,8 @@ class AuthenticationApi:
             '401': None,
             '404': None,
             '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -252,6 +256,8 @@ class AuthenticationApi:
             '401': None,
             '404': None,
             '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -343,7 +349,7 @@ class AuthenticationApi:
     def authenticate_me_from_body_with_code(
         self,
         code: StrictStr,
-        auth_requests_dto: Optional[AuthRequestsDto] = None,
+        auth_with_code_requests_dto: Optional[AuthWithCodeRequestsDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -363,8 +369,8 @@ class AuthenticationApi:
 
         :param code: (required)
         :type code: str
-        :param auth_requests_dto:
-        :type auth_requests_dto: AuthRequestsDto
+        :param auth_with_code_requests_dto:
+        :type auth_with_code_requests_dto: AuthWithCodeRequestsDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -389,7 +395,7 @@ class AuthenticationApi:
 
         _param = self._authenticate_me_from_body_with_code_serialize(
             code=code,
-            auth_requests_dto=auth_requests_dto,
+            auth_with_code_requests_dto=auth_with_code_requests_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -402,6 +408,8 @@ class AuthenticationApi:
             '401': None,
             '403': None,
             '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -418,7 +426,7 @@ class AuthenticationApi:
     def authenticate_me_from_body_with_code_with_http_info(
         self,
         code: StrictStr,
-        auth_requests_dto: Optional[AuthRequestsDto] = None,
+        auth_with_code_requests_dto: Optional[AuthWithCodeRequestsDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -438,8 +446,8 @@ class AuthenticationApi:
 
         :param code: (required)
         :type code: str
-        :param auth_requests_dto:
-        :type auth_requests_dto: AuthRequestsDto
+        :param auth_with_code_requests_dto:
+        :type auth_with_code_requests_dto: AuthWithCodeRequestsDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -464,7 +472,7 @@ class AuthenticationApi:
 
         _param = self._authenticate_me_from_body_with_code_serialize(
             code=code,
-            auth_requests_dto=auth_requests_dto,
+            auth_with_code_requests_dto=auth_with_code_requests_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -477,6 +485,8 @@ class AuthenticationApi:
             '401': None,
             '403': None,
             '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -493,7 +503,7 @@ class AuthenticationApi:
     def authenticate_me_from_body_with_code_without_preload_content(
         self,
         code: StrictStr,
-        auth_requests_dto: Optional[AuthRequestsDto] = None,
+        auth_with_code_requests_dto: Optional[AuthWithCodeRequestsDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -513,8 +523,8 @@ class AuthenticationApi:
 
         :param code: (required)
         :type code: str
-        :param auth_requests_dto:
-        :type auth_requests_dto: AuthRequestsDto
+        :param auth_with_code_requests_dto:
+        :type auth_with_code_requests_dto: AuthWithCodeRequestsDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -539,7 +549,7 @@ class AuthenticationApi:
 
         _param = self._authenticate_me_from_body_with_code_serialize(
             code=code,
-            auth_requests_dto=auth_requests_dto,
+            auth_with_code_requests_dto=auth_with_code_requests_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -552,6 +562,8 @@ class AuthenticationApi:
             '401': None,
             '403': None,
             '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -563,7 +575,7 @@ class AuthenticationApi:
     def _authenticate_me_from_body_with_code_serialize(
         self,
         code,
-        auth_requests_dto,
+        auth_with_code_requests_dto,
         _request_auth,
         _content_type,
         _headers,
@@ -591,8 +603,8 @@ class AuthenticationApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if auth_requests_dto is not None:
-            _body_params = auth_requests_dto
+        if auth_with_code_requests_dto is not None:
+            _body_params = auth_with_code_requests_dto
 
 
         # set the HTTP header `Accept`
@@ -697,6 +709,9 @@ class AuthenticationApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ConfirmWrapper",
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -764,6 +779,9 @@ class AuthenticationApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ConfirmWrapper",
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -831,6 +849,9 @@ class AuthenticationApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ConfirmWrapper",
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -969,6 +990,9 @@ class AuthenticationApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1032,6 +1056,9 @@ class AuthenticationApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1095,6 +1122,9 @@ class AuthenticationApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1217,6 +1247,9 @@ class AuthenticationApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1280,6 +1313,9 @@ class AuthenticationApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1343,6 +1379,9 @@ class AuthenticationApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1470,6 +1509,9 @@ class AuthenticationApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AuthenticationTokenWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1538,6 +1580,9 @@ class AuthenticationApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AuthenticationTokenWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1606,6 +1651,9 @@ class AuthenticationApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AuthenticationTokenWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1756,6 +1804,8 @@ class AuthenticationApi:
             '200': "AuthenticationTokenWrapper",
             '400': None,
             '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1825,6 +1875,8 @@ class AuthenticationApi:
             '200': "AuthenticationTokenWrapper",
             '400': None,
             '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1894,6 +1946,8 @@ class AuthenticationApi:
             '200': "AuthenticationTokenWrapper",
             '400': None,
             '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,

@@ -5,8 +5,8 @@ The product administrator parameters.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**product_id** | **str** | The product ID. | 
-**user_id** | **str** | The user unique identifier. | 
+**product_id** | **UUID** | The product ID. | 
+**user_id** | **UUID** | The user unique identifier. | 
 **administrator** | **bool** | Indicates whether the user has administrator privileges for the product. | 
 
 ## Example

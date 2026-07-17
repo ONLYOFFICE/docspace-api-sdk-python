@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,6 +23,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from uuid import UUID
 from docspace_api_sdk.models.api_date_time import ApiDateTime
 from docspace_api_sdk.models.employee_dto import EmployeeDto
 from typing import Optional, Set
@@ -32,7 +33,7 @@ class ApiKeyResponseDto(BaseModel):
     """
     The response data for the API key operations.
     """ # noqa: E501
-    id: StrictStr = Field(description="The API key unique identifier.")
+    id: UUID = Field(description="The API key unique identifier.")
     name: Optional[StrictStr] = Field(description="The API key name.")
     key: Optional[StrictStr] = Field(description="The full API key value (only returned when creating a new key).")
     key_postfix: Optional[StrictStr] = Field(default=None, description="The API key postfix (used for identification).", alias="keyPostfix")

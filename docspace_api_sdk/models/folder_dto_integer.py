@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,7 +24,7 @@ import re  # noqa: F401
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from docspace_api_sdk.models.api_date_time import ApiDateTime
-from docspace_api_sdk.models.chat_settings import ChatSettings
+from docspace_api_sdk.models.chat_settings_dto import ChatSettingsDto
 from docspace_api_sdk.models.employee_dto import EmployeeDto
 from docspace_api_sdk.models.file_entry_dto_integer_all_of_available_share_rights import FileEntryDtoIntegerAllOfAvailableShareRights
 from docspace_api_sdk.models.file_entry_dto_integer_all_of_security import FileEntryDtoIntegerAllOfSecurity
@@ -68,8 +68,11 @@ class FolderDtoInteger(FileEntryDtoInteger):
     used_space: Optional[StrictInt] = Field(default=None, description="How much folder space is used (counter).", alias="usedSpace")
     password_protected: Optional[StrictBool] = Field(default=None, description="Specifies if the folder is password protected or not.", alias="passwordProtected")
     expired: Optional[StrictBool] = Field(default=None, description="Specifies if an external link to the folder is expired or not.")
-    chat_settings: Optional[ChatSettings] = Field(default=None, alias="chatSettings")
+    chat_settings: Optional[ChatSettingsDto] = Field(default=None, alias="chatSettings")
     root_room_type: Optional[RoomType] = Field(default=None, alias="rootRoomType")
+    save_form_as_xlsx: Optional[StrictBool] = Field(default=None, description="Specifies whether to save form data as XLSX file.", alias="saveFormAsXLSX")
+    send_form_to_external_db: Optional[StrictBool] = Field(default=None, description="Specifies whether to send form data to external database.", alias="sendFormToExternalDB")
+    original_form_id: Optional[StrictInt] = Field(default=None, description="The original form ID that corresponds to this FormFillingFolderDone folder.", alias="originalFormId")
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -269,6 +272,21 @@ class FolderDtoInteger(FileEntryDtoInteger):
         if self.expired is None and "expired" in self.model_fields_set:
             _dict['expired'] = None
 
+        # set to None if save_form_as_xlsx (nullable) is None
+        # and model_fields_set contains the field
+        if self.save_form_as_xlsx is None and "save_form_as_xlsx" in self.model_fields_set:
+            _dict['saveFormAsXLSX'] = None
+
+        # set to None if send_form_to_external_db (nullable) is None
+        # and model_fields_set contains the field
+        if self.send_form_to_external_db is None and "send_form_to_external_db" in self.model_fields_set:
+            _dict['sendFormToExternalDB'] = None
+
+        # set to None if original_form_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.original_form_id is None and "original_form_id" in self.model_fields_set:
+            _dict['originalFormId'] = None
+
         return _dict
 
     @classmethod
@@ -305,8 +323,11 @@ class FolderDtoInteger(FileEntryDtoInteger):
             "usedSpace": obj.get("usedSpace"),
             "passwordProtected": obj.get("passwordProtected"),
             "expired": obj.get("expired"),
-            "chatSettings": ChatSettings.from_dict(obj["chatSettings"]) if obj.get("chatSettings") is not None else None,
-            "rootRoomType": obj.get("rootRoomType")
+            "chatSettings": ChatSettingsDto.from_dict(obj["chatSettings"]) if obj.get("chatSettings") is not None else None,
+            "rootRoomType": obj.get("rootRoomType"),
+            "saveFormAsXLSX": obj.get("saveFormAsXLSX"),
+            "sendFormToExternalDB": obj.get("sendFormToExternalDB"),
+            "originalFormId": obj.get("originalFormId")
         }
         all_fields = {**base_dict, **extra_fields}
         return cls.model_validate(all_fields)

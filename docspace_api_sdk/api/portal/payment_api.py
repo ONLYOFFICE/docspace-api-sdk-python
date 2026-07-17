@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -25,27 +25,37 @@ from datetime import datetime
 from pydantic import Field, StrictBool, StrictInt, StrictStr
 from typing import Optional
 from typing_extensions import Annotated
+from docspace_api_sdk.models.ai_prices_response_wrapper import AiPricesResponseWrapper
 from docspace_api_sdk.models.balance_wrapper import BalanceWrapper
 from docspace_api_sdk.models.boolean_wrapper import BooleanWrapper
 from docspace_api_sdk.models.change_wallet_service_state_request_dto import ChangeWalletServiceStateRequestDto
+from docspace_api_sdk.models.credit_ai_balance_request_dto import CreditAiBalanceRequestDto
 from docspace_api_sdk.models.currencies_array_wrapper import CurrenciesArrayWrapper
 from docspace_api_sdk.models.customer_info_wrapper import CustomerInfoWrapper
 from docspace_api_sdk.models.customer_operations_report_request_dto import CustomerOperationsReportRequestDto
 from docspace_api_sdk.models.document_builder_task_wrapper import DocumentBuilderTaskWrapper
+from docspace_api_sdk.models.get_portal_prices200_response import GetPortalPrices200Response
+from docspace_api_sdk.models.operation_order_type import OperationOrderType
+from docspace_api_sdk.models.operation_status import OperationStatus
+from docspace_api_sdk.models.operation_type import OperationType
 from docspace_api_sdk.models.payment_calculation_wrapper import PaymentCalculationWrapper
-from docspace_api_sdk.models.payment_url_requests_dto import PaymentUrlRequestsDto
+from docspace_api_sdk.models.payment_url_request_dto import PaymentUrlRequestDto
 from docspace_api_sdk.models.quantity_request_dto import QuantityRequestDto
 from docspace_api_sdk.models.quota_array_wrapper import QuotaArrayWrapper
 from docspace_api_sdk.models.quota_wrapper import QuotaWrapper
 from docspace_api_sdk.models.report_wrapper import ReportWrapper
+from docspace_api_sdk.models.restricted_models_response_wrapper import RestrictedModelsResponseWrapper
 from docspace_api_sdk.models.sales_requests_dto import SalesRequestsDto
+from docspace_api_sdk.models.service_payment_wrapper import ServicePaymentWrapper
+from docspace_api_sdk.models.set_restricted_ai_models_request_dto import SetRestrictedAiModelsRequestDto
 from docspace_api_sdk.models.string_wrapper import StringWrapper
 from docspace_api_sdk.models.tenant_wallet_service import TenantWalletService
 from docspace_api_sdk.models.tenant_wallet_service_settings_wrapper import TenantWalletServiceSettingsWrapper
 from docspace_api_sdk.models.tenant_wallet_settings_wrapper import TenantWalletSettingsWrapper
 from docspace_api_sdk.models.top_up_deposit_request_dto import TopUpDepositRequestDto
-from docspace_api_sdk.models.unknown_wrapper import UnknownWrapper
 from docspace_api_sdk.models.wallet_quantity_request_dto import WalletQuantityRequestDto
+from docspace_api_sdk.models.wallet_service_array_wrapper import WalletServiceArrayWrapper
+from docspace_api_sdk.models.wallet_service_wrapper import WalletServiceWrapper
 
 from docspace_api_sdk.api_client import ApiClient, RequestSerialized
 from docspace_api_sdk.api_response import ApiResponse
@@ -63,7 +73,6 @@ class PaymentApi:
         if api_client is None:
             api_client = ApiClient.get_default()
         self.api_client = api_client
-
 
 
 
@@ -122,8 +131,13 @@ class PaymentApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "PaymentCalculationWrapper",
-            '401': None,
+            '400': None,
             '403': None,
+            '404': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -191,8 +205,13 @@ class PaymentApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "PaymentCalculationWrapper",
-            '401': None,
+            '400': None,
             '403': None,
+            '404': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -260,8 +279,13 @@ class PaymentApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "PaymentCalculationWrapper",
-            '401': None,
+            '400': None,
             '403': None,
+            '404': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -372,9 +396,9 @@ class PaymentApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> TenantWalletServiceSettingsWrapper:
-        """Change wallet service state
+        """Change tenant wallet service state
 
-        Changes the wallet service state.
+        Changes the state of a wallet service for the current tenant.  Requires permission to edit portal settings and a configured tariff service.  Adds or removes the specified service from the enabled services list based on the enabled flag.
 
         :param change_wallet_service_state_request_dto:
         :type change_wallet_service_state_request_dto: ChangeWalletServiceStateRequestDto
@@ -410,8 +434,12 @@ class PaymentApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantWalletServiceSettingsWrapper",
-            '401': None,
             '403': None,
+            '404': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -441,9 +469,9 @@ class PaymentApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[TenantWalletServiceSettingsWrapper]:
-        """Change wallet service state
+        """Change tenant wallet service state
 
-        Changes the wallet service state.
+        Changes the state of a wallet service for the current tenant.  Requires permission to edit portal settings and a configured tariff service.  Adds or removes the specified service from the enabled services list based on the enabled flag.
 
         :param change_wallet_service_state_request_dto:
         :type change_wallet_service_state_request_dto: ChangeWalletServiceStateRequestDto
@@ -479,8 +507,12 @@ class PaymentApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantWalletServiceSettingsWrapper",
-            '401': None,
             '403': None,
+            '404': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -510,9 +542,9 @@ class PaymentApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Change wallet service state
+        """Change tenant wallet service state
 
-        Changes the wallet service state.
+        Changes the state of a wallet service for the current tenant.  Requires permission to edit portal settings and a configured tariff service.  Adds or removes the specified service from the enabled services list based on the enabled flag.
 
         :param change_wallet_service_state_request_dto:
         :type change_wallet_service_state_request_dto: ChangeWalletServiceStateRequestDto
@@ -548,8 +580,12 @@ class PaymentApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantWalletServiceSettingsWrapper",
-            '401': None,
             '403': None,
+            '404': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -698,7 +734,12 @@ class PaymentApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocumentBuilderTaskWrapper",
+            '403': None,
+            '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -766,7 +807,12 @@ class PaymentApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocumentBuilderTaskWrapper",
+            '403': None,
+            '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -834,7 +880,12 @@ class PaymentApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocumentBuilderTaskWrapper",
+            '403': None,
+            '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -929,9 +980,582 @@ class PaymentApi:
 
 
     @validate_call
+    def credit_ai_balance(
+        self,
+        credit_ai_balance_request_dto: Optional[CreditAiBalanceRequestDto] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ServicePaymentWrapper:
+        """Credit AI balance
+
+        Credits AI quota to the customer AI sub-account from their main balance.  Requires the customer to have a configured payment method.
+
+        :param credit_ai_balance_request_dto:
+        :type credit_ai_balance_request_dto: CreditAiBalanceRequestDto
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._credit_ai_balance_serialize(
+            credit_ai_balance_request_dto=credit_ai_balance_request_dto,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ServicePaymentWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def credit_ai_balance_with_http_info(
+        self,
+        credit_ai_balance_request_dto: Optional[CreditAiBalanceRequestDto] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[ServicePaymentWrapper]:
+        """Credit AI balance
+
+        Credits AI quota to the customer AI sub-account from their main balance.  Requires the customer to have a configured payment method.
+
+        :param credit_ai_balance_request_dto:
+        :type credit_ai_balance_request_dto: CreditAiBalanceRequestDto
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._credit_ai_balance_serialize(
+            credit_ai_balance_request_dto=credit_ai_balance_request_dto,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ServicePaymentWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def credit_ai_balance_without_preload_content(
+        self,
+        credit_ai_balance_request_dto: Optional[CreditAiBalanceRequestDto] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Credit AI balance
+
+        Credits AI quota to the customer AI sub-account from their main balance.  Requires the customer to have a configured payment method.
+
+        :param credit_ai_balance_request_dto:
+        :type credit_ai_balance_request_dto: CreditAiBalanceRequestDto
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._credit_ai_balance_serialize(
+            credit_ai_balance_request_dto=credit_ai_balance_request_dto,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ServicePaymentWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _credit_ai_balance_serialize(
+        self,
+        credit_ai_balance_request_dto,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if credit_ai_balance_request_dto is not None:
+            _body_params = credit_ai_balance_request_dto
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
+        ]
+
+
+        resource_path = "/api/2.0/portal/payment/creditaibalance"
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path=resource_path,
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def get_ai_prices(
+        self,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> AiPricesResponseWrapper:
+        """Get AI model prices
+
+        Retrieves the pricing information for AI models including chat, embedding, and web search services.  The prices are returned in the configured currency and normalized per million tokens.  Requires administrator permissions to access.
+
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_ai_prices_serialize(
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "AiPricesResponseWrapper",
+            '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def get_ai_prices_with_http_info(
+        self,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[AiPricesResponseWrapper]:
+        """Get AI model prices
+
+        Retrieves the pricing information for AI models including chat, embedding, and web search services.  The prices are returned in the configured currency and normalized per million tokens.  Requires administrator permissions to access.
+
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_ai_prices_serialize(
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "AiPricesResponseWrapper",
+            '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def get_ai_prices_without_preload_content(
+        self,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Get AI model prices
+
+        Retrieves the pricing information for AI models including chat, embedding, and web search services.  The prices are returned in the configured currency and normalized per million tokens.  Requires administrator permissions to access.
+
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_ai_prices_serialize(
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "AiPricesResponseWrapper",
+            '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _get_ai_prices_serialize(
+        self,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
+        ]
+
+
+        resource_path = "/api/2.0/portal/payment/ai-prices"
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path=resource_path,
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
     def get_checkout_setup_url(
         self,
-        back_url: Annotated[Optional[StrictStr], Field(description="The URL where the user will be redirected after completing the setup.")] = None,
+        back_url: Annotated[str, Field(min_length=0, strict=True, max_length=255, description="The URL where the user will be redirected after setup cancellation.")],
+        success_url: Annotated[str, Field(min_length=0, strict=True, max_length=255, description="The URL where the user will be redirected after successful payment.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -949,8 +1573,10 @@ class PaymentApi:
 
         Returns the URL to the checkout setup page.
 
-        :param back_url: The URL where the user will be redirected after completing the setup.
+        :param back_url: The URL where the user will be redirected after setup cancellation. (required)
         :type back_url: str
+        :param success_url: The URL where the user will be redirected after successful payment. (required)
+        :type success_url: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -975,6 +1601,7 @@ class PaymentApi:
 
         _param = self._get_checkout_setup_url_serialize(
             back_url=back_url,
+            success_url=success_url,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -983,8 +1610,11 @@ class PaymentApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
-            '401': None,
             '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1000,7 +1630,8 @@ class PaymentApi:
     @validate_call
     def get_checkout_setup_url_with_http_info(
         self,
-        back_url: Annotated[Optional[StrictStr], Field(description="The URL where the user will be redirected after completing the setup.")] = None,
+        back_url: Annotated[str, Field(min_length=0, strict=True, max_length=255, description="The URL where the user will be redirected after setup cancellation.")],
+        success_url: Annotated[str, Field(min_length=0, strict=True, max_length=255, description="The URL where the user will be redirected after successful payment.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1018,8 +1649,10 @@ class PaymentApi:
 
         Returns the URL to the checkout setup page.
 
-        :param back_url: The URL where the user will be redirected after completing the setup.
+        :param back_url: The URL where the user will be redirected after setup cancellation. (required)
         :type back_url: str
+        :param success_url: The URL where the user will be redirected after successful payment. (required)
+        :type success_url: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1044,6 +1677,7 @@ class PaymentApi:
 
         _param = self._get_checkout_setup_url_serialize(
             back_url=back_url,
+            success_url=success_url,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1052,8 +1686,11 @@ class PaymentApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
-            '401': None,
             '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1069,7 +1706,8 @@ class PaymentApi:
     @validate_call
     def get_checkout_setup_url_without_preload_content(
         self,
-        back_url: Annotated[Optional[StrictStr], Field(description="The URL where the user will be redirected after completing the setup.")] = None,
+        back_url: Annotated[str, Field(min_length=0, strict=True, max_length=255, description="The URL where the user will be redirected after setup cancellation.")],
+        success_url: Annotated[str, Field(min_length=0, strict=True, max_length=255, description="The URL where the user will be redirected after successful payment.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1087,8 +1725,10 @@ class PaymentApi:
 
         Returns the URL to the checkout setup page.
 
-        :param back_url: The URL where the user will be redirected after completing the setup.
+        :param back_url: The URL where the user will be redirected after setup cancellation. (required)
         :type back_url: str
+        :param success_url: The URL where the user will be redirected after successful payment. (required)
+        :type success_url: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1113,6 +1753,7 @@ class PaymentApi:
 
         _param = self._get_checkout_setup_url_serialize(
             back_url=back_url,
+            success_url=success_url,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1121,8 +1762,11 @@ class PaymentApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
-            '401': None,
             '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1134,6 +1778,7 @@ class PaymentApi:
     def _get_checkout_setup_url_serialize(
         self,
         back_url,
+        success_url,
         _request_auth,
         _content_type,
         _headers,
@@ -1160,6 +1805,10 @@ class PaymentApi:
             
             _query_params.append(('BackUrl', back_url))
             
+        if success_url is not None:
+            
+            _query_params.append(('SuccessUrl', success_url))
+            
         # process the header parameters
         # process the form parameters
         # process the body parameter
@@ -1185,7 +1834,293 @@ class PaymentApi:
         ]
 
 
-        resource_path = "/api/2.0/portal/payment/chechoutsetupurl"
+        resource_path = "/api/2.0/portal/payment/checkoutsetupurl"
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path=resource_path,
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def get_customer_ai_balance(
+        self,
+        refresh: Annotated[Optional[StrictBool], Field(description="Specifies whether to refresh the payment information cache or not.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> BalanceWrapper:
+        """Get the customer AI balance
+
+        Returns the AI quota balance of a customer from the accounting service.
+
+        :param refresh: Specifies whether to refresh the payment information cache or not.
+        :type refresh: bool
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_customer_ai_balance_serialize(
+            refresh=refresh,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "BalanceWrapper",
+            '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def get_customer_ai_balance_with_http_info(
+        self,
+        refresh: Annotated[Optional[StrictBool], Field(description="Specifies whether to refresh the payment information cache or not.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[BalanceWrapper]:
+        """Get the customer AI balance
+
+        Returns the AI quota balance of a customer from the accounting service.
+
+        :param refresh: Specifies whether to refresh the payment information cache or not.
+        :type refresh: bool
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_customer_ai_balance_serialize(
+            refresh=refresh,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "BalanceWrapper",
+            '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def get_customer_ai_balance_without_preload_content(
+        self,
+        refresh: Annotated[Optional[StrictBool], Field(description="Specifies whether to refresh the payment information cache or not.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Get the customer AI balance
+
+        Returns the AI quota balance of a customer from the accounting service.
+
+        :param refresh: Specifies whether to refresh the payment information cache or not.
+        :type refresh: bool
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_customer_ai_balance_serialize(
+            refresh=refresh,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "BalanceWrapper",
+            '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _get_customer_ai_balance_serialize(
+        self,
+        refresh,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        if refresh is not None:
+            
+            _query_params.append(('refresh', refresh))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
+        ]
+
+
+        resource_path = "/api/2.0/portal/payment/customer/aibalance"
 
         return self.api_client.param_serialize(
             method='GET',
@@ -1260,8 +2195,11 @@ class PaymentApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BalanceWrapper",
-            '401': None,
             '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1329,8 +2267,11 @@ class PaymentApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BalanceWrapper",
-            '401': None,
             '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1398,8 +2339,11 @@ class PaymentApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BalanceWrapper",
-            '401': None,
             '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1537,8 +2481,11 @@ class PaymentApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CustomerInfoWrapper",
-            '401': None,
             '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1606,8 +2553,11 @@ class PaymentApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CustomerInfoWrapper",
-            '401': None,
             '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1675,8 +2625,11 @@ class PaymentApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CustomerInfoWrapper",
-            '401': None,
             '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1762,13 +2715,18 @@ class PaymentApi:
     @validate_call
     def get_customer_operations(
         self,
+        offset: Annotated[Optional[StrictInt], Field(description="The number of items to skip for pagination. The default value is 0.")] = None,
+        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of items to return for pagination. The default value is 25.")] = None,
+        service_name: Annotated[Optional[StrictStr], Field(description="The service name.")] = None,
         start_date: Annotated[Optional[datetime], Field(description="The report start date.")] = None,
         end_date: Annotated[Optional[datetime], Field(description="The report end date.")] = None,
         participant_name: Annotated[Optional[StrictStr], Field(description="The participant name.")] = None,
-        credit: Annotated[Optional[StrictBool], Field(description="Specifies whether to include credit operations in the report. The default value is true.")] = None,
-        debit: Annotated[Optional[StrictBool], Field(description="Specifies whether to include debit operations in the report. The default value is true.")] = None,
-        offset: Annotated[Optional[StrictInt], Field(description="The number of items to skip for pagination. The default value is 0.")] = None,
-        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of items to return for pagination. The default value is 25.")] = None,
+        credit: Annotated[Optional[StrictBool], Field(description="Specifies whether to include credit operations in the report.")] = None,
+        debit: Annotated[Optional[StrictBool], Field(description="Specifies whether to include debit operations in the report.")] = None,
+        type: Annotated[Optional[OperationType], Field(description="The operation type to filter by.")] = None,
+        status: Annotated[Optional[OperationStatus], Field(description="The operation status to filter by.")] = None,
+        order_by: Annotated[Optional[StrictStr], Field(description="The field to order by.")] = None,
+        order_type: Annotated[Optional[OperationOrderType], Field(description="Order direction: Ascending or Descending.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1786,20 +2744,30 @@ class PaymentApi:
 
         Returns the report of customer operations from the accounting service.
 
+        :param offset: The number of items to skip for pagination. The default value is 0.
+        :type offset: int
+        :param limit: The maximum number of items to return for pagination. The default value is 25.
+        :type limit: int
+        :param service_name: The service name.
+        :type service_name: str
         :param start_date: The report start date.
         :type start_date: datetime
         :param end_date: The report end date.
         :type end_date: datetime
         :param participant_name: The participant name.
         :type participant_name: str
-        :param credit: Specifies whether to include credit operations in the report. The default value is true.
+        :param credit: Specifies whether to include credit operations in the report.
         :type credit: bool
-        :param debit: Specifies whether to include debit operations in the report. The default value is true.
+        :param debit: Specifies whether to include debit operations in the report.
         :type debit: bool
-        :param offset: The number of items to skip for pagination. The default value is 0.
-        :type offset: int
-        :param limit: The maximum number of items to return for pagination. The default value is 25.
-        :type limit: int
+        :param type: The operation type to filter by.
+        :type type: OperationType
+        :param status: The operation status to filter by.
+        :type status: OperationStatus
+        :param order_by: The field to order by.
+        :type order_by: str
+        :param order_type: Order direction: Ascending or Descending.
+        :type order_type: OperationOrderType
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1823,13 +2791,18 @@ class PaymentApi:
         """ # noqa: E501
 
         _param = self._get_customer_operations_serialize(
+            offset=offset,
+            limit=limit,
+            service_name=service_name,
             start_date=start_date,
             end_date=end_date,
             participant_name=participant_name,
             credit=credit,
             debit=debit,
-            offset=offset,
-            limit=limit,
+            type=type,
+            status=status,
+            order_by=order_by,
+            order_type=order_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1838,8 +2811,12 @@ class PaymentApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ReportWrapper",
-            '401': None,
             '403': None,
+            '404': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1855,13 +2832,18 @@ class PaymentApi:
     @validate_call
     def get_customer_operations_with_http_info(
         self,
+        offset: Annotated[Optional[StrictInt], Field(description="The number of items to skip for pagination. The default value is 0.")] = None,
+        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of items to return for pagination. The default value is 25.")] = None,
+        service_name: Annotated[Optional[StrictStr], Field(description="The service name.")] = None,
         start_date: Annotated[Optional[datetime], Field(description="The report start date.")] = None,
         end_date: Annotated[Optional[datetime], Field(description="The report end date.")] = None,
         participant_name: Annotated[Optional[StrictStr], Field(description="The participant name.")] = None,
-        credit: Annotated[Optional[StrictBool], Field(description="Specifies whether to include credit operations in the report. The default value is true.")] = None,
-        debit: Annotated[Optional[StrictBool], Field(description="Specifies whether to include debit operations in the report. The default value is true.")] = None,
-        offset: Annotated[Optional[StrictInt], Field(description="The number of items to skip for pagination. The default value is 0.")] = None,
-        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of items to return for pagination. The default value is 25.")] = None,
+        credit: Annotated[Optional[StrictBool], Field(description="Specifies whether to include credit operations in the report.")] = None,
+        debit: Annotated[Optional[StrictBool], Field(description="Specifies whether to include debit operations in the report.")] = None,
+        type: Annotated[Optional[OperationType], Field(description="The operation type to filter by.")] = None,
+        status: Annotated[Optional[OperationStatus], Field(description="The operation status to filter by.")] = None,
+        order_by: Annotated[Optional[StrictStr], Field(description="The field to order by.")] = None,
+        order_type: Annotated[Optional[OperationOrderType], Field(description="Order direction: Ascending or Descending.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1879,20 +2861,30 @@ class PaymentApi:
 
         Returns the report of customer operations from the accounting service.
 
+        :param offset: The number of items to skip for pagination. The default value is 0.
+        :type offset: int
+        :param limit: The maximum number of items to return for pagination. The default value is 25.
+        :type limit: int
+        :param service_name: The service name.
+        :type service_name: str
         :param start_date: The report start date.
         :type start_date: datetime
         :param end_date: The report end date.
         :type end_date: datetime
         :param participant_name: The participant name.
         :type participant_name: str
-        :param credit: Specifies whether to include credit operations in the report. The default value is true.
+        :param credit: Specifies whether to include credit operations in the report.
         :type credit: bool
-        :param debit: Specifies whether to include debit operations in the report. The default value is true.
+        :param debit: Specifies whether to include debit operations in the report.
         :type debit: bool
-        :param offset: The number of items to skip for pagination. The default value is 0.
-        :type offset: int
-        :param limit: The maximum number of items to return for pagination. The default value is 25.
-        :type limit: int
+        :param type: The operation type to filter by.
+        :type type: OperationType
+        :param status: The operation status to filter by.
+        :type status: OperationStatus
+        :param order_by: The field to order by.
+        :type order_by: str
+        :param order_type: Order direction: Ascending or Descending.
+        :type order_type: OperationOrderType
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1916,13 +2908,18 @@ class PaymentApi:
         """ # noqa: E501
 
         _param = self._get_customer_operations_serialize(
+            offset=offset,
+            limit=limit,
+            service_name=service_name,
             start_date=start_date,
             end_date=end_date,
             participant_name=participant_name,
             credit=credit,
             debit=debit,
-            offset=offset,
-            limit=limit,
+            type=type,
+            status=status,
+            order_by=order_by,
+            order_type=order_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1931,8 +2928,12 @@ class PaymentApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ReportWrapper",
-            '401': None,
             '403': None,
+            '404': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1948,13 +2949,18 @@ class PaymentApi:
     @validate_call
     def get_customer_operations_without_preload_content(
         self,
+        offset: Annotated[Optional[StrictInt], Field(description="The number of items to skip for pagination. The default value is 0.")] = None,
+        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of items to return for pagination. The default value is 25.")] = None,
+        service_name: Annotated[Optional[StrictStr], Field(description="The service name.")] = None,
         start_date: Annotated[Optional[datetime], Field(description="The report start date.")] = None,
         end_date: Annotated[Optional[datetime], Field(description="The report end date.")] = None,
         participant_name: Annotated[Optional[StrictStr], Field(description="The participant name.")] = None,
-        credit: Annotated[Optional[StrictBool], Field(description="Specifies whether to include credit operations in the report. The default value is true.")] = None,
-        debit: Annotated[Optional[StrictBool], Field(description="Specifies whether to include debit operations in the report. The default value is true.")] = None,
-        offset: Annotated[Optional[StrictInt], Field(description="The number of items to skip for pagination. The default value is 0.")] = None,
-        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of items to return for pagination. The default value is 25.")] = None,
+        credit: Annotated[Optional[StrictBool], Field(description="Specifies whether to include credit operations in the report.")] = None,
+        debit: Annotated[Optional[StrictBool], Field(description="Specifies whether to include debit operations in the report.")] = None,
+        type: Annotated[Optional[OperationType], Field(description="The operation type to filter by.")] = None,
+        status: Annotated[Optional[OperationStatus], Field(description="The operation status to filter by.")] = None,
+        order_by: Annotated[Optional[StrictStr], Field(description="The field to order by.")] = None,
+        order_type: Annotated[Optional[OperationOrderType], Field(description="Order direction: Ascending or Descending.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1972,20 +2978,30 @@ class PaymentApi:
 
         Returns the report of customer operations from the accounting service.
 
+        :param offset: The number of items to skip for pagination. The default value is 0.
+        :type offset: int
+        :param limit: The maximum number of items to return for pagination. The default value is 25.
+        :type limit: int
+        :param service_name: The service name.
+        :type service_name: str
         :param start_date: The report start date.
         :type start_date: datetime
         :param end_date: The report end date.
         :type end_date: datetime
         :param participant_name: The participant name.
         :type participant_name: str
-        :param credit: Specifies whether to include credit operations in the report. The default value is true.
+        :param credit: Specifies whether to include credit operations in the report.
         :type credit: bool
-        :param debit: Specifies whether to include debit operations in the report. The default value is true.
+        :param debit: Specifies whether to include debit operations in the report.
         :type debit: bool
-        :param offset: The number of items to skip for pagination. The default value is 0.
-        :type offset: int
-        :param limit: The maximum number of items to return for pagination. The default value is 25.
-        :type limit: int
+        :param type: The operation type to filter by.
+        :type type: OperationType
+        :param status: The operation status to filter by.
+        :type status: OperationStatus
+        :param order_by: The field to order by.
+        :type order_by: str
+        :param order_type: Order direction: Ascending or Descending.
+        :type order_type: OperationOrderType
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2009,13 +3025,18 @@ class PaymentApi:
         """ # noqa: E501
 
         _param = self._get_customer_operations_serialize(
+            offset=offset,
+            limit=limit,
+            service_name=service_name,
             start_date=start_date,
             end_date=end_date,
             participant_name=participant_name,
             credit=credit,
             debit=debit,
-            offset=offset,
-            limit=limit,
+            type=type,
+            status=status,
+            order_by=order_by,
+            order_type=order_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2024,8 +3045,12 @@ class PaymentApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ReportWrapper",
-            '401': None,
             '403': None,
+            '404': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2036,13 +3061,18 @@ class PaymentApi:
 
     def _get_customer_operations_serialize(
         self,
+        offset,
+        limit,
+        service_name,
         start_date,
         end_date,
         participant_name,
         credit,
         debit,
-        offset,
-        limit,
+        type,
+        status,
+        order_by,
+        order_type,
         _request_auth,
         _content_type,
         _headers,
@@ -2065,44 +3095,6 @@ class PaymentApi:
 
         # process the path parameters
         # process the query parameters
-        if start_date is not None:
-            if isinstance(start_date, datetime):
-                _query_params.append(
-                    (
-                        'startDate',
-                        start_date.strftime(
-                            self.api_client.configuration.datetime_format
-                        )
-                    )
-                )
-            else:
-                _query_params.append(('startDate', start_date))
-            
-        if end_date is not None:
-            if isinstance(end_date, datetime):
-                _query_params.append(
-                    (
-                        'endDate',
-                        end_date.strftime(
-                            self.api_client.configuration.datetime_format
-                        )
-                    )
-                )
-            else:
-                _query_params.append(('endDate', end_date))
-            
-        if participant_name is not None:
-            
-            _query_params.append(('participantName', participant_name))
-            
-        if credit is not None:
-            
-            _query_params.append(('credit', credit))
-            
-        if debit is not None:
-            
-            _query_params.append(('debit', debit))
-            
         if offset is not None:
             
             _query_params.append(('offset', offset))
@@ -2110,6 +3102,64 @@ class PaymentApi:
         if limit is not None:
             
             _query_params.append(('limit', limit))
+            
+        if service_name is not None:
+            
+            _query_params.append(('ServiceName', service_name))
+            
+        if start_date is not None:
+            if isinstance(start_date, datetime):
+                _query_params.append(
+                    (
+                        'StartDate',
+                        start_date.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('StartDate', start_date))
+            
+        if end_date is not None:
+            if isinstance(end_date, datetime):
+                _query_params.append(
+                    (
+                        'EndDate',
+                        end_date.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('EndDate', end_date))
+            
+        if participant_name is not None:
+            
+            _query_params.append(('ParticipantName', participant_name))
+            
+        if credit is not None:
+            
+            _query_params.append(('Credit', credit))
+            
+        if debit is not None:
+            
+            _query_params.append(('Debit', debit))
+            
+        if type is not None:
+            
+            _query_params.append(('Type', type.value))
+            
+        if status is not None:
+            
+            _query_params.append(('Status', status.value))
+            
+        if order_by is not None:
+            
+            _query_params.append(('OrderBy', order_by))
+            
+        if order_type is not None:
+            
+            _query_params.append(('OrderType', order_type.value))
             
         # process the header parameters
         # process the form parameters
@@ -2207,7 +3257,12 @@ class PaymentApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocumentBuilderTaskWrapper",
+            '403': None,
+            '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2271,7 +3326,12 @@ class PaymentApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocumentBuilderTaskWrapper",
+            '403': None,
+            '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2335,7 +3395,12 @@ class PaymentApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocumentBuilderTaskWrapper",
+            '403': None,
+            '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2416,7 +3481,7 @@ class PaymentApi:
     @validate_call
     def get_payment_account(
         self,
-        back_url: Annotated[Optional[StrictStr], Field(description="The URL where the user will be redirected after payment processing.")] = None,
+        back_url: Annotated[Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]], Field(description="The URL where the user will be redirected after payment processing.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2468,8 +3533,11 @@ class PaymentApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
-            '401': None,
             '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2485,7 +3553,7 @@ class PaymentApi:
     @validate_call
     def get_payment_account_with_http_info(
         self,
-        back_url: Annotated[Optional[StrictStr], Field(description="The URL where the user will be redirected after payment processing.")] = None,
+        back_url: Annotated[Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]], Field(description="The URL where the user will be redirected after payment processing.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2537,8 +3605,11 @@ class PaymentApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
-            '401': None,
             '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2554,7 +3625,7 @@ class PaymentApi:
     @validate_call
     def get_payment_account_without_preload_content(
         self,
-        back_url: Annotated[Optional[StrictStr], Field(description="The URL where the user will be redirected after payment processing.")] = None,
+        back_url: Annotated[Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]], Field(description="The URL where the user will be redirected after payment processing.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2606,8 +3677,11 @@ class PaymentApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
-            '401': None,
             '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2741,7 +3815,11 @@ class PaymentApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CurrenciesArrayWrapper",
+            '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2805,7 +3883,11 @@ class PaymentApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CurrenciesArrayWrapper",
+            '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2869,7 +3951,11 @@ class PaymentApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CurrenciesArrayWrapper",
+            '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3002,7 +4088,11 @@ class PaymentApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "QuotaArrayWrapper",
+            '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3070,7 +4160,11 @@ class PaymentApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "QuotaArrayWrapper",
+            '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3138,7 +4232,11 @@ class PaymentApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "QuotaArrayWrapper",
+            '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3224,7 +4322,7 @@ class PaymentApi:
     @validate_call
     def get_payment_url(
         self,
-        payment_url_requests_dto: Optional[PaymentUrlRequestsDto] = None,
+        payment_url_request_dto: Optional[PaymentUrlRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3242,8 +4340,8 @@ class PaymentApi:
 
         Returns the URL to the payment page.
 
-        :param payment_url_requests_dto:
-        :type payment_url_requests_dto: PaymentUrlRequestsDto
+        :param payment_url_request_dto:
+        :type payment_url_request_dto: PaymentUrlRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3267,7 +4365,7 @@ class PaymentApi:
         """ # noqa: E501
 
         _param = self._get_payment_url_serialize(
-            payment_url_requests_dto=payment_url_requests_dto,
+            payment_url_request_dto=payment_url_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3276,8 +4374,12 @@ class PaymentApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
-            '401': None,
+            '400': None,
             '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3293,7 +4395,7 @@ class PaymentApi:
     @validate_call
     def get_payment_url_with_http_info(
         self,
-        payment_url_requests_dto: Optional[PaymentUrlRequestsDto] = None,
+        payment_url_request_dto: Optional[PaymentUrlRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3311,8 +4413,8 @@ class PaymentApi:
 
         Returns the URL to the payment page.
 
-        :param payment_url_requests_dto:
-        :type payment_url_requests_dto: PaymentUrlRequestsDto
+        :param payment_url_request_dto:
+        :type payment_url_request_dto: PaymentUrlRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3336,7 +4438,7 @@ class PaymentApi:
         """ # noqa: E501
 
         _param = self._get_payment_url_serialize(
-            payment_url_requests_dto=payment_url_requests_dto,
+            payment_url_request_dto=payment_url_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3345,8 +4447,12 @@ class PaymentApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
-            '401': None,
+            '400': None,
             '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3362,7 +4468,7 @@ class PaymentApi:
     @validate_call
     def get_payment_url_without_preload_content(
         self,
-        payment_url_requests_dto: Optional[PaymentUrlRequestsDto] = None,
+        payment_url_request_dto: Optional[PaymentUrlRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3380,8 +4486,8 @@ class PaymentApi:
 
         Returns the URL to the payment page.
 
-        :param payment_url_requests_dto:
-        :type payment_url_requests_dto: PaymentUrlRequestsDto
+        :param payment_url_request_dto:
+        :type payment_url_request_dto: PaymentUrlRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3405,7 +4511,7 @@ class PaymentApi:
         """ # noqa: E501
 
         _param = self._get_payment_url_serialize(
-            payment_url_requests_dto=payment_url_requests_dto,
+            payment_url_request_dto=payment_url_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3414,8 +4520,12 @@ class PaymentApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
-            '401': None,
+            '400': None,
             '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3426,7 +4536,7 @@ class PaymentApi:
 
     def _get_payment_url_serialize(
         self,
-        payment_url_requests_dto,
+        payment_url_request_dto,
         _request_auth,
         _content_type,
         _headers,
@@ -3452,8 +4562,8 @@ class PaymentApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if payment_url_requests_dto is not None:
-            _body_params = payment_url_requests_dto
+        if payment_url_request_dto is not None:
+            _body_params = payment_url_request_dto
 
 
         # set the HTTP header `Accept`
@@ -3524,7 +4634,7 @@ class PaymentApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> UnknownWrapper:
+    ) -> GetPortalPrices200Response:
         """Get prices
 
         Returns the available portal prices.
@@ -3559,8 +4669,12 @@ class PaymentApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "UnknownWrapper",
+            '200': "GetPortalPrices200Response",
+            '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3588,7 +4702,7 @@ class PaymentApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[UnknownWrapper]:
+    ) -> ApiResponse[GetPortalPrices200Response]:
         """Get prices
 
         Returns the available portal prices.
@@ -3623,8 +4737,12 @@ class PaymentApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "UnknownWrapper",
+            '200': "GetPortalPrices200Response",
+            '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3687,8 +4805,12 @@ class PaymentApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "UnknownWrapper",
+            '200': "GetPortalPrices200Response",
+            '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3821,8 +4943,11 @@ class PaymentApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "QuotaWrapper",
-            '401': None,
             '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3890,8 +5015,11 @@ class PaymentApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "QuotaWrapper",
-            '401': None,
             '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3959,8 +5087,11 @@ class PaymentApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "QuotaWrapper",
-            '401': None,
             '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4044,6 +5175,275 @@ class PaymentApi:
 
 
     @validate_call
+    def get_restricted_ai_models(
+        self,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RestrictedModelsResponseWrapper:
+        """Get restricted AI models
+
+        Returns the list of AI chat model IDs that are restricted (disabled) for the current tenant.  Restricted models cannot be used for AI chat conversations by any user within the portal.  Only DocSpace administrators can access this endpoint.
+
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_restricted_ai_models_serialize(
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "RestrictedModelsResponseWrapper",
+            '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def get_restricted_ai_models_with_http_info(
+        self,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[RestrictedModelsResponseWrapper]:
+        """Get restricted AI models
+
+        Returns the list of AI chat model IDs that are restricted (disabled) for the current tenant.  Restricted models cannot be used for AI chat conversations by any user within the portal.  Only DocSpace administrators can access this endpoint.
+
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_restricted_ai_models_serialize(
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "RestrictedModelsResponseWrapper",
+            '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def get_restricted_ai_models_without_preload_content(
+        self,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Get restricted AI models
+
+        Returns the list of AI chat model IDs that are restricted (disabled) for the current tenant.  Restricted models cannot be used for AI chat conversations by any user within the portal.  Only DocSpace administrators can access this endpoint.
+
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_restricted_ai_models_serialize(
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "RestrictedModelsResponseWrapper",
+            '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _get_restricted_ai_models_serialize(
+        self,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
+        ]
+
+
+        resource_path = "/api/2.0/portal/payment/ai-model/restrictions"
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path=resource_path,
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
     def get_tenant_wallet_service_settings(
         self,
         _request_timeout: Union[
@@ -4059,9 +5459,9 @@ class PaymentApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> TenantWalletServiceSettingsWrapper:
-        """Get wallet services settings
+        """Gets the wallet service settings for the tenant.
 
-        Returns the wallet services settings.
+        Retrieves configuration settings related to the wallet service associated with the current tenant.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4094,8 +5494,11 @@ class PaymentApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantWalletServiceSettingsWrapper",
-            '401': None,
             '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4124,9 +5527,9 @@ class PaymentApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[TenantWalletServiceSettingsWrapper]:
-        """Get wallet services settings
+        """Gets the wallet service settings for the tenant.
 
-        Returns the wallet services settings.
+        Retrieves configuration settings related to the wallet service associated with the current tenant.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4159,8 +5562,11 @@ class PaymentApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantWalletServiceSettingsWrapper",
-            '401': None,
             '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4189,9 +5595,9 @@ class PaymentApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get wallet services settings
+        """Gets the wallet service settings for the tenant.
 
-        Returns the wallet services settings.
+        Retrieves configuration settings related to the wallet service associated with the current tenant.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4224,8 +5630,11 @@ class PaymentApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantWalletServiceSettingsWrapper",
-            '401': None,
             '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4319,9 +5728,9 @@ class PaymentApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> TenantWalletSettingsWrapper:
-        """Get wallet auto top-up settings
+        """Gets the tenant wallet auto top up settings
 
-        Returns the wallet auto top-up settings.
+        Returns the wallet auto top up settings for the current tenant.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4354,8 +5763,11 @@ class PaymentApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantWalletSettingsWrapper",
-            '401': None,
             '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4384,9 +5796,9 @@ class PaymentApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[TenantWalletSettingsWrapper]:
-        """Get wallet auto top-up settings
+        """Gets the tenant wallet auto top up settings
 
-        Returns the wallet auto top-up settings.
+        Returns the wallet auto top up settings for the current tenant.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4419,8 +5831,11 @@ class PaymentApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantWalletSettingsWrapper",
-            '401': None,
             '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4449,9 +5864,9 @@ class PaymentApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get wallet auto top-up settings
+        """Gets the tenant wallet auto top up settings
 
-        Returns the wallet auto top-up settings.
+        Returns the wallet auto top up settings for the current tenant.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4484,8 +5899,11 @@ class PaymentApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantWalletSettingsWrapper",
-            '401': None,
             '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4579,7 +5997,7 @@ class PaymentApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> QuotaWrapper:
+    ) -> WalletServiceWrapper:
         """Get wallet service
 
         Returns the specified wallet service.
@@ -4617,8 +6035,13 @@ class PaymentApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "QuotaWrapper",
+            '200': "WalletServiceWrapper",
+            '403': None,
+            '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4647,7 +6070,7 @@ class PaymentApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[QuotaWrapper]:
+    ) -> ApiResponse[WalletServiceWrapper]:
         """Get wallet service
 
         Returns the specified wallet service.
@@ -4685,8 +6108,13 @@ class PaymentApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "QuotaWrapper",
+            '200': "WalletServiceWrapper",
+            '403': None,
+            '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4753,8 +6181,13 @@ class PaymentApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "QuotaWrapper",
+            '200': "WalletServiceWrapper",
+            '403': None,
+            '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4852,7 +6285,7 @@ class PaymentApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> QuotaArrayWrapper:
+    ) -> WalletServiceArrayWrapper:
         """Get wallet services
 
         Returns the available wallet services.
@@ -4887,8 +6320,12 @@ class PaymentApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "QuotaArrayWrapper",
+            '200': "WalletServiceArrayWrapper",
+            '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4916,7 +6353,7 @@ class PaymentApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[QuotaArrayWrapper]:
+    ) -> ApiResponse[WalletServiceArrayWrapper]:
         """Get wallet services
 
         Returns the available wallet services.
@@ -4951,8 +6388,12 @@ class PaymentApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "QuotaArrayWrapper",
+            '200': "WalletServiceArrayWrapper",
+            '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -5015,8 +6456,12 @@ class PaymentApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "QuotaArrayWrapper",
+            '200': "WalletServiceArrayWrapper",
+            '403': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -5150,8 +6595,11 @@ class PaymentApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
             '400': None,
-            '401': None,
+            '403': None,
             '429': None,
+            '401': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -5220,8 +6668,11 @@ class PaymentApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
             '400': None,
-            '401': None,
+            '403': None,
             '429': None,
+            '401': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -5290,8 +6741,11 @@ class PaymentApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
             '400': None,
-            '401': None,
+            '403': None,
             '429': None,
+            '401': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -5379,6 +6833,306 @@ class PaymentApi:
 
 
     @validate_call
+    def set_restricted_ai_models(
+        self,
+        set_restricted_ai_models_request_dto: Optional[SetRestrictedAiModelsRequestDto] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RestrictedModelsResponseWrapper:
+        """Set restricted AI models
+
+        Overwrites the entire set of restricted AI model IDs for the current tenant.  The request body must contain the complete desired set — to add a restriction, include the new model alongside existing ones;  to remove one, omit it. An empty set lifts all restrictions. Only the portal payer can perform this action.
+
+        :param set_restricted_ai_models_request_dto:
+        :type set_restricted_ai_models_request_dto: SetRestrictedAiModelsRequestDto
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._set_restricted_ai_models_serialize(
+            set_restricted_ai_models_request_dto=set_restricted_ai_models_request_dto,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "RestrictedModelsResponseWrapper",
+            '403': None,
+            '404': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def set_restricted_ai_models_with_http_info(
+        self,
+        set_restricted_ai_models_request_dto: Optional[SetRestrictedAiModelsRequestDto] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[RestrictedModelsResponseWrapper]:
+        """Set restricted AI models
+
+        Overwrites the entire set of restricted AI model IDs for the current tenant.  The request body must contain the complete desired set — to add a restriction, include the new model alongside existing ones;  to remove one, omit it. An empty set lifts all restrictions. Only the portal payer can perform this action.
+
+        :param set_restricted_ai_models_request_dto:
+        :type set_restricted_ai_models_request_dto: SetRestrictedAiModelsRequestDto
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._set_restricted_ai_models_serialize(
+            set_restricted_ai_models_request_dto=set_restricted_ai_models_request_dto,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "RestrictedModelsResponseWrapper",
+            '403': None,
+            '404': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def set_restricted_ai_models_without_preload_content(
+        self,
+        set_restricted_ai_models_request_dto: Optional[SetRestrictedAiModelsRequestDto] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Set restricted AI models
+
+        Overwrites the entire set of restricted AI model IDs for the current tenant.  The request body must contain the complete desired set — to add a restriction, include the new model alongside existing ones;  to remove one, omit it. An empty set lifts all restrictions. Only the portal payer can perform this action.
+
+        :param set_restricted_ai_models_request_dto:
+        :type set_restricted_ai_models_request_dto: SetRestrictedAiModelsRequestDto
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._set_restricted_ai_models_serialize(
+            set_restricted_ai_models_request_dto=set_restricted_ai_models_request_dto,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "RestrictedModelsResponseWrapper",
+            '403': None,
+            '404': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _set_restricted_ai_models_serialize(
+        self,
+        set_restricted_ai_models_request_dto,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if set_restricted_ai_models_request_dto is not None:
+            _body_params = set_restricted_ai_models_request_dto
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
+        ]
+
+
+        resource_path = "/api/2.0/portal/payment/ai-model/restrictions"
+
+        return self.api_client.param_serialize(
+            method='PUT',
+            resource_path=resource_path,
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
     def set_tenant_wallet_settings(
         self,
         tenant_wallet_settings_wrapper: Optional[TenantWalletSettingsWrapper] = None,
@@ -5395,9 +7149,9 @@ class PaymentApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> TenantWalletSettingsWrapper:
-        """Set wallet auto top-up settings
+        """Set the wallet auto top up settings
 
-        Sets the wallet auto top-up settings.
+        Updates the wallet auto top up settings for the current tenant.  Requires the tariff service to be configured and the user to be authorized as a payer.  Returns null if the tariff service is not configured or customer information/balance cannot be retrieved.
 
         :param tenant_wallet_settings_wrapper:
         :type tenant_wallet_settings_wrapper: TenantWalletSettingsWrapper
@@ -5433,8 +7187,12 @@ class PaymentApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantWalletSettingsWrapper",
-            '401': None,
             '403': None,
+            '404': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -5464,9 +7222,9 @@ class PaymentApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[TenantWalletSettingsWrapper]:
-        """Set wallet auto top-up settings
+        """Set the wallet auto top up settings
 
-        Sets the wallet auto top-up settings.
+        Updates the wallet auto top up settings for the current tenant.  Requires the tariff service to be configured and the user to be authorized as a payer.  Returns null if the tariff service is not configured or customer information/balance cannot be retrieved.
 
         :param tenant_wallet_settings_wrapper:
         :type tenant_wallet_settings_wrapper: TenantWalletSettingsWrapper
@@ -5502,8 +7260,12 @@ class PaymentApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantWalletSettingsWrapper",
-            '401': None,
             '403': None,
+            '404': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -5533,9 +7295,9 @@ class PaymentApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Set wallet auto top-up settings
+        """Set the wallet auto top up settings
 
-        Sets the wallet auto top-up settings.
+        Updates the wallet auto top up settings for the current tenant.  Requires the tariff service to be configured and the user to be authorized as a payer.  Returns null if the tariff service is not configured or customer information/balance cannot be retrieved.
 
         :param tenant_wallet_settings_wrapper:
         :type tenant_wallet_settings_wrapper: TenantWalletSettingsWrapper
@@ -5571,8 +7333,12 @@ class PaymentApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantWalletSettingsWrapper",
-            '401': None,
             '403': None,
+            '404': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -5717,7 +7483,12 @@ class PaymentApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
+            '403': None,
+            '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -5781,7 +7552,12 @@ class PaymentApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
+            '403': None,
+            '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -5845,7 +7621,12 @@ class PaymentApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
+            '403': None,
+            '404': None,
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -5971,8 +7752,13 @@ class PaymentApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
-            '401': None,
+            '400': None,
             '403': None,
+            '404': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -6040,8 +7826,13 @@ class PaymentApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
-            '401': None,
+            '400': None,
             '403': None,
+            '404': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -6109,8 +7900,13 @@ class PaymentApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
-            '401': None,
+            '400': None,
             '403': None,
+            '404': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -6259,8 +8055,13 @@ class PaymentApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
-            '401': None,
+            '400': None,
             '403': None,
+            '404': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -6328,8 +8129,13 @@ class PaymentApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
-            '401': None,
+            '400': None,
             '403': None,
+            '404': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -6397,8 +8203,13 @@ class PaymentApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
-            '401': None,
+            '400': None,
             '403': None,
+            '404': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -6547,8 +8358,14 @@ class PaymentApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
-            '401': None,
+            '400': None,
+            '402': None,
             '403': None,
+            '404': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -6616,8 +8433,14 @@ class PaymentApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
-            '401': None,
+            '400': None,
+            '402': None,
             '403': None,
+            '404': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -6685,8 +8508,14 @@ class PaymentApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
-            '401': None,
+            '400': None,
+            '402': None,
             '403': None,
+            '404': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,

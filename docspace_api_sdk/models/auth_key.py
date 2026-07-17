@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -32,9 +32,13 @@ class AuthKey(BaseModel):
     The authorization key parameters.
     """ # noqa: E501
     name: Optional[StrictStr] = Field(description="The authorization key name.")
-    value: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(description="The authorization key value.")
+    value: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=4000)]] = Field(description="The authorization key value.")
     title: Optional[StrictStr] = Field(default=None, description="The authorization key title.")
-    __properties: ClassVar[List[str]] = ["name", "value", "title"]
+    type: Optional[StrictStr] = Field(default=None, description="The field type: text, password, select, toggle.")
+    options: Optional[List[StrictStr]] = Field(default=None, description="The list of options for select type fields.")
+    depends_on: Optional[StrictStr] = Field(default=None, description="The name of another key this field depends on for visibility.", alias="dependsOn")
+    depends_on_value: Optional[StrictStr] = Field(default=None, description="The value of ASC.Web.Studio.UserControls.Management.AuthKey.DependsOn key that makes this field visible.", alias="dependsOnValue")
+    __properties: ClassVar[List[str]] = ["name", "value", "title", "type", "options", "dependsOn", "dependsOnValue"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -90,6 +94,26 @@ class AuthKey(BaseModel):
         if self.title is None and "title" in self.model_fields_set:
             _dict['title'] = None
 
+        # set to None if type (nullable) is None
+        # and model_fields_set contains the field
+        if self.type is None and "type" in self.model_fields_set:
+            _dict['type'] = None
+
+        # set to None if options (nullable) is None
+        # and model_fields_set contains the field
+        if self.options is None and "options" in self.model_fields_set:
+            _dict['options'] = None
+
+        # set to None if depends_on (nullable) is None
+        # and model_fields_set contains the field
+        if self.depends_on is None and "depends_on" in self.model_fields_set:
+            _dict['dependsOn'] = None
+
+        # set to None if depends_on_value (nullable) is None
+        # and model_fields_set contains the field
+        if self.depends_on_value is None and "depends_on_value" in self.model_fields_set:
+            _dict['dependsOnValue'] = None
+
         return _dict
 
     @classmethod
@@ -105,7 +129,11 @@ class AuthKey(BaseModel):
         _obj = cls.model_validate({
             "name": obj.get("name"),
             "value": obj.get("value"),
-            "title": obj.get("title")
+            "title": obj.get("title"),
+            "type": obj.get("type"),
+            "options": obj.get("options"),
+            "dependsOn": obj.get("dependsOn"),
+            "dependsOnValue": obj.get("dependsOnValue")
         })
         return _obj
 

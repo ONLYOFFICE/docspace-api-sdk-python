@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -36,7 +36,7 @@ class CapabilitiesDto(BaseModel):
     sso_label: Optional[StrictStr] = Field(description="The SP login label.", alias="ssoLabel")
     oauth_enabled: StrictBool = Field(description="Specifies if OAuth is enabled or not.", alias="oauthEnabled")
     sso_url: Optional[StrictStr] = Field(description="The SSO URL. If this parameter is empty, then the SSO settings are disabled.", alias="ssoUrl")
-    identity_server_enabled: StrictBool = Field(description="Specifies if identity server is enabled or not", alias="identityServerEnabled")
+    identity_server_enabled: StrictBool = Field(description="Specifies if an identity server is enabled or not.", alias="identityServerEnabled")
     __properties: ClassVar[List[str]] = ["ldapEnabled", "ldapDomain", "providers", "ssoLabel", "oauthEnabled", "ssoUrl", "identityServerEnabled"]
 
     model_config = ConfigDict(

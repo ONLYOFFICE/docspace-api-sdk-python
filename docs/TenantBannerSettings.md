@@ -6,7 +6,7 @@ The visibility settings of the promotional banners.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **hidden** | **bool** | The banners visibility flag. | [optional] 
-**last_modified** | **datetime** |  | [optional] 
+**last_modified** | **datetime** | The timestamp indicating when the settings were last modified. | [optional] 
 
 ## Example
 

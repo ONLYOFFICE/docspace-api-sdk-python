@@ -5,9 +5,9 @@ The request for updating a group.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**members_to_add** | **List[str]** | The list of user IDs to add to the group. | [optional] 
-**members_to_remove** | **List[str]** | The list of user IDs to remove from the group. | [optional] 
-**group_manager** | **str** | The group manager ID. | [optional] 
+**members_to_add** | **List[UUID]** | The list of user IDs to add to the group. | [optional] 
+**members_to_remove** | **List[UUID]** | The list of user IDs to remove from the group. | [optional] 
+**group_manager** | **UUID** | The group manager ID. | [optional] 
 **group_name** | **str** | The group name. | [optional] 
 
 ## Example

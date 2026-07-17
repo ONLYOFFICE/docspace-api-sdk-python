@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,8 +21,9 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List, Optional
+from uuid import UUID
 from docspace_api_sdk.models.update_members_quota_request_dto_quota import UpdateMembersQuotaRequestDtoQuota
 from typing import Optional, Set
 from typing_extensions import Self
@@ -31,7 +32,7 @@ class UpdateMembersQuotaRequestDto(BaseModel):
     """
     The request parameters for updating a user quota.
     """ # noqa: E501
-    user_ids: Optional[List[StrictStr]] = Field(default=None, description="The list of user IDs.", alias="userIds")
+    user_ids: Optional[List[UUID]] = Field(default=None, description="The list of user IDs.", alias="userIds")
     quota: Optional[UpdateMembersQuotaRequestDtoQuota] = None
     __properties: ClassVar[List[str]] = ["userIds", "quota"]
 

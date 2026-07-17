@@ -5,7 +5,7 @@ The module information.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** | The module ID. | [optional] 
+**id** | **UUID** | The module ID. | [optional] 
 **app_name** | **str** | The module product class name. | [optional] 
 **title** | **str** | The module product class name. | [optional] 
 **link** | **str** | The URL to the module start page. | [optional] 

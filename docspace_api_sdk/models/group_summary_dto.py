@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,6 +23,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from uuid import UUID
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -30,7 +31,7 @@ class GroupSummaryDto(BaseModel):
     """
     The group summary parameters.
     """ # noqa: E501
-    id: StrictStr = Field(description="The group ID.")
+    id: UUID = Field(description="The group ID.")
     name: Optional[StrictStr] = Field(description="The group name.")
     manager: Optional[StrictStr] = Field(default=None, description="The group manager.")
     is_system: Optional[StrictBool] = Field(default=None, description="Indicates whether the group is a system group.", alias="isSystem")

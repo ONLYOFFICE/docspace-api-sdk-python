@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,9 +22,10 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictInt, StrictStr
+from pydantic import Field, StrictInt
 from typing import Optional
 from typing_extensions import Annotated
+from uuid import UUID
 from docspace_api_sdk.models.api_date_time import ApiDateTime
 from docspace_api_sdk.models.login_event_array_wrapper import LoginEventArrayWrapper
 from docspace_api_sdk.models.message_action import MessageAction
@@ -47,7 +48,6 @@ class LoginHistoryApi:
             api_client = ApiClient.get_default()
         self.api_client = api_client
         self._fields = None
-
 
     def with_fields(self, fields: str) -> LoginHistoryApi:
         self._fields = fields
@@ -105,8 +105,12 @@ class LoginHistoryApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
-            '401': None,
             '402': None,
+            '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -170,8 +174,12 @@ class LoginHistoryApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
-            '401': None,
             '402': None,
+            '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -235,8 +243,12 @@ class LoginHistoryApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
-            '401': None,
             '402': None,
+            '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -365,8 +377,12 @@ class LoginHistoryApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "LoginEventArrayWrapper",
-            '401': None,
             '402': None,
+            '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -430,8 +446,12 @@ class LoginHistoryApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "LoginEventArrayWrapper",
-            '401': None,
             '402': None,
+            '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -495,8 +515,12 @@ class LoginHistoryApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "LoginEventArrayWrapper",
-            '401': None,
             '402': None,
+            '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -577,7 +601,7 @@ class LoginHistoryApi:
     @validate_call
     def get_login_events_by_filter(
         self,
-        user_id: Annotated[Optional[StrictStr], Field(description="The ID of the user whose login events are being queried.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="The ID of the user whose login events are being queried.")] = None,
         action: Annotated[Optional[MessageAction], Field(description="The login-related action to filter events by.")] = None,
         var_from: Annotated[Optional[ApiDateTime], Field(description="The starting date and time for filtering login events.")] = None,
         to: Annotated[Optional[ApiDateTime], Field(description="The ending date and time for filtering login events.")] = None,
@@ -601,7 +625,7 @@ class LoginHistoryApi:
         Returns a list of the login events by the parameters specified in the request.
 
         :param user_id: The ID of the user whose login events are being queried.
-        :type user_id: str
+        :type user_id: UUID
         :param action: The login-related action to filter events by.
         :type action: MessageAction
         :param var_from: The starting date and time for filtering login events.
@@ -649,8 +673,12 @@ class LoginHistoryApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "LoginEventArrayWrapper",
-            '401': None,
             '402': None,
+            '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -666,7 +694,7 @@ class LoginHistoryApi:
     @validate_call
     def get_login_events_by_filter_with_http_info(
         self,
-        user_id: Annotated[Optional[StrictStr], Field(description="The ID of the user whose login events are being queried.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="The ID of the user whose login events are being queried.")] = None,
         action: Annotated[Optional[MessageAction], Field(description="The login-related action to filter events by.")] = None,
         var_from: Annotated[Optional[ApiDateTime], Field(description="The starting date and time for filtering login events.")] = None,
         to: Annotated[Optional[ApiDateTime], Field(description="The ending date and time for filtering login events.")] = None,
@@ -690,7 +718,7 @@ class LoginHistoryApi:
         Returns a list of the login events by the parameters specified in the request.
 
         :param user_id: The ID of the user whose login events are being queried.
-        :type user_id: str
+        :type user_id: UUID
         :param action: The login-related action to filter events by.
         :type action: MessageAction
         :param var_from: The starting date and time for filtering login events.
@@ -738,8 +766,12 @@ class LoginHistoryApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "LoginEventArrayWrapper",
-            '401': None,
             '402': None,
+            '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -755,7 +787,7 @@ class LoginHistoryApi:
     @validate_call
     def get_login_events_by_filter_without_preload_content(
         self,
-        user_id: Annotated[Optional[StrictStr], Field(description="The ID of the user whose login events are being queried.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="The ID of the user whose login events are being queried.")] = None,
         action: Annotated[Optional[MessageAction], Field(description="The login-related action to filter events by.")] = None,
         var_from: Annotated[Optional[ApiDateTime], Field(description="The starting date and time for filtering login events.")] = None,
         to: Annotated[Optional[ApiDateTime], Field(description="The ending date and time for filtering login events.")] = None,
@@ -779,7 +811,7 @@ class LoginHistoryApi:
         Returns a list of the login events by the parameters specified in the request.
 
         :param user_id: The ID of the user whose login events are being queried.
-        :type user_id: str
+        :type user_id: UUID
         :param action: The login-related action to filter events by.
         :type action: MessageAction
         :param var_from: The starting date and time for filtering login events.
@@ -827,8 +859,12 @@ class LoginHistoryApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "LoginEventArrayWrapper",
-            '401': None,
             '402': None,
+            '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,

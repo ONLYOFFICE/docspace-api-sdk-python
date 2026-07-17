@@ -62,6 +62,11 @@ Name | Type | Description | Notes
 **max_upload_thread_count** | **int** | The maximum number of upload threads. | [optional] 
 **chunk_upload_size** | **int** | The size of a large file that is uploaded in chunks. | [optional] 
 **open_editor_in_same_tab** | **bool** | Specifies whether to open the editor in the same tab or not. | [optional] 
+**organize_rooms_grouping** | **bool** | Specifies whether the grouping of rooms is enabled or not. | [optional] 
+**default_share_link_internal** | **bool** | Specifies the default sharing link type: true = DocSpace users only (internal), false = Anyone with the link. | [optional] 
+**external_share_apply_to_documents** | **bool** | When external sharing is restricted, specifies whether the restriction applies to the My Documents section. | [optional] 
+**external_share_apply_to_rooms** | **bool** | When external sharing is restricted, specifies whether the restriction applies to the Rooms section. | [optional] 
+**block_existing_links_on_restrict** | **bool** | When external sharing is restricted, specifies whether existing public links are blocked immediately. | [optional] 
 **exts_files_vectorized** | **List[str]** | List of extensions available for vectorization | [optional] 
 **max_vectorization_file_size** | **int** | The maximum file size for vectorization | [optional] 
 

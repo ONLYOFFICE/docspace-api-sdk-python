@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,22 +24,24 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from docspace_api_sdk.models.backup_progress_enum import BackupProgressEnum
+from docspace_api_sdk.models.distributed_task_status import DistributedTaskStatus
 from typing import Optional, Set
 from typing_extensions import Self
 
 class BackupProgress(BaseModel):
     """
-    BackupProgress
+    The backup progress parameters.
     """ # noqa: E501
-    is_completed: Optional[StrictBool] = Field(default=None, alias="isCompleted")
-    progress: Optional[StrictInt] = None
-    error: Optional[StrictStr] = None
-    warning: Optional[StrictStr] = None
-    link: Optional[StrictStr] = None
-    tenant_id: Optional[StrictInt] = Field(default=None, alias="tenantId")
+    is_completed: Optional[StrictBool] = Field(default=None, description="Specifies if the backup is completed or not.", alias="isCompleted")
+    progress: Optional[StrictInt] = Field(default=None, description="The backup progress in percentage.")
+    error: Optional[StrictStr] = Field(default=None, description="The backup error message.")
+    warning: Optional[StrictStr] = Field(default=None, description="The backup warning message.")
+    link: Optional[StrictStr] = Field(default=None, description="The backup link.")
+    tenant_id: Optional[StrictInt] = Field(default=None, description="The tenant ID.", alias="tenantId")
     backup_progress_enum: Optional[BackupProgressEnum] = Field(default=None, alias="backupProgressEnum")
-    task_id: Optional[StrictStr] = Field(default=None, alias="taskId")
-    __properties: ClassVar[List[str]] = ["isCompleted", "progress", "error", "warning", "link", "tenantId", "backupProgressEnum", "taskId"]
+    status: Optional[DistributedTaskStatus] = None
+    task_id: Optional[StrictStr] = Field(default=None, description="The task ID.", alias="taskId")
+    __properties: ClassVar[List[str]] = ["isCompleted", "progress", "error", "warning", "link", "tenantId", "backupProgressEnum", "status", "taskId"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -120,6 +122,7 @@ class BackupProgress(BaseModel):
             "link": obj.get("link"),
             "tenantId": obj.get("tenantId"),
             "backupProgressEnum": obj.get("backupProgressEnum"),
+            "status": obj.get("status"),
             "taskId": obj.get("taskId")
         })
         return _obj

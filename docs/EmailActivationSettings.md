@@ -6,7 +6,7 @@ The email activation settings.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **show** | **bool** | Specifies whether the email activation settings are shown or hidden. | [optional] 
-**last_modified** | **datetime** |  | [optional] 
+**last_modified** | **datetime** | The timestamp indicating when the settings were last modified. | [optional] 
 
 ## Example
 

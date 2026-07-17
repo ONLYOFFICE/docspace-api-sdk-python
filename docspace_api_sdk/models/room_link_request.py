@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,9 +21,10 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
+from uuid import UUID
 from docspace_api_sdk.models.api_date_time import ApiDateTime
 from docspace_api_sdk.models.file_share import FileShare
 from docspace_api_sdk.models.link_type import LinkType
@@ -34,7 +35,7 @@ class RoomLinkRequest(BaseModel):
     """
     The room link parameters.
     """ # noqa: E501
-    link_id: Optional[StrictStr] = Field(default=None, description="The room link ID.", alias="linkId")
+    link_id: Optional[UUID] = Field(default=None, description="The room link ID.", alias="linkId")
     access: Optional[FileShare] = None
     expiration_date: Optional[ApiDateTime] = Field(default=None, alias="expirationDate")
     internal: Optional[StrictBool] = Field(default=None, description="The link scope, whether it is internal or not.")
@@ -42,7 +43,9 @@ class RoomLinkRequest(BaseModel):
     link_type: Optional[LinkType] = Field(default=None, alias="linkType")
     password: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The link password.")
     deny_download: Optional[StrictBool] = Field(default=None, description="Specifies if downloading the file from the link is disabled or not.", alias="denyDownload")
-    __properties: ClassVar[List[str]] = ["linkId", "access", "expirationDate", "internal", "title", "linkType", "password", "denyDownload"]
+    max_use_count: Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]] = Field(default=None, description="The maximum number of times the invitation link can be used.", alias="maxUseCount")
+    current_use_count: Optional[StrictInt] = Field(default=None, description="The current number of times the invitation link has been used.", alias="currentUseCount")
+    __properties: ClassVar[List[str]] = ["linkId", "access", "expirationDate", "internal", "title", "linkType", "password", "denyDownload", "maxUseCount", "currentUseCount"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -96,6 +99,11 @@ class RoomLinkRequest(BaseModel):
         if self.password is None and "password" in self.model_fields_set:
             _dict['password'] = None
 
+        # set to None if max_use_count (nullable) is None
+        # and model_fields_set contains the field
+        if self.max_use_count is None and "max_use_count" in self.model_fields_set:
+            _dict['maxUseCount'] = None
+
         return _dict
 
     @classmethod
@@ -116,7 +124,9 @@ class RoomLinkRequest(BaseModel):
             "title": obj.get("title"),
             "linkType": obj.get("linkType"),
             "password": obj.get("password"),
-            "denyDownload": obj.get("denyDownload")
+            "denyDownload": obj.get("denyDownload"),
+            "maxUseCount": obj.get("maxUseCount"),
+            "currentUseCount": obj.get("currentUseCount")
         })
         return _obj
 

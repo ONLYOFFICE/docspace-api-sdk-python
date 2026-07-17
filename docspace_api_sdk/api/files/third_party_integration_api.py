@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -49,7 +49,6 @@ class ThirdPartyIntegrationApi:
         if api_client is None:
             api_client = ApiClient.get_default()
         self.api_client = api_client
-
 
 
 
@@ -109,6 +108,9 @@ class ThirdPartyIntegrationApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -177,6 +179,9 @@ class ThirdPartyIntegrationApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -245,6 +250,9 @@ class ThirdPartyIntegrationApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -344,7 +352,7 @@ class ThirdPartyIntegrationApi:
     ) -> ProviderArrayWrapper:
         """Get all providers
 
-        Returns a list of all providers.   **Note**: Available provider keys: Dropbox, Box, WebDav, OneDrive, GoogleDrive, kDrive, ownCloud, Nextcloud.
+        Returns a list of all providers.
 
         :param excludewebdav: Specifies whether WebDAV resources should be excluded from the result..
         :type excludewebdav: bool
@@ -381,6 +389,9 @@ class ThirdPartyIntegrationApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ProviderArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -412,7 +423,7 @@ class ThirdPartyIntegrationApi:
     ) -> ApiResponse[ProviderArrayWrapper]:
         """Get all providers
 
-        Returns a list of all providers.   **Note**: Available provider keys: Dropbox, Box, WebDav, OneDrive, GoogleDrive, kDrive, ownCloud, Nextcloud.
+        Returns a list of all providers.
 
         :param excludewebdav: Specifies whether WebDAV resources should be excluded from the result..
         :type excludewebdav: bool
@@ -449,6 +460,9 @@ class ThirdPartyIntegrationApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ProviderArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -480,7 +494,7 @@ class ThirdPartyIntegrationApi:
     ) -> RESTResponseType:
         """Get all providers
 
-        Returns a list of all providers.   **Note**: Available provider keys: Dropbox, Box, WebDav, OneDrive, GoogleDrive, kDrive, ownCloud, Nextcloud.
+        Returns a list of all providers.
 
         :param excludewebdav: Specifies whether WebDAV resources should be excluded from the result..
         :type excludewebdav: bool
@@ -517,6 +531,9 @@ class ThirdPartyIntegrationApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ProviderArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -651,6 +668,9 @@ class ThirdPartyIntegrationApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderStringWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -715,6 +735,9 @@ class ThirdPartyIntegrationApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderStringWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -779,6 +802,9 @@ class ThirdPartyIntegrationApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderStringWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -874,7 +900,7 @@ class ThirdPartyIntegrationApi:
     ) -> ArrayArrayWrapper:
         """Get providers
 
-        Returns the list of the available providers.   **Note**: Available provider keys: DropboxV2, Box, WebDav, Yandex, OneDrive, SharePoint, GoogleDrive, kDrive.
+        Returns the list of the available providers.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -908,6 +934,9 @@ class ThirdPartyIntegrationApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ArrayArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -938,7 +967,7 @@ class ThirdPartyIntegrationApi:
     ) -> ApiResponse[ArrayArrayWrapper]:
         """Get providers
 
-        Returns the list of the available providers.   **Note**: Available provider keys: DropboxV2, Box, WebDav, Yandex, OneDrive, SharePoint, GoogleDrive, kDrive.
+        Returns the list of the available providers.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -972,6 +1001,9 @@ class ThirdPartyIntegrationApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ArrayArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1002,7 +1034,7 @@ class ThirdPartyIntegrationApi:
     ) -> RESTResponseType:
         """Get providers
 
-        Returns the list of the available providers.   **Note**: Available provider keys: DropboxV2, Box, WebDav, Yandex, OneDrive, SharePoint, GoogleDrive, kDrive.
+        Returns the list of the available providers.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1036,6 +1068,9 @@ class ThirdPartyIntegrationApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ArrayArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1165,6 +1200,9 @@ class ThirdPartyIntegrationApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderStringArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1229,6 +1267,9 @@ class ThirdPartyIntegrationApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderStringArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1293,6 +1334,9 @@ class ThirdPartyIntegrationApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderStringArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1422,6 +1466,9 @@ class ThirdPartyIntegrationApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ThirdPartyParamsArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1486,6 +1533,9 @@ class ThirdPartyIntegrationApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ThirdPartyParamsArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1550,6 +1600,9 @@ class ThirdPartyIntegrationApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ThirdPartyParamsArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1646,7 +1699,7 @@ class ThirdPartyIntegrationApi:
     ) -> FolderStringWrapper:
         """Save a third-party account
 
-        Saves the third-party storage service account. For WebDav, Yandex, kDrive and SharePoint, the login and password are used for authentication. For other providers, the authentication is performed using a token received via OAuth 2.0.   **Note**: List of provider keys: DropboxV2, Box, WebDav, Yandex, OneDrive, SharePoint, GoogleDrive, kDrive.
+        Saves the third-party storage service account. For WebDav, Yandex, kDrive and SharePoint, the login and password are used for authentication. For other providers, the authentication is performed using a token received via OAuth 2.0.
 
         :param third_party_request_dto:
         :type third_party_request_dto: ThirdPartyRequestDto
@@ -1683,6 +1736,9 @@ class ThirdPartyIntegrationApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderStringWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1714,7 +1770,7 @@ class ThirdPartyIntegrationApi:
     ) -> ApiResponse[FolderStringWrapper]:
         """Save a third-party account
 
-        Saves the third-party storage service account. For WebDav, Yandex, kDrive and SharePoint, the login and password are used for authentication. For other providers, the authentication is performed using a token received via OAuth 2.0.   **Note**: List of provider keys: DropboxV2, Box, WebDav, Yandex, OneDrive, SharePoint, GoogleDrive, kDrive.
+        Saves the third-party storage service account. For WebDav, Yandex, kDrive and SharePoint, the login and password are used for authentication. For other providers, the authentication is performed using a token received via OAuth 2.0.
 
         :param third_party_request_dto:
         :type third_party_request_dto: ThirdPartyRequestDto
@@ -1751,6 +1807,9 @@ class ThirdPartyIntegrationApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderStringWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1782,7 +1841,7 @@ class ThirdPartyIntegrationApi:
     ) -> RESTResponseType:
         """Save a third-party account
 
-        Saves the third-party storage service account. For WebDav, Yandex, kDrive and SharePoint, the login and password are used for authentication. For other providers, the authentication is performed using a token received via OAuth 2.0.   **Note**: List of provider keys: DropboxV2, Box, WebDav, Yandex, OneDrive, SharePoint, GoogleDrive, kDrive.
+        Saves the third-party storage service account. For WebDav, Yandex, kDrive and SharePoint, the login and password are used for authentication. For other providers, the authentication is performed using a token received via OAuth 2.0.
 
         :param third_party_request_dto:
         :type third_party_request_dto: ThirdPartyRequestDto
@@ -1819,6 +1878,9 @@ class ThirdPartyIntegrationApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderStringWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1931,7 +1993,7 @@ class ThirdPartyIntegrationApi:
     ) -> FolderStringWrapper:
         """Save a third-party account backup
 
-        Saves a backup of the connected third-party account.   **Note**: List of provider keys: DropboxV2, Box, WebDav, Yandex, OneDrive, SharePoint, GoogleDrive, kDrive.
+        Saves a backup of the connected third-party account.
 
         :param third_party_backup_request_dto:
         :type third_party_backup_request_dto: ThirdPartyBackupRequestDto
@@ -1968,6 +2030,9 @@ class ThirdPartyIntegrationApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderStringWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1999,7 +2064,7 @@ class ThirdPartyIntegrationApi:
     ) -> ApiResponse[FolderStringWrapper]:
         """Save a third-party account backup
 
-        Saves a backup of the connected third-party account.   **Note**: List of provider keys: DropboxV2, Box, WebDav, Yandex, OneDrive, SharePoint, GoogleDrive, kDrive.
+        Saves a backup of the connected third-party account.
 
         :param third_party_backup_request_dto:
         :type third_party_backup_request_dto: ThirdPartyBackupRequestDto
@@ -2036,6 +2101,9 @@ class ThirdPartyIntegrationApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderStringWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2067,7 +2135,7 @@ class ThirdPartyIntegrationApi:
     ) -> RESTResponseType:
         """Save a third-party account backup
 
-        Saves a backup of the connected third-party account.   **Note**: List of provider keys: DropboxV2, Box, WebDav, Yandex, OneDrive, SharePoint, GoogleDrive, kDrive.
+        Saves a backup of the connected third-party account.
 
         :param third_party_backup_request_dto:
         :type third_party_backup_request_dto: ThirdPartyBackupRequestDto
@@ -2104,6 +2172,9 @@ class ThirdPartyIntegrationApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderStringWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,

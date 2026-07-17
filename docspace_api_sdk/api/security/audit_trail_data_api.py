@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -25,6 +25,7 @@ from typing_extensions import Annotated
 from pydantic import Field, StrictInt, StrictStr
 from typing import Optional
 from typing_extensions import Annotated
+from uuid import UUID
 from docspace_api_sdk.models.action_type import ActionType
 from docspace_api_sdk.models.api_date_time import ApiDateTime
 from docspace_api_sdk.models.audit_event_array_wrapper import AuditEventArrayWrapper
@@ -53,7 +54,6 @@ class AuditTrailDataApi:
             api_client = ApiClient.get_default()
         self.api_client = api_client
         self._fields = None
-
 
     def with_fields(self, fields: str) -> AuditTrailDataApi:
         self._fields = fields
@@ -111,9 +111,12 @@ class AuditTrailDataApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
-            '401': None,
             '402': None,
             '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -177,9 +180,12 @@ class AuditTrailDataApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
-            '401': None,
             '402': None,
             '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -243,9 +249,12 @@ class AuditTrailDataApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
-            '401': None,
             '402': None,
             '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -326,7 +335,7 @@ class AuditTrailDataApi:
     @validate_call
     def get_audit_events_by_filter(
         self,
-        user_id: Annotated[Optional[StrictStr], Field(description="The ID of the user who triggered the audit event.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="The ID of the user who triggered the audit event.")] = None,
         module_type: Annotated[Optional[LocationType], Field(description="The location where the audit event occurred.")] = None,
         action_type: Annotated[Optional[ActionType], Field(description="The type of action performed in the audit event (e.g., Create, Update, Delete).")] = None,
         action: Annotated[Optional[MessageAction], Field(description="The specific action that occurred within the audit event.")] = None,
@@ -354,7 +363,7 @@ class AuditTrailDataApi:
         Returns a list of the audit events by the parameters specified in the request.
 
         :param user_id: The ID of the user who triggered the audit event.
-        :type user_id: str
+        :type user_id: UUID
         :param module_type: The location where the audit event occurred.
         :type module_type: LocationType
         :param action_type: The type of action performed in the audit event (e.g., Create, Update, Delete).
@@ -414,8 +423,12 @@ class AuditTrailDataApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AuditEventArrayWrapper",
-            '401': None,
             '402': None,
+            '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -431,7 +444,7 @@ class AuditTrailDataApi:
     @validate_call
     def get_audit_events_by_filter_with_http_info(
         self,
-        user_id: Annotated[Optional[StrictStr], Field(description="The ID of the user who triggered the audit event.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="The ID of the user who triggered the audit event.")] = None,
         module_type: Annotated[Optional[LocationType], Field(description="The location where the audit event occurred.")] = None,
         action_type: Annotated[Optional[ActionType], Field(description="The type of action performed in the audit event (e.g., Create, Update, Delete).")] = None,
         action: Annotated[Optional[MessageAction], Field(description="The specific action that occurred within the audit event.")] = None,
@@ -459,7 +472,7 @@ class AuditTrailDataApi:
         Returns a list of the audit events by the parameters specified in the request.
 
         :param user_id: The ID of the user who triggered the audit event.
-        :type user_id: str
+        :type user_id: UUID
         :param module_type: The location where the audit event occurred.
         :type module_type: LocationType
         :param action_type: The type of action performed in the audit event (e.g., Create, Update, Delete).
@@ -519,8 +532,12 @@ class AuditTrailDataApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AuditEventArrayWrapper",
-            '401': None,
             '402': None,
+            '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -536,7 +553,7 @@ class AuditTrailDataApi:
     @validate_call
     def get_audit_events_by_filter_without_preload_content(
         self,
-        user_id: Annotated[Optional[StrictStr], Field(description="The ID of the user who triggered the audit event.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="The ID of the user who triggered the audit event.")] = None,
         module_type: Annotated[Optional[LocationType], Field(description="The location where the audit event occurred.")] = None,
         action_type: Annotated[Optional[ActionType], Field(description="The type of action performed in the audit event (e.g., Create, Update, Delete).")] = None,
         action: Annotated[Optional[MessageAction], Field(description="The specific action that occurred within the audit event.")] = None,
@@ -564,7 +581,7 @@ class AuditTrailDataApi:
         Returns a list of the audit events by the parameters specified in the request.
 
         :param user_id: The ID of the user who triggered the audit event.
-        :type user_id: str
+        :type user_id: UUID
         :param module_type: The location where the audit event occurred.
         :type module_type: LocationType
         :param action_type: The type of action performed in the audit event (e.g., Create, Update, Delete).
@@ -624,8 +641,12 @@ class AuditTrailDataApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AuditEventArrayWrapper",
-            '401': None,
             '402': None,
+            '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -806,8 +827,12 @@ class AuditTrailDataApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantAuditSettingsWrapper",
-            '401': None,
             '402': None,
+            '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -871,8 +896,12 @@ class AuditTrailDataApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantAuditSettingsWrapper",
-            '401': None,
             '402': None,
+            '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -936,8 +965,12 @@ class AuditTrailDataApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantAuditSettingsWrapper",
-            '401': None,
             '402': None,
+            '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1074,6 +1107,11 @@ class AuditTrailDataApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectWrapper",
+            '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1145,6 +1183,11 @@ class AuditTrailDataApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectWrapper",
+            '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1216,6 +1259,11 @@ class AuditTrailDataApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectWrapper",
+            '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1274,6 +1322,12 @@ class AuditTrailDataApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
 
 
@@ -1348,6 +1402,11 @@ class AuditTrailDataApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectWrapper",
+            '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1411,6 +1470,11 @@ class AuditTrailDataApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectWrapper",
+            '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1474,6 +1538,11 @@ class AuditTrailDataApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectWrapper",
+            '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1522,6 +1591,12 @@ class AuditTrailDataApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
 
 
@@ -1596,8 +1671,12 @@ class AuditTrailDataApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AuditEventArrayWrapper",
-            '401': None,
             '402': None,
+            '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1661,8 +1740,12 @@ class AuditTrailDataApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AuditEventArrayWrapper",
-            '401': None,
             '402': None,
+            '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1726,8 +1809,12 @@ class AuditTrailDataApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AuditEventArrayWrapper",
-            '401': None,
             '402': None,
+            '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1861,8 +1948,12 @@ class AuditTrailDataApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantAuditSettingsWrapper",
             '400': None,
-            '401': None,
             '402': None,
+            '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1931,8 +2022,12 @@ class AuditTrailDataApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantAuditSettingsWrapper",
             '400': None,
-            '401': None,
             '402': None,
+            '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2001,8 +2096,12 @@ class AuditTrailDataApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantAuditSettingsWrapper",
             '400': None,
-            '401': None,
             '402': None,
+            '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,

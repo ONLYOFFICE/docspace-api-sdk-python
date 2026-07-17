@@ -3,7 +3,7 @@
 
 ## Enum
 
-* `None` (value: `0`)
+* `None_` (value: `0`)
 
 * `Draft` (value: `1`)
 

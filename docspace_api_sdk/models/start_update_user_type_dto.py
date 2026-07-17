@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,8 +21,9 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List, Optional
+from uuid import UUID
 from docspace_api_sdk.models.employee_type import EmployeeType
 from typing import Optional, Set
 from typing_extensions import Self
@@ -32,8 +33,8 @@ class StartUpdateUserTypeDto(BaseModel):
     The parameters for updating the type of the user or guest when reassigning rooms and shared files.
     """ # noqa: E501
     type: Optional[EmployeeType] = None
-    user_id: Optional[StrictStr] = Field(default=None, description="The user ID.", alias="userId")
-    reassign_user_id: Optional[StrictStr] = Field(default=None, description="The user ID to reassign.", alias="reassignUserId")
+    user_id: Optional[UUID] = Field(default=None, description="The user ID.", alias="userId")
+    reassign_user_id: Optional[UUID] = Field(default=None, description="The user ID to reassign.", alias="reassignUserId")
     __properties: ClassVar[List[str]] = ["type", "userId", "reassignUserId"]
 
     model_config = ConfigDict(

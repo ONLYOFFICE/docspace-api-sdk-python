@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **id** | **int** | The login event ID. | [optional] 
 **var_date** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] 
 **user** | **str** | The user name of the login event. | [optional] 
-**user_id** | **str** | The user ID of the login event. | [optional] 
+**user_id** | **UUID** | The user ID of the login event. | [optional] 
 **login** | **str** | The user login of the login event. | [optional] 
 **action** | **str** | The login event action. | [optional] 
 **action_id** | [**MessageAction**](MessageAction.md) |  | [optional] 

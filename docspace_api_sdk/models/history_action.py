@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from docspace_api_sdk.models.message_action import MessageAction
 from typing import Optional, Set
@@ -32,7 +32,7 @@ class HistoryAction(BaseModel):
     The action performed on the file.
     """ # noqa: E501
     id: Optional[MessageAction] = None
-    key: Optional[StrictStr] = None
+    key: Optional[StrictStr] = Field(default=None, description="The action performed on the file.")
     __properties: ClassVar[List[str]] = ["id", "key"]
 
     model_config = ConfigDict(

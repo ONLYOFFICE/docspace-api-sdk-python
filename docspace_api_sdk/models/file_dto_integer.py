@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -55,6 +55,7 @@ class FileDtoInteger(FileEntryDtoInteger):
     content_length: Optional[StrictStr] = Field(default=None, description="The content length of the file.", alias="contentLength")
     pure_content_length: Optional[StrictInt] = Field(default=None, description="The pure content length of the file.", alias="pureContentLength")
     file_status: Optional[FileStatus] = Field(default=None, alias="fileStatus")
+    editing_by: Optional[Dict[str, Optional[StrictStr]]] = Field(default=None, description="The list of users editing the file.", alias="editingBy")
     mute: Optional[StrictBool] = Field(default=None, description="Specifies if the file is muted or not.")
     view_url: Optional[StrictStr] = Field(default=None, description="The URL link to view the file.", alias="viewUrl")
     web_url: Optional[StrictStr] = Field(default=None, description="The Web URL link to the file.", alias="webUrl")
@@ -72,13 +73,16 @@ class FileDtoInteger(FileEntryDtoInteger):
     custom_filter_enabled: Optional[StrictBool] = Field(default=None, description="Specifies if the Custom Filter editing mode is enabled for a file or not.", alias="customFilterEnabled")
     custom_filter_enabled_by: Optional[StrictStr] = Field(default=None, description="The name of the user who enabled a Custom Filter editing mode for a file.", alias="customFilterEnabledBy")
     start_filling: Optional[StrictBool] = Field(default=None, description="Specifies if the filling has started or not.", alias="startFilling")
+    is_filling_preparing: Optional[StrictBool] = Field(default=None, description="Specifies if the form filling has started but the file is still being saved by the document editor. Filling and editing are not allowed.", alias="isFillingPreparing")
     in_process_folder_id: Optional[StrictInt] = Field(default=None, description="The InProcess folder ID of the file.", alias="inProcessFolderId")
     in_process_folder_title: Optional[StrictStr] = Field(default=None, description="The InProcess folder title of the file.", alias="inProcessFolderTitle")
+    results_folder_id: Optional[StrictInt] = Field(default=None, description="The ID of the FormFillingFolderDone folder that corresponds to this original form.", alias="resultsFolderId")
     draft_location: Optional[DraftLocationInteger] = Field(default=None, alias="draftLocation")
     view_accessibility: Optional[FileDtoIntegerAllOfViewAccessibility] = Field(default=None, alias="viewAccessibility")
     last_opened: Optional[ApiDateTime] = Field(default=None, alias="lastOpened")
     expired: Optional[ApiDateTime] = None
     vectorization_status: Optional[VectorizationStatus] = Field(default=None, alias="vectorizationStatus")
+    external_db_table_name: Optional[StrictStr] = Field(default=None, description="The name of the table in the external database that corresponds to this form.", alias="externalDbTableName")
     dimensions: Optional[Size] = None
 
     model_config = ConfigDict(
@@ -252,6 +256,11 @@ class FileDtoInteger(FileEntryDtoInteger):
         if self.pure_content_length is None and "pure_content_length" in self.model_fields_set:
             _dict['pureContentLength'] = None
 
+        # set to None if editing_by (nullable) is None
+        # and model_fields_set contains the field
+        if self.editing_by is None and "editing_by" in self.model_fields_set:
+            _dict['editingBy'] = None
+
         # set to None if view_url (nullable) is None
         # and model_fields_set contains the field
         if self.view_url is None and "view_url" in self.model_fields_set:
@@ -317,6 +326,11 @@ class FileDtoInteger(FileEntryDtoInteger):
         if self.start_filling is None and "start_filling" in self.model_fields_set:
             _dict['startFilling'] = None
 
+        # set to None if is_filling_preparing (nullable) is None
+        # and model_fields_set contains the field
+        if self.is_filling_preparing is None and "is_filling_preparing" in self.model_fields_set:
+            _dict['isFillingPreparing'] = None
+
         # set to None if in_process_folder_id (nullable) is None
         # and model_fields_set contains the field
         if self.in_process_folder_id is None and "in_process_folder_id" in self.model_fields_set:
@@ -327,10 +341,20 @@ class FileDtoInteger(FileEntryDtoInteger):
         if self.in_process_folder_title is None and "in_process_folder_title" in self.model_fields_set:
             _dict['inProcessFolderTitle'] = None
 
+        # set to None if results_folder_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.results_folder_id is None and "results_folder_id" in self.model_fields_set:
+            _dict['resultsFolderId'] = None
+
         # set to None if view_accessibility (nullable) is None
         # and model_fields_set contains the field
         if self.view_accessibility is None and "view_accessibility" in self.model_fields_set:
             _dict['viewAccessibility'] = None
+
+        # set to None if external_db_table_name (nullable) is None
+        # and model_fields_set contains the field
+        if self.external_db_table_name is None and "external_db_table_name" in self.model_fields_set:
+            _dict['externalDbTableName'] = None
 
         return _dict
 
@@ -352,6 +376,7 @@ class FileDtoInteger(FileEntryDtoInteger):
             "contentLength": obj.get("contentLength"),
             "pureContentLength": obj.get("pureContentLength"),
             "fileStatus": obj.get("fileStatus"),
+            "editingBy": obj.get("editingBy"),
             "mute": obj.get("mute"),
             "viewUrl": obj.get("viewUrl"),
             "webUrl": obj.get("webUrl"),
@@ -369,13 +394,16 @@ class FileDtoInteger(FileEntryDtoInteger):
             "customFilterEnabled": obj.get("customFilterEnabled"),
             "customFilterEnabledBy": obj.get("customFilterEnabledBy"),
             "startFilling": obj.get("startFilling"),
+            "isFillingPreparing": obj.get("isFillingPreparing"),
             "inProcessFolderId": obj.get("inProcessFolderId"),
             "inProcessFolderTitle": obj.get("inProcessFolderTitle"),
+            "resultsFolderId": obj.get("resultsFolderId"),
             "draftLocation": DraftLocationInteger.from_dict(obj["draftLocation"]) if obj.get("draftLocation") is not None else None,
             "viewAccessibility": FileDtoIntegerAllOfViewAccessibility.from_dict(obj["viewAccessibility"]) if obj.get("viewAccessibility") is not None else None,
             "lastOpened": ApiDateTime.from_dict(obj["lastOpened"]) if obj.get("lastOpened") is not None else None,
             "expired": ApiDateTime.from_dict(obj["expired"]) if obj.get("expired") is not None else None,
             "vectorizationStatus": obj.get("vectorizationStatus"),
+            "externalDbTableName": obj.get("externalDbTableName"),
             "dimensions": Size.from_dict(obj["dimensions"]) if obj.get("dimensions") is not None else None
         }
         all_fields = {**base_dict, **extra_fields}

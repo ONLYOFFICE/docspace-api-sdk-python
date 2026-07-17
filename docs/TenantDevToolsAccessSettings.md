@@ -6,7 +6,7 @@ The Developer Tools access settings.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **limited_access_for_users** | **bool** | Specifies if the Developer Tools access are limited for users or not. | [optional] 
-**last_modified** | **datetime** |  | [optional] 
+**last_modified** | **datetime** | The timestamp indicating when the settings were last modified. | [optional] 
 
 ## Example
 

@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -46,7 +46,9 @@ class UpdateRoomRequest(BaseModel):
     color: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=6)]] = Field(default=None, description="The room color.")
     cover: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=50)]] = Field(default=None, description="The room cover.")
     chat_settings: Optional[ChatSettings] = Field(default=None, alias="chatSettings")
-    __properties: ClassVar[List[str]] = ["title", "quota", "indexing", "denyDownload", "lifetime", "watermark", "logo", "tags", "color", "cover", "chatSettings"]
+    send_form_to_external_db: Optional[StrictBool] = Field(default=None, description="Specifies whether to send form data to external database.", alias="sendFormToExternalDB")
+    save_form_as_xlsx: Optional[StrictBool] = Field(default=None, description="Specifies whether to save form data as XLSX file.", alias="saveFormAsXLSX")
+    __properties: ClassVar[List[str]] = ["title", "quota", "indexing", "denyDownload", "lifetime", "watermark", "logo", "tags", "color", "cover", "chatSettings", "sendFormToExternalDB", "saveFormAsXLSX"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -134,6 +136,16 @@ class UpdateRoomRequest(BaseModel):
         if self.cover is None and "cover" in self.model_fields_set:
             _dict['cover'] = None
 
+        # set to None if send_form_to_external_db (nullable) is None
+        # and model_fields_set contains the field
+        if self.send_form_to_external_db is None and "send_form_to_external_db" in self.model_fields_set:
+            _dict['sendFormToExternalDB'] = None
+
+        # set to None if save_form_as_xlsx (nullable) is None
+        # and model_fields_set contains the field
+        if self.save_form_as_xlsx is None and "save_form_as_xlsx" in self.model_fields_set:
+            _dict['saveFormAsXLSX'] = None
+
         return _dict
 
     @classmethod
@@ -157,7 +169,9 @@ class UpdateRoomRequest(BaseModel):
             "tags": obj.get("tags"),
             "color": obj.get("color"),
             "cover": obj.get("cover"),
-            "chatSettings": ChatSettings.from_dict(obj["chatSettings"]) if obj.get("chatSettings") is not None else None
+            "chatSettings": ChatSettings.from_dict(obj["chatSettings"]) if obj.get("chatSettings") is not None else None,
+            "sendFormToExternalDB": obj.get("sendFormToExternalDB"),
+            "saveFormAsXLSX": obj.get("saveFormAsXLSX")
         })
         return _obj
 

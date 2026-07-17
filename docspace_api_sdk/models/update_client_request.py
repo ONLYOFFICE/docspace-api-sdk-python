@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -29,15 +29,16 @@ from typing_extensions import Self
 
 class UpdateClientRequest(BaseModel):
     """
-    The request for updating client details.
+    Client update request containing modified client details
     """ # noqa: E501
-    name: Optional[Annotated[str, Field(min_length=1, strict=True)]] = Field(default=None, description="The client name.")
-    description: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The client description")
-    logo: Optional[Annotated[str, Field(min_length=1, strict=True)]] = Field(default=None, description="The client logo in base64 format.")
-    allow_pkce: Optional[StrictBool] = Field(default=None, description="Indicates whether PKCE is allowed for the client.")
-    is_public: Optional[StrictBool] = Field(default=None, description="Indicates whether the client is accessible by third-party tenants.")
-    allowed_origins: Optional[List[StrictStr]] = Field(default=None, description="The allowed origins for the client.")
-    __properties: ClassVar[List[str]] = ["name", "description", "logo", "allow_pkce", "is_public", "allowed_origins"]
+    name: Optional[Annotated[str, Field(min_length=1, strict=True)]] = Field(default=None, description="The name of the client")
+    description: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The description of the client")
+    logo: Optional[Annotated[str, Field(min_length=1, strict=True)]] = Field(default=None, description="The logo of the client in base64 format")
+    public: Optional[StrictBool] = None
+    allow_pkce: Optional[StrictBool] = Field(default=None, description="Indicates whether PKCE is allowed for the client")
+    is_public: Optional[StrictBool] = Field(default=None, description="Indicates whether client is accessible by third-party tenants")
+    allowed_origins: Optional[Annotated[List[StrictStr], Field(min_length=1, max_length=12)]] = Field(default=None, description="The allowed origins for the client")
+    __properties: ClassVar[List[str]] = ["name", "description", "logo", "public", "allow_pkce", "is_public", "allowed_origins"]
 
     @field_validator('logo')
     def logo_validate_regular_expression(cls, value):
@@ -104,6 +105,7 @@ class UpdateClientRequest(BaseModel):
             "name": obj.get("name"),
             "description": obj.get("description"),
             "logo": obj.get("logo"),
+            "public": obj.get("public"),
             "allow_pkce": obj.get("allow_pkce"),
             "is_public": obj.get("is_public"),
             "allowed_origins": obj.get("allowed_origins")

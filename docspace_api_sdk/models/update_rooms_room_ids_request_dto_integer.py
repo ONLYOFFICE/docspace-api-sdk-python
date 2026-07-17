@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,7 +23,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List, Optional
-from docspace_api_sdk.models.duplicate_request_dto_all_of_file_ids import DuplicateRequestDtoAllOfFileIds
+from docspace_api_sdk.models.continue_chat_body_files_inner import ContinueChatBodyFilesInner
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -31,7 +31,7 @@ class UpdateRoomsRoomIdsRequestDtoInteger(BaseModel):
     """
     The request parameters for updating the rooms.
     """ # noqa: E501
-    room_ids: Optional[List[DuplicateRequestDtoAllOfFileIds]] = Field(default=None, description="The list of room IDs.", alias="roomIds")
+    room_ids: Optional[List[ContinueChatBodyFilesInner]] = Field(default=None, description="The list of room IDs.", alias="roomIds")
     __properties: ClassVar[List[str]] = ["roomIds"]
 
     model_config = ConfigDict(
@@ -98,7 +98,7 @@ class UpdateRoomsRoomIdsRequestDtoInteger(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "roomIds": [DuplicateRequestDtoAllOfFileIds.from_dict(_item) for _item in obj["roomIds"]] if obj.get("roomIds") is not None else None
+            "roomIds": [ContinueChatBodyFilesInner.from_dict(_item) for _item in obj["roomIds"]] if obj.get("roomIds") is not None else None
         })
         return _obj
 

@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,9 +23,11 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
+from uuid import UUID
 from docspace_api_sdk.models.culture_specific_external_resources import CultureSpecificExternalResources
 from docspace_api_sdk.models.deep_link_dto import DeepLinkDto
 from docspace_api_sdk.models.firebase_dto import FirebaseDto
+from docspace_api_sdk.models.folder_type import FolderType
 from docspace_api_sdk.models.form_gallery_dto import FormGalleryDto
 from docspace_api_sdk.models.password_hasher import PasswordHasher
 from docspace_api_sdk.models.plugins_dto import PluginsDto
@@ -47,7 +49,7 @@ class SettingsDto(BaseModel):
     utc_offset: Optional[StrictStr] = Field(default=None, description="The UTC offset in the TimeSpan format.", alias="utcOffset")
     utc_hours_offset: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The UTC offset in hours.", alias="utcHoursOffset")
     greeting_settings: Optional[StrictStr] = Field(default=None, description="The greeting settings.", alias="greetingSettings")
-    owner_id: Optional[StrictStr] = Field(default=None, description="The owner ID.", alias="ownerId")
+    owner_id: Optional[UUID] = Field(default=None, description="The owner ID.", alias="ownerId")
     name_schema_id: Optional[StrictStr] = Field(default=None, description="The team template ID.", alias="nameSchemaId")
     enabled_join: Optional[StrictBool] = Field(default=None, description="Specifies if a user can join the portal or not.", alias="enabledJoin")
     enable_adm_mess: Optional[StrictBool] = Field(default=None, description="Specifies if a user can send a message to the administrator when accessing the DocSpace portal or not.", alias="enableAdmMess")
@@ -74,6 +76,7 @@ class SettingsDto(BaseModel):
     limited_access_space: Optional[StrictBool] = Field(default=None, description="Specifies whether the access to the space management is limited or not.", alias="limitedAccessSpace")
     limited_access_dev_tools_for_users: Optional[StrictBool] = Field(default=None, description="Specifies whether the access to the Developer Tools is limited for users or not.", alias="limitedAccessDevToolsForUsers")
     display_banners: Optional[StrictBool] = Field(default=None, description="Specifies whether to display the promotional banners.", alias="displayBanners")
+    ai_enabled: Optional[StrictBool] = Field(default=None, description="Specifies whether AI functionality (chat, agents, vectorization) is enabled for the current tenant.  When `false`, all AI features are disabled and the AI Agents folder is hidden.", alias="aiEnabled")
     user_name_regex: Optional[StrictStr] = Field(default=None, description="The user name validation regex.", alias="userNameRegex")
     invitation_limit: Optional[StrictInt] = Field(default=None, description="The maximum number of invitations to the portal.", alias="invitationLimit")
     plugins: Optional[PluginsDto] = None
@@ -82,7 +85,9 @@ class SettingsDto(BaseModel):
     max_image_upload_size: Optional[StrictInt] = Field(default=None, description="The maximum image upload size.", alias="maxImageUploadSize")
     logo_text: Optional[StrictStr] = Field(default=None, description="The white label logo text.", alias="logoText")
     external_resources: Optional[CultureSpecificExternalResources] = Field(default=None, alias="externalResources")
-    __properties: ClassVar[List[str]] = ["timezone", "trustedDomains", "trustedDomainsType", "culture", "utcOffset", "utcHoursOffset", "greetingSettings", "ownerId", "nameSchemaId", "enabledJoin", "enableAdmMess", "thirdpartyEnable", "docSpace", "standalone", "isAmi", "baseDomain", "wizardToken", "passwordHash", "firebase", "version", "recaptchaType", "recaptchaPublicKey", "debugInfo", "socketUrl", "tenantStatus", "tenantAlias", "displayAbout", "domainValidator", "zendeskKey", "tagManagerId", "cookieSettingsEnabled", "limitedAccessSpace", "limitedAccessDevToolsForUsers", "displayBanners", "userNameRegex", "invitationLimit", "plugins", "deepLink", "formGallery", "maxImageUploadSize", "logoText", "externalResources"]
+    default_folder_type: Optional[FolderType] = Field(default=None, alias="defaultFolderType")
+    external_db_enabled: Optional[StrictBool] = Field(default=None, description="Specifies if an external database is connected for storing form results.", alias="externalDbEnabled")
+    __properties: ClassVar[List[str]] = ["timezone", "trustedDomains", "trustedDomainsType", "culture", "utcOffset", "utcHoursOffset", "greetingSettings", "ownerId", "nameSchemaId", "enabledJoin", "enableAdmMess", "thirdpartyEnable", "docSpace", "standalone", "isAmi", "baseDomain", "wizardToken", "passwordHash", "firebase", "version", "recaptchaType", "recaptchaPublicKey", "debugInfo", "socketUrl", "tenantStatus", "tenantAlias", "displayAbout", "domainValidator", "zendeskKey", "tagManagerId", "cookieSettingsEnabled", "limitedAccessSpace", "limitedAccessDevToolsForUsers", "displayBanners", "aiEnabled", "userNameRegex", "invitationLimit", "plugins", "deepLink", "formGallery", "maxImageUploadSize", "logoText", "externalResources", "defaultFolderType", "externalDbEnabled"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -286,6 +291,7 @@ class SettingsDto(BaseModel):
             "limitedAccessSpace": obj.get("limitedAccessSpace"),
             "limitedAccessDevToolsForUsers": obj.get("limitedAccessDevToolsForUsers"),
             "displayBanners": obj.get("displayBanners"),
+            "aiEnabled": obj.get("aiEnabled"),
             "userNameRegex": obj.get("userNameRegex"),
             "invitationLimit": obj.get("invitationLimit"),
             "plugins": PluginsDto.from_dict(obj["plugins"]) if obj.get("plugins") is not None else None,
@@ -293,7 +299,9 @@ class SettingsDto(BaseModel):
             "formGallery": FormGalleryDto.from_dict(obj["formGallery"]) if obj.get("formGallery") is not None else None,
             "maxImageUploadSize": obj.get("maxImageUploadSize"),
             "logoText": obj.get("logoText"),
-            "externalResources": CultureSpecificExternalResources.from_dict(obj["externalResources"]) if obj.get("externalResources") is not None else None
+            "externalResources": CultureSpecificExternalResources.from_dict(obj["externalResources"]) if obj.get("externalResources") is not None else None,
+            "defaultFolderType": obj.get("defaultFolderType"),
+            "externalDbEnabled": obj.get("externalDbEnabled")
         })
         return _obj
 

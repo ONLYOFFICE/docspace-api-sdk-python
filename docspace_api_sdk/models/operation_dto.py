@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,6 +24,7 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from docspace_api_sdk.models.api_date_time import ApiDateTime
+from docspace_api_sdk.models.operation_type import OperationType
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -42,7 +43,10 @@ class OperationDto(BaseModel):
     debit: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The debit amount of the operation.")
     participant_name: Optional[StrictStr] = Field(default=None, description="The participant original name.", alias="participantName")
     participant_display_name: Optional[StrictStr] = Field(default=None, description="The participant display name.", alias="participantDisplayName")
-    __properties: ClassVar[List[str]] = ["date", "service", "description", "details", "serviceUnit", "quantity", "currency", "credit", "debit", "participantName", "participantDisplayName"]
+    agent_id: Optional[StrictStr] = Field(default=None, description="AI Agent id.", alias="agentId")
+    agent_title: Optional[StrictStr] = Field(default=None, description="AI Agent name.", alias="agentTitle")
+    type: Optional[OperationType] = None
+    __properties: ClassVar[List[str]] = ["date", "service", "description", "details", "serviceUnit", "quantity", "currency", "credit", "debit", "participantName", "participantDisplayName", "agentId", "agentTitle", "type"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -121,6 +125,16 @@ class OperationDto(BaseModel):
         if self.participant_display_name is None and "participant_display_name" in self.model_fields_set:
             _dict['participantDisplayName'] = None
 
+        # set to None if agent_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.agent_id is None and "agent_id" in self.model_fields_set:
+            _dict['agentId'] = None
+
+        # set to None if agent_title (nullable) is None
+        # and model_fields_set contains the field
+        if self.agent_title is None and "agent_title" in self.model_fields_set:
+            _dict['agentTitle'] = None
+
         return _dict
 
     @classmethod
@@ -144,7 +158,10 @@ class OperationDto(BaseModel):
             "credit": obj.get("credit"),
             "debit": obj.get("debit"),
             "participantName": obj.get("participantName"),
-            "participantDisplayName": obj.get("participantDisplayName")
+            "participantDisplayName": obj.get("participantDisplayName"),
+            "agentId": obj.get("agentId"),
+            "agentTitle": obj.get("agentTitle"),
+            "type": obj.get("type")
         })
         return _obj
 

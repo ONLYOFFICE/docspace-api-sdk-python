@@ -5,7 +5,7 @@ The group summary parameters.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** | The group ID. | 
+**id** | **UUID** | The group ID. | 
 **name** | **str** | The group name. | 
 **manager** | **str** | The group manager. | [optional] 
 **is_system** | **bool** | Indicates whether the group is a system group. | [optional] 

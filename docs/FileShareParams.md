@@ -5,8 +5,8 @@ The collection of file sharing parameters.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**share_to** | **str** | The ID of the user to whom the file will be shared. | [optional] 
-**email** | **str** | The user email address. | [optional] 
+**email** | **str** | The email address. | [optional] 
+**share_to** | **UUID** | The ID of the user to whom the file will be shared. | [optional] 
 **access** | [**FileShare**](FileShare.md) |  | [optional] 
 
 ## Example

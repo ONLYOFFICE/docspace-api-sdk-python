@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -43,7 +43,6 @@ class IPRestrictionsApi:
         if api_client is None:
             api_client = ApiClient.get_default()
         self.api_client = api_client
-
 
 
 
@@ -99,6 +98,9 @@ class IPRestrictionsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "IPRestrictionArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -163,6 +165,9 @@ class IPRestrictionsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "IPRestrictionArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -227,6 +232,9 @@ class IPRestrictionsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "IPRestrictionArrayWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -356,6 +364,9 @@ class IPRestrictionsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "IPRestrictionsSettingsWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -420,6 +431,9 @@ class IPRestrictionsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "IPRestrictionsSettingsWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -484,6 +498,9 @@ class IPRestrictionsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "IPRestrictionsSettingsWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -617,6 +634,9 @@ class IPRestrictionsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "IpRestrictionsWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -685,6 +705,9 @@ class IPRestrictionsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "IpRestrictionsWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -753,6 +776,9 @@ class IPRestrictionsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "IpRestrictionsWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -902,6 +928,9 @@ class IPRestrictionsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "IpRestrictionsWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -970,6 +999,9 @@ class IPRestrictionsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "IpRestrictionsWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1038,6 +1070,9 @@ class IPRestrictionsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "IpRestrictionsWrapper",
             '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,

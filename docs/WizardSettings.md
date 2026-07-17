@@ -6,7 +6,7 @@ The Wizard settings.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **completed** | **bool** | Specifies if the Wizard settings are completed or not | [optional] 
-**last_modified** | **datetime** |  | [optional] 
+**last_modified** | **datetime** | The timestamp indicating when the settings were last modified. | [optional] 
 
 ## Example
 

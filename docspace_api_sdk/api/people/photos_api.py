@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,11 +21,10 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictStr
-from typing import List
+from pydantic import Field, StrictBool, StrictBytes, StrictStr
+from typing import Optional, Tuple, Union
 from typing_extensions import Annotated
 from docspace_api_sdk.models.file_upload_result_wrapper import FileUploadResultWrapper
-from docspace_api_sdk.models.key_value_pair_string_string_values import KeyValuePairStringStringValues
 from docspace_api_sdk.models.thumbnails_data_wrapper import ThumbnailsDataWrapper
 from docspace_api_sdk.models.thumbnails_request import ThumbnailsRequest
 from docspace_api_sdk.models.update_photo_member_request import UpdatePhotoMemberRequest
@@ -46,7 +45,6 @@ class PhotosApi:
         if api_client is None:
             api_client = ApiClient.get_default()
         self.api_client = api_client
-
 
 
 
@@ -109,9 +107,12 @@ class PhotosApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ThumbnailsDataWrapper",
-            '401': None,
             '403': None,
             '404': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -183,9 +184,12 @@ class PhotosApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ThumbnailsDataWrapper",
-            '401': None,
             '403': None,
             '404': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -257,9 +261,12 @@ class PhotosApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ThumbnailsDataWrapper",
-            '401': None,
             '403': None,
             '404': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -411,9 +418,12 @@ class PhotosApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ThumbnailsDataWrapper",
-            '401': None,
             '403': None,
             '404': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -481,9 +491,12 @@ class PhotosApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ThumbnailsDataWrapper",
-            '401': None,
             '403': None,
             '404': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -551,9 +564,12 @@ class PhotosApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ThumbnailsDataWrapper",
-            '401': None,
             '403': None,
             '404': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -689,9 +705,12 @@ class PhotosApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ThumbnailsDataWrapper",
-            '401': None,
             '403': None,
             '404': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -759,9 +778,12 @@ class PhotosApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ThumbnailsDataWrapper",
-            '401': None,
             '403': None,
             '404': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -829,9 +851,12 @@ class PhotosApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ThumbnailsDataWrapper",
-            '401': None,
             '403': None,
             '404': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -971,9 +996,12 @@ class PhotosApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ThumbnailsDataWrapper",
-            '401': None,
             '403': None,
             '404': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1045,9 +1073,12 @@ class PhotosApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ThumbnailsDataWrapper",
-            '401': None,
             '403': None,
             '404': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1119,9 +1150,12 @@ class PhotosApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ThumbnailsDataWrapper",
-            '401': None,
             '403': None,
             '404': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1222,7 +1256,8 @@ class PhotosApi:
     def upload_member_photo(
         self,
         userid: Annotated[StrictStr, Field(description="The user ID.")],
-        form_collection: Annotated[List[KeyValuePairStringStringValues], Field(description="The image data.")],
+        file: Annotated[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]], Field(description="The image data.")],
+        autosave: Annotated[Optional[StrictBool], Field(description="Specifies whether to autosave a photo or not.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1242,8 +1277,10 @@ class PhotosApi:
 
         :param userid: The user ID. (required)
         :type userid: str
-        :param form_collection: The image data. (required)
-        :type form_collection: List[KeyValuePairStringStringValues]
+        :param file: The image data. (required)
+        :type file: bytes
+        :param autosave: Specifies whether to autosave a photo or not.
+        :type autosave: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1268,7 +1305,8 @@ class PhotosApi:
 
         _param = self._upload_member_photo_serialize(
             userid=userid,
-            form_collection=form_collection,
+            file=file,
+            autosave=autosave,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1278,10 +1316,13 @@ class PhotosApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileUploadResultWrapper",
             '400': None,
-            '401': None,
             '403': None,
             '413': None,
             '415': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1298,7 +1339,8 @@ class PhotosApi:
     def upload_member_photo_with_http_info(
         self,
         userid: Annotated[StrictStr, Field(description="The user ID.")],
-        form_collection: Annotated[List[KeyValuePairStringStringValues], Field(description="The image data.")],
+        file: Annotated[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]], Field(description="The image data.")],
+        autosave: Annotated[Optional[StrictBool], Field(description="Specifies whether to autosave a photo or not.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1318,8 +1360,10 @@ class PhotosApi:
 
         :param userid: The user ID. (required)
         :type userid: str
-        :param form_collection: The image data. (required)
-        :type form_collection: List[KeyValuePairStringStringValues]
+        :param file: The image data. (required)
+        :type file: bytes
+        :param autosave: Specifies whether to autosave a photo or not.
+        :type autosave: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1344,7 +1388,8 @@ class PhotosApi:
 
         _param = self._upload_member_photo_serialize(
             userid=userid,
-            form_collection=form_collection,
+            file=file,
+            autosave=autosave,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1354,10 +1399,13 @@ class PhotosApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileUploadResultWrapper",
             '400': None,
-            '401': None,
             '403': None,
             '413': None,
             '415': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1374,7 +1422,8 @@ class PhotosApi:
     def upload_member_photo_without_preload_content(
         self,
         userid: Annotated[StrictStr, Field(description="The user ID.")],
-        form_collection: Annotated[List[KeyValuePairStringStringValues], Field(description="The image data.")],
+        file: Annotated[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]], Field(description="The image data.")],
+        autosave: Annotated[Optional[StrictBool], Field(description="Specifies whether to autosave a photo or not.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1394,8 +1443,10 @@ class PhotosApi:
 
         :param userid: The user ID. (required)
         :type userid: str
-        :param form_collection: The image data. (required)
-        :type form_collection: List[KeyValuePairStringStringValues]
+        :param file: The image data. (required)
+        :type file: bytes
+        :param autosave: Specifies whether to autosave a photo or not.
+        :type autosave: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1420,7 +1471,8 @@ class PhotosApi:
 
         _param = self._upload_member_photo_serialize(
             userid=userid,
-            form_collection=form_collection,
+            file=file,
+            autosave=autosave,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1430,10 +1482,13 @@ class PhotosApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileUploadResultWrapper",
             '400': None,
-            '401': None,
             '403': None,
             '413': None,
             '415': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1445,7 +1500,8 @@ class PhotosApi:
     def _upload_member_photo_serialize(
         self,
         userid,
-        form_collection,
+        file,
+        autosave,
         _request_auth,
         _content_type,
         _headers,
@@ -1455,7 +1511,6 @@ class PhotosApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'formCollection': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -1473,8 +1528,10 @@ class PhotosApi:
         # process the query parameters
         # process the header parameters
         # process the form parameters
-        if form_collection is not None:
-            _form_params.append(('formCollection', form_collection))
+        if file is not None:
+            _files['File'] = file
+        if autosave is not None:
+            _form_params.append(('Autosave', autosave))
         # process the body parameter
 
 

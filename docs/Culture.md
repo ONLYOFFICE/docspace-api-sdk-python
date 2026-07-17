@@ -1,11 +1,11 @@
 # Culture
-The culture code parameters.
+The culture name parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**culture_name** | **str** | The user language. | [optional] 
+**culture_name** | **str** | The user culture name (en-US, de, fr, es, ...). | 
 
 ## Example
 
