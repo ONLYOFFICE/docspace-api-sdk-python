@@ -30,9 +30,9 @@ from typing_extensions import Self
 
 class EmailActivationSettingsWrapper(BaseModel):
     """
-    EmailActivationSettingsWrapper
+    The successful API response containing the EmailActivationSettings object.
     """ # noqa: E501
-    response: Optional[EmailActivationSettings] = None
+    response: Optional[EmailActivationSettings] = Field(default=None, description="The EmailActivationSettings object returned by the operation.")
     count: Optional[StrictInt] = Field(default=None, description="The total number of items in the response")
     links: Optional[List[GetPortalPrices200ResponseLinksInner]] = Field(default=None, description="List of links related to the response")
     status: Optional[StrictInt] = Field(default=None, description="HTTP status code of the response")

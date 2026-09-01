@@ -116,8 +116,10 @@ class ProfilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeFullWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -189,8 +191,10 @@ class ProfilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeFullWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -262,8 +266,10 @@ class ProfilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeFullWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -424,8 +430,9 @@ class ProfilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "UserExistsResponseWrapper",
             '400': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -505,8 +512,9 @@ class ProfilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "UserExistsResponseWrapper",
             '400': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -586,8 +594,9 @@ class ProfilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "UserExistsResponseWrapper",
             '400': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -740,8 +749,10 @@ class ProfilesApi:
             '200': "EmployeeFullWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -814,8 +825,10 @@ class ProfilesApi:
             '200': "EmployeeFullWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -888,8 +901,10 @@ class ProfilesApi:
             '200': "EmployeeFullWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1026,8 +1041,9 @@ class ProfilesApi:
             '200': "EmployeeFullWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1096,8 +1112,9 @@ class ProfilesApi:
             '200': "EmployeeFullWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1166,8 +1183,9 @@ class ProfilesApi:
             '200': "EmployeeFullWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1327,8 +1345,10 @@ class ProfilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeFullArrayWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1423,8 +1443,10 @@ class ProfilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeFullArrayWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1519,8 +1541,10 @@ class ProfilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeFullArrayWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1689,8 +1713,9 @@ class ProfilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1757,8 +1782,9 @@ class ProfilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1825,8 +1851,9 @@ class ProfilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1973,8 +2000,9 @@ class ProfilesApi:
             '400': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2056,8 +2084,9 @@ class ProfilesApi:
             '400': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2139,8 +2168,9 @@ class ProfilesApi:
             '400': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2293,8 +2323,9 @@ class ProfilesApi:
             '200': "EmployeeFullWrapper",
             '400': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2367,8 +2398,9 @@ class ProfilesApi:
             '200': "EmployeeFullWrapper",
             '400': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2441,8 +2473,9 @@ class ProfilesApi:
             '200': "EmployeeFullWrapper",
             '400': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2577,8 +2610,9 @@ class ProfilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeFullWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2645,8 +2679,9 @@ class ProfilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeFullWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2713,8 +2748,9 @@ class ProfilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeFullWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2853,7 +2889,8 @@ class ProfilesApi:
             '400': None,
             '402': None,
             '403': None,
-            '401': None,
+            '401': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2927,7 +2964,8 @@ class ProfilesApi:
             '400': None,
             '402': None,
             '403': None,
-            '401': None,
+            '401': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3001,7 +3039,8 @@ class ProfilesApi:
             '400': None,
             '402': None,
             '403': None,
-            '401': None,
+            '401': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3156,8 +3195,9 @@ class ProfilesApi:
             '400': None,
             '403': None,
             '409': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3231,8 +3271,9 @@ class ProfilesApi:
             '400': None,
             '403': None,
             '409': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3306,8 +3347,9 @@ class ProfilesApi:
             '400': None,
             '403': None,
             '409': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3460,8 +3502,10 @@ class ProfilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeFullArrayWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3533,8 +3577,10 @@ class ProfilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeFullArrayWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3606,8 +3652,10 @@ class ProfilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeFullArrayWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3766,8 +3814,9 @@ class ProfilesApi:
             '400': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3845,8 +3894,9 @@ class ProfilesApi:
             '400': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3924,8 +3974,9 @@ class ProfilesApi:
             '400': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4087,8 +4138,9 @@ class ProfilesApi:
             '400': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4166,8 +4218,9 @@ class ProfilesApi:
             '400': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4245,8 +4298,9 @@ class ProfilesApi:
             '400': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }

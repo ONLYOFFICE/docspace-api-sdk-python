@@ -29,16 +29,16 @@ from typing_extensions import Self
 
 class OAuth20Token(BaseModel):
     """
-    OAuth20Token
+    The OAuth 2.0 token issued by a third-party provider.
     """ # noqa: E501
-    access_token: Optional[StrictStr] = None
-    refresh_token: Optional[StrictStr] = None
-    expires_in: Optional[StrictInt] = None
-    client_id: Optional[StrictStr] = None
-    client_secret: Optional[StrictStr] = None
-    redirect_uri: Optional[StrictStr] = None
-    timestamp: Optional[datetime] = None
-    is_expired: Optional[StrictBool] = Field(default=None, alias="isExpired")
+    access_token: Optional[StrictStr] = Field(default=None, description="Access token", json_schema_extra={"examples": ["eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."]})
+    refresh_token: Optional[StrictStr] = Field(default=None, description="Refresh token", json_schema_extra={"examples": ["def50200a1b2c3d4e5f6..."]})
+    expires_in: Optional[StrictInt] = Field(default=None, description="Expires in", json_schema_extra={"examples": [3600]})
+    client_id: Optional[StrictStr] = Field(default=None, description="Client id", json_schema_extra={"examples": ["my-client-id"]})
+    client_secret: Optional[StrictStr] = Field(default=None, description="Client secret", json_schema_extra={"examples": ["my-client-secret"]})
+    redirect_uri: Optional[StrictStr] = Field(default=None, description="Redirect uri", json_schema_extra={"examples": ["https://app.example.com/callback"]})
+    timestamp: Optional[datetime] = Field(default=None, description="Timestamp", json_schema_extra={"examples": ["2026-01-01T00:00:00Z"]})
+    is_expired: Optional[StrictBool] = Field(default=None, description="Is expired", alias="isExpired", json_schema_extra={"examples": [False]})
     __properties: ClassVar[List[str]] = ["access_token", "refresh_token", "expires_in", "client_id", "client_secret", "redirect_uri", "timestamp", "isExpired"]
 
     model_config = ConfigDict(

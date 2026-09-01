@@ -32,8 +32,8 @@ class GroupMemberSecurityRequestDto(BaseModel):
     """
     The group member security information.
     """ # noqa: E501
-    user: EmployeeFullDto = Field(description="The full list of user parameters.")
-    group_access: FileShare = Field(description="The access rights type.", alias="groupAccess")
+    user: EmployeeFullDto = Field(description="The group member parameters.")
+    group_access: FileShare = Field(description="The group access rights to the files.", alias="groupAccess")
     user_access: Optional[FileShare] = Field(default=None, description="The group member access rights to the files.", alias="userAccess")
     overridden: StrictBool = Field(description="Specifies if the group access rights are overridden or not.", json_schema_extra={"examples": [False]})
     can_edit_access: StrictBool = Field(description="Specifies if the group member can edit the group access rights or not.", alias="canEditAccess", json_schema_extra={"examples": [True]})

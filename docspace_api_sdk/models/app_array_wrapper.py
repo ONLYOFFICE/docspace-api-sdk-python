@@ -30,9 +30,9 @@ from typing_extensions import Self
 
 class AppArrayWrapper(BaseModel):
     """
-    AppArrayWrapper
+    The successful API response containing the list of AppDto objects.
     """ # noqa: E501
-    response: Optional[List[AppDto]] = None
+    response: Optional[List[AppDto]] = Field(default=None, description="The list of AppDto objects returned by the operation.")
     count: Optional[StrictInt] = Field(default=None, description="The total number of items in the response")
     links: Optional[List[GetPortalPrices200ResponseLinksInner]] = Field(default=None, description="List of links related to the response")
     status: Optional[StrictInt] = Field(default=None, description="HTTP status code of the response")

@@ -1,15 +1,16 @@
 # AiImageModelPricing
+The pricing of a single image model.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** |  | 
-**alias** | **str** |  | [optional] 
-**owned_by** | **str** |  | [optional] 
-**provider** | **str** |  | [optional] 
-**link** | **str** |  | [optional] 
-**price** | [**AiImagePrice**](AiImagePrice.md) |  | 
+**id** | **str** | The identifier of the model, as the provider expects it on the wire. | 
+**alias** | **str** | The display name of the model. | [optional] 
+**owned_by** | **str** | The owner of the model, as reported by the provider. | [optional] 
+**provider** | **str** | The provider that serves the model. | [optional] 
+**link** | **str** | The link to the pricing page of the model. | [optional] 
+**price** | [**AiImagePrice**](AiImagePrice.md) | The price of an image model: per prompt token and per generated image. | 
 
 ## Example
 

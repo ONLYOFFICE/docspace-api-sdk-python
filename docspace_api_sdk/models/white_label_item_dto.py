@@ -23,8 +23,8 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from docspace_api_sdk.models.i_magick_geometry import IMagickGeometry
 from docspace_api_sdk.models.white_label_item_path_dto import WhiteLabelItemPathDto
+from docspace_api_sdk.models.white_label_item_size_dto import WhiteLabelItemSizeDto
 from docspace_api_sdk.models.white_label_logo_type import WhiteLabelLogoType
 from typing import Optional, Set
 from typing_extensions import Self
@@ -35,7 +35,7 @@ class WhiteLabelItemDto(BaseModel):
     """ # noqa: E501
     type: Optional[WhiteLabelLogoType] = Field(default=None, description="The white label logo type.")
     name: Optional[StrictStr] = Field(default=None, description="The white label file name.", json_schema_extra={"examples": ["Example Name"]})
-    size: Optional[IMagickGeometry] = Field(default=None, description="The white label file size.")
+    size: Optional[WhiteLabelItemSizeDto] = Field(default=None, description="The white label file size.")
     path: Optional[WhiteLabelItemPathDto] = Field(default=None, description="The white label file path.")
     __properties: ClassVar[List[str]] = ["type", "name", "size", "path"]
 
@@ -104,7 +104,7 @@ class WhiteLabelItemDto(BaseModel):
         _obj = cls.model_validate({
             "type": obj.get("type"),
             "name": obj.get("name"),
-            "size": IMagickGeometry.from_dict(obj["size"]) if obj.get("size") is not None else None,
+            "size": WhiteLabelItemSizeDto.from_dict(obj["size"]) if obj.get("size") is not None else None,
             "path": WhiteLabelItemPathDto.from_dict(obj["path"]) if obj.get("path") is not None else None
         })
         return _obj

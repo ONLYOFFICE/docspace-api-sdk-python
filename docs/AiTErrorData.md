@@ -1,11 +1,12 @@
 # AiTErrorData
+A field-scoped validation error: which form field was rejected, and why.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**var_field** | **str** |  | 
-**message** | **str** |  | 
+**var_field** | **str** | The rejected field. | 
+**message** | **str** | The human-readable reason the field was rejected. | 
 
 ## Example
 

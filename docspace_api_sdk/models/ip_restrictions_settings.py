@@ -29,10 +29,10 @@ from typing_extensions import Self
 
 class IPRestrictionsSettings(BaseModel):
     """
-    IPRestrictionsSettings
+    The IP restriction settings.
     """ # noqa: E501
-    enable: Optional[StrictBool] = None
-    last_modified: Optional[datetime] = Field(default=None, alias="lastModified")
+    enable: Optional[StrictBool] = Field(default=None, description="Specifies if the IP restrictions are enabled or not.", json_schema_extra={"examples": [True]})
+    last_modified: Optional[datetime] = Field(default=None, description="The date and time when the settings were last modified.", alias="lastModified", json_schema_extra={"examples": ["2024-01-01T00:00:00Z"]})
     __properties: ClassVar[List[str]] = ["enable", "lastModified"]
 
     model_config = ConfigDict(

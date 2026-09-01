@@ -1,4 +1,4 @@
-# docspace_api_sdk.PrivacyroomApi
+# docspace_api_sdk.PrivacyRoomApi
 
 All URIs are relative to *https://your-docspace.onlyoffice.com*
 
@@ -61,21 +61,21 @@ configuration = docspace_api_sdk.Configuration(
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace_api_sdk.PrivacyroomApi(api_client)
+    api_instance = docspace_api_sdk.PrivacyRoomApi(api_client)
     id = UUID('00000000-0000-0000-0000-000000000000') # UUID | The unique identifier of the encryption key to be deleted.
 
     try:
         # Deletes an encryption key and removes it from the system.
         api_instance.delete_keys(id)
     except Exception as e:
-        print("Exception when calling PrivacyroomApi->delete_keys: %s\n" % e)
+        print("Exception when calling PrivacyRoomApi->delete_keys: %s\n" % e)
 ```
 
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 
 ### HTTP response details
@@ -86,7 +86,8 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 **400** | The key identifier is not a valid GUID |  -  |
 **404** | The encryption key is not found |  -  |
 **401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
+**429** | Too Many Requests. |  * Retry-After -  <br>  |
+**500** | Internal Server Error. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -136,15 +137,15 @@ configuration = docspace_api_sdk.Configuration(
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace_api_sdk.PrivacyroomApi(api_client)
+    api_instance = docspace_api_sdk.PrivacyRoomApi(api_client)
 
     try:
         # Retrieves encryption keys associated with the current user.
         api_response = api_instance.get_user_keys()
-        print("The response of PrivacyroomApi->get_user_keys:\n")
+        print("The response of PrivacyRoomApi->get_user_keys:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling PrivacyroomApi->get_user_keys: %s\n" % e)
+        print("Exception when calling PrivacyRoomApi->get_user_keys: %s\n" % e)
 ```
 
 
@@ -158,9 +159,10 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | OK |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
+**200** | OK |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 **401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
+**429** | Too Many Requests. |  * Retry-After -  <br>  |
+**500** | Internal Server Error. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -213,16 +215,16 @@ configuration = docspace_api_sdk.Configuration(
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace_api_sdk.PrivacyroomApi(api_client)
+    api_instance = docspace_api_sdk.PrivacyRoomApi(api_client)
     room_id = 56 # int | The identifier of the privacy room.
 
     try:
         # Retrieves the encryption keys associated with a specific privacy room.
         api_response = api_instance.get_user_keys_for_room(room_id)
-        print("The response of PrivacyroomApi->get_user_keys_for_room:\n")
+        print("The response of PrivacyRoomApi->get_user_keys_for_room:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling PrivacyroomApi->get_user_keys_for_room: %s\n" % e)
+        print("Exception when calling PrivacyRoomApi->get_user_keys_for_room: %s\n" % e)
 ```
 
 
@@ -236,9 +238,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | OK |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
+**200** | OK |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 **401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
+**429** | Too Many Requests. |  * Retry-After -  <br>  |
+**500** | Internal Server Error. |  -  |
+**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -292,16 +296,16 @@ configuration = docspace_api_sdk.Configuration(
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace_api_sdk.PrivacyroomApi(api_client)
+    api_instance = docspace_api_sdk.PrivacyRoomApi(api_client)
     encryption_key_request_dto = docspace_api_sdk.EncryptionKeyRequestDto() # EncryptionKeyRequestDto | The request object containing the public and private key information to replace the existing key. (optional)
 
     try:
         # Replaces an existing encryption key with a new one for the user.
         api_response = api_instance.replace_key(encryption_key_request_dto=encryption_key_request_dto)
-        print("The response of PrivacyroomApi->replace_key:\n")
+        print("The response of PrivacyRoomApi->replace_key:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling PrivacyroomApi->replace_key: %s\n" % e)
+        print("Exception when calling PrivacyRoomApi->replace_key: %s\n" % e)
 ```
 
 
@@ -315,11 +319,12 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | The encryption key is replaced |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
+**200** | The encryption key is replaced |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 **400** | The key material is missing, blank or too large to be stored |  -  |
 **404** | The encryption key to replace is not found |  -  |
 **401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
+**429** | Too Many Requests. |  * Retry-After -  <br>  |
+**500** | Internal Server Error. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -373,16 +378,16 @@ configuration = docspace_api_sdk.Configuration(
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = docspace_api_sdk.PrivacyroomApi(api_client)
+    api_instance = docspace_api_sdk.PrivacyRoomApi(api_client)
     encryption_key_request_dto = docspace_api_sdk.EncryptionKeyRequestDto() # EncryptionKeyRequestDto | The request object containing public and private key information. (optional)
 
     try:
         # Creates and sets encryption keys for the user.
         api_response = api_instance.set_keys(encryption_key_request_dto=encryption_key_request_dto)
-        print("The response of PrivacyroomApi->set_keys:\n")
+        print("The response of PrivacyRoomApi->set_keys:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling PrivacyroomApi->set_keys: %s\n" % e)
+        print("Exception when calling PrivacyRoomApi->set_keys: %s\n" % e)
 ```
 
 
@@ -400,7 +405,8 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 **400** | The key material is missing, blank or too large to be stored |  -  |
 **409** | A key with the same identifier already exists |  -  |
 **401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
+**429** | Too Many Requests. |  * Retry-After -  <br>  |
+**500** | Internal Server Error. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 

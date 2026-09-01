@@ -97,8 +97,9 @@ class IPRestrictionsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "IPRestrictionArrayWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -165,8 +166,9 @@ class IPRestrictionsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "IPRestrictionArrayWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -233,8 +235,9 @@ class IPRestrictionsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "IPRestrictionArrayWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -366,8 +369,9 @@ class IPRestrictionsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "IPRestrictionsSettingsWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -434,8 +438,9 @@ class IPRestrictionsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "IPRestrictionsSettingsWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -502,8 +507,9 @@ class IPRestrictionsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "IPRestrictionsSettingsWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -639,8 +645,10 @@ class IPRestrictionsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "IpRestrictionsWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -711,8 +719,10 @@ class IPRestrictionsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "IpRestrictionsWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -783,8 +793,10 @@ class IPRestrictionsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "IpRestrictionsWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -936,8 +948,10 @@ class IPRestrictionsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "IpRestrictionsWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1008,8 +1022,10 @@ class IPRestrictionsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "IpRestrictionsWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1080,8 +1096,10 @@ class IPRestrictionsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "IpRestrictionsWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }

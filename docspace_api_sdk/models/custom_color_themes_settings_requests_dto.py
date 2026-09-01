@@ -31,7 +31,7 @@ class CustomColorThemesSettingsRequestsDto(BaseModel):
     """
     The request parameters for managing the portal theme settings.
     """ # noqa: E501
-    theme: Optional[CustomColorThemesSettingsItem] = Field(default=None, description="The custom color theme settings.")
+    theme: Optional[CustomColorThemesSettingsItem] = Field(default=None, description="The custom color theme configuration.")
     selected: Optional[StrictInt] = Field(default=None, description="Specifies the optional value indicating the selected custom color theme.", json_schema_extra={"examples": [1]})
     __properties: ClassVar[List[str]] = ["theme", "selected"]
 

@@ -99,8 +99,10 @@ class AccessToDevToolsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantDevToolsAccessSettingsWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -171,8 +173,10 @@ class AccessToDevToolsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantDevToolsAccessSettingsWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -243,8 +247,10 @@ class AccessToDevToolsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantDevToolsAccessSettingsWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }

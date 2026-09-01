@@ -78,6 +78,7 @@ __all__ = [
     "UsersApi",
     "RoomsApi",
     "GroupsApi",
+    "PrivacyRoomApi",
     "AccessToDevToolsApi",
     "ActiveConnectionsApi",
     "AuditTrailDataApi",
@@ -112,7 +113,6 @@ __all__ = [
     "WebhooksApi",
     "WebpluginsApi",
     "ThirdPartyApi",
-    "PrivacyroomApi",
     "ApiResponse",
     "ApiClient",
     "Configuration",
@@ -138,6 +138,8 @@ __all__ = [
     "ActiveServiceDto",
     "AdditionalWhiteLabelSettings",
     "AdditionalWhiteLabelSettingsDto",
+    "AdditionalWhiteLabelSettingsDtoWrapper",
+    "AdditionalWhiteLabelSettingsResponseWrapper",
     "AdditionalWhiteLabelSettingsWrapper",
     "AdminMessageBaseSettingsRequestsDto",
     "AdminMessageSettingsRequestsDto",
@@ -161,7 +163,6 @@ __all__ = [
     "AiAiToolCallData",
     "AiAiUserSettingsDto",
     "AiAiUserSettingsWrapper",
-    "AiApiDateTime",
     "AiAssignmentMutationResult",
     "AiAssignmentsAssignRequest",
     "AiAttachment",
@@ -282,7 +283,6 @@ __all__ = [
     "AiWebSearchMutationResult",
     "AiWebSearchPricing",
     "AnonymousConfigDto",
-    "ApiDateTime",
     "ApiKeyResponseArrayWrapper",
     "ApiKeyResponseDto",
     "ApiKeyResponseWrapper",
@@ -364,6 +364,8 @@ __all__ = [
     "CompanyWhiteLabelSettings",
     "CompanyWhiteLabelSettingsArrayWrapper",
     "CompanyWhiteLabelSettingsDto",
+    "CompanyWhiteLabelSettingsDtoWrapper",
+    "CompanyWhiteLabelSettingsResponseWrapper",
     "CompanyWhiteLabelSettingsWrapper",
     "ConfigurationDtoInteger",
     "ConfigurationIntegerWrapper",
@@ -525,6 +527,8 @@ __all__ = [
     "EncryptionSettings",
     "EncryptionSettingsWrapper",
     "EntryType",
+    "ErrorApiResponse",
+    "ErrorApiResponseError",
     "ExchangeToken200Response",
     "ExternalDatabaseSettings",
     "ExternalDatabaseType",
@@ -573,6 +577,7 @@ __all__ = [
     "FileShareDto",
     "FileShareLink",
     "FileShareParams",
+    "FileShareResponseArrayWrapper",
     "FileShareWrapper",
     "FileStatus",
     "FileType",
@@ -635,7 +640,6 @@ __all__ = [
     "HistoryData",
     "HistoryDto",
     "ICompressWrapper",
-    "IMagickGeometry",
     "IPRestriction",
     "IPRestrictionArrayWrapper",
     "IPRestrictionsSettings",
@@ -657,12 +661,12 @@ __all__ = [
     "IsDefaultWhiteLabelLogosArrayWrapper",
     "IsDefaultWhiteLabelLogosDto",
     "IsDefaultWhiteLabelLogosWrapper",
+    "ItemKeyValuePairBooleanString",
+    "ItemKeyValuePairBooleanStringWrapper",
     "ItemKeyValuePairObjectObject",
     "ItemKeyValuePairStringBoolean",
     "ItemKeyValuePairStringLogoRequestsDto",
     "ItemKeyValuePairStringString",
-    "KeyValuePairBooleanString",
-    "KeyValuePairBooleanStringWrapper",
     "LinkAccountRequestDto",
     "LinkType",
     "Location",
@@ -702,8 +706,6 @@ __all__ = [
     "NewItemsDtoRoomNewItemsDto",
     "NewItemsFileEntryBaseArrayWrapper",
     "NewItemsRoomNewItemsArrayWrapper",
-    "NoContentResult",
-    "NoContentResultWrapper",
     "NotificationChannelDto",
     "NotificationChannelStatusDto",
     "NotificationChannelStatusWrapper",
@@ -818,8 +820,6 @@ __all__ = [
     "SettingsDto",
     "SettingsRequestDto",
     "SettingsWrapper",
-    "SetupCode",
-    "SetupCodeWrapper",
     "ShareFilterType",
     "SignupAccountRequestDto",
     "Size",
@@ -873,6 +873,7 @@ __all__ = [
     "TenantAiAgentQuotaSettings",
     "TenantAiAgentQuotaSettingsWrapper",
     "TenantAuditSettings",
+    "TenantAuditSettingsResponseWrapper",
     "TenantAuditSettingsWrapper",
     "TenantBannerSettings",
     "TenantBannerSettingsDto",
@@ -905,6 +906,7 @@ __all__ = [
     "TenantWalletServiceSettings",
     "TenantWalletServiceSettingsWrapper",
     "TenantWalletSettings",
+    "TenantWalletSettingsResponseWrapper",
     "TenantWalletSettingsWrapper",
     "TenantWrapper",
     "TerminateRequestDto",
@@ -916,6 +918,8 @@ __all__ = [
     "TfaRequestsDtoType",
     "TfaSettingsArrayWrapper",
     "TfaSettingsDto",
+    "TfaSetupCodeDto",
+    "TfaSetupCodeWrapper",
     "TfaValidateRequestsDto",
     "ThirdPartyBackupRequestDto",
     "ThirdPartyParams",
@@ -992,6 +996,7 @@ __all__ = [
     "WhiteLabelItemArrayWrapper",
     "WhiteLabelItemDto",
     "WhiteLabelItemPathDto",
+    "WhiteLabelItemSizeDto",
     "WhiteLabelLogoType",
     "WhiteLabelRequestsDto",
     "WizardRequestsDto",
@@ -1056,6 +1061,7 @@ from docspace_api_sdk.api.portal.settings_api import SettingsApi as SettingsApi
 from docspace_api_sdk.api.portal.users_api import UsersApi as UsersApi
 from docspace_api_sdk.api.rooms.rooms_api import RoomsApi as RoomsApi
 from docspace_api_sdk.api.rooms.groups_api import GroupsApi as GroupsApi
+from docspace_api_sdk.api.rooms.privacy_room_api import PrivacyRoomApi as PrivacyRoomApi
 from docspace_api_sdk.api.security.access_to_dev_tools_api import AccessToDevToolsApi as AccessToDevToolsApi
 from docspace_api_sdk.api.security.active_connections_api import ActiveConnectionsApi as ActiveConnectionsApi
 from docspace_api_sdk.api.security.audit_trail_data_api import AuditTrailDataApi as AuditTrailDataApi
@@ -1090,7 +1096,6 @@ from docspace_api_sdk.api.settings.telegram_api import TelegramApi as TelegramAp
 from docspace_api_sdk.api.settings.webhooks_api import WebhooksApi as WebhooksApi
 from docspace_api_sdk.api.settings.webplugins_api import WebpluginsApi as WebpluginsApi
 from docspace_api_sdk.api.third_party.third_party_api import ThirdPartyApi as ThirdPartyApi
-from docspace_api_sdk.api.privacyroom.privacyroom_api import PrivacyroomApi as PrivacyroomApi
 
 # import ApiClient
 from docspace_api_sdk.api_response import ApiResponse as ApiResponse
@@ -1120,6 +1125,8 @@ from docspace_api_sdk.models.active_service_array_wrapper import ActiveServiceAr
 from docspace_api_sdk.models.active_service_dto import ActiveServiceDto as ActiveServiceDto
 from docspace_api_sdk.models.additional_white_label_settings import AdditionalWhiteLabelSettings as AdditionalWhiteLabelSettings
 from docspace_api_sdk.models.additional_white_label_settings_dto import AdditionalWhiteLabelSettingsDto as AdditionalWhiteLabelSettingsDto
+from docspace_api_sdk.models.additional_white_label_settings_dto_wrapper import AdditionalWhiteLabelSettingsDtoWrapper as AdditionalWhiteLabelSettingsDtoWrapper
+from docspace_api_sdk.models.additional_white_label_settings_response_wrapper import AdditionalWhiteLabelSettingsResponseWrapper as AdditionalWhiteLabelSettingsResponseWrapper
 from docspace_api_sdk.models.additional_white_label_settings_wrapper import AdditionalWhiteLabelSettingsWrapper as AdditionalWhiteLabelSettingsWrapper
 from docspace_api_sdk.models.admin_message_base_settings_requests_dto import AdminMessageBaseSettingsRequestsDto as AdminMessageBaseSettingsRequestsDto
 from docspace_api_sdk.models.admin_message_settings_requests_dto import AdminMessageSettingsRequestsDto as AdminMessageSettingsRequestsDto
@@ -1143,7 +1150,6 @@ from docspace_api_sdk.models.ai_ai_settings_wrapper import AiAiSettingsWrapper a
 from docspace_api_sdk.models.ai_ai_tool_call_data import AiAiToolCallData as AiAiToolCallData
 from docspace_api_sdk.models.ai_ai_user_settings_dto import AiAiUserSettingsDto as AiAiUserSettingsDto
 from docspace_api_sdk.models.ai_ai_user_settings_wrapper import AiAiUserSettingsWrapper as AiAiUserSettingsWrapper
-from docspace_api_sdk.models.ai_api_date_time import AiApiDateTime as AiApiDateTime
 from docspace_api_sdk.models.ai_assignment_mutation_result import AiAssignmentMutationResult as AiAssignmentMutationResult
 from docspace_api_sdk.models.ai_assignments_assign_request import AiAssignmentsAssignRequest as AiAssignmentsAssignRequest
 from docspace_api_sdk.models.ai_attachment import AiAttachment as AiAttachment
@@ -1264,7 +1270,6 @@ from docspace_api_sdk.models.ai_web_search_configure_request import AiWebSearchC
 from docspace_api_sdk.models.ai_web_search_mutation_result import AiWebSearchMutationResult as AiWebSearchMutationResult
 from docspace_api_sdk.models.ai_web_search_pricing import AiWebSearchPricing as AiWebSearchPricing
 from docspace_api_sdk.models.anonymous_config_dto import AnonymousConfigDto as AnonymousConfigDto
-from docspace_api_sdk.models.api_date_time import ApiDateTime as ApiDateTime
 from docspace_api_sdk.models.api_key_response_array_wrapper import ApiKeyResponseArrayWrapper as ApiKeyResponseArrayWrapper
 from docspace_api_sdk.models.api_key_response_dto import ApiKeyResponseDto as ApiKeyResponseDto
 from docspace_api_sdk.models.api_key_response_wrapper import ApiKeyResponseWrapper as ApiKeyResponseWrapper
@@ -1346,6 +1351,8 @@ from docspace_api_sdk.models.co_editing_config_mode import CoEditingConfigMode a
 from docspace_api_sdk.models.company_white_label_settings import CompanyWhiteLabelSettings as CompanyWhiteLabelSettings
 from docspace_api_sdk.models.company_white_label_settings_array_wrapper import CompanyWhiteLabelSettingsArrayWrapper as CompanyWhiteLabelSettingsArrayWrapper
 from docspace_api_sdk.models.company_white_label_settings_dto import CompanyWhiteLabelSettingsDto as CompanyWhiteLabelSettingsDto
+from docspace_api_sdk.models.company_white_label_settings_dto_wrapper import CompanyWhiteLabelSettingsDtoWrapper as CompanyWhiteLabelSettingsDtoWrapper
+from docspace_api_sdk.models.company_white_label_settings_response_wrapper import CompanyWhiteLabelSettingsResponseWrapper as CompanyWhiteLabelSettingsResponseWrapper
 from docspace_api_sdk.models.company_white_label_settings_wrapper import CompanyWhiteLabelSettingsWrapper as CompanyWhiteLabelSettingsWrapper
 from docspace_api_sdk.models.configuration_dto_integer import ConfigurationDtoInteger as ConfigurationDtoInteger
 from docspace_api_sdk.models.configuration_integer_wrapper import ConfigurationIntegerWrapper as ConfigurationIntegerWrapper
@@ -1507,6 +1514,8 @@ from docspace_api_sdk.models.encryption_key_request_dto import EncryptionKeyRequ
 from docspace_api_sdk.models.encryption_settings import EncryptionSettings as EncryptionSettings
 from docspace_api_sdk.models.encryption_settings_wrapper import EncryptionSettingsWrapper as EncryptionSettingsWrapper
 from docspace_api_sdk.models.entry_type import EntryType as EntryType
+from docspace_api_sdk.models.error_api_response import ErrorApiResponse as ErrorApiResponse
+from docspace_api_sdk.models.error_api_response_error import ErrorApiResponseError as ErrorApiResponseError
 from docspace_api_sdk.models.exchange_token200_response import ExchangeToken200Response as ExchangeToken200Response
 from docspace_api_sdk.models.external_database_settings import ExternalDatabaseSettings as ExternalDatabaseSettings
 from docspace_api_sdk.models.external_database_type import ExternalDatabaseType as ExternalDatabaseType
@@ -1555,6 +1564,7 @@ from docspace_api_sdk.models.file_share_array_wrapper import FileShareArrayWrapp
 from docspace_api_sdk.models.file_share_dto import FileShareDto as FileShareDto
 from docspace_api_sdk.models.file_share_link import FileShareLink as FileShareLink
 from docspace_api_sdk.models.file_share_params import FileShareParams as FileShareParams
+from docspace_api_sdk.models.file_share_response_array_wrapper import FileShareResponseArrayWrapper as FileShareResponseArrayWrapper
 from docspace_api_sdk.models.file_share_wrapper import FileShareWrapper as FileShareWrapper
 from docspace_api_sdk.models.file_status import FileStatus as FileStatus
 from docspace_api_sdk.models.file_type import FileType as FileType
@@ -1617,7 +1627,6 @@ from docspace_api_sdk.models.history_array_wrapper import HistoryArrayWrapper as
 from docspace_api_sdk.models.history_data import HistoryData as HistoryData
 from docspace_api_sdk.models.history_dto import HistoryDto as HistoryDto
 from docspace_api_sdk.models.i_compress_wrapper import ICompressWrapper as ICompressWrapper
-from docspace_api_sdk.models.i_magick_geometry import IMagickGeometry as IMagickGeometry
 from docspace_api_sdk.models.ip_restriction import IPRestriction as IPRestriction
 from docspace_api_sdk.models.ip_restriction_array_wrapper import IPRestrictionArrayWrapper as IPRestrictionArrayWrapper
 from docspace_api_sdk.models.ip_restrictions_settings import IPRestrictionsSettings as IPRestrictionsSettings
@@ -1639,12 +1648,12 @@ from docspace_api_sdk.models.ip_restrictions_wrapper import IpRestrictionsWrappe
 from docspace_api_sdk.models.is_default_white_label_logos_array_wrapper import IsDefaultWhiteLabelLogosArrayWrapper as IsDefaultWhiteLabelLogosArrayWrapper
 from docspace_api_sdk.models.is_default_white_label_logos_dto import IsDefaultWhiteLabelLogosDto as IsDefaultWhiteLabelLogosDto
 from docspace_api_sdk.models.is_default_white_label_logos_wrapper import IsDefaultWhiteLabelLogosWrapper as IsDefaultWhiteLabelLogosWrapper
+from docspace_api_sdk.models.item_key_value_pair_boolean_string import ItemKeyValuePairBooleanString as ItemKeyValuePairBooleanString
+from docspace_api_sdk.models.item_key_value_pair_boolean_string_wrapper import ItemKeyValuePairBooleanStringWrapper as ItemKeyValuePairBooleanStringWrapper
 from docspace_api_sdk.models.item_key_value_pair_object_object import ItemKeyValuePairObjectObject as ItemKeyValuePairObjectObject
 from docspace_api_sdk.models.item_key_value_pair_string_boolean import ItemKeyValuePairStringBoolean as ItemKeyValuePairStringBoolean
 from docspace_api_sdk.models.item_key_value_pair_string_logo_requests_dto import ItemKeyValuePairStringLogoRequestsDto as ItemKeyValuePairStringLogoRequestsDto
 from docspace_api_sdk.models.item_key_value_pair_string_string import ItemKeyValuePairStringString as ItemKeyValuePairStringString
-from docspace_api_sdk.models.key_value_pair_boolean_string import KeyValuePairBooleanString as KeyValuePairBooleanString
-from docspace_api_sdk.models.key_value_pair_boolean_string_wrapper import KeyValuePairBooleanStringWrapper as KeyValuePairBooleanStringWrapper
 from docspace_api_sdk.models.link_account_request_dto import LinkAccountRequestDto as LinkAccountRequestDto
 from docspace_api_sdk.models.link_type import LinkType as LinkType
 from docspace_api_sdk.models.location import Location as Location
@@ -1684,8 +1693,6 @@ from docspace_api_sdk.models.new_items_dto_file_entry_base_dto import NewItemsDt
 from docspace_api_sdk.models.new_items_dto_room_new_items_dto import NewItemsDtoRoomNewItemsDto as NewItemsDtoRoomNewItemsDto
 from docspace_api_sdk.models.new_items_file_entry_base_array_wrapper import NewItemsFileEntryBaseArrayWrapper as NewItemsFileEntryBaseArrayWrapper
 from docspace_api_sdk.models.new_items_room_new_items_array_wrapper import NewItemsRoomNewItemsArrayWrapper as NewItemsRoomNewItemsArrayWrapper
-from docspace_api_sdk.models.no_content_result import NoContentResult as NoContentResult
-from docspace_api_sdk.models.no_content_result_wrapper import NoContentResultWrapper as NoContentResultWrapper
 from docspace_api_sdk.models.notification_channel_dto import NotificationChannelDto as NotificationChannelDto
 from docspace_api_sdk.models.notification_channel_status_dto import NotificationChannelStatusDto as NotificationChannelStatusDto
 from docspace_api_sdk.models.notification_channel_status_wrapper import NotificationChannelStatusWrapper as NotificationChannelStatusWrapper
@@ -1800,8 +1807,6 @@ from docspace_api_sdk.models.set_restricted_ai_models_request_dto import SetRest
 from docspace_api_sdk.models.settings_dto import SettingsDto as SettingsDto
 from docspace_api_sdk.models.settings_request_dto import SettingsRequestDto as SettingsRequestDto
 from docspace_api_sdk.models.settings_wrapper import SettingsWrapper as SettingsWrapper
-from docspace_api_sdk.models.setup_code import SetupCode as SetupCode
-from docspace_api_sdk.models.setup_code_wrapper import SetupCodeWrapper as SetupCodeWrapper
 from docspace_api_sdk.models.share_filter_type import ShareFilterType as ShareFilterType
 from docspace_api_sdk.models.signup_account_request_dto import SignupAccountRequestDto as SignupAccountRequestDto
 from docspace_api_sdk.models.size import Size as Size
@@ -1855,6 +1860,7 @@ from docspace_api_sdk.models.tenant_ai_access_settings_wrapper import TenantAiAc
 from docspace_api_sdk.models.tenant_ai_agent_quota_settings import TenantAiAgentQuotaSettings as TenantAiAgentQuotaSettings
 from docspace_api_sdk.models.tenant_ai_agent_quota_settings_wrapper import TenantAiAgentQuotaSettingsWrapper as TenantAiAgentQuotaSettingsWrapper
 from docspace_api_sdk.models.tenant_audit_settings import TenantAuditSettings as TenantAuditSettings
+from docspace_api_sdk.models.tenant_audit_settings_response_wrapper import TenantAuditSettingsResponseWrapper as TenantAuditSettingsResponseWrapper
 from docspace_api_sdk.models.tenant_audit_settings_wrapper import TenantAuditSettingsWrapper as TenantAuditSettingsWrapper
 from docspace_api_sdk.models.tenant_banner_settings import TenantBannerSettings as TenantBannerSettings
 from docspace_api_sdk.models.tenant_banner_settings_dto import TenantBannerSettingsDto as TenantBannerSettingsDto
@@ -1887,6 +1893,7 @@ from docspace_api_sdk.models.tenant_wallet_service import TenantWalletService as
 from docspace_api_sdk.models.tenant_wallet_service_settings import TenantWalletServiceSettings as TenantWalletServiceSettings
 from docspace_api_sdk.models.tenant_wallet_service_settings_wrapper import TenantWalletServiceSettingsWrapper as TenantWalletServiceSettingsWrapper
 from docspace_api_sdk.models.tenant_wallet_settings import TenantWalletSettings as TenantWalletSettings
+from docspace_api_sdk.models.tenant_wallet_settings_response_wrapper import TenantWalletSettingsResponseWrapper as TenantWalletSettingsResponseWrapper
 from docspace_api_sdk.models.tenant_wallet_settings_wrapper import TenantWalletSettingsWrapper as TenantWalletSettingsWrapper
 from docspace_api_sdk.models.tenant_wrapper import TenantWrapper as TenantWrapper
 from docspace_api_sdk.models.terminate_request_dto import TerminateRequestDto as TerminateRequestDto
@@ -1898,6 +1905,8 @@ from docspace_api_sdk.models.tfa_requests_dto import TfaRequestsDto as TfaReques
 from docspace_api_sdk.models.tfa_requests_dto_type import TfaRequestsDtoType as TfaRequestsDtoType
 from docspace_api_sdk.models.tfa_settings_array_wrapper import TfaSettingsArrayWrapper as TfaSettingsArrayWrapper
 from docspace_api_sdk.models.tfa_settings_dto import TfaSettingsDto as TfaSettingsDto
+from docspace_api_sdk.models.tfa_setup_code_dto import TfaSetupCodeDto as TfaSetupCodeDto
+from docspace_api_sdk.models.tfa_setup_code_wrapper import TfaSetupCodeWrapper as TfaSetupCodeWrapper
 from docspace_api_sdk.models.tfa_validate_requests_dto import TfaValidateRequestsDto as TfaValidateRequestsDto
 from docspace_api_sdk.models.third_party_backup_request_dto import ThirdPartyBackupRequestDto as ThirdPartyBackupRequestDto
 from docspace_api_sdk.models.third_party_params import ThirdPartyParams as ThirdPartyParams
@@ -1974,6 +1983,7 @@ from docspace_api_sdk.models.webhooks_log_wrapper import WebhooksLogWrapper as W
 from docspace_api_sdk.models.white_label_item_array_wrapper import WhiteLabelItemArrayWrapper as WhiteLabelItemArrayWrapper
 from docspace_api_sdk.models.white_label_item_dto import WhiteLabelItemDto as WhiteLabelItemDto
 from docspace_api_sdk.models.white_label_item_path_dto import WhiteLabelItemPathDto as WhiteLabelItemPathDto
+from docspace_api_sdk.models.white_label_item_size_dto import WhiteLabelItemSizeDto as WhiteLabelItemSizeDto
 from docspace_api_sdk.models.white_label_logo_type import WhiteLabelLogoType as WhiteLabelLogoType
 from docspace_api_sdk.models.white_label_requests_dto import WhiteLabelRequestsDto as WhiteLabelRequestsDto
 from docspace_api_sdk.models.wizard_requests_dto import WizardRequestsDto as WizardRequestsDto

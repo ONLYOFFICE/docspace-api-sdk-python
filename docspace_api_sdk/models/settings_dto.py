@@ -44,7 +44,7 @@ class SettingsDto(BaseModel):
     """ # noqa: E501
     timezone: Optional[StrictStr] = Field(default=None, description="The time zone.", json_schema_extra={"examples": ["UTC"]})
     trusted_domains: Optional[List[StrictStr]] = Field(default=None, description="The list of the trusted domains.", alias="trustedDomains", json_schema_extra={"examples": [["mydomain.com", "mydomain1.com"]]})
-    trusted_domains_type: Optional[TenantTrustedDomainsType] = Field(default=None, description="The type of the tenant trusted domains.", alias="trustedDomainsType")
+    trusted_domains_type: Optional[TenantTrustedDomainsType] = Field(default=None, description="The type of the trusted domains.", alias="trustedDomainsType")
     culture: Optional[StrictStr] = Field(description="The language.", json_schema_extra={"examples": ["en-US"]})
     utc_offset: Optional[StrictStr] = Field(default=None, description="The UTC offset in the TimeSpan format.", alias="utcOffset", json_schema_extra={"examples": ["-08:30:00"]})
     utc_hours_offset: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The UTC offset in hours.", alias="utcHoursOffset", json_schema_extra={"examples": [-8.5]})
@@ -86,7 +86,7 @@ class SettingsDto(BaseModel):
     max_image_upload_size: Optional[StrictInt] = Field(default=None, description="The maximum image upload size.", alias="maxImageUploadSize", json_schema_extra={"examples": [10485760]})
     logo_text: Optional[StrictStr] = Field(default=None, description="The white label logo text.", alias="logoText", json_schema_extra={"examples": ["Company Name"]})
     external_resources: Optional[CultureSpecificExternalResources] = Field(default=None, description="The external resources settings.", alias="externalResources")
-    default_folder_type: Optional[FolderType] = Field(default=None, description="The folder type.", alias="defaultFolderType")
+    default_folder_type: Optional[FolderType] = Field(default=None, description="Specifies the default folder type for the current settings.", alias="defaultFolderType")
     external_db_enabled: Optional[StrictBool] = Field(default=None, description="Specifies if an external database is connected for storing form results.", alias="externalDbEnabled", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["timezone", "trustedDomains", "trustedDomainsType", "culture", "utcOffset", "utcHoursOffset", "greetingSettings", "ownerId", "nameSchemaId", "enabledJoin", "enableAdmMess", "thirdpartyEnable", "docSpace", "standalone", "isAmi", "baseDomain", "wizardToken", "passwordHash", "firebase", "version", "recaptchaType", "recaptchaPublicKey", "debugInfo", "socketUrl", "tenantStatus", "tenantAlias", "displayAbout", "domainValidator", "zendeskKey", "tagManagerId", "cookieSettingsEnabled", "limitedAccessSpace", "limitedAccessDevToolsForUsers", "displayBanners", "aiEnabled", "walletLowBalance", "userNameRegex", "invitationLimit", "plugins", "deepLink", "formGallery", "maxImageUploadSize", "logoText", "externalResources", "defaultFolderType", "externalDbEnabled"]
 

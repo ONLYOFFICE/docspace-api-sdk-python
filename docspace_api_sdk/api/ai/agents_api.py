@@ -21,7 +21,8 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import StrictStr
+from pydantic import Field, StrictStr
+from typing_extensions import Annotated
 from docspace_api_sdk.models.ai_agents_create_request import AiAgentsCreateRequest
 from docspace_api_sdk.models.ai_agents_delete_request import AiAgentsDeleteRequest
 from docspace_api_sdk.models.ai_agents_reset_quota_request import AiAgentsResetQuotaRequest
@@ -71,6 +72,7 @@ class AgentsApi:
     ) -> AiFolderIntegerWrapper:
         """Create an agent
 
+        Creates an AI agent room in the .NET AI service and binds the supplied `profileId` to it as a `Chat` assignment. The instruction is stored on the room as a prompt-only chat setting; a failed binding is reported as an error even though the room already exists.
 
         :param ai_agents_create_request: (required)
         :type ai_agents_create_request: AiAgentsCreateRequest
@@ -139,6 +141,7 @@ class AgentsApi:
     ) -> ApiResponse[AiFolderIntegerWrapper]:
         """Create an agent
 
+        Creates an AI agent room in the .NET AI service and binds the supplied `profileId` to it as a `Chat` assignment. The instruction is stored on the room as a prompt-only chat setting; a failed binding is reported as an error even though the room already exists.
 
         :param ai_agents_create_request: (required)
         :type ai_agents_create_request: AiAgentsCreateRequest
@@ -207,6 +210,7 @@ class AgentsApi:
     ) -> RESTResponseType:
         """Create an agent
 
+        Creates an AI agent room in the .NET AI service and binds the supplied `profileId` to it as a `Chat` assignment. The instruction is stored on the room as a prompt-only chat setting; a failed binding is reported as an error even though the room already exists.
 
         :param ai_agents_create_request: (required)
         :type ai_agents_create_request: AiAgentsCreateRequest
@@ -334,7 +338,7 @@ class AgentsApi:
     @validate_call
     def ai_agents_delete(
         self,
-        id: StrictStr,
+        id: Annotated[StrictStr, Field(description="The agent identifier.")],
         ai_agents_delete_request: AiAgentsDeleteRequest,
         _request_timeout: Union[
             None,
@@ -351,8 +355,9 @@ class AgentsApi:
     ) -> AiFileOperationWrapper:
         """Delete an agent
 
+        Deletes an AI agent room.
 
-        :param id: (required)
+        :param id: The agent identifier. (required)
         :type id: str
         :param ai_agents_delete_request: (required)
         :type ai_agents_delete_request: AiAgentsDeleteRequest
@@ -406,7 +411,7 @@ class AgentsApi:
     @validate_call
     def ai_agents_delete_with_http_info(
         self,
-        id: StrictStr,
+        id: Annotated[StrictStr, Field(description="The agent identifier.")],
         ai_agents_delete_request: AiAgentsDeleteRequest,
         _request_timeout: Union[
             None,
@@ -423,8 +428,9 @@ class AgentsApi:
     ) -> ApiResponse[AiFileOperationWrapper]:
         """Delete an agent
 
+        Deletes an AI agent room.
 
-        :param id: (required)
+        :param id: The agent identifier. (required)
         :type id: str
         :param ai_agents_delete_request: (required)
         :type ai_agents_delete_request: AiAgentsDeleteRequest
@@ -478,7 +484,7 @@ class AgentsApi:
     @validate_call
     def ai_agents_delete_without_preload_content(
         self,
-        id: StrictStr,
+        id: Annotated[StrictStr, Field(description="The agent identifier.")],
         ai_agents_delete_request: AiAgentsDeleteRequest,
         _request_timeout: Union[
             None,
@@ -495,8 +501,9 @@ class AgentsApi:
     ) -> RESTResponseType:
         """Delete an agent
 
+        Deletes an AI agent room.
 
-        :param id: (required)
+        :param id: The agent identifier. (required)
         :type id: str
         :param ai_agents_delete_request: (required)
         :type ai_agents_delete_request: AiAgentsDeleteRequest
@@ -628,7 +635,7 @@ class AgentsApi:
     @validate_call
     def ai_agents_get(
         self,
-        id: StrictStr,
+        id: Annotated[StrictStr, Field(description="The agent identifier.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -644,8 +651,9 @@ class AgentsApi:
     ) -> AiFolderIntegerWrapper:
         """Get an agent
 
+        Returns one AI agent room, enriched with the `profileId` bound to it so an edit form can prefill the profile selector. A missing assignment simply leaves `profileId` out.
 
-        :param id: (required)
+        :param id: The agent identifier. (required)
         :type id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -696,7 +704,7 @@ class AgentsApi:
     @validate_call
     def ai_agents_get_with_http_info(
         self,
-        id: StrictStr,
+        id: Annotated[StrictStr, Field(description="The agent identifier.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -712,8 +720,9 @@ class AgentsApi:
     ) -> ApiResponse[AiFolderIntegerWrapper]:
         """Get an agent
 
+        Returns one AI agent room, enriched with the `profileId` bound to it so an edit form can prefill the profile selector. A missing assignment simply leaves `profileId` out.
 
-        :param id: (required)
+        :param id: The agent identifier. (required)
         :type id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -764,7 +773,7 @@ class AgentsApi:
     @validate_call
     def ai_agents_get_without_preload_content(
         self,
-        id: StrictStr,
+        id: Annotated[StrictStr, Field(description="The agent identifier.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -780,8 +789,9 @@ class AgentsApi:
     ) -> RESTResponseType:
         """Get an agent
 
+        Returns one AI agent room, enriched with the `profileId` bound to it so an edit form can prefill the profile selector. A missing assignment simply leaves `profileId` out.
 
-        :param id: (required)
+        :param id: The agent identifier. (required)
         :type id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -909,6 +919,7 @@ class AgentsApi:
     ) -> AiFolderContentIntegerWrapper:
         """List agents
 
+        Lists the portal's AI agent rooms. Query parameters are forwarded unchanged to the .NET AI service, which answers with its folder-content payload.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -973,6 +984,7 @@ class AgentsApi:
     ) -> ApiResponse[AiFolderContentIntegerWrapper]:
         """List agents
 
+        Lists the portal's AI agent rooms. Query parameters are forwarded unchanged to the .NET AI service, which answers with its folder-content payload.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1037,6 +1049,7 @@ class AgentsApi:
     ) -> RESTResponseType:
         """List agents
 
+        Lists the portal's AI agent rooms. Query parameters are forwarded unchanged to the .NET AI service, which answers with its folder-content payload.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1160,6 +1173,7 @@ class AgentsApi:
     ) -> AiNewItemsAgentNewItemsArrayWrapper:
         """List agent news items
 
+        Lists the new items across the caller's AI agent rooms.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1224,6 +1238,7 @@ class AgentsApi:
     ) -> ApiResponse[AiNewItemsAgentNewItemsArrayWrapper]:
         """List agent news items
 
+        Lists the new items across the caller's AI agent rooms.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1288,6 +1303,7 @@ class AgentsApi:
     ) -> RESTResponseType:
         """List agent news items
 
+        Lists the new items across the caller's AI agent rooms.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1412,6 +1428,7 @@ class AgentsApi:
     ) -> AiFolderIntegerArrayWrapper:
         """Reset agents' quota
 
+        Resets the storage quota of the given AI agent rooms.
 
         :param ai_agents_reset_quota_request: (required)
         :type ai_agents_reset_quota_request: AiAgentsResetQuotaRequest
@@ -1480,6 +1497,7 @@ class AgentsApi:
     ) -> ApiResponse[AiFolderIntegerArrayWrapper]:
         """Reset agents' quota
 
+        Resets the storage quota of the given AI agent rooms.
 
         :param ai_agents_reset_quota_request: (required)
         :type ai_agents_reset_quota_request: AiAgentsResetQuotaRequest
@@ -1548,6 +1566,7 @@ class AgentsApi:
     ) -> RESTResponseType:
         """Reset agents' quota
 
+        Resets the storage quota of the given AI agent rooms.
 
         :param ai_agents_reset_quota_request: (required)
         :type ai_agents_reset_quota_request: AiAgentsResetQuotaRequest
@@ -1675,7 +1694,7 @@ class AgentsApi:
     @validate_call
     def ai_agents_update(
         self,
-        id: StrictStr,
+        id: Annotated[StrictStr, Field(description="The agent identifier.")],
         ai_agents_update_request: AiAgentsUpdateRequest,
         _request_timeout: Union[
             None,
@@ -1692,8 +1711,9 @@ class AgentsApi:
     ) -> AiFolderIntegerWrapper:
         """Update an agent
 
+        Updates an AI agent room - title, tags, instruction. `profileId` is not part of the room contract: it is stripped from the forwarded body and re-bound as the agent's assignment afterwards.
 
-        :param id: (required)
+        :param id: The agent identifier. (required)
         :type id: str
         :param ai_agents_update_request: (required)
         :type ai_agents_update_request: AiAgentsUpdateRequest
@@ -1747,7 +1767,7 @@ class AgentsApi:
     @validate_call
     def ai_agents_update_with_http_info(
         self,
-        id: StrictStr,
+        id: Annotated[StrictStr, Field(description="The agent identifier.")],
         ai_agents_update_request: AiAgentsUpdateRequest,
         _request_timeout: Union[
             None,
@@ -1764,8 +1784,9 @@ class AgentsApi:
     ) -> ApiResponse[AiFolderIntegerWrapper]:
         """Update an agent
 
+        Updates an AI agent room - title, tags, instruction. `profileId` is not part of the room contract: it is stripped from the forwarded body and re-bound as the agent's assignment afterwards.
 
-        :param id: (required)
+        :param id: The agent identifier. (required)
         :type id: str
         :param ai_agents_update_request: (required)
         :type ai_agents_update_request: AiAgentsUpdateRequest
@@ -1819,7 +1840,7 @@ class AgentsApi:
     @validate_call
     def ai_agents_update_without_preload_content(
         self,
-        id: StrictStr,
+        id: Annotated[StrictStr, Field(description="The agent identifier.")],
         ai_agents_update_request: AiAgentsUpdateRequest,
         _request_timeout: Union[
             None,
@@ -1836,8 +1857,9 @@ class AgentsApi:
     ) -> RESTResponseType:
         """Update an agent
 
+        Updates an AI agent room - title, tags, instruction. `profileId` is not part of the room contract: it is stripped from the forwarded body and re-bound as the agent's assignment afterwards.
 
-        :param id: (required)
+        :param id: The agent identifier. (required)
         :type id: str
         :param ai_agents_update_request: (required)
         :type ai_agents_update_request: AiAgentsUpdateRequest
@@ -1985,6 +2007,7 @@ class AgentsApi:
     ) -> AiFolderIntegerArrayWrapper:
         """Update agents' quota
 
+        Changes the storage quota of the given AI agent rooms.
 
         :param ai_agents_update_quota_request: (required)
         :type ai_agents_update_quota_request: AiAgentsUpdateQuotaRequest
@@ -2053,6 +2076,7 @@ class AgentsApi:
     ) -> ApiResponse[AiFolderIntegerArrayWrapper]:
         """Update agents' quota
 
+        Changes the storage quota of the given AI agent rooms.
 
         :param ai_agents_update_quota_request: (required)
         :type ai_agents_update_quota_request: AiAgentsUpdateQuotaRequest
@@ -2121,6 +2145,7 @@ class AgentsApi:
     ) -> RESTResponseType:
         """Update agents' quota
 
+        Changes the storage quota of the given AI agent rooms.
 
         :param ai_agents_update_quota_request: (required)
         :type ai_agents_update_quota_request: AiAgentsUpdateQuotaRequest

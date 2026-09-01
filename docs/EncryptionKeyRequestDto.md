@@ -1,12 +1,13 @@
 # EncryptionKeyRequestDto
+The request parameters for storing the encryption key pair of a user.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **UUID** |  | [optional] 
-**public_key** | **str** |  | [optional] 
-**private_key_enc** | **str** |  | [optional] 
+**id** | **UUID** | The identifier of the key pair. | [optional] 
+**public_key** | **str** | The public key of the pair, used to encrypt the file keys. | [optional] 
+**private_key_enc** | **str** | The private key of the pair, encrypted with the user password. | [optional] 
 
 ## Example
 

@@ -29,11 +29,11 @@ from typing_extensions import Self
 
 class AiImportError(BaseModel):
     """
-    Per-entry error reported by  {@link  PromptsEngine.importBundle } .
+    Per-entry error reported by `PromptsEngine.importBundle`.
     """ # noqa: E501
     kind: StrictStr = Field(description="`folder` or `prompt`, plus the offending name or id.")
-    ref: StrictStr
-    error: AiTErrorData
+    ref: StrictStr = Field(description="The offending entry - its name or its id.")
+    error: AiTErrorData = Field(description="Why the entry was rejected.")
     __properties: ClassVar[List[str]] = ["kind", "ref", "error"]
 
     @field_validator('kind')

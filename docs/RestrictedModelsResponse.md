@@ -1,10 +1,11 @@
 # RestrictedModelsResponse
+The AI models the portal is not allowed to use.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**models** | **List[str]** |  | 
+**models** | **List[str]** | The identifiers of the models the portal is not allowed to use. | 
 
 ## Example
 

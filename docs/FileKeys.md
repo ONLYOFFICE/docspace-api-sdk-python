@@ -1,15 +1,16 @@
 # FileKeys
+The encrypted file key issued to one user.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**user_id** | **UUID** |  | [optional] 
-**public_key_id** | **UUID** |  | [optional] 
-**private_key_enc** | **str** |  | [optional] 
-**tenant_id** | **int** |  | [optional] 
-**file_id** | **int** |  | [optional] 
-**create_on** | **datetime** |  | [optional] 
+**user_id** | **UUID** | The identifier of the user the file key was issued to. | [optional] 
+**public_key_id** | **UUID** | The identifier of the key pair the file key is encrypted for. | [optional] 
+**private_key_enc** | **str** | The file key, encrypted with the public key of the pair. | [optional] 
+**tenant_id** | **int** | The identifier of the portal the file belongs to. | [optional] 
+**file_id** | **int** | The identifier of the file the key unlocks. | [optional] 
+**create_on** | **datetime** | The date and time when the file key was issued. | [optional] 
 
 ## Example
 

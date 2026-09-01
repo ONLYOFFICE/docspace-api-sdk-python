@@ -21,7 +21,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictFloat, StrictInt, StrictStr, field_validator
+from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Union
 from docspace_api_sdk.models.ai_open_ai_chunk_choice import AiOpenAIChunkChoice
 from typing import Optional, Set
@@ -29,13 +29,13 @@ from typing_extensions import Self
 
 class AiOpenAIChatCompletionChunk(BaseModel):
     """
-    AiOpenAIChatCompletionChunk
+    One `chat.completion.chunk` of an OpenAI-compatible streaming response. Only the fields this service can populate are emitted - an OpenAI client tolerates the rest as absent.
     """ # noqa: E501
-    id: StrictStr
-    object: StrictStr
-    created: Union[StrictFloat, StrictInt]
-    model: StrictStr
-    choices: List[AiOpenAIChunkChoice]
+    id: StrictStr = Field(description="The completion identifier, stable across every chunk of one response.")
+    object: StrictStr = Field(description="Always `chat.completion.chunk`.")
+    created: Union[StrictFloat, StrictInt] = Field(description="When the completion started, in Unix seconds.")
+    model: StrictStr = Field(description="The model that produced the completion - the resolved profile's model.")
+    choices: List[AiOpenAIChunkChoice] = Field(description="The choices carried by this chunk. This service emits exactly one.")
     __properties: ClassVar[List[str]] = ["id", "object", "created", "model", "choices"]
 
     @field_validator('object')

@@ -21,7 +21,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool
+from pydantic import BaseModel, ConfigDict, Field, StrictBool
 from typing import Any, ClassVar, Dict, List, Optional
 from docspace_api_sdk.models.ai_import_error import AiImportError
 from docspace_api_sdk.models.ai_import_result_imported import AiImportResultImported
@@ -30,11 +30,11 @@ from typing_extensions import Self
 
 class AiImportResult(BaseModel):
     """
-    Outcome of  {@link  PromptsEngine.importBundle } . Either every entry persisted with counts, or no entries persisted plus a per-entry error report.
+    Outcome of `PromptsEngine.importBundle`. Either every entry persisted with counts, or no entries persisted plus a per-entry error report.
     """ # noqa: E501
-    success: StrictBool
+    success: StrictBool = Field(description="True when the whole bundle was imported.")
     imported: Optional[AiImportResultImported] = None
-    errors: Optional[List[AiImportError]] = None
+    errors: Optional[List[AiImportError]] = Field(default=None, description="What was rejected, per entry. Present on failure - and then nothing was imported.")
     __properties: ClassVar[List[str]] = ["success", "imported", "errors"]
 
     model_config = ConfigDict(

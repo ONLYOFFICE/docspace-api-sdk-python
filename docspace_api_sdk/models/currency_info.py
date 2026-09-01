@@ -21,17 +21,17 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
 class CurrencyInfo(BaseModel):
     """
-    CurrencyInfo
+    The currency the AI prices are quoted in.
     """ # noqa: E501
-    code: Optional[StrictStr]
-    symbol: Optional[StrictStr]
+    code: Optional[StrictStr] = Field(description="The ISO 4217 code of the currency the prices are quoted in.", json_schema_extra={"examples": ["USD"]})
+    symbol: Optional[StrictStr] = Field(description="The display symbol of the currency.", json_schema_extra={"examples": ["$"]})
     __properties: ClassVar[List[str]] = ["code", "symbol"]
 
     model_config = ConfigDict(

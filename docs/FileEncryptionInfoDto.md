@@ -1,11 +1,12 @@
 # FileEncryptionInfoDto
+The encryption information of a file: the user key pairs and the per-user file keys.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**user_keys** | [**List[EncryptionKeyDto]**](EncryptionKeyDto.md) |  | [optional] 
-**file_keys** | [**List[FileKeys]**](FileKeys.md) |  | [optional] 
+**user_keys** | [**List[EncryptionKeyDto]**](EncryptionKeyDto.md) | The key pairs of the users who have access to the file. | [optional] 
+**file_keys** | [**List[FileKeys]**](FileKeys.md) | The file keys issued to those users. | [optional] 
 
 ## Example
 

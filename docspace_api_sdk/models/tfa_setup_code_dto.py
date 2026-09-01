@@ -21,18 +21,19 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
-class KeyValuePairBooleanString(BaseModel):
+class TfaSetupCodeDto(BaseModel):
     """
-    KeyValuePairBooleanString
+    The setup TFA code parameters.
     """ # noqa: E501
-    key: Optional[StrictBool] = None
-    value: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["key", "value"]
+    account: Optional[StrictStr] = Field(default=None, description="The account for which the setup code is generated.", json_schema_extra={"examples": ["john.doe@onlyoffice.com"]})
+    manual_entry_key: Optional[StrictStr] = Field(default=None, description="The manual entry key.", alias="manualEntryKey", json_schema_extra={"examples": ["JBSWY3DPEHPK3PXP"]})
+    qr_code_setup_image_url: Optional[StrictStr] = Field(default=None, description="The QR-code setup image URL (base64-encoded PNG image).", alias="qrCodeSetupImageUrl", json_schema_extra={"examples": ["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAAAAAA6fptVAAAACklEQVR4nGMAAgAABAABiCEmiQAAAABJRU5ErkJggg=="]})
+    __properties: ClassVar[List[str]] = ["account", "manualEntryKey", "qrCodeSetupImageUrl"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -52,7 +53,7 @@ class KeyValuePairBooleanString(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of KeyValuePairBooleanString from a JSON string"""
+        """Create an instance of TfaSetupCodeDto from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -64,8 +65,14 @@ class KeyValuePairBooleanString(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
         """
         excluded_fields: Set[str] = set([
+            "account",
+            "manual_entry_key",
+            "qr_code_setup_image_url",
         ])
 
         _dict = self.model_dump(
@@ -73,16 +80,26 @@ class KeyValuePairBooleanString(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # set to None if value (nullable) is None
+        # set to None if account (nullable) is None
         # and model_fields_set contains the field
-        if self.value is None and "value" in self.model_fields_set:
-            _dict['value'] = None
+        if self.account is None and "account" in self.model_fields_set:
+            _dict['account'] = None
+
+        # set to None if manual_entry_key (nullable) is None
+        # and model_fields_set contains the field
+        if self.manual_entry_key is None and "manual_entry_key" in self.model_fields_set:
+            _dict['manualEntryKey'] = None
+
+        # set to None if qr_code_setup_image_url (nullable) is None
+        # and model_fields_set contains the field
+        if self.qr_code_setup_image_url is None and "qr_code_setup_image_url" in self.model_fields_set:
+            _dict['qrCodeSetupImageUrl'] = None
 
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of KeyValuePairBooleanString from a dict"""
+        """Create an instance of TfaSetupCodeDto from a dict"""
         if obj is None:
             return None
 
@@ -91,8 +108,9 @@ class KeyValuePairBooleanString(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "key": obj.get("key"),
-            "value": obj.get("value")
+            "account": obj.get("account"),
+            "manualEntryKey": obj.get("manualEntryKey"),
+            "qrCodeSetupImageUrl": obj.get("qrCodeSetupImageUrl")
         })
         return _obj
 

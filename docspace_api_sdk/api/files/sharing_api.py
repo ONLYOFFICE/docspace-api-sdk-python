@@ -118,7 +118,9 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ExternalShareWrapper",
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -193,7 +195,9 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ExternalShareWrapper",
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -268,7 +272,9 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ExternalShareWrapper",
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -417,8 +423,10 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileEntryBaseArrayWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -489,8 +497,10 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileEntryBaseArrayWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -561,8 +571,10 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileEntryBaseArrayWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -715,8 +727,10 @@ class SharingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EncryptionKeyArrayWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -788,8 +802,10 @@ class SharingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EncryptionKeyArrayWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -861,8 +877,10 @@ class SharingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EncryptionKeyArrayWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1009,7 +1027,9 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ExternalShareWrapper",
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1088,7 +1108,9 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ExternalShareWrapper",
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1167,7 +1189,9 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ExternalShareWrapper",
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1318,8 +1342,10 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1398,8 +1424,10 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1478,8 +1506,10 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1636,8 +1666,10 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1716,8 +1748,10 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1796,8 +1830,10 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1962,8 +1998,10 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupMemberSecurityRequestArrayWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2050,8 +2088,10 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupMemberSecurityRequestArrayWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2138,8 +2178,10 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupMemberSecurityRequestArrayWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2312,8 +2354,10 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupMemberSecurityRequestArrayWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2400,8 +2444,10 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupMemberSecurityRequestArrayWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2488,8 +2534,10 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupMemberSecurityRequestArrayWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2646,8 +2694,10 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2718,8 +2768,10 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2790,8 +2842,10 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2943,8 +2997,10 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "MentionWrapperArrayWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3015,8 +3071,10 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "MentionWrapperArrayWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3087,8 +3145,10 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "MentionWrapperArrayWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3227,8 +3287,10 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3299,8 +3361,10 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3371,8 +3435,10 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3531,8 +3597,9 @@ class SharingApi:
             '400': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3610,8 +3677,9 @@ class SharingApi:
             '400': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3689,8 +3757,9 @@ class SharingApi:
             '400': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3793,7 +3862,7 @@ class SharingApi:
     @validate_call
     def set_file_security_info(
         self,
-        file_id: Annotated[StrictInt, Field(description="The file ID.")],
+        id: Annotated[StrictInt, Field(description="The file ID.")],
         security_info_simple_request_dto: Annotated[SecurityInfoSimpleRequestDto, Field(description="The parameters of the security information simple request.")],
         _request_timeout: Union[
             None,
@@ -3812,8 +3881,8 @@ class SharingApi:
 
         Sets the sharing settings to a file with the ID specified in the request.
 
-        :param file_id: The file ID. (required)
-        :type file_id: int
+        :param id: The file ID. (required)
+        :type id: int
         :param security_info_simple_request_dto: The parameters of the security information simple request. (required)
         :type security_info_simple_request_dto: SecurityInfoSimpleRequestDto
         :param _request_timeout: timeout setting for this request. If one
@@ -3839,7 +3908,7 @@ class SharingApi:
         """ # noqa: E501
 
         _param = self._set_file_security_info_serialize(
-            file_id=file_id,
+            id=id,
             security_info_simple_request_dto=security_info_simple_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -3849,8 +3918,10 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3869,7 +3940,7 @@ class SharingApi:
     @validate_call
     def set_file_security_info_with_http_info(
         self,
-        file_id: Annotated[StrictInt, Field(description="The file ID.")],
+        id: Annotated[StrictInt, Field(description="The file ID.")],
         security_info_simple_request_dto: Annotated[SecurityInfoSimpleRequestDto, Field(description="The parameters of the security information simple request.")],
         _request_timeout: Union[
             None,
@@ -3888,8 +3959,8 @@ class SharingApi:
 
         Sets the sharing settings to a file with the ID specified in the request.
 
-        :param file_id: The file ID. (required)
-        :type file_id: int
+        :param id: The file ID. (required)
+        :type id: int
         :param security_info_simple_request_dto: The parameters of the security information simple request. (required)
         :type security_info_simple_request_dto: SecurityInfoSimpleRequestDto
         :param _request_timeout: timeout setting for this request. If one
@@ -3915,7 +3986,7 @@ class SharingApi:
         """ # noqa: E501
 
         _param = self._set_file_security_info_serialize(
-            file_id=file_id,
+            id=id,
             security_info_simple_request_dto=security_info_simple_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -3925,8 +3996,10 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3945,7 +4018,7 @@ class SharingApi:
     @validate_call
     def set_file_security_info_without_preload_content(
         self,
-        file_id: Annotated[StrictInt, Field(description="The file ID.")],
+        id: Annotated[StrictInt, Field(description="The file ID.")],
         security_info_simple_request_dto: Annotated[SecurityInfoSimpleRequestDto, Field(description="The parameters of the security information simple request.")],
         _request_timeout: Union[
             None,
@@ -3964,8 +4037,8 @@ class SharingApi:
 
         Sets the sharing settings to a file with the ID specified in the request.
 
-        :param file_id: The file ID. (required)
-        :type file_id: int
+        :param id: The file ID. (required)
+        :type id: int
         :param security_info_simple_request_dto: The parameters of the security information simple request. (required)
         :type security_info_simple_request_dto: SecurityInfoSimpleRequestDto
         :param _request_timeout: timeout setting for this request. If one
@@ -3991,7 +4064,7 @@ class SharingApi:
         """ # noqa: E501
 
         _param = self._set_file_security_info_serialize(
-            file_id=file_id,
+            id=id,
             security_info_simple_request_dto=security_info_simple_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -4001,8 +4074,10 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4016,7 +4091,7 @@ class SharingApi:
 
     def _set_file_security_info_serialize(
         self,
-        file_id,
+        id,
         security_info_simple_request_dto,
         _request_auth,
         _content_type,
@@ -4039,8 +4114,8 @@ class SharingApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if file_id is not None:
-            _path_params['fileId'] = file_id
+        if id is not None:
+            _path_params['id'] = id
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -4082,7 +4157,7 @@ class SharingApi:
         ]
 
 
-        resource_path = "/api/2.0/files/file/{fileId}/share"
+        resource_path = "/api/2.0/files/file/{id}/share"
 
         return self.api_client.param_serialize(
             method='PUT',
@@ -4105,7 +4180,7 @@ class SharingApi:
     @validate_call
     def set_folder_security_info(
         self,
-        folder_id: Annotated[StrictInt, Field(description="The folder ID.")],
+        id: Annotated[StrictInt, Field(description="The folder ID.")],
         security_info_simple_request_dto: Annotated[SecurityInfoSimpleRequestDto, Field(description="The parameters of the security information simple request.")],
         _request_timeout: Union[
             None,
@@ -4124,8 +4199,8 @@ class SharingApi:
 
         Sets the sharing settings to a folder with the ID specified in the request.
 
-        :param folder_id: The folder ID. (required)
-        :type folder_id: int
+        :param id: The folder ID. (required)
+        :type id: int
         :param security_info_simple_request_dto: The parameters of the security information simple request. (required)
         :type security_info_simple_request_dto: SecurityInfoSimpleRequestDto
         :param _request_timeout: timeout setting for this request. If one
@@ -4151,7 +4226,7 @@ class SharingApi:
         """ # noqa: E501
 
         _param = self._set_folder_security_info_serialize(
-            folder_id=folder_id,
+            id=id,
             security_info_simple_request_dto=security_info_simple_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -4161,8 +4236,10 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4181,7 +4258,7 @@ class SharingApi:
     @validate_call
     def set_folder_security_info_with_http_info(
         self,
-        folder_id: Annotated[StrictInt, Field(description="The folder ID.")],
+        id: Annotated[StrictInt, Field(description="The folder ID.")],
         security_info_simple_request_dto: Annotated[SecurityInfoSimpleRequestDto, Field(description="The parameters of the security information simple request.")],
         _request_timeout: Union[
             None,
@@ -4200,8 +4277,8 @@ class SharingApi:
 
         Sets the sharing settings to a folder with the ID specified in the request.
 
-        :param folder_id: The folder ID. (required)
-        :type folder_id: int
+        :param id: The folder ID. (required)
+        :type id: int
         :param security_info_simple_request_dto: The parameters of the security information simple request. (required)
         :type security_info_simple_request_dto: SecurityInfoSimpleRequestDto
         :param _request_timeout: timeout setting for this request. If one
@@ -4227,7 +4304,7 @@ class SharingApi:
         """ # noqa: E501
 
         _param = self._set_folder_security_info_serialize(
-            folder_id=folder_id,
+            id=id,
             security_info_simple_request_dto=security_info_simple_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -4237,8 +4314,10 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4257,7 +4336,7 @@ class SharingApi:
     @validate_call
     def set_folder_security_info_without_preload_content(
         self,
-        folder_id: Annotated[StrictInt, Field(description="The folder ID.")],
+        id: Annotated[StrictInt, Field(description="The folder ID.")],
         security_info_simple_request_dto: Annotated[SecurityInfoSimpleRequestDto, Field(description="The parameters of the security information simple request.")],
         _request_timeout: Union[
             None,
@@ -4276,8 +4355,8 @@ class SharingApi:
 
         Sets the sharing settings to a folder with the ID specified in the request.
 
-        :param folder_id: The folder ID. (required)
-        :type folder_id: int
+        :param id: The folder ID. (required)
+        :type id: int
         :param security_info_simple_request_dto: The parameters of the security information simple request. (required)
         :type security_info_simple_request_dto: SecurityInfoSimpleRequestDto
         :param _request_timeout: timeout setting for this request. If one
@@ -4303,7 +4382,7 @@ class SharingApi:
         """ # noqa: E501
 
         _param = self._set_folder_security_info_serialize(
-            folder_id=folder_id,
+            id=id,
             security_info_simple_request_dto=security_info_simple_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -4313,8 +4392,10 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4328,7 +4409,7 @@ class SharingApi:
 
     def _set_folder_security_info_serialize(
         self,
-        folder_id,
+        id,
         security_info_simple_request_dto,
         _request_auth,
         _content_type,
@@ -4351,8 +4432,8 @@ class SharingApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if folder_id is not None:
-            _path_params['folderId'] = folder_id
+        if id is not None:
+            _path_params['id'] = id
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -4394,7 +4475,7 @@ class SharingApi:
         ]
 
 
-        resource_path = "/api/2.0/files/folder/{folderId}/share"
+        resource_path = "/api/2.0/files/folder/{id}/share"
 
         return self.api_client.param_serialize(
             method='PUT',
@@ -4469,8 +4550,10 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4541,8 +4624,10 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4613,8 +4698,10 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }

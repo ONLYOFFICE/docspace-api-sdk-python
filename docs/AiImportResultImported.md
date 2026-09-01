@@ -1,4 +1,5 @@
 # AiImportResultImported
+How many folders and prompts were created. Present on success.
 
 ## Properties
 

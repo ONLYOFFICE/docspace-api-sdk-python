@@ -21,7 +21,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictFloat, StrictInt, StrictStr, field_validator
+from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from docspace_api_sdk.models.ai_open_ai_tool_call_delta_function import AiOpenAIToolCallDeltaFunction
 from typing import Optional, Set
@@ -29,11 +29,11 @@ from typing_extensions import Self
 
 class AiOpenAIToolCallDelta(BaseModel):
     """
-    AiOpenAIToolCallDelta
+    The incremental part of one tool call the model requested.
     """ # noqa: E501
-    index: Union[StrictFloat, StrictInt]
-    id: Optional[StrictStr] = None
-    type: Optional[StrictStr] = None
+    index: Union[StrictFloat, StrictInt] = Field(description="The zero-based position of the tool call within the message.")
+    id: Optional[StrictStr] = Field(default=None, description="The tool call identifier, quoted back when its result is submitted.")
+    type: Optional[StrictStr] = Field(default=None, description="Always `function` - the only tool kind the API defines.")
     function: Optional[AiOpenAIToolCallDeltaFunction] = None
     __properties: ClassVar[List[str]] = ["index", "id", "type", "function"]
 

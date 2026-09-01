@@ -29,14 +29,14 @@ from typing_extensions import Self
 
 class AiImageModelPricing(BaseModel):
     """
-    AiImageModelPricing
+    The pricing of a single image model.
     """ # noqa: E501
-    id: Optional[StrictStr]
-    alias: Optional[StrictStr] = None
-    owned_by: Optional[StrictStr] = Field(default=None, alias="ownedBy")
-    provider: Optional[StrictStr] = None
-    link: Optional[StrictStr] = None
-    price: AiImagePrice
+    id: Optional[StrictStr] = Field(description="The identifier of the model, as the provider expects it on the wire.", json_schema_extra={"examples": ["gpt-4o"]})
+    alias: Optional[StrictStr] = Field(default=None, description="The display name of the model.", json_schema_extra={"examples": ["GPT-4o"]})
+    owned_by: Optional[StrictStr] = Field(default=None, description="The owner of the model, as reported by the provider.", alias="ownedBy", json_schema_extra={"examples": ["openai"]})
+    provider: Optional[StrictStr] = Field(default=None, description="The provider that serves the model.", json_schema_extra={"examples": ["openai"]})
+    link: Optional[StrictStr] = Field(default=None, description="The link to the pricing page of the model.", json_schema_extra={"examples": ["https://openai.com/api/pricing"]})
+    price: AiImagePrice = Field(description="The price of an image model: per prompt token and per generated image.")
     __properties: ClassVar[List[str]] = ["id", "alias", "ownedBy", "provider", "link", "price"]
 
     model_config = ConfigDict(

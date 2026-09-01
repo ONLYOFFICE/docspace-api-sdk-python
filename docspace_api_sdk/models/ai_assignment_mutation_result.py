@@ -21,7 +21,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool
+from pydantic import BaseModel, ConfigDict, Field, StrictBool
 from typing import Any, ClassVar, Dict, List, Optional
 from docspace_api_sdk.models.ai_t_error_data import AiTErrorData
 from typing import Optional, Set
@@ -29,10 +29,10 @@ from typing_extensions import Self
 
 class AiAssignmentMutationResult(BaseModel):
     """
-    Outcome of  {@link  AssignmentsEngine.assign }  /  {@link  AssignmentsEngine.unassign } . Either a success or a field-scoped error suitable for displaying in the profile editor.
+    Outcome of `AssignmentsEngine.assign` / `AssignmentsEngine.unassign`. Either a success or a field-scoped error suitable for displaying in the profile editor.
     """ # noqa: E501
-    success: StrictBool
-    error: Optional[AiTErrorData] = None
+    success: StrictBool = Field(description="True when the assignment was persisted.")
+    error: Optional[AiTErrorData] = Field(default=None, description="Why the assignment was rejected. Present on failure.")
     __properties: ClassVar[List[str]] = ["success", "error"]
 
     model_config = ConfigDict(

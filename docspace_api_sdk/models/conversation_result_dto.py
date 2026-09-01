@@ -32,7 +32,7 @@ class ConversationResultDto(BaseModel):
     The result of file convertion operation.
     """ # noqa: E501
     id: Optional[StrictStr] = Field(description="The conversion operation ID.", json_schema_extra={"examples": ["12345"]})
-    operation: FileOperationType = Field(description="The file operation type.", alias="Operation")
+    operation: FileOperationType = Field(description="The conversion operation type.", alias="Operation")
     progress: StrictInt = Field(description="The conversion operation progress.", json_schema_extra={"examples": [50]})
     source: Optional[StrictStr] = Field(default=None, description="The source file for the conversion.", json_schema_extra={"examples": ["document.docx"]})
     result: Optional[Any] = None

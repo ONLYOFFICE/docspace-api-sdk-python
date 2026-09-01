@@ -21,9 +21,9 @@ import pprint
 import re  # noqa: F401
 import json
 
+from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from docspace_api_sdk.models.api_date_time import ApiDateTime
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -34,7 +34,7 @@ class SessionRequest(BaseModel):
     file_name: Optional[StrictStr] = Field(description="The file name.", alias="fileName", json_schema_extra={"examples": ["My Document.docx"]})
     file_size: Optional[StrictInt] = Field(default=None, description="The file size.", alias="fileSize", json_schema_extra={"examples": [10485760]})
     relative_path: Optional[StrictStr] = Field(default=None, description="The relative path to the file.", alias="relativePath", json_schema_extra={"examples": ["subfolder/documents"]})
-    create_on: Optional[ApiDateTime] = Field(default=None, description="The API date and time parameters.", alias="createOn")
+    create_on: Optional[datetime] = Field(default=None, description="The date and time when the file was created.", alias="createOn", json_schema_extra={"examples": ["2025-01-01T00:00:00Z"]})
     encrypted: Optional[StrictBool] = Field(default=None, description="Specifies whether the file is encrypted or not.", json_schema_extra={"examples": [False]})
     create_new_if_exist: Optional[StrictBool] = Field(default=None, description="Specifies whether to create a new file if it already exists.", alias="createNewIfExist", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["fileName", "fileSize", "relativePath", "createOn", "encrypted", "createNewIfExist"]
@@ -78,9 +78,6 @@ class SessionRequest(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of create_on
-        if self.create_on:
-            _dict['createOn'] = self.create_on.to_dict()
         # set to None if file_name (nullable) is None
         # and model_fields_set contains the field
         if self.file_name is None and "file_name" in self.model_fields_set:
@@ -90,6 +87,11 @@ class SessionRequest(BaseModel):
         # and model_fields_set contains the field
         if self.relative_path is None and "relative_path" in self.model_fields_set:
             _dict['relativePath'] = None
+
+        # set to None if create_on (nullable) is None
+        # and model_fields_set contains the field
+        if self.create_on is None and "create_on" in self.model_fields_set:
+            _dict['createOn'] = None
 
         return _dict
 
@@ -107,7 +109,7 @@ class SessionRequest(BaseModel):
             "fileName": obj.get("fileName"),
             "fileSize": obj.get("fileSize"),
             "relativePath": obj.get("relativePath"),
-            "createOn": ApiDateTime.from_dict(obj["createOn"]) if obj.get("createOn") is not None else None,
+            "createOn": obj.get("createOn"),
             "encrypted": obj.get("encrypted"),
             "createNewIfExist": obj.get("createNewIfExist")
         })

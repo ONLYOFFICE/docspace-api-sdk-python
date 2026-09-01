@@ -42,7 +42,7 @@ class WebPluginDto(BaseModel):
     plugin_name: Optional[StrictStr] = Field(description="The name by which the web plugin is registered in the window object.", alias="pluginName", json_schema_extra={"examples": ["examplePlugin"]})
     scopes: Optional[StrictStr] = Field(description="The web plugin scopes.", json_schema_extra={"examples": ["Files,Rooms"]})
     image: Optional[StrictStr] = Field(description="The web plugin image.", json_schema_extra={"examples": ["https://example.com/image.png"]})
-    create_by: EmployeeDto = Field(description="The user parameters.", alias="createBy")
+    create_by: EmployeeDto = Field(description="The user who created the web plugin.", alias="createBy")
     create_on: datetime = Field(description="The date and time when the web plugin was created.", alias="createOn", json_schema_extra={"examples": ["2024-01-15T10:30:00Z"]})
     enabled: StrictBool = Field(description="Specifies if the web plugin is enabled or not.", json_schema_extra={"examples": [True]})
     system: StrictBool = Field(description="Specifies if the web plugin is system or not.", json_schema_extra={"examples": [False]})

@@ -21,8 +21,9 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import StrictStr
+from pydantic import Field, StrictStr
 from typing import Optional
+from typing_extensions import Annotated
 from docspace_api_sdk.models.auth_requests_dto import AuthRequestsDto
 from docspace_api_sdk.models.auth_with_code_requests_dto import AuthWithCodeRequestsDto
 from docspace_api_sdk.models.authentication_token_wrapper import AuthenticationTokenWrapper
@@ -109,7 +110,8 @@ class AuthenticationApi:
             '400': None,
             '401': None,
             '404': None,
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -183,7 +185,8 @@ class AuthenticationApi:
             '400': None,
             '401': None,
             '404': None,
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -257,7 +260,8 @@ class AuthenticationApi:
             '400': None,
             '401': None,
             '404': None,
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -351,7 +355,7 @@ class AuthenticationApi:
     @validate_call
     def authenticate_me_from_body_with_code(
         self,
-        code: StrictStr,
+        code: Annotated[StrictStr, Field(description="The two-factor authentication code. Send the same value as the `code` of the request body, which is the one the handler reads.")],
         auth_with_code_requests_dto: Optional[AuthWithCodeRequestsDto] = None,
         _request_timeout: Union[
             None,
@@ -370,7 +374,7 @@ class AuthenticationApi:
 
         Authenticates the current user by SMS or two-factor authentication code.
 
-        :param code: (required)
+        :param code: The two-factor authentication code. Send the same value as the `code` of the request body, which is the one the handler reads. (required)
         :type code: str
         :param auth_with_code_requests_dto:
         :type auth_with_code_requests_dto: AuthWithCodeRequestsDto
@@ -410,7 +414,8 @@ class AuthenticationApi:
             '400': None,
             '401': None,
             '403': None,
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -429,7 +434,7 @@ class AuthenticationApi:
     @validate_call
     def authenticate_me_from_body_with_code_with_http_info(
         self,
-        code: StrictStr,
+        code: Annotated[StrictStr, Field(description="The two-factor authentication code. Send the same value as the `code` of the request body, which is the one the handler reads.")],
         auth_with_code_requests_dto: Optional[AuthWithCodeRequestsDto] = None,
         _request_timeout: Union[
             None,
@@ -448,7 +453,7 @@ class AuthenticationApi:
 
         Authenticates the current user by SMS or two-factor authentication code.
 
-        :param code: (required)
+        :param code: The two-factor authentication code. Send the same value as the `code` of the request body, which is the one the handler reads. (required)
         :type code: str
         :param auth_with_code_requests_dto:
         :type auth_with_code_requests_dto: AuthWithCodeRequestsDto
@@ -488,7 +493,8 @@ class AuthenticationApi:
             '400': None,
             '401': None,
             '403': None,
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -507,7 +513,7 @@ class AuthenticationApi:
     @validate_call
     def authenticate_me_from_body_with_code_without_preload_content(
         self,
-        code: StrictStr,
+        code: Annotated[StrictStr, Field(description="The two-factor authentication code. Send the same value as the `code` of the request body, which is the one the handler reads.")],
         auth_with_code_requests_dto: Optional[AuthWithCodeRequestsDto] = None,
         _request_timeout: Union[
             None,
@@ -526,7 +532,7 @@ class AuthenticationApi:
 
         Authenticates the current user by SMS or two-factor authentication code.
 
-        :param code: (required)
+        :param code: The two-factor authentication code. Send the same value as the `code` of the request body, which is the one the handler reads. (required)
         :type code: str
         :param auth_with_code_requests_dto:
         :type auth_with_code_requests_dto: AuthWithCodeRequestsDto
@@ -566,7 +572,8 @@ class AuthenticationApi:
             '400': None,
             '401': None,
             '403': None,
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -715,7 +722,9 @@ class AuthenticationApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ConfirmWrapper",
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -786,7 +795,9 @@ class AuthenticationApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ConfirmWrapper",
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -857,7 +868,9 @@ class AuthenticationApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ConfirmWrapper",
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -999,7 +1012,8 @@ class AuthenticationApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1066,7 +1080,8 @@ class AuthenticationApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1133,7 +1148,8 @@ class AuthenticationApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1259,7 +1275,8 @@ class AuthenticationApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1326,7 +1343,8 @@ class AuthenticationApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1393,7 +1411,8 @@ class AuthenticationApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1523,8 +1542,10 @@ class AuthenticationApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AuthenticationTokenWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1595,8 +1616,10 @@ class AuthenticationApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AuthenticationTokenWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1667,8 +1690,10 @@ class AuthenticationApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AuthenticationTokenWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1821,7 +1846,8 @@ class AuthenticationApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AuthenticationTokenWrapper",
             '400': None,
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1893,7 +1919,8 @@ class AuthenticationApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AuthenticationTokenWrapper",
             '400': None,
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1965,7 +1992,8 @@ class AuthenticationApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AuthenticationTokenWrapper",
             '400': None,
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }

@@ -21,7 +21,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictFloat, StrictInt
+from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from docspace_api_sdk.models.ai_open_ai_choice_delta import AiOpenAIChoiceDelta
 from docspace_api_sdk.models.ai_open_ai_finish_reason import AiOpenAIFinishReason
@@ -30,11 +30,11 @@ from typing_extensions import Self
 
 class AiOpenAIChunkChoice(BaseModel):
     """
-    AiOpenAIChunkChoice
+    One choice of a streaming completion, carrying the part this chunk adds.
     """ # noqa: E501
-    index: Union[StrictFloat, StrictInt]
-    delta: AiOpenAIChoiceDelta
-    finish_reason: Optional[AiOpenAIFinishReason]
+    index: Union[StrictFloat, StrictInt] = Field(description="The zero-based position of the choice. This service emits a single choice, so always 0.")
+    delta: AiOpenAIChoiceDelta = Field(description="What this chunk adds to the choice.")
+    finish_reason: Optional[AiOpenAIFinishReason] = Field(description="Why the completion stopped, or null while it is still streaming.")
     __properties: ClassVar[List[str]] = ["index", "delta", "finish_reason"]
 
     model_config = ConfigDict(

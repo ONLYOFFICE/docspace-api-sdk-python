@@ -21,8 +21,9 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import StrictStr
+from pydantic import Field, StrictStr
 from typing import Any, Dict
+from typing_extensions import Annotated
 from docspace_api_sdk.models.ai_success_response import AiSuccessResponse
 
 from docspace_api_sdk.api_client import ApiClient, RequestSerialized
@@ -47,7 +48,7 @@ class OpenAIPassthroughApi:
     @validate_call
     def ai_openai_chat_completions(
         self,
-        profile_id: StrictStr,
+        profile_id: Annotated[StrictStr, Field(description="The AI provider profile identifier.")],
         request_body: Dict[str, Any],
         _request_timeout: Union[
             None,
@@ -64,8 +65,9 @@ class OpenAIPassthroughApi:
     ) -> AiSuccessResponse:
         """OpenAI-compatible chat completions proxied to the profile's provider
 
+        OpenAI-compatible chat completions for the document editor's AI plugin. The profile is resolved server-side, its credentials are attached, and the body is forwarded to the provider verbatim - the payload is owned by the plugin's SDK on one end and the provider on the other. A client disconnect cancels the provider call.
 
-        :param profile_id: (required)
+        :param profile_id: The AI provider profile identifier. (required)
         :type profile_id: str
         :param request_body: (required)
         :type request_body: Dict[str, object]
@@ -119,7 +121,7 @@ class OpenAIPassthroughApi:
     @validate_call
     def ai_openai_chat_completions_with_http_info(
         self,
-        profile_id: StrictStr,
+        profile_id: Annotated[StrictStr, Field(description="The AI provider profile identifier.")],
         request_body: Dict[str, Any],
         _request_timeout: Union[
             None,
@@ -136,8 +138,9 @@ class OpenAIPassthroughApi:
     ) -> ApiResponse[AiSuccessResponse]:
         """OpenAI-compatible chat completions proxied to the profile's provider
 
+        OpenAI-compatible chat completions for the document editor's AI plugin. The profile is resolved server-side, its credentials are attached, and the body is forwarded to the provider verbatim - the payload is owned by the plugin's SDK on one end and the provider on the other. A client disconnect cancels the provider call.
 
-        :param profile_id: (required)
+        :param profile_id: The AI provider profile identifier. (required)
         :type profile_id: str
         :param request_body: (required)
         :type request_body: Dict[str, object]
@@ -191,7 +194,7 @@ class OpenAIPassthroughApi:
     @validate_call
     def ai_openai_chat_completions_without_preload_content(
         self,
-        profile_id: StrictStr,
+        profile_id: Annotated[StrictStr, Field(description="The AI provider profile identifier.")],
         request_body: Dict[str, Any],
         _request_timeout: Union[
             None,
@@ -208,8 +211,9 @@ class OpenAIPassthroughApi:
     ) -> RESTResponseType:
         """OpenAI-compatible chat completions proxied to the profile's provider
 
+        OpenAI-compatible chat completions for the document editor's AI plugin. The profile is resolved server-side, its credentials are attached, and the body is forwarded to the provider verbatim - the payload is owned by the plugin's SDK on one end and the provider on the other. A client disconnect cancels the provider call.
 
-        :param profile_id: (required)
+        :param profile_id: The AI provider profile identifier. (required)
         :type profile_id: str
         :param request_body: (required)
         :type request_body: Dict[str, object]
@@ -341,7 +345,7 @@ class OpenAIPassthroughApi:
     @validate_call
     def ai_openai_images_generations(
         self,
-        profile_id: StrictStr,
+        profile_id: Annotated[StrictStr, Field(description="The AI provider profile identifier.")],
         request_body: Dict[str, Any],
         _request_timeout: Union[
             None,
@@ -358,8 +362,9 @@ class OpenAIPassthroughApi:
     ) -> AiSuccessResponse:
         """OpenAI-compatible image generation proxied to the profile's provider
 
+        OpenAI-compatible image generation for the document editor's AI plugin. As with the chat-completions passthrough, the profile's credentials are attached server-side and the body reaches the provider unchanged.
 
-        :param profile_id: (required)
+        :param profile_id: The AI provider profile identifier. (required)
         :type profile_id: str
         :param request_body: (required)
         :type request_body: Dict[str, object]
@@ -413,7 +418,7 @@ class OpenAIPassthroughApi:
     @validate_call
     def ai_openai_images_generations_with_http_info(
         self,
-        profile_id: StrictStr,
+        profile_id: Annotated[StrictStr, Field(description="The AI provider profile identifier.")],
         request_body: Dict[str, Any],
         _request_timeout: Union[
             None,
@@ -430,8 +435,9 @@ class OpenAIPassthroughApi:
     ) -> ApiResponse[AiSuccessResponse]:
         """OpenAI-compatible image generation proxied to the profile's provider
 
+        OpenAI-compatible image generation for the document editor's AI plugin. As with the chat-completions passthrough, the profile's credentials are attached server-side and the body reaches the provider unchanged.
 
-        :param profile_id: (required)
+        :param profile_id: The AI provider profile identifier. (required)
         :type profile_id: str
         :param request_body: (required)
         :type request_body: Dict[str, object]
@@ -485,7 +491,7 @@ class OpenAIPassthroughApi:
     @validate_call
     def ai_openai_images_generations_without_preload_content(
         self,
-        profile_id: StrictStr,
+        profile_id: Annotated[StrictStr, Field(description="The AI provider profile identifier.")],
         request_body: Dict[str, Any],
         _request_timeout: Union[
             None,
@@ -502,8 +508,9 @@ class OpenAIPassthroughApi:
     ) -> RESTResponseType:
         """OpenAI-compatible image generation proxied to the profile's provider
 
+        OpenAI-compatible image generation for the document editor's AI plugin. As with the chat-completions passthrough, the profile's credentials are attached server-side and the body reaches the provider unchanged.
 
-        :param profile_id: (required)
+        :param profile_id: The AI provider profile identifier. (required)
         :type profile_id: str
         :param request_body: (required)
         :type request_body: Dict[str, object]

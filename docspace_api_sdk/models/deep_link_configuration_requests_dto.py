@@ -31,7 +31,7 @@ class DeepLinkConfigurationRequestsDto(BaseModel):
     """
     The request parameters for managing the deep link configuration.
     """ # noqa: E501
-    deep_link_settings: Optional[TenantDeepLinkSettings] = Field(default=None, description="The deep link settings.", alias="deepLinkSettings")
+    deep_link_settings: Optional[TenantDeepLinkSettings] = Field(default=None, description="The deep link settings for the specified tenant.", alias="deepLinkSettings")
     __properties: ClassVar[List[str]] = ["deepLinkSettings"]
 
     model_config = ConfigDict(

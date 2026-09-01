@@ -5,9 +5,9 @@ Outcome of `create` / `update` / `move` on a prompt — either the persisted pro
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**success** | **bool** |  | 
-**prompt** | [**AiPrompt**](AiPrompt.md) |  | [optional] 
-**error** | [**AiTErrorData**](AiTErrorData.md) |  | [optional] 
+**success** | **bool** | True when the prompt was persisted. | 
+**prompt** | [**AiPrompt**](AiPrompt.md) | The persisted prompt. Present on success. | [optional] 
+**error** | [**AiTErrorData**](AiTErrorData.md) | Why the prompt was rejected. Present on failure. | [optional] 
 
 ## Example
 

@@ -28,7 +28,7 @@ from typing_extensions import Self
 
 class AiImportResultImported(BaseModel):
     """
-    AiImportResultImported
+    How many folders and prompts were created. Present on success.
     """ # noqa: E501
     folders: Union[StrictFloat, StrictInt]
     prompts: Union[StrictFloat, StrictInt]

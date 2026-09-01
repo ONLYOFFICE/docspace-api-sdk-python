@@ -10,10 +10,10 @@ Name | Type | Description | Notes
 **key** | **str** | The full API key value (only returned when creating a new key). | 
 **key_postfix** | **str** | The API key postfix (used for identification). | [optional] 
 **permissions** | **List[str]** | The list of permissions granted to the API key. | 
-**last_used** | [**ApiDateTime**](ApiDateTime.md) | The API date and time parameters. | [optional] 
-**create_on** | [**ApiDateTime**](ApiDateTime.md) | The API date and time parameters. | [optional] 
-**create_by** | [**EmployeeDto**](EmployeeDto.md) | The user parameters. | [optional] 
-**expires_at** | [**ApiDateTime**](ApiDateTime.md) | The API date and time parameters. | [optional] 
+**last_used** | **datetime** | The date and time when the API key was last used. | [optional] 
+**create_on** | **datetime** | The date and time when the API key was created. | [optional] 
+**create_by** | [**EmployeeDto**](EmployeeDto.md) | The identifier of the user who created the API key. | [optional] 
+**expires_at** | **datetime** | The date and time when the API key expires. | [optional] 
 **is_active** | **bool** | Indicates whether the API key is active or not. | 
 
 ## Example

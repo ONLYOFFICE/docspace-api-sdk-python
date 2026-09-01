@@ -30,7 +30,7 @@ from typing_extensions import Self
 
 class UpdateRoomGroupRequest(BaseModel):
     """
-    UpdateRoomGroupRequest
+    The changes to apply to a room group: its name and the rooms to add or remove.
     """ # noqa: E501
     rooms_to_add: Optional[List[DuplicateRequestDtoAllOfFileIds]] = Field(default=None, description="The list of room IDs to add to the group.", alias="roomsToAdd", json_schema_extra={"examples": [[1, 2, 3]]})
     rooms_to_remove: Optional[List[DuplicateRequestDtoAllOfFileIds]] = Field(default=None, description="The list of room IDs to remove from the group.", alias="roomsToRemove", json_schema_extra={"examples": [[1, 2, 3]]})

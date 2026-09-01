@@ -101,8 +101,9 @@ class NotificationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "NotificationChannelStatusWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -169,8 +170,9 @@ class NotificationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "NotificationChannelStatusWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -237,8 +239,9 @@ class NotificationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "NotificationChannelStatusWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -374,8 +377,10 @@ class NotificationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "NotificationSettingsWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -446,8 +451,10 @@ class NotificationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "NotificationSettingsWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -518,8 +525,10 @@ class NotificationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "NotificationSettingsWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -654,8 +663,9 @@ class NotificationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomsNotificationSettingsWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -722,8 +732,9 @@ class NotificationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomsNotificationSettingsWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -790,8 +801,9 @@ class NotificationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomsNotificationSettingsWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -927,8 +939,10 @@ class NotificationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "NotificationSettingsWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -999,8 +1013,10 @@ class NotificationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "NotificationSettingsWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1071,8 +1087,10 @@ class NotificationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "NotificationSettingsWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1224,8 +1242,10 @@ class NotificationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomsNotificationSettingsWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1296,8 +1316,10 @@ class NotificationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomsNotificationSettingsWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1368,8 +1390,10 @@ class NotificationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomsNotificationSettingsWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }

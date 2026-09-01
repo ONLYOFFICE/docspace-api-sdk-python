@@ -32,16 +32,16 @@ from docspace_api_sdk.models.importable_api_entity import ImportableApiEntity
 
 class MigratingApiUser(ImportableApiEntity):
     """
-    MigratingApiUser
+    The migrating user parameters.
     """
 
-    key: Optional[StrictStr] = None
-    email: Optional[StrictStr] = None
-    display_name: Optional[StrictStr] = Field(default=None, alias="displayName")
-    first_name: Optional[StrictStr] = Field(default=None, alias="firstName")
-    last_name: Optional[StrictStr] = Field(default=None, alias="lastName")
+    key: Optional[StrictStr] = Field(default=None, description="The user key.", json_schema_extra={"examples": ["abcd1234"]})
+    email: Optional[StrictStr] = Field(default=None, description="The user email.", json_schema_extra={"examples": ["john.doe@example.com"]})
+    display_name: Optional[StrictStr] = Field(default=None, description="The user display name.", alias="displayName", json_schema_extra={"examples": ["John Doe"]})
+    first_name: Optional[StrictStr] = Field(default=None, description="The user first name.", alias="firstName", json_schema_extra={"examples": ["John"]})
+    last_name: Optional[StrictStr] = Field(default=None, description="The user last name.", alias="lastName", json_schema_extra={"examples": ["Doe"]})
     user_type: Optional[EmployeeType] = Field(default=None, description="The user type.", alias="userType")
-    migrating_files: Optional[MigratingApiFiles] = Field(default=None, alias="migratingFiles")
+    migrating_files: Optional[MigratingApiFiles] = Field(default=None, description="The user's migrating files.", alias="migratingFiles")
 
     model_config = ConfigDict(
         populate_by_name=True,

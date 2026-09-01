@@ -5,9 +5,9 @@ Input for creating a prompt — the engine generates `id`/`createdAt`/`updatedAt
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **str** |  | 
-**text** | **str** |  | 
-**folder_id** | **str** |  | [optional] 
+**name** | **str** | The prompt name. | 
+**text** | **str** | The prompt body. | 
+**folder_id** | **str** | The folder to file the prompt under. Omit or send null to leave it outside any folder. | [optional] 
 
 ## Example
 

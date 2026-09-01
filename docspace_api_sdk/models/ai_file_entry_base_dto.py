@@ -21,9 +21,9 @@ import pprint
 import re  # noqa: F401
 import json
 
+from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from docspace_api_sdk.models.ai_api_date_time import AiApiDateTime
 from docspace_api_sdk.models.ai_employee_dto import AiEmployeeDto
 from docspace_api_sdk.models.ai_file_entry_type import AiFileEntryType
 from docspace_api_sdk.models.ai_file_share import AiFileShare
@@ -44,10 +44,10 @@ class AiFileEntryBaseDto(BaseModel):
     shared_external: Optional[StrictBool] = Field(default=None, description="Specifies if the file entry is shared via a public (non-internal) external link.", alias="sharedExternal", json_schema_extra={"examples": [False]})
     parent_shared: Optional[StrictBool] = Field(default=None, description="Indicates whether the parent entity is shared.", alias="parentShared", json_schema_extra={"examples": [False]})
     short_web_url: Optional[StrictStr] = Field(default=None, description="The short Web URL.", alias="shortWebUrl", json_schema_extra={"examples": ["http://localhost/s/abc123"]})
-    created: Optional[AiApiDateTime] = Field(default=None, description="The creation date and time of the file entry.")
+    created: Optional[datetime] = Field(default=None, description="The creation date and time of the file entry.", json_schema_extra={"examples": ["2021-01-01T00:00:00Z"]})
     created_by: Optional[AiEmployeeDto] = Field(default=None, description="The file entry author.", alias="createdBy")
-    updated: Optional[AiApiDateTime] = Field(default=None, description="The last date and time when the file entry was updated.")
-    auto_delete: Optional[AiApiDateTime] = Field(default=None, description="The date and time when the file entry will be automatically deleted.", alias="autoDelete")
+    updated: Optional[datetime] = Field(default=None, description="The last date and time when the file entry was updated.", json_schema_extra={"examples": ["2021-01-01T00:00:00Z"]})
+    auto_delete: Optional[datetime] = Field(default=None, description="The date and time when the file entry will be automatically deleted.", alias="autoDelete", json_schema_extra={"examples": ["2021-01-01T00:00:00Z"]})
     root_folder_type: Optional[AiFolderType] = Field(default=None, description="The root folder type of the file entry.", alias="rootFolderType")
     parent_room_type: Optional[AiFolderType] = Field(default=None, description="The parent room type of the file entry.", alias="parentRoomType")
     updated_by: Optional[AiEmployeeDto] = Field(default=None, description="The user who updated the file entry.", alias="updatedBy")
@@ -104,18 +104,9 @@ class AiFileEntryBaseDto(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of owned_by
         if self.owned_by:
             _dict['ownedBy'] = self.owned_by.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of created
-        if self.created:
-            _dict['created'] = self.created.to_dict()
         # override the default output from pydantic by calling `to_dict()` of created_by
         if self.created_by:
             _dict['createdBy'] = self.created_by.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of updated
-        if self.updated:
-            _dict['updated'] = self.updated.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of auto_delete
-        if self.auto_delete:
-            _dict['autoDelete'] = self.auto_delete.to_dict()
         # override the default output from pydantic by calling `to_dict()` of updated_by
         if self.updated_by:
             _dict['updatedBy'] = self.updated_by.to_dict()
@@ -128,6 +119,21 @@ class AiFileEntryBaseDto(BaseModel):
         # and model_fields_set contains the field
         if self.short_web_url is None and "short_web_url" in self.model_fields_set:
             _dict['shortWebUrl'] = None
+
+        # set to None if created (nullable) is None
+        # and model_fields_set contains the field
+        if self.created is None and "created" in self.model_fields_set:
+            _dict['created'] = None
+
+        # set to None if updated (nullable) is None
+        # and model_fields_set contains the field
+        if self.updated is None and "updated" in self.model_fields_set:
+            _dict['updated'] = None
+
+        # set to None if auto_delete (nullable) is None
+        # and model_fields_set contains the field
+        if self.auto_delete is None and "auto_delete" in self.model_fields_set:
+            _dict['autoDelete'] = None
 
         # set to None if provider_item (nullable) is None
         # and model_fields_set contains the field
@@ -176,10 +182,10 @@ class AiFileEntryBaseDto(BaseModel):
             "sharedExternal": obj.get("sharedExternal"),
             "parentShared": obj.get("parentShared"),
             "shortWebUrl": obj.get("shortWebUrl"),
-            "created": AiApiDateTime.from_dict(obj["created"]) if obj.get("created") is not None else None,
+            "created": obj.get("created"),
             "createdBy": AiEmployeeDto.from_dict(obj["createdBy"]) if obj.get("createdBy") is not None else None,
-            "updated": AiApiDateTime.from_dict(obj["updated"]) if obj.get("updated") is not None else None,
-            "autoDelete": AiApiDateTime.from_dict(obj["autoDelete"]) if obj.get("autoDelete") is not None else None,
+            "updated": obj.get("updated"),
+            "autoDelete": obj.get("autoDelete"),
             "rootFolderType": obj.get("rootFolderType"),
             "parentRoomType": obj.get("parentRoomType"),
             "updatedBy": AiEmployeeDto.from_dict(obj["updatedBy"]) if obj.get("updatedBy") is not None else None,

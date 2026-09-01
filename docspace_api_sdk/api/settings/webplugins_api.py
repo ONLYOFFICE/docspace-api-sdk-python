@@ -104,8 +104,9 @@ class WebpluginsApi:
             '200': "WebPluginWrapper",
             '400': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -178,8 +179,9 @@ class WebpluginsApi:
             '200': "WebPluginWrapper",
             '400': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -252,8 +254,9 @@ class WebpluginsApi:
             '200': "WebPluginWrapper",
             '400': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -395,8 +398,10 @@ class WebpluginsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -468,8 +473,10 @@ class WebpluginsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -541,8 +548,10 @@ class WebpluginsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -586,6 +595,13 @@ class WebpluginsApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
@@ -675,8 +691,10 @@ class WebpluginsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "WebPluginWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -748,8 +766,10 @@ class WebpluginsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "WebPluginWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -821,8 +841,10 @@ class WebpluginsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "WebPluginWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -962,8 +984,10 @@ class WebpluginsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "WebPluginArrayWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1035,8 +1059,10 @@ class WebpluginsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "WebPluginArrayWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1108,8 +1134,10 @@ class WebpluginsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "WebPluginArrayWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1255,8 +1283,10 @@ class WebpluginsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1332,8 +1362,10 @@ class WebpluginsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1409,8 +1441,10 @@ class WebpluginsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1457,6 +1491,13 @@ class WebpluginsApi:
             _body_params = web_plugin_requests
 
 
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
         # set the HTTP header `Content-Type`
         if _content_type:

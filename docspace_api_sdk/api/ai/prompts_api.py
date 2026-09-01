@@ -21,8 +21,9 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import StrictStr
-from typing import List
+from pydantic import Field, StrictStr
+from typing import List, Optional
+from typing_extensions import Annotated
 from docspace_api_sdk.models.ai_create_prompt_input import AiCreatePromptInput
 from docspace_api_sdk.models.ai_folder_mutation_result import AiFolderMutationResult
 from docspace_api_sdk.models.ai_import_result import AiImportResult
@@ -74,6 +75,7 @@ class PromptsApi:
     ) -> AiPromptMutationResult:
         """Create
 
+        Saves a new prompt. The name must be non-empty and unique inside its folder, and `folderId` must point at an existing folder - omit it for the root.
 
         :param ai_create_prompt_input: (required)
         :type ai_create_prompt_input: AiCreatePromptInput
@@ -142,6 +144,7 @@ class PromptsApi:
     ) -> ApiResponse[AiPromptMutationResult]:
         """Create
 
+        Saves a new prompt. The name must be non-empty and unique inside its folder, and `folderId` must point at an existing folder - omit it for the root.
 
         :param ai_create_prompt_input: (required)
         :type ai_create_prompt_input: AiCreatePromptInput
@@ -210,6 +213,7 @@ class PromptsApi:
     ) -> RESTResponseType:
         """Create
 
+        Saves a new prompt. The name must be non-empty and unique inside its folder, and `folderId` must point at an existing folder - omit it for the root.
 
         :param ai_create_prompt_input: (required)
         :type ai_create_prompt_input: AiCreatePromptInput
@@ -353,6 +357,7 @@ class PromptsApi:
     ) -> AiFolderMutationResult:
         """Create folder
 
+        Creates a prompt folder. The name must be non-empty and unique across the portal - prompt folders do not nest.
 
         :param body: (required)
         :type body: str
@@ -421,6 +426,7 @@ class PromptsApi:
     ) -> ApiResponse[AiFolderMutationResult]:
         """Create folder
 
+        Creates a prompt folder. The name must be non-empty and unique across the portal - prompt folders do not nest.
 
         :param body: (required)
         :type body: str
@@ -489,6 +495,7 @@ class PromptsApi:
     ) -> RESTResponseType:
         """Create folder
 
+        Creates a prompt folder. The name must be non-empty and unique across the portal - prompt folders do not nest.
 
         :param body: (required)
         :type body: str
@@ -632,6 +639,7 @@ class PromptsApi:
     ) -> AiSuccessResponse:
         """Delete
 
+        Deletes a saved prompt. Does nothing when it no longer exists.
 
         :param body: (required)
         :type body: str
@@ -700,6 +708,7 @@ class PromptsApi:
     ) -> ApiResponse[AiSuccessResponse]:
         """Delete
 
+        Deletes a saved prompt. Does nothing when it no longer exists.
 
         :param body: (required)
         :type body: str
@@ -768,6 +777,7 @@ class PromptsApi:
     ) -> RESTResponseType:
         """Delete
 
+        Deletes a saved prompt. Does nothing when it no longer exists.
 
         :param body: (required)
         :type body: str
@@ -911,6 +921,7 @@ class PromptsApi:
     ) -> AiSuccessResponse:
         """Delete folder
 
+        Deletes a prompt folder together with the prompts inside it.
 
         :param body: (required)
         :type body: str
@@ -979,6 +990,7 @@ class PromptsApi:
     ) -> ApiResponse[AiSuccessResponse]:
         """Delete folder
 
+        Deletes a prompt folder together with the prompts inside it.
 
         :param body: (required)
         :type body: str
@@ -1047,6 +1059,7 @@ class PromptsApi:
     ) -> RESTResponseType:
         """Delete folder
 
+        Deletes a prompt folder together with the prompts inside it.
 
         :param body: (required)
         :type body: str
@@ -1189,6 +1202,7 @@ class PromptsApi:
     ) -> AiPromptBundle:
         """Export
 
+        Builds a self-contained, versioned bundle of every saved prompt and folder, ready for `import-bundle`.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1253,6 +1267,7 @@ class PromptsApi:
     ) -> ApiResponse[AiPromptBundle]:
         """Export
 
+        Builds a self-contained, versioned bundle of every saved prompt and folder, ready for `import-bundle`.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1317,6 +1332,7 @@ class PromptsApi:
     ) -> RESTResponseType:
         """Export
 
+        Builds a self-contained, versioned bundle of every saved prompt and folder, ready for `import-bundle`.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1425,7 +1441,7 @@ class PromptsApi:
     @validate_call
     def ai_prompts_get_by_id(
         self,
-        id: StrictStr,
+        id: Annotated[StrictStr, Field(description="The saved prompt identifier.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1441,8 +1457,9 @@ class PromptsApi:
     ) -> AiPrompt:
         """Get by id
 
+        Returns one saved prompt, or an empty result when the identifier is unknown.
 
-        :param id: (required)
+        :param id: The saved prompt identifier. (required)
         :type id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1493,7 +1510,7 @@ class PromptsApi:
     @validate_call
     def ai_prompts_get_by_id_with_http_info(
         self,
-        id: StrictStr,
+        id: Annotated[StrictStr, Field(description="The saved prompt identifier.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1509,8 +1526,9 @@ class PromptsApi:
     ) -> ApiResponse[AiPrompt]:
         """Get by id
 
+        Returns one saved prompt, or an empty result when the identifier is unknown.
 
-        :param id: (required)
+        :param id: The saved prompt identifier. (required)
         :type id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1561,7 +1579,7 @@ class PromptsApi:
     @validate_call
     def ai_prompts_get_by_id_without_preload_content(
         self,
-        id: StrictStr,
+        id: Annotated[StrictStr, Field(description="The saved prompt identifier.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1577,8 +1595,9 @@ class PromptsApi:
     ) -> RESTResponseType:
         """Get by id
 
+        Returns one saved prompt, or an empty result when the identifier is unknown.
 
-        :param id: (required)
+        :param id: The saved prompt identifier. (required)
         :type id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1693,7 +1712,7 @@ class PromptsApi:
     @validate_call
     def ai_prompts_get_folder_by_id(
         self,
-        id: StrictStr,
+        id: Annotated[StrictStr, Field(description="The prompt folder identifier.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1709,8 +1728,9 @@ class PromptsApi:
     ) -> AiPromptFolder:
         """Get folder by id
 
+        Returns one prompt folder, or an empty result when the identifier is unknown.
 
-        :param id: (required)
+        :param id: The prompt folder identifier. (required)
         :type id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1761,7 +1781,7 @@ class PromptsApi:
     @validate_call
     def ai_prompts_get_folder_by_id_with_http_info(
         self,
-        id: StrictStr,
+        id: Annotated[StrictStr, Field(description="The prompt folder identifier.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1777,8 +1797,9 @@ class PromptsApi:
     ) -> ApiResponse[AiPromptFolder]:
         """Get folder by id
 
+        Returns one prompt folder, or an empty result when the identifier is unknown.
 
-        :param id: (required)
+        :param id: The prompt folder identifier. (required)
         :type id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1829,7 +1850,7 @@ class PromptsApi:
     @validate_call
     def ai_prompts_get_folder_by_id_without_preload_content(
         self,
-        id: StrictStr,
+        id: Annotated[StrictStr, Field(description="The prompt folder identifier.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1845,8 +1866,9 @@ class PromptsApi:
     ) -> RESTResponseType:
         """Get folder by id
 
+        Returns one prompt folder, or an empty result when the identifier is unknown.
 
-        :param id: (required)
+        :param id: The prompt folder identifier. (required)
         :type id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1977,6 +1999,7 @@ class PromptsApi:
     ) -> AiImportResult:
         """Import bundle
 
+        Restores a prompt bundle. `replace` wipes the current prompts and folders before writing the bundle, `merge` writes the bundle on top of what is already there; both validate the folder references inside the bundle before any write, so a corrupt bundle is rejected whole.
 
         :param ai_prompts_import_bundle_request: (required)
         :type ai_prompts_import_bundle_request: AiPromptsImportBundleRequest
@@ -2045,6 +2068,7 @@ class PromptsApi:
     ) -> ApiResponse[AiImportResult]:
         """Import bundle
 
+        Restores a prompt bundle. `replace` wipes the current prompts and folders before writing the bundle, `merge` writes the bundle on top of what is already there; both validate the folder references inside the bundle before any write, so a corrupt bundle is rejected whole.
 
         :param ai_prompts_import_bundle_request: (required)
         :type ai_prompts_import_bundle_request: AiPromptsImportBundleRequest
@@ -2113,6 +2137,7 @@ class PromptsApi:
     ) -> RESTResponseType:
         """Import bundle
 
+        Restores a prompt bundle. `replace` wipes the current prompts and folders before writing the bundle, `merge` writes the bundle on top of what is already there; both validate the folder references inside the bundle before any write, so a corrupt bundle is rejected whole.
 
         :param ai_prompts_import_bundle_request: (required)
         :type ai_prompts_import_bundle_request: AiPromptsImportBundleRequest
@@ -2240,7 +2265,7 @@ class PromptsApi:
     @validate_call
     def ai_prompts_list(
         self,
-        folder_id: StrictStr,
+        folder_id: Annotated[Optional[StrictStr], Field(description="The prompt folder identifier. Omit to list the prompts that sit outside any folder.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2256,8 +2281,9 @@ class PromptsApi:
     ) -> List[AiPrompt]:
         """List
 
+        Lists saved prompts. Scope the answer to one folder, ask for the root-level prompts only, or omit the folder to get every prompt newest first.
 
-        :param folder_id: (required)
+        :param folder_id: The prompt folder identifier. Omit to list the prompts that sit outside any folder.
         :type folder_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2308,7 +2334,7 @@ class PromptsApi:
     @validate_call
     def ai_prompts_list_with_http_info(
         self,
-        folder_id: StrictStr,
+        folder_id: Annotated[Optional[StrictStr], Field(description="The prompt folder identifier. Omit to list the prompts that sit outside any folder.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2324,8 +2350,9 @@ class PromptsApi:
     ) -> ApiResponse[List[AiPrompt]]:
         """List
 
+        Lists saved prompts. Scope the answer to one folder, ask for the root-level prompts only, or omit the folder to get every prompt newest first.
 
-        :param folder_id: (required)
+        :param folder_id: The prompt folder identifier. Omit to list the prompts that sit outside any folder.
         :type folder_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2376,7 +2403,7 @@ class PromptsApi:
     @validate_call
     def ai_prompts_list_without_preload_content(
         self,
-        folder_id: StrictStr,
+        folder_id: Annotated[Optional[StrictStr], Field(description="The prompt folder identifier. Omit to list the prompts that sit outside any folder.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2392,8 +2419,9 @@ class PromptsApi:
     ) -> RESTResponseType:
         """List
 
+        Lists saved prompts. Scope the answer to one folder, ask for the root-level prompts only, or omit the folder to get every prompt newest first.
 
-        :param folder_id: (required)
+        :param folder_id: The prompt folder identifier. Omit to list the prompts that sit outside any folder.
         :type folder_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2523,6 +2551,7 @@ class PromptsApi:
     ) -> List[AiPromptFolder]:
         """List folders
 
+        Lists the prompt folders, newest first.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2587,6 +2616,7 @@ class PromptsApi:
     ) -> ApiResponse[List[AiPromptFolder]]:
         """List folders
 
+        Lists the prompt folders, newest first.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2651,6 +2681,7 @@ class PromptsApi:
     ) -> RESTResponseType:
         """List folders
 
+        Lists the prompt folders, newest first.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2775,6 +2806,7 @@ class PromptsApi:
     ) -> AiPromptMutationResult:
         """Move
 
+        Moves a saved prompt into another folder, or to the root. The name is re-validated in the target folder, so the move fails when a prompt of that name is already there.
 
         :param ai_prompts_move_request: (required)
         :type ai_prompts_move_request: AiPromptsMoveRequest
@@ -2843,6 +2875,7 @@ class PromptsApi:
     ) -> ApiResponse[AiPromptMutationResult]:
         """Move
 
+        Moves a saved prompt into another folder, or to the root. The name is re-validated in the target folder, so the move fails when a prompt of that name is already there.
 
         :param ai_prompts_move_request: (required)
         :type ai_prompts_move_request: AiPromptsMoveRequest
@@ -2911,6 +2944,7 @@ class PromptsApi:
     ) -> RESTResponseType:
         """Move
 
+        Moves a saved prompt into another folder, or to the root. The name is re-validated in the target folder, so the move fails when a prompt of that name is already there.
 
         :param ai_prompts_move_request: (required)
         :type ai_prompts_move_request: AiPromptsMoveRequest
@@ -3054,6 +3088,7 @@ class PromptsApi:
     ) -> AiFolderMutationResult:
         """Rename folder
 
+        Renames a prompt folder, validating the new name against the existing folders.
 
         :param ai_prompts_rename_folder_request: (required)
         :type ai_prompts_rename_folder_request: AiPromptsRenameFolderRequest
@@ -3122,6 +3157,7 @@ class PromptsApi:
     ) -> ApiResponse[AiFolderMutationResult]:
         """Rename folder
 
+        Renames a prompt folder, validating the new name against the existing folders.
 
         :param ai_prompts_rename_folder_request: (required)
         :type ai_prompts_rename_folder_request: AiPromptsRenameFolderRequest
@@ -3190,6 +3226,7 @@ class PromptsApi:
     ) -> RESTResponseType:
         """Rename folder
 
+        Renames a prompt folder, validating the new name against the existing folders.
 
         :param ai_prompts_rename_folder_request: (required)
         :type ai_prompts_rename_folder_request: AiPromptsRenameFolderRequest
@@ -3333,6 +3370,7 @@ class PromptsApi:
     ) -> AiPromptMutationResult:
         """Update
 
+        Updates a saved prompt. The name and the folder reference are re-validated whenever either of them changes.
 
         :param ai_prompts_update_request: (required)
         :type ai_prompts_update_request: AiPromptsUpdateRequest
@@ -3401,6 +3439,7 @@ class PromptsApi:
     ) -> ApiResponse[AiPromptMutationResult]:
         """Update
 
+        Updates a saved prompt. The name and the folder reference are re-validated whenever either of them changes.
 
         :param ai_prompts_update_request: (required)
         :type ai_prompts_update_request: AiPromptsUpdateRequest
@@ -3469,6 +3508,7 @@ class PromptsApi:
     ) -> RESTResponseType:
         """Update
 
+        Updates a saved prompt. The name and the folder reference are re-validated whenever either of them changes.
 
         :param ai_prompts_update_request: (required)
         :type ai_prompts_update_request: AiPromptsUpdateRequest

@@ -11,7 +11,7 @@ Method | HTTP request | Description
 # **ai_editor_tools_call**
 > AiSuccessResponse ai_editor_tools_call(request_body)
 
-
+Executes one DocSpace tool on behalf of the document editor's AI plugin, server-side and with the caller's forwarded credentials. Whatever the tool produced is returned for the plugin to relay to the model; a failure comes back as an error payload.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -77,7 +77,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **ai_editor_tools_list**
 > AiSuccessResponse ai_editor_tools_list()
 
-
+Returns the sanitized catalog of DocSpace tools available to the document editor's AI plugin - the same composed tool set the DocSpace chat sees, minus the web-search pair the editor already has through its own passthrough. Only the name, description, parameters and approval flag of each tool are exposed; transport details never reach the browser.
 
 For more information, see [api.onlyoffice.com]().
 

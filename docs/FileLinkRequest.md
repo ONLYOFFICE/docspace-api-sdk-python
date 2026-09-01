@@ -6,8 +6,8 @@ The external link request parameters.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **link_id** | **UUID** | The external link ID. | [optional] 
-**access** | [**FileShare**](FileShare.md) | The access rights type. | [optional] 
-**expiration_date** | [**ApiDateTime**](ApiDateTime.md) | The API date and time parameters. | [optional] 
+**access** | [**FileShare**](FileShare.md) | The link sharing rights. | [optional] 
+**expiration_date** | **datetime** | The link expiration date. | [optional] 
 **title** | **str** | The link name. | [optional] 
 **internal** | **bool** | The link scope, whether it is internal or not. | [optional] 
 **primary** | **bool** | Specifies whether the file link is primary or not. | [optional] 

@@ -1,10 +1,11 @@
 # AiFolderIntegerWrapper
+The successful API response containing the FolderDtoInteger object.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**response** | [**AiFolderDtoInteger**](AiFolderDtoInteger.md) |  | [optional] 
+**response** | [**AiFolderDtoInteger**](AiFolderDtoInteger.md) | The FolderDtoInteger object returned by the operation. | [optional] 
 **count** | **int** | The total number of items in the response | [optional] 
 **links** | [**List[GetPortalPrices200ResponseLinksInner]**](GetPortalPrices200ResponseLinksInner.md) | List of links related to the response | [optional] 
 **status** | **int** | HTTP status code of the response | [optional] 

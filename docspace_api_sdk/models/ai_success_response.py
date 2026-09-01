@@ -21,7 +21,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool
+from pydantic import BaseModel, ConfigDict, Field, StrictBool
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
@@ -30,7 +30,7 @@ class AiSuccessResponse(BaseModel):
     """
     Generic success acknowledgement for mutations that return no data.
     """ # noqa: E501
-    success: StrictBool
+    success: StrictBool = Field(description="Always true — the mutation completed.")
     __properties: ClassVar[List[str]] = ["success"]
 
     model_config = ConfigDict(

@@ -21,7 +21,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool
+from pydantic import BaseModel, ConfigDict, Field, StrictBool
 from typing import Any, ClassVar, Dict, List, Optional
 from docspace_api_sdk.models.ai_tools_bulk_result_errors_inner import AiToolsBulkResultErrorsInner
 from typing import Optional, Set
@@ -29,10 +29,10 @@ from typing_extensions import Self
 
 class AiToolsBulkResult(BaseModel):
     """
-    Outcome of  {@link  ToolsEngine.replaceAllCustomServers }  — either every entry persisted, or no entries persisted plus a per-key error report.
+    Outcome of `ToolsEngine.replaceAllCustomServers` — either every entry persisted, or no entries persisted plus a per-key error report.
     """ # noqa: E501
-    success: StrictBool
-    errors: Optional[List[AiToolsBulkResultErrorsInner]] = None
+    success: StrictBool = Field(description="True when every custom MCP server was persisted.")
+    errors: Optional[List[AiToolsBulkResultErrorsInner]] = Field(default=None, description="What was rejected, per server. Present on failure - and then no server was persisted.")
     __properties: ClassVar[List[str]] = ["success", "errors"]
 
     model_config = ConfigDict(

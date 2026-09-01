@@ -1,10 +1,11 @@
 # OwnerChangeInstructionsWrapper
+The successful API response containing the OwnerChangeInstructionsDto object.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**response** | [**OwnerChangeInstructionsDto**](OwnerChangeInstructionsDto.md) |  | [optional] 
+**response** | [**OwnerChangeInstructionsDto**](OwnerChangeInstructionsDto.md) | The OwnerChangeInstructionsDto object returned by the operation. | [optional] 
 **count** | **int** | The total number of items in the response | [optional] 
 **links** | [**List[GetPortalPrices200ResponseLinksInner]**](GetPortalPrices200ResponseLinksInner.md) | List of links related to the response | [optional] 
 **status** | **int** | HTTP status code of the response | [optional] 

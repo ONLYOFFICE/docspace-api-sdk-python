@@ -28,7 +28,7 @@ from typing_extensions import Self
 
 class MultiSizeLogoCover(BaseModel):
     """
-    MultiSizeLogoCover
+    The logo cover information, with the cover data in every available size.
     """ # noqa: E501
     id: Optional[StrictStr] = Field(description="The logo cover ID.", json_schema_extra={"examples": ["default_cover"]})
     data: Dict[str, Optional[StrictStr]] = Field(description="The logo cover data.", json_schema_extra={"examples": [{"small": "base64...", "medium": "base64...", "large": "base64..."}]})

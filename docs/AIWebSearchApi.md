@@ -17,7 +17,7 @@ Method | HTTP request | Description
 # **ai_web_search_clear**
 > AiSuccessResponse ai_web_search_clear(body)
 
-
+Removes the web-search configuration of the scope. Does nothing when web search was not configured there.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -83,7 +83,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **ai_web_search_configure**
 > AiWebSearchMutationResult ai_web_search_configure(ai_web_search_configure_request)
 
-
+Validates a web-search configuration against the live provider and stores it only when the provider answers, replacing the previous one in a single write.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -148,9 +148,9 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ai_web_search_get_active_config**
-> AiWebSearchConfig ai_web_search_get_active_config(entity_id)
+> AiWebSearchConfig ai_web_search_get_active_config(entity_id=entity_id)
 
-
+Returns the web-search configuration active in the scope, or an empty result when web search is not configured.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -159,7 +159,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **entity_id** | **str**|  | 
+ **entity_id** | **str**| The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | [optional] 
 
 ### Return type
 
@@ -186,11 +186,11 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.WebSearchApi(api_client)
-    entity_id = 'entity_id_example' # str | 
+    entity_id = 'entity_id_example' # str | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. (optional)
 
     try:
         # Get active config
-        api_response = api_instance.ai_web_search_get_active_config(entity_id)
+        api_response = api_instance.ai_web_search_get_active_config(entity_id=entity_id)
         print("The response of WebSearchApi->ai_web_search_get_active_config:\n")
         pprint(api_response)
     except Exception as e:
@@ -214,9 +214,9 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ai_web_search_is_configured**
-> bool ai_web_search_is_configured(entity_id)
+> bool ai_web_search_is_configured(entity_id=entity_id)
 
-
+Tells whether web search is configured in the scope.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -225,7 +225,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **entity_id** | **str**|  | 
+ **entity_id** | **str**| The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | [optional] 
 
 ### Return type
 
@@ -251,11 +251,11 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.WebSearchApi(api_client)
-    entity_id = 'entity_id_example' # str | 
+    entity_id = 'entity_id_example' # str | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. (optional)
 
     try:
         # Is configured
-        api_response = api_instance.ai_web_search_is_configured(entity_id)
+        api_response = api_instance.ai_web_search_is_configured(entity_id=entity_id)
         print("The response of WebSearchApi->ai_web_search_is_configured:\n")
         pprint(api_response)
     except Exception as e:
@@ -281,7 +281,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **ai_web_search_passthrough_contents**
 > AiSuccessResponse ai_web_search_passthrough_contents(request_body)
 
-
+Fetches web page contents on behalf of the document editor's AI plugin, against the portal's active web-search provider, the same way as the search passthrough.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -347,7 +347,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **ai_web_search_passthrough_search**
 > AiSuccessResponse ai_web_search_passthrough_search(request_body)
 
-
+Runs a web search on behalf of the document editor's AI plugin. The plugin only holds a placeholder configuration; the portal's active provider and its key are resolved here and never reach the browser.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -413,7 +413,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **ai_web_search_set_active_config**
 > AiSuccessResponse ai_web_search_set_active_config(ai_web_search_configure_request)
 
-
+Stores a web-search configuration without contacting the provider first, for forms that validate locally.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -480,7 +480,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **ai_web_search_test_connection**
 > AiProfilesTestConnection200Response ai_web_search_test_connection(ai_web_search_config)
 
-
+Checks a web-search configuration against the live provider without storing it - for a Test button that must not commit on success.
 
 For more information, see [api.onlyoffice.com]().
 

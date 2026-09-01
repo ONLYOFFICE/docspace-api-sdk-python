@@ -22,7 +22,7 @@ Method | HTTP request | Description
 # **ai_tools_add_custom_server**
 > AiToolsMutationResult ai_tools_add_custom_server(ai_tools_add_custom_server_request)
 
-
+Registers a custom MCP server in the scope under the given name.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -87,9 +87,9 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ai_tools_get_allow_always**
-> List[str] ai_tools_get_allow_always(entity_id)
+> List[str] ai_tools_get_allow_always(entity_id=entity_id)
 
-
+Lists the tools on the always-allow list of the scope.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -98,7 +98,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **entity_id** | **str**|  | 
+ **entity_id** | **str**| The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | [optional] 
 
 ### Return type
 
@@ -124,11 +124,11 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.ToolsApi(api_client)
-    entity_id = 'entity_id_example' # str | 
+    entity_id = 'entity_id_example' # str | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. (optional)
 
     try:
         # Get allow always
-        api_response = api_instance.ai_tools_get_allow_always(entity_id)
+        api_response = api_instance.ai_tools_get_allow_always(entity_id=entity_id)
         print("The response of ToolsApi->ai_tools_get_allow_always:\n")
         pprint(api_response)
     except Exception as e:
@@ -152,9 +152,9 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ai_tools_get_custom_server**
-> object ai_tools_get_custom_server(name, entity_id)
+> object ai_tools_get_custom_server(name, entity_id=entity_id)
 
-
+Returns the configuration of one custom MCP server, or an empty result when it is not registered.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -163,8 +163,8 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **name** | **str**|  | 
- **entity_id** | **str**|  | 
+ **name** | **str**| The custom MCP server name. | 
+ **entity_id** | **str**| The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | [optional] 
 
 ### Return type
 
@@ -190,12 +190,12 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.ToolsApi(api_client)
-    name = 'name_example' # str | 
-    entity_id = 'entity_id_example' # str | 
+    name = 'name_example' # str | The custom MCP server name.
+    entity_id = 'entity_id_example' # str | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. (optional)
 
     try:
         # Get custom server
-        api_response = api_instance.ai_tools_get_custom_server(name, entity_id)
+        api_response = api_instance.ai_tools_get_custom_server(name, entity_id=entity_id)
         print("The response of ToolsApi->ai_tools_get_custom_server:\n")
         pprint(api_response)
     except Exception as e:
@@ -219,9 +219,9 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ai_tools_get_disabled**
-> Dict[str, List[str]] ai_tools_get_disabled(entity_id)
+> Dict[str, List[str]] ai_tools_get_disabled(entity_id=entity_id)
 
-
+Returns the switched-off tools of the scope, grouped by server type.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -230,7 +230,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **entity_id** | **str**|  | 
+ **entity_id** | **str**| The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | [optional] 
 
 ### Return type
 
@@ -256,11 +256,11 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.ToolsApi(api_client)
-    entity_id = 'entity_id_example' # str | 
+    entity_id = 'entity_id_example' # str | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. (optional)
 
     try:
         # Get disabled
-        api_response = api_instance.ai_tools_get_disabled(entity_id)
+        api_response = api_instance.ai_tools_get_disabled(entity_id=entity_id)
         print("The response of ToolsApi->ai_tools_get_disabled:\n")
         pprint(api_response)
     except Exception as e:
@@ -284,9 +284,9 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ai_tools_is_allow_always**
-> bool ai_tools_is_allow_always(server_type, tool_name, entity_id)
+> bool ai_tools_is_allow_always(server_type, tool_name, entity_id=entity_id)
 
-
+Tells whether one tool is on the always-allow list.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -295,9 +295,9 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **server_type** | **str**|  | 
- **tool_name** | **str**|  | 
- **entity_id** | **str**|  | 
+ **server_type** | **str**| The MCP server type the tool belongs to. | 
+ **tool_name** | **str**| The tool name. | 
+ **entity_id** | **str**| The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | [optional] 
 
 ### Return type
 
@@ -323,13 +323,13 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.ToolsApi(api_client)
-    server_type = 'server_type_example' # str | 
-    tool_name = 'tool_name_example' # str | 
-    entity_id = 'entity_id_example' # str | 
+    server_type = 'server_type_example' # str | The MCP server type the tool belongs to.
+    tool_name = 'tool_name_example' # str | The tool name.
+    entity_id = 'entity_id_example' # str | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. (optional)
 
     try:
         # Is allow always
-        api_response = api_instance.ai_tools_is_allow_always(server_type, tool_name, entity_id)
+        api_response = api_instance.ai_tools_is_allow_always(server_type, tool_name, entity_id=entity_id)
         print("The response of ToolsApi->ai_tools_is_allow_always:\n")
         pprint(api_response)
     except Exception as e:
@@ -353,9 +353,9 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ai_tools_is_tool_disabled**
-> bool ai_tools_is_tool_disabled(server_type, tool_name, entity_id)
+> bool ai_tools_is_tool_disabled(server_type, tool_name, entity_id=entity_id)
 
-
+Tells whether one tool of a server type is switched off.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -364,9 +364,9 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **server_type** | **str**|  | 
- **tool_name** | **str**|  | 
- **entity_id** | **str**|  | 
+ **server_type** | **str**| The MCP server type the tool belongs to. | 
+ **tool_name** | **str**| The tool name. | 
+ **entity_id** | **str**| The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | [optional] 
 
 ### Return type
 
@@ -392,13 +392,13 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.ToolsApi(api_client)
-    server_type = 'server_type_example' # str | 
-    tool_name = 'tool_name_example' # str | 
-    entity_id = 'entity_id_example' # str | 
+    server_type = 'server_type_example' # str | The MCP server type the tool belongs to.
+    tool_name = 'tool_name_example' # str | The tool name.
+    entity_id = 'entity_id_example' # str | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. (optional)
 
     try:
         # Is tool disabled
-        api_response = api_instance.ai_tools_is_tool_disabled(server_type, tool_name, entity_id)
+        api_response = api_instance.ai_tools_is_tool_disabled(server_type, tool_name, entity_id=entity_id)
         print("The response of ToolsApi->ai_tools_is_tool_disabled:\n")
         pprint(api_response)
     except Exception as e:
@@ -422,9 +422,9 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ai_tools_list_custom_servers**
-> Dict[str, object] ai_tools_list_custom_servers(entity_id)
+> Dict[str, object] ai_tools_list_custom_servers(entity_id=entity_id)
 
-
+Lists the custom MCP servers registered in the scope, keyed by name.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -433,7 +433,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **entity_id** | **str**|  | 
+ **entity_id** | **str**| The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | [optional] 
 
 ### Return type
 
@@ -459,11 +459,11 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.ToolsApi(api_client)
-    entity_id = 'entity_id_example' # str | 
+    entity_id = 'entity_id_example' # str | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. (optional)
 
     try:
         # List custom servers
-        api_response = api_instance.ai_tools_list_custom_servers(entity_id)
+        api_response = api_instance.ai_tools_list_custom_servers(entity_id=entity_id)
         print("The response of ToolsApi->ai_tools_list_custom_servers:\n")
         pprint(api_response)
     except Exception as e:
@@ -487,9 +487,9 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ai_tools_list_system_tools**
-> Dict[str, List[AiTMCPItem]] ai_tools_list_system_tools(entity_id)
+> Dict[str, List[AiTMCPItem]] ai_tools_list_system_tools(entity_id=entity_id)
 
-
+Lists the tools of the host-configured system MCP servers, grouped by server type. The servers are connected and listed server-side, so the client renders its permission cards from one request and never opens an MCP connection of its own.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -498,7 +498,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **entity_id** | **str**|  | 
+ **entity_id** | **str**| The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | [optional] 
 
 ### Return type
 
@@ -525,11 +525,11 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.ToolsApi(api_client)
-    entity_id = 'entity_id_example' # str | 
+    entity_id = 'entity_id_example' # str | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. (optional)
 
     try:
         # List system tools
-        api_response = api_instance.ai_tools_list_system_tools(entity_id)
+        api_response = api_instance.ai_tools_list_system_tools(entity_id=entity_id)
         print("The response of ToolsApi->ai_tools_list_system_tools:\n")
         pprint(api_response)
     except Exception as e:
@@ -555,7 +555,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **ai_tools_remove_custom_server**
 > AiSuccessResponse ai_tools_remove_custom_server(ai_tools_remove_custom_server_request)
 
-
+Removes a custom MCP server from the registry.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -622,7 +622,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **ai_tools_replace_all_custom_servers**
 > AiToolsBulkResult ai_tools_replace_all_custom_servers(ai_tools_replace_all_custom_servers_request)
 
-
+Replaces the whole custom MCP server registry of the scope with the supplied map.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -689,7 +689,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **ai_tools_set_allow_always**
 > AiSuccessResponse ai_tools_set_allow_always(ai_tools_set_allow_always_request)
 
-
+Adds a tool to the always-allow list, or removes it - the tools on that list run without an approval dialog.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -756,7 +756,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **ai_tools_set_disabled**
 > AiSuccessResponse ai_tools_set_disabled(ai_tools_set_disabled_request)
 
-
+Marks the listed tools of one server type as switched off, so the model is no longer offered them.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -823,7 +823,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **ai_tools_update_custom_server**
 > AiToolsMutationResult ai_tools_update_custom_server(ai_tools_update_custom_server_request)
 
-
+Updates the configuration of a registered custom MCP server.
 
 For more information, see [api.onlyoffice.com]().
 

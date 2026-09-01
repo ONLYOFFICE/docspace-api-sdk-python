@@ -32,8 +32,8 @@ class XlsxReportResponseDto(BaseModel):
     """
     The XLSX report task response parameters.
     """ # noqa: E501
-    form: Optional[FileDtoInteger] = Field(default=None, description="The file parameters.")
-    task: Optional[DocumentBuilderTaskDto] = Field(default=None, description="The Document Builder task parameters.")
+    form: Optional[FileDtoInteger] = Field(default=None, description="The original form file information.")
+    task: Optional[DocumentBuilderTaskDto] = Field(default=None, description="The Document Builder task information.")
     is_new_file: Optional[StrictBool] = Field(default=None, description="Specifies whether the XLSX report file is newly created or an existing file will be updated.", alias="isNewFile", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["form", "task", "isNewFile"]
 

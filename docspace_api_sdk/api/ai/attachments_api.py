@@ -67,6 +67,7 @@ class AttachmentsApi:
     ) -> AiSuccessResponse:
         """Delete
 
+        Permanently deletes one attachment, whether it is still a draft or already linked to a message.
 
         :param body: (required)
         :type body: str
@@ -135,6 +136,7 @@ class AttachmentsApi:
     ) -> ApiResponse[AiSuccessResponse]:
         """Delete
 
+        Permanently deletes one attachment, whether it is still a draft or already linked to a message.
 
         :param body: (required)
         :type body: str
@@ -203,6 +205,7 @@ class AttachmentsApi:
     ) -> RESTResponseType:
         """Delete
 
+        Permanently deletes one attachment, whether it is still a draft or already linked to a message.
 
         :param body: (required)
         :type body: str
@@ -346,6 +349,7 @@ class AttachmentsApi:
     ) -> AiSuccessResponse:
         """Delete many
 
+        Permanently deletes a batch of attachments in a single round trip.
 
         :param request_body: (required)
         :type request_body: List[str]
@@ -414,6 +418,7 @@ class AttachmentsApi:
     ) -> ApiResponse[AiSuccessResponse]:
         """Delete many
 
+        Permanently deletes a batch of attachments in a single round trip.
 
         :param request_body: (required)
         :type request_body: List[str]
@@ -482,6 +487,7 @@ class AttachmentsApi:
     ) -> RESTResponseType:
         """Delete many
 
+        Permanently deletes a batch of attachments in a single round trip.
 
         :param request_body: (required)
         :type request_body: List[str]
@@ -626,6 +632,7 @@ class AttachmentsApi:
     ) -> AiAttachment:
         """Get
 
+        Returns one attachment by identifier.
 
         :param body: (required)
         :type body: str
@@ -694,6 +701,7 @@ class AttachmentsApi:
     ) -> ApiResponse[AiAttachment]:
         """Get
 
+        Returns one attachment by identifier.
 
         :param body: (required)
         :type body: str
@@ -762,6 +770,7 @@ class AttachmentsApi:
     ) -> RESTResponseType:
         """Get
 
+        Returns one attachment by identifier.
 
         :param body: (required)
         :type body: str
@@ -905,6 +914,7 @@ class AttachmentsApi:
     ) -> List[Optional[AiAttachment]]:
         """Get many
 
+        Returns a batch of attachments, preserving the requested order; an identifier that no longer exists comes back empty.
 
         :param request_body: (required)
         :type request_body: List[str]
@@ -973,6 +983,7 @@ class AttachmentsApi:
     ) -> ApiResponse[List[Optional[AiAttachment]]]:
         """Get many
 
+        Returns a batch of attachments, preserving the requested order; an identifier that no longer exists comes back empty.
 
         :param request_body: (required)
         :type request_body: List[str]
@@ -1041,6 +1052,7 @@ class AttachmentsApi:
     ) -> RESTResponseType:
         """Get many
 
+        Returns a batch of attachments, preserving the requested order; an identifier that no longer exists comes back empty.
 
         :param request_body: (required)
         :type request_body: List[str]
@@ -1185,6 +1197,7 @@ class AttachmentsApi:
     ) -> AiSuccessResponse:
         """Link to message
 
+        Binds draft attachments to the chat message that owns them, once that message has been persisted, so deleting the message removes them too. Identifiers that no longer exist are skipped.
 
         :param ai_attachments_link_to_message_request: (required)
         :type ai_attachments_link_to_message_request: AiAttachmentsLinkToMessageRequest
@@ -1253,6 +1266,7 @@ class AttachmentsApi:
     ) -> ApiResponse[AiSuccessResponse]:
         """Link to message
 
+        Binds draft attachments to the chat message that owns them, once that message has been persisted, so deleting the message removes them too. Identifiers that no longer exist are skipped.
 
         :param ai_attachments_link_to_message_request: (required)
         :type ai_attachments_link_to_message_request: AiAttachmentsLinkToMessageRequest
@@ -1321,6 +1335,7 @@ class AttachmentsApi:
     ) -> RESTResponseType:
         """Link to message
 
+        Binds draft attachments to the chat message that owns them, once that message has been persisted, so deleting the message removes them too. Identifiers that no longer exist are skipped.
 
         :param ai_attachments_link_to_message_request: (required)
         :type ai_attachments_link_to_message_request: AiAttachmentsLinkToMessageRequest
@@ -1464,6 +1479,7 @@ class AttachmentsApi:
     ) -> AiAttachment:
         """Save file
 
+        Stores one file attachment as a draft, carrying the host-extracted text of the file. Prefer `save-files-many` when adding several files at once so they land as one round trip.
 
         :param ai_attachments_save_file_request: (required)
         :type ai_attachments_save_file_request: AiAttachmentsSaveFileRequest
@@ -1532,6 +1548,7 @@ class AttachmentsApi:
     ) -> ApiResponse[AiAttachment]:
         """Save file
 
+        Stores one file attachment as a draft, carrying the host-extracted text of the file. Prefer `save-files-many` when adding several files at once so they land as one round trip.
 
         :param ai_attachments_save_file_request: (required)
         :type ai_attachments_save_file_request: AiAttachmentsSaveFileRequest
@@ -1600,6 +1617,7 @@ class AttachmentsApi:
     ) -> RESTResponseType:
         """Save file
 
+        Stores one file attachment as a draft, carrying the host-extracted text of the file. Prefer `save-files-many` when adding several files at once so they land as one round trip.
 
         :param ai_attachments_save_file_request: (required)
         :type ai_attachments_save_file_request: AiAttachmentsSaveFileRequest
@@ -1743,6 +1761,7 @@ class AttachmentsApi:
     ) -> List[AiAttachment]:
         """Save files many
 
+        Stores a batch of file attachments as drafts in a single round trip. The returned records keep the order of the input.
 
         :param ai_attachments_save_files_many_request: (required)
         :type ai_attachments_save_files_many_request: AiAttachmentsSaveFilesManyRequest
@@ -1811,6 +1830,7 @@ class AttachmentsApi:
     ) -> ApiResponse[List[AiAttachment]]:
         """Save files many
 
+        Stores a batch of file attachments as drafts in a single round trip. The returned records keep the order of the input.
 
         :param ai_attachments_save_files_many_request: (required)
         :type ai_attachments_save_files_many_request: AiAttachmentsSaveFilesManyRequest
@@ -1879,6 +1899,7 @@ class AttachmentsApi:
     ) -> RESTResponseType:
         """Save files many
 
+        Stores a batch of file attachments as drafts in a single round trip. The returned records keep the order of the input.
 
         :param ai_attachments_save_files_many_request: (required)
         :type ai_attachments_save_files_many_request: AiAttachmentsSaveFilesManyRequest

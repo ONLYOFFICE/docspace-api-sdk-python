@@ -118,8 +118,9 @@ class CommonSettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
             '405': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -187,8 +188,9 @@ class CommonSettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
             '405': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -256,8 +258,9 @@ class CommonSettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
             '405': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -298,6 +301,13 @@ class CommonSettingsApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
@@ -388,8 +398,9 @@ class CommonSettingsApi:
             '200': "WizardSettingsWrapper",
             '400': None,
             '402': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -462,8 +473,9 @@ class CommonSettingsApi:
             '200': "WizardSettingsWrapper",
             '400': None,
             '402': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -536,8 +548,9 @@ class CommonSettingsApi:
             '200': "WizardSettingsWrapper",
             '400': None,
             '402': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -690,8 +703,9 @@ class CommonSettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantDeepLinkSettingsWrapper",
             '400': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -763,8 +777,9 @@ class CommonSettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantDeepLinkSettingsWrapper",
             '400': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -836,8 +851,9 @@ class CommonSettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantDeepLinkSettingsWrapper",
             '400': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -989,8 +1005,10 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CustomColorThemesSettingsWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1061,8 +1079,10 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CustomColorThemesSettingsWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1133,8 +1153,10 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CustomColorThemesSettingsWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1271,7 +1293,8 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantDeepLinkSettingsWrapper",
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1338,7 +1361,8 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantDeepLinkSettingsWrapper",
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1405,7 +1429,8 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantDeepLinkSettingsWrapper",
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1531,8 +1556,9 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "PaymentSettingsWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1599,8 +1625,9 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "PaymentSettingsWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1667,8 +1694,9 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "PaymentSettingsWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1800,7 +1828,8 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CustomColorThemesSettingsWrapper",
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1867,7 +1896,8 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CustomColorThemesSettingsWrapper",
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1934,7 +1964,8 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CustomColorThemesSettingsWrapper",
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2060,8 +2091,9 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2128,8 +2160,9 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2196,8 +2229,9 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2329,8 +2363,9 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2397,8 +2432,9 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2465,8 +2501,9 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2602,7 +2639,9 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "SettingsWrapper",
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2673,7 +2712,9 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "SettingsWrapper",
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2744,7 +2785,9 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "SettingsWrapper",
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2875,8 +2918,9 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2943,8 +2987,9 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3011,8 +3056,9 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3144,7 +3190,8 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "STRINGArrayWrapper",
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3211,7 +3258,8 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "STRINGArrayWrapper",
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3278,7 +3326,8 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "STRINGArrayWrapper",
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3404,8 +3453,9 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantAiAccessSettingsWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3472,8 +3522,9 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantAiAccessSettingsWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3540,8 +3591,9 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantAiAccessSettingsWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3673,7 +3725,8 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantUserInvitationSettingsWrapper",
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3740,7 +3793,8 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantUserInvitationSettingsWrapper",
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3807,7 +3861,8 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantUserInvitationSettingsWrapper",
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3933,8 +3988,9 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TimezonesRequestsArrayWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4001,8 +4057,9 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TimezonesRequestsArrayWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4069,8 +4126,9 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TimezonesRequestsArrayWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4206,8 +4264,10 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StudioDefaultPageSettingsWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4278,8 +4338,10 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StudioDefaultPageSettingsWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4350,8 +4412,10 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StudioDefaultPageSettingsWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4506,8 +4570,9 @@ class CommonSettingsApi:
             '400': None,
             '402': None,
             '405': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4581,8 +4646,9 @@ class CommonSettingsApi:
             '400': None,
             '402': None,
             '405': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4656,8 +4722,9 @@ class CommonSettingsApi:
             '400': None,
             '402': None,
             '405': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4809,8 +4876,10 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4881,8 +4950,10 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4953,8 +5024,10 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -5106,8 +5179,10 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CustomColorThemesSettingsWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -5178,8 +5253,10 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CustomColorThemesSettingsWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -5250,8 +5327,10 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CustomColorThemesSettingsWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -5404,8 +5483,10 @@ class CommonSettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantAiAccessSettingsWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -5477,8 +5558,10 @@ class CommonSettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantAiAccessSettingsWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -5550,8 +5633,10 @@ class CommonSettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantAiAccessSettingsWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -5703,8 +5788,10 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmailActivationSettingsWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -5775,8 +5862,10 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmailActivationSettingsWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -5847,8 +5936,10 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmailActivationSettingsWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -6000,8 +6091,10 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantUserInvitationSettingsWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -6072,8 +6165,10 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantUserInvitationSettingsWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -6144,8 +6239,10 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantUserInvitationSettingsWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }

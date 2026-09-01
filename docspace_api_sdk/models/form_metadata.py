@@ -28,7 +28,7 @@ from typing_extensions import Self
 
 class FormMetadata(BaseModel):
     """
-    FormMetadata
+    The metadata of a single form field.
     """ # noqa: E501
     key: Optional[StrictStr] = Field(default=None, description="The form field key.", json_schema_extra={"examples": ["name"]})
     type: Optional[StrictStr] = Field(default=None, description="The form field type.", json_schema_extra={"examples": ["text"]})

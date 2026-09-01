@@ -30,9 +30,9 @@ class AiCreatePromptInput(BaseModel):
     """
     Input for creating a prompt — the engine generates `id`/`createdAt`/`updatedAt`.
     """ # noqa: E501
-    name: StrictStr
-    text: StrictStr
-    folder_id: Optional[StrictStr] = Field(default=None, alias="folderId")
+    name: StrictStr = Field(description="The prompt name.")
+    text: StrictStr = Field(description="The prompt body.")
+    folder_id: Optional[StrictStr] = Field(default=None, description="The folder to file the prompt under. Omit or send null to leave it outside any folder.", alias="folderId")
     __properties: ClassVar[List[str]] = ["name", "text", "folderId"]
 
     model_config = ConfigDict(

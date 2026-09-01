@@ -21,19 +21,19 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictFloat, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing import Optional, Set
 from typing_extensions import Self
 
 class AiWebSearchPricing(BaseModel):
     """
-    AiWebSearchPricing
+    The pricing of a single web search provider, per request.
     """ # noqa: E501
-    id: Optional[StrictStr] = None
-    provider: Optional[StrictStr] = None
-    price: Optional[Union[StrictFloat, StrictInt]] = None
-    link: Optional[StrictStr] = None
+    id: Optional[StrictStr] = Field(default=None, description="The identifier of the web search provider.", json_schema_extra={"examples": ["brave"]})
+    provider: Optional[StrictStr] = Field(default=None, description="The provider that serves the web search requests.", json_schema_extra={"examples": ["brave"]})
+    price: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The price of a single web search request.", json_schema_extra={"examples": [0.005]})
+    link: Optional[StrictStr] = Field(default=None, description="The link to the pricing page of the provider.", json_schema_extra={"examples": ["https://brave.com/search/api"]})
     __properties: ClassVar[List[str]] = ["id", "provider", "price", "link"]
 
     model_config = ConfigDict(

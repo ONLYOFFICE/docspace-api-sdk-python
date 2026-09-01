@@ -1,12 +1,13 @@
 # AiOpenAIChunkChoice
+One choice of a streaming completion, carrying the part this chunk adds.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**index** | **float** |  | 
-**delta** | [**AiOpenAIChoiceDelta**](AiOpenAIChoiceDelta.md) |  | 
-**finish_reason** | [**AiOpenAIFinishReason**](AiOpenAIFinishReason.md) |  | 
+**index** | **float** | The zero-based position of the choice. This service emits a single choice, so always 0. | 
+**delta** | [**AiOpenAIChoiceDelta**](AiOpenAIChoiceDelta.md) | What this chunk adds to the choice. | 
+**finish_reason** | [**AiOpenAIFinishReason**](AiOpenAIFinishReason.md) | Why the completion stopped, or null while it is still streaming. | 
 
 ## Example
 

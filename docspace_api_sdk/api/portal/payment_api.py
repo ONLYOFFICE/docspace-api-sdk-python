@@ -55,6 +55,7 @@ from docspace_api_sdk.models.string_wrapper import StringWrapper
 from docspace_api_sdk.models.subscription_balance_info_wrapper import SubscriptionBalanceInfoWrapper
 from docspace_api_sdk.models.tenant_wallet_service import TenantWalletService
 from docspace_api_sdk.models.tenant_wallet_service_settings_wrapper import TenantWalletServiceSettingsWrapper
+from docspace_api_sdk.models.tenant_wallet_settings_response_wrapper import TenantWalletSettingsResponseWrapper
 from docspace_api_sdk.models.tenant_wallet_settings_wrapper import TenantWalletSettingsWrapper
 from docspace_api_sdk.models.top_up_deposit_request_dto import TopUpDepositRequestDto
 from docspace_api_sdk.models.wallet_quantity_request_dto import WalletQuantityRequestDto
@@ -138,8 +139,9 @@ class PaymentApi:
             '400': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -213,8 +215,9 @@ class PaymentApi:
             '400': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -288,8 +291,9 @@ class PaymentApi:
             '400': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -443,8 +447,10 @@ class PaymentApi:
             '200': "TenantWalletServiceSettingsWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -517,8 +523,10 @@ class PaymentApi:
             '200': "TenantWalletServiceSettingsWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -591,8 +599,10 @@ class PaymentApi:
             '200': "TenantWalletServiceSettingsWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -746,8 +756,10 @@ class PaymentApi:
             '200': "DocumentBuilderTaskWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -820,8 +832,10 @@ class PaymentApi:
             '200': "DocumentBuilderTaskWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -894,8 +908,10 @@ class PaymentApi:
             '200': "DocumentBuilderTaskWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1049,8 +1065,10 @@ class PaymentApi:
             '200': "DocumentBuilderTaskWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1123,8 +1141,10 @@ class PaymentApi:
             '200': "DocumentBuilderTaskWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1197,8 +1217,10 @@ class PaymentApi:
             '200': "DocumentBuilderTaskWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1352,8 +1374,10 @@ class PaymentApi:
             '200': "DocumentBuilderTaskWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1426,8 +1450,10 @@ class PaymentApi:
             '200': "DocumentBuilderTaskWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1500,8 +1526,10 @@ class PaymentApi:
             '200': "DocumentBuilderTaskWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1650,8 +1678,9 @@ class PaymentApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ActiveServiceArrayWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1719,8 +1748,9 @@ class PaymentApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ActiveServiceArrayWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1788,8 +1818,9 @@ class PaymentApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ActiveServiceArrayWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1922,8 +1953,9 @@ class PaymentApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiPricesResponseWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1991,8 +2023,9 @@ class PaymentApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiPricesResponseWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2060,8 +2093,9 @@ class PaymentApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiPricesResponseWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2202,8 +2236,10 @@ class PaymentApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2279,8 +2315,10 @@ class PaymentApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2356,8 +2394,10 @@ class PaymentApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2504,8 +2544,10 @@ class PaymentApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BalanceWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2577,8 +2619,10 @@ class PaymentApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BalanceWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2650,8 +2694,10 @@ class PaymentApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BalanceWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2793,8 +2839,10 @@ class PaymentApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CustomerInfoWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2866,8 +2914,10 @@ class PaymentApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CustomerInfoWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2939,8 +2989,10 @@ class PaymentApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CustomerInfoWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3086,8 +3138,10 @@ class PaymentApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CustomerMonthlyUsageArrayWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3163,8 +3217,10 @@ class PaymentApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CustomerMonthlyUsageArrayWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3240,8 +3296,10 @@ class PaymentApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CustomerMonthlyUsageArrayWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3403,8 +3461,9 @@ class PaymentApi:
             '200': "DocumentBuilderTaskWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3473,8 +3532,9 @@ class PaymentApi:
             '200': "DocumentBuilderTaskWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3543,8 +3603,9 @@ class PaymentApi:
             '200': "DocumentBuilderTaskWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3726,8 +3787,10 @@ class PaymentApi:
             '200': "ReportWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3844,8 +3907,10 @@ class PaymentApi:
             '200': "ReportWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3962,8 +4027,10 @@ class PaymentApi:
             '200': "ReportWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4176,8 +4243,9 @@ class PaymentApi:
             '200': "DocumentBuilderTaskWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4246,8 +4314,9 @@ class PaymentApi:
             '200': "DocumentBuilderTaskWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4316,8 +4385,9 @@ class PaymentApi:
             '200': "DocumentBuilderTaskWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4491,8 +4561,10 @@ class PaymentApi:
             '200': "CustomerServiceUsageReportWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4601,8 +4673,10 @@ class PaymentApi:
             '200': "CustomerServiceUsageReportWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4711,8 +4785,10 @@ class PaymentApi:
             '200': "CustomerServiceUsageReportWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4915,8 +4991,9 @@ class PaymentApi:
             '200': "DocumentBuilderTaskWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4985,8 +5062,9 @@ class PaymentApi:
             '200': "DocumentBuilderTaskWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -5055,8 +5133,9 @@ class PaymentApi:
             '200': "DocumentBuilderTaskWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -5193,8 +5272,10 @@ class PaymentApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -5266,8 +5347,10 @@ class PaymentApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -5339,8 +5422,10 @@ class PaymentApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -5478,8 +5563,9 @@ class PaymentApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CurrenciesArrayWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -5547,8 +5633,9 @@ class PaymentApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CurrenciesArrayWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -5616,8 +5703,9 @@ class PaymentApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CurrenciesArrayWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -5758,8 +5846,10 @@ class PaymentApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "QuotaArrayWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -5835,8 +5925,10 @@ class PaymentApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "QuotaArrayWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -5912,8 +6004,10 @@ class PaymentApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "QuotaArrayWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -6061,8 +6155,9 @@ class PaymentApi:
             '200': "StringWrapper",
             '400': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -6135,8 +6230,9 @@ class PaymentApi:
             '200': "StringWrapper",
             '400': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -6209,8 +6305,9 @@ class PaymentApi:
             '200': "StringWrapper",
             '400': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -6359,8 +6456,9 @@ class PaymentApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GetPortalPrices200Response",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -6428,8 +6526,9 @@ class PaymentApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GetPortalPrices200Response",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -6497,8 +6596,9 @@ class PaymentApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GetPortalPrices200Response",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -6635,8 +6735,10 @@ class PaymentApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "QuotaWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -6708,8 +6810,10 @@ class PaymentApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "QuotaWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -6781,8 +6885,10 @@ class PaymentApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "QuotaWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -6920,8 +7026,9 @@ class PaymentApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RestrictedModelsResponseWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -6989,8 +7096,9 @@ class PaymentApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RestrictedModelsResponseWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -7058,8 +7166,9 @@ class PaymentApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RestrictedModelsResponseWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -7195,8 +7304,9 @@ class PaymentApi:
             '402': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -7267,8 +7377,9 @@ class PaymentApi:
             '402': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -7339,8 +7450,9 @@ class PaymentApi:
             '402': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -7473,8 +7585,9 @@ class PaymentApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantWalletServiceSettingsWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -7542,8 +7655,9 @@ class PaymentApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantWalletServiceSettingsWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -7611,8 +7725,9 @@ class PaymentApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantWalletServiceSettingsWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -7708,7 +7823,7 @@ class PaymentApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> TenantWalletSettingsWrapper:
+    ) -> TenantWalletSettingsResponseWrapper:
         """Gets the tenant wallet auto top up settings
 
         Returns the wallet auto top up settings for the current tenant.
@@ -7743,10 +7858,11 @@ class PaymentApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "TenantWalletSettingsWrapper",
+            '200': "TenantWalletSettingsResponseWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -7777,7 +7893,7 @@ class PaymentApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[TenantWalletSettingsWrapper]:
+    ) -> ApiResponse[TenantWalletSettingsResponseWrapper]:
         """Gets the tenant wallet auto top up settings
 
         Returns the wallet auto top up settings for the current tenant.
@@ -7812,10 +7928,11 @@ class PaymentApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "TenantWalletSettingsWrapper",
+            '200': "TenantWalletSettingsResponseWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -7881,10 +7998,11 @@ class PaymentApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "TenantWalletSettingsWrapper",
+            '200': "TenantWalletSettingsResponseWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -8022,8 +8140,10 @@ class PaymentApi:
             '200': "WalletServiceWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -8096,8 +8216,10 @@ class PaymentApi:
             '200': "WalletServiceWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -8170,8 +8292,10 @@ class PaymentApi:
             '200': "WalletServiceWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -8309,8 +8433,9 @@ class PaymentApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "WalletServiceArrayWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -8378,8 +8503,9 @@ class PaymentApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "WalletServiceArrayWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -8447,8 +8573,9 @@ class PaymentApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "WalletServiceArrayWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -8588,8 +8715,9 @@ class PaymentApi:
             '402': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -8664,8 +8792,9 @@ class PaymentApi:
             '402': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -8740,8 +8869,9 @@ class PaymentApi:
             '402': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -8895,8 +9025,9 @@ class PaymentApi:
             '200': None,
             '400': None,
             '403': None,
-            '429': None,
-            '401': None,
+            '429': "ErrorApiResponse",
+            '401': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -8969,8 +9100,9 @@ class PaymentApi:
             '200': None,
             '400': None,
             '403': None,
-            '429': None,
-            '401': None,
+            '429': "ErrorApiResponse",
+            '401': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -9043,8 +9175,9 @@ class PaymentApi:
             '200': None,
             '400': None,
             '403': None,
-            '429': None,
-            '401': None,
+            '429': "ErrorApiResponse",
+            '401': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -9088,6 +9221,13 @@ class PaymentApi:
             _body_params = sales_requests_dto
 
 
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
         # set the HTTP header `Content-Type`
         if _content_type:
@@ -9191,8 +9331,10 @@ class PaymentApi:
             '200': "RestrictedModelsResponseWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -9265,8 +9407,10 @@ class PaymentApi:
             '200': "RestrictedModelsResponseWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -9339,8 +9483,10 @@ class PaymentApi:
             '200': "RestrictedModelsResponseWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -9453,7 +9599,7 @@ class PaymentApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> TenantWalletSettingsWrapper:
+    ) -> TenantWalletSettingsResponseWrapper:
         """Set the wallet auto top up settings
 
         Updates the wallet auto top up settings for the current tenant.  Requires the tariff service to be configured and the user to be authorized as a payer.  Returns null if the tariff service is not configured or customer information/balance cannot be retrieved.
@@ -9491,11 +9637,13 @@ class PaymentApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "TenantWalletSettingsWrapper",
+            '200': "TenantWalletSettingsResponseWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -9527,7 +9675,7 @@ class PaymentApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[TenantWalletSettingsWrapper]:
+    ) -> ApiResponse[TenantWalletSettingsResponseWrapper]:
         """Set the wallet auto top up settings
 
         Updates the wallet auto top up settings for the current tenant.  Requires the tariff service to be configured and the user to be authorized as a payer.  Returns null if the tariff service is not configured or customer information/balance cannot be retrieved.
@@ -9565,11 +9713,13 @@ class PaymentApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "TenantWalletSettingsWrapper",
+            '200': "TenantWalletSettingsResponseWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -9639,11 +9789,13 @@ class PaymentApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "TenantWalletSettingsWrapper",
+            '200': "TenantWalletSettingsResponseWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -9793,8 +9945,9 @@ class PaymentApi:
             '200': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -9863,8 +10016,9 @@ class PaymentApi:
             '200': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -9933,8 +10087,9 @@ class PaymentApi:
             '200': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -9975,6 +10130,13 @@ class PaymentApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
@@ -10061,8 +10223,9 @@ class PaymentApi:
             '200': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -10131,8 +10294,9 @@ class PaymentApi:
             '200': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -10201,8 +10365,9 @@ class PaymentApi:
             '200': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -10243,6 +10408,13 @@ class PaymentApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
@@ -10329,8 +10501,9 @@ class PaymentApi:
             '200': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -10399,8 +10572,9 @@ class PaymentApi:
             '200': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -10469,8 +10643,9 @@ class PaymentApi:
             '200': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -10511,6 +10686,13 @@ class PaymentApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
@@ -10602,8 +10784,9 @@ class PaymentApi:
             '400': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -10677,8 +10860,9 @@ class PaymentApi:
             '400': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -10752,8 +10936,9 @@ class PaymentApi:
             '400': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -10908,8 +11093,9 @@ class PaymentApi:
             '400': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -10983,8 +11169,9 @@ class PaymentApi:
             '400': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -11058,8 +11245,9 @@ class PaymentApi:
             '400': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -11215,8 +11403,9 @@ class PaymentApi:
             '402': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -11291,8 +11480,9 @@ class PaymentApi:
             '402': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -11367,8 +11557,9 @@ class PaymentApi:
             '402': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }

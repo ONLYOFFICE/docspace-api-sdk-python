@@ -1,10 +1,11 @@
 # WebPluginArrayWrapper
+The successful API response containing the list of WebPluginDto objects.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**response** | [**List[WebPluginDto]**](WebPluginDto.md) |  | [optional] 
+**response** | [**List[WebPluginDto]**](WebPluginDto.md) | The list of WebPluginDto objects returned by the operation. | [optional] 
 **count** | **int** | The total number of items in the response | [optional] 
 **links** | [**List[GetPortalPrices200ResponseLinksInner]**](GetPortalPrices200ResponseLinksInner.md) | List of links related to the response | [optional] 
 **status** | **int** | HTTP status code of the response | [optional] 

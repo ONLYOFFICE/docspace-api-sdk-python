@@ -21,7 +21,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List, Optional
 from docspace_api_sdk.models.ai_chat_model_pricing import AiChatModelPricing
 from docspace_api_sdk.models.ai_embedding_model_pricing import AiEmbeddingModelPricing
@@ -33,13 +33,13 @@ from typing_extensions import Self
 
 class AiPricesResponse(BaseModel):
     """
-    AiPricesResponse
+    The AI price list: per-model pricing for every model kind, in a single currency.
     """ # noqa: E501
-    chat: Optional[List[AiChatModelPricing]]
-    embedding: Optional[List[AiEmbeddingModelPricing]]
-    image: Optional[List[AiImageModelPricing]]
-    search: Optional[List[AiWebSearchPricing]]
-    currency: CurrencyInfo
+    chat: Optional[List[AiChatModelPricing]] = Field(description="The pricing of every available chat model.")
+    embedding: Optional[List[AiEmbeddingModelPricing]] = Field(description="The pricing of every available embedding model.")
+    image: Optional[List[AiImageModelPricing]] = Field(description="The pricing of every available image model.")
+    search: Optional[List[AiWebSearchPricing]] = Field(description="The pricing of every available web search provider.")
+    currency: CurrencyInfo = Field(description="The currency the AI prices are quoted in.")
     __properties: ClassVar[List[str]] = ["chat", "embedding", "image", "search", "currency"]
 
     model_config = ConfigDict(

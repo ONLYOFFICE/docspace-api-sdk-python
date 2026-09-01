@@ -1,13 +1,13 @@
 # AiOpenOrCreateResult
-Resolved thread state returned by  {@link  ThreadsEngine.openOrCreate } .
+Resolved thread state returned by `ThreadsEngine.openOrCreate`.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**thread_id** | **str** |  | 
+**thread_id** | **str** | The thread that was opened, or the one just created. | 
 **title** | **str** | Empty string for existing threads — the engine doesn't re-fetch. | 
-**prior_messages** | [**List[AiThreadMessageLike]**](AiThreadMessageLike.md) |  | 
+**prior_messages** | [**List[AiThreadMessageLike]**](AiThreadMessageLike.md) | The messages already in the thread - empty for a thread that was just created. | 
 
 ## Example
 

@@ -1,10 +1,11 @@
 # WebhooksLogArrayWrapper
+The successful API response containing the list of WebhooksLogDto objects.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**response** | [**List[WebhooksLogDto]**](WebhooksLogDto.md) |  | [optional] 
+**response** | [**List[WebhooksLogDto]**](WebhooksLogDto.md) | The list of WebhooksLogDto objects returned by the operation. | [optional] 
 **count** | **int** | The total number of items in the response | [optional] 
 **links** | [**List[GetPortalPrices200ResponseLinksInner]**](GetPortalPrices200ResponseLinksInner.md) | List of links related to the response | [optional] 
 **status** | **int** | HTTP status code of the response | [optional] 

@@ -1,10 +1,11 @@
 # TfaAppCodeArrayWrapper
+The successful API response containing the list of TfaAppCodeDto objects.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**response** | [**List[TfaAppCodeDto]**](TfaAppCodeDto.md) |  | [optional] 
+**response** | [**List[TfaAppCodeDto]**](TfaAppCodeDto.md) | The list of TfaAppCodeDto objects returned by the operation. | [optional] 
 **count** | **int** | The total number of items in the response | [optional] 
 **links** | [**List[GetPortalPrices200ResponseLinksInner]**](GetPortalPrices200ResponseLinksInner.md) | List of links related to the response | [optional] 
 **status** | **int** | HTTP status code of the response | [optional] 

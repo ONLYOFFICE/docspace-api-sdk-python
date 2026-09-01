@@ -1,4 +1,5 @@
 # AiAiSendStreamBody
+Shared body of the two streaming send endpoints (`sendWithStream` and its OpenAI-framed twin) — the `Chat` action is implied, so there is no `actionType`.
 
 ## Properties
 
@@ -6,7 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **thread_id** | **str** | Target thread; a new one is created (with an auto title) when omitted. | [optional] 
 **user_message** | [**AiThreadMessageLike**](AiThreadMessageLike.md) | The user turn to send. | 
-**action_args** | [**AiAiActionArgs**](AiAiActionArgs.md) |  | [optional] 
+**action_args** | [**AiAiActionArgs**](AiAiActionArgs.md) | Per-request engine options: extra tools, reasoning, prompt override. | [optional] 
 **entity_id** | **str** | Optional entity (room) scope for profile resolution. | [optional] 
 **profile_id** | **str** | Session-level profile override for this request only. | [optional] 
 

@@ -37,7 +37,7 @@ class UploadSessionResponseDtoInteger(BaseModel):
     title: Optional[StrictStr] = Field(default=None, description="The file title.", json_schema_extra={"examples": ["My Document.docx"]})
     provider_key: Optional[StrictStr] = Field(default=None, description="The third-party provider key.", alias="providerKey", json_schema_extra={"examples": ["Google"]})
     uploaded: Optional[StrictBool] = Field(default=None, description="Specifies whether the file has been uploaded.", json_schema_extra={"examples": [False]})
-    file: Optional[FileDtoInteger] = Field(default=None, description="The file parameters.")
+    file: Optional[FileDtoInteger] = Field(default=None, description="The uploaded file information.")
     __properties: ClassVar[List[str]] = ["id", "folderId", "version", "title", "providerKey", "uploaded", "file"]
 
     model_config = ConfigDict(

@@ -1,14 +1,15 @@
 # AiPricesResponse
+The AI price list: per-model pricing for every model kind, in a single currency.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**chat** | [**List[AiChatModelPricing]**](AiChatModelPricing.md) |  | 
-**embedding** | [**List[AiEmbeddingModelPricing]**](AiEmbeddingModelPricing.md) |  | 
-**image** | [**List[AiImageModelPricing]**](AiImageModelPricing.md) |  | 
-**search** | [**List[AiWebSearchPricing]**](AiWebSearchPricing.md) |  | 
-**currency** | [**CurrencyInfo**](CurrencyInfo.md) |  | 
+**chat** | [**List[AiChatModelPricing]**](AiChatModelPricing.md) | The pricing of every available chat model. | 
+**embedding** | [**List[AiEmbeddingModelPricing]**](AiEmbeddingModelPricing.md) | The pricing of every available embedding model. | 
+**image** | [**List[AiImageModelPricing]**](AiImageModelPricing.md) | The pricing of every available image model. | 
+**search** | [**List[AiWebSearchPricing]**](AiWebSearchPricing.md) | The pricing of every available web search provider. | 
+**currency** | [**CurrencyInfo**](CurrencyInfo.md) | The currency the AI prices are quoted in. | 
 
 ## Example
 

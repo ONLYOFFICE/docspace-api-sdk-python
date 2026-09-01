@@ -21,8 +21,9 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import StrictBool, StrictStr
-from typing import Any, Dict
+from pydantic import Field, StrictBool, StrictStr
+from typing import Any, Dict, Optional
+from typing_extensions import Annotated
 from docspace_api_sdk.models.ai_profiles_test_connection200_response import AiProfilesTestConnection200Response
 from docspace_api_sdk.models.ai_success_response import AiSuccessResponse
 from docspace_api_sdk.models.ai_web_search_config import AiWebSearchConfig
@@ -67,6 +68,7 @@ class WebSearchApi:
     ) -> AiSuccessResponse:
         """Clear
 
+        Removes the web-search configuration of the scope. Does nothing when web search was not configured there.
 
         :param body: (required)
         :type body: str
@@ -135,6 +137,7 @@ class WebSearchApi:
     ) -> ApiResponse[AiSuccessResponse]:
         """Clear
 
+        Removes the web-search configuration of the scope. Does nothing when web search was not configured there.
 
         :param body: (required)
         :type body: str
@@ -203,6 +206,7 @@ class WebSearchApi:
     ) -> RESTResponseType:
         """Clear
 
+        Removes the web-search configuration of the scope. Does nothing when web search was not configured there.
 
         :param body: (required)
         :type body: str
@@ -346,6 +350,7 @@ class WebSearchApi:
     ) -> AiWebSearchMutationResult:
         """Configure
 
+        Validates a web-search configuration against the live provider and stores it only when the provider answers, replacing the previous one in a single write.
 
         :param ai_web_search_configure_request: (required)
         :type ai_web_search_configure_request: AiWebSearchConfigureRequest
@@ -414,6 +419,7 @@ class WebSearchApi:
     ) -> ApiResponse[AiWebSearchMutationResult]:
         """Configure
 
+        Validates a web-search configuration against the live provider and stores it only when the provider answers, replacing the previous one in a single write.
 
         :param ai_web_search_configure_request: (required)
         :type ai_web_search_configure_request: AiWebSearchConfigureRequest
@@ -482,6 +488,7 @@ class WebSearchApi:
     ) -> RESTResponseType:
         """Configure
 
+        Validates a web-search configuration against the live provider and stores it only when the provider answers, replacing the previous one in a single write.
 
         :param ai_web_search_configure_request: (required)
         :type ai_web_search_configure_request: AiWebSearchConfigureRequest
@@ -609,7 +616,7 @@ class WebSearchApi:
     @validate_call
     def ai_web_search_get_active_config(
         self,
-        entity_id: StrictStr,
+        entity_id: Annotated[Optional[StrictStr], Field(description="The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -625,8 +632,9 @@ class WebSearchApi:
     ) -> AiWebSearchConfig:
         """Get active config
 
+        Returns the web-search configuration active in the scope, or an empty result when web search is not configured.
 
-        :param entity_id: (required)
+        :param entity_id: The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
         :type entity_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -677,7 +685,7 @@ class WebSearchApi:
     @validate_call
     def ai_web_search_get_active_config_with_http_info(
         self,
-        entity_id: StrictStr,
+        entity_id: Annotated[Optional[StrictStr], Field(description="The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -693,8 +701,9 @@ class WebSearchApi:
     ) -> ApiResponse[AiWebSearchConfig]:
         """Get active config
 
+        Returns the web-search configuration active in the scope, or an empty result when web search is not configured.
 
-        :param entity_id: (required)
+        :param entity_id: The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
         :type entity_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -745,7 +754,7 @@ class WebSearchApi:
     @validate_call
     def ai_web_search_get_active_config_without_preload_content(
         self,
-        entity_id: StrictStr,
+        entity_id: Annotated[Optional[StrictStr], Field(description="The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -761,8 +770,9 @@ class WebSearchApi:
     ) -> RESTResponseType:
         """Get active config
 
+        Returns the web-search configuration active in the scope, or an empty result when web search is not configured.
 
-        :param entity_id: (required)
+        :param entity_id: The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
         :type entity_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -877,7 +887,7 @@ class WebSearchApi:
     @validate_call
     def ai_web_search_is_configured(
         self,
-        entity_id: StrictStr,
+        entity_id: Annotated[Optional[StrictStr], Field(description="The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -893,8 +903,9 @@ class WebSearchApi:
     ) -> bool:
         """Is configured
 
+        Tells whether web search is configured in the scope.
 
-        :param entity_id: (required)
+        :param entity_id: The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
         :type entity_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -945,7 +956,7 @@ class WebSearchApi:
     @validate_call
     def ai_web_search_is_configured_with_http_info(
         self,
-        entity_id: StrictStr,
+        entity_id: Annotated[Optional[StrictStr], Field(description="The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -961,8 +972,9 @@ class WebSearchApi:
     ) -> ApiResponse[bool]:
         """Is configured
 
+        Tells whether web search is configured in the scope.
 
-        :param entity_id: (required)
+        :param entity_id: The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
         :type entity_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1013,7 +1025,7 @@ class WebSearchApi:
     @validate_call
     def ai_web_search_is_configured_without_preload_content(
         self,
-        entity_id: StrictStr,
+        entity_id: Annotated[Optional[StrictStr], Field(description="The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1029,8 +1041,9 @@ class WebSearchApi:
     ) -> RESTResponseType:
         """Is configured
 
+        Tells whether web search is configured in the scope.
 
-        :param entity_id: (required)
+        :param entity_id: The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
         :type entity_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1161,6 +1174,7 @@ class WebSearchApi:
     ) -> AiSuccessResponse:
         """Web page contents proxied to the portal's active web-search provider
 
+        Fetches web page contents on behalf of the document editor's AI plugin, against the portal's active web-search provider, the same way as the search passthrough.
 
         :param request_body: (required)
         :type request_body: Dict[str, object]
@@ -1229,6 +1243,7 @@ class WebSearchApi:
     ) -> ApiResponse[AiSuccessResponse]:
         """Web page contents proxied to the portal's active web-search provider
 
+        Fetches web page contents on behalf of the document editor's AI plugin, against the portal's active web-search provider, the same way as the search passthrough.
 
         :param request_body: (required)
         :type request_body: Dict[str, object]
@@ -1297,6 +1312,7 @@ class WebSearchApi:
     ) -> RESTResponseType:
         """Web page contents proxied to the portal's active web-search provider
 
+        Fetches web page contents on behalf of the document editor's AI plugin, against the portal's active web-search provider, the same way as the search passthrough.
 
         :param request_body: (required)
         :type request_body: Dict[str, object]
@@ -1440,6 +1456,7 @@ class WebSearchApi:
     ) -> AiSuccessResponse:
         """Web search proxied to the portal's active web-search provider
 
+        Runs a web search on behalf of the document editor's AI plugin. The plugin only holds a placeholder configuration; the portal's active provider and its key are resolved here and never reach the browser.
 
         :param request_body: (required)
         :type request_body: Dict[str, object]
@@ -1508,6 +1525,7 @@ class WebSearchApi:
     ) -> ApiResponse[AiSuccessResponse]:
         """Web search proxied to the portal's active web-search provider
 
+        Runs a web search on behalf of the document editor's AI plugin. The plugin only holds a placeholder configuration; the portal's active provider and its key are resolved here and never reach the browser.
 
         :param request_body: (required)
         :type request_body: Dict[str, object]
@@ -1576,6 +1594,7 @@ class WebSearchApi:
     ) -> RESTResponseType:
         """Web search proxied to the portal's active web-search provider
 
+        Runs a web search on behalf of the document editor's AI plugin. The plugin only holds a placeholder configuration; the portal's active provider and its key are resolved here and never reach the browser.
 
         :param request_body: (required)
         :type request_body: Dict[str, object]
@@ -1719,6 +1738,7 @@ class WebSearchApi:
     ) -> AiSuccessResponse:
         """Set active config
 
+        Stores a web-search configuration without contacting the provider first, for forms that validate locally.
 
         :param ai_web_search_configure_request: (required)
         :type ai_web_search_configure_request: AiWebSearchConfigureRequest
@@ -1787,6 +1807,7 @@ class WebSearchApi:
     ) -> ApiResponse[AiSuccessResponse]:
         """Set active config
 
+        Stores a web-search configuration without contacting the provider first, for forms that validate locally.
 
         :param ai_web_search_configure_request: (required)
         :type ai_web_search_configure_request: AiWebSearchConfigureRequest
@@ -1855,6 +1876,7 @@ class WebSearchApi:
     ) -> RESTResponseType:
         """Set active config
 
+        Stores a web-search configuration without contacting the provider first, for forms that validate locally.
 
         :param ai_web_search_configure_request: (required)
         :type ai_web_search_configure_request: AiWebSearchConfigureRequest
@@ -1998,6 +2020,7 @@ class WebSearchApi:
     ) -> AiProfilesTestConnection200Response:
         """Test connection
 
+        Checks a web-search configuration against the live provider without storing it - for a Test button that must not commit on success.
 
         :param ai_web_search_config: (required)
         :type ai_web_search_config: AiWebSearchConfig
@@ -2066,6 +2089,7 @@ class WebSearchApi:
     ) -> ApiResponse[AiProfilesTestConnection200Response]:
         """Test connection
 
+        Checks a web-search configuration against the live provider without storing it - for a Test button that must not commit on success.
 
         :param ai_web_search_config: (required)
         :type ai_web_search_config: AiWebSearchConfig
@@ -2134,6 +2158,7 @@ class WebSearchApi:
     ) -> RESTResponseType:
         """Test connection
 
+        Checks a web-search configuration against the live provider without storing it - for a Test button that must not commit on success.
 
         :param ai_web_search_config: (required)
         :type ai_web_search_config: AiWebSearchConfig

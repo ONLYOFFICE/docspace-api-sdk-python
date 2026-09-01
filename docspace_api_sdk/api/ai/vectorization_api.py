@@ -62,6 +62,7 @@ class VectorizationApi:
     ) -> AiSuccessResponse:
         """Start a vectorization task
 
+        Starts a vectorization task over the supplied portal files. The indexing itself runs asynchronously on the .NET side.
 
         :param request_body: (required)
         :type request_body: Dict[str, object]
@@ -130,6 +131,7 @@ class VectorizationApi:
     ) -> ApiResponse[AiSuccessResponse]:
         """Start a vectorization task
 
+        Starts a vectorization task over the supplied portal files. The indexing itself runs asynchronously on the .NET side.
 
         :param request_body: (required)
         :type request_body: Dict[str, object]
@@ -198,6 +200,7 @@ class VectorizationApi:
     ) -> RESTResponseType:
         """Start a vectorization task
 
+        Starts a vectorization task over the supplied portal files. The indexing itself runs asynchronously on the .NET side.
 
         :param request_body: (required)
         :type request_body: Dict[str, object]

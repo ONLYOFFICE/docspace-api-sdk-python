@@ -21,18 +21,18 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictFloat, StrictInt
+from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing import Optional, Set
 from typing_extensions import Self
 
 class AiImagePrice(BaseModel):
     """
-    AiImagePrice
+    The price of an image model: per prompt token and per generated image.
     """ # noqa: E501
-    prompt: Optional[Union[StrictFloat, StrictInt]] = None
-    completion: Optional[Union[StrictFloat, StrictInt]] = None
-    image: Optional[Union[StrictFloat, StrictInt]] = None
+    prompt: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The price of a single prompt token.", json_schema_extra={"examples": [1.0E-5]})
+    completion: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The cost associated with the completion of a prompt in an AI model.", json_schema_extra={"examples": [1.0E-5]})
+    image: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The price of a single generated image.", json_schema_extra={"examples": [0.04]})
     __properties: ClassVar[List[str]] = ["prompt", "completion", "image"]
 
     model_config = ConfigDict(

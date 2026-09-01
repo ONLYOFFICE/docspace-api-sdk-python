@@ -23,15 +23,21 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictInt
 from typing import Any, ClassVar, Dict, List, Optional
+from docspace_api_sdk.models.file_share import FileShare
+from docspace_api_sdk.models.get_portal_prices200_response_links_inner import GetPortalPrices200ResponseLinksInner
 from typing import Optional, Set
 from typing_extensions import Self
 
-class NoContentResult(BaseModel):
+class FileShareResponseArrayWrapper(BaseModel):
     """
-    NoContentResult
+    The successful API response containing the list of FileShare objects.
     """ # noqa: E501
-    status_code: Optional[StrictInt] = Field(default=None, alias="statusCode")
-    __properties: ClassVar[List[str]] = ["statusCode"]
+    response: Optional[List[FileShare]] = Field(default=None, description="The list of FileShare objects returned by the operation.")
+    count: Optional[StrictInt] = Field(default=None, description="The total number of items in the response")
+    links: Optional[List[GetPortalPrices200ResponseLinksInner]] = Field(default=None, description="List of links related to the response")
+    status: Optional[StrictInt] = Field(default=None, description="HTTP status code of the response")
+    status_code: Optional[StrictInt] = Field(default=None, description="HTTP status code of the response (duplicate of status)", alias="statusCode")
+    __properties: ClassVar[List[str]] = ["response", "count", "links", "status", "statusCode"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -51,7 +57,7 @@ class NoContentResult(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of NoContentResult from a JSON string"""
+        """Create an instance of FileShareResponseArrayWrapper from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -72,11 +78,18 @@ class NoContentResult(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each item in links (list)
+        _items = []
+        if self.links:
+            for _item_links in self.links:
+                if _item_links:
+                    _items.append(_item_links.to_dict())
+            _dict['links'] = _items
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of NoContentResult from a dict"""
+        """Create an instance of FileShareResponseArrayWrapper from a dict"""
         if obj is None:
             return None
 
@@ -85,6 +98,10 @@ class NoContentResult(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "response": obj.get("response"),
+            "count": obj.get("count"),
+            "links": [GetPortalPrices200ResponseLinksInner.from_dict(_item) for _item in obj["links"]] if obj.get("links") is not None else None,
+            "status": obj.get("status"),
             "statusCode": obj.get("statusCode")
         })
         return _obj

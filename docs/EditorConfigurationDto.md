@@ -9,15 +9,15 @@ Name | Type | Description | Notes
 **co_editing** | [**CoEditingConfig**](CoEditingConfig.md) | The co-editing configuration parameters. | [optional] 
 **create_url** | **str** | The creation URL of the editor. | [optional] 
 **customization** | [**CustomizationConfigDto**](CustomizationConfigDto.md) | The customization configuration. | [optional] 
-**embedded** | [**EmbeddedConfig**](EmbeddedConfig.md) | The configuration parameters for the embedded document type. | [optional] 
+**embedded** | [**EmbeddedConfig**](EmbeddedConfig.md) | The embedded configuration parameters for embedded documents. | [optional] 
 **encryption_keys** | [**List[EncryptionKeyDto]**](EncryptionKeyDto.md) | The encryption keys of the editor configuration. | [optional] 
 **lang** | **str** | The language of the editor configuration. | 
 **mode** | **str** | The mode of the editor configuration. | 
 **mode_write** | **bool** | Specifies if the mode is write of the editor configuration. | [optional] 
-**plugins** | [**PluginsConfig**](PluginsConfig.md) | The configuration settings to connect the special add-ons. | [optional] 
+**plugins** | [**PluginsConfig**](PluginsConfig.md) | The plugins configuration. | [optional] 
 **recent** | [**List[RecentConfig]**](RecentConfig.md) | The recent configuration of the editor. | [optional] 
 **templates** | [**List[TemplatesConfig]**](TemplatesConfig.md) | The templates of the editor configuration. | [optional] 
-**user** | [**UserConfig**](UserConfig.md) | The configuration parameters of the user currently viewing or editing the document. | [optional] 
+**user** | [**UserConfig**](UserConfig.md) | The user configuration of the editor. | [optional] 
 
 ## Example
 

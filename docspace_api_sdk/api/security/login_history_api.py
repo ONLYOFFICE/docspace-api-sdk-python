@@ -22,11 +22,11 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
+from datetime import datetime
 from pydantic import Field, StrictInt
 from typing import Optional
 from typing_extensions import Annotated
 from uuid import UUID
-from docspace_api_sdk.models.api_date_time import ApiDateTime
 from docspace_api_sdk.models.audit_report_format import AuditReportFormat
 from docspace_api_sdk.models.document_builder_task_wrapper import DocumentBuilderTaskWrapper
 from docspace_api_sdk.models.login_event_array_wrapper import LoginEventArrayWrapper
@@ -112,8 +112,10 @@ class LoginHistoryApi:
             '200': "DocumentBuilderTaskWrapper",
             '402': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -186,8 +188,10 @@ class LoginHistoryApi:
             '200': "DocumentBuilderTaskWrapper",
             '402': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -260,8 +264,10 @@ class LoginHistoryApi:
             '200': "DocumentBuilderTaskWrapper",
             '402': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -400,8 +406,9 @@ class LoginHistoryApi:
             '200': "LoginEventArrayWrapper",
             '402': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -470,8 +477,9 @@ class LoginHistoryApi:
             '200': "LoginEventArrayWrapper",
             '402': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -540,8 +548,9 @@ class LoginHistoryApi:
             '200': "LoginEventArrayWrapper",
             '402': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -627,8 +636,8 @@ class LoginHistoryApi:
         self,
         user_id: Annotated[Optional[UUID], Field(description="The ID of the user whose login events are being queried.")] = None,
         action: Annotated[Optional[MessageAction], Field(description="The login-related action to filter events by.")] = None,
-        var_from: Annotated[Optional[ApiDateTime], Field(description="The starting date and time for filtering login events.")] = None,
-        to: Annotated[Optional[ApiDateTime], Field(description="The ending date and time for filtering login events.")] = None,
+        var_from: Annotated[Optional[datetime], Field(description="The starting date and time for filtering login events.")] = None,
+        to: Annotated[Optional[datetime], Field(description="The ending date and time for filtering login events.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of login events to retrieve in the query.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The starting index for fetching a subset of login events from the query results.")] = None,
         _request_timeout: Union[
@@ -653,9 +662,9 @@ class LoginHistoryApi:
         :param action: The login-related action to filter events by.
         :type action: MessageAction
         :param var_from: The starting date and time for filtering login events.
-        :type var_from: ApiDateTime
+        :type var_from: datetime
         :param to: The ending date and time for filtering login events.
-        :type to: ApiDateTime
+        :type to: datetime
         :param count: The number of login events to retrieve in the query.
         :type count: int
         :param start_index: The starting index for fetching a subset of login events from the query results.
@@ -699,8 +708,10 @@ class LoginHistoryApi:
             '200': "LoginEventArrayWrapper",
             '402': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -721,8 +732,8 @@ class LoginHistoryApi:
         self,
         user_id: Annotated[Optional[UUID], Field(description="The ID of the user whose login events are being queried.")] = None,
         action: Annotated[Optional[MessageAction], Field(description="The login-related action to filter events by.")] = None,
-        var_from: Annotated[Optional[ApiDateTime], Field(description="The starting date and time for filtering login events.")] = None,
-        to: Annotated[Optional[ApiDateTime], Field(description="The ending date and time for filtering login events.")] = None,
+        var_from: Annotated[Optional[datetime], Field(description="The starting date and time for filtering login events.")] = None,
+        to: Annotated[Optional[datetime], Field(description="The ending date and time for filtering login events.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of login events to retrieve in the query.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The starting index for fetching a subset of login events from the query results.")] = None,
         _request_timeout: Union[
@@ -747,9 +758,9 @@ class LoginHistoryApi:
         :param action: The login-related action to filter events by.
         :type action: MessageAction
         :param var_from: The starting date and time for filtering login events.
-        :type var_from: ApiDateTime
+        :type var_from: datetime
         :param to: The ending date and time for filtering login events.
-        :type to: ApiDateTime
+        :type to: datetime
         :param count: The number of login events to retrieve in the query.
         :type count: int
         :param start_index: The starting index for fetching a subset of login events from the query results.
@@ -793,8 +804,10 @@ class LoginHistoryApi:
             '200': "LoginEventArrayWrapper",
             '402': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -815,8 +828,8 @@ class LoginHistoryApi:
         self,
         user_id: Annotated[Optional[UUID], Field(description="The ID of the user whose login events are being queried.")] = None,
         action: Annotated[Optional[MessageAction], Field(description="The login-related action to filter events by.")] = None,
-        var_from: Annotated[Optional[ApiDateTime], Field(description="The starting date and time for filtering login events.")] = None,
-        to: Annotated[Optional[ApiDateTime], Field(description="The ending date and time for filtering login events.")] = None,
+        var_from: Annotated[Optional[datetime], Field(description="The starting date and time for filtering login events.")] = None,
+        to: Annotated[Optional[datetime], Field(description="The ending date and time for filtering login events.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of login events to retrieve in the query.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The starting index for fetching a subset of login events from the query results.")] = None,
         _request_timeout: Union[
@@ -841,9 +854,9 @@ class LoginHistoryApi:
         :param action: The login-related action to filter events by.
         :type action: MessageAction
         :param var_from: The starting date and time for filtering login events.
-        :type var_from: ApiDateTime
+        :type var_from: datetime
         :param to: The ending date and time for filtering login events.
-        :type to: ApiDateTime
+        :type to: datetime
         :param count: The number of login events to retrieve in the query.
         :type count: int
         :param start_index: The starting index for fetching a subset of login events from the query results.
@@ -887,8 +900,10 @@ class LoginHistoryApi:
             '200': "LoginEventArrayWrapper",
             '402': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -939,12 +954,30 @@ class LoginHistoryApi:
             _query_params.append(('action', action.value))
             
         if var_from is not None:
-            
-            _query_params.append(('from', var_from))
+            if isinstance(var_from, datetime):
+                _query_params.append(
+                    (
+                        'from',
+                        var_from.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('from', var_from))
             
         if to is not None:
-            
-            _query_params.append(('to', to))
+            if isinstance(to, datetime):
+                _query_params.append(
+                    (
+                        'to',
+                        to.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('to', to))
             
         if count is not None:
             
@@ -1054,8 +1087,9 @@ class LoginHistoryApi:
             '200': "DocumentBuilderTaskWrapper",
             '402': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1124,8 +1158,9 @@ class LoginHistoryApi:
             '200': "DocumentBuilderTaskWrapper",
             '402': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1194,8 +1229,9 @@ class LoginHistoryApi:
             '200': "DocumentBuilderTaskWrapper",
             '402': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1329,8 +1365,9 @@ class LoginHistoryApi:
             '200': None,
             '402': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1399,8 +1436,9 @@ class LoginHistoryApi:
             '200': None,
             '402': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1469,8 +1507,9 @@ class LoginHistoryApi:
             '200': None,
             '402': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1511,6 +1550,13 @@ class LoginHistoryApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting

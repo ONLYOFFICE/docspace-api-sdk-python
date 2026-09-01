@@ -30,9 +30,9 @@ from typing_extensions import Self
 
 class FileEncryptionInfoWrapper(BaseModel):
     """
-    FileEncryptionInfoWrapper
+    The successful API response containing the FileEncryptionInfoDto object.
     """ # noqa: E501
-    response: Optional[FileEncryptionInfoDto] = None
+    response: Optional[FileEncryptionInfoDto] = Field(default=None, description="The FileEncryptionInfoDto object returned by the operation.")
     count: Optional[StrictInt] = Field(default=None, description="The total number of items in the response")
     links: Optional[List[GetPortalPrices200ResponseLinksInner]] = Field(default=None, description="List of links related to the response")
     status: Optional[StrictInt] = Field(default=None, description="HTTP status code of the response")

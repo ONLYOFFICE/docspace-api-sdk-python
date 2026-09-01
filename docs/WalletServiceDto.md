@@ -12,10 +12,10 @@ Name | Type | Description | Notes
 **free** | **bool** | Specifies if the quota is free or not. | 
 **trial** | **bool** | Specifies if the quota is trial or not. | 
 **features** | [**List[TenantQuotaFeatureDto]**](TenantQuotaFeatureDto.md) | The list of tenant quota features. | 
-**users_quota** | [**TenantEntityQuotaSettings**](TenantEntityQuotaSettings.md) | The tenant entity quota settings. | [optional] 
-**rooms_quota** | [**TenantEntityQuotaSettings**](TenantEntityQuotaSettings.md) | The tenant entity quota settings. | [optional] 
-**ai_agents_quota** | [**TenantEntityQuotaSettings**](TenantEntityQuotaSettings.md) | The tenant entity quota settings. | [optional] 
-**tenant_custom_quota** | [**TenantQuotaSettings**](TenantQuotaSettings.md) | The tenant quota settings. | [optional] 
+**users_quota** | [**TenantEntityQuotaSettings**](TenantEntityQuotaSettings.md) | The user quota. | [optional] 
+**rooms_quota** | [**TenantEntityQuotaSettings**](TenantEntityQuotaSettings.md) | The room quota. | [optional] 
+**ai_agents_quota** | [**TenantEntityQuotaSettings**](TenantEntityQuotaSettings.md) | The ai agent quota. | [optional] 
+**tenant_custom_quota** | [**TenantQuotaSettings**](TenantQuotaSettings.md) | The tenant custom quota. | [optional] 
 **due_date** | **datetime** | The due date. | [optional] 
 **inner_services** | [**List[WalletServiceDto]**](WalletServiceDto.md) | The list of inner services. | [optional] 
 **service_name** | **str** | The service name. | [optional] 

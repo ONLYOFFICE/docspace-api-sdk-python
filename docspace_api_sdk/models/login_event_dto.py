@@ -21,10 +21,10 @@ import pprint
 import re  # noqa: F401
 import json
 
+from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from uuid import UUID
-from docspace_api_sdk.models.api_date_time import ApiDateTime
 from docspace_api_sdk.models.message_action import MessageAction
 from typing import Optional, Set
 from typing_extensions import Self
@@ -34,12 +34,12 @@ class LoginEventDto(BaseModel):
     The login event parameters.
     """ # noqa: E501
     id: Optional[StrictInt] = Field(default=None, description="The login event ID.", json_schema_extra={"examples": [1]})
-    var_date: Optional[ApiDateTime] = Field(default=None, description="The API date and time parameters.", alias="date")
+    var_date: Optional[datetime] = Field(default=None, description="The login event date.", alias="date", json_schema_extra={"examples": ["2024-01-15T10:30:00Z"]})
     user: Optional[StrictStr] = Field(default=None, description="The user name of the login event.", json_schema_extra={"examples": ["John Doe"]})
     user_id: Optional[UUID] = Field(default=None, description="The user ID of the login event.", alias="userId", json_schema_extra={"examples": ["{}"]})
     login: Optional[StrictStr] = Field(default=None, description="The user login of the login event.", json_schema_extra={"examples": ["user@example.com"]})
     action: Optional[StrictStr] = Field(default=None, description="The login event action.", json_schema_extra={"examples": ["User logged in"]})
-    action_id: Optional[MessageAction] = Field(default=None, description="The event action ID.", alias="actionId")
+    action_id: Optional[MessageAction] = Field(default=None, description="The login-related action to filter events by.", alias="actionId")
     ip: Optional[StrictStr] = Field(default=None, description="The login event IP.", json_schema_extra={"examples": ["192.0.2.1"]})
     country: Optional[StrictStr] = Field(default=None, description="The login event country.", json_schema_extra={"examples": ["United States"]})
     city: Optional[StrictStr] = Field(default=None, description="The login event city.", json_schema_extra={"examples": ["New York"]})
@@ -87,9 +87,11 @@ class LoginEventDto(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of var_date
-        if self.var_date:
-            _dict['date'] = self.var_date.to_dict()
+        # set to None if var_date (nullable) is None
+        # and model_fields_set contains the field
+        if self.var_date is None and "var_date" in self.model_fields_set:
+            _dict['date'] = None
+
         # set to None if user (nullable) is None
         # and model_fields_set contains the field
         if self.user is None and "user" in self.model_fields_set:
@@ -149,7 +151,7 @@ class LoginEventDto(BaseModel):
 
         _obj = cls.model_validate({
             "id": obj.get("id"),
-            "date": ApiDateTime.from_dict(obj["date"]) if obj.get("date") is not None else None,
+            "date": obj.get("date"),
             "user": obj.get("user"),
             "userId": obj.get("userId"),
             "login": obj.get("login"),

@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **is_stream** | **bool** | Stream the reply (ndjson) when true, else return a single message. | 
 **system_prompt** | **str** | Caller-supplied system prompt for this one-turn call. | 
 **user_message** | [**AiThreadMessageLike**](AiThreadMessageLike.md) |  | 
-**action_args** | [**AiAiActionArgs**](AiAiActionArgs.md) |  | [optional] 
+**action_args** | [**AiAiActionArgs**](AiAiActionArgs.md) | Per-request engine options: extra tools, reasoning, prompt override. | [optional] 
 
 ## Example
 

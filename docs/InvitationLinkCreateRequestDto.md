@@ -5,7 +5,7 @@ The request parameters for creating an invitation link.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**employee_type** | [**EmployeeType**](EmployeeType.md) | The user type. | 
+**employee_type** | [**EmployeeType**](EmployeeType.md) | The type of employee role for the invitation link (DocSpaceAdmin, RoomAdmin or User). | 
 **expiration** | **datetime** | The expiration date of the invitation link. | [optional] 
 **max_use_count** | **int** | The maximum number of times the invitation link can be used. | [optional] 
 

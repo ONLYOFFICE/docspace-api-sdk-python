@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **secret_key** | **str** | The webhook secret key used to sign the webhook payloads for the security verification. | [optional] 
 **enabled** | **bool** | Specifies whether the webhook configuration is active or not. | [optional] 
 **ssl** | **bool** | Specifies whether the SSL certificate verification is required or not. | [optional] 
-**triggers** | [**WebhookTrigger**](WebhookTrigger.md) | The webhook trigger type. | [optional] 
+**triggers** | [**WebhookTrigger**](WebhookTrigger.md) | Defines which events will trigger webhook notifications. | [optional] 
 **target_id** | **str** | Target ID | [optional] 
 
 ## Example

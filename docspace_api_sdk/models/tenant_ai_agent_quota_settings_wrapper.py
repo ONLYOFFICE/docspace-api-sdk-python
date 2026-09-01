@@ -30,9 +30,9 @@ from typing_extensions import Self
 
 class TenantAiAgentQuotaSettingsWrapper(BaseModel):
     """
-    TenantAiAgentQuotaSettingsWrapper
+    The successful API response containing the TenantAiAgentQuotaSettings object.
     """ # noqa: E501
-    response: Optional[TenantAiAgentQuotaSettings] = None
+    response: Optional[TenantAiAgentQuotaSettings] = Field(default=None, description="The TenantAiAgentQuotaSettings object returned by the operation.")
     count: Optional[StrictInt] = Field(default=None, description="The total number of items in the response")
     links: Optional[List[GetPortalPrices200ResponseLinksInner]] = Field(default=None, description="List of links related to the response")
     status: Optional[StrictInt] = Field(default=None, description="HTTP status code of the response")

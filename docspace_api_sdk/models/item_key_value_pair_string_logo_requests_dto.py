@@ -29,10 +29,10 @@ from typing_extensions import Self
 
 class ItemKeyValuePairStringLogoRequestsDto(BaseModel):
     """
-    ItemKeyValuePairStringLogoRequestsDto
+    A key-value pair of a list item.
     """ # noqa: E501
-    key: Optional[StrictStr] = None
-    value: Optional[LogoRequestsDto] = Field(default=None, description="The request parameters for the theme-specific logo configurations.")
+    key: Optional[StrictStr] = Field(default=None, description="The key that identifies the item within the list.")
+    value: Optional[LogoRequestsDto] = Field(default=None, description="The value associated with the key.")
     __properties: ClassVar[List[str]] = ["key", "value"]
 
     model_config = ConfigDict(

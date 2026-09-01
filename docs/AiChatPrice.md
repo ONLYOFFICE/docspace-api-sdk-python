@@ -1,11 +1,12 @@
 # AiChatPrice
+The price of a chat model, per token.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**prompt** | **float** |  | [optional] 
-**completion** | **float** |  | [optional] 
+**prompt** | **float** | The price of a single prompt token. | [optional] 
+**completion** | **float** | The price of a single completion token. | [optional] 
 
 ## Example
 

@@ -21,9 +21,9 @@ import pprint
 import re  # noqa: F401
 import json
 
+from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
-from docspace_api_sdk.models.api_date_time import ApiDateTime
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -37,7 +37,7 @@ class UpcomingPaymentDto(BaseModel):
     unit_of_measure: Optional[StrictStr] = Field(default=None, description="The quota unit of measure.", alias="unitOfMeasure", json_schema_extra={"examples": ["admins"]})
     quantity: Optional[StrictInt] = Field(default=None, description="The quantity that will be charged (the next quantity if set, otherwise the current quantity).", json_schema_extra={"examples": [100]})
     wallet: Optional[StrictBool] = Field(default=None, description="The quota applies to the wallet or not.", json_schema_extra={"examples": [True]})
-    due_date: Optional[ApiDateTime] = Field(default=None, description="The API date and time parameters.", alias="dueDate")
+    due_date: Optional[datetime] = Field(default=None, description="The due date of the upcoming payment in the portal time zone.", alias="dueDate", json_schema_extra={"examples": ["2026-07-08T11:39:43.0000000+03:00"]})
     amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The amount that will be charged (unit price multiplied by the quantity).", json_schema_extra={"examples": [14]})
     currency: Optional[StrictStr] = Field(default=None, description="The three-character ISO 4217 currency symbol of the amount.", json_schema_extra={"examples": ["USD"]})
     __properties: ClassVar[List[str]] = ["id", "name", "title", "unitOfMeasure", "quantity", "wallet", "dueDate", "amount", "currency"]
@@ -81,9 +81,6 @@ class UpcomingPaymentDto(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of due_date
-        if self.due_date:
-            _dict['dueDate'] = self.due_date.to_dict()
         # set to None if name (nullable) is None
         # and model_fields_set contains the field
         if self.name is None and "name" in self.model_fields_set:
@@ -98,6 +95,11 @@ class UpcomingPaymentDto(BaseModel):
         # and model_fields_set contains the field
         if self.unit_of_measure is None and "unit_of_measure" in self.model_fields_set:
             _dict['unitOfMeasure'] = None
+
+        # set to None if due_date (nullable) is None
+        # and model_fields_set contains the field
+        if self.due_date is None and "due_date" in self.model_fields_set:
+            _dict['dueDate'] = None
 
         # set to None if currency (nullable) is None
         # and model_fields_set contains the field
@@ -123,7 +125,7 @@ class UpcomingPaymentDto(BaseModel):
             "unitOfMeasure": obj.get("unitOfMeasure"),
             "quantity": obj.get("quantity"),
             "wallet": obj.get("wallet"),
-            "dueDate": ApiDateTime.from_dict(obj["dueDate"]) if obj.get("dueDate") is not None else None,
+            "dueDate": obj.get("dueDate"),
             "amount": obj.get("amount"),
             "currency": obj.get("currency")
         })

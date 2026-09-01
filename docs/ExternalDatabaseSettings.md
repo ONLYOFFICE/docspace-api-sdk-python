@@ -1,18 +1,19 @@
 # ExternalDatabaseSettings
+The connection parameters of an external database.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**database_type** | **str** |  | [optional] 
-**database_type_enum** | [**ExternalDatabaseType**](ExternalDatabaseType.md) |  | [optional] 
-**db_host** | **str** |  | [optional] 
-**db_port** | **int** |  | [optional] 
-**db_name** | **str** |  | [optional] 
-**db_user** | **str** |  | [optional] 
-**db_password** | **str** |  | [optional] 
-**db_ssl** | **bool** |  | [optional] 
-**sqlite_file_path** | **str** |  | [optional] 
+**database_type** | **str** | The engine of the external database. | [optional] 
+**database_type_enum** | [**ExternalDatabaseType**](ExternalDatabaseType.md) | The engine of an external database. | [optional] 
+**db_host** | **str** | The host name or the IP address of the database server. | [optional] 
+**db_port** | **int** | The port the database server listens on. | [optional] 
+**db_name** | **str** | The name of the database to connect to. | [optional] 
+**db_user** | **str** | The user name to connect with. | [optional] 
+**db_password** | **str** | The password to connect with. | [optional] 
+**db_ssl** | **bool** | Specifies whether the connection to the database is secured with SSL. | [optional] 
+**sqlite_file_path** | **str** | The path to the database file, used by the SQLite engine only. | [optional] 
 
 ## Example
 

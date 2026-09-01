@@ -21,11 +21,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
 from uuid import UUID
-from docspace_api_sdk.models.api_date_time import ApiDateTime
 from docspace_api_sdk.models.file_share import FileShare
 from typing import Optional, Set
 from typing_extensions import Self
@@ -35,8 +35,8 @@ class FileLinkRequest(BaseModel):
     The external link request parameters.
     """ # noqa: E501
     link_id: Optional[UUID] = Field(default=None, description="The external link ID.", alias="linkId", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000000"]})
-    access: Optional[FileShare] = Field(default=None, description="The access rights type.")
-    expiration_date: Optional[ApiDateTime] = Field(default=None, description="The API date and time parameters.", alias="expirationDate")
+    access: Optional[FileShare] = Field(default=None, description="The link sharing rights.")
+    expiration_date: Optional[datetime] = Field(default=None, description="The link expiration date.", alias="expirationDate", json_schema_extra={"examples": ["2021-01-01T00:00:00Z"]})
     title: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The link name.", json_schema_extra={"examples": ["My Document"]})
     internal: Optional[StrictBool] = Field(default=None, description="The link scope, whether it is internal or not.", json_schema_extra={"examples": [False]})
     primary: Optional[StrictBool] = Field(default=None, description="Specifies whether the file link is primary or not.", json_schema_extra={"examples": [True]})
@@ -83,9 +83,11 @@ class FileLinkRequest(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of expiration_date
-        if self.expiration_date:
-            _dict['expirationDate'] = self.expiration_date.to_dict()
+        # set to None if expiration_date (nullable) is None
+        # and model_fields_set contains the field
+        if self.expiration_date is None and "expiration_date" in self.model_fields_set:
+            _dict['expirationDate'] = None
+
         # set to None if title (nullable) is None
         # and model_fields_set contains the field
         if self.title is None and "title" in self.model_fields_set:
@@ -111,7 +113,7 @@ class FileLinkRequest(BaseModel):
         _obj = cls.model_validate({
             "linkId": obj.get("linkId"),
             "access": obj.get("access"),
-            "expirationDate": ApiDateTime.from_dict(obj["expirationDate"]) if obj.get("expirationDate") is not None else None,
+            "expirationDate": obj.get("expirationDate"),
             "title": obj.get("title"),
             "internal": obj.get("internal"),
             "primary": obj.get("primary"),

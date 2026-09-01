@@ -35,7 +35,7 @@ class AiAiSendCustomRequest(BaseModel):
     is_stream: StrictBool = Field(description="Stream the reply (ndjson) when true, else return a single message.", alias="isStream")
     system_prompt: StrictStr = Field(description="Caller-supplied system prompt for this one-turn call.", alias="systemPrompt")
     user_message: AiThreadMessageLike = Field(alias="userMessage")
-    action_args: Optional[AiAiActionArgs] = Field(default=None, alias="actionArgs")
+    action_args: Optional[AiAiActionArgs] = Field(default=None, description="Per-request engine options: extra tools, reasoning, prompt override.", alias="actionArgs")
     __properties: ClassVar[List[str]] = ["isStream", "systemPrompt", "userMessage", "actionArgs"]
 
     model_config = ConfigDict(

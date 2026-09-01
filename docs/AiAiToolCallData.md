@@ -1,4 +1,5 @@
 # AiAiToolCallData
+Identifies a pending tool call to resume — mirrors the library `ToolCallData` (its serializable fields).
 
 ## Properties
 
@@ -8,9 +9,9 @@ Name | Type | Description | Notes
 **message_id** | **str** | Storage id of the assistant message holding the tool call. | 
 **idx** | **float** | Index of the tool-call content part inside `message.content`. | 
 **message** | [**AiThreadMessageLike**](AiThreadMessageLike.md) | Snapshot of the assistant message at the time the tool call surfaced. | 
-**action_args** | [**AiAiActionArgs**](AiAiActionArgs.md) |  | [optional] 
-**entity_id** | **str** |  | [optional] 
-**profile_id** | **str** |  | [optional] 
+**action_args** | [**AiAiActionArgs**](AiAiActionArgs.md) | Per-request engine options: extra tools, reasoning, prompt override. | [optional] 
+**entity_id** | **str** | Optional entity (room) scope for profile resolution. | [optional] 
+**profile_id** | **str** | Session-level profile override for this request only. | [optional] 
 
 ## Example
 

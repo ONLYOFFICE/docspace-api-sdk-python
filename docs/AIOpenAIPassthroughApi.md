@@ -11,7 +11,7 @@ Method | HTTP request | Description
 # **ai_openai_chat_completions**
 > AiSuccessResponse ai_openai_chat_completions(profile_id, request_body)
 
-
+OpenAI-compatible chat completions for the document editor's AI plugin. The profile is resolved server-side, its credentials are attached, and the body is forwarded to the provider verbatim - the payload is owned by the plugin's SDK on one end and the provider on the other. A client disconnect cancels the provider call.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -20,7 +20,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **profile_id** | **str**|  | 
+ **profile_id** | **str**| The AI provider profile identifier. | 
  **request_body** | [**Dict[str, object]**](object.md)|  | 
 
 ### Return type
@@ -48,7 +48,7 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.OpenAIPassthroughApi(api_client)
-    profile_id = 'profile_id_example' # str | 
+    profile_id = 'profile_id_example' # str | The AI provider profile identifier.
     request_body = None # Dict[str, object] | 
 
     try:
@@ -79,7 +79,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **ai_openai_images_generations**
 > AiSuccessResponse ai_openai_images_generations(profile_id, request_body)
 
-
+OpenAI-compatible image generation for the document editor's AI plugin. As with the chat-completions passthrough, the profile's credentials are attached server-side and the body reaches the provider unchanged.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -88,7 +88,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **profile_id** | **str**|  | 
+ **profile_id** | **str**| The AI provider profile identifier. | 
  **request_body** | [**Dict[str, object]**](object.md)|  | 
 
 ### Return type
@@ -116,7 +116,7 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.OpenAIPassthroughApi(api_client)
-    profile_id = 'profile_id_example' # str | 
+    profile_id = 'profile_id_example' # str | The AI provider profile identifier.
     request_body = None # Dict[str, object] | 
 
     try:

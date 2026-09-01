@@ -27,7 +27,6 @@ from pydantic import Field, StrictBool, StrictBytes, StrictInt, StrictStr, field
 from typing import List, Optional, Tuple, Union
 from typing_extensions import Annotated
 from uuid import UUID
-from docspace_api_sdk.models.api_date_time import ApiDateTime
 from docspace_api_sdk.models.apply_filter_option import ApplyFilterOption
 from docspace_api_sdk.models.audit_report_format import AuditReportFormat
 from docspace_api_sdk.models.check_upload_request import CheckUploadRequest
@@ -145,8 +144,10 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "STRINGArrayWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -221,8 +222,10 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "STRINGArrayWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -297,8 +300,10 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "STRINGArrayWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -457,8 +462,10 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -533,8 +540,10 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -609,8 +618,10 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -771,8 +782,10 @@ class FoldersApi:
             '200': "FileShareWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -849,8 +862,10 @@ class FoldersApi:
             '200': "FileShareWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -927,8 +942,10 @@ class FoldersApi:
             '200': "FileShareWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1097,8 +1114,10 @@ class FoldersApi:
             '200': "DocumentBuilderTaskWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1183,8 +1202,10 @@ class FoldersApi:
             '200': "DocumentBuilderTaskWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1269,8 +1290,10 @@ class FoldersApi:
             '200': "DocumentBuilderTaskWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1446,8 +1469,10 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1522,8 +1547,10 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1598,8 +1625,10 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1756,8 +1785,10 @@ class FoldersApi:
             '200': "XlsxReportResponseWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1830,8 +1861,10 @@ class FoldersApi:
             '200': "XlsxReportResponseWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1904,8 +1937,10 @@ class FoldersApi:
             '200': "XlsxReportResponseWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2070,8 +2105,10 @@ class FoldersApi:
             '200': "FolderContentIntegerWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2168,8 +2205,10 @@ class FoldersApi:
             '200': "FolderContentIntegerWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2266,8 +2305,10 @@ class FoldersApi:
             '200': "FolderContentIntegerWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2436,8 +2477,9 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FilesStatisticsResultWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2504,8 +2546,9 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FilesStatisticsResultWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2572,8 +2615,9 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FilesStatisticsResultWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2709,7 +2753,9 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FormsItemArrayWrapper",
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2780,7 +2826,9 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FormsItemArrayWrapper",
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2851,7 +2899,9 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FormsItemArrayWrapper",
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3058,7 +3108,9 @@ class FoldersApi:
             '200': "FolderContentIntegerWrapper",
             '403': None,
             '404': None,
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3203,7 +3255,9 @@ class FoldersApi:
             '200': "FolderContentIntegerWrapper",
             '403': None,
             '404': None,
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3348,7 +3402,9 @@ class FoldersApi:
             '200': "FolderContentIntegerWrapper",
             '403': None,
             '404': None,
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3521,8 +3577,8 @@ class FoldersApi:
     def get_folder_history(
         self,
         folder_id: Annotated[StrictInt, Field(description="The folder ID of the history request.")],
-        from_date: Annotated[Optional[ApiDateTime], Field(description="The start date of the history request.")] = None,
-        to_date: Annotated[Optional[ApiDateTime], Field(description="The end date of the history request.")] = None,
+        from_date: Annotated[Optional[datetime], Field(description="The start date of the history request.")] = None,
+        to_date: Annotated[Optional[datetime], Field(description="The end date of the history request.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of records to retrieve for the folder history.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The starting index from which the history records are retrieved in the request.")] = None,
         _request_timeout: Union[
@@ -3545,9 +3601,9 @@ class FoldersApi:
         :param folder_id: The folder ID of the history request. (required)
         :type folder_id: int
         :param from_date: The start date of the history request.
-        :type from_date: ApiDateTime
+        :type from_date: datetime
         :param to_date: The end date of the history request.
-        :type to_date: ApiDateTime
+        :type to_date: datetime
         :param count: The number of records to retrieve for the folder history.
         :type count: int
         :param start_index: The starting index from which the history records are retrieved in the request.
@@ -3590,8 +3646,10 @@ class FoldersApi:
             '200': "HistoryArrayWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3611,8 +3669,8 @@ class FoldersApi:
     def get_folder_history_with_http_info(
         self,
         folder_id: Annotated[StrictInt, Field(description="The folder ID of the history request.")],
-        from_date: Annotated[Optional[ApiDateTime], Field(description="The start date of the history request.")] = None,
-        to_date: Annotated[Optional[ApiDateTime], Field(description="The end date of the history request.")] = None,
+        from_date: Annotated[Optional[datetime], Field(description="The start date of the history request.")] = None,
+        to_date: Annotated[Optional[datetime], Field(description="The end date of the history request.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of records to retrieve for the folder history.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The starting index from which the history records are retrieved in the request.")] = None,
         _request_timeout: Union[
@@ -3635,9 +3693,9 @@ class FoldersApi:
         :param folder_id: The folder ID of the history request. (required)
         :type folder_id: int
         :param from_date: The start date of the history request.
-        :type from_date: ApiDateTime
+        :type from_date: datetime
         :param to_date: The end date of the history request.
-        :type to_date: ApiDateTime
+        :type to_date: datetime
         :param count: The number of records to retrieve for the folder history.
         :type count: int
         :param start_index: The starting index from which the history records are retrieved in the request.
@@ -3680,8 +3738,10 @@ class FoldersApi:
             '200': "HistoryArrayWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3701,8 +3761,8 @@ class FoldersApi:
     def get_folder_history_without_preload_content(
         self,
         folder_id: Annotated[StrictInt, Field(description="The folder ID of the history request.")],
-        from_date: Annotated[Optional[ApiDateTime], Field(description="The start date of the history request.")] = None,
-        to_date: Annotated[Optional[ApiDateTime], Field(description="The end date of the history request.")] = None,
+        from_date: Annotated[Optional[datetime], Field(description="The start date of the history request.")] = None,
+        to_date: Annotated[Optional[datetime], Field(description="The end date of the history request.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of records to retrieve for the folder history.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The starting index from which the history records are retrieved in the request.")] = None,
         _request_timeout: Union[
@@ -3725,9 +3785,9 @@ class FoldersApi:
         :param folder_id: The folder ID of the history request. (required)
         :type folder_id: int
         :param from_date: The start date of the history request.
-        :type from_date: ApiDateTime
+        :type from_date: datetime
         :param to_date: The end date of the history request.
-        :type to_date: ApiDateTime
+        :type to_date: datetime
         :param count: The number of records to retrieve for the folder history.
         :type count: int
         :param start_index: The starting index from which the history records are retrieved in the request.
@@ -3770,8 +3830,10 @@ class FoldersApi:
             '200': "HistoryArrayWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3815,12 +3877,30 @@ class FoldersApi:
             _path_params['folderId'] = folder_id
         # process the query parameters
         if from_date is not None:
-            
-            _query_params.append(('fromDate', from_date))
+            if isinstance(from_date, datetime):
+                _query_params.append(
+                    (
+                        'fromDate',
+                        from_date.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('fromDate', from_date))
             
         if to_date is not None:
-            
-            _query_params.append(('toDate', to_date))
+            if isinstance(to_date, datetime):
+                _query_params.append(
+                    (
+                        'toDate',
+                        to_date.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('toDate', to_date))
             
         if count is not None:
             
@@ -3930,7 +4010,9 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4001,7 +4083,9 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4072,7 +4156,9 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4205,8 +4291,10 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4277,8 +4365,10 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4349,8 +4439,10 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4490,8 +4582,10 @@ class FoldersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileEntryBaseArrayWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4563,8 +4657,10 @@ class FoldersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileEntryBaseArrayWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4636,8 +4732,10 @@ class FoldersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileEntryBaseArrayWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4786,7 +4884,9 @@ class FoldersApi:
             '200': "FileShareWrapper",
             '403': None,
             '404': None,
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4867,7 +4967,9 @@ class FoldersApi:
             '200': "FileShareWrapper",
             '403': None,
             '404': None,
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4948,7 +5050,9 @@ class FoldersApi:
             '200': "FileShareWrapper",
             '403': None,
             '404': None,
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -5092,8 +5196,10 @@ class FoldersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileEntryBaseArrayWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -5165,8 +5271,10 @@ class FoldersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileEntryBaseArrayWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -5238,8 +5346,10 @@ class FoldersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileEntryBaseArrayWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -5404,8 +5514,10 @@ class FoldersApi:
             '200': "FolderContentIntegerWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -5502,8 +5614,10 @@ class FoldersApi:
             '200': "FolderContentIntegerWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -5600,8 +5714,10 @@ class FoldersApi:
             '200': "FolderContentIntegerWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -5804,8 +5920,10 @@ class FoldersApi:
             '200': "FolderContentIntegerWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -5906,8 +6024,10 @@ class FoldersApi:
             '200': "FolderContentIntegerWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -6008,8 +6128,10 @@ class FoldersApi:
             '200': "FolderContentIntegerWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -6188,8 +6310,10 @@ class FoldersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileEntryBaseArrayWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -6261,8 +6385,10 @@ class FoldersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileEntryBaseArrayWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -6334,8 +6460,10 @@ class FoldersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileEntryBaseArrayWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -6516,8 +6644,10 @@ class FoldersApi:
             '200': "FolderContentIntegerWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -6630,8 +6760,10 @@ class FoldersApi:
             '200': "FolderContentIntegerWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -6744,8 +6876,10 @@ class FoldersApi:
             '200': "FolderContentIntegerWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -6889,7 +7023,7 @@ class FoldersApi:
     @validate_call
     def get_report_folder_history(
         self,
-        folder_id: StrictInt,
+        folder_id: Annotated[StrictInt, Field(description="The folder unique identifier.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6907,7 +7041,7 @@ class FoldersApi:
 
         Returns the status of generating the folder history report.
 
-        :param folder_id: (required)
+        :param folder_id: The folder unique identifier. (required)
         :type folder_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -6943,8 +7077,10 @@ class FoldersApi:
             '200': "DocumentBuilderTaskWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -6963,7 +7099,7 @@ class FoldersApi:
     @validate_call
     def get_report_folder_history_with_http_info(
         self,
-        folder_id: StrictInt,
+        folder_id: Annotated[StrictInt, Field(description="The folder unique identifier.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6981,7 +7117,7 @@ class FoldersApi:
 
         Returns the status of generating the folder history report.
 
-        :param folder_id: (required)
+        :param folder_id: The folder unique identifier. (required)
         :type folder_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -7017,8 +7153,10 @@ class FoldersApi:
             '200': "DocumentBuilderTaskWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -7037,7 +7175,7 @@ class FoldersApi:
     @validate_call
     def get_report_folder_history_without_preload_content(
         self,
-        folder_id: StrictInt,
+        folder_id: Annotated[StrictInt, Field(description="The folder unique identifier.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -7055,7 +7193,7 @@ class FoldersApi:
 
         Returns the status of generating the folder history report.
 
-        :param folder_id: (required)
+        :param folder_id: The folder unique identifier. (required)
         :type folder_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -7091,8 +7229,10 @@ class FoldersApi:
             '200': "DocumentBuilderTaskWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -7261,8 +7401,10 @@ class FoldersApi:
             '200': "FolderContentIntegerArrayWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -7363,8 +7505,10 @@ class FoldersApi:
             '200': "FolderContentIntegerArrayWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -7465,8 +7609,10 @@ class FoldersApi:
             '200': "FolderContentIntegerArrayWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -7674,8 +7820,10 @@ class FoldersApi:
             '200': "FolderContentIntegerWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -7776,8 +7924,10 @@ class FoldersApi:
             '200': "FolderContentIntegerWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -7878,8 +8028,10 @@ class FoldersApi:
             '200': "FolderContentIntegerWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -8107,8 +8259,10 @@ class FoldersApi:
             '200': "FileIntegerWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -8229,8 +8383,10 @@ class FoldersApi:
             '200': "FileIntegerWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -8351,8 +8507,10 @@ class FoldersApi:
             '200': "FileIntegerWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -8586,8 +8744,10 @@ class FoldersApi:
             '200': "FileIntegerWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -8704,8 +8864,10 @@ class FoldersApi:
             '200': "FileIntegerWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -8822,8 +8984,10 @@ class FoldersApi:
             '200': "FileIntegerWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -9013,8 +9177,10 @@ class FoldersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -9090,8 +9256,10 @@ class FoldersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -9167,8 +9335,10 @@ class FoldersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -9327,8 +9497,10 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -9403,8 +9575,10 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -9479,8 +9653,10 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderIntegerWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -9639,8 +9815,10 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -9715,8 +9893,10 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -9791,8 +9971,10 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -9895,7 +10077,7 @@ class FoldersApi:
     @validate_call
     def terminate_report_folder_history(
         self,
-        folder_id: StrictInt,
+        folder_id: Annotated[StrictInt, Field(description="The folder unique identifier.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -9913,7 +10095,7 @@ class FoldersApi:
 
         Terminates generating the folder history report.
 
-        :param folder_id: (required)
+        :param folder_id: The folder unique identifier. (required)
         :type folder_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -9949,8 +10131,10 @@ class FoldersApi:
             '200': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -9969,7 +10153,7 @@ class FoldersApi:
     @validate_call
     def terminate_report_folder_history_with_http_info(
         self,
-        folder_id: StrictInt,
+        folder_id: Annotated[StrictInt, Field(description="The folder unique identifier.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -9987,7 +10171,7 @@ class FoldersApi:
 
         Terminates generating the folder history report.
 
-        :param folder_id: (required)
+        :param folder_id: The folder unique identifier. (required)
         :type folder_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -10023,8 +10207,10 @@ class FoldersApi:
             '200': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -10043,7 +10229,7 @@ class FoldersApi:
     @validate_call
     def terminate_report_folder_history_without_preload_content(
         self,
-        folder_id: StrictInt,
+        folder_id: Annotated[StrictInt, Field(description="The folder unique identifier.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -10061,7 +10247,7 @@ class FoldersApi:
 
         Terminates generating the folder history report.
 
-        :param folder_id: (required)
+        :param folder_id: The folder unique identifier. (required)
         :type folder_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -10097,8 +10283,10 @@ class FoldersApi:
             '200': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -10142,6 +10330,13 @@ class FoldersApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
@@ -10248,8 +10443,10 @@ class FoldersApi:
             '200': "FileIntegerArrayWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -10338,8 +10535,10 @@ class FoldersApi:
             '200': "FileIntegerArrayWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -10428,8 +10627,10 @@ class FoldersApi:
             '200': "FileIntegerArrayWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -10613,8 +10814,10 @@ class FoldersApi:
             '200': "FileIntegerArrayWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -10699,8 +10902,10 @@ class FoldersApi:
             '200': "FileIntegerArrayWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -10785,8 +10990,10 @@ class FoldersApi:
             '200': "FileIntegerArrayWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }

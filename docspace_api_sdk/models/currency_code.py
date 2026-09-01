@@ -28,7 +28,7 @@ from typing_extensions import Self
 
 class CurrencyCode(BaseModel):
     """
-    CurrencyCode
+    The currency an amount is expressed in.
     """ # noqa: E501
     currency: Optional[StrictStr] = Field(default=None, description="The three-character ISO 4217 currency symbol.", json_schema_extra={"examples": ["\"USD\""]})
     __properties: ClassVar[List[str]] = ["currency"]

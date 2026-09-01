@@ -23,12 +23,12 @@ from typing_extensions import Annotated
 
 from typing import Optional
 from docspace_api_sdk.models.boolean_wrapper import BooleanWrapper
-from docspace_api_sdk.models.setup_code_wrapper import SetupCodeWrapper
 from docspace_api_sdk.models.string_wrapper import StringWrapper
 from docspace_api_sdk.models.tfa_app_code_array_wrapper import TfaAppCodeArrayWrapper
 from docspace_api_sdk.models.tfa_confirm_data_wrapper import TfaConfirmDataWrapper
 from docspace_api_sdk.models.tfa_requests_dto import TfaRequestsDto
 from docspace_api_sdk.models.tfa_settings_array_wrapper import TfaSettingsArrayWrapper
+from docspace_api_sdk.models.tfa_setup_code_wrapper import TfaSetupCodeWrapper
 from docspace_api_sdk.models.tfa_validate_requests_dto import TfaValidateRequestsDto
 
 from docspace_api_sdk.api_client import ApiClient, RequestSerialized
@@ -102,8 +102,9 @@ class TFASettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TfaAppCodeArrayWrapper",
             '405': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -171,8 +172,9 @@ class TFASettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TfaAppCodeArrayWrapper",
             '405': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -240,8 +242,9 @@ class TFASettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TfaAppCodeArrayWrapper",
             '405': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -373,8 +376,9 @@ class TFASettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TfaConfirmDataWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -441,8 +445,9 @@ class TFASettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TfaConfirmDataWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -509,8 +514,9 @@ class TFASettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TfaConfirmDataWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -642,8 +648,9 @@ class TFASettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TfaSettingsArrayWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -710,8 +717,9 @@ class TFASettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TfaSettingsArrayWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -778,8 +786,9 @@ class TFASettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TfaSettingsArrayWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -875,7 +884,7 @@ class TFASettingsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> SetupCodeWrapper:
+    ) -> TfaSetupCodeWrapper:
         """Generate setup code
 
         Generates the setup TFA code for the current user.
@@ -910,10 +919,11 @@ class TFASettingsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "SetupCodeWrapper",
+            '200': "TfaSetupCodeWrapper",
             '405': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -944,7 +954,7 @@ class TFASettingsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[SetupCodeWrapper]:
+    ) -> ApiResponse[TfaSetupCodeWrapper]:
         """Generate setup code
 
         Generates the setup TFA code for the current user.
@@ -979,10 +989,11 @@ class TFASettingsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "SetupCodeWrapper",
+            '200': "TfaSetupCodeWrapper",
             '405': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1048,10 +1059,11 @@ class TFASettingsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "SetupCodeWrapper",
+            '200': "TfaSetupCodeWrapper",
             '405': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1187,8 +1199,10 @@ class TFASettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1259,8 +1273,10 @@ class TFASettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1331,8 +1347,10 @@ class TFASettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1486,8 +1504,10 @@ class TFASettingsApi:
             '200': "StringWrapper",
             '403': None,
             '405': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1560,8 +1580,10 @@ class TFASettingsApi:
             '200': "StringWrapper",
             '403': None,
             '405': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1634,8 +1656,10 @@ class TFASettingsApi:
             '200': "StringWrapper",
             '403': None,
             '405': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1784,8 +1808,9 @@ class TFASettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TfaAppCodeArrayWrapper",
             '405': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1853,8 +1878,9 @@ class TFASettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TfaAppCodeArrayWrapper",
             '405': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1922,8 +1948,9 @@ class TFASettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TfaAppCodeArrayWrapper",
             '405': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2060,8 +2087,10 @@ class TFASettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
             '405': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2133,8 +2162,10 @@ class TFASettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
             '405': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2206,8 +2237,10 @@ class TFASettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
             '405': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2361,8 +2394,10 @@ class TFASettingsApi:
             '200': "StringWrapper",
             '403': None,
             '405': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2435,8 +2470,10 @@ class TFASettingsApi:
             '200': "StringWrapper",
             '403': None,
             '405': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2509,8 +2546,10 @@ class TFASettingsApi:
             '200': "StringWrapper",
             '403': None,
             '405': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }

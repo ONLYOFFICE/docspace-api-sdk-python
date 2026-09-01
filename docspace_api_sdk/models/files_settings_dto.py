@@ -77,7 +77,7 @@ class FilesSettingsDto(BaseModel):
     hide_confirm_convert_save: Optional[StrictBool] = Field(default=None, description="Specifies whether to hide the confirmation dialog  for saving the file copy in the original format when converting a file.", alias="hideConfirmConvertSave", json_schema_extra={"examples": [False]})
     hide_confirm_convert_open: Optional[StrictBool] = Field(default=None, description="Specifies whether to hide the confirmation dialog  for opening the conversion result.", alias="hideConfirmConvertOpen", json_schema_extra={"examples": [False]})
     hide_confirm_room_lifetime: Optional[StrictBool] = Field(default=None, description="Specifies whether to hide the confirmation dialog about the file lifetime in the room.", alias="hideConfirmRoomLifetime", json_schema_extra={"examples": [False]})
-    default_order: Optional[OrderBy] = Field(default=None, description="The sorting parameters.", alias="defaultOrder")
+    default_order: Optional[OrderBy] = Field(default=None, description="The default order of files.", alias="defaultOrder")
     forcesave: Optional[StrictBool] = Field(default=None, description="Specifies whether to forcesave the files or not.", json_schema_extra={"examples": [False]})
     store_forcesave: Optional[StrictBool] = Field(default=None, description="Specifies whether to store the forcesaved file versions or not.", alias="storeForcesave", json_schema_extra={"examples": [False]})
     recent_section: Optional[StrictBool] = Field(default=None, description="Specifies if the Recent section is displayed or not.", alias="recentSection", json_schema_extra={"examples": [True]})

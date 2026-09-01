@@ -22,7 +22,7 @@ Method | HTTP request | Description
 # **ai_prompts_create**
 > AiPromptMutationResult ai_prompts_create(ai_create_prompt_input)
 
-
+Saves a new prompt. The name must be non-empty and unique inside its folder, and `folderId` must point at an existing folder - omit it for the root.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -89,7 +89,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **ai_prompts_create_folder**
 > AiFolderMutationResult ai_prompts_create_folder(body)
 
-
+Creates a prompt folder. The name must be non-empty and unique across the portal - prompt folders do not nest.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -155,7 +155,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **ai_prompts_delete**
 > AiSuccessResponse ai_prompts_delete(body)
 
-
+Deletes a saved prompt. Does nothing when it no longer exists.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -221,7 +221,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **ai_prompts_delete_folder**
 > AiSuccessResponse ai_prompts_delete_folder(body)
 
-
+Deletes a prompt folder together with the prompts inside it.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -287,7 +287,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **ai_prompts_export**
 > AiPromptBundle ai_prompts_export()
 
-
+Builds a self-contained, versioned bundle of every saved prompt and folder, ready for `import-bundle`.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -349,7 +349,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **ai_prompts_get_by_id**
 > AiPrompt ai_prompts_get_by_id(id)
 
-
+Returns one saved prompt, or an empty result when the identifier is unknown.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -358,7 +358,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **str**|  | 
+ **id** | **str**| The saved prompt identifier. | 
 
 ### Return type
 
@@ -385,7 +385,7 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.PromptsApi(api_client)
-    id = 'id_example' # str | 
+    id = 'id_example' # str | The saved prompt identifier.
 
     try:
         # Get by id
@@ -415,7 +415,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **ai_prompts_get_folder_by_id**
 > AiPromptFolder ai_prompts_get_folder_by_id(id)
 
-
+Returns one prompt folder, or an empty result when the identifier is unknown.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -424,7 +424,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **str**|  | 
+ **id** | **str**| The prompt folder identifier. | 
 
 ### Return type
 
@@ -451,7 +451,7 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.PromptsApi(api_client)
-    id = 'id_example' # str | 
+    id = 'id_example' # str | The prompt folder identifier.
 
     try:
         # Get folder by id
@@ -481,7 +481,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **ai_prompts_import_bundle**
 > AiImportResult ai_prompts_import_bundle(ai_prompts_import_bundle_request)
 
-
+Restores a prompt bundle. `replace` wipes the current prompts and folders before writing the bundle, `merge` writes the bundle on top of what is already there; both validate the folder references inside the bundle before any write, so a corrupt bundle is rejected whole.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -546,9 +546,9 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ai_prompts_list**
-> List[AiPrompt] ai_prompts_list(folder_id)
+> List[AiPrompt] ai_prompts_list(folder_id=folder_id)
 
-
+Lists saved prompts. Scope the answer to one folder, ask for the root-level prompts only, or omit the folder to get every prompt newest first.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -557,7 +557,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **folder_id** | **str**|  | 
+ **folder_id** | **str**| The prompt folder identifier. Omit to list the prompts that sit outside any folder. | [optional] 
 
 ### Return type
 
@@ -584,11 +584,11 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.PromptsApi(api_client)
-    folder_id = 'folder_id_example' # str | 
+    folder_id = 'folder_id_example' # str | The prompt folder identifier. Omit to list the prompts that sit outside any folder. (optional)
 
     try:
         # List
-        api_response = api_instance.ai_prompts_list(folder_id)
+        api_response = api_instance.ai_prompts_list(folder_id=folder_id)
         print("The response of PromptsApi->ai_prompts_list:\n")
         pprint(api_response)
     except Exception as e:
@@ -614,7 +614,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **ai_prompts_list_folders**
 > List[AiPromptFolder] ai_prompts_list_folders()
 
-
+Lists the prompt folders, newest first.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -676,7 +676,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **ai_prompts_move**
 > AiPromptMutationResult ai_prompts_move(ai_prompts_move_request)
 
-
+Moves a saved prompt into another folder, or to the root. The name is re-validated in the target folder, so the move fails when a prompt of that name is already there.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -743,7 +743,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **ai_prompts_rename_folder**
 > AiFolderMutationResult ai_prompts_rename_folder(ai_prompts_rename_folder_request)
 
-
+Renames a prompt folder, validating the new name against the existing folders.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -810,7 +810,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **ai_prompts_update**
 > AiPromptMutationResult ai_prompts_update(ai_prompts_update_request)
 
-
+Updates a saved prompt. The name and the folder reference are re-validated whenever either of them changes.
 
 For more information, see [api.onlyoffice.com]().
 

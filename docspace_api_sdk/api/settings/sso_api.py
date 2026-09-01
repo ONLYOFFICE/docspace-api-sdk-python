@@ -96,8 +96,9 @@ class SSOApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "SsoSettingsV2Wrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -164,8 +165,9 @@ class SSOApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "SsoSettingsV2Wrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -232,8 +234,9 @@ class SSOApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "SsoSettingsV2Wrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -365,7 +368,8 @@ class SSOApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "SsoSettingsV2Wrapper",
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -432,7 +436,8 @@ class SSOApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "SsoSettingsV2Wrapper",
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -499,7 +504,8 @@ class SSOApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "SsoSettingsV2Wrapper",
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -625,8 +631,9 @@ class SSOApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -693,8 +700,9 @@ class SSOApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -761,8 +769,9 @@ class SSOApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -894,8 +903,9 @@ class SSOApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "SsoSettingsV2Wrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -962,8 +972,9 @@ class SSOApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "SsoSettingsV2Wrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1030,8 +1041,9 @@ class SSOApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "SsoSettingsV2Wrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1168,8 +1180,9 @@ class SSOApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "SsoSettingsV2Wrapper",
             '400': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1241,8 +1254,9 @@ class SSOApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "SsoSettingsV2Wrapper",
             '400': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1314,8 +1328,9 @@ class SSOApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "SsoSettingsV2Wrapper",
             '400': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }

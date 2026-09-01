@@ -104,8 +104,10 @@ class GroupsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomGroupWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -176,8 +178,10 @@ class GroupsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomGroupWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -248,8 +252,10 @@ class GroupsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomGroupWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -405,8 +411,10 @@ class GroupsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomGroupWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -481,8 +489,10 @@ class GroupsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomGroupWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -557,8 +567,10 @@ class GroupsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomGroupWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -717,8 +729,10 @@ class GroupsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -793,8 +807,10 @@ class GroupsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -869,8 +885,10 @@ class GroupsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -919,6 +937,13 @@ class GroupsApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
@@ -1011,8 +1036,10 @@ class GroupsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomGroupWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1087,8 +1114,10 @@ class GroupsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomGroupWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1163,8 +1192,10 @@ class GroupsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomGroupWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1256,7 +1287,6 @@ class GroupsApi:
     @validate_call
     def get_room_groups(
         self,
-        id: Annotated[StrictInt, Field(description="The group unique identifier.")],
         include_members: Annotated[Optional[StrictBool], Field(description="Whether to include group members.")] = None,
         _request_timeout: Union[
             None,
@@ -1275,8 +1305,6 @@ class GroupsApi:
 
         Returns a list of all room groups for the current user.
 
-        :param id: The group unique identifier. (required)
-        :type id: int
         :param include_members: Whether to include group members.
         :type include_members: bool
         :param _request_timeout: timeout setting for this request. If one
@@ -1302,7 +1330,6 @@ class GroupsApi:
         """ # noqa: E501
 
         _param = self._get_room_groups_serialize(
-            id=id,
             include_members=include_members,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1312,8 +1339,10 @@ class GroupsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomGroupArrayWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1332,7 +1361,6 @@ class GroupsApi:
     @validate_call
     def get_room_groups_with_http_info(
         self,
-        id: Annotated[StrictInt, Field(description="The group unique identifier.")],
         include_members: Annotated[Optional[StrictBool], Field(description="Whether to include group members.")] = None,
         _request_timeout: Union[
             None,
@@ -1351,8 +1379,6 @@ class GroupsApi:
 
         Returns a list of all room groups for the current user.
 
-        :param id: The group unique identifier. (required)
-        :type id: int
         :param include_members: Whether to include group members.
         :type include_members: bool
         :param _request_timeout: timeout setting for this request. If one
@@ -1378,7 +1404,6 @@ class GroupsApi:
         """ # noqa: E501
 
         _param = self._get_room_groups_serialize(
-            id=id,
             include_members=include_members,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1388,8 +1413,10 @@ class GroupsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomGroupArrayWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1408,7 +1435,6 @@ class GroupsApi:
     @validate_call
     def get_room_groups_without_preload_content(
         self,
-        id: Annotated[StrictInt, Field(description="The group unique identifier.")],
         include_members: Annotated[Optional[StrictBool], Field(description="Whether to include group members.")] = None,
         _request_timeout: Union[
             None,
@@ -1427,8 +1453,6 @@ class GroupsApi:
 
         Returns a list of all room groups for the current user.
 
-        :param id: The group unique identifier. (required)
-        :type id: int
         :param include_members: Whether to include group members.
         :type include_members: bool
         :param _request_timeout: timeout setting for this request. If one
@@ -1454,7 +1478,6 @@ class GroupsApi:
         """ # noqa: E501
 
         _param = self._get_room_groups_serialize(
-            id=id,
             include_members=include_members,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1464,8 +1487,10 @@ class GroupsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomGroupArrayWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1479,7 +1504,6 @@ class GroupsApi:
 
     def _get_room_groups_serialize(
         self,
-        id,
         include_members,
         _request_auth,
         _content_type,
@@ -1502,8 +1526,6 @@ class GroupsApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if id is not None:
-            _path_params['id'] = id
         # process the query parameters
         if include_members is not None:
             
@@ -1613,8 +1635,10 @@ class GroupsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomGroupWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1689,8 +1713,10 @@ class GroupsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomGroupWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1765,8 +1791,10 @@ class GroupsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomGroupWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }

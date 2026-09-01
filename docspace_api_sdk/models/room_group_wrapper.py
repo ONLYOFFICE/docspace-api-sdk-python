@@ -30,9 +30,9 @@ from typing_extensions import Self
 
 class RoomGroupWrapper(BaseModel):
     """
-    RoomGroupWrapper
+    The successful API response containing the RoomGroupDto object.
     """ # noqa: E501
-    response: Optional[RoomGroupDto] = None
+    response: Optional[RoomGroupDto] = Field(default=None, description="The RoomGroupDto object returned by the operation.")
     count: Optional[StrictInt] = Field(default=None, description="The total number of items in the response")
     links: Optional[List[GetPortalPrices200ResponseLinksInner]] = Field(default=None, description="List of links related to the response")
     status: Optional[StrictInt] = Field(default=None, description="HTTP status code of the response")

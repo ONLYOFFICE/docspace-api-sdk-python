@@ -31,7 +31,7 @@ class AiAgentNewItemsDto(BaseModel):
     """
     The agent new item's information.
     """ # noqa: E501
-    agent: AiFileEntryBaseDto = Field(description="The file entry information.")
+    agent: AiFileEntryBaseDto = Field(description="The agent file entry.")
     items: Optional[List[AiFileEntryBaseDto]] = Field(description="The list of file entry items.")
     __properties: ClassVar[List[str]] = ["agent", "items"]
 

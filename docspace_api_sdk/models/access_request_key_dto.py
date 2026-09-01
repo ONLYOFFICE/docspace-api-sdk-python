@@ -29,7 +29,7 @@ from typing_extensions import Self
 
 class AccessRequestKeyDto(BaseModel):
     """
-    AccessRequestKeyDto
+    The encryption key granting one user access to a file.
     """ # noqa: E501
     user_id: Optional[UUID] = Field(default=None, description="User ID", alias="userId", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000000"]})
     public_key_id: Optional[UUID] = Field(default=None, description="Public key ID", alias="publicKeyId", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000000"]})

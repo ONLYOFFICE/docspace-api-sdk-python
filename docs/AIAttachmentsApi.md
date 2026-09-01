@@ -16,7 +16,7 @@ Method | HTTP request | Description
 # **ai_attachments_delete**
 > AiSuccessResponse ai_attachments_delete(body)
 
-
+Permanently deletes one attachment, whether it is still a draft or already linked to a message.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -82,7 +82,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **ai_attachments_delete_many**
 > AiSuccessResponse ai_attachments_delete_many(request_body)
 
-
+Permanently deletes a batch of attachments in a single round trip.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -148,7 +148,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **ai_attachments_get**
 > AiAttachment ai_attachments_get(body)
 
-
+Returns one attachment by identifier.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -214,7 +214,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **ai_attachments_get_many**
 > List[Optional[AiAttachment]] ai_attachments_get_many(request_body)
 
-
+Returns a batch of attachments, preserving the requested order; an identifier that no longer exists comes back empty.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -280,7 +280,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **ai_attachments_link_to_message**
 > AiSuccessResponse ai_attachments_link_to_message(ai_attachments_link_to_message_request)
 
-
+Binds draft attachments to the chat message that owns them, once that message has been persisted, so deleting the message removes them too. Identifiers that no longer exist are skipped.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -347,7 +347,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **ai_attachments_save_file**
 > AiAttachment ai_attachments_save_file(ai_attachments_save_file_request)
 
-
+Stores one file attachment as a draft, carrying the host-extracted text of the file. Prefer `save-files-many` when adding several files at once so they land as one round trip.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -414,7 +414,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **ai_attachments_save_files_many**
 > List[AiAttachment] ai_attachments_save_files_many(ai_attachments_save_files_many_request)
 
-
+Stores a batch of file attachments as drafts in a single round trip. The returned records keep the order of the input.
 
 For more information, see [api.onlyoffice.com]().
 

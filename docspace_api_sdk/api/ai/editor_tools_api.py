@@ -62,6 +62,7 @@ class EditorToolsApi:
     ) -> AiSuccessResponse:
         """Execute a DocSpace tool on behalf of the editor AI plugin
 
+        Executes one DocSpace tool on behalf of the document editor's AI plugin, server-side and with the caller's forwarded credentials. Whatever the tool produced is returned for the plugin to relay to the model; a failure comes back as an error payload.
 
         :param request_body: (required)
         :type request_body: Dict[str, object]
@@ -130,6 +131,7 @@ class EditorToolsApi:
     ) -> ApiResponse[AiSuccessResponse]:
         """Execute a DocSpace tool on behalf of the editor AI plugin
 
+        Executes one DocSpace tool on behalf of the document editor's AI plugin, server-side and with the caller's forwarded credentials. Whatever the tool produced is returned for the plugin to relay to the model; a failure comes back as an error payload.
 
         :param request_body: (required)
         :type request_body: Dict[str, object]
@@ -198,6 +200,7 @@ class EditorToolsApi:
     ) -> RESTResponseType:
         """Execute a DocSpace tool on behalf of the editor AI plugin
 
+        Executes one DocSpace tool on behalf of the document editor's AI plugin, server-side and with the caller's forwarded credentials. Whatever the tool produced is returned for the plugin to relay to the model; a failure comes back as an error payload.
 
         :param request_body: (required)
         :type request_body: Dict[str, object]
@@ -340,6 +343,7 @@ class EditorToolsApi:
     ) -> AiSuccessResponse:
         """Sanitized DocSpace tool catalog for the editor AI plugin
 
+        Returns the sanitized catalog of DocSpace tools available to the document editor's AI plugin - the same composed tool set the DocSpace chat sees, minus the web-search pair the editor already has through its own passthrough. Only the name, description, parameters and approval flag of each tool are exposed; transport details never reach the browser.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -404,6 +408,7 @@ class EditorToolsApi:
     ) -> ApiResponse[AiSuccessResponse]:
         """Sanitized DocSpace tool catalog for the editor AI plugin
 
+        Returns the sanitized catalog of DocSpace tools available to the document editor's AI plugin - the same composed tool set the DocSpace chat sees, minus the web-search pair the editor already has through its own passthrough. Only the name, description, parameters and approval flag of each tool are exposed; transport details never reach the browser.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -468,6 +473,7 @@ class EditorToolsApi:
     ) -> RESTResponseType:
         """Sanitized DocSpace tool catalog for the editor AI plugin
 
+        Returns the sanitized catalog of DocSpace tools available to the document editor's AI plugin - the same composed tool set the DocSpace chat sees, minus the web-search pair the editor already has through its own passthrough. Only the name, description, parameters and approval flag of each tool are exposed; transport details never reach the browser.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request

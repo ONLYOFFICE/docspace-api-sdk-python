@@ -667,7 +667,7 @@ conf = docspace_api_sdk.Configuration(
         return [
             {
                 'url': "{baseUrl}",
-                'description': "Server configuration",
+                'description': "The production DocSpace portal, at the customer's own domain.",
                 'variables': {
                     'baseUrl': {
                         'description': "Default URL",

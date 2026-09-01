@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **type** | [**WhiteLabelLogoType**](WhiteLabelLogoType.md) | The white label logo type. | [optional] 
 **name** | **str** | The white label file name. | [optional] 
-**size** | [**IMagickGeometry**](IMagickGeometry.md) | The white label file size. | [optional] 
+**size** | [**WhiteLabelItemSizeDto**](WhiteLabelItemSizeDto.md) | The white label file size. | [optional] 
 **path** | [**WhiteLabelItemPathDto**](WhiteLabelItemPathDto.md) | The white label file path. | [optional] 
 
 ## Example

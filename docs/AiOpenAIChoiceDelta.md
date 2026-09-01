@@ -1,12 +1,13 @@
 # AiOpenAIChoiceDelta
+The incremental part of one choice - what this chunk adds to the assistant message.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**role** | **str** |  | [optional] 
-**content** | **str** |  | [optional] 
-**tool_calls** | [**List[AiOpenAIToolCallDelta]**](AiOpenAIToolCallDelta.md) |  | [optional] 
+**role** | **str** | Sent on the first chunk only, always `assistant`. | [optional] 
+**content** | **str** | The text this chunk appends. Null when the chunk carries no text. | [optional] 
+**tool_calls** | [**List[AiOpenAIToolCallDelta]**](AiOpenAIToolCallDelta.md) | The tool calls the model requested, emitted in place of text. | [optional] 
 
 ## Example
 

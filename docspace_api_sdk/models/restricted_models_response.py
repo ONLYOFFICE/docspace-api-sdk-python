@@ -21,16 +21,16 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
 class RestrictedModelsResponse(BaseModel):
     """
-    RestrictedModelsResponse
+    The AI models the portal is not allowed to use.
     """ # noqa: E501
-    models: Optional[List[StrictStr]]
+    models: Optional[List[StrictStr]] = Field(description="The identifiers of the models the portal is not allowed to use.")
     __properties: ClassVar[List[str]] = ["models"]
 
     model_config = ConfigDict(

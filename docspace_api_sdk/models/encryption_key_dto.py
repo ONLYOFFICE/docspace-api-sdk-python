@@ -30,14 +30,14 @@ from typing_extensions import Self
 
 class EncryptionKeyDto(BaseModel):
     """
-    EncryptionKeyDto
+    The encryption key pair of a user.
     """ # noqa: E501
-    id: Optional[UUID] = None
-    user_id: Optional[UUID] = Field(default=None, alias="userId")
-    var_date: Optional[datetime] = Field(default=None, alias="date")
-    public_key: Optional[StrictStr] = Field(default=None, alias="publicKey")
-    private_key_enc: Optional[StrictStr] = Field(default=None, alias="privateKeyEnc")
-    crypto_engine_id: Optional[StrictStr] = Field(default=None, alias="cryptoEngineId")
+    id: Optional[UUID] = Field(default=None, description="The identifier of the key pair.", json_schema_extra={"examples": ["9924256B-447C-4F19-9dbd-8ad8c39e8ff5"]})
+    user_id: Optional[UUID] = Field(default=None, description="The identifier of the user the key pair belongs to.", alias="userId", json_schema_extra={"examples": ["9924256B-447C-4F19-9dbd-8ad8c39e8ff5"]})
+    var_date: Optional[datetime] = Field(default=None, description="The date and time when the key pair was created.", alias="date", json_schema_extra={"examples": ["2025-01-01T00:00:00"]})
+    public_key: Optional[StrictStr] = Field(default=None, description="The public key of the pair, used to encrypt the file keys.", alias="publicKey", json_schema_extra={"examples": ["MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8A..."]})
+    private_key_enc: Optional[StrictStr] = Field(default=None, description="The private key of the pair, encrypted with the user password.", alias="privateKeyEnc", json_schema_extra={"examples": ["U2FsdGVkX1+Lm3s..."]})
+    crypto_engine_id: Optional[StrictStr] = Field(default=None, description="The identifier of the crypto engine the key pair was issued for.", alias="cryptoEngineId", json_schema_extra={"examples": ["{DC522726-5E0E-43E5-AA02-8EA156BECBC5}"]})
     __properties: ClassVar[List[str]] = ["id", "userId", "date", "publicKey", "privateKeyEnc", "cryptoEngineId"]
 
     model_config = ConfigDict(

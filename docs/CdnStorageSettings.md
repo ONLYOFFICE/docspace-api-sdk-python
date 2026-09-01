@@ -1,12 +1,13 @@
 # CdnStorageSettings
+The CDN storage settings.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**module** | **str** |  | [optional] 
-**props** | **Dict[str, Optional[str]]** |  | [optional] 
-**last_modified** | **datetime** |  | [optional] 
+**module** | **str** | The storage name. | [optional] 
+**props** | **Dict[str, Optional[str]]** | The storage properties. | [optional] 
+**last_modified** | **datetime** | The date and time when the storage settings were last modified. | [optional] 
 
 ## Example
 

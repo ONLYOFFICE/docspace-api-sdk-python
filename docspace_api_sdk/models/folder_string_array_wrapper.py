@@ -30,9 +30,9 @@ from typing_extensions import Self
 
 class FolderStringArrayWrapper(BaseModel):
     """
-    FolderStringArrayWrapper
+    The successful API response containing the list of FolderDtoString objects.
     """ # noqa: E501
-    response: Optional[List[FolderDtoString]] = None
+    response: Optional[List[FolderDtoString]] = Field(default=None, description="The list of FolderDtoString objects returned by the operation.")
     count: Optional[StrictInt] = Field(default=None, description="The total number of items in the response")
     links: Optional[List[GetPortalPrices200ResponseLinksInner]] = Field(default=None, description="List of links related to the response")
     status: Optional[StrictInt] = Field(default=None, description="HTTP status code of the response")

@@ -1,10 +1,11 @@
 # WizardSettingsWrapper
+The successful API response containing the WizardSettings object.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**response** | [**WizardSettings**](WizardSettings.md) |  | [optional] 
+**response** | [**WizardSettings**](WizardSettings.md) | The WizardSettings object returned by the operation. | [optional] 
 **count** | **int** | The total number of items in the response | [optional] 
 **links** | [**List[GetPortalPrices200ResponseLinksInner]**](GetPortalPrices200ResponseLinksInner.md) | List of links related to the response | [optional] 
 **status** | **int** | HTTP status code of the response | [optional] 

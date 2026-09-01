@@ -21,12 +21,12 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
+from datetime import datetime
 from pydantic import Field, StrictBool, StrictBytes, StrictInt, StrictStr
 from typing import List, Optional, Tuple, Union
 from typing_extensions import Annotated
 from uuid import UUID
 from docspace_api_sdk.models.access_request_key_dto import AccessRequestKeyDto
-from docspace_api_sdk.models.api_date_time import ApiDateTime
 from docspace_api_sdk.models.base_batch_request_dto import BaseBatchRequestDto
 from docspace_api_sdk.models.boolean_wrapper import BooleanWrapper
 from docspace_api_sdk.models.change_history import ChangeHistory
@@ -58,11 +58,10 @@ from docspace_api_sdk.models.form_role_array_wrapper import FormRoleArrayWrapper
 from docspace_api_sdk.models.form_submissions_wrapper import FormSubmissionsWrapper
 from docspace_api_sdk.models.get_reference_data_dto_integer import GetReferenceDataDtoInteger
 from docspace_api_sdk.models.history_array_wrapper import HistoryArrayWrapper
-from docspace_api_sdk.models.key_value_pair_boolean_string_wrapper import KeyValuePairBooleanStringWrapper
+from docspace_api_sdk.models.item_key_value_pair_boolean_string_wrapper import ItemKeyValuePairBooleanStringWrapper
 from docspace_api_sdk.models.lock_file_parameters import LockFileParameters
 from docspace_api_sdk.models.manage_form_filling_dto_integer import ManageFormFillingDtoInteger
 from docspace_api_sdk.models.mention_wrapper_array_wrapper import MentionWrapperArrayWrapper
-from docspace_api_sdk.models.no_content_result_wrapper import NoContentResultWrapper
 from docspace_api_sdk.models.object_array_wrapper import ObjectArrayWrapper
 from docspace_api_sdk.models.order_request_dto import OrderRequestDto
 from docspace_api_sdk.models.orders_request_dto_integer import OrdersRequestDtoInteger
@@ -150,8 +149,10 @@ class FilesApi:
             '200': "FileIntegerWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -224,8 +225,10 @@ class FilesApi:
             '200': "FileIntegerWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -298,8 +301,10 @@ class FilesApi:
             '200': "FileIntegerWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -438,8 +443,10 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -510,8 +517,10 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -582,8 +591,10 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -740,8 +751,10 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerArrayWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -817,8 +830,10 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerArrayWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -894,8 +909,10 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerArrayWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1055,7 +1072,9 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
             '403': None,
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1131,7 +1150,9 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
             '403': None,
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1207,7 +1228,9 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
             '403': None,
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1363,8 +1386,9 @@ class FilesApi:
             '400': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1442,8 +1466,9 @@ class FilesApi:
             '400': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1521,8 +1546,9 @@ class FilesApi:
             '400': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1682,8 +1708,10 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ChunkedUploadSessionResponseWrapperIntegerWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1759,8 +1787,10 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ChunkedUploadSessionResponseWrapperIntegerWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1836,8 +1866,10 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ChunkedUploadSessionResponseWrapperIntegerWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1985,8 +2017,10 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2061,8 +2095,10 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2137,8 +2173,10 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2293,8 +2331,10 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2365,8 +2405,10 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2437,8 +2479,10 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2596,8 +2640,10 @@ class FilesApi:
             '200': "FileShareWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2674,8 +2720,10 @@ class FilesApi:
             '200': "FileShareWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2752,8 +2800,10 @@ class FilesApi:
             '200': "FileShareWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2913,8 +2963,10 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2990,8 +3042,10 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3067,8 +3121,10 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3224,8 +3280,10 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3297,8 +3355,10 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3370,8 +3430,10 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3527,8 +3589,10 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3603,8 +3667,10 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3679,8 +3745,10 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3835,8 +3903,10 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3907,8 +3977,10 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3979,8 +4051,10 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4132,7 +4206,9 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectArrayWrapper",
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4203,7 +4279,9 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectArrayWrapper",
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4274,7 +4352,9 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectArrayWrapper",
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4428,8 +4508,10 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4508,8 +4590,10 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4588,8 +4672,10 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4710,7 +4796,7 @@ class FilesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> NoContentResultWrapper:
+    ) -> None:
         """Delete recent files
 
         Removes files with the IDs specified in the request from the Recent section.
@@ -4748,9 +4834,11 @@ class FilesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "NoContentResultWrapper",
-            '401': None,
-            '429': None,
+            '200': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4782,7 +4870,7 @@ class FilesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[NoContentResultWrapper]:
+    ) -> ApiResponse[None]:
         """Delete recent files
 
         Removes files with the IDs specified in the request from the Recent section.
@@ -4820,9 +4908,11 @@ class FilesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "NoContentResultWrapper",
-            '401': None,
-            '429': None,
+            '200': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4892,9 +4982,11 @@ class FilesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "NoContentResultWrapper",
-            '401': None,
-            '429': None,
+            '200': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -5046,8 +5138,10 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -5118,8 +5212,10 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -5190,8 +5286,10 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -5346,8 +5444,10 @@ class FilesApi:
             '200': "XlsxReportResponseWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -5420,8 +5520,10 @@ class FilesApi:
             '200': "XlsxReportResponseWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -5494,8 +5596,10 @@ class FilesApi:
             '200': "XlsxReportResponseWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -5636,8 +5740,10 @@ class FilesApi:
             '200': "FormRoleArrayWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -5710,8 +5816,10 @@ class FilesApi:
             '200': "FormRoleArrayWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -5784,8 +5892,10 @@ class FilesApi:
             '200': "FormRoleArrayWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -5928,7 +6038,9 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EditHistoryDataWrapper",
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -6003,7 +6115,9 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EditHistoryDataWrapper",
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -6078,7 +6192,9 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EditHistoryDataWrapper",
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -6216,7 +6332,9 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EditHistoryArrayWrapper",
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -6287,7 +6405,9 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EditHistoryArrayWrapper",
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -6358,7 +6478,9 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EditHistoryArrayWrapper",
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -6439,7 +6561,7 @@ class FilesApi:
     @validate_call
     def get_encryption_info(
         self,
-        file_id: StrictInt,
+        file_id: Annotated[StrictInt, Field(description="The file unique identifier.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6457,7 +6579,7 @@ class FilesApi:
 
         Returns the encryption information for a file with the specified identifier, including user encryption keys and file-specific encryption keys.
 
-        :param file_id: (required)
+        :param file_id: The file unique identifier. (required)
         :type file_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -6494,8 +6616,9 @@ class FilesApi:
             '400': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -6514,7 +6637,7 @@ class FilesApi:
     @validate_call
     def get_encryption_info_with_http_info(
         self,
-        file_id: StrictInt,
+        file_id: Annotated[StrictInt, Field(description="The file unique identifier.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6532,7 +6655,7 @@ class FilesApi:
 
         Returns the encryption information for a file with the specified identifier, including user encryption keys and file-specific encryption keys.
 
-        :param file_id: (required)
+        :param file_id: The file unique identifier. (required)
         :type file_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -6569,8 +6692,9 @@ class FilesApi:
             '400': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -6589,7 +6713,7 @@ class FilesApi:
     @validate_call
     def get_encryption_info_without_preload_content(
         self,
-        file_id: StrictInt,
+        file_id: Annotated[StrictInt, Field(description="The file unique identifier.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6607,7 +6731,7 @@ class FilesApi:
 
         Returns the encryption information for a file with the specified identifier, including user encryption keys and file-specific encryption keys.
 
-        :param file_id: (required)
+        :param file_id: The file unique identifier. (required)
         :type file_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -6644,8 +6768,9 @@ class FilesApi:
             '400': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -6733,8 +6858,8 @@ class FilesApi:
     def get_file_history(
         self,
         file_id: Annotated[StrictInt, Field(description="The file ID of the history request.")],
-        from_date: Annotated[Optional[ApiDateTime], Field(description="The start date of the history.")] = None,
-        to_date: Annotated[Optional[ApiDateTime], Field(description="The end date of the history.")] = None,
+        from_date: Annotated[Optional[datetime], Field(description="The start date of the history.")] = None,
+        to_date: Annotated[Optional[datetime], Field(description="The end date of the history.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of history entries to retrieve for the file log.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The starting index for retrieving a subset of file history entries.")] = None,
         _request_timeout: Union[
@@ -6757,9 +6882,9 @@ class FilesApi:
         :param file_id: The file ID of the history request. (required)
         :type file_id: int
         :param from_date: The start date of the history.
-        :type from_date: ApiDateTime
+        :type from_date: datetime
         :param to_date: The end date of the history.
-        :type to_date: ApiDateTime
+        :type to_date: datetime
         :param count: The number of history entries to retrieve for the file log.
         :type count: int
         :param start_index: The starting index for retrieving a subset of file history entries.
@@ -6802,8 +6927,10 @@ class FilesApi:
             '200': "HistoryArrayWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -6823,8 +6950,8 @@ class FilesApi:
     def get_file_history_with_http_info(
         self,
         file_id: Annotated[StrictInt, Field(description="The file ID of the history request.")],
-        from_date: Annotated[Optional[ApiDateTime], Field(description="The start date of the history.")] = None,
-        to_date: Annotated[Optional[ApiDateTime], Field(description="The end date of the history.")] = None,
+        from_date: Annotated[Optional[datetime], Field(description="The start date of the history.")] = None,
+        to_date: Annotated[Optional[datetime], Field(description="The end date of the history.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of history entries to retrieve for the file log.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The starting index for retrieving a subset of file history entries.")] = None,
         _request_timeout: Union[
@@ -6847,9 +6974,9 @@ class FilesApi:
         :param file_id: The file ID of the history request. (required)
         :type file_id: int
         :param from_date: The start date of the history.
-        :type from_date: ApiDateTime
+        :type from_date: datetime
         :param to_date: The end date of the history.
-        :type to_date: ApiDateTime
+        :type to_date: datetime
         :param count: The number of history entries to retrieve for the file log.
         :type count: int
         :param start_index: The starting index for retrieving a subset of file history entries.
@@ -6892,8 +7019,10 @@ class FilesApi:
             '200': "HistoryArrayWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -6913,8 +7042,8 @@ class FilesApi:
     def get_file_history_without_preload_content(
         self,
         file_id: Annotated[StrictInt, Field(description="The file ID of the history request.")],
-        from_date: Annotated[Optional[ApiDateTime], Field(description="The start date of the history.")] = None,
-        to_date: Annotated[Optional[ApiDateTime], Field(description="The end date of the history.")] = None,
+        from_date: Annotated[Optional[datetime], Field(description="The start date of the history.")] = None,
+        to_date: Annotated[Optional[datetime], Field(description="The end date of the history.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of history entries to retrieve for the file log.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The starting index for retrieving a subset of file history entries.")] = None,
         _request_timeout: Union[
@@ -6937,9 +7066,9 @@ class FilesApi:
         :param file_id: The file ID of the history request. (required)
         :type file_id: int
         :param from_date: The start date of the history.
-        :type from_date: ApiDateTime
+        :type from_date: datetime
         :param to_date: The end date of the history.
-        :type to_date: ApiDateTime
+        :type to_date: datetime
         :param count: The number of history entries to retrieve for the file log.
         :type count: int
         :param start_index: The starting index for retrieving a subset of file history entries.
@@ -6982,8 +7111,10 @@ class FilesApi:
             '200': "HistoryArrayWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -7027,12 +7158,30 @@ class FilesApi:
             _path_params['fileId'] = file_id
         # process the query parameters
         if from_date is not None:
-            
-            _query_params.append(('fromDate', from_date))
+            if isinstance(from_date, datetime):
+                _query_params.append(
+                    (
+                        'fromDate',
+                        from_date.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('fromDate', from_date))
             
         if to_date is not None:
-            
-            _query_params.append(('toDate', to_date))
+            if isinstance(to_date, datetime):
+                _query_params.append(
+                    (
+                        'toDate',
+                        to_date.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('toDate', to_date))
             
         if count is not None:
             
@@ -7146,7 +7295,9 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -7221,7 +7372,9 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -7296,7 +7449,9 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -7442,8 +7597,10 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -7522,8 +7679,10 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -7602,8 +7761,10 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -7762,7 +7923,9 @@ class FilesApi:
             '200': "FileShareWrapper",
             '403': None,
             '404': None,
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -7843,7 +8006,9 @@ class FilesApi:
             '200': "FileShareWrapper",
             '403': None,
             '404': None,
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -7924,7 +8089,9 @@ class FilesApi:
             '200': "FileShareWrapper",
             '403': None,
             '404': None,
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -8067,7 +8234,9 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerArrayWrapper",
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -8138,7 +8307,9 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerArrayWrapper",
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -8209,7 +8380,9 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerArrayWrapper",
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -8342,7 +8515,9 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FillingFormResultIntegerWrapper",
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -8413,7 +8588,9 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FillingFormResultIntegerWrapper",
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -8484,7 +8661,9 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FillingFormResultIntegerWrapper",
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -8620,8 +8799,10 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FormSubmissionsWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -8693,8 +8874,10 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FormSubmissionsWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -8766,8 +8949,10 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FormSubmissionsWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -8906,8 +9091,10 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileLinkWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -8978,8 +9165,10 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileLinkWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -9050,8 +9239,10 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileLinkWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -9190,8 +9381,10 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -9262,8 +9455,10 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -9334,8 +9529,10 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -9474,8 +9671,10 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "MentionWrapperArrayWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -9546,8 +9745,10 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "MentionWrapperArrayWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -9618,8 +9819,10 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "MentionWrapperArrayWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -9758,8 +9961,10 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileReferenceWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -9830,8 +10035,10 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileReferenceWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -9902,8 +10109,10 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileReferenceWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -10055,8 +10264,10 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocumentBuilderTaskWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -10127,8 +10338,10 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocumentBuilderTaskWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -10199,8 +10412,10 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocumentBuilderTaskWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -10339,8 +10554,10 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -10411,8 +10628,10 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -10483,8 +10702,10 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -10627,8 +10848,10 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -10703,8 +10926,10 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -10779,8 +11004,10 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -10883,7 +11110,7 @@ class FilesApi:
     @validate_call
     def manage_form_filling(
         self,
-        file_id: StrictStr,
+        file_id: Annotated[StrictStr, Field(description="The form the action applies to. Send the same value as the `formId` of the request body, which is the one the handler reads.")],
         manage_form_filling_dto_integer: Optional[ManageFormFillingDtoInteger] = None,
         _request_timeout: Union[
             None,
@@ -10902,7 +11129,7 @@ class FilesApi:
 
         Performs the specified form filling action.
 
-        :param file_id: (required)
+        :param file_id: The form the action applies to. Send the same value as the `formId` of the request body, which is the one the handler reads. (required)
         :type file_id: str
         :param manage_form_filling_dto_integer:
         :type manage_form_filling_dto_integer: ManageFormFillingDtoInteger
@@ -10940,8 +11167,10 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -10960,7 +11189,7 @@ class FilesApi:
     @validate_call
     def manage_form_filling_with_http_info(
         self,
-        file_id: StrictStr,
+        file_id: Annotated[StrictStr, Field(description="The form the action applies to. Send the same value as the `formId` of the request body, which is the one the handler reads.")],
         manage_form_filling_dto_integer: Optional[ManageFormFillingDtoInteger] = None,
         _request_timeout: Union[
             None,
@@ -10979,7 +11208,7 @@ class FilesApi:
 
         Performs the specified form filling action.
 
-        :param file_id: (required)
+        :param file_id: The form the action applies to. Send the same value as the `formId` of the request body, which is the one the handler reads. (required)
         :type file_id: str
         :param manage_form_filling_dto_integer:
         :type manage_form_filling_dto_integer: ManageFormFillingDtoInteger
@@ -11017,8 +11246,10 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -11037,7 +11268,7 @@ class FilesApi:
     @validate_call
     def manage_form_filling_without_preload_content(
         self,
-        file_id: StrictStr,
+        file_id: Annotated[StrictStr, Field(description="The form the action applies to. Send the same value as the `formId` of the request body, which is the one the handler reads.")],
         manage_form_filling_dto_integer: Optional[ManageFormFillingDtoInteger] = None,
         _request_timeout: Union[
             None,
@@ -11056,7 +11287,7 @@ class FilesApi:
 
         Performs the specified form filling action.
 
-        :param file_id: (required)
+        :param file_id: The form the action applies to. Send the same value as the `formId` of the request body, which is the one the handler reads. (required)
         :type file_id: str
         :param manage_form_filling_dto_integer:
         :type manage_form_filling_dto_integer: ManageFormFillingDtoInteger
@@ -11094,8 +11325,10 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -11142,6 +11375,13 @@ class FilesApi:
             _body_params = manage_form_filling_dto_integer
 
 
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
         # set the HTTP header `Content-Type`
         if _content_type:
@@ -11264,7 +11504,9 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ConfigurationIntegerWrapper",
             '403': None,
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -11356,7 +11598,9 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ConfigurationIntegerWrapper",
             '403': None,
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -11448,7 +11692,9 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ConfigurationIntegerWrapper",
             '403': None,
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -11616,7 +11862,8 @@ class FilesApi:
             '200': "EditHistoryArrayWrapper",
             '400': None,
             '403': None,
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -11697,7 +11944,8 @@ class FilesApi:
             '200': "EditHistoryArrayWrapper",
             '400': None,
             '403': None,
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -11778,7 +12026,8 @@ class FilesApi:
             '200': "EditHistoryArrayWrapper",
             '400': None,
             '403': None,
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -11939,8 +12188,9 @@ class FilesApi:
             '200': "FileIntegerWrapper",
             '400': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -12029,8 +12279,9 @@ class FilesApi:
             '200': "FileIntegerWrapper",
             '400': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -12119,8 +12370,9 @@ class FilesApi:
             '200': "FileIntegerWrapper",
             '400': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -12291,8 +12543,10 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -12368,8 +12622,10 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -12445,8 +12701,10 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -12549,7 +12807,7 @@ class FilesApi:
     @validate_call
     def save_form_role_mapping(
         self,
-        file_id: StrictStr,
+        file_id: Annotated[StrictStr, Field(description="The form the role mapping belongs to. Send the same value as the `formId` of the request body, which is the one the handler reads.")],
         save_form_role_mapping_dto_integer: Optional[SaveFormRoleMappingDtoInteger] = None,
         _request_timeout: Union[
             None,
@@ -12568,7 +12826,7 @@ class FilesApi:
 
         Saves the form role mapping.
 
-        :param file_id: (required)
+        :param file_id: The form the role mapping belongs to. Send the same value as the `formId` of the request body, which is the one the handler reads. (required)
         :type file_id: str
         :param save_form_role_mapping_dto_integer:
         :type save_form_role_mapping_dto_integer: SaveFormRoleMappingDtoInteger
@@ -12606,8 +12864,10 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -12626,7 +12886,7 @@ class FilesApi:
     @validate_call
     def save_form_role_mapping_with_http_info(
         self,
-        file_id: StrictStr,
+        file_id: Annotated[StrictStr, Field(description="The form the role mapping belongs to. Send the same value as the `formId` of the request body, which is the one the handler reads.")],
         save_form_role_mapping_dto_integer: Optional[SaveFormRoleMappingDtoInteger] = None,
         _request_timeout: Union[
             None,
@@ -12645,7 +12905,7 @@ class FilesApi:
 
         Saves the form role mapping.
 
-        :param file_id: (required)
+        :param file_id: The form the role mapping belongs to. Send the same value as the `formId` of the request body, which is the one the handler reads. (required)
         :type file_id: str
         :param save_form_role_mapping_dto_integer:
         :type save_form_role_mapping_dto_integer: SaveFormRoleMappingDtoInteger
@@ -12683,8 +12943,10 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -12703,7 +12965,7 @@ class FilesApi:
     @validate_call
     def save_form_role_mapping_without_preload_content(
         self,
-        file_id: StrictStr,
+        file_id: Annotated[StrictStr, Field(description="The form the role mapping belongs to. Send the same value as the `formId` of the request body, which is the one the handler reads.")],
         save_form_role_mapping_dto_integer: Optional[SaveFormRoleMappingDtoInteger] = None,
         _request_timeout: Union[
             None,
@@ -12722,7 +12984,7 @@ class FilesApi:
 
         Saves the form role mapping.
 
-        :param file_id: (required)
+        :param file_id: The form the role mapping belongs to. Send the same value as the `formId` of the request body, which is the one the handler reads. (required)
         :type file_id: str
         :param save_form_role_mapping_dto_integer:
         :type save_form_role_mapping_dto_integer: SaveFormRoleMappingDtoInteger
@@ -12760,8 +13022,10 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -12808,6 +13072,13 @@ class FilesApi:
             _body_params = save_form_role_mapping_dto_integer
 
 
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
         # set the HTTP header `Content-Type`
         if _content_type:
@@ -12913,8 +13184,10 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -12989,8 +13262,10 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -13065,8 +13340,10 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -13227,8 +13504,10 @@ class FilesApi:
             '200': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -13305,8 +13584,10 @@ class FilesApi:
             '200': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -13383,8 +13664,10 @@ class FilesApi:
             '200': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -13432,6 +13715,13 @@ class FilesApi:
             _body_params = access_request_key_dto
 
 
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
         # set the HTTP header `Content-Type`
         if _content_type:
@@ -13537,8 +13827,10 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -13613,8 +13905,10 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -13689,8 +13983,10 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -13851,8 +14147,10 @@ class FilesApi:
             '200': "FileIntegerWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -13929,8 +14227,10 @@ class FilesApi:
             '200': "FileIntegerWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -14007,8 +14307,10 @@ class FilesApi:
             '200': "FileIntegerWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -14163,8 +14465,10 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileEntryIntegerArrayWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -14235,8 +14539,10 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileEntryIntegerArrayWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -14307,8 +14613,10 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileEntryIntegerArrayWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -14465,7 +14773,9 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
             '403': None,
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -14541,7 +14851,9 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
             '403': None,
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -14617,7 +14929,9 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
             '403': None,
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -14767,8 +15081,10 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -14840,8 +15156,10 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -14913,8 +15231,10 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -15058,8 +15378,10 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -15135,8 +15457,10 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -15212,8 +15536,10 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -15321,7 +15647,7 @@ class FilesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> KeyValuePairBooleanStringWrapper:
+    ) -> ItemKeyValuePairBooleanStringWrapper:
         """Track file editing
 
         Tracks file changes when editing.
@@ -15368,9 +15694,11 @@ class FilesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "KeyValuePairBooleanStringWrapper",
+            '200': "ItemKeyValuePairBooleanStringWrapper",
             '403': None,
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -15405,7 +15733,7 @@ class FilesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[KeyValuePairBooleanStringWrapper]:
+    ) -> ApiResponse[ItemKeyValuePairBooleanStringWrapper]:
         """Track file editing
 
         Tracks file changes when editing.
@@ -15452,9 +15780,11 @@ class FilesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "KeyValuePairBooleanStringWrapper",
+            '200': "ItemKeyValuePairBooleanStringWrapper",
             '403': None,
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -15536,9 +15866,11 @@ class FilesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "KeyValuePairBooleanStringWrapper",
+            '200': "ItemKeyValuePairBooleanStringWrapper",
             '403': None,
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -15691,7 +16023,9 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
             '403': None,
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -15767,7 +16101,9 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
             '403': None,
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -15843,7 +16179,9 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileIntegerWrapper",
             '403': None,
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }

@@ -115,7 +115,9 @@ class ThirdPartyAccountsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AccountInfoArrayWrapper",
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -198,7 +200,9 @@ class ThirdPartyAccountsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AccountInfoArrayWrapper",
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -281,7 +285,9 @@ class ThirdPartyAccountsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AccountInfoArrayWrapper",
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -432,8 +438,10 @@ class ThirdPartyAccountsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
             '405': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -505,8 +513,10 @@ class ThirdPartyAccountsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
             '405': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -578,8 +588,10 @@ class ThirdPartyAccountsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
             '405': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -623,6 +635,13 @@ class ThirdPartyAccountsApi:
             _body_params = link_account_request_dto
 
 
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
         # set the HTTP header `Content-Type`
         if _content_type:
@@ -726,7 +745,8 @@ class ThirdPartyAccountsApi:
             '200': "EmployeeWrapper",
             '400': None,
             '403': None,
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -799,7 +819,8 @@ class ThirdPartyAccountsApi:
             '200': "EmployeeWrapper",
             '400': None,
             '403': None,
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -872,7 +893,8 @@ class ThirdPartyAccountsApi:
             '200': "EmployeeWrapper",
             '400': None,
             '403': None,
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1018,8 +1040,10 @@ class ThirdPartyAccountsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1090,8 +1114,10 @@ class ThirdPartyAccountsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1162,8 +1188,10 @@ class ThirdPartyAccountsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1209,6 +1237,13 @@ class ThirdPartyAccountsApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting

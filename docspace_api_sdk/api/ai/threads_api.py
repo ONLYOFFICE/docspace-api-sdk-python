@@ -22,8 +22,9 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import StrictStr
-from typing import List
+from pydantic import Field, StrictStr
+from typing import List, Optional
+from typing_extensions import Annotated
 from docspace_api_sdk.models.ai_open_or_create_result import AiOpenOrCreateResult
 from docspace_api_sdk.models.ai_success_response import AiSuccessResponse
 from docspace_api_sdk.models.ai_thread import AiThread
@@ -78,6 +79,7 @@ class ThreadsApi:
     ) -> AiThreadMessageLike:
         """Append user message
 
+        Persists a user message in a thread and bumps the thread's last-edit date so it resurfaces in the sidebar. Optionally rebinds the thread to another profile when the model changed mid-conversation.
 
         :param ai_threads_append_user_message_request: (required)
         :type ai_threads_append_user_message_request: AiThreadsAppendUserMessageRequest
@@ -146,6 +148,7 @@ class ThreadsApi:
     ) -> ApiResponse[AiThreadMessageLike]:
         """Append user message
 
+        Persists a user message in a thread and bumps the thread's last-edit date so it resurfaces in the sidebar. Optionally rebinds the thread to another profile when the model changed mid-conversation.
 
         :param ai_threads_append_user_message_request: (required)
         :type ai_threads_append_user_message_request: AiThreadsAppendUserMessageRequest
@@ -214,6 +217,7 @@ class ThreadsApi:
     ) -> RESTResponseType:
         """Append user message
 
+        Persists a user message in a thread and bumps the thread's last-edit date so it resurfaces in the sidebar. Optionally rebinds the thread to another profile when the model changed mid-conversation.
 
         :param ai_threads_append_user_message_request: (required)
         :type ai_threads_append_user_message_request: AiThreadsAppendUserMessageRequest
@@ -357,6 +361,7 @@ class ThreadsApi:
     ) -> AiSuccessResponse:
         """Clear messages
 
+        Drops every message of a thread while keeping the thread itself, and bumps its last-edit date.
 
         :param body: (required)
         :type body: str
@@ -425,6 +430,7 @@ class ThreadsApi:
     ) -> ApiResponse[AiSuccessResponse]:
         """Clear messages
 
+        Drops every message of a thread while keeping the thread itself, and bumps its last-edit date.
 
         :param body: (required)
         :type body: str
@@ -493,6 +499,7 @@ class ThreadsApi:
     ) -> RESTResponseType:
         """Clear messages
 
+        Drops every message of a thread while keeping the thread itself, and bumps its last-edit date.
 
         :param body: (required)
         :type body: str
@@ -636,6 +643,7 @@ class ThreadsApi:
     ) -> AiThread:
         """Create
 
+        Creates a chat thread with a caller-supplied title. Use `open-or-create` instead when the title should be generated from the first user message.
 
         :param ai_threads_create_request: (required)
         :type ai_threads_create_request: AiThreadsCreateRequest
@@ -704,6 +712,7 @@ class ThreadsApi:
     ) -> ApiResponse[AiThread]:
         """Create
 
+        Creates a chat thread with a caller-supplied title. Use `open-or-create` instead when the title should be generated from the first user message.
 
         :param ai_threads_create_request: (required)
         :type ai_threads_create_request: AiThreadsCreateRequest
@@ -772,6 +781,7 @@ class ThreadsApi:
     ) -> RESTResponseType:
         """Create
 
+        Creates a chat thread with a caller-supplied title. Use `open-or-create` instead when the title should be generated from the first user message.
 
         :param ai_threads_create_request: (required)
         :type ai_threads_create_request: AiThreadsCreateRequest
@@ -915,6 +925,7 @@ class ThreadsApi:
     ) -> AiSuccessResponse:
         """Delete
 
+        Deletes a chat thread together with its messages.
 
         :param body: (required)
         :type body: str
@@ -983,6 +994,7 @@ class ThreadsApi:
     ) -> ApiResponse[AiSuccessResponse]:
         """Delete
 
+        Deletes a chat thread together with its messages.
 
         :param body: (required)
         :type body: str
@@ -1051,6 +1063,7 @@ class ThreadsApi:
     ) -> RESTResponseType:
         """Delete
 
+        Deletes a chat thread together with its messages.
 
         :param body: (required)
         :type body: str
@@ -1194,6 +1207,7 @@ class ThreadsApi:
     ) -> AiSuccessResponse:
         """Delete message
 
+        Deletes one chat message, leaving the rest of the thread untouched.
 
         :param body: (required)
         :type body: str
@@ -1262,6 +1276,7 @@ class ThreadsApi:
     ) -> ApiResponse[AiSuccessResponse]:
         """Delete message
 
+        Deletes one chat message, leaving the rest of the thread untouched.
 
         :param body: (required)
         :type body: str
@@ -1330,6 +1345,7 @@ class ThreadsApi:
     ) -> RESTResponseType:
         """Delete message
 
+        Deletes one chat message, leaving the rest of the thread untouched.
 
         :param body: (required)
         :type body: str
@@ -1457,7 +1473,7 @@ class ThreadsApi:
     @validate_call
     def ai_threads_get_by_id(
         self,
-        thread_id: StrictStr,
+        thread_id: Annotated[StrictStr, Field(description="The chat thread identifier.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1473,8 +1489,9 @@ class ThreadsApi:
     ) -> AiThread:
         """Get by id
 
+        Returns one chat thread, or an empty result when the identifier is unknown.
 
-        :param thread_id: (required)
+        :param thread_id: The chat thread identifier. (required)
         :type thread_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1525,7 +1542,7 @@ class ThreadsApi:
     @validate_call
     def ai_threads_get_by_id_with_http_info(
         self,
-        thread_id: StrictStr,
+        thread_id: Annotated[StrictStr, Field(description="The chat thread identifier.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1541,8 +1558,9 @@ class ThreadsApi:
     ) -> ApiResponse[AiThread]:
         """Get by id
 
+        Returns one chat thread, or an empty result when the identifier is unknown.
 
-        :param thread_id: (required)
+        :param thread_id: The chat thread identifier. (required)
         :type thread_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1593,7 +1611,7 @@ class ThreadsApi:
     @validate_call
     def ai_threads_get_by_id_without_preload_content(
         self,
-        thread_id: StrictStr,
+        thread_id: Annotated[StrictStr, Field(description="The chat thread identifier.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1609,8 +1627,9 @@ class ThreadsApi:
     ) -> RESTResponseType:
         """Get by id
 
+        Returns one chat thread, or an empty result when the identifier is unknown.
 
-        :param thread_id: (required)
+        :param thread_id: The chat thread identifier. (required)
         :type thread_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1725,7 +1744,7 @@ class ThreadsApi:
     @validate_call
     def ai_threads_get_message_by_id(
         self,
-        message_id: StrictStr,
+        message_id: Annotated[StrictStr, Field(description="The globally unique chat message identifier.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1741,8 +1760,9 @@ class ThreadsApi:
     ) -> AiThreadMessageLike:
         """Get message by id
 
+        Returns one chat message by its globally unique identifier.
 
-        :param message_id: (required)
+        :param message_id: The globally unique chat message identifier. (required)
         :type message_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1793,7 +1813,7 @@ class ThreadsApi:
     @validate_call
     def ai_threads_get_message_by_id_with_http_info(
         self,
-        message_id: StrictStr,
+        message_id: Annotated[StrictStr, Field(description="The globally unique chat message identifier.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1809,8 +1829,9 @@ class ThreadsApi:
     ) -> ApiResponse[AiThreadMessageLike]:
         """Get message by id
 
+        Returns one chat message by its globally unique identifier.
 
-        :param message_id: (required)
+        :param message_id: The globally unique chat message identifier. (required)
         :type message_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1861,7 +1882,7 @@ class ThreadsApi:
     @validate_call
     def ai_threads_get_message_by_id_without_preload_content(
         self,
-        message_id: StrictStr,
+        message_id: Annotated[StrictStr, Field(description="The globally unique chat message identifier.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1877,8 +1898,9 @@ class ThreadsApi:
     ) -> RESTResponseType:
         """Get message by id
 
+        Returns one chat message by its globally unique identifier.
 
-        :param message_id: (required)
+        :param message_id: The globally unique chat message identifier. (required)
         :type message_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1993,10 +2015,10 @@ class ThreadsApi:
     @validate_call
     def ai_threads_list(
         self,
-        entity_id: StrictStr,
-        count: StrictStr,
-        cursor: StrictStr,
-        query: StrictStr,
+        entity_id: Annotated[Optional[StrictStr], Field(description="The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.")] = None,
+        count: Annotated[Optional[StrictStr], Field(description="The maximum number of items to return in one page.")] = None,
+        cursor: Annotated[Optional[StrictStr], Field(description="The keyset pagination cursor: the JSON-encoded sort key of the last item already received. Omit for the first page.")] = None,
+        query: Annotated[Optional[StrictStr], Field(description="The full-text query the thread list is filtered by.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2012,14 +2034,15 @@ class ThreadsApi:
     ) -> List[AiThread]:
         """List
 
+        Lists the chat threads of the scope, most recently edited first. Supports cursor pagination and a server-side case-insensitive title search.
 
-        :param entity_id: (required)
+        :param entity_id: The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
         :type entity_id: str
-        :param count: (required)
+        :param count: The maximum number of items to return in one page.
         :type count: str
-        :param cursor: (required)
+        :param cursor: The keyset pagination cursor: the JSON-encoded sort key of the last item already received. Omit for the first page.
         :type cursor: str
-        :param query: (required)
+        :param query: The full-text query the thread list is filtered by.
         :type query: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2073,10 +2096,10 @@ class ThreadsApi:
     @validate_call
     def ai_threads_list_with_http_info(
         self,
-        entity_id: StrictStr,
-        count: StrictStr,
-        cursor: StrictStr,
-        query: StrictStr,
+        entity_id: Annotated[Optional[StrictStr], Field(description="The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.")] = None,
+        count: Annotated[Optional[StrictStr], Field(description="The maximum number of items to return in one page.")] = None,
+        cursor: Annotated[Optional[StrictStr], Field(description="The keyset pagination cursor: the JSON-encoded sort key of the last item already received. Omit for the first page.")] = None,
+        query: Annotated[Optional[StrictStr], Field(description="The full-text query the thread list is filtered by.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2092,14 +2115,15 @@ class ThreadsApi:
     ) -> ApiResponse[List[AiThread]]:
         """List
 
+        Lists the chat threads of the scope, most recently edited first. Supports cursor pagination and a server-side case-insensitive title search.
 
-        :param entity_id: (required)
+        :param entity_id: The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
         :type entity_id: str
-        :param count: (required)
+        :param count: The maximum number of items to return in one page.
         :type count: str
-        :param cursor: (required)
+        :param cursor: The keyset pagination cursor: the JSON-encoded sort key of the last item already received. Omit for the first page.
         :type cursor: str
-        :param query: (required)
+        :param query: The full-text query the thread list is filtered by.
         :type query: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2153,10 +2177,10 @@ class ThreadsApi:
     @validate_call
     def ai_threads_list_without_preload_content(
         self,
-        entity_id: StrictStr,
-        count: StrictStr,
-        cursor: StrictStr,
-        query: StrictStr,
+        entity_id: Annotated[Optional[StrictStr], Field(description="The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.")] = None,
+        count: Annotated[Optional[StrictStr], Field(description="The maximum number of items to return in one page.")] = None,
+        cursor: Annotated[Optional[StrictStr], Field(description="The keyset pagination cursor: the JSON-encoded sort key of the last item already received. Omit for the first page.")] = None,
+        query: Annotated[Optional[StrictStr], Field(description="The full-text query the thread list is filtered by.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2172,14 +2196,15 @@ class ThreadsApi:
     ) -> RESTResponseType:
         """List
 
+        Lists the chat threads of the scope, most recently edited first. Supports cursor pagination and a server-side case-insensitive title search.
 
-        :param entity_id: (required)
+        :param entity_id: The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
         :type entity_id: str
-        :param count: (required)
+        :param count: The maximum number of items to return in one page.
         :type count: str
-        :param cursor: (required)
+        :param cursor: The keyset pagination cursor: the JSON-encoded sort key of the last item already received. Omit for the first page.
         :type cursor: str
-        :param query: (required)
+        :param query: The full-text query the thread list is filtered by.
         :type query: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2330,6 +2355,7 @@ class ThreadsApi:
     ) -> AiOpenOrCreateResult:
         """Open or create
 
+        Opens a chat thread and returns its history, or creates one with a title generated from the supplied first message. That first message is not persisted - the caller decides whether to follow up with `append-user-message`.
 
         :param ai_threads_open_or_create_request: (required)
         :type ai_threads_open_or_create_request: AiThreadsOpenOrCreateRequest
@@ -2398,6 +2424,7 @@ class ThreadsApi:
     ) -> ApiResponse[AiOpenOrCreateResult]:
         """Open or create
 
+        Opens a chat thread and returns its history, or creates one with a title generated from the supplied first message. That first message is not persisted - the caller decides whether to follow up with `append-user-message`.
 
         :param ai_threads_open_or_create_request: (required)
         :type ai_threads_open_or_create_request: AiThreadsOpenOrCreateRequest
@@ -2466,6 +2493,7 @@ class ThreadsApi:
     ) -> RESTResponseType:
         """Open or create
 
+        Opens a chat thread and returns its history, or creates one with a title generated from the supplied first message. That first message is not persisted - the caller decides whether to follow up with `append-user-message`.
 
         :param ai_threads_open_or_create_request: (required)
         :type ai_threads_open_or_create_request: AiThreadsOpenOrCreateRequest
@@ -2593,10 +2621,10 @@ class ThreadsApi:
     @validate_call
     def ai_threads_read_messages(
         self,
-        thread_id: StrictStr,
-        count: StrictStr,
-        cursor: StrictStr,
-        direction: StrictStr,
+        thread_id: Annotated[StrictStr, Field(description="The chat thread identifier.")],
+        count: Annotated[Optional[StrictStr], Field(description="The maximum number of items to return in one page.")] = None,
+        cursor: Annotated[Optional[StrictStr], Field(description="The keyset pagination cursor: the JSON-encoded sort key of the last item already received. Omit for the first page.")] = None,
+        direction: Annotated[Optional[StrictStr], Field(description="The order the message page is read in. Only desc turns the read around and pages back from the newest message; omit for the forward read.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2612,14 +2640,15 @@ class ThreadsApi:
     ) -> List[AiThreadMessageLike]:
         """Read messages
 
+        Reads the messages of a thread, with the same cursor pagination as the thread list.
 
-        :param thread_id: (required)
+        :param thread_id: The chat thread identifier. (required)
         :type thread_id: str
-        :param count: (required)
+        :param count: The maximum number of items to return in one page.
         :type count: str
-        :param cursor: (required)
+        :param cursor: The keyset pagination cursor: the JSON-encoded sort key of the last item already received. Omit for the first page.
         :type cursor: str
-        :param direction: (required)
+        :param direction: The order the message page is read in. Only desc turns the read around and pages back from the newest message; omit for the forward read.
         :type direction: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2673,10 +2702,10 @@ class ThreadsApi:
     @validate_call
     def ai_threads_read_messages_with_http_info(
         self,
-        thread_id: StrictStr,
-        count: StrictStr,
-        cursor: StrictStr,
-        direction: StrictStr,
+        thread_id: Annotated[StrictStr, Field(description="The chat thread identifier.")],
+        count: Annotated[Optional[StrictStr], Field(description="The maximum number of items to return in one page.")] = None,
+        cursor: Annotated[Optional[StrictStr], Field(description="The keyset pagination cursor: the JSON-encoded sort key of the last item already received. Omit for the first page.")] = None,
+        direction: Annotated[Optional[StrictStr], Field(description="The order the message page is read in. Only desc turns the read around and pages back from the newest message; omit for the forward read.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2692,14 +2721,15 @@ class ThreadsApi:
     ) -> ApiResponse[List[AiThreadMessageLike]]:
         """Read messages
 
+        Reads the messages of a thread, with the same cursor pagination as the thread list.
 
-        :param thread_id: (required)
+        :param thread_id: The chat thread identifier. (required)
         :type thread_id: str
-        :param count: (required)
+        :param count: The maximum number of items to return in one page.
         :type count: str
-        :param cursor: (required)
+        :param cursor: The keyset pagination cursor: the JSON-encoded sort key of the last item already received. Omit for the first page.
         :type cursor: str
-        :param direction: (required)
+        :param direction: The order the message page is read in. Only desc turns the read around and pages back from the newest message; omit for the forward read.
         :type direction: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2753,10 +2783,10 @@ class ThreadsApi:
     @validate_call
     def ai_threads_read_messages_without_preload_content(
         self,
-        thread_id: StrictStr,
-        count: StrictStr,
-        cursor: StrictStr,
-        direction: StrictStr,
+        thread_id: Annotated[StrictStr, Field(description="The chat thread identifier.")],
+        count: Annotated[Optional[StrictStr], Field(description="The maximum number of items to return in one page.")] = None,
+        cursor: Annotated[Optional[StrictStr], Field(description="The keyset pagination cursor: the JSON-encoded sort key of the last item already received. Omit for the first page.")] = None,
+        direction: Annotated[Optional[StrictStr], Field(description="The order the message page is read in. Only desc turns the read around and pages back from the newest message; omit for the forward read.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2772,14 +2802,15 @@ class ThreadsApi:
     ) -> RESTResponseType:
         """Read messages
 
+        Reads the messages of a thread, with the same cursor pagination as the thread list.
 
-        :param thread_id: (required)
+        :param thread_id: The chat thread identifier. (required)
         :type thread_id: str
-        :param count: (required)
+        :param count: The maximum number of items to return in one page.
         :type count: str
-        :param cursor: (required)
+        :param cursor: The keyset pagination cursor: the JSON-encoded sort key of the last item already received. Omit for the first page.
         :type cursor: str
-        :param direction: (required)
+        :param direction: The order the message page is read in. Only desc turns the read around and pages back from the newest message; omit for the forward read.
         :type direction: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2930,6 +2961,7 @@ class ThreadsApi:
     ) -> str:
         """Regenerate title
 
+        Generates a fresh title from the thread's first user message and persists it. Fails when the thread has no user message yet.
 
         :param ai_threads_regenerate_title_request: (required)
         :type ai_threads_regenerate_title_request: AiThreadsRegenerateTitleRequest
@@ -2998,6 +3030,7 @@ class ThreadsApi:
     ) -> ApiResponse[str]:
         """Regenerate title
 
+        Generates a fresh title from the thread's first user message and persists it. Fails when the thread has no user message yet.
 
         :param ai_threads_regenerate_title_request: (required)
         :type ai_threads_regenerate_title_request: AiThreadsRegenerateTitleRequest
@@ -3066,6 +3099,7 @@ class ThreadsApi:
     ) -> RESTResponseType:
         """Regenerate title
 
+        Generates a fresh title from the thread's first user message and persists it. Fails when the thread has no user message yet.
 
         :param ai_threads_regenerate_title_request: (required)
         :type ai_threads_regenerate_title_request: AiThreadsRegenerateTitleRequest
@@ -3209,6 +3243,7 @@ class ThreadsApi:
     ) -> AiSuccessResponse:
         """Rename
 
+        Renames a chat thread and bumps its last-edit date so the new title shows up in the sidebar.
 
         :param ai_threads_rename_request: (required)
         :type ai_threads_rename_request: AiThreadsRenameRequest
@@ -3277,6 +3312,7 @@ class ThreadsApi:
     ) -> ApiResponse[AiSuccessResponse]:
         """Rename
 
+        Renames a chat thread and bumps its last-edit date so the new title shows up in the sidebar.
 
         :param ai_threads_rename_request: (required)
         :type ai_threads_rename_request: AiThreadsRenameRequest
@@ -3345,6 +3381,7 @@ class ThreadsApi:
     ) -> RESTResponseType:
         """Rename
 
+        Renames a chat thread and bumps its last-edit date so the new title shows up in the sidebar.
 
         :param ai_threads_rename_request: (required)
         :type ai_threads_rename_request: AiThreadsRenameRequest
@@ -3488,6 +3525,7 @@ class ThreadsApi:
     ) -> AiSuccessResponse:
         """Touch
 
+        Bumps a thread's last-edit date, and optionally rebinds it to another profile, when something other than a new message - a model switch, say - should resurface it.
 
         :param ai_threads_touch_request: (required)
         :type ai_threads_touch_request: AiThreadsTouchRequest
@@ -3556,6 +3594,7 @@ class ThreadsApi:
     ) -> ApiResponse[AiSuccessResponse]:
         """Touch
 
+        Bumps a thread's last-edit date, and optionally rebinds it to another profile, when something other than a new message - a model switch, say - should resurface it.
 
         :param ai_threads_touch_request: (required)
         :type ai_threads_touch_request: AiThreadsTouchRequest
@@ -3624,6 +3663,7 @@ class ThreadsApi:
     ) -> RESTResponseType:
         """Touch
 
+        Bumps a thread's last-edit date, and optionally rebinds it to another profile, when something other than a new message - a model switch, say - should resurface it.
 
         :param ai_threads_touch_request: (required)
         :type ai_threads_touch_request: AiThreadsTouchRequest
@@ -3767,6 +3807,7 @@ class ThreadsApi:
     ) -> AiSuccessResponse:
         """Update message
 
+        Replaces the content of a chat message - used by the edit and regenerate flows that change a message outside the streaming lifecycle.
 
         :param ai_threads_update_message_request: (required)
         :type ai_threads_update_message_request: AiThreadsUpdateMessageRequest
@@ -3835,6 +3876,7 @@ class ThreadsApi:
     ) -> ApiResponse[AiSuccessResponse]:
         """Update message
 
+        Replaces the content of a chat message - used by the edit and regenerate flows that change a message outside the streaming lifecycle.
 
         :param ai_threads_update_message_request: (required)
         :type ai_threads_update_message_request: AiThreadsUpdateMessageRequest
@@ -3903,6 +3945,7 @@ class ThreadsApi:
     ) -> RESTResponseType:
         """Update message
 
+        Replaces the content of a chat message - used by the edit and regenerate flows that change a message outside the streaming lifecycle.
 
         :param ai_threads_update_message_request: (required)
         :type ai_threads_update_message_request: AiThreadsUpdateMessageRequest

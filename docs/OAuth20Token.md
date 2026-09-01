@@ -1,17 +1,18 @@
 # OAuth20Token
+The OAuth 2.0 token issued by a third-party provider.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**access_token** | **str** |  | [optional] 
-**refresh_token** | **str** |  | [optional] 
-**expires_in** | **int** |  | [optional] 
-**client_id** | **str** |  | [optional] 
-**client_secret** | **str** |  | [optional] 
-**redirect_uri** | **str** |  | [optional] 
-**timestamp** | **datetime** |  | [optional] 
-**is_expired** | **bool** |  | [optional] [readonly] 
+**access_token** | **str** | Access token | [optional] 
+**refresh_token** | **str** | Refresh token | [optional] 
+**expires_in** | **int** | Expires in | [optional] 
+**client_id** | **str** | Client id | [optional] 
+**client_secret** | **str** | Client secret | [optional] 
+**redirect_uri** | **str** | Redirect uri | [optional] 
+**timestamp** | **datetime** | Timestamp | [optional] 
+**is_expired** | **bool** | Is expired | [optional] [readonly] 
 
 ## Example
 

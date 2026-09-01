@@ -1,10 +1,11 @@
 # IPRestrictionArrayWrapper
+The successful API response containing the list of IPRestriction objects.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**response** | [**List[IPRestriction]**](IPRestriction.md) |  | [optional] 
+**response** | [**List[IPRestriction]**](IPRestriction.md) | The list of IPRestriction objects returned by the operation. | [optional] 
 **count** | **int** | The total number of items in the response | [optional] 
 **links** | [**List[GetPortalPrices200ResponseLinksInner]**](GetPortalPrices200ResponseLinksInner.md) | List of links related to the response | [optional] 
 **status** | **int** | HTTP status code of the response | [optional] 

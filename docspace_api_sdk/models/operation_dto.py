@@ -21,9 +21,9 @@ import pprint
 import re  # noqa: F401
 import json
 
+from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
-from docspace_api_sdk.models.api_date_time import ApiDateTime
 from docspace_api_sdk.models.operation_type import OperationType
 from typing import Optional, Set
 from typing_extensions import Self
@@ -32,7 +32,7 @@ class OperationDto(BaseModel):
     """
     Represents an operation.
     """ # noqa: E501
-    var_date: Optional[ApiDateTime] = Field(default=None, description="The API date and time parameters.", alias="date")
+    var_date: Optional[datetime] = Field(default=None, description="The date when the operation took place.", alias="date", json_schema_extra={"examples": ["2024-01-15T10:30:00Z"]})
     service: Optional[StrictStr] = Field(default=None, description="The service related to the operation.", json_schema_extra={"examples": ["Storage"]})
     description: Optional[StrictStr] = Field(default=None, description="The brief operation description.", json_schema_extra={"examples": ["Storage quota increase"]})
     details: Optional[StrictStr] = Field(default=None, description="The detailed information about the operation.", json_schema_extra={"examples": ["Increased storage from 50GB to 100GB"]})
@@ -45,7 +45,7 @@ class OperationDto(BaseModel):
     participant_display_name: Optional[StrictStr] = Field(default=None, description="The participant display name.", alias="participantDisplayName", json_schema_extra={"examples": ["Example Name"]})
     agent_id: Optional[StrictStr] = Field(default=None, description="AI Agent id.", alias="agentId", json_schema_extra={"examples": ["123"]})
     agent_title: Optional[StrictStr] = Field(default=None, description="AI Agent name.", alias="agentTitle", json_schema_extra={"examples": ["My AI Agent"]})
-    type: Optional[OperationType] = Field(default=None, description="The operation type")
+    type: Optional[OperationType] = Field(default=None, description="Type of the operation")
     __properties: ClassVar[List[str]] = ["date", "service", "description", "details", "serviceUnit", "quantity", "currency", "credit", "debit", "participantName", "participantDisplayName", "agentId", "agentTitle", "type"]
 
     model_config = ConfigDict(
@@ -87,9 +87,11 @@ class OperationDto(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of var_date
-        if self.var_date:
-            _dict['date'] = self.var_date.to_dict()
+        # set to None if var_date (nullable) is None
+        # and model_fields_set contains the field
+        if self.var_date is None and "var_date" in self.model_fields_set:
+            _dict['date'] = None
+
         # set to None if service (nullable) is None
         # and model_fields_set contains the field
         if self.service is None and "service" in self.model_fields_set:
@@ -148,7 +150,7 @@ class OperationDto(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "date": ApiDateTime.from_dict(obj["date"]) if obj.get("date") is not None else None,
+            "date": obj.get("date"),
             "service": obj.get("service"),
             "description": obj.get("description"),
             "details": obj.get("details"),

@@ -5,9 +5,9 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **thread_id** | **str** | Target thread (must already exist). | 
-**action_args** | [**AiAiActionArgs**](AiAiActionArgs.md) |  | [optional] 
-**entity_id** | **str** |  | [optional] 
-**profile_id** | **str** |  | [optional] 
+**action_args** | [**AiAiActionArgs**](AiAiActionArgs.md) | Per-request engine options: extra tools, reasoning, prompt override. | [optional] 
+**entity_id** | **str** | Optional entity (room) scope for profile resolution. | [optional] 
+**profile_id** | **str** | Session-level profile override for this request only. | [optional] 
 
 ## Example
 

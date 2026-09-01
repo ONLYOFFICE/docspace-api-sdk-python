@@ -30,9 +30,9 @@ from typing_extensions import Self
 
 class PasswordSettingsWrapper(BaseModel):
     """
-    PasswordSettingsWrapper
+    The successful API response containing the PasswordSettingsDto object.
     """ # noqa: E501
-    response: Optional[PasswordSettingsDto] = None
+    response: Optional[PasswordSettingsDto] = Field(default=None, description="The PasswordSettingsDto object returned by the operation.")
     count: Optional[StrictInt] = Field(default=None, description="The total number of items in the response")
     links: Optional[List[GetPortalPrices200ResponseLinksInner]] = Field(default=None, description="List of links related to the response")
     status: Optional[StrictInt] = Field(default=None, description="HTTP status code of the response")

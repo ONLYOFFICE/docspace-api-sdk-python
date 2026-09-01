@@ -21,7 +21,9 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import StrictBool, StrictStr
+from pydantic import Field, StrictBool, StrictStr
+from typing import Optional
+from typing_extensions import Annotated
 from docspace_api_sdk.models.ai_preferences_set_deep_mode_request import AiPreferencesSetDeepModeRequest
 from docspace_api_sdk.models.ai_success_response import AiSuccessResponse
 
@@ -63,6 +65,7 @@ class PreferencesApi:
     ) -> AiSuccessResponse:
         """Clear deep mode
 
+        Drops the persisted deep-mode toggle of the scope, so later reads fall back to the configured default.
 
         :param body: (required)
         :type body: str
@@ -131,6 +134,7 @@ class PreferencesApi:
     ) -> ApiResponse[AiSuccessResponse]:
         """Clear deep mode
 
+        Drops the persisted deep-mode toggle of the scope, so later reads fall back to the configured default.
 
         :param body: (required)
         :type body: str
@@ -199,6 +203,7 @@ class PreferencesApi:
     ) -> RESTResponseType:
         """Clear deep mode
 
+        Drops the persisted deep-mode toggle of the scope, so later reads fall back to the configured default.
 
         :param body: (required)
         :type body: str
@@ -326,7 +331,7 @@ class PreferencesApi:
     @validate_call
     def ai_preferences_get_deep_mode(
         self,
-        entity_id: StrictStr,
+        entity_id: Annotated[Optional[StrictStr], Field(description="The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -342,8 +347,9 @@ class PreferencesApi:
     ) -> bool:
         """Get deep mode
 
+        Returns the deep-mode toggle of the scope, falling back to the configured default when nothing has been persisted.
 
-        :param entity_id: (required)
+        :param entity_id: The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
         :type entity_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -394,7 +400,7 @@ class PreferencesApi:
     @validate_call
     def ai_preferences_get_deep_mode_with_http_info(
         self,
-        entity_id: StrictStr,
+        entity_id: Annotated[Optional[StrictStr], Field(description="The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -410,8 +416,9 @@ class PreferencesApi:
     ) -> ApiResponse[bool]:
         """Get deep mode
 
+        Returns the deep-mode toggle of the scope, falling back to the configured default when nothing has been persisted.
 
-        :param entity_id: (required)
+        :param entity_id: The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
         :type entity_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -462,7 +469,7 @@ class PreferencesApi:
     @validate_call
     def ai_preferences_get_deep_mode_without_preload_content(
         self,
-        entity_id: StrictStr,
+        entity_id: Annotated[Optional[StrictStr], Field(description="The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -478,8 +485,9 @@ class PreferencesApi:
     ) -> RESTResponseType:
         """Get deep mode
 
+        Returns the deep-mode toggle of the scope, falling back to the configured default when nothing has been persisted.
 
-        :param entity_id: (required)
+        :param entity_id: The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
         :type entity_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -594,7 +602,7 @@ class PreferencesApi:
     @validate_call
     def ai_preferences_is_deep_mode_set(
         self,
-        entity_id: StrictStr,
+        entity_id: Annotated[Optional[StrictStr], Field(description="The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -610,8 +618,9 @@ class PreferencesApi:
     ) -> bool:
         """Is deep mode set
 
+        Tells whether the scope has an explicitly persisted deep-mode value, whichever way that value is set.
 
-        :param entity_id: (required)
+        :param entity_id: The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
         :type entity_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -662,7 +671,7 @@ class PreferencesApi:
     @validate_call
     def ai_preferences_is_deep_mode_set_with_http_info(
         self,
-        entity_id: StrictStr,
+        entity_id: Annotated[Optional[StrictStr], Field(description="The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -678,8 +687,9 @@ class PreferencesApi:
     ) -> ApiResponse[bool]:
         """Is deep mode set
 
+        Tells whether the scope has an explicitly persisted deep-mode value, whichever way that value is set.
 
-        :param entity_id: (required)
+        :param entity_id: The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
         :type entity_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -730,7 +740,7 @@ class PreferencesApi:
     @validate_call
     def ai_preferences_is_deep_mode_set_without_preload_content(
         self,
-        entity_id: StrictStr,
+        entity_id: Annotated[Optional[StrictStr], Field(description="The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -746,8 +756,9 @@ class PreferencesApi:
     ) -> RESTResponseType:
         """Is deep mode set
 
+        Tells whether the scope has an explicitly persisted deep-mode value, whichever way that value is set.
 
-        :param entity_id: (required)
+        :param entity_id: The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
         :type entity_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -878,6 +889,7 @@ class PreferencesApi:
     ) -> AiSuccessResponse:
         """Set deep mode
 
+        Persists the deep-mode toggle of the scope. Idempotent - there is no need to check whether a value already exists.
 
         :param ai_preferences_set_deep_mode_request: (required)
         :type ai_preferences_set_deep_mode_request: AiPreferencesSetDeepModeRequest
@@ -946,6 +958,7 @@ class PreferencesApi:
     ) -> ApiResponse[AiSuccessResponse]:
         """Set deep mode
 
+        Persists the deep-mode toggle of the scope. Idempotent - there is no need to check whether a value already exists.
 
         :param ai_preferences_set_deep_mode_request: (required)
         :type ai_preferences_set_deep_mode_request: AiPreferencesSetDeepModeRequest
@@ -1014,6 +1027,7 @@ class PreferencesApi:
     ) -> RESTResponseType:
         """Set deep mode
 
+        Persists the deep-mode toggle of the scope. Idempotent - there is no need to check whether a value already exists.
 
         :param ai_preferences_set_deep_mode_request: (required)
         :type ai_preferences_set_deep_mode_request: AiPreferencesSetDeepModeRequest

@@ -42,10 +42,10 @@ class QuotaDto(BaseModel):
     free: StrictBool = Field(description="Specifies if the quota is free or not.", json_schema_extra={"examples": [True]})
     trial: StrictBool = Field(description="Specifies if the quota is trial or not.", json_schema_extra={"examples": [False]})
     features: Optional[List[TenantQuotaFeatureDto]] = Field(description="The list of tenant quota features.", json_schema_extra={"examples": [[{"id": "00000000-0000-0000-0000-000000000001", "title": "Premium Storage"}]]})
-    users_quota: Optional[TenantEntityQuotaSettings] = Field(default=None, description="The tenant entity quota settings.", alias="usersQuota")
-    rooms_quota: Optional[TenantEntityQuotaSettings] = Field(default=None, description="The tenant entity quota settings.", alias="roomsQuota")
-    ai_agents_quota: Optional[TenantEntityQuotaSettings] = Field(default=None, description="The tenant entity quota settings.", alias="aiAgentsQuota")
-    tenant_custom_quota: Optional[TenantQuotaSettings] = Field(default=None, description="The tenant quota settings.", alias="tenantCustomQuota")
+    users_quota: Optional[TenantEntityQuotaSettings] = Field(default=None, description="The user quota.", alias="usersQuota")
+    rooms_quota: Optional[TenantEntityQuotaSettings] = Field(default=None, description="The room quota.", alias="roomsQuota")
+    ai_agents_quota: Optional[TenantEntityQuotaSettings] = Field(default=None, description="The ai agent quota.", alias="aiAgentsQuota")
+    tenant_custom_quota: Optional[TenantQuotaSettings] = Field(default=None, description="The tenant custom quota.", alias="tenantCustomQuota")
     due_date: Optional[datetime] = Field(default=None, description="The due date.", alias="dueDate", json_schema_extra={"examples": ["2024-01-15T10:30:00Z"]})
     __properties: ClassVar[List[str]] = ["id", "title", "price", "nonProfit", "free", "trial", "features", "usersQuota", "roomsQuota", "aiAgentsQuota", "tenantCustomQuota", "dueDate"]
 

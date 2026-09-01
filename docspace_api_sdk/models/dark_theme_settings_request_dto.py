@@ -31,7 +31,7 @@ class DarkThemeSettingsRequestDto(BaseModel):
     """
     The theme settings request parameters.
     """ # noqa: E501
-    theme: DarkThemeSettingsType = Field(description="The theme type.")
+    theme: DarkThemeSettingsType = Field(description="The portal theme settings type.")
     __properties: ClassVar[List[str]] = ["theme"]
 
     model_config = ConfigDict(

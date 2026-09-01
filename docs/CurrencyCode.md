@@ -1,4 +1,5 @@
 # CurrencyCode
+The currency an amount is expressed in.
 
 ## Properties
 

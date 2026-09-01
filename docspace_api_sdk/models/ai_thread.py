@@ -37,7 +37,7 @@ class AiThread(BaseModel):
     last_edit_date: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Timestamp (ms since epoch) of the last message in this thread. Used for sorting.", alias="lastEditDate")
     provider: Optional[AiTProvider] = Field(default=None, description="Provider configuration at the time of last message. Used for thread-level provider display.")
     model: Optional[AiModel] = Field(default=None, description="Model info at the time of last message.")
-    profile_id: Optional[StrictStr] = Field(default=None, description="ID of the profile used for this thread. Links to  {@link  Profile.id } .", alias="profileId")
+    profile_id: Optional[StrictStr] = Field(default=None, description="ID of the profile used for this thread. Links to `Profile.id`.", alias="profileId")
     __properties: ClassVar[List[str]] = ["threadId", "title", "lastEditDate", "provider", "model", "profileId"]
 
     model_config = ConfigDict(

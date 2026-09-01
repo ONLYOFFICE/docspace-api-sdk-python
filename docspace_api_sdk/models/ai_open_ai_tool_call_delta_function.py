@@ -28,7 +28,7 @@ from typing_extensions import Self
 
 class AiOpenAIToolCallDeltaFunction(BaseModel):
     """
-    AiOpenAIToolCallDeltaFunction
+    The call itself: the function name and its JSON-encoded arguments.
     """ # noqa: E501
     name: Optional[StrictStr] = None
     arguments: Optional[StrictStr] = None

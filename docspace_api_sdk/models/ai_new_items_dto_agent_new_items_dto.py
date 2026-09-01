@@ -21,10 +21,10 @@ import pprint
 import re  # noqa: F401
 import json
 
+from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List, Optional
 from docspace_api_sdk.models.ai_agent_new_items_dto import AiAgentNewItemsDto
-from docspace_api_sdk.models.ai_api_date_time import AiApiDateTime
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -32,7 +32,7 @@ class AiNewItemsDtoAgentNewItemsDto(BaseModel):
     """
     The new item parameters.
     """ # noqa: E501
-    var_date: AiApiDateTime = Field(description="The date and time when the new item was created.", alias="date")
+    var_date: Optional[datetime] = Field(description="The date and time when the new item was created.", alias="date", json_schema_extra={"examples": ["2025-01-01T00:00:00Z"]})
     items: Optional[List[AiAgentNewItemsDto]] = Field(description="The list of items.")
     __properties: ClassVar[List[str]] = ["date", "items"]
 
@@ -75,9 +75,6 @@ class AiNewItemsDtoAgentNewItemsDto(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of var_date
-        if self.var_date:
-            _dict['date'] = self.var_date.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in items (list)
         _items = []
         if self.items:
@@ -85,6 +82,11 @@ class AiNewItemsDtoAgentNewItemsDto(BaseModel):
                 if _item_items:
                     _items.append(_item_items.to_dict())
             _dict['items'] = _items
+        # set to None if var_date (nullable) is None
+        # and model_fields_set contains the field
+        if self.var_date is None and "var_date" in self.model_fields_set:
+            _dict['date'] = None
+
         # set to None if items (nullable) is None
         # and model_fields_set contains the field
         if self.items is None and "items" in self.model_fields_set:
@@ -103,7 +105,7 @@ class AiNewItemsDtoAgentNewItemsDto(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "date": AiApiDateTime.from_dict(obj["date"]) if obj.get("date") is not None else None,
+            "date": obj.get("date"),
             "items": [AiAgentNewItemsDto.from_dict(_item) for _item in obj["items"]] if obj.get("items") is not None else None
         })
         return _obj

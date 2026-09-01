@@ -21,8 +21,9 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import StrictStr
+from pydantic import Field, StrictStr
 from typing import List
+from typing_extensions import Annotated
 from docspace_api_sdk.models.ai_create_profile_input import AiCreateProfileInput
 from docspace_api_sdk.models.ai_model import AiModel
 from docspace_api_sdk.models.ai_profile import AiProfile
@@ -70,6 +71,7 @@ class ProfilesApi:
     ) -> AiProfileMutationResult:
         """Create
 
+        Creates an AI provider profile. The name must be unique and the credentials are validated against the provider before the profile is stored; the portal's first profile also takes the `Default` assignment slot.
 
         :param ai_create_profile_input: (required)
         :type ai_create_profile_input: AiCreateProfileInput
@@ -138,6 +140,7 @@ class ProfilesApi:
     ) -> ApiResponse[AiProfileMutationResult]:
         """Create
 
+        Creates an AI provider profile. The name must be unique and the credentials are validated against the provider before the profile is stored; the portal's first profile also takes the `Default` assignment slot.
 
         :param ai_create_profile_input: (required)
         :type ai_create_profile_input: AiCreateProfileInput
@@ -206,6 +209,7 @@ class ProfilesApi:
     ) -> RESTResponseType:
         """Create
 
+        Creates an AI provider profile. The name must be unique and the credentials are validated against the provider before the profile is stored; the portal's first profile also takes the `Default` assignment slot.
 
         :param ai_create_profile_input: (required)
         :type ai_create_profile_input: AiCreateProfileInput
@@ -349,6 +353,7 @@ class ProfilesApi:
     ) -> AiSuccessResponse:
         """Delete
 
+        Deletes an AI provider profile and cleans up the assignments pointing at it - the `Default` slot moves to the first remaining profile, the other slots are unbound.
 
         :param body: (required)
         :type body: str
@@ -417,6 +422,7 @@ class ProfilesApi:
     ) -> ApiResponse[AiSuccessResponse]:
         """Delete
 
+        Deletes an AI provider profile and cleans up the assignments pointing at it - the `Default` slot moves to the first remaining profile, the other slots are unbound.
 
         :param body: (required)
         :type body: str
@@ -485,6 +491,7 @@ class ProfilesApi:
     ) -> RESTResponseType:
         """Delete
 
+        Deletes an AI provider profile and cleans up the assignments pointing at it - the `Default` slot moves to the first remaining profile, the other slots are unbound.
 
         :param body: (required)
         :type body: str
@@ -612,7 +619,7 @@ class ProfilesApi:
     @validate_call
     def ai_profiles_get_by_id(
         self,
-        id: StrictStr,
+        id: Annotated[StrictStr, Field(description="The AI provider profile identifier.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -628,8 +635,9 @@ class ProfilesApi:
     ) -> AiProfilesGetById200Response:
         """Get by id
 
+        Returns one AI provider profile, or an empty result when the identifier is unknown.
 
-        :param id: (required)
+        :param id: The AI provider profile identifier. (required)
         :type id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -680,7 +688,7 @@ class ProfilesApi:
     @validate_call
     def ai_profiles_get_by_id_with_http_info(
         self,
-        id: StrictStr,
+        id: Annotated[StrictStr, Field(description="The AI provider profile identifier.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -696,8 +704,9 @@ class ProfilesApi:
     ) -> ApiResponse[AiProfilesGetById200Response]:
         """Get by id
 
+        Returns one AI provider profile, or an empty result when the identifier is unknown.
 
-        :param id: (required)
+        :param id: The AI provider profile identifier. (required)
         :type id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -748,7 +757,7 @@ class ProfilesApi:
     @validate_call
     def ai_profiles_get_by_id_without_preload_content(
         self,
-        id: StrictStr,
+        id: Annotated[StrictStr, Field(description="The AI provider profile identifier.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -764,8 +773,9 @@ class ProfilesApi:
     ) -> RESTResponseType:
         """Get by id
 
+        Returns one AI provider profile, or an empty result when the identifier is unknown.
 
-        :param id: (required)
+        :param id: The AI provider profile identifier. (required)
         :type id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -895,6 +905,7 @@ class ProfilesApi:
     ) -> List[AiProfile]:
         """List
 
+        Lists the portal's AI provider profiles.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -959,6 +970,7 @@ class ProfilesApi:
     ) -> ApiResponse[List[AiProfile]]:
         """List
 
+        Lists the portal's AI provider profiles.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1023,6 +1035,7 @@ class ProfilesApi:
     ) -> RESTResponseType:
         """List
 
+        Lists the portal's AI provider profiles.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1131,7 +1144,7 @@ class ProfilesApi:
     @validate_call
     def ai_profiles_list_models(
         self,
-        profile_id: StrictStr,
+        profile_id: Annotated[StrictStr, Field(description="The AI provider profile identifier.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1147,8 +1160,9 @@ class ProfilesApi:
     ) -> List[AiModel]:
         """List models
 
+        Lists the models the given profile's provider offers, as reported by the provider itself.
 
-        :param profile_id: (required)
+        :param profile_id: The AI provider profile identifier. (required)
         :type profile_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1199,7 +1213,7 @@ class ProfilesApi:
     @validate_call
     def ai_profiles_list_models_with_http_info(
         self,
-        profile_id: StrictStr,
+        profile_id: Annotated[StrictStr, Field(description="The AI provider profile identifier.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1215,8 +1229,9 @@ class ProfilesApi:
     ) -> ApiResponse[List[AiModel]]:
         """List models
 
+        Lists the models the given profile's provider offers, as reported by the provider itself.
 
-        :param profile_id: (required)
+        :param profile_id: The AI provider profile identifier. (required)
         :type profile_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1267,7 +1282,7 @@ class ProfilesApi:
     @validate_call
     def ai_profiles_list_models_without_preload_content(
         self,
-        profile_id: StrictStr,
+        profile_id: Annotated[StrictStr, Field(description="The AI provider profile identifier.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1283,8 +1298,9 @@ class ProfilesApi:
     ) -> RESTResponseType:
         """List models
 
+        Lists the models the given profile's provider offers, as reported by the provider itself.
 
-        :param profile_id: (required)
+        :param profile_id: The AI provider profile identifier. (required)
         :type profile_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1415,6 +1431,7 @@ class ProfilesApi:
     ) -> List[AiModel]:
         """List provider models
 
+        Lists the models a provider offers for the supplied endpoint and key, before any profile is created from them.
 
         :param ai_profiles_list_provider_models_request: (required)
         :type ai_profiles_list_provider_models_request: AiProfilesListProviderModelsRequest
@@ -1483,6 +1500,7 @@ class ProfilesApi:
     ) -> ApiResponse[List[AiModel]]:
         """List provider models
 
+        Lists the models a provider offers for the supplied endpoint and key, before any profile is created from them.
 
         :param ai_profiles_list_provider_models_request: (required)
         :type ai_profiles_list_provider_models_request: AiProfilesListProviderModelsRequest
@@ -1551,6 +1569,7 @@ class ProfilesApi:
     ) -> RESTResponseType:
         """List provider models
 
+        Lists the models a provider offers for the supplied endpoint and key, before any profile is created from them.
 
         :param ai_profiles_list_provider_models_request: (required)
         :type ai_profiles_list_provider_models_request: AiProfilesListProviderModelsRequest
@@ -1694,6 +1713,7 @@ class ProfilesApi:
     ) -> AiProfilesTestConnection200Response:
         """Test connection
 
+        Checks a stored profile's credentials against its provider and reports the provider's own error when the call fails. Nothing is written.
 
         :param body: (required)
         :type body: str
@@ -1762,6 +1782,7 @@ class ProfilesApi:
     ) -> ApiResponse[AiProfilesTestConnection200Response]:
         """Test connection
 
+        Checks a stored profile's credentials against its provider and reports the provider's own error when the call fails. Nothing is written.
 
         :param body: (required)
         :type body: str
@@ -1830,6 +1851,7 @@ class ProfilesApi:
     ) -> RESTResponseType:
         """Test connection
 
+        Checks a stored profile's credentials against its provider and reports the provider's own error when the call fails. Nothing is written.
 
         :param body: (required)
         :type body: str
@@ -1973,6 +1995,7 @@ class ProfilesApi:
     ) -> AiProfileMutationResult:
         """Update
 
+        Updates an AI provider profile, re-checking name uniqueness and the provider credentials.
 
         :param ai_profile: (required)
         :type ai_profile: AiProfile
@@ -2041,6 +2064,7 @@ class ProfilesApi:
     ) -> ApiResponse[AiProfileMutationResult]:
         """Update
 
+        Updates an AI provider profile, re-checking name uniqueness and the provider credentials.
 
         :param ai_profile: (required)
         :type ai_profile: AiProfile
@@ -2109,6 +2133,7 @@ class ProfilesApi:
     ) -> RESTResponseType:
         """Update
 
+        Updates an AI provider profile, re-checking name uniqueness and the provider credentials.
 
         :param ai_profile: (required)
         :type ai_profile: AiProfile

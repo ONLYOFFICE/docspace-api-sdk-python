@@ -21,7 +21,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr, field_validator
+from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from docspace_api_sdk.models.ai_open_ai_tool_call_delta import AiOpenAIToolCallDelta
 from typing import Optional, Set
@@ -29,11 +29,11 @@ from typing_extensions import Self
 
 class AiOpenAIChoiceDelta(BaseModel):
     """
-    AiOpenAIChoiceDelta
+    The incremental part of one choice - what this chunk adds to the assistant message.
     """ # noqa: E501
-    role: Optional[StrictStr] = None
-    content: Optional[StrictStr] = None
-    tool_calls: Optional[List[AiOpenAIToolCallDelta]] = None
+    role: Optional[StrictStr] = Field(default=None, description="Sent on the first chunk only, always `assistant`.")
+    content: Optional[StrictStr] = Field(default=None, description="The text this chunk appends. Null when the chunk carries no text.")
+    tool_calls: Optional[List[AiOpenAIToolCallDelta]] = Field(default=None, description="The tool calls the model requested, emitted in place of text.")
     __properties: ClassVar[List[str]] = ["role", "content", "tool_calls"]
 
     @field_validator('role')

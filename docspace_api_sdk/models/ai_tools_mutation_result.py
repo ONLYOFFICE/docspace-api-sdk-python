@@ -21,7 +21,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool
+from pydantic import BaseModel, ConfigDict, Field, StrictBool
 from typing import Any, ClassVar, Dict, List, Optional
 from docspace_api_sdk.models.ai_t_error_data import AiTErrorData
 from typing import Optional, Set
@@ -31,8 +31,8 @@ class AiToolsMutationResult(BaseModel):
     """
     Outcome of an MCP-server CRUD call. Either success or a field-scoped error suitable for the settings form.
     """ # noqa: E501
-    success: StrictBool
-    error: Optional[AiTErrorData] = None
+    success: StrictBool = Field(description="True when the MCP server was persisted.")
+    error: Optional[AiTErrorData] = Field(default=None, description="Why the MCP server was rejected. Present on failure.")
     __properties: ClassVar[List[str]] = ["success", "error"]
 
     model_config = ConfigDict(

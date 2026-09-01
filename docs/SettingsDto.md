@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **timezone** | **str** | The time zone. | [optional] 
 **trusted_domains** | **List[str]** | The list of the trusted domains. | [optional] 
-**trusted_domains_type** | [**TenantTrustedDomainsType**](TenantTrustedDomainsType.md) | The type of the tenant trusted domains. | [optional] 
+**trusted_domains_type** | [**TenantTrustedDomainsType**](TenantTrustedDomainsType.md) | The type of the trusted domains. | [optional] 
 **culture** | **str** | The language. | 
 **utc_offset** | **str** | The UTC offset in the TimeSpan format. | [optional] 
 **utc_hours_offset** | **float** | The UTC offset in hours. | [optional] 
@@ -49,7 +49,7 @@ Name | Type | Description | Notes
 **max_image_upload_size** | **int** | The maximum image upload size. | [optional] 
 **logo_text** | **str** | The white label logo text. | [optional] 
 **external_resources** | [**CultureSpecificExternalResources**](CultureSpecificExternalResources.md) | The external resources settings. | [optional] 
-**default_folder_type** | [**FolderType**](FolderType.md) | The folder type. | [optional] 
+**default_folder_type** | [**FolderType**](FolderType.md) | Specifies the default folder type for the current settings. | [optional] 
 **external_db_enabled** | **bool** | Specifies if an external database is connected for storing form results. | [optional] 
 
 ## Example

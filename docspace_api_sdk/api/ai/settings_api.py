@@ -63,6 +63,7 @@ class SettingsApi:
     ) -> AiAiSettingsWrapper:
         """Get AI settings
 
+        Reports the portal's combined AI configuration and readiness.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -127,6 +128,7 @@ class SettingsApi:
     ) -> ApiResponse[AiAiSettingsWrapper]:
         """Get AI settings
 
+        Reports the portal's combined AI configuration and readiness.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -191,6 +193,7 @@ class SettingsApi:
     ) -> RESTResponseType:
         """Get AI settings
 
+        Reports the portal's combined AI configuration and readiness.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -314,6 +317,7 @@ class SettingsApi:
     ) -> AiAiUserSettingsWrapper:
         """Get user AI settings
 
+        Returns the current user's AI settings.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -378,6 +382,7 @@ class SettingsApi:
     ) -> ApiResponse[AiAiUserSettingsWrapper]:
         """Get user AI settings
 
+        Returns the current user's AI settings.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -442,6 +447,7 @@ class SettingsApi:
     ) -> RESTResponseType:
         """Get user AI settings
 
+        Returns the current user's AI settings.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -565,6 +571,7 @@ class SettingsApi:
     ) -> AiVectorizationSettingsWrapper:
         """Get vectorization settings
 
+        Returns the portal's vectorization settings.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -629,6 +636,7 @@ class SettingsApi:
     ) -> ApiResponse[AiVectorizationSettingsWrapper]:
         """Get vectorization settings
 
+        Returns the portal's vectorization settings.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -693,6 +701,7 @@ class SettingsApi:
     ) -> RESTResponseType:
         """Get vectorization settings
 
+        Returns the portal's vectorization settings.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -817,6 +826,7 @@ class SettingsApi:
     ) -> AiAiUserSettingsWrapper:
         """Update user AI settings
 
+        Updates the current user's AI settings.
 
         :param request_body: (required)
         :type request_body: Dict[str, object]
@@ -885,6 +895,7 @@ class SettingsApi:
     ) -> ApiResponse[AiAiUserSettingsWrapper]:
         """Update user AI settings
 
+        Updates the current user's AI settings.
 
         :param request_body: (required)
         :type request_body: Dict[str, object]
@@ -953,6 +964,7 @@ class SettingsApi:
     ) -> RESTResponseType:
         """Update user AI settings
 
+        Updates the current user's AI settings.
 
         :param request_body: (required)
         :type request_body: Dict[str, object]
@@ -1096,6 +1108,7 @@ class SettingsApi:
     ) -> AiVectorizationSettingsWrapper:
         """Update vectorization settings
 
+        Updates the portal's vectorization settings.
 
         :param request_body: (required)
         :type request_body: Dict[str, Optional[object]]
@@ -1164,6 +1177,7 @@ class SettingsApi:
     ) -> ApiResponse[AiVectorizationSettingsWrapper]:
         """Update vectorization settings
 
+        Updates the portal's vectorization settings.
 
         :param request_body: (required)
         :type request_body: Dict[str, Optional[object]]
@@ -1232,6 +1246,7 @@ class SettingsApi:
     ) -> RESTResponseType:
         """Update vectorization settings
 
+        Updates the portal's vectorization settings.
 
         :param request_body: (required)
         :type request_body: Dict[str, Optional[object]]

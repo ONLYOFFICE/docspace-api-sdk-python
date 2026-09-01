@@ -1,13 +1,14 @@
 # IPRestriction
+The IP restiction parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ip** | **str** |  | 
-**for_admin** | **bool** |  | [optional] 
-**id** | **int** |  | [optional] 
-**tenant_id** | **int** |  | [optional] 
+**ip** | **str** | The IP address. | 
+**for_admin** | **bool** | Specifies if the IP address is for administrator users only or not. | [optional] 
+**id** | **int** | The IP restiction ID. | [optional] 
+**tenant_id** | **int** | The tenant ID. | [optional] 
 
 ## Example
 

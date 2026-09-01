@@ -21,17 +21,17 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
 class ItemKeyValuePairStringString(BaseModel):
     """
-    ItemKeyValuePairStringString
+    A key-value pair of a list item.
     """ # noqa: E501
-    key: Optional[StrictStr] = None
-    value: Optional[StrictStr] = None
+    key: Optional[StrictStr] = Field(default=None, description="The key that identifies the item within the list.")
+    value: Optional[StrictStr] = Field(default=None, description="The value associated with the key.")
     __properties: ClassVar[List[str]] = ["key", "value"]
 
     model_config = ConfigDict(

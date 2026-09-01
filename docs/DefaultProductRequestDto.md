@@ -5,7 +5,7 @@ The request parameters for setting the default product configuration.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**default_folder_type** | [**FolderType**](FolderType.md) | The folder type. | 
+**default_folder_type** | [**FolderType**](FolderType.md) | The ID of the product to be set as default. | 
 
 ## Example
 

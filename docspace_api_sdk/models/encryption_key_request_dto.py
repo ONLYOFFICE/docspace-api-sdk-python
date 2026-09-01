@@ -29,11 +29,11 @@ from typing_extensions import Self
 
 class EncryptionKeyRequestDto(BaseModel):
     """
-    EncryptionKeyRequestDto
+    The request parameters for storing the encryption key pair of a user.
     """ # noqa: E501
-    id: Optional[UUID] = None
-    public_key: Optional[StrictStr] = Field(default=None, alias="publicKey")
-    private_key_enc: Optional[StrictStr] = Field(default=None, alias="privateKeyEnc")
+    id: Optional[UUID] = Field(default=None, description="The identifier of the key pair.", json_schema_extra={"examples": ["9924256B-447C-4F19-9dbd-8ad8c39e8ff5"]})
+    public_key: Optional[StrictStr] = Field(default=None, description="The public key of the pair, used to encrypt the file keys.", alias="publicKey", json_schema_extra={"examples": ["MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8A..."]})
+    private_key_enc: Optional[StrictStr] = Field(default=None, description="The private key of the pair, encrypted with the user password.", alias="privateKeyEnc", json_schema_extra={"examples": ["U2FsdGVkX1+Lm3s..."]})
     __properties: ClassVar[List[str]] = ["id", "publicKey", "privateKeyEnc"]
 
     model_config = ConfigDict(

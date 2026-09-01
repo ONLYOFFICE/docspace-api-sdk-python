@@ -38,9 +38,9 @@ class AiAiApproveToolCallRequest(BaseModel):
     message_id: StrictStr = Field(description="Storage id of the assistant message holding the tool call.", alias="messageId")
     idx: Union[StrictFloat, StrictInt] = Field(description="Index of the tool-call content part inside `message.content`.")
     message: AiThreadMessageLike = Field(description="Snapshot of the assistant message at the time the tool call surfaced.")
-    action_args: Optional[AiAiActionArgs] = Field(default=None, alias="actionArgs")
-    entity_id: Optional[StrictStr] = Field(default=None, alias="entityId")
-    profile_id: Optional[StrictStr] = Field(default=None, alias="profileId")
+    action_args: Optional[AiAiActionArgs] = Field(default=None, description="Per-request engine options: extra tools, reasoning, prompt override.", alias="actionArgs")
+    entity_id: Optional[StrictStr] = Field(default=None, description="Optional entity (room) scope for profile resolution.", alias="entityId")
+    profile_id: Optional[StrictStr] = Field(default=None, description="Session-level profile override for this request only.", alias="profileId")
     __properties: ClassVar[List[str]] = ["result", "allowAlways", "threadId", "messageId", "idx", "message", "actionArgs", "entityId", "profileId"]
 
     model_config = ConfigDict(

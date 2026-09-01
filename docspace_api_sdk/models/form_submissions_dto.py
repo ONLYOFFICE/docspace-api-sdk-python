@@ -30,7 +30,7 @@ from typing_extensions import Self
 
 class FormSubmissionsDto(BaseModel):
     """
-    FormSubmissionsDto
+    All submissions of a form, together with the metadata of its fields.
     """ # noqa: E501
     metadata: Optional[List[FormMetadata]] = Field(default=None, description="The form field metadata.", json_schema_extra={"examples": [[]]})
     submissions: Optional[List[FormResultsDto]] = Field(default=None, description="All submissions.", json_schema_extra={"examples": [[]]})

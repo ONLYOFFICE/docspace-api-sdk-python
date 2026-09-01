@@ -28,7 +28,7 @@ from typing_extensions import Self
 
 class ItemKeyValuePairObjectObject(BaseModel):
     """
-    ItemKeyValuePairObjectObject
+    A key-value pair of a list item.
     """ # noqa: E501
     key: Optional[Any] = None
     value: Optional[Any] = None

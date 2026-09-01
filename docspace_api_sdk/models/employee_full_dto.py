@@ -21,10 +21,10 @@ from inspect import getfullargspec
 import json
 import pprint
 import re  # noqa: F401
+from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from uuid import UUID
-from docspace_api_sdk.models.api_date_time import ApiDateTime
 from docspace_api_sdk.models.contact import Contact
 from docspace_api_sdk.models.dark_theme_settings_type import DarkThemeSettingsType
 from docspace_api_sdk.models.employee_activation_status import EmployeeActivationStatus
@@ -49,7 +49,7 @@ class EmployeeFullDto(EmployeeDto):
     contacts: Optional[List[Contact]] = Field(default=None, description="The list of user contacts.", json_schema_extra={"examples": [[{"type": "email", "value": "user@example.com"}]]})
     status: Optional[EmployeeStatus] = Field(default=None, description="The user status.")
     activation_status: Optional[EmployeeActivationStatus] = Field(default=None, description="The user activation status.", alias="activationStatus")
-    terminated: Optional[ApiDateTime] = Field(default=None, description="The date when the user account was terminated.")
+    terminated: Optional[datetime] = Field(default=None, description="The date when the user account was terminated.", json_schema_extra={"examples": ["2025-06-01T00:00:00.0000000Z"]})
     department: Optional[StrictStr] = Field(default=None, description="The user department.", json_schema_extra={"examples": ["Marketing"]})
     groups: Optional[List[GroupSummaryDto]] = Field(default=None, description="The list of user groups.", json_schema_extra={"examples": [[{"id": "00000000-0000-0000-0000-000000000000", "name": "Marketing"}]]})
     location: Optional[StrictStr] = Field(default=None, description="The user location.", json_schema_extra={"examples": ["Palo Alto"]})
@@ -63,7 +63,7 @@ class EmployeeFullDto(EmployeeDto):
     is_collaborator: Optional[StrictBool] = Field(default=None, description="Specifies if the user is a portal collaborator or not.", alias="isCollaborator", json_schema_extra={"examples": [False]})
     culture_name: Optional[StrictStr] = Field(default=None, description="The user culture code.", alias="cultureName", json_schema_extra={"examples": ["en-EN"]})
     mobile_phone: Optional[StrictStr] = Field(default=None, description="The user mobile phone number.", alias="mobilePhone", json_schema_extra={"examples": ["+1 (555) 123-4567"]})
-    mobile_phone_activation_status: Optional[MobilePhoneActivationStatus] = Field(default=None, description="The user mobile phone activation status.", alias="mobilePhoneActivationStatus")
+    mobile_phone_activation_status: Optional[MobilePhoneActivationStatus] = Field(default=None, description="The mobile phone activation status.", alias="mobilePhoneActivationStatus")
     is_sso: Optional[StrictBool] = Field(default=None, description="Specifies if the SSO settings are enabled for the user or not.", alias="isSSO", json_schema_extra={"examples": [False]})
     theme: Optional[DarkThemeSettingsType] = Field(default=None, description="The user theme settings.")
     quota_limit: Optional[StrictInt] = Field(default=None, description="The user quota limit.", alias="quotaLimit", json_schema_extra={"examples": [1073741824]})
@@ -73,7 +73,7 @@ class EmployeeFullDto(EmployeeDto):
     login_event_id: Optional[StrictInt] = Field(default=None, description="The current login event ID.", alias="loginEventId", json_schema_extra={"examples": [123]})
     auth_cookie_lifetime: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The auth cookie lifetime in seconds.", alias="authCookieLifetime", json_schema_extra={"examples": [3600]})
     created_by: Optional[EmployeeDto] = Field(default=None, description="The user who created the current user.", alias="createdBy")
-    registration_date: Optional[ApiDateTime] = Field(default=None, description="The user registration date.", alias="registrationDate")
+    registration_date: Optional[datetime] = Field(default=None, description="The user registration date.", alias="registrationDate", json_schema_extra={"examples": ["2020-01-01T00:00:00.0000000Z"]})
     has_personal_folder: Optional[StrictBool] = Field(default=None, description="Specifies if the user has a personal folder or not.", alias="hasPersonalFolder", json_schema_extra={"examples": [True]})
     tfa_app_enabled: Optional[StrictBool] = Field(default=None, description="Indicates whether the user has enabled two-factor authentication (TFA) using an authentication app.", alias="tfaAppEnabled", json_schema_extra={"examples": [False]})
 
@@ -122,9 +122,6 @@ class EmployeeFullDto(EmployeeDto):
                 if _item_contacts:
                     _items.append(_item_contacts.to_dict())
             _dict['contacts'] = _items
-        # override the default output from pydantic by calling `to_dict()` of terminated
-        if self.terminated:
-            _dict['terminated'] = self.terminated.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in groups (list)
         _items = []
         if self.groups:
@@ -135,9 +132,6 @@ class EmployeeFullDto(EmployeeDto):
         # override the default output from pydantic by calling `to_dict()` of created_by
         if self.created_by:
             _dict['createdBy'] = self.created_by.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of registration_date
-        if self.registration_date:
-            _dict['registrationDate'] = self.registration_date.to_dict()
         # set to None if first_name (nullable) is None
         # and model_fields_set contains the field
         if self.first_name is None and "first_name" in self.model_fields_set:
@@ -162,6 +156,11 @@ class EmployeeFullDto(EmployeeDto):
         # and model_fields_set contains the field
         if self.contacts is None and "contacts" in self.model_fields_set:
             _dict['contacts'] = None
+
+        # set to None if terminated (nullable) is None
+        # and model_fields_set contains the field
+        if self.terminated is None and "terminated" in self.model_fields_set:
+            _dict['terminated'] = None
 
         # set to None if department (nullable) is None
         # and model_fields_set contains the field
@@ -228,6 +227,11 @@ class EmployeeFullDto(EmployeeDto):
         if self.auth_cookie_lifetime is None and "auth_cookie_lifetime" in self.model_fields_set:
             _dict['authCookieLifetime'] = None
 
+        # set to None if registration_date (nullable) is None
+        # and model_fields_set contains the field
+        if self.registration_date is None and "registration_date" in self.model_fields_set:
+            _dict['registrationDate'] = None
+
         # set to None if has_personal_folder (nullable) is None
         # and model_fields_set contains the field
         if self.has_personal_folder is None and "has_personal_folder" in self.model_fields_set:
@@ -259,7 +263,7 @@ class EmployeeFullDto(EmployeeDto):
             "contacts": [Contact.from_dict(_item) for _item in obj["contacts"]] if obj.get("contacts") is not None else None,
             "status": obj.get("status"),
             "activationStatus": obj.get("activationStatus"),
-            "terminated": ApiDateTime.from_dict(obj["terminated"]) if obj.get("terminated") is not None else None,
+            "terminated": obj.get("terminated"),
             "department": obj.get("department"),
             "groups": [GroupSummaryDto.from_dict(_item) for _item in obj["groups"]] if obj.get("groups") is not None else None,
             "location": obj.get("location"),
@@ -283,7 +287,7 @@ class EmployeeFullDto(EmployeeDto):
             "loginEventId": obj.get("loginEventId"),
             "authCookieLifetime": obj.get("authCookieLifetime"),
             "createdBy": EmployeeDto.from_dict(obj["createdBy"]) if obj.get("createdBy") is not None else None,
-            "registrationDate": ApiDateTime.from_dict(obj["registrationDate"]) if obj.get("registrationDate") is not None else None,
+            "registrationDate": obj.get("registrationDate"),
             "hasPersonalFolder": obj.get("hasPersonalFolder"),
             "tfaAppEnabled": obj.get("tfaAppEnabled")
         }

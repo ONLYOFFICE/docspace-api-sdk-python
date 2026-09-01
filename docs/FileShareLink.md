@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **id** | **UUID** | The unique identifier of the shared link. | [optional] 
 **title** | **str** | The title of the shared content. | [optional] 
 **share_link** | **str** | The URL for accessing the shared content. | [optional] 
-**expiration_date** | [**ApiDateTime**](ApiDateTime.md) | The API date and time parameters. | [optional] 
+**expiration_date** | **datetime** | The date when the shared link expires. | [optional] 
 **link_type** | [**LinkType**](LinkType.md) | The sharing link type (e.g., Invitation). | [optional] 
 **password** | **str** | The password protection for accessing the shared content. | [optional] 
 **deny_download** | **bool** | Indicates whether downloading of the shared content is prohibited. | [optional] 

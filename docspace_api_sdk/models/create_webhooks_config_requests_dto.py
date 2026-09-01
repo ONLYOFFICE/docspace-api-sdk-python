@@ -37,7 +37,7 @@ class CreateWebhooksConfigRequestsDto(BaseModel):
     secret_key: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=50)]] = Field(default=None, description="The webhook secret key used to sign the webhook payloads for the security verification.", alias="secretKey", json_schema_extra={"examples": ["my-secret-key-123"]})
     enabled: Optional[StrictBool] = Field(default=None, description="Specifies whether the webhook configuration is active or not.", json_schema_extra={"examples": [True]})
     ssl: Optional[StrictBool] = Field(default=None, description="Specifies whether the SSL certificate verification is required or not.", json_schema_extra={"examples": [True]})
-    triggers: Optional[WebhookTrigger] = Field(default=None, description="The webhook trigger type.")
+    triggers: Optional[WebhookTrigger] = Field(default=None, description="Defines which events will trigger webhook notifications.")
     target_id: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="Target ID", alias="targetId", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000001"]})
     __properties: ClassVar[List[str]] = ["name", "uri", "secretKey", "enabled", "ssl", "triggers", "targetId"]
 

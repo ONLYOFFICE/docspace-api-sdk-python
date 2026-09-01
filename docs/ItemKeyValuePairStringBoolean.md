@@ -1,11 +1,12 @@
 # ItemKeyValuePairStringBoolean
+A key-value pair of a list item.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**key** | **str** |  | [optional] 
-**value** | **bool** |  | [optional] 
+**key** | **str** | The key that identifies the item within the list. | [optional] 
+**value** | **bool** | The value associated with the key. | [optional] 
 
 ## Example
 

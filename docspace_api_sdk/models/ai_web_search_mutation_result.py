@@ -21,7 +21,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool
+from pydantic import BaseModel, ConfigDict, Field, StrictBool
 from typing import Any, ClassVar, Dict, List, Optional
 from docspace_api_sdk.models.ai_t_error_data import AiTErrorData
 from docspace_api_sdk.models.ai_web_search_config import AiWebSearchConfig
@@ -30,11 +30,11 @@ from typing_extensions import Self
 
 class AiWebSearchMutationResult(BaseModel):
     """
-    Outcome of  {@link  WebSearchEngine.configure }  — either the persisted config or a field-scoped error suitable for the settings form.
+    Outcome of `WebSearchEngine.configure` — either the persisted config or a field-scoped error suitable for the settings form.
     """ # noqa: E501
-    success: StrictBool
-    config: Optional[AiWebSearchConfig] = None
-    error: Optional[AiTErrorData] = None
+    success: StrictBool = Field(description="True when the configuration was persisted.")
+    config: Optional[AiWebSearchConfig] = Field(default=None, description="The persisted web-search configuration. Present on success.")
+    error: Optional[AiTErrorData] = Field(default=None, description="Why the configuration was rejected. Present on failure.")
     __properties: ClassVar[List[str]] = ["success", "config", "error"]
 
     model_config = ConfigDict(

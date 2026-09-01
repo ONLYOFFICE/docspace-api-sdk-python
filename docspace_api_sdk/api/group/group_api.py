@@ -31,7 +31,6 @@ from docspace_api_sdk.models.group_request_dto import GroupRequestDto
 from docspace_api_sdk.models.group_summary_array_wrapper import GroupSummaryArrayWrapper
 from docspace_api_sdk.models.group_wrapper import GroupWrapper
 from docspace_api_sdk.models.members_request import MembersRequest
-from docspace_api_sdk.models.no_content_result_wrapper import NoContentResultWrapper
 from docspace_api_sdk.models.set_manager_request import SetManagerRequest
 from docspace_api_sdk.models.sort_order import SortOrder
 from docspace_api_sdk.models.update_group_request import UpdateGroupRequest
@@ -114,8 +113,10 @@ class GroupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -186,8 +187,10 @@ class GroupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -258,8 +261,10 @@ class GroupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -416,8 +421,10 @@ class GroupApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupWrapper",
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -493,8 +500,10 @@ class GroupApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupWrapper",
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -570,8 +579,10 @@ class GroupApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupWrapper",
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -687,7 +698,7 @@ class GroupApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> NoContentResultWrapper:
+    ) -> None:
         """Delete a group
 
         Deletes a group with the ID specified in the request from the list of groups on the portal.
@@ -725,10 +736,12 @@ class GroupApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "NoContentResultWrapper",
+            '200': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -760,7 +773,7 @@ class GroupApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[NoContentResultWrapper]:
+    ) -> ApiResponse[None]:
         """Delete a group
 
         Deletes a group with the ID specified in the request from the list of groups on the portal.
@@ -798,10 +811,12 @@ class GroupApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "NoContentResultWrapper",
+            '200': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -871,10 +886,12 @@ class GroupApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "NoContentResultWrapper",
+            '200': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1018,8 +1035,10 @@ class GroupApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupWrapper",
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1095,8 +1114,10 @@ class GroupApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupWrapper",
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1172,8 +1193,10 @@ class GroupApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupWrapper",
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1317,8 +1340,10 @@ class GroupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupSummaryArrayWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1389,8 +1414,10 @@ class GroupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupSummaryArrayWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1461,8 +1488,10 @@ class GroupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupSummaryArrayWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1625,8 +1654,10 @@ class GroupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupArrayWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1721,8 +1752,10 @@ class GroupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupArrayWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1817,8 +1850,10 @@ class GroupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupArrayWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1996,8 +2031,10 @@ class GroupApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupWrapper",
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2073,8 +2110,10 @@ class GroupApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupWrapper",
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2150,8 +2189,10 @@ class GroupApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupWrapper",
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2298,8 +2339,10 @@ class GroupApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupWrapper",
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2375,8 +2418,10 @@ class GroupApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupWrapper",
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2452,8 +2497,10 @@ class GroupApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupWrapper",
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2613,8 +2660,10 @@ class GroupApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupWrapper",
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2690,8 +2739,10 @@ class GroupApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupWrapper",
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2767,8 +2818,10 @@ class GroupApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupWrapper",
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2927,8 +2980,10 @@ class GroupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3003,8 +3058,10 @@ class GroupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3079,8 +3136,10 @@ class GroupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3240,8 +3299,10 @@ class GroupApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupWrapper",
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3317,8 +3378,10 @@ class GroupApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupWrapper",
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3394,8 +3457,10 @@ class GroupApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupWrapper",
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }

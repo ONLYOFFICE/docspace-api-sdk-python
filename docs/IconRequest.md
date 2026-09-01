@@ -1,4 +1,5 @@
 # IconRequest
+The icon to set on a room group.
 
 ## Properties
 

@@ -21,9 +21,9 @@ import pprint
 import re  # noqa: F401
 import json
 
+from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictInt
 from typing import Any, ClassVar, Dict, List, Optional
-from docspace_api_sdk.models.api_date_time import ApiDateTime
 from docspace_api_sdk.models.employee_dto import EmployeeDto
 from docspace_api_sdk.models.history_action import HistoryAction
 from docspace_api_sdk.models.history_data import HistoryData
@@ -36,8 +36,8 @@ class HistoryDto(BaseModel):
     """ # noqa: E501
     id: StrictInt = Field(description="The unique identifier for the file history entry.", json_schema_extra={"examples": [123]})
     action: HistoryAction = Field(description="The action performed on the file.")
-    initiator: EmployeeDto = Field(description="The user parameters.")
-    var_date: ApiDateTime = Field(description="The API date and time parameters.", alias="date")
+    initiator: EmployeeDto = Field(description="The action initiator.")
+    var_date: Optional[datetime] = Field(description="The date and time when an action on the file was performed.", alias="date", json_schema_extra={"examples": ["2021-01-01T00:00:00Z"]})
     data: HistoryData = Field(description="The history data.")
     related: Optional[List[HistoryDto]] = Field(default=None, description="The list of related history.", json_schema_extra={"examples": [[{"id": 124, "action": 0}]]})
     __properties: ClassVar[List[str]] = ["id", "action", "initiator", "date", "data", "related"]
@@ -87,9 +87,6 @@ class HistoryDto(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of initiator
         if self.initiator:
             _dict['initiator'] = self.initiator.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of var_date
-        if self.var_date:
-            _dict['date'] = self.var_date.to_dict()
         # override the default output from pydantic by calling `to_dict()` of data
         if self.data:
             _dict['data'] = self.data.to_dict()
@@ -100,6 +97,11 @@ class HistoryDto(BaseModel):
                 if _item_related:
                     _items.append(_item_related.to_dict())
             _dict['related'] = _items
+        # set to None if var_date (nullable) is None
+        # and model_fields_set contains the field
+        if self.var_date is None and "var_date" in self.model_fields_set:
+            _dict['date'] = None
+
         # set to None if related (nullable) is None
         # and model_fields_set contains the field
         if self.related is None and "related" in self.model_fields_set:
@@ -121,7 +123,7 @@ class HistoryDto(BaseModel):
             "id": obj.get("id"),
             "action": HistoryAction.from_dict(obj["action"]) if obj.get("action") is not None else None,
             "initiator": EmployeeDto.from_dict(obj["initiator"]) if obj.get("initiator") is not None else None,
-            "date": ApiDateTime.from_dict(obj["date"]) if obj.get("date") is not None else None,
+            "date": obj.get("date"),
             "data": HistoryData.from_dict(obj["data"]) if obj.get("data") is not None else None,
             "related": [HistoryDto.from_dict(_item) for _item in obj["related"]] if obj.get("related") is not None else None
         })

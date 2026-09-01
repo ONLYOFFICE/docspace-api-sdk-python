@@ -93,7 +93,8 @@ class CapabilitiesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CapabilitiesWrapper",
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -160,7 +161,8 @@ class CapabilitiesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CapabilitiesWrapper",
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -227,7 +229,8 @@ class CapabilitiesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CapabilitiesWrapper",
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }

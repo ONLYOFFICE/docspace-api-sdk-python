@@ -36,7 +36,7 @@ class InfoConfigDto(BaseModel):
     folder: Optional[StrictStr] = Field(default=None, description="The folder of the file.", json_schema_extra={"examples": ["My Documents"]})
     owner: Optional[StrictStr] = Field(default=None, description="The file owner.", json_schema_extra={"examples": ["John Doe"]})
     sharing_settings: Optional[List[AceShortWrapper]] = Field(default=None, description="The sharing settings of the file.", alias="sharingSettings", json_schema_extra={"examples": [[]]})
-    type: Optional[EditorType] = Field(default=None, description="The editor type.")
+    type: Optional[EditorType] = Field(default=None, description="The editor type of the file.")
     uploaded: Optional[StrictStr] = Field(default=None, description="The uploaded file.", json_schema_extra={"examples": ["2025-01-01T00:00:00"]})
     __properties: ClassVar[List[str]] = ["favorite", "folder", "owner", "sharingSettings", "type", "uploaded"]
 

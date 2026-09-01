@@ -22,12 +22,12 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
+from datetime import datetime
 from pydantic import Field, StrictInt, StrictStr
 from typing import Optional
 from typing_extensions import Annotated
 from uuid import UUID
 from docspace_api_sdk.models.action_type import ActionType
-from docspace_api_sdk.models.api_date_time import ApiDateTime
 from docspace_api_sdk.models.audit_event_array_wrapper import AuditEventArrayWrapper
 from docspace_api_sdk.models.audit_report_format import AuditReportFormat
 from docspace_api_sdk.models.document_builder_task_wrapper import DocumentBuilderTaskWrapper
@@ -36,6 +36,7 @@ from docspace_api_sdk.models.location_type import LocationType
 from docspace_api_sdk.models.message_action import MessageAction
 from docspace_api_sdk.models.object_wrapper import ObjectWrapper
 from docspace_api_sdk.models.product_type import ProductType
+from docspace_api_sdk.models.tenant_audit_settings_response_wrapper import TenantAuditSettingsResponseWrapper
 from docspace_api_sdk.models.tenant_audit_settings_wrapper import TenantAuditSettingsWrapper
 
 from docspace_api_sdk.api_client import ApiClient, RequestSerialized
@@ -118,8 +119,10 @@ class AuditTrailDataApi:
             '200': "DocumentBuilderTaskWrapper",
             '402': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -192,8 +195,10 @@ class AuditTrailDataApi:
             '200': "DocumentBuilderTaskWrapper",
             '402': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -266,8 +271,10 @@ class AuditTrailDataApi:
             '200': "DocumentBuilderTaskWrapper",
             '402': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -362,8 +369,8 @@ class AuditTrailDataApi:
         action: Annotated[Optional[MessageAction], Field(description="The specific action that occurred within the audit event.")] = None,
         entry_type: Annotated[Optional[EntryType], Field(description="The type of audit entry (e.g., Folder, User, File).")] = None,
         target: Annotated[Optional[StrictStr], Field(description="The target object affected by the audit event (e.g., document ID, user account).")] = None,
-        var_from: Annotated[Optional[ApiDateTime], Field(description="The starting date and time for filtering audit events.")] = None,
-        to: Annotated[Optional[ApiDateTime], Field(description="The ending date and time for filtering audit events.")] = None,
+        var_from: Annotated[Optional[datetime], Field(description="The starting date and time for filtering audit events.")] = None,
+        to: Annotated[Optional[datetime], Field(description="The ending date and time for filtering audit events.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of audit event records to retrieve.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The index of the first audit event record to retrieve in a paged query.")] = None,
         _request_timeout: Union[
@@ -396,9 +403,9 @@ class AuditTrailDataApi:
         :param target: The target object affected by the audit event (e.g., document ID, user account).
         :type target: str
         :param var_from: The starting date and time for filtering audit events.
-        :type var_from: ApiDateTime
+        :type var_from: datetime
         :param to: The ending date and time for filtering audit events.
-        :type to: ApiDateTime
+        :type to: datetime
         :param count: The maximum number of audit event records to retrieve.
         :type count: int
         :param start_index: The index of the first audit event record to retrieve in a paged query.
@@ -446,8 +453,10 @@ class AuditTrailDataApi:
             '200': "AuditEventArrayWrapper",
             '402': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -472,8 +481,8 @@ class AuditTrailDataApi:
         action: Annotated[Optional[MessageAction], Field(description="The specific action that occurred within the audit event.")] = None,
         entry_type: Annotated[Optional[EntryType], Field(description="The type of audit entry (e.g., Folder, User, File).")] = None,
         target: Annotated[Optional[StrictStr], Field(description="The target object affected by the audit event (e.g., document ID, user account).")] = None,
-        var_from: Annotated[Optional[ApiDateTime], Field(description="The starting date and time for filtering audit events.")] = None,
-        to: Annotated[Optional[ApiDateTime], Field(description="The ending date and time for filtering audit events.")] = None,
+        var_from: Annotated[Optional[datetime], Field(description="The starting date and time for filtering audit events.")] = None,
+        to: Annotated[Optional[datetime], Field(description="The ending date and time for filtering audit events.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of audit event records to retrieve.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The index of the first audit event record to retrieve in a paged query.")] = None,
         _request_timeout: Union[
@@ -506,9 +515,9 @@ class AuditTrailDataApi:
         :param target: The target object affected by the audit event (e.g., document ID, user account).
         :type target: str
         :param var_from: The starting date and time for filtering audit events.
-        :type var_from: ApiDateTime
+        :type var_from: datetime
         :param to: The ending date and time for filtering audit events.
-        :type to: ApiDateTime
+        :type to: datetime
         :param count: The maximum number of audit event records to retrieve.
         :type count: int
         :param start_index: The index of the first audit event record to retrieve in a paged query.
@@ -556,8 +565,10 @@ class AuditTrailDataApi:
             '200': "AuditEventArrayWrapper",
             '402': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -582,8 +593,8 @@ class AuditTrailDataApi:
         action: Annotated[Optional[MessageAction], Field(description="The specific action that occurred within the audit event.")] = None,
         entry_type: Annotated[Optional[EntryType], Field(description="The type of audit entry (e.g., Folder, User, File).")] = None,
         target: Annotated[Optional[StrictStr], Field(description="The target object affected by the audit event (e.g., document ID, user account).")] = None,
-        var_from: Annotated[Optional[ApiDateTime], Field(description="The starting date and time for filtering audit events.")] = None,
-        to: Annotated[Optional[ApiDateTime], Field(description="The ending date and time for filtering audit events.")] = None,
+        var_from: Annotated[Optional[datetime], Field(description="The starting date and time for filtering audit events.")] = None,
+        to: Annotated[Optional[datetime], Field(description="The ending date and time for filtering audit events.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of audit event records to retrieve.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The index of the first audit event record to retrieve in a paged query.")] = None,
         _request_timeout: Union[
@@ -616,9 +627,9 @@ class AuditTrailDataApi:
         :param target: The target object affected by the audit event (e.g., document ID, user account).
         :type target: str
         :param var_from: The starting date and time for filtering audit events.
-        :type var_from: ApiDateTime
+        :type var_from: datetime
         :param to: The ending date and time for filtering audit events.
-        :type to: ApiDateTime
+        :type to: datetime
         :param count: The maximum number of audit event records to retrieve.
         :type count: int
         :param start_index: The index of the first audit event record to retrieve in a paged query.
@@ -666,8 +677,10 @@ class AuditTrailDataApi:
             '200': "AuditEventArrayWrapper",
             '402': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -738,12 +751,30 @@ class AuditTrailDataApi:
             _query_params.append(('target', target))
             
         if var_from is not None:
-            
-            _query_params.append(('from', var_from))
+            if isinstance(var_from, datetime):
+                _query_params.append(
+                    (
+                        'from',
+                        var_from.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('from', var_from))
             
         if to is not None:
-            
-            _query_params.append(('to', to))
+            if isinstance(to, datetime):
+                _query_params.append(
+                    (
+                        'to',
+                        to.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('to', to))
             
         if count is not None:
             
@@ -815,7 +846,7 @@ class AuditTrailDataApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> TenantAuditSettingsWrapper:
+    ) -> TenantAuditSettingsResponseWrapper:
         """Get the audit trail settings
 
         Returns the audit trail settings.
@@ -850,11 +881,12 @@ class AuditTrailDataApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "TenantAuditSettingsWrapper",
+            '200': "TenantAuditSettingsResponseWrapper",
             '402': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -885,7 +917,7 @@ class AuditTrailDataApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[TenantAuditSettingsWrapper]:
+    ) -> ApiResponse[TenantAuditSettingsResponseWrapper]:
         """Get the audit trail settings
 
         Returns the audit trail settings.
@@ -920,11 +952,12 @@ class AuditTrailDataApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "TenantAuditSettingsWrapper",
+            '200': "TenantAuditSettingsResponseWrapper",
             '402': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -990,11 +1023,12 @@ class AuditTrailDataApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "TenantAuditSettingsWrapper",
+            '200': "TenantAuditSettingsResponseWrapper",
             '402': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1135,8 +1169,10 @@ class AuditTrailDataApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1212,8 +1248,10 @@ class AuditTrailDataApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1289,8 +1327,10 @@ class AuditTrailDataApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1434,8 +1474,9 @@ class AuditTrailDataApi:
             '200': "DocumentBuilderTaskWrapper",
             '402': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1504,8 +1545,9 @@ class AuditTrailDataApi:
             '200': "DocumentBuilderTaskWrapper",
             '402': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1574,8 +1616,9 @@ class AuditTrailDataApi:
             '200': "DocumentBuilderTaskWrapper",
             '402': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1708,8 +1751,9 @@ class AuditTrailDataApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1777,8 +1821,9 @@ class AuditTrailDataApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1846,8 +1891,9 @@ class AuditTrailDataApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1981,8 +2027,9 @@ class AuditTrailDataApi:
             '200': "AuditEventArrayWrapper",
             '402': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2051,8 +2098,9 @@ class AuditTrailDataApi:
             '200': "AuditEventArrayWrapper",
             '402': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2121,8 +2169,9 @@ class AuditTrailDataApi:
             '200': "AuditEventArrayWrapper",
             '402': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2219,7 +2268,7 @@ class AuditTrailDataApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> TenantAuditSettingsWrapper:
+    ) -> TenantAuditSettingsResponseWrapper:
         """Set the audit trail settings
 
         Sets the audit trail settings for the current portal.
@@ -2257,12 +2306,13 @@ class AuditTrailDataApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "TenantAuditSettingsWrapper",
+            '200': "TenantAuditSettingsResponseWrapper",
             '400': None,
             '402': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2294,7 +2344,7 @@ class AuditTrailDataApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[TenantAuditSettingsWrapper]:
+    ) -> ApiResponse[TenantAuditSettingsResponseWrapper]:
         """Set the audit trail settings
 
         Sets the audit trail settings for the current portal.
@@ -2332,12 +2382,13 @@ class AuditTrailDataApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "TenantAuditSettingsWrapper",
+            '200': "TenantAuditSettingsResponseWrapper",
             '400': None,
             '402': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2407,12 +2458,13 @@ class AuditTrailDataApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "TenantAuditSettingsWrapper",
+            '200': "TenantAuditSettingsResponseWrapper",
             '400': None,
             '402': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2562,8 +2614,9 @@ class AuditTrailDataApi:
             '200': None,
             '402': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2632,8 +2685,9 @@ class AuditTrailDataApi:
             '200': None,
             '402': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2702,8 +2756,9 @@ class AuditTrailDataApi:
             '200': None,
             '402': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2744,6 +2799,13 @@ class AuditTrailDataApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting

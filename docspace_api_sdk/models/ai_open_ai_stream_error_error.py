@@ -28,7 +28,7 @@ from typing_extensions import Self
 
 class AiOpenAIStreamErrorError(BaseModel):
     """
-    AiOpenAIStreamErrorError
+    The error that ended the stream: its message, type, code and the offending parameter.
     """ # noqa: E501
     message: StrictStr
     type: StrictStr

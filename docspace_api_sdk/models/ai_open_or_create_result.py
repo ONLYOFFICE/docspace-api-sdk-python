@@ -29,11 +29,11 @@ from typing_extensions import Self
 
 class AiOpenOrCreateResult(BaseModel):
     """
-    Resolved thread state returned by  {@link  ThreadsEngine.openOrCreate } .
+    Resolved thread state returned by `ThreadsEngine.openOrCreate`.
     """ # noqa: E501
-    thread_id: StrictStr = Field(alias="threadId")
+    thread_id: StrictStr = Field(description="The thread that was opened, or the one just created.", alias="threadId")
     title: StrictStr = Field(description="Empty string for existing threads — the engine doesn't re-fetch.")
-    prior_messages: List[AiThreadMessageLike] = Field(alias="priorMessages")
+    prior_messages: List[AiThreadMessageLike] = Field(description="The messages already in the thread - empty for a thread that was just created.", alias="priorMessages")
     __properties: ClassVar[List[str]] = ["threadId", "title", "priorMessages"]
 
     model_config = ConfigDict(

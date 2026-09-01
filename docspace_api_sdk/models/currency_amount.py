@@ -30,7 +30,7 @@ from docspace_api_sdk.models.currency_code import CurrencyCode
 
 class CurrencyAmount(CurrencyCode):
     """
-    CurrencyAmount
+    An amount of money together with its currency.
     """
 
     amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The amount in the specified currency.", json_schema_extra={"examples": [1500.75]})

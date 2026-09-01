@@ -21,9 +21,9 @@ from inspect import getfullargspec
 import json
 import pprint
 import re  # noqa: F401
+from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from docspace_api_sdk.models.api_date_time import ApiDateTime
 from docspace_api_sdk.models.chat_settings_dto import ChatSettingsDto
 from docspace_api_sdk.models.employee_dto import EmployeeDto
 from docspace_api_sdk.models.file_entry_dto_integer_all_of_available_share_rights import FileEntryDtoIntegerAllOfAvailableShareRights
@@ -118,18 +118,9 @@ class FolderDtoInteger(FileEntryDtoInteger):
         # override the default output from pydantic by calling `to_dict()` of owned_by
         if self.owned_by:
             _dict['ownedBy'] = self.owned_by.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of created
-        if self.created:
-            _dict['created'] = self.created.to_dict()
         # override the default output from pydantic by calling `to_dict()` of created_by
         if self.created_by:
             _dict['createdBy'] = self.created_by.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of updated
-        if self.updated:
-            _dict['updated'] = self.updated.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of auto_delete
-        if self.auto_delete:
-            _dict['autoDelete'] = self.auto_delete.to_dict()
         # override the default output from pydantic by calling `to_dict()` of updated_by
         if self.updated_by:
             _dict['updatedBy'] = self.updated_by.to_dict()
@@ -142,9 +133,6 @@ class FolderDtoInteger(FileEntryDtoInteger):
         # override the default output from pydantic by calling `to_dict()` of available_share_rights
         if self.available_share_rights:
             _dict['availableShareRights'] = self.available_share_rights.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of expiration_date
-        if self.expiration_date:
-            _dict['expirationDate'] = self.expiration_date.to_dict()
         # override the default output from pydantic by calling `to_dict()` of logo
         if self.logo:
             _dict['logo'] = self.logo.to_dict()

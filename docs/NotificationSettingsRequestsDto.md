@@ -5,7 +5,7 @@ The request parameters for configuring notification settings.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**type** | [**NotificationType**](NotificationType.md) | The notification type. | 
+**type** | [**NotificationType**](NotificationType.md) | The notification to be configured. | 
 **is_enabled** | **bool** | Specifies if the specified notification type is enabled or not. | [optional] 
 
 ## Example

@@ -1,26 +1,27 @@
 # MigrationApiInfo
+The migration API information.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**migrator_name** | **str** |  | [optional] 
-**operation** | **str** |  | [optional] 
-**failed_archives** | **List[str]** |  | [optional] 
-**users** | [**List[MigratingApiUser]**](MigratingApiUser.md) |  | [optional] 
-**without_email_users** | [**List[MigratingApiUser]**](MigratingApiUser.md) |  | [optional] 
-**exist_users** | [**List[MigratingApiUser]**](MigratingApiUser.md) |  | [optional] 
-**groups** | [**List[MigratingApiGroup]**](MigratingApiGroup.md) |  | [optional] 
-**import_personal_files** | **bool** |  | [optional] 
-**import_shared_files** | **bool** |  | [optional] 
-**import_shared_folders** | **bool** |  | [optional] 
-**import_common_files** | **bool** |  | [optional] 
-**import_project_files** | **bool** |  | [optional] 
-**import_groups** | **bool** |  | [optional] 
-**successed_users** | **int** |  | [optional] 
-**failed_users** | **int** |  | [optional] 
-**files** | **List[str]** |  | [optional] 
-**errors** | **List[str]** |  | [optional] 
+**migrator_name** | **str** | The migrator name. | [optional] 
+**operation** | **str** | The migration operation. | [optional] 
+**failed_archives** | **List[str]** | The list of failed archives. | [optional] 
+**users** | [**List[MigratingApiUser]**](MigratingApiUser.md) | The list of migrating users. | [optional] 
+**without_email_users** | [**List[MigratingApiUser]**](MigratingApiUser.md) | The list of migrating users without email. | [optional] 
+**exist_users** | [**List[MigratingApiUser]**](MigratingApiUser.md) | The list of existing migrating users. | [optional] 
+**groups** | [**List[MigratingApiGroup]**](MigratingApiGroup.md) | The list of migrating groups. | [optional] 
+**import_personal_files** | **bool** | Specifies whether to import personal files or not. | [optional] 
+**import_shared_files** | **bool** | Specifies whether to import shared files or not. | [optional] 
+**import_shared_folders** | **bool** | Specifies whether to import shared folders or not. | [optional] 
+**import_common_files** | **bool** | Specifies whether to import common files or not. | [optional] 
+**import_project_files** | **bool** | Specifies whether to import project files or not. | [optional] 
+**import_groups** | **bool** | Specifies whether to import groups or not. | [optional] 
+**successed_users** | **int** | The number of successfully migrated users. | [optional] 
+**failed_users** | **int** | The number of unsuccessfully migrated users. | [optional] 
+**files** | **List[str]** | The list of migrated files. | [optional] 
+**errors** | **List[str]** | The list of migration errors. | [optional] 
 
 ## Example
 

@@ -21,10 +21,10 @@ import pprint
 import re  # noqa: F401
 import json
 
+from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from uuid import UUID
-from docspace_api_sdk.models.api_date_time import ApiDateTime
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -41,7 +41,7 @@ class ActiveConnectionsItemDto(BaseModel):
     city: Optional[StrictStr] = Field(default=None, description="The active connection city.", json_schema_extra={"examples": ["New York"]})
     browser: Optional[StrictStr] = Field(default=None, description="The active connection browser.", json_schema_extra={"examples": ["Chrome 120.0"]})
     platform: Optional[StrictStr] = Field(default=None, description="The active connection platform.", json_schema_extra={"examples": ["Windows"]})
-    var_date: Optional[ApiDateTime] = Field(default=None, description="The API date and time parameters.", alias="date")
+    var_date: Optional[datetime] = Field(default=None, description="The active connection date.", alias="date", json_schema_extra={"examples": ["2024-01-15T10:30:00Z"]})
     page: Optional[StrictStr] = Field(default=None, description="The active connection page.", json_schema_extra={"examples": ["/rooms/shared"]})
     __properties: ClassVar[List[str]] = ["id", "tenantId", "userId", "mobile", "ip", "country", "city", "browser", "platform", "date", "page"]
 
@@ -84,9 +84,6 @@ class ActiveConnectionsItemDto(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of var_date
-        if self.var_date:
-            _dict['date'] = self.var_date.to_dict()
         # set to None if ip (nullable) is None
         # and model_fields_set contains the field
         if self.ip is None and "ip" in self.model_fields_set:
@@ -111,6 +108,11 @@ class ActiveConnectionsItemDto(BaseModel):
         # and model_fields_set contains the field
         if self.platform is None and "platform" in self.model_fields_set:
             _dict['platform'] = None
+
+        # set to None if var_date (nullable) is None
+        # and model_fields_set contains the field
+        if self.var_date is None and "var_date" in self.model_fields_set:
+            _dict['date'] = None
 
         # set to None if page (nullable) is None
         # and model_fields_set contains the field
@@ -139,7 +141,7 @@ class ActiveConnectionsItemDto(BaseModel):
             "city": obj.get("city"),
             "browser": obj.get("browser"),
             "platform": obj.get("platform"),
-            "date": ApiDateTime.from_dict(obj["date"]) if obj.get("date") is not None else None,
+            "date": obj.get("date"),
             "page": obj.get("page")
         })
         return _obj

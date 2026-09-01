@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **folder** | **str** | The folder of the file. | [optional] 
 **owner** | **str** | The file owner. | [optional] 
 **sharing_settings** | [**List[AceShortWrapper]**](AceShortWrapper.md) | The sharing settings of the file. | [optional] 
-**type** | [**EditorType**](EditorType.md) | The editor type. | [optional] 
+**type** | [**EditorType**](EditorType.md) | The editor type of the file. | [optional] 
 **uploaded** | **str** | The uploaded file. | [optional] 
 
 ## Example

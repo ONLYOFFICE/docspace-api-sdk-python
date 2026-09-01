@@ -5,8 +5,8 @@ Outcome of an MCP-server CRUD call. Either success or a field-scoped error suita
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**success** | **bool** |  | 
-**error** | [**AiTErrorData**](AiTErrorData.md) |  | [optional] 
+**success** | **bool** | True when the MCP server was persisted. | 
+**error** | [**AiTErrorData**](AiTErrorData.md) | Why the MCP server was rejected. Present on failure. | [optional] 
 
 ## Example
 

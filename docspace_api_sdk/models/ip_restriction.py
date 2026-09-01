@@ -30,11 +30,11 @@ from docspace_api_sdk.models.ip_restriction_base import IpRestrictionBase
 
 class IPRestriction(IpRestrictionBase):
     """
-    IPRestriction
+    The IP restiction parameters.
     """
 
-    id: Optional[StrictInt] = None
-    tenant_id: Optional[StrictInt] = Field(default=None, alias="tenantId")
+    id: Optional[StrictInt] = Field(default=None, description="The IP restiction ID.", json_schema_extra={"examples": [1]})
+    tenant_id: Optional[StrictInt] = Field(default=None, description="The tenant ID.", alias="tenantId", json_schema_extra={"examples": [1]})
 
     model_config = ConfigDict(
         populate_by_name=True,

@@ -21,9 +21,9 @@ from inspect import getfullargspec
 import json
 import pprint
 import re  # noqa: F401
+from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from docspace_api_sdk.models.ai_api_date_time import AiApiDateTime
 from docspace_api_sdk.models.ai_employee_dto import AiEmployeeDto
 from docspace_api_sdk.models.ai_file_entry_type import AiFileEntryType
 from docspace_api_sdk.models.ai_file_share import AiFileShare
@@ -53,7 +53,7 @@ class AiFileEntryDtoInteger(AiFileEntryBaseDto):
     available_share_rights: Optional[FileEntryDtoIntegerAllOfAvailableShareRights] = Field(default=None, alias="availableShareRights")
     request_token: Optional[StrictStr] = Field(default=None, description="The request token of the file entry.", alias="requestToken", json_schema_extra={"examples": ["token-abc-123"]})
     external: Optional[StrictBool] = Field(default=None, description="Specifies if the folder can be accessed via an external link or not.", json_schema_extra={"examples": [False]})
-    expiration_date: Optional[AiApiDateTime] = Field(default=None, description="Represents the expiration date of the file entry.", alias="expirationDate")
+    expiration_date: Optional[datetime] = Field(default=None, description="Represents the expiration date of the file entry.", alias="expirationDate", json_schema_extra={"examples": ["2021-01-01T00:00:00Z"]})
     is_link_expired: Optional[StrictBool] = Field(default=None, description="Indicates whether the shareable link associated with the file or folder has expired.", alias="isLinkExpired", json_schema_extra={"examples": [False]})
 
     model_config = ConfigDict(
@@ -100,18 +100,9 @@ class AiFileEntryDtoInteger(AiFileEntryBaseDto):
         # override the default output from pydantic by calling `to_dict()` of owned_by
         if self.owned_by:
             _dict['ownedBy'] = self.owned_by.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of created
-        if self.created:
-            _dict['created'] = self.created.to_dict()
         # override the default output from pydantic by calling `to_dict()` of created_by
         if self.created_by:
             _dict['createdBy'] = self.created_by.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of updated
-        if self.updated:
-            _dict['updated'] = self.updated.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of auto_delete
-        if self.auto_delete:
-            _dict['autoDelete'] = self.auto_delete.to_dict()
         # override the default output from pydantic by calling `to_dict()` of updated_by
         if self.updated_by:
             _dict['updatedBy'] = self.updated_by.to_dict()
@@ -124,9 +115,6 @@ class AiFileEntryDtoInteger(AiFileEntryBaseDto):
         # override the default output from pydantic by calling `to_dict()` of available_share_rights
         if self.available_share_rights:
             _dict['availableShareRights'] = self.available_share_rights.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of expiration_date
-        if self.expiration_date:
-            _dict['expirationDate'] = self.expiration_date.to_dict()
         # set to None if origin_title (nullable) is None
         # and model_fields_set contains the field
         if self.origin_title is None and "origin_title" in self.model_fields_set:
@@ -162,6 +150,11 @@ class AiFileEntryDtoInteger(AiFileEntryBaseDto):
         if self.external is None and "external" in self.model_fields_set:
             _dict['external'] = None
 
+        # set to None if expiration_date (nullable) is None
+        # and model_fields_set contains the field
+        if self.expiration_date is None and "expiration_date" in self.model_fields_set:
+            _dict['expirationDate'] = None
+
         # set to None if is_link_expired (nullable) is None
         # and model_fields_set contains the field
         if self.is_link_expired is None and "is_link_expired" in self.model_fields_set:
@@ -193,7 +186,7 @@ class AiFileEntryDtoInteger(AiFileEntryBaseDto):
             "availableShareRights": FileEntryDtoIntegerAllOfAvailableShareRights.from_dict(obj["availableShareRights"]) if obj.get("availableShareRights") is not None else None,
             "requestToken": obj.get("requestToken"),
             "external": obj.get("external"),
-            "expirationDate": AiApiDateTime.from_dict(obj["expirationDate"]) if obj.get("expirationDate") is not None else None,
+            "expirationDate": obj.get("expirationDate"),
             "isLinkExpired": obj.get("isLinkExpired")
         }
         all_fields = {**base_dict, **extra_fields}

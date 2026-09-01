@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **title** | **str** | The file title. | [optional] 
 **provider_key** | **str** | The third-party provider key. | [optional] 
 **uploaded** | **bool** | Specifies whether the file has been uploaded. | [optional] 
-**file** | [**FileDtoInteger**](FileDtoInteger.md) | The file parameters. | [optional] 
+**file** | [**FileDtoInteger**](FileDtoInteger.md) | The uploaded file information. | [optional] 
 
 ## Example
 

@@ -30,14 +30,14 @@ from typing_extensions import Self
 
 class FileKeys(BaseModel):
     """
-    FileKeys
+    The encrypted file key issued to one user.
     """ # noqa: E501
-    user_id: Optional[UUID] = Field(default=None, alias="userId")
-    public_key_id: Optional[UUID] = Field(default=None, alias="publicKeyId")
-    private_key_enc: Optional[StrictStr] = Field(default=None, alias="privateKeyEnc")
-    tenant_id: Optional[StrictInt] = Field(default=None, alias="tenantId")
-    file_id: Optional[StrictInt] = Field(default=None, alias="fileId")
-    create_on: Optional[datetime] = Field(default=None, alias="createOn")
+    user_id: Optional[UUID] = Field(default=None, description="The identifier of the user the file key was issued to.", alias="userId", json_schema_extra={"examples": ["9924256B-447C-4F19-9dbd-8ad8c39e8ff5"]})
+    public_key_id: Optional[UUID] = Field(default=None, description="The identifier of the key pair the file key is encrypted for.", alias="publicKeyId", json_schema_extra={"examples": ["9924256B-447C-4F19-9dbd-8ad8c39e8ff5"]})
+    private_key_enc: Optional[StrictStr] = Field(default=None, description="The file key, encrypted with the public key of the pair.", alias="privateKeyEnc", json_schema_extra={"examples": ["U2FsdGVkX1+Lm3s..."]})
+    tenant_id: Optional[StrictInt] = Field(default=None, description="The identifier of the portal the file belongs to.", alias="tenantId", json_schema_extra={"examples": [1]})
+    file_id: Optional[StrictInt] = Field(default=None, description="The identifier of the file the key unlocks.", alias="fileId", json_schema_extra={"examples": [9846]})
+    create_on: Optional[datetime] = Field(default=None, description="The date and time when the file key was issued.", alias="createOn", json_schema_extra={"examples": ["2025-01-01T00:00:00"]})
     __properties: ClassVar[List[str]] = ["userId", "publicKeyId", "privateKeyEnc", "tenantId", "fileId", "createOn"]
 
     model_config = ConfigDict(

@@ -55,6 +55,7 @@ from docspace_api_sdk.api.portal.settings_api import SettingsApi
 from docspace_api_sdk.api.portal.users_api import UsersApi
 from docspace_api_sdk.api.rooms.rooms_api import RoomsApi
 from docspace_api_sdk.api.rooms.groups_api import GroupsApi
+from docspace_api_sdk.api.rooms.privacy_room_api import PrivacyRoomApi
 from docspace_api_sdk.api.security.access_to_dev_tools_api import AccessToDevToolsApi
 from docspace_api_sdk.api.security.active_connections_api import ActiveConnectionsApi
 from docspace_api_sdk.api.security.audit_trail_data_api import AuditTrailDataApi
@@ -89,5 +90,4 @@ from docspace_api_sdk.api.settings.telegram_api import TelegramApi
 from docspace_api_sdk.api.settings.webhooks_api import WebhooksApi
 from docspace_api_sdk.api.settings.webplugins_api import WebpluginsApi
 from docspace_api_sdk.api.third_party.third_party_api import ThirdPartyApi
-from docspace_api_sdk.api.privacyroom.privacyroom_api import PrivacyroomApi
 

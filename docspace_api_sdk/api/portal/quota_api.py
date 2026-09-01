@@ -100,8 +100,9 @@ class QuotaApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantQuotaWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -169,8 +170,9 @@ class QuotaApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantQuotaWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -238,8 +240,9 @@ class QuotaApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantQuotaWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -375,8 +378,10 @@ class QuotaApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TariffWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -447,8 +452,10 @@ class QuotaApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TariffWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -519,8 +526,10 @@ class QuotaApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TariffWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -657,8 +666,9 @@ class QuotaApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DoubleWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -725,8 +735,9 @@ class QuotaApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DoubleWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -793,8 +804,9 @@ class QuotaApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DoubleWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -927,8 +939,9 @@ class QuotaApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantQuotaWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -996,8 +1009,9 @@ class QuotaApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantQuotaWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1065,8 +1079,9 @@ class QuotaApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantQuotaWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1203,8 +1218,10 @@ class QuotaApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "UpcomingPaymentArrayWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1276,8 +1293,10 @@ class QuotaApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "UpcomingPaymentArrayWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1349,8 +1368,10 @@ class QuotaApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "UpcomingPaymentArrayWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }

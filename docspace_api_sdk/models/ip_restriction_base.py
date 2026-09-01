@@ -28,10 +28,10 @@ from typing_extensions import Self
 
 class IpRestrictionBase(BaseModel):
     """
-    IpRestrictionBase
+    The IP restiction base parameters.
     """ # noqa: E501
-    ip: Optional[StrictStr]
-    for_admin: Optional[StrictBool] = Field(default=None, alias="forAdmin")
+    ip: Optional[StrictStr] = Field(description="The IP address.", json_schema_extra={"examples": ["192.0.2.1"]})
+    for_admin: Optional[StrictBool] = Field(default=None, description="Specifies if the IP address is for administrator users only or not.", alias="forAdmin", json_schema_extra={"examples": [False]})
     __properties: ClassVar[List[str]] = ["ip", "forAdmin"]
 
     model_config = ConfigDict(

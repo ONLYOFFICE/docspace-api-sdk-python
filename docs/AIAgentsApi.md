@@ -17,7 +17,7 @@ Method | HTTP request | Description
 # **ai_agents_create**
 > AiFolderIntegerWrapper ai_agents_create(ai_agents_create_request)
 
-
+Creates an AI agent room in the .NET AI service and binds the supplied `profileId` to it as a `Chat` assignment. The instruction is stored on the room as a prompt-only chat setting; a failed binding is reported as an error even though the room already exists.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -84,7 +84,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **ai_agents_delete**
 > AiFileOperationWrapper ai_agents_delete(id, ai_agents_delete_request)
 
-
+Deletes an AI agent room.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -93,7 +93,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **str**|  | 
+ **id** | **str**| The agent identifier. | 
  **ai_agents_delete_request** | [**AiAgentsDeleteRequest**](AiAgentsDeleteRequest.md)|  | 
 
 ### Return type
@@ -122,7 +122,7 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.AgentsApi(api_client)
-    id = 'id_example' # str | 
+    id = 'id_example' # str | The agent identifier.
     ai_agents_delete_request = docspace_api_sdk.AiAgentsDeleteRequest() # AiAgentsDeleteRequest | 
 
     try:
@@ -153,7 +153,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **ai_agents_get**
 > AiFolderIntegerWrapper ai_agents_get(id)
 
-
+Returns one AI agent room, enriched with the `profileId` bound to it so an edit form can prefill the profile selector. A missing assignment simply leaves `profileId` out.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -162,7 +162,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **str**|  | 
+ **id** | **str**| The agent identifier. | 
 
 ### Return type
 
@@ -189,7 +189,7 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.AgentsApi(api_client)
-    id = 'id_example' # str | 
+    id = 'id_example' # str | The agent identifier.
 
     try:
         # Get an agent
@@ -219,7 +219,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **ai_agents_list**
 > AiFolderContentIntegerWrapper ai_agents_list()
 
-
+Lists the portal's AI agent rooms. Query parameters are forwarded unchanged to the .NET AI service, which answers with its folder-content payload.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -281,7 +281,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **ai_agents_news**
 > AiNewItemsAgentNewItemsArrayWrapper ai_agents_news()
 
-
+Lists the new items across the caller's AI agent rooms.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -343,7 +343,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **ai_agents_reset_quota**
 > AiFolderIntegerArrayWrapper ai_agents_reset_quota(ai_agents_reset_quota_request)
 
-
+Resets the storage quota of the given AI agent rooms.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -410,7 +410,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **ai_agents_update**
 > AiFolderIntegerWrapper ai_agents_update(id, ai_agents_update_request)
 
-
+Updates an AI agent room - title, tags, instruction. `profileId` is not part of the room contract: it is stripped from the forwarded body and re-bound as the agent's assignment afterwards.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -419,7 +419,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **str**|  | 
+ **id** | **str**| The agent identifier. | 
  **ai_agents_update_request** | [**AiAgentsUpdateRequest**](AiAgentsUpdateRequest.md)|  | 
 
 ### Return type
@@ -448,7 +448,7 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.AgentsApi(api_client)
-    id = 'id_example' # str | 
+    id = 'id_example' # str | The agent identifier.
     ai_agents_update_request = docspace_api_sdk.AiAgentsUpdateRequest() # AiAgentsUpdateRequest | 
 
     try:
@@ -479,7 +479,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **ai_agents_update_quota**
 > AiFolderIntegerArrayWrapper ai_agents_update_quota(ai_agents_update_quota_request)
 
-
+Changes the storage quota of the given AI agent rooms.
 
 For more information, see [api.onlyoffice.com]().
 

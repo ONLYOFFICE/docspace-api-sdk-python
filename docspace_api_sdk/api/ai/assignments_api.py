@@ -21,8 +21,9 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import StrictStr
-from typing import Dict
+from pydantic import Field, StrictStr
+from typing import Dict, Optional
+from typing_extensions import Annotated
 from docspace_api_sdk.models.ai_action_type import AiActionType
 from docspace_api_sdk.models.ai_assignment_mutation_result import AiAssignmentMutationResult
 from docspace_api_sdk.models.ai_assignments_assign_request import AiAssignmentsAssignRequest
@@ -68,6 +69,7 @@ class AssignmentsApi:
     ) -> AiAssignmentMutationResult:
         """Assign
 
+        Binds a profile to an AI action, creating the assignment or updating it in place. The profile's declared capabilities are validated against the action, except for the `Default` slot.
 
         :param ai_assignments_assign_request: (required)
         :type ai_assignments_assign_request: AiAssignmentsAssignRequest
@@ -136,6 +138,7 @@ class AssignmentsApi:
     ) -> ApiResponse[AiAssignmentMutationResult]:
         """Assign
 
+        Binds a profile to an AI action, creating the assignment or updating it in place. The profile's declared capabilities are validated against the action, except for the `Default` slot.
 
         :param ai_assignments_assign_request: (required)
         :type ai_assignments_assign_request: AiAssignmentsAssignRequest
@@ -204,6 +207,7 @@ class AssignmentsApi:
     ) -> RESTResponseType:
         """Assign
 
+        Binds a profile to an AI action, creating the assignment or updating it in place. The profile's declared capabilities are validated against the action, except for the `Default` slot.
 
         :param ai_assignments_assign_request: (required)
         :type ai_assignments_assign_request: AiAssignmentsAssignRequest
@@ -347,6 +351,7 @@ class AssignmentsApi:
     ) -> AiBulkAssignmentResult:
         """Bulk assign
 
+        Applies many action-to-profile bindings at once. Every entry is validated first and nothing is written if any of them fails, so the assignment set is never left half-written.
 
         :param request_body: (required)
         :type request_body: Dict[str, str]
@@ -415,6 +420,7 @@ class AssignmentsApi:
     ) -> ApiResponse[AiBulkAssignmentResult]:
         """Bulk assign
 
+        Applies many action-to-profile bindings at once. Every entry is validated first and nothing is written if any of them fails, so the assignment set is never left half-written.
 
         :param request_body: (required)
         :type request_body: Dict[str, str]
@@ -483,6 +489,7 @@ class AssignmentsApi:
     ) -> RESTResponseType:
         """Bulk assign
 
+        Applies many action-to-profile bindings at once. Every entry is validated first and nothing is written if any of them fails, so the assignment set is never left half-written.
 
         :param request_body: (required)
         :type request_body: Dict[str, str]
@@ -626,6 +633,7 @@ class AssignmentsApi:
     ) -> AiSuccessResponse:
         """Cascade profile delete
 
+        Cleans up the assignments pointing at a profile that is about to be deleted: the `Default` slot is promoted to the first remaining profile (or dropped when none is left), and every other slot holding that profile is unbound.
 
         :param body: (required)
         :type body: str
@@ -694,6 +702,7 @@ class AssignmentsApi:
     ) -> ApiResponse[AiSuccessResponse]:
         """Cascade profile delete
 
+        Cleans up the assignments pointing at a profile that is about to be deleted: the `Default` slot is promoted to the first remaining profile (or dropped when none is left), and every other slot holding that profile is unbound.
 
         :param body: (required)
         :type body: str
@@ -762,6 +771,7 @@ class AssignmentsApi:
     ) -> RESTResponseType:
         """Cascade profile delete
 
+        Cleans up the assignments pointing at a profile that is about to be deleted: the `Default` slot is promoted to the first remaining profile (or dropped when none is left), and every other slot holding that profile is unbound.
 
         :param body: (required)
         :type body: str
@@ -889,7 +899,7 @@ class AssignmentsApi:
     @validate_call
     def ai_assignments_get_all_assignments(
         self,
-        entity_id: StrictStr,
+        entity_id: Annotated[Optional[StrictStr], Field(description="The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -905,8 +915,9 @@ class AssignmentsApi:
     ) -> Dict[str, str]:
         """Get all assignments
 
+        Returns the full action-to-profile assignment map of the scope.
 
-        :param entity_id: (required)
+        :param entity_id: The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
         :type entity_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -957,7 +968,7 @@ class AssignmentsApi:
     @validate_call
     def ai_assignments_get_all_assignments_with_http_info(
         self,
-        entity_id: StrictStr,
+        entity_id: Annotated[Optional[StrictStr], Field(description="The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -973,8 +984,9 @@ class AssignmentsApi:
     ) -> ApiResponse[Dict[str, str]]:
         """Get all assignments
 
+        Returns the full action-to-profile assignment map of the scope.
 
-        :param entity_id: (required)
+        :param entity_id: The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
         :type entity_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1025,7 +1037,7 @@ class AssignmentsApi:
     @validate_call
     def ai_assignments_get_all_assignments_without_preload_content(
         self,
-        entity_id: StrictStr,
+        entity_id: Annotated[Optional[StrictStr], Field(description="The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1041,8 +1053,9 @@ class AssignmentsApi:
     ) -> RESTResponseType:
         """Get all assignments
 
+        Returns the full action-to-profile assignment map of the scope.
 
-        :param entity_id: (required)
+        :param entity_id: The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
         :type entity_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1157,7 +1170,7 @@ class AssignmentsApi:
     @validate_call
     def ai_assignments_get_assignment(
         self,
-        action_type: StrictStr,
+        action_type: Annotated[StrictStr, Field(description="The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1173,8 +1186,9 @@ class AssignmentsApi:
     ) -> str:
         """Get assignment
 
+        Returns the profile bound to one AI action, without the `Default` fallback.
 
-        :param action_type: (required)
+        :param action_type: The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision. (required)
         :type action_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1225,7 +1239,7 @@ class AssignmentsApi:
     @validate_call
     def ai_assignments_get_assignment_with_http_info(
         self,
-        action_type: StrictStr,
+        action_type: Annotated[StrictStr, Field(description="The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1241,8 +1255,9 @@ class AssignmentsApi:
     ) -> ApiResponse[str]:
         """Get assignment
 
+        Returns the profile bound to one AI action, without the `Default` fallback.
 
-        :param action_type: (required)
+        :param action_type: The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision. (required)
         :type action_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1293,7 +1308,7 @@ class AssignmentsApi:
     @validate_call
     def ai_assignments_get_assignment_without_preload_content(
         self,
-        action_type: StrictStr,
+        action_type: Annotated[StrictStr, Field(description="The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1309,8 +1324,9 @@ class AssignmentsApi:
     ) -> RESTResponseType:
         """Get assignment
 
+        Returns the profile bound to one AI action, without the `Default` fallback.
 
-        :param action_type: (required)
+        :param action_type: The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision. (required)
         :type action_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1425,8 +1441,8 @@ class AssignmentsApi:
     @validate_call
     def ai_assignments_resolve_for_action(
         self,
-        action_type: StrictStr,
-        entity_id: StrictStr,
+        action_type: Annotated[StrictStr, Field(description="The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision.")],
+        entity_id: Annotated[Optional[StrictStr], Field(description="The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1442,10 +1458,11 @@ class AssignmentsApi:
     ) -> AiResolvedAssignment:
         """Resolve for action
 
+        Resolves the profile bound to an AI action, falling back to the `Default` slot when the action itself has none. Fails when neither slot is set or the bound profile no longer exists - use `try-resolve-for-action` for an empty answer instead.
 
-        :param action_type: (required)
+        :param action_type: The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision. (required)
         :type action_type: str
-        :param entity_id: (required)
+        :param entity_id: The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
         :type entity_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1497,8 +1514,8 @@ class AssignmentsApi:
     @validate_call
     def ai_assignments_resolve_for_action_with_http_info(
         self,
-        action_type: StrictStr,
-        entity_id: StrictStr,
+        action_type: Annotated[StrictStr, Field(description="The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision.")],
+        entity_id: Annotated[Optional[StrictStr], Field(description="The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1514,10 +1531,11 @@ class AssignmentsApi:
     ) -> ApiResponse[AiResolvedAssignment]:
         """Resolve for action
 
+        Resolves the profile bound to an AI action, falling back to the `Default` slot when the action itself has none. Fails when neither slot is set or the bound profile no longer exists - use `try-resolve-for-action` for an empty answer instead.
 
-        :param action_type: (required)
+        :param action_type: The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision. (required)
         :type action_type: str
-        :param entity_id: (required)
+        :param entity_id: The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
         :type entity_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1569,8 +1587,8 @@ class AssignmentsApi:
     @validate_call
     def ai_assignments_resolve_for_action_without_preload_content(
         self,
-        action_type: StrictStr,
-        entity_id: StrictStr,
+        action_type: Annotated[StrictStr, Field(description="The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision.")],
+        entity_id: Annotated[Optional[StrictStr], Field(description="The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1586,10 +1604,11 @@ class AssignmentsApi:
     ) -> RESTResponseType:
         """Resolve for action
 
+        Resolves the profile bound to an AI action, falling back to the `Default` slot when the action itself has none. Fails when neither slot is set or the bound profile no longer exists - use `try-resolve-for-action` for an empty answer instead.
 
-        :param action_type: (required)
+        :param action_type: The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision. (required)
         :type action_type: str
-        :param entity_id: (required)
+        :param entity_id: The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
         :type entity_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1710,8 +1729,8 @@ class AssignmentsApi:
     @validate_call
     def ai_assignments_try_resolve_for_action(
         self,
-        action_type: StrictStr,
-        entity_id: StrictStr,
+        action_type: Annotated[StrictStr, Field(description="The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision.")],
+        entity_id: Annotated[Optional[StrictStr], Field(description="The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1727,10 +1746,11 @@ class AssignmentsApi:
     ) -> AiResolvedAssignment:
         """Try resolve for action
 
+        Resolves the profile bound to an AI action exactly like `resolve-for-action`, but answers with an empty result instead of failing when nothing is configured.
 
-        :param action_type: (required)
+        :param action_type: The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision. (required)
         :type action_type: str
-        :param entity_id: (required)
+        :param entity_id: The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
         :type entity_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1782,8 +1802,8 @@ class AssignmentsApi:
     @validate_call
     def ai_assignments_try_resolve_for_action_with_http_info(
         self,
-        action_type: StrictStr,
-        entity_id: StrictStr,
+        action_type: Annotated[StrictStr, Field(description="The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision.")],
+        entity_id: Annotated[Optional[StrictStr], Field(description="The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1799,10 +1819,11 @@ class AssignmentsApi:
     ) -> ApiResponse[AiResolvedAssignment]:
         """Try resolve for action
 
+        Resolves the profile bound to an AI action exactly like `resolve-for-action`, but answers with an empty result instead of failing when nothing is configured.
 
-        :param action_type: (required)
+        :param action_type: The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision. (required)
         :type action_type: str
-        :param entity_id: (required)
+        :param entity_id: The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
         :type entity_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1854,8 +1875,8 @@ class AssignmentsApi:
     @validate_call
     def ai_assignments_try_resolve_for_action_without_preload_content(
         self,
-        action_type: StrictStr,
-        entity_id: StrictStr,
+        action_type: Annotated[StrictStr, Field(description="The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision.")],
+        entity_id: Annotated[Optional[StrictStr], Field(description="The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1871,10 +1892,11 @@ class AssignmentsApi:
     ) -> RESTResponseType:
         """Try resolve for action
 
+        Resolves the profile bound to an AI action exactly like `resolve-for-action`, but answers with an empty result instead of failing when nothing is configured.
 
-        :param action_type: (required)
+        :param action_type: The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision. (required)
         :type action_type: str
-        :param entity_id: (required)
+        :param entity_id: The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
         :type entity_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2011,6 +2033,7 @@ class AssignmentsApi:
     ) -> AiSuccessResponse:
         """Unassign
 
+        Removes the profile binding of an AI action. Does nothing when that slot is already empty.
 
         :param body: (required)
         :type body: str
@@ -2079,6 +2102,7 @@ class AssignmentsApi:
     ) -> ApiResponse[AiSuccessResponse]:
         """Unassign
 
+        Removes the profile binding of an AI action. Does nothing when that slot is already empty.
 
         :param body: (required)
         :type body: str
@@ -2147,6 +2171,7 @@ class AssignmentsApi:
     ) -> RESTResponseType:
         """Unassign
 
+        Removes the profile binding of an AI action. Does nothing when that slot is already empty.
 
         :param body: (required)
         :type body: str

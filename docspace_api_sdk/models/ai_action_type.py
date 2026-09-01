@@ -24,7 +24,7 @@ from typing_extensions import Self
 
 class AiActionType(str, Enum):
     """
-    AiActionType
+    The AI action a request or an assignment applies to. Each action has its own assignment slot; `Default` is the profile used when an action's own slot is empty.
     """
 
     """

@@ -31,8 +31,8 @@ class AiResolvedAssignment(BaseModel):
     """
     Resolved profile for an action — both the storage row and its ID.
     """ # noqa: E501
-    profile_id: StrictStr = Field(alias="profileId")
-    profile: AiProfile
+    profile_id: StrictStr = Field(description="The identifier of the resolved profile.", alias="profileId")
+    profile: AiProfile = Field(description="The resolved profile itself.")
     __properties: ClassVar[List[str]] = ["profileId", "profile"]
 
     model_config = ConfigDict(

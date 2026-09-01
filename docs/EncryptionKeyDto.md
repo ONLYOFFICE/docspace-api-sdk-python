@@ -1,15 +1,16 @@
 # EncryptionKeyDto
+The encryption key pair of a user.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **UUID** |  | [optional] 
-**user_id** | **UUID** |  | [optional] 
-**var_date** | **datetime** |  | [optional] 
-**public_key** | **str** |  | [optional] 
-**private_key_enc** | **str** |  | [optional] 
-**crypto_engine_id** | **str** |  | [optional] 
+**id** | **UUID** | The identifier of the key pair. | [optional] 
+**user_id** | **UUID** | The identifier of the user the key pair belongs to. | [optional] 
+**var_date** | **datetime** | The date and time when the key pair was created. | [optional] 
+**public_key** | **str** | The public key of the pair, used to encrypt the file keys. | [optional] 
+**private_key_enc** | **str** | The private key of the pair, encrypted with the user password. | [optional] 
+**crypto_engine_id** | **str** | The identifier of the crypto engine the key pair was issued for. | [optional] 
 
 ## Example
 

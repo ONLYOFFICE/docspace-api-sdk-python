@@ -30,10 +30,10 @@ from typing_extensions import Self
 
 class FileEncryptionInfoDto(BaseModel):
     """
-    FileEncryptionInfoDto
+    The encryption information of a file: the user key pairs and the per-user file keys.
     """ # noqa: E501
-    user_keys: Optional[List[EncryptionKeyDto]] = Field(default=None, alias="userKeys")
-    file_keys: Optional[List[FileKeys]] = Field(default=None, alias="fileKeys")
+    user_keys: Optional[List[EncryptionKeyDto]] = Field(default=None, description="The key pairs of the users who have access to the file.", alias="userKeys")
+    file_keys: Optional[List[FileKeys]] = Field(default=None, description="The file keys issued to those users.", alias="fileKeys")
     __properties: ClassVar[List[str]] = ["userKeys", "fileKeys"]
 
     model_config = ConfigDict(

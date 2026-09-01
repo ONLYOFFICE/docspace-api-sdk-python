@@ -21,7 +21,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictFloat, StrictInt, field_validator
+from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt, field_validator
 from typing import Any, ClassVar, Dict, List, Union
 from docspace_api_sdk.models.ai_prompt import AiPrompt
 from docspace_api_sdk.models.ai_prompt_folder import AiPromptFolder
@@ -32,9 +32,9 @@ class AiPromptBundle(BaseModel):
     """
     Versioned, self-contained bundle of every saved prompt and folder. Stable wire format — `version` lets the import path migrate older shapes if the schema ever changes.
     """ # noqa: E501
-    version: Union[StrictFloat, StrictInt]
-    folders: List[AiPromptFolder]
-    prompts: List[AiPrompt]
+    version: Union[StrictFloat, StrictInt] = Field(description="The bundle format version, so an import can migrate an older export.")
+    folders: List[AiPromptFolder] = Field(description="Every exported prompt folder.")
+    prompts: List[AiPrompt] = Field(description="Every exported prompt.")
     __properties: ClassVar[List[str]] = ["version", "folders", "prompts"]
 
     @field_validator('version')

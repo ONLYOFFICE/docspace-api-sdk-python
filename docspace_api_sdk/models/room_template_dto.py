@@ -35,7 +35,7 @@ class RoomTemplateDto(BaseModel):
     """ # noqa: E501
     room_id: StrictInt = Field(description="The room template ID.", alias="roomId", json_schema_extra={"examples": [1]})
     title: Annotated[str, Field(min_length=0, strict=True, max_length=400)] = Field(description="The room template title.", json_schema_extra={"examples": ["My Document"]})
-    logo: Optional[LogoRequest] = Field(default=None, description="The logo request parameters.")
+    logo: Optional[LogoRequest] = Field(default=None, description="The room template logo.")
     copy_logo: Optional[StrictBool] = Field(default=None, description="Specifies whether to copy room logo or not.", alias="copyLogo", json_schema_extra={"examples": [True]})
     share: Optional[List[StrictStr]] = Field(default=None, description="The collection of email addresses of users with whom to share a room.", json_schema_extra={"examples": [["user1@example.com", "user2@example.com"]]})
     groups: Optional[List[UUID]] = Field(default=None, description="The collection of groups with whom to share a room.", json_schema_extra={"examples": [["00000000-0000-0000-0000-000000000000"]]})

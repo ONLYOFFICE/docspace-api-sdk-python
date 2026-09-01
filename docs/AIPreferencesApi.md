@@ -13,7 +13,7 @@ Method | HTTP request | Description
 # **ai_preferences_clear_deep_mode**
 > AiSuccessResponse ai_preferences_clear_deep_mode(body)
 
-
+Drops the persisted deep-mode toggle of the scope, so later reads fall back to the configured default.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -77,9 +77,9 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ai_preferences_get_deep_mode**
-> bool ai_preferences_get_deep_mode(entity_id)
+> bool ai_preferences_get_deep_mode(entity_id=entity_id)
 
-
+Returns the deep-mode toggle of the scope, falling back to the configured default when nothing has been persisted.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -88,7 +88,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **entity_id** | **str**|  | 
+ **entity_id** | **str**| The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | [optional] 
 
 ### Return type
 
@@ -114,11 +114,11 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.PreferencesApi(api_client)
-    entity_id = 'entity_id_example' # str | 
+    entity_id = 'entity_id_example' # str | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. (optional)
 
     try:
         # Get deep mode
-        api_response = api_instance.ai_preferences_get_deep_mode(entity_id)
+        api_response = api_instance.ai_preferences_get_deep_mode(entity_id=entity_id)
         print("The response of PreferencesApi->ai_preferences_get_deep_mode:\n")
         pprint(api_response)
     except Exception as e:
@@ -142,9 +142,9 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ai_preferences_is_deep_mode_set**
-> bool ai_preferences_is_deep_mode_set(entity_id)
+> bool ai_preferences_is_deep_mode_set(entity_id=entity_id)
 
-
+Tells whether the scope has an explicitly persisted deep-mode value, whichever way that value is set.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -153,7 +153,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **entity_id** | **str**|  | 
+ **entity_id** | **str**| The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | [optional] 
 
 ### Return type
 
@@ -179,11 +179,11 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.PreferencesApi(api_client)
-    entity_id = 'entity_id_example' # str | 
+    entity_id = 'entity_id_example' # str | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. (optional)
 
     try:
         # Is deep mode set
-        api_response = api_instance.ai_preferences_is_deep_mode_set(entity_id)
+        api_response = api_instance.ai_preferences_is_deep_mode_set(entity_id=entity_id)
         print("The response of PreferencesApi->ai_preferences_is_deep_mode_set:\n")
         pprint(api_response)
     except Exception as e:
@@ -209,7 +209,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **ai_preferences_set_deep_mode**
 > AiSuccessResponse ai_preferences_set_deep_mode(ai_preferences_set_deep_mode_request)
 
-
+Persists the deep-mode toggle of the scope. Idempotent - there is no need to check whether a value already exists.
 
 For more information, see [api.onlyoffice.com]().
 

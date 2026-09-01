@@ -17,7 +17,7 @@ Method | HTTP request | Description
 # **ai_assignments_assign**
 > AiAssignmentMutationResult ai_assignments_assign(ai_assignments_assign_request)
 
-
+Binds a profile to an AI action, creating the assignment or updating it in place. The profile's declared capabilities are validated against the action, except for the `Default` slot.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -84,7 +84,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **ai_assignments_bulk_assign**
 > AiBulkAssignmentResult ai_assignments_bulk_assign(request_body)
 
-
+Applies many action-to-profile bindings at once. Every entry is validated first and nothing is written if any of them fails, so the assignment set is never left half-written.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -150,7 +150,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **ai_assignments_cascade_profile_delete**
 > AiSuccessResponse ai_assignments_cascade_profile_delete(body)
 
-
+Cleans up the assignments pointing at a profile that is about to be deleted: the `Default` slot is promoted to the first remaining profile (or dropped when none is left), and every other slot holding that profile is unbound.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -214,9 +214,9 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ai_assignments_get_all_assignments**
-> Dict[str, str] ai_assignments_get_all_assignments(entity_id)
+> Dict[str, str] ai_assignments_get_all_assignments(entity_id=entity_id)
 
-
+Returns the full action-to-profile assignment map of the scope.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -225,7 +225,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **entity_id** | **str**|  | 
+ **entity_id** | **str**| The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | [optional] 
 
 ### Return type
 
@@ -251,11 +251,11 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.AssignmentsApi(api_client)
-    entity_id = 'entity_id_example' # str | 
+    entity_id = 'entity_id_example' # str | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. (optional)
 
     try:
         # Get all assignments
-        api_response = api_instance.ai_assignments_get_all_assignments(entity_id)
+        api_response = api_instance.ai_assignments_get_all_assignments(entity_id=entity_id)
         print("The response of AssignmentsApi->ai_assignments_get_all_assignments:\n")
         pprint(api_response)
     except Exception as e:
@@ -281,7 +281,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **ai_assignments_get_assignment**
 > str ai_assignments_get_assignment(action_type)
 
-
+Returns the profile bound to one AI action, without the `Default` fallback.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -290,7 +290,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **action_type** | **str**|  | 
+ **action_type** | **str**| The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision. | 
 
 ### Return type
 
@@ -316,7 +316,7 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.AssignmentsApi(api_client)
-    action_type = 'action_type_example' # str | 
+    action_type = 'action_type_example' # str | The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision.
 
     try:
         # Get assignment
@@ -344,9 +344,9 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ai_assignments_resolve_for_action**
-> AiResolvedAssignment ai_assignments_resolve_for_action(action_type, entity_id)
+> AiResolvedAssignment ai_assignments_resolve_for_action(action_type, entity_id=entity_id)
 
-
+Resolves the profile bound to an AI action, falling back to the `Default` slot when the action itself has none. Fails when neither slot is set or the bound profile no longer exists - use `try-resolve-for-action` for an empty answer instead.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -355,8 +355,8 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **action_type** | **str**|  | 
- **entity_id** | **str**|  | 
+ **action_type** | **str**| The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision. | 
+ **entity_id** | **str**| The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | [optional] 
 
 ### Return type
 
@@ -383,12 +383,12 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.AssignmentsApi(api_client)
-    action_type = 'action_type_example' # str | 
-    entity_id = 'entity_id_example' # str | 
+    action_type = 'action_type_example' # str | The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision.
+    entity_id = 'entity_id_example' # str | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. (optional)
 
     try:
         # Resolve for action
-        api_response = api_instance.ai_assignments_resolve_for_action(action_type, entity_id)
+        api_response = api_instance.ai_assignments_resolve_for_action(action_type, entity_id=entity_id)
         print("The response of AssignmentsApi->ai_assignments_resolve_for_action:\n")
         pprint(api_response)
     except Exception as e:
@@ -412,9 +412,9 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ai_assignments_try_resolve_for_action**
-> AiResolvedAssignment ai_assignments_try_resolve_for_action(action_type, entity_id)
+> AiResolvedAssignment ai_assignments_try_resolve_for_action(action_type, entity_id=entity_id)
 
-
+Resolves the profile bound to an AI action exactly like `resolve-for-action`, but answers with an empty result instead of failing when nothing is configured.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -423,8 +423,8 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **action_type** | **str**|  | 
- **entity_id** | **str**|  | 
+ **action_type** | **str**| The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision. | 
+ **entity_id** | **str**| The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | [optional] 
 
 ### Return type
 
@@ -451,12 +451,12 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.AssignmentsApi(api_client)
-    action_type = 'action_type_example' # str | 
-    entity_id = 'entity_id_example' # str | 
+    action_type = 'action_type_example' # str | The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision.
+    entity_id = 'entity_id_example' # str | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. (optional)
 
     try:
         # Try resolve for action
-        api_response = api_instance.ai_assignments_try_resolve_for_action(action_type, entity_id)
+        api_response = api_instance.ai_assignments_try_resolve_for_action(action_type, entity_id=entity_id)
         print("The response of AssignmentsApi->ai_assignments_try_resolve_for_action:\n")
         pprint(api_response)
     except Exception as e:
@@ -482,7 +482,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **ai_assignments_unassign**
 > AiSuccessResponse ai_assignments_unassign(body)
 
-
+Removes the profile binding of an AI action. Does nothing when that slot is already empty.
 
 For more information, see [api.onlyoffice.com]().
 

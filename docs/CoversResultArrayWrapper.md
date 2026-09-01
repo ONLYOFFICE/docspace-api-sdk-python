@@ -1,10 +1,11 @@
 # CoversResultArrayWrapper
+The successful API response containing the list of CoversResultDto objects.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**response** | [**List[CoversResultDto]**](CoversResultDto.md) |  | [optional] 
+**response** | [**List[CoversResultDto]**](CoversResultDto.md) | The list of CoversResultDto objects returned by the operation. | [optional] 
 **count** | **int** | The total number of items in the response | [optional] 
 **links** | [**List[GetPortalPrices200ResponseLinksInner]**](GetPortalPrices200ResponseLinksInner.md) | List of links related to the response | [optional] 
 **status** | **int** | HTTP status code of the response | [optional] 

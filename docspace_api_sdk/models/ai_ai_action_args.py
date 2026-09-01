@@ -30,7 +30,7 @@ from typing_extensions import Self
 
 class AiAiActionArgs(BaseModel):
     """
-    AiAiActionArgs
+    Wire-serializable subset of the engine's `ActionArgs` — drops the engine-injected `signal`/`fetch`; `profile`/`messages` are owned by the engine and never sent by the caller.
     """ # noqa: E501
     tools: Optional[List[AiTMCPItem]] = Field(default=None, description="Extra tools offered to the model for this request.")
     is_reasoning: Optional[StrictBool] = Field(default=None, description="Enable extended thinking / reasoning for this request.", alias="isReasoning")

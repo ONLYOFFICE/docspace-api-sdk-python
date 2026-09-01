@@ -30,25 +30,25 @@ from typing_extensions import Self
 
 class MigrationApiInfo(BaseModel):
     """
-    MigrationApiInfo
+    The migration API information.
     """ # noqa: E501
-    migrator_name: Optional[StrictStr] = Field(default=None, alias="migratorName")
-    operation: Optional[StrictStr] = None
-    failed_archives: Optional[List[StrictStr]] = Field(default=None, alias="failedArchives")
-    users: Optional[List[MigratingApiUser]] = None
-    without_email_users: Optional[List[MigratingApiUser]] = Field(default=None, alias="withoutEmailUsers")
-    exist_users: Optional[List[MigratingApiUser]] = Field(default=None, alias="existUsers")
-    groups: Optional[List[MigratingApiGroup]] = None
-    import_personal_files: Optional[StrictBool] = Field(default=None, alias="importPersonalFiles")
-    import_shared_files: Optional[StrictBool] = Field(default=None, alias="importSharedFiles")
-    import_shared_folders: Optional[StrictBool] = Field(default=None, alias="importSharedFolders")
-    import_common_files: Optional[StrictBool] = Field(default=None, alias="importCommonFiles")
-    import_project_files: Optional[StrictBool] = Field(default=None, alias="importProjectFiles")
-    import_groups: Optional[StrictBool] = Field(default=None, alias="importGroups")
-    successed_users: Optional[StrictInt] = Field(default=None, alias="successedUsers")
-    failed_users: Optional[StrictInt] = Field(default=None, alias="failedUsers")
-    files: Optional[List[StrictStr]] = None
-    errors: Optional[List[StrictStr]] = None
+    migrator_name: Optional[StrictStr] = Field(default=None, description="The migrator name.", alias="migratorName", json_schema_extra={"examples": ["Nextcloud"]})
+    operation: Optional[StrictStr] = Field(default=None, description="The migration operation.", json_schema_extra={"examples": ["parse"]})
+    failed_archives: Optional[List[StrictStr]] = Field(default=None, description="The list of failed archives.", alias="failedArchives", json_schema_extra={"examples": [["archive1.zip", "archive2.zip"]]})
+    users: Optional[List[MigratingApiUser]] = Field(default=None, description="The list of migrating users.")
+    without_email_users: Optional[List[MigratingApiUser]] = Field(default=None, description="The list of migrating users without email.", alias="withoutEmailUsers")
+    exist_users: Optional[List[MigratingApiUser]] = Field(default=None, description="The list of existing migrating users.", alias="existUsers")
+    groups: Optional[List[MigratingApiGroup]] = Field(default=None, description="The list of migrating groups.")
+    import_personal_files: Optional[StrictBool] = Field(default=None, description="Specifies whether to import personal files or not.", alias="importPersonalFiles", json_schema_extra={"examples": [True]})
+    import_shared_files: Optional[StrictBool] = Field(default=None, description="Specifies whether to import shared files or not.", alias="importSharedFiles", json_schema_extra={"examples": [True]})
+    import_shared_folders: Optional[StrictBool] = Field(default=None, description="Specifies whether to import shared folders or not.", alias="importSharedFolders", json_schema_extra={"examples": [True]})
+    import_common_files: Optional[StrictBool] = Field(default=None, description="Specifies whether to import common files or not.", alias="importCommonFiles", json_schema_extra={"examples": [True]})
+    import_project_files: Optional[StrictBool] = Field(default=None, description="Specifies whether to import project files or not.", alias="importProjectFiles", json_schema_extra={"examples": [False]})
+    import_groups: Optional[StrictBool] = Field(default=None, description="Specifies whether to import groups or not.", alias="importGroups", json_schema_extra={"examples": [True]})
+    successed_users: Optional[StrictInt] = Field(default=None, description="The number of successfully migrated users.", alias="successedUsers", json_schema_extra={"examples": [50]})
+    failed_users: Optional[StrictInt] = Field(default=None, description="The number of unsuccessfully migrated users.", alias="failedUsers", json_schema_extra={"examples": [2]})
+    files: Optional[List[StrictStr]] = Field(default=None, description="The list of migrated files.", json_schema_extra={"examples": [["document.docx", "spreadsheet.xlsx"]]})
+    errors: Optional[List[StrictStr]] = Field(default=None, description="The list of migration errors.", json_schema_extra={"examples": [["User not found", "File access denied"]]})
     __properties: ClassVar[List[str]] = ["migratorName", "operation", "failedArchives", "users", "withoutEmailUsers", "existUsers", "groups", "importPersonalFiles", "importSharedFiles", "importSharedFolders", "importCommonFiles", "importProjectFiles", "importGroups", "successedUsers", "failedUsers", "files", "errors"]
 
     model_config = ConfigDict(

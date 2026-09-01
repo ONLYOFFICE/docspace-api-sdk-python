@@ -14,10 +14,10 @@ Name | Type | Description | Notes
 **shared_external** | **bool** | Specifies if the file entry is shared via a public (non-internal) external link. | [optional] 
 **parent_shared** | **bool** | Indicates whether the parent entity is shared. | [optional] 
 **short_web_url** | **str** | The short Web URL. | [optional] 
-**created** | [**AiApiDateTime**](AiApiDateTime.md) | The creation date and time of the file entry. | [optional] 
+**created** | **datetime** | The creation date and time of the file entry. | [optional] 
 **created_by** | [**AiEmployeeDto**](AiEmployeeDto.md) | The file entry author. | [optional] 
-**updated** | [**AiApiDateTime**](AiApiDateTime.md) | The last date and time when the file entry was updated. | [optional] 
-**auto_delete** | [**AiApiDateTime**](AiApiDateTime.md) | The date and time when the file entry will be automatically deleted. | [optional] 
+**updated** | **datetime** | The last date and time when the file entry was updated. | [optional] 
+**auto_delete** | **datetime** | The date and time when the file entry will be automatically deleted. | [optional] 
 **root_folder_type** | [**AiFolderType**](AiFolderType.md) | The root folder type of the file entry. | [optional] 
 **parent_room_type** | [**AiFolderType**](AiFolderType.md) | The parent room type of the file entry. | [optional] 
 **updated_by** | [**AiEmployeeDto**](AiEmployeeDto.md) | The user who updated the file entry. | [optional] 
@@ -39,7 +39,7 @@ Name | Type | Description | Notes
 **available_share_rights** | [**FileEntryDtoIntegerAllOfAvailableShareRights**](FileEntryDtoIntegerAllOfAvailableShareRights.md) |  | [optional] 
 **request_token** | **str** | The request token of the file entry. | [optional] 
 **external** | **bool** | Specifies if the folder can be accessed via an external link or not. | [optional] 
-**expiration_date** | [**AiApiDateTime**](AiApiDateTime.md) | Represents the expiration date of the file entry. | [optional] 
+**expiration_date** | **datetime** | Represents the expiration date of the file entry. | [optional] 
 **is_link_expired** | **bool** | Indicates whether the shareable link associated with the file or folder has expired. | [optional] 
 
 ## Example

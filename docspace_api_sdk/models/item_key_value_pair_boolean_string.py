@@ -21,19 +21,18 @@ import pprint
 import re  # noqa: F401
 import json
 
-from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
-class ApiDateTime(BaseModel):
+class ItemKeyValuePairBooleanString(BaseModel):
     """
-    The API date and time parameters.
+    A key-value pair of a list item.
     """ # noqa: E501
-    utc_time: Optional[datetime] = Field(default=None, description="The time in UTC format.", alias="utcTime", json_schema_extra={"examples": ["2018-01-01T00:00:00.0000000Z"]})
-    time_zone_offset: Optional[StrictStr] = Field(default=None, description="The time zone offset.", alias="timeZoneOffset", json_schema_extra={"examples": ["00:00:00"]})
-    __properties: ClassVar[List[str]] = ["utcTime", "timeZoneOffset"]
+    key: Optional[StrictBool] = Field(default=None, description="The key that identifies the item within the list.")
+    value: Optional[StrictStr] = Field(default=None, description="The value associated with the key.")
+    __properties: ClassVar[List[str]] = ["key", "value"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -53,7 +52,7 @@ class ApiDateTime(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of ApiDateTime from a JSON string"""
+        """Create an instance of ItemKeyValuePairBooleanString from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -65,12 +64,8 @@ class ApiDateTime(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
-        * OpenAPI `readOnly` fields are excluded.
-        * OpenAPI `readOnly` fields are excluded.
         """
         excluded_fields: Set[str] = set([
-            "utc_time",
-            "time_zone_offset",
         ])
 
         _dict = self.model_dump(
@@ -78,23 +73,26 @@ class ApiDateTime(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if value (nullable) is None
+        # and model_fields_set contains the field
+        if self.value is None and "value" in self.model_fields_set:
+            _dict['value'] = None
+
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of ApiDateTime from a dict"""
+        """Create an instance of ItemKeyValuePairBooleanString from a dict"""
         if obj is None:
             return None
 
-        if isinstance(obj, str):
-            obj = {"utcTime": obj}
 
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "utcTime": obj.get("utcTime"),
-            "timeZoneOffset": obj.get("timeZoneOffset")
+            "key": obj.get("key"),
+            "value": obj.get("value")
         })
         return _obj
 

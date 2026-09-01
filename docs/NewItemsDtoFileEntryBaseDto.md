@@ -5,7 +5,7 @@ The new item parameters.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**var_date** | [**ApiDateTime**](ApiDateTime.md) | The date and time when the new item was created. | 
+**var_date** | **datetime** | The date and time when the new item was created. | 
 **items** | [**List[FileEntryBaseDto]**](FileEntryBaseDto.md) | The list of items. | 
 
 ## Example

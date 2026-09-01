@@ -37,8 +37,8 @@ class FileShareDto(BaseModel):
     """ # noqa: E501
     access: Optional[FileShare] = Field(default=None, description="The access rights type.")
     shared_to: Optional[Any] = Field(default=None, alias="sharedTo")
-    shared_to_user: Optional[EmployeeFullDto] = Field(default=None, description="The full list of user parameters.", alias="sharedToUser")
-    shared_to_group: Optional[GroupSummaryDto] = Field(default=None, description="The group summary parameters.", alias="sharedToGroup")
+    shared_to_user: Optional[EmployeeFullDto] = Field(default=None, description="The user who has the access to the specified file.", alias="sharedToUser")
+    shared_to_group: Optional[GroupSummaryDto] = Field(default=None, description="The user who has the access to the specified file.", alias="sharedToGroup")
     shared_link: Optional[FileShareLink] = Field(default=None, description="The user who has the access to the specified file.", alias="sharedLink")
     is_locked: StrictBool = Field(description="Specifies if the access right is locked or not.", alias="isLocked", json_schema_extra={"examples": [False]})
     is_owner: StrictBool = Field(description="Specifies if the user is an owner of the specified file or not.", alias="isOwner", json_schema_extra={"examples": [False]})
@@ -47,7 +47,7 @@ class FileShareDto(BaseModel):
     can_edit_deny_download: StrictBool = Field(description="Determines whether the user has permission to modify the deny download setting for the file share.", alias="canEditDenyDownload", json_schema_extra={"examples": [True]})
     can_edit_expiration_date: StrictBool = Field(description="Indicates whether the expiration date of access permissions can be edited.", alias="canEditExpirationDate", json_schema_extra={"examples": [True]})
     can_revoke: StrictBool = Field(description="Specifies whether the file sharing access can be revoked by the current user.", alias="canRevoke", json_schema_extra={"examples": [True]})
-    subject_type: SubjectType = Field(description="The subject type of the access right.", alias="subjectType")
+    subject_type: SubjectType = Field(description="The subject type.", alias="subjectType")
     __properties: ClassVar[List[str]] = ["access", "sharedTo", "sharedToUser", "sharedToGroup", "sharedLink", "isLocked", "isOwner", "canEditAccess", "canEditInternal", "canEditDenyDownload", "canEditExpirationDate", "canRevoke", "subjectType"]
 
     model_config = ConfigDict(

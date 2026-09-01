@@ -1,11 +1,12 @@
 # ConnectionTestResult
+The outcome of a connection test against an external database.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**success** | **bool** |  | [optional] 
-**error** | **str** |  | [optional] 
+**success** | **bool** | Specifies whether the connection to the database succeeded. | [optional] 
+**error** | **str** | The reason the connection failed, or null when it succeeded. | [optional] 
 
 ## Example
 

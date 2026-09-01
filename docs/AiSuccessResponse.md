@@ -5,7 +5,7 @@ Generic success acknowledgement for mutations that return no data.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**success** | **bool** |  | 
+**success** | **bool** | Always true — the mutation completed. | 
 
 ## Example
 

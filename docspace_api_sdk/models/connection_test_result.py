@@ -21,17 +21,17 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
 class ConnectionTestResult(BaseModel):
     """
-    ConnectionTestResult
+    The outcome of a connection test against an external database.
     """ # noqa: E501
-    success: Optional[StrictBool] = None
-    error: Optional[StrictStr] = None
+    success: Optional[StrictBool] = Field(default=None, description="Specifies whether the connection to the database succeeded.")
+    error: Optional[StrictStr] = Field(default=None, description="The reason the connection failed, or null when it succeeded.")
     __properties: ClassVar[List[str]] = ["success", "error"]
 
     model_config = ConfigDict(

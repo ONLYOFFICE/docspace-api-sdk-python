@@ -21,17 +21,17 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictFloat, StrictInt
+from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing import Optional, Set
 from typing_extensions import Self
 
 class AiChatPrice(BaseModel):
     """
-    AiChatPrice
+    The price of a chat model, per token.
     """ # noqa: E501
-    prompt: Optional[Union[StrictFloat, StrictInt]] = None
-    completion: Optional[Union[StrictFloat, StrictInt]] = None
+    prompt: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The price of a single prompt token.", json_schema_extra={"examples": [2.5E-6]})
+    completion: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The price of a single completion token.", json_schema_extra={"examples": [1.0E-5]})
     __properties: ClassVar[List[str]] = ["prompt", "completion"]
 
     model_config = ConfigDict(

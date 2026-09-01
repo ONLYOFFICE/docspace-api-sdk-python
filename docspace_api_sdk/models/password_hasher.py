@@ -21,18 +21,18 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
 class PasswordHasher(BaseModel):
     """
-    PasswordHasher
+    The password hash parameters.
     """ # noqa: E501
-    size: Optional[StrictInt] = None
-    iterations: Optional[StrictInt] = None
-    salt: Optional[StrictStr] = None
+    size: Optional[StrictInt] = Field(default=None, description="The password hash size.", json_schema_extra={"examples": [32]})
+    iterations: Optional[StrictInt] = Field(default=None, description="The number of iterations to generate the ppassword hash.", json_schema_extra={"examples": [1000]})
+    salt: Optional[StrictStr] = Field(default=None, description="The salt to generate the ppassword hash.", json_schema_extra={"examples": ["random_salt_value"]})
     __properties: ClassVar[List[str]] = ["size", "iterations", "salt"]
 
     model_config = ConfigDict(

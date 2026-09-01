@@ -42,15 +42,15 @@ class EditorConfigurationDto(BaseModel):
     co_editing: Optional[CoEditingConfig] = Field(default=None, description="The co-editing configuration parameters.", alias="coEditing")
     create_url: Optional[StrictStr] = Field(default=None, description="The creation URL of the editor.", alias="createUrl", json_schema_extra={"examples": ["http://localhost/create"]})
     customization: Optional[CustomizationConfigDto] = Field(default=None, description="The customization configuration.")
-    embedded: Optional[EmbeddedConfig] = Field(default=None, description="The configuration parameters for the embedded document type.")
+    embedded: Optional[EmbeddedConfig] = Field(default=None, description="The embedded configuration parameters for embedded documents.")
     encryption_keys: Optional[List[EncryptionKeyDto]] = Field(default=None, description="The encryption keys of the editor configuration.", alias="encryptionKeys")
     lang: Optional[StrictStr] = Field(description="The language of the editor configuration.", json_schema_extra={"examples": ["en-US"]})
     mode: Optional[StrictStr] = Field(description="The mode of the editor configuration.", json_schema_extra={"examples": ["edit"]})
     mode_write: Optional[StrictBool] = Field(default=None, description="Specifies if the mode is write of the editor configuration.", alias="modeWrite", json_schema_extra={"examples": [True]})
-    plugins: Optional[PluginsConfig] = Field(default=None, description="The configuration settings to connect the special add-ons.")
+    plugins: Optional[PluginsConfig] = Field(default=None, description="The plugins configuration.")
     recent: Optional[List[RecentConfig]] = Field(default=None, description="The recent configuration of the editor.", json_schema_extra={"examples": [[]]})
     templates: Optional[List[TemplatesConfig]] = Field(default=None, description="The templates of the editor configuration.", json_schema_extra={"examples": [[]]})
-    user: Optional[UserConfig] = Field(default=None, description="The configuration parameters of the user currently viewing or editing the document.")
+    user: Optional[UserConfig] = Field(default=None, description="The user configuration of the editor.")
     __properties: ClassVar[List[str]] = ["callbackUrl", "coEditing", "createUrl", "customization", "embedded", "encryptionKeys", "lang", "mode", "modeWrite", "plugins", "recent", "templates", "user"]
 
     model_config = ConfigDict(

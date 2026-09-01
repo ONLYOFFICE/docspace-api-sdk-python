@@ -35,7 +35,7 @@ class AiModel(BaseModel):
     name: StrictStr = Field(description="Human-readable model name for display in the UI.")
     provider: AiProviderType = Field(description="Provider that offers this model.")
     reasoning: Optional[StrictBool] = Field(default=None, description="Whether this model supports extended thinking / chain-of-thought reasoning.")
-    capabilities: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Bitmask of model capabilities (Chat, Image, Vision, Tools, etc.). Used to filter models per  {@link  ActionType  } .")
+    capabilities: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Bitmask of model capabilities (Chat, Image, Vision, Tools, etc.). Used to filter models per `ActionType`.")
     __properties: ClassVar[List[str]] = ["id", "name", "provider", "reasoning", "capabilities"]
 
     model_config = ConfigDict(

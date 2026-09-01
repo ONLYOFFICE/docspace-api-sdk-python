@@ -30,12 +30,12 @@ from docspace_api_sdk.models.importable_api_entity import ImportableApiEntity
 
 class MigratingApiGroup(ImportableApiEntity):
     """
-    MigratingApiGroup
+    The migrating group parameters.
     """
 
-    group_name: Optional[StrictStr] = Field(default=None, alias="groupName")
-    module_name: Optional[StrictStr] = Field(default=None, alias="moduleName")
-    user_uid_list: Optional[List[StrictStr]] = Field(default=None, alias="userUidList")
+    group_name: Optional[StrictStr] = Field(default=None, description="The group name.", alias="groupName", json_schema_extra={"examples": ["Marketing Team"]})
+    module_name: Optional[StrictStr] = Field(default=None, description="The group module name.", alias="moduleName", json_schema_extra={"examples": ["Projects"]})
+    user_uid_list: Optional[List[StrictStr]] = Field(default=None, description="The list of group user UIDs.", alias="userUidList", json_schema_extra={"examples": [["user1-uid", "user2-uid"]]})
 
     model_config = ConfigDict(
         populate_by_name=True,

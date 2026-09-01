@@ -28,10 +28,10 @@ from typing_extensions import Self
 
 class AiTErrorData(BaseModel):
     """
-    AiTErrorData
+    A field-scoped validation error: which form field was rejected, and why.
     """ # noqa: E501
-    var_field: StrictStr = Field(alias="field")
-    message: StrictStr
+    var_field: StrictStr = Field(description="The rejected field.", alias="field")
+    message: StrictStr = Field(description="The human-readable reason the field was rejected.")
     __properties: ClassVar[List[str]] = ["field", "message"]
 
     @field_validator('var_field')

@@ -21,8 +21,9 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import StrictBool, StrictStr
-from typing import Any, Dict, List
+from pydantic import Field, StrictBool, StrictStr
+from typing import Any, Dict, List, Optional
+from typing_extensions import Annotated
 from docspace_api_sdk.models.ai_success_response import AiSuccessResponse
 from docspace_api_sdk.models.ai_tmcp_item import AiTMCPItem
 from docspace_api_sdk.models.ai_tools_add_custom_server_request import AiToolsAddCustomServerRequest
@@ -72,6 +73,7 @@ class ToolsApi:
     ) -> AiToolsMutationResult:
         """Add custom server
 
+        Registers a custom MCP server in the scope under the given name.
 
         :param ai_tools_add_custom_server_request: (required)
         :type ai_tools_add_custom_server_request: AiToolsAddCustomServerRequest
@@ -140,6 +142,7 @@ class ToolsApi:
     ) -> ApiResponse[AiToolsMutationResult]:
         """Add custom server
 
+        Registers a custom MCP server in the scope under the given name.
 
         :param ai_tools_add_custom_server_request: (required)
         :type ai_tools_add_custom_server_request: AiToolsAddCustomServerRequest
@@ -208,6 +211,7 @@ class ToolsApi:
     ) -> RESTResponseType:
         """Add custom server
 
+        Registers a custom MCP server in the scope under the given name.
 
         :param ai_tools_add_custom_server_request: (required)
         :type ai_tools_add_custom_server_request: AiToolsAddCustomServerRequest
@@ -335,7 +339,7 @@ class ToolsApi:
     @validate_call
     def ai_tools_get_allow_always(
         self,
-        entity_id: StrictStr,
+        entity_id: Annotated[Optional[StrictStr], Field(description="The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -351,8 +355,9 @@ class ToolsApi:
     ) -> List[str]:
         """Get allow always
 
+        Lists the tools on the always-allow list of the scope.
 
-        :param entity_id: (required)
+        :param entity_id: The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
         :type entity_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -403,7 +408,7 @@ class ToolsApi:
     @validate_call
     def ai_tools_get_allow_always_with_http_info(
         self,
-        entity_id: StrictStr,
+        entity_id: Annotated[Optional[StrictStr], Field(description="The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -419,8 +424,9 @@ class ToolsApi:
     ) -> ApiResponse[List[str]]:
         """Get allow always
 
+        Lists the tools on the always-allow list of the scope.
 
-        :param entity_id: (required)
+        :param entity_id: The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
         :type entity_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -471,7 +477,7 @@ class ToolsApi:
     @validate_call
     def ai_tools_get_allow_always_without_preload_content(
         self,
-        entity_id: StrictStr,
+        entity_id: Annotated[Optional[StrictStr], Field(description="The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -487,8 +493,9 @@ class ToolsApi:
     ) -> RESTResponseType:
         """Get allow always
 
+        Lists the tools on the always-allow list of the scope.
 
-        :param entity_id: (required)
+        :param entity_id: The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
         :type entity_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -603,8 +610,8 @@ class ToolsApi:
     @validate_call
     def ai_tools_get_custom_server(
         self,
-        name: StrictStr,
-        entity_id: StrictStr,
+        name: Annotated[StrictStr, Field(description="The custom MCP server name.")],
+        entity_id: Annotated[Optional[StrictStr], Field(description="The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -620,10 +627,11 @@ class ToolsApi:
     ) -> object:
         """Get custom server
 
+        Returns the configuration of one custom MCP server, or an empty result when it is not registered.
 
-        :param name: (required)
+        :param name: The custom MCP server name. (required)
         :type name: str
-        :param entity_id: (required)
+        :param entity_id: The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
         :type entity_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -675,8 +683,8 @@ class ToolsApi:
     @validate_call
     def ai_tools_get_custom_server_with_http_info(
         self,
-        name: StrictStr,
-        entity_id: StrictStr,
+        name: Annotated[StrictStr, Field(description="The custom MCP server name.")],
+        entity_id: Annotated[Optional[StrictStr], Field(description="The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -692,10 +700,11 @@ class ToolsApi:
     ) -> ApiResponse[object]:
         """Get custom server
 
+        Returns the configuration of one custom MCP server, or an empty result when it is not registered.
 
-        :param name: (required)
+        :param name: The custom MCP server name. (required)
         :type name: str
-        :param entity_id: (required)
+        :param entity_id: The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
         :type entity_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -747,8 +756,8 @@ class ToolsApi:
     @validate_call
     def ai_tools_get_custom_server_without_preload_content(
         self,
-        name: StrictStr,
-        entity_id: StrictStr,
+        name: Annotated[StrictStr, Field(description="The custom MCP server name.")],
+        entity_id: Annotated[Optional[StrictStr], Field(description="The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -764,10 +773,11 @@ class ToolsApi:
     ) -> RESTResponseType:
         """Get custom server
 
+        Returns the configuration of one custom MCP server, or an empty result when it is not registered.
 
-        :param name: (required)
+        :param name: The custom MCP server name. (required)
         :type name: str
-        :param entity_id: (required)
+        :param entity_id: The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
         :type entity_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -888,7 +898,7 @@ class ToolsApi:
     @validate_call
     def ai_tools_get_disabled(
         self,
-        entity_id: StrictStr,
+        entity_id: Annotated[Optional[StrictStr], Field(description="The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -904,8 +914,9 @@ class ToolsApi:
     ) -> Dict[str, List[str]]:
         """Get disabled
 
+        Returns the switched-off tools of the scope, grouped by server type.
 
-        :param entity_id: (required)
+        :param entity_id: The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
         :type entity_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -956,7 +967,7 @@ class ToolsApi:
     @validate_call
     def ai_tools_get_disabled_with_http_info(
         self,
-        entity_id: StrictStr,
+        entity_id: Annotated[Optional[StrictStr], Field(description="The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -972,8 +983,9 @@ class ToolsApi:
     ) -> ApiResponse[Dict[str, List[str]]]:
         """Get disabled
 
+        Returns the switched-off tools of the scope, grouped by server type.
 
-        :param entity_id: (required)
+        :param entity_id: The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
         :type entity_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1024,7 +1036,7 @@ class ToolsApi:
     @validate_call
     def ai_tools_get_disabled_without_preload_content(
         self,
-        entity_id: StrictStr,
+        entity_id: Annotated[Optional[StrictStr], Field(description="The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1040,8 +1052,9 @@ class ToolsApi:
     ) -> RESTResponseType:
         """Get disabled
 
+        Returns the switched-off tools of the scope, grouped by server type.
 
-        :param entity_id: (required)
+        :param entity_id: The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
         :type entity_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1156,9 +1169,9 @@ class ToolsApi:
     @validate_call
     def ai_tools_is_allow_always(
         self,
-        server_type: StrictStr,
-        tool_name: StrictStr,
-        entity_id: StrictStr,
+        server_type: Annotated[StrictStr, Field(description="The MCP server type the tool belongs to.")],
+        tool_name: Annotated[StrictStr, Field(description="The tool name.")],
+        entity_id: Annotated[Optional[StrictStr], Field(description="The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1174,12 +1187,13 @@ class ToolsApi:
     ) -> bool:
         """Is allow always
 
+        Tells whether one tool is on the always-allow list.
 
-        :param server_type: (required)
+        :param server_type: The MCP server type the tool belongs to. (required)
         :type server_type: str
-        :param tool_name: (required)
+        :param tool_name: The tool name. (required)
         :type tool_name: str
-        :param entity_id: (required)
+        :param entity_id: The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
         :type entity_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1232,9 +1246,9 @@ class ToolsApi:
     @validate_call
     def ai_tools_is_allow_always_with_http_info(
         self,
-        server_type: StrictStr,
-        tool_name: StrictStr,
-        entity_id: StrictStr,
+        server_type: Annotated[StrictStr, Field(description="The MCP server type the tool belongs to.")],
+        tool_name: Annotated[StrictStr, Field(description="The tool name.")],
+        entity_id: Annotated[Optional[StrictStr], Field(description="The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1250,12 +1264,13 @@ class ToolsApi:
     ) -> ApiResponse[bool]:
         """Is allow always
 
+        Tells whether one tool is on the always-allow list.
 
-        :param server_type: (required)
+        :param server_type: The MCP server type the tool belongs to. (required)
         :type server_type: str
-        :param tool_name: (required)
+        :param tool_name: The tool name. (required)
         :type tool_name: str
-        :param entity_id: (required)
+        :param entity_id: The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
         :type entity_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1308,9 +1323,9 @@ class ToolsApi:
     @validate_call
     def ai_tools_is_allow_always_without_preload_content(
         self,
-        server_type: StrictStr,
-        tool_name: StrictStr,
-        entity_id: StrictStr,
+        server_type: Annotated[StrictStr, Field(description="The MCP server type the tool belongs to.")],
+        tool_name: Annotated[StrictStr, Field(description="The tool name.")],
+        entity_id: Annotated[Optional[StrictStr], Field(description="The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1326,12 +1341,13 @@ class ToolsApi:
     ) -> RESTResponseType:
         """Is allow always
 
+        Tells whether one tool is on the always-allow list.
 
-        :param server_type: (required)
+        :param server_type: The MCP server type the tool belongs to. (required)
         :type server_type: str
-        :param tool_name: (required)
+        :param tool_name: The tool name. (required)
         :type tool_name: str
-        :param entity_id: (required)
+        :param entity_id: The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
         :type entity_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1458,9 +1474,9 @@ class ToolsApi:
     @validate_call
     def ai_tools_is_tool_disabled(
         self,
-        server_type: StrictStr,
-        tool_name: StrictStr,
-        entity_id: StrictStr,
+        server_type: Annotated[StrictStr, Field(description="The MCP server type the tool belongs to.")],
+        tool_name: Annotated[StrictStr, Field(description="The tool name.")],
+        entity_id: Annotated[Optional[StrictStr], Field(description="The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1476,12 +1492,13 @@ class ToolsApi:
     ) -> bool:
         """Is tool disabled
 
+        Tells whether one tool of a server type is switched off.
 
-        :param server_type: (required)
+        :param server_type: The MCP server type the tool belongs to. (required)
         :type server_type: str
-        :param tool_name: (required)
+        :param tool_name: The tool name. (required)
         :type tool_name: str
-        :param entity_id: (required)
+        :param entity_id: The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
         :type entity_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1534,9 +1551,9 @@ class ToolsApi:
     @validate_call
     def ai_tools_is_tool_disabled_with_http_info(
         self,
-        server_type: StrictStr,
-        tool_name: StrictStr,
-        entity_id: StrictStr,
+        server_type: Annotated[StrictStr, Field(description="The MCP server type the tool belongs to.")],
+        tool_name: Annotated[StrictStr, Field(description="The tool name.")],
+        entity_id: Annotated[Optional[StrictStr], Field(description="The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1552,12 +1569,13 @@ class ToolsApi:
     ) -> ApiResponse[bool]:
         """Is tool disabled
 
+        Tells whether one tool of a server type is switched off.
 
-        :param server_type: (required)
+        :param server_type: The MCP server type the tool belongs to. (required)
         :type server_type: str
-        :param tool_name: (required)
+        :param tool_name: The tool name. (required)
         :type tool_name: str
-        :param entity_id: (required)
+        :param entity_id: The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
         :type entity_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1610,9 +1628,9 @@ class ToolsApi:
     @validate_call
     def ai_tools_is_tool_disabled_without_preload_content(
         self,
-        server_type: StrictStr,
-        tool_name: StrictStr,
-        entity_id: StrictStr,
+        server_type: Annotated[StrictStr, Field(description="The MCP server type the tool belongs to.")],
+        tool_name: Annotated[StrictStr, Field(description="The tool name.")],
+        entity_id: Annotated[Optional[StrictStr], Field(description="The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1628,12 +1646,13 @@ class ToolsApi:
     ) -> RESTResponseType:
         """Is tool disabled
 
+        Tells whether one tool of a server type is switched off.
 
-        :param server_type: (required)
+        :param server_type: The MCP server type the tool belongs to. (required)
         :type server_type: str
-        :param tool_name: (required)
+        :param tool_name: The tool name. (required)
         :type tool_name: str
-        :param entity_id: (required)
+        :param entity_id: The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
         :type entity_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1760,7 +1779,7 @@ class ToolsApi:
     @validate_call
     def ai_tools_list_custom_servers(
         self,
-        entity_id: StrictStr,
+        entity_id: Annotated[Optional[StrictStr], Field(description="The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1776,8 +1795,9 @@ class ToolsApi:
     ) -> Dict[str, object]:
         """List custom servers
 
+        Lists the custom MCP servers registered in the scope, keyed by name.
 
-        :param entity_id: (required)
+        :param entity_id: The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
         :type entity_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1828,7 +1848,7 @@ class ToolsApi:
     @validate_call
     def ai_tools_list_custom_servers_with_http_info(
         self,
-        entity_id: StrictStr,
+        entity_id: Annotated[Optional[StrictStr], Field(description="The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1844,8 +1864,9 @@ class ToolsApi:
     ) -> ApiResponse[Dict[str, object]]:
         """List custom servers
 
+        Lists the custom MCP servers registered in the scope, keyed by name.
 
-        :param entity_id: (required)
+        :param entity_id: The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
         :type entity_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1896,7 +1917,7 @@ class ToolsApi:
     @validate_call
     def ai_tools_list_custom_servers_without_preload_content(
         self,
-        entity_id: StrictStr,
+        entity_id: Annotated[Optional[StrictStr], Field(description="The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1912,8 +1933,9 @@ class ToolsApi:
     ) -> RESTResponseType:
         """List custom servers
 
+        Lists the custom MCP servers registered in the scope, keyed by name.
 
-        :param entity_id: (required)
+        :param entity_id: The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
         :type entity_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2028,7 +2050,7 @@ class ToolsApi:
     @validate_call
     def ai_tools_list_system_tools(
         self,
-        entity_id: StrictStr,
+        entity_id: Annotated[Optional[StrictStr], Field(description="The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2044,8 +2066,9 @@ class ToolsApi:
     ) -> Dict[str, List[AiTMCPItem]]:
         """List system tools
 
+        Lists the tools of the host-configured system MCP servers, grouped by server type. The servers are connected and listed server-side, so the client renders its permission cards from one request and never opens an MCP connection of its own.
 
-        :param entity_id: (required)
+        :param entity_id: The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
         :type entity_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2096,7 +2119,7 @@ class ToolsApi:
     @validate_call
     def ai_tools_list_system_tools_with_http_info(
         self,
-        entity_id: StrictStr,
+        entity_id: Annotated[Optional[StrictStr], Field(description="The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2112,8 +2135,9 @@ class ToolsApi:
     ) -> ApiResponse[Dict[str, List[AiTMCPItem]]]:
         """List system tools
 
+        Lists the tools of the host-configured system MCP servers, grouped by server type. The servers are connected and listed server-side, so the client renders its permission cards from one request and never opens an MCP connection of its own.
 
-        :param entity_id: (required)
+        :param entity_id: The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
         :type entity_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2164,7 +2188,7 @@ class ToolsApi:
     @validate_call
     def ai_tools_list_system_tools_without_preload_content(
         self,
-        entity_id: StrictStr,
+        entity_id: Annotated[Optional[StrictStr], Field(description="The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2180,8 +2204,9 @@ class ToolsApi:
     ) -> RESTResponseType:
         """List system tools
 
+        Lists the tools of the host-configured system MCP servers, grouped by server type. The servers are connected and listed server-side, so the client renders its permission cards from one request and never opens an MCP connection of its own.
 
-        :param entity_id: (required)
+        :param entity_id: The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
         :type entity_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2312,6 +2337,7 @@ class ToolsApi:
     ) -> AiSuccessResponse:
         """Remove custom server
 
+        Removes a custom MCP server from the registry.
 
         :param ai_tools_remove_custom_server_request: (required)
         :type ai_tools_remove_custom_server_request: AiToolsRemoveCustomServerRequest
@@ -2380,6 +2406,7 @@ class ToolsApi:
     ) -> ApiResponse[AiSuccessResponse]:
         """Remove custom server
 
+        Removes a custom MCP server from the registry.
 
         :param ai_tools_remove_custom_server_request: (required)
         :type ai_tools_remove_custom_server_request: AiToolsRemoveCustomServerRequest
@@ -2448,6 +2475,7 @@ class ToolsApi:
     ) -> RESTResponseType:
         """Remove custom server
 
+        Removes a custom MCP server from the registry.
 
         :param ai_tools_remove_custom_server_request: (required)
         :type ai_tools_remove_custom_server_request: AiToolsRemoveCustomServerRequest
@@ -2591,6 +2619,7 @@ class ToolsApi:
     ) -> AiToolsBulkResult:
         """Replace all custom servers
 
+        Replaces the whole custom MCP server registry of the scope with the supplied map.
 
         :param ai_tools_replace_all_custom_servers_request: (required)
         :type ai_tools_replace_all_custom_servers_request: AiToolsReplaceAllCustomServersRequest
@@ -2659,6 +2688,7 @@ class ToolsApi:
     ) -> ApiResponse[AiToolsBulkResult]:
         """Replace all custom servers
 
+        Replaces the whole custom MCP server registry of the scope with the supplied map.
 
         :param ai_tools_replace_all_custom_servers_request: (required)
         :type ai_tools_replace_all_custom_servers_request: AiToolsReplaceAllCustomServersRequest
@@ -2727,6 +2757,7 @@ class ToolsApi:
     ) -> RESTResponseType:
         """Replace all custom servers
 
+        Replaces the whole custom MCP server registry of the scope with the supplied map.
 
         :param ai_tools_replace_all_custom_servers_request: (required)
         :type ai_tools_replace_all_custom_servers_request: AiToolsReplaceAllCustomServersRequest
@@ -2870,6 +2901,7 @@ class ToolsApi:
     ) -> AiSuccessResponse:
         """Set allow always
 
+        Adds a tool to the always-allow list, or removes it - the tools on that list run without an approval dialog.
 
         :param ai_tools_set_allow_always_request: (required)
         :type ai_tools_set_allow_always_request: AiToolsSetAllowAlwaysRequest
@@ -2938,6 +2970,7 @@ class ToolsApi:
     ) -> ApiResponse[AiSuccessResponse]:
         """Set allow always
 
+        Adds a tool to the always-allow list, or removes it - the tools on that list run without an approval dialog.
 
         :param ai_tools_set_allow_always_request: (required)
         :type ai_tools_set_allow_always_request: AiToolsSetAllowAlwaysRequest
@@ -3006,6 +3039,7 @@ class ToolsApi:
     ) -> RESTResponseType:
         """Set allow always
 
+        Adds a tool to the always-allow list, or removes it - the tools on that list run without an approval dialog.
 
         :param ai_tools_set_allow_always_request: (required)
         :type ai_tools_set_allow_always_request: AiToolsSetAllowAlwaysRequest
@@ -3149,6 +3183,7 @@ class ToolsApi:
     ) -> AiSuccessResponse:
         """Set disabled
 
+        Marks the listed tools of one server type as switched off, so the model is no longer offered them.
 
         :param ai_tools_set_disabled_request: (required)
         :type ai_tools_set_disabled_request: AiToolsSetDisabledRequest
@@ -3217,6 +3252,7 @@ class ToolsApi:
     ) -> ApiResponse[AiSuccessResponse]:
         """Set disabled
 
+        Marks the listed tools of one server type as switched off, so the model is no longer offered them.
 
         :param ai_tools_set_disabled_request: (required)
         :type ai_tools_set_disabled_request: AiToolsSetDisabledRequest
@@ -3285,6 +3321,7 @@ class ToolsApi:
     ) -> RESTResponseType:
         """Set disabled
 
+        Marks the listed tools of one server type as switched off, so the model is no longer offered them.
 
         :param ai_tools_set_disabled_request: (required)
         :type ai_tools_set_disabled_request: AiToolsSetDisabledRequest
@@ -3428,6 +3465,7 @@ class ToolsApi:
     ) -> AiToolsMutationResult:
         """Update custom server
 
+        Updates the configuration of a registered custom MCP server.
 
         :param ai_tools_update_custom_server_request: (required)
         :type ai_tools_update_custom_server_request: AiToolsUpdateCustomServerRequest
@@ -3496,6 +3534,7 @@ class ToolsApi:
     ) -> ApiResponse[AiToolsMutationResult]:
         """Update custom server
 
+        Updates the configuration of a registered custom MCP server.
 
         :param ai_tools_update_custom_server_request: (required)
         :type ai_tools_update_custom_server_request: AiToolsUpdateCustomServerRequest
@@ -3564,6 +3603,7 @@ class ToolsApi:
     ) -> RESTResponseType:
         """Update custom server
 
+        Updates the configuration of a registered custom MCP server.
 
         :param ai_tools_update_custom_server_request: (required)
         :type ai_tools_update_custom_server_request: AiToolsUpdateCustomServerRequest

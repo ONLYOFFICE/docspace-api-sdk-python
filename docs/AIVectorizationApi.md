@@ -10,7 +10,7 @@ Method | HTTP request | Description
 # **ai_vectorization_start_task**
 > AiSuccessResponse ai_vectorization_start_task(request_body)
 
-
+Starts a vectorization task over the supplied portal files. The indexing itself runs asynchronously on the .NET side.
 
 For more information, see [api.onlyoffice.com]().
 

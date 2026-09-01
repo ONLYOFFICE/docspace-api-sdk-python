@@ -16,7 +16,7 @@ Method | HTTP request | Description
 # **ai_ai_approve_tool_call**
 > AiChatEvent ai_ai_approve_tool_call(ai_ai_approve_tool_call_request)
 
-
+Resumes a chat round paused on a tool call. The supplied result is persisted onto the assistant message that issued the call and the stream continues with the augmented history.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -83,7 +83,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **ai_ai_deny_tool_call**
 > AiChatEvent ai_ai_deny_tool_call(ai_ai_tool_call_data)
 
-
+Denies the pending tool call and resumes the chat immediately, with `User deny tool call` standing in for the tool result.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -150,7 +150,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **ai_ai_regenerate_stream**
 > AiChatEvent ai_ai_regenerate_stream(ai_ai_regenerate_stream_request)
 
-
+Re-rolls the last assistant reply in an existing thread: every message after the last user message (the previous reply plus any tool-call hops) is dropped and a fresh reply is streamed against the unchanged prompt. The thread must already exist and no title is generated.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -217,7 +217,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **ai_ai_send**
 > AiThreadMessageLike ai_ai_send(ai_ai_send_request)
 
-
+Runs one AI action: the profile bound to `actionType` (falling back to the `Default` slot) is dispatched against a single-message history. Nothing is persisted - no thread, no title generation, no storage writes.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -284,7 +284,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **ai_ai_send_custom**
 > AiThreadMessageLike ai_ai_send_custom(ai_ai_send_custom_request)
 
-
+Runs a free-form one-turn call against a caller-supplied system prompt. No thread, no history and no persistence. The profile is the explicit `profileId` when it resolves, otherwise the `Default` assignment slot.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -351,7 +351,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **ai_ai_send_with_stream**
 > AiChatEvent ai_ai_send_with_stream(ai_ai_send_stream_body)
 
-
+Starts a chat round and streams it back as newline-delimited `ChatEvent` objects. The thread is opened or created, the user message and the reply are persisted, a new thread gets a generated title, and a tool call pauses the round until it is approved or denied.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -418,7 +418,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **ai_ai_send_with_stream_open_ai**
 > AiOpenAIStreamChunk ai_ai_send_with_stream_open_ai(ai_ai_send_stream_body)
 
-
+The same chat round as `send-with-stream`, re-encoded as an OpenAI Chat Completions stream of `chat.completion.chunk` objects. Storage, title generation and tool-call pauses are identical - only the wire shape differs; a tool call ends the stream with `finish_reason: tool_calls`.
 
 For more information, see [api.onlyoffice.com]().
 

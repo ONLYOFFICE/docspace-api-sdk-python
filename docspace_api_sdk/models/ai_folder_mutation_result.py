@@ -21,7 +21,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool
+from pydantic import BaseModel, ConfigDict, Field, StrictBool
 from typing import Any, ClassVar, Dict, List, Optional
 from docspace_api_sdk.models.ai_prompt_folder import AiPromptFolder
 from docspace_api_sdk.models.ai_t_error_data import AiTErrorData
@@ -32,9 +32,9 @@ class AiFolderMutationResult(BaseModel):
     """
     Outcome of `createFolder` / `renameFolder` — either the persisted folder or a field-scoped error.
     """ # noqa: E501
-    success: StrictBool
-    folder: Optional[AiPromptFolder] = None
-    error: Optional[AiTErrorData] = None
+    success: StrictBool = Field(description="True when the folder was persisted.")
+    folder: Optional[AiPromptFolder] = Field(default=None, description="The persisted folder. Present on success.")
+    error: Optional[AiTErrorData] = Field(default=None, description="Why the folder was rejected. Present on failure.")
     __properties: ClassVar[List[str]] = ["success", "folder", "error"]
 
     model_config = ConfigDict(

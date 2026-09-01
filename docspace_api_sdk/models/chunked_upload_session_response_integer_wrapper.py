@@ -30,9 +30,9 @@ from typing_extensions import Self
 
 class ChunkedUploadSessionResponseIntegerWrapper(BaseModel):
     """
-    ChunkedUploadSessionResponseIntegerWrapper
+    The successful API response containing the ChunkedUploadSessionResponseInteger object.
     """ # noqa: E501
-    response: Optional[ChunkedUploadSessionResponseInteger] = None
+    response: Optional[ChunkedUploadSessionResponseInteger] = Field(default=None, description="The ChunkedUploadSessionResponseInteger object returned by the operation.")
     count: Optional[StrictInt] = Field(default=None, description="The total number of items in the response")
     links: Optional[List[GetPortalPrices200ResponseLinksInner]] = Field(default=None, description="List of links related to the response")
     status: Optional[StrictInt] = Field(default=None, description="HTTP status code of the response")

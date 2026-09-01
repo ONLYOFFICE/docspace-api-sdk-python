@@ -21,7 +21,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool
+from pydantic import BaseModel, ConfigDict, Field, StrictBool
 from typing import Any, ClassVar, Dict, List, Optional
 from docspace_api_sdk.models.ai_bulk_assignment_result_errors_inner import AiBulkAssignmentResultErrorsInner
 from typing import Optional, Set
@@ -29,10 +29,10 @@ from typing_extensions import Self
 
 class AiBulkAssignmentResult(BaseModel):
     """
-    Outcome of  {@link  AssignmentsEngine.bulkAssign } . Either every entry persisted, or no entries persisted and a per-key error report. The engine validates first and writes second so a single bad entry never leaves the assignment table in a half-written state.
+    Outcome of `AssignmentsEngine.bulkAssign`. Either every entry persisted, or no entries persisted and a per-key error report. The engine validates first and writes second so a single bad entry never leaves the assignment table in a half-written state.
     """ # noqa: E501
-    success: StrictBool
-    errors: Optional[List[AiBulkAssignmentResultErrorsInner]] = None
+    success: StrictBool = Field(description="True when every entry was persisted.")
+    errors: Optional[List[AiBulkAssignmentResultErrorsInner]] = Field(default=None, description="What was rejected, per action. Present on failure - and then no entry was persisted.")
     __properties: ClassVar[List[str]] = ["success", "errors"]
 
     model_config = ConfigDict(

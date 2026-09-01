@@ -21,10 +21,10 @@ import pprint
 import re  # noqa: F401
 import json
 
+from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from uuid import UUID
-from docspace_api_sdk.models.api_date_time import ApiDateTime
 from docspace_api_sdk.models.employee_dto import EmployeeDto
 from typing import Optional, Set
 from typing_extensions import Self
@@ -38,10 +38,10 @@ class ApiKeyResponseDto(BaseModel):
     key: Optional[StrictStr] = Field(description="The full API key value (only returned when creating a new key).", json_schema_extra={"examples": ["api_key_1234567890abcdef"]})
     key_postfix: Optional[StrictStr] = Field(default=None, description="The API key postfix (used for identification).", alias="keyPostfix", json_schema_extra={"examples": ["...cdef"]})
     permissions: Optional[List[StrictStr]] = Field(description="The list of permissions granted to the API key.", json_schema_extra={"examples": [["read", "write", "delete"]]})
-    last_used: Optional[ApiDateTime] = Field(default=None, description="The API date and time parameters.", alias="lastUsed")
-    create_on: Optional[ApiDateTime] = Field(default=None, description="The API date and time parameters.", alias="createOn")
-    create_by: Optional[EmployeeDto] = Field(default=None, description="The user parameters.", alias="createBy")
-    expires_at: Optional[ApiDateTime] = Field(default=None, description="The API date and time parameters.", alias="expiresAt")
+    last_used: Optional[datetime] = Field(default=None, description="The date and time when the API key was last used.", alias="lastUsed", json_schema_extra={"examples": ["2025-06-15T10:30:00.0000000Z"]})
+    create_on: Optional[datetime] = Field(default=None, description="The date and time when the API key was created.", alias="createOn", json_schema_extra={"examples": ["2025-06-15T10:30:00.0000000Z"]})
+    create_by: Optional[EmployeeDto] = Field(default=None, description="The identifier of the user who created the API key.", alias="createBy")
+    expires_at: Optional[datetime] = Field(default=None, description="The date and time when the API key expires.", alias="expiresAt", json_schema_extra={"examples": ["2025-06-15T10:30:00.0000000Z"]})
     is_active: StrictBool = Field(description="Indicates whether the API key is active or not.", alias="isActive", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["id", "name", "key", "keyPostfix", "permissions", "lastUsed", "createOn", "createBy", "expiresAt", "isActive"]
 
@@ -84,18 +84,9 @@ class ApiKeyResponseDto(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of last_used
-        if self.last_used:
-            _dict['lastUsed'] = self.last_used.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of create_on
-        if self.create_on:
-            _dict['createOn'] = self.create_on.to_dict()
         # override the default output from pydantic by calling `to_dict()` of create_by
         if self.create_by:
             _dict['createBy'] = self.create_by.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of expires_at
-        if self.expires_at:
-            _dict['expiresAt'] = self.expires_at.to_dict()
         # set to None if name (nullable) is None
         # and model_fields_set contains the field
         if self.name is None and "name" in self.model_fields_set:
@@ -116,6 +107,21 @@ class ApiKeyResponseDto(BaseModel):
         if self.permissions is None and "permissions" in self.model_fields_set:
             _dict['permissions'] = None
 
+        # set to None if last_used (nullable) is None
+        # and model_fields_set contains the field
+        if self.last_used is None and "last_used" in self.model_fields_set:
+            _dict['lastUsed'] = None
+
+        # set to None if create_on (nullable) is None
+        # and model_fields_set contains the field
+        if self.create_on is None and "create_on" in self.model_fields_set:
+            _dict['createOn'] = None
+
+        # set to None if expires_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.expires_at is None and "expires_at" in self.model_fields_set:
+            _dict['expiresAt'] = None
+
         return _dict
 
     @classmethod
@@ -134,10 +140,10 @@ class ApiKeyResponseDto(BaseModel):
             "key": obj.get("key"),
             "keyPostfix": obj.get("keyPostfix"),
             "permissions": obj.get("permissions"),
-            "lastUsed": ApiDateTime.from_dict(obj["lastUsed"]) if obj.get("lastUsed") is not None else None,
-            "createOn": ApiDateTime.from_dict(obj["createOn"]) if obj.get("createOn") is not None else None,
+            "lastUsed": obj.get("lastUsed"),
+            "createOn": obj.get("createOn"),
             "createBy": EmployeeDto.from_dict(obj["createBy"]) if obj.get("createBy") is not None else None,
-            "expiresAt": ApiDateTime.from_dict(obj["expiresAt"]) if obj.get("expiresAt") is not None else None,
+            "expiresAt": obj.get("expiresAt"),
             "isActive": obj.get("isActive")
         })
         return _obj

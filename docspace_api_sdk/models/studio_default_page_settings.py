@@ -30,7 +30,7 @@ from typing_extensions import Self
 
 class StudioDefaultPageSettings(BaseModel):
     """
-    StudioDefaultPageSettings
+    The settings that define the folder opened by default after sign-in.
     """ # noqa: E501
     default_folder_type: Optional[FolderType] = Field(default=None, description="Specifies the type of the default folder associated with the settings.", alias="defaultFolderType")
     last_modified: Optional[datetime] = Field(default=None, description="The timestamp indicating when the settings were last modified.", alias="lastModified", json_schema_extra={"examples": ["1990-01-01T00:00:00Z"]})

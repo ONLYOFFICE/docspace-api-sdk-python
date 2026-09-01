@@ -28,11 +28,11 @@ from typing_extensions import Self
 
 class MigratingApiFiles(BaseModel):
     """
-    MigratingApiFiles
+    The parameters of the migrating files.
     """ # noqa: E501
-    folders_count: Optional[StrictInt] = Field(default=None, alias="foldersCount")
-    files_count: Optional[StrictInt] = Field(default=None, alias="filesCount")
-    bytes_total: Optional[StrictInt] = Field(default=None, alias="bytesTotal")
+    folders_count: Optional[StrictInt] = Field(default=None, description="The number of folders.", alias="foldersCount", json_schema_extra={"examples": [12]})
+    files_count: Optional[StrictInt] = Field(default=None, description="The number of files.", alias="filesCount", json_schema_extra={"examples": [48]})
+    bytes_total: Optional[StrictInt] = Field(default=None, description="The total number of bytes.", alias="bytesTotal", json_schema_extra={"examples": [104857600]})
     __properties: ClassVar[List[str]] = ["foldersCount", "filesCount", "bytesTotal"]
 
     model_config = ConfigDict(

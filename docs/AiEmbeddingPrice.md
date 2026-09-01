@@ -1,10 +1,11 @@
 # AiEmbeddingPrice
+The price of an embedding model, per token.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**prompt** | **float** |  | [optional] 
+**prompt** | **float** | The price of a single input token. | [optional] 
 
 ## Example
 

@@ -30,11 +30,11 @@ from typing_extensions import Self
 
 class AiAiSendStreamBody(BaseModel):
     """
-    AiAiSendStreamBody
+    Shared body of the two streaming send endpoints (`sendWithStream` and its OpenAI-framed twin) — the `Chat` action is implied, so there is no `actionType`.
     """ # noqa: E501
     thread_id: Optional[StrictStr] = Field(default=None, description="Target thread; a new one is created (with an auto title) when omitted.", alias="threadId")
     user_message: AiThreadMessageLike = Field(description="The user turn to send.", alias="userMessage")
-    action_args: Optional[AiAiActionArgs] = Field(default=None, alias="actionArgs")
+    action_args: Optional[AiAiActionArgs] = Field(default=None, description="Per-request engine options: extra tools, reasoning, prompt override.", alias="actionArgs")
     entity_id: Optional[StrictStr] = Field(default=None, description="Optional entity (room) scope for profile resolution.", alias="entityId")
     profile_id: Optional[StrictStr] = Field(default=None, description="Session-level profile override for this request only.", alias="profileId")
     __properties: ClassVar[List[str]] = ["threadId", "userMessage", "actionArgs", "entityId", "profileId"]

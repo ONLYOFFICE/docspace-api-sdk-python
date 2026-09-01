@@ -1,10 +1,11 @@
-# SetupCodeWrapper
+# TfaSetupCodeWrapper
+The successful API response containing the TfaSetupCodeDto object.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**response** | [**SetupCode**](SetupCode.md) |  | [optional] 
+**response** | [**TfaSetupCodeDto**](TfaSetupCodeDto.md) | The TfaSetupCodeDto object returned by the operation. | [optional] 
 **count** | **int** | The total number of items in the response | [optional] 
 **links** | [**List[GetPortalPrices200ResponseLinksInner]**](GetPortalPrices200ResponseLinksInner.md) | List of links related to the response | [optional] 
 **status** | **int** | HTTP status code of the response | [optional] 
@@ -13,19 +14,19 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace_api_sdk.models.setup_code_wrapper import SetupCodeWrapper
+from docspace_api_sdk.models.tfa_setup_code_wrapper import TfaSetupCodeWrapper
 
 # TODO update the JSON string below
 json = "{}"
-# create an instance of SetupCodeWrapper from a JSON string
-setup_code_wrapper_instance = SetupCodeWrapper.from_json(json)
+# create an instance of TfaSetupCodeWrapper from a JSON string
+tfa_setup_code_wrapper_instance = TfaSetupCodeWrapper.from_json(json)
 # print the JSON string representation of the object
-print(SetupCodeWrapper.to_json())
+print(TfaSetupCodeWrapper.to_json())
 
 # convert the object into a dict
-setup_code_wrapper_dict = setup_code_wrapper_instance.to_dict()
-# create an instance of SetupCodeWrapper from a dict
-setup_code_wrapper_from_dict = SetupCodeWrapper.from_dict(setup_code_wrapper_dict)
+tfa_setup_code_wrapper_dict = tfa_setup_code_wrapper_instance.to_dict()
+# create an instance of TfaSetupCodeWrapper from a dict
+tfa_setup_code_wrapper_from_dict = TfaSetupCodeWrapper.from_dict(tfa_setup_code_wrapper_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

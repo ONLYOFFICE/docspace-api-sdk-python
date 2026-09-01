@@ -45,7 +45,7 @@ class CreateRoomFromTemplateDto(BaseModel):
     indexing: Optional[StrictBool] = Field(default=None, description="Specifies whether to create a room with indexing.", json_schema_extra={"examples": [True]})
     deny_download: Optional[StrictBool] = Field(default=None, description="Specifies whether to deny downloads from the room.", alias="denyDownload", json_schema_extra={"examples": [False]})
     lifetime: Optional[RoomDataLifetimeDto] = Field(default=None, description="The room data lifetime information.")
-    watermark: Optional[WatermarkRequestDto] = Field(default=None, description="The request parameters for adding watermarks.")
+    watermark: Optional[WatermarkRequestDto] = Field(default=None, description="The watermark settings.")
     private: Optional[StrictBool] = Field(default=None, description="Specifies whether the room to be created is private or not.", json_schema_extra={"examples": [False]})
     __properties: ClassVar[List[str]] = ["templateId", "title", "logo", "copyLogo", "tags", "color", "cover", "quota", "indexing", "denyDownload", "lifetime", "watermark", "private"]
 

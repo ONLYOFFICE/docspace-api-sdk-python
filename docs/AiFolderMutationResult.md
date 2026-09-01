@@ -5,9 +5,9 @@ Outcome of `createFolder` / `renameFolder` — either the persisted folder or a 
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**success** | **bool** |  | 
-**folder** | [**AiPromptFolder**](AiPromptFolder.md) |  | [optional] 
-**error** | [**AiTErrorData**](AiTErrorData.md) |  | [optional] 
+**success** | **bool** | True when the folder was persisted. | 
+**folder** | [**AiPromptFolder**](AiPromptFolder.md) | The persisted folder. Present on success. | [optional] 
+**error** | [**AiTErrorData**](AiTErrorData.md) | Why the folder was rejected. Present on failure. | [optional] 
 
 ## Example
 

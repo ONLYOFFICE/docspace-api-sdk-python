@@ -1,4 +1,5 @@
 # AiAiActionArgs
+Wire-serializable subset of the engine's `ActionArgs` — drops the engine-injected `signal`/`fetch`; `profile`/`messages` are owned by the engine and never sent by the caller.
 
 ## Properties
 

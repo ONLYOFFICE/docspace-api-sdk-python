@@ -30,9 +30,9 @@ from typing_extensions import Self
 
 class FileReferenceWrapper(BaseModel):
     """
-    FileReferenceWrapper
+    The successful API response containing the FileReference object.
     """ # noqa: E501
-    response: Optional[FileReference] = None
+    response: Optional[FileReference] = Field(default=None, description="The FileReference object returned by the operation.")
     count: Optional[StrictInt] = Field(default=None, description="The total number of items in the response")
     links: Optional[List[GetPortalPrices200ResponseLinksInner]] = Field(default=None, description="List of links related to the response")
     status: Optional[StrictInt] = Field(default=None, description="HTTP status code of the response")

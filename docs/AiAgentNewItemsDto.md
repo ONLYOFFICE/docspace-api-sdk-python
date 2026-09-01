@@ -5,7 +5,7 @@ The agent new item's information.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**agent** | [**AiFileEntryBaseDto**](AiFileEntryBaseDto.md) | The file entry information. | 
+**agent** | [**AiFileEntryBaseDto**](AiFileEntryBaseDto.md) | The agent file entry. | 
 **items** | [**List[AiFileEntryBaseDto]**](AiFileEntryBaseDto.md) | The list of file entry items. | 
 
 ## Example

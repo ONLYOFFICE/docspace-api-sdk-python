@@ -14,7 +14,7 @@ Method | HTTP request | Description
 # **ai_settings_get**
 > AiAiSettingsWrapper ai_settings_get()
 
-
+Reports the portal's combined AI configuration and readiness.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -76,7 +76,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **ai_settings_get_user**
 > AiAiUserSettingsWrapper ai_settings_get_user()
 
-
+Returns the current user's AI settings.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -138,7 +138,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **ai_settings_get_vectorization**
 > AiVectorizationSettingsWrapper ai_settings_get_vectorization()
 
-
+Returns the portal's vectorization settings.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -200,7 +200,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **ai_settings_set_user**
 > AiAiUserSettingsWrapper ai_settings_set_user(request_body)
 
-
+Updates the current user's AI settings.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -266,7 +266,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **ai_settings_set_vectorization**
 > AiVectorizationSettingsWrapper ai_settings_set_vectorization(request_body)
 
-
+Updates the portal's vectorization settings.
 
 For more information, see [api.onlyoffice.com]().
 

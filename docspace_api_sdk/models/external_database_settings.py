@@ -29,17 +29,17 @@ from typing_extensions import Self
 
 class ExternalDatabaseSettings(BaseModel):
     """
-    ExternalDatabaseSettings
+    The connection parameters of an external database.
     """ # noqa: E501
-    database_type: Optional[StrictStr] = Field(default=None, alias="databaseType")
-    database_type_enum: Optional[ExternalDatabaseType] = Field(default=None, alias="databaseTypeEnum")
-    db_host: Optional[StrictStr] = Field(default=None, alias="dbHost")
-    db_port: Optional[StrictInt] = Field(default=None, alias="dbPort")
-    db_name: Optional[StrictStr] = Field(default=None, alias="dbName")
-    db_user: Optional[StrictStr] = Field(default=None, alias="dbUser")
-    db_password: Optional[StrictStr] = Field(default=None, alias="dbPassword")
-    db_ssl: Optional[StrictBool] = Field(default=None, alias="dbSsl")
-    sqlite_file_path: Optional[StrictStr] = Field(default=None, alias="sqliteFilePath")
+    database_type: Optional[StrictStr] = Field(default=None, description="The engine of the external database.", alias="databaseType", json_schema_extra={"examples": ["mysql"]})
+    database_type_enum: Optional[ExternalDatabaseType] = Field(default=None, description="The engine of an external database.", alias="databaseTypeEnum")
+    db_host: Optional[StrictStr] = Field(default=None, description="The host name or the IP address of the database server.", alias="dbHost", json_schema_extra={"examples": ["localhost"]})
+    db_port: Optional[StrictInt] = Field(default=None, description="The port the database server listens on.", alias="dbPort", json_schema_extra={"examples": [3306]})
+    db_name: Optional[StrictStr] = Field(default=None, description="The name of the database to connect to.", alias="dbName", json_schema_extra={"examples": ["docspace"]})
+    db_user: Optional[StrictStr] = Field(default=None, description="The user name to connect with.", alias="dbUser", json_schema_extra={"examples": ["root"]})
+    db_password: Optional[StrictStr] = Field(default=None, description="The password to connect with.", alias="dbPassword", json_schema_extra={"examples": ["my-secret-password"]})
+    db_ssl: Optional[StrictBool] = Field(default=None, description="Specifies whether the connection to the database is secured with SSL.", alias="dbSsl", json_schema_extra={"examples": [False]})
+    sqlite_file_path: Optional[StrictStr] = Field(default=None, description="The path to the database file, used by the SQLite engine only.", alias="sqliteFilePath", json_schema_extra={"examples": ["/var/lib/docspace/external.db"]})
     __properties: ClassVar[List[str]] = ["databaseType", "databaseTypeEnum", "dbHost", "dbPort", "dbName", "dbUser", "dbPassword", "dbSsl", "sqliteFilePath"]
 
     model_config = ConfigDict(

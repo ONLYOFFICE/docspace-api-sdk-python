@@ -24,9 +24,13 @@ from typing_extensions import Annotated
 from pydantic import Field, StrictBool
 from typing import Optional
 from typing_extensions import Annotated
+from docspace_api_sdk.models.additional_white_label_settings_dto_wrapper import AdditionalWhiteLabelSettingsDtoWrapper
+from docspace_api_sdk.models.additional_white_label_settings_response_wrapper import AdditionalWhiteLabelSettingsResponseWrapper
 from docspace_api_sdk.models.additional_white_label_settings_wrapper import AdditionalWhiteLabelSettingsWrapper
 from docspace_api_sdk.models.boolean_wrapper import BooleanWrapper
 from docspace_api_sdk.models.company_white_label_settings_array_wrapper import CompanyWhiteLabelSettingsArrayWrapper
+from docspace_api_sdk.models.company_white_label_settings_dto_wrapper import CompanyWhiteLabelSettingsDtoWrapper
+from docspace_api_sdk.models.company_white_label_settings_response_wrapper import CompanyWhiteLabelSettingsResponseWrapper
 from docspace_api_sdk.models.company_white_label_settings_wrapper import CompanyWhiteLabelSettingsWrapper
 from docspace_api_sdk.models.is_default_white_label_logos_array_wrapper import IsDefaultWhiteLabelLogosArrayWrapper
 from docspace_api_sdk.models.is_default_white_label_logos_wrapper import IsDefaultWhiteLabelLogosWrapper
@@ -68,7 +72,7 @@ class RebrandingApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> AdditionalWhiteLabelSettingsWrapper:
+    ) -> AdditionalWhiteLabelSettingsResponseWrapper:
         """Delete the additional white label settings
 
         Deletes the additional white label settings.
@@ -103,10 +107,11 @@ class RebrandingApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "AdditionalWhiteLabelSettingsWrapper",
+            '200': "AdditionalWhiteLabelSettingsResponseWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -137,7 +142,7 @@ class RebrandingApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[AdditionalWhiteLabelSettingsWrapper]:
+    ) -> ApiResponse[AdditionalWhiteLabelSettingsResponseWrapper]:
         """Delete the additional white label settings
 
         Deletes the additional white label settings.
@@ -172,10 +177,11 @@ class RebrandingApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "AdditionalWhiteLabelSettingsWrapper",
+            '200': "AdditionalWhiteLabelSettingsResponseWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -241,10 +247,11 @@ class RebrandingApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "AdditionalWhiteLabelSettingsWrapper",
+            '200': "AdditionalWhiteLabelSettingsResponseWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -340,7 +347,7 @@ class RebrandingApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> CompanyWhiteLabelSettingsWrapper:
+    ) -> CompanyWhiteLabelSettingsResponseWrapper:
         """Delete the company white label settings
 
         Deletes the company white label settings.
@@ -375,10 +382,11 @@ class RebrandingApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "CompanyWhiteLabelSettingsWrapper",
+            '200': "CompanyWhiteLabelSettingsResponseWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -409,7 +417,7 @@ class RebrandingApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[CompanyWhiteLabelSettingsWrapper]:
+    ) -> ApiResponse[CompanyWhiteLabelSettingsResponseWrapper]:
         """Delete the company white label settings
 
         Deletes the company white label settings.
@@ -444,10 +452,11 @@ class RebrandingApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "CompanyWhiteLabelSettingsWrapper",
+            '200': "CompanyWhiteLabelSettingsResponseWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -513,10 +522,11 @@ class RebrandingApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "CompanyWhiteLabelSettingsWrapper",
+            '200': "CompanyWhiteLabelSettingsResponseWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -612,7 +622,7 @@ class RebrandingApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> AdditionalWhiteLabelSettingsWrapper:
+    ) -> AdditionalWhiteLabelSettingsDtoWrapper:
         """Get the additional white label settings
 
         Returns the additional white label settings.
@@ -647,9 +657,10 @@ class RebrandingApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "AdditionalWhiteLabelSettingsWrapper",
-            '401': None,
-            '429': None,
+            '200': "AdditionalWhiteLabelSettingsDtoWrapper",
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -680,7 +691,7 @@ class RebrandingApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[AdditionalWhiteLabelSettingsWrapper]:
+    ) -> ApiResponse[AdditionalWhiteLabelSettingsDtoWrapper]:
         """Get the additional white label settings
 
         Returns the additional white label settings.
@@ -715,9 +726,10 @@ class RebrandingApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "AdditionalWhiteLabelSettingsWrapper",
-            '401': None,
-            '429': None,
+            '200': "AdditionalWhiteLabelSettingsDtoWrapper",
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -783,9 +795,10 @@ class RebrandingApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "AdditionalWhiteLabelSettingsWrapper",
-            '401': None,
-            '429': None,
+            '200': "AdditionalWhiteLabelSettingsDtoWrapper",
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -881,7 +894,7 @@ class RebrandingApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> CompanyWhiteLabelSettingsWrapper:
+    ) -> CompanyWhiteLabelSettingsDtoWrapper:
         """Get the company white label settings
 
         Returns the company white label settings.
@@ -916,9 +929,10 @@ class RebrandingApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "CompanyWhiteLabelSettingsWrapper",
-            '401': None,
-            '429': None,
+            '200': "CompanyWhiteLabelSettingsDtoWrapper",
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -949,7 +963,7 @@ class RebrandingApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[CompanyWhiteLabelSettingsWrapper]:
+    ) -> ApiResponse[CompanyWhiteLabelSettingsDtoWrapper]:
         """Get the company white label settings
 
         Returns the company white label settings.
@@ -984,9 +998,10 @@ class RebrandingApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "CompanyWhiteLabelSettingsWrapper",
-            '401': None,
-            '429': None,
+            '200': "CompanyWhiteLabelSettingsDtoWrapper",
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1052,9 +1067,10 @@ class RebrandingApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "CompanyWhiteLabelSettingsWrapper",
-            '401': None,
-            '429': None,
+            '200': "CompanyWhiteLabelSettingsDtoWrapper",
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1186,8 +1202,9 @@ class RebrandingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1254,8 +1271,9 @@ class RebrandingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1322,8 +1340,9 @@ class RebrandingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1463,8 +1482,10 @@ class RebrandingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "IsDefaultWhiteLabelLogosWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1539,8 +1560,10 @@ class RebrandingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "IsDefaultWhiteLabelLogosWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1615,8 +1638,10 @@ class RebrandingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "IsDefaultWhiteLabelLogosWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1766,8 +1791,10 @@ class RebrandingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "IsDefaultWhiteLabelLogosArrayWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1842,8 +1869,10 @@ class RebrandingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "IsDefaultWhiteLabelLogosArrayWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1918,8 +1947,10 @@ class RebrandingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "IsDefaultWhiteLabelLogosArrayWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2061,8 +2092,9 @@ class RebrandingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CompanyWhiteLabelSettingsArrayWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2129,8 +2161,9 @@ class RebrandingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CompanyWhiteLabelSettingsArrayWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2197,8 +2230,9 @@ class RebrandingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CompanyWhiteLabelSettingsArrayWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2338,8 +2372,10 @@ class RebrandingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2414,8 +2450,10 @@ class RebrandingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2490,8 +2528,10 @@ class RebrandingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2641,7 +2681,9 @@ class RebrandingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "WhiteLabelItemArrayWrapper",
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2716,7 +2758,9 @@ class RebrandingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "WhiteLabelItemArrayWrapper",
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2791,7 +2835,9 @@ class RebrandingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "WhiteLabelItemArrayWrapper",
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2936,8 +2982,10 @@ class RebrandingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3013,8 +3061,10 @@ class RebrandingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3090,8 +3140,10 @@ class RebrandingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3242,8 +3294,10 @@ class RebrandingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3319,8 +3373,10 @@ class RebrandingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3396,8 +3452,10 @@ class RebrandingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3545,8 +3603,9 @@ class RebrandingApi:
             '200': "BooleanWrapper",
             '400': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3619,8 +3678,9 @@ class RebrandingApi:
             '200': "BooleanWrapper",
             '400': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3693,8 +3753,9 @@ class RebrandingApi:
             '200': "BooleanWrapper",
             '400': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3848,8 +3909,9 @@ class RebrandingApi:
             '200': "BooleanWrapper",
             '400': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3922,8 +3984,9 @@ class RebrandingApi:
             '200': "BooleanWrapper",
             '400': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3996,8 +4059,9 @@ class RebrandingApi:
             '200': "BooleanWrapper",
             '400': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4158,8 +4222,10 @@ class RebrandingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4239,8 +4305,10 @@ class RebrandingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4320,8 +4388,10 @@ class RebrandingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4492,8 +4562,10 @@ class RebrandingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4573,8 +4645,10 @@ class RebrandingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4654,8 +4728,10 @@ class RebrandingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4823,8 +4899,10 @@ class RebrandingApi:
             '200': "BooleanWrapper",
             '403': None,
             '409': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4901,8 +4979,10 @@ class RebrandingApi:
             '200': "BooleanWrapper",
             '403': None,
             '409': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4979,8 +5059,10 @@ class RebrandingApi:
             '200': "BooleanWrapper",
             '403': None,
             '409': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }

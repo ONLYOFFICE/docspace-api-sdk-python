@@ -35,7 +35,7 @@ class AiAiSendRequest(BaseModel):
     """ # noqa: E501
     action_type: AiActionType = Field(description="Which AI action to run — selects the assignment slot and action.", alias="actionType")
     user_message: AiThreadMessageLike = Field(description="The user turn to send.", alias="userMessage")
-    action_args: Optional[AiAiActionArgs] = Field(default=None, alias="actionArgs")
+    action_args: Optional[AiAiActionArgs] = Field(default=None, description="Per-request engine options: extra tools, reasoning, prompt override.", alias="actionArgs")
     entity_id: Optional[StrictStr] = Field(default=None, description="Optional entity (room) scope for profile resolution.", alias="entityId")
     __properties: ClassVar[List[str]] = ["actionType", "userMessage", "actionArgs", "entityId"]
 

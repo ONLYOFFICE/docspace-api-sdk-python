@@ -21,9 +21,9 @@ from inspect import getfullargspec
 import json
 import pprint
 import re  # noqa: F401
+from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from docspace_api_sdk.models.api_date_time import ApiDateTime
 from docspace_api_sdk.models.draft_location_integer import DraftLocationInteger
 from docspace_api_sdk.models.employee_dto import EmployeeDto
 from docspace_api_sdk.models.file_dto_integer_all_of_view_accessibility import FileDtoIntegerAllOfViewAccessibility
@@ -79,11 +79,11 @@ class FileDtoInteger(FileEntryDtoInteger):
     results_folder_id: Optional[StrictInt] = Field(default=None, description="The ID of the FormFillingFolderDone folder that corresponds to this original form.", alias="resultsFolderId", json_schema_extra={"examples": [55]})
     draft_location: Optional[DraftLocationInteger] = Field(default=None, description="The file draft information with its location.", alias="draftLocation")
     view_accessibility: Optional[FileDtoIntegerAllOfViewAccessibility] = Field(default=None, alias="viewAccessibility")
-    last_opened: Optional[ApiDateTime] = Field(default=None, description="The time when the file was last opened.", alias="lastOpened")
-    expired: Optional[ApiDateTime] = Field(default=None, description="The date when the file will be expired.")
+    last_opened: Optional[datetime] = Field(default=None, description="The time when the file was last opened.", alias="lastOpened", json_schema_extra={"examples": ["2021-01-01T00:00:00Z"]})
+    expired: Optional[datetime] = Field(default=None, description="The date when the file will be expired.", json_schema_extra={"examples": ["2025-12-31T23:59:59Z"]})
     vectorization_status: Optional[VectorizationStatus] = Field(default=None, description="The vectorization status of the file.", alias="vectorizationStatus")
     external_db_table_name: Optional[StrictStr] = Field(default=None, description="The name of the table in the external database that corresponds to this form.", alias="externalDbTableName", json_schema_extra={"examples": ["form_123_v1"]})
-    dimensions: Optional[Size] = Field(default=None, description="Represents dimensions with width and height values.")
+    dimensions: Optional[Size] = Field(default=None, description="The dimensions (width and height) of the image file in pixels.  This property is populated only for image files that can be viewed (supported formats like PNG, JPEG, GIF, BMP, etc.).  For non-image files, this property remains null.")
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -129,18 +129,9 @@ class FileDtoInteger(FileEntryDtoInteger):
         # override the default output from pydantic by calling `to_dict()` of owned_by
         if self.owned_by:
             _dict['ownedBy'] = self.owned_by.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of created
-        if self.created:
-            _dict['created'] = self.created.to_dict()
         # override the default output from pydantic by calling `to_dict()` of created_by
         if self.created_by:
             _dict['createdBy'] = self.created_by.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of updated
-        if self.updated:
-            _dict['updated'] = self.updated.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of auto_delete
-        if self.auto_delete:
-            _dict['autoDelete'] = self.auto_delete.to_dict()
         # override the default output from pydantic by calling `to_dict()` of updated_by
         if self.updated_by:
             _dict['updatedBy'] = self.updated_by.to_dict()
@@ -153,21 +144,12 @@ class FileDtoInteger(FileEntryDtoInteger):
         # override the default output from pydantic by calling `to_dict()` of available_share_rights
         if self.available_share_rights:
             _dict['availableShareRights'] = self.available_share_rights.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of expiration_date
-        if self.expiration_date:
-            _dict['expirationDate'] = self.expiration_date.to_dict()
         # override the default output from pydantic by calling `to_dict()` of draft_location
         if self.draft_location:
             _dict['draftLocation'] = self.draft_location.to_dict()
         # override the default output from pydantic by calling `to_dict()` of view_accessibility
         if self.view_accessibility:
             _dict['viewAccessibility'] = self.view_accessibility.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of last_opened
-        if self.last_opened:
-            _dict['lastOpened'] = self.last_opened.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of expired
-        if self.expired:
-            _dict['expired'] = self.expired.to_dict()
         # override the default output from pydantic by calling `to_dict()` of dimensions
         if self.dimensions:
             _dict['dimensions'] = self.dimensions.to_dict()
@@ -286,6 +268,16 @@ class FileDtoInteger(FileEntryDtoInteger):
         if self.view_accessibility is None and "view_accessibility" in self.model_fields_set:
             _dict['viewAccessibility'] = None
 
+        # set to None if last_opened (nullable) is None
+        # and model_fields_set contains the field
+        if self.last_opened is None and "last_opened" in self.model_fields_set:
+            _dict['lastOpened'] = None
+
+        # set to None if expired (nullable) is None
+        # and model_fields_set contains the field
+        if self.expired is None and "expired" in self.model_fields_set:
+            _dict['expired'] = None
+
         # set to None if external_db_table_name (nullable) is None
         # and model_fields_set contains the field
         if self.external_db_table_name is None and "external_db_table_name" in self.model_fields_set:
@@ -335,8 +327,8 @@ class FileDtoInteger(FileEntryDtoInteger):
             "resultsFolderId": obj.get("resultsFolderId"),
             "draftLocation": DraftLocationInteger.from_dict(obj["draftLocation"]) if obj.get("draftLocation") is not None else None,
             "viewAccessibility": FileDtoIntegerAllOfViewAccessibility.from_dict(obj["viewAccessibility"]) if obj.get("viewAccessibility") is not None else None,
-            "lastOpened": ApiDateTime.from_dict(obj["lastOpened"]) if obj.get("lastOpened") is not None else None,
-            "expired": ApiDateTime.from_dict(obj["expired"]) if obj.get("expired") is not None else None,
+            "lastOpened": obj.get("lastOpened"),
+            "expired": obj.get("expired"),
             "vectorizationStatus": obj.get("vectorizationStatus"),
             "externalDbTableName": obj.get("externalDbTableName"),
             "dimensions": Size.from_dict(obj["dimensions"]) if obj.get("dimensions") is not None else None

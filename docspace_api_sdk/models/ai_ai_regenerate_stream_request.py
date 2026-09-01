@@ -32,9 +32,9 @@ class AiAiRegenerateStreamRequest(BaseModel):
     AiAiRegenerateStreamRequest
     """ # noqa: E501
     thread_id: StrictStr = Field(description="Target thread (must already exist).", alias="threadId")
-    action_args: Optional[AiAiActionArgs] = Field(default=None, alias="actionArgs")
-    entity_id: Optional[StrictStr] = Field(default=None, alias="entityId")
-    profile_id: Optional[StrictStr] = Field(default=None, alias="profileId")
+    action_args: Optional[AiAiActionArgs] = Field(default=None, description="Per-request engine options: extra tools, reasoning, prompt override.", alias="actionArgs")
+    entity_id: Optional[StrictStr] = Field(default=None, description="Optional entity (room) scope for profile resolution.", alias="entityId")
+    profile_id: Optional[StrictStr] = Field(default=None, description="Session-level profile override for this request only.", alias="profileId")
     __properties: ClassVar[List[str]] = ["threadId", "actionArgs", "entityId", "profileId"]
 
     model_config = ConfigDict(

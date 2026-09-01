@@ -1,13 +1,13 @@
 # AiImportError
-Per-entry error reported by  {@link  PromptsEngine.importBundle } .
+Per-entry error reported by `PromptsEngine.importBundle`.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **kind** | **str** | `folder` or `prompt`, plus the offending name or id. | 
-**ref** | **str** |  | 
-**error** | [**AiTErrorData**](AiTErrorData.md) |  | 
+**ref** | **str** | The offending entry - its name or its id. | 
+**error** | [**AiTErrorData**](AiTErrorData.md) | Why the entry was rejected. | 
 
 ## Example
 

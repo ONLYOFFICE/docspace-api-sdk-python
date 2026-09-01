@@ -21,8 +21,9 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import StrictBool
+from pydantic import Field, StrictBool
 from typing import Optional
+from typing_extensions import Annotated
 from docspace_api_sdk.models.boolean_wrapper import BooleanWrapper
 from docspace_api_sdk.models.docs_cloud_config import DocsCloudConfig
 from docspace_api_sdk.models.docs_cloud_config_wrapper import DocsCloudConfigWrapper
@@ -112,8 +113,9 @@ class DocsCloudApi:
             '402': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -188,8 +190,9 @@ class DocsCloudApi:
             '402': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -264,8 +267,9 @@ class DocsCloudApi:
             '402': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -414,8 +418,9 @@ class DocsCloudApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocumentBuilderTaskWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -483,8 +488,9 @@ class DocsCloudApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocumentBuilderTaskWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -552,8 +558,9 @@ class DocsCloudApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocumentBuilderTaskWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -637,7 +644,7 @@ class DocsCloudApi:
     @validate_call
     def get_tenant(
         self,
-        refresh: Optional[StrictBool] = None,
+        refresh: Annotated[Optional[StrictBool], Field(description="Specifies whether to bypass the cache and request the tenant from DocsCloud again.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -655,7 +662,7 @@ class DocsCloudApi:
 
         Returns the DocsCloud tenant of the current portal.
 
-        :param refresh:
+        :param refresh: Specifies whether to bypass the cache and request the tenant from DocsCloud again.
         :type refresh: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -689,8 +696,10 @@ class DocsCloudApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocsCloudTenantWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -709,7 +718,7 @@ class DocsCloudApi:
     @validate_call
     def get_tenant_with_http_info(
         self,
-        refresh: Optional[StrictBool] = None,
+        refresh: Annotated[Optional[StrictBool], Field(description="Specifies whether to bypass the cache and request the tenant from DocsCloud again.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -727,7 +736,7 @@ class DocsCloudApi:
 
         Returns the DocsCloud tenant of the current portal.
 
-        :param refresh:
+        :param refresh: Specifies whether to bypass the cache and request the tenant from DocsCloud again.
         :type refresh: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -761,8 +770,10 @@ class DocsCloudApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocsCloudTenantWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -781,7 +792,7 @@ class DocsCloudApi:
     @validate_call
     def get_tenant_without_preload_content(
         self,
-        refresh: Optional[StrictBool] = None,
+        refresh: Annotated[Optional[StrictBool], Field(description="Specifies whether to bypass the cache and request the tenant from DocsCloud again.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -799,7 +810,7 @@ class DocsCloudApi:
 
         Returns the DocsCloud tenant of the current portal.
 
-        :param refresh:
+        :param refresh: Specifies whether to bypass the cache and request the tenant from DocsCloud again.
         :type refresh: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -833,8 +844,10 @@ class DocsCloudApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocsCloudTenantWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -923,7 +936,7 @@ class DocsCloudApi:
     @validate_call
     def get_tenant_config(
         self,
-        refresh: Optional[StrictBool] = None,
+        refresh: Annotated[Optional[StrictBool], Field(description="Specifies whether to bypass the cache and request the tenant configuration from DocsCloud again.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -941,7 +954,7 @@ class DocsCloudApi:
 
         Returns the DocsCloud tenant configuration of the current portal.
 
-        :param refresh:
+        :param refresh: Specifies whether to bypass the cache and request the tenant configuration from DocsCloud again.
         :type refresh: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -976,8 +989,9 @@ class DocsCloudApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocsCloudConfigWrapper",
             '400': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -996,7 +1010,7 @@ class DocsCloudApi:
     @validate_call
     def get_tenant_config_with_http_info(
         self,
-        refresh: Optional[StrictBool] = None,
+        refresh: Annotated[Optional[StrictBool], Field(description="Specifies whether to bypass the cache and request the tenant configuration from DocsCloud again.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1014,7 +1028,7 @@ class DocsCloudApi:
 
         Returns the DocsCloud tenant configuration of the current portal.
 
-        :param refresh:
+        :param refresh: Specifies whether to bypass the cache and request the tenant configuration from DocsCloud again.
         :type refresh: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1049,8 +1063,9 @@ class DocsCloudApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocsCloudConfigWrapper",
             '400': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1069,7 +1084,7 @@ class DocsCloudApi:
     @validate_call
     def get_tenant_config_without_preload_content(
         self,
-        refresh: Optional[StrictBool] = None,
+        refresh: Annotated[Optional[StrictBool], Field(description="Specifies whether to bypass the cache and request the tenant configuration from DocsCloud again.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1087,7 +1102,7 @@ class DocsCloudApi:
 
         Returns the DocsCloud tenant configuration of the current portal.
 
-        :param refresh:
+        :param refresh: Specifies whether to bypass the cache and request the tenant configuration from DocsCloud again.
         :type refresh: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1122,8 +1137,9 @@ class DocsCloudApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocsCloudConfigWrapper",
             '400': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1212,7 +1228,7 @@ class DocsCloudApi:
     @validate_call
     def get_tenant_info(
         self,
-        refresh: Optional[StrictBool] = None,
+        refresh: Annotated[Optional[StrictBool], Field(description="Specifies whether to bypass the cache and request the tenant information from DocsCloud again.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1230,7 +1246,7 @@ class DocsCloudApi:
 
         Returns the DocsCloud license and server information with usage statistics of the current portal.
 
-        :param refresh:
+        :param refresh: Specifies whether to bypass the cache and request the tenant information from DocsCloud again.
         :type refresh: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1265,8 +1281,9 @@ class DocsCloudApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocsCloudTenantInfoWrapper",
             '400': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1285,7 +1302,7 @@ class DocsCloudApi:
     @validate_call
     def get_tenant_info_with_http_info(
         self,
-        refresh: Optional[StrictBool] = None,
+        refresh: Annotated[Optional[StrictBool], Field(description="Specifies whether to bypass the cache and request the tenant information from DocsCloud again.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1303,7 +1320,7 @@ class DocsCloudApi:
 
         Returns the DocsCloud license and server information with usage statistics of the current portal.
 
-        :param refresh:
+        :param refresh: Specifies whether to bypass the cache and request the tenant information from DocsCloud again.
         :type refresh: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1338,8 +1355,9 @@ class DocsCloudApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocsCloudTenantInfoWrapper",
             '400': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1358,7 +1376,7 @@ class DocsCloudApi:
     @validate_call
     def get_tenant_info_without_preload_content(
         self,
-        refresh: Optional[StrictBool] = None,
+        refresh: Annotated[Optional[StrictBool], Field(description="Specifies whether to bypass the cache and request the tenant information from DocsCloud again.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1376,7 +1394,7 @@ class DocsCloudApi:
 
         Returns the DocsCloud license and server information with usage statistics of the current portal.
 
-        :param refresh:
+        :param refresh: Specifies whether to bypass the cache and request the tenant information from DocsCloud again.
         :type refresh: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1411,8 +1429,9 @@ class DocsCloudApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocsCloudTenantInfoWrapper",
             '400': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1501,7 +1520,7 @@ class DocsCloudApi:
     @validate_call
     def get_tenant_quota(
         self,
-        refresh: Optional[StrictBool] = None,
+        refresh: Annotated[Optional[StrictBool], Field(description="Specifies whether to bypass the cache and request the user quota from DocsCloud again.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1519,7 +1538,7 @@ class DocsCloudApi:
 
         Returns the DocsCloud user quota (active users) of the current portal.
 
-        :param refresh:
+        :param refresh: Specifies whether to bypass the cache and request the user quota from DocsCloud again.
         :type refresh: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1554,8 +1573,9 @@ class DocsCloudApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocsCloudQuotaWrapper",
             '400': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1574,7 +1594,7 @@ class DocsCloudApi:
     @validate_call
     def get_tenant_quota_with_http_info(
         self,
-        refresh: Optional[StrictBool] = None,
+        refresh: Annotated[Optional[StrictBool], Field(description="Specifies whether to bypass the cache and request the user quota from DocsCloud again.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1592,7 +1612,7 @@ class DocsCloudApi:
 
         Returns the DocsCloud user quota (active users) of the current portal.
 
-        :param refresh:
+        :param refresh: Specifies whether to bypass the cache and request the user quota from DocsCloud again.
         :type refresh: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1627,8 +1647,9 @@ class DocsCloudApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocsCloudQuotaWrapper",
             '400': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1647,7 +1668,7 @@ class DocsCloudApi:
     @validate_call
     def get_tenant_quota_without_preload_content(
         self,
-        refresh: Optional[StrictBool] = None,
+        refresh: Annotated[Optional[StrictBool], Field(description="Specifies whether to bypass the cache and request the user quota from DocsCloud again.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1665,7 +1686,7 @@ class DocsCloudApi:
 
         Returns the DocsCloud user quota (active users) of the current portal.
 
-        :param refresh:
+        :param refresh: Specifies whether to bypass the cache and request the user quota from DocsCloud again.
         :type refresh: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1700,8 +1721,9 @@ class DocsCloudApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocsCloudQuotaWrapper",
             '400': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1839,8 +1861,9 @@ class DocsCloudApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocumentBuilderTaskWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1908,8 +1931,9 @@ class DocsCloudApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocumentBuilderTaskWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1977,8 +2001,9 @@ class DocsCloudApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocumentBuilderTaskWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2062,7 +2087,7 @@ class DocsCloudApi:
     @validate_call
     def get_tenant_usage(
         self,
-        refresh: Optional[StrictBool] = None,
+        refresh: Annotated[Optional[StrictBool], Field(description="Specifies whether to bypass the cache and request the usage statistics from DocsCloud again.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2080,7 +2105,7 @@ class DocsCloudApi:
 
         Returns the DocsCloud usage statistics of the current portal.
 
-        :param refresh:
+        :param refresh: Specifies whether to bypass the cache and request the usage statistics from DocsCloud again.
         :type refresh: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2115,8 +2140,9 @@ class DocsCloudApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocsCloudUsageWrapper",
             '400': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2135,7 +2161,7 @@ class DocsCloudApi:
     @validate_call
     def get_tenant_usage_with_http_info(
         self,
-        refresh: Optional[StrictBool] = None,
+        refresh: Annotated[Optional[StrictBool], Field(description="Specifies whether to bypass the cache and request the usage statistics from DocsCloud again.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2153,7 +2179,7 @@ class DocsCloudApi:
 
         Returns the DocsCloud usage statistics of the current portal.
 
-        :param refresh:
+        :param refresh: Specifies whether to bypass the cache and request the usage statistics from DocsCloud again.
         :type refresh: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2188,8 +2214,9 @@ class DocsCloudApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocsCloudUsageWrapper",
             '400': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2208,7 +2235,7 @@ class DocsCloudApi:
     @validate_call
     def get_tenant_usage_without_preload_content(
         self,
-        refresh: Optional[StrictBool] = None,
+        refresh: Annotated[Optional[StrictBool], Field(description="Specifies whether to bypass the cache and request the usage statistics from DocsCloud again.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2226,7 +2253,7 @@ class DocsCloudApi:
 
         Returns the DocsCloud usage statistics of the current portal.
 
-        :param refresh:
+        :param refresh: Specifies whether to bypass the cache and request the usage statistics from DocsCloud again.
         :type refresh: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2261,8 +2288,9 @@ class DocsCloudApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocsCloudUsageWrapper",
             '400': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2403,8 +2431,9 @@ class DocsCloudApi:
             '402': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2475,8 +2504,9 @@ class DocsCloudApi:
             '402': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2547,8 +2577,9 @@ class DocsCloudApi:
             '402': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2688,8 +2719,9 @@ class DocsCloudApi:
             '402': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2764,8 +2796,9 @@ class DocsCloudApi:
             '402': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2840,8 +2873,9 @@ class DocsCloudApi:
             '402': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2990,8 +3024,9 @@ class DocsCloudApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3059,8 +3094,9 @@ class DocsCloudApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3128,8 +3164,9 @@ class DocsCloudApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3170,6 +3207,13 @@ class DocsCloudApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
@@ -3259,8 +3303,9 @@ class DocsCloudApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocsCloudConfigWrapper",
             '400': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3332,8 +3377,9 @@ class DocsCloudApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocsCloudConfigWrapper",
             '400': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3405,8 +3451,9 @@ class DocsCloudApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocsCloudConfigWrapper",
             '400': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }

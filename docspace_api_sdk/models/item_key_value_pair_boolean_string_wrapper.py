@@ -24,15 +24,15 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictInt
 from typing import Any, ClassVar, Dict, List, Optional
 from docspace_api_sdk.models.get_portal_prices200_response_links_inner import GetPortalPrices200ResponseLinksInner
-from docspace_api_sdk.models.key_value_pair_boolean_string import KeyValuePairBooleanString
+from docspace_api_sdk.models.item_key_value_pair_boolean_string import ItemKeyValuePairBooleanString
 from typing import Optional, Set
 from typing_extensions import Self
 
-class KeyValuePairBooleanStringWrapper(BaseModel):
+class ItemKeyValuePairBooleanStringWrapper(BaseModel):
     """
-    KeyValuePairBooleanStringWrapper
+    The successful API response containing the ItemKeyValuePairBooleanString object.
     """ # noqa: E501
-    response: Optional[KeyValuePairBooleanString] = None
+    response: Optional[ItemKeyValuePairBooleanString] = Field(default=None, description="The ItemKeyValuePairBooleanString object returned by the operation.")
     count: Optional[StrictInt] = Field(default=None, description="The total number of items in the response")
     links: Optional[List[GetPortalPrices200ResponseLinksInner]] = Field(default=None, description="List of links related to the response")
     status: Optional[StrictInt] = Field(default=None, description="HTTP status code of the response")
@@ -57,7 +57,7 @@ class KeyValuePairBooleanStringWrapper(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of KeyValuePairBooleanStringWrapper from a JSON string"""
+        """Create an instance of ItemKeyValuePairBooleanStringWrapper from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -92,7 +92,7 @@ class KeyValuePairBooleanStringWrapper(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of KeyValuePairBooleanStringWrapper from a dict"""
+        """Create an instance of ItemKeyValuePairBooleanStringWrapper from a dict"""
         if obj is None:
             return None
 
@@ -101,7 +101,7 @@ class KeyValuePairBooleanStringWrapper(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "response": KeyValuePairBooleanString.from_dict(obj["response"]) if obj.get("response") is not None else None,
+            "response": ItemKeyValuePairBooleanString.from_dict(obj["response"]) if obj.get("response") is not None else None,
             "count": obj.get("count"),
             "links": [GetPortalPrices200ResponseLinksInner.from_dict(_item) for _item in obj["links"]] if obj.get("links") is not None else None,
             "status": obj.get("status"),

@@ -29,11 +29,11 @@ from typing_extensions import Self
 
 class StorageSettings(BaseModel):
     """
-    StorageSettings
+    The storage settings.
     """ # noqa: E501
-    module: Optional[StrictStr] = None
-    props: Optional[Dict[str, Optional[StrictStr]]] = None
-    last_modified: Optional[datetime] = Field(default=None, alias="lastModified")
+    module: Optional[StrictStr] = Field(default=None, description="The storage name.", json_schema_extra={"examples": ["LocalStorage"]})
+    props: Optional[Dict[str, Optional[StrictStr]]] = Field(default=None, description="The storage properties.", json_schema_extra={"examples": [{"region": "eu-central-1", "bucket": "tenant-files"}]})
+    last_modified: Optional[datetime] = Field(default=None, description="The date and time when the storage settings were last modified.", alias="lastModified", json_schema_extra={"examples": ["2025-01-01T12:00:00Z"]})
     __properties: ClassVar[List[str]] = ["module", "props", "lastModified"]
 
     model_config = ConfigDict(

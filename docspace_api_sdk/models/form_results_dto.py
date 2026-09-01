@@ -30,7 +30,7 @@ from typing_extensions import Self
 
 class FormResultsDto(BaseModel):
     """
-    FormResultsDto
+    A single filled-in form submission.
     """ # noqa: E501
     create_on: Optional[datetime] = Field(default=None, description="The date and time when the form was created.", alias="createOn", json_schema_extra={"examples": ["2025-01-01T00:00:00"]})
     forms_data: Optional[List[FormsItemData]] = Field(default=None, description="The list of forms data.", alias="formsData", json_schema_extra={"examples": [[{"key": "field1", "value": "Answer"}]]})

@@ -21,10 +21,10 @@ import pprint
 import re  # noqa: F401
 import json
 
+from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from uuid import UUID
-from docspace_api_sdk.models.api_date_time import ApiDateTime
 from docspace_api_sdk.models.link_type import LinkType
 from typing import Optional, Set
 from typing_extensions import Self
@@ -36,7 +36,7 @@ class FileShareLink(BaseModel):
     id: Optional[UUID] = Field(default=None, description="The unique identifier of the shared link.", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000000"]})
     title: Optional[StrictStr] = Field(default=None, description="The title of the shared content.", json_schema_extra={"examples": ["Shared Document"]})
     share_link: Optional[StrictStr] = Field(default=None, description="The URL for accessing the shared content.", alias="shareLink", json_schema_extra={"examples": ["http://localhost/share/abc123"]})
-    expiration_date: Optional[ApiDateTime] = Field(default=None, description="The API date and time parameters.", alias="expirationDate")
+    expiration_date: Optional[datetime] = Field(default=None, description="The date when the shared link expires.", alias="expirationDate")
     link_type: Optional[LinkType] = Field(default=None, description="The sharing link type (e.g., Invitation).", alias="linkType")
     password: Optional[StrictStr] = Field(default=None, description="The password protection for accessing the shared content.", json_schema_extra={"examples": ["password123"]})
     deny_download: Optional[StrictBool] = Field(default=None, description="Indicates whether downloading of the shared content is prohibited.", alias="denyDownload", json_schema_extra={"examples": [False]})
@@ -87,9 +87,6 @@ class FileShareLink(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of expiration_date
-        if self.expiration_date:
-            _dict['expirationDate'] = self.expiration_date.to_dict()
         # set to None if title (nullable) is None
         # and model_fields_set contains the field
         if self.title is None and "title" in self.model_fields_set:
@@ -99,6 +96,11 @@ class FileShareLink(BaseModel):
         # and model_fields_set contains the field
         if self.share_link is None and "share_link" in self.model_fields_set:
             _dict['shareLink'] = None
+
+        # set to None if expiration_date (nullable) is None
+        # and model_fields_set contains the field
+        if self.expiration_date is None and "expiration_date" in self.model_fields_set:
+            _dict['expirationDate'] = None
 
         # set to None if password (nullable) is None
         # and model_fields_set contains the field
@@ -151,7 +153,7 @@ class FileShareLink(BaseModel):
             "id": obj.get("id"),
             "title": obj.get("title"),
             "shareLink": obj.get("shareLink"),
-            "expirationDate": ApiDateTime.from_dict(obj["expirationDate"]) if obj.get("expirationDate") is not None else None,
+            "expirationDate": obj.get("expirationDate"),
             "linkType": obj.get("linkType"),
             "password": obj.get("password"),
             "denyDownload": obj.get("denyDownload"),

@@ -17,7 +17,7 @@ Method | HTTP request | Description
 # **ai_profiles_create**
 > AiProfileMutationResult ai_profiles_create(ai_create_profile_input)
 
-
+Creates an AI provider profile. The name must be unique and the credentials are validated against the provider before the profile is stored; the portal's first profile also takes the `Default` assignment slot.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -84,7 +84,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **ai_profiles_delete**
 > AiSuccessResponse ai_profiles_delete(body)
 
-
+Deletes an AI provider profile and cleans up the assignments pointing at it - the `Default` slot moves to the first remaining profile, the other slots are unbound.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -150,7 +150,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **ai_profiles_get_by_id**
 > AiProfilesGetById200Response ai_profiles_get_by_id(id)
 
-
+Returns one AI provider profile, or an empty result when the identifier is unknown.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -159,7 +159,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **str**|  | 
+ **id** | **str**| The AI provider profile identifier. | 
 
 ### Return type
 
@@ -186,7 +186,7 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.ProfilesApi(api_client)
-    id = 'id_example' # str | 
+    id = 'id_example' # str | The AI provider profile identifier.
 
     try:
         # Get by id
@@ -216,7 +216,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **ai_profiles_list**
 > List[AiProfile] ai_profiles_list()
 
-
+Lists the portal's AI provider profiles.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -278,7 +278,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **ai_profiles_list_models**
 > List[AiModel] ai_profiles_list_models(profile_id)
 
-
+Lists the models the given profile's provider offers, as reported by the provider itself.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -287,7 +287,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **profile_id** | **str**|  | 
+ **profile_id** | **str**| The AI provider profile identifier. | 
 
 ### Return type
 
@@ -314,7 +314,7 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.ProfilesApi(api_client)
-    profile_id = 'profile_id_example' # str | 
+    profile_id = 'profile_id_example' # str | The AI provider profile identifier.
 
     try:
         # List models
@@ -344,7 +344,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **ai_profiles_list_provider_models**
 > List[AiModel] ai_profiles_list_provider_models(ai_profiles_list_provider_models_request)
 
-
+Lists the models a provider offers for the supplied endpoint and key, before any profile is created from them.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -411,7 +411,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **ai_profiles_test_connection**
 > AiProfilesTestConnection200Response ai_profiles_test_connection(body)
 
-
+Checks a stored profile's credentials against its provider and reports the provider's own error when the call fails. Nothing is written.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -477,7 +477,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **ai_profiles_update**
 > AiProfileMutationResult ai_profiles_update(ai_profile)
 
-
+Updates an AI provider profile, re-checking name uniqueness and the provider credentials.
 
 For more information, see [api.onlyoffice.com]().
 

@@ -21,16 +21,16 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictFloat, StrictInt
+from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing import Optional, Set
 from typing_extensions import Self
 
 class AiEmbeddingPrice(BaseModel):
     """
-    AiEmbeddingPrice
+    The price of an embedding model, per token.
     """ # noqa: E501
-    prompt: Optional[Union[StrictFloat, StrictInt]] = None
+    prompt: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The price of a single input token.", json_schema_extra={"examples": [2.0E-8]})
     __properties: ClassVar[List[str]] = ["prompt"]
 
     model_config = ConfigDict(

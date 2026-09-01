@@ -30,9 +30,9 @@ from typing_extensions import Self
 
 class FileIntegerArrayWrapper(BaseModel):
     """
-    FileIntegerArrayWrapper
+    The successful API response containing the list of FileDtoInteger objects.
     """ # noqa: E501
-    response: Optional[List[FileDtoInteger]] = None
+    response: Optional[List[FileDtoInteger]] = Field(default=None, description="The list of FileDtoInteger objects returned by the operation.")
     count: Optional[StrictInt] = Field(default=None, description="The total number of items in the response")
     links: Optional[List[GetPortalPrices200ResponseLinksInner]] = Field(default=None, description="List of links related to the response")
     status: Optional[StrictInt] = Field(default=None, description="HTTP status code of the response")

@@ -1,13 +1,14 @@
 # AiWebSearchPricing
+The pricing of a single web search provider, per request.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** |  | [optional] 
-**provider** | **str** |  | [optional] 
-**price** | **float** |  | [optional] 
-**link** | **str** |  | [optional] 
+**id** | **str** | The identifier of the web search provider. | [optional] 
+**provider** | **str** | The provider that serves the web search requests. | [optional] 
+**price** | **float** | The price of a single web search request. | [optional] 
+**link** | **str** | The link to the pricing page of the provider. | [optional] 
 
 ## Example
 

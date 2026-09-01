@@ -21,7 +21,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool
+from pydantic import BaseModel, ConfigDict, Field, StrictBool
 from typing import Any, ClassVar, Dict, List, Optional
 from docspace_api_sdk.models.ai_profile import AiProfile
 from docspace_api_sdk.models.ai_t_error_data import AiTErrorData
@@ -32,9 +32,9 @@ class AiProfileMutationResult(BaseModel):
     """
     Outcome of `create` / `update` — either a success carrying the persisted profile, or a failure with a field-level error description from the name check or the provider credential check.
     """ # noqa: E501
-    success: StrictBool
-    profile: Optional[AiProfile] = None
-    error: Optional[AiTErrorData] = None
+    success: StrictBool = Field(description="True when the profile was persisted.")
+    profile: Optional[AiProfile] = Field(default=None, description="The persisted profile. Present on success.")
+    error: Optional[AiTErrorData] = Field(default=None, description="Why the profile was rejected - the name check or the provider credential check. Present on failure.")
     __properties: ClassVar[List[str]] = ["success", "profile", "error"]
 
     model_config = ConfigDict(

@@ -30,7 +30,7 @@ from typing_extensions import Self
 
 class AiThreadMessageLike(BaseModel):
     """
-    AiThreadMessageLike
+    A single chat message as it travels on the wire.
     """ # noqa: E501
     id: Optional[StrictStr] = Field(default=None, description="Storage-assigned message id (absent on inbound drafts).")
     role: StrictStr = Field(description="Message author role.")

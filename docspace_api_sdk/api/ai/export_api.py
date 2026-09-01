@@ -62,6 +62,7 @@ class ExportApi:
     ) -> AiExportTextToDocx200Response:
         """Start markdown → docx export
 
+        Starts an asynchronous markdown-to-docx export. The response only acknowledges the task: the AI Worker converts the content and saves the .docx into the target folder (an agent room resolves to its result-storage subfolder), and completion reaches the client as the usual folder-modified socket event.
 
         :param ai_export_text_to_docx_request: (required)
         :type ai_export_text_to_docx_request: AiExportTextToDocxRequest
@@ -130,6 +131,7 @@ class ExportApi:
     ) -> ApiResponse[AiExportTextToDocx200Response]:
         """Start markdown → docx export
 
+        Starts an asynchronous markdown-to-docx export. The response only acknowledges the task: the AI Worker converts the content and saves the .docx into the target folder (an agent room resolves to its result-storage subfolder), and completion reaches the client as the usual folder-modified socket event.
 
         :param ai_export_text_to_docx_request: (required)
         :type ai_export_text_to_docx_request: AiExportTextToDocxRequest
@@ -198,6 +200,7 @@ class ExportApi:
     ) -> RESTResponseType:
         """Start markdown → docx export
 
+        Starts an asynchronous markdown-to-docx export. The response only acknowledges the task: the AI Worker converts the content and saves the .docx into the target folder (an agent room resolves to its result-storage subfolder), and completion reaches the client as the usual folder-modified socket event.
 
         :param ai_export_text_to_docx_request: (required)
         :type ai_export_text_to_docx_request: AiExportTextToDocxRequest

@@ -1,12 +1,13 @@
 # AiOpenAIToolCallDelta
+The incremental part of one tool call the model requested.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**index** | **float** |  | 
-**id** | **str** |  | [optional] 
-**type** | **str** |  | [optional] 
+**index** | **float** | The zero-based position of the tool call within the message. | 
+**id** | **str** | The tool call identifier, quoted back when its result is submitted. | [optional] 
+**type** | **str** | Always `function` - the only tool kind the API defines. | [optional] 
 **function** | [**AiOpenAIToolCallDeltaFunction**](AiOpenAIToolCallDeltaFunction.md) |  | [optional] 
 
 ## Example

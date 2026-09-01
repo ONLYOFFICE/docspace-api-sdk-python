@@ -1,13 +1,13 @@
 # AiWebSearchMutationResult
-Outcome of  {@link  WebSearchEngine.configure }  — either the persisted config or a field-scoped error suitable for the settings form.
+Outcome of `WebSearchEngine.configure` — either the persisted config or a field-scoped error suitable for the settings form.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**success** | **bool** |  | 
-**config** | [**AiWebSearchConfig**](AiWebSearchConfig.md) |  | [optional] 
-**error** | [**AiTErrorData**](AiTErrorData.md) |  | [optional] 
+**success** | **bool** | True when the configuration was persisted. | 
+**config** | [**AiWebSearchConfig**](AiWebSearchConfig.md) | The persisted web-search configuration. Present on success. | [optional] 
+**error** | [**AiTErrorData**](AiTErrorData.md) | Why the configuration was rejected. Present on failure. | [optional] 
 
 ## Example
 
