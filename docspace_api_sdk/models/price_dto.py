@@ -30,9 +30,9 @@ class PriceDto(BaseModel):
     """
     The price parameters.
     """ # noqa: E501
-    value: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The price value.")
-    currency_symbol: Optional[StrictStr] = Field(default=None, description="The currency symbol.", alias="currencySymbol")
-    iso_currency_symbol: Optional[StrictStr] = Field(default=None, description="The three-character ISO 4217 currency symbol.", alias="isoCurrencySymbol")
+    value: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The price value.", json_schema_extra={"examples": [99.99]})
+    currency_symbol: Optional[StrictStr] = Field(default=None, description="The currency symbol.", alias="currencySymbol", json_schema_extra={"examples": ["$"]})
+    iso_currency_symbol: Optional[StrictStr] = Field(default=None, description="The three-character ISO 4217 currency symbol.", alias="isoCurrencySymbol", json_schema_extra={"examples": ["USD"]})
     __properties: ClassVar[List[str]] = ["value", "currencySymbol", "isoCurrencySymbol"]
 
     model_config = ConfigDict(

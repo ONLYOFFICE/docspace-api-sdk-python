@@ -4,14 +4,13 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**start_task**](#start_task) | **POST** /api/2.0/ai/vectorization/tasks | Start a vectorization task
+[**ai_vectorization_start_task**](#ai_vectorization_start_task) | **POST** /api/2.0/ai/vectorization/tasks | Start a vectorization task
 
 
-# **start_task**
-> start_task(vectorization_start_request_body)
+# **ai_vectorization_start_task**
+> AiSuccessResponse ai_vectorization_start_task(request_body)
 
-Submits the specified files for vectorization. Each file is processed asynchronously by the configured embedding provider
-and indexed for semantic search in AI chat sessions. Only files accessible to the current user can be vectorized.
+
 
 For more information, see [api.onlyoffice.com]().
 
@@ -20,22 +19,22 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **vectorization_start_request_body** | [**VectorizationStartRequestBody**](VectorizationStartRequestBody.md)| The vectorization parameters including file identifiers. | 
+ **request_body** | [**Dict[str, object]**](object.md)|  | 
 
 ### Return type
 
-void (empty response body)
+[**AiSuccessResponse**](AiSuccessResponse.md)
 
 ### Authorization
 
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+No authorization required
 
 ### Example
 
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.vectorization_start_request_body import VectorizationStartRequestBody
+from docspace_api_sdk.models.ai_success_response import AiSuccessResponse
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -43,44 +42,34 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace_api_sdk.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.VectorizationApi(api_client)
-    vectorization_start_request_body = docspace_api_sdk.VectorizationStartRequestBody() # VectorizationStartRequestBody | The vectorization parameters including file identifiers.
+    request_body = None # Dict[str, object] | 
 
     try:
         # Start a vectorization task
-        api_instance.start_task(vectorization_start_request_body)
+        api_response = api_instance.ai_vectorization_start_task(request_body)
+        print("The response of VectorizationApi->ai_vectorization_start_task:\n")
+        pprint(api_response)
     except Exception as e:
-        print("Exception when calling VectorizationApi->start_task: %s\n" % e)
+        print("Exception when calling VectorizationApi->ai_vectorization_start_task: %s\n" % e)
 ```
 
 
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | The vectorization task was successfully submitted |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
-**401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
-**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+**200** | Success. |  -  |
+**401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

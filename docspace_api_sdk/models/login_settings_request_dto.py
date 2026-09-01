@@ -31,9 +31,9 @@ class LoginSettingsRequestDto(BaseModel):
     """
     The request parameters for configuring login security and performance settings.
     """ # noqa: E501
-    attempt_count: Optional[Annotated[int, Field(le=9999, strict=True, ge=1)]] = Field(default=None, description="The maximum number of consecutive failed login attempts allowed before triggering account suspension.", alias="attemptCount")
-    block_time: Optional[Annotated[int, Field(le=9999, strict=True, ge=1)]] = Field(default=None, description="The duration (in minutes) for which an account remains suspended after exceeding maximum login attempts.", alias="blockTime")
-    check_period: Optional[Annotated[int, Field(le=9999, strict=True, ge=1)]] = Field(default=None, description="The maximum time (in seconds) allowed for server to process and respond to login requests.", alias="checkPeriod")
+    attempt_count: Optional[Annotated[int, Field(le=9999, strict=True, ge=1)]] = Field(default=None, description="The maximum number of consecutive failed login attempts allowed before triggering account suspension.", alias="attemptCount", json_schema_extra={"examples": [1]})
+    block_time: Optional[Annotated[int, Field(le=9999, strict=True, ge=1)]] = Field(default=None, description="The duration (in minutes) for which an account remains suspended after exceeding maximum login attempts.", alias="blockTime", json_schema_extra={"examples": [1]})
+    check_period: Optional[Annotated[int, Field(le=9999, strict=True, ge=1)]] = Field(default=None, description="The maximum time (in seconds) allowed for server to process and respond to login requests.", alias="checkPeriod", json_schema_extra={"examples": [1]})
     __properties: ClassVar[List[str]] = ["attemptCount", "blockTime", "checkPeriod"]
 
     model_config = ConfigDict(

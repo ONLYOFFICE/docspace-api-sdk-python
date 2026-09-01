@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 **plugin_name** | **str** | The name by which the web plugin is registered in the window object. | 
 **scopes** | **str** | The web plugin scopes. | 
 **image** | **str** | The web plugin image. | 
-**create_by** | [**EmployeeDto**](EmployeeDto.md) |  | 
+**create_by** | [**EmployeeDto**](EmployeeDto.md) | The user parameters. | 
 **create_on** | **datetime** | The date and time when the web plugin was created. | 
 **enabled** | **bool** | Specifies if the web plugin is enabled or not. | 
 **system** | **bool** | Specifies if the web plugin is system or not. | 
@@ -24,6 +24,7 @@ Name | Type | Description | Notes
 **settings** | **str** | The web plugin settings. | 
 **name_locale** | **Dict[str, Optional[str]]** | The web plugin localized name. | [optional] 
 **description_locale** | **Dict[str, Optional[str]]** | The web plugin localized description. | [optional] 
+**runtime** | **str** | The web plugin loading method | [optional] 
 
 ## Example
 

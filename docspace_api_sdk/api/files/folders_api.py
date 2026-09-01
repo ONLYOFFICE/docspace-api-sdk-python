@@ -22,15 +22,18 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictBool, StrictBytes, StrictInt, StrictStr
+from datetime import datetime
+from pydantic import Field, StrictBool, StrictBytes, StrictInt, StrictStr, field_validator
 from typing import List, Optional, Tuple, Union
 from typing_extensions import Annotated
 from uuid import UUID
 from docspace_api_sdk.models.api_date_time import ApiDateTime
 from docspace_api_sdk.models.apply_filter_option import ApplyFilterOption
+from docspace_api_sdk.models.audit_report_format import AuditReportFormat
 from docspace_api_sdk.models.check_upload_request import CheckUploadRequest
 from docspace_api_sdk.models.create_folder import CreateFolder
 from docspace_api_sdk.models.delete_folder import DeleteFolder
+from docspace_api_sdk.models.document_builder_task_wrapper import DocumentBuilderTaskWrapper
 from docspace_api_sdk.models.file_entry_base_array_wrapper import FileEntryBaseArrayWrapper
 from docspace_api_sdk.models.file_integer_array_wrapper import FileIntegerArrayWrapper
 from docspace_api_sdk.models.file_integer_wrapper import FileIntegerWrapper
@@ -50,7 +53,6 @@ from docspace_api_sdk.models.order_request_dto import OrderRequestDto
 from docspace_api_sdk.models.string_array_wrapper import STRINGArrayWrapper
 from docspace_api_sdk.models.search_area import SearchArea
 from docspace_api_sdk.models.sort_order import SortOrder
-from docspace_api_sdk.models.string_wrapper import StringWrapper
 from docspace_api_sdk.models.xlsx_report_response_wrapper import XlsxReportResponseWrapper
 
 from docspace_api_sdk.api_client import ApiClient, RequestSerialized
@@ -148,6 +150,7 @@ class FoldersApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -223,6 +226,7 @@ class FoldersApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -298,6 +302,7 @@ class FoldersApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -457,6 +462,7 @@ class FoldersApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -532,6 +538,7 @@ class FoldersApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -607,6 +614,7 @@ class FoldersApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -768,6 +776,7 @@ class FoldersApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -845,6 +854,7 @@ class FoldersApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -922,6 +932,7 @@ class FoldersApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1020,7 +1031,10 @@ class FoldersApi:
     @validate_call
     def create_report_folder_history(
         self,
-        folder_id: StrictInt,
+        folder_id: Annotated[StrictInt, Field(description="The folder ID whose history is exported.")],
+        format: Annotated[Optional[AuditReportFormat], Field(description="The output file format of the report. Defaults to XLSX.")] = None,
+        var_from: Annotated[Optional[datetime], Field(description="The start date of the history period to export.")] = None,
+        to: Annotated[Optional[datetime], Field(description="The end date of the history period to export.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1033,13 +1047,19 @@ class FoldersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> StringWrapper:
-        """Generates folder history
+    ) -> DocumentBuilderTaskWrapper:
+        """Start the folder history report generation
 
-        Generates the activity history of a folder.
+        Starts generating the activity history report of a folder (XLSX by default, or CSV) and saves it to My documents.
 
-        :param folder_id: (required)
+        :param folder_id: The folder ID whose history is exported. (required)
         :type folder_id: int
+        :param format: The output file format of the report. Defaults to XLSX.
+        :type format: AuditReportFormat
+        :param var_from: The start date of the history period to export.
+        :type var_from: datetime
+        :param to: The end date of the history period to export.
+        :type to: datetime
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1064,6 +1084,9 @@ class FoldersApi:
 
         _param = self._create_report_folder_history_serialize(
             folder_id=folder_id,
+            format=format,
+            var_from=var_from,
+            to=to,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1071,7 +1094,7 @@ class FoldersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "StringWrapper",
+            '200': "DocumentBuilderTaskWrapper",
             '403': None,
             '404': None,
             '401': None,
@@ -1079,6 +1102,7 @@ class FoldersApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1093,7 +1117,10 @@ class FoldersApi:
     @validate_call
     def create_report_folder_history_with_http_info(
         self,
-        folder_id: StrictInt,
+        folder_id: Annotated[StrictInt, Field(description="The folder ID whose history is exported.")],
+        format: Annotated[Optional[AuditReportFormat], Field(description="The output file format of the report. Defaults to XLSX.")] = None,
+        var_from: Annotated[Optional[datetime], Field(description="The start date of the history period to export.")] = None,
+        to: Annotated[Optional[datetime], Field(description="The end date of the history period to export.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1106,13 +1133,19 @@ class FoldersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[StringWrapper]:
-        """Generates folder history
+    ) -> ApiResponse[DocumentBuilderTaskWrapper]:
+        """Start the folder history report generation
 
-        Generates the activity history of a folder.
+        Starts generating the activity history report of a folder (XLSX by default, or CSV) and saves it to My documents.
 
-        :param folder_id: (required)
+        :param folder_id: The folder ID whose history is exported. (required)
         :type folder_id: int
+        :param format: The output file format of the report. Defaults to XLSX.
+        :type format: AuditReportFormat
+        :param var_from: The start date of the history period to export.
+        :type var_from: datetime
+        :param to: The end date of the history period to export.
+        :type to: datetime
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1137,6 +1170,9 @@ class FoldersApi:
 
         _param = self._create_report_folder_history_serialize(
             folder_id=folder_id,
+            format=format,
+            var_from=var_from,
+            to=to,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1144,7 +1180,7 @@ class FoldersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "StringWrapper",
+            '200': "DocumentBuilderTaskWrapper",
             '403': None,
             '404': None,
             '401': None,
@@ -1152,6 +1188,7 @@ class FoldersApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1166,7 +1203,10 @@ class FoldersApi:
     @validate_call
     def create_report_folder_history_without_preload_content(
         self,
-        folder_id: StrictInt,
+        folder_id: Annotated[StrictInt, Field(description="The folder ID whose history is exported.")],
+        format: Annotated[Optional[AuditReportFormat], Field(description="The output file format of the report. Defaults to XLSX.")] = None,
+        var_from: Annotated[Optional[datetime], Field(description="The start date of the history period to export.")] = None,
+        to: Annotated[Optional[datetime], Field(description="The end date of the history period to export.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1180,12 +1220,18 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Generates folder history
+        """Start the folder history report generation
 
-        Generates the activity history of a folder.
+        Starts generating the activity history report of a folder (XLSX by default, or CSV) and saves it to My documents.
 
-        :param folder_id: (required)
+        :param folder_id: The folder ID whose history is exported. (required)
         :type folder_id: int
+        :param format: The output file format of the report. Defaults to XLSX.
+        :type format: AuditReportFormat
+        :param var_from: The start date of the history period to export.
+        :type var_from: datetime
+        :param to: The end date of the history period to export.
+        :type to: datetime
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1210,6 +1256,9 @@ class FoldersApi:
 
         _param = self._create_report_folder_history_serialize(
             folder_id=folder_id,
+            format=format,
+            var_from=var_from,
+            to=to,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1217,7 +1266,7 @@ class FoldersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "StringWrapper",
+            '200': "DocumentBuilderTaskWrapper",
             '403': None,
             '404': None,
             '401': None,
@@ -1225,6 +1274,7 @@ class FoldersApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1235,6 +1285,9 @@ class FoldersApi:
     def _create_report_folder_history_serialize(
         self,
         folder_id,
+        format,
+        var_from,
+        to,
         _request_auth,
         _content_type,
         _headers,
@@ -1259,6 +1312,36 @@ class FoldersApi:
         if folder_id is not None:
             _path_params['folderId'] = folder_id
         # process the query parameters
+        if format is not None:
+            
+            _query_params.append(('format', format.value))
+            
+        if var_from is not None:
+            if isinstance(var_from, datetime):
+                _query_params.append(
+                    (
+                        'from',
+                        var_from.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('from', var_from))
+            
+        if to is not None:
+            if isinstance(to, datetime):
+                _query_params.append(
+                    (
+                        'to',
+                        to.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('to', to))
+            
         # process the header parameters
         # process the form parameters
         # process the body parameter
@@ -1368,6 +1451,7 @@ class FoldersApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1443,6 +1527,7 @@ class FoldersApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1518,6 +1603,7 @@ class FoldersApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1675,6 +1761,7 @@ class FoldersApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1748,6 +1835,7 @@ class FoldersApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1821,6 +1909,7 @@ class FoldersApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1986,6 +2075,7 @@ class FoldersApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2083,6 +2173,7 @@ class FoldersApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2180,6 +2271,7 @@ class FoldersApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2349,6 +2441,7 @@ class FoldersApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2416,6 +2509,7 @@ class FoldersApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2483,6 +2577,7 @@ class FoldersApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2618,6 +2713,7 @@ class FoldersApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2688,6 +2784,7 @@ class FoldersApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2758,6 +2855,7 @@ class FoldersApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2839,6 +2937,7 @@ class FoldersApi:
         shared_by: Annotated[Optional[UUID], Field(description="The identifier of the user who shared the folder or file.")] = None,
         filter_type: Annotated[Optional[FilterType], Field(description="The filter type.")] = None,
         room_id: Annotated[Optional[StrictInt], Field(description="The room ID.")] = None,
+        folder_type: Annotated[Optional[List[StrictInt]], Field(description="The parent folder types used to filter the folder contents by folder type.")] = None,
         exclude_subject: Annotated[Optional[StrictBool], Field(description="Specifies whether to exclude search by user or group ID.")] = None,
         apply_filter_option: Annotated[Optional[ApplyFilterOption], Field(description="Specifies whether to return only files, only folders, or all elements from the specified folder.")] = None,
         with_sub_folders: Annotated[Optional[StrictBool], Field(description="Specifies whether to include files from subfolders in the results.")] = None,
@@ -2879,6 +2978,8 @@ class FoldersApi:
         :type filter_type: FilterType
         :param room_id: The room ID.
         :type room_id: int
+        :param folder_type: The parent folder types used to filter the folder contents by folder type.
+        :type folder_type: List[int]
         :param exclude_subject: Specifies whether to exclude search by user or group ID.
         :type exclude_subject: bool
         :param apply_filter_option: Specifies whether to return only files, only folders, or all elements from the specified folder.
@@ -2933,6 +3034,7 @@ class FoldersApi:
             shared_by=shared_by,
             filter_type=filter_type,
             room_id=room_id,
+            folder_type=folder_type,
             exclude_subject=exclude_subject,
             apply_filter_option=apply_filter_option,
             with_sub_folders=with_sub_folders,
@@ -2960,6 +3062,7 @@ class FoldersApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2979,6 +3082,7 @@ class FoldersApi:
         shared_by: Annotated[Optional[UUID], Field(description="The identifier of the user who shared the folder or file.")] = None,
         filter_type: Annotated[Optional[FilterType], Field(description="The filter type.")] = None,
         room_id: Annotated[Optional[StrictInt], Field(description="The room ID.")] = None,
+        folder_type: Annotated[Optional[List[StrictInt]], Field(description="The parent folder types used to filter the folder contents by folder type.")] = None,
         exclude_subject: Annotated[Optional[StrictBool], Field(description="Specifies whether to exclude search by user or group ID.")] = None,
         apply_filter_option: Annotated[Optional[ApplyFilterOption], Field(description="Specifies whether to return only files, only folders, or all elements from the specified folder.")] = None,
         with_sub_folders: Annotated[Optional[StrictBool], Field(description="Specifies whether to include files from subfolders in the results.")] = None,
@@ -3019,6 +3123,8 @@ class FoldersApi:
         :type filter_type: FilterType
         :param room_id: The room ID.
         :type room_id: int
+        :param folder_type: The parent folder types used to filter the folder contents by folder type.
+        :type folder_type: List[int]
         :param exclude_subject: Specifies whether to exclude search by user or group ID.
         :type exclude_subject: bool
         :param apply_filter_option: Specifies whether to return only files, only folders, or all elements from the specified folder.
@@ -3073,6 +3179,7 @@ class FoldersApi:
             shared_by=shared_by,
             filter_type=filter_type,
             room_id=room_id,
+            folder_type=folder_type,
             exclude_subject=exclude_subject,
             apply_filter_option=apply_filter_option,
             with_sub_folders=with_sub_folders,
@@ -3100,6 +3207,7 @@ class FoldersApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3119,6 +3227,7 @@ class FoldersApi:
         shared_by: Annotated[Optional[UUID], Field(description="The identifier of the user who shared the folder or file.")] = None,
         filter_type: Annotated[Optional[FilterType], Field(description="The filter type.")] = None,
         room_id: Annotated[Optional[StrictInt], Field(description="The room ID.")] = None,
+        folder_type: Annotated[Optional[List[StrictInt]], Field(description="The parent folder types used to filter the folder contents by folder type.")] = None,
         exclude_subject: Annotated[Optional[StrictBool], Field(description="Specifies whether to exclude search by user or group ID.")] = None,
         apply_filter_option: Annotated[Optional[ApplyFilterOption], Field(description="Specifies whether to return only files, only folders, or all elements from the specified folder.")] = None,
         with_sub_folders: Annotated[Optional[StrictBool], Field(description="Specifies whether to include files from subfolders in the results.")] = None,
@@ -3159,6 +3268,8 @@ class FoldersApi:
         :type filter_type: FilterType
         :param room_id: The room ID.
         :type room_id: int
+        :param folder_type: The parent folder types used to filter the folder contents by folder type.
+        :type folder_type: List[int]
         :param exclude_subject: Specifies whether to exclude search by user or group ID.
         :type exclude_subject: bool
         :param apply_filter_option: Specifies whether to return only files, only folders, or all elements from the specified folder.
@@ -3213,6 +3324,7 @@ class FoldersApi:
             shared_by=shared_by,
             filter_type=filter_type,
             room_id=room_id,
+            folder_type=folder_type,
             exclude_subject=exclude_subject,
             apply_filter_option=apply_filter_option,
             with_sub_folders=with_sub_folders,
@@ -3240,6 +3352,7 @@ class FoldersApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3254,6 +3367,7 @@ class FoldersApi:
         shared_by,
         filter_type,
         room_id,
+        folder_type,
         exclude_subject,
         apply_filter_option,
         with_sub_folders,
@@ -3276,6 +3390,7 @@ class FoldersApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
+            'folderType': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -3306,6 +3421,10 @@ class FoldersApi:
         if room_id is not None:
             
             _query_params.append(('roomId', room_id))
+            
+        if folder_type is not None:
+            
+            _query_params.append(('folderType', folder_type))
             
         if exclude_subject is not None:
             
@@ -3476,6 +3595,7 @@ class FoldersApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3565,6 +3685,7 @@ class FoldersApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3654,6 +3775,7 @@ class FoldersApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3812,6 +3934,7 @@ class FoldersApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3882,6 +4005,7 @@ class FoldersApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3952,6 +4076,7 @@ class FoldersApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4085,6 +4210,7 @@ class FoldersApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4156,6 +4282,7 @@ class FoldersApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4227,6 +4354,7 @@ class FoldersApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4367,6 +4495,7 @@ class FoldersApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4439,6 +4568,7 @@ class FoldersApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4511,6 +4641,7 @@ class FoldersApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4659,6 +4790,7 @@ class FoldersApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4739,6 +4871,7 @@ class FoldersApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4819,6 +4952,7 @@ class FoldersApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4963,6 +5097,7 @@ class FoldersApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5035,6 +5170,7 @@ class FoldersApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5107,6 +5243,7 @@ class FoldersApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5167,6 +5304,402 @@ class FoldersApi:
 
 
         resource_path = "/api/2.0/files/{folderId}/subfolders"
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path=resource_path,
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def get_forms_folder(
+        self,
+        user_id_or_group_id: Annotated[Optional[UUID], Field(description="The user or group ID.")] = None,
+        filter_type: Annotated[Optional[FilterType], Field(description="The filter type.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of items to retrieve in the request.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The zero-based index of the first item to retrieve in a paginated list.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="Specifies the field by which the folder content should be sorted.")] = None,
+        sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The text used as a filter or search criterion for folder content queries.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> FolderContentIntegerWrapper:
+        """Get the Forms section
+
+        Returns the detailed list of rooms used for filling out forms located in the Forms section.
+
+        :param user_id_or_group_id: The user or group ID.
+        :type user_id_or_group_id: UUID
+        :param filter_type: The filter type.
+        :type filter_type: FilterType
+        :param count: The maximum number of items to retrieve in the request.
+        :type count: int
+        :param start_index: The zero-based index of the first item to retrieve in a paginated list.
+        :type start_index: int
+        :param sort_by: Specifies the field by which the folder content should be sorted.
+        :type sort_by: str
+        :param sort_order: The order in which the results are sorted.
+        :type sort_order: SortOrder
+        :param filter_value: The text used as a filter or search criterion for folder content queries.
+        :type filter_value: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_forms_folder_serialize(
+            user_id_or_group_id=user_id_or_group_id,
+            filter_type=filter_type,
+            count=count,
+            start_index=start_index,
+            sort_by=sort_by,
+            sort_order=sort_order,
+            filter_value=filter_value,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "FolderContentIntegerWrapper",
+            '403': None,
+            '404': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def get_forms_folder_with_http_info(
+        self,
+        user_id_or_group_id: Annotated[Optional[UUID], Field(description="The user or group ID.")] = None,
+        filter_type: Annotated[Optional[FilterType], Field(description="The filter type.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of items to retrieve in the request.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The zero-based index of the first item to retrieve in a paginated list.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="Specifies the field by which the folder content should be sorted.")] = None,
+        sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The text used as a filter or search criterion for folder content queries.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[FolderContentIntegerWrapper]:
+        """Get the Forms section
+
+        Returns the detailed list of rooms used for filling out forms located in the Forms section.
+
+        :param user_id_or_group_id: The user or group ID.
+        :type user_id_or_group_id: UUID
+        :param filter_type: The filter type.
+        :type filter_type: FilterType
+        :param count: The maximum number of items to retrieve in the request.
+        :type count: int
+        :param start_index: The zero-based index of the first item to retrieve in a paginated list.
+        :type start_index: int
+        :param sort_by: Specifies the field by which the folder content should be sorted.
+        :type sort_by: str
+        :param sort_order: The order in which the results are sorted.
+        :type sort_order: SortOrder
+        :param filter_value: The text used as a filter or search criterion for folder content queries.
+        :type filter_value: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_forms_folder_serialize(
+            user_id_or_group_id=user_id_or_group_id,
+            filter_type=filter_type,
+            count=count,
+            start_index=start_index,
+            sort_by=sort_by,
+            sort_order=sort_order,
+            filter_value=filter_value,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "FolderContentIntegerWrapper",
+            '403': None,
+            '404': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def get_forms_folder_without_preload_content(
+        self,
+        user_id_or_group_id: Annotated[Optional[UUID], Field(description="The user or group ID.")] = None,
+        filter_type: Annotated[Optional[FilterType], Field(description="The filter type.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of items to retrieve in the request.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The zero-based index of the first item to retrieve in a paginated list.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="Specifies the field by which the folder content should be sorted.")] = None,
+        sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The text used as a filter or search criterion for folder content queries.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Get the Forms section
+
+        Returns the detailed list of rooms used for filling out forms located in the Forms section.
+
+        :param user_id_or_group_id: The user or group ID.
+        :type user_id_or_group_id: UUID
+        :param filter_type: The filter type.
+        :type filter_type: FilterType
+        :param count: The maximum number of items to retrieve in the request.
+        :type count: int
+        :param start_index: The zero-based index of the first item to retrieve in a paginated list.
+        :type start_index: int
+        :param sort_by: Specifies the field by which the folder content should be sorted.
+        :type sort_by: str
+        :param sort_order: The order in which the results are sorted.
+        :type sort_order: SortOrder
+        :param filter_value: The text used as a filter or search criterion for folder content queries.
+        :type filter_value: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_forms_folder_serialize(
+            user_id_or_group_id=user_id_or_group_id,
+            filter_type=filter_type,
+            count=count,
+            start_index=start_index,
+            sort_by=sort_by,
+            sort_order=sort_order,
+            filter_value=filter_value,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "FolderContentIntegerWrapper",
+            '403': None,
+            '404': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _get_forms_folder_serialize(
+        self,
+        user_id_or_group_id,
+        filter_type,
+        count,
+        start_index,
+        sort_by,
+        sort_order,
+        filter_value,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        if user_id_or_group_id is not None:
+            
+            _query_params.append(('userIdOrGroupId', user_id_or_group_id))
+            
+        if filter_type is not None:
+            
+            _query_params.append(('filterType', filter_type.value))
+            
+        if count is not None:
+            
+            _query_params.append(('count', count))
+            
+        if start_index is not None:
+            
+            _query_params.append(('startIndex', start_index))
+            
+        if sort_by is not None:
+            
+            _query_params.append(('sortBy', sort_by))
+            
+        if sort_order is not None:
+            
+            _query_params.append(('sortOrder', sort_order.value))
+            
+        if filter_value is not None:
+            
+            _query_params.append(('filterValue', filter_value))
+            
+        # process the header parameters
+        if self._fields is not None:
+            _header_params['fields'] = self._fields
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
+        ]
+
+
+        resource_path = "/api/2.0/files/@forms"
 
         return self.api_client.param_serialize(
             method='GET',
@@ -5276,6 +5809,7 @@ class FoldersApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5377,6 +5911,7 @@ class FoldersApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5478,6 +6013,7 @@ class FoldersApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5657,6 +6193,7 @@ class FoldersApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5729,6 +6266,7 @@ class FoldersApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5801,6 +6339,7 @@ class FoldersApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5881,399 +6420,6 @@ class FoldersApi:
 
 
     @validate_call
-    def get_privacy_folder(
-        self,
-        user_id_or_group_id: Annotated[Optional[UUID], Field(description="The user or group ID.")] = None,
-        filter_type: Annotated[Optional[FilterType], Field(description="The filter type.")] = None,
-        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of items to retrieve in the request.")] = None,
-        start_index: Annotated[Optional[StrictInt], Field(description="The zero-based index of the first item to retrieve in a paginated list.")] = None,
-        sort_by: Annotated[Optional[StrictStr], Field(description="Specifies the field by which the folder content should be sorted.")] = None,
-        sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
-        filter_value: Annotated[Optional[StrictStr], Field(description="The text used as a filter or search criterion for folder content queries.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> FolderContentIntegerWrapper:
-        """Get the Private Room section
-
-        Returns the detailed list of files and folders located in the Private Room section.
-
-        :param user_id_or_group_id: The user or group ID.
-        :type user_id_or_group_id: UUID
-        :param filter_type: The filter type.
-        :type filter_type: FilterType
-        :param count: The maximum number of items to retrieve in the request.
-        :type count: int
-        :param start_index: The zero-based index of the first item to retrieve in a paginated list.
-        :type start_index: int
-        :param sort_by: Specifies the field by which the folder content should be sorted.
-        :type sort_by: str
-        :param sort_order: The order in which the results are sorted.
-        :type sort_order: SortOrder
-        :param filter_value: The text used as a filter or search criterion for folder content queries.
-        :type filter_value: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._get_privacy_folder_serialize(
-            user_id_or_group_id=user_id_or_group_id,
-            filter_type=filter_type,
-            count=count,
-            start_index=start_index,
-            sort_by=sort_by,
-            sort_order=sort_order,
-            filter_value=filter_value,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderContentIntegerWrapper",
-            '403': None,
-            '404': None,
-            '401': None,
-            '429': None,
-            '502': None,
-            '503': None,
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        ).data
-
-
-    @validate_call
-    def get_privacy_folder_with_http_info(
-        self,
-        user_id_or_group_id: Annotated[Optional[UUID], Field(description="The user or group ID.")] = None,
-        filter_type: Annotated[Optional[FilterType], Field(description="The filter type.")] = None,
-        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of items to retrieve in the request.")] = None,
-        start_index: Annotated[Optional[StrictInt], Field(description="The zero-based index of the first item to retrieve in a paginated list.")] = None,
-        sort_by: Annotated[Optional[StrictStr], Field(description="Specifies the field by which the folder content should be sorted.")] = None,
-        sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
-        filter_value: Annotated[Optional[StrictStr], Field(description="The text used as a filter or search criterion for folder content queries.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[FolderContentIntegerWrapper]:
-        """Get the Private Room section
-
-        Returns the detailed list of files and folders located in the Private Room section.
-
-        :param user_id_or_group_id: The user or group ID.
-        :type user_id_or_group_id: UUID
-        :param filter_type: The filter type.
-        :type filter_type: FilterType
-        :param count: The maximum number of items to retrieve in the request.
-        :type count: int
-        :param start_index: The zero-based index of the first item to retrieve in a paginated list.
-        :type start_index: int
-        :param sort_by: Specifies the field by which the folder content should be sorted.
-        :type sort_by: str
-        :param sort_order: The order in which the results are sorted.
-        :type sort_order: SortOrder
-        :param filter_value: The text used as a filter or search criterion for folder content queries.
-        :type filter_value: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._get_privacy_folder_serialize(
-            user_id_or_group_id=user_id_or_group_id,
-            filter_type=filter_type,
-            count=count,
-            start_index=start_index,
-            sort_by=sort_by,
-            sort_order=sort_order,
-            filter_value=filter_value,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderContentIntegerWrapper",
-            '403': None,
-            '404': None,
-            '401': None,
-            '429': None,
-            '502': None,
-            '503': None,
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        )
-
-
-    @validate_call
-    def get_privacy_folder_without_preload_content(
-        self,
-        user_id_or_group_id: Annotated[Optional[UUID], Field(description="The user or group ID.")] = None,
-        filter_type: Annotated[Optional[FilterType], Field(description="The filter type.")] = None,
-        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of items to retrieve in the request.")] = None,
-        start_index: Annotated[Optional[StrictInt], Field(description="The zero-based index of the first item to retrieve in a paginated list.")] = None,
-        sort_by: Annotated[Optional[StrictStr], Field(description="Specifies the field by which the folder content should be sorted.")] = None,
-        sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
-        filter_value: Annotated[Optional[StrictStr], Field(description="The text used as a filter or search criterion for folder content queries.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> RESTResponseType:
-        """Get the Private Room section
-
-        Returns the detailed list of files and folders located in the Private Room section.
-
-        :param user_id_or_group_id: The user or group ID.
-        :type user_id_or_group_id: UUID
-        :param filter_type: The filter type.
-        :type filter_type: FilterType
-        :param count: The maximum number of items to retrieve in the request.
-        :type count: int
-        :param start_index: The zero-based index of the first item to retrieve in a paginated list.
-        :type start_index: int
-        :param sort_by: Specifies the field by which the folder content should be sorted.
-        :type sort_by: str
-        :param sort_order: The order in which the results are sorted.
-        :type sort_order: SortOrder
-        :param filter_value: The text used as a filter or search criterion for folder content queries.
-        :type filter_value: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._get_privacy_folder_serialize(
-            user_id_or_group_id=user_id_or_group_id,
-            filter_type=filter_type,
-            count=count,
-            start_index=start_index,
-            sort_by=sort_by,
-            sort_order=sort_order,
-            filter_value=filter_value,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderContentIntegerWrapper",
-            '403': None,
-            '404': None,
-            '401': None,
-            '429': None,
-            '502': None,
-            '503': None,
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        return response_data.response
-
-
-    def _get_privacy_folder_serialize(
-        self,
-        user_id_or_group_id,
-        filter_type,
-        count,
-        start_index,
-        sort_by,
-        sort_order,
-        filter_value,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
-    ) -> RequestSerialized:
-
-        _host = None
-
-        _collection_formats: Dict[str, str] = {
-        }
-
-        _path_params: Dict[str, str] = {}
-        _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
-        _form_params: List[Tuple[str, str]] = []
-        _files: Dict[
-            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
-        ] = {}
-        _body_params: Optional[bytes] = None
-
-        # process the path parameters
-        # process the query parameters
-        if user_id_or_group_id is not None:
-            
-            _query_params.append(('userIdOrGroupId', user_id_or_group_id))
-            
-        if filter_type is not None:
-            
-            _query_params.append(('filterType', filter_type.value))
-            
-        if count is not None:
-            
-            _query_params.append(('count', count))
-            
-        if start_index is not None:
-            
-            _query_params.append(('startIndex', start_index))
-            
-        if sort_by is not None:
-            
-            _query_params.append(('sortBy', sort_by))
-            
-        if sort_order is not None:
-            
-            _query_params.append(('sortOrder', sort_order.value))
-            
-        if filter_value is not None:
-            
-            _query_params.append(('filterValue', filter_value))
-            
-        # process the header parameters
-        if self._fields is not None:
-            _header_params['fields'] = self._fields
-        # process the form parameters
-        # process the body parameter
-
-
-        # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
-            _header_params['Accept'] = self.api_client.select_header_accept(
-                [
-                    'application/json'
-                ]
-            )
-
-
-        # authentication setting
-        _auth_settings: List[str] = [
-            'Basic', 
-            'OAuth2', 
-            'ApiKeyBearer', 
-            'asc_auth_key', 
-            'Bearer', 
-            'OpenId'
-        ]
-
-
-        resource_path = "/api/2.0/files/@privacy"
-
-        return self.api_client.param_serialize(
-            method='GET',
-            resource_path=resource_path,
-            path_params=_path_params,
-            query_params=_query_params,
-            header_params=_header_params,
-            body=_body_params,
-            post_params=_form_params,
-            files=_files,
-            auth_settings=_auth_settings,
-            collection_formats=_collection_formats,
-            _host=_host,
-            _request_auth=_request_auth
-        )
-
-
-
-
-    @validate_call
     def get_recent_folder(
         self,
         user_id_or_group_id: Annotated[Optional[UUID], Field(description="The user or group ID.")] = None,
@@ -6281,7 +6427,7 @@ class FoldersApi:
         exclude_subject: Annotated[Optional[StrictBool], Field(description="Specifies whether to exclude search by user or group ID.")] = None,
         apply_filter_option: Annotated[Optional[ApplyFilterOption], Field(description="Specifies whether to return only files, only folders or all elements.")] = None,
         search_area: Annotated[Optional[SearchArea], Field(description="The search area.")] = None,
-        extension: Annotated[Optional[List[List[StrictStr]]], Field(description="Specifies whether to search for a specific file extension in the Recent folder.")] = None,
+        extension: Annotated[Optional[List[StrictStr]], Field(description="Specifies whether to search for a specific file extension in the Recent folder.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of items to return.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The starting position of the results to be returned in the query response.")] = None,
         sort_by: Annotated[Optional[StrictStr], Field(description="Specifies the sorting criteria for the folder request.")] = None,
@@ -6375,6 +6521,7 @@ class FoldersApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -6394,7 +6541,7 @@ class FoldersApi:
         exclude_subject: Annotated[Optional[StrictBool], Field(description="Specifies whether to exclude search by user or group ID.")] = None,
         apply_filter_option: Annotated[Optional[ApplyFilterOption], Field(description="Specifies whether to return only files, only folders or all elements.")] = None,
         search_area: Annotated[Optional[SearchArea], Field(description="The search area.")] = None,
-        extension: Annotated[Optional[List[List[StrictStr]]], Field(description="Specifies whether to search for a specific file extension in the Recent folder.")] = None,
+        extension: Annotated[Optional[List[StrictStr]], Field(description="Specifies whether to search for a specific file extension in the Recent folder.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of items to return.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The starting position of the results to be returned in the query response.")] = None,
         sort_by: Annotated[Optional[StrictStr], Field(description="Specifies the sorting criteria for the folder request.")] = None,
@@ -6488,6 +6635,7 @@ class FoldersApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -6507,7 +6655,7 @@ class FoldersApi:
         exclude_subject: Annotated[Optional[StrictBool], Field(description="Specifies whether to exclude search by user or group ID.")] = None,
         apply_filter_option: Annotated[Optional[ApplyFilterOption], Field(description="Specifies whether to return only files, only folders or all elements.")] = None,
         search_area: Annotated[Optional[SearchArea], Field(description="The search area.")] = None,
-        extension: Annotated[Optional[List[List[StrictStr]]], Field(description="Specifies whether to search for a specific file extension in the Recent folder.")] = None,
+        extension: Annotated[Optional[List[StrictStr]], Field(description="Specifies whether to search for a specific file extension in the Recent folder.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of items to return.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The starting position of the results to be returned in the query response.")] = None,
         sort_by: Annotated[Optional[StrictStr], Field(description="Specifies the sorting criteria for the folder request.")] = None,
@@ -6601,6 +6749,7 @@ class FoldersApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -6630,7 +6779,7 @@ class FoldersApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'extension': 'csv',
+            'extension': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -6718,6 +6867,296 @@ class FoldersApi:
         resource_path = '/api/2.0/files/{recent_prefix}recent'
         self._use_at_recent = False
 
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path=resource_path,
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def get_report_folder_history(
+        self,
+        folder_id: StrictInt,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> DocumentBuilderTaskWrapper:
+        """Get the folder history report generation status
+
+        Returns the status of generating the folder history report.
+
+        :param folder_id: (required)
+        :type folder_id: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_report_folder_history_serialize(
+            folder_id=folder_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "DocumentBuilderTaskWrapper",
+            '403': None,
+            '404': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def get_report_folder_history_with_http_info(
+        self,
+        folder_id: StrictInt,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[DocumentBuilderTaskWrapper]:
+        """Get the folder history report generation status
+
+        Returns the status of generating the folder history report.
+
+        :param folder_id: (required)
+        :type folder_id: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_report_folder_history_serialize(
+            folder_id=folder_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "DocumentBuilderTaskWrapper",
+            '403': None,
+            '404': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def get_report_folder_history_without_preload_content(
+        self,
+        folder_id: StrictInt,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Get the folder history report generation status
+
+        Returns the status of generating the folder history report.
+
+        :param folder_id: (required)
+        :type folder_id: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_report_folder_history_serialize(
+            folder_id=folder_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "DocumentBuilderTaskWrapper",
+            '403': None,
+            '404': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _get_report_folder_history_serialize(
+        self,
+        folder_id,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if folder_id is not None:
+            _path_params['folderId'] = folder_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
+        ]
+
+
+        resource_path = "/api/2.0/files/folder/{folderId}/log/report"
 
         return self.api_client.param_serialize(
             method='GET',
@@ -6827,6 +7266,7 @@ class FoldersApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -6928,6 +7368,7 @@ class FoldersApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -7029,6 +7470,7 @@ class FoldersApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -7237,6 +7679,7 @@ class FoldersApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -7338,6 +7781,7 @@ class FoldersApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -7439,6 +7883,7 @@ class FoldersApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -7667,6 +8112,7 @@ class FoldersApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -7788,6 +8234,7 @@ class FoldersApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -7909,6 +8356,7 @@ class FoldersApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -8143,6 +8591,7 @@ class FoldersApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -8260,6 +8709,7 @@ class FoldersApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -8377,6 +8827,7 @@ class FoldersApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -8567,6 +9018,7 @@ class FoldersApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -8643,6 +9095,7 @@ class FoldersApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -8719,6 +9172,7 @@ class FoldersApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -8878,6 +9332,7 @@ class FoldersApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -8953,6 +9408,7 @@ class FoldersApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -9028,6 +9484,7 @@ class FoldersApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -9187,6 +9644,7 @@ class FoldersApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -9262,6 +9720,7 @@ class FoldersApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -9337,6 +9796,7 @@ class FoldersApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -9433,6 +9893,289 @@ class FoldersApi:
 
 
     @validate_call
+    def terminate_report_folder_history(
+        self,
+        folder_id: StrictInt,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> None:
+        """Terminate the folder history report generation
+
+        Terminates generating the folder history report.
+
+        :param folder_id: (required)
+        :type folder_id: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._terminate_report_folder_history_serialize(
+            folder_id=folder_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': None,
+            '403': None,
+            '404': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def terminate_report_folder_history_with_http_info(
+        self,
+        folder_id: StrictInt,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[None]:
+        """Terminate the folder history report generation
+
+        Terminates generating the folder history report.
+
+        :param folder_id: (required)
+        :type folder_id: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._terminate_report_folder_history_serialize(
+            folder_id=folder_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': None,
+            '403': None,
+            '404': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def terminate_report_folder_history_without_preload_content(
+        self,
+        folder_id: StrictInt,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Terminate the folder history report generation
+
+        Terminates generating the folder history report.
+
+        :param folder_id: (required)
+        :type folder_id: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._terminate_report_folder_history_serialize(
+            folder_id=folder_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': None,
+            '403': None,
+            '404': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _terminate_report_folder_history_serialize(
+        self,
+        folder_id,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if folder_id is not None:
+            _path_params['folderId'] = folder_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
+        ]
+
+
+        resource_path = "/api/2.0/files/folder/{folderId}/log/report"
+
+        return self.api_client.param_serialize(
+            method='DELETE',
+            resource_path=resource_path,
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
     def upload_file(
         self,
         folder_id: Annotated[StrictInt, Field(description="The folder ID to upload a file.")],
@@ -9510,6 +10253,7 @@ class FoldersApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -9599,6 +10343,7 @@ class FoldersApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -9688,6 +10433,7 @@ class FoldersApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -9872,6 +10618,7 @@ class FoldersApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -9957,6 +10704,7 @@ class FoldersApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -10042,6 +10790,7 @@ class FoldersApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout

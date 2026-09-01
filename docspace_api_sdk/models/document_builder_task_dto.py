@@ -31,14 +31,14 @@ class DocumentBuilderTaskDto(BaseModel):
     """
     The Document Builder task parameters.
     """ # noqa: E501
-    id: Optional[StrictStr] = Field(description="The Document Builder task ID.")
-    error: Optional[StrictStr] = Field(description="The error message occurred during the document building process.")
-    percentage: StrictInt = Field(description="The progress percentage of the document building process.")
-    is_completed: StrictBool = Field(description="Specifies whether the document building process is completed or not.", alias="isCompleted")
-    status: DistributedTaskStatus
-    result_file_id: Optional[Any] = Field(description="The result file ID.", alias="resultFileId")
-    result_file_name: Optional[StrictStr] = Field(description="The result file name.", alias="resultFileName")
-    result_file_url: Optional[StrictStr] = Field(description="The result file URL.", alias="resultFileUrl")
+    id: Optional[StrictStr] = Field(description="The Document Builder task ID.", json_schema_extra={"examples": ["task-123-456"]})
+    error: Optional[StrictStr] = Field(description="The error message occurred during the document building process.", json_schema_extra={"examples": ["Build failed"]})
+    percentage: StrictInt = Field(description="The progress percentage of the document building process.", json_schema_extra={"examples": [75]})
+    is_completed: StrictBool = Field(description="Specifies whether the document building process is completed or not.", alias="isCompleted", json_schema_extra={"examples": [False]})
+    status: DistributedTaskStatus = Field(description="The status of the document building process.")
+    result_file_id: Optional[Any] = Field(alias="resultFileId")
+    result_file_name: Optional[StrictStr] = Field(description="The result file name.", alias="resultFileName", json_schema_extra={"examples": ["result.docx"]})
+    result_file_url: Optional[StrictStr] = Field(description="The result file URL.", alias="resultFileUrl", json_schema_extra={"examples": ["http://localhost/files/result.docx"]})
     __properties: ClassVar[List[str]] = ["id", "error", "percentage", "isCompleted", "status", "resultFileId", "resultFileName", "resultFileUrl"]
 
     model_config = ConfigDict(

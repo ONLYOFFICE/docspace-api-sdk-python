@@ -5,7 +5,7 @@ The wrapper for the tenant wallet settings.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**settings** | [**TenantWalletSettings**](TenantWalletSettings.md) |  | [optional] 
+**settings** | [**TenantWalletSettings**](TenantWalletSettings.md) | The tenant wallet settings. | [optional] 
 
 ## Example
 

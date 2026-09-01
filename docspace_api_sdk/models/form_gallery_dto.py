@@ -30,13 +30,13 @@ class FormGalleryDto(BaseModel):
     """
     The form gallery parameters.
     """ # noqa: E501
-    path: Optional[StrictStr] = Field(description="The form gallery path.")
-    domain: Optional[StrictStr] = Field(description="The form gallery domain.")
-    ext: Optional[StrictStr] = Field(description="The form gallery extension.")
-    upload_path: Optional[StrictStr] = Field(description="The form gallery upload path.", alias="uploadPath")
-    upload_domain: Optional[StrictStr] = Field(description="The form gallery upload domain.", alias="uploadDomain")
-    upload_ext: Optional[StrictStr] = Field(description="The form gallery upload extension.", alias="uploadExt")
-    upload_dashboard: Optional[StrictStr] = Field(description="The form gallery upload dashboard.", alias="uploadDashboard")
+    path: Optional[StrictStr] = Field(description="The form gallery path.", json_schema_extra={"examples": ["/forms/templates"]})
+    domain: Optional[StrictStr] = Field(description="The form gallery domain.", json_schema_extra={"examples": ["https://forms.example.com"]})
+    ext: Optional[StrictStr] = Field(description="The form gallery extension.", json_schema_extra={"examples": [".docxf"]})
+    upload_path: Optional[StrictStr] = Field(description="The form gallery upload path.", alias="uploadPath", json_schema_extra={"examples": ["/forms/upload"]})
+    upload_domain: Optional[StrictStr] = Field(description="The form gallery upload domain.", alias="uploadDomain", json_schema_extra={"examples": ["https://upload.forms.example.com"]})
+    upload_ext: Optional[StrictStr] = Field(description="The form gallery upload extension.", alias="uploadExt", json_schema_extra={"examples": [".docxf"]})
+    upload_dashboard: Optional[StrictStr] = Field(description="The form gallery upload dashboard.", alias="uploadDashboard", json_schema_extra={"examples": ["/dashboard/forms"]})
     __properties: ClassVar[List[str]] = ["path", "domain", "ext", "uploadPath", "uploadDomain", "uploadExt", "uploadDashboard"]
 
     model_config = ConfigDict(

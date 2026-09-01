@@ -31,8 +31,8 @@ class ChunkedUploadSessionResponseWrapperInteger(BaseModel):
     """
     Represents a wrapper for the response of a chunked upload session operation.
     """ # noqa: E501
-    success: Optional[StrictBool] = Field(default=None, description="Gets or sets a value indicating whether the operation was successful.")
-    data: Optional[ChunkedUploadSessionResponseInteger] = None
+    success: Optional[StrictBool] = Field(default=None, description="Gets or sets a value indicating whether the operation was successful.", json_schema_extra={"examples": [True]})
+    data: Optional[ChunkedUploadSessionResponseInteger] = Field(default=None, description="Represents the response returned from a chunked upload session.")
     __properties: ClassVar[List[str]] = ["success", "data"]
 
     model_config = ConfigDict(

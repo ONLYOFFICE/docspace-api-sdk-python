@@ -30,8 +30,8 @@ class CustomColorThemesSettingsColorItem(BaseModel):
     """
     The custom color theme color parameters.
     """ # noqa: E501
-    accent: Optional[StrictStr] = Field(default=None, description="The accent color.")
-    buttons: Optional[StrictStr] = Field(default=None, description="The button color.")
+    accent: Optional[StrictStr] = Field(default=None, description="The accent color.", json_schema_extra={"examples": ["#4781D1"]})
+    buttons: Optional[StrictStr] = Field(default=None, description="The button color.", json_schema_extra={"examples": ["#5299E0"]})
     __properties: ClassVar[List[str]] = ["accent", "buttons"]
 
     model_config = ConfigDict(

@@ -8,7 +8,7 @@ Method | HTTP request | Description
 [**change_automatically_clean_up**](#change_automatically_clean_up) | **PUT** /api/2.0/files/settings/autocleanup | Update the trash bin auto-clearing setting
 [**change_default_access_rights**](#change_default_access_rights) | **PUT** /api/2.0/files/settings/dafaultaccessrights | Change the default access rights
 [**change_delete_confirm**](#change_delete_confirm) | **PUT** /api/2.0/files/changedeleteconfrim | Confirm the file deletion
-[**change_download_zip_from_body**](#change_download_zip_from_body) | **PUT** /api/2.0/files/settings/downloadtargz | Change the archive format (using body parameters)
+[**change_download_zip**](#change_download_zip) | **PUT** /api/2.0/files/settings/downloadtargz | Change the archive format (using body parameters)
 [**change_external_sharing_settings**](#change_external_sharing_settings) | **PUT** /api/2.0/files/settings/externalsharingsettings | Change the Access Control external sharing settings
 [**check_doc_service_url**](#check_doc_service_url) | **PUT** /api/2.0/files/docservice | Check the document service URL
 [**display_file_extension**](#display_file_extension) | **PUT** /api/2.0/files/displayfileextension | Display a file extension
@@ -24,7 +24,6 @@ Method | HTTP request | Description
 [**hide_confirm_cancel_operation**](#hide_confirm_cancel_operation) | **PUT** /api/2.0/files/hideconfirmcanceloperation | Hide confirmation dialog when canceling operations
 [**hide_confirm_convert**](#hide_confirm_convert) | **PUT** /api/2.0/files/hideconfirmconvert | Hide the confirmation dialog when converting
 [**hide_confirm_room_lifetime**](#hide_confirm_room_lifetime) | **PUT** /api/2.0/files/hideconfirmroomlifetime | Hide confirmation dialog when changing room lifetime settings
-[**is_available_privacy_room_settings**](#is_available_privacy_room_settings) | **GET** /api/2.0/files/@privacy/available | Check the Private Room availability
 [**keep_new_file_name**](#keep_new_file_name) | **PUT** /api/2.0/files/keepnewfilename | Ask a new file name
 [**reset_default_template**](#reset_default_template) | **DELETE** /api/2.0/files/settings/defaulttemplate | Reset the default template setting
 [**set_default_template**](#set_default_template) | **PUT** /api/2.0/files/settings/defaulttemplate | Change the default template setting
@@ -351,8 +350,8 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **change_download_zip_from_body**
-> ICompressWrapper change_download_zip_from_body(display_request_dto=display_request_dto)
+# **change_download_zip**
+> ICompressWrapper change_download_zip(display_request_dto=display_request_dto)
 
 Changes the format of the downloaded archive from .zip to .tar.gz. This method uses the body parameters.
 
@@ -404,11 +403,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
     try:
         # Change the archive format (using body parameters)
-        api_response = api_instance.change_download_zip_from_body(display_request_dto=display_request_dto)
-        print("The response of SettingsApi->change_download_zip_from_body:\n")
+        api_response = api_instance.change_download_zip(display_request_dto=display_request_dto)
+        print("The response of SettingsApi->change_download_zip:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling SettingsApi->change_download_zip_from_body: %s\n" % e)
+        print("Exception when calling SettingsApi->change_download_zip: %s\n" % e)
 ```
 
 
@@ -582,6 +581,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 |-------------|-------------|------------------|
 **200** | Document service information: the Document Server address, the Document Server address in the local private network, the Community Server address |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
 **400** | Invalid input urls/Mixed Active Content is not allowed. HTTPS address for Document Server is required |  -  |
+**403** | You don't have enough permission to perform the operation |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
@@ -1565,80 +1565,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Boolean value: true if the parameter is enabled |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
-**401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
-**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **is_available_privacy_room_settings**
-> BooleanWrapper is_available_privacy_room_settings()
-
-Checks if the Private Room settings are available or not.
-
-For more information, see [api.onlyoffice.com]().
-
-### Parameters
-
-This endpoint does not need any parameter.
-
-### Return type
-
-[**BooleanWrapper**](BooleanWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### Example
-
-
-```python
-import docspace_api_sdk
-from docspace_api_sdk.models.boolean_wrapper import BooleanWrapper
-from docspace_api_sdk.rest import ApiException
-from pprint import pprint
-
-configuration = docspace_api_sdk.Configuration(
-    host = "https://your-docspace.onlyoffice.com"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace_api_sdk.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-# Enter a context with an instance of the API client
-with docspace_api_sdk.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace_api_sdk.SettingsApi(api_client)
-
-    try:
-        # Check the Private Room availability
-        api_response = api_instance.is_available_privacy_room_settings()
-        print("The response of SettingsApi->is_available_privacy_room_settings:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling SettingsApi->is_available_privacy_room_settings: %s\n" % e)
-```
-
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Boolean value: true if the Private Room settings are available |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |

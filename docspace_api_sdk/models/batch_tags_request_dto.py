@@ -30,7 +30,7 @@ class BatchTagsRequestDto(BaseModel):
     """
     The parameters for managing room tags.
     """ # noqa: E501
-    names: List[StrictStr] = Field(description="The list of tag names.")
+    names: List[StrictStr] = Field(description="The list of tag names.", json_schema_extra={"examples": [["tag1", "tag2", "tag3"]]})
     __properties: ClassVar[List[str]] = ["names"]
 
     model_config = ConfigDict(

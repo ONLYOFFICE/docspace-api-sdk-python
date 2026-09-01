@@ -25,6 +25,7 @@ Method | HTTP request | Description
 [**get_all_form_roles**](#get_all_form_roles) | **GET** /api/2.0/files/file/{fileId}/formroles | Get form roles
 [**get_edit_diff_url**](#get_edit_diff_url) | **GET** /api/2.0/files/file/{fileId}/edit/diff | Get changes URL
 [**get_edit_history**](#get_edit_history) | **GET** /api/2.0/files/file/{fileId}/edit/history | Get version history
+[**get_encryption_info**](#get_encryption_info) | **GET** /api/2.0/files/{fileId}/access | Get file encryption information
 [**get_file_history**](#get_file_history) | **GET** /api/2.0/files/file/{fileId}/log | Get file history
 [**get_file_info**](#get_file_info) | **GET** /api/2.0/files/file/{fileId} | Get file information
 [**get_file_links**](#get_file_links) | **GET** /api/2.0/files/file/{id}/links | Get file external links
@@ -46,6 +47,7 @@ Method | HTTP request | Description
 [**save_file_as_pdf**](#save_file_as_pdf) | **POST** /api/2.0/files/file/{id}/saveaspdf | Save a file as PDF
 [**save_form_role_mapping**](#save_form_role_mapping) | **POST** /api/2.0/files/file/{fileId}/formrolemapping | Save form role mapping
 [**set_custom_filter_tag**](#set_custom_filter_tag) | **PUT** /api/2.0/files/file/{fileId}/customfilter | Set the Custom Filter editing mode
+[**set_encryption_info**](#set_encryption_info) | **PUT** /api/2.0/files/{fileId}/access | Set file encryption information
 [**set_file_external_link**](#set_file_external_link) | **PUT** /api/2.0/files/file/{id}/links | Set an external link
 [**set_file_order**](#set_file_order) | **PUT** /api/2.0/files/{fileId}/order | Set file order
 [**set_files_order**](#set_files_order) | **PUT** /api/2.0/files/order | Set order of files
@@ -1706,6 +1708,87 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **get_encryption_info**
+> FileEncryptionInfoWrapper get_encryption_info(file_id)
+
+Returns the encryption information for a file with the specified identifier, including user encryption keys and file-specific encryption keys.
+
+For more information, see [api.onlyoffice.com]().
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **file_id** | **int**|  | 
+
+### Return type
+
+[**FileEncryptionInfoWrapper**](FileEncryptionInfoWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+
+```python
+import docspace_api_sdk
+from docspace_api_sdk.models.file_encryption_info_wrapper import FileEncryptionInfoWrapper
+from docspace_api_sdk.rest import ApiException
+from pprint import pprint
+
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+# Enter a context with an instance of the API client
+with docspace_api_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace_api_sdk.FilesApi(api_client)
+    file_id = 56 # int | 
+
+    try:
+        # Get file encryption information
+        api_response = api_instance.get_encryption_info(file_id)
+        print("The response of FilesApi->get_encryption_info:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling FilesApi->get_encryption_info: %s\n" % e)
+```
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | File encryption information |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
+**400** | Invalid operation |  -  |
+**403** | You don't have enough permission to read the file |  -  |
+**404** | File not found |  -  |
+**401** | Unauthorized |  -  |
+**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
+**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **get_file_history**
 > HistoryArrayWrapper get_file_history(file_id, from_date=from_date, to_date=to_date, count=count, start_index=start_index)
 
@@ -3343,6 +3426,86 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | File information |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
+**401** | Unauthorized |  -  |
+**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
+**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **set_encryption_info**
+> set_encryption_info(file_id, access_request_key_dto=access_request_key_dto)
+
+Sets or updates the encryption keys for a file with the specified identifier. This allows updating the file's encryption configuration.
+
+For more information, see [api.onlyoffice.com]().
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **file_id** | **int**| File ID | 
+ **access_request_key_dto** | [**List[AccessRequestKeyDto]**](AccessRequestKeyDto.md)| Collection of encryption key data for users with access to the file | [optional] 
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+
+```python
+import docspace_api_sdk
+from docspace_api_sdk.models.access_request_key_dto import AccessRequestKeyDto
+from docspace_api_sdk.rest import ApiException
+from pprint import pprint
+
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+# Enter a context with an instance of the API client
+with docspace_api_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace_api_sdk.FilesApi(api_client)
+    file_id = 12345 # int | File ID
+    access_request_key_dto = [docspace_api_sdk.AccessRequestKeyDto()] # List[AccessRequestKeyDto] | Collection of encryption key data for users with access to the file (optional)
+
+    try:
+        # Set file encryption information
+        api_instance.set_encryption_info(file_id, access_request_key_dto=access_request_key_dto)
+    except Exception as e:
+        print("Exception when calling FilesApi->set_encryption_info: %s\n" % e)
+```
+
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: Not defined
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Encryption information successfully updated |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
+**403** | You don't have enough permission to edit the file |  -  |
+**404** | File not found |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |

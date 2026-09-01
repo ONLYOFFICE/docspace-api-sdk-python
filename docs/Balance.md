@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **account_name** | **str** | The account name. | [optional] 
 **account_currency** | **str** | The account currency. | [optional] 
 **sub_accounts** | [**List[SubAccount]**](SubAccount.md) | A list of sub-accounts. | [optional] 
-**last_credit** | [**TransactionInfo**](TransactionInfo.md) |  | [optional] 
+**last_credit** | [**TransactionInfo**](TransactionInfo.md) | The most recent credit transaction applied to the account. | [optional] 
 
 ## Example
 

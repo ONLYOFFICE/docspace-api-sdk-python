@@ -55,7 +55,7 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.StatisticsApi(api_client)
-    id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | The ID extracted from the route parameters.
+    id = UUID('1') # UUID | The ID extracted from the route parameters.
 
     try:
         # Get the space usage statistics

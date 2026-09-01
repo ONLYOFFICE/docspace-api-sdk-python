@@ -30,8 +30,8 @@ class LogoRequestsDto(BaseModel):
     """
     The request parameters for the theme-specific logo configurations.
     """ # noqa: E501
-    light: Optional[StrictStr] = Field(default=None, description="The URL or base64-encoded image data for the light theme logo.")
-    dark: Optional[StrictStr] = Field(default=None, description="The URL or base64-encoded image data for the dark theme logo.")
+    light: Optional[StrictStr] = Field(default=None, description="The URL or base64-encoded image data for the light theme logo.", json_schema_extra={"examples": ["data:image/png;base64,iVBORw0KGgoAAAANS..."]})
+    dark: Optional[StrictStr] = Field(default=None, description="The URL or base64-encoded image data for the dark theme logo.", json_schema_extra={"examples": ["data:image/png;base64,iVBORw0KGgoAAAANS..."]})
     __properties: ClassVar[List[str]] = ["light", "dark"]
 
     model_config = ConfigDict(

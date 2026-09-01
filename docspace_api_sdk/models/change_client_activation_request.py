@@ -30,7 +30,7 @@ class ChangeClientActivationRequest(BaseModel):
     """
     Client activation change request
     """ # noqa: E501
-    status: StrictBool = Field(description="The activation status of the client")
+    status: StrictBool = Field(description="The activation status of the client", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["status"]
 
     model_config = ConfigDict(

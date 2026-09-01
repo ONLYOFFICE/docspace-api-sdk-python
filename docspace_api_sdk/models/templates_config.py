@@ -30,9 +30,9 @@ class TemplatesConfig(BaseModel):
     """
     The presence or absence of the templates in the Create New... menu option.
     """ # noqa: E501
-    image: Optional[StrictStr] = Field(default=None, description="The absolute URL to the image for template.")
-    title: Optional[StrictStr] = Field(default=None, description="The template title that will be displayed in the Create New... menu option.")
-    url: Optional[StrictStr] = Field(default=None, description="The absolute URL to the document where it will be created and available after creation.")
+    image: Optional[StrictStr] = Field(default=None, description="The absolute URL to the image for template.", json_schema_extra={"examples": ["https://portal.example.com/templates/template1.png"]})
+    title: Optional[StrictStr] = Field(default=None, description="The template title that will be displayed in the Create New... menu option.", json_schema_extra={"examples": ["Blank Document"]})
+    url: Optional[StrictStr] = Field(default=None, description="The absolute URL to the document where it will be created and available after creation.", json_schema_extra={"examples": ["https://portal.example.com/editor/new?template=blank"]})
     __properties: ClassVar[List[str]] = ["image", "title", "url"]
 
     model_config = ConfigDict(

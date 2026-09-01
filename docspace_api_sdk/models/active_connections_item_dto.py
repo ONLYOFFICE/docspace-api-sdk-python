@@ -32,17 +32,17 @@ class ActiveConnectionsItemDto(BaseModel):
     """
     The active connection item parameters.
     """ # noqa: E501
-    id: StrictInt = Field(description="The active connection ID.")
-    tenant_id: StrictInt = Field(description="The tenant ID.", alias="tenantId")
-    user_id: UUID = Field(description="The user ID.", alias="userId")
-    mobile: Optional[StrictBool] = Field(default=None, description="Specifies if the active connection has a mobile phone or not.")
-    ip: Optional[StrictStr] = Field(default=None, description="The IP address of the active connection.")
-    country: Optional[StrictStr] = Field(default=None, description="The active connection country.")
-    city: Optional[StrictStr] = Field(default=None, description="The active connection city.")
-    browser: Optional[StrictStr] = Field(default=None, description="The active connection browser.")
-    platform: Optional[StrictStr] = Field(default=None, description="The active connection platform.")
-    var_date: Optional[ApiDateTime] = Field(default=None, alias="date")
-    page: Optional[StrictStr] = Field(default=None, description="The active connection page.")
+    id: StrictInt = Field(description="The active connection ID.", json_schema_extra={"examples": [1]})
+    tenant_id: StrictInt = Field(description="The tenant ID.", alias="tenantId", json_schema_extra={"examples": [1]})
+    user_id: UUID = Field(description="The user ID.", alias="userId", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000000"]})
+    mobile: Optional[StrictBool] = Field(default=None, description="Specifies if the active connection has a mobile phone or not.", json_schema_extra={"examples": [True]})
+    ip: Optional[StrictStr] = Field(default=None, description="The IP address of the active connection.", json_schema_extra={"examples": ["192.0.2.1"]})
+    country: Optional[StrictStr] = Field(default=None, description="The active connection country.", json_schema_extra={"examples": ["United States"]})
+    city: Optional[StrictStr] = Field(default=None, description="The active connection city.", json_schema_extra={"examples": ["New York"]})
+    browser: Optional[StrictStr] = Field(default=None, description="The active connection browser.", json_schema_extra={"examples": ["Chrome 120.0"]})
+    platform: Optional[StrictStr] = Field(default=None, description="The active connection platform.", json_schema_extra={"examples": ["Windows"]})
+    var_date: Optional[ApiDateTime] = Field(default=None, description="The API date and time parameters.", alias="date")
+    page: Optional[StrictStr] = Field(default=None, description="The active connection page.", json_schema_extra={"examples": ["/rooms/shared"]})
     __properties: ClassVar[List[str]] = ["id", "tenantId", "userId", "mobile", "ip", "country", "city", "browser", "platform", "date", "page"]
 
     model_config = ConfigDict(

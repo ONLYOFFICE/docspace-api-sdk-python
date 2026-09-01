@@ -6,7 +6,7 @@ Represents a wrapper for the response of a chunked upload session operation.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **success** | **bool** | Gets or sets a value indicating whether the operation was successful. | [optional] 
-**data** | [**ChunkedUploadSessionResponseInteger**](ChunkedUploadSessionResponseInteger.md) |  | [optional] 
+**data** | [**ChunkedUploadSessionResponseInteger**](ChunkedUploadSessionResponseInteger.md) | Represents the response returned from a chunked upload session. | [optional] 
 
 ## Example
 

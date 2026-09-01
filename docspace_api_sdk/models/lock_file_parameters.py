@@ -30,7 +30,7 @@ class LockFileParameters(BaseModel):
     """
     The parameters for locking a file.
     """ # noqa: E501
-    lock_file: Optional[StrictBool] = Field(default=None, description="Specifies whether to lock a file or not.", alias="lockFile")
+    lock_file: Optional[StrictBool] = Field(default=None, description="Specifies whether to lock a file or not.", alias="lockFile", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["lockFile"]
 
     model_config = ConfigDict(

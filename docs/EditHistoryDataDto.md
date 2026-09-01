@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **changes_url** | **str** | The URL address of the file with the document changes data. | [optional] 
 **key** | **str** | The document identifier used to unambiguously identify the document file. | 
-**previous** | [**EditHistoryUrl**](EditHistoryUrl.md) |  | [optional] 
+**previous** | [**EditHistoryUrl**](EditHistoryUrl.md) | The object of the previous version of the document. | [optional] 
 **token** | **str** | The encrypted signature added to the parameter in the form of a token. | [optional] 
 **url** | **str** | The URL address of the current document version. | 
 **version** | **int** | The document version number. | 

@@ -32,7 +32,7 @@ class UpdateMembersQuotaRequestDto(BaseModel):
     """
     The request parameters for updating a user quota.
     """ # noqa: E501
-    user_ids: Optional[List[UUID]] = Field(default=None, description="The list of user IDs.", alias="userIds")
+    user_ids: Optional[List[UUID]] = Field(default=None, description="The list of user IDs.", alias="userIds", json_schema_extra={"examples": [["00000000-0000-0000-0000-000000000000", "11111111-1111-1111-1111-111111111111"]]})
     quota: Optional[UpdateMembersQuotaRequestDtoQuota] = None
     __properties: ClassVar[List[str]] = ["userIds", "quota"]
 

@@ -30,10 +30,10 @@ class RoomTemplateStatusDto(BaseModel):
     """
     The room template status.
     """ # noqa: E501
-    template_id: StrictInt = Field(description="The room template ID.", alias="templateId")
-    progress: Union[StrictFloat, StrictInt] = Field(description="The progress of the room template creation process.")
-    error: Optional[StrictStr] = Field(default=None, description="The error message that is sent when the room template is not created successfully.")
-    is_completed: StrictBool = Field(description="Specifies whether the process of creating the room template is completed.", alias="isCompleted")
+    template_id: StrictInt = Field(description="The room template ID.", alias="templateId", json_schema_extra={"examples": [123]})
+    progress: Union[StrictFloat, StrictInt] = Field(description="The progress of the room template creation process.", json_schema_extra={"examples": [75.5]})
+    error: Optional[StrictStr] = Field(default=None, description="The error message that is sent when the room template is not created successfully.", json_schema_extra={"examples": ["Template creation failed"]})
+    is_completed: StrictBool = Field(description="Specifies whether the process of creating the room template is completed.", alias="isCompleted", json_schema_extra={"examples": [False]})
     __properties: ClassVar[List[str]] = ["templateId", "progress", "error", "isCompleted"]
 
     model_config = ConfigDict(

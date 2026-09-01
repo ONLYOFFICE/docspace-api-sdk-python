@@ -32,9 +32,9 @@ class MentionMessageWrapper(BaseModel):
     """
     The mention message parameters.
     """ # noqa: E501
-    action_link: Optional[ActionLinkConfig] = Field(default=None, alias="actionLink")
-    emails: Optional[List[StrictStr]] = Field(default=None, description="A list of emails that will receive the mention message.")
-    message: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The mention message.")
+    action_link: Optional[ActionLinkConfig] = Field(default=None, description="The config parameter which contains the information about the action in the document that will be scrolled to.", alias="actionLink")
+    emails: Optional[List[StrictStr]] = Field(default=None, description="A list of emails that will receive the mention message.", json_schema_extra={"examples": [["user1@example.com", "user2@example.com"]]})
+    message: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The mention message.", json_schema_extra={"examples": ["Hello"]})
     __properties: ClassVar[List[str]] = ["actionLink", "emails", "message"]
 
     model_config = ConfigDict(

@@ -5,7 +5,7 @@ The additional white label settings wrapper.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**settings** | [**AdditionalWhiteLabelSettings**](AdditionalWhiteLabelSettings.md) |  | [optional] 
+**settings** | [**AdditionalWhiteLabelSettings**](AdditionalWhiteLabelSettings.md) | The additional white label settings. | [optional] 
 
 ## Example
 

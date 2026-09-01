@@ -31,11 +31,11 @@ class RoomInvitationRequest(BaseModel):
     """
     The request parameters for inviting users to the room.
     """ # noqa: E501
-    invitations: Optional[List[RoomInvitation]] = Field(default=None, description="The collection of invitation parameters.")
-    notify: Optional[StrictBool] = Field(default=None, description="Specifies whether to notify users about the shared room or not.")
-    message: Optional[StrictStr] = Field(default=None, description="The message to send when notifying about the shared room.")
-    culture: Optional[StrictStr] = Field(default=None, description="The language of the room invitation.")
-    force: Optional[StrictBool] = Field(default=None, description="Specifies whether to forcibly delete a user with form roles from the room.")
+    invitations: Optional[List[RoomInvitation]] = Field(default=None, description="The collection of invitation parameters.", json_schema_extra={"examples": [[{"id": "00000000-0000-0000-0000-000000000000", "access": 1}]]})
+    notify: Optional[StrictBool] = Field(default=None, description="Specifies whether to notify users about the shared room or not.", json_schema_extra={"examples": [True]})
+    message: Optional[StrictStr] = Field(default=None, description="The message to send when notifying about the shared room.", json_schema_extra={"examples": ["You have been invited to the room"]})
+    culture: Optional[StrictStr] = Field(default=None, description="The language of the room invitation.", json_schema_extra={"examples": ["en-US"]})
+    force: Optional[StrictBool] = Field(default=None, description="Specifies whether to forcibly delete a user with form roles from the room.", json_schema_extra={"examples": [False]})
     __properties: ClassVar[List[str]] = ["invitations", "notify", "message", "culture", "force"]
 
     model_config = ConfigDict(

@@ -5,7 +5,7 @@ The room new items information.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**room** | [**FileEntryBaseDto**](FileEntryBaseDto.md) |  | [optional] 
+**room** | [**FileEntryBaseDto**](FileEntryBaseDto.md) | The room file entry. | [optional] 
 **items** | [**List[FileEntryBaseDto]**](FileEntryBaseDto.md) | The list of file entry items. | [optional] 
 
 ## Example

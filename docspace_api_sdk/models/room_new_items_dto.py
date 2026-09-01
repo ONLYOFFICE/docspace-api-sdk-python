@@ -31,7 +31,7 @@ class RoomNewItemsDto(BaseModel):
     """
     The room new items information.
     """ # noqa: E501
-    room: Optional[FileEntryBaseDto] = None
+    room: Optional[FileEntryBaseDto] = Field(default=None, description="The room file entry.")
     items: Optional[List[FileEntryBaseDto]] = Field(default=None, description="The list of file entry items.")
     __properties: ClassVar[List[str]] = ["room", "items"]
 

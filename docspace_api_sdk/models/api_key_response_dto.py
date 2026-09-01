@@ -33,16 +33,16 @@ class ApiKeyResponseDto(BaseModel):
     """
     The response data for the API key operations.
     """ # noqa: E501
-    id: UUID = Field(description="The API key unique identifier.")
-    name: Optional[StrictStr] = Field(description="The API key name.")
-    key: Optional[StrictStr] = Field(description="The full API key value (only returned when creating a new key).")
-    key_postfix: Optional[StrictStr] = Field(default=None, description="The API key postfix (used for identification).", alias="keyPostfix")
-    permissions: Optional[List[StrictStr]] = Field(description="The list of permissions granted to the API key.")
-    last_used: Optional[ApiDateTime] = Field(default=None, alias="lastUsed")
-    create_on: Optional[ApiDateTime] = Field(default=None, alias="createOn")
-    create_by: Optional[EmployeeDto] = Field(default=None, alias="createBy")
-    expires_at: Optional[ApiDateTime] = Field(default=None, alias="expiresAt")
-    is_active: StrictBool = Field(description="Indicates whether the API key is active or not.", alias="isActive")
+    id: UUID = Field(description="The API key unique identifier.", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000000"]})
+    name: Optional[StrictStr] = Field(description="The API key name.", json_schema_extra={"examples": ["My API Key"]})
+    key: Optional[StrictStr] = Field(description="The full API key value (only returned when creating a new key).", json_schema_extra={"examples": ["api_key_1234567890abcdef"]})
+    key_postfix: Optional[StrictStr] = Field(default=None, description="The API key postfix (used for identification).", alias="keyPostfix", json_schema_extra={"examples": ["...cdef"]})
+    permissions: Optional[List[StrictStr]] = Field(description="The list of permissions granted to the API key.", json_schema_extra={"examples": [["read", "write", "delete"]]})
+    last_used: Optional[ApiDateTime] = Field(default=None, description="The API date and time parameters.", alias="lastUsed")
+    create_on: Optional[ApiDateTime] = Field(default=None, description="The API date and time parameters.", alias="createOn")
+    create_by: Optional[EmployeeDto] = Field(default=None, description="The user parameters.", alias="createBy")
+    expires_at: Optional[ApiDateTime] = Field(default=None, description="The API date and time parameters.", alias="expiresAt")
+    is_active: StrictBool = Field(description="Indicates whether the API key is active or not.", alias="isActive", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["id", "name", "key", "keyPostfix", "permissions", "lastUsed", "createOn", "createBy", "expiresAt", "isActive"]
 
     model_config = ConfigDict(

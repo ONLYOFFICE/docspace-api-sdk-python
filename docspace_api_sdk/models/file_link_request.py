@@ -34,14 +34,14 @@ class FileLinkRequest(BaseModel):
     """
     The external link request parameters.
     """ # noqa: E501
-    link_id: Optional[UUID] = Field(default=None, description="The external link ID.", alias="linkId")
-    access: Optional[FileShare] = None
-    expiration_date: Optional[ApiDateTime] = Field(default=None, alias="expirationDate")
-    title: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The link name.")
-    internal: Optional[StrictBool] = Field(default=None, description="The link scope, whether it is internal or not.")
-    primary: Optional[StrictBool] = Field(default=None, description="Specifies whether the file link is primary or not.")
-    deny_download: Optional[StrictBool] = Field(default=None, description="Specifies whether to deny downloading the file or not.", alias="denyDownload")
-    password: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="Password for access via link.")
+    link_id: Optional[UUID] = Field(default=None, description="The external link ID.", alias="linkId", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000000"]})
+    access: Optional[FileShare] = Field(default=None, description="The access rights type.")
+    expiration_date: Optional[ApiDateTime] = Field(default=None, description="The API date and time parameters.", alias="expirationDate")
+    title: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The link name.", json_schema_extra={"examples": ["My Document"]})
+    internal: Optional[StrictBool] = Field(default=None, description="The link scope, whether it is internal or not.", json_schema_extra={"examples": [False]})
+    primary: Optional[StrictBool] = Field(default=None, description="Specifies whether the file link is primary or not.", json_schema_extra={"examples": [True]})
+    deny_download: Optional[StrictBool] = Field(default=None, description="Specifies whether to deny downloading the file or not.", alias="denyDownload", json_schema_extra={"examples": [False]})
+    password: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="Password for access via link.", json_schema_extra={"examples": ["p@ssw0rd"]})
     __properties: ClassVar[List[str]] = ["linkId", "access", "expirationDate", "title", "internal", "primary", "denyDownload", "password"]
 
     model_config = ConfigDict(

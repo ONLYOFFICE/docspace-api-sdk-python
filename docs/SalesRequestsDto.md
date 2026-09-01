@@ -5,7 +5,7 @@ The request parameters for handling sales and payment inquiries in the portal.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**user_name** | **str** | The name of the user submitting the sales request. | [optional] 
+**user_name** | **str** | The name of the user submitting the sales request. | 
 **email** | **str** | The contact email address for the sales inquiry. | 
 **message** | **str** | The details of the sales inquiry or payment request. | 
 

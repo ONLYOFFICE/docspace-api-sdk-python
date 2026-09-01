@@ -33,14 +33,14 @@ class Tariff(BaseModel):
     """
     The tariff parameters.
     """ # noqa: E501
-    id: Optional[StrictInt] = Field(default=None, description="The tariff ID.")
-    state: Optional[TariffState] = None
-    due_date: datetime = Field(description="The tariff due date.", alias="dueDate")
-    delay_due_date: Optional[datetime] = Field(default=None, description="The tariff delay due date.", alias="delayDueDate")
-    license_date: Optional[datetime] = Field(default=None, description="The tariff license date.", alias="licenseDate")
-    customer_id: Optional[StrictStr] = Field(default=None, description="The tariff customer ID.", alias="customerId")
-    quotas: Optional[List[Quota]] = Field(description="The list of tariff quotas.")
-    overdue_quotas: Optional[List[Quota]] = Field(default=None, description="The list of overdue tariff quotas.", alias="overdueQuotas")
+    id: Optional[StrictInt] = Field(default=None, description="The tariff ID.", json_schema_extra={"examples": [1]})
+    state: Optional[TariffState] = Field(default=None, description="The tariff state.")
+    due_date: datetime = Field(description="The tariff due date.", alias="dueDate", json_schema_extra={"examples": ["2026-03-31T00:00:00Z"]})
+    delay_due_date: Optional[datetime] = Field(default=None, description="The tariff delay due date.", alias="delayDueDate", json_schema_extra={"examples": ["2026-04-07T00:00:00Z"]})
+    license_date: Optional[datetime] = Field(default=None, description="The tariff license date.", alias="licenseDate", json_schema_extra={"examples": ["2026-03-01T00:00:00Z"]})
+    customer_id: Optional[StrictStr] = Field(default=None, description="The tariff customer ID.", alias="customerId", json_schema_extra={"examples": ["cus_123"]})
+    quotas: Optional[List[Quota]] = Field(description="The list of tariff quotas.", json_schema_extra={"examples": [{"quotas": [{"id": 1, "quantity": 50, "wallet": False}]}]})
+    overdue_quotas: Optional[List[Quota]] = Field(default=None, description="The list of overdue tariff quotas.", alias="overdueQuotas", json_schema_extra={"examples": [[]]})
     __properties: ClassVar[List[str]] = ["id", "state", "dueDate", "delayDueDate", "licenseDate", "customerId", "quotas", "overdueQuotas"]
 
     model_config = ConfigDict(

@@ -31,19 +31,19 @@ class CreateClientRequest(BaseModel):
     """
     Client creation request containing client details
     """ # noqa: E501
-    name: Optional[Annotated[str, Field(min_length=3, strict=True, max_length=256)]] = Field(default=None, description="The client name.")
-    description: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The description of the client")
-    logo: Optional[Annotated[str, Field(min_length=1, strict=True)]] = Field(default=None, description="The logo of the client in base64 format")
-    scopes: Optional[Annotated[List[StrictStr], Field(min_length=1)]] = Field(default=None, description="The scopes for the client")
+    name: Optional[Annotated[str, Field(min_length=3, strict=True, max_length=256)]] = Field(default=None, description="The client name.", json_schema_extra={"examples": ["Example Client"]})
+    description: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The description of the client", json_schema_extra={"examples": ["Description of the client"]})
+    logo: Optional[Annotated[str, Field(min_length=1, strict=True)]] = Field(default=None, description="The logo of the client in base64 format", json_schema_extra={"examples": ["data:image/png;base64,..."]})
+    scopes: Optional[Annotated[List[StrictStr], Field(min_length=1)]] = Field(default=None, description="The scopes for the client", json_schema_extra={"examples": [["read", "write"]]})
     public: Optional[StrictBool] = None
-    allow_pkce: Optional[StrictBool] = Field(default=None, description="Indicates whether PKCE is allowed for the client")
-    is_public: Optional[StrictBool] = Field(default=None, description="Indicates if the client is public")
-    website_url: Optional[Annotated[str, Field(min_length=1, strict=True)]] = Field(default=None, description="The website URL of the client")
-    terms_url: Optional[Annotated[str, Field(min_length=1, strict=True)]] = Field(default=None, description="The terms URL of the client")
-    policy_url: Optional[Annotated[str, Field(min_length=1, strict=True)]] = Field(default=None, description="The policy URL of the client")
-    redirect_uris: Annotated[List[StrictStr], Field(min_length=1, max_length=12)] = Field(description="The redirect URIs for the client")
-    allowed_origins: Annotated[List[StrictStr], Field(min_length=1, max_length=12)] = Field(description="The allowed origins for the client")
-    logout_redirect_uri: Optional[Annotated[str, Field(min_length=1, strict=True)]] = Field(default=None, description="The logout redirect URI for the client")
+    allow_pkce: Optional[StrictBool] = Field(default=None, description="Indicates whether PKCE is allowed for the client", json_schema_extra={"examples": [True]})
+    is_public: Optional[StrictBool] = Field(default=None, description="Indicates if the client is public", json_schema_extra={"examples": [False]})
+    website_url: Optional[Annotated[str, Field(min_length=1, strict=True)]] = Field(default=None, description="The website URL of the client", json_schema_extra={"examples": ["http://example.com"]})
+    terms_url: Optional[Annotated[str, Field(min_length=1, strict=True)]] = Field(default=None, description="The terms URL of the client", json_schema_extra={"examples": ["http://example.com/terms"]})
+    policy_url: Optional[Annotated[str, Field(min_length=1, strict=True)]] = Field(default=None, description="The policy URL of the client", json_schema_extra={"examples": ["http://example.com/policy"]})
+    redirect_uris: Annotated[List[StrictStr], Field(min_length=1, max_length=12)] = Field(description="The redirect URIs for the client", json_schema_extra={"examples": [["http://example.com/redirect"]]})
+    allowed_origins: Annotated[List[StrictStr], Field(min_length=1, max_length=12)] = Field(description="The allowed origins for the client", json_schema_extra={"examples": [["http://example.com"]]})
+    logout_redirect_uri: Optional[Annotated[str, Field(min_length=1, strict=True)]] = Field(default=None, description="The logout redirect URI for the client", json_schema_extra={"examples": ["http://example.com/logout"]})
     __properties: ClassVar[List[str]] = ["name", "description", "logo", "scopes", "public", "allow_pkce", "is_public", "website_url", "terms_url", "policy_url", "redirect_uris", "allowed_origins", "logout_redirect_uri"]
 
     @field_validator('logo')

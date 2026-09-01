@@ -30,7 +30,7 @@ class CustomFilterParameters(BaseModel):
     """
     The parameters for setting the Custom Filter editing mode.
     """ # noqa: E501
-    enabled: Optional[StrictBool] = Field(default=None, description="Specifies whether the Custom Filter editing mode is enabled or not.")
+    enabled: Optional[StrictBool] = Field(default=None, description="Specifies whether the Custom Filter editing mode is enabled or not.", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["enabled"]
 
     model_config = ConfigDict(

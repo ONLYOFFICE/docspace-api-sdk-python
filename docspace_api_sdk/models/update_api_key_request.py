@@ -31,9 +31,9 @@ class UpdateApiKeyRequest(BaseModel):
     """
     The request parameters for updating an existing API key.
     """ # noqa: E501
-    name: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=30)]] = Field(default=None, description="The new name for the API key.")
-    permissions: Optional[List[StrictStr]] = Field(default=None, description="The new list of permissions for the API key.")
-    is_active: Optional[StrictBool] = Field(default=None, description="Indicates whether the API key should be active or not.", alias="isActive")
+    name: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=30)]] = Field(default=None, description="The new name for the API key.", json_schema_extra={"examples": ["Updated API Key"]})
+    permissions: Optional[List[StrictStr]] = Field(default=None, description="The new list of permissions for the API key.", json_schema_extra={"examples": [["read", "write", "delete"]]})
+    is_active: Optional[StrictBool] = Field(default=None, description="Indicates whether the API key should be active or not.", alias="isActive", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["name", "permissions", "isActive"]
 
     model_config = ConfigDict(

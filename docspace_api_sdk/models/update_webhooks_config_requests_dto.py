@@ -35,7 +35,7 @@ class UpdateWebhooksConfigRequestsDto(CreateWebhooksConfigRequestsDto):
     The request parameters for updating the webhook configuration.
     """
 
-    id: StrictInt = Field(description="The webhook configuration ID.")
+    id: StrictInt = Field(description="The webhook configuration ID.", json_schema_extra={"examples": [1]})
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -75,16 +75,6 @@ class UpdateWebhooksConfigRequestsDto(CreateWebhooksConfigRequestsDto):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # set to None if secret_key (nullable) is None
-        # and model_fields_set contains the field
-        if self.secret_key is None and "secret_key" in self.model_fields_set:
-            _dict['secretKey'] = None
-
-        # set to None if target_id (nullable) is None
-        # and model_fields_set contains the field
-        if self.target_id is None and "target_id" in self.model_fields_set:
-            _dict['targetId'] = None
-
         return _dict
 
     @classmethod

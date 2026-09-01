@@ -35,8 +35,8 @@ class DuplicateRequestDto(FileOperationRequestBaseDto):
     The request parameters for duplicating files and fodlers.
     """
 
-    folder_ids: Optional[List[DuplicateRequestDtoAllOfFolderIds]] = Field(default=None, description="The list of folder IDs.", alias="folderIds")
-    file_ids: Optional[List[DuplicateRequestDtoAllOfFileIds]] = Field(default=None, description="The list of file IDs.", alias="fileIds")
+    folder_ids: Optional[List[DuplicateRequestDtoAllOfFolderIds]] = Field(default=None, description="The list of folder IDs.", alias="folderIds", json_schema_extra={"examples": [[1, 2, 3]]})
+    file_ids: Optional[List[DuplicateRequestDtoAllOfFileIds]] = Field(default=None, description="The list of file IDs.", alias="fileIds", json_schema_extra={"examples": [[1, 2, 3]]})
 
     model_config = ConfigDict(
         populate_by_name=True,

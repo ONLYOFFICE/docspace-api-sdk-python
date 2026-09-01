@@ -30,8 +30,8 @@ class Size(BaseModel):
     """
     Represents dimensions with width and height values.
     """ # noqa: E501
-    height: Optional[StrictInt] = Field(default=None, description="Gets or sets the height dimension of an object, typically measured in pixels or other unit.  It defines the vertical size of the object.")
-    width: Optional[StrictInt] = Field(default=None, description="Gets or sets the width dimension of an object, typically measured in pixels or other unit.")
+    height: Optional[StrictInt] = Field(default=None, description="Gets or sets the height dimension of an object, typically measured in pixels or other unit.  It defines the vertical size of the object.", json_schema_extra={"examples": [10]})
+    width: Optional[StrictInt] = Field(default=None, description="Gets or sets the width dimension of an object, typically measured in pixels or other unit.", json_schema_extra={"examples": [10]})
     __properties: ClassVar[List[str]] = ["height", "width"]
 
     model_config = ConfigDict(

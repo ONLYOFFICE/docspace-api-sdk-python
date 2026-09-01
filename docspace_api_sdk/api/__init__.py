@@ -1,14 +1,23 @@
 # flake8: noqa
 
 # import apis into api package
+from docspace_api_sdk.api.ai.ai_api import AIApi
 from docspace_api_sdk.api.ai.agents_api import AgentsApi
-from docspace_api_sdk.api.ai.chat_api import ChatApi
-from docspace_api_sdk.api.ai.mcp_api import MCPApi
-from docspace_api_sdk.api.ai.messages_api import MessagesApi
-from docspace_api_sdk.api.ai.providers_api import ProvidersApi
+from docspace_api_sdk.api.ai.assignments_api import AssignmentsApi
+from docspace_api_sdk.api.ai.attachments_api import AttachmentsApi
+from docspace_api_sdk.api.ai.editor_tools_api import EditorToolsApi
+from docspace_api_sdk.api.ai.export_api import ExportApi
+from docspace_api_sdk.api.ai.open_ai_passthrough_api import OpenAIPassthroughApi
+from docspace_api_sdk.api.ai.preferences_api import PreferencesApi
+from docspace_api_sdk.api.ai.profiles_api import ProfilesApi
+from docspace_api_sdk.api.ai.prompts_api import PromptsApi
 from docspace_api_sdk.api.ai.settings_api import SettingsApi
+from docspace_api_sdk.api.ai.threads_api import ThreadsApi
+from docspace_api_sdk.api.ai.tools_api import ToolsApi
 from docspace_api_sdk.api.ai.vectorization_api import VectorizationApi
+from docspace_api_sdk.api.ai.web_search_api import WebSearchApi
 from docspace_api_sdk.api.api_keys.api_keys_api import ApiKeysApi
+from docspace_api_sdk.api.apps.apps_api import AppsApi
 from docspace_api_sdk.api.authentication.authentication_api import AuthenticationApi
 from docspace_api_sdk.api.backup.backup_api import BackupApi
 from docspace_api_sdk.api.capabilities.capabilities_api import CapabilitiesApi
@@ -60,6 +69,7 @@ from docspace_api_sdk.api.settings.authorization_api import AuthorizationApi
 from docspace_api_sdk.api.settings.banners_visibility_api import BannersVisibilityApi
 from docspace_api_sdk.api.settings.common_settings_api import CommonSettingsApi
 from docspace_api_sdk.api.settings.cookies_api import CookiesApi
+from docspace_api_sdk.api.settings.docs_cloud_api import DocsCloudApi
 from docspace_api_sdk.api.settings.encryption_api import EncryptionApi
 from docspace_api_sdk.api.settings.greeting_settings_api import GreetingSettingsApi
 from docspace_api_sdk.api.settings.ip_restrictions_api import IPRestrictionsApi
@@ -79,4 +89,5 @@ from docspace_api_sdk.api.settings.telegram_api import TelegramApi
 from docspace_api_sdk.api.settings.webhooks_api import WebhooksApi
 from docspace_api_sdk.api.settings.webplugins_api import WebpluginsApi
 from docspace_api_sdk.api.third_party.third_party_api import ThirdPartyApi
+from docspace_api_sdk.api.privacyroom.privacyroom_api import PrivacyroomApi
 

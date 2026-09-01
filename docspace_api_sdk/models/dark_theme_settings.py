@@ -32,8 +32,8 @@ class DarkThemeSettings(BaseModel):
     """
     The theme parameters.
     """ # noqa: E501
-    theme: Optional[DarkThemeSettingsType] = None
-    last_modified: Optional[datetime] = Field(default=None, description="The last modified date.", alias="lastModified")
+    theme: Optional[DarkThemeSettingsType] = Field(default=None, description="The theme type.")
+    last_modified: Optional[datetime] = Field(default=None, description="The last modified date.", alias="lastModified", json_schema_extra={"examples": ["2020-01-15T00:00:00Z"]})
     __properties: ClassVar[List[str]] = ["theme", "lastModified"]
 
     model_config = ConfigDict(

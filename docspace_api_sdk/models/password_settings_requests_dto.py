@@ -30,10 +30,10 @@ class PasswordSettingsRequestsDto(BaseModel):
     """
     The request parameters for configuring the password complexity requirements.
     """ # noqa: E501
-    min_length: StrictInt = Field(description="The minimum number of characters required for valid passwords.", alias="minLength")
-    upper_case: Optional[StrictBool] = Field(default=None, description="Specifies whether the password should contain the uppercase letters or not.", alias="upperCase")
-    digits: Optional[StrictBool] = Field(default=None, description="Specifies whether the password should contain the digits or not.")
-    spec_symbols: Optional[StrictBool] = Field(default=None, description="Specifies whether the password should contain the special symbols or not.", alias="specSymbols")
+    min_length: StrictInt = Field(description="The minimum number of characters required for valid passwords.", alias="minLength", json_schema_extra={"examples": [8]})
+    upper_case: Optional[StrictBool] = Field(default=None, description="Specifies whether the password should contain the uppercase letters or not.", alias="upperCase", json_schema_extra={"examples": [True]})
+    digits: Optional[StrictBool] = Field(default=None, description="Specifies whether the password should contain the digits or not.", json_schema_extra={"examples": [True]})
+    spec_symbols: Optional[StrictBool] = Field(default=None, description="Specifies whether the password should contain the special symbols or not.", alias="specSymbols", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["minLength", "upperCase", "digits", "specSymbols"]
 
     model_config = ConfigDict(

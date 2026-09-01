@@ -33,14 +33,14 @@ class EmailValidationKeyModel(BaseModel):
     """
     The confirmation email parameters.
     """ # noqa: E501
-    key: Optional[StrictStr] = Field(default=None, description="The email validation key.")
-    empl_type: Optional[EmployeeType] = Field(default=None, alias="emplType")
-    email: Optional[StrictStr] = Field(default=None, description="The email address.")
-    enc_email: Optional[StrictStr] = Field(default=None, description="The encrypted email address.", alias="encEmail")
-    ui_d: Optional[UUID] = Field(default=None, description="The user ID.", alias="uiD")
-    type: Optional[ConfirmType] = None
-    first: Optional[StrictStr] = Field(default=None, description="Specifies whether it is the first time account access or not.")
-    room_id: Optional[StrictStr] = Field(default=None, description="The room ID.", alias="roomId")
+    key: Optional[StrictStr] = Field(default=None, description="The email validation key.", json_schema_extra={"examples": ["abcdef123456"]})
+    empl_type: Optional[EmployeeType] = Field(default=None, description="The user type.", alias="emplType")
+    email: Optional[StrictStr] = Field(default=None, description="The email address.", json_schema_extra={"examples": ["user@example.com"]})
+    enc_email: Optional[StrictStr] = Field(default=None, description="The encrypted email address.", alias="encEmail", json_schema_extra={"examples": ["user%40example.com"]})
+    ui_d: Optional[UUID] = Field(default=None, description="The user ID.", alias="uiD", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000000"]})
+    type: Optional[ConfirmType] = Field(default=None, description="The confirmation email type.")
+    first: Optional[StrictStr] = Field(default=None, description="Specifies whether it is the first time account access or not.", json_schema_extra={"examples": ["false"]})
+    room_id: Optional[StrictStr] = Field(default=None, description="The room ID.", alias="roomId", json_schema_extra={"examples": ["1"]})
     __properties: ClassVar[List[str]] = ["key", "emplType", "email", "encEmail", "uiD", "type", "first", "roomId"]
 
     model_config = ConfigDict(

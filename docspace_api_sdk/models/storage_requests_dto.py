@@ -31,8 +31,8 @@ class StorageRequestsDto(BaseModel):
     """
     The request parameters for configuring the storage module settings.
     """ # noqa: E501
-    module: Optional[StrictStr] = Field(description="The name for the storage module to be configured.")
-    props: Optional[List[ItemKeyValuePairStringString]] = Field(default=None, description="The list of configuration key-value pairs for the storage module.")
+    module: Optional[StrictStr] = Field(description="The name for the storage module to be configured.", json_schema_extra={"examples": ["default"]})
+    props: Optional[List[ItemKeyValuePairStringString]] = Field(default=None, description="The list of configuration key-value pairs for the storage module.", json_schema_extra={"examples": [["item1", "item2"]]})
     __properties: ClassVar[List[str]] = ["module", "props"]
 
     model_config = ConfigDict(

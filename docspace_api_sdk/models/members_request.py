@@ -31,7 +31,7 @@ class MembersRequest(BaseModel):
     """
     The member request.
     """ # noqa: E501
-    members: Optional[List[UUID]] = Field(default=None, description="The list of group member IDs.")
+    members: Optional[List[UUID]] = Field(default=None, description="The list of group member IDs.", json_schema_extra={"examples": [["00000000-0000-0000-0000-000000000000", "11111111-1111-1111-1111-111111111111"]]})
     __properties: ClassVar[List[str]] = ["members"]
 
     model_config = ConfigDict(

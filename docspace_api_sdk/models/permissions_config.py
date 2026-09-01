@@ -30,16 +30,16 @@ class PermissionsConfig(BaseModel):
     """
     The permissions configuration parameters.
     """ # noqa: E501
-    comment: Optional[StrictBool] = Field(default=None, description="Defines if the document can be commented or not.")
-    chat: Optional[StrictBool] = Field(default=None, description="Defines if the chat functionality is enabled in the document or not.")
-    download: Optional[StrictBool] = Field(default=None, description="Defines if the document can be downloaded or only viewed or edited online.")
-    edit: Optional[StrictBool] = Field(default=None, description="Defines if the document can be edited or only viewed.")
-    fill_forms: Optional[StrictBool] = Field(default=None, description="Defines if the forms can be filled.", alias="fillForms")
-    modify_filter: Optional[StrictBool] = Field(default=None, description="Defines if the filter can be applied globally (true) affecting all the other users,  or locally (false), i.e. for the current user only.", alias="modifyFilter")
-    protect: Optional[StrictBool] = Field(default=None, description="Defines if the Protection tab on the toolbar and the Protect button in the left menu are displayedor hidden.")
-    var_print: Optional[StrictBool] = Field(default=None, description="Defines if the document can be printed or not.", alias="print")
-    review: Optional[StrictBool] = Field(default=None, description="Defines if the document can be reviewed or not.")
-    copy: Optional[StrictBool] = Field(default=None, description="Defines if the content can be copied to the clipboard or not.")
+    comment: Optional[StrictBool] = Field(default=None, description="Defines if the document can be commented or not.", json_schema_extra={"examples": [True]})
+    chat: Optional[StrictBool] = Field(default=None, description="Defines if the chat functionality is enabled in the document or not.", json_schema_extra={"examples": [True]})
+    download: Optional[StrictBool] = Field(default=None, description="Defines if the document can be downloaded or only viewed or edited online.", json_schema_extra={"examples": [True]})
+    edit: Optional[StrictBool] = Field(default=None, description="Defines if the document can be edited or only viewed.", json_schema_extra={"examples": [True]})
+    fill_forms: Optional[StrictBool] = Field(default=None, description="Defines if the forms can be filled.", alias="fillForms", json_schema_extra={"examples": [True]})
+    modify_filter: Optional[StrictBool] = Field(default=None, description="Defines if the filter can be applied globally (true) affecting all the other users,  or locally (false), i.e. for the current user only.", alias="modifyFilter", json_schema_extra={"examples": [True]})
+    protect: Optional[StrictBool] = Field(default=None, description="Defines if the Protection tab on the toolbar and the Protect button in the left menu are displayedor hidden.", json_schema_extra={"examples": [True]})
+    var_print: Optional[StrictBool] = Field(default=None, description="Defines if the document can be printed or not.", alias="print", json_schema_extra={"examples": [True]})
+    review: Optional[StrictBool] = Field(default=None, description="Defines if the document can be reviewed or not.", json_schema_extra={"examples": [True]})
+    copy: Optional[StrictBool] = Field(default=None, description="Defines if the content can be copied to the clipboard or not.", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["comment", "chat", "download", "edit", "fillForms", "modifyFilter", "protect", "print", "review", "copy"]
 
     model_config = ConfigDict(

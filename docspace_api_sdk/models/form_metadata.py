@@ -30,10 +30,10 @@ class FormMetadata(BaseModel):
     """
     FormMetadata
     """ # noqa: E501
-    key: Optional[StrictStr] = Field(default=None, description="The form field key.")
-    type: Optional[StrictStr] = Field(default=None, description="The form field type.")
-    format: Optional[StrictStr] = Field(default=None, description="The form field format.")
-    possible_values: Optional[List[StrictStr]] = Field(default=None, description="The list of possible values for the form field.", alias="possibleValues")
+    key: Optional[StrictStr] = Field(default=None, description="The form field key.", json_schema_extra={"examples": ["name"]})
+    type: Optional[StrictStr] = Field(default=None, description="The form field type.", json_schema_extra={"examples": ["text"]})
+    format: Optional[StrictStr] = Field(default=None, description="The form field format.", json_schema_extra={"examples": ["date"]})
+    possible_values: Optional[List[StrictStr]] = Field(default=None, description="The list of possible values for the form field.", alias="possibleValues", json_schema_extra={"examples": [[]]})
     __properties: ClassVar[List[str]] = ["key", "type", "format", "possibleValues"]
 
     model_config = ConfigDict(

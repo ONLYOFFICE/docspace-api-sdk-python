@@ -32,8 +32,8 @@ class TenantDeepLinkSettings(BaseModel):
     """
     The deep link settings.
     """ # noqa: E501
-    handling_mode: Optional[DeepLinkHandlingMode] = Field(default=None, alias="handlingMode")
-    last_modified: Optional[datetime] = Field(default=None, description="The timestamp indicating when the settings were last modified.", alias="lastModified")
+    handling_mode: Optional[DeepLinkHandlingMode] = Field(default=None, description="The deep link handling mode.", alias="handlingMode")
+    last_modified: Optional[datetime] = Field(default=None, description="The timestamp indicating when the settings were last modified.", alias="lastModified", json_schema_extra={"examples": ["1990-01-01T00:00:00Z"]})
     __properties: ClassVar[List[str]] = ["handlingMode", "lastModified"]
 
     model_config = ConfigDict(

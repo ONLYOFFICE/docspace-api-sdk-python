@@ -30,13 +30,13 @@ class SsoSpCertificateAdvanced(BaseModel):
     """
     The SP advanced certificate parameters.
     """ # noqa: E501
-    signing_algorithm: Optional[StrictStr] = Field(default=None, description="The certificate signing algorithm.", alias="signingAlgorithm")
-    sign_auth_requests: Optional[StrictBool] = Field(default=None, description="Specifies if SP will sign the SAML authentication requests sent to IdP or not.", alias="signAuthRequests")
-    sign_logout_requests: Optional[StrictBool] = Field(default=None, description="Specifies if SP will sign the SAML logout requests sent to IdP or not.", alias="signLogoutRequests")
-    sign_logout_responses: Optional[StrictBool] = Field(default=None, description="Specifies if SP will sign the SAML logout responses sent to IdP or not.", alias="signLogoutResponses")
-    encrypt_algorithm: Optional[StrictStr] = Field(default=None, description="The certificate encryption algorithm.", alias="encryptAlgorithm")
-    decrypt_algorithm: Optional[StrictStr] = Field(default=None, description="The certificate decryption algorithm.", alias="decryptAlgorithm")
-    encrypt_assertions: Optional[StrictBool] = Field(default=None, description="Specifies if the assertions will be encrypted or not.", alias="encryptAssertions")
+    signing_algorithm: Optional[StrictStr] = Field(default=None, description="The certificate signing algorithm.", alias="signingAlgorithm", json_schema_extra={"examples": ["rsa-sha256"]})
+    sign_auth_requests: Optional[StrictBool] = Field(default=None, description="Specifies if SP will sign the SAML authentication requests sent to IdP or not.", alias="signAuthRequests", json_schema_extra={"examples": [True]})
+    sign_logout_requests: Optional[StrictBool] = Field(default=None, description="Specifies if SP will sign the SAML logout requests sent to IdP or not.", alias="signLogoutRequests", json_schema_extra={"examples": [True]})
+    sign_logout_responses: Optional[StrictBool] = Field(default=None, description="Specifies if SP will sign the SAML logout responses sent to IdP or not.", alias="signLogoutResponses", json_schema_extra={"examples": [True]})
+    encrypt_algorithm: Optional[StrictStr] = Field(default=None, description="The certificate encryption algorithm.", alias="encryptAlgorithm", json_schema_extra={"examples": ["aes256-cbc"]})
+    decrypt_algorithm: Optional[StrictStr] = Field(default=None, description="The certificate decryption algorithm.", alias="decryptAlgorithm", json_schema_extra={"examples": ["aes256-cbc"]})
+    encrypt_assertions: Optional[StrictBool] = Field(default=None, description="Specifies if the assertions will be encrypted or not.", alias="encryptAssertions", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["signingAlgorithm", "signAuthRequests", "signLogoutRequests", "signLogoutResponses", "encryptAlgorithm", "decryptAlgorithm", "encryptAssertions"]
 
     model_config = ConfigDict(

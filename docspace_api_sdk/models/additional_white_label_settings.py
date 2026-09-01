@@ -31,13 +31,13 @@ class AdditionalWhiteLabelSettings(BaseModel):
     """
     The additional white label settings.
     """ # noqa: E501
-    start_docs_enabled: Optional[StrictBool] = Field(default=None, description="Specifies if the sample documents are displayed or hidden.", alias="startDocsEnabled")
-    help_center_enabled: Optional[StrictBool] = Field(default=None, description="Specifies if the Help Center link is available or not.", alias="helpCenterEnabled")
-    feedback_and_support_enabled: Optional[StrictBool] = Field(default=None, description="Specifies if the Feedback & Support link is available or not.", alias="feedbackAndSupportEnabled")
-    user_forum_enabled: Optional[StrictBool] = Field(default=None, description="Specifies if the user forum is available or not.", alias="userForumEnabled")
-    video_guides_enabled: Optional[StrictBool] = Field(default=None, description="Specifies if the Video Guides link is available or not.", alias="videoGuidesEnabled")
-    license_agreements_enabled: Optional[StrictBool] = Field(default=None, description="Specifies if the License Agreements link is available or not.", alias="licenseAgreementsEnabled")
-    last_modified: Optional[datetime] = Field(default=None, description="The timestamp indicating when the settings were last modified.", alias="lastModified")
+    start_docs_enabled: Optional[StrictBool] = Field(default=None, description="Specifies if the sample documents are displayed or hidden.", alias="startDocsEnabled", json_schema_extra={"examples": [True]})
+    help_center_enabled: Optional[StrictBool] = Field(default=None, description="Specifies if the Help Center link is available or not.", alias="helpCenterEnabled", json_schema_extra={"examples": [True]})
+    feedback_and_support_enabled: Optional[StrictBool] = Field(default=None, description="Specifies if the Feedback & Support link is available or not.", alias="feedbackAndSupportEnabled", json_schema_extra={"examples": [True]})
+    user_forum_enabled: Optional[StrictBool] = Field(default=None, description="Specifies if the user forum is available or not.", alias="userForumEnabled", json_schema_extra={"examples": [True]})
+    video_guides_enabled: Optional[StrictBool] = Field(default=None, description="Specifies if the Video Guides link is available or not.", alias="videoGuidesEnabled", json_schema_extra={"examples": [True]})
+    license_agreements_enabled: Optional[StrictBool] = Field(default=None, description="Specifies if the License Agreements link is available or not.", alias="licenseAgreementsEnabled", json_schema_extra={"examples": [True]})
+    last_modified: Optional[datetime] = Field(default=None, description="The timestamp indicating when the settings were last modified.", alias="lastModified", json_schema_extra={"examples": ["1990-01-01T00:00:00Z"]})
     __properties: ClassVar[List[str]] = ["startDocsEnabled", "helpCenterEnabled", "feedbackAndSupportEnabled", "userForumEnabled", "videoGuidesEnabled", "licenseAgreementsEnabled", "lastModified"]
 
     model_config = ConfigDict(

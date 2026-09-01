@@ -5,11 +5,12 @@ The file statistics result parameters.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**my_documents_used_space** | [**FilesStatisticsFolder**](FilesStatisticsFolder.md) |  | [optional] 
-**trash_used_space** | [**FilesStatisticsFolder**](FilesStatisticsFolder.md) |  | [optional] 
-**archive_used_space** | [**FilesStatisticsFolder**](FilesStatisticsFolder.md) |  | [optional] 
-**rooms_used_space** | [**FilesStatisticsFolder**](FilesStatisticsFolder.md) |  | [optional] 
-**ai_agents_used_space** | [**FilesStatisticsFolder**](FilesStatisticsFolder.md) |  | [optional] 
+**my_documents_used_space** | [**FilesStatisticsFolder**](FilesStatisticsFolder.md) | The used space of files in the \\My Documents\\ section. | [optional] 
+**trash_used_space** | [**FilesStatisticsFolder**](FilesStatisticsFolder.md) | The used space of files in the \\Trash\\ section. | [optional] 
+**archive_used_space** | [**FilesStatisticsFolder**](FilesStatisticsFolder.md) | The used space of files in the \\Archive\\ section. | [optional] 
+**rooms_used_space** | [**FilesStatisticsFolder**](FilesStatisticsFolder.md) | The used space of files in the \\Rooms\\ section. | [optional] 
+**ai_agents_used_space** | [**FilesStatisticsFolder**](FilesStatisticsFolder.md) | The used space of files in the \\AI agents\\ section. | [optional] 
+**forms_used_space** | [**FilesStatisticsFolder**](FilesStatisticsFolder.md) | The used space of files in the \\Forms\\ section. | [optional] 
 
 ## Example
 

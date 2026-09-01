@@ -30,7 +30,7 @@ class AnonymousConfigDto(BaseModel):
     """
     The anonymous config parameters.
     """ # noqa: E501
-    request: StrictBool = Field(description="Specifies if the anonymous is a request.")
+    request: StrictBool = Field(description="Specifies if the anonymous is a request.", json_schema_extra={"examples": [False]})
     __properties: ClassVar[List[str]] = ["request"]
 
     model_config = ConfigDict(

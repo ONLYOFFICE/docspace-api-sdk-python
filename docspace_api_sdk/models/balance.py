@@ -32,12 +32,12 @@ class Balance(BaseModel):
     """
     Represents a balance with an account number and a list of sub-accounts.
     """ # noqa: E501
-    account_number: Optional[StrictInt] = Field(default=None, description="The account number.", alias="accountNumber")
-    sub_account_number: Optional[StrictInt] = Field(default=None, description="The sub-account number.", alias="subAccountNumber")
-    account_name: Optional[StrictStr] = Field(default=None, description="The account name.", alias="accountName")
-    account_currency: Optional[StrictStr] = Field(default=None, description="The account currency.", alias="accountCurrency")
-    sub_accounts: Optional[List[SubAccount]] = Field(default=None, description="A list of sub-accounts.", alias="subAccounts")
-    last_credit: Optional[TransactionInfo] = Field(default=None, alias="lastCredit")
+    account_number: Optional[StrictInt] = Field(default=None, description="The account number.", alias="accountNumber", json_schema_extra={"examples": [12345]})
+    sub_account_number: Optional[StrictInt] = Field(default=None, description="The sub-account number.", alias="subAccountNumber", json_schema_extra={"examples": [12345]})
+    account_name: Optional[StrictStr] = Field(default=None, description="The account name.", alias="accountName", json_schema_extra={"examples": ["account name"]})
+    account_currency: Optional[StrictStr] = Field(default=None, description="The account currency.", alias="accountCurrency", json_schema_extra={"examples": ["\"USD\""]})
+    sub_accounts: Optional[List[SubAccount]] = Field(default=None, description="A list of sub-accounts.", alias="subAccounts", json_schema_extra={"examples": [[{"currency": "USD", "amount": 1500.75}]]})
+    last_credit: Optional[TransactionInfo] = Field(default=None, description="The most recent credit transaction applied to the account.", alias="lastCredit")
     __properties: ClassVar[List[str]] = ["accountNumber", "subAccountNumber", "accountName", "accountCurrency", "subAccounts", "lastCredit"]
 
     model_config = ConfigDict(

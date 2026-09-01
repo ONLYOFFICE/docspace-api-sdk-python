@@ -36,8 +36,8 @@ class RoomInvitation(EmailInvitationDto):
     The room invitation parameters.
     """
 
-    id: Optional[UUID] = Field(default=None, description="The ID of the user to share a room with.")
-    access: Optional[FileShare] = None
+    id: Optional[UUID] = Field(default=None, description="The ID of the user to share a room with.", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000000"]})
+    access: Optional[FileShare] = Field(default=None, description="The room sharing rights.")
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -77,11 +77,6 @@ class RoomInvitation(EmailInvitationDto):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # set to None if email (nullable) is None
-        # and model_fields_set contains the field
-        if self.email is None and "email" in self.model_fields_set:
-            _dict['email'] = None
-
         return _dict
 
     @classmethod

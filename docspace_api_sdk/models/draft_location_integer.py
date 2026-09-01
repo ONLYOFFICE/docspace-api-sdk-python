@@ -30,10 +30,10 @@ class DraftLocationInteger(BaseModel):
     """
     The file draft parameters.
     """ # noqa: E501
-    folder_id: Optional[StrictInt] = Field(default=None, description="The InProcess folder ID of the draft.", alias="folderId")
-    folder_title: Optional[StrictStr] = Field(default=None, description="The InProcess folder title of the draft.", alias="folderTitle")
-    file_id: Optional[StrictInt] = Field(default=None, description="The draft ID.", alias="fileId")
-    file_title: Optional[StrictStr] = Field(default=None, description="The draft title.", alias="fileTitle")
+    folder_id: Optional[StrictInt] = Field(default=None, description="The InProcess folder ID of the draft.", alias="folderId", json_schema_extra={"examples": [10]})
+    folder_title: Optional[StrictStr] = Field(default=None, description="The InProcess folder title of the draft.", alias="folderTitle", json_schema_extra={"examples": ["Draft Folder"]})
+    file_id: Optional[StrictInt] = Field(default=None, description="The draft ID.", alias="fileId", json_schema_extra={"examples": [123]})
+    file_title: Optional[StrictStr] = Field(default=None, description="The draft title.", alias="fileTitle", json_schema_extra={"examples": ["Draft Document"]})
     __properties: ClassVar[List[str]] = ["folderId", "folderTitle", "fileId", "fileTitle"]
 
     model_config = ConfigDict(

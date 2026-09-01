@@ -6,10 +6,10 @@ The result of file convertion operation.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **str** | The conversion operation ID. | 
-**operation** | [**FileOperationType**](FileOperationType.md) |  | 
+**operation** | [**FileOperationType**](FileOperationType.md) | The file operation type. | 
 **progress** | **int** | The conversion operation progress. | 
 **source** | **str** | The source file for the conversion. | [optional] 
-**result** | **object** | The resulting file after the conversion. | [optional] 
+**result** | **object** |  | [optional] 
 **error** | **str** | The conversion operation error message. | [optional] 
 **processed** | **str** | Specifies if the conversion operation is processed or not. | [optional] 
 

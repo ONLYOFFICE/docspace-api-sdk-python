@@ -5,14 +5,14 @@ The external sharing information and validation data.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**status** | [**Status**](Status.md) |  | 
+**status** | [**Status**](Status.md) | The external data status. | 
 **id** | **str** | The external data ID. | [optional] 
 **title** | **str** | The external data title. | [optional] 
-**type** | [**FileEntryType**](FileEntryType.md) |  | [optional] 
+**type** | [**FileEntryType**](FileEntryType.md) | The type of the external data. | [optional] 
 **tenant_id** | **int** | The tenant ID. | 
 **entity_id** | **str** | The unique identifier of the shared entity. | [optional] 
 **entity_title** | **str** | The title of the shared entity. | [optional] 
-**entity_type** | [**FileEntryType**](FileEntryType.md) |  | [optional] 
+**entity_type** | [**FileEntryType**](FileEntryType.md) | The entry type of the external data. | [optional] 
 **is_room** | **bool** | Indicates whether the entity represents a room. | [optional] 
 **shared** | **bool** | Specifies whether to share the external data or not. | 
 **link_id** | **UUID** | The link ID of the external data. | 

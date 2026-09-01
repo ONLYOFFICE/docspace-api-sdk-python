@@ -31,13 +31,13 @@ class EditHistoryDataDto(BaseModel):
     """
     The file editing history data.
     """ # noqa: E501
-    changes_url: Optional[StrictStr] = Field(default=None, description="The URL address of the file with the document changes data.", alias="changesUrl")
-    key: Optional[StrictStr] = Field(description="The document identifier used to unambiguously identify the document file.")
-    previous: Optional[EditHistoryUrl] = None
-    token: Optional[StrictStr] = Field(default=None, description="The encrypted signature added to the parameter in the form of a token.")
-    url: Optional[StrictStr] = Field(description="The URL address of the current document version.")
-    version: StrictInt = Field(description="The document version number.")
-    file_type: Optional[StrictStr] = Field(description="The document extension.", alias="fileType")
+    changes_url: Optional[StrictStr] = Field(default=None, description="The URL address of the file with the document changes data.", alias="changesUrl", json_schema_extra={"examples": ["https://example.com/changes"]})
+    key: Optional[StrictStr] = Field(description="The document identifier used to unambiguously identify the document file.", json_schema_extra={"examples": ["doc1"]})
+    previous: Optional[EditHistoryUrl] = Field(default=None, description="The object of the previous version of the document.")
+    token: Optional[StrictStr] = Field(default=None, description="The encrypted signature added to the parameter in the form of a token.", json_schema_extra={"examples": ["token"]})
+    url: Optional[StrictStr] = Field(description="The URL address of the current document version.", json_schema_extra={"examples": ["https://example.com/file.docx"]})
+    version: StrictInt = Field(description="The document version number.", json_schema_extra={"examples": [1]})
+    file_type: Optional[StrictStr] = Field(description="The document extension.", alias="fileType", json_schema_extra={"examples": ["docx"]})
     __properties: ClassVar[List[str]] = ["changesUrl", "key", "previous", "token", "url", "version", "fileType"]
 
     model_config = ConfigDict(

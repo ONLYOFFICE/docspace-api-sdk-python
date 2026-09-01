@@ -31,16 +31,16 @@ class EmployeeDto(BaseModel):
     """
     The user parameters.
     """ # noqa: E501
-    id: Optional[UUID] = Field(default=None, description="The user ID.")
-    display_name: Optional[StrictStr] = Field(default=None, description="The HTML-encoded user's display name formatted according to the default format for the current culture.", alias="displayName")
-    avatar: Optional[StrictStr] = Field(default=None, description="The user avatar.")
-    avatar_original: Optional[StrictStr] = Field(default=None, description="The user original size avatar.", alias="avatarOriginal")
-    avatar_max: Optional[StrictStr] = Field(default=None, description="The user maximum size avatar.", alias="avatarMax")
-    avatar_medium: Optional[StrictStr] = Field(default=None, description="The user medium size avatar.", alias="avatarMedium")
-    avatar_small: Optional[StrictStr] = Field(default=None, description="The user small size avatar.", alias="avatarSmall")
-    profile_url: Optional[StrictStr] = Field(default=None, description="The user profile URL.", alias="profileUrl")
-    has_avatar: Optional[StrictBool] = Field(default=None, description="Specifies if the user has an avatar or not.", alias="hasAvatar")
-    is_anonim: Optional[StrictBool] = Field(default=None, description="Specifies if the user is anonymous or not.", alias="isAnonim")
+    id: Optional[UUID] = Field(default=None, description="The user ID.", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000000"]})
+    display_name: Optional[StrictStr] = Field(default=None, description="The HTML-encoded user's display name formatted according to the default format for the current culture.", alias="displayName", json_schema_extra={"examples": ["Mike Zanyatski"]})
+    avatar: Optional[StrictStr] = Field(default=None, description="The user avatar.", json_schema_extra={"examples": ["https://example.com/avatar.jpg"]})
+    avatar_original: Optional[StrictStr] = Field(default=None, description="The user original size avatar.", alias="avatarOriginal", json_schema_extra={"examples": ["https://example.com/avatar_original.jpg"]})
+    avatar_max: Optional[StrictStr] = Field(default=None, description="The user maximum size avatar.", alias="avatarMax", json_schema_extra={"examples": ["https://example.com/avatar_max.jpg"]})
+    avatar_medium: Optional[StrictStr] = Field(default=None, description="The user medium size avatar.", alias="avatarMedium", json_schema_extra={"examples": ["https://example.com/avatar_medium.jpg"]})
+    avatar_small: Optional[StrictStr] = Field(default=None, description="The user small size avatar.", alias="avatarSmall", json_schema_extra={"examples": ["https://example.com/avatar_small.jpg"]})
+    profile_url: Optional[StrictStr] = Field(default=None, description="The user profile URL.", alias="profileUrl", json_schema_extra={"examples": ["https://example.com/profile/user123"]})
+    has_avatar: Optional[StrictBool] = Field(default=None, description="Specifies if the user has an avatar or not.", alias="hasAvatar", json_schema_extra={"examples": [True]})
+    is_anonim: Optional[StrictBool] = Field(default=None, description="Specifies if the user is anonymous or not.", alias="isAnonim", json_schema_extra={"examples": [False]})
     __properties: ClassVar[List[str]] = ["id", "displayName", "avatar", "avatarOriginal", "avatarMax", "avatarMedium", "avatarSmall", "profileUrl", "hasAvatar", "isAnonim"]
 
     model_config = ConfigDict(

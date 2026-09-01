@@ -30,11 +30,11 @@ class EmbeddedConfig(BaseModel):
     """
     The configuration parameters for the embedded document type.
     """ # noqa: E501
-    embed_url: Optional[StrictStr] = Field(default=None, description="The absolute URL to the document serving as a source file for the document embedded into the web page.", alias="embedUrl")
-    save_url: Optional[StrictStr] = Field(default=None, description="The absolute URL that will allow the document to be saved onto the user personal computer.", alias="saveUrl")
-    share_link_param: Optional[StrictStr] = Field(default=None, description="The shared URL parameter.", alias="shareLinkParam")
-    share_url: Optional[StrictStr] = Field(default=None, description="The absolute URL that will allow other users to share this document.", alias="shareUrl")
-    toolbar_docked: Optional[StrictStr] = Field(default=None, description="The place for the embedded viewer toolbar, can be either top or bottom.", alias="toolbarDocked")
+    embed_url: Optional[StrictStr] = Field(default=None, description="The absolute URL to the document serving as a source file for the document embedded into the web page.", alias="embedUrl", json_schema_extra={"examples": ["https://portal.example.com/files/editor?action=embedded&share=abc123"]})
+    save_url: Optional[StrictStr] = Field(default=None, description="The absolute URL that will allow the document to be saved onto the user personal computer.", alias="saveUrl", json_schema_extra={"examples": ["https://portal.example.com/files/filehandler?action=download&share=abc123"]})
+    share_link_param: Optional[StrictStr] = Field(default=None, description="The shared URL parameter.", alias="shareLinkParam", json_schema_extra={"examples": ["&share=abc123"]})
+    share_url: Optional[StrictStr] = Field(default=None, description="The absolute URL that will allow other users to share this document.", alias="shareUrl", json_schema_extra={"examples": ["https://portal.example.com/files/editor?action=view&share=abc123"]})
+    toolbar_docked: Optional[StrictStr] = Field(default=None, description="The place for the embedded viewer toolbar, can be either top or bottom.", alias="toolbarDocked", json_schema_extra={"examples": ["top"]})
     __properties: ClassVar[List[str]] = ["embedUrl", "saveUrl", "shareLinkParam", "shareUrl", "toolbarDocked"]
 
     model_config = ConfigDict(

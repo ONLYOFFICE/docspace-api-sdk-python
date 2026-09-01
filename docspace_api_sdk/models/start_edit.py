@@ -30,7 +30,7 @@ class StartEdit(BaseModel):
     """
     The parameters for starting file editing.
     """ # noqa: E501
-    editing_alone: Optional[StrictBool] = Field(default=None, description="Specifies whether to share the file with other users for editing or not.", alias="editingAlone")
+    editing_alone: Optional[StrictBool] = Field(default=None, description="Specifies whether to share the file with other users for editing or not.", alias="editingAlone", json_schema_extra={"examples": [False]})
     __properties: ClassVar[List[str]] = ["editingAlone"]
 
     model_config = ConfigDict(

@@ -30,8 +30,8 @@ class WhiteLabelItemPathDto(BaseModel):
     """
     The white label item path parameters.
     """ # noqa: E501
-    light: Optional[StrictStr] = Field(default=None, description="The path to the light theme logo.")
-    dark: Optional[StrictStr] = Field(default=None, description="The path to the dark theme logo.")
+    light: Optional[StrictStr] = Field(default=None, description="The path to the light theme logo.", json_schema_extra={"examples": ["/images/logo-light.png"]})
+    dark: Optional[StrictStr] = Field(default=None, description="The path to the dark theme logo.", json_schema_extra={"examples": ["/images/logo-dark.png"]})
     __properties: ClassVar[List[str]] = ["light", "dark"]
 
     model_config = ConfigDict(

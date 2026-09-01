@@ -41,20 +41,20 @@ class FileEntryDtoInteger(FileEntryBaseDto):
     The generic file entry information.
     """
 
-    id: Optional[StrictInt] = Field(default=None, description="The file entry ID.")
-    root_folder_id: Optional[StrictInt] = Field(default=None, description="The root folder ID of the file entry.", alias="rootFolderId")
-    origin_id: Optional[StrictInt] = Field(default=None, description="The origin ID of the file entry.", alias="originId")
-    origin_room_id: Optional[StrictInt] = Field(default=None, description="The origin room ID of the file entry.", alias="originRoomId")
-    origin_title: Optional[StrictStr] = Field(default=None, description="The origin title of the file entry.", alias="originTitle")
-    origin_room_title: Optional[StrictStr] = Field(default=None, description="The origin room title of the file entry.", alias="originRoomTitle")
-    can_share: Optional[StrictBool] = Field(default=None, description="Specifies if the file entry can be shared or not.", alias="canShare")
+    id: Optional[StrictInt] = Field(default=None, description="The file entry ID.", json_schema_extra={"examples": [10]})
+    root_folder_id: Optional[StrictInt] = Field(default=None, description="The root folder ID of the file entry.", alias="rootFolderId", json_schema_extra={"examples": [1]})
+    origin_id: Optional[StrictInt] = Field(default=None, description="The origin ID of the file entry.", alias="originId", json_schema_extra={"examples": [12]})
+    origin_room_id: Optional[StrictInt] = Field(default=None, description="The origin room ID of the file entry.", alias="originRoomId", json_schema_extra={"examples": [22]})
+    origin_title: Optional[StrictStr] = Field(default=None, description="The origin title of the file entry.", alias="originTitle", json_schema_extra={"examples": ["Original Title"]})
+    origin_room_title: Optional[StrictStr] = Field(default=None, description="The origin room title of the file entry.", alias="originRoomTitle", json_schema_extra={"examples": ["Original Room"]})
+    can_share: Optional[StrictBool] = Field(default=None, description="Specifies if the file entry can be shared or not.", alias="canShare", json_schema_extra={"examples": [True]})
     share_settings: Optional[FileEntryDtoIntegerAllOfShareSettings] = Field(default=None, alias="shareSettings")
     security: Optional[FileEntryDtoIntegerAllOfSecurity] = None
     available_share_rights: Optional[FileEntryDtoIntegerAllOfAvailableShareRights] = Field(default=None, alias="availableShareRights")
-    request_token: Optional[StrictStr] = Field(default=None, description="The request token of the file entry.", alias="requestToken")
-    external: Optional[StrictBool] = Field(default=None, description="Specifies if the folder can be accessed via an external link or not.")
-    expiration_date: Optional[ApiDateTime] = Field(default=None, alias="expirationDate")
-    is_link_expired: Optional[StrictBool] = Field(default=None, description="Indicates whether the shareable link associated with the file or folder has expired.", alias="isLinkExpired")
+    request_token: Optional[StrictStr] = Field(default=None, description="The request token of the file entry.", alias="requestToken", json_schema_extra={"examples": ["token-abc-123"]})
+    external: Optional[StrictBool] = Field(default=None, description="Specifies if the folder can be accessed via an external link or not.", json_schema_extra={"examples": [False]})
+    expiration_date: Optional[ApiDateTime] = Field(default=None, description="Represents the expiration date of the file entry.", alias="expirationDate")
+    is_link_expired: Optional[StrictBool] = Field(default=None, description="Indicates whether the shareable link associated with the file or folder has expired.", alias="isLinkExpired", json_schema_extra={"examples": [False]})
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -127,41 +127,6 @@ class FileEntryDtoInteger(FileEntryBaseDto):
         # override the default output from pydantic by calling `to_dict()` of expiration_date
         if self.expiration_date:
             _dict['expirationDate'] = self.expiration_date.to_dict()
-        # set to None if title (nullable) is None
-        # and model_fields_set contains the field
-        if self.title is None and "title" in self.model_fields_set:
-            _dict['title'] = None
-
-        # set to None if short_web_url (nullable) is None
-        # and model_fields_set contains the field
-        if self.short_web_url is None and "short_web_url" in self.model_fields_set:
-            _dict['shortWebUrl'] = None
-
-        # set to None if provider_item (nullable) is None
-        # and model_fields_set contains the field
-        if self.provider_item is None and "provider_item" in self.model_fields_set:
-            _dict['providerItem'] = None
-
-        # set to None if provider_key (nullable) is None
-        # and model_fields_set contains the field
-        if self.provider_key is None and "provider_key" in self.model_fields_set:
-            _dict['providerKey'] = None
-
-        # set to None if provider_id (nullable) is None
-        # and model_fields_set contains the field
-        if self.provider_id is None and "provider_id" in self.model_fields_set:
-            _dict['providerId'] = None
-
-        # set to None if order (nullable) is None
-        # and model_fields_set contains the field
-        if self.order is None and "order" in self.model_fields_set:
-            _dict['order'] = None
-
-        # set to None if is_favorite (nullable) is None
-        # and model_fields_set contains the field
-        if self.is_favorite is None and "is_favorite" in self.model_fields_set:
-            _dict['isFavorite'] = None
-
         # set to None if origin_title (nullable) is None
         # and model_fields_set contains the field
         if self.origin_title is None and "origin_title" in self.model_fields_set:

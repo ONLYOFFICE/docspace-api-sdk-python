@@ -35,16 +35,16 @@ class RoomLinkRequest(BaseModel):
     """
     The room link parameters.
     """ # noqa: E501
-    link_id: Optional[UUID] = Field(default=None, description="The room link ID.", alias="linkId")
-    access: Optional[FileShare] = None
-    expiration_date: Optional[ApiDateTime] = Field(default=None, alias="expirationDate")
-    internal: Optional[StrictBool] = Field(default=None, description="The link scope, whether it is internal or not.")
-    title: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The link name.")
-    link_type: Optional[LinkType] = Field(default=None, alias="linkType")
-    password: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The link password.")
-    deny_download: Optional[StrictBool] = Field(default=None, description="Specifies if downloading the file from the link is disabled or not.", alias="denyDownload")
-    max_use_count: Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]] = Field(default=None, description="The maximum number of times the invitation link can be used.", alias="maxUseCount")
-    current_use_count: Optional[StrictInt] = Field(default=None, description="The current number of times the invitation link has been used.", alias="currentUseCount")
+    link_id: Optional[UUID] = Field(default=None, description="The room link ID.", alias="linkId", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000000"]})
+    access: Optional[FileShare] = Field(default=None, description="The access rights type.")
+    expiration_date: Optional[ApiDateTime] = Field(default=None, description="The API date and time parameters.", alias="expirationDate")
+    internal: Optional[StrictBool] = Field(default=None, description="The link scope, whether it is internal or not.", json_schema_extra={"examples": [False]})
+    title: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The link name.", json_schema_extra={"examples": ["My Document"]})
+    link_type: Optional[LinkType] = Field(default=None, description="The link type.", alias="linkType")
+    password: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The link password.", json_schema_extra={"examples": ["doc_key_123"]})
+    deny_download: Optional[StrictBool] = Field(default=None, description="Specifies if downloading the file from the link is disabled or not.", alias="denyDownload", json_schema_extra={"examples": [False]})
+    max_use_count: Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]] = Field(default=None, description="The maximum number of times the invitation link can be used.", alias="maxUseCount", json_schema_extra={"examples": [25]})
+    current_use_count: Optional[StrictInt] = Field(default=None, description="The current number of times the invitation link has been used.", alias="currentUseCount", json_schema_extra={"examples": [0]})
     __properties: ClassVar[List[str]] = ["linkId", "access", "expirationDate", "internal", "title", "linkType", "password", "denyDownload", "maxUseCount", "currentUseCount"]
 
     model_config = ConfigDict(

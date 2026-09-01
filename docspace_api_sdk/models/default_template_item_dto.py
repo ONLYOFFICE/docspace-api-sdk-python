@@ -31,12 +31,12 @@ class DefaultTemplateItemDto(BaseModel):
     """
     Default template setting
     """ # noqa: E501
-    selected_file: Optional[StrictInt] = Field(default=None, description="File id to use as a default template", alias="selectedFile")
-    file_extension: Optional[StrictStr] = Field(description="Extension of a default template", alias="fileExtension")
-    file_title: Optional[StrictStr] = Field(default=None, description="Title of a default template", alias="fileTitle")
-    last_modified: Optional[datetime] = Field(default=None, description="Last modified date of a default template", alias="lastModified")
-    file_size: Optional[StrictInt] = Field(default=None, description="Filesize (in bytes) of a default template", alias="fileSize")
-    view_url: Optional[StrictStr] = Field(default=None, description="View url of a default template", alias="viewUrl")
+    selected_file: Optional[StrictInt] = Field(default=None, description="File id to use as a default template", alias="selectedFile", json_schema_extra={"examples": [123]})
+    file_extension: Optional[StrictStr] = Field(description="Extension of a default template", alias="fileExtension", json_schema_extra={"examples": [".docx"]})
+    file_title: Optional[StrictStr] = Field(default=None, description="Title of a default template", alias="fileTitle", json_schema_extra={"examples": ["Default Template"]})
+    last_modified: Optional[datetime] = Field(default=None, description="Last modified date of a default template", alias="lastModified", json_schema_extra={"examples": ["2025-01-01T00:00:00"]})
+    file_size: Optional[StrictInt] = Field(default=None, description="Filesize (in bytes) of a default template", alias="fileSize", json_schema_extra={"examples": [1024]})
+    view_url: Optional[StrictStr] = Field(default=None, description="View url of a default template", alias="viewUrl", json_schema_extra={"examples": ["http://localhost/template/view"]})
     __properties: ClassVar[List[str]] = ["selectedFile", "fileExtension", "fileTitle", "lastModified", "fileSize", "viewUrl"]
 
     model_config = ConfigDict(

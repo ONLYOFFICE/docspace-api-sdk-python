@@ -30,9 +30,9 @@ class UploadResultDto(BaseModel):
     """
     The upload result parameters.
     """ # noqa: E501
-    success: Optional[StrictBool] = Field(default=None, description="Specifies if the upload operation is successful or not.")
-    data: Optional[Any] = Field(default=None, description="The uploaded data.")
-    message: Optional[StrictStr] = Field(default=None, description="The message sent after the successful upload operation.")
+    success: Optional[StrictBool] = Field(default=None, description="Specifies if the upload operation is successful or not.", json_schema_extra={"examples": [True]})
+    data: Optional[Any] = None
+    message: Optional[StrictStr] = Field(default=None, description="The message sent after the successful upload operation.", json_schema_extra={"examples": ["File uploaded successfully"]})
     __properties: ClassVar[List[str]] = ["success", "data", "message"]
 
     model_config = ConfigDict(

@@ -32,10 +32,10 @@ class RoomDataLifetimeDto(BaseModel):
     """
     The room data lifetime information.
     """ # noqa: E501
-    delete_permanently: Optional[StrictBool] = Field(default=None, description="Specifies whether to permanently delete the room data or not.", alias="deletePermanently")
-    period: Optional[RoomDataLifetimePeriod] = None
-    value: Optional[Annotated[int, Field(le=999, strict=True, ge=1)]] = Field(default=None, description="Specifies the time period value of the room data lifetime.")
-    enabled: Optional[StrictBool] = Field(default=None, description="Specifies whether the room data lifetime setting is enabled or not.")
+    delete_permanently: Optional[StrictBool] = Field(default=None, description="Specifies whether to permanently delete the room data or not.", alias="deletePermanently", json_schema_extra={"examples": [True]})
+    period: Optional[RoomDataLifetimePeriod] = Field(default=None, description="Specifies the time period type of the room data lifetime.")
+    value: Optional[Annotated[int, Field(le=999, strict=True, ge=1)]] = Field(default=None, description="Specifies the time period value of the room data lifetime.", json_schema_extra={"examples": [33]})
+    enabled: Optional[StrictBool] = Field(default=None, description="Specifies whether the room data lifetime setting is enabled or not.", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["deletePermanently", "period", "value", "enabled"]
 
     model_config = ConfigDict(

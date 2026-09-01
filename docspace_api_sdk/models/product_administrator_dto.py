@@ -31,9 +31,9 @@ class ProductAdministratorDto(BaseModel):
     """
     The product administrator parameters.
     """ # noqa: E501
-    product_id: UUID = Field(description="The product ID.", alias="productId")
-    user_id: UUID = Field(description="The user unique identifier.", alias="userId")
-    administrator: StrictBool = Field(description="Indicates whether the user has administrator privileges for the product.")
+    product_id: UUID = Field(description="The product ID.", alias="productId", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000000"]})
+    user_id: UUID = Field(description="The user unique identifier.", alias="userId", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000000"]})
+    administrator: StrictBool = Field(description="Indicates whether the user has administrator privileges for the product.", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["productId", "userId", "administrator"]
 
     model_config = ConfigDict(

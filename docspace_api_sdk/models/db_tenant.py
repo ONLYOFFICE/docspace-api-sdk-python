@@ -37,27 +37,27 @@ class DbTenant(BaseModel):
     """
     The database tenant parameters.
     """ # noqa: E501
-    id: Optional[StrictInt] = Field(default=None, description="The tenant ID.")
-    name: Optional[Annotated[str, Field(strict=True, max_length=255)]] = Field(default=None, description="The tenant name.")
-    alias: Optional[Annotated[str, Field(strict=True, max_length=100)]] = Field(default=None, description="The tenant alias.")
-    mapped_domain: Optional[Annotated[str, Field(strict=True, max_length=100)]] = Field(default=None, description="Mapped domain", alias="mappedDomain")
-    version: Optional[StrictInt] = Field(default=None, description="The tenant version.")
-    version_changed: Optional[datetime] = Field(default=None, description="The Version_changed field.", alias="version_Changed")
-    version_changed: Optional[datetime] = Field(default=None, description="The date and time when the version was changed.", alias="versionChanged")
-    language: Optional[Annotated[str, Field(strict=True, max_length=10)]] = Field(default=None, description="The tenant language.")
-    time_zone: Optional[Annotated[str, Field(strict=True, max_length=50)]] = Field(default=None, description="The tenant time zone.", alias="timeZone")
-    trusted_domains_raw: Optional[Annotated[str, Field(strict=True, max_length=1024)]] = Field(default=None, description="The tenant trusted domains raw.", alias="trustedDomainsRaw")
-    trusted_domains_enabled: Optional[TenantTrustedDomainsType] = Field(default=None, alias="trustedDomainsEnabled")
-    status: Optional[TenantStatus] = None
-    status_changed: Optional[datetime] = Field(default=None, description="The date and time when the tenant status was changed.", alias="statusChanged")
-    status_changed_hack: Optional[datetime] = Field(default=None, description="The hacked date and time when the tenant status was changed.", alias="statusChangedHack")
-    creation_date_time: Optional[datetime] = Field(default=None, description="The tenant creation date.", alias="creationDateTime")
-    owner_id: Optional[UUID] = Field(default=None, description="The tenant owner ID.", alias="ownerId")
-    payment_id: Optional[Annotated[str, Field(strict=True, max_length=38)]] = Field(default=None, description="The tenant payment ID.", alias="paymentId")
-    industry: Optional[TenantIndustry] = None
-    last_modified: Optional[datetime] = Field(default=None, description="The date and time when the tenant was last modified.", alias="lastModified")
-    calls: Optional[StrictBool] = Field(default=None, description="Specifies if the calls are available for the current tenant or not.")
-    partner: Optional[DbTenantPartner] = None
+    id: Optional[StrictInt] = Field(default=None, description="The tenant ID.", json_schema_extra={"examples": [1]})
+    name: Optional[Annotated[str, Field(strict=True, max_length=255)]] = Field(default=None, description="The tenant name.", json_schema_extra={"examples": ["Tenant"]})
+    alias: Optional[Annotated[str, Field(strict=True, max_length=100)]] = Field(default=None, description="The tenant alias.", json_schema_extra={"examples": ["tenant"]})
+    mapped_domain: Optional[Annotated[str, Field(strict=True, max_length=100)]] = Field(default=None, description="Mapped domain", alias="mappedDomain", json_schema_extra={"examples": ["tenant.example.com"]})
+    version: Optional[StrictInt] = Field(default=None, description="The tenant version.", json_schema_extra={"examples": [5]})
+    version_changed: Optional[datetime] = Field(default=None, description="The Version_changed field.", alias="version_Changed", json_schema_extra={"examples": ["2025-01-01T10:00:00Z"]})
+    version_changed: Optional[datetime] = Field(default=None, description="The date and time when the version was changed.", alias="versionChanged", json_schema_extra={"examples": ["2025-01-01T10:00:00Z"]})
+    language: Optional[Annotated[str, Field(strict=True, max_length=10)]] = Field(default=None, description="The tenant language.", json_schema_extra={"examples": ["en-US"]})
+    time_zone: Optional[Annotated[str, Field(strict=True, max_length=50)]] = Field(default=None, description="The tenant time zone.", alias="timeZone", json_schema_extra={"examples": ["UTC"]})
+    trusted_domains_raw: Optional[Annotated[str, Field(strict=True, max_length=1024)]] = Field(default=None, description="The tenant trusted domains raw.", alias="trustedDomainsRaw", json_schema_extra={"examples": ["tenant.exapmle.com, example.com"]})
+    trusted_domains_enabled: Optional[TenantTrustedDomainsType] = Field(default=None, description="The type of the tenant trusted domains.", alias="trustedDomainsEnabled")
+    status: Optional[TenantStatus] = Field(default=None, description="The tenant status.")
+    status_changed: Optional[datetime] = Field(default=None, description="The date and time when the tenant status was changed.", alias="statusChanged", json_schema_extra={"examples": ["2025-01-01T12:00:00Z"]})
+    status_changed_hack: Optional[datetime] = Field(default=None, description="The hacked date and time when the tenant status was changed.", alias="statusChangedHack", json_schema_extra={"examples": ["2025-01-01T12:00:00Z"]})
+    creation_date_time: Optional[datetime] = Field(default=None, description="The tenant creation date.", alias="creationDateTime", json_schema_extra={"examples": ["2025-01-01T12:00:00Z"]})
+    owner_id: Optional[UUID] = Field(default=None, description="The tenant owner ID.", alias="ownerId", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000000"]})
+    payment_id: Optional[Annotated[str, Field(strict=True, max_length=38)]] = Field(default=None, description="The tenant payment ID.", alias="paymentId", json_schema_extra={"examples": ["pay_1234567890"]})
+    industry: Optional[TenantIndustry] = Field(default=None, description="The tenant industry.")
+    last_modified: Optional[datetime] = Field(default=None, description="The date and time when the tenant was last modified.", alias="lastModified", json_schema_extra={"examples": ["2025-02-01T08:30:00Z"]})
+    calls: Optional[StrictBool] = Field(default=None, description="Specifies if the calls are available for the current tenant or not.", json_schema_extra={"examples": [True]})
+    partner: Optional[DbTenantPartner] = Field(default=None, description="The database tenant partner parameters.")
     __properties: ClassVar[List[str]] = ["id", "name", "alias", "mappedDomain", "version", "version_Changed", "versionChanged", "language", "timeZone", "trustedDomainsRaw", "trustedDomainsEnabled", "status", "statusChanged", "statusChangedHack", "creationDateTime", "ownerId", "paymentId", "industry", "lastModified", "calls", "partner"]
 
     model_config = ConfigDict(

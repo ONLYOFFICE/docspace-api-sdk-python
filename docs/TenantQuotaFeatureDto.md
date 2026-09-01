@@ -8,9 +8,9 @@ Name | Type | Description | Notes
 **id** | **str** | The ID of the tenant quota feature. | [optional] 
 **title** | **str** | The title of the tenant quota feature. | [optional] 
 **image** | **str** | The image URL of the tenant quota feature. | [optional] 
-**value** | **object** | The value of the tenant quota feature. | [optional] 
+**value** | **object** |  | [optional] 
 **type** | **str** | The type of the tenant quota feature. | [optional] 
-**used** | [**FeatureUsedDto**](FeatureUsedDto.md) |  | [optional] 
+**used** | [**FeatureUsedDto**](FeatureUsedDto.md) | The used space parameters of the tenant quota feature. | [optional] 
 **price_title** | **str** | The price title of the tenant quota feature. | [optional] 
 
 ## Example

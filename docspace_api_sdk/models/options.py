@@ -21,7 +21,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List, Optional
 from docspace_api_sdk.models.watermark_on_draw import WatermarkOnDraw
 from typing import Optional, Set
@@ -31,7 +31,7 @@ class Options(BaseModel):
     """
     The document options.
     """ # noqa: E501
-    watermark_on_draw: Optional[WatermarkOnDraw] = None
+    watermark_on_draw: Optional[WatermarkOnDraw] = Field(default=None, description="The document watermark parameters.")
     __properties: ClassVar[List[str]] = ["watermark_on_draw"]
 
     model_config = ConfigDict(

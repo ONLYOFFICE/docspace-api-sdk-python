@@ -37,24 +37,24 @@ class AuditEventDto(BaseModel):
     """
     The audit event parameters.
     """ # noqa: E501
-    id: Optional[StrictInt] = Field(default=None, description="The audit event ID.")
-    var_date: Optional[ApiDateTime] = Field(default=None, alias="date")
-    user: Optional[StrictStr] = Field(default=None, description="The name of the user who triggered the audit event.")
-    user_id: Optional[UUID] = Field(default=None, description="The ID of the user who triggered the audit event.", alias="userId")
-    action: Optional[StrictStr] = Field(default=None, description="The audit event action.")
-    action_id: Optional[MessageAction] = Field(default=None, alias="actionId")
-    ip: Optional[StrictStr] = Field(default=None, description="The audit event IP.")
-    country: Optional[StrictStr] = Field(default=None, description="The audit event country.")
-    city: Optional[StrictStr] = Field(default=None, description="The audit event city.")
-    browser: Optional[StrictStr] = Field(default=None, description="The audit event browser.")
-    platform: Optional[StrictStr] = Field(default=None, description="The audit event platform.")
-    page: Optional[StrictStr] = Field(default=None, description="The audit event page.")
-    action_type: Optional[ActionType] = Field(default=None, alias="actionType")
-    product: Optional[ProductType] = None
-    location: Optional[LocationType] = None
-    target: Optional[List[StrictStr]] = Field(default=None, description="The list of target objects affected by the audit event (e.g., document ID, user account).")
-    entries: Optional[List[EntryType]] = Field(default=None, description="The list of audit entry types (e.g., Folder, User, File).")
-    context: Optional[StrictStr] = Field(default=None, description="The audit event context.")
+    id: Optional[StrictInt] = Field(default=None, description="The audit event ID.", json_schema_extra={"examples": [1]})
+    var_date: Optional[ApiDateTime] = Field(default=None, description="The API date and time parameters.", alias="date")
+    user: Optional[StrictStr] = Field(default=None, description="The name of the user who triggered the audit event.", json_schema_extra={"examples": ["John Doe"]})
+    user_id: Optional[UUID] = Field(default=None, description="The ID of the user who triggered the audit event.", alias="userId", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000001"]})
+    action: Optional[StrictStr] = Field(default=None, description="The audit event action.", json_schema_extra={"examples": ["User logged in"]})
+    action_id: Optional[MessageAction] = Field(default=None, description="The event action ID.", alias="actionId")
+    ip: Optional[StrictStr] = Field(default=None, description="The audit event IP.", json_schema_extra={"examples": ["192.0.2.1"]})
+    country: Optional[StrictStr] = Field(default=None, description="The audit event country.", json_schema_extra={"examples": ["United States"]})
+    city: Optional[StrictStr] = Field(default=None, description="The audit event city.", json_schema_extra={"examples": ["New York"]})
+    browser: Optional[StrictStr] = Field(default=None, description="The audit event browser.", json_schema_extra={"examples": ["Chrome 120.0"]})
+    platform: Optional[StrictStr] = Field(default=None, description="The audit event platform.", json_schema_extra={"examples": ["Windows"]})
+    page: Optional[StrictStr] = Field(default=None, description="The audit event page.", json_schema_extra={"examples": ["/rooms/shared"]})
+    action_type: Optional[ActionType] = Field(default=None, description="The type of action performed in the audit event (e.g., Create, Update, Delete).", alias="actionType")
+    product: Optional[ProductType] = Field(default=None, description="The type of product related to the audit event.")
+    location: Optional[LocationType] = Field(default=None, description="The location where the audit event occurred.")
+    target: Optional[List[StrictStr]] = Field(default=None, description="The list of target objects affected by the audit event (e.g., document ID, user account).", json_schema_extra={"examples": [["item1", "item2"]]})
+    entries: Optional[List[EntryType]] = Field(default=None, description="The list of audit entry types (e.g., Folder, User, File).", json_schema_extra={"examples": [["File", "Folder"]]})
+    context: Optional[StrictStr] = Field(default=None, description="The audit event context.", json_schema_extra={"examples": ["Security settings updated"]})
     __properties: ClassVar[List[str]] = ["id", "date", "user", "userId", "action", "actionId", "ip", "country", "city", "browser", "platform", "page", "actionType", "product", "location", "target", "entries", "context"]
 
     model_config = ConfigDict(

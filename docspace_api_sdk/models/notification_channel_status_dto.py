@@ -31,7 +31,7 @@ class NotificationChannelStatusDto(BaseModel):
     """
     The notification channel settings.
     """ # noqa: E501
-    channels: Optional[List[NotificationChannelDto]] = Field(default=None, description="The list of notification channels.")
+    channels: Optional[List[NotificationChannelDto]] = Field(default=None, description="The list of notification channels.", json_schema_extra={"examples": [[{"name": "email", "isActive": True}]]})
     __properties: ClassVar[List[str]] = ["channels"]
 
     model_config = ConfigDict(

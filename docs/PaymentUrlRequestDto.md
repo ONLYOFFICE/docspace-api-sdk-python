@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **back_url** | **str** | The URL where the user will be redirected after payment cancellation. | 
 **success_url** | **str** | The URL where the user will be redirected after successful payment. | 
-**quantity** | **Dict[str, int]** | The payment quantity. | [optional] 
+**quantity** | **Dict[str, int]** | The payment quantity. | 
 
 ## Example
 

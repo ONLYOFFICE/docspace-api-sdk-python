@@ -33,11 +33,11 @@ class BackupScheduleDto(BaseModel):
     """
     The backup schedule parameters.
     """ # noqa: E501
-    storage_type: Optional[BackupStorageType] = Field(default=None, alias="storageType")
-    storage_params: Optional[List[ItemKeyValuePairObjectObject]] = Field(default=None, description="The backup storage parameters.", alias="storageParams")
-    backups_stored: Optional[StrictInt] = Field(default=None, description="The maximum number of the stored backup copies.", alias="backupsStored")
-    cron_params: Optional[Cron] = Field(default=None, alias="cronParams")
-    dump: Optional[StrictBool] = Field(default=None, description="Specifies if a dump will be created or not.")
+    storage_type: Optional[BackupStorageType] = Field(default=None, description="The backup storage type.", alias="storageType")
+    storage_params: Optional[List[ItemKeyValuePairObjectObject]] = Field(default=None, description="The backup storage parameters.", alias="storageParams", json_schema_extra={"examples": [[{"key": "path", "value": "/backup"}]]})
+    backups_stored: Optional[StrictInt] = Field(default=None, description="The maximum number of the stored backup copies.", alias="backupsStored", json_schema_extra={"examples": [5]})
+    cron_params: Optional[Cron] = Field(default=None, description="The backup cron parameters.", alias="cronParams")
+    dump: Optional[StrictBool] = Field(default=None, description="Specifies if a dump will be created or not.", json_schema_extra={"examples": [False]})
     __properties: ClassVar[List[str]] = ["storageType", "storageParams", "backupsStored", "cronParams", "dump"]
 
     model_config = ConfigDict(

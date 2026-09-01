@@ -4,29 +4,34 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_audit_trail_report**](#create_audit_trail_report) | **POST** /api/2.0/security/audit/events/report | Generate the audit trail report
+[**create_audit_trail_report**](#create_audit_trail_report) | **POST** /api/2.0/security/audit/events/report | Start the audit trail report generation
 [**get_audit_events_by_filter**](#get_audit_events_by_filter) | **GET** /api/2.0/security/audit/events/filter | Get filtered audit trail data
 [**get_audit_settings**](#get_audit_settings) | **GET** /api/2.0/security/audit/settings/lifetime | Get the audit trail settings
 [**get_audit_trail_mappers**](#get_audit_trail_mappers) | **GET** /api/2.0/security/audit/mappers | Get audit trail mappers
+[**get_audit_trail_report**](#get_audit_trail_report) | **GET** /api/2.0/security/audit/events/report | Get the audit trail report generation status
 [**get_audit_trail_types**](#get_audit_trail_types) | **GET** /api/2.0/security/audit/types | Get audit trail types
 [**get_last_audit_events**](#get_last_audit_events) | **GET** /api/2.0/security/audit/events/last | Get audit trail data
 [**set_audit_settings**](#set_audit_settings) | **POST** /api/2.0/security/audit/settings/lifetime | Set the audit trail settings
+[**terminate_audit_trail_report**](#terminate_audit_trail_report) | **DELETE** /api/2.0/security/audit/events/report | Terminate the audit trail report generation
 
 
 # **create_audit_trail_report**
-> StringWrapper create_audit_trail_report()
+> DocumentBuilderTaskWrapper create_audit_trail_report(format=format)
 
-Generates the audit trail report.
+Starts generating the audit trail report (XLSX by default, or CSV) and saves it to My documents.
 
 For more information, see [api.onlyoffice.com]().
 
 ### Parameters
 
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **format** | [**AuditReportFormat**](.md)| The output file format of the report. Defaults to XLSX. | [optional] 
 
 ### Return type
 
-[**StringWrapper**](StringWrapper.md)
+[**DocumentBuilderTaskWrapper**](DocumentBuilderTaskWrapper.md)
 
 ### Authorization
 
@@ -37,7 +42,8 @@ This endpoint does not need any parameter.
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.string_wrapper import StringWrapper
+from docspace_api_sdk.models.audit_report_format import AuditReportFormat
+from docspace_api_sdk.models.document_builder_task_wrapper import DocumentBuilderTaskWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -58,10 +64,11 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.AuditTrailDataApi(api_client)
+    format = docspace_api_sdk.AuditReportFormat() # AuditReportFormat | The output file format of the report. Defaults to XLSX. (optional)
 
     try:
-        # Generate the audit trail report
-        api_response = api_instance.create_audit_trail_report()
+        # Start the audit trail report generation
+        api_response = api_instance.create_audit_trail_report(format=format)
         print("The response of AuditTrailDataApi->create_audit_trail_report:\n")
         pprint(api_response)
     except Exception as e:
@@ -79,7 +86,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | URL to the xlsx report file |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
+**200** | Operation execution status |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
 **402** | Your pricing plan does not support this option |  -  |
 **403** | You don't have enough permission to create |  -  |
 **401** | Unauthorized |  -  |
@@ -351,6 +358,82 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **get_audit_trail_report**
+> DocumentBuilderTaskWrapper get_audit_trail_report()
+
+Returns the status of generating the audit trail report.
+
+For more information, see [api.onlyoffice.com]().
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**DocumentBuilderTaskWrapper**](DocumentBuilderTaskWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+
+```python
+import docspace_api_sdk
+from docspace_api_sdk.models.document_builder_task_wrapper import DocumentBuilderTaskWrapper
+from docspace_api_sdk.rest import ApiException
+from pprint import pprint
+
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+# Enter a context with an instance of the API client
+with docspace_api_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace_api_sdk.AuditTrailDataApi(api_client)
+
+    try:
+        # Get the audit trail report generation status
+        api_response = api_instance.get_audit_trail_report()
+        print("The response of AuditTrailDataApi->get_audit_trail_report:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AuditTrailDataApi->get_audit_trail_report: %s\n" % e)
+```
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Operation execution status |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
+**402** | Your pricing plan does not support this option |  -  |
+**403** | No permissions to perform this action |  -  |
+**401** | Unauthorized |  -  |
+**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
+**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **get_audit_trail_types**
 > ObjectWrapper get_audit_trail_types()
 
@@ -574,6 +657,79 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 |-------------|-------------|------------------|
 **200** | Audit trail settings |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
 **400** | Exception in LoginHistoryLifeTime or AuditTrailLifeTime |  -  |
+**402** | Your pricing plan does not support this option |  -  |
+**403** | No permissions to perform this action |  -  |
+**401** | Unauthorized |  -  |
+**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
+**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **terminate_audit_trail_report**
+> terminate_audit_trail_report()
+
+Terminates generating the audit trail report.
+
+For more information, see [api.onlyoffice.com]().
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+
+```python
+import docspace_api_sdk
+from docspace_api_sdk.rest import ApiException
+from pprint import pprint
+
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+# Enter a context with an instance of the API client
+with docspace_api_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace_api_sdk.AuditTrailDataApi(api_client)
+
+    try:
+        # Terminate the audit trail report generation
+        api_instance.terminate_audit_trail_report()
+    except Exception as e:
+        print("Exception when calling AuditTrailDataApi->terminate_audit_trail_report: %s\n" % e)
+```
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Ok |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
 **402** | Your pricing plan does not support this option |  -  |
 **403** | No permissions to perform this action |  -  |
 **401** | Unauthorized |  -  |

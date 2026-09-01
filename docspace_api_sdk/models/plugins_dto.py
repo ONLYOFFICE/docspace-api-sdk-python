@@ -30,9 +30,9 @@ class PluginsDto(BaseModel):
     """
     The plugins parameters.
     """ # noqa: E501
-    enabled: Optional[StrictBool] = Field(default=None, description="Specifies if the plugins are enabled or not.")
-    upload: Optional[StrictBool] = Field(default=None, description="Specifies if the plugins can be uploaded or not.")
-    delete: Optional[StrictBool] = Field(default=None, description="Specifies if the plugins can be deleted or not.")
+    enabled: Optional[StrictBool] = Field(default=None, description="Specifies if the plugins are enabled or not.", json_schema_extra={"examples": [True]})
+    upload: Optional[StrictBool] = Field(default=None, description="Specifies if the plugins can be uploaded or not.", json_schema_extra={"examples": [True]})
+    delete: Optional[StrictBool] = Field(default=None, description="Specifies if the plugins can be deleted or not.", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["enabled", "upload", "delete"]
 
     model_config = ConfigDict(

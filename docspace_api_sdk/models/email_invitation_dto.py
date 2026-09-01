@@ -31,7 +31,7 @@ class EmailInvitationDto(BaseModel):
     """
     The email invitation parameters.
     """ # noqa: E501
-    email: Optional[Annotated[str, Field(strict=True, max_length=255)]] = Field(default=None, description="The email address.")
+    email: Optional[Annotated[str, Field(strict=True, max_length=255)]] = Field(default=None, description="The email address.", json_schema_extra={"examples": ["user@example.com"]})
     __properties: ClassVar[List[str]] = ["email"]
 
     model_config = ConfigDict(

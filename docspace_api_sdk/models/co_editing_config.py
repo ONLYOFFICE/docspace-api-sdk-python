@@ -31,9 +31,9 @@ class CoEditingConfig(BaseModel):
     """
     The co-editing configuration parameters.
     """ # noqa: E501
-    change: Optional[StrictBool] = Field(default=None, description="Specifies if the co-editing mode can be changed in the editor interface or not.")
-    fast: Optional[StrictBool] = Field(default=None, description="Specifies if the co-editing mode is fast.")
-    mode: Optional[CoEditingConfigMode] = None
+    change: Optional[StrictBool] = Field(default=None, description="Specifies if the co-editing mode can be changed in the editor interface or not.", json_schema_extra={"examples": [True]})
+    fast: Optional[StrictBool] = Field(default=None, description="Specifies if the co-editing mode is fast.", json_schema_extra={"examples": [False]})
+    mode: Optional[CoEditingConfigMode] = Field(default=None, description="The co-editing mode (fast or strict).")
     __properties: ClassVar[List[str]] = ["change", "fast", "mode"]
 
     model_config = ConfigDict(

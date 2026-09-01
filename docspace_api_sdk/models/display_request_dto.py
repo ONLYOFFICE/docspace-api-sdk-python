@@ -30,7 +30,7 @@ class DisplayRequestDto(BaseModel):
     """
     The settings request parameters.
     """ # noqa: E501
-    set: Optional[StrictBool] = Field(default=None, description="Specifies whether to set the specified settings or not.")
+    set: Optional[StrictBool] = Field(default=None, description="Specifies whether to set the specified settings or not.", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["set"]
 
     model_config = ConfigDict(

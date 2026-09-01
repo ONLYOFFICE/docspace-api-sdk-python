@@ -30,9 +30,9 @@ class TfaConfirmDataDto(BaseModel):
     """
     The TFA confirmation data.
     """ # noqa: E501
-    url: Optional[StrictStr] = Field(default=None, description="The confirmation URL.")
-    cookie_name: Optional[StrictStr] = Field(default=None, description="The confirmation cookie name.", alias="cookieName")
-    cookie_value: Optional[StrictStr] = Field(default=None, description="The confirmation cookie value.", alias="cookieValue")
+    url: Optional[StrictStr] = Field(default=None, description="The confirmation URL.", json_schema_extra={"examples": ["https://example.com/confirm?type=TfaAuth&key=abc123"]})
+    cookie_name: Optional[StrictStr] = Field(default=None, description="The confirmation cookie name.", alias="cookieName", json_schema_extra={"examples": ["asc_confirm_key_TfaAuth"]})
+    cookie_value: Optional[StrictStr] = Field(default=None, description="The confirmation cookie value.", alias="cookieValue", json_schema_extra={"examples": ["1234567890.abcdef"]})
     __properties: ClassVar[List[str]] = ["url", "cookieName", "cookieValue"]
 
     model_config = ConfigDict(

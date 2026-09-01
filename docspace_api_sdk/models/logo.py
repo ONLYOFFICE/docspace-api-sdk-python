@@ -31,12 +31,12 @@ class Logo(BaseModel):
     """
     The room logo information.
     """ # noqa: E501
-    original: Optional[StrictStr] = Field(description="The original logo.")
-    large: Optional[StrictStr] = Field(description="The large logo.")
-    medium: Optional[StrictStr] = Field(description="The medium logo.")
-    small: Optional[StrictStr] = Field(description="The small logo.")
-    color: Optional[StrictStr] = Field(default=None, description="The logo color.")
-    cover: Optional[LogoCover] = None
+    original: Optional[StrictStr] = Field(description="The original logo.", json_schema_extra={"examples": ["https://portal.example.com/logo/original.png"]})
+    large: Optional[StrictStr] = Field(description="The large logo.", json_schema_extra={"examples": ["https://portal.example.com/logo/large.png"]})
+    medium: Optional[StrictStr] = Field(description="The medium logo.", json_schema_extra={"examples": ["https://portal.example.com/logo/medium.png"]})
+    small: Optional[StrictStr] = Field(description="The small logo.", json_schema_extra={"examples": ["https://portal.example.com/logo/small.png"]})
+    color: Optional[StrictStr] = Field(default=None, description="The logo color.", json_schema_extra={"examples": ["#4781D1"]})
+    cover: Optional[LogoCover] = Field(default=None, description="The logo cover.")
     __properties: ClassVar[List[str]] = ["original", "large", "medium", "small", "color", "cover"]
 
     model_config = ConfigDict(

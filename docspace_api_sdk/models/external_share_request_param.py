@@ -30,7 +30,7 @@ class ExternalShareRequestParam(BaseModel):
     """
     The external data parameters.
     """ # noqa: E501
-    password: Optional[StrictStr] = Field(default=None, description="The password to share external data.")
+    password: Optional[StrictStr] = Field(default=None, description="The password to share external data.", json_schema_extra={"examples": ["p@ssw0rd"]})
     __properties: ClassVar[List[str]] = ["password"]
 
     model_config = ConfigDict(

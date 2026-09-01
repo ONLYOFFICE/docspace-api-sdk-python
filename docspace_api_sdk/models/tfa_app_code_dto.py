@@ -30,8 +30,8 @@ class TfaAppCodeDto(BaseModel):
     """
     The TFA app code.
     """ # noqa: E501
-    is_used: Optional[StrictBool] = Field(default=None, description="The TFA app code usage status.", alias="isUsed")
-    code: Optional[StrictStr] = Field(default=None, description="The TFA app code.")
+    is_used: Optional[StrictBool] = Field(default=None, description="The TFA app code usage status.", alias="isUsed", json_schema_extra={"examples": [True]})
+    code: Optional[StrictStr] = Field(default=None, description="The TFA app code.", json_schema_extra={"examples": ["123456"]})
     __properties: ClassVar[List[str]] = ["isUsed", "code"]
 
     model_config = ConfigDict(

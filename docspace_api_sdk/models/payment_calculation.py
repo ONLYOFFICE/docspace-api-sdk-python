@@ -30,10 +30,10 @@ class PaymentCalculation(BaseModel):
     """
     The parameters of the calculated payment amount.
     """ # noqa: E501
-    operation_id: Optional[StrictInt] = Field(default=None, description="The operation unique identifier.", alias="operationId")
-    amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The calculated payment amount.")
-    currency: Optional[StrictStr] = Field(default=None, description="The three-character ISO 4217 currency symbol used for the payment calculation.")
-    quantity: Optional[StrictInt] = Field(default=None, description="The quantity associated with the payment calculation.")
+    operation_id: Optional[StrictInt] = Field(default=None, description="The operation unique identifier.", alias="operationId", json_schema_extra={"examples": [123456789]})
+    amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The calculated payment amount.", json_schema_extra={"examples": [10.0]})
+    currency: Optional[StrictStr] = Field(default=None, description="The three-character ISO 4217 currency symbol used for the payment calculation.", json_schema_extra={"examples": ["USD"]})
+    quantity: Optional[StrictInt] = Field(default=None, description="The quantity associated with the payment calculation.", json_schema_extra={"examples": [1]})
     __properties: ClassVar[List[str]] = ["operationId", "amount", "currency", "quantity"]
 
     model_config = ConfigDict(

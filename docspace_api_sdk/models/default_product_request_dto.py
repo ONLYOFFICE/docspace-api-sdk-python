@@ -31,7 +31,7 @@ class DefaultProductRequestDto(BaseModel):
     """
     The request parameters for setting the default product configuration.
     """ # noqa: E501
-    default_folder_type: FolderType = Field(alias="defaultFolderType")
+    default_folder_type: FolderType = Field(description="The folder type.", alias="defaultFolderType")
     __properties: ClassVar[List[str]] = ["defaultFolderType"]
 
     model_config = ConfigDict(

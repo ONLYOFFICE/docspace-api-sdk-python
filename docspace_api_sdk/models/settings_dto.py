@@ -42,52 +42,53 @@ class SettingsDto(BaseModel):
     """
     The settings information.
     """ # noqa: E501
-    timezone: Optional[StrictStr] = Field(default=None, description="The time zone.")
-    trusted_domains: Optional[List[StrictStr]] = Field(default=None, description="The list of the trusted domains.", alias="trustedDomains")
-    trusted_domains_type: Optional[TenantTrustedDomainsType] = Field(default=None, alias="trustedDomainsType")
-    culture: Optional[StrictStr] = Field(description="The language.")
-    utc_offset: Optional[StrictStr] = Field(default=None, description="The UTC offset in the TimeSpan format.", alias="utcOffset")
-    utc_hours_offset: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The UTC offset in hours.", alias="utcHoursOffset")
-    greeting_settings: Optional[StrictStr] = Field(default=None, description="The greeting settings.", alias="greetingSettings")
-    owner_id: Optional[UUID] = Field(default=None, description="The owner ID.", alias="ownerId")
-    name_schema_id: Optional[StrictStr] = Field(default=None, description="The team template ID.", alias="nameSchemaId")
-    enabled_join: Optional[StrictBool] = Field(default=None, description="Specifies if a user can join the portal or not.", alias="enabledJoin")
-    enable_adm_mess: Optional[StrictBool] = Field(default=None, description="Specifies if a user can send a message to the administrator when accessing the DocSpace portal or not.", alias="enableAdmMess")
-    thirdparty_enable: Optional[StrictBool] = Field(default=None, description="Specifies if a user can connect third-party providers to the portal or not.", alias="thirdpartyEnable")
-    doc_space: Optional[StrictBool] = Field(default=None, description="Specifies if this portal is a DocSpace portal or not.", alias="docSpace")
-    standalone: Optional[StrictBool] = Field(default=None, description="Indicates whether the system is running in standalone mode.")
-    is_ami: Optional[StrictBool] = Field(default=None, description="Specifies if this portal is the AMI instance or not.", alias="isAmi")
-    base_domain: Optional[StrictStr] = Field(description="The base domain.", alias="baseDomain")
-    wizard_token: Optional[StrictStr] = Field(default=None, description="The wizard token.", alias="wizardToken")
-    password_hash: Optional[PasswordHasher] = Field(default=None, alias="passwordHash")
-    firebase: Optional[FirebaseDto] = None
-    version: Optional[StrictStr] = Field(default=None, description="The portal version.")
-    recaptcha_type: Optional[RecaptchaType] = Field(default=None, alias="recaptchaType")
-    recaptcha_public_key: Optional[StrictStr] = Field(default=None, description="The ReCAPTCHA public key.", alias="recaptchaPublicKey")
-    debug_info: Optional[StrictBool] = Field(default=None, description="Specifies if the debug information will be sent or not.", alias="debugInfo")
-    socket_url: Optional[StrictStr] = Field(default=None, description="The socket URL.", alias="socketUrl")
-    tenant_status: Optional[TenantStatus] = Field(default=None, alias="tenantStatus")
-    tenant_alias: Optional[StrictStr] = Field(default=None, description="The tenant alias.", alias="tenantAlias")
-    display_about: Optional[StrictBool] = Field(default=None, description="Specifies whether to display the About portal section.", alias="displayAbout")
-    domain_validator: Optional[TenantDomainValidator] = Field(default=None, alias="domainValidator")
-    zendesk_key: Optional[StrictStr] = Field(default=None, description="The Zendesk key.", alias="zendeskKey")
-    tag_manager_id: Optional[StrictStr] = Field(default=None, description="The tag manager ID.", alias="tagManagerId")
-    cookie_settings_enabled: StrictBool = Field(description="Specifies whether the cookie settings are enabled.", alias="cookieSettingsEnabled")
-    limited_access_space: Optional[StrictBool] = Field(default=None, description="Specifies whether the access to the space management is limited or not.", alias="limitedAccessSpace")
-    limited_access_dev_tools_for_users: Optional[StrictBool] = Field(default=None, description="Specifies whether the access to the Developer Tools is limited for users or not.", alias="limitedAccessDevToolsForUsers")
-    display_banners: Optional[StrictBool] = Field(default=None, description="Specifies whether to display the promotional banners.", alias="displayBanners")
-    ai_enabled: Optional[StrictBool] = Field(default=None, description="Specifies whether AI functionality (chat, agents, vectorization) is enabled for the current tenant.  When `false`, all AI features are disabled and the AI Agents folder is hidden.", alias="aiEnabled")
-    user_name_regex: Optional[StrictStr] = Field(default=None, description="The user name validation regex.", alias="userNameRegex")
-    invitation_limit: Optional[StrictInt] = Field(default=None, description="The maximum number of invitations to the portal.", alias="invitationLimit")
-    plugins: Optional[PluginsDto] = None
-    deep_link: DeepLinkDto = Field(alias="deepLink")
-    form_gallery: Optional[FormGalleryDto] = Field(default=None, alias="formGallery")
-    max_image_upload_size: Optional[StrictInt] = Field(default=None, description="The maximum image upload size.", alias="maxImageUploadSize")
-    logo_text: Optional[StrictStr] = Field(default=None, description="The white label logo text.", alias="logoText")
-    external_resources: Optional[CultureSpecificExternalResources] = Field(default=None, alias="externalResources")
-    default_folder_type: Optional[FolderType] = Field(default=None, alias="defaultFolderType")
-    external_db_enabled: Optional[StrictBool] = Field(default=None, description="Specifies if an external database is connected for storing form results.", alias="externalDbEnabled")
-    __properties: ClassVar[List[str]] = ["timezone", "trustedDomains", "trustedDomainsType", "culture", "utcOffset", "utcHoursOffset", "greetingSettings", "ownerId", "nameSchemaId", "enabledJoin", "enableAdmMess", "thirdpartyEnable", "docSpace", "standalone", "isAmi", "baseDomain", "wizardToken", "passwordHash", "firebase", "version", "recaptchaType", "recaptchaPublicKey", "debugInfo", "socketUrl", "tenantStatus", "tenantAlias", "displayAbout", "domainValidator", "zendeskKey", "tagManagerId", "cookieSettingsEnabled", "limitedAccessSpace", "limitedAccessDevToolsForUsers", "displayBanners", "aiEnabled", "userNameRegex", "invitationLimit", "plugins", "deepLink", "formGallery", "maxImageUploadSize", "logoText", "externalResources", "defaultFolderType", "externalDbEnabled"]
+    timezone: Optional[StrictStr] = Field(default=None, description="The time zone.", json_schema_extra={"examples": ["UTC"]})
+    trusted_domains: Optional[List[StrictStr]] = Field(default=None, description="The list of the trusted domains.", alias="trustedDomains", json_schema_extra={"examples": [["mydomain.com", "mydomain1.com"]]})
+    trusted_domains_type: Optional[TenantTrustedDomainsType] = Field(default=None, description="The type of the tenant trusted domains.", alias="trustedDomainsType")
+    culture: Optional[StrictStr] = Field(description="The language.", json_schema_extra={"examples": ["en-US"]})
+    utc_offset: Optional[StrictStr] = Field(default=None, description="The UTC offset in the TimeSpan format.", alias="utcOffset", json_schema_extra={"examples": ["-08:30:00"]})
+    utc_hours_offset: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The UTC offset in hours.", alias="utcHoursOffset", json_schema_extra={"examples": [-8.5]})
+    greeting_settings: Optional[StrictStr] = Field(default=None, description="The greeting settings.", alias="greetingSettings", json_schema_extra={"examples": ["Web Office Applications"]})
+    owner_id: Optional[UUID] = Field(default=None, description="The owner ID.", alias="ownerId", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000000"]})
+    name_schema_id: Optional[StrictStr] = Field(default=None, description="The team template ID.", alias="nameSchemaId", json_schema_extra={"examples": ["default"]})
+    enabled_join: Optional[StrictBool] = Field(default=None, description="Specifies if a user can join the portal or not.", alias="enabledJoin", json_schema_extra={"examples": [True]})
+    enable_adm_mess: Optional[StrictBool] = Field(default=None, description="Specifies if a user can send a message to the administrator when accessing the DocSpace portal or not.", alias="enableAdmMess", json_schema_extra={"examples": [True]})
+    thirdparty_enable: Optional[StrictBool] = Field(default=None, description="Specifies if a user can connect third-party providers to the portal or not.", alias="thirdpartyEnable", json_schema_extra={"examples": [True]})
+    doc_space: Optional[StrictBool] = Field(default=None, description="Specifies if this portal is a DocSpace portal or not.", alias="docSpace", json_schema_extra={"examples": [True]})
+    standalone: Optional[StrictBool] = Field(default=None, description="Indicates whether the system is running in standalone mode.", json_schema_extra={"examples": [True]})
+    is_ami: Optional[StrictBool] = Field(default=None, description="Specifies if this portal is the AMI instance or not.", alias="isAmi", json_schema_extra={"examples": [True]})
+    base_domain: Optional[StrictStr] = Field(description="The base domain.", alias="baseDomain", json_schema_extra={"examples": ["example.com"]})
+    wizard_token: Optional[StrictStr] = Field(default=None, description="The wizard token.", alias="wizardToken", json_schema_extra={"examples": ["dGhpc2lzYXRva2Vu..."]})
+    password_hash: Optional[PasswordHasher] = Field(default=None, description="The password hash.", alias="passwordHash")
+    firebase: Optional[FirebaseDto] = Field(default=None, description="The Firebase parameters.")
+    version: Optional[StrictStr] = Field(default=None, description="The portal version.", json_schema_extra={"examples": ["12.5.0"]})
+    recaptcha_type: Optional[RecaptchaType] = Field(default=None, description="The type of CAPTCHA validation used.", alias="recaptchaType")
+    recaptcha_public_key: Optional[StrictStr] = Field(default=None, description="The ReCAPTCHA public key.", alias="recaptchaPublicKey", json_schema_extra={"examples": ["abc123def456"]})
+    debug_info: Optional[StrictBool] = Field(default=None, description="Specifies if the debug information will be sent or not.", alias="debugInfo", json_schema_extra={"examples": [True]})
+    socket_url: Optional[StrictStr] = Field(default=None, description="The socket URL.", alias="socketUrl", json_schema_extra={"examples": ["https://example.com"]})
+    tenant_status: Optional[TenantStatus] = Field(default=None, description="The tenant status.", alias="tenantStatus")
+    tenant_alias: Optional[StrictStr] = Field(default=None, description="The tenant alias.", alias="tenantAlias", json_schema_extra={"examples": ["mycompany"]})
+    display_about: Optional[StrictBool] = Field(default=None, description="Specifies whether to display the About portal section.", alias="displayAbout", json_schema_extra={"examples": [True]})
+    domain_validator: Optional[TenantDomainValidator] = Field(default=None, description="The domain validator.", alias="domainValidator")
+    zendesk_key: Optional[StrictStr] = Field(default=None, description="The Zendesk key.", alias="zendeskKey", json_schema_extra={"examples": ["abc123def456"]})
+    tag_manager_id: Optional[StrictStr] = Field(default=None, description="The tag manager ID.", alias="tagManagerId", json_schema_extra={"examples": ["GTM-XXXXXX"]})
+    cookie_settings_enabled: StrictBool = Field(description="Specifies whether the cookie settings are enabled.", alias="cookieSettingsEnabled", json_schema_extra={"examples": [True]})
+    limited_access_space: Optional[StrictBool] = Field(default=None, description="Specifies whether the access to the space management is limited or not.", alias="limitedAccessSpace", json_schema_extra={"examples": [True]})
+    limited_access_dev_tools_for_users: Optional[StrictBool] = Field(default=None, description="Specifies whether the access to the Developer Tools is limited for users or not.", alias="limitedAccessDevToolsForUsers", json_schema_extra={"examples": [True]})
+    display_banners: Optional[StrictBool] = Field(default=None, description="Specifies whether to display the promotional banners.", alias="displayBanners", json_schema_extra={"examples": [True]})
+    ai_enabled: Optional[StrictBool] = Field(default=None, description="Specifies whether AI functionality (chat, agents, vectorization) is enabled for the current tenant.  When `false`, all AI features are disabled and the AI Agents folder is hidden.", alias="aiEnabled", json_schema_extra={"examples": [True]})
+    wallet_low_balance: Optional[StrictBool] = Field(default=None, description="Specifies whether the tenant wallet balance is currently below the low-balance threshold. Only returned to portal administrators.", alias="walletLowBalance", json_schema_extra={"examples": [False]})
+    user_name_regex: Optional[StrictStr] = Field(default=None, description="The user name validation regex.", alias="userNameRegex", json_schema_extra={"examples": ["^[a-zA-Z0-9_]{3,20}$"]})
+    invitation_limit: Optional[StrictInt] = Field(default=None, description="The maximum number of invitations to the portal.", alias="invitationLimit", json_schema_extra={"examples": [10]})
+    plugins: Optional[PluginsDto] = Field(default=None, description="The plugins settings.")
+    deep_link: DeepLinkDto = Field(description="The deep link settings.", alias="deepLink")
+    form_gallery: Optional[FormGalleryDto] = Field(default=None, description="The form gallery settings.", alias="formGallery")
+    max_image_upload_size: Optional[StrictInt] = Field(default=None, description="The maximum image upload size.", alias="maxImageUploadSize", json_schema_extra={"examples": [10485760]})
+    logo_text: Optional[StrictStr] = Field(default=None, description="The white label logo text.", alias="logoText", json_schema_extra={"examples": ["Company Name"]})
+    external_resources: Optional[CultureSpecificExternalResources] = Field(default=None, description="The external resources settings.", alias="externalResources")
+    default_folder_type: Optional[FolderType] = Field(default=None, description="The folder type.", alias="defaultFolderType")
+    external_db_enabled: Optional[StrictBool] = Field(default=None, description="Specifies if an external database is connected for storing form results.", alias="externalDbEnabled", json_schema_extra={"examples": [True]})
+    __properties: ClassVar[List[str]] = ["timezone", "trustedDomains", "trustedDomainsType", "culture", "utcOffset", "utcHoursOffset", "greetingSettings", "ownerId", "nameSchemaId", "enabledJoin", "enableAdmMess", "thirdpartyEnable", "docSpace", "standalone", "isAmi", "baseDomain", "wizardToken", "passwordHash", "firebase", "version", "recaptchaType", "recaptchaPublicKey", "debugInfo", "socketUrl", "tenantStatus", "tenantAlias", "displayAbout", "domainValidator", "zendeskKey", "tagManagerId", "cookieSettingsEnabled", "limitedAccessSpace", "limitedAccessDevToolsForUsers", "displayBanners", "aiEnabled", "walletLowBalance", "userNameRegex", "invitationLimit", "plugins", "deepLink", "formGallery", "maxImageUploadSize", "logoText", "externalResources", "defaultFolderType", "externalDbEnabled"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -229,6 +230,11 @@ class SettingsDto(BaseModel):
         if self.tag_manager_id is None and "tag_manager_id" in self.model_fields_set:
             _dict['tagManagerId'] = None
 
+        # set to None if wallet_low_balance (nullable) is None
+        # and model_fields_set contains the field
+        if self.wallet_low_balance is None and "wallet_low_balance" in self.model_fields_set:
+            _dict['walletLowBalance'] = None
+
         # set to None if user_name_regex (nullable) is None
         # and model_fields_set contains the field
         if self.user_name_regex is None and "user_name_regex" in self.model_fields_set:
@@ -292,6 +298,7 @@ class SettingsDto(BaseModel):
             "limitedAccessDevToolsForUsers": obj.get("limitedAccessDevToolsForUsers"),
             "displayBanners": obj.get("displayBanners"),
             "aiEnabled": obj.get("aiEnabled"),
+            "walletLowBalance": obj.get("walletLowBalance"),
             "userNameRegex": obj.get("userNameRegex"),
             "invitationLimit": obj.get("invitationLimit"),
             "plugins": PluginsDto.from_dict(obj["plugins"]) if obj.get("plugins") is not None else None,

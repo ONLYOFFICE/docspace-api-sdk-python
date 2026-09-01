@@ -33,20 +33,20 @@ class WebhooksConfigDto(BaseModel):
     """
     The webhook configuration parameters.
     """ # noqa: E501
-    id: StrictInt = Field(description="The webhook ID.")
-    name: Optional[StrictStr] = Field(default=None, description="The webhook name.")
-    uri: Optional[StrictStr] = Field(default=None, description="The webhook URI.")
-    enabled: Optional[StrictBool] = Field(default=None, description="Specifies if the webhooks are enabled or not.")
-    ssl: Optional[StrictBool] = Field(default=None, description="The webhook SSL verification (enabled or not).")
-    triggers: Optional[WebhookTrigger] = None
-    target_id: Optional[StrictStr] = Field(default=None, description="The webhook target ID.", alias="targetId")
-    created_by: Optional[EmployeeDto] = Field(default=None, alias="createdBy")
-    created_on: Optional[datetime] = Field(default=None, description="The date and time when the webhook was created.", alias="createdOn")
-    modified_by: Optional[EmployeeDto] = Field(default=None, alias="modifiedBy")
-    modified_on: Optional[datetime] = Field(default=None, description="The date and time when the webhook was modified.", alias="modifiedOn")
-    last_failure_on: Optional[datetime] = Field(default=None, description="The date and time of the webhook last failure.", alias="lastFailureOn")
-    last_failure_content: Optional[StrictStr] = Field(default=None, description="The webhook last failure content.", alias="lastFailureContent")
-    last_success_on: Optional[datetime] = Field(default=None, description="The date and time of the webhook last success.", alias="lastSuccessOn")
+    id: StrictInt = Field(description="The webhook ID.", json_schema_extra={"examples": [1]})
+    name: Optional[StrictStr] = Field(default=None, description="The webhook name.", json_schema_extra={"examples": ["John"]})
+    uri: Optional[StrictStr] = Field(default=None, description="The webhook URI.", json_schema_extra={"examples": ["https://example.com"]})
+    enabled: Optional[StrictBool] = Field(default=None, description="Specifies if the webhooks are enabled or not.", json_schema_extra={"examples": [True]})
+    ssl: Optional[StrictBool] = Field(default=None, description="The webhook SSL verification (enabled or not).", json_schema_extra={"examples": [True]})
+    triggers: Optional[WebhookTrigger] = Field(default=None, description="The webhook trigger type.")
+    target_id: Optional[StrictStr] = Field(default=None, description="The webhook target ID.", alias="targetId", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000001"]})
+    created_by: Optional[EmployeeDto] = Field(default=None, description="The user parameters.", alias="createdBy")
+    created_on: Optional[datetime] = Field(default=None, description="The date and time when the webhook was created.", alias="createdOn", json_schema_extra={"examples": ["2024-01-15T10:30:00Z"]})
+    modified_by: Optional[EmployeeDto] = Field(default=None, description="The user parameters.", alias="modifiedBy")
+    modified_on: Optional[datetime] = Field(default=None, description="The date and time when the webhook was modified.", alias="modifiedOn", json_schema_extra={"examples": ["2024-01-15T10:30:00Z"]})
+    last_failure_on: Optional[datetime] = Field(default=None, description="The date and time of the webhook last failure.", alias="lastFailureOn", json_schema_extra={"examples": ["2024-01-15T10:30:00Z"]})
+    last_failure_content: Optional[StrictStr] = Field(default=None, description="The webhook last failure content.", alias="lastFailureContent", json_schema_extra={"examples": ["example value"]})
+    last_success_on: Optional[datetime] = Field(default=None, description="The date and time of the webhook last success.", alias="lastSuccessOn", json_schema_extra={"examples": ["2024-01-15T10:30:00Z"]})
     __properties: ClassVar[List[str]] = ["id", "name", "uri", "enabled", "ssl", "triggers", "targetId", "createdBy", "createdOn", "modifiedBy", "modifiedOn", "lastFailureOn", "lastFailureContent", "lastSuccessOn"]
 
     model_config = ConfigDict(

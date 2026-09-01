@@ -31,13 +31,13 @@ class WatermarkDto(BaseModel):
     """
     The watermark settings.
     """ # noqa: E501
-    additions: WatermarkAdditions
-    text: Optional[StrictStr] = Field(default=None, description="The watermark text.")
-    rotate: StrictInt = Field(description="The watermark text and image rotate.")
-    image_scale: StrictInt = Field(description="The watermark image scale.", alias="imageScale")
-    image_url: Optional[StrictStr] = Field(default=None, description="The watermark image url.", alias="imageUrl")
-    image_height: Union[StrictFloat, StrictInt] = Field(description="The watermark image height.", alias="imageHeight")
-    image_width: Union[StrictFloat, StrictInt] = Field(description="The watermark image width.", alias="imageWidth")
+    additions: WatermarkAdditions = Field(description="Specifies whether to display in the watermark: username, user email, user ip-adress, current date, and room name.")
+    text: Optional[StrictStr] = Field(default=None, description="The watermark text.", json_schema_extra={"examples": ["Confidential"]})
+    rotate: StrictInt = Field(description="The watermark text and image rotate.", json_schema_extra={"examples": [45]})
+    image_scale: StrictInt = Field(description="The watermark image scale.", alias="imageScale", json_schema_extra={"examples": [100]})
+    image_url: Optional[StrictStr] = Field(default=None, description="The watermark image url.", alias="imageUrl", json_schema_extra={"examples": ["http://localhost/watermark.png"]})
+    image_height: Union[StrictFloat, StrictInt] = Field(description="The watermark image height.", alias="imageHeight", json_schema_extra={"examples": [100.0]})
+    image_width: Union[StrictFloat, StrictInt] = Field(description="The watermark image width.", alias="imageWidth", json_schema_extra={"examples": [200.0]})
     __properties: ClassVar[List[str]] = ["additions", "text", "rotate", "imageScale", "imageUrl", "imageHeight", "imageWidth"]
 
     model_config = ConfigDict(

@@ -32,9 +32,9 @@ class SecurityInfoSimpleRequestDto(BaseModel):
     """
     The parameters of the security information request.
     """ # noqa: E501
-    share: Optional[List[FileShareParams]] = Field(default=None, description="The collection of sharing parameters.")
-    notify: Optional[StrictBool] = Field(default=None, description="Specifies whether to notify users about the shared file or not.")
-    sharing_message: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The message to send when notifying about the shared file.", alias="sharingMessage")
+    share: Optional[List[FileShareParams]] = Field(default=None, description="The collection of sharing parameters.", json_schema_extra={"examples": [[{"access": 1, "shareTo": "00000000-0000-0000-0000-000000000000"}]]})
+    notify: Optional[StrictBool] = Field(default=None, description="Specifies whether to notify users about the shared file or not.", json_schema_extra={"examples": [True]})
+    sharing_message: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The message to send when notifying about the shared file.", alias="sharingMessage", json_schema_extra={"examples": ["You have been granted access to the file"]})
     __properties: ClassVar[List[str]] = ["share", "notify", "sharingMessage"]
 
     model_config = ConfigDict(

@@ -7,12 +7,12 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **role_name** | **str** | The role name. | 
 **role_color** | **str** | The role color. | [optional] 
-**user** | [**EmployeeFullDto**](EmployeeFullDto.md) |  | [optional] 
+**user** | [**EmployeeFullDto**](EmployeeFullDto.md) | The user of the role. | [optional] 
 **sequence** | **int** | The role sequence. | 
 **submitted** | **bool** | Specifies if the role is submitted. | 
-**stoped_by** | [**EmployeeFullDto**](EmployeeFullDto.md) |  | [optional] 
+**stoped_by** | [**EmployeeFullDto**](EmployeeFullDto.md) | The user who stopped the role. | [optional] 
 **history** | **Dict[str, datetime]** | The role history. | [optional] 
-**role_status** | [**FormFillingStatus**](FormFillingStatus.md) |  | [optional] 
+**role_status** | [**FormFillingStatus**](FormFillingStatus.md) | The role status. | [optional] 
 
 ## Example
 

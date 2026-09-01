@@ -5,7 +5,7 @@ The confirmation parameters.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**result** | [**ValidationResult**](ValidationResult.md) |  | 
+**result** | [**ValidationResult**](ValidationResult.md) | The confirmation result. | 
 **room_id** | **str** | The confirmation room ID. | [optional] 
 **title** | **str** | The confirmation title. | [optional] 
 **email** | **str** | The confirmation email. | [optional] 

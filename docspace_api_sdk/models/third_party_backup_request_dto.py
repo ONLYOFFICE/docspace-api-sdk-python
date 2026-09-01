@@ -30,12 +30,12 @@ class ThirdPartyBackupRequestDto(BaseModel):
     """
     The third-party backup request parameters.
     """ # noqa: E501
-    url: Optional[StrictStr] = Field(default=None, description="The connection URL for the sharepoint.")
-    login: Optional[StrictStr] = Field(default=None, description="The login.")
-    password: Optional[StrictStr] = Field(default=None, description="The password.")
-    token: Optional[StrictStr] = Field(default=None, description="The authentication token.")
-    customer_title: Optional[StrictStr] = Field(default=None, description="The customer title.", alias="customerTitle")
-    provider_key: Optional[StrictStr] = Field(default=None, description="The provider key.", alias="providerKey")
+    url: Optional[StrictStr] = Field(default=None, description="The connection URL for the sharepoint.", json_schema_extra={"examples": ["https://sharepoint.example.com"]})
+    login: Optional[StrictStr] = Field(default=None, description="The login.", json_schema_extra={"examples": ["admin"]})
+    password: Optional[StrictStr] = Field(default=None, description="The password.", json_schema_extra={"examples": ["P@ssw0rd"]})
+    token: Optional[StrictStr] = Field(default=None, description="The authentication token.", json_schema_extra={"examples": ["abc123def456"]})
+    customer_title: Optional[StrictStr] = Field(default=None, description="The customer title.", alias="customerTitle", json_schema_extra={"examples": ["My Cloud Storage"]})
+    provider_key: Optional[StrictStr] = Field(default=None, description="The provider key.", alias="providerKey", json_schema_extra={"examples": ["SharePoint"]})
     __properties: ClassVar[List[str]] = ["url", "login", "password", "token", "customerTitle", "providerKey"]
 
     model_config = ConfigDict(

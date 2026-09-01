@@ -30,12 +30,12 @@ class WizardRequestsDto(BaseModel):
     """
     The request parameters for initial configuration of the setup wizard.
     """ # noqa: E501
-    email: Optional[StrictStr] = Field(description="The user's email address for authentication and communication.")
-    password_hash: Optional[StrictStr] = Field(description="The hashed representation of the user's password.", alias="passwordHash")
-    lng: Optional[StrictStr] = Field(default=None, description="The user's preferred interface language code.")
-    time_zone: Optional[StrictStr] = Field(default=None, description="The user's time zone identifier.", alias="timeZone")
-    ami_id: Optional[StrictStr] = Field(default=None, description="The Amazon Machine Image (AMI) identifier.", alias="amiId")
-    subscribe_from_site: Optional[StrictBool] = Field(default=None, description="Specifies whether the user opted in for site communications.", alias="subscribeFromSite")
+    email: Optional[StrictStr] = Field(description="The user's email address for authentication and communication.", json_schema_extra={"examples": ["user@example.com"]})
+    password_hash: Optional[StrictStr] = Field(description="The hashed representation of the user's password.", alias="passwordHash", json_schema_extra={"examples": ["2DYmIoA/aYKEksFocEf6uw=="]})
+    lng: Optional[StrictStr] = Field(default=None, description="The user's preferred interface language code.", json_schema_extra={"examples": ["en-US"]})
+    time_zone: Optional[StrictStr] = Field(default=None, description="The user's time zone identifier.", alias="timeZone", json_schema_extra={"examples": ["UTC"]})
+    ami_id: Optional[StrictStr] = Field(default=None, description="The Amazon Machine Image (AMI) identifier.", alias="amiId", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000001"]})
+    subscribe_from_site: Optional[StrictBool] = Field(default=None, description="Specifies whether the user opted in for site communications.", alias="subscribeFromSite", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["email", "passwordHash", "lng", "timeZone", "amiId", "subscribeFromSite"]
 
     model_config = ConfigDict(

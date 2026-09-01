@@ -30,8 +30,8 @@ class TenantUserInvitationSettingsDto(BaseModel):
     """
     The user invitation settings.
     """ # noqa: E501
-    allow_inviting_members: StrictBool = Field(description="Specifies whether to allow inviting new DocSpace members through the Contacts section.", alias="allowInvitingMembers")
-    allow_inviting_guests: StrictBool = Field(description="Specifies whether to allow all DocSpace members to invite external guests to the rooms.", alias="allowInvitingGuests")
+    allow_inviting_members: StrictBool = Field(description="Specifies whether to allow inviting new DocSpace members through the Contacts section.", alias="allowInvitingMembers", json_schema_extra={"examples": [True]})
+    allow_inviting_guests: StrictBool = Field(description="Specifies whether to allow all DocSpace members to invite external guests to the rooms.", alias="allowInvitingGuests", json_schema_extra={"examples": [False]})
     __properties: ClassVar[List[str]] = ["allowInvitingMembers", "allowInvitingGuests"]
 
     model_config = ConfigDict(

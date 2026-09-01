@@ -6,7 +6,7 @@ The upload result parameters.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **success** | **bool** | Specifies if the upload operation is successful or not. | [optional] 
-**data** | **object** | The uploaded data. | [optional] 
+**data** | **object** |  | [optional] 
 **message** | **str** | The message sent after the successful upload operation. | [optional] 
 
 ## Example

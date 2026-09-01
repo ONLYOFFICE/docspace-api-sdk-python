@@ -31,9 +31,9 @@ class CreateApiKeyRequestDto(BaseModel):
     """
     The request parameters for creating a new API key.
     """ # noqa: E501
-    name: Annotated[str, Field(min_length=0, strict=True, max_length=30)] = Field(description="The API key name.")
-    permissions: Optional[List[StrictStr]] = Field(default=None, description="The list of permissions granted to the API key.")
-    expires_in_days: Optional[Annotated[int, Field(le=365, strict=True, ge=1)]] = Field(default=None, description="The number of days until the API key expires (null for no expiration).", alias="expiresInDays")
+    name: Annotated[str, Field(min_length=0, strict=True, max_length=30)] = Field(description="The API key name.", json_schema_extra={"examples": ["My API Key"]})
+    permissions: Optional[List[StrictStr]] = Field(default=None, description="The list of permissions granted to the API key.", json_schema_extra={"examples": [["read", "write"]]})
+    expires_in_days: Optional[Annotated[int, Field(le=365, strict=True, ge=1)]] = Field(default=None, description="The number of days until the API key expires (null for no expiration).", alias="expiresInDays", json_schema_extra={"examples": [30]})
     __properties: ClassVar[List[str]] = ["name", "permissions", "expiresInDays"]
 
     model_config = ConfigDict(

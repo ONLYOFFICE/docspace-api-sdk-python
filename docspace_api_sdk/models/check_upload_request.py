@@ -30,7 +30,7 @@ class CheckUploadRequest(BaseModel):
     """
     The request parameters for checking file uploads.
     """ # noqa: E501
-    files_title: Optional[List[StrictStr]] = Field(default=None, description="The list of file titles.", alias="filesTitle")
+    files_title: Optional[List[StrictStr]] = Field(default=None, description="The list of file titles.", alias="filesTitle", json_schema_extra={"examples": [["file1.docx", "file2.pdf", "file3.xlsx"]]})
     __properties: ClassVar[List[str]] = ["filesTitle"]
 
     model_config = ConfigDict(

@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **file_name** | **str** | The file name. | 
 **file_size** | **int** | The file size. | [optional] 
 **relative_path** | **str** | The relative path to the file. | [optional] 
-**create_on** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] 
+**create_on** | [**ApiDateTime**](ApiDateTime.md) | The API date and time parameters. | [optional] 
 **encrypted** | **bool** | Specifies whether the file is encrypted or not. | [optional] 
 **create_new_if_exist** | **bool** | Specifies whether to create a new file if it already exists. | [optional] 
 

@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**get_portal_tariff**](#get_portal_tariff) | **GET** /api/2.0/portal/tariff | Get a portal tariff
 [**get_portal_used_space**](#get_portal_used_space) | **GET** /api/2.0/portal/usedspace | Get the portal used space
 [**get_right_quota**](#get_right_quota) | **GET** /api/2.0/portal/quota/right | Get the recommended quota
+[**get_upcoming_payments**](#get_upcoming_payments) | **GET** /api/2.0/portal/tariff/upcoming | Get upcoming payments
 
 
 # **get_portal_quota**
@@ -304,6 +305,85 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Recommended portal quota |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
+**403** | No permissions to perform this action |  -  |
+**401** | Unauthorized |  -  |
+**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
+**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_upcoming_payments**
+> UpcomingPaymentArrayWrapper get_upcoming_payments(refresh=refresh)
+
+Returns the list of upcoming payments based on the active quotas of the current portal tariff.
+
+For more information, see [api.onlyoffice.com]().
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **refresh** | **bool**| The value indicating whether the current portal tariff information should be refreshed. | [optional] 
+
+### Return type
+
+[**UpcomingPaymentArrayWrapper**](UpcomingPaymentArrayWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+
+```python
+import docspace_api_sdk
+from docspace_api_sdk.models.upcoming_payment_array_wrapper import UpcomingPaymentArrayWrapper
+from docspace_api_sdk.rest import ApiException
+from pprint import pprint
+
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+# Enter a context with an instance of the API client
+with docspace_api_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace_api_sdk.QuotaApi(api_client)
+    refresh = true # bool | The value indicating whether the current portal tariff information should be refreshed. (optional)
+
+    try:
+        # Get upcoming payments
+        api_response = api_instance.get_upcoming_payments(refresh=refresh)
+        print("The response of QuotaApi->get_upcoming_payments:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling QuotaApi->get_upcoming_payments: %s\n" % e)
+```
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | List of upcoming payments |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
 **403** | No permissions to perform this action |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |

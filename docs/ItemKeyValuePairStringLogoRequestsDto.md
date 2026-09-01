@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **key** | **str** |  | [optional] 
-**value** | [**LogoRequestsDto**](LogoRequestsDto.md) |  | [optional] 
+**value** | [**LogoRequestsDto**](LogoRequestsDto.md) | The request parameters for the theme-specific logo configurations. | [optional] 
 
 ## Example
 

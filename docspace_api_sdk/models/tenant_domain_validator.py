@@ -30,9 +30,9 @@ class TenantDomainValidator(BaseModel):
     """
     The domain validator.
     """ # noqa: E501
-    regex: Optional[StrictStr] = Field(default=None, description="The regex string to validate a domain.")
-    min_length: Optional[StrictInt] = Field(default=None, description="The minimum length of the valid domain.", alias="minLength")
-    max_length: Optional[StrictInt] = Field(default=None, description="The maximum length of the valid domain.", alias="maxLength")
+    regex: Optional[StrictStr] = Field(default=None, description="The regex string to validate a domain.", json_schema_extra={"examples": ["^[a-z0-9]([a-z0-9-]){1,61}[a-z0-9]$"]})
+    min_length: Optional[StrictInt] = Field(default=None, description="The minimum length of the valid domain.", alias="minLength", json_schema_extra={"examples": [6]})
+    max_length: Optional[StrictInt] = Field(default=None, description="The maximum length of the valid domain.", alias="maxLength", json_schema_extra={"examples": [63]})
     __properties: ClassVar[List[str]] = ["regex", "minLength", "maxLength"]
 
     model_config = ConfigDict(

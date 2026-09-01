@@ -31,11 +31,11 @@ class ConfirmDto(BaseModel):
     """
     The confirmation parameters.
     """ # noqa: E501
-    result: ValidationResult
-    room_id: Optional[StrictStr] = Field(default=None, description="The confirmation room ID.", alias="roomId")
-    title: Optional[StrictStr] = Field(default=None, description="The confirmation title.")
-    email: Optional[StrictStr] = Field(default=None, description="The confirmation email.")
-    is_agent: Optional[StrictBool] = Field(default=None, description="The confirmation is agent.", alias="isAgent")
+    result: ValidationResult = Field(description="The confirmation result.")
+    room_id: Optional[StrictStr] = Field(default=None, description="The confirmation room ID.", alias="roomId", json_schema_extra={"examples": ["1"]})
+    title: Optional[StrictStr] = Field(default=None, description="The confirmation title.", json_schema_extra={"examples": ["Conference Room"]})
+    email: Optional[StrictStr] = Field(default=None, description="The confirmation email.", json_schema_extra={"examples": ["user@example.com"]})
+    is_agent: Optional[StrictBool] = Field(default=None, description="The confirmation is agent.", alias="isAgent", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["result", "roomId", "title", "email", "isAgent"]
 
     model_config = ConfigDict(

@@ -31,8 +31,8 @@ class UpdateMembersRequestDto(BaseModel):
     """
     The request parameters for updating the user information.
     """ # noqa: E501
-    user_ids: Optional[List[UUID]] = Field(default=None, description="The list of user IDs.", alias="userIds")
-    resend_all: Optional[StrictBool] = Field(default=None, description="Specifies whether to resend invitation letters to all the users or not.", alias="resendAll")
+    user_ids: Optional[List[UUID]] = Field(default=None, description="The list of user IDs.", alias="userIds", json_schema_extra={"examples": [["00000000-0000-0000-0000-000000000000", "11111111-1111-1111-1111-111111111111"]]})
+    resend_all: Optional[StrictBool] = Field(default=None, description="Specifies whether to resend invitation letters to all the users or not.", alias="resendAll", json_schema_extra={"examples": [False]})
     __properties: ClassVar[List[str]] = ["userIds", "resendAll"]
 
     model_config = ConfigDict(

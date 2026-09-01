@@ -30,11 +30,11 @@ class SmtpOperationStatusRequestsDto(BaseModel):
     """
     The request parameters for tracking SMTP (Simple Mail Transfer Protocol) operation status.
     """ # noqa: E501
-    completed: Optional[StrictBool] = Field(default=None, description="Specifies whether the SMTP operation has finished processing.")
-    id: Optional[StrictStr] = Field(default=None, description="The unique identifier for tracking the SMTP operation.")
-    error: Optional[StrictStr] = Field(default=None, description="The error message if the SMTP operation encountered issues.")
-    status: Optional[StrictStr] = Field(default=None, description="The current state of the SMTP operation.")
-    percents: Optional[StrictInt] = Field(default=None, description="The progress indicator showing completion percentage of the operation.")
+    completed: Optional[StrictBool] = Field(default=None, description="Specifies whether the SMTP operation has finished processing.", json_schema_extra={"examples": [True]})
+    id: Optional[StrictStr] = Field(default=None, description="The unique identifier for tracking the SMTP operation.", json_schema_extra={"examples": ["smtp-op-123"]})
+    error: Optional[StrictStr] = Field(default=None, description="The error message if the SMTP operation encountered issues.", json_schema_extra={"examples": ["SMTP connection failed."]})
+    status: Optional[StrictStr] = Field(default=None, description="The current state of the SMTP operation.", json_schema_extra={"examples": ["Completed"]})
+    percents: Optional[StrictInt] = Field(default=None, description="The progress indicator showing completion percentage of the operation.", json_schema_extra={"examples": [1]})
     __properties: ClassVar[List[str]] = ["completed", "id", "error", "status", "percents"]
 
     model_config = ConfigDict(

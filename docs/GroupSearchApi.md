@@ -61,7 +61,7 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.SearchApi(api_client)
-    id = 56 # int | The group ID.
+    id = 00000000-0000-0000-0000-000000000000 # int | The group ID.
     exclude_shared = false # bool | Specifies whether to exclude the group sharing settings from the response. (optional)
     count = 25 # int | The number of groups to retrieve in the request. (optional)
     start_index = 0 # int | The starting index from which to begin retrieving groups with their sharing settings. (optional)
@@ -148,7 +148,7 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.SearchApi(api_client)
-    id = 56 # int | The group ID.
+    id = 00000000-0000-0000-0000-000000000000 # int | The group ID.
     exclude_shared = false # bool | Specifies whether to exclude the group sharing settings from the response. (optional)
     count = 25 # int | The number of groups to retrieve in the request. (optional)
     start_index = 0 # int | The starting index from which to begin retrieving groups with their sharing settings. (optional)
@@ -235,7 +235,7 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.SearchApi(api_client)
-    id = 56 # int | The group ID.
+    id = 00000000-0000-0000-0000-000000000000 # int | The group ID.
     exclude_shared = false # bool | Specifies whether to exclude the group sharing settings from the response. (optional)
     count = 25 # int | The number of groups to retrieve in the request. (optional)
     start_index = 0 # int | The starting index from which to begin retrieving groups with their sharing settings. (optional)

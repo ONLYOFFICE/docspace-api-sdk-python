@@ -30,13 +30,13 @@ class ProviderDto(BaseModel):
     """
     The provider information.
     """ # noqa: E501
-    name: Optional[StrictStr] = Field(default=None, description="The provider name.")
-    key: Optional[StrictStr] = Field(default=None, description="The provider key.")
-    connected: Optional[StrictBool] = Field(default=None, description="Specifies whether the provider is connected.")
-    oauth: Optional[StrictBool] = Field(default=None, description="Specifies if the provider is OAuth.")
-    redirect_url: Optional[StrictStr] = Field(default=None, description="The provider redirect URL.", alias="redirectUrl")
-    required_connection_url: Optional[StrictBool] = Field(default=None, description="The required connection URL flag.", alias="requiredConnectionUrl")
-    client_id: Optional[StrictStr] = Field(default=None, description="The provider OAuth client ID.", alias="clientId")
+    name: Optional[StrictStr] = Field(default=None, description="The provider name.", json_schema_extra={"examples": ["GoogleDrive"]})
+    key: Optional[StrictStr] = Field(default=None, description="The provider key.", json_schema_extra={"examples": ["google-drive"]})
+    connected: Optional[StrictBool] = Field(default=None, description="Specifies whether the provider is connected.", json_schema_extra={"examples": [True]})
+    oauth: Optional[StrictBool] = Field(default=None, description="Specifies if the provider is OAuth.", json_schema_extra={"examples": [True]})
+    redirect_url: Optional[StrictStr] = Field(default=None, description="The provider redirect URL.", alias="redirectUrl", json_schema_extra={"examples": ["http://localhost/redirect"]})
+    required_connection_url: Optional[StrictBool] = Field(default=None, description="The required connection URL flag.", alias="requiredConnectionUrl", json_schema_extra={"examples": [False]})
+    client_id: Optional[StrictStr] = Field(default=None, description="The provider OAuth client ID.", alias="clientId", json_schema_extra={"examples": ["client-id-123"]})
     __properties: ClassVar[List[str]] = ["name", "key", "connected", "oauth", "redirectUrl", "requiredConnectionUrl", "clientId"]
 
     model_config = ConfigDict(

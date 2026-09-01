@@ -30,9 +30,9 @@ class WebhookTriggerDto(BaseModel):
     """
     The webhook trigger with its availability for the current user.
     """ # noqa: E501
-    name: Optional[StrictStr] = Field(default=None, description="The trigger name.")
-    id: Optional[StrictInt] = Field(default=None, description="The trigger bit value.")
-    available: Optional[StrictBool] = Field(default=None, description="Specifies whether this trigger is available for the current user's role.")
+    name: Optional[StrictStr] = Field(default=None, description="The trigger name.", json_schema_extra={"examples": ["file.created"]})
+    id: Optional[StrictInt] = Field(default=None, description="The trigger bit value.", json_schema_extra={"examples": [128]})
+    available: Optional[StrictBool] = Field(default=None, description="Specifies whether this trigger is available for the current user's role.", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["name", "id", "available"]
 
     model_config = ConfigDict(

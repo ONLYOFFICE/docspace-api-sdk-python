@@ -5,8 +5,8 @@ The request parameters for specifying wallet payment quantity.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**quantity** | **Dict[str, Optional[int]]** | The mapping of item identifiers to their respective quantities in the payment. | [optional] 
-**product_quantity_type** | [**ProductQuantityType**](ProductQuantityType.md) |  | [optional] 
+**quantity** | **Dict[str, Optional[int]]** | The mapping of item identifiers to their respective quantities in the payment. | 
+**product_quantity_type** | [**ProductQuantityType**](ProductQuantityType.md) | The type of action performed on a product's quantity. | [optional] 
 
 ## Example
 

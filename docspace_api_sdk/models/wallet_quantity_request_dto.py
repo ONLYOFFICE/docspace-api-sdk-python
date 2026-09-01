@@ -31,8 +31,8 @@ class WalletQuantityRequestDto(BaseModel):
     """
     The request parameters for specifying wallet payment quantity.
     """ # noqa: E501
-    quantity: Optional[Dict[str, Optional[StrictInt]]] = Field(default=None, description="The mapping of item identifiers to their respective quantities in the payment.")
-    product_quantity_type: Optional[ProductQuantityType] = Field(default=None, alias="productQuantityType")
+    quantity: Dict[str, Optional[StrictInt]] = Field(description="The mapping of item identifiers to their respective quantities in the payment.", json_schema_extra={"examples": [{"admin": 1}]})
+    product_quantity_type: Optional[ProductQuantityType] = Field(default=None, description="The type of action performed on a product's quantity.", alias="productQuantityType")
     __properties: ClassVar[List[str]] = ["quantity", "productQuantityType"]
 
     model_config = ConfigDict(
@@ -74,11 +74,6 @@ class WalletQuantityRequestDto(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # set to None if quantity (nullable) is None
-        # and model_fields_set contains the field
-        if self.quantity is None and "quantity" in self.model_fields_set:
-            _dict['quantity'] = None
-
         return _dict
 
     @classmethod

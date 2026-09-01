@@ -33,11 +33,11 @@ class SecurityInfoRequestDto(BaseModel):
     """
     The security information request parameters.
     """ # noqa: E501
-    folder_ids: Optional[List[DuplicateRequestDtoAllOfFileIds]] = Field(default=None, description="The list of the shared folder IDs.", alias="folderIds")
-    file_ids: Optional[List[DuplicateRequestDtoAllOfFileIds]] = Field(default=None, description="The list of the shared file IDs.", alias="fileIds")
-    share: Optional[List[FileShareParams]] = Field(default=None, description="The collection of sharing parameters.")
-    notify: Optional[StrictBool] = Field(default=None, description="Specifies whether to notify users about the shared file or not.")
-    sharing_message: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The message to send when notifying about the shared file.", alias="sharingMessage")
+    folder_ids: Optional[List[DuplicateRequestDtoAllOfFileIds]] = Field(default=None, description="The list of the shared folder IDs.", alias="folderIds", json_schema_extra={"examples": [[1, 2, 3]]})
+    file_ids: Optional[List[DuplicateRequestDtoAllOfFileIds]] = Field(default=None, description="The list of the shared file IDs.", alias="fileIds", json_schema_extra={"examples": [[1, 2, 3]]})
+    share: Optional[List[FileShareParams]] = Field(default=None, description="The collection of sharing parameters.", json_schema_extra={"examples": [[{"access": 1, "shareTo": "00000000-0000-0000-0000-000000000000"}]]})
+    notify: Optional[StrictBool] = Field(default=None, description="Specifies whether to notify users about the shared file or not.", json_schema_extra={"examples": [True]})
+    sharing_message: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The message to send when notifying about the shared file.", alias="sharingMessage", json_schema_extra={"examples": ["You have been granted access to the file"]})
     __properties: ClassVar[List[str]] = ["folderIds", "fileIds", "share", "notify", "sharingMessage"]
 
     model_config = ConfigDict(

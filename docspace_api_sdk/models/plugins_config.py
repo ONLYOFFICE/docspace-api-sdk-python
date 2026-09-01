@@ -30,7 +30,7 @@ class PluginsConfig(BaseModel):
     """
     The configuration settings to connect the special add-ons.
     """ # noqa: E501
-    plugins_data: Optional[List[StrictStr]] = Field(default=None, description="The array of absolute URLs to the plugin configuration files.", alias="pluginsData")
+    plugins_data: Optional[List[StrictStr]] = Field(default=None, description="The array of absolute URLs to the plugin configuration files.", alias="pluginsData", json_schema_extra={"examples": [["https://portal.example.com/ThirdParty/plugin/easybib/config.json", "https://portal.example.com/ThirdParty/plugin/wordpress/config.json"]]})
     __properties: ClassVar[List[str]] = ["pluginsData"]
 
     model_config = ConfigDict(

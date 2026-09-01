@@ -38,8 +38,8 @@ class WalletServiceDto(QuotaDto):
     The wallet service information.
     """
 
-    inner_services: Optional[List[WalletServiceDto]] = Field(default=None, description="The list of inner services.", alias="innerServices")
-    service_name: Optional[StrictStr] = Field(default=None, description="The service name.", alias="serviceName")
+    inner_services: Optional[List[WalletServiceDto]] = Field(default=None, description="The list of inner services.", alias="innerServices", json_schema_extra={"examples": [[{"title": "File Storage", "size": 1073741824}]]})
+    service_name: Optional[StrictStr] = Field(default=None, description="The service name.", alias="serviceName", json_schema_extra={"examples": ["backup"]})
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -108,21 +108,6 @@ class WalletServiceDto(QuotaDto):
                 if _item_inner_services:
                     _items.append(_item_inner_services.to_dict())
             _dict['innerServices'] = _items
-        # set to None if title (nullable) is None
-        # and model_fields_set contains the field
-        if self.title is None and "title" in self.model_fields_set:
-            _dict['title'] = None
-
-        # set to None if features (nullable) is None
-        # and model_fields_set contains the field
-        if self.features is None and "features" in self.model_fields_set:
-            _dict['features'] = None
-
-        # set to None if due_date (nullable) is None
-        # and model_fields_set contains the field
-        if self.due_date is None and "due_date" in self.model_fields_set:
-            _dict['dueDate'] = None
-
         # set to None if inner_services (nullable) is None
         # and model_fields_set contains the field
         if self.inner_services is None and "inner_services" in self.model_fields_set:

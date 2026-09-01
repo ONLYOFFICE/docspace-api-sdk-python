@@ -21,9 +21,8 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field
-from typing_extensions import Annotated
-from docspace_api_sdk.models.vectorization_start_request_body import VectorizationStartRequestBody
+from typing import Any, Dict
+from docspace_api_sdk.models.ai_success_response import AiSuccessResponse
 
 from docspace_api_sdk.api_client import ApiClient, RequestSerialized
 from docspace_api_sdk.api_response import ApiResponse
@@ -45,9 +44,9 @@ class VectorizationApi:
 
 
     @validate_call
-    def start_task(
+    def ai_vectorization_start_task(
         self,
-        vectorization_start_request_body: Annotated[VectorizationStartRequestBody, Field(description="The vectorization parameters including file identifiers.")],
+        request_body: Dict[str, Any],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -60,13 +59,12 @@ class VectorizationApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> AiSuccessResponse:
         """Start a vectorization task
 
-        Submits the specified files for vectorization. Each file is processed asynchronously by the configured embedding provider  and indexed for semantic search in AI chat sessions. Only files accessible to the current user can be vectorized.
 
-        :param vectorization_start_request_body: The vectorization parameters including file identifiers. (required)
-        :type vectorization_start_request_body: VectorizationStartRequestBody
+        :param request_body: (required)
+        :type request_body: Dict[str, object]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -89,8 +87,8 @@ class VectorizationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._start_task_serialize(
-            vectorization_start_request_body=vectorization_start_request_body,
+        _param = self._ai_vectorization_start_task_serialize(
+            request_body=request_body,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -98,12 +96,10 @@ class VectorizationApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
-            '401': None,
-            '429': None,
-            '502': None,
-            '503': None,
+            '200': "AiSuccessResponse",
+            '401': "AiErrorResponse",
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -116,9 +112,9 @@ class VectorizationApi:
 
 
     @validate_call
-    def start_task_with_http_info(
+    def ai_vectorization_start_task_with_http_info(
         self,
-        vectorization_start_request_body: Annotated[VectorizationStartRequestBody, Field(description="The vectorization parameters including file identifiers.")],
+        request_body: Dict[str, Any],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -131,13 +127,12 @@ class VectorizationApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[AiSuccessResponse]:
         """Start a vectorization task
 
-        Submits the specified files for vectorization. Each file is processed asynchronously by the configured embedding provider  and indexed for semantic search in AI chat sessions. Only files accessible to the current user can be vectorized.
 
-        :param vectorization_start_request_body: The vectorization parameters including file identifiers. (required)
-        :type vectorization_start_request_body: VectorizationStartRequestBody
+        :param request_body: (required)
+        :type request_body: Dict[str, object]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -160,8 +155,8 @@ class VectorizationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._start_task_serialize(
-            vectorization_start_request_body=vectorization_start_request_body,
+        _param = self._ai_vectorization_start_task_serialize(
+            request_body=request_body,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -169,12 +164,10 @@ class VectorizationApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
-            '401': None,
-            '429': None,
-            '502': None,
-            '503': None,
+            '200': "AiSuccessResponse",
+            '401': "AiErrorResponse",
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -187,9 +180,9 @@ class VectorizationApi:
 
 
     @validate_call
-    def start_task_without_preload_content(
+    def ai_vectorization_start_task_without_preload_content(
         self,
-        vectorization_start_request_body: Annotated[VectorizationStartRequestBody, Field(description="The vectorization parameters including file identifiers.")],
+        request_body: Dict[str, Any],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -205,10 +198,9 @@ class VectorizationApi:
     ) -> RESTResponseType:
         """Start a vectorization task
 
-        Submits the specified files for vectorization. Each file is processed asynchronously by the configured embedding provider  and indexed for semantic search in AI chat sessions. Only files accessible to the current user can be vectorized.
 
-        :param vectorization_start_request_body: The vectorization parameters including file identifiers. (required)
-        :type vectorization_start_request_body: VectorizationStartRequestBody
+        :param request_body: (required)
+        :type request_body: Dict[str, object]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -231,8 +223,8 @@ class VectorizationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._start_task_serialize(
-            vectorization_start_request_body=vectorization_start_request_body,
+        _param = self._ai_vectorization_start_task_serialize(
+            request_body=request_body,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -240,12 +232,10 @@ class VectorizationApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
-            '401': None,
-            '429': None,
-            '502': None,
-            '503': None,
+            '200': "AiSuccessResponse",
+            '401': "AiErrorResponse",
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -253,9 +243,9 @@ class VectorizationApi:
         return response_data.response
 
 
-    def _start_task_serialize(
+    def _ai_vectorization_start_task_serialize(
         self,
-        vectorization_start_request_body,
+        request_body,
         _request_auth,
         _content_type,
         _headers,
@@ -281,10 +271,17 @@ class VectorizationApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if vectorization_start_request_body is not None:
-            _body_params = vectorization_start_request_body
+        if request_body is not None:
+            _body_params = request_body
 
 
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
         # set the HTTP header `Content-Type`
         if _content_type:
@@ -302,12 +299,6 @@ class VectorizationApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'Basic', 
-            'OAuth2', 
-            'ApiKeyBearer', 
-            'asc_auth_key', 
-            'Bearer', 
-            'OpenId'
         ]
 
 

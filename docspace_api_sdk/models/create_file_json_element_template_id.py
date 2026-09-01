@@ -32,9 +32,9 @@ class CreateFileJsonElementTemplateId(BaseModel):
     The template file ID for creation.
     """
     # data type: int
-    oneof_schema_1_validator: Optional[StrictInt] = None
+    oneof_schema_1_validator: Optional[StrictInt] = Field(default=None, json_schema_extra={"examples": [1234]})
     # data type: str
-    oneof_schema_2_validator: Optional[StrictStr] = None
+    oneof_schema_2_validator: Optional[StrictStr] = Field(default=None, json_schema_extra={"examples": ["some text"]})
     actual_instance: Optional[Union[int, str]] = None
     one_of_schemas: Set[str] = { "int", "str" }
 

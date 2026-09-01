@@ -30,8 +30,8 @@ class FilesStatisticsFolder(BaseModel):
     """
     The file statictics folder parameters.
     """ # noqa: E501
-    title: Optional[StrictStr] = Field(default=None, description="The folder title.")
-    used_space: Optional[StrictInt] = Field(default=None, description="The used space in the folder.", alias="usedSpace")
+    title: Optional[StrictStr] = Field(default=None, description="The folder title.", json_schema_extra={"examples": ["My Documents"]})
+    used_space: Optional[StrictInt] = Field(default=None, description="The used space in the folder.", alias="usedSpace", json_schema_extra={"examples": [1048576]})
     __properties: ClassVar[List[str]] = ["title", "usedSpace"]
 
     model_config = ConfigDict(

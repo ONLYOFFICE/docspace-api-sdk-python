@@ -35,9 +35,9 @@ class DownloadRequestDtoAllOfFolderIds(BaseModel):
     """
 
     # data type: int
-    anyof_schema_1_validator: Optional[StrictInt] = None
+    anyof_schema_1_validator: Optional[StrictInt] = Field(default=None, json_schema_extra={"examples": [1234]})
     # data type: str
-    anyof_schema_2_validator: Optional[StrictStr] = None
+    anyof_schema_2_validator: Optional[StrictStr] = Field(default=None, json_schema_extra={"examples": ["some text"]})
     if TYPE_CHECKING:
         actual_instance: Optional[Union[int, str]] = None
     else:

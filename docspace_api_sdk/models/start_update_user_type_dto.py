@@ -32,9 +32,9 @@ class StartUpdateUserTypeDto(BaseModel):
     """
     The parameters for updating the type of the user or guest when reassigning rooms and shared files.
     """ # noqa: E501
-    type: Optional[EmployeeType] = None
-    user_id: Optional[UUID] = Field(default=None, description="The user ID.", alias="userId")
-    reassign_user_id: Optional[UUID] = Field(default=None, description="The user ID to reassign.", alias="reassignUserId")
+    type: Optional[EmployeeType] = Field(default=None, description="The user type.")
+    user_id: Optional[UUID] = Field(default=None, description="The user ID.", alias="userId", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000000"]})
+    reassign_user_id: Optional[UUID] = Field(default=None, description="The user ID to reassign.", alias="reassignUserId", json_schema_extra={"examples": ["11111111-1111-1111-1111-111111111111"]})
     __properties: ClassVar[List[str]] = ["type", "userId", "reassignUserId"]
 
     model_config = ConfigDict(

@@ -31,8 +31,8 @@ class UpdateFile(BaseModel):
     """
     The parameters for updating a file.
     """ # noqa: E501
-    title: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=165)]] = Field(default=None, description="The file title to update.")
-    last_version: Optional[StrictInt] = Field(default=None, description="The number of the latest file version.", alias="lastVersion")
+    title: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=165)]] = Field(default=None, description="The file title to update.", json_schema_extra={"examples": ["My Document"]})
+    last_version: Optional[StrictInt] = Field(default=None, description="The number of the latest file version.", alias="lastVersion", json_schema_extra={"examples": [1]})
     __properties: ClassVar[List[str]] = ["title", "lastVersion"]
 
     model_config = ConfigDict(

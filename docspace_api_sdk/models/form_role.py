@@ -32,14 +32,14 @@ class FormRole(BaseModel):
     """
     The form role.
     """ # noqa: E501
-    room_id: Optional[StrictInt] = Field(default=None, description="The room ID.", alias="roomId")
-    role_name: Optional[StrictStr] = Field(default=None, description="The role name.", alias="roleName")
-    role_color: Optional[StrictStr] = Field(default=None, description="The role color.", alias="roleColor")
-    user_id: Optional[UUID] = Field(default=None, description="The user ID.", alias="userId")
-    sequence: Optional[StrictInt] = Field(default=None, description="The role sequence.")
-    submitted: Optional[StrictBool] = Field(default=None, description="Specifies if the role was submitted or not.")
-    opened_at: Optional[datetime] = Field(default=None, description="The date and time when the role was opened.", alias="openedAt")
-    submission_date: Optional[datetime] = Field(default=None, description="The date and time when the role was submitted.", alias="submissionDate")
+    room_id: Optional[StrictInt] = Field(default=None, description="The room ID.", alias="roomId", json_schema_extra={"examples": [1]})
+    role_name: Optional[StrictStr] = Field(default=None, description="The role name.", alias="roleName", json_schema_extra={"examples": ["Manager"]})
+    role_color: Optional[StrictStr] = Field(default=None, description="The role color.", alias="roleColor", json_schema_extra={"examples": ["#4781D1"]})
+    user_id: Optional[UUID] = Field(default=None, description="The user ID.", alias="userId", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000000"]})
+    sequence: Optional[StrictInt] = Field(default=None, description="The role sequence.", json_schema_extra={"examples": [12]})
+    submitted: Optional[StrictBool] = Field(default=None, description="Specifies if the role was submitted or not.", json_schema_extra={"examples": [False]})
+    opened_at: Optional[datetime] = Field(default=None, description="The date and time when the role was opened.", alias="openedAt", json_schema_extra={"examples": ["2026-01-01T10:00:00Z"]})
+    submission_date: Optional[datetime] = Field(default=None, description="The date and time when the role was submitted.", alias="submissionDate", json_schema_extra={"examples": ["2026-01-01T10:00:00Z"]})
     __properties: ClassVar[List[str]] = ["roomId", "roleName", "roleColor", "userId", "sequence", "submitted", "openedAt", "submissionDate"]
 
     model_config = ConfigDict(

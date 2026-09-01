@@ -32,8 +32,8 @@ class CheckDestFolderDto(BaseModel):
     """
     The result of checking whether files can be moved or copied to the specified folder.
     """ # noqa: E501
-    result: Optional[CheckDestFolderResult] = None
-    files: Optional[List[FileEntryBaseDto]] = Field(default=None, description="The list of files in the destination folder.")
+    result: Optional[CheckDestFolderResult] = Field(default=None, description="The result of the validation operation.")
+    files: Optional[List[FileEntryBaseDto]] = Field(default=None, description="The list of files in the destination folder.", json_schema_extra={"examples": [[{"id": 10, "title": "document.docx"}]]})
     __properties: ClassVar[List[str]] = ["result", "files"]
 
     model_config = ConfigDict(

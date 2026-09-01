@@ -21,7 +21,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from docspace_api_sdk.models.logo_requests_dto import LogoRequestsDto
 from typing import Optional, Set
@@ -32,7 +32,7 @@ class ItemKeyValuePairStringLogoRequestsDto(BaseModel):
     ItemKeyValuePairStringLogoRequestsDto
     """ # noqa: E501
     key: Optional[StrictStr] = None
-    value: Optional[LogoRequestsDto] = None
+    value: Optional[LogoRequestsDto] = Field(default=None, description="The request parameters for the theme-specific logo configurations.")
     __properties: ClassVar[List[str]] = ["key", "value"]
 
     model_config = ConfigDict(

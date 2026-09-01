@@ -32,16 +32,16 @@ class CreateThirdPartyRoom(BaseModel):
     """
     The parameters for creating a third-party room.
     """ # noqa: E501
-    create_as_new_folder: Optional[StrictBool] = Field(default=None, description="Specifies whether to create a third-party room as a new folder or not.", alias="createAsNewFolder")
-    title: Optional[StrictStr] = Field(description="The third-party room name to be created.")
-    room_type: RoomType = Field(alias="roomType")
-    private: Optional[StrictBool] = Field(default=None, description="Specifies whether to create the private third-party room or not.")
-    indexing: Optional[StrictBool] = Field(default=None, description="Specifies whether to create the third-party room with indexing.")
-    deny_download: Optional[StrictBool] = Field(default=None, description="Specifies whether to deny downloads from the third-party room.", alias="denyDownload")
-    color: Optional[StrictStr] = Field(default=None, description="The color of the third-party room.")
-    cover: Optional[StrictStr] = Field(default=None, description="The cover of the third-party room.")
-    tags: Optional[List[StrictStr]] = Field(default=None, description="The list of tags of the third-party room.")
-    logo: Optional[LogoRequest] = None
+    create_as_new_folder: Optional[StrictBool] = Field(default=None, description="Specifies whether to create a third-party room as a new folder or not.", alias="createAsNewFolder", json_schema_extra={"examples": [False]})
+    title: Optional[StrictStr] = Field(description="The third-party room name to be created.", json_schema_extra={"examples": ["My Third-Party Room"]})
+    room_type: RoomType = Field(description="The room type.", alias="roomType")
+    private: Optional[StrictBool] = Field(default=None, description="Specifies whether to create the private third-party room or not.", json_schema_extra={"examples": [False]})
+    indexing: Optional[StrictBool] = Field(default=None, description="Specifies whether to create the third-party room with indexing.", json_schema_extra={"examples": [True]})
+    deny_download: Optional[StrictBool] = Field(default=None, description="Specifies whether to deny downloads from the third-party room.", alias="denyDownload", json_schema_extra={"examples": [False]})
+    color: Optional[StrictStr] = Field(default=None, description="The color of the third-party room.", json_schema_extra={"examples": ["#FF0000"]})
+    cover: Optional[StrictStr] = Field(default=None, description="The cover of the third-party room.", json_schema_extra={"examples": ["cover1.jpg"]})
+    tags: Optional[List[StrictStr]] = Field(default=None, description="The list of tags of the third-party room.", json_schema_extra={"examples": [["tag1", "tag2", "tag3"]]})
+    logo: Optional[LogoRequest] = Field(default=None, description="The logo request parameters.")
     __properties: ClassVar[List[str]] = ["createAsNewFolder", "title", "roomType", "private", "indexing", "denyDownload", "color", "cover", "tags", "logo"]
 
     model_config = ConfigDict(

@@ -5,7 +5,7 @@ The company white label settings wrapper.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**settings** | [**CompanyWhiteLabelSettings**](CompanyWhiteLabelSettings.md) |  | [optional] 
+**settings** | [**CompanyWhiteLabelSettings**](CompanyWhiteLabelSettings.md) | The company white label settings. | [optional] 
 
 ## Example
 

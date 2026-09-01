@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **int** | The group ID. | [optional] 
 **name** | **str** | Group name | [optional] 
-**icon** | [**MultiSizeLogoCover**](MultiSizeLogoCover.md) |  | [optional] 
+**icon** | [**MultiSizeLogoCover**](MultiSizeLogoCover.md) | Group icon | [optional] 
 **user_id** | **UUID** | The user ID. | [optional] 
 **rooms** | [**List[FileEntryBaseDto]**](FileEntryBaseDto.md) | The list of rooms in the group. | [optional] 
 **total_rooms** | **int** | Total number of rooms in the group. | [optional] 

@@ -22,7 +22,7 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
 from typing import Optional, Set
@@ -32,12 +32,14 @@ class TenantWalletSettings(BaseModel):
     """
     The tenant wallet settings.
     """ # noqa: E501
-    enabled: Optional[StrictBool] = Field(default=None, description="Specifies whether automatic top-up for the tenant wallet is enabled.")
-    min_balance: Optional[Annotated[int, Field(le=1000, strict=True, ge=5)]] = Field(default=None, description="The minimum wallet balance at which automatic top-up will be triggered. Must be between 5 and 1000.", alias="minBalance")
-    up_to_balance: Optional[Annotated[int, Field(le=5000, strict=True, ge=6)]] = Field(default=None, description="The maximum wallet balance at which automatic top-up will be triggered. Must be between 6 and 5000.", alias="upToBalance")
-    currency: Optional[StrictStr] = Field(default=None, description="The three-character ISO 4217 currency symbol.")
-    last_modified: Optional[datetime] = Field(default=None, description="The date and time when the tenant wallet settings were last modified.", alias="lastModified")
-    __properties: ClassVar[List[str]] = ["enabled", "minBalance", "upToBalance", "currency", "lastModified"]
+    enabled: Optional[StrictBool] = Field(default=None, description="Specifies whether automatic top-up for the tenant wallet is enabled.", json_schema_extra={"examples": [True]})
+    min_balance: Optional[Annotated[int, Field(le=1000, strict=True, ge=5)]] = Field(default=None, description="The minimum wallet balance at which automatic top-up will be triggered. Must be between 5 and 1000.", alias="minBalance", json_schema_extra={"examples": [10]})
+    up_to_balance: Optional[Annotated[int, Field(le=5000, strict=True, ge=6)]] = Field(default=None, description="The maximum wallet balance at which automatic top-up will be triggered. Must be between 6 and 5000.", alias="upToBalance", json_schema_extra={"examples": [100]})
+    currency: Optional[StrictStr] = Field(default=None, description="The three-character ISO 4217 currency symbol.", json_schema_extra={"examples": ["USD"]})
+    low_balance_threshold: Optional[StrictInt] = Field(default=None, description="The wallet balance below which a low-balance notification is sent. Set internally, not user-configurable.", alias="lowBalanceThreshold", json_schema_extra={"examples": [1]})
+    low_balance_notified: Optional[StrictBool] = Field(default=None, description="Specifies whether a low-balance notification has already been sent for the current dip below ASC.Core.Tenants.TenantWalletSettings.LowBalanceThreshold.", alias="lowBalanceNotified", json_schema_extra={"examples": [False]})
+    last_modified: Optional[datetime] = Field(default=None, description="The date and time when the tenant wallet settings were last modified.", alias="lastModified", json_schema_extra={"examples": ["1990-01-01T00:00:00Z"]})
+    __properties: ClassVar[List[str]] = ["enabled", "minBalance", "upToBalance", "currency", "lowBalanceThreshold", "lowBalanceNotified", "lastModified"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -100,6 +102,8 @@ class TenantWalletSettings(BaseModel):
             "minBalance": obj.get("minBalance"),
             "upToBalance": obj.get("upToBalance"),
             "currency": obj.get("currency"),
+            "lowBalanceThreshold": obj.get("lowBalanceThreshold"),
+            "lowBalanceNotified": obj.get("lowBalanceNotified"),
             "lastModified": obj.get("lastModified")
         })
         return _obj

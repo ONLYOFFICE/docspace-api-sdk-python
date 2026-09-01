@@ -31,8 +31,8 @@ class CoverRequestDto(BaseModel):
     """
     The request parameters to change the room cover.
     """ # noqa: E501
-    color: Optional[Annotated[str, Field(strict=True)]] = Field(default=None, description="The cover color.")
-    cover: Optional[StrictStr] = Field(default=None, description="The cover name.")
+    color: Optional[Annotated[str, Field(strict=True)]] = Field(default=None, description="The cover color.", json_schema_extra={"examples": ["FF0000"]})
+    cover: Optional[StrictStr] = Field(default=None, description="The cover name.", json_schema_extra={"examples": ["cover1.jpg"]})
     __properties: ClassVar[List[str]] = ["color", "cover"]
 
     @field_validator('color')
@@ -41,8 +41,8 @@ class CoverRequestDto(BaseModel):
         if value is None:
             return value
 
-        if not re.match(r"^([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$", value):
-            raise ValueError(r"must validate the regular expression /^([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/")
+        if not re.match(r"^[A-Fa-f0-9]{6}$", value):
+            raise ValueError(r"must validate the regular expression /^[A-Fa-f0-9]{6}$/")
         return value
 
     model_config = ConfigDict(

@@ -33,9 +33,9 @@ class DeleteVersionBatchRequestDto(FileOperationRequestBaseDto):
     The request parameters for deleting file versions.
     """
 
-    delete_after: Optional[StrictBool] = Field(default=None, description="Specifies whether to delete a file after the editing session is finished or not.", alias="deleteAfter")
-    file_id: StrictInt = Field(description="The file ID to delete.", alias="fileId")
-    versions: Optional[List[StrictInt]] = Field(description="The collection of file versions to be deleted.")
+    delete_after: Optional[StrictBool] = Field(default=None, description="Specifies whether to delete a file after the editing session is finished or not.", alias="deleteAfter", json_schema_extra={"examples": [False]})
+    file_id: StrictInt = Field(description="The file ID to delete.", alias="fileId", json_schema_extra={"examples": [1]})
+    versions: Optional[List[StrictInt]] = Field(description="The collection of file versions to be deleted.", json_schema_extra={"examples": [[1, 2, 3]]})
 
     model_config = ConfigDict(
         populate_by_name=True,

@@ -31,10 +31,10 @@ class TenantQuotaSettings(BaseModel):
     """
     The tenant quota settings.
     """ # noqa: E501
-    enable_quota: Optional[StrictBool] = Field(default=None, description="Specifies if the tenant quota is enabled or not.", alias="enableQuota")
-    quota: Optional[StrictInt] = Field(default=None, description="The tenant quota.")
-    last_recalculate_date: Optional[datetime] = Field(default=None, description="The date of the last tenant quota recalculation.", alias="lastRecalculateDate")
-    last_modified: Optional[datetime] = Field(default=None, description="The timestamp indicating when the settings were last modified.", alias="lastModified")
+    enable_quota: Optional[StrictBool] = Field(default=None, description="Specifies if the tenant quota is enabled or not.", alias="enableQuota", json_schema_extra={"examples": [True]})
+    quota: Optional[StrictInt] = Field(default=None, description="The tenant quota.", json_schema_extra={"examples": [10737418240]})
+    last_recalculate_date: Optional[datetime] = Field(default=None, description="The date of the last tenant quota recalculation.", alias="lastRecalculateDate", json_schema_extra={"examples": ["1990-01-01T00:00:00Z"]})
+    last_modified: Optional[datetime] = Field(default=None, description="The timestamp indicating when the settings were last modified.", alias="lastModified", json_schema_extra={"examples": ["1990-01-01T00:00:00Z"]})
     __properties: ClassVar[List[str]] = ["enableQuota", "quota", "lastRecalculateDate", "lastModified"]
 
     model_config = ConfigDict(

@@ -30,8 +30,8 @@ class CultureSpecificExternalResource(BaseModel):
     """
     The external resource parameters.
     """ # noqa: E501
-    domain: Optional[StrictStr] = Field(default=None, description="The external resource domain.")
-    entries: Optional[Dict[str, Optional[StrictStr]]] = Field(default=None, description="The external resource entries.")
+    domain: Optional[StrictStr] = Field(default=None, description="The external resource domain.", json_schema_extra={"examples": ["example.com"]})
+    entries: Optional[Dict[str, Optional[StrictStr]]] = Field(default=None, description="The external resource entries.", json_schema_extra={"examples": [{"welcomeMessage": "Welcome", "logoutButton": "Log out"}]})
     __properties: ClassVar[List[str]] = ["domain", "entries"]
 
     model_config = ConfigDict(
@@ -77,11 +77,6 @@ class CultureSpecificExternalResource(BaseModel):
         # and model_fields_set contains the field
         if self.domain is None and "domain" in self.model_fields_set:
             _dict['domain'] = None
-
-        # set to None if entries (nullable) is None
-        # and model_fields_set contains the field
-        if self.entries is None and "entries" in self.model_fields_set:
-            _dict['entries'] = None
 
         return _dict
 

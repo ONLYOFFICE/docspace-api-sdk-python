@@ -6,7 +6,7 @@ The parameters for managing form filling.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **form_id** | **int** | The ID of the form to manage. | 
-**action** | [**FormFillingManageAction**](FormFillingManageAction.md) |  | [optional] 
+**action** | [**FormFillingManageAction**](FormFillingManageAction.md) | The action to perform on the form. | [optional] 
 
 ## Example
 

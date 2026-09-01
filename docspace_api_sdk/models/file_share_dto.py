@@ -35,19 +35,19 @@ class FileShareDto(BaseModel):
     """
     The file sharing information and access rights.
     """ # noqa: E501
-    access: Optional[FileShare] = None
-    shared_to: Optional[Any] = Field(default=None, description="The user who has the access to the specified file.", alias="sharedTo")
-    shared_to_user: Optional[EmployeeFullDto] = Field(default=None, alias="sharedToUser")
-    shared_to_group: Optional[GroupSummaryDto] = Field(default=None, alias="sharedToGroup")
-    shared_link: Optional[FileShareLink] = Field(default=None, alias="sharedLink")
-    is_locked: StrictBool = Field(description="Specifies if the access right is locked or not.", alias="isLocked")
-    is_owner: StrictBool = Field(description="Specifies if the user is an owner of the specified file or not.", alias="isOwner")
-    can_edit_access: StrictBool = Field(description="Specifies if the user can edit the access to the specified file or not.", alias="canEditAccess")
-    can_edit_internal: StrictBool = Field(description="Indicates whether internal editing permissions are granted.", alias="canEditInternal")
-    can_edit_deny_download: StrictBool = Field(description="Determines whether the user has permission to modify the deny download setting for the file share.", alias="canEditDenyDownload")
-    can_edit_expiration_date: StrictBool = Field(description="Indicates whether the expiration date of access permissions can be edited.", alias="canEditExpirationDate")
-    can_revoke: StrictBool = Field(description="Specifies whether the file sharing access can be revoked by the current user.", alias="canRevoke")
-    subject_type: SubjectType = Field(alias="subjectType")
+    access: Optional[FileShare] = Field(default=None, description="The access rights type.")
+    shared_to: Optional[Any] = Field(default=None, alias="sharedTo")
+    shared_to_user: Optional[EmployeeFullDto] = Field(default=None, description="The full list of user parameters.", alias="sharedToUser")
+    shared_to_group: Optional[GroupSummaryDto] = Field(default=None, description="The group summary parameters.", alias="sharedToGroup")
+    shared_link: Optional[FileShareLink] = Field(default=None, description="The user who has the access to the specified file.", alias="sharedLink")
+    is_locked: StrictBool = Field(description="Specifies if the access right is locked or not.", alias="isLocked", json_schema_extra={"examples": [False]})
+    is_owner: StrictBool = Field(description="Specifies if the user is an owner of the specified file or not.", alias="isOwner", json_schema_extra={"examples": [False]})
+    can_edit_access: StrictBool = Field(description="Specifies if the user can edit the access to the specified file or not.", alias="canEditAccess", json_schema_extra={"examples": [True]})
+    can_edit_internal: StrictBool = Field(description="Indicates whether internal editing permissions are granted.", alias="canEditInternal", json_schema_extra={"examples": [True]})
+    can_edit_deny_download: StrictBool = Field(description="Determines whether the user has permission to modify the deny download setting for the file share.", alias="canEditDenyDownload", json_schema_extra={"examples": [True]})
+    can_edit_expiration_date: StrictBool = Field(description="Indicates whether the expiration date of access permissions can be edited.", alias="canEditExpirationDate", json_schema_extra={"examples": [True]})
+    can_revoke: StrictBool = Field(description="Specifies whether the file sharing access can be revoked by the current user.", alias="canRevoke", json_schema_extra={"examples": [True]})
+    subject_type: SubjectType = Field(description="The subject type of the access right.", alias="subjectType")
     __properties: ClassVar[List[str]] = ["access", "sharedTo", "sharedToUser", "sharedToGroup", "sharedLink", "isLocked", "isOwner", "canEditAccess", "canEditInternal", "canEditDenyDownload", "canEditExpirationDate", "canRevoke", "subjectType"]
 
     model_config = ConfigDict(

@@ -22,7 +22,7 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field
-from typing import Any, ClassVar, Dict, List, Optional
+from typing import Any, ClassVar, Dict, List
 from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
@@ -31,9 +31,9 @@ class SalesRequestsDto(BaseModel):
     """
     The request parameters for handling sales and payment inquiries in the portal.
     """ # noqa: E501
-    user_name: Optional[Annotated[str, Field(strict=True, max_length=255)]] = Field(default=None, description="The name of the user submitting the sales request.", alias="userName")
-    email: Optional[Annotated[str, Field(strict=True, max_length=64)]] = Field(description="The contact email address for the sales inquiry.")
-    message: Optional[Annotated[str, Field(strict=True, max_length=255)]] = Field(description="The details of the sales inquiry or payment request.")
+    user_name: Annotated[str, Field(min_length=1, strict=True, max_length=255)] = Field(description="The name of the user submitting the sales request.", alias="userName", json_schema_extra={"examples": ["John Doe"]})
+    email: Annotated[str, Field(min_length=1, strict=True, max_length=64)] = Field(description="The contact email address for the sales inquiry.", json_schema_extra={"examples": ["user@example.com"]})
+    message: Annotated[str, Field(min_length=1, strict=True, max_length=255)] = Field(description="The details of the sales inquiry or payment request.", json_schema_extra={"examples": ["I would like to inquire about pricing"]})
     __properties: ClassVar[List[str]] = ["userName", "email", "message"]
 
     model_config = ConfigDict(
@@ -75,21 +75,6 @@ class SalesRequestsDto(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # set to None if user_name (nullable) is None
-        # and model_fields_set contains the field
-        if self.user_name is None and "user_name" in self.model_fields_set:
-            _dict['userName'] = None
-
-        # set to None if email (nullable) is None
-        # and model_fields_set contains the field
-        if self.email is None and "email" in self.model_fields_set:
-            _dict['email'] = None
-
-        # set to None if message (nullable) is None
-        # and model_fields_set contains the field
-        if self.message is None and "message" in self.model_fields_set:
-            _dict['message'] = None
-
         return _dict
 
     @classmethod

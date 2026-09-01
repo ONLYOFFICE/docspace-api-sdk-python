@@ -31,10 +31,10 @@ class CustomColorThemesSettingsItem(BaseModel):
     """
     The custom color theme settings.
     """ # noqa: E501
-    id: Optional[StrictInt] = Field(default=None, description="The custom color theme ID.")
-    name: Optional[StrictStr] = Field(default=None, description="The custom color theme name.")
-    main: Optional[CustomColorThemesSettingsColorItem] = None
-    text: Optional[CustomColorThemesSettingsColorItem] = None
+    id: Optional[StrictInt] = Field(default=None, description="The custom color theme ID.", json_schema_extra={"examples": [1]})
+    name: Optional[StrictStr] = Field(default=None, description="The custom color theme name.", json_schema_extra={"examples": ["blue"]})
+    main: Optional[CustomColorThemesSettingsColorItem] = Field(default=None, description="The custom color theme main colors.")
+    text: Optional[CustomColorThemesSettingsColorItem] = Field(default=None, description="The custom color theme text colors.")
     __properties: ClassVar[List[str]] = ["id", "name", "main", "text"]
 
     model_config = ConfigDict(

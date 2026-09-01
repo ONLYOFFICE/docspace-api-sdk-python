@@ -31,8 +31,8 @@ class TenantBannerSettings(BaseModel):
     """
     The visibility settings of the promotional banners.
     """ # noqa: E501
-    hidden: Optional[StrictBool] = Field(default=None, description="The banners visibility flag.")
-    last_modified: Optional[datetime] = Field(default=None, description="The timestamp indicating when the settings were last modified.", alias="lastModified")
+    hidden: Optional[StrictBool] = Field(default=None, description="The banners visibility flag.", json_schema_extra={"examples": [False]})
+    last_modified: Optional[datetime] = Field(default=None, description="The timestamp indicating when the settings were last modified.", alias="lastModified", json_schema_extra={"examples": ["1990-01-01T00:00:00Z"]})
     __properties: ClassVar[List[str]] = ["hidden", "lastModified"]
 
     model_config = ConfigDict(

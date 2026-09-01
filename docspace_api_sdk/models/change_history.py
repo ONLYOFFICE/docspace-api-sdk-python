@@ -30,8 +30,8 @@ class ChangeHistory(BaseModel):
     """
     The parameters for changing version history.
     """ # noqa: E501
-    version: StrictInt = Field(description="The file version of the change history.")
-    continue_version: Optional[StrictBool] = Field(default=None, description="Specifies whether to start a new version or continue revision of the change history.", alias="continueVersion")
+    version: StrictInt = Field(description="The file version of the change history.", json_schema_extra={"examples": [1]})
+    continue_version: Optional[StrictBool] = Field(default=None, description="Specifies whether to start a new version or continue revision of the change history.", alias="continueVersion", json_schema_extra={"examples": [False]})
     __properties: ClassVar[List[str]] = ["version", "continueVersion"]
 
     model_config = ConfigDict(

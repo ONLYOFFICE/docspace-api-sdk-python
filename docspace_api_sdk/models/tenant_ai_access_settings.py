@@ -31,8 +31,8 @@ class TenantAiAccessSettings(BaseModel):
     """
     The tenant-level settings for enabling or disabling all AI functionality in DocSpace.
     """ # noqa: E501
-    enabled: Optional[StrictBool] = Field(default=None, description="Specifies whether AI functionality is enabled for the tenant.  When set to `false`, all AI features (chat, agents, vectorization) are disabled tenant-wide.")
-    last_modified: Optional[datetime] = Field(default=None, description="The timestamp indicating when the settings were last modified.", alias="lastModified")
+    enabled: Optional[StrictBool] = Field(default=None, description="Specifies whether AI functionality is enabled for the tenant.  When set to `false`, all AI features (chat, agents, vectorization) are disabled tenant-wide.", json_schema_extra={"examples": [True]})
+    last_modified: Optional[datetime] = Field(default=None, description="The timestamp indicating when the settings were last modified.", alias="lastModified", json_schema_extra={"examples": ["1990-01-01T00:00:00Z"]})
     __properties: ClassVar[List[str]] = ["enabled", "lastModified"]
 
     model_config = ConfigDict(

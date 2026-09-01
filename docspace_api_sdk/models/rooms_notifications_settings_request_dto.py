@@ -30,8 +30,8 @@ class RoomsNotificationsSettingsRequestDto(BaseModel):
     """
     The request parameters for configuring notification settings for the chat or collaboration rooms.
     """ # noqa: E501
-    rooms_id: Optional[Any] = Field(default=None, description="The target room identifier.", alias="roomsId")
-    mute: Optional[StrictBool] = Field(default=None, description="Specifies whether the notifications will be delivered to the specified room or not.")
+    rooms_id: Optional[Any] = Field(default=None, alias="roomsId")
+    mute: Optional[StrictBool] = Field(default=None, description="Specifies whether the notifications will be delivered to the specified room or not.", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["roomsId", "mute"]
 
     model_config = ConfigDict(

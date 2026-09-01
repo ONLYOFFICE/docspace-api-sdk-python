@@ -30,14 +30,14 @@ class FirebaseDto(BaseModel):
     """
     The Firebase parameters.
     """ # noqa: E501
-    api_key: Optional[StrictStr] = Field(description="The Firebase API key.", alias="apiKey")
-    auth_domain: Optional[StrictStr] = Field(description="The Firebase authentication domain.", alias="authDomain")
-    project_id: Optional[StrictStr] = Field(description="The Firebase project ID.", alias="projectId")
-    storage_bucket: Optional[StrictStr] = Field(description="The Firebase storage bucket.", alias="storageBucket")
-    messaging_sender_id: Optional[StrictStr] = Field(description="The Firebase messaging sender ID.", alias="messagingSenderId")
-    app_id: Optional[StrictStr] = Field(description="The Firebase application ID.", alias="appId")
-    measurement_id: Optional[StrictStr] = Field(description="The Firebase measurement ID.", alias="measurementId")
-    database_url: Optional[StrictStr] = Field(description="The Firebase database URL.", alias="databaseURL")
+    api_key: Optional[StrictStr] = Field(description="The Firebase API key.", alias="apiKey", json_schema_extra={"examples": ["AIzaSyDxK9L3j4H8mN2pQ5rS6tU7vW8xY9zA1bC"]})
+    auth_domain: Optional[StrictStr] = Field(description="The Firebase authentication domain.", alias="authDomain", json_schema_extra={"examples": ["myapp-12345.firebaseapp.com"]})
+    project_id: Optional[StrictStr] = Field(description="The Firebase project ID.", alias="projectId", json_schema_extra={"examples": ["myapp-12345"]})
+    storage_bucket: Optional[StrictStr] = Field(description="The Firebase storage bucket.", alias="storageBucket", json_schema_extra={"examples": ["myapp-12345.appspot.com"]})
+    messaging_sender_id: Optional[StrictStr] = Field(description="The Firebase messaging sender ID.", alias="messagingSenderId", json_schema_extra={"examples": ["123456789012"]})
+    app_id: Optional[StrictStr] = Field(description="The Firebase application ID.", alias="appId", json_schema_extra={"examples": ["1:123456789012:web:a1b2c3d4e5f6g7h8"]})
+    measurement_id: Optional[StrictStr] = Field(description="The Firebase measurement ID.", alias="measurementId", json_schema_extra={"examples": ["G-ABCD123456"]})
+    database_url: Optional[StrictStr] = Field(description="The Firebase database URL.", alias="databaseURL", json_schema_extra={"examples": ["https://myapp-12345.firebaseio.com"]})
     __properties: ClassVar[List[str]] = ["apiKey", "authDomain", "projectId", "storageBucket", "messagingSenderId", "appId", "measurementId", "databaseURL"]
 
     model_config = ConfigDict(

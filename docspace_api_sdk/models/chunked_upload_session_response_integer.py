@@ -31,12 +31,12 @@ class ChunkedUploadSessionResponseInteger(BaseModel):
     """
     Represents the response returned from a chunked upload session.
     """ # noqa: E501
-    id: Optional[StrictStr] = Field(default=None, description="The unique identifier for the entity.")
-    path: Optional[List[StrictInt]] = Field(default=None, description="Represents the hierarchical path of folders associated with a chunked upload session.")
-    created: Optional[datetime] = Field(default=None, description="The timestamp indicating when the chunked upload session was created.")
-    expired: Optional[datetime] = Field(default=None, description="The date and time when the chunked upload session is set to expire.")
-    location: Optional[StrictStr] = Field(default=None, description="Represents the URI or path of the chunked upload session's current location.")
-    bytes_total: Optional[StrictInt] = Field(default=None, description="The total size, in bytes, of the file being uploaded in the chunked upload session.")
+    id: Optional[StrictStr] = Field(default=None, description="The unique identifier for the entity.", json_schema_extra={"examples": ["0af4bc0d-9a9d-450c-a72b-f14d9ac55c89"]})
+    path: Optional[List[StrictInt]] = Field(default=None, description="Represents the hierarchical path of folders associated with a chunked upload session.", json_schema_extra={"examples": [["123", "456", "789"]]})
+    created: Optional[datetime] = Field(default=None, description="The timestamp indicating when the chunked upload session was created.", json_schema_extra={"examples": ["2024-01-15T10:30:00Z"]})
+    expired: Optional[datetime] = Field(default=None, description="The date and time when the chunked upload session is set to expire.", json_schema_extra={"examples": ["2024-01-15T11:30:00Z"]})
+    location: Optional[StrictStr] = Field(default=None, description="Represents the URI or path of the chunked upload session's current location.", json_schema_extra={"examples": ["https://example.com/products/files/httphandlers/filehandler.ashx?action=upload"]})
+    bytes_total: Optional[StrictInt] = Field(default=None, description="The total size, in bytes, of the file being uploaded in the chunked upload session.", json_schema_extra={"examples": [10485760]})
     __properties: ClassVar[List[str]] = ["id", "path", "created", "expired", "location", "bytes_total"]
 
     model_config = ConfigDict(

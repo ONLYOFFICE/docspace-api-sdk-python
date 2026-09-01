@@ -30,7 +30,7 @@ class HideConfirmConvertRequestDto(BaseModel):
     """
     The request parameters for hiding the confirmation dialog when converting.
     """ # noqa: E501
-    save: Optional[StrictBool] = Field(default=None, description="Specifies whether to set the specified settings or not.")
+    save: Optional[StrictBool] = Field(default=None, description="Specifies whether to set the specified settings or not.", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["save"]
 
     model_config = ConfigDict(

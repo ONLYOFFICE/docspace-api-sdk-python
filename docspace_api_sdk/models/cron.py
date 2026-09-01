@@ -31,9 +31,9 @@ class Cron(BaseModel):
     """
     The backup cron parameters.
     """ # noqa: E501
-    period: Optional[BackupPeriod] = None
-    hour: Optional[StrictInt] = Field(default=None, description="The time of the day to start the backup process.")
-    day: Optional[StrictInt] = Field(default=None, description="The day of the week to start the backup process.")
+    period: Optional[BackupPeriod] = Field(default=None, description="The backup period type.")
+    hour: Optional[StrictInt] = Field(default=None, description="The time of the day to start the backup process.", json_schema_extra={"examples": [0]})
+    day: Optional[StrictInt] = Field(default=None, description="The day of the week to start the backup process.", json_schema_extra={"examples": [0]})
     __properties: ClassVar[List[str]] = ["period", "hour", "day"]
 
     model_config = ConfigDict(

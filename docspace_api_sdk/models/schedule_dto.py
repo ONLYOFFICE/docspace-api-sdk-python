@@ -33,12 +33,12 @@ class ScheduleDto(BaseModel):
     """
     The backup schedule parameters.
     """ # noqa: E501
-    storage_type: BackupStorageType = Field(alias="storageType")
-    storage_params: Optional[Dict[str, Optional[StrictStr]]] = Field(description="The backup storage parameters.", alias="storageParams")
-    cron_params: CronParams = Field(alias="cronParams")
-    backups_stored: Optional[StrictInt] = Field(default=None, description="The maximum number of the stored backup copies.", alias="backupsStored")
-    last_backup_time: datetime = Field(description="The date and time when the last backup was reated.", alias="lastBackupTime")
-    dump: StrictBool = Field(description="Specifies if a dump will be created or not.")
+    storage_type: BackupStorageType = Field(description="The backup storage type.", alias="storageType")
+    storage_params: Dict[str, Optional[StrictStr]] = Field(description="The backup storage parameters.", alias="storageParams", json_schema_extra={"examples": [{}]})
+    cron_params: CronParams = Field(description="The backup cron parameters.", alias="cronParams")
+    backups_stored: Optional[StrictInt] = Field(default=None, description="The maximum number of the stored backup copies.", alias="backupsStored", json_schema_extra={"examples": [5]})
+    last_backup_time: datetime = Field(description="The date and time when the last backup was reated.", alias="lastBackupTime", json_schema_extra={"examples": ["2026-01-01T00:00:00Z"]})
+    dump: StrictBool = Field(description="Specifies if a dump will be created or not.", json_schema_extra={"examples": [False]})
     __properties: ClassVar[List[str]] = ["storageType", "storageParams", "cronParams", "backupsStored", "lastBackupTime", "dump"]
 
     model_config = ConfigDict(
@@ -83,11 +83,6 @@ class ScheduleDto(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of cron_params
         if self.cron_params:
             _dict['cronParams'] = self.cron_params.to_dict()
-        # set to None if storage_params (nullable) is None
-        # and model_fields_set contains the field
-        if self.storage_params is None and "storage_params" in self.model_fields_set:
-            _dict['storageParams'] = None
-
         # set to None if backups_stored (nullable) is None
         # and model_fields_set contains the field
         if self.backups_stored is None and "backups_stored" in self.model_fields_set:

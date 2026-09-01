@@ -5,11 +5,11 @@ The file sharing information and access rights.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**access** | [**FileShare**](FileShare.md) |  | [optional] 
-**shared_to** | **object** | The user who has the access to the specified file. | [optional] 
-**shared_to_user** | [**EmployeeFullDto**](EmployeeFullDto.md) |  | [optional] 
-**shared_to_group** | [**GroupSummaryDto**](GroupSummaryDto.md) |  | [optional] 
-**shared_link** | [**FileShareLink**](FileShareLink.md) |  | [optional] 
+**access** | [**FileShare**](FileShare.md) | The access rights type. | [optional] 
+**shared_to** | **object** |  | [optional] 
+**shared_to_user** | [**EmployeeFullDto**](EmployeeFullDto.md) | The full list of user parameters. | [optional] 
+**shared_to_group** | [**GroupSummaryDto**](GroupSummaryDto.md) | The group summary parameters. | [optional] 
+**shared_link** | [**FileShareLink**](FileShareLink.md) | The user who has the access to the specified file. | [optional] 
 **is_locked** | **bool** | Specifies if the access right is locked or not. | 
 **is_owner** | **bool** | Specifies if the user is an owner of the specified file or not. | 
 **can_edit_access** | **bool** | Specifies if the user can edit the access to the specified file or not. | 
@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 **can_edit_deny_download** | **bool** | Determines whether the user has permission to modify the deny download setting for the file share. | 
 **can_edit_expiration_date** | **bool** | Indicates whether the expiration date of access permissions can be edited. | 
 **can_revoke** | **bool** | Specifies whether the file sharing access can be revoked by the current user. | 
-**subject_type** | [**SubjectType**](SubjectType.md) |  | 
+**subject_type** | [**SubjectType**](SubjectType.md) | The subject type of the access right. | 
 
 ## Example
 

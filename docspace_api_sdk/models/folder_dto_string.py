@@ -46,33 +46,33 @@ class FolderDtoString(FileEntryDtoString):
     The folder parameters.
     """
 
-    parent_id: Optional[StrictStr] = Field(default=None, description="The parent folder ID of the folder.", alias="parentId")
-    files_count: Optional[StrictInt] = Field(default=None, description="The number of files that the folder contains.", alias="filesCount")
-    folders_count: Optional[StrictInt] = Field(default=None, description="The number of folders that the folder contains.", alias="foldersCount")
-    is_shareable: Optional[StrictBool] = Field(default=None, description="Specifies if the folder can be shared or not.", alias="isShareable")
-    new: Optional[StrictInt] = Field(default=None, description="The new element index in the folder.")
-    mute: Optional[StrictBool] = Field(default=None, description="Specifies if the folder notifications are enabled or not.")
-    tags: Optional[List[StrictStr]] = Field(default=None, description="The list of tags of the folder.")
-    logo: Optional[Logo] = None
-    pinned: Optional[StrictBool] = Field(default=None, description="Specifies if the folder is pinned or not.")
-    room_type: Optional[RoomType] = Field(default=None, alias="roomType")
-    private: Optional[StrictBool] = Field(default=None, description="Specifies if the folder is private or not.")
-    indexing: Optional[StrictBool] = Field(default=None, description="Specifies if the folder is indexed or not.")
-    deny_download: Optional[StrictBool] = Field(default=None, description="Specifies if the folder can be downloaded or not.", alias="denyDownload")
-    lifetime: Optional[RoomDataLifetimeDto] = None
-    watermark: Optional[WatermarkDto] = None
-    type: Optional[FolderType] = None
-    in_room: Optional[StrictBool] = Field(default=None, description="Specifies if the folder is placed in the room or not.", alias="inRoom")
-    quota_limit: Optional[StrictInt] = Field(default=None, description="The folder quota limit.", alias="quotaLimit")
-    is_custom_quota: Optional[StrictBool] = Field(default=None, description="Specifies if the folder room has a custom quota or not.", alias="isCustomQuota")
-    used_space: Optional[StrictInt] = Field(default=None, description="How much folder space is used (counter).", alias="usedSpace")
-    password_protected: Optional[StrictBool] = Field(default=None, description="Specifies if the folder is password protected or not.", alias="passwordProtected")
-    expired: Optional[StrictBool] = Field(default=None, description="Specifies if an external link to the folder is expired or not.")
-    chat_settings: Optional[ChatSettingsDto] = Field(default=None, alias="chatSettings")
-    root_room_type: Optional[RoomType] = Field(default=None, alias="rootRoomType")
-    save_form_as_xlsx: Optional[StrictBool] = Field(default=None, description="Specifies whether to save form data as XLSX file.", alias="saveFormAsXLSX")
-    send_form_to_external_db: Optional[StrictBool] = Field(default=None, description="Specifies whether to send form data to external database.", alias="sendFormToExternalDB")
-    original_form_id: Optional[StrictInt] = Field(default=None, description="The original form ID that corresponds to this FormFillingFolderDone folder.", alias="originalFormId")
+    parent_id: Optional[StrictStr] = Field(default=None, description="The parent folder ID of the folder.", alias="parentId", json_schema_extra={"examples": ["10"]})
+    files_count: Optional[StrictInt] = Field(default=None, description="The number of files that the folder contains.", alias="filesCount", json_schema_extra={"examples": [5]})
+    folders_count: Optional[StrictInt] = Field(default=None, description="The number of folders that the folder contains.", alias="foldersCount", json_schema_extra={"examples": [7]})
+    is_shareable: Optional[StrictBool] = Field(default=None, description="Specifies if the folder can be shared or not.", alias="isShareable", json_schema_extra={"examples": [True]})
+    new: Optional[StrictInt] = Field(default=None, description="The new element index in the folder.", json_schema_extra={"examples": [0]})
+    mute: Optional[StrictBool] = Field(default=None, description="Specifies if the folder notifications are enabled or not.", json_schema_extra={"examples": [False]})
+    tags: Optional[List[StrictStr]] = Field(default=None, description="The list of tags of the folder.", json_schema_extra={"examples": [["tag1", "tag2"]]})
+    logo: Optional[Logo] = Field(default=None, description="The folder logo.")
+    pinned: Optional[StrictBool] = Field(default=None, description="Specifies if the folder is pinned or not.", json_schema_extra={"examples": [False]})
+    room_type: Optional[RoomType] = Field(default=None, description="The room type of the folder.", alias="roomType")
+    private: Optional[StrictBool] = Field(default=None, description="Specifies if the folder is private or not.", json_schema_extra={"examples": [False]})
+    indexing: Optional[StrictBool] = Field(default=None, description="Specifies if the folder is indexed or not.", json_schema_extra={"examples": [True]})
+    deny_download: Optional[StrictBool] = Field(default=None, description="Specifies if the folder can be downloaded or not.", alias="denyDownload", json_schema_extra={"examples": [False]})
+    lifetime: Optional[RoomDataLifetimeDto] = Field(default=None, description="The room data lifetime settings of the folder.")
+    watermark: Optional[WatermarkDto] = Field(default=None, description="The watermark settings of the folder.")
+    type: Optional[FolderType] = Field(default=None, description="The folder type.")
+    in_room: Optional[StrictBool] = Field(default=None, description="Specifies if the folder is placed in the room or not.", alias="inRoom", json_schema_extra={"examples": [False]})
+    quota_limit: Optional[StrictInt] = Field(default=None, description="The folder quota limit.", alias="quotaLimit", json_schema_extra={"examples": [1073741824]})
+    is_custom_quota: Optional[StrictBool] = Field(default=None, description="Specifies if the folder room has a custom quota or not.", alias="isCustomQuota", json_schema_extra={"examples": [False]})
+    used_space: Optional[StrictInt] = Field(default=None, description="How much folder space is used (counter).", alias="usedSpace", json_schema_extra={"examples": [524288000]})
+    password_protected: Optional[StrictBool] = Field(default=None, description="Specifies if the folder is password protected or not.", alias="passwordProtected", json_schema_extra={"examples": [False]})
+    expired: Optional[StrictBool] = Field(default=None, description="Specifies if an external link to the folder is expired or not.", json_schema_extra={"examples": [False]})
+    chat_settings: Optional[ChatSettingsDto] = Field(default=None, description="The AI chat settings for the folder room. Contains configuration for AI provider, model selection, and custom prompts.  Only applicable to rooms with AI chat functionality enabled. Null if the room does not have chat settings configured.", alias="chatSettings")
+    root_room_type: Optional[RoomType] = Field(default=None, description="The room type of the root folder. Indicates the type of the parent room if the current folder is nested within a room hierarchy.  This property helps identify the context in which a nested folder exists.", alias="rootRoomType")
+    save_form_as_xlsx: Optional[StrictBool] = Field(default=None, description="Specifies whether to save form data as XLSX file.", alias="saveFormAsXLSX", json_schema_extra={"examples": [False]})
+    send_form_to_external_db: Optional[StrictBool] = Field(default=None, description="Specifies whether to send form data to external database.", alias="sendFormToExternalDB", json_schema_extra={"examples": [False]})
+    original_form_id: Optional[StrictInt] = Field(default=None, description="The original form ID that corresponds to this FormFillingFolderDone folder.", alias="originalFormId", json_schema_extra={"examples": [42]})
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -157,71 +157,6 @@ class FolderDtoString(FileEntryDtoString):
         # override the default output from pydantic by calling `to_dict()` of chat_settings
         if self.chat_settings:
             _dict['chatSettings'] = self.chat_settings.to_dict()
-        # set to None if title (nullable) is None
-        # and model_fields_set contains the field
-        if self.title is None and "title" in self.model_fields_set:
-            _dict['title'] = None
-
-        # set to None if short_web_url (nullable) is None
-        # and model_fields_set contains the field
-        if self.short_web_url is None and "short_web_url" in self.model_fields_set:
-            _dict['shortWebUrl'] = None
-
-        # set to None if provider_item (nullable) is None
-        # and model_fields_set contains the field
-        if self.provider_item is None and "provider_item" in self.model_fields_set:
-            _dict['providerItem'] = None
-
-        # set to None if provider_key (nullable) is None
-        # and model_fields_set contains the field
-        if self.provider_key is None and "provider_key" in self.model_fields_set:
-            _dict['providerKey'] = None
-
-        # set to None if provider_id (nullable) is None
-        # and model_fields_set contains the field
-        if self.provider_id is None and "provider_id" in self.model_fields_set:
-            _dict['providerId'] = None
-
-        # set to None if order (nullable) is None
-        # and model_fields_set contains the field
-        if self.order is None and "order" in self.model_fields_set:
-            _dict['order'] = None
-
-        # set to None if is_favorite (nullable) is None
-        # and model_fields_set contains the field
-        if self.is_favorite is None and "is_favorite" in self.model_fields_set:
-            _dict['isFavorite'] = None
-
-        # set to None if id (nullable) is None
-        # and model_fields_set contains the field
-        if self.id is None and "id" in self.model_fields_set:
-            _dict['id'] = None
-
-        # set to None if root_folder_id (nullable) is None
-        # and model_fields_set contains the field
-        if self.root_folder_id is None and "root_folder_id" in self.model_fields_set:
-            _dict['rootFolderId'] = None
-
-        # set to None if origin_id (nullable) is None
-        # and model_fields_set contains the field
-        if self.origin_id is None and "origin_id" in self.model_fields_set:
-            _dict['originId'] = None
-
-        # set to None if origin_room_id (nullable) is None
-        # and model_fields_set contains the field
-        if self.origin_room_id is None and "origin_room_id" in self.model_fields_set:
-            _dict['originRoomId'] = None
-
-        # set to None if origin_title (nullable) is None
-        # and model_fields_set contains the field
-        if self.origin_title is None and "origin_title" in self.model_fields_set:
-            _dict['originTitle'] = None
-
-        # set to None if origin_room_title (nullable) is None
-        # and model_fields_set contains the field
-        if self.origin_room_title is None and "origin_room_title" in self.model_fields_set:
-            _dict['originRoomTitle'] = None
-
         # set to None if share_settings (nullable) is None
         # and model_fields_set contains the field
         if self.share_settings is None and "share_settings" in self.model_fields_set:
@@ -236,21 +171,6 @@ class FolderDtoString(FileEntryDtoString):
         # and model_fields_set contains the field
         if self.available_share_rights is None and "available_share_rights" in self.model_fields_set:
             _dict['availableShareRights'] = None
-
-        # set to None if request_token (nullable) is None
-        # and model_fields_set contains the field
-        if self.request_token is None and "request_token" in self.model_fields_set:
-            _dict['requestToken'] = None
-
-        # set to None if external (nullable) is None
-        # and model_fields_set contains the field
-        if self.external is None and "external" in self.model_fields_set:
-            _dict['external'] = None
-
-        # set to None if is_link_expired (nullable) is None
-        # and model_fields_set contains the field
-        if self.is_link_expired is None and "is_link_expired" in self.model_fields_set:
-            _dict['isLinkExpired'] = None
 
         # set to None if parent_id (nullable) is None
         # and model_fields_set contains the field

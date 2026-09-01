@@ -31,12 +31,12 @@ class SessionRequest(BaseModel):
     """
     The session request parameters.
     """ # noqa: E501
-    file_name: Optional[StrictStr] = Field(description="The file name.", alias="fileName")
-    file_size: Optional[StrictInt] = Field(default=None, description="The file size.", alias="fileSize")
-    relative_path: Optional[StrictStr] = Field(default=None, description="The relative path to the file.", alias="relativePath")
-    create_on: Optional[ApiDateTime] = Field(default=None, alias="createOn")
-    encrypted: Optional[StrictBool] = Field(default=None, description="Specifies whether the file is encrypted or not.")
-    create_new_if_exist: Optional[StrictBool] = Field(default=None, description="Specifies whether to create a new file if it already exists.", alias="createNewIfExist")
+    file_name: Optional[StrictStr] = Field(description="The file name.", alias="fileName", json_schema_extra={"examples": ["My Document.docx"]})
+    file_size: Optional[StrictInt] = Field(default=None, description="The file size.", alias="fileSize", json_schema_extra={"examples": [10485760]})
+    relative_path: Optional[StrictStr] = Field(default=None, description="The relative path to the file.", alias="relativePath", json_schema_extra={"examples": ["subfolder/documents"]})
+    create_on: Optional[ApiDateTime] = Field(default=None, description="The API date and time parameters.", alias="createOn")
+    encrypted: Optional[StrictBool] = Field(default=None, description="Specifies whether the file is encrypted or not.", json_schema_extra={"examples": [False]})
+    create_new_if_exist: Optional[StrictBool] = Field(default=None, description="Specifies whether to create a new file if it already exists.", alias="createNewIfExist", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["fileName", "fileSize", "relativePath", "createOn", "encrypted", "createNewIfExist"]
 
     model_config = ConfigDict(

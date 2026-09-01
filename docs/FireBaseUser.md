@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **firebase_device_token** | **str** | The Firebase device token. | [optional] 
 **application** | **str** | The Firebase application. | [optional] 
 **is_subscribed** | **bool** | Specifies if the user is subscribed to the push notifications or not. | [optional] 
-**tenant** | [**DbTenant**](DbTenant.md) |  | [optional] 
+**tenant** | [**DbTenant**](DbTenant.md) | The database tenant parameters. | [optional] 
 
 ## Example
 

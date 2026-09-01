@@ -31,9 +31,9 @@ class WebItemSecurityRequestsDto(BaseModel):
     """
     The request parameters for configuring security settings of a single web module.
     """ # noqa: E501
-    id: Optional[StrictStr] = Field(description="The module ID.")
-    enabled: Optional[StrictBool] = Field(default=None, description="Controls whether the security restrictions are enforced for this module.")
-    subjects: Optional[List[UUID]] = Field(default=None, description="The collection of user and group identifiers granted access to the module.")
+    id: Optional[StrictStr] = Field(description="The module ID.", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000000"]})
+    enabled: Optional[StrictBool] = Field(default=None, description="Controls whether the security restrictions are enforced for this module.", json_schema_extra={"examples": [True]})
+    subjects: Optional[List[UUID]] = Field(default=None, description="The collection of user and group identifiers granted access to the module.", json_schema_extra={"examples": [["00000000-0000-0000-0000-000000000000"]]})
     __properties: ClassVar[List[str]] = ["id", "enabled", "subjects"]
 
     model_config = ConfigDict(

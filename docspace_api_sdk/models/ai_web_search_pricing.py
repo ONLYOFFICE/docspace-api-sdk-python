@@ -30,10 +30,11 @@ class AiWebSearchPricing(BaseModel):
     """
     AiWebSearchPricing
     """ # noqa: E501
+    id: Optional[StrictStr] = None
     provider: Optional[StrictStr] = None
-    search: Optional[Union[StrictFloat, StrictInt]] = None
-    contents: Optional[Union[StrictFloat, StrictInt]] = None
-    __properties: ClassVar[List[str]] = ["provider", "search", "contents"]
+    price: Optional[Union[StrictFloat, StrictInt]] = None
+    link: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["id", "provider", "price", "link"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -74,10 +75,20 @@ class AiWebSearchPricing(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if id (nullable) is None
+        # and model_fields_set contains the field
+        if self.id is None and "id" in self.model_fields_set:
+            _dict['id'] = None
+
         # set to None if provider (nullable) is None
         # and model_fields_set contains the field
         if self.provider is None and "provider" in self.model_fields_set:
             _dict['provider'] = None
+
+        # set to None if link (nullable) is None
+        # and model_fields_set contains the field
+        if self.link is None and "link" in self.model_fields_set:
+            _dict['link'] = None
 
         return _dict
 
@@ -92,9 +103,10 @@ class AiWebSearchPricing(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "id": obj.get("id"),
             "provider": obj.get("provider"),
-            "search": obj.get("search"),
-            "contents": obj.get("contents")
+            "price": obj.get("price"),
+            "link": obj.get("link")
         })
         return _obj
 

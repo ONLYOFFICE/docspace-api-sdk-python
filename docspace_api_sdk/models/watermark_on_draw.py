@@ -31,13 +31,13 @@ class WatermarkOnDraw(BaseModel):
     """
     The document watermark parameters.
     """ # noqa: E501
-    width: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Defines the watermark width measured in millimeters.")
-    height: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Defines the watermark height measured in millimeters.")
-    margins: Optional[List[StrictInt]] = Field(default=None, description="Defines the watermark margins measured in millimeters.")
-    fill: Optional[StrictStr] = Field(default=None, description="Defines the watermark fill color.")
-    rotate: Optional[StrictInt] = Field(default=None, description="Defines the watermark rotation angle.")
-    transparent: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Defines the watermark transparency percentage.")
-    paragraphs: Optional[List[Paragraph]] = Field(default=None, description="The list of paragraphs of the watermark.")
+    width: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Defines the watermark width measured in millimeters.", json_schema_extra={"examples": [150]})
+    height: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Defines the watermark height measured in millimeters.", json_schema_extra={"examples": [100]})
+    margins: Optional[List[StrictInt]] = Field(default=None, description="Defines the watermark margins measured in millimeters.", json_schema_extra={"examples": [[10, 10, 10, 10]]})
+    fill: Optional[StrictStr] = Field(default=None, description="Defines the watermark fill color.", json_schema_extra={"examples": ["#FF0000"]})
+    rotate: Optional[StrictInt] = Field(default=None, description="Defines the watermark rotation angle.", json_schema_extra={"examples": [45]})
+    transparent: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Defines the watermark transparency percentage.", json_schema_extra={"examples": [0.4]})
+    paragraphs: Optional[List[Paragraph]] = Field(default=None, description="The list of paragraphs of the watermark.", json_schema_extra={"examples": [[{"align": 2, "runs": [{"fill": [124, 124, 124], "text": "CONFIDENTIAL", "fontSize": 26}]}]]})
     __properties: ClassVar[List[str]] = ["width", "height", "margins", "fill", "rotate", "transparent", "paragraphs"]
 
     model_config = ConfigDict(

@@ -21,7 +21,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List, Optional
 from docspace_api_sdk.models.tenant_wallet_settings import TenantWalletSettings
 from typing import Optional, Set
@@ -31,7 +31,7 @@ class TenantWalletSettingsWrapper(BaseModel):
     """
     The wrapper for the tenant wallet settings.
     """ # noqa: E501
-    settings: Optional[TenantWalletSettings] = None
+    settings: Optional[TenantWalletSettings] = Field(default=None, description="The tenant wallet settings.")
     __properties: ClassVar[List[str]] = ["settings"]
 
     model_config = ConfigDict(

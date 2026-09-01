@@ -33,15 +33,15 @@ class EditHistoryDto(BaseModel):
     """
     The file editing history parameters.
     """ # noqa: E501
-    id: Optional[StrictInt] = Field(default=None, description="The document ID.")
-    key: Optional[StrictStr] = Field(default=None, description="The document identifier used to unambiguously identify the document file.")
-    version: Optional[StrictInt] = Field(default=None, description="The document version number.")
-    version_group: Optional[StrictInt] = Field(default=None, description="The document version group.", alias="versionGroup")
-    user: Optional[EditHistoryAuthor] = None
-    created: Optional[ApiDateTime] = None
-    changes_history: Optional[StrictStr] = Field(default=None, description="The file history changes in the string format.", alias="changesHistory")
-    changes: Optional[List[EditHistoryChangesWrapper]] = Field(default=None, description="The list of file history changes.")
-    server_version: Optional[StrictStr] = Field(default=None, description="The current server version number.", alias="serverVersion")
+    id: Optional[StrictInt] = Field(default=None, description="The document ID.", json_schema_extra={"examples": [123]})
+    key: Optional[StrictStr] = Field(default=None, description="The document identifier used to unambiguously identify the document file.", json_schema_extra={"examples": ["doc-key-abc123"]})
+    version: Optional[StrictInt] = Field(default=None, description="The document version number.", json_schema_extra={"examples": [2]})
+    version_group: Optional[StrictInt] = Field(default=None, description="The document version group.", alias="versionGroup", json_schema_extra={"examples": [1]})
+    user: Optional[EditHistoryAuthor] = Field(default=None, description="The information about the file editing history author.")
+    created: Optional[ApiDateTime] = Field(default=None, description="The API date and time parameters.")
+    changes_history: Optional[StrictStr] = Field(default=None, description="The file history changes in the string format.", alias="changesHistory", json_schema_extra={"examples": ["Changes history text"]})
+    changes: Optional[List[EditHistoryChangesWrapper]] = Field(default=None, description="The list of file history changes.", json_schema_extra={"examples": [[{"user": {"id": "123", "name": "John Doe"}, "created": "2021-01-01T00:00:00Z"}]]})
+    server_version: Optional[StrictStr] = Field(default=None, description="The current server version number.", alias="serverVersion", json_schema_extra={"examples": ["8.0.1"]})
     __properties: ClassVar[List[str]] = ["id", "key", "version", "versionGroup", "user", "created", "changesHistory", "changes", "serverVersion"]
 
     model_config = ConfigDict(

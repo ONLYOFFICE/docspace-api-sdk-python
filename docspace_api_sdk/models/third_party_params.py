@@ -31,12 +31,12 @@ class ThirdPartyParams(BaseModel):
     """
     The third-party account parameters.
     """ # noqa: E501
-    auth_data: Optional[AuthData] = None
-    corporate: Optional[StrictBool] = Field(default=None, description="Specifies if this is a corporate account or not.")
-    rooms_storage: Optional[StrictBool] = Field(default=None, description="Specifies if this is a room storage or not.", alias="roomsStorage")
-    customer_title: Optional[StrictStr] = Field(default=None, description="The customer title.")
-    provider_id: Optional[StrictInt] = Field(default=None, description="The provider ID.")
-    provider_key: Optional[StrictStr] = Field(default=None, description="The provider key.")
+    auth_data: Optional[AuthData] = Field(default=None, description="The authentication data.")
+    corporate: Optional[StrictBool] = Field(default=None, description="Specifies if this is a corporate account or not.", json_schema_extra={"examples": [False]})
+    rooms_storage: Optional[StrictBool] = Field(default=None, description="Specifies if this is a room storage or not.", alias="roomsStorage", json_schema_extra={"examples": [False]})
+    customer_title: Optional[StrictStr] = Field(default=None, description="The customer title.", json_schema_extra={"examples": ["My Storage"]})
+    provider_id: Optional[StrictInt] = Field(default=None, description="The provider ID.", json_schema_extra={"examples": [1]})
+    provider_key: Optional[StrictStr] = Field(default=None, description="The provider key.", json_schema_extra={"examples": ["GoogleDrive"]})
     __properties: ClassVar[List[str]] = ["auth_data", "corporate", "roomsStorage", "customer_title", "provider_id", "provider_key"]
 
     model_config = ConfigDict(

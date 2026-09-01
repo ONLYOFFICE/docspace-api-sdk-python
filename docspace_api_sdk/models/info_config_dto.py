@@ -32,12 +32,12 @@ class InfoConfigDto(BaseModel):
     """
     The information config parameters.
     """ # noqa: E501
-    favorite: Optional[StrictBool] = Field(default=None, description="Specifies if the file is favorite or not.")
-    folder: Optional[StrictStr] = Field(default=None, description="The folder of the file.")
-    owner: Optional[StrictStr] = Field(default=None, description="The file owner.")
-    sharing_settings: Optional[List[AceShortWrapper]] = Field(default=None, description="The sharing settings of the file.", alias="sharingSettings")
-    type: Optional[EditorType] = None
-    uploaded: Optional[StrictStr] = Field(default=None, description="The uploaded file.")
+    favorite: Optional[StrictBool] = Field(default=None, description="Specifies if the file is favorite or not.", json_schema_extra={"examples": [False]})
+    folder: Optional[StrictStr] = Field(default=None, description="The folder of the file.", json_schema_extra={"examples": ["My Documents"]})
+    owner: Optional[StrictStr] = Field(default=None, description="The file owner.", json_schema_extra={"examples": ["John Doe"]})
+    sharing_settings: Optional[List[AceShortWrapper]] = Field(default=None, description="The sharing settings of the file.", alias="sharingSettings", json_schema_extra={"examples": [[]]})
+    type: Optional[EditorType] = Field(default=None, description="The editor type.")
+    uploaded: Optional[StrictStr] = Field(default=None, description="The uploaded file.", json_schema_extra={"examples": ["2025-01-01T00:00:00"]})
     __properties: ClassVar[List[str]] = ["favorite", "folder", "owner", "sharingSettings", "type", "uploaded"]
 
     model_config = ConfigDict(

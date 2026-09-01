@@ -31,8 +31,8 @@ class UpdateTagRequestDto(BaseModel):
     """
     The request parameters for creating a tag.
     """ # noqa: E501
-    old_name: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(description="The old tag name.", alias="oldName")
-    new_name: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(description="The new tag name.", alias="newName")
+    old_name: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(description="The old tag name.", alias="oldName", json_schema_extra={"examples": ["old-tag"]})
+    new_name: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(description="The new tag name.", alias="newName", json_schema_extra={"examples": ["new-tag"]})
     __properties: ClassVar[List[str]] = ["oldName", "newName"]
 
     model_config = ConfigDict(

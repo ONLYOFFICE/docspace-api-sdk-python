@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **service_group** | **str** | The service group. | [optional] 
 **visible** | **bool** | Specifies if the tenant quota is visible or not. | [optional] 
 **wallet** | **bool** | Specifies if the tenant quota applies to the wallet or not | [optional] 
+**additional** | **bool** | Specifies if the tenant quota is primary or additional. | [optional] 
 **due_date** | **datetime** | The quota due date. | [optional] 
 **features** | **str** | The tenant quota features. | [optional] 
 **max_file_size** | **int** | The tenant maximum file size. | [optional] 
@@ -46,6 +47,10 @@ Name | Type | Description | Notes
 **backup** | **bool** | Specifies if the backup enabled as a wallet service or not. | [optional] 
 **count_ai_agent** | **int** | The number of AI agents. | [optional] 
 **ai_tools** | **bool** | Specifies if the AI tools enabled as a wallet service or not. | [optional] 
+**ai_search** | **bool** | Specifies if the AI search enabled as a wallet service or not. | [optional] 
+**docs_cloud** | **int** | The number of DocsCloud users. | [optional] 
+**docs_cloud_dev_pack** | **bool** | Specifies if the DocsCloudDevPack enabled or not. | [optional] 
+**docs_cloud_trial** | **bool** | Specifies if the DocsCloudTrial enabled or not. | [optional] 
 
 ## Example
 

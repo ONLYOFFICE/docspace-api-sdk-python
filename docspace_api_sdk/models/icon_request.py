@@ -30,7 +30,7 @@ class IconRequest(BaseModel):
     """
     IconRequest
     """ # noqa: E501
-    icon: Optional[StrictStr] = Field(default=None, description="Group icon")
+    icon: Optional[StrictStr] = Field(default=None, description="Group icon", json_schema_extra={"examples": ["https://example.com/image.png"]})
     __properties: ClassVar[List[str]] = ["icon"]
 
     model_config = ConfigDict(

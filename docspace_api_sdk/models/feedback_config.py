@@ -30,8 +30,8 @@ class FeedbackConfig(BaseModel):
     """
     The settings for the Feedback & Support menu button.
     """ # noqa: E501
-    url: Optional[StrictStr] = Field(default=None, description="The absolute URL to the website address which will be opened when clicking the Feedback & Support menu button.")
-    visible: Optional[StrictBool] = Field(default=None, description="Shows or hides the Feedback & Support menu button.")
+    url: Optional[StrictStr] = Field(default=None, description="The absolute URL to the website address which will be opened when clicking the Feedback & Support menu button.", json_schema_extra={"examples": ["https://portal.example.com/support"]})
+    visible: Optional[StrictBool] = Field(default=None, description="Shows or hides the Feedback & Support menu button.", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["url", "visible"]
 
     model_config = ConfigDict(

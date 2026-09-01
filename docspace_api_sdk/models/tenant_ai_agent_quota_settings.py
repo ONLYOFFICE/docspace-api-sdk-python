@@ -34,7 +34,7 @@ class TenantAiAgentQuotaSettings(TenantEntityQuotaSettings):
     The AI agent quota settings.
     """
 
-    last_modified: Optional[datetime] = Field(default=None, description="The timestamp indicating when the settings were last modified.", alias="lastModified")
+    last_modified: Optional[datetime] = Field(default=None, description="The timestamp indicating when the settings were last modified.", alias="lastModified", json_schema_extra={"examples": ["1990-01-01T00:00:00Z"]})
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -74,11 +74,6 @@ class TenantAiAgentQuotaSettings(TenantEntityQuotaSettings):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # set to None if last_recalculate_date (nullable) is None
-        # and model_fields_set contains the field
-        if self.last_recalculate_date is None and "last_recalculate_date" in self.model_fields_set:
-            _dict['lastRecalculateDate'] = None
-
         return _dict
 
     @classmethod

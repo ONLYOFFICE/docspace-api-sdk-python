@@ -31,15 +31,15 @@ class Module(BaseModel):
     """
     The module information.
     """ # noqa: E501
-    id: Optional[UUID] = Field(default=None, description="The module ID.")
-    app_name: Optional[StrictStr] = Field(default=None, description="The module product class name.", alias="appName")
-    title: Optional[StrictStr] = Field(default=None, description="The module product class name.")
-    link: Optional[StrictStr] = Field(default=None, description="The URL to the module start page.")
-    icon_url: Optional[StrictStr] = Field(default=None, description="The module icon URL.", alias="iconUrl")
-    image_url: Optional[StrictStr] = Field(default=None, description="The module large image URL.", alias="imageUrl")
-    help_url: Optional[StrictStr] = Field(default=None, description="The module help URL.", alias="helpUrl")
-    description: Optional[StrictStr] = Field(default=None, description="The module description.")
-    is_primary: Optional[StrictBool] = Field(default=None, description="Specifies if the module is primary or not.", alias="isPrimary")
+    id: Optional[UUID] = Field(default=None, description="The module ID.", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000000"]})
+    app_name: Optional[StrictStr] = Field(default=None, description="The module product class name.", alias="appName", json_schema_extra={"examples": ["files"]})
+    title: Optional[StrictStr] = Field(default=None, description="The module product class name.", json_schema_extra={"examples": ["Documents"]})
+    link: Optional[StrictStr] = Field(default=None, description="The URL to the module start page.", json_schema_extra={"examples": ["https://example.com"]})
+    icon_url: Optional[StrictStr] = Field(default=None, description="The module icon URL.", alias="iconUrl", json_schema_extra={"examples": ["https://example.com/icon.svg"]})
+    image_url: Optional[StrictStr] = Field(default=None, description="The module large image URL.", alias="imageUrl", json_schema_extra={"examples": ["https://example.com/image.png"]})
+    help_url: Optional[StrictStr] = Field(default=None, description="The module help URL.", alias="helpUrl", json_schema_extra={"examples": ["https://example.com/help"]})
+    description: Optional[StrictStr] = Field(default=None, description="The module description.", json_schema_extra={"examples": ["File management"]})
+    is_primary: Optional[StrictBool] = Field(default=None, description="Specifies if the module is primary or not.", alias="isPrimary", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["id", "appName", "title", "link", "iconUrl", "imageUrl", "helpUrl", "description", "isPrimary"]
 
     model_config = ConfigDict(

@@ -31,11 +31,11 @@ class LogoRequest(BaseModel):
     """
     The logo request parameters.
     """ # noqa: E501
-    tmp_file: Annotated[str, Field(min_length=1, strict=True)] = Field(description="The path to the temporary image file.", alias="tmpFile")
-    x: Optional[Annotated[int, Field(le=1280, strict=True, ge=0)]] = Field(default=None, description="The X coordinate of the rectangle starting point.")
-    y: Optional[Annotated[int, Field(le=1280, strict=True, ge=0)]] = Field(default=None, description="The Y coordinate of the rectangle starting point.")
-    width: Optional[Annotated[int, Field(le=1280, strict=True, ge=1)]] = Field(default=None, description="The rectangle width.")
-    height: Optional[Annotated[int, Field(le=1280, strict=True, ge=1)]] = Field(default=None, description="The rectangle height.")
+    tmp_file: Annotated[str, Field(min_length=1, strict=True)] = Field(description="The path to the temporary image file.", alias="tmpFile", json_schema_extra={"examples": ["/tmp/logo.png"]})
+    x: Optional[Annotated[int, Field(le=1280, strict=True, ge=0)]] = Field(default=None, description="The X coordinate of the rectangle starting point.", json_schema_extra={"examples": [0]})
+    y: Optional[Annotated[int, Field(le=1280, strict=True, ge=0)]] = Field(default=None, description="The Y coordinate of the rectangle starting point.", json_schema_extra={"examples": [0]})
+    width: Optional[Annotated[int, Field(le=1280, strict=True, ge=1)]] = Field(default=None, description="The rectangle width.", json_schema_extra={"examples": [100]})
+    height: Optional[Annotated[int, Field(le=1280, strict=True, ge=1)]] = Field(default=None, description="The rectangle height.", json_schema_extra={"examples": [100]})
     __properties: ClassVar[List[str]] = ["tmpFile", "x", "y", "width", "height"]
 
     model_config = ConfigDict(

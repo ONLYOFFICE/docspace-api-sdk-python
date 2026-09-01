@@ -32,9 +32,9 @@ class RoomSecurityDto(BaseModel):
     """
     The room security parameters.
     """ # noqa: E501
-    members: Optional[List[FileShareDto]] = Field(default=None, description="The list of room members.")
-    warning: Optional[StrictStr] = Field(default=None, description="The warning message.")
-    error: Optional[RoomSecurityError] = None
+    members: Optional[List[FileShareDto]] = Field(default=None, description="The list of room members.", json_schema_extra={"examples": [[{"access": 1, "isOwner": False}]]})
+    warning: Optional[StrictStr] = Field(default=None, description="The warning message.", json_schema_extra={"examples": ["Warning message"]})
+    error: Optional[RoomSecurityError] = Field(default=None, description="The error type.")
     __properties: ClassVar[List[str]] = ["members", "warning", "error"]
 
     model_config = ConfigDict(

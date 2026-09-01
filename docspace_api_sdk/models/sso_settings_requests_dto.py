@@ -30,7 +30,7 @@ class SsoSettingsRequestsDto(BaseModel):
     """
     The request parameters for the Single Sign-On (SSO) configuration settings.
     """ # noqa: E501
-    serialize_settings: Optional[StrictStr] = Field(description="The JSON-serialized SSO configuration settings.", alias="serializeSettings")
+    serialize_settings: Optional[StrictStr] = Field(description="The JSON-serialized SSO configuration settings.", alias="serializeSettings", json_schema_extra={"examples": ["{\"enableSso\":true,\"idpSettings\":{\"entityId\":\"https://idp.example.com\"}}"]})
     __properties: ClassVar[List[str]] = ["serializeSettings"]
 
     model_config = ConfigDict(

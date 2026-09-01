@@ -35,7 +35,7 @@ class AuthWithCodeRequestsDto(AuthRequestsDto):
     The parameters required for the user two-factor authentication requests.
     """
 
-    code: Optional[StrictStr] = Field(default=None, description="The code for two-factor authentication.")
+    code: Optional[StrictStr] = Field(default=None, description="The code for two-factor authentication.", json_schema_extra={"examples": ["123456"]})
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -78,51 +78,6 @@ class AuthWithCodeRequestsDto(AuthRequestsDto):
         # override the default output from pydantic by calling `to_dict()` of confirm_data
         if self.confirm_data:
             _dict['confirmData'] = self.confirm_data.to_dict()
-        # set to None if user_name (nullable) is None
-        # and model_fields_set contains the field
-        if self.user_name is None and "user_name" in self.model_fields_set:
-            _dict['userName'] = None
-
-        # set to None if password (nullable) is None
-        # and model_fields_set contains the field
-        if self.password is None and "password" in self.model_fields_set:
-            _dict['password'] = None
-
-        # set to None if password_hash (nullable) is None
-        # and model_fields_set contains the field
-        if self.password_hash is None and "password_hash" in self.model_fields_set:
-            _dict['passwordHash'] = None
-
-        # set to None if provider (nullable) is None
-        # and model_fields_set contains the field
-        if self.provider is None and "provider" in self.model_fields_set:
-            _dict['provider'] = None
-
-        # set to None if access_token (nullable) is None
-        # and model_fields_set contains the field
-        if self.access_token is None and "access_token" in self.model_fields_set:
-            _dict['accessToken'] = None
-
-        # set to None if serialized_profile (nullable) is None
-        # and model_fields_set contains the field
-        if self.serialized_profile is None and "serialized_profile" in self.model_fields_set:
-            _dict['serializedProfile'] = None
-
-        # set to None if code_o_auth (nullable) is None
-        # and model_fields_set contains the field
-        if self.code_o_auth is None and "code_o_auth" in self.model_fields_set:
-            _dict['codeOAuth'] = None
-
-        # set to None if recaptcha_response (nullable) is None
-        # and model_fields_set contains the field
-        if self.recaptcha_response is None and "recaptcha_response" in self.model_fields_set:
-            _dict['recaptchaResponse'] = None
-
-        # set to None if culture (nullable) is None
-        # and model_fields_set contains the field
-        if self.culture is None and "culture" in self.model_fields_set:
-            _dict['culture'] = None
-
         # set to None if code (nullable) is None
         # and model_fields_set contains the field
         if self.code is None and "code" in self.model_fields_set:

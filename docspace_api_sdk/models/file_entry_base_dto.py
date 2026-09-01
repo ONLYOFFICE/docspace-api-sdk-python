@@ -35,28 +35,28 @@ class FileEntryBaseDto(BaseModel):
     """
     The file entry information.
     """ # noqa: E501
-    title: Optional[StrictStr] = Field(default=None, description="The file entry title.")
-    access: Optional[FileShare] = None
-    shared_by: Optional[EmployeeDto] = Field(default=None, alias="sharedBy")
-    owned_by: Optional[EmployeeDto] = Field(default=None, alias="ownedBy")
-    shared: Optional[StrictBool] = Field(default=None, description="Specifies if the file entry is shared via link or not.")
-    shared_for_user: Optional[StrictBool] = Field(default=None, description="Specifies if the file entry is shared for user or not.", alias="sharedForUser")
-    shared_external: Optional[StrictBool] = Field(default=None, description="Specifies if the file entry is shared via a public (non-internal) external link.", alias="sharedExternal")
-    parent_shared: Optional[StrictBool] = Field(default=None, description="Indicates whether the parent entity is shared.", alias="parentShared")
-    short_web_url: Optional[StrictStr] = Field(default=None, description="The short Web URL.", alias="shortWebUrl")
-    created: Optional[ApiDateTime] = None
-    created_by: Optional[EmployeeDto] = Field(default=None, alias="createdBy")
-    updated: Optional[ApiDateTime] = None
-    auto_delete: Optional[ApiDateTime] = Field(default=None, alias="autoDelete")
-    root_folder_type: Optional[FolderType] = Field(default=None, alias="rootFolderType")
-    parent_room_type: Optional[FolderType] = Field(default=None, alias="parentRoomType")
-    updated_by: Optional[EmployeeDto] = Field(default=None, alias="updatedBy")
-    provider_item: Optional[StrictBool] = Field(default=None, description="Specifies if the file entry provider is specified or not.", alias="providerItem")
-    provider_key: Optional[StrictStr] = Field(default=None, description="The provider key of the file entry.", alias="providerKey")
-    provider_id: Optional[StrictInt] = Field(default=None, description="The provider ID of the file entry.", alias="providerId")
-    order: Optional[StrictStr] = Field(default=None, description="The order of the file entry.")
-    is_favorite: Optional[StrictBool] = Field(default=None, description="Specifies if the file is a favorite or not.", alias="isFavorite")
-    file_entry_type: Optional[FileEntryType] = Field(default=None, alias="fileEntryType")
+    title: Optional[StrictStr] = Field(default=None, description="The file entry title.", json_schema_extra={"examples": ["Some title.txt"]})
+    access: Optional[FileShare] = Field(default=None, description="The access rights to the file entry.")
+    shared_by: Optional[EmployeeDto] = Field(default=None, description="Provides information about the employee who shared the file or folder.", alias="sharedBy")
+    owned_by: Optional[EmployeeDto] = Field(default=None, description="The information about the employee who owns the file entry.", alias="ownedBy")
+    shared: Optional[StrictBool] = Field(default=None, description="Specifies if the file entry is shared via link or not.", json_schema_extra={"examples": [False]})
+    shared_for_user: Optional[StrictBool] = Field(default=None, description="Specifies if the file entry is shared for user or not.", alias="sharedForUser", json_schema_extra={"examples": [False]})
+    shared_external: Optional[StrictBool] = Field(default=None, description="Specifies if the file entry is shared via a public (non-internal) external link.", alias="sharedExternal", json_schema_extra={"examples": [False]})
+    parent_shared: Optional[StrictBool] = Field(default=None, description="Indicates whether the parent entity is shared.", alias="parentShared", json_schema_extra={"examples": [False]})
+    short_web_url: Optional[StrictStr] = Field(default=None, description="The short Web URL.", alias="shortWebUrl", json_schema_extra={"examples": ["http://localhost/s/abc123"]})
+    created: Optional[ApiDateTime] = Field(default=None, description="The creation date and time of the file entry.")
+    created_by: Optional[EmployeeDto] = Field(default=None, description="The file entry author.", alias="createdBy")
+    updated: Optional[ApiDateTime] = Field(default=None, description="The last date and time when the file entry was updated.")
+    auto_delete: Optional[ApiDateTime] = Field(default=None, description="The date and time when the file entry will be automatically deleted.", alias="autoDelete")
+    root_folder_type: Optional[FolderType] = Field(default=None, description="The root folder type of the file entry.", alias="rootFolderType")
+    parent_room_type: Optional[FolderType] = Field(default=None, description="The parent room type of the file entry.", alias="parentRoomType")
+    updated_by: Optional[EmployeeDto] = Field(default=None, description="The user who updated the file entry.", alias="updatedBy")
+    provider_item: Optional[StrictBool] = Field(default=None, description="Specifies if the file entry provider is specified or not.", alias="providerItem", json_schema_extra={"examples": [False]})
+    provider_key: Optional[StrictStr] = Field(default=None, description="The provider key of the file entry.", alias="providerKey", json_schema_extra={"examples": ["google-drive"]})
+    provider_id: Optional[StrictInt] = Field(default=None, description="The provider ID of the file entry.", alias="providerId", json_schema_extra={"examples": [1]})
+    order: Optional[StrictStr] = Field(default=None, description="The order of the file entry.", json_schema_extra={"examples": ["1"]})
+    is_favorite: Optional[StrictBool] = Field(default=None, description="Specifies if the file is a favorite or not.", alias="isFavorite", json_schema_extra={"examples": [False]})
+    file_entry_type: Optional[FileEntryType] = Field(default=None, description="The file entry type.", alias="fileEntryType")
     __properties: ClassVar[List[str]] = ["title", "access", "sharedBy", "ownedBy", "shared", "sharedForUser", "sharedExternal", "parentShared", "shortWebUrl", "created", "createdBy", "updated", "autoDelete", "rootFolderType", "parentRoomType", "updatedBy", "providerItem", "providerKey", "providerId", "order", "isFavorite", "fileEntryType"]
 
     model_config = ConfigDict(

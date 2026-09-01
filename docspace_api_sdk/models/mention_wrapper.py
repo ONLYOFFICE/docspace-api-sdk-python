@@ -31,12 +31,12 @@ class MentionWrapper(BaseModel):
     """
     The parameters of a user mentioned in a message.
     """ # noqa: E501
-    user: Optional[UserInfo] = None
-    email: Optional[StrictStr] = Field(default=None, description="The user email address.")
-    id: Optional[StrictStr] = Field(default=None, description="The user unique identification.")
-    image: Optional[StrictStr] = Field(default=None, description="The path to the user's avatar.")
-    has_access: Optional[StrictBool] = Field(default=None, description="Specifies whether the user has the access to the file where they are mentioned.", alias="hasAccess")
-    name: Optional[StrictStr] = Field(default=None, description="The user full name.")
+    user: Optional[UserInfo] = Field(default=None, description="The user information.")
+    email: Optional[StrictStr] = Field(default=None, description="The user email address.", json_schema_extra={"examples": ["user@example.com"]})
+    id: Optional[StrictStr] = Field(default=None, description="The user unique identification.", json_schema_extra={"examples": ["user_0001"]})
+    image: Optional[StrictStr] = Field(default=None, description="The path to the user's avatar.", json_schema_extra={"examples": ["https://portal.example.com/avatar/user_0001.png"]})
+    has_access: Optional[StrictBool] = Field(default=None, description="Specifies whether the user has the access to the file where they are mentioned.", alias="hasAccess", json_schema_extra={"examples": [True]})
+    name: Optional[StrictStr] = Field(default=None, description="The user full name.", json_schema_extra={"examples": ["John Doe"]})
     __properties: ClassVar[List[str]] = ["user", "email", "id", "image", "hasAccess", "name"]
 
     model_config = ConfigDict(

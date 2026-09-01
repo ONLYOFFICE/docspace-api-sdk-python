@@ -30,8 +30,8 @@ class DnsSettingsRequestsDto(BaseModel):
     """
     The request parameters for managing the DNS (Domain Name System) settings.
     """ # noqa: E501
-    dns_name: Optional[StrictStr] = Field(default=None, description="The DNS (Domain Name System) configuration name.", alias="dnsName")
-    enable: Optional[StrictBool] = Field(default=None, description="Specifies whether the DNS settings are enabled.")
+    dns_name: Optional[StrictStr] = Field(default=None, description="The DNS (Domain Name System) configuration name.", alias="dnsName", json_schema_extra={"examples": ["example.com"]})
+    enable: Optional[StrictBool] = Field(default=None, description="Specifies whether the DNS settings are enabled.", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["dnsName", "enable"]
 
     model_config = ConfigDict(

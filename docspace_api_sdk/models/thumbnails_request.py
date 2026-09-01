@@ -30,11 +30,11 @@ class ThumbnailsRequest(BaseModel):
     """
     The thumbnail request.
     """ # noqa: E501
-    tmp_file: Optional[StrictStr] = Field(default=None, description="The path to the temporary thumbnail file.", alias="tmpFile")
-    x: Optional[StrictInt] = Field(default=None, description="The thumbnail horizontal coordinate.")
-    y: Optional[StrictInt] = Field(default=None, description="The thumbnail vertical coordinate.")
-    width: Optional[StrictInt] = Field(default=None, description="The thumbnail width.")
-    height: Optional[StrictInt] = Field(default=None, description="The thumbnail height.")
+    tmp_file: Optional[StrictStr] = Field(default=None, description="The path to the temporary thumbnail file.", alias="tmpFile", json_schema_extra={"examples": ["/tmp/photo_temp_123.jpg"]})
+    x: Optional[StrictInt] = Field(default=None, description="The thumbnail horizontal coordinate.", json_schema_extra={"examples": [100]})
+    y: Optional[StrictInt] = Field(default=None, description="The thumbnail vertical coordinate.", json_schema_extra={"examples": [50]})
+    width: Optional[StrictInt] = Field(default=None, description="The thumbnail width.", json_schema_extra={"examples": [200]})
+    height: Optional[StrictInt] = Field(default=None, description="The thumbnail height.", json_schema_extra={"examples": [200]})
     __properties: ClassVar[List[str]] = ["tmpFile", "x", "y", "width", "height"]
 
     model_config = ConfigDict(

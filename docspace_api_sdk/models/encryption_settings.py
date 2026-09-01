@@ -31,9 +31,9 @@ class EncryptionSettings(BaseModel):
     """
     The encryption settings.
     """ # noqa: E501
-    password: Optional[StrictStr] = Field(default=None, description="The encryption password.")
-    status: Optional[EncryprtionStatus] = None
-    notify_users: Optional[StrictBool] = Field(default=None, description="Specifies if the users will be notified about the encryption operation or not.", alias="notifyUsers")
+    password: Optional[StrictStr] = Field(default=None, description="The encryption password.", json_schema_extra={"examples": ["password"]})
+    status: Optional[EncryprtionStatus] = Field(default=None, description="The encryption status.")
+    notify_users: Optional[StrictBool] = Field(default=None, description="Specifies if the users will be notified about the encryption operation or not.", alias="notifyUsers", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["password", "status", "notifyUsers"]
 
     model_config = ConfigDict(

@@ -30,8 +30,8 @@ class NotificationChannelDto(BaseModel):
     """
     The notification channel information.
     """ # noqa: E501
-    name: Optional[StrictStr] = Field(description="The notification channel name.")
-    is_enabled: StrictBool = Field(description="Specifies whether the notification channel is enabled.", alias="isEnabled")
+    name: Optional[StrictStr] = Field(description="The notification channel name.", json_schema_extra={"examples": ["Email"]})
+    is_enabled: StrictBool = Field(description="Specifies whether the notification channel is enabled.", alias="isEnabled", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["name", "isEnabled"]
 
     model_config = ConfigDict(

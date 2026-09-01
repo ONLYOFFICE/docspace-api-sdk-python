@@ -1,0 +1,35 @@
+# AiWatermarkDto
+The watermark settings.
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**additions** | [**AiWatermarkAdditions**](AiWatermarkAdditions.md) | Specifies whether to display in the watermark: username, user email, user ip-adress, current date, and room name. | 
+**text** | **str** | The watermark text. | [optional] 
+**rotate** | **int** | The watermark text and image rotate. | 
+**image_scale** | **int** | The watermark image scale. | 
+**image_url** | **str** | The watermark image url. | [optional] 
+**image_height** | **float** | The watermark image height. | 
+**image_width** | **float** | The watermark image width. | 
+
+## Example
+
+```python
+from docspace_api_sdk.models.ai_watermark_dto import AiWatermarkDto
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of AiWatermarkDto from a JSON string
+ai_watermark_dto_instance = AiWatermarkDto.from_json(json)
+# print the JSON string representation of the object
+print(AiWatermarkDto.to_json())
+
+# convert the object into a dict
+ai_watermark_dto_dict = ai_watermark_dto_instance.to_dict()
+# create an instance of AiWatermarkDto from a dict
+ai_watermark_dto_from_dict = AiWatermarkDto.from_dict(ai_watermark_dto_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

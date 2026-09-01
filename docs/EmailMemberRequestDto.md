@@ -6,7 +6,7 @@ The request parameters for the user email.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **email** | **str** | The user email address. | 
-**recaptcha_type** | [**RecaptchaType**](RecaptchaType.md) |  | [optional] 
+**recaptcha_type** | [**RecaptchaType**](RecaptchaType.md) | The type of CAPTCHA validation used. | [optional] 
 **recaptcha_response** | **str** | The user's response to the CAPTCHA challenge. | [optional] 
 
 ## Example

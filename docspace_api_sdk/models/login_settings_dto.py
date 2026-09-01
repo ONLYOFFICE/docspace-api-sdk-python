@@ -30,10 +30,10 @@ class LoginSettingsDto(BaseModel):
     """
     The login settings parameters.
     """ # noqa: E501
-    attempt_count: StrictInt = Field(description="The maximum number of consecutive failed login attempts allowed before triggering account suspension.", alias="attemptCount")
-    block_time: StrictInt = Field(description="The duration (in minutes) for which an account remains suspended after exceeding maximum login attempts.", alias="blockTime")
-    check_period: StrictInt = Field(description="The maximum time (in seconds) allowed for server to process and respond to login requests.", alias="checkPeriod")
-    is_default: StrictBool = Field(description="Specifies whether the login settings are default or not.", alias="isDefault")
+    attempt_count: StrictInt = Field(description="The maximum number of consecutive failed login attempts allowed before triggering account suspension.", alias="attemptCount", json_schema_extra={"examples": [5]})
+    block_time: StrictInt = Field(description="The duration (in minutes) for which an account remains suspended after exceeding maximum login attempts.", alias="blockTime", json_schema_extra={"examples": [15]})
+    check_period: StrictInt = Field(description="The maximum time (in seconds) allowed for server to process and respond to login requests.", alias="checkPeriod", json_schema_extra={"examples": [60]})
+    is_default: StrictBool = Field(description="Specifies whether the login settings are default or not.", alias="isDefault", json_schema_extra={"examples": [False]})
     __properties: ClassVar[List[str]] = ["attemptCount", "blockTime", "checkPeriod", "isDefault"]
 
     model_config = ConfigDict(

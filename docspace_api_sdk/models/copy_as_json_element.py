@@ -31,11 +31,11 @@ class CopyAsJsonElement(BaseModel):
     """
     The parameters for copying a file.
     """ # noqa: E501
-    dest_title: Optional[StrictStr] = Field(description="The copied file name.", alias="destTitle")
+    dest_title: Optional[StrictStr] = Field(description="The copied file name.", alias="destTitle", json_schema_extra={"examples": ["Document Copy.docx"]})
     dest_folder_id: CopyAsJsonElementDestFolderId = Field(alias="destFolderId")
-    enable_external_ext: Optional[StrictBool] = Field(default=None, description="Specifies whether to allow creating the copied file of an external extension or not.", alias="enableExternalExt")
-    password: Optional[StrictStr] = Field(default=None, description="The copied file password.")
-    to_form: Optional[StrictBool] = Field(default=None, description="Specifies whether to convert the file to form or not.", alias="toForm")
+    enable_external_ext: Optional[StrictBool] = Field(default=None, description="Specifies whether to allow creating the copied file of an external extension or not.", alias="enableExternalExt", json_schema_extra={"examples": [False]})
+    password: Optional[StrictStr] = Field(default=None, description="The copied file password.", json_schema_extra={"examples": ["password123"]})
+    to_form: Optional[StrictBool] = Field(default=None, description="Specifies whether to convert the file to form or not.", alias="toForm", json_schema_extra={"examples": [False]})
     __properties: ClassVar[List[str]] = ["destTitle", "destFolderId", "enableExternalExt", "password", "toForm"]
 
     model_config = ConfigDict(

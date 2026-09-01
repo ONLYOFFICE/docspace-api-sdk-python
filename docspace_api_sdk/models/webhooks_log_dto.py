@@ -32,18 +32,18 @@ class WebhooksLogDto(BaseModel):
     """
     The webhook log parameters.
     """ # noqa: E501
-    id: StrictInt = Field(description="The webhook log ID.")
-    config_name: Optional[StrictStr] = Field(default=None, description="The webhook configuration name.", alias="configName")
-    trigger: Optional[WebhookTrigger] = None
-    creation_time: Optional[datetime] = Field(default=None, description="The webhook creation time.", alias="creationTime")
-    method: Optional[StrictStr] = Field(default=None, description="The webhook method.")
-    route: Optional[StrictStr] = Field(default=None, description="The webhook route.")
-    request_headers: Optional[StrictStr] = Field(default=None, description="The webhook request headers.", alias="requestHeaders")
-    request_payload: Optional[StrictStr] = Field(default=None, description="The webhook request payload.", alias="requestPayload")
-    response_headers: Optional[StrictStr] = Field(default=None, description="The webhook response headers.", alias="responseHeaders")
-    response_payload: Optional[StrictStr] = Field(default=None, description="The webhook response payload.", alias="responsePayload")
-    status: Optional[StrictInt] = Field(default=None, description="The webhook status.")
-    delivery: Optional[datetime] = Field(default=None, description="The webhook delivery time.")
+    id: StrictInt = Field(description="The webhook log ID.", json_schema_extra={"examples": [1]})
+    config_name: Optional[StrictStr] = Field(default=None, description="The webhook configuration name.", alias="configName", json_schema_extra={"examples": ["Example Name"]})
+    trigger: Optional[WebhookTrigger] = Field(default=None, description="The webhook trigger type.")
+    creation_time: Optional[datetime] = Field(default=None, description="The webhook creation time.", alias="creationTime", json_schema_extra={"examples": ["2024-01-15T10:30:00Z"]})
+    method: Optional[StrictStr] = Field(default=None, description="The webhook method.", json_schema_extra={"examples": ["example value"]})
+    route: Optional[StrictStr] = Field(default=None, description="The webhook route.", json_schema_extra={"examples": ["example value"]})
+    request_headers: Optional[StrictStr] = Field(default=None, description="The webhook request headers.", alias="requestHeaders", json_schema_extra={"examples": ["example value"]})
+    request_payload: Optional[StrictStr] = Field(default=None, description="The webhook request payload.", alias="requestPayload", json_schema_extra={"examples": ["example value"]})
+    response_headers: Optional[StrictStr] = Field(default=None, description="The webhook response headers.", alias="responseHeaders", json_schema_extra={"examples": ["example value"]})
+    response_payload: Optional[StrictStr] = Field(default=None, description="The webhook response payload.", alias="responsePayload", json_schema_extra={"examples": ["example value"]})
+    status: Optional[StrictInt] = Field(default=None, description="The webhook status.", json_schema_extra={"examples": [1]})
+    delivery: Optional[datetime] = Field(default=None, description="The webhook delivery time.", json_schema_extra={"examples": ["2024-01-15T10:30:00Z"]})
     __properties: ClassVar[List[str]] = ["id", "configName", "trigger", "creationTime", "method", "route", "requestHeaders", "requestPayload", "responseHeaders", "responsePayload", "status", "delivery"]
 
     model_config = ConfigDict(

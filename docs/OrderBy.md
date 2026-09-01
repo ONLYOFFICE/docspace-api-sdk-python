@@ -6,7 +6,7 @@ The sorting parameters.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **is_asc** | **bool** | Specifies if the order is ascending. | [optional] 
-**var_property** | [**SortedByType**](SortedByType.md) |  | [optional] 
+**var_property** | [**SortedByType**](SortedByType.md) | The parameters by which the files will be sorted. | [optional] 
 
 ## Example
 

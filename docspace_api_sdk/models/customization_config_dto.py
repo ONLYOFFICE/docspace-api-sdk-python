@@ -38,17 +38,17 @@ class CustomizationConfigDto(BaseModel):
     """
     The customization config parameters.
     """ # noqa: E501
-    about: Optional[StrictBool] = Field(default=None, description="Specifies if the customization is about.")
-    customer: Optional[CustomerConfigDto] = None
-    anonymous: Optional[AnonymousConfigDto] = None
-    feedback: Optional[FeedbackConfig] = None
-    forcesave: Optional[StrictBool] = Field(default=None, description="Specifies if the customization should be force saved.")
-    goback: Optional[GobackConfig] = None
-    review: Optional[ReviewConfig] = None
-    logo: Optional[LogoConfigDto] = None
-    mention_share: Optional[StrictBool] = Field(default=None, description="Specifies if the share should be mentioned.", alias="mentionShare")
-    submit_form: Optional[SubmitForm] = Field(default=None, alias="submitForm")
-    start_filling_form: Optional[StartFillingForm] = Field(default=None, alias="startFillingForm")
+    about: Optional[StrictBool] = Field(default=None, description="Specifies if the customization is about.", json_schema_extra={"examples": [True]})
+    customer: Optional[CustomerConfigDto] = Field(default=None, description="The customization customer configuration.")
+    anonymous: Optional[AnonymousConfigDto] = Field(default=None, description="The anonymous configuration of the customization.")
+    feedback: Optional[FeedbackConfig] = Field(default=None, description="The settings for the Feedback & Support menu button.")
+    forcesave: Optional[StrictBool] = Field(default=None, description="Specifies if the customization should be force saved.", json_schema_extra={"examples": [False]})
+    goback: Optional[GobackConfig] = Field(default=None, description="The settings for the Open file location menu button and upper right corner button.")
+    review: Optional[ReviewConfig] = Field(default=None, description="Configuration for review display settings.")
+    logo: Optional[LogoConfigDto] = Field(default=None, description="The logo of the customization.")
+    mention_share: Optional[StrictBool] = Field(default=None, description="Specifies if the share should be mentioned.", alias="mentionShare", json_schema_extra={"examples": [True]})
+    submit_form: Optional[SubmitForm] = Field(default=None, description="The Complete & Submit button settings.", alias="submitForm")
+    start_filling_form: Optional[StartFillingForm] = Field(default=None, description="The parameters of the button that starts filling out the form.", alias="startFillingForm")
     __properties: ClassVar[List[str]] = ["about", "customer", "anonymous", "feedback", "forcesave", "goback", "review", "logo", "mentionShare", "submitForm", "startFillingForm"]
 
     model_config = ConfigDict(

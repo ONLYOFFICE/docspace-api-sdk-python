@@ -5,21 +5,21 @@ The configuration parameters.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**document** | [**DocumentConfigDto**](DocumentConfigDto.md) |  | 
+**document** | [**DocumentConfigDto**](DocumentConfigDto.md) | The document configuration. | 
 **document_type** | **str** | The document type. | 
-**editor_config** | [**EditorConfigurationDto**](EditorConfigurationDto.md) |  | 
-**editor_type** | [**EditorType**](EditorType.md) |  | 
+**editor_config** | [**EditorConfigurationDto**](EditorConfigurationDto.md) | The editor configuration. | 
+**editor_type** | [**EditorType**](EditorType.md) | The editor type. | 
 **editor_url** | **str** | The editor URL. | 
 **token** | **str** | The token of the file configuration. | [optional] 
 **type** | **str** | The platform type. | [optional] 
-**file** | [**FileDtoInteger**](FileDtoInteger.md) |  | 
+**file** | [**FileDtoInteger**](FileDtoInteger.md) | The file parameters. | 
 **error_message** | **str** | The error message. | [optional] 
 **start_filling** | **bool** | Specifies if the file filling has started or not. | [optional] 
 **filling_status** | **bool** | The file filling status. | [optional] 
-**start_filling_mode** | [**StartFillingMode**](StartFillingMode.md) |  | [optional] 
+**start_filling_mode** | [**StartFillingMode**](StartFillingMode.md) | The start filling mode. | [optional] 
 **filling_session_id** | **str** | The file filling session ID. | [optional] 
-**quota_exceeded_scope** | [**QuotaScope**](QuotaScope.md) |  | [optional] 
-**generation_tool_call_state** | [**EditorToolCallStateDto**](EditorToolCallStateDto.md) |  | [optional] 
+**quota_exceeded_scope** | [**QuotaScope**](QuotaScope.md) | Indicates which quota scope has been exceeded. | [optional] 
+**generation_tool_call_state** | [**EditorToolCallStateDto**](EditorToolCallStateDto.md) | The generation tool call state. Used to run the agent flow in the editor. | [optional] 
 
 ## Example
 

@@ -6,11 +6,11 @@ The confirmation email parameters.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **key** | **str** | The email validation key. | [optional] 
-**empl_type** | [**EmployeeType**](EmployeeType.md) |  | [optional] 
+**empl_type** | [**EmployeeType**](EmployeeType.md) | The user type. | [optional] 
 **email** | **str** | The email address. | [optional] 
 **enc_email** | **str** | The encrypted email address. | [optional] 
 **ui_d** | **UUID** | The user ID. | [optional] 
-**type** | [**ConfirmType**](ConfirmType.md) |  | [optional] 
+**type** | [**ConfirmType**](ConfirmType.md) | The confirmation email type. | [optional] 
 **first** | **str** | Specifies whether it is the first time account access or not. | [optional] 
 **room_id** | **str** | The room ID. | [optional] 
 

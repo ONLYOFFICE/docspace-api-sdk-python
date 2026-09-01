@@ -31,16 +31,16 @@ class SmtpSettingsDto(BaseModel):
     """
     The SMTP settings parameters.
     """ # noqa: E501
-    host: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The SMTP host.")
-    port: Optional[Annotated[int, Field(le=65535, strict=True, ge=1)]] = Field(default=None, description="The SMTP port.")
-    sender_address: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The sender address.", alias="senderAddress")
-    sender_display_name: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The sender display name.", alias="senderDisplayName")
-    credentials_user_name: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The credentials username.", alias="credentialsUserName")
-    credentials_user_password: Optional[StrictStr] = Field(default=None, description="The credentials user password.", alias="credentialsUserPassword")
-    enable_ssl: Optional[StrictBool] = Field(default=None, description="Specifies whether the SSL is enabled or not.", alias="enableSSL")
-    enable_auth: Optional[StrictBool] = Field(default=None, description="Specifies whether the authentication is enabled or not.", alias="enableAuth")
-    use_ntlm: Optional[StrictBool] = Field(default=None, description="Specifies whether to use NTLM or not.", alias="useNtlm")
-    is_default_settings: Optional[StrictBool] = Field(default=None, description="Specifies if the current settings are default or not.", alias="isDefaultSettings")
+    host: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The SMTP host.", json_schema_extra={"examples": ["mail.example.com"]})
+    port: Optional[Annotated[int, Field(le=65535, strict=True, ge=1)]] = Field(default=None, description="The SMTP port.", json_schema_extra={"examples": [25]})
+    sender_address: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The sender address.", alias="senderAddress", json_schema_extra={"examples": ["notify@example.com"]})
+    sender_display_name: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The sender display name.", alias="senderDisplayName", json_schema_extra={"examples": ["Postman"]})
+    credentials_user_name: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The credentials username.", alias="credentialsUserName", json_schema_extra={"examples": ["notify@example.com"]})
+    credentials_user_password: Optional[StrictStr] = Field(default=None, description="The credentials user password.", alias="credentialsUserPassword", json_schema_extra={"examples": ["example value"]})
+    enable_ssl: Optional[StrictBool] = Field(default=None, description="Specifies whether the SSL is enabled or not.", alias="enableSSL", json_schema_extra={"examples": [True]})
+    enable_auth: Optional[StrictBool] = Field(default=None, description="Specifies whether the authentication is enabled or not.", alias="enableAuth", json_schema_extra={"examples": [True]})
+    use_ntlm: Optional[StrictBool] = Field(default=None, description="Specifies whether to use NTLM or not.", alias="useNtlm", json_schema_extra={"examples": [True]})
+    is_default_settings: Optional[StrictBool] = Field(default=None, description="Specifies if the current settings are default or not.", alias="isDefaultSettings", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["host", "port", "senderAddress", "senderDisplayName", "credentialsUserName", "credentialsUserPassword", "enableSSL", "enableAuth", "useNtlm", "isDefaultSettings"]
 
     model_config = ConfigDict(

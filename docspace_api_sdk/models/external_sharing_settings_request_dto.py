@@ -30,11 +30,11 @@ class ExternalSharingSettingsRequestDto(BaseModel):
     """
     The Access Control external sharing settings request parameters.
     """ # noqa: E501
-    external_share: Optional[StrictBool] = Field(default=None, description="Specifies whether external (public) link creation is allowed.", alias="externalShare")
-    default_share_link_internal: Optional[StrictBool] = Field(default=None, description="Specifies the default sharing link type: true = DocSpace users only, false = Anyone with the link.  Relevant only when ExternalShare is true.", alias="defaultShareLinkInternal")
-    external_share_apply_to_documents: Optional[StrictBool] = Field(default=None, description="When external sharing is restricted, specifies whether to apply the restriction to the My Documents section.  Relevant only when ExternalShare is false.", alias="externalShareApplyToDocuments")
-    external_share_apply_to_rooms: Optional[StrictBool] = Field(default=None, description="When external sharing is restricted, specifies whether to apply the restriction to the Rooms section.  Relevant only when ExternalShare is false.", alias="externalShareApplyToRooms")
-    block_existing_links_on_restrict: Optional[StrictBool] = Field(default=None, description="When external sharing is restricted, specifies whether to block existing public links immediately.  Relevant only when ExternalShare is false.", alias="blockExistingLinksOnRestrict")
+    external_share: Optional[StrictBool] = Field(default=None, description="Specifies whether external (public) link creation is allowed.", alias="externalShare", json_schema_extra={"examples": [True]})
+    default_share_link_internal: Optional[StrictBool] = Field(default=None, description="Specifies the default sharing link type: true = DocSpace users only, false = Anyone with the link.  Relevant only when ExternalShare is true.", alias="defaultShareLinkInternal", json_schema_extra={"examples": [False]})
+    external_share_apply_to_documents: Optional[StrictBool] = Field(default=None, description="When external sharing is restricted, specifies whether to apply the restriction to the My Documents section.  Relevant only when ExternalShare is false.", alias="externalShareApplyToDocuments", json_schema_extra={"examples": [True]})
+    external_share_apply_to_rooms: Optional[StrictBool] = Field(default=None, description="When external sharing is restricted, specifies whether to apply the restriction to the Rooms section.  Relevant only when ExternalShare is false.", alias="externalShareApplyToRooms", json_schema_extra={"examples": [True]})
+    block_existing_links_on_restrict: Optional[StrictBool] = Field(default=None, description="When external sharing is restricted, specifies whether to block existing public links immediately.  Relevant only when ExternalShare is false.", alias="blockExistingLinksOnRestrict", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["externalShare", "defaultShareLinkInternal", "externalShareApplyToDocuments", "externalShareApplyToRooms", "blockExistingLinksOnRestrict"]
 
     model_config = ConfigDict(

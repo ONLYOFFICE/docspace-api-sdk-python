@@ -32,7 +32,7 @@ class DefaultTemplateSettingsRequestDto(BaseModel):
     Default templates settings request parameters.
     """ # noqa: E501
     selected_file: DefaultTemplateSettingsRequestDtoSelectedFile = Field(alias="selectedFile")
-    file_extension: Optional[StrictStr] = Field(description="File extension of a template to replace", alias="fileExtension")
+    file_extension: Optional[StrictStr] = Field(description="File extension of a template to replace", alias="fileExtension", json_schema_extra={"examples": [".docx"]})
     __properties: ClassVar[List[str]] = ["selectedFile", "fileExtension"]
 
     model_config = ConfigDict(

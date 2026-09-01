@@ -31,13 +31,13 @@ class AuthServiceRequestsDto(BaseModel):
     """
     The request parameters for handling the authorization service.
     """ # noqa: E501
-    name: Optional[StrictStr] = Field(default=None, description="The name of the authorization service.")
-    title: Optional[StrictStr] = Field(default=None, description="The user-friendly display title of the authorization service.")
-    description: Optional[StrictStr] = Field(default=None, description="The brief description of the authorization service.")
-    instruction: Optional[StrictStr] = Field(default=None, description="The detailed instructions for configuring or using the authorization service.")
-    can_set: Optional[StrictBool] = Field(default=None, description="Specifies whether the authorization service can be configured by the user.", alias="canSet")
-    paid: Optional[StrictBool] = Field(default=None, description="Specifies whether the authorization service is paid or not.")
-    props: Optional[List[AuthKey]] = Field(default=None, description="The collection of authorization keys associated with the authorization service.")
+    name: Optional[StrictStr] = Field(default=None, description="The name of the authorization service.", json_schema_extra={"examples": ["google"]})
+    title: Optional[StrictStr] = Field(default=None, description="The user-friendly display title of the authorization service.", json_schema_extra={"examples": ["Google"]})
+    description: Optional[StrictStr] = Field(default=None, description="The brief description of the authorization service.", json_schema_extra={"examples": ["Google OAuth authentication"]})
+    instruction: Optional[StrictStr] = Field(default=None, description="The detailed instructions for configuring or using the authorization service.", json_schema_extra={"examples": ["Configure your Google OAuth credentials"]})
+    can_set: Optional[StrictBool] = Field(default=None, description="Specifies whether the authorization service can be configured by the user.", alias="canSet", json_schema_extra={"examples": [True]})
+    paid: Optional[StrictBool] = Field(default=None, description="Specifies whether the authorization service is paid or not.", json_schema_extra={"examples": [False]})
+    props: Optional[List[AuthKey]] = Field(default=None, description="The collection of authorization keys associated with the authorization service.", json_schema_extra={"examples": [[{"name": "key", "value": "value"}]]})
     __properties: ClassVar[List[str]] = ["name", "title", "description", "instruction", "canSet", "paid", "props"]
 
     model_config = ConfigDict(

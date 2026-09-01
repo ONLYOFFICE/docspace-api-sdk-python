@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **display_name** | **str** |  | [optional] 
 **first_name** | **str** |  | [optional] 
 **last_name** | **str** |  | [optional] 
-**user_type** | [**EmployeeType**](EmployeeType.md) |  | [optional] 
+**user_type** | [**EmployeeType**](EmployeeType.md) | The user type. | [optional] 
 **migrating_files** | [**MigratingApiFiles**](MigratingApiFiles.md) |  | [optional] 
 
 ## Example

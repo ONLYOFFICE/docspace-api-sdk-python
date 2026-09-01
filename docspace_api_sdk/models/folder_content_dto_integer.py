@@ -32,14 +32,14 @@ class FolderContentDtoInteger(BaseModel):
     """
     The folder content information.
     """ # noqa: E501
-    files: Optional[List[FileEntryBaseDto]] = Field(default=None, description="The list of files in the folder.")
-    folders: Optional[List[FileEntryBaseDto]] = Field(default=None, description="The list of folders in the folder.")
-    current: Optional[FolderDtoInteger] = None
-    path_parts: Optional[Any] = Field(description="The folder path.", alias="pathParts")
-    start_index: Optional[StrictInt] = Field(default=None, description="The folder start index.", alias="startIndex")
-    count: Optional[StrictInt] = Field(default=None, description="The number of folder elements.")
-    total: StrictInt = Field(description="The total number of elements in the folder.")
-    new: Optional[StrictInt] = Field(default=None, description="The new element index in the folder.")
+    files: Optional[List[FileEntryBaseDto]] = Field(default=None, description="The list of files in the folder.", json_schema_extra={"examples": [[{"id": 10, "title": "document.docx"}]]})
+    folders: Optional[List[FileEntryBaseDto]] = Field(default=None, description="The list of folders in the folder.", json_schema_extra={"examples": [[{"id": 20, "title": "My Folder"}]]})
+    current: Optional[FolderDtoInteger] = Field(default=None, description="The current folder information.")
+    path_parts: Optional[Any] = Field(alias="pathParts")
+    start_index: Optional[StrictInt] = Field(default=None, description="The folder start index.", alias="startIndex", json_schema_extra={"examples": [0]})
+    count: Optional[StrictInt] = Field(default=None, description="The number of folder elements.", json_schema_extra={"examples": [4]})
+    total: StrictInt = Field(description="The total number of elements in the folder.", json_schema_extra={"examples": [4]})
+    new: Optional[StrictInt] = Field(default=None, description="The new element index in the folder.", json_schema_extra={"examples": [0]})
     __properties: ClassVar[List[str]] = ["files", "folders", "current", "pathParts", "startIndex", "count", "total", "new"]
 
     model_config = ConfigDict(

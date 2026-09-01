@@ -33,9 +33,9 @@ class InvitationLinkCreateRequestDto(BaseModel):
     """
     The request parameters for creating an invitation link.
     """ # noqa: E501
-    employee_type: EmployeeType = Field(alias="employeeType")
-    expiration: Optional[datetime] = Field(default=None, description="The expiration date of the invitation link.")
-    max_use_count: Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]] = Field(default=None, description="The maximum number of times the invitation link can be used.", alias="maxUseCount")
+    employee_type: EmployeeType = Field(description="The user type.", alias="employeeType")
+    expiration: Optional[datetime] = Field(default=None, description="The expiration date of the invitation link.", json_schema_extra={"examples": ["2025-06-15T10:30:00.0000000Z"]})
+    max_use_count: Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]] = Field(default=None, description="The maximum number of times the invitation link can be used.", alias="maxUseCount", json_schema_extra={"examples": [1]})
     __properties: ClassVar[List[str]] = ["employeeType", "expiration", "maxUseCount"]
 
     model_config = ConfigDict(

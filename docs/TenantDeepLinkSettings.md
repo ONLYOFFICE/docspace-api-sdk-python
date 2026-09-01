@@ -5,7 +5,7 @@ The deep link settings.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**handling_mode** | [**DeepLinkHandlingMode**](DeepLinkHandlingMode.md) |  | [optional] 
+**handling_mode** | [**DeepLinkHandlingMode**](DeepLinkHandlingMode.md) | The deep link handling mode. | [optional] 
 **last_modified** | **datetime** | The timestamp indicating when the settings were last modified. | [optional] 
 
 ## Example

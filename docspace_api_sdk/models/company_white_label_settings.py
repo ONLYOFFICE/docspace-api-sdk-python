@@ -32,14 +32,14 @@ class CompanyWhiteLabelSettings(BaseModel):
     """
     The company white label settings.
     """ # noqa: E501
-    company_name: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The company name.", alias="companyName")
-    site: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The company site.")
-    email: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The company email address.")
-    address: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The company address.")
-    phone: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The company phone number.")
-    is_licensor: Optional[StrictBool] = Field(default=None, description="Specifies if a company is a licensor or not.", alias="IsLicensor")
-    hide_about: Optional[StrictBool] = Field(default=None, description="Specifies if the About page is visible or not", alias="hideAbout")
-    last_modified: Optional[datetime] = Field(default=None, description="The timestamp indicating when the settings were last modified.", alias="lastModified")
+    company_name: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The company name.", alias="companyName", json_schema_extra={"examples": ["ONLYOFFICE"]})
+    site: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The company site.", json_schema_extra={"examples": ["https://www.onlyoffice.com"]})
+    email: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The company email address.", json_schema_extra={"examples": ["support@onlyoffice.com"]})
+    address: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The company address.", json_schema_extra={"examples": ["Lubanas st. 125a-25"]})
+    phone: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The company phone number.", json_schema_extra={"examples": ["+7 843 2271372"]})
+    is_licensor: Optional[StrictBool] = Field(default=None, description="Specifies if a company is a licensor or not.", alias="IsLicensor", json_schema_extra={"examples": [True]})
+    hide_about: Optional[StrictBool] = Field(default=None, description="Specifies if the About page is visible or not", alias="hideAbout", json_schema_extra={"examples": [False]})
+    last_modified: Optional[datetime] = Field(default=None, description="The timestamp indicating when the settings were last modified.", alias="lastModified", json_schema_extra={"examples": ["1990-01-01T00:00:00Z"]})
     __properties: ClassVar[List[str]] = ["companyName", "site", "email", "address", "phone", "IsLicensor", "hideAbout", "lastModified"]
 
     model_config = ConfigDict(

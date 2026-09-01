@@ -30,8 +30,8 @@ class SaveAsPdfInteger(BaseModel):
     """
     The parameters for saving a file as PDF.
     """ # noqa: E501
-    folder_id: StrictInt = Field(description="The folder ID to save the file as PDF.", alias="folderId")
-    title: Optional[StrictStr] = Field(description="The file title to save as PDF.")
+    folder_id: StrictInt = Field(description="The folder ID to save the file as PDF.", alias="folderId", json_schema_extra={"examples": [1]})
+    title: Optional[StrictStr] = Field(description="The file title to save as PDF.", json_schema_extra={"examples": ["My Document"]})
     __properties: ClassVar[List[str]] = ["folderId", "title"]
 
     model_config = ConfigDict(

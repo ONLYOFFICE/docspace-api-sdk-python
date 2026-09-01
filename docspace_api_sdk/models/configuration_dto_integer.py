@@ -37,21 +37,21 @@ class ConfigurationDtoInteger(BaseModel):
     """
     The configuration parameters.
     """ # noqa: E501
-    document: DocumentConfigDto
-    document_type: Optional[StrictStr] = Field(description="The document type.", alias="documentType")
-    editor_config: EditorConfigurationDto = Field(alias="editorConfig")
-    editor_type: EditorType = Field(alias="editorType")
-    editor_url: Optional[StrictStr] = Field(description="The editor URL.", alias="editorUrl")
-    token: Optional[StrictStr] = Field(default=None, description="The token of the file configuration.")
-    type: Optional[StrictStr] = Field(default=None, description="The platform type.")
-    file: FileDtoInteger
-    error_message: Optional[StrictStr] = Field(default=None, description="The error message.", alias="errorMessage")
-    start_filling: Optional[StrictBool] = Field(default=None, description="Specifies if the file filling has started or not.", alias="startFilling")
-    filling_status: Optional[StrictBool] = Field(default=None, description="The file filling status.", alias="fillingStatus")
-    start_filling_mode: Optional[StartFillingMode] = Field(default=None, alias="startFillingMode")
-    filling_session_id: Optional[StrictStr] = Field(default=None, description="The file filling session ID.", alias="fillingSessionId")
-    quota_exceeded_scope: Optional[QuotaScope] = Field(default=None, alias="quotaExceededScope")
-    generation_tool_call_state: Optional[EditorToolCallStateDto] = Field(default=None, alias="generationToolCallState")
+    document: DocumentConfigDto = Field(description="The document configuration.")
+    document_type: Optional[StrictStr] = Field(description="The document type.", alias="documentType", json_schema_extra={"examples": ["word"]})
+    editor_config: EditorConfigurationDto = Field(description="The editor configuration.", alias="editorConfig")
+    editor_type: EditorType = Field(description="The editor type.", alias="editorType")
+    editor_url: Optional[StrictStr] = Field(description="The editor URL.", alias="editorUrl", json_schema_extra={"examples": ["http://localhost/editor"]})
+    token: Optional[StrictStr] = Field(default=None, description="The token of the file configuration.", json_schema_extra={"examples": ["token-abc-123"]})
+    type: Optional[StrictStr] = Field(default=None, description="The platform type.", json_schema_extra={"examples": ["desktop"]})
+    file: FileDtoInteger = Field(description="The file parameters.")
+    error_message: Optional[StrictStr] = Field(default=None, description="The error message.", alias="errorMessage", json_schema_extra={"examples": ["Configuration error"]})
+    start_filling: Optional[StrictBool] = Field(default=None, description="Specifies if the file filling has started or not.", alias="startFilling", json_schema_extra={"examples": [False]})
+    filling_status: Optional[StrictBool] = Field(default=None, description="The file filling status.", alias="fillingStatus", json_schema_extra={"examples": [False]})
+    start_filling_mode: Optional[StartFillingMode] = Field(default=None, description="The start filling mode.", alias="startFillingMode")
+    filling_session_id: Optional[StrictStr] = Field(default=None, description="The file filling session ID.", alias="fillingSessionId", json_schema_extra={"examples": ["session-123-456"]})
+    quota_exceeded_scope: Optional[QuotaScope] = Field(default=None, description="Indicates which quota scope has been exceeded.", alias="quotaExceededScope")
+    generation_tool_call_state: Optional[EditorToolCallStateDto] = Field(default=None, description="The generation tool call state. Used to run the agent flow in the editor.", alias="generationToolCallState")
     __properties: ClassVar[List[str]] = ["document", "documentType", "editorConfig", "editorType", "editorUrl", "token", "type", "file", "errorMessage", "startFilling", "fillingStatus", "startFillingMode", "fillingSessionId", "quotaExceededScope", "generationToolCallState"]
 
     model_config = ConfigDict(

@@ -31,8 +31,8 @@ class ManageFormFillingDtoInteger(BaseModel):
     """
     The parameters for managing form filling.
     """ # noqa: E501
-    form_id: StrictInt = Field(description="The ID of the form to manage.", alias="formId")
-    action: Optional[FormFillingManageAction] = None
+    form_id: StrictInt = Field(description="The ID of the form to manage.", alias="formId", json_schema_extra={"examples": [1]})
+    action: Optional[FormFillingManageAction] = Field(default=None, description="The action to perform on the form.")
     __properties: ClassVar[List[str]] = ["formId", "action"]
 
     model_config = ConfigDict(

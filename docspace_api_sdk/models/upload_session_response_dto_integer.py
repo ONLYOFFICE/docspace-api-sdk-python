@@ -31,13 +31,13 @@ class UploadSessionResponseDtoInteger(BaseModel):
     """
     The upload session response parameters.
     """ # noqa: E501
-    id: Optional[StrictInt] = Field(default=None, description="The upload session ID.")
-    folder_id: Optional[StrictInt] = Field(default=None, description="The folder ID where the file is being uploaded.", alias="folderId")
-    version: Optional[StrictInt] = Field(default=None, description="The file version number.")
-    title: Optional[StrictStr] = Field(default=None, description="The file title.")
-    provider_key: Optional[StrictStr] = Field(default=None, description="The third-party provider key.", alias="providerKey")
-    uploaded: Optional[StrictBool] = Field(default=None, description="Specifies whether the file has been uploaded.")
-    file: Optional[FileDtoInteger] = None
+    id: Optional[StrictInt] = Field(default=None, description="The upload session ID.", json_schema_extra={"examples": [1]})
+    folder_id: Optional[StrictInt] = Field(default=None, description="The folder ID where the file is being uploaded.", alias="folderId", json_schema_extra={"examples": [1]})
+    version: Optional[StrictInt] = Field(default=None, description="The file version number.", json_schema_extra={"examples": [1]})
+    title: Optional[StrictStr] = Field(default=None, description="The file title.", json_schema_extra={"examples": ["My Document.docx"]})
+    provider_key: Optional[StrictStr] = Field(default=None, description="The third-party provider key.", alias="providerKey", json_schema_extra={"examples": ["Google"]})
+    uploaded: Optional[StrictBool] = Field(default=None, description="Specifies whether the file has been uploaded.", json_schema_extra={"examples": [False]})
+    file: Optional[FileDtoInteger] = Field(default=None, description="The file parameters.")
     __properties: ClassVar[List[str]] = ["id", "folderId", "version", "title", "providerKey", "uploaded", "file"]
 
     model_config = ConfigDict(

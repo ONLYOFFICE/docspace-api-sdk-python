@@ -42,40 +42,40 @@ class EmployeeFullDto(EmployeeDto):
     The full list of user parameters.
     """
 
-    first_name: Optional[StrictStr] = Field(default=None, description="The user first name.", alias="firstName")
-    last_name: Optional[StrictStr] = Field(default=None, description="The user last name.", alias="lastName")
-    user_name: Optional[StrictStr] = Field(default=None, description="The user username.", alias="userName")
-    email: Optional[StrictStr] = Field(default=None, description="The user email.")
-    contacts: Optional[List[Contact]] = Field(default=None, description="The list of user contacts.")
-    status: Optional[EmployeeStatus] = None
-    activation_status: Optional[EmployeeActivationStatus] = Field(default=None, alias="activationStatus")
-    terminated: Optional[ApiDateTime] = None
-    department: Optional[StrictStr] = Field(default=None, description="The user department.")
-    groups: Optional[List[GroupSummaryDto]] = Field(default=None, description="The list of user groups.")
-    location: Optional[StrictStr] = Field(default=None, description="The user location.")
-    notes: Optional[StrictStr] = Field(default=None, description="The user notes.")
-    is_admin: Optional[StrictBool] = Field(default=None, description="Specifies if the user is an administrator or not.", alias="isAdmin")
-    is_room_admin: Optional[StrictBool] = Field(default=None, description="Specifies if the user is a room administrator or not.", alias="isRoomAdmin")
-    is_ldap: Optional[StrictBool] = Field(default=None, description="Specifies if the LDAP settings are enabled for the user or not.", alias="isLDAP")
-    list_admin_modules: Optional[List[StrictStr]] = Field(default=None, description="The list of the administrator modules.", alias="listAdminModules")
-    is_owner: Optional[StrictBool] = Field(default=None, description="Specifies if the user is a portal owner or not.", alias="isOwner")
-    is_visitor: Optional[StrictBool] = Field(default=None, description="Specifies if the user is a portal visitor or not.", alias="isVisitor")
-    is_collaborator: Optional[StrictBool] = Field(default=None, description="Specifies if the user is a portal collaborator or not.", alias="isCollaborator")
-    culture_name: Optional[StrictStr] = Field(default=None, description="The user culture code.", alias="cultureName")
-    mobile_phone: Optional[StrictStr] = Field(default=None, description="The user mobile phone number.", alias="mobilePhone")
-    mobile_phone_activation_status: Optional[MobilePhoneActivationStatus] = Field(default=None, alias="mobilePhoneActivationStatus")
-    is_sso: Optional[StrictBool] = Field(default=None, description="Specifies if the SSO settings are enabled for the user or not.", alias="isSSO")
-    theme: Optional[DarkThemeSettingsType] = None
-    quota_limit: Optional[StrictInt] = Field(default=None, description="The user quota limit.", alias="quotaLimit")
-    used_space: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The portal used space of the user.", alias="usedSpace")
-    shared: Optional[StrictBool] = Field(default=None, description="Specifies if the user has access rights.")
-    is_custom_quota: Optional[StrictBool] = Field(default=None, description="Specifies if the user has a custom quota or not.", alias="isCustomQuota")
-    login_event_id: Optional[StrictInt] = Field(default=None, description="The current login event ID.", alias="loginEventId")
-    auth_cookie_lifetime: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The auth cookie lifetime in seconds.", alias="authCookieLifetime")
-    created_by: Optional[EmployeeDto] = Field(default=None, alias="createdBy")
-    registration_date: Optional[ApiDateTime] = Field(default=None, alias="registrationDate")
-    has_personal_folder: Optional[StrictBool] = Field(default=None, description="Specifies if the user has a personal folder or not.", alias="hasPersonalFolder")
-    tfa_app_enabled: Optional[StrictBool] = Field(default=None, description="Indicates whether the user has enabled two-factor authentication (TFA) using an authentication app.", alias="tfaAppEnabled")
+    first_name: Optional[StrictStr] = Field(default=None, description="The user first name.", alias="firstName", json_schema_extra={"examples": ["Mike"]})
+    last_name: Optional[StrictStr] = Field(default=None, description="The user last name.", alias="lastName", json_schema_extra={"examples": ["Zanyatski"]})
+    user_name: Optional[StrictStr] = Field(default=None, description="The user username.", alias="userName", json_schema_extra={"examples": ["Mike.Zanyatski"]})
+    email: Optional[StrictStr] = Field(default=None, description="The user email.", json_schema_extra={"examples": ["my@gmail.com"]})
+    contacts: Optional[List[Contact]] = Field(default=None, description="The list of user contacts.", json_schema_extra={"examples": [[{"type": "email", "value": "user@example.com"}]]})
+    status: Optional[EmployeeStatus] = Field(default=None, description="The user status.")
+    activation_status: Optional[EmployeeActivationStatus] = Field(default=None, description="The user activation status.", alias="activationStatus")
+    terminated: Optional[ApiDateTime] = Field(default=None, description="The date when the user account was terminated.")
+    department: Optional[StrictStr] = Field(default=None, description="The user department.", json_schema_extra={"examples": ["Marketing"]})
+    groups: Optional[List[GroupSummaryDto]] = Field(default=None, description="The list of user groups.", json_schema_extra={"examples": [[{"id": "00000000-0000-0000-0000-000000000000", "name": "Marketing"}]]})
+    location: Optional[StrictStr] = Field(default=None, description="The user location.", json_schema_extra={"examples": ["Palo Alto"]})
+    notes: Optional[StrictStr] = Field(default=None, description="The user notes.", json_schema_extra={"examples": ["Notes to worker"]})
+    is_admin: Optional[StrictBool] = Field(default=None, description="Specifies if the user is an administrator or not.", alias="isAdmin", json_schema_extra={"examples": [False]})
+    is_room_admin: Optional[StrictBool] = Field(default=None, description="Specifies if the user is a room administrator or not.", alias="isRoomAdmin", json_schema_extra={"examples": [False]})
+    is_ldap: Optional[StrictBool] = Field(default=None, description="Specifies if the LDAP settings are enabled for the user or not.", alias="isLDAP", json_schema_extra={"examples": [False]})
+    list_admin_modules: Optional[List[StrictStr]] = Field(default=None, description="The list of the administrator modules.", alias="listAdminModules", json_schema_extra={"examples": [["projects", "crm"]]})
+    is_owner: Optional[StrictBool] = Field(default=None, description="Specifies if the user is a portal owner or not.", alias="isOwner", json_schema_extra={"examples": [False]})
+    is_visitor: Optional[StrictBool] = Field(default=None, description="Specifies if the user is a portal visitor or not.", alias="isVisitor", json_schema_extra={"examples": [False]})
+    is_collaborator: Optional[StrictBool] = Field(default=None, description="Specifies if the user is a portal collaborator or not.", alias="isCollaborator", json_schema_extra={"examples": [False]})
+    culture_name: Optional[StrictStr] = Field(default=None, description="The user culture code.", alias="cultureName", json_schema_extra={"examples": ["en-EN"]})
+    mobile_phone: Optional[StrictStr] = Field(default=None, description="The user mobile phone number.", alias="mobilePhone", json_schema_extra={"examples": ["+1 (555) 123-4567"]})
+    mobile_phone_activation_status: Optional[MobilePhoneActivationStatus] = Field(default=None, description="The user mobile phone activation status.", alias="mobilePhoneActivationStatus")
+    is_sso: Optional[StrictBool] = Field(default=None, description="Specifies if the SSO settings are enabled for the user or not.", alias="isSSO", json_schema_extra={"examples": [False]})
+    theme: Optional[DarkThemeSettingsType] = Field(default=None, description="The user theme settings.")
+    quota_limit: Optional[StrictInt] = Field(default=None, description="The user quota limit.", alias="quotaLimit", json_schema_extra={"examples": [1073741824]})
+    used_space: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The portal used space of the user.", alias="usedSpace", json_schema_extra={"examples": [12345]})
+    shared: Optional[StrictBool] = Field(default=None, description="Specifies if the user has access rights.", json_schema_extra={"examples": [False]})
+    is_custom_quota: Optional[StrictBool] = Field(default=None, description="Specifies if the user has a custom quota or not.", alias="isCustomQuota", json_schema_extra={"examples": [False]})
+    login_event_id: Optional[StrictInt] = Field(default=None, description="The current login event ID.", alias="loginEventId", json_schema_extra={"examples": [123]})
+    auth_cookie_lifetime: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The auth cookie lifetime in seconds.", alias="authCookieLifetime", json_schema_extra={"examples": [3600]})
+    created_by: Optional[EmployeeDto] = Field(default=None, description="The user who created the current user.", alias="createdBy")
+    registration_date: Optional[ApiDateTime] = Field(default=None, description="The user registration date.", alias="registrationDate")
+    has_personal_folder: Optional[StrictBool] = Field(default=None, description="Specifies if the user has a personal folder or not.", alias="hasPersonalFolder", json_schema_extra={"examples": [True]})
+    tfa_app_enabled: Optional[StrictBool] = Field(default=None, description="Indicates whether the user has enabled two-factor authentication (TFA) using an authentication app.", alias="tfaAppEnabled", json_schema_extra={"examples": [False]})
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -138,41 +138,6 @@ class EmployeeFullDto(EmployeeDto):
         # override the default output from pydantic by calling `to_dict()` of registration_date
         if self.registration_date:
             _dict['registrationDate'] = self.registration_date.to_dict()
-        # set to None if display_name (nullable) is None
-        # and model_fields_set contains the field
-        if self.display_name is None and "display_name" in self.model_fields_set:
-            _dict['displayName'] = None
-
-        # set to None if avatar (nullable) is None
-        # and model_fields_set contains the field
-        if self.avatar is None and "avatar" in self.model_fields_set:
-            _dict['avatar'] = None
-
-        # set to None if avatar_original (nullable) is None
-        # and model_fields_set contains the field
-        if self.avatar_original is None and "avatar_original" in self.model_fields_set:
-            _dict['avatarOriginal'] = None
-
-        # set to None if avatar_max (nullable) is None
-        # and model_fields_set contains the field
-        if self.avatar_max is None and "avatar_max" in self.model_fields_set:
-            _dict['avatarMax'] = None
-
-        # set to None if avatar_medium (nullable) is None
-        # and model_fields_set contains the field
-        if self.avatar_medium is None and "avatar_medium" in self.model_fields_set:
-            _dict['avatarMedium'] = None
-
-        # set to None if avatar_small (nullable) is None
-        # and model_fields_set contains the field
-        if self.avatar_small is None and "avatar_small" in self.model_fields_set:
-            _dict['avatarSmall'] = None
-
-        # set to None if profile_url (nullable) is None
-        # and model_fields_set contains the field
-        if self.profile_url is None and "profile_url" in self.model_fields_set:
-            _dict['profileUrl'] = None
-
         # set to None if first_name (nullable) is None
         # and model_fields_set contains the field
         if self.first_name is None and "first_name" in self.model_fields_set:

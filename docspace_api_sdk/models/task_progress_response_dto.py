@@ -31,11 +31,11 @@ class TaskProgressResponseDto(BaseModel):
     """
     The task progress response parameters.
     """ # noqa: E501
-    id: Optional[StrictStr] = Field(description="The task progress ID.")
-    error: Optional[StrictStr] = Field(default=None, description="The task progress error message.")
-    percentage: StrictInt = Field(description="The percentage of the task progress.")
-    is_completed: StrictBool = Field(description="Specifies if the task peogress is completed or not.", alias="isCompleted")
-    status: DistributedTaskStatus
+    id: Optional[StrictStr] = Field(description="The task progress ID.", json_schema_extra={"examples": ["task-123456"]})
+    error: Optional[StrictStr] = Field(default=None, description="The task progress error message.", json_schema_extra={"examples": ["An error occurred during processing"]})
+    percentage: StrictInt = Field(description="The percentage of the task progress.", json_schema_extra={"examples": [75]})
+    is_completed: StrictBool = Field(description="Specifies if the task peogress is completed or not.", alias="isCompleted", json_schema_extra={"examples": [False]})
+    status: DistributedTaskStatus = Field(description="The status of the distributed task.")
     __properties: ClassVar[List[str]] = ["id", "error", "percentage", "isCompleted", "status"]
 
     model_config = ConfigDict(

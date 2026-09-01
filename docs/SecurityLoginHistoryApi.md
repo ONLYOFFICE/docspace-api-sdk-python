@@ -4,25 +4,30 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_login_history_report**](#create_login_history_report) | **POST** /api/2.0/security/audit/login/report | Generate the login history report
+[**create_login_history_report**](#create_login_history_report) | **POST** /api/2.0/security/audit/login/report | Start the login history report generation
 [**get_last_login_events**](#get_last_login_events) | **GET** /api/2.0/security/audit/login/last | Get login history
 [**get_login_events_by_filter**](#get_login_events_by_filter) | **GET** /api/2.0/security/audit/login/filter | Get filtered login events
+[**get_login_history_report**](#get_login_history_report) | **GET** /api/2.0/security/audit/login/report | Get the login history report generation status
+[**terminate_login_history_report**](#terminate_login_history_report) | **DELETE** /api/2.0/security/audit/login/report | Terminate the login history report generation
 
 
 # **create_login_history_report**
-> StringWrapper create_login_history_report()
+> DocumentBuilderTaskWrapper create_login_history_report(format=format)
 
-Generates the login history report.
+Starts generating the login history report (XLSX by default, or CSV) and saves it to My documents.
 
 For more information, see [api.onlyoffice.com]().
 
 ### Parameters
 
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **format** | [**AuditReportFormat**](.md)| The output file format of the report. Defaults to XLSX. | [optional] 
 
 ### Return type
 
-[**StringWrapper**](StringWrapper.md)
+[**DocumentBuilderTaskWrapper**](DocumentBuilderTaskWrapper.md)
 
 ### Authorization
 
@@ -33,7 +38,8 @@ This endpoint does not need any parameter.
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.string_wrapper import StringWrapper
+from docspace_api_sdk.models.audit_report_format import AuditReportFormat
+from docspace_api_sdk.models.document_builder_task_wrapper import DocumentBuilderTaskWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -54,10 +60,11 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.LoginHistoryApi(api_client)
+    format = docspace_api_sdk.AuditReportFormat() # AuditReportFormat | The output file format of the report. Defaults to XLSX. (optional)
 
     try:
-        # Generate the login history report
-        api_response = api_instance.create_login_history_report()
+        # Start the login history report generation
+        api_response = api_instance.create_login_history_report(format=format)
         print("The response of LoginHistoryApi->create_login_history_report:\n")
         pprint(api_response)
     except Exception as e:
@@ -75,7 +82,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | URL to the xlsx report file |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
+**200** | Operation execution status |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
 **402** | Your pricing plan does not support this option |  -  |
 **403** | No permissions to perform this action |  -  |
 **401** | Unauthorized |  -  |
@@ -244,6 +251,155 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | List of filtered login events |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
+**402** | Your pricing plan does not support this option |  -  |
+**403** | No permissions to perform this action |  -  |
+**401** | Unauthorized |  -  |
+**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
+**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_login_history_report**
+> DocumentBuilderTaskWrapper get_login_history_report()
+
+Returns the status of generating the login history report.
+
+For more information, see [api.onlyoffice.com]().
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**DocumentBuilderTaskWrapper**](DocumentBuilderTaskWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+
+```python
+import docspace_api_sdk
+from docspace_api_sdk.models.document_builder_task_wrapper import DocumentBuilderTaskWrapper
+from docspace_api_sdk.rest import ApiException
+from pprint import pprint
+
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+# Enter a context with an instance of the API client
+with docspace_api_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace_api_sdk.LoginHistoryApi(api_client)
+
+    try:
+        # Get the login history report generation status
+        api_response = api_instance.get_login_history_report()
+        print("The response of LoginHistoryApi->get_login_history_report:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling LoginHistoryApi->get_login_history_report: %s\n" % e)
+```
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Operation execution status |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
+**402** | Your pricing plan does not support this option |  -  |
+**403** | No permissions to perform this action |  -  |
+**401** | Unauthorized |  -  |
+**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
+**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **terminate_login_history_report**
+> terminate_login_history_report()
+
+Terminates generating the login history report.
+
+For more information, see [api.onlyoffice.com]().
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+
+```python
+import docspace_api_sdk
+from docspace_api_sdk.rest import ApiException
+from pprint import pprint
+
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+# Enter a context with an instance of the API client
+with docspace_api_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace_api_sdk.LoginHistoryApi(api_client)
+
+    try:
+        # Terminate the login history report generation
+        api_instance.terminate_login_history_report()
+    except Exception as e:
+        print("Exception when calling LoginHistoryApi->terminate_login_history_report: %s\n" % e)
+```
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Ok |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
 **402** | Your pricing plan does not support this option |  -  |
 **403** | No permissions to perform this action |  -  |
 **401** | Unauthorized |  -  |

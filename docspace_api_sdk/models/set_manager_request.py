@@ -31,7 +31,7 @@ class SetManagerRequest(BaseModel):
     """
     The request for setting a group manager.
     """ # noqa: E501
-    user_id: UUID = Field(description="The user ID.", alias="userId")
+    user_id: UUID = Field(description="The user ID.", alias="userId", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000000"]})
     __properties: ClassVar[List[str]] = ["userId"]
 
     model_config = ConfigDict(

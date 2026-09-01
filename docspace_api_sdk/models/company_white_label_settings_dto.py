@@ -30,14 +30,14 @@ class CompanyWhiteLabelSettingsDto(BaseModel):
     """
     The company white label settings.
     """ # noqa: E501
-    company_name: Optional[StrictStr] = Field(description="The company name.", alias="companyName")
-    site: Optional[StrictStr] = Field(description="The company site.")
-    email: Optional[StrictStr] = Field(description="The company email address.")
-    address: Optional[StrictStr] = Field(description="The company address.")
-    phone: Optional[StrictStr] = Field(description="The company phone number.")
-    is_licensor: StrictBool = Field(description="Specifies if a company is a licensor or not.", alias="isLicensor")
-    hide_about: StrictBool = Field(description="Specifies if the About page is visible or not.", alias="hideAbout")
-    is_default: StrictBool = Field(description="Specifies if these settings are default or not.", alias="isDefault")
+    company_name: Optional[StrictStr] = Field(description="The company name.", alias="companyName", json_schema_extra={"examples": ["My Own Corporation"]})
+    site: Optional[StrictStr] = Field(description="The company site.", json_schema_extra={"examples": ["https://www.example.com"]})
+    email: Optional[StrictStr] = Field(description="The company email address.", json_schema_extra={"examples": ["contact@example.com"]})
+    address: Optional[StrictStr] = Field(description="The company address.", json_schema_extra={"examples": ["123 Business St, New York, NY 10001"]})
+    phone: Optional[StrictStr] = Field(description="The company phone number.", json_schema_extra={"examples": ["+1-800-555-0123"]})
+    is_licensor: StrictBool = Field(description="Specifies if a company is a licensor or not.", alias="isLicensor", json_schema_extra={"examples": [False]})
+    hide_about: StrictBool = Field(description="Specifies if the About page is visible or not.", alias="hideAbout", json_schema_extra={"examples": [False]})
+    is_default: StrictBool = Field(description="Specifies if these settings are default or not.", alias="isDefault", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["companyName", "site", "email", "address", "phone", "isLicensor", "hideAbout", "isDefault"]
 
     model_config = ConfigDict(

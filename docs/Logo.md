@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **medium** | **str** | The medium logo. | 
 **small** | **str** | The small logo. | 
 **color** | **str** | The logo color. | [optional] 
-**cover** | [**LogoCover**](LogoCover.md) |  | [optional] 
+**cover** | [**LogoCover**](LogoCover.md) | The logo cover. | [optional] 
 
 ## Example
 

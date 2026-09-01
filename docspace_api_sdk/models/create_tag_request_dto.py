@@ -31,7 +31,7 @@ class CreateTagRequestDto(BaseModel):
     """
     The request parameters for creating a tag.
     """ # noqa: E501
-    name: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(description="The tag name.")
+    name: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(description="The tag name.", json_schema_extra={"examples": ["Important"]})
     __properties: ClassVar[List[str]] = ["name"]
 
     model_config = ConfigDict(

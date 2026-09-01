@@ -7,7 +7,7 @@ Method | HTTP request | Description
 [**check_upload**](#check_upload) | **POST** /api/2.0/files/{folderId}/upload/check | Check file uploads
 [**create_folder**](#create_folder) | **POST** /api/2.0/files/folder/{folderId} | Create a folder
 [**create_folder_primary_external_link**](#create_folder_primary_external_link) | **POST** /api/2.0/files/folder/{id}/link | Create primary external link
-[**create_report_folder_history**](#create_report_folder_history) | **POST** /api/2.0/files/folder/{folderId}/log/report | Generates folder history
+[**create_report_folder_history**](#create_report_folder_history) | **POST** /api/2.0/files/folder/{folderId}/log/report | Start the folder history report generation
 [**delete_folder**](#delete_folder) | **DELETE** /api/2.0/files/folder/{folderId} | Delete a folder
 [**generate_xlsx_by_folder**](#generate_xlsx_by_folder) | **POST** /api/2.0/files/folder/{folderId}/xlsx | Generate XLSX report by folder
 [**get_favorites_folder**](#get_favorites_folder) | **GET** /api/2.0/files/@favorites | Get the Favorites section
@@ -20,10 +20,11 @@ Method | HTTP request | Description
 [**get_folder_path**](#get_folder_path) | **GET** /api/2.0/files/folder/{folderId}/path | Get the folder path
 [**get_folder_primary_external_link**](#get_folder_primary_external_link) | **GET** /api/2.0/files/folder/{id}/link | Get primary external link
 [**get_folders**](#get_folders) | **GET** /api/2.0/files/{folderId}/subfolders | Get subfolders
+[**get_forms_folder**](#get_forms_folder) | **GET** /api/2.0/files/@forms | Get the Forms section
 [**get_my_folder**](#get_my_folder) | **GET** /api/2.0/files/@my | Get the My documents section
 [**get_new_folder_items**](#get_new_folder_items) | **GET** /api/2.0/files/{folderId}/news | Get new folder items
-[**get_privacy_folder**](#get_privacy_folder) | **GET** /api/2.0/files/@privacy | Get the Private Room section
 [**get_recent_folder**](#get_recent_folder) | **GET** /api/2.0/files/recent | Get the Recent section
+[**get_report_folder_history**](#get_report_folder_history) | **GET** /api/2.0/files/folder/{folderId}/log/report | Get the folder history report generation status
 [**get_root_folders**](#get_root_folders) | **GET** /api/2.0/files/@root | Get filtered sections
 [**get_trash_folder**](#get_trash_folder) | **GET** /api/2.0/files/@trash | Get the Trash section
 [**insert_file**](#insert_file) | **POST** /api/2.0/files/{folderId}/insert | Insert a file
@@ -31,6 +32,7 @@ Method | HTTP request | Description
 [**rename_folder**](#rename_folder) | **PUT** /api/2.0/files/folder/{folderId} | Rename a folder
 [**set_folder_order**](#set_folder_order) | **PUT** /api/2.0/files/folder/{folderId}/order | Set folder order
 [**set_folder_primary_external_link**](#set_folder_primary_external_link) | **PUT** /api/2.0/files/folder/{id}/links | Set the folder external link
+[**terminate_report_folder_history**](#terminate_report_folder_history) | **DELETE** /api/2.0/files/folder/{folderId}/log/report | Terminate the folder history report generation
 [**upload_file**](#upload_file) | **POST** /api/2.0/files/{folderId}/upload | Upload a file
 [**upload_file_to_my**](#upload_file_to_my) | **POST** /api/2.0/files/@my/upload | Upload a file to the My documents section
 
@@ -281,9 +283,9 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_report_folder_history**
-> StringWrapper create_report_folder_history(folder_id)
+> DocumentBuilderTaskWrapper create_report_folder_history(folder_id, format=format, var_from=var_from, to=to)
 
-Generates the activity history of a folder.
+Starts generating the activity history report of a folder (XLSX by default, or CSV) and saves it to My documents.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -292,11 +294,14 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **folder_id** | **int**|  | 
+ **folder_id** | **int**| The folder ID whose history is exported. | 
+ **format** | [**AuditReportFormat**](.md)| The output file format of the report. Defaults to XLSX. | [optional] 
+ **var_from** | **datetime**| The start date of the history period to export. | [optional] 
+ **to** | **datetime**| The end date of the history period to export. | [optional] 
 
 ### Return type
 
-[**StringWrapper**](StringWrapper.md)
+[**DocumentBuilderTaskWrapper**](DocumentBuilderTaskWrapper.md)
 
 ### Authorization
 
@@ -307,7 +312,8 @@ Name | Type | Description  | Notes
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.string_wrapper import StringWrapper
+from docspace_api_sdk.models.audit_report_format import AuditReportFormat
+from docspace_api_sdk.models.document_builder_task_wrapper import DocumentBuilderTaskWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -328,11 +334,14 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.FoldersApi(api_client)
-    folder_id = 56 # int | 
+    folder_id = 1 # int | The folder ID whose history is exported.
+    format = docspace_api_sdk.AuditReportFormat() # AuditReportFormat | The output file format of the report. Defaults to XLSX. (optional)
+    var_from = '2025-01-01T00:00:00' # datetime | The start date of the history period to export. (optional)
+    to = '2025-12-31T23:59:59' # datetime | The end date of the history period to export. (optional)
 
     try:
-        # Generates folder history
-        api_response = api_instance.create_report_folder_history(folder_id)
+        # Start the folder history report generation
+        api_response = api_instance.create_report_folder_history(folder_id, format=format, var_from=var_from, to=to)
         print("The response of FoldersApi->create_report_folder_history:\n")
         pprint(api_response)
     except Exception as e:
@@ -350,7 +359,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | URL to the report file |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
+**200** | Operation execution status |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
 **403** | You don't have enough permission to perform the operation |  -  |
 **404** | The required folder was not found |  -  |
 **401** | Unauthorized |  -  |
@@ -758,7 +767,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_folder_by_folder_id**
-> FolderContentIntegerWrapper get_folder_by_folder_id(folder_id, user_id_or_group_id=user_id_or_group_id, shared_by=shared_by, filter_type=filter_type, room_id=room_id, exclude_subject=exclude_subject, apply_filter_option=apply_filter_option, with_sub_folders=with_sub_folders, extension=extension, search_area=search_area, forms_item_key=forms_item_key, forms_item_type=forms_item_type, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value, location=location)
+> FolderContentIntegerWrapper get_folder_by_folder_id(folder_id, user_id_or_group_id=user_id_or_group_id, shared_by=shared_by, filter_type=filter_type, room_id=room_id, folder_type=folder_type, exclude_subject=exclude_subject, apply_filter_option=apply_filter_option, with_sub_folders=with_sub_folders, extension=extension, search_area=search_area, forms_item_key=forms_item_key, forms_item_type=forms_item_type, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value, location=location)
 
 Returns the detailed list of files and folders located in the folder with the ID specified in the request.
 
@@ -774,6 +783,7 @@ Name | Type | Description  | Notes
  **shared_by** | **UUID**| The identifier of the user who shared the folder or file. | [optional] 
  **filter_type** | [**FilterType**](.md)| The filter type. | [optional] 
  **room_id** | **int**| The room ID. | [optional] 
+ **folder_type** | [**List[int]**](int.md)| The parent folder types used to filter the folder contents by folder type. | [optional] 
  **exclude_subject** | **bool**| Specifies whether to exclude search by user or group ID. | [optional] 
  **apply_filter_option** | [**ApplyFilterOption**](.md)| Specifies whether to return only files, only folders, or all elements from the specified folder. | [optional] 
  **with_sub_folders** | **bool**| Specifies whether to include files from subfolders in the results. | [optional] 
@@ -823,6 +833,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     shared_by = UUID('00000000-0000-0000-0000-000000000000') # UUID | The identifier of the user who shared the folder or file. (optional)
     filter_type = docspace_api_sdk.FilterType() # FilterType | The filter type. (optional)
     room_id = 1 # int | The room ID. (optional)
+    folder_type = [[2]] # List[int] | The parent folder types used to filter the folder contents by folder type. (optional)
     exclude_subject = false # bool | Specifies whether to exclude search by user or group ID. (optional)
     apply_filter_option = docspace_api_sdk.ApplyFilterOption() # ApplyFilterOption | Specifies whether to return only files, only folders, or all elements from the specified folder. (optional)
     with_sub_folders = true # bool | Specifies whether to include files from subfolders in the results. (optional)
@@ -839,7 +850,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
     try:
         # Get a folder by ID
-        api_response = api_instance.get_folder_by_folder_id(folder_id, user_id_or_group_id=user_id_or_group_id, shared_by=shared_by, filter_type=filter_type, room_id=room_id, exclude_subject=exclude_subject, apply_filter_option=apply_filter_option, with_sub_folders=with_sub_folders, extension=extension, search_area=search_area, forms_item_key=forms_item_key, forms_item_type=forms_item_type, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value, location=location)
+        api_response = api_instance.get_folder_by_folder_id(folder_id, user_id_or_group_id=user_id_or_group_id, shared_by=shared_by, filter_type=filter_type, room_id=room_id, folder_type=folder_type, exclude_subject=exclude_subject, apply_filter_option=apply_filter_option, with_sub_folders=with_sub_folders, extension=extension, search_area=search_area, forms_item_key=forms_item_key, forms_item_type=forms_item_type, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value, location=location)
         print("The response of FoldersApi->get_folder_by_folder_id:\n")
         pprint(api_response)
     except Exception as e:
@@ -1333,6 +1344,100 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **get_forms_folder**
+> FolderContentIntegerWrapper get_forms_folder(user_id_or_group_id=user_id_or_group_id, filter_type=filter_type, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value)
+
+Returns the detailed list of rooms used for filling out forms located in the Forms section.
+
+For more information, see [api.onlyoffice.com]().
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **user_id_or_group_id** | **UUID**| The user or group ID. | [optional] 
+ **filter_type** | [**FilterType**](.md)| The filter type. | [optional] 
+ **count** | **int**| The maximum number of items to retrieve in the request. | [optional] 
+ **start_index** | **int**| The zero-based index of the first item to retrieve in a paginated list. | [optional] 
+ **sort_by** | **str**| Specifies the field by which the folder content should be sorted. | [optional] 
+ **sort_order** | [**SortOrder**](.md)| The order in which the results are sorted. | [optional] 
+ **filter_value** | **str**| The text used as a filter or search criterion for folder content queries. | [optional] 
+
+### Return type
+
+[**FolderContentIntegerWrapper**](FolderContentIntegerWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+
+```python
+import docspace_api_sdk
+from docspace_api_sdk.models.filter_type import FilterType
+from docspace_api_sdk.models.folder_content_integer_wrapper import FolderContentIntegerWrapper
+from docspace_api_sdk.models.sort_order import SortOrder
+from docspace_api_sdk.rest import ApiException
+from pprint import pprint
+
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+# Enter a context with an instance of the API client
+with docspace_api_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace_api_sdk.FoldersApi(api_client)
+    user_id_or_group_id = UUID('00000000-0000-0000-0000-000000000000') # UUID | The user or group ID. (optional)
+    filter_type = docspace_api_sdk.FilterType() # FilterType | The filter type. (optional)
+    count = 25 # int | The maximum number of items to retrieve in the request. (optional)
+    start_index = 0 # int | The zero-based index of the first item to retrieve in a paginated list. (optional)
+    sort_by = 'DateAndTime' # str | Specifies the field by which the folder content should be sorted. (optional)
+    sort_order = docspace_api_sdk.SortOrder() # SortOrder | The order in which the results are sorted. (optional)
+    filter_value = 'My Document' # str | The text used as a filter or search criterion for folder content queries. (optional)
+
+    try:
+        # Get the Forms section
+        api_response = api_instance.get_forms_folder(user_id_or_group_id=user_id_or_group_id, filter_type=filter_type, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value)
+        print("The response of FoldersApi->get_forms_folder:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling FoldersApi->get_forms_folder: %s\n" % e)
+```
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The Forms section contents |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
+**403** | You don't have enough permission to view the folder content |  -  |
+**404** | The required folder was not found |  -  |
+**401** | Unauthorized |  -  |
+**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
+**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **get_my_folder**
 > FolderContentIntegerWrapper get_my_folder(user_id_or_group_id=user_id_or_group_id, filter_type=filter_type, apply_filter_option=apply_filter_option, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value)
 
@@ -1509,100 +1614,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **get_privacy_folder**
-> FolderContentIntegerWrapper get_privacy_folder(user_id_or_group_id=user_id_or_group_id, filter_type=filter_type, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value)
-
-Returns the detailed list of files and folders located in the Private Room section.
-
-For more information, see [api.onlyoffice.com]().
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **user_id_or_group_id** | **UUID**| The user or group ID. | [optional] 
- **filter_type** | [**FilterType**](.md)| The filter type. | [optional] 
- **count** | **int**| The maximum number of items to retrieve in the request. | [optional] 
- **start_index** | **int**| The zero-based index of the first item to retrieve in a paginated list. | [optional] 
- **sort_by** | **str**| Specifies the field by which the folder content should be sorted. | [optional] 
- **sort_order** | [**SortOrder**](.md)| The order in which the results are sorted. | [optional] 
- **filter_value** | **str**| The text used as a filter or search criterion for folder content queries. | [optional] 
-
-### Return type
-
-[**FolderContentIntegerWrapper**](FolderContentIntegerWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### Example
-
-
-```python
-import docspace_api_sdk
-from docspace_api_sdk.models.filter_type import FilterType
-from docspace_api_sdk.models.folder_content_integer_wrapper import FolderContentIntegerWrapper
-from docspace_api_sdk.models.sort_order import SortOrder
-from docspace_api_sdk.rest import ApiException
-from pprint import pprint
-
-configuration = docspace_api_sdk.Configuration(
-    host = "https://your-docspace.onlyoffice.com"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace_api_sdk.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-# Enter a context with an instance of the API client
-with docspace_api_sdk.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace_api_sdk.FoldersApi(api_client)
-    user_id_or_group_id = UUID('00000000-0000-0000-0000-000000000000') # UUID | The user or group ID. (optional)
-    filter_type = docspace_api_sdk.FilterType() # FilterType | The filter type. (optional)
-    count = 25 # int | The maximum number of items to retrieve in the request. (optional)
-    start_index = 0 # int | The zero-based index of the first item to retrieve in a paginated list. (optional)
-    sort_by = 'DateAndTime' # str | Specifies the field by which the folder content should be sorted. (optional)
-    sort_order = docspace_api_sdk.SortOrder() # SortOrder | The order in which the results are sorted. (optional)
-    filter_value = 'My Document' # str | The text used as a filter or search criterion for folder content queries. (optional)
-
-    try:
-        # Get the Private Room section
-        api_response = api_instance.get_privacy_folder(user_id_or_group_id=user_id_or_group_id, filter_type=filter_type, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value)
-        print("The response of FoldersApi->get_privacy_folder:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling FoldersApi->get_privacy_folder: %s\n" % e)
-```
-
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | The Private Room section contents |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
-**403** | You don't have enough permission to view the folder content |  -  |
-**404** | The required folder was not found |  -  |
-**401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
-**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **get_recent_folder**
 > FolderContentIntegerWrapper get_recent_folder(user_id_or_group_id=user_id_or_group_id, filter_type=filter_type, exclude_subject=exclude_subject, apply_filter_option=apply_filter_option, search_area=search_area, extension=extension, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value)
 
@@ -1699,6 +1710,86 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 |-------------|-------------|------------------|
 **200** | The Recent section contents |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
 **403** | You don't have enough permission to view the folder content |  -  |
+**404** | The required folder was not found |  -  |
+**401** | Unauthorized |  -  |
+**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
+**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_report_folder_history**
+> DocumentBuilderTaskWrapper get_report_folder_history(folder_id)
+
+Returns the status of generating the folder history report.
+
+For more information, see [api.onlyoffice.com]().
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **folder_id** | **int**|  | 
+
+### Return type
+
+[**DocumentBuilderTaskWrapper**](DocumentBuilderTaskWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+
+```python
+import docspace_api_sdk
+from docspace_api_sdk.models.document_builder_task_wrapper import DocumentBuilderTaskWrapper
+from docspace_api_sdk.rest import ApiException
+from pprint import pprint
+
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+# Enter a context with an instance of the API client
+with docspace_api_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace_api_sdk.FoldersApi(api_client)
+    folder_id = 56 # int | 
+
+    try:
+        # Get the folder history report generation status
+        api_response = api_instance.get_report_folder_history(folder_id)
+        print("The response of FoldersApi->get_report_folder_history:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling FoldersApi->get_report_folder_history: %s\n" % e)
+```
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Operation execution status |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
+**403** | You don't have enough permission to perform the operation |  -  |
 **404** | The required folder was not found |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
@@ -2343,6 +2434,83 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Folder information |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
+**401** | Unauthorized |  -  |
+**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
+**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **terminate_report_folder_history**
+> terminate_report_folder_history(folder_id)
+
+Terminates generating the folder history report.
+
+For more information, see [api.onlyoffice.com]().
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **folder_id** | **int**|  | 
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+
+```python
+import docspace_api_sdk
+from docspace_api_sdk.rest import ApiException
+from pprint import pprint
+
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+# Enter a context with an instance of the API client
+with docspace_api_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace_api_sdk.FoldersApi(api_client)
+    folder_id = 56 # int | 
+
+    try:
+        # Terminate the folder history report generation
+        api_instance.terminate_report_folder_history(folder_id)
+    except Exception as e:
+        print("Exception when calling FoldersApi->terminate_report_folder_history: %s\n" % e)
+```
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Ok |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
+**403** | You don't have enough permission to perform the operation |  -  |
+**404** | The required folder was not found |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |

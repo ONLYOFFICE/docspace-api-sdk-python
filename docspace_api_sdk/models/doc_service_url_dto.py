@@ -30,15 +30,15 @@ class DocServiceUrlDto(BaseModel):
     """
     The document service URL parameters.
     """ # noqa: E501
-    version: Optional[StrictStr] = Field(description="The version of the document service.")
-    doc_service_url_api: Optional[StrictStr] = Field(description="The document service URL API.", alias="docServiceUrlApi")
-    doc_service_url: Optional[StrictStr] = Field(description="The document service URL.", alias="docServiceUrl")
-    doc_service_preload_url: Optional[StrictStr] = Field(description="The URL used to preload the document service scripts.", alias="docServicePreloadUrl")
-    doc_service_url_internal: Optional[StrictStr] = Field(description="The internal document service URL.", alias="docServiceUrlInternal")
-    doc_service_portal_url: Optional[StrictStr] = Field(description="The document service portal URL.", alias="docServicePortalUrl")
-    doc_service_signature_header: Optional[StrictStr] = Field(description="The document service signature header.", alias="docServiceSignatureHeader")
-    doc_service_ssl_verification: StrictBool = Field(description="Specifies if the document service SSL verification is enabled.", alias="docServiceSslVerification")
-    is_default: StrictBool = Field(description="Specifies if the document service is default.", alias="isDefault")
+    version: Optional[StrictStr] = Field(description="The version of the document service.", json_schema_extra={"examples": ["8.0.1"]})
+    doc_service_url_api: Optional[StrictStr] = Field(description="The document service URL API.", alias="docServiceUrlApi", json_schema_extra={"examples": ["http://localhost/api"]})
+    doc_service_url: Optional[StrictStr] = Field(description="The document service URL.", alias="docServiceUrl", json_schema_extra={"examples": ["http://localhost/docservice"]})
+    doc_service_preload_url: Optional[StrictStr] = Field(description="The URL used to preload the document service scripts.", alias="docServicePreloadUrl", json_schema_extra={"examples": ["http://localhost/preload"]})
+    doc_service_url_internal: Optional[StrictStr] = Field(description="The internal document service URL.", alias="docServiceUrlInternal", json_schema_extra={"examples": ["http://localhost/internal"]})
+    doc_service_portal_url: Optional[StrictStr] = Field(description="The document service portal URL.", alias="docServicePortalUrl", json_schema_extra={"examples": ["http://localhost/portal"]})
+    doc_service_signature_header: Optional[StrictStr] = Field(description="The document service signature header.", alias="docServiceSignatureHeader", json_schema_extra={"examples": ["Authorization"]})
+    doc_service_ssl_verification: StrictBool = Field(description="Specifies if the document service SSL verification is enabled.", alias="docServiceSslVerification", json_schema_extra={"examples": [True]})
+    is_default: StrictBool = Field(description="Specifies if the document service is default.", alias="isDefault", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["version", "docServiceUrlApi", "docServiceUrl", "docServicePreloadUrl", "docServiceUrlInternal", "docServicePortalUrl", "docServiceSignatureHeader", "docServiceSslVerification", "isDefault"]
 
     model_config = ConfigDict(

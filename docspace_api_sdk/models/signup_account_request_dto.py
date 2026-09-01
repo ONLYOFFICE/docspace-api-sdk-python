@@ -31,10 +31,10 @@ class SignupAccountRequestDto(BaseModel):
     """
     The request parameters for creating a third-party account.
     """ # noqa: E501
-    employee_type: Optional[EmployeeType] = Field(default=None, alias="employeeType")
-    key: Optional[StrictStr] = Field(description="The user link key.")
-    culture: Optional[StrictStr] = Field(default=None, description="The user culture code.")
-    serialized_profile: Optional[StrictStr] = Field(description="The third-party profile in the serialized format", alias="serializedProfile")
+    employee_type: Optional[EmployeeType] = Field(default=None, description="The user type.", alias="employeeType")
+    key: Optional[StrictStr] = Field(description="The user link key.", json_schema_extra={"examples": ["invite_key_123456"]})
+    culture: Optional[StrictStr] = Field(default=None, description="The user culture code.", json_schema_extra={"examples": ["en-US"]})
+    serialized_profile: Optional[StrictStr] = Field(description="The third-party profile in the serialized format", alias="serializedProfile", json_schema_extra={"examples": ["{\"provider\":\"Google\",\"id\":\"123456\"}"]})
     __properties: ClassVar[List[str]] = ["employeeType", "key", "culture", "serializedProfile"]
 
     model_config = ConfigDict(

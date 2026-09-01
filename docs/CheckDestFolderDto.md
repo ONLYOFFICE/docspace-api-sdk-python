@@ -5,7 +5,7 @@ The result of checking whether files can be moved or copied to the specified fol
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**result** | [**CheckDestFolderResult**](CheckDestFolderResult.md) |  | [optional] 
+**result** | [**CheckDestFolderResult**](CheckDestFolderResult.md) | The result of the validation operation. | [optional] 
 **files** | [**List[FileEntryBaseDto]**](FileEntryBaseDto.md) | The list of files in the destination folder. | [optional] 
 
 ## Example

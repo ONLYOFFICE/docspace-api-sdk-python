@@ -32,9 +32,9 @@ class UpdateRoomGroupRequest(BaseModel):
     """
     UpdateRoomGroupRequest
     """ # noqa: E501
-    rooms_to_add: Optional[List[DuplicateRequestDtoAllOfFileIds]] = Field(default=None, description="The list of room IDs to add to the group.", alias="roomsToAdd")
-    rooms_to_remove: Optional[List[DuplicateRequestDtoAllOfFileIds]] = Field(default=None, description="The list of room IDs to remove from the group.", alias="roomsToRemove")
-    group_name: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=128)]] = Field(default=None, description="The group name.", alias="groupName")
+    rooms_to_add: Optional[List[DuplicateRequestDtoAllOfFileIds]] = Field(default=None, description="The list of room IDs to add to the group.", alias="roomsToAdd", json_schema_extra={"examples": [[1, 2, 3]]})
+    rooms_to_remove: Optional[List[DuplicateRequestDtoAllOfFileIds]] = Field(default=None, description="The list of room IDs to remove from the group.", alias="roomsToRemove", json_schema_extra={"examples": [[1, 2, 3]]})
+    group_name: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=128)]] = Field(default=None, description="The group name.", alias="groupName", json_schema_extra={"examples": ["New Group Name"]})
     __properties: ClassVar[List[str]] = ["roomsToAdd", "roomsToRemove", "groupName"]
 
     model_config = ConfigDict(

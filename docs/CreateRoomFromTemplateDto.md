@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **template_id** | **int** | The template ID from which the room to be created. | 
 **title** | **str** | The room title. | 
-**logo** | [**LogoRequest**](LogoRequest.md) |  | [optional] 
+**logo** | [**LogoRequest**](LogoRequest.md) | The logo request parameters. | [optional] 
 **copy_logo** | **bool** | Specifies whether to copy a logo or not. | [optional] 
 **tags** | **List[str]** | The collection of tags. | [optional] 
 **color** | **str** | The color of the room to be created. | [optional] 
@@ -15,8 +15,8 @@ Name | Type | Description | Notes
 **quota** | **int** | The room quota. | [optional] 
 **indexing** | **bool** | Specifies whether to create a room with indexing. | [optional] 
 **deny_download** | **bool** | Specifies whether to deny downloads from the room. | [optional] 
-**lifetime** | [**RoomDataLifetimeDto**](RoomDataLifetimeDto.md) |  | [optional] 
-**watermark** | [**WatermarkRequestDto**](WatermarkRequestDto.md) |  | [optional] 
+**lifetime** | [**RoomDataLifetimeDto**](RoomDataLifetimeDto.md) | The room data lifetime information. | [optional] 
+**watermark** | [**WatermarkRequestDto**](WatermarkRequestDto.md) | The request parameters for adding watermarks. | [optional] 
 **private** | **bool** | Specifies whether the room to be created is private or not. | [optional] 
 
 ## Example

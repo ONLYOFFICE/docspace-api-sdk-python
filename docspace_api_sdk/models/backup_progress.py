@@ -32,15 +32,15 @@ class BackupProgress(BaseModel):
     """
     The backup progress parameters.
     """ # noqa: E501
-    is_completed: Optional[StrictBool] = Field(default=None, description="Specifies if the backup is completed or not.", alias="isCompleted")
-    progress: Optional[StrictInt] = Field(default=None, description="The backup progress in percentage.")
+    is_completed: Optional[StrictBool] = Field(default=None, description="Specifies if the backup is completed or not.", alias="isCompleted", json_schema_extra={"examples": [False]})
+    progress: Optional[StrictInt] = Field(default=None, description="The backup progress in percentage.", json_schema_extra={"examples": [50]})
     error: Optional[StrictStr] = Field(default=None, description="The backup error message.")
     warning: Optional[StrictStr] = Field(default=None, description="The backup warning message.")
-    link: Optional[StrictStr] = Field(default=None, description="The backup link.")
-    tenant_id: Optional[StrictInt] = Field(default=None, description="The tenant ID.", alias="tenantId")
-    backup_progress_enum: Optional[BackupProgressEnum] = Field(default=None, alias="backupProgressEnum")
-    status: Optional[DistributedTaskStatus] = None
-    task_id: Optional[StrictStr] = Field(default=None, description="The task ID.", alias="taskId")
+    link: Optional[StrictStr] = Field(default=None, description="The backup link.", json_schema_extra={"examples": ["https://example.com/backup/task_123"]})
+    tenant_id: Optional[StrictInt] = Field(default=None, description="The tenant ID.", alias="tenantId", json_schema_extra={"examples": [1]})
+    backup_progress_enum: Optional[BackupProgressEnum] = Field(default=None, description="The backup progress type.", alias="backupProgressEnum")
+    status: Optional[DistributedTaskStatus] = Field(default=None, description="The backup progress status.")
+    task_id: Optional[StrictStr] = Field(default=None, description="The task ID.", alias="taskId", json_schema_extra={"examples": ["task_123"]})
     __properties: ClassVar[List[str]] = ["isCompleted", "progress", "error", "warning", "link", "tenantId", "backupProgressEnum", "status", "taskId"]
 
     model_config = ConfigDict(

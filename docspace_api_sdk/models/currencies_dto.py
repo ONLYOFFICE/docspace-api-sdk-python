@@ -30,9 +30,9 @@ class CurrenciesDto(BaseModel):
     """
     The currencies parameters.
     """ # noqa: E501
-    iso_country_code: Optional[StrictStr] = Field(default=None, description="The ISO country code.", alias="isoCountryCode")
-    iso_currency_symbol: Optional[StrictStr] = Field(default=None, description="The ISO currency symbol.", alias="isoCurrencySymbol")
-    currency_native_name: Optional[StrictStr] = Field(default=None, description="The currency native name.", alias="currencyNativeName")
+    iso_country_code: Optional[StrictStr] = Field(default=None, description="The ISO country code.", alias="isoCountryCode", json_schema_extra={"examples": ["US"]})
+    iso_currency_symbol: Optional[StrictStr] = Field(default=None, description="The ISO currency symbol.", alias="isoCurrencySymbol", json_schema_extra={"examples": ["USD"]})
+    currency_native_name: Optional[StrictStr] = Field(default=None, description="The currency native name.", alias="currencyNativeName", json_schema_extra={"examples": ["Example Name"]})
     __properties: ClassVar[List[str]] = ["isoCountryCode", "isoCurrencySymbol", "currencyNativeName"]
 
     model_config = ConfigDict(

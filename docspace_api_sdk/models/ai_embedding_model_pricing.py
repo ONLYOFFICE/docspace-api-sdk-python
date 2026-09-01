@@ -35,8 +35,9 @@ class AiEmbeddingModelPricing(BaseModel):
     alias: Optional[StrictStr] = None
     owned_by: Optional[StrictStr] = Field(default=None, alias="ownedBy")
     provider: Optional[StrictStr] = None
+    link: Optional[StrictStr] = None
     price: AiEmbeddingPrice
-    __properties: ClassVar[List[str]] = ["id", "alias", "ownedBy", "provider", "price"]
+    __properties: ClassVar[List[str]] = ["id", "alias", "ownedBy", "provider", "link", "price"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -100,6 +101,11 @@ class AiEmbeddingModelPricing(BaseModel):
         if self.provider is None and "provider" in self.model_fields_set:
             _dict['provider'] = None
 
+        # set to None if link (nullable) is None
+        # and model_fields_set contains the field
+        if self.link is None and "link" in self.model_fields_set:
+            _dict['link'] = None
+
         return _dict
 
     @classmethod
@@ -117,6 +123,7 @@ class AiEmbeddingModelPricing(BaseModel):
             "alias": obj.get("alias"),
             "ownedBy": obj.get("ownedBy"),
             "provider": obj.get("provider"),
+            "link": obj.get("link"),
             "price": AiEmbeddingPrice.from_dict(obj["price"]) if obj.get("price") is not None else None
         })
         return _obj

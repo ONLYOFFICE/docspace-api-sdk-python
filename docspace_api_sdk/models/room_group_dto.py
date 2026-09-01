@@ -33,12 +33,12 @@ class RoomGroupDto(BaseModel):
     """
     The room security parameters.
     """ # noqa: E501
-    id: Optional[StrictInt] = Field(default=None, description="The group ID.")
-    name: Optional[StrictStr] = Field(default=None, description="Group name")
-    icon: Optional[MultiSizeLogoCover] = None
-    user_id: Optional[UUID] = Field(default=None, description="The user ID.", alias="userId")
-    rooms: Optional[List[FileEntryBaseDto]] = Field(default=None, description="The list of rooms in the group.")
-    total_rooms: Optional[StrictInt] = Field(default=None, description="Total number of rooms in the group.", alias="totalRooms")
+    id: Optional[StrictInt] = Field(default=None, description="The group ID.", json_schema_extra={"examples": [1]})
+    name: Optional[StrictStr] = Field(default=None, description="Group name", json_schema_extra={"examples": ["My Group"]})
+    icon: Optional[MultiSizeLogoCover] = Field(default=None, description="Group icon")
+    user_id: Optional[UUID] = Field(default=None, description="The user ID.", alias="userId", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000000"]})
+    rooms: Optional[List[FileEntryBaseDto]] = Field(default=None, description="The list of rooms in the group.", json_schema_extra={"examples": [[{"id": 1, "title": "Room 1"}, {"id": 2, "title": "Room 2"}]]})
+    total_rooms: Optional[StrictInt] = Field(default=None, description="Total number of rooms in the group.", alias="totalRooms", json_schema_extra={"examples": [2]})
     __properties: ClassVar[List[str]] = ["id", "name", "icon", "userId", "rooms", "totalRooms"]
 
     model_config = ConfigDict(

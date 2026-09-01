@@ -31,9 +31,9 @@ class CustomColorThemesSettingsDto(BaseModel):
     """
     The custom color themes settings.
     """ # noqa: E501
-    themes: Optional[List[CustomColorThemesSettingsItem]] = Field(default=None, description="The list of the custom color themes.")
-    selected: Optional[StrictInt] = Field(default=None, description="Specifies whether the custom color theme is selected.")
-    limit: Optional[StrictInt] = Field(default=None, description="The maximum number of the custom color themes.")
+    themes: Optional[List[CustomColorThemesSettingsItem]] = Field(default=None, description="The list of the custom color themes.", json_schema_extra={"examples": [[{"id": 1, "name": "Custom Theme"}]]})
+    selected: Optional[StrictInt] = Field(default=None, description="Specifies whether the custom color theme is selected.", json_schema_extra={"examples": [1]})
+    limit: Optional[StrictInt] = Field(default=None, description="The maximum number of the custom color themes.", json_schema_extra={"examples": [1]})
     __properties: ClassVar[List[str]] = ["themes", "selected", "limit"]
 
     model_config = ConfigDict(

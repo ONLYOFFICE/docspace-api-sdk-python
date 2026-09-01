@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **change** | **bool** | Specifies if the co-editing mode can be changed in the editor interface or not. | [optional] 
 **fast** | **bool** | Specifies if the co-editing mode is fast. | [optional] 
-**mode** | [**CoEditingConfigMode**](CoEditingConfigMode.md) |  | [optional] 
+**mode** | [**CoEditingConfigMode**](CoEditingConfigMode.md) | The co-editing mode (fast or strict). | [optional] 
 
 ## Example
 

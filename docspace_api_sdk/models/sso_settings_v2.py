@@ -36,18 +36,18 @@ class SsoSettingsV2(BaseModel):
     """
     The SSO portal settings.
     """ # noqa: E501
-    last_modified: Optional[datetime] = Field(default=None, description="The timestamp indicating when the settings were last modified.", alias="lastModified")
-    enable_sso: Optional[StrictBool] = Field(default=None, description="Specifies if the SSO settings are enabled or not.", alias="enableSso")
-    idp_settings: Optional[SsoIdpSettings] = Field(default=None, alias="idpSettings")
-    idp_certificates: Optional[List[SsoCertificate]] = Field(default=None, description="The list of the IdP certificates.", alias="idpCertificates")
-    idp_certificate_advanced: Optional[SsoIdpCertificateAdvanced] = Field(default=None, alias="idpCertificateAdvanced")
-    sp_login_label: Optional[StrictStr] = Field(default=None, description="The SP login label.", alias="spLoginLabel")
-    sp_certificates: Optional[List[SsoCertificate]] = Field(default=None, description="The list of the SP certificates.", alias="spCertificates")
-    sp_certificate_advanced: Optional[SsoSpCertificateAdvanced] = Field(default=None, alias="spCertificateAdvanced")
-    field_mapping: Optional[SsoFieldMapping] = Field(default=None, alias="fieldMapping")
-    hide_auth_page: Optional[StrictBool] = Field(default=None, description="Specifies if the authentication page will be hidden or not.", alias="hideAuthPage")
-    users_type: Optional[StrictInt] = Field(default=None, description="The user type.", alias="usersType")
-    disable_email_verification: Optional[StrictBool] = Field(default=None, description="Specifies if the email verification is disabled or not.", alias="disableEmailVerification")
+    last_modified: Optional[datetime] = Field(default=None, description="The timestamp indicating when the settings were last modified.", alias="lastModified", json_schema_extra={"examples": ["1990-01-01T00:00:00Z"]})
+    enable_sso: Optional[StrictBool] = Field(default=None, description="Specifies if the SSO settings are enabled or not.", alias="enableSso", json_schema_extra={"examples": [False]})
+    idp_settings: Optional[SsoIdpSettings] = Field(default=None, description="The SSO IdP settings.", alias="idpSettings")
+    idp_certificates: Optional[List[SsoCertificate]] = Field(default=None, description="The list of the IdP certificates.", alias="idpCertificates", json_schema_extra={"examples": [[{"crt": "base64-cert-data", "key": "base64-key-data"}]]})
+    idp_certificate_advanced: Optional[SsoIdpCertificateAdvanced] = Field(default=None, description="The IdP advanced certificate.", alias="idpCertificateAdvanced")
+    sp_login_label: Optional[StrictStr] = Field(default=None, description="The SP login label.", alias="spLoginLabel", json_schema_extra={"examples": ["Single Sign-on"]})
+    sp_certificates: Optional[List[SsoCertificate]] = Field(default=None, description="The list of the SP certificates.", alias="spCertificates", json_schema_extra={"examples": [[{"crt": "base64-cert-data", "key": "base64-key-data"}]]})
+    sp_certificate_advanced: Optional[SsoSpCertificateAdvanced] = Field(default=None, description="The SP advanced certificate.", alias="spCertificateAdvanced")
+    field_mapping: Optional[SsoFieldMapping] = Field(default=None, description="The SSO field mapping.", alias="fieldMapping")
+    hide_auth_page: Optional[StrictBool] = Field(default=None, description="Specifies if the authentication page will be hidden or not.", alias="hideAuthPage", json_schema_extra={"examples": [False]})
+    users_type: Optional[StrictInt] = Field(default=None, description="The user type.", alias="usersType", json_schema_extra={"examples": [1]})
+    disable_email_verification: Optional[StrictBool] = Field(default=None, description="Specifies if the email verification is disabled or not.", alias="disableEmailVerification", json_schema_extra={"examples": [False]})
     __properties: ClassVar[List[str]] = ["lastModified", "enableSso", "idpSettings", "idpCertificates", "idpCertificateAdvanced", "spLoginLabel", "spCertificates", "spCertificateAdvanced", "fieldMapping", "hideAuthPage", "usersType", "disableEmailVerification"]
 
     model_config = ConfigDict(

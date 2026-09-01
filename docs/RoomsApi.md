@@ -1942,7 +1942,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_rooms_folder**
-> FolderContentIntegerWrapper get_rooms_folder(type=type, subject_id=subject_id, subject_owner_id=subject_owner_id, search_area=search_area, without_tags=without_tags, tags=tags, exclude_subject=exclude_subject, provider=provider, subject_filter=subject_filter, quota_filter=quota_filter, storage_filter=storage_filter, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value, group_id=group_id)
+> FolderContentIntegerWrapper get_rooms_folder(type=type, subject_id=subject_id, subject_owner_id=subject_owner_id, search_area=search_area, without_tags=without_tags, tags=tags, exclude_subject=exclude_subject, provider=provider, quota_filter=quota_filter, storage_filter=storage_filter, privacy_filter=privacy_filter, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value, group_id=group_id)
 
 Returns the contents of the Rooms section by the parameters specified in the request.
 
@@ -1954,16 +1954,16 @@ For more information, see [api.onlyoffice.com]().
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **type** | [**List[RoomType]**](RoomType.md)| The filter by room type. | [optional] 
- **subject_id** | **str**| The filter by user ID. | [optional] 
- **subject_owner_id** | **str**| The filter by room owner ID. | [optional] 
+ **subject_id** | **UUID**| The filter by user ID. | [optional] 
+ **subject_owner_id** | **UUID**| The filter by room owner ID. | [optional] 
  **search_area** | [**SearchArea**](.md)| The room search area (Active, Archive, Any, Recent by links). | [optional] 
  **without_tags** | **bool**| Specifies whether to search by tags or not. | [optional] 
  **tags** | **str**| The tags in the serialized format. | [optional] 
  **exclude_subject** | **bool**| Specifies whether to exclude search by user or group ID. | [optional] 
  **provider** | [**ProviderFilter**](.md)| The filter by provider name (None, Box, DropBox, GoogleDrive, kDrive, OneDrive, SharePoint, WebDav, Yandex, Storage). | [optional] 
- **subject_filter** | [**SubjectFilter**](.md)| The filter by user (Owner - 0, Member - 1). | [optional] 
  **quota_filter** | [**QuotaFilter**](.md)| The filter by quota (All - 0, Default - 1, Custom - 2). | [optional] 
  **storage_filter** | [**StorageFilter**](.md)| The filter by storage (None - 0, Internal - 1, ThirdParty - 2). | [optional] 
+ **privacy_filter** | [**RoomPrivacyFilter**](.md)| The filter by room privacy (None - 0, Private - 1, NotPrivate - 2). When omitted, all rooms are returned. | [optional] 
  **count** | **int**| Specifies the maximum number of items to retrieve. | [optional] 
  **start_index** | **int**| The index from which to start retrieving the room content. | [optional] 
  **sort_by** | **str**| Specifies the field by which the room content should be sorted. | [optional] 
@@ -1987,11 +1987,11 @@ import docspace_api_sdk
 from docspace_api_sdk.models.folder_content_integer_wrapper import FolderContentIntegerWrapper
 from docspace_api_sdk.models.provider_filter import ProviderFilter
 from docspace_api_sdk.models.quota_filter import QuotaFilter
+from docspace_api_sdk.models.room_privacy_filter import RoomPrivacyFilter
 from docspace_api_sdk.models.room_type import RoomType
 from docspace_api_sdk.models.search_area import SearchArea
 from docspace_api_sdk.models.sort_order import SortOrder
 from docspace_api_sdk.models.storage_filter import StorageFilter
-from docspace_api_sdk.models.subject_filter import SubjectFilter
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -2013,16 +2013,16 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.RoomsApi(api_client)
     type = [docspace_api_sdk.RoomType()] # List[RoomType] | The filter by room type. (optional)
-    subject_id = '00000000-0000-0000-0000-000000000000' # str | The filter by user ID. (optional)
-    subject_owner_id = '00000000-0000-0000-0000-000000000000' # str | The filter by room owner ID. (optional)
+    subject_id = UUID('00000000-0000-0000-0000-000000000000') # UUID | The filter by user ID. (optional)
+    subject_owner_id = UUID('00000000-0000-0000-0000-000000000000') # UUID | The filter by room owner ID. (optional)
     search_area = docspace_api_sdk.SearchArea() # SearchArea | The room search area (Active, Archive, Any, Recent by links). (optional)
     without_tags = false # bool | Specifies whether to search by tags or not. (optional)
     tags = 'tag1' # str | The tags in the serialized format. (optional)
     exclude_subject = false # bool | Specifies whether to exclude search by user or group ID. (optional)
     provider = docspace_api_sdk.ProviderFilter() # ProviderFilter | The filter by provider name (None, Box, DropBox, GoogleDrive, kDrive, OneDrive, SharePoint, WebDav, Yandex, Storage). (optional)
-    subject_filter = docspace_api_sdk.SubjectFilter() # SubjectFilter | The filter by user (Owner - 0, Member - 1). (optional)
     quota_filter = docspace_api_sdk.QuotaFilter() # QuotaFilter | The filter by quota (All - 0, Default - 1, Custom - 2). (optional)
     storage_filter = docspace_api_sdk.StorageFilter() # StorageFilter | The filter by storage (None - 0, Internal - 1, ThirdParty - 2). (optional)
+    privacy_filter = docspace_api_sdk.RoomPrivacyFilter() # RoomPrivacyFilter | The filter by room privacy (None - 0, Private - 1, NotPrivate - 2). When omitted, all rooms are returned. (optional)
     count = 25 # int | Specifies the maximum number of items to retrieve. (optional)
     start_index = 0 # int | The index from which to start retrieving the room content. (optional)
     sort_by = 'DateAndTime' # str | Specifies the field by which the room content should be sorted. (optional)
@@ -2032,7 +2032,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
     try:
         # Get rooms
-        api_response = api_instance.get_rooms_folder(type=type, subject_id=subject_id, subject_owner_id=subject_owner_id, search_area=search_area, without_tags=without_tags, tags=tags, exclude_subject=exclude_subject, provider=provider, subject_filter=subject_filter, quota_filter=quota_filter, storage_filter=storage_filter, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value, group_id=group_id)
+        api_response = api_instance.get_rooms_folder(type=type, subject_id=subject_id, subject_owner_id=subject_owner_id, search_area=search_area, without_tags=without_tags, tags=tags, exclude_subject=exclude_subject, provider=provider, quota_filter=quota_filter, storage_filter=storage_filter, privacy_filter=privacy_filter, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value, group_id=group_id)
         print("The response of RoomsApi->get_rooms_folder:\n")
         pprint(api_response)
     except Exception as e:
@@ -3205,7 +3205,7 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.RoomsApi(api_client)
-    id = 56 # int | The room ID.
+    id = file-id # int | The room ID.
     update_room_request = docspace_api_sdk.UpdateRoomRequest() # UpdateRoomRequest | The request parameters for updating a room.
 
     try:
@@ -3387,6 +3387,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Upload result |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
+**400** | The request carries no image, or the image cannot be used as a logo |  -  |
 **403** | No permissions to perform this action |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |

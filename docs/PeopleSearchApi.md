@@ -81,7 +81,7 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.SearchApi(api_client)
-    id = 56 # int | The user ID.
+    id = 00000000-0000-0000-0000-000000000000 # int | The user ID.
     employee_status = docspace_api_sdk.EmployeeStatus() # EmployeeStatus | The user status. (optional)
     activation_status = docspace_api_sdk.EmployeeActivationStatus() # EmployeeActivationStatus | The user activation status. (optional)
     exclude_shared = false # bool | Specifies whether to exclude the account sharing settings from the response. (optional)
@@ -188,7 +188,7 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.SearchApi(api_client)
-    id = 56 # int | The user ID.
+    id = 00000000-0000-0000-0000-000000000000 # int | The user ID.
     employee_status = docspace_api_sdk.EmployeeStatus() # EmployeeStatus | The user status. (optional)
     activation_status = docspace_api_sdk.EmployeeActivationStatus() # EmployeeActivationStatus | The user activation status. (optional)
     exclude_shared = false # bool | Specifies whether to exclude the account sharing settings from the response. (optional)
@@ -295,7 +295,7 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.SearchApi(api_client)
-    id = 56 # int | The user ID.
+    id = 00000000-0000-0000-0000-000000000000 # int | The user ID.
     employee_status = docspace_api_sdk.EmployeeStatus() # EmployeeStatus | The user status. (optional)
     activation_status = docspace_api_sdk.EmployeeActivationStatus() # EmployeeActivationStatus | The user activation status. (optional)
     exclude_shared = false # bool | Specifies whether to exclude the account sharing settings from the response. (optional)
@@ -500,7 +500,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     group_id = UUID('00000000-0000-0000-0000-000000000000') # UUID | The group ID. (optional)
     activation_status = docspace_api_sdk.EmployeeActivationStatus() # EmployeeActivationStatus | The user activation status. (optional)
     employee_type = docspace_api_sdk.EmployeeType() # EmployeeType | The user type. (optional)
-    employee_types = [[1,2]] # List[int] | The list of user types. (optional)
+    employee_types = [[1, 2]] # List[int] | The list of user types. (optional)
     is_administrator = false # bool | Specifies if the user is an administrator or not. (optional)
     payments = docspace_api_sdk.Payments() # Payments | The user payment status. (optional)
     account_login_type = docspace_api_sdk.AccountLoginType() # AccountLoginType | The account login type. (optional)
@@ -610,7 +610,7 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.SearchApi(api_client)
-    id = 56 # int | The user ID.
+    id = 00000000-0000-0000-0000-000000000000 # int | The user ID.
     employee_status = docspace_api_sdk.EmployeeStatus() # EmployeeStatus | The user status. (optional)
     activation_status = docspace_api_sdk.EmployeeActivationStatus() # EmployeeActivationStatus | The user activation status. (optional)
     exclude_shared = false # bool | Specifies whether to exclude the user sharing settings or not. (optional)
@@ -717,7 +717,7 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.SearchApi(api_client)
-    id = 56 # int | The user ID.
+    id = 00000000-0000-0000-0000-000000000000 # int | The user ID.
     employee_status = docspace_api_sdk.EmployeeStatus() # EmployeeStatus | The user status. (optional)
     activation_status = docspace_api_sdk.EmployeeActivationStatus() # EmployeeActivationStatus | The user activation status. (optional)
     exclude_shared = false # bool | Specifies whether to exclude the user sharing settings or not. (optional)
@@ -824,7 +824,7 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.SearchApi(api_client)
-    id = 56 # int | The user ID.
+    id = 00000000-0000-0000-0000-000000000000 # int | The user ID.
     employee_status = docspace_api_sdk.EmployeeStatus() # EmployeeStatus | The user status. (optional)
     activation_status = docspace_api_sdk.EmployeeActivationStatus() # EmployeeActivationStatus | The user activation status. (optional)
     exclude_shared = false # bool | Specifies whether to exclude the user sharing settings or not. (optional)

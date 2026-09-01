@@ -32,8 +32,8 @@ class WhiteLabelRequestsDto(BaseModel):
     """
     The request parameters for configuring the white label branding settings.
     """ # noqa: E501
-    logo_text: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=40)]] = Field(default=None, description="The text to display alongside or in place of the logo.", alias="logoText")
-    logo: Optional[List[ItemKeyValuePairStringLogoRequestsDto]] = Field(default=None, description="The white label tenant IDs with their logos (light or dark).")
+    logo_text: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=40)]] = Field(default=None, description="The text to display alongside or in place of the logo.", alias="logoText", json_schema_extra={"examples": ["Company Name"]})
+    logo: Optional[List[ItemKeyValuePairStringLogoRequestsDto]] = Field(default=None, description="The white label tenant IDs with their logos (light or dark).", json_schema_extra={"examples": [["item1", "item2"]]})
     __properties: ClassVar[List[str]] = ["logoText", "logo"]
 
     model_config = ConfigDict(

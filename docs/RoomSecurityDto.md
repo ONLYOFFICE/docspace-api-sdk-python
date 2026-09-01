@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **members** | [**List[FileShareDto]**](FileShareDto.md) | The list of room members. | [optional] 
 **warning** | **str** | The warning message. | [optional] 
-**error** | [**RoomSecurityError**](RoomSecurityError.md) |  | [optional] 
+**error** | [**RoomSecurityError**](RoomSecurityError.md) | The error type. | [optional] 
 
 ## Example
 

@@ -34,14 +34,14 @@ class FolderLinkRequest(BaseModel):
     """
     The folder link parameters.
     """ # noqa: E501
-    link_id: Optional[UUID] = Field(default=None, description="The folder link ID.", alias="linkId")
-    access: Optional[FileShare] = None
-    expiration_date: Optional[ApiDateTime] = Field(default=None, alias="expirationDate")
-    title: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The link name.")
-    password: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The link password.")
-    deny_download: Optional[StrictBool] = Field(default=None, description="Specifies if downloading the file from the link is disabled or not.", alias="denyDownload")
-    internal: Optional[StrictBool] = Field(default=None, description="The link scope, whether it is internal or not.")
-    primary: Optional[StrictBool] = Field(default=None, description="Specifies whether the folder link is primary or not.")
+    link_id: Optional[UUID] = Field(default=None, description="The folder link ID.", alias="linkId", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000000"]})
+    access: Optional[FileShare] = Field(default=None, description="The access rights type.")
+    expiration_date: Optional[ApiDateTime] = Field(default=None, description="The API date and time parameters.", alias="expirationDate")
+    title: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The link name.", json_schema_extra={"examples": ["My Document"]})
+    password: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The link password.", json_schema_extra={"examples": ["p@ssw0rd"]})
+    deny_download: Optional[StrictBool] = Field(default=None, description="Specifies if downloading the file from the link is disabled or not.", alias="denyDownload", json_schema_extra={"examples": [False]})
+    internal: Optional[StrictBool] = Field(default=None, description="The link scope, whether it is internal or not.", json_schema_extra={"examples": [False]})
+    primary: Optional[StrictBool] = Field(default=None, description="Specifies whether the folder link is primary or not.", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["linkId", "access", "expirationDate", "title", "password", "denyDownload", "internal", "primary"]
 
     model_config = ConfigDict(

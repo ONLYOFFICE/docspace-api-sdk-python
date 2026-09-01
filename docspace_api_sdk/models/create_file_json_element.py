@@ -32,10 +32,10 @@ class CreateFileJsonElement(BaseModel):
     """
     The parameters for creating a file.
     """ # noqa: E501
-    title: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=165)]] = Field(description="The file title for creation.")
+    title: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=165)]] = Field(description="The file title for creation.", json_schema_extra={"examples": ["New Document.docx"]})
     template_id: Optional[CreateFileJsonElementTemplateId] = Field(default=None, alias="templateId")
-    enable_external_ext: Optional[StrictBool] = Field(default=None, description="Specifies whether to allow creating a file of an external extension or not.", alias="enableExternalExt")
-    form_id: Optional[StrictInt] = Field(default=None, description="The form ID for creation.", alias="formId")
+    enable_external_ext: Optional[StrictBool] = Field(default=None, description="Specifies whether to allow creating a file of an external extension or not.", alias="enableExternalExt", json_schema_extra={"examples": [False]})
+    form_id: Optional[StrictInt] = Field(default=None, description="The form ID for creation.", alias="formId", json_schema_extra={"examples": [0]})
     __properties: ClassVar[List[str]] = ["title", "templateId", "enableExternalExt", "formId"]
 
     model_config = ConfigDict(

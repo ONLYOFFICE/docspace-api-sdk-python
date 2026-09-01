@@ -6,7 +6,7 @@ The editor tool call state. Used to run the agent flow in the editor.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **tool_name** | **str** | The tool name. | 
-**parameters** | **object** | The editor tool call parameters. | 
+**parameters** | **object** | The tool call parameters. | 
 
 ## Example
 

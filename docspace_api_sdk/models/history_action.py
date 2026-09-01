@@ -31,8 +31,8 @@ class HistoryAction(BaseModel):
     """
     The action performed on the file.
     """ # noqa: E501
-    id: Optional[MessageAction] = None
-    key: Optional[StrictStr] = Field(default=None, description="The action performed on the file.")
+    id: Optional[MessageAction] = Field(default=None, description="The event action ID.")
+    key: Optional[StrictStr] = Field(default=None, description="The action performed on the file.", json_schema_extra={"examples": ["fileUploaded"]})
     __properties: ClassVar[List[str]] = ["id", "key"]
 
     model_config = ConfigDict(

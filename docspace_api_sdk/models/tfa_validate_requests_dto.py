@@ -30,8 +30,8 @@ class TfaValidateRequestsDto(BaseModel):
     """
     The request parameters for validating the two-factor authentication codes.
     """ # noqa: E501
-    code: Optional[StrictStr] = Field(description="The verification code provided by the user.")
-    session: Optional[StrictBool] = Field(default=None, description="Specifies whether the authentication is session-based.")
+    code: Optional[StrictStr] = Field(description="The verification code provided by the user.", json_schema_extra={"examples": ["123456"]})
+    session: Optional[StrictBool] = Field(default=None, description="Specifies whether the authentication is session-based.", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["code", "session"]
 
     model_config = ConfigDict(

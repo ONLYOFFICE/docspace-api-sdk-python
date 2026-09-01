@@ -30,8 +30,8 @@ class FirebaseRequestsDto(BaseModel):
     """
     The Firebase-related request parameters.
     """ # noqa: E501
-    firebase_device_token: Optional[StrictStr] = Field(default=None, description="The Firebase device token.", alias="firebaseDeviceToken")
-    is_subscribed: Optional[StrictBool] = Field(default=None, description="Specifies whether the user is subscribed to the push notifications or not.", alias="isSubscribed")
+    firebase_device_token: Optional[StrictStr] = Field(default=None, description="The Firebase device token.", alias="firebaseDeviceToken", json_schema_extra={"examples": ["dGhpc2lzYXRva2Vu..."]})
+    is_subscribed: Optional[StrictBool] = Field(default=None, description="Specifies whether the user is subscribed to the push notifications or not.", alias="isSubscribed", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["firebaseDeviceToken", "isSubscribed"]
 
     model_config = ConfigDict(

@@ -31,8 +31,8 @@ class NotificationSettingsDto(BaseModel):
     """
     The notification settings parameters.
     """ # noqa: E501
-    type: Optional[NotificationType] = None
-    is_enabled: Optional[StrictBool] = Field(default=None, description="Specifies if the notification type is enabled or not.", alias="isEnabled")
+    type: Optional[NotificationType] = Field(default=None, description="The notification type.")
+    is_enabled: Optional[StrictBool] = Field(default=None, description="Specifies if the notification type is enabled or not.", alias="isEnabled", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["type", "isEnabled"]
 
     model_config = ConfigDict(

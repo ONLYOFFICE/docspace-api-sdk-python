@@ -32,14 +32,14 @@ class WatermarkRequestDto(BaseModel):
     """
     The request parameters for adding watermarks.
     """ # noqa: E501
-    enabled: Optional[StrictBool] = Field(default=None, description="Specifies whether watermarks are on or off.")
-    additions: Optional[WatermarkAdditions] = None
-    text: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The watermark text.")
-    rotate: Optional[StrictInt] = Field(default=None, description="The watermark text and image rotate angle.")
-    image_scale: Optional[StrictInt] = Field(default=None, description="The watermark image scale.", alias="imageScale")
-    image_url: Optional[StrictStr] = Field(default=None, description="The path to the temporary image file.", alias="imageUrl")
-    image_height: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The watermark image height.", alias="imageHeight")
-    image_width: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The watermark image width.", alias="imageWidth")
+    enabled: Optional[StrictBool] = Field(default=None, description="Specifies whether watermarks are on or off.", json_schema_extra={"examples": [True]})
+    additions: Optional[WatermarkAdditions] = Field(default=None, description="Specifies whether to display the following addditional information or not: username, user email, user IP address, current date and room name.")
+    text: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The watermark text.", json_schema_extra={"examples": ["Confidential"]})
+    rotate: Optional[StrictInt] = Field(default=None, description="The watermark text and image rotate angle.", json_schema_extra={"examples": [-45]})
+    image_scale: Optional[StrictInt] = Field(default=None, description="The watermark image scale.", alias="imageScale", json_schema_extra={"examples": [100]})
+    image_url: Optional[StrictStr] = Field(default=None, description="The path to the temporary image file.", alias="imageUrl", json_schema_extra={"examples": ["/tmp/watermark.png"]})
+    image_height: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The watermark image height.", alias="imageHeight", json_schema_extra={"examples": [100.0]})
+    image_width: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The watermark image width.", alias="imageWidth", json_schema_extra={"examples": [200.0]})
     __properties: ClassVar[List[str]] = ["enabled", "additions", "text", "rotate", "imageScale", "imageUrl", "imageHeight", "imageWidth"]
 
     model_config = ConfigDict(

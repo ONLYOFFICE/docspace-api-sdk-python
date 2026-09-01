@@ -33,9 +33,9 @@ class InvitationLinkUpdateRequestDto(BaseModel):
     """
     The request parameters for updating an invitation link.
     """ # noqa: E501
-    id: UUID = Field(description="The ID of the invitation link.")
-    expiration: Optional[datetime] = Field(default=None, description="The expiration date of the invitation link.")
-    max_use_count: Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]] = Field(default=None, description="The maximum number of times the invitation link can be used.", alias="maxUseCount")
+    id: UUID = Field(description="The ID of the invitation link.", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000000"]})
+    expiration: Optional[datetime] = Field(default=None, description="The expiration date of the invitation link.", json_schema_extra={"examples": ["2024-01-15T10:30:00Z"]})
+    max_use_count: Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]] = Field(default=None, description="The maximum number of times the invitation link can be used.", alias="maxUseCount", json_schema_extra={"examples": [1]})
     __properties: ClassVar[List[str]] = ["id", "expiration", "maxUseCount"]
 
     model_config = ConfigDict(

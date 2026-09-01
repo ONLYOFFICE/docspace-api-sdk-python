@@ -30,9 +30,9 @@ class Run(BaseModel):
     """
     The text run parameters.
     """ # noqa: E501
-    fill: Optional[List[StrictInt]] = Field(default=None, description="The fill color of the text run in RGB format.")
-    text: Optional[StrictStr] = Field(default=None, description="The run text.")
-    font_size: Optional[StrictStr] = Field(default=None, description="The font size of the text run in points.", alias="font-size")
+    fill: Optional[List[StrictInt]] = Field(default=None, description="The fill color of the text run in RGB format.", json_schema_extra={"examples": [[124, 124, 124]]})
+    text: Optional[StrictStr] = Field(default=None, description="The run text.", json_schema_extra={"examples": ["CONFIDENTIAL"]})
+    font_size: Optional[StrictStr] = Field(default=None, description="The font size of the text run in points.", alias="font-size", json_schema_extra={"examples": ["26"]})
     __properties: ClassVar[List[str]] = ["fill", "text", "font-size"]
 
     model_config = ConfigDict(

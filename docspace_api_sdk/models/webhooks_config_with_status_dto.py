@@ -31,8 +31,8 @@ class WebhooksConfigWithStatusDto(BaseModel):
     """
     The webhook configuration with its status.
     """ # noqa: E501
-    configs: Optional[WebhooksConfigDto] = None
-    status: Optional[StrictInt] = Field(default=None, description="The webhook status.")
+    configs: Optional[WebhooksConfigDto] = Field(default=None, description="The webhook configuration.")
+    status: Optional[StrictInt] = Field(default=None, description="The webhook status.", json_schema_extra={"examples": [1]})
     __properties: ClassVar[List[str]] = ["configs", "status"]
 
     model_config = ConfigDict(

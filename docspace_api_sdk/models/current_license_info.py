@@ -31,8 +31,8 @@ class CurrentLicenseInfo(BaseModel):
     """
     The current license information.
     """ # noqa: E501
-    trial: StrictBool = Field(description="Specifies whether the license is trial or not.")
-    due_date: datetime = Field(description="The date when the license expires.", alias="dueDate")
+    trial: StrictBool = Field(description="Specifies whether the license is trial or not.", json_schema_extra={"examples": [False]})
+    due_date: datetime = Field(description="The date when the license expires.", alias="dueDate", json_schema_extra={"examples": ["2025-06-15T10:30:00.0000000Z"]})
     __properties: ClassVar[List[str]] = ["trial", "dueDate"]
 
     model_config = ConfigDict(

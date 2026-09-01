@@ -32,11 +32,11 @@ class AdminMessageSettingsRequestsDto(BaseModel):
     """
     The request parameters for configuring the administrator message content.
     """ # noqa: E501
-    message: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(description="The content of the administrator message to be sent.")
-    email: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(description="Email")
-    culture: Optional[StrictStr] = Field(default=None, description="Culture")
-    recaptcha_type: Optional[RecaptchaType] = Field(default=None, alias="recaptchaType")
-    recaptcha_response: Optional[StrictStr] = Field(default=None, description="The user's response to the CAPTCHA challenge.", alias="recaptchaResponse")
+    message: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(description="The content of the administrator message to be sent.", json_schema_extra={"examples": ["Hello, this is a test message from the administrator."]})
+    email: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(description="Email", json_schema_extra={"examples": ["user@example.com"]})
+    culture: Optional[StrictStr] = Field(default=None, description="Culture", json_schema_extra={"examples": ["en-US"]})
+    recaptcha_type: Optional[RecaptchaType] = Field(default=None, description="The type of CAPTCHA validation used.", alias="recaptchaType")
+    recaptcha_response: Optional[StrictStr] = Field(default=None, description="The user's response to the CAPTCHA challenge.", alias="recaptchaResponse", json_schema_extra={"examples": ["03AGdBq24PBCbwiDRaS..."]})
     __properties: ClassVar[List[str]] = ["message", "email", "culture", "recaptchaType", "recaptchaResponse"]
 
     model_config = ConfigDict(

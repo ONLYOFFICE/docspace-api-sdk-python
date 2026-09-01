@@ -30,8 +30,8 @@ class CookieSettingsRequestsDto(BaseModel):
     """
     The request parameters for managing cookie settings.
     """ # noqa: E501
-    life_time: Optional[StrictInt] = Field(default=None, description="The cookie lifetime in minutes.", alias="lifeTime")
-    enabled: Optional[StrictBool] = Field(default=None, description="Specifies whether the cookie settings are enabled or disabled.")
+    life_time: Optional[StrictInt] = Field(default=None, description="The cookie lifetime in minutes.", alias="lifeTime", json_schema_extra={"examples": [525600]})
+    enabled: Optional[StrictBool] = Field(default=None, description="Specifies whether the cookie settings are enabled or disabled.", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["lifeTime", "enabled"]
 
     model_config = ConfigDict(

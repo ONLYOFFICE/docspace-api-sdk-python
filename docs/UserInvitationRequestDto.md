@@ -6,7 +6,7 @@ The user invitation parameters.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **email** | **str** | The email address. | [optional] 
-**type** | [**EmployeeType**](EmployeeType.md) |  | [optional] 
+**type** | [**EmployeeType**](EmployeeType.md) | The user type. | [optional] 
 
 ## Example
 

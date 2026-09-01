@@ -33,16 +33,16 @@ class FileOperationDto(BaseModel):
     """
     The file operation information.
     """ # noqa: E501
-    id: Optional[StrictStr] = Field(description="The file operation ID.")
-    operation: FileOperationType = Field(alias="Operation")
-    progress: StrictInt = Field(description="The file operation progress in percentage.")
-    error: Optional[StrictStr] = Field(description="The file operation error message.")
-    processed: Optional[StrictStr] = Field(description="The file operation processing status.")
-    finished: StrictBool = Field(description="Specifies if the file operation is finished or not.")
-    url: Optional[StrictStr] = Field(default=None, description="The file operation URL.")
-    files: Optional[List[FileEntryBaseDto]] = Field(default=None, description="The list of files of the file operation.")
-    folders: Optional[List[FileEntryBaseDto]] = Field(default=None, description="The list of folders of the file operation.")
-    status: Optional[DistributedTaskStatus] = None
+    id: Optional[StrictStr] = Field(description="The file operation ID.", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000000"]})
+    operation: FileOperationType = Field(description="The file operation type.", alias="Operation")
+    progress: StrictInt = Field(description="The file operation progress in percentage.", json_schema_extra={"examples": [100]})
+    error: Optional[StrictStr] = Field(description="The file operation error message.", json_schema_extra={"examples": ["File not found."]})
+    processed: Optional[StrictStr] = Field(description="The file operation processing status.", json_schema_extra={"examples": ["1"]})
+    finished: StrictBool = Field(description="Specifies if the file operation is finished or not.", json_schema_extra={"examples": [True]})
+    url: Optional[StrictStr] = Field(default=None, description="The file operation URL.", json_schema_extra={"examples": ["http://localhost/download"]})
+    files: Optional[List[FileEntryBaseDto]] = Field(default=None, description="The list of files of the file operation.", json_schema_extra={"examples": [[{"id": 10, "title": "document.docx"}]]})
+    folders: Optional[List[FileEntryBaseDto]] = Field(default=None, description="The list of folders of the file operation.", json_schema_extra={"examples": [[{"id": 20, "title": "My Folder"}]]})
+    status: Optional[DistributedTaskStatus] = Field(default=None, description="The status of the distributed task related to the file operation.")
     __properties: ClassVar[List[str]] = ["id", "Operation", "progress", "error", "processed", "finished", "url", "files", "folders", "status"]
 
     model_config = ConfigDict(

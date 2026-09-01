@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **message** | **str** | The content of the administrator message to be sent. | 
 **email** | **str** | Email | 
 **culture** | **str** | Culture | [optional] 
-**recaptcha_type** | [**RecaptchaType**](RecaptchaType.md) |  | [optional] 
+**recaptcha_type** | [**RecaptchaType**](RecaptchaType.md) | The type of CAPTCHA validation used. | [optional] 
 **recaptcha_response** | **str** | The user's response to the CAPTCHA challenge. | [optional] 
 
 ## Example

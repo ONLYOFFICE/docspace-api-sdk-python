@@ -21,7 +21,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List, Optional
 from docspace_api_sdk.models.action_config import ActionConfig
 from typing import Optional, Set
@@ -31,7 +31,7 @@ class ActionLinkConfig(BaseModel):
     """
     The config parameter which contains the information about the action in the document that will be scrolled to.
     """ # noqa: E501
-    action: Optional[ActionConfig] = None
+    action: Optional[ActionConfig] = Field(default=None, description="The information about the action in the document that will be scrolled to.")
     __properties: ClassVar[List[str]] = ["action"]
 
     model_config = ConfigDict(

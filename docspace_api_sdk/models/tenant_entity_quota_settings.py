@@ -31,9 +31,9 @@ class TenantEntityQuotaSettings(BaseModel):
     """
     The tenant entity quota settings.
     """ # noqa: E501
-    enable_quota: Optional[StrictBool] = Field(default=None, description="Specifies if the quota is enabled for the tenant entity or not.", alias="enableQuota")
-    default_quota: Optional[StrictInt] = Field(default=None, description="The default quota of the tenant entity.", alias="defaultQuota")
-    last_recalculate_date: Optional[datetime] = Field(default=None, description="The date of the last quota recalculation.", alias="lastRecalculateDate")
+    enable_quota: Optional[StrictBool] = Field(default=None, description="Specifies if the quota is enabled for the tenant entity or not.", alias="enableQuota", json_schema_extra={"examples": [True]})
+    default_quota: Optional[StrictInt] = Field(default=None, description="The default quota of the tenant entity.", alias="defaultQuota", json_schema_extra={"examples": [1000]})
+    last_recalculate_date: Optional[datetime] = Field(default=None, description="The date of the last quota recalculation.", alias="lastRecalculateDate", json_schema_extra={"examples": ["2024-01-01T00:00:00Z"]})
     __properties: ClassVar[List[str]] = ["enableQuota", "defaultQuota", "lastRecalculateDate"]
 
     model_config = ConfigDict(

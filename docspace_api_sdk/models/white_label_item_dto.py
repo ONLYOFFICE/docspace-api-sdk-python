@@ -33,10 +33,10 @@ class WhiteLabelItemDto(BaseModel):
     """
     The white label item parameters.
     """ # noqa: E501
-    type: Optional[WhiteLabelLogoType] = None
-    name: Optional[StrictStr] = Field(default=None, description="The white label file name.")
-    size: Optional[IMagickGeometry] = None
-    path: Optional[WhiteLabelItemPathDto] = None
+    type: Optional[WhiteLabelLogoType] = Field(default=None, description="The white label logo type.")
+    name: Optional[StrictStr] = Field(default=None, description="The white label file name.", json_schema_extra={"examples": ["Example Name"]})
+    size: Optional[IMagickGeometry] = Field(default=None, description="The white label file size.")
+    path: Optional[WhiteLabelItemPathDto] = Field(default=None, description="The white label file path.")
     __properties: ClassVar[List[str]] = ["type", "name", "size", "path"]
 
     model_config = ConfigDict(

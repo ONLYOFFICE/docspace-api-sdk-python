@@ -30,8 +30,8 @@ class FeatureUsedDto(BaseModel):
     """
     The used space parameters of the tenant quota feature.
     """ # noqa: E501
-    value: Optional[Any] = Field(description="The used space value.")
-    title: Optional[StrictStr] = Field(default=None, description="The used space title.")
+    value: Optional[Any]
+    title: Optional[StrictStr] = Field(default=None, description="The used space title.", json_schema_extra={"examples": ["50 GB used"]})
     __properties: ClassVar[List[str]] = ["value", "title"]
 
     model_config = ConfigDict(

@@ -30,7 +30,7 @@ class BackupServiceStateDto(BaseModel):
     """
     Backup service state.
     """ # noqa: E501
-    enabled: Optional[StrictBool] = Field(default=None, description="Specifies if the backup service is enabled or not.")
+    enabled: Optional[StrictBool] = Field(default=None, description="Specifies if the backup service is enabled or not.", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["enabled"]
 
     model_config = ConfigDict(

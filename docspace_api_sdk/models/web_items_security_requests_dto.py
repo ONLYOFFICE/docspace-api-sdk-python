@@ -31,7 +31,7 @@ class WebItemsSecurityRequestsDto(BaseModel):
     """
     The request parameters for configuring security settings across multiple web modules.
     """ # noqa: E501
-    items: Optional[List[ItemKeyValuePairStringBoolean]] = Field(default=None, description="The list of module security configurations.")
+    items: Optional[List[ItemKeyValuePairStringBoolean]] = Field(default=None, description="The list of module security configurations.", json_schema_extra={"examples": [["item1", "item2"]]})
     __properties: ClassVar[List[str]] = ["items"]
 
     model_config = ConfigDict(

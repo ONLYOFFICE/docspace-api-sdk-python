@@ -1060,9 +1060,9 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **empty_trash**
-> FileOperationArrayWrapper empty_trash(single=single)
+> FileOperationArrayWrapper empty_trash(single=single, folder_type=folder_type)
 
-Deletes all the files and folders from the Trash folder.
+Deletes all the files and folders from the Trash folder. If the folder types are specified, only the items originally located in the sections of these types are deleted.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -1072,6 +1072,7 @@ For more information, see [api.onlyoffice.com]().
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **single** | **bool**| Specifies whether to return only the current operation | [optional] 
+ **folder_type** | [**List[int]**](int.md)| The parent folder types used to empty the trash only from the items originally located in the sections of the specified types. | [optional] 
 
 ### Return type
 
@@ -1108,10 +1109,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.OperationsApi(api_client)
     single = false # bool | Specifies whether to return only the current operation (optional)
+    folder_type = [[2]] # List[int] | The parent folder types used to empty the trash only from the items originally located in the sections of the specified types. (optional)
 
     try:
         # Empty the Trash folder
-        api_response = api_instance.empty_trash(single=single)
+        api_response = api_instance.empty_trash(single=single, folder_type=folder_type)
         print("The response of OperationsApi->empty_trash:\n")
         pprint(api_response)
     except Exception as e:

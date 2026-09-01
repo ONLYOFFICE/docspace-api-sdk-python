@@ -30,8 +30,8 @@ class MultiSizeLogoCover(BaseModel):
     """
     MultiSizeLogoCover
     """ # noqa: E501
-    id: Optional[StrictStr] = Field(description="The logo cover ID.")
-    data: Optional[Dict[str, Optional[StrictStr]]] = Field(description="The logo cover data.")
+    id: Optional[StrictStr] = Field(description="The logo cover ID.", json_schema_extra={"examples": ["default_cover"]})
+    data: Dict[str, Optional[StrictStr]] = Field(description="The logo cover data.", json_schema_extra={"examples": [{"small": "base64...", "medium": "base64...", "large": "base64..."}]})
     __properties: ClassVar[List[str]] = ["id", "data"]
 
     model_config = ConfigDict(
@@ -77,11 +77,6 @@ class MultiSizeLogoCover(BaseModel):
         # and model_fields_set contains the field
         if self.id is None and "id" in self.model_fields_set:
             _dict['id'] = None
-
-        # set to None if data (nullable) is None
-        # and model_fields_set contains the field
-        if self.data is None and "data" in self.model_fields_set:
-            _dict['data'] = None
 
         return _dict
 

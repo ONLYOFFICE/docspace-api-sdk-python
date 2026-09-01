@@ -32,11 +32,11 @@ class BackupRestoreDto(BaseModel):
     """
     The backup restoring parameters.
     """ # noqa: E501
-    backup_id: Optional[StrictStr] = Field(description="The backup ID.", alias="backupId")
-    storage_type: Optional[BackupStorageType] = Field(default=None, alias="storageType")
-    storage_params: Optional[List[ItemKeyValuePairObjectObject]] = Field(default=None, description="The backup storage parameters.", alias="storageParams")
-    notify: Optional[StrictBool] = Field(default=None, description="Notifies users about the portal restoring process or not.")
-    dump: Optional[StrictBool] = Field(default=None, description="Specifies if a dump will be created or not.")
+    backup_id: Optional[StrictStr] = Field(description="The backup ID.", alias="backupId", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000000"]})
+    storage_type: Optional[BackupStorageType] = Field(default=None, description="The backup storage type.", alias="storageType")
+    storage_params: Optional[List[ItemKeyValuePairObjectObject]] = Field(default=None, description="The backup storage parameters.", alias="storageParams", json_schema_extra={"examples": [[{"key": "path", "value": "/backup"}]]})
+    notify: Optional[StrictBool] = Field(default=None, description="Notifies users about the portal restoring process or not.", json_schema_extra={"examples": [True]})
+    dump: Optional[StrictBool] = Field(default=None, description="Specifies if a dump will be created or not.", json_schema_extra={"examples": [False]})
     __properties: ClassVar[List[str]] = ["backupId", "storageType", "storageParams", "notify", "dump"]
 
     model_config = ConfigDict(

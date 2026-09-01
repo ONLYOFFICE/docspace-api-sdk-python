@@ -33,19 +33,19 @@ class FileShareLink(BaseModel):
     """
     A shareable link for a file with its configuration and status.
     """ # noqa: E501
-    id: Optional[UUID] = Field(default=None, description="The unique identifier of the shared link.")
-    title: Optional[StrictStr] = Field(default=None, description="The title of the shared content.")
-    share_link: Optional[StrictStr] = Field(default=None, description="The URL for accessing the shared content.", alias="shareLink")
-    expiration_date: Optional[ApiDateTime] = Field(default=None, alias="expirationDate")
-    link_type: Optional[LinkType] = Field(default=None, alias="linkType")
-    password: Optional[StrictStr] = Field(default=None, description="The password protection for accessing the shared content.")
-    deny_download: Optional[StrictBool] = Field(default=None, description="Indicates whether downloading of the shared content is prohibited.", alias="denyDownload")
-    is_expired: Optional[StrictBool] = Field(default=None, description="Indicates whether the shared link has expired.", alias="isExpired")
-    primary: Optional[StrictBool] = Field(default=None, description="Indicates whether this is the primary shared link.")
-    internal: Optional[StrictBool] = Field(default=None, description="Indicates whether the link is for the internal sharing only.")
-    request_token: Optional[StrictStr] = Field(default=None, description="The token for validating access requests.", alias="requestToken")
-    max_use_count: Optional[StrictInt] = Field(default=None, description="The maximum number of times the invitation link can be used.", alias="maxUseCount")
-    current_use_count: Optional[StrictInt] = Field(default=None, description="The current number of times the invitation link has been used.", alias="currentUseCount")
+    id: Optional[UUID] = Field(default=None, description="The unique identifier of the shared link.", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000000"]})
+    title: Optional[StrictStr] = Field(default=None, description="The title of the shared content.", json_schema_extra={"examples": ["Shared Document"]})
+    share_link: Optional[StrictStr] = Field(default=None, description="The URL for accessing the shared content.", alias="shareLink", json_schema_extra={"examples": ["http://localhost/share/abc123"]})
+    expiration_date: Optional[ApiDateTime] = Field(default=None, description="The API date and time parameters.", alias="expirationDate")
+    link_type: Optional[LinkType] = Field(default=None, description="The sharing link type (e.g., Invitation).", alias="linkType")
+    password: Optional[StrictStr] = Field(default=None, description="The password protection for accessing the shared content.", json_schema_extra={"examples": ["password123"]})
+    deny_download: Optional[StrictBool] = Field(default=None, description="Indicates whether downloading of the shared content is prohibited.", alias="denyDownload", json_schema_extra={"examples": [False]})
+    is_expired: Optional[StrictBool] = Field(default=None, description="Indicates whether the shared link has expired.", alias="isExpired", json_schema_extra={"examples": [False]})
+    primary: Optional[StrictBool] = Field(default=None, description="Indicates whether this is the primary shared link.", json_schema_extra={"examples": [True]})
+    internal: Optional[StrictBool] = Field(default=None, description="Indicates whether the link is for the internal sharing only.", json_schema_extra={"examples": [False]})
+    request_token: Optional[StrictStr] = Field(default=None, description="The token for validating access requests.", alias="requestToken", json_schema_extra={"examples": ["token-abc-123"]})
+    max_use_count: Optional[StrictInt] = Field(default=None, description="The maximum number of times the invitation link can be used.", alias="maxUseCount", json_schema_extra={"examples": [10]})
+    current_use_count: Optional[StrictInt] = Field(default=None, description="The current number of times the invitation link has been used.", alias="currentUseCount", json_schema_extra={"examples": [5]})
     __properties: ClassVar[List[str]] = ["id", "title", "shareLink", "expirationDate", "linkType", "password", "denyDownload", "isExpired", "primary", "internal", "requestToken", "maxUseCount", "currentUseCount"]
 
     model_config = ConfigDict(

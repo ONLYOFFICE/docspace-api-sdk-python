@@ -31,8 +31,8 @@ class ApiDateTime(BaseModel):
     """
     The API date and time parameters.
     """ # noqa: E501
-    utc_time: Optional[datetime] = Field(default=None, description="The time in UTC format.", alias="utcTime")
-    time_zone_offset: Optional[StrictStr] = Field(default=None, description="The time zone offset.", alias="timeZoneOffset")
+    utc_time: Optional[datetime] = Field(default=None, description="The time in UTC format.", alias="utcTime", json_schema_extra={"examples": ["2018-01-01T00:00:00.0000000Z"]})
+    time_zone_offset: Optional[StrictStr] = Field(default=None, description="The time zone offset.", alias="timeZoneOffset", json_schema_extra={"examples": ["00:00:00"]})
     __properties: ClassVar[List[str]] = ["utcTime", "timeZoneOffset"]
 
     model_config = ConfigDict(

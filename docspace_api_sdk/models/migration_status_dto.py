@@ -31,10 +31,10 @@ class MigrationStatusDto(BaseModel):
     """
     The migration status parameters.
     """ # noqa: E501
-    progress: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The migration progress.")
-    error: Optional[StrictStr] = Field(default=None, description="The migration error.")
-    parse_result: Optional[MigrationApiInfo] = Field(default=None, alias="parseResult")
-    is_completed: Optional[StrictBool] = Field(default=None, description="Specifies whether the migration is completed or not.", alias="isCompleted")
+    progress: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The migration progress.", json_schema_extra={"examples": [99.99]})
+    error: Optional[StrictStr] = Field(default=None, description="The migration error.", json_schema_extra={"examples": ["Connection failed"]})
+    parse_result: Optional[MigrationApiInfo] = Field(default=None, description="The migration API information.", alias="parseResult")
+    is_completed: Optional[StrictBool] = Field(default=None, description="Specifies whether the migration is completed or not.", alias="isCompleted", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["progress", "error", "parseResult", "isCompleted"]
 
     model_config = ConfigDict(

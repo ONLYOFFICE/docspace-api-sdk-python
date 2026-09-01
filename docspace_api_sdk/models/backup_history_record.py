@@ -33,11 +33,11 @@ class BackupHistoryRecord(BaseModel):
     """
     The backup history parameters.
     """ # noqa: E501
-    id: UUID = Field(description="The backup ID.")
-    file_name: Optional[StrictStr] = Field(description="The backup file name.", alias="fileName")
-    storage_type: BackupStorageType = Field(alias="storageType")
-    created_on: datetime = Field(description="The backup creation date.", alias="createdOn")
-    expires_on: datetime = Field(description="The backup expiration date.", alias="expiresOn")
+    id: UUID = Field(description="The backup ID.", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000000"]})
+    file_name: Optional[StrictStr] = Field(description="The backup file name.", alias="fileName", json_schema_extra={"examples": ["tenant-backup"]})
+    storage_type: BackupStorageType = Field(description="The backup storage type.", alias="storageType")
+    created_on: datetime = Field(description="The backup creation date.", alias="createdOn", json_schema_extra={"examples": ["2026-03-01T02:15:00Z"]})
+    expires_on: datetime = Field(description="The backup expiration date.", alias="expiresOn", json_schema_extra={"examples": ["2026-03-31T02:15:00Z"]})
     __properties: ClassVar[List[str]] = ["id", "fileName", "storageType", "createdOn", "expiresOn"]
 
     model_config = ConfigDict(

@@ -35,8 +35,8 @@ class BaseBatchRequestDto(FileOperationRequestBaseDto):
     The base batch request parameters.
     """
 
-    folder_ids: Optional[List[BaseBatchRequestDtoAllOfFolderIds]] = Field(default=None, description="The list of folder IDs of the base batch request.", alias="folderIds")
-    file_ids: Optional[List[BaseBatchRequestDtoAllOfFileIds]] = Field(default=None, description="The list of file IDs of the base batch request.", alias="fileIds")
+    folder_ids: Optional[List[BaseBatchRequestDtoAllOfFolderIds]] = Field(default=None, description="The list of folder IDs of the base batch request.", alias="folderIds", json_schema_extra={"examples": [[1, 2, 3]]})
+    file_ids: Optional[List[BaseBatchRequestDtoAllOfFileIds]] = Field(default=None, description="The list of file IDs of the base batch request.", alias="fileIds", json_schema_extra={"examples": [[1, 2, 3]]})
 
     model_config = ConfigDict(
         populate_by_name=True,

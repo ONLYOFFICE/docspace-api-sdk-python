@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **email** | **str** | The email address. | [optional] 
 **share_to** | **UUID** | The ID of the user to whom the file will be shared. | [optional] 
-**access** | [**FileShare**](FileShare.md) |  | [optional] 
+**access** | [**FileShare**](FileShare.md) | The sharing access rights. | [optional] 
 
 ## Example
 

@@ -30,7 +30,7 @@ class TenantAiAccessSettingsDto(BaseModel):
     """
     The request parameters for managing the tenant-level AI access settings.
     """ # noqa: E501
-    enabled: Optional[StrictBool] = Field(default=None, description="Specifies whether AI functionality is enabled for the tenant.  Set to `true` to enable all AI features or `false` to disable them tenant-wide.")
+    enabled: Optional[StrictBool] = Field(default=None, description="Specifies whether AI functionality is enabled for the tenant.  Set to `true` to enable all AI features or `false` to disable them tenant-wide.", json_schema_extra={"examples": [False]})
     __properties: ClassVar[List[str]] = ["enabled"]
 
     model_config = ConfigDict(

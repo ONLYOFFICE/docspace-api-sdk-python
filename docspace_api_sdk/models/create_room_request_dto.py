@@ -21,7 +21,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
 from docspace_api_sdk.models.chat_settings import ChatSettings
@@ -37,23 +37,33 @@ class CreateRoomRequestDto(BaseModel):
     """
     The request parameters for creating a room.
     """ # noqa: E501
-    title: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=170)]] = Field(description="The room name.")
-    quota: Optional[StrictInt] = Field(default=None, description="The room quota.")
-    indexing: Optional[StrictBool] = Field(default=None, description="Specifies whether to create a room with indexing.")
-    deny_download: Optional[StrictBool] = Field(default=None, description="Specifies whether to deny downloads from the room.", alias="denyDownload")
-    lifetime: Optional[RoomDataLifetimeDto] = None
-    watermark: Optional[WatermarkRequestDto] = None
-    logo: Optional[LogoRequest] = None
-    tags: Optional[List[StrictStr]] = Field(default=None, description="The list of tags.")
-    color: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=6)]] = Field(default=None, description="The room color.")
-    cover: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=50)]] = Field(default=None, description="The room cover.")
-    room_type: RoomType = Field(alias="roomType")
-    private: Optional[StrictBool] = Field(default=None, description="Specifies whether the room to be created is private or not.")
-    share: Optional[List[FileShareParams]] = Field(default=None, description="The collection of sharing parameters.")
-    chat_settings: Optional[ChatSettings] = Field(default=None, alias="chatSettings")
-    send_form_to_external_db: Optional[StrictBool] = Field(default=None, description="Specifies whether to send form data to external database.", alias="sendFormToExternalDB")
-    save_form_as_xlsx: Optional[StrictBool] = Field(default=None, description="Specifies whether to save form data as XLSX file.", alias="saveFormAsXLSX")
+    title: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=170)]] = Field(description="The room name.", json_schema_extra={"examples": ["My Room"]})
+    quota: Optional[StrictInt] = Field(default=None, description="The room quota.", json_schema_extra={"examples": [1073741824]})
+    indexing: Optional[StrictBool] = Field(default=None, description="Specifies whether to create a room with indexing.", json_schema_extra={"examples": [True]})
+    deny_download: Optional[StrictBool] = Field(default=None, description="Specifies whether to deny downloads from the room.", alias="denyDownload", json_schema_extra={"examples": [False]})
+    lifetime: Optional[RoomDataLifetimeDto] = Field(default=None, description="The room data lifetime information.")
+    watermark: Optional[WatermarkRequestDto] = Field(default=None, description="The request parameters for adding watermarks.")
+    logo: Optional[LogoRequest] = Field(default=None, description="The logo request parameters.")
+    tags: Optional[List[StrictStr]] = Field(default=None, description="The list of tags.", json_schema_extra={"examples": [["tag1", "tag2", "tag3"]]})
+    color: Optional[Annotated[str, Field(strict=True)]] = Field(default=None, description="The room color, as a six-digit hexadecimal value without a leading '#'.", json_schema_extra={"examples": ["FF0000"]})
+    cover: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=50)]] = Field(default=None, description="The room cover.", json_schema_extra={"examples": ["cover1.jpg"]})
+    room_type: RoomType = Field(description="The room type.", alias="roomType")
+    private: Optional[StrictBool] = Field(default=None, description="Specifies whether the room to be created is private or not.", json_schema_extra={"examples": [False]})
+    share: Optional[List[FileShareParams]] = Field(default=None, description="The collection of sharing parameters.", json_schema_extra={"examples": [[{"access": 1, "shareTo": "00000000-0000-0000-0000-000000000000"}]]})
+    chat_settings: Optional[ChatSettings] = Field(default=None, description="The chat settings.", alias="chatSettings")
+    send_form_to_external_db: Optional[StrictBool] = Field(default=None, description="Specifies whether to send form data to external database.", alias="sendFormToExternalDB", json_schema_extra={"examples": [False]})
+    save_form_as_xlsx: Optional[StrictBool] = Field(default=None, description="Specifies whether to save form data as XLSX file.", alias="saveFormAsXLSX", json_schema_extra={"examples": [False]})
     __properties: ClassVar[List[str]] = ["title", "quota", "indexing", "denyDownload", "lifetime", "watermark", "logo", "tags", "color", "cover", "roomType", "private", "share", "chatSettings", "sendFormToExternalDB", "saveFormAsXLSX"]
+
+    @field_validator('color')
+    def color_validate_regular_expression(cls, value):
+        """Validates the regular expression"""
+        if value is None:
+            return value
+
+        if not re.match(r"^[0-9a-fA-F]{6}$", value):
+            raise ValueError(r"must validate the regular expression /^[0-9a-fA-F]{6}$/")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,

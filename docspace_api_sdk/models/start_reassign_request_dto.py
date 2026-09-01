@@ -31,9 +31,9 @@ class StartReassignRequestDto(BaseModel):
     """
     The request parameters for starting the reassignment process.
     """ # noqa: E501
-    from_user_id: UUID = Field(description="The user ID whose data will be reassigned to another user.", alias="fromUserId")
-    to_user_id: UUID = Field(description="The user ID to whom all the data will be reassigned.", alias="toUserId")
-    delete_profile: Optional[StrictBool] = Field(default=None, description="Specifies whether to delete a profile when the data reassignment will be finished or not.", alias="deleteProfile")
+    from_user_id: UUID = Field(description="The user ID whose data will be reassigned to another user.", alias="fromUserId", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000000"]})
+    to_user_id: UUID = Field(description="The user ID to whom all the data will be reassigned.", alias="toUserId", json_schema_extra={"examples": ["11111111-1111-1111-1111-111111111111"]})
+    delete_profile: Optional[StrictBool] = Field(default=None, description="Specifies whether to delete a profile when the data reassignment will be finished or not.", alias="deleteProfile", json_schema_extra={"examples": [False]})
     __properties: ClassVar[List[str]] = ["fromUserId", "toUserId", "deleteProfile"]
 
     model_config = ConfigDict(

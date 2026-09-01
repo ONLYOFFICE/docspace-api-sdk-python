@@ -31,8 +31,8 @@ class AdminMessageBaseSettingsRequestsDto(BaseModel):
     """
     The request parameters for the administrator message configuration.
     """ # noqa: E501
-    email: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(description="The email address used for sending administrator messages.")
-    culture: Optional[StrictStr] = Field(default=None, description="The locale identifier for message localization.")
+    email: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(description="The email address used for sending administrator messages.", json_schema_extra={"examples": ["admin@example.com"]})
+    culture: Optional[StrictStr] = Field(default=None, description="The locale identifier for message localization.", json_schema_extra={"examples": ["en-US"]})
     __properties: ClassVar[List[str]] = ["email", "culture"]
 
     model_config = ConfigDict(

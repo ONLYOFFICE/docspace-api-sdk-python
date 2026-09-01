@@ -30,12 +30,12 @@ class ThumbnailsDataDto(BaseModel):
     """
     The thumbnails data parameters.
     """ # noqa: E501
-    original: Optional[StrictStr] = Field(default=None, description="The thumbnail original photo.")
-    retina: Optional[StrictStr] = Field(default=None, description="The thumbnail retina.")
-    max: Optional[StrictStr] = Field(default=None, description="The thumbnail maximum size photo.")
-    big: Optional[StrictStr] = Field(default=None, description="The thumbnail big size photo.")
-    medium: Optional[StrictStr] = Field(default=None, description="The thumbnail medium size photo.")
-    small: Optional[StrictStr] = Field(default=None, description="The thumbnail small size photo.")
+    original: Optional[StrictStr] = Field(default=None, description="The thumbnail original photo.", json_schema_extra={"examples": ["default_user_photo_size_1280-1280.png"]})
+    retina: Optional[StrictStr] = Field(default=None, description="The thumbnail retina.", json_schema_extra={"examples": ["default_user_photo_size_360-360.png"]})
+    max: Optional[StrictStr] = Field(default=None, description="The thumbnail maximum size photo.", json_schema_extra={"examples": ["default_user_photo_size_200-200.png"]})
+    big: Optional[StrictStr] = Field(default=None, description="The thumbnail big size photo.", json_schema_extra={"examples": ["default_user_photo_size_82-82.png"]})
+    medium: Optional[StrictStr] = Field(default=None, description="The thumbnail medium size photo.", json_schema_extra={"examples": ["default_user_photo_size_48-48.png"]})
+    small: Optional[StrictStr] = Field(default=None, description="The thumbnail small size photo.", json_schema_extra={"examples": ["default_user_photo_size_32-32.png"]})
     __properties: ClassVar[List[str]] = ["original", "retina", "max", "big", "medium", "small"]
 
     model_config = ConfigDict(

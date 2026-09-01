@@ -32,6 +32,7 @@ from docspace_api_sdk.models.backup_progress_wrapper import BackupProgressWrappe
 from docspace_api_sdk.models.backup_restore_dto import BackupRestoreDto
 from docspace_api_sdk.models.backup_schedule_dto import BackupScheduleDto
 from docspace_api_sdk.models.backup_service_state_wrapper import BackupServiceStateWrapper
+from docspace_api_sdk.models.backups_count_result_wrapper import BackupsCountResultWrapper
 from docspace_api_sdk.models.boolean_wrapper import BooleanWrapper
 from docspace_api_sdk.models.int32_wrapper import Int32Wrapper
 from docspace_api_sdk.models.schedule_wrapper import ScheduleWrapper
@@ -111,6 +112,7 @@ class BackupApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -178,6 +180,7 @@ class BackupApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -245,6 +248,7 @@ class BackupApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -385,6 +389,7 @@ class BackupApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -460,6 +465,7 @@ class BackupApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -535,6 +541,7 @@ class BackupApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -688,6 +695,7 @@ class BackupApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -760,6 +768,7 @@ class BackupApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -832,6 +841,7 @@ class BackupApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -972,6 +982,7 @@ class BackupApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1044,6 +1055,7 @@ class BackupApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1116,6 +1128,7 @@ class BackupApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1258,6 +1271,7 @@ class BackupApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1330,6 +1344,7 @@ class BackupApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1402,6 +1417,7 @@ class BackupApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1544,6 +1560,7 @@ class BackupApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1616,6 +1633,7 @@ class BackupApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1688,6 +1706,7 @@ class BackupApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1830,6 +1849,7 @@ class BackupApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1902,6 +1922,7 @@ class BackupApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1974,6 +1995,7 @@ class BackupApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2116,6 +2138,7 @@ class BackupApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2188,6 +2211,7 @@ class BackupApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2260,6 +2284,7 @@ class BackupApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2411,6 +2436,7 @@ class BackupApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2492,6 +2518,7 @@ class BackupApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2573,6 +2600,7 @@ class BackupApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2683,6 +2711,350 @@ class BackupApi:
 
 
     @validate_call
+    def get_backups_counts(
+        self,
+        var_from: Annotated[Optional[datetime], Field(description="The from date.")] = None,
+        to: Annotated[Optional[datetime], Field(description="The to date.")] = None,
+        paid: Annotated[Optional[StrictBool], Field(description="Specifies if the backups are paid or not.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> BackupsCountResultWrapper:
+        """Get the number of free and paid backups
+
+        Returns the number of free and paid backups for a period of time. The default is the current calendar month.
+
+        :param var_from: The from date.
+        :type var_from: datetime
+        :param to: The to date.
+        :type to: datetime
+        :param paid: Specifies if the backups are paid or not.
+        :type paid: bool
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_backups_counts_serialize(
+            var_from=var_from,
+            to=to,
+            paid=paid,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "BackupsCountResultWrapper",
+            '400': None,
+            '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def get_backups_counts_with_http_info(
+        self,
+        var_from: Annotated[Optional[datetime], Field(description="The from date.")] = None,
+        to: Annotated[Optional[datetime], Field(description="The to date.")] = None,
+        paid: Annotated[Optional[StrictBool], Field(description="Specifies if the backups are paid or not.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[BackupsCountResultWrapper]:
+        """Get the number of free and paid backups
+
+        Returns the number of free and paid backups for a period of time. The default is the current calendar month.
+
+        :param var_from: The from date.
+        :type var_from: datetime
+        :param to: The to date.
+        :type to: datetime
+        :param paid: Specifies if the backups are paid or not.
+        :type paid: bool
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_backups_counts_serialize(
+            var_from=var_from,
+            to=to,
+            paid=paid,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "BackupsCountResultWrapper",
+            '400': None,
+            '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def get_backups_counts_without_preload_content(
+        self,
+        var_from: Annotated[Optional[datetime], Field(description="The from date.")] = None,
+        to: Annotated[Optional[datetime], Field(description="The to date.")] = None,
+        paid: Annotated[Optional[StrictBool], Field(description="Specifies if the backups are paid or not.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Get the number of free and paid backups
+
+        Returns the number of free and paid backups for a period of time. The default is the current calendar month.
+
+        :param var_from: The from date.
+        :type var_from: datetime
+        :param to: The to date.
+        :type to: datetime
+        :param paid: Specifies if the backups are paid or not.
+        :type paid: bool
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_backups_counts_serialize(
+            var_from=var_from,
+            to=to,
+            paid=paid,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "BackupsCountResultWrapper",
+            '400': None,
+            '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _get_backups_counts_serialize(
+        self,
+        var_from,
+        to,
+        paid,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        if var_from is not None:
+            if isinstance(var_from, datetime):
+                _query_params.append(
+                    (
+                        'from',
+                        var_from.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('from', var_from))
+            
+        if to is not None:
+            if isinstance(to, datetime):
+                _query_params.append(
+                    (
+                        'to',
+                        to.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('to', to))
+            
+        if paid is not None:
+            
+            _query_params.append(('paid', paid))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
+        ]
+
+
+        resource_path = "/api/2.0/backup/getbackupscountbypaid"
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path=resource_path,
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
     def get_backups_service_state(
         self,
         _request_timeout: Union[
@@ -2739,6 +3111,7 @@ class BackupApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2807,6 +3180,7 @@ class BackupApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2875,6 +3249,7 @@ class BackupApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3010,6 +3385,7 @@ class BackupApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3080,6 +3456,7 @@ class BackupApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3150,6 +3527,7 @@ class BackupApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3289,6 +3667,7 @@ class BackupApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3364,6 +3743,7 @@ class BackupApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3439,6 +3819,7 @@ class BackupApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3595,6 +3976,7 @@ class BackupApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3670,6 +4052,7 @@ class BackupApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3745,6 +4128,7 @@ class BackupApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout

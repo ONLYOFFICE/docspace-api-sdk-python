@@ -30,7 +30,7 @@ class CspRequestsDto(BaseModel):
     """
     The request parameters for configuring the Content Security Policy (CSP) settings.
     """ # noqa: E501
-    domains: Optional[List[StrictStr]] = Field(default=None, description="The collection of allowed domains in the Content Security Policy (CSP).")
+    domains: Optional[List[StrictStr]] = Field(default=None, description="The collection of allowed domains in the Content Security Policy (CSP).", json_schema_extra={"examples": [["example.com", "trusted-site.com"]]})
     __properties: ClassVar[List[str]] = ["domains"]
 
     model_config = ConfigDict(

@@ -32,9 +32,9 @@ class BackupDto(BaseModel):
     """
     The backup parameters.
     """ # noqa: E501
-    storage_type: Optional[BackupStorageType] = Field(default=None, alias="storageType")
-    storage_params: Optional[List[ItemKeyValuePairObjectObject]] = Field(default=None, description="The backup storage parameters.", alias="storageParams")
-    dump: Optional[StrictBool] = Field(default=None, description="Specifies if a dump will be created or not.")
+    storage_type: Optional[BackupStorageType] = Field(default=None, description="The backup storage type.", alias="storageType")
+    storage_params: Optional[List[ItemKeyValuePairObjectObject]] = Field(default=None, description="The backup storage parameters.", alias="storageParams", json_schema_extra={"examples": [[{"key": "path", "value": "/backup"}]]})
+    dump: Optional[StrictBool] = Field(default=None, description="Specifies if a dump will be created or not.", json_schema_extra={"examples": [False]})
     __properties: ClassVar[List[str]] = ["storageType", "storageParams", "dump"]
 
     model_config = ConfigDict(

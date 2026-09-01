@@ -31,8 +31,8 @@ class ActiveConnectionsDto(BaseModel):
     """
     The active connections parameters.
     """ # noqa: E501
-    login_event: StrictInt = Field(description="The login event.", alias="loginEvent")
-    items: Optional[List[ActiveConnectionsItemDto]] = Field(default=None, description="The list of active connection items.")
+    login_event: StrictInt = Field(description="The login event.", alias="loginEvent", json_schema_extra={"examples": [1]})
+    items: Optional[List[ActiveConnectionsItemDto]] = Field(default=None, description="The list of active connection items.", json_schema_extra={"examples": [[{"id": "conn1", "ip": "192.168.1.1"}]]})
     __properties: ClassVar[List[str]] = ["loginEvent", "items"]
 
     model_config = ConfigDict(

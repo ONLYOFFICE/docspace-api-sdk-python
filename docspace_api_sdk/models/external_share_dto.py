@@ -33,19 +33,19 @@ class ExternalShareDto(BaseModel):
     """
     The external sharing information and validation data.
     """ # noqa: E501
-    status: Status
-    id: Optional[StrictStr] = Field(default=None, description="The external data ID.")
-    title: Optional[StrictStr] = Field(default=None, description="The external data title.")
-    type: Optional[FileEntryType] = None
-    tenant_id: StrictInt = Field(description="The tenant ID.", alias="tenantId")
-    entity_id: Optional[StrictStr] = Field(default=None, description="The unique identifier of the shared entity.", alias="entityId")
-    entity_title: Optional[StrictStr] = Field(default=None, description="The title of the shared entity.", alias="entityTitle")
-    entity_type: Optional[FileEntryType] = Field(default=None, alias="entityType")
-    is_room: Optional[StrictBool] = Field(default=None, description="Indicates whether the entity represents a room.", alias="isRoom")
-    shared: StrictBool = Field(description="Specifies whether to share the external data or not.")
-    link_id: UUID = Field(description="The link ID of the external data.", alias="linkId")
-    is_authenticated: StrictBool = Field(description="Specifies whether the user is authenticated or not.", alias="isAuthenticated")
-    is_room_member: Optional[StrictBool] = Field(default=None, description="The room ID of the external data.", alias="isRoomMember")
+    status: Status = Field(description="The external data status.")
+    id: Optional[StrictStr] = Field(default=None, description="The external data ID.", json_schema_extra={"examples": ["123"]})
+    title: Optional[StrictStr] = Field(default=None, description="The external data title.", json_schema_extra={"examples": ["Shared Document"]})
+    type: Optional[FileEntryType] = Field(default=None, description="The type of the external data.")
+    tenant_id: StrictInt = Field(description="The tenant ID.", alias="tenantId", json_schema_extra={"examples": [1]})
+    entity_id: Optional[StrictStr] = Field(default=None, description="The unique identifier of the shared entity.", alias="entityId", json_schema_extra={"examples": ["456"]})
+    entity_title: Optional[StrictStr] = Field(default=None, description="The title of the shared entity.", alias="entityTitle", json_schema_extra={"examples": ["Entity Title"]})
+    entity_type: Optional[FileEntryType] = Field(default=None, description="The entry type of the external data.", alias="entityType")
+    is_room: Optional[StrictBool] = Field(default=None, description="Indicates whether the entity represents a room.", alias="isRoom", json_schema_extra={"examples": [False]})
+    shared: StrictBool = Field(description="Specifies whether to share the external data or not.", json_schema_extra={"examples": [True]})
+    link_id: UUID = Field(description="The link ID of the external data.", alias="linkId", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000000"]})
+    is_authenticated: StrictBool = Field(description="Specifies whether the user is authenticated or not.", alias="isAuthenticated", json_schema_extra={"examples": [True]})
+    is_room_member: Optional[StrictBool] = Field(default=None, description="The room ID of the external data.", alias="isRoomMember", json_schema_extra={"examples": [False]})
     __properties: ClassVar[List[str]] = ["status", "id", "title", "type", "tenantId", "entityId", "entityTitle", "entityType", "isRoom", "shared", "linkId", "isAuthenticated", "isRoomMember"]
 
     model_config = ConfigDict(

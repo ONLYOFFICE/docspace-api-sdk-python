@@ -30,7 +30,7 @@ class FileOperationRequestBaseDto(BaseModel):
     """
     The base operation request parameters.
     """ # noqa: E501
-    return_single_operation: Optional[StrictBool] = Field(default=None, description="Specifies whether to return only the current operation", alias="returnSingleOperation")
+    return_single_operation: Optional[StrictBool] = Field(default=None, description="Specifies whether to return only the current operation", alias="returnSingleOperation", json_schema_extra={"examples": [False]})
     __properties: ClassVar[List[str]] = ["returnSingleOperation"]
 
     model_config = ConfigDict(

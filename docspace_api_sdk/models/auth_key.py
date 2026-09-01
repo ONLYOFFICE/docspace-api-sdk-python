@@ -31,9 +31,9 @@ class AuthKey(BaseModel):
     """
     The authorization key parameters.
     """ # noqa: E501
-    name: Optional[StrictStr] = Field(description="The authorization key name.")
-    value: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=4000)]] = Field(description="The authorization key value.")
-    title: Optional[StrictStr] = Field(default=None, description="The authorization key title.")
+    name: Optional[StrictStr] = Field(description="The authorization key name.", json_schema_extra={"examples": ["Auth-Key"]})
+    value: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=4000)]] = Field(description="The authorization key value.", json_schema_extra={"examples": ["abc123xyz456"]})
+    title: Optional[StrictStr] = Field(default=None, description="The authorization key title.", json_schema_extra={"examples": ["API key"]})
     type: Optional[StrictStr] = Field(default=None, description="The field type: text, password, select, toggle.")
     options: Optional[List[StrictStr]] = Field(default=None, description="The list of options for select type fields.")
     depends_on: Optional[StrictStr] = Field(default=None, description="The name of another key this field depends on for visibility.", alias="dependsOn")

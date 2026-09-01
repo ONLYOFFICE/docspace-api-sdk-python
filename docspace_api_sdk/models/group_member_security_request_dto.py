@@ -32,12 +32,12 @@ class GroupMemberSecurityRequestDto(BaseModel):
     """
     The group member security information.
     """ # noqa: E501
-    user: EmployeeFullDto
-    group_access: FileShare = Field(alias="groupAccess")
-    user_access: Optional[FileShare] = Field(default=None, alias="userAccess")
-    overridden: StrictBool = Field(description="Specifies if the group access rights are overridden or not.")
-    can_edit_access: StrictBool = Field(description="Specifies if the group member can edit the group access rights or not.", alias="canEditAccess")
-    owner: StrictBool = Field(description="Specifies if the group member is a group owner or not.")
+    user: EmployeeFullDto = Field(description="The full list of user parameters.")
+    group_access: FileShare = Field(description="The access rights type.", alias="groupAccess")
+    user_access: Optional[FileShare] = Field(default=None, description="The group member access rights to the files.", alias="userAccess")
+    overridden: StrictBool = Field(description="Specifies if the group access rights are overridden or not.", json_schema_extra={"examples": [False]})
+    can_edit_access: StrictBool = Field(description="Specifies if the group member can edit the group access rights or not.", alias="canEditAccess", json_schema_extra={"examples": [True]})
+    owner: StrictBool = Field(description="Specifies if the group member is a group owner or not.", json_schema_extra={"examples": [False]})
     __properties: ClassVar[List[str]] = ["user", "groupAccess", "userAccess", "overridden", "canEditAccess", "owner"]
 
     model_config = ConfigDict(

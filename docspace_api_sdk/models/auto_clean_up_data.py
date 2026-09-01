@@ -31,8 +31,8 @@ class AutoCleanUpData(BaseModel):
     """
     The auto-clearing setting parameters.
     """ # noqa: E501
-    is_auto_clean_up: Optional[StrictBool] = Field(default=None, description="Specifies whether to permanently delete files in the Trash folder.", alias="isAutoCleanUp")
-    gap: Optional[DateToAutoCleanUp] = None
+    is_auto_clean_up: Optional[StrictBool] = Field(default=None, description="Specifies whether to permanently delete files in the Trash folder.", alias="isAutoCleanUp", json_schema_extra={"examples": [False]})
+    gap: Optional[DateToAutoCleanUp] = Field(default=None, description="The period when the trash bin will be cleared.")
     __properties: ClassVar[List[str]] = ["isAutoCleanUp", "gap"]
 
     model_config = ConfigDict(

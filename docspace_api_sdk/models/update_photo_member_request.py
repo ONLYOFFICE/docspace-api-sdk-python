@@ -30,7 +30,7 @@ class UpdatePhotoMemberRequest(BaseModel):
     """
     The request parameters for updating a photo.
     """ # noqa: E501
-    files: Optional[StrictStr] = Field(default=None, description="The avatar photo URL.")
+    files: Optional[StrictStr] = Field(default=None, description="The avatar photo URL.", json_schema_extra={"examples": ["https://example.com/avatar.jpg"]})
     __properties: ClassVar[List[str]] = ["files"]
 
     model_config = ConfigDict(

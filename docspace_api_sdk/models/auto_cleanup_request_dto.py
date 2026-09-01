@@ -31,8 +31,8 @@ class AutoCleanupRequestDto(BaseModel):
     """
     The request parameters for updating the trash bin auto-clearing setting.
     """ # noqa: E501
-    set: Optional[StrictBool] = Field(default=None, description="Specifies whether to enable the auto-clearing or not.")
-    gap: Optional[DateToAutoCleanUp] = None
+    set: Optional[StrictBool] = Field(default=None, description="Specifies whether to enable the auto-clearing or not.", json_schema_extra={"examples": [True]})
+    gap: Optional[DateToAutoCleanUp] = Field(default=None, description="The period when the trash bin will be cleared.")
     __properties: ClassVar[List[str]] = ["set", "gap"]
 
     model_config = ConfigDict(

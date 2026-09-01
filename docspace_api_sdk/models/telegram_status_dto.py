@@ -31,8 +31,8 @@ class TelegramStatusDto(BaseModel):
     """
     The Telegram connection status parameters.
     """ # noqa: E501
-    status: RegStatus
-    username: Optional[StrictStr] = Field(default=None, description="The Telegram username.")
+    status: RegStatus = Field(description="The registration Telegram status.")
+    username: Optional[StrictStr] = Field(default=None, description="The Telegram username.", json_schema_extra={"examples": ["john_doe"]})
     __properties: ClassVar[List[str]] = ["status", "username"]
 
     model_config = ConfigDict(

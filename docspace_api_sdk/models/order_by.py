@@ -31,8 +31,8 @@ class OrderBy(BaseModel):
     """
     The sorting parameters.
     """ # noqa: E501
-    is_asc: Optional[StrictBool] = Field(default=None, description="Specifies if the order is ascending.")
-    var_property: Optional[SortedByType] = Field(default=None, alias="property")
+    is_asc: Optional[StrictBool] = Field(default=None, description="Specifies if the order is ascending.", json_schema_extra={"examples": [True]})
+    var_property: Optional[SortedByType] = Field(default=None, description="The parameters by which the files will be sorted.", alias="property")
     __properties: ClassVar[List[str]] = ["is_asc", "property"]
 
     model_config = ConfigDict(

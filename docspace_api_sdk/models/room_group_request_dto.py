@@ -32,9 +32,9 @@ class RoomGroupRequestDto(BaseModel):
     """
     The request parameters for creating a room group
     """ # noqa: E501
-    name: Annotated[str, Field(min_length=0, strict=True, max_length=128)] = Field(description="Group name")
-    icon: Annotated[str, Field(min_length=0, strict=True, max_length=50)] = Field(description="Group icon")
-    rooms: List[DuplicateRequestDtoAllOfFileIds] = Field(description="The list of room IDs.")
+    name: Annotated[str, Field(min_length=0, strict=True, max_length=128)] = Field(description="Group name", json_schema_extra={"examples": ["My Group"]})
+    icon: Annotated[str, Field(min_length=0, strict=True, max_length=50)] = Field(description="Group icon", json_schema_extra={"examples": ["cover1"]})
+    rooms: List[DuplicateRequestDtoAllOfFileIds] = Field(description="The list of room IDs.", json_schema_extra={"examples": [[1, 2, 3]]})
     __properties: ClassVar[List[str]] = ["name", "icon", "rooms"]
 
     model_config = ConfigDict(

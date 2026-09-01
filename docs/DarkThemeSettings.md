@@ -5,7 +5,7 @@ The theme parameters.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**theme** | [**DarkThemeSettingsType**](DarkThemeSettingsType.md) |  | [optional] 
+**theme** | [**DarkThemeSettingsType**](DarkThemeSettingsType.md) | The theme type. | [optional] 
 **last_modified** | **datetime** | The last modified date. | [optional] 
 
 ## Example

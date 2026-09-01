@@ -30,8 +30,8 @@ class SubmitForm(BaseModel):
     """
     The Complete & Submit button settings.
     """ # noqa: E501
-    visible: Optional[StrictBool] = Field(default=None, description="Specifies whether the Complete  & Submit button will be displayed or hidden on the top toolbar.")
-    result_message: Optional[StrictStr] = Field(default=None, description="A message displayed after forms are submitted.", alias="resultMessage")
+    visible: Optional[StrictBool] = Field(default=None, description="Specifies whether the Complete  & Submit button will be displayed or hidden on the top toolbar.", json_schema_extra={"examples": [True]})
+    result_message: Optional[StrictStr] = Field(default=None, description="A message displayed after forms are submitted.", alias="resultMessage", json_schema_extra={"examples": ["Form submitted successfully"]})
     __properties: ClassVar[List[str]] = ["visible", "resultMessage"]
 
     model_config = ConfigDict(

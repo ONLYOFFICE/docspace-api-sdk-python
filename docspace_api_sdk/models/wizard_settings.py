@@ -31,8 +31,8 @@ class WizardSettings(BaseModel):
     """
     The Wizard settings.
     """ # noqa: E501
-    completed: Optional[StrictBool] = Field(default=None, description="Specifies if the Wizard settings are completed or not")
-    last_modified: Optional[datetime] = Field(default=None, description="The timestamp indicating when the settings were last modified.", alias="lastModified")
+    completed: Optional[StrictBool] = Field(default=None, description="Specifies if the Wizard settings are completed or not", json_schema_extra={"examples": [True]})
+    last_modified: Optional[datetime] = Field(default=None, description="The timestamp indicating when the settings were last modified.", alias="lastModified", json_schema_extra={"examples": ["1990-01-01T00:00:00Z"]})
     __properties: ClassVar[List[str]] = ["completed", "lastModified"]
 
     model_config = ConfigDict(

@@ -32,9 +32,9 @@ class ChangeOwnerRequestDto(BaseModel):
     """
     The request parameters for changing the file owner.
     """ # noqa: E501
-    folder_ids: Optional[List[BatchRequestDtoAllOfFileIds]] = Field(default=None, description="The list of folder IDs to change the owner.", alias="folderIds")
-    file_ids: Optional[List[BatchRequestDtoAllOfFileIds]] = Field(default=None, description="The list of file IDs to change the owner.", alias="fileIds")
-    user_id: UUID = Field(description="The new file owner ID.", alias="userId")
+    folder_ids: Optional[List[BatchRequestDtoAllOfFileIds]] = Field(default=None, description="The list of folder IDs to change the owner.", alias="folderIds", json_schema_extra={"examples": [[1, 2, 3]]})
+    file_ids: Optional[List[BatchRequestDtoAllOfFileIds]] = Field(default=None, description="The list of file IDs to change the owner.", alias="fileIds", json_schema_extra={"examples": [[1, 2, 3]]})
+    user_id: UUID = Field(description="The new file owner ID.", alias="userId", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000000"]})
     __properties: ClassVar[List[str]] = ["folderIds", "fileIds", "userId"]
 
     model_config = ConfigDict(

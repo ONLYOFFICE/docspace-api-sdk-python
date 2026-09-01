@@ -32,20 +32,20 @@ class OperationDto(BaseModel):
     """
     Represents an operation.
     """ # noqa: E501
-    var_date: Optional[ApiDateTime] = Field(default=None, alias="date")
-    service: Optional[StrictStr] = Field(default=None, description="The service related to the operation.")
-    description: Optional[StrictStr] = Field(default=None, description="The brief operation description.")
-    details: Optional[StrictStr] = Field(default=None, description="The detailed information about the operation.")
-    service_unit: Optional[StrictStr] = Field(default=None, description="The service unit.", alias="serviceUnit")
-    quantity: Optional[StrictInt] = Field(default=None, description="The quantity of the service used.")
-    currency: Optional[StrictStr] = Field(default=None, description="The three-character ISO 4217 currency symbol of the operation.")
-    credit: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The credit amount of the operation.")
-    debit: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The debit amount of the operation.")
-    participant_name: Optional[StrictStr] = Field(default=None, description="The participant original name.", alias="participantName")
-    participant_display_name: Optional[StrictStr] = Field(default=None, description="The participant display name.", alias="participantDisplayName")
-    agent_id: Optional[StrictStr] = Field(default=None, description="AI Agent id.", alias="agentId")
-    agent_title: Optional[StrictStr] = Field(default=None, description="AI Agent name.", alias="agentTitle")
-    type: Optional[OperationType] = None
+    var_date: Optional[ApiDateTime] = Field(default=None, description="The API date and time parameters.", alias="date")
+    service: Optional[StrictStr] = Field(default=None, description="The service related to the operation.", json_schema_extra={"examples": ["Storage"]})
+    description: Optional[StrictStr] = Field(default=None, description="The brief operation description.", json_schema_extra={"examples": ["Storage quota increase"]})
+    details: Optional[StrictStr] = Field(default=None, description="The detailed information about the operation.", json_schema_extra={"examples": ["Increased storage from 50GB to 100GB"]})
+    service_unit: Optional[StrictStr] = Field(default=None, description="The service unit.", alias="serviceUnit", json_schema_extra={"examples": ["GB"]})
+    quantity: Optional[StrictInt] = Field(default=None, description="The quantity of the service used.", json_schema_extra={"examples": [1]})
+    currency: Optional[StrictStr] = Field(default=None, description="The three-character ISO 4217 currency symbol of the operation.", json_schema_extra={"examples": ["USD"]})
+    credit: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The credit amount of the operation.", json_schema_extra={"examples": [99.99]})
+    debit: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The debit amount of the operation.", json_schema_extra={"examples": [99.99]})
+    participant_name: Optional[StrictStr] = Field(default=None, description="The participant original name.", alias="participantName", json_schema_extra={"examples": ["Example Name"]})
+    participant_display_name: Optional[StrictStr] = Field(default=None, description="The participant display name.", alias="participantDisplayName", json_schema_extra={"examples": ["Example Name"]})
+    agent_id: Optional[StrictStr] = Field(default=None, description="AI Agent id.", alias="agentId", json_schema_extra={"examples": ["123"]})
+    agent_title: Optional[StrictStr] = Field(default=None, description="AI Agent name.", alias="agentTitle", json_schema_extra={"examples": ["My AI Agent"]})
+    type: Optional[OperationType] = Field(default=None, description="The operation type")
     __properties: ClassVar[List[str]] = ["date", "service", "description", "details", "serviceUnit", "quantity", "currency", "credit", "debit", "participantName", "participantDisplayName", "agentId", "agentTitle", "type"]
 
     model_config = ConfigDict(

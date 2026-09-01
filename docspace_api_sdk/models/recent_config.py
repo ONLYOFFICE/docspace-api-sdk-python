@@ -30,9 +30,9 @@ class RecentConfig(BaseModel):
     """
     The presence or absence of the documents in the Open Recent... menu option.
     """ # noqa: E501
-    folder: Optional[StrictStr] = Field(default=None, description="The folder where the document is stored.")
-    title: Optional[StrictStr] = Field(default=None, description="The document title that will be displayed in the Open Recent... menu option.")
-    url: Optional[StrictStr] = Field(default=None, description="The absolute URL to the document where it is stored.")
+    folder: Optional[StrictStr] = Field(default=None, description="The folder where the document is stored.", json_schema_extra={"examples": ["folder_123"]})
+    title: Optional[StrictStr] = Field(default=None, description="The document title that will be displayed in the Open Recent... menu option.", json_schema_extra={"examples": ["Report 2026"]})
+    url: Optional[StrictStr] = Field(default=None, description="The absolute URL to the document where it is stored.", json_schema_extra={"examples": ["https://portal.example.com/files/recent/report2026.docx"]})
     __properties: ClassVar[List[str]] = ["folder", "title", "url"]
 
     model_config = ConfigDict(

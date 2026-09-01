@@ -17,31 +17,30 @@
 
 
 from __future__ import annotations
+from inspect import getfullargspec
+import json
 import pprint
 import re  # noqa: F401
-import json
-
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
-from typing import Optional, Set
-from typing_extensions import Self
+from typing import Union, Any, List, Set, TYPE_CHECKING, Optional, Dict
+from typing_extensions import Literal, Self
+from pydantic import Field
+from docspace_api_sdk.models.currency_amount import CurrencyAmount
 
-class TransactionInfo(BaseModel):
+class TransactionInfo(CurrencyAmount):
     """
     Represents information about the transaction applied to an account.
-    """ # noqa: E501
-    var_date: Optional[datetime] = Field(default=None, description="The date and time when the credit transaction occurred.", alias="date")
-    currency: Optional[StrictStr] = Field(default=None, description="The three-character ISO 4217 currency symbol of the transaction.")
-    amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Amount of the transaction.")
-    __properties: ClassVar[List[str]] = ["date", "currency", "amount"]
+    """
+
+    var_date: Optional[datetime] = Field(default=None, description="The date and time when the credit transaction occurred.", alias="date", json_schema_extra={"examples": ["2024-01-15T10:30:00Z"]})
 
     model_config = ConfigDict(
         populate_by_name=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
-
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -75,28 +74,23 @@ class TransactionInfo(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # set to None if currency (nullable) is None
-        # and model_fields_set contains the field
-        if self.currency is None and "currency" in self.model_fields_set:
-            _dict['currency'] = None
-
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of TransactionInfo from a dict"""
+        """Create an instance from a dict"""
         if obj is None:
             return None
-
-
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "date": obj.get("date"),
-            "currency": obj.get("currency"),
-            "amount": obj.get("amount")
-        })
-        return _obj
+        base_obj = super().from_dict(obj)
+        base_dict = base_obj.model_dump() if hasattr(base_obj, "model_dump") else dict(base_obj or {})
+
+        extra_fields = {
+            "date": obj.get("date")
+        }
+        all_fields = {**base_dict, **extra_fields}
+        return cls.model_validate(all_fields)
 
 

@@ -30,10 +30,10 @@ class CheckFillFormDraft(BaseModel):
     """
     The parameters for checking the form draft filling.
     """ # noqa: E501
-    version: StrictInt = Field(description="The file version of the form draft.")
-    action: Optional[StrictStr] = Field(default=None, description="The action with the form draft.")
-    request_view: Optional[StrictBool] = Field(default=None, description="Specifies whether to request the form for viewing or not.", alias="requestView")
-    request_embedded: Optional[StrictBool] = Field(default=None, description="Specifies whether to request an embedded form or not.", alias="requestEmbedded")
+    version: StrictInt = Field(description="The file version of the form draft.", json_schema_extra={"examples": [1]})
+    action: Optional[StrictStr] = Field(default=None, description="The action with the form draft.", json_schema_extra={"examples": ["view"]})
+    request_view: Optional[StrictBool] = Field(default=None, description="Specifies whether to request the form for viewing or not.", alias="requestView", json_schema_extra={"examples": [False]})
+    request_embedded: Optional[StrictBool] = Field(default=None, description="Specifies whether to request an embedded form or not.", alias="requestEmbedded", json_schema_extra={"examples": [False]})
     __properties: ClassVar[List[str]] = ["version", "action", "requestView", "requestEmbedded"]
 
     model_config = ConfigDict(

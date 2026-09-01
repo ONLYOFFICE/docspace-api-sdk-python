@@ -30,13 +30,13 @@ class ThirdPartyRequestDto(BaseModel):
     """
     The third-party request parameters.
     """ # noqa: E501
-    url: Optional[StrictStr] = Field(default=None, description="The connection URL for the sharepoint.")
-    login: Optional[StrictStr] = Field(default=None, description="The third-party request login.")
-    password: Optional[StrictStr] = Field(default=None, description="The third-party request password.")
-    token: Optional[StrictStr] = Field(default=None, description="The authentication token.")
-    customer_title: Optional[StrictStr] = Field(description="The customer title.", alias="customerTitle")
-    provider_key: Optional[StrictStr] = Field(description="The provider key.", alias="providerKey")
-    provider_id: Optional[StrictInt] = Field(default=None, description="The provider ID.", alias="providerId")
+    url: Optional[StrictStr] = Field(default=None, description="The connection URL for the sharepoint.", json_schema_extra={"examples": ["https://example.com"]})
+    login: Optional[StrictStr] = Field(default=None, description="The third-party request login.", json_schema_extra={"examples": ["admin"]})
+    password: Optional[StrictStr] = Field(default=None, description="The third-party request password.", json_schema_extra={"examples": ["password123"]})
+    token: Optional[StrictStr] = Field(default=None, description="The authentication token.", json_schema_extra={"examples": ["abc123"]})
+    customer_title: Optional[StrictStr] = Field(description="The customer title.", alias="customerTitle", json_schema_extra={"examples": ["My Document"]})
+    provider_key: Optional[StrictStr] = Field(description="The provider key.", alias="providerKey", json_schema_extra={"examples": ["abc123"]})
+    provider_id: Optional[StrictInt] = Field(default=None, description="The provider ID.", alias="providerId", json_schema_extra={"examples": [1]})
     __properties: ClassVar[List[str]] = ["url", "login", "password", "token", "customerTitle", "providerKey", "providerId"]
 
     model_config = ConfigDict(

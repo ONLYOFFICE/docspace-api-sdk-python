@@ -6,6 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**apply_external_share_password**](#apply_external_share_password) | **POST** /api/2.0/files/share/{key}/password | Apply external data password
 [**change_file_owner**](#change_file_owner) | **POST** /api/2.0/files/owner | Change the file owner
+[**get_encryption_access**](#get_encryption_access) | **GET** /api/2.0/files/file/{fileId}/publickeys | Get file encryption keys
 [**get_external_share_data**](#get_external_share_data) | **GET** /api/2.0/files/share/{key} | Get the external data
 [**get_file_security_info**](#get_file_security_info) | **GET** /api/2.0/files/file/{id}/share | Get the shared file information
 [**get_folder_security_info**](#get_folder_security_info) | **GET** /api/2.0/files/folder/{id}/share | Get the shared folder information
@@ -163,6 +164,85 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | File entry information |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
+**401** | Unauthorized |  -  |
+**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
+**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_encryption_access**
+> EncryptionKeyArrayWrapper get_encryption_access(file_id)
+
+Returns the encryption keys to access a file with the ID specified in the request.
+
+For more information, see [api.onlyoffice.com]().
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **file_id** | **int**| The file unique identifier. | 
+
+### Return type
+
+[**EncryptionKeyArrayWrapper**](EncryptionKeyArrayWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+
+```python
+import docspace_api_sdk
+from docspace_api_sdk.models.encryption_key_array_wrapper import EncryptionKeyArrayWrapper
+from docspace_api_sdk.rest import ApiException
+from pprint import pprint
+
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+# Enter a context with an instance of the API client
+with docspace_api_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace_api_sdk.SharingApi(api_client)
+    file_id = 1 # int | The file unique identifier.
+
+    try:
+        # Get file encryption keys
+        api_response = api_instance.get_encryption_access(file_id)
+        print("The response of SharingApi->get_encryption_access:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling SharingApi->get_encryption_access: %s\n" % e)
+```
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | List of encryption keys: public key, user ID, and the encrypted private key of the current user only |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
+**403** | You do not have enough permissions to edit the file |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
@@ -864,7 +944,7 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.SharingApi(api_client)
-    file_id = 56 # int | The file ID with the mention message.
+    file_id = file-id # int | The file ID with the mention message.
     mention_message_wrapper = docspace_api_sdk.MentionMessageWrapper() # MentionMessageWrapper | The mention message. (optional)
 
     try:

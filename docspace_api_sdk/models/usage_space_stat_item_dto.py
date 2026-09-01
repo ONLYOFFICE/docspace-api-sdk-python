@@ -30,11 +30,11 @@ class UsageSpaceStatItemDto(BaseModel):
     """
     The parameters of the usage space statistics item.
     """ # noqa: E501
-    name: Optional[StrictStr] = Field(default=None, description="The item name.")
-    icon: Optional[StrictStr] = Field(default=None, description="The item icon path.")
-    disabled: Optional[StrictBool] = Field(default=None, description="Specifies if the item is disabled or not.")
-    size: Optional[StrictStr] = Field(default=None, description="The item used space.")
-    url: Optional[StrictStr] = Field(default=None, description="The item URL.")
+    name: Optional[StrictStr] = Field(default=None, description="The item name.", json_schema_extra={"examples": ["Item name"]})
+    icon: Optional[StrictStr] = Field(default=None, description="The item icon path.", json_schema_extra={"examples": ["Item icon path"]})
+    disabled: Optional[StrictBool] = Field(default=None, description="Specifies if the item is disabled or not.", json_schema_extra={"examples": [True]})
+    size: Optional[StrictStr] = Field(default=None, description="The item used space.", json_schema_extra={"examples": ["0 Byte"]})
+    url: Optional[StrictStr] = Field(default=None, description="The item URL.", json_schema_extra={"examples": ["Item url"]})
     __properties: ClassVar[List[str]] = ["name", "icon", "disabled", "size", "url"]
 
     model_config = ConfigDict(

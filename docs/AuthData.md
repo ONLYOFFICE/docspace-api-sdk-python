@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **raw_token** | **str** | The authentication raw token. | [optional] 
 **url** | **str** | The authentication URL. | [optional] 
 **provider** | **str** | The authentication provider. | [optional] 
-**token** | [**OAuth20Token**](OAuth20Token.md) |  | [optional] 
+**token** | [**OAuth20Token**](OAuth20Token.md) | The authentication token. | [optional] 
 
 ## Example
 

@@ -31,9 +31,9 @@ class MailDomainSettingsRequestsDto(BaseModel):
     """
     The request parameters for configuring trusted mail domains and visitor invitation settings.
     """ # noqa: E501
-    type: TenantTrustedDomainsType
-    domains: Optional[List[StrictStr]] = Field(description="The list of authorized email domains that are considered trusted.")
-    invite_users_as_visitors: StrictBool = Field(description="Specifies the default permission level for the invited users (visitors or not).", alias="inviteUsersAsVisitors")
+    type: TenantTrustedDomainsType = Field(description="The type of the tenant trusted domains.")
+    domains: Optional[List[StrictStr]] = Field(description="The list of authorized email domains that are considered trusted.", json_schema_extra={"examples": [["example.com", "company.com"]]})
+    invite_users_as_visitors: StrictBool = Field(description="Specifies the default permission level for the invited users (visitors or not).", alias="inviteUsersAsVisitors", json_schema_extra={"examples": [False]})
     __properties: ClassVar[List[str]] = ["type", "domains", "inviteUsersAsVisitors"]
 
     model_config = ConfigDict(

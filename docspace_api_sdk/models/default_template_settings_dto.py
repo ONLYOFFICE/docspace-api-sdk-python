@@ -31,7 +31,7 @@ class DefaultTemplateSettingsDto(BaseModel):
     """
     Default templates settings parameters.
     """ # noqa: E501
-    items: Optional[List[DefaultTemplateItemDto]] = Field(description="Default templates list.")
+    items: Optional[List[DefaultTemplateItemDto]] = Field(description="Default templates list.", json_schema_extra={"examples": [[{"extension": ".docx", "title": "Blank Document"}]]})
     __properties: ClassVar[List[str]] = ["items"]
 
     model_config = ConfigDict(

@@ -6,16 +6,16 @@ The customization config parameters.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **about** | **bool** | Specifies if the customization is about. | [optional] 
-**customer** | [**CustomerConfigDto**](CustomerConfigDto.md) |  | [optional] 
-**anonymous** | [**AnonymousConfigDto**](AnonymousConfigDto.md) |  | [optional] 
-**feedback** | [**FeedbackConfig**](FeedbackConfig.md) |  | [optional] 
+**customer** | [**CustomerConfigDto**](CustomerConfigDto.md) | The customization customer configuration. | [optional] 
+**anonymous** | [**AnonymousConfigDto**](AnonymousConfigDto.md) | The anonymous configuration of the customization. | [optional] 
+**feedback** | [**FeedbackConfig**](FeedbackConfig.md) | The settings for the Feedback & Support menu button. | [optional] 
 **forcesave** | **bool** | Specifies if the customization should be force saved. | [optional] 
-**goback** | [**GobackConfig**](GobackConfig.md) |  | [optional] 
-**review** | [**ReviewConfig**](ReviewConfig.md) |  | [optional] 
-**logo** | [**LogoConfigDto**](LogoConfigDto.md) |  | [optional] 
+**goback** | [**GobackConfig**](GobackConfig.md) | The settings for the Open file location menu button and upper right corner button. | [optional] 
+**review** | [**ReviewConfig**](ReviewConfig.md) | Configuration for review display settings. | [optional] 
+**logo** | [**LogoConfigDto**](LogoConfigDto.md) | The logo of the customization. | [optional] 
 **mention_share** | **bool** | Specifies if the share should be mentioned. | [optional] 
-**submit_form** | [**SubmitForm**](SubmitForm.md) |  | [optional] 
-**start_filling_form** | [**StartFillingForm**](StartFillingForm.md) |  | [optional] 
+**submit_form** | [**SubmitForm**](SubmitForm.md) | The Complete & Submit button settings. | [optional] 
+**start_filling_form** | [**StartFillingForm**](StartFillingForm.md) | The parameters of the button that starts filling out the form. | [optional] 
 
 ## Example
 

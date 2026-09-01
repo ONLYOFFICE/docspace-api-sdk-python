@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **error** | **str** | The error message if the synchronization failed. | [optional] 
 **percentage** | **int** | The progress percentage of the synchronization. | 
 **is_completed** | **bool** | Specifies whether the synchronization is completed or not. | 
-**status** | [**DistributedTaskStatus**](DistributedTaskStatus.md) |  | 
+**status** | [**DistributedTaskStatus**](DistributedTaskStatus.md) | The status of the synchronization task. | 
 **forms** | [**List[ExternalDbSyncFormResultDto]**](ExternalDbSyncFormResultDto.md) | The synchronization results for all original forms in the room. | 
 
 ## Example

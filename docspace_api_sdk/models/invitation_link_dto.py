@@ -33,13 +33,13 @@ class InvitationLinkDto(BaseModel):
     """
     The invitation link parameters.
     """ # noqa: E501
-    id: Optional[UUID] = Field(default=None, description="The ID of the invitation link.")
-    employee_type: EmployeeType = Field(alias="employeeType")
-    expiration: Optional[ApiDateTime] = None
-    is_expired: Optional[StrictBool] = Field(default=None, description="Indicates whether the invitation link has expired.", alias="isExpired")
-    max_use_count: Optional[StrictInt] = Field(default=None, description="The maximum number of times the invitation link can be used.", alias="maxUseCount")
-    current_use_count: Optional[StrictInt] = Field(default=None, description="The current number of times the invitation link has been used.", alias="currentUseCount")
-    url: Optional[StrictStr] = Field(default=None, description="The URL of the invitation link.")
+    id: Optional[UUID] = Field(default=None, description="The ID of the invitation link.", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000000"]})
+    employee_type: EmployeeType = Field(description="The user type.", alias="employeeType")
+    expiration: Optional[ApiDateTime] = Field(default=None, description="The API date and time parameters.")
+    is_expired: Optional[StrictBool] = Field(default=None, description="Indicates whether the invitation link has expired.", alias="isExpired", json_schema_extra={"examples": [True]})
+    max_use_count: Optional[StrictInt] = Field(default=None, description="The maximum number of times the invitation link can be used.", alias="maxUseCount", json_schema_extra={"examples": [1]})
+    current_use_count: Optional[StrictInt] = Field(default=None, description="The current number of times the invitation link has been used.", alias="currentUseCount", json_schema_extra={"examples": [1]})
+    url: Optional[StrictStr] = Field(default=None, description="The URL of the invitation link.", json_schema_extra={"examples": ["https://example.com"]})
     __properties: ClassVar[List[str]] = ["id", "employeeType", "expiration", "isExpired", "maxUseCount", "currentUseCount", "url"]
 
     model_config = ConfigDict(

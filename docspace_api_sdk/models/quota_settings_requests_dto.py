@@ -31,7 +31,7 @@ class QuotaSettingsRequestsDto(BaseModel):
     """
     The request parameters for managing the user storage quota configurations.
     """ # noqa: E501
-    enable_quota: Optional[StrictBool] = Field(default=None, description="Specifies whether the storage quota restrictions are enabled.", alias="enableQuota")
+    enable_quota: Optional[StrictBool] = Field(default=None, description="Specifies whether the storage quota restrictions are enabled.", alias="enableQuota", json_schema_extra={"examples": [True]})
     default_quota: QuotaSettingsRequestsDtoDefaultQuota = Field(alias="defaultQuota")
     __properties: ClassVar[List[str]] = ["enableQuota", "defaultQuota"]
 

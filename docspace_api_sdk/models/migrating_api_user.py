@@ -40,7 +40,7 @@ class MigratingApiUser(ImportableApiEntity):
     display_name: Optional[StrictStr] = Field(default=None, alias="displayName")
     first_name: Optional[StrictStr] = Field(default=None, alias="firstName")
     last_name: Optional[StrictStr] = Field(default=None, alias="lastName")
-    user_type: Optional[EmployeeType] = Field(default=None, alias="userType")
+    user_type: Optional[EmployeeType] = Field(default=None, description="The user type.", alias="userType")
     migrating_files: Optional[MigratingApiFiles] = Field(default=None, alias="migratingFiles")
 
     model_config = ConfigDict(

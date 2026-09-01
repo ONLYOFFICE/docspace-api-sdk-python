@@ -32,9 +32,9 @@ class EmailMemberRequestDto(BaseModel):
     """
     The request parameters for the user email.
     """ # noqa: E501
-    email: Annotated[str, Field(min_length=0, strict=True, max_length=255)] = Field(description="The user email address.")
-    recaptcha_type: Optional[RecaptchaType] = Field(default=None, alias="recaptchaType")
-    recaptcha_response: Optional[StrictStr] = Field(default=None, description="The user's response to the CAPTCHA challenge.", alias="recaptchaResponse")
+    email: Annotated[str, Field(min_length=0, strict=True, max_length=255)] = Field(description="The user email address.", json_schema_extra={"examples": ["john.doe@example.com"]})
+    recaptcha_type: Optional[RecaptchaType] = Field(default=None, description="The type of CAPTCHA validation used.", alias="recaptchaType")
+    recaptcha_response: Optional[StrictStr] = Field(default=None, description="The user's response to the CAPTCHA challenge.", alias="recaptchaResponse", json_schema_extra={"examples": ["03AGdBq27..."]})
     __properties: ClassVar[List[str]] = ["email", "recaptchaType", "recaptchaResponse"]
 
     model_config = ConfigDict(

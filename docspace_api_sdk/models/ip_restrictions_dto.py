@@ -31,8 +31,8 @@ class IpRestrictionsDto(BaseModel):
     """
     The parameters for configuring new IP restriction settings.
     """ # noqa: E501
-    ip_restrictions: Optional[List[IpRestrictionBase]] = Field(description="The list of IP restriction addresses.", alias="ipRestrictions")
-    enable: Optional[StrictBool] = Field(default=None, description="Specifies whether to enable IP restrictions or not.")
+    ip_restrictions: Optional[List[IpRestrictionBase]] = Field(description="The list of IP restriction addresses.", alias="ipRestrictions", json_schema_extra={"examples": [[{"ip": "192.0.2.1", "forAdmin": False}]]})
+    enable: Optional[StrictBool] = Field(default=None, description="Specifies whether to enable IP restrictions or not.", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["ipRestrictions", "enable"]
 
     model_config = ConfigDict(

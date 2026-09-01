@@ -31,7 +31,7 @@ class GreetingSettingsRequestsDto(BaseModel):
     """
     The request parameters for managing the greeting settings.
     """ # noqa: E501
-    title: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(description="The title of the tenant greeting settings.")
+    title: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(description="The title of the tenant greeting settings.", json_schema_extra={"examples": ["Welcome to Our Portal"]})
     __properties: ClassVar[List[str]] = ["title"]
 
     model_config = ConfigDict(

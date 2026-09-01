@@ -32,10 +32,10 @@ class CustomerInfoDto(BaseModel):
     """
     The customer information.
     """ # noqa: E501
-    portal_id: Optional[StrictStr] = Field(default=None, description="The portal ID.", alias="portalId")
-    payment_method_status: Optional[PaymentMethodStatus] = Field(default=None, alias="paymentMethodStatus")
-    email: Optional[StrictStr] = Field(default=None, description="The customer email address.")
-    payer: Optional[EmployeeDto] = None
+    portal_id: Optional[StrictStr] = Field(default=None, description="The portal ID.", alias="portalId", json_schema_extra={"examples": ["portal-001"]})
+    payment_method_status: Optional[PaymentMethodStatus] = Field(default=None, description="The payment method status.", alias="paymentMethodStatus")
+    email: Optional[StrictStr] = Field(default=None, description="The customer email address.", json_schema_extra={"examples": ["user@example.com"]})
+    payer: Optional[EmployeeDto] = Field(default=None, description="The user parameters.")
     __properties: ClassVar[List[str]] = ["portalId", "paymentMethodStatus", "email", "payer"]
 
     model_config = ConfigDict(

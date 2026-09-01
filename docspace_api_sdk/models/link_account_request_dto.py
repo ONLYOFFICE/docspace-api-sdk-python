@@ -30,7 +30,7 @@ class LinkAccountRequestDto(BaseModel):
     """
     The request parameters for linking accounts.
     """ # noqa: E501
-    serialized_profile: Optional[StrictStr] = Field(default=None, description="The third-party profile in the serialized format.", alias="serializedProfile")
+    serialized_profile: Optional[StrictStr] = Field(default=None, description="The third-party profile in the serialized format.", alias="serializedProfile", json_schema_extra={"examples": ["{\"provider\":\"Google\",\"id\":\"123456\"}"]})
     __properties: ClassVar[List[str]] = ["serializedProfile"]
 
     model_config = ConfigDict(

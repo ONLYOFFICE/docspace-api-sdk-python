@@ -32,10 +32,10 @@ class UpdateGroupRequest(BaseModel):
     """
     The request for updating a group.
     """ # noqa: E501
-    members_to_add: Optional[List[UUID]] = Field(default=None, description="The list of user IDs to add to the group.", alias="membersToAdd")
-    members_to_remove: Optional[List[UUID]] = Field(default=None, description="The list of user IDs to remove from the group.", alias="membersToRemove")
-    group_manager: Optional[UUID] = Field(default=None, description="The group manager ID.", alias="groupManager")
-    group_name: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=128)]] = Field(default=None, description="The group name.", alias="groupName")
+    members_to_add: Optional[List[UUID]] = Field(default=None, description="The list of user IDs to add to the group.", alias="membersToAdd", json_schema_extra={"examples": [["00000000-0000-0000-0000-000000000000"]]})
+    members_to_remove: Optional[List[UUID]] = Field(default=None, description="The list of user IDs to remove from the group.", alias="membersToRemove", json_schema_extra={"examples": [["11111111-1111-1111-1111-111111111111"]]})
+    group_manager: Optional[UUID] = Field(default=None, description="The group manager ID.", alias="groupManager", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000000"]})
+    group_name: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=128)]] = Field(default=None, description="The group name.", alias="groupName", json_schema_extra={"examples": ["Sales Team"]})
     __properties: ClassVar[List[str]] = ["membersToAdd", "membersToRemove", "groupManager", "groupName"]
 
     model_config = ConfigDict(

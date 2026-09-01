@@ -32,26 +32,27 @@ class WebPluginDto(BaseModel):
     """
     The web plugin information.
     """ # noqa: E501
-    name: Optional[StrictStr] = Field(description="The web plugin name.")
-    version: Optional[StrictStr] = Field(description="The web plugin version.")
-    min_doc_space_version: Optional[StrictStr] = Field(default=None, description="The minimum version of DocSpace with which the plugin is guaranteed to work.", alias="minDocSpaceVersion")
-    description: Optional[StrictStr] = Field(description="The web plugin description.")
-    license: Optional[StrictStr] = Field(description="The web plugin license.")
-    author: Optional[StrictStr] = Field(description="The web plugin author.")
-    home_page: Optional[StrictStr] = Field(description="The web plugin home page URL.", alias="homePage")
-    plugin_name: Optional[StrictStr] = Field(description="The name by which the web plugin is registered in the window object.", alias="pluginName")
-    scopes: Optional[StrictStr] = Field(description="The web plugin scopes.")
-    image: Optional[StrictStr] = Field(description="The web plugin image.")
-    create_by: EmployeeDto = Field(alias="createBy")
-    create_on: datetime = Field(description="The date and time when the web plugin was created.", alias="createOn")
-    enabled: StrictBool = Field(description="Specifies if the web plugin is enabled or not.")
-    system: StrictBool = Field(description="Specifies if the web plugin is system or not.")
-    url: Optional[StrictStr] = Field(description="The web plugin URL.")
-    css_url: Optional[StrictStr] = Field(description="The web plugin css URL.", alias="cssUrl")
-    settings: Optional[StrictStr] = Field(description="The web plugin settings.")
-    name_locale: Optional[Dict[str, Optional[StrictStr]]] = Field(default=None, description="The web plugin localized name.", alias="nameLocale")
-    description_locale: Optional[Dict[str, Optional[StrictStr]]] = Field(default=None, description="The web plugin localized description.", alias="descriptionLocale")
-    __properties: ClassVar[List[str]] = ["name", "version", "minDocSpaceVersion", "description", "license", "author", "homePage", "pluginName", "scopes", "image", "createBy", "createOn", "enabled", "system", "url", "cssUrl", "settings", "nameLocale", "descriptionLocale"]
+    name: Optional[StrictStr] = Field(description="The web plugin name.", json_schema_extra={"examples": ["Example Plugin"]})
+    version: Optional[StrictStr] = Field(description="The web plugin version.", json_schema_extra={"examples": ["1.0.0"]})
+    min_doc_space_version: Optional[StrictStr] = Field(default=None, description="The minimum version of DocSpace with which the plugin is guaranteed to work.", alias="minDocSpaceVersion", json_schema_extra={"examples": ["12.0.0"]})
+    description: Optional[StrictStr] = Field(description="The web plugin description.", json_schema_extra={"examples": ["A plugin that provides additional functionality"]})
+    license: Optional[StrictStr] = Field(description="The web plugin license.", json_schema_extra={"examples": ["MIT"]})
+    author: Optional[StrictStr] = Field(description="The web plugin author.", json_schema_extra={"examples": ["ONLYOFFICE"]})
+    home_page: Optional[StrictStr] = Field(description="The web plugin home page URL.", alias="homePage", json_schema_extra={"examples": ["https://example.com"]})
+    plugin_name: Optional[StrictStr] = Field(description="The name by which the web plugin is registered in the window object.", alias="pluginName", json_schema_extra={"examples": ["examplePlugin"]})
+    scopes: Optional[StrictStr] = Field(description="The web plugin scopes.", json_schema_extra={"examples": ["Files,Rooms"]})
+    image: Optional[StrictStr] = Field(description="The web plugin image.", json_schema_extra={"examples": ["https://example.com/image.png"]})
+    create_by: EmployeeDto = Field(description="The user parameters.", alias="createBy")
+    create_on: datetime = Field(description="The date and time when the web plugin was created.", alias="createOn", json_schema_extra={"examples": ["2024-01-15T10:30:00Z"]})
+    enabled: StrictBool = Field(description="Specifies if the web plugin is enabled or not.", json_schema_extra={"examples": [True]})
+    system: StrictBool = Field(description="Specifies if the web plugin is system or not.", json_schema_extra={"examples": [False]})
+    url: Optional[StrictStr] = Field(description="The web plugin URL.", json_schema_extra={"examples": ["https://example.com/plugin.js"]})
+    css_url: Optional[StrictStr] = Field(description="The web plugin css URL.", alias="cssUrl", json_schema_extra={"examples": ["https://example.com/plugin.css"]})
+    settings: Optional[StrictStr] = Field(description="The web plugin settings.", json_schema_extra={"examples": ["{}"]})
+    name_locale: Optional[Dict[str, Optional[StrictStr]]] = Field(default=None, description="The web plugin localized name.", alias="nameLocale", json_schema_extra={"examples": [{}]})
+    description_locale: Optional[Dict[str, Optional[StrictStr]]] = Field(default=None, description="The web plugin localized description.", alias="descriptionLocale", json_schema_extra={"examples": [{}]})
+    runtime: Optional[StrictStr] = Field(default=None, description="The web plugin loading method", json_schema_extra={"examples": ["module"]})
+    __properties: ClassVar[List[str]] = ["name", "version", "minDocSpaceVersion", "description", "license", "author", "homePage", "pluginName", "scopes", "image", "createBy", "createOn", "enabled", "system", "url", "cssUrl", "settings", "nameLocale", "descriptionLocale", "runtime"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -160,15 +161,10 @@ class WebPluginDto(BaseModel):
         if self.settings is None and "settings" in self.model_fields_set:
             _dict['settings'] = None
 
-        # set to None if name_locale (nullable) is None
+        # set to None if runtime (nullable) is None
         # and model_fields_set contains the field
-        if self.name_locale is None and "name_locale" in self.model_fields_set:
-            _dict['nameLocale'] = None
-
-        # set to None if description_locale (nullable) is None
-        # and model_fields_set contains the field
-        if self.description_locale is None and "description_locale" in self.model_fields_set:
-            _dict['descriptionLocale'] = None
+        if self.runtime is None and "runtime" in self.model_fields_set:
+            _dict['runtime'] = None
 
         return _dict
 
@@ -201,7 +197,8 @@ class WebPluginDto(BaseModel):
             "cssUrl": obj.get("cssUrl"),
             "settings": obj.get("settings"),
             "nameLocale": obj.get("nameLocale"),
-            "descriptionLocale": obj.get("descriptionLocale")
+            "descriptionLocale": obj.get("descriptionLocale"),
+            "runtime": obj.get("runtime")
         })
         return _obj
 

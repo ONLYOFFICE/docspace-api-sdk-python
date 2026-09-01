@@ -49,41 +49,41 @@ class FileDtoInteger(FileEntryDtoInteger):
     The file parameters.
     """
 
-    folder_id: Optional[StrictInt] = Field(default=None, description="The folder ID where the file is located.", alias="folderId")
-    version: Optional[StrictInt] = Field(default=None, description="The file version.")
-    version_group: Optional[StrictInt] = Field(default=None, description="The version group of the file.", alias="versionGroup")
-    content_length: Optional[StrictStr] = Field(default=None, description="The content length of the file.", alias="contentLength")
-    pure_content_length: Optional[StrictInt] = Field(default=None, description="The pure content length of the file.", alias="pureContentLength")
-    file_status: Optional[FileStatus] = Field(default=None, alias="fileStatus")
-    editing_by: Optional[Dict[str, Optional[StrictStr]]] = Field(default=None, description="The list of users editing the file.", alias="editingBy")
-    mute: Optional[StrictBool] = Field(default=None, description="Specifies if the file is muted or not.")
-    view_url: Optional[StrictStr] = Field(default=None, description="The URL link to view the file.", alias="viewUrl")
-    web_url: Optional[StrictStr] = Field(default=None, description="The Web URL link to the file.", alias="webUrl")
-    file_type: Optional[FileType] = Field(default=None, alias="fileType")
-    file_exst: Optional[StrictStr] = Field(default=None, description="The file extension.", alias="fileExst")
-    comment: Optional[StrictStr] = Field(default=None, description="The comment to the file.")
-    encrypted: Optional[StrictBool] = Field(default=None, description="Specifies if the file is encrypted or not.")
-    thumbnail_url: Optional[StrictStr] = Field(default=None, description="The thumbnail URL of the file.", alias="thumbnailUrl")
-    thumbnail_status: Optional[Thumbnail] = Field(default=None, alias="thumbnailStatus")
-    locked: Optional[StrictBool] = Field(default=None, description="Specifies if the file is locked or not.")
-    locked_by: Optional[StrictStr] = Field(default=None, description="The user ID of the person who locked the file.", alias="lockedBy")
-    has_draft: Optional[StrictBool] = Field(default=None, description="Specifies if the file has a draft or not.", alias="hasDraft")
-    form_filling_status: Optional[FormFillingStatus] = Field(default=None, alias="formFillingStatus")
-    is_form: Optional[StrictBool] = Field(default=None, description="Specifies if the file is a form or not.", alias="isForm")
-    custom_filter_enabled: Optional[StrictBool] = Field(default=None, description="Specifies if the Custom Filter editing mode is enabled for a file or not.", alias="customFilterEnabled")
-    custom_filter_enabled_by: Optional[StrictStr] = Field(default=None, description="The name of the user who enabled a Custom Filter editing mode for a file.", alias="customFilterEnabledBy")
-    start_filling: Optional[StrictBool] = Field(default=None, description="Specifies if the filling has started or not.", alias="startFilling")
-    is_filling_preparing: Optional[StrictBool] = Field(default=None, description="Specifies if the form filling has started but the file is still being saved by the document editor. Filling and editing are not allowed.", alias="isFillingPreparing")
-    in_process_folder_id: Optional[StrictInt] = Field(default=None, description="The InProcess folder ID of the file.", alias="inProcessFolderId")
-    in_process_folder_title: Optional[StrictStr] = Field(default=None, description="The InProcess folder title of the file.", alias="inProcessFolderTitle")
-    results_folder_id: Optional[StrictInt] = Field(default=None, description="The ID of the FormFillingFolderDone folder that corresponds to this original form.", alias="resultsFolderId")
-    draft_location: Optional[DraftLocationInteger] = Field(default=None, alias="draftLocation")
+    folder_id: Optional[StrictInt] = Field(default=None, description="The folder ID where the file is located.", alias="folderId", json_schema_extra={"examples": [10]})
+    version: Optional[StrictInt] = Field(default=None, description="The file version.", json_schema_extra={"examples": [3]})
+    version_group: Optional[StrictInt] = Field(default=None, description="The version group of the file.", alias="versionGroup", json_schema_extra={"examples": [1]})
+    content_length: Optional[StrictStr] = Field(default=None, description="The content length of the file.", alias="contentLength", json_schema_extra={"examples": ["12345"]})
+    pure_content_length: Optional[StrictInt] = Field(default=None, description="The pure content length of the file.", alias="pureContentLength", json_schema_extra={"examples": [12345]})
+    file_status: Optional[FileStatus] = Field(default=None, description="The current status of the file.", alias="fileStatus")
+    editing_by: Optional[Dict[str, Optional[StrictStr]]] = Field(default=None, description="The list of users editing the file.", alias="editingBy", json_schema_extra={"examples": [{"00000000-0000-0000-0000-000000000000": "John Doe"}]})
+    mute: Optional[StrictBool] = Field(default=None, description="Specifies if the file is muted or not.", json_schema_extra={"examples": [False]})
+    view_url: Optional[StrictStr] = Field(default=None, description="The URL link to view the file.", alias="viewUrl", json_schema_extra={"examples": ["https://www.onlyoffice.com/viewfile?fileid=2221"]})
+    web_url: Optional[StrictStr] = Field(default=None, description="The Web URL link to the file.", alias="webUrl", json_schema_extra={"examples": ["http://localhost/files/document.docx"]})
+    file_type: Optional[FileType] = Field(default=None, description="The file type.", alias="fileType")
+    file_exst: Optional[StrictStr] = Field(default=None, description="The file extension.", alias="fileExst", json_schema_extra={"examples": [".txt"]})
+    comment: Optional[StrictStr] = Field(default=None, description="The comment to the file.", json_schema_extra={"examples": ["This is a comment"]})
+    encrypted: Optional[StrictBool] = Field(default=None, description="Specifies if the file is encrypted or not.", json_schema_extra={"examples": [False]})
+    thumbnail_url: Optional[StrictStr] = Field(default=None, description="The thumbnail URL of the file.", alias="thumbnailUrl", json_schema_extra={"examples": ["http://localhost/thumbnails/file.png"]})
+    thumbnail_status: Optional[Thumbnail] = Field(default=None, description="The current thumbnail status of the file.", alias="thumbnailStatus")
+    locked: Optional[StrictBool] = Field(default=None, description="Specifies if the file is locked or not.", json_schema_extra={"examples": [False]})
+    locked_by: Optional[StrictStr] = Field(default=None, description="The user ID of the person who locked the file.", alias="lockedBy", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000000"]})
+    has_draft: Optional[StrictBool] = Field(default=None, description="Specifies if the file has a draft or not.", alias="hasDraft", json_schema_extra={"examples": [False]})
+    form_filling_status: Optional[FormFillingStatus] = Field(default=None, description="The status of the form filling process.", alias="formFillingStatus")
+    is_form: Optional[StrictBool] = Field(default=None, description="Specifies if the file is a form or not.", alias="isForm", json_schema_extra={"examples": [False]})
+    custom_filter_enabled: Optional[StrictBool] = Field(default=None, description="Specifies if the Custom Filter editing mode is enabled for a file or not.", alias="customFilterEnabled", json_schema_extra={"examples": [False]})
+    custom_filter_enabled_by: Optional[StrictStr] = Field(default=None, description="The name of the user who enabled a Custom Filter editing mode for a file.", alias="customFilterEnabledBy", json_schema_extra={"examples": ["John Doe"]})
+    start_filling: Optional[StrictBool] = Field(default=None, description="Specifies if the filling has started or not.", alias="startFilling", json_schema_extra={"examples": [False]})
+    is_filling_preparing: Optional[StrictBool] = Field(default=None, description="Specifies if the form filling has started but the file is still being saved by the document editor. Filling and editing are not allowed.", alias="isFillingPreparing", json_schema_extra={"examples": [False]})
+    in_process_folder_id: Optional[StrictInt] = Field(default=None, description="The InProcess folder ID of the file.", alias="inProcessFolderId", json_schema_extra={"examples": [10]})
+    in_process_folder_title: Optional[StrictStr] = Field(default=None, description="The InProcess folder title of the file.", alias="inProcessFolderTitle", json_schema_extra={"examples": ["In Process"]})
+    results_folder_id: Optional[StrictInt] = Field(default=None, description="The ID of the FormFillingFolderDone folder that corresponds to this original form.", alias="resultsFolderId", json_schema_extra={"examples": [55]})
+    draft_location: Optional[DraftLocationInteger] = Field(default=None, description="The file draft information with its location.", alias="draftLocation")
     view_accessibility: Optional[FileDtoIntegerAllOfViewAccessibility] = Field(default=None, alias="viewAccessibility")
-    last_opened: Optional[ApiDateTime] = Field(default=None, alias="lastOpened")
-    expired: Optional[ApiDateTime] = None
-    vectorization_status: Optional[VectorizationStatus] = Field(default=None, alias="vectorizationStatus")
-    external_db_table_name: Optional[StrictStr] = Field(default=None, description="The name of the table in the external database that corresponds to this form.", alias="externalDbTableName")
-    dimensions: Optional[Size] = None
+    last_opened: Optional[ApiDateTime] = Field(default=None, description="The time when the file was last opened.", alias="lastOpened")
+    expired: Optional[ApiDateTime] = Field(default=None, description="The date when the file will be expired.")
+    vectorization_status: Optional[VectorizationStatus] = Field(default=None, description="The vectorization status of the file.", alias="vectorizationStatus")
+    external_db_table_name: Optional[StrictStr] = Field(default=None, description="The name of the table in the external database that corresponds to this form.", alias="externalDbTableName", json_schema_extra={"examples": ["form_123_v1"]})
+    dimensions: Optional[Size] = Field(default=None, description="Represents dimensions with width and height values.")
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -171,51 +171,6 @@ class FileDtoInteger(FileEntryDtoInteger):
         # override the default output from pydantic by calling `to_dict()` of dimensions
         if self.dimensions:
             _dict['dimensions'] = self.dimensions.to_dict()
-        # set to None if title (nullable) is None
-        # and model_fields_set contains the field
-        if self.title is None and "title" in self.model_fields_set:
-            _dict['title'] = None
-
-        # set to None if short_web_url (nullable) is None
-        # and model_fields_set contains the field
-        if self.short_web_url is None and "short_web_url" in self.model_fields_set:
-            _dict['shortWebUrl'] = None
-
-        # set to None if provider_item (nullable) is None
-        # and model_fields_set contains the field
-        if self.provider_item is None and "provider_item" in self.model_fields_set:
-            _dict['providerItem'] = None
-
-        # set to None if provider_key (nullable) is None
-        # and model_fields_set contains the field
-        if self.provider_key is None and "provider_key" in self.model_fields_set:
-            _dict['providerKey'] = None
-
-        # set to None if provider_id (nullable) is None
-        # and model_fields_set contains the field
-        if self.provider_id is None and "provider_id" in self.model_fields_set:
-            _dict['providerId'] = None
-
-        # set to None if order (nullable) is None
-        # and model_fields_set contains the field
-        if self.order is None and "order" in self.model_fields_set:
-            _dict['order'] = None
-
-        # set to None if is_favorite (nullable) is None
-        # and model_fields_set contains the field
-        if self.is_favorite is None and "is_favorite" in self.model_fields_set:
-            _dict['isFavorite'] = None
-
-        # set to None if origin_title (nullable) is None
-        # and model_fields_set contains the field
-        if self.origin_title is None and "origin_title" in self.model_fields_set:
-            _dict['originTitle'] = None
-
-        # set to None if origin_room_title (nullable) is None
-        # and model_fields_set contains the field
-        if self.origin_room_title is None and "origin_room_title" in self.model_fields_set:
-            _dict['originRoomTitle'] = None
-
         # set to None if share_settings (nullable) is None
         # and model_fields_set contains the field
         if self.share_settings is None and "share_settings" in self.model_fields_set:
@@ -231,21 +186,6 @@ class FileDtoInteger(FileEntryDtoInteger):
         if self.available_share_rights is None and "available_share_rights" in self.model_fields_set:
             _dict['availableShareRights'] = None
 
-        # set to None if request_token (nullable) is None
-        # and model_fields_set contains the field
-        if self.request_token is None and "request_token" in self.model_fields_set:
-            _dict['requestToken'] = None
-
-        # set to None if external (nullable) is None
-        # and model_fields_set contains the field
-        if self.external is None and "external" in self.model_fields_set:
-            _dict['external'] = None
-
-        # set to None if is_link_expired (nullable) is None
-        # and model_fields_set contains the field
-        if self.is_link_expired is None and "is_link_expired" in self.model_fields_set:
-            _dict['isLinkExpired'] = None
-
         # set to None if content_length (nullable) is None
         # and model_fields_set contains the field
         if self.content_length is None and "content_length" in self.model_fields_set:
@@ -255,11 +195,6 @@ class FileDtoInteger(FileEntryDtoInteger):
         # and model_fields_set contains the field
         if self.pure_content_length is None and "pure_content_length" in self.model_fields_set:
             _dict['pureContentLength'] = None
-
-        # set to None if editing_by (nullable) is None
-        # and model_fields_set contains the field
-        if self.editing_by is None and "editing_by" in self.model_fields_set:
-            _dict['editingBy'] = None
 
         # set to None if view_url (nullable) is None
         # and model_fields_set contains the field

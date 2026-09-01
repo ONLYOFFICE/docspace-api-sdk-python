@@ -5,7 +5,7 @@ The action performed on the file.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | [**MessageAction**](MessageAction.md) |  | [optional] 
+**id** | [**MessageAction**](MessageAction.md) | The event action ID. | [optional] 
 **key** | **str** | The action performed on the file. | [optional] 
 
 ## Example

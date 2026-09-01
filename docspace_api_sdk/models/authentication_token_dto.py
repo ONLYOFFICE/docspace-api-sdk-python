@@ -31,13 +31,13 @@ class AuthenticationTokenDto(BaseModel):
     """
     The authentication token parameters.
     """ # noqa: E501
-    token: Optional[StrictStr] = Field(default=None, description="The authentication token.")
-    expires: Optional[datetime] = Field(default=None, description="The token expiration time.")
-    sms: Optional[StrictBool] = Field(default=None, description="Specifies if the authentication code is sent by SMS or not.")
-    phone_noise: Optional[StrictStr] = Field(default=None, description="The phone number.", alias="phoneNoise")
-    tfa: Optional[StrictBool] = Field(default=None, description="Specifies if the two-factor application is used or not.")
-    tfa_key: Optional[StrictStr] = Field(default=None, description="The two-factor authentication key.", alias="tfaKey")
-    confirm_url: Optional[StrictStr] = Field(default=None, description="The confirmation email URL.", alias="confirmUrl")
+    token: Optional[StrictStr] = Field(default=None, description="The authentication token.", json_schema_extra={"examples": ["abcde12345"]})
+    expires: Optional[datetime] = Field(default=None, description="The token expiration time.", json_schema_extra={"examples": ["2024-01-15T10:30:00Z"]})
+    sms: Optional[StrictBool] = Field(default=None, description="Specifies if the authentication code is sent by SMS or not.", json_schema_extra={"examples": [True]})
+    phone_noise: Optional[StrictStr] = Field(default=None, description="The phone number.", alias="phoneNoise", json_schema_extra={"examples": ["+1***1234"]})
+    tfa: Optional[StrictBool] = Field(default=None, description="Specifies if the two-factor application is used or not.", json_schema_extra={"examples": [True]})
+    tfa_key: Optional[StrictStr] = Field(default=None, description="The two-factor authentication key.", alias="tfaKey", json_schema_extra={"examples": ["JBSWY3DPEHPK3PXP"]})
+    confirm_url: Optional[StrictStr] = Field(default=None, description="The confirmation email URL.", alias="confirmUrl", json_schema_extra={"examples": ["https://example.com/confirm?token=abc123"]})
     __properties: ClassVar[List[str]] = ["token", "expires", "sms", "phoneNoise", "tfa", "tfaKey", "confirmUrl"]
 
     model_config = ConfigDict(

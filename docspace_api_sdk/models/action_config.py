@@ -31,8 +31,8 @@ class ActionConfig(BaseModel):
     """
     The information about the action in the document that will be scrolled to.
     """ # noqa: E501
-    data: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=256)]] = Field(default=None, description="The action data that will be scrolled to.")
-    type: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=128)]] = Field(default=None, description="The action type.")
+    data: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=256)]] = Field(default=None, description="The action data that will be scrolled to.", json_schema_extra={"examples": ["section"]})
+    type: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=128)]] = Field(default=None, description="The action type.", json_schema_extra={"examples": ["scroll"]})
     __properties: ClassVar[List[str]] = ["data", "type"]
 
     model_config = ConfigDict(

@@ -72,7 +72,7 @@ class SearchApi:
         invited_by_me: Annotated[Optional[StrictBool], Field(description="Specifies whether the user is invited by the current user or not.")] = None,
         inviter_id: Annotated[Optional[UUID], Field(description="The inviter ID.")] = None,
         area: Annotated[Optional[Area], Field(description="The area of the account entries.")] = None,
-        employee_types: Annotated[Optional[List[List[EmployeeType]]], Field(description="The list of the user types.")] = None,
+        employee_types: Annotated[Optional[List[EmployeeType]], Field(description="The list of the user types.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of items to retrieve in a request.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The starting index for the query results.")] = None,
         filter_separator: Annotated[Optional[StrictStr], Field(description="Specifies the separator used in filter expressions.")] = None,
@@ -170,6 +170,7 @@ class SearchApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -192,7 +193,7 @@ class SearchApi:
         invited_by_me: Annotated[Optional[StrictBool], Field(description="Specifies whether the user is invited by the current user or not.")] = None,
         inviter_id: Annotated[Optional[UUID], Field(description="The inviter ID.")] = None,
         area: Annotated[Optional[Area], Field(description="The area of the account entries.")] = None,
-        employee_types: Annotated[Optional[List[List[EmployeeType]]], Field(description="The list of the user types.")] = None,
+        employee_types: Annotated[Optional[List[EmployeeType]], Field(description="The list of the user types.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of items to retrieve in a request.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The starting index for the query results.")] = None,
         filter_separator: Annotated[Optional[StrictStr], Field(description="Specifies the separator used in filter expressions.")] = None,
@@ -290,6 +291,7 @@ class SearchApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -312,7 +314,7 @@ class SearchApi:
         invited_by_me: Annotated[Optional[StrictBool], Field(description="Specifies whether the user is invited by the current user or not.")] = None,
         inviter_id: Annotated[Optional[UUID], Field(description="The inviter ID.")] = None,
         area: Annotated[Optional[Area], Field(description="The area of the account entries.")] = None,
-        employee_types: Annotated[Optional[List[List[EmployeeType]]], Field(description="The list of the user types.")] = None,
+        employee_types: Annotated[Optional[List[EmployeeType]], Field(description="The list of the user types.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of items to retrieve in a request.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The starting index for the query results.")] = None,
         filter_separator: Annotated[Optional[StrictStr], Field(description="Specifies the separator used in filter expressions.")] = None,
@@ -410,6 +412,7 @@ class SearchApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -441,7 +444,7 @@ class SearchApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'employeeTypes': 'csv',
+            'employeeTypes': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -561,7 +564,7 @@ class SearchApi:
         invited_by_me: Annotated[Optional[StrictBool], Field(description="Specifies whether the user is invited by the current user or not.")] = None,
         inviter_id: Annotated[Optional[UUID], Field(description="The inviter ID.")] = None,
         area: Annotated[Optional[Area], Field(description="The area of the account entries.")] = None,
-        employee_types: Annotated[Optional[List[List[EmployeeType]]], Field(description="The list of the user types.")] = None,
+        employee_types: Annotated[Optional[List[EmployeeType]], Field(description="The list of the user types.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of items to retrieve in a request.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The starting index for the query results.")] = None,
         filter_separator: Annotated[Optional[StrictStr], Field(description="Specifies the separator used in filter expressions.")] = None,
@@ -659,6 +662,7 @@ class SearchApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -681,7 +685,7 @@ class SearchApi:
         invited_by_me: Annotated[Optional[StrictBool], Field(description="Specifies whether the user is invited by the current user or not.")] = None,
         inviter_id: Annotated[Optional[UUID], Field(description="The inviter ID.")] = None,
         area: Annotated[Optional[Area], Field(description="The area of the account entries.")] = None,
-        employee_types: Annotated[Optional[List[List[EmployeeType]]], Field(description="The list of the user types.")] = None,
+        employee_types: Annotated[Optional[List[EmployeeType]], Field(description="The list of the user types.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of items to retrieve in a request.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The starting index for the query results.")] = None,
         filter_separator: Annotated[Optional[StrictStr], Field(description="Specifies the separator used in filter expressions.")] = None,
@@ -779,6 +783,7 @@ class SearchApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -801,7 +806,7 @@ class SearchApi:
         invited_by_me: Annotated[Optional[StrictBool], Field(description="Specifies whether the user is invited by the current user or not.")] = None,
         inviter_id: Annotated[Optional[UUID], Field(description="The inviter ID.")] = None,
         area: Annotated[Optional[Area], Field(description="The area of the account entries.")] = None,
-        employee_types: Annotated[Optional[List[List[EmployeeType]]], Field(description="The list of the user types.")] = None,
+        employee_types: Annotated[Optional[List[EmployeeType]], Field(description="The list of the user types.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of items to retrieve in a request.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The starting index for the query results.")] = None,
         filter_separator: Annotated[Optional[StrictStr], Field(description="Specifies the separator used in filter expressions.")] = None,
@@ -899,6 +904,7 @@ class SearchApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -930,7 +936,7 @@ class SearchApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'employeeTypes': 'csv',
+            'employeeTypes': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -1050,7 +1056,7 @@ class SearchApi:
         invited_by_me: Annotated[Optional[StrictBool], Field(description="Specifies whether the user is invited by the current user or not.")] = None,
         inviter_id: Annotated[Optional[UUID], Field(description="The inviter ID.")] = None,
         area: Annotated[Optional[Area], Field(description="The area of the account entries.")] = None,
-        employee_types: Annotated[Optional[List[List[EmployeeType]]], Field(description="The list of the user types.")] = None,
+        employee_types: Annotated[Optional[List[EmployeeType]], Field(description="The list of the user types.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of items to retrieve in a request.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The starting index for the query results.")] = None,
         filter_separator: Annotated[Optional[StrictStr], Field(description="Specifies the separator used in filter expressions.")] = None,
@@ -1148,6 +1154,7 @@ class SearchApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1170,7 +1177,7 @@ class SearchApi:
         invited_by_me: Annotated[Optional[StrictBool], Field(description="Specifies whether the user is invited by the current user or not.")] = None,
         inviter_id: Annotated[Optional[UUID], Field(description="The inviter ID.")] = None,
         area: Annotated[Optional[Area], Field(description="The area of the account entries.")] = None,
-        employee_types: Annotated[Optional[List[List[EmployeeType]]], Field(description="The list of the user types.")] = None,
+        employee_types: Annotated[Optional[List[EmployeeType]], Field(description="The list of the user types.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of items to retrieve in a request.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The starting index for the query results.")] = None,
         filter_separator: Annotated[Optional[StrictStr], Field(description="Specifies the separator used in filter expressions.")] = None,
@@ -1268,6 +1275,7 @@ class SearchApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1290,7 +1298,7 @@ class SearchApi:
         invited_by_me: Annotated[Optional[StrictBool], Field(description="Specifies whether the user is invited by the current user or not.")] = None,
         inviter_id: Annotated[Optional[UUID], Field(description="The inviter ID.")] = None,
         area: Annotated[Optional[Area], Field(description="The area of the account entries.")] = None,
-        employee_types: Annotated[Optional[List[List[EmployeeType]]], Field(description="The list of the user types.")] = None,
+        employee_types: Annotated[Optional[List[EmployeeType]], Field(description="The list of the user types.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of items to retrieve in a request.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The starting index for the query results.")] = None,
         filter_separator: Annotated[Optional[StrictStr], Field(description="Specifies the separator used in filter expressions.")] = None,
@@ -1388,6 +1396,7 @@ class SearchApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1419,7 +1428,7 @@ class SearchApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'employeeTypes': 'csv',
+            'employeeTypes': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -1597,6 +1606,7 @@ class SearchApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1677,6 +1687,7 @@ class SearchApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1757,6 +1768,7 @@ class SearchApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1853,7 +1865,7 @@ class SearchApi:
         group_id: Annotated[Optional[UUID], Field(description="The group ID.")] = None,
         activation_status: Annotated[Optional[EmployeeActivationStatus], Field(description="The user activation status.")] = None,
         employee_type: Annotated[Optional[EmployeeType], Field(description="The user type.")] = None,
-        employee_types: Annotated[Optional[List[List[StrictInt]]], Field(description="The list of user types.")] = None,
+        employee_types: Annotated[Optional[List[StrictInt]], Field(description="The list of user types.")] = None,
         is_administrator: Annotated[Optional[StrictBool], Field(description="Specifies if the user is an administrator or not.")] = None,
         payments: Annotated[Optional[Payments], Field(description="The user payment status.")] = None,
         account_login_type: Annotated[Optional[AccountLoginType], Field(description="The account login type.")] = None,
@@ -1983,6 +1995,7 @@ class SearchApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2001,7 +2014,7 @@ class SearchApi:
         group_id: Annotated[Optional[UUID], Field(description="The group ID.")] = None,
         activation_status: Annotated[Optional[EmployeeActivationStatus], Field(description="The user activation status.")] = None,
         employee_type: Annotated[Optional[EmployeeType], Field(description="The user type.")] = None,
-        employee_types: Annotated[Optional[List[List[StrictInt]]], Field(description="The list of user types.")] = None,
+        employee_types: Annotated[Optional[List[StrictInt]], Field(description="The list of user types.")] = None,
         is_administrator: Annotated[Optional[StrictBool], Field(description="Specifies if the user is an administrator or not.")] = None,
         payments: Annotated[Optional[Payments], Field(description="The user payment status.")] = None,
         account_login_type: Annotated[Optional[AccountLoginType], Field(description="The account login type.")] = None,
@@ -2131,6 +2144,7 @@ class SearchApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2149,7 +2163,7 @@ class SearchApi:
         group_id: Annotated[Optional[UUID], Field(description="The group ID.")] = None,
         activation_status: Annotated[Optional[EmployeeActivationStatus], Field(description="The user activation status.")] = None,
         employee_type: Annotated[Optional[EmployeeType], Field(description="The user type.")] = None,
-        employee_types: Annotated[Optional[List[List[StrictInt]]], Field(description="The list of user types.")] = None,
+        employee_types: Annotated[Optional[List[StrictInt]], Field(description="The list of user types.")] = None,
         is_administrator: Annotated[Optional[StrictBool], Field(description="Specifies if the user is an administrator or not.")] = None,
         payments: Annotated[Optional[Payments], Field(description="The user payment status.")] = None,
         account_login_type: Annotated[Optional[AccountLoginType], Field(description="The account login type.")] = None,
@@ -2279,6 +2293,7 @@ class SearchApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2317,7 +2332,7 @@ class SearchApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'employeeTypes': 'csv',
+            'employeeTypes': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -2469,7 +2484,7 @@ class SearchApi:
         invited_by_me: Annotated[Optional[StrictBool], Field(description="Specifies whether the user was invited by the current user or not.")] = None,
         inviter_id: Annotated[Optional[UUID], Field(description="The inviter ID.")] = None,
         area: Annotated[Optional[Area], Field(description="The user area.")] = None,
-        employee_types: Annotated[Optional[List[List[EmployeeType]]], Field(description="The list of user types.")] = None,
+        employee_types: Annotated[Optional[List[EmployeeType]], Field(description="The list of user types.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of users to be retrieved in the request.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The zero-based index of the first record to retrieve in a paged query.")] = None,
         filter_separator: Annotated[Optional[StrictStr], Field(description="The character or string used to separate multiple filter values in a filtering query.")] = None,
@@ -2567,6 +2582,7 @@ class SearchApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2589,7 +2605,7 @@ class SearchApi:
         invited_by_me: Annotated[Optional[StrictBool], Field(description="Specifies whether the user was invited by the current user or not.")] = None,
         inviter_id: Annotated[Optional[UUID], Field(description="The inviter ID.")] = None,
         area: Annotated[Optional[Area], Field(description="The user area.")] = None,
-        employee_types: Annotated[Optional[List[List[EmployeeType]]], Field(description="The list of user types.")] = None,
+        employee_types: Annotated[Optional[List[EmployeeType]], Field(description="The list of user types.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of users to be retrieved in the request.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The zero-based index of the first record to retrieve in a paged query.")] = None,
         filter_separator: Annotated[Optional[StrictStr], Field(description="The character or string used to separate multiple filter values in a filtering query.")] = None,
@@ -2687,6 +2703,7 @@ class SearchApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2709,7 +2726,7 @@ class SearchApi:
         invited_by_me: Annotated[Optional[StrictBool], Field(description="Specifies whether the user was invited by the current user or not.")] = None,
         inviter_id: Annotated[Optional[UUID], Field(description="The inviter ID.")] = None,
         area: Annotated[Optional[Area], Field(description="The user area.")] = None,
-        employee_types: Annotated[Optional[List[List[EmployeeType]]], Field(description="The list of user types.")] = None,
+        employee_types: Annotated[Optional[List[EmployeeType]], Field(description="The list of user types.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of users to be retrieved in the request.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The zero-based index of the first record to retrieve in a paged query.")] = None,
         filter_separator: Annotated[Optional[StrictStr], Field(description="The character or string used to separate multiple filter values in a filtering query.")] = None,
@@ -2807,6 +2824,7 @@ class SearchApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2838,7 +2856,7 @@ class SearchApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'employeeTypes': 'csv',
+            'employeeTypes': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -2958,7 +2976,7 @@ class SearchApi:
         invited_by_me: Annotated[Optional[StrictBool], Field(description="Specifies whether the user was invited by the current user or not.")] = None,
         inviter_id: Annotated[Optional[UUID], Field(description="The inviter ID.")] = None,
         area: Annotated[Optional[Area], Field(description="The user area.")] = None,
-        employee_types: Annotated[Optional[List[List[EmployeeType]]], Field(description="The list of user types.")] = None,
+        employee_types: Annotated[Optional[List[EmployeeType]], Field(description="The list of user types.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of users to be retrieved in the request.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The zero-based index of the first record to retrieve in a paged query.")] = None,
         filter_separator: Annotated[Optional[StrictStr], Field(description="The character or string used to separate multiple filter values in a filtering query.")] = None,
@@ -3056,6 +3074,7 @@ class SearchApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3078,7 +3097,7 @@ class SearchApi:
         invited_by_me: Annotated[Optional[StrictBool], Field(description="Specifies whether the user was invited by the current user or not.")] = None,
         inviter_id: Annotated[Optional[UUID], Field(description="The inviter ID.")] = None,
         area: Annotated[Optional[Area], Field(description="The user area.")] = None,
-        employee_types: Annotated[Optional[List[List[EmployeeType]]], Field(description="The list of user types.")] = None,
+        employee_types: Annotated[Optional[List[EmployeeType]], Field(description="The list of user types.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of users to be retrieved in the request.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The zero-based index of the first record to retrieve in a paged query.")] = None,
         filter_separator: Annotated[Optional[StrictStr], Field(description="The character or string used to separate multiple filter values in a filtering query.")] = None,
@@ -3176,6 +3195,7 @@ class SearchApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3198,7 +3218,7 @@ class SearchApi:
         invited_by_me: Annotated[Optional[StrictBool], Field(description="Specifies whether the user was invited by the current user or not.")] = None,
         inviter_id: Annotated[Optional[UUID], Field(description="The inviter ID.")] = None,
         area: Annotated[Optional[Area], Field(description="The user area.")] = None,
-        employee_types: Annotated[Optional[List[List[EmployeeType]]], Field(description="The list of user types.")] = None,
+        employee_types: Annotated[Optional[List[EmployeeType]], Field(description="The list of user types.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of users to be retrieved in the request.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The zero-based index of the first record to retrieve in a paged query.")] = None,
         filter_separator: Annotated[Optional[StrictStr], Field(description="The character or string used to separate multiple filter values in a filtering query.")] = None,
@@ -3296,6 +3316,7 @@ class SearchApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3327,7 +3348,7 @@ class SearchApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'employeeTypes': 'csv',
+            'employeeTypes': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -3447,7 +3468,7 @@ class SearchApi:
         invited_by_me: Annotated[Optional[StrictBool], Field(description="Specifies whether the user was invited by the current user or not.")] = None,
         inviter_id: Annotated[Optional[UUID], Field(description="The inviter ID.")] = None,
         area: Annotated[Optional[Area], Field(description="The user area.")] = None,
-        employee_types: Annotated[Optional[List[List[EmployeeType]]], Field(description="The list of user types.")] = None,
+        employee_types: Annotated[Optional[List[EmployeeType]], Field(description="The list of user types.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of users to be retrieved in the request.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The zero-based index of the first record to retrieve in a paged query.")] = None,
         filter_separator: Annotated[Optional[StrictStr], Field(description="The character or string used to separate multiple filter values in a filtering query.")] = None,
@@ -3545,6 +3566,7 @@ class SearchApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3567,7 +3589,7 @@ class SearchApi:
         invited_by_me: Annotated[Optional[StrictBool], Field(description="Specifies whether the user was invited by the current user or not.")] = None,
         inviter_id: Annotated[Optional[UUID], Field(description="The inviter ID.")] = None,
         area: Annotated[Optional[Area], Field(description="The user area.")] = None,
-        employee_types: Annotated[Optional[List[List[EmployeeType]]], Field(description="The list of user types.")] = None,
+        employee_types: Annotated[Optional[List[EmployeeType]], Field(description="The list of user types.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of users to be retrieved in the request.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The zero-based index of the first record to retrieve in a paged query.")] = None,
         filter_separator: Annotated[Optional[StrictStr], Field(description="The character or string used to separate multiple filter values in a filtering query.")] = None,
@@ -3665,6 +3687,7 @@ class SearchApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3687,7 +3710,7 @@ class SearchApi:
         invited_by_me: Annotated[Optional[StrictBool], Field(description="Specifies whether the user was invited by the current user or not.")] = None,
         inviter_id: Annotated[Optional[UUID], Field(description="The inviter ID.")] = None,
         area: Annotated[Optional[Area], Field(description="The user area.")] = None,
-        employee_types: Annotated[Optional[List[List[EmployeeType]]], Field(description="The list of user types.")] = None,
+        employee_types: Annotated[Optional[List[EmployeeType]], Field(description="The list of user types.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of users to be retrieved in the request.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The zero-based index of the first record to retrieve in a paged query.")] = None,
         filter_separator: Annotated[Optional[StrictStr], Field(description="The character or string used to separate multiple filter values in a filtering query.")] = None,
@@ -3785,6 +3808,7 @@ class SearchApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3816,7 +3840,7 @@ class SearchApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'employeeTypes': 'csv',
+            'employeeTypes': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -3932,7 +3956,7 @@ class SearchApi:
         group_id: Annotated[Optional[UUID], Field(description="The group ID.")] = None,
         activation_status: Annotated[Optional[EmployeeActivationStatus], Field(description="The user activation status.")] = None,
         employee_type: Annotated[Optional[EmployeeType], Field(description="The user type.")] = None,
-        employee_types: Annotated[Optional[List[List[StrictInt]]], Field(description="The list of user types.")] = None,
+        employee_types: Annotated[Optional[List[StrictInt]], Field(description="The list of user types.")] = None,
         is_administrator: Annotated[Optional[StrictBool], Field(description="Specifies if the user is an administrator or not.")] = None,
         payments: Annotated[Optional[Payments], Field(description="The user payment status.")] = None,
         account_login_type: Annotated[Optional[AccountLoginType], Field(description="The account login type.")] = None,
@@ -4062,6 +4086,7 @@ class SearchApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4080,7 +4105,7 @@ class SearchApi:
         group_id: Annotated[Optional[UUID], Field(description="The group ID.")] = None,
         activation_status: Annotated[Optional[EmployeeActivationStatus], Field(description="The user activation status.")] = None,
         employee_type: Annotated[Optional[EmployeeType], Field(description="The user type.")] = None,
-        employee_types: Annotated[Optional[List[List[StrictInt]]], Field(description="The list of user types.")] = None,
+        employee_types: Annotated[Optional[List[StrictInt]], Field(description="The list of user types.")] = None,
         is_administrator: Annotated[Optional[StrictBool], Field(description="Specifies if the user is an administrator or not.")] = None,
         payments: Annotated[Optional[Payments], Field(description="The user payment status.")] = None,
         account_login_type: Annotated[Optional[AccountLoginType], Field(description="The account login type.")] = None,
@@ -4210,6 +4235,7 @@ class SearchApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4228,7 +4254,7 @@ class SearchApi:
         group_id: Annotated[Optional[UUID], Field(description="The group ID.")] = None,
         activation_status: Annotated[Optional[EmployeeActivationStatus], Field(description="The user activation status.")] = None,
         employee_type: Annotated[Optional[EmployeeType], Field(description="The user type.")] = None,
-        employee_types: Annotated[Optional[List[List[StrictInt]]], Field(description="The list of user types.")] = None,
+        employee_types: Annotated[Optional[List[StrictInt]], Field(description="The list of user types.")] = None,
         is_administrator: Annotated[Optional[StrictBool], Field(description="Specifies if the user is an administrator or not.")] = None,
         payments: Annotated[Optional[Payments], Field(description="The user payment status.")] = None,
         account_login_type: Annotated[Optional[AccountLoginType], Field(description="The account login type.")] = None,
@@ -4358,6 +4384,7 @@ class SearchApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4396,7 +4423,7 @@ class SearchApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'employeeTypes': 'csv',
+            'employeeTypes': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -4597,6 +4624,7 @@ class SearchApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4668,6 +4696,7 @@ class SearchApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4739,6 +4768,7 @@ class SearchApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4893,6 +4923,7 @@ class SearchApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4977,6 +5008,7 @@ class SearchApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5061,6 +5093,7 @@ class SearchApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout

@@ -31,48 +31,53 @@ class TenantQuota(BaseModel):
     """
     The current tenant quota.
     """ # noqa: E501
-    tenant_id: Optional[StrictInt] = Field(default=None, description="The tenant ID.", alias="tenantId")
-    name: Optional[StrictStr] = Field(default=None, description="The tenant name.")
-    price: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The tenant price.")
-    price_currency_symbol: Optional[StrictStr] = Field(default=None, description="The tenant price currency symbol.", alias="priceCurrencySymbol")
-    price_iso_currency_symbol: Optional[StrictStr] = Field(default=None, description="The tenant price three-character ISO 4217 currency symbol.", alias="priceISOCurrencySymbol")
-    product_id: Optional[StrictStr] = Field(default=None, description="The tenant product ID.", alias="productId")
-    service_name: Optional[StrictStr] = Field(default=None, description="The service name.", alias="serviceName")
-    service_group: Optional[StrictStr] = Field(default=None, description="The service group.", alias="serviceGroup")
-    visible: Optional[StrictBool] = Field(default=None, description="Specifies if the tenant quota is visible or not.")
-    wallet: Optional[StrictBool] = Field(default=None, description="Specifies if the tenant quota applies to the wallet or not")
-    due_date: Optional[datetime] = Field(default=None, description="The quota due date.", alias="dueDate")
-    features: Optional[StrictStr] = Field(default=None, description="The tenant quota features.")
-    max_file_size: Optional[StrictInt] = Field(default=None, description="The tenant maximum file size.", alias="maxFileSize")
-    max_total_size: Optional[StrictInt] = Field(default=None, description="The tenant maximum total size.", alias="maxTotalSize")
-    count_user: Optional[StrictInt] = Field(default=None, description="The number of portal users.", alias="countUser")
-    count_room_admin: Optional[StrictInt] = Field(default=None, description="The number of portal room administrators.", alias="countRoomAdmin")
-    users_in_room: Optional[StrictInt] = Field(default=None, description="The number of room users.", alias="usersInRoom")
-    count_room: Optional[StrictInt] = Field(default=None, description="The number of rooms.", alias="countRoom")
-    non_profit: Optional[StrictBool] = Field(default=None, description="Specifies if the tenant quota is nonprofit or not.", alias="nonProfit")
-    trial: Optional[StrictBool] = Field(default=None, description="Specifies if the tenant quota is trial or not.")
-    free: Optional[StrictBool] = Field(default=None, description="Specifies if the tenant quota is free or not.")
-    update: Optional[StrictBool] = Field(default=None, description="Specifies if the tenant quota is updated or not.")
-    audit: Optional[StrictBool] = Field(default=None, description="Specifies if the audit trail is available or not.")
-    docs_edition: Optional[StrictBool] = Field(default=None, description="Specifies if ONLYOFFICE Docs is included in the tenant quota or not.", alias="docsEdition")
-    ldap: Optional[StrictBool] = Field(default=None, description="Specifies if the LDAP settings are available or not.")
-    sso: Optional[StrictBool] = Field(default=None, description="Specifies if the SSO settings are available or not.")
-    statistic: Optional[StrictBool] = Field(default=None, description="Specifies if the statistics settings are available or not.")
-    branding: Optional[StrictBool] = Field(default=None, description="Specifies if the branding settings are available or not.")
-    customization: Optional[StrictBool] = Field(default=None, description="Specifies if the customization settings are available or not.")
-    lifetime: Optional[StrictBool] = Field(default=None, description="Specifies if the license has the lifetime settings or not.")
-    automation_api: Optional[StrictBool] = Field(default=None, description="Specifies if the Automation API is available or not.", alias="automationApi")
-    custom: Optional[StrictBool] = Field(default=None, description="Specifies if the custom domain URL is available or not.")
-    restore: Optional[StrictBool] = Field(default=None, description="Specifies if the restore is enabled or not.")
-    oauth: Optional[StrictBool] = Field(default=None, description="Specifies if Oauth is available or not.")
-    content_search: Optional[StrictBool] = Field(default=None, description="Specifies if the content search is available or not.", alias="contentSearch")
-    third_party: Optional[StrictBool] = Field(default=None, description="Specifies if the third-party accounts linking is available or not.", alias="thirdParty")
-    year: Optional[StrictBool] = Field(default=None, description="Specifies if the tenant quota is yearly subscription or not.")
-    count_free_backup: Optional[StrictInt] = Field(default=None, description="The number of free backups within a month.", alias="countFreeBackup")
-    backup: Optional[StrictBool] = Field(default=None, description="Specifies if the backup enabled as a wallet service or not.")
-    count_ai_agent: Optional[StrictInt] = Field(default=None, description="The number of AI agents.", alias="countAIAgent")
-    ai_tools: Optional[StrictBool] = Field(default=None, description="Specifies if the AI tools enabled as a wallet service or not.", alias="aiTools")
-    __properties: ClassVar[List[str]] = ["tenantId", "name", "price", "priceCurrencySymbol", "priceISOCurrencySymbol", "productId", "serviceName", "serviceGroup", "visible", "wallet", "dueDate", "features", "maxFileSize", "maxTotalSize", "countUser", "countRoomAdmin", "usersInRoom", "countRoom", "nonProfit", "trial", "free", "update", "audit", "docsEdition", "ldap", "sso", "statistic", "branding", "customization", "lifetime", "automationApi", "custom", "restore", "oauth", "contentSearch", "thirdParty", "year", "countFreeBackup", "backup", "countAIAgent", "aiTools"]
+    tenant_id: Optional[StrictInt] = Field(default=None, description="The tenant ID.", alias="tenantId", json_schema_extra={"examples": [1]})
+    name: Optional[StrictStr] = Field(default=None, description="The tenant name.", json_schema_extra={"examples": ["Default"]})
+    price: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The tenant price.", json_schema_extra={"examples": [10.0]})
+    price_currency_symbol: Optional[StrictStr] = Field(default=None, description="The tenant price currency symbol.", alias="priceCurrencySymbol", json_schema_extra={"examples": ["$"]})
+    price_iso_currency_symbol: Optional[StrictStr] = Field(default=None, description="The tenant price three-character ISO 4217 currency symbol.", alias="priceISOCurrencySymbol", json_schema_extra={"examples": ["USD"]})
+    product_id: Optional[StrictStr] = Field(default=None, description="The tenant product ID.", alias="productId", json_schema_extra={"examples": ["64"]})
+    service_name: Optional[StrictStr] = Field(default=None, description="The service name.", alias="serviceName", json_schema_extra={"examples": ["backup"]})
+    service_group: Optional[StrictStr] = Field(default=None, description="The service group.", alias="serviceGroup", json_schema_extra={"examples": ["services"]})
+    visible: Optional[StrictBool] = Field(default=None, description="Specifies if the tenant quota is visible or not.", json_schema_extra={"examples": [True]})
+    wallet: Optional[StrictBool] = Field(default=None, description="Specifies if the tenant quota applies to the wallet or not", json_schema_extra={"examples": [True]})
+    additional: Optional[StrictBool] = Field(default=None, description="Specifies if the tenant quota is primary or additional.", json_schema_extra={"examples": [False]})
+    due_date: Optional[datetime] = Field(default=None, description="The quota due date.", alias="dueDate", json_schema_extra={"examples": ["2021-01-01T00:00:00"]})
+    features: Optional[StrictStr] = Field(default=None, description="The tenant quota features.", json_schema_extra={"examples": ["audit,ldap,sso"]})
+    max_file_size: Optional[StrictInt] = Field(default=None, description="The tenant maximum file size.", alias="maxFileSize", json_schema_extra={"examples": [25000000]})
+    max_total_size: Optional[StrictInt] = Field(default=None, description="The tenant maximum total size.", alias="maxTotalSize", json_schema_extra={"examples": [25000000000]})
+    count_user: Optional[StrictInt] = Field(default=None, description="The number of portal users.", alias="countUser", json_schema_extra={"examples": [100]})
+    count_room_admin: Optional[StrictInt] = Field(default=None, description="The number of portal room administrators.", alias="countRoomAdmin", json_schema_extra={"examples": [10]})
+    users_in_room: Optional[StrictInt] = Field(default=None, description="The number of room users.", alias="usersInRoom", json_schema_extra={"examples": [50]})
+    count_room: Optional[StrictInt] = Field(default=None, description="The number of rooms.", alias="countRoom", json_schema_extra={"examples": [500]})
+    non_profit: Optional[StrictBool] = Field(default=None, description="Specifies if the tenant quota is nonprofit or not.", alias="nonProfit", json_schema_extra={"examples": [False]})
+    trial: Optional[StrictBool] = Field(default=None, description="Specifies if the tenant quota is trial or not.", json_schema_extra={"examples": [False]})
+    free: Optional[StrictBool] = Field(default=None, description="Specifies if the tenant quota is free or not.", json_schema_extra={"examples": [False]})
+    update: Optional[StrictBool] = Field(default=None, description="Specifies if the tenant quota is updated or not.", json_schema_extra={"examples": [False]})
+    audit: Optional[StrictBool] = Field(default=None, description="Specifies if the audit trail is available or not.", json_schema_extra={"examples": [True]})
+    docs_edition: Optional[StrictBool] = Field(default=None, description="Specifies if ONLYOFFICE Docs is included in the tenant quota or not.", alias="docsEdition", json_schema_extra={"examples": [True]})
+    ldap: Optional[StrictBool] = Field(default=None, description="Specifies if the LDAP settings are available or not.", json_schema_extra={"examples": [True]})
+    sso: Optional[StrictBool] = Field(default=None, description="Specifies if the SSO settings are available or not.", json_schema_extra={"examples": [True]})
+    statistic: Optional[StrictBool] = Field(default=None, description="Specifies if the statistics settings are available or not.", json_schema_extra={"examples": [True]})
+    branding: Optional[StrictBool] = Field(default=None, description="Specifies if the branding settings are available or not.", json_schema_extra={"examples": [True]})
+    customization: Optional[StrictBool] = Field(default=None, description="Specifies if the customization settings are available or not.", json_schema_extra={"examples": [True]})
+    lifetime: Optional[StrictBool] = Field(default=None, description="Specifies if the license has the lifetime settings or not.", json_schema_extra={"examples": [False]})
+    automation_api: Optional[StrictBool] = Field(default=None, description="Specifies if the Automation API is available or not.", alias="automationApi", json_schema_extra={"examples": [True]})
+    custom: Optional[StrictBool] = Field(default=None, description="Specifies if the custom domain URL is available or not.", json_schema_extra={"examples": [False]})
+    restore: Optional[StrictBool] = Field(default=None, description="Specifies if the restore is enabled or not.", json_schema_extra={"examples": [True]})
+    oauth: Optional[StrictBool] = Field(default=None, description="Specifies if Oauth is available or not.", json_schema_extra={"examples": [True]})
+    content_search: Optional[StrictBool] = Field(default=None, description="Specifies if the content search is available or not.", alias="contentSearch", json_schema_extra={"examples": [True]})
+    third_party: Optional[StrictBool] = Field(default=None, description="Specifies if the third-party accounts linking is available or not.", alias="thirdParty", json_schema_extra={"examples": [True]})
+    year: Optional[StrictBool] = Field(default=None, description="Specifies if the tenant quota is yearly subscription or not.", json_schema_extra={"examples": [True]})
+    count_free_backup: Optional[StrictInt] = Field(default=None, description="The number of free backups within a month.", alias="countFreeBackup", json_schema_extra={"examples": [1]})
+    backup: Optional[StrictBool] = Field(default=None, description="Specifies if the backup enabled as a wallet service or not.", json_schema_extra={"examples": [True]})
+    count_ai_agent: Optional[StrictInt] = Field(default=None, description="The number of AI agents.", alias="countAIAgent", json_schema_extra={"examples": [5]})
+    ai_tools: Optional[StrictBool] = Field(default=None, description="Specifies if the AI tools enabled as a wallet service or not.", alias="aiTools", json_schema_extra={"examples": [True]})
+    ai_search: Optional[StrictBool] = Field(default=None, description="Specifies if the AI search enabled as a wallet service or not.", alias="aiSearch", json_schema_extra={"examples": [True]})
+    docs_cloud: Optional[StrictInt] = Field(default=None, description="The number of DocsCloud users.", alias="docsCloud", json_schema_extra={"examples": [True]})
+    docs_cloud_dev_pack: Optional[StrictBool] = Field(default=None, description="Specifies if the DocsCloudDevPack enabled or not.", alias="docsCloudDevPack", json_schema_extra={"examples": [True]})
+    docs_cloud_trial: Optional[StrictBool] = Field(default=None, description="Specifies if the DocsCloudTrial enabled or not.", alias="docsCloudTrial", json_schema_extra={"examples": [True]})
+    __properties: ClassVar[List[str]] = ["tenantId", "name", "price", "priceCurrencySymbol", "priceISOCurrencySymbol", "productId", "serviceName", "serviceGroup", "visible", "wallet", "additional", "dueDate", "features", "maxFileSize", "maxTotalSize", "countUser", "countRoomAdmin", "usersInRoom", "countRoom", "nonProfit", "trial", "free", "update", "audit", "docsEdition", "ldap", "sso", "statistic", "branding", "customization", "lifetime", "automationApi", "custom", "restore", "oauth", "contentSearch", "thirdParty", "year", "countFreeBackup", "backup", "countAIAgent", "aiTools", "aiSearch", "docsCloud", "docsCloudDevPack", "docsCloudTrial"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -176,6 +181,7 @@ class TenantQuota(BaseModel):
             "serviceGroup": obj.get("serviceGroup"),
             "visible": obj.get("visible"),
             "wallet": obj.get("wallet"),
+            "additional": obj.get("additional"),
             "dueDate": obj.get("dueDate"),
             "features": obj.get("features"),
             "maxFileSize": obj.get("maxFileSize"),
@@ -206,7 +212,11 @@ class TenantQuota(BaseModel):
             "countFreeBackup": obj.get("countFreeBackup"),
             "backup": obj.get("backup"),
             "countAIAgent": obj.get("countAIAgent"),
-            "aiTools": obj.get("aiTools")
+            "aiTools": obj.get("aiTools"),
+            "aiSearch": obj.get("aiSearch"),
+            "docsCloud": obj.get("docsCloud"),
+            "docsCloudDevPack": obj.get("docsCloudDevPack"),
+            "docsCloudTrial": obj.get("docsCloudTrial")
         })
         return _obj
 

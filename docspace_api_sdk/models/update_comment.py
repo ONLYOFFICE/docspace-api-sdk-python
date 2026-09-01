@@ -21,8 +21,9 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -30,8 +31,8 @@ class UpdateComment(BaseModel):
     """
     The parameters for updating a comment.
     """ # noqa: E501
-    version: StrictInt = Field(description="The comment version.")
-    comment: Optional[StrictStr] = Field(default=None, description="The comment text.")
+    version: Annotated[int, Field(le=2147483647, strict=True, ge=1)] = Field(description="The comment version.", json_schema_extra={"examples": [1]})
+    comment: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The comment text.", json_schema_extra={"examples": ["This is a comment"]})
     __properties: ClassVar[List[str]] = ["version", "comment"]
 
     model_config = ConfigDict(

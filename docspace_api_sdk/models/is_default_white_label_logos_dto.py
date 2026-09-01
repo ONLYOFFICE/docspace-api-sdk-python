@@ -30,8 +30,8 @@ class IsDefaultWhiteLabelLogosDto(BaseModel):
     """
     The default white label logo parameters.
     """ # noqa: E501
-    name: Optional[StrictStr] = Field(description="The white label logo name.")
-    default: StrictBool = Field(description="Specifies if the white label logo is default or not.")
+    name: Optional[StrictStr] = Field(description="The white label logo name.", json_schema_extra={"examples": ["logo_light"]})
+    default: StrictBool = Field(description="Specifies if the white label logo is default or not.", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["name", "default"]
 
     model_config = ConfigDict(

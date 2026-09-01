@@ -32,12 +32,12 @@ class ExternalDbSyncTaskDto(BaseModel):
     """
     The external DB synchronization task parameters.
     """ # noqa: E501
-    id: Optional[StrictStr] = Field(description="The task ID.")
-    error: Optional[StrictStr] = Field(default=None, description="The error message if the synchronization failed.")
-    percentage: StrictInt = Field(description="The progress percentage of the synchronization.")
-    is_completed: StrictBool = Field(description="Specifies whether the synchronization is completed or not.", alias="isCompleted")
-    status: DistributedTaskStatus
-    forms: Optional[List[ExternalDbSyncFormResultDto]] = Field(description="The synchronization results for all original forms in the room.")
+    id: Optional[StrictStr] = Field(description="The task ID.", json_schema_extra={"examples": ["ExternalDbSyncTask_1_42"]})
+    error: Optional[StrictStr] = Field(default=None, description="The error message if the synchronization failed.", json_schema_extra={"examples": ["Connection refused"]})
+    percentage: StrictInt = Field(description="The progress percentage of the synchronization.", json_schema_extra={"examples": [75]})
+    is_completed: StrictBool = Field(description="Specifies whether the synchronization is completed or not.", alias="isCompleted", json_schema_extra={"examples": [False]})
+    status: DistributedTaskStatus = Field(description="The status of the synchronization task.")
+    forms: Optional[List[ExternalDbSyncFormResultDto]] = Field(description="The synchronization results for all original forms in the room.", json_schema_extra={"examples": [[{"id": 42, "title": "Application.pdf", "success": True}]]})
     __properties: ClassVar[List[str]] = ["id", "error", "percentage", "isCompleted", "status", "forms"]
 
     model_config = ConfigDict(

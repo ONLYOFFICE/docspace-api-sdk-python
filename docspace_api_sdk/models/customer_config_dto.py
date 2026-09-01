@@ -30,12 +30,12 @@ class CustomerConfigDto(BaseModel):
     """
     The customer config parameters.
     """ # noqa: E501
-    address: Optional[StrictStr] = Field(default=None, description="The address of the customer configuration.")
-    logo: Optional[StrictStr] = Field(default=None, description="The logo of the customer configuration.")
-    logo_dark: Optional[StrictStr] = Field(default=None, description="The dark logo of the customer configuration.", alias="logoDark")
-    mail: Optional[StrictStr] = Field(default=None, description="The mail address of the customer configuration.")
-    name: Optional[StrictStr] = Field(default=None, description="The name of the customer configuration.")
-    www: Optional[StrictStr] = Field(default=None, description="The site web address of the customer configuration.")
+    address: Optional[StrictStr] = Field(default=None, description="The address of the customer configuration.", json_schema_extra={"examples": ["123 Main Street, City"]})
+    logo: Optional[StrictStr] = Field(default=None, description="The logo of the customer configuration.", json_schema_extra={"examples": ["http://localhost/customer-logo.png"]})
+    logo_dark: Optional[StrictStr] = Field(default=None, description="The dark logo of the customer configuration.", alias="logoDark", json_schema_extra={"examples": ["http://localhost/customer-logo-dark.png"]})
+    mail: Optional[StrictStr] = Field(default=None, description="The mail address of the customer configuration.", json_schema_extra={"examples": ["contact@example.com"]})
+    name: Optional[StrictStr] = Field(default=None, description="The name of the customer configuration.", json_schema_extra={"examples": ["ONLYOFFICE"]})
+    www: Optional[StrictStr] = Field(default=None, description="The site web address of the customer configuration.", json_schema_extra={"examples": ["https://www.example.com"]})
     __properties: ClassVar[List[str]] = ["address", "logo", "logoDark", "mail", "name", "www"]
 
     model_config = ConfigDict(

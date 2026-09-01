@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **UUID** | The backup ID. | 
 **file_name** | **str** | The backup file name. | 
-**storage_type** | [**BackupStorageType**](BackupStorageType.md) |  | 
+**storage_type** | [**BackupStorageType**](BackupStorageType.md) | The backup storage type. | 
 **created_on** | **datetime** | The backup creation date. | 
 **expires_on** | **datetime** | The backup expiration date. | 
 

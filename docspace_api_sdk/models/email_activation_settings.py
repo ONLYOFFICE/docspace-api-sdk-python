@@ -31,8 +31,8 @@ class EmailActivationSettings(BaseModel):
     """
     The email activation settings.
     """ # noqa: E501
-    show: Optional[StrictBool] = Field(default=None, description="Specifies whether the email activation settings are shown or hidden.")
-    last_modified: Optional[datetime] = Field(default=None, description="The timestamp indicating when the settings were last modified.", alias="lastModified")
+    show: Optional[StrictBool] = Field(default=None, description="Specifies whether the email activation settings are shown or hidden.", json_schema_extra={"examples": [True]})
+    last_modified: Optional[datetime] = Field(default=None, description="The timestamp indicating when the settings were last modified.", alias="lastModified", json_schema_extra={"examples": ["1990-01-01T00:00:00Z"]})
     __properties: ClassVar[List[str]] = ["show", "lastModified"]
 
     model_config = ConfigDict(

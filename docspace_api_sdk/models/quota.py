@@ -30,15 +30,17 @@ from typing_extensions import Self
 
 class Quota(BaseModel):
     """
-    The quota parameters.  <example>  {    id: 1,    quantity: 50,    wallet: false,    dueDate: 2026-03-31T00:00:00Z,    nextQuantity: 100,    state: Active  }  </example>
+    The quota parameters.  <example>  {    id: 1,    quantity: 50,    wallet: false,    additional: false,    dueDate: 2026-03-31T00:00:00Z,    nextQuantity: 100,    state: Active  }  </example>
     """ # noqa: E501
-    id: Optional[StrictInt] = Field(default=None, description="The quota ID.")
-    quantity: Optional[StrictInt] = Field(default=None, description="The quota quantity.")
-    wallet: Optional[StrictBool] = Field(default=None, description="The quota applies to the wallet or not")
-    due_date: Optional[datetime] = Field(default=None, description="The quota due date.", alias="dueDate")
-    next_quantity: Optional[StrictInt] = Field(default=None, description="The quota next quantity.", alias="nextQuantity")
-    state: Optional[QuotaState] = None
-    __properties: ClassVar[List[str]] = ["id", "quantity", "wallet", "dueDate", "nextQuantity", "state"]
+    id: Optional[StrictInt] = Field(default=None, description="The quota ID.", json_schema_extra={"examples": [""]})
+    quantity: Optional[StrictInt] = Field(default=None, description="The quota quantity.", json_schema_extra={"examples": [50]})
+    wallet: Optional[StrictBool] = Field(default=None, description="The quota applies to the wallet or not", json_schema_extra={"examples": [False]})
+    due_date: Optional[datetime] = Field(default=None, description="The quota due date.", alias="dueDate", json_schema_extra={"examples": ["2026-03-31T00:00:00Z"]})
+    next_quantity: Optional[StrictInt] = Field(default=None, description="The quota next quantity.", alias="nextQuantity", json_schema_extra={"examples": [100]})
+    additional: Optional[StrictBool] = Field(default=None, description="Indicates whether the quota is primary or additional.", json_schema_extra={"examples": [False]})
+    next_quota: Optional[StrictInt] = Field(default=None, description="The quota ID to switch to at the next period.", alias="nextQuota", json_schema_extra={"examples": [""]})
+    state: Optional[QuotaState] = Field(default=None, description="The quota state.")
+    __properties: ClassVar[List[str]] = ["id", "quantity", "wallet", "dueDate", "nextQuantity", "additional", "nextQuota", "state"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -89,6 +91,11 @@ class Quota(BaseModel):
         if self.next_quantity is None and "next_quantity" in self.model_fields_set:
             _dict['nextQuantity'] = None
 
+        # set to None if next_quota (nullable) is None
+        # and model_fields_set contains the field
+        if self.next_quota is None and "next_quota" in self.model_fields_set:
+            _dict['nextQuota'] = None
+
         return _dict
 
     @classmethod
@@ -107,6 +114,8 @@ class Quota(BaseModel):
             "wallet": obj.get("wallet"),
             "dueDate": obj.get("dueDate"),
             "nextQuantity": obj.get("nextQuantity"),
+            "additional": obj.get("additional"),
+            "nextQuota": obj.get("nextQuota"),
             "state": obj.get("state")
         })
         return _obj

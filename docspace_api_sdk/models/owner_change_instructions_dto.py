@@ -30,8 +30,8 @@ class OwnerChangeInstructionsDto(BaseModel):
     """
     The owner change instructions parameters.
     """ # noqa: E501
-    status: Optional[StrictInt] = Field(default=None, description="The owner change instructions status.")
-    message: Optional[StrictStr] = Field(default=None, description="The owner change instructions message.")
+    status: Optional[StrictInt] = Field(default=None, description="The owner change instructions status.", json_schema_extra={"examples": [1]})
+    message: Optional[StrictStr] = Field(default=None, description="The owner change instructions message.", json_schema_extra={"examples": ["Ownership transferred successfully"]})
     __properties: ClassVar[List[str]] = ["status", "message"]
 
     model_config = ConfigDict(

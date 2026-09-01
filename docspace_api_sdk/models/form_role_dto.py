@@ -33,14 +33,14 @@ class FormRoleDto(BaseModel):
     """
     The form role parameters.
     """ # noqa: E501
-    role_name: Optional[StrictStr] = Field(description="The role name.", alias="roleName")
-    role_color: Optional[StrictStr] = Field(default=None, description="The role color.", alias="roleColor")
-    user: Optional[EmployeeFullDto] = None
-    sequence: StrictInt = Field(description="The role sequence.")
-    submitted: StrictBool = Field(description="Specifies if the role is submitted.")
-    stoped_by: Optional[EmployeeFullDto] = Field(default=None, alias="stopedBy")
-    history: Optional[Dict[str, datetime]] = Field(default=None, description="The role history.")
-    role_status: Optional[FormFillingStatus] = Field(default=None, alias="roleStatus")
+    role_name: Optional[StrictStr] = Field(description="The role name.", alias="roleName", json_schema_extra={"examples": ["Approver"]})
+    role_color: Optional[StrictStr] = Field(default=None, description="The role color.", alias="roleColor", json_schema_extra={"examples": ["#FF5733"]})
+    user: Optional[EmployeeFullDto] = Field(default=None, description="The user of the role.")
+    sequence: StrictInt = Field(description="The role sequence.", json_schema_extra={"examples": [1]})
+    submitted: StrictBool = Field(description="Specifies if the role is submitted.", json_schema_extra={"examples": [False]})
+    stoped_by: Optional[EmployeeFullDto] = Field(default=None, description="The user who stopped the role.", alias="stopedBy")
+    history: Optional[Dict[str, datetime]] = Field(default=None, description="The role history.", json_schema_extra={"examples": [{"0": "2025-01-15T10:30:00Z"}]})
+    role_status: Optional[FormFillingStatus] = Field(default=None, description="The role status.", alias="roleStatus")
     __properties: ClassVar[List[str]] = ["roleName", "roleColor", "user", "sequence", "submitted", "stopedBy", "history", "roleStatus"]
 
     model_config = ConfigDict(
@@ -97,11 +97,6 @@ class FormRoleDto(BaseModel):
         # and model_fields_set contains the field
         if self.role_color is None and "role_color" in self.model_fields_set:
             _dict['roleColor'] = None
-
-        # set to None if history (nullable) is None
-        # and model_fields_set contains the field
-        if self.history is None and "history" in self.model_fields_set:
-            _dict['history'] = None
 
         return _dict
 

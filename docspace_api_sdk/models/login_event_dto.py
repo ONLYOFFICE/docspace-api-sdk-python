@@ -33,19 +33,19 @@ class LoginEventDto(BaseModel):
     """
     The login event parameters.
     """ # noqa: E501
-    id: Optional[StrictInt] = Field(default=None, description="The login event ID.")
-    var_date: Optional[ApiDateTime] = Field(default=None, alias="date")
-    user: Optional[StrictStr] = Field(default=None, description="The user name of the login event.")
-    user_id: Optional[UUID] = Field(default=None, description="The user ID of the login event.", alias="userId")
-    login: Optional[StrictStr] = Field(default=None, description="The user login of the login event.")
-    action: Optional[StrictStr] = Field(default=None, description="The login event action.")
-    action_id: Optional[MessageAction] = Field(default=None, alias="actionId")
-    ip: Optional[StrictStr] = Field(default=None, description="The login event IP.")
-    country: Optional[StrictStr] = Field(default=None, description="The login event country.")
-    city: Optional[StrictStr] = Field(default=None, description="The login event city.")
-    browser: Optional[StrictStr] = Field(default=None, description="The login event browser.")
-    platform: Optional[StrictStr] = Field(default=None, description="The login event platform.")
-    page: Optional[StrictStr] = Field(default=None, description="The login event page.")
+    id: Optional[StrictInt] = Field(default=None, description="The login event ID.", json_schema_extra={"examples": [1]})
+    var_date: Optional[ApiDateTime] = Field(default=None, description="The API date and time parameters.", alias="date")
+    user: Optional[StrictStr] = Field(default=None, description="The user name of the login event.", json_schema_extra={"examples": ["John Doe"]})
+    user_id: Optional[UUID] = Field(default=None, description="The user ID of the login event.", alias="userId", json_schema_extra={"examples": ["{}"]})
+    login: Optional[StrictStr] = Field(default=None, description="The user login of the login event.", json_schema_extra={"examples": ["user@example.com"]})
+    action: Optional[StrictStr] = Field(default=None, description="The login event action.", json_schema_extra={"examples": ["User logged in"]})
+    action_id: Optional[MessageAction] = Field(default=None, description="The event action ID.", alias="actionId")
+    ip: Optional[StrictStr] = Field(default=None, description="The login event IP.", json_schema_extra={"examples": ["192.0.2.1"]})
+    country: Optional[StrictStr] = Field(default=None, description="The login event country.", json_schema_extra={"examples": ["United States"]})
+    city: Optional[StrictStr] = Field(default=None, description="The login event city.", json_schema_extra={"examples": ["New York"]})
+    browser: Optional[StrictStr] = Field(default=None, description="The login event browser.", json_schema_extra={"examples": ["Chrome 120.0"]})
+    platform: Optional[StrictStr] = Field(default=None, description="The login event platform.", json_schema_extra={"examples": ["Windows"]})
+    page: Optional[StrictStr] = Field(default=None, description="The login event page.", json_schema_extra={"examples": ["/login"]})
     __properties: ClassVar[List[str]] = ["id", "date", "user", "userId", "login", "action", "actionId", "ip", "country", "city", "browser", "platform", "page"]
 
     model_config = ConfigDict(

@@ -30,7 +30,7 @@ class SetRestrictedAiModelsRequestDto(BaseModel):
     """
     The request parameters for setting restricted AI models.
     """ # noqa: E501
-    models: List[StrictStr] = Field(description="The set of restricted AI model IDs.")
+    models: List[StrictStr] = Field(description="The set of restricted AI model IDs.", json_schema_extra={"examples": [["model1", "model2"]]})
     __properties: ClassVar[List[str]] = ["models"]
 
     model_config = ConfigDict(

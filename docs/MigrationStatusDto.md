@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **progress** | **float** | The migration progress. | [optional] 
 **error** | **str** | The migration error. | [optional] 
-**parse_result** | [**MigrationApiInfo**](MigrationApiInfo.md) |  | [optional] 
+**parse_result** | [**MigrationApiInfo**](MigrationApiInfo.md) | The migration API information. | [optional] 
 **is_completed** | **bool** | Specifies whether the migration is completed or not. | [optional] 
 
 ## Example

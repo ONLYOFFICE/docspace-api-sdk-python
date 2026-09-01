@@ -31,7 +31,7 @@ class OrderRequestDto(BaseModel):
     """
     The parameters for ordering requests.
     """ # noqa: E501
-    order: Optional[Annotated[int, Field(le=2147483647, strict=True, ge=1)]] = Field(default=None, description="The order value.")
+    order: Optional[Annotated[int, Field(le=2147483647, strict=True, ge=1)]] = Field(default=None, description="The order value.", json_schema_extra={"examples": [1]})
     __properties: ClassVar[List[str]] = ["order"]
 
     model_config = ConfigDict(

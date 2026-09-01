@@ -30,7 +30,7 @@ class TenantBannerSettingsDto(BaseModel):
     """
     The request parameters for managing the visibility settings of the promotional banners for the current tenant.
     """ # noqa: E501
-    hidden: Optional[StrictBool] = Field(default=None, description="The banners visibility flag.")
+    hidden: Optional[StrictBool] = Field(default=None, description="The banners visibility flag.", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["hidden"]
 
     model_config = ConfigDict(

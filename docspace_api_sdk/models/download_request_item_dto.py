@@ -32,8 +32,8 @@ class DownloadRequestItemDto(BaseModel):
     The download request item with conversion parameters and security settings.
     """ # noqa: E501
     key: DownloadRequestItemDtoKey
-    value: Optional[StrictStr] = Field(description="The target format or conversion type for the file download.")
-    password: Optional[StrictStr] = Field(default=None, description="The optional password for accessing protected files.")
+    value: Optional[StrictStr] = Field(description="The target format or conversion type for the file download.", json_schema_extra={"examples": ["pdf"]})
+    password: Optional[StrictStr] = Field(default=None, description="The optional password for accessing protected files.", json_schema_extra={"examples": ["password123"]})
     __properties: ClassVar[List[str]] = ["key", "value", "password"]
 
     model_config = ConfigDict(

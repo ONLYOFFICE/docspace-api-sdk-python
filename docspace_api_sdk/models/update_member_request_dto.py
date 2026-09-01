@@ -33,18 +33,18 @@ class UpdateMemberRequestDto(BaseModel):
     """
     The request parameters for updating the user information.
     """ # noqa: E501
-    user_id: Optional[StrictStr] = Field(default=None, description="The user ID.", alias="userId")
-    disable: Optional[StrictBool] = Field(default=None, description="Specifies whether to disable a user or not.")
-    email: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The user email address.")
-    is_user: Optional[StrictBool] = Field(default=None, description="Specifies if this is a guest or a user.", alias="isUser")
-    first_name: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The user first name.", alias="firstName")
-    last_name: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The user last name.", alias="lastName")
-    department: Optional[List[UUID]] = Field(default=None, description="The list of the user departments.")
-    location: Optional[StrictStr] = Field(default=None, description="The user location.")
-    comment: Optional[StrictStr] = Field(default=None, description="The user comment.")
-    contacts: Optional[List[Contact]] = Field(default=None, description="The list of the user contacts.")
-    files: Optional[StrictStr] = Field(default=None, description="The user avatar photo URL.")
-    spam: Optional[StrictBool] = Field(default=None, description="Specifies if tips, updates and offers are allowed to be sent to the user or not.")
+    user_id: Optional[StrictStr] = Field(default=None, description="The user ID.", alias="userId", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000000"]})
+    disable: Optional[StrictBool] = Field(default=None, description="Specifies whether to disable a user or not.", json_schema_extra={"examples": [False]})
+    email: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The user email address.", json_schema_extra={"examples": ["john.doe@example.com"]})
+    is_user: Optional[StrictBool] = Field(default=None, description="Specifies if this is a guest or a user.", alias="isUser", json_schema_extra={"examples": [True]})
+    first_name: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The user first name.", alias="firstName", json_schema_extra={"examples": ["John"]})
+    last_name: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The user last name.", alias="lastName", json_schema_extra={"examples": ["Doe"]})
+    department: Optional[List[UUID]] = Field(default=None, description="The list of the user departments.", json_schema_extra={"examples": [["00000000-0000-0000-0000-000000000000"]]})
+    location: Optional[StrictStr] = Field(default=None, description="The user location.", json_schema_extra={"examples": ["New York"]})
+    comment: Optional[StrictStr] = Field(default=None, description="The user comment.", json_schema_extra={"examples": ["User comment"]})
+    contacts: Optional[List[Contact]] = Field(default=None, description="The list of the user contacts.", json_schema_extra={"examples": [[{"type": "email", "value": "john.doe@example.com"}]]})
+    files: Optional[StrictStr] = Field(default=None, description="The user avatar photo URL.", json_schema_extra={"examples": ["https://example.com/avatar.jpg"]})
+    spam: Optional[StrictBool] = Field(default=None, description="Specifies if tips, updates and offers are allowed to be sent to the user or not.", json_schema_extra={"examples": [False]})
     __properties: ClassVar[List[str]] = ["userId", "disable", "email", "isUser", "firstName", "lastName", "department", "location", "comment", "contacts", "files", "spam"]
 
     model_config = ConfigDict(

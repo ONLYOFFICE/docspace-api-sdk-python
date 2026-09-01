@@ -32,8 +32,8 @@ class StudioDefaultPageSettings(BaseModel):
     """
     StudioDefaultPageSettings
     """ # noqa: E501
-    default_folder_type: Optional[FolderType] = Field(default=None, alias="defaultFolderType")
-    last_modified: Optional[datetime] = Field(default=None, description="The timestamp indicating when the settings were last modified.", alias="lastModified")
+    default_folder_type: Optional[FolderType] = Field(default=None, description="Specifies the type of the default folder associated with the settings.", alias="defaultFolderType")
+    last_modified: Optional[datetime] = Field(default=None, description="The timestamp indicating when the settings were last modified.", alias="lastModified", json_schema_extra={"examples": ["1990-01-01T00:00:00Z"]})
     __properties: ClassVar[List[str]] = ["defaultFolderType", "lastModified"]
 
     model_config = ConfigDict(

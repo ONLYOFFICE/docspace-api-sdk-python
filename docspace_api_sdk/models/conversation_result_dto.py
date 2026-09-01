@@ -31,13 +31,13 @@ class ConversationResultDto(BaseModel):
     """
     The result of file convertion operation.
     """ # noqa: E501
-    id: Optional[StrictStr] = Field(description="The conversion operation ID.")
-    operation: FileOperationType = Field(alias="Operation")
-    progress: StrictInt = Field(description="The conversion operation progress.")
-    source: Optional[StrictStr] = Field(default=None, description="The source file for the conversion.")
-    result: Optional[Any] = Field(default=None, description="The resulting file after the conversion.")
-    error: Optional[StrictStr] = Field(default=None, description="The conversion operation error message.")
-    processed: Optional[StrictStr] = Field(default=None, description="Specifies if the conversion operation is processed or not.")
+    id: Optional[StrictStr] = Field(description="The conversion operation ID.", json_schema_extra={"examples": ["12345"]})
+    operation: FileOperationType = Field(description="The file operation type.", alias="Operation")
+    progress: StrictInt = Field(description="The conversion operation progress.", json_schema_extra={"examples": [50]})
+    source: Optional[StrictStr] = Field(default=None, description="The source file for the conversion.", json_schema_extra={"examples": ["document.docx"]})
+    result: Optional[Any] = None
+    error: Optional[StrictStr] = Field(default=None, description="The conversion operation error message.", json_schema_extra={"examples": ["Conversion failed"]})
+    processed: Optional[StrictStr] = Field(default=None, description="Specifies if the conversion operation is processed or not.", json_schema_extra={"examples": ["true"]})
     __properties: ClassVar[List[str]] = ["id", "Operation", "progress", "source", "result", "error", "processed"]
 
     model_config = ConfigDict(

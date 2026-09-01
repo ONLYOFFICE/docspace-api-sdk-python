@@ -30,8 +30,8 @@ class EditorToolCallStateDto(BaseModel):
     """
     The editor tool call state. Used to run the agent flow in the editor.
     """ # noqa: E501
-    tool_name: Optional[StrictStr] = Field(description="The tool name.", alias="toolName")
-    parameters: Dict[str, Any] = Field(description="The editor tool call parameters.")
+    tool_name: Optional[StrictStr] = Field(description="The tool name.", alias="toolName", json_schema_extra={"examples": ["GenerateDocx"]})
+    parameters: Dict[str, Any] = Field(description="The tool call parameters.")
     __properties: ClassVar[List[str]] = ["toolName", "parameters"]
 
     model_config = ConfigDict(

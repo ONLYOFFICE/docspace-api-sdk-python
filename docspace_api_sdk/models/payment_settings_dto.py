@@ -31,12 +31,12 @@ class PaymentSettingsDto(BaseModel):
     """
     The payment settings parameters.
     """ # noqa: E501
-    sales_email: Optional[StrictStr] = Field(description="The email address for sales inquiries and support.", alias="salesEmail")
-    feedback_and_support_url: Optional[StrictStr] = Field(default=None, description="The URL for accessing the feedback and support resources.", alias="feedbackAndSupportUrl")
-    buy_url: Optional[StrictStr] = Field(description="The URL for purchasing or upgrading the product.", alias="buyUrl")
-    standalone: StrictBool = Field(description="Indicates whether the system is running in standalone mode.")
-    current_license: CurrentLicenseInfo = Field(alias="currentLicense")
-    max: StrictInt = Field(description="The maximum quota quantity.")
+    sales_email: Optional[StrictStr] = Field(description="The email address for sales inquiries and support.", alias="salesEmail", json_schema_extra={"examples": ["sales@example.com"]})
+    feedback_and_support_url: Optional[StrictStr] = Field(default=None, description="The URL for accessing the feedback and support resources.", alias="feedbackAndSupportUrl", json_schema_extra={"examples": ["https://example.com"]})
+    buy_url: Optional[StrictStr] = Field(description="The URL for purchasing or upgrading the product.", alias="buyUrl", json_schema_extra={"examples": ["https://example.com/buy"]})
+    standalone: StrictBool = Field(description="Indicates whether the system is running in standalone mode.", json_schema_extra={"examples": [False]})
+    current_license: CurrentLicenseInfo = Field(description="The current license information.", alias="currentLicense")
+    max: StrictInt = Field(description="The maximum quota quantity.", json_schema_extra={"examples": [1]})
     __properties: ClassVar[List[str]] = ["salesEmail", "feedbackAndSupportUrl", "buyUrl", "standalone", "currentLicense", "max"]
 
     model_config = ConfigDict(

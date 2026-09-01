@@ -5,7 +5,7 @@ The Telegram connection status parameters.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**status** | [**RegStatus**](RegStatus.md) |  | 
+**status** | [**RegStatus**](RegStatus.md) | The registration Telegram status. | 
 **username** | **str** | The Telegram username. | [optional] 
 
 ## Example

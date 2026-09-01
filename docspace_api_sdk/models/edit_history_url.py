@@ -30,9 +30,9 @@ class EditHistoryUrl(BaseModel):
     """
     The file editing history URL parameters.
     """ # noqa: E501
-    key: Optional[StrictStr] = Field(default=None, description="The document identifier of the previous version of the document.")
-    url: Optional[StrictStr] = Field(default=None, description="The url address of the previous version of the document.")
-    file_type: Optional[StrictStr] = Field(default=None, description="The document extension.", alias="fileType")
+    key: Optional[StrictStr] = Field(default=None, description="The document identifier of the previous version of the document.", json_schema_extra={"examples": ["doc_v2_20260101"]})
+    url: Optional[StrictStr] = Field(default=None, description="The url address of the previous version of the document.", json_schema_extra={"examples": ["https://files.example.com/history/doc_v2_20260101.docx"]})
+    file_type: Optional[StrictStr] = Field(default=None, description="The document extension.", alias="fileType", json_schema_extra={"examples": [".docx"]})
     __properties: ClassVar[List[str]] = ["key", "url", "fileType"]
 
     model_config = ConfigDict(

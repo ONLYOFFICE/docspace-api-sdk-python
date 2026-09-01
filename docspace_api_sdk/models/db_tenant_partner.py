@@ -31,10 +31,10 @@ class DbTenantPartner(BaseModel):
     """
     The database tenant partner parameters.
     """ # noqa: E501
-    tenant_id: Optional[StrictInt] = Field(default=None, description="The tenant ID.", alias="tenantId")
-    partner_id: Optional[Annotated[str, Field(strict=True, max_length=36)]] = Field(default=None, description="The partner ID.", alias="partnerId")
-    affiliate_id: Optional[Annotated[str, Field(strict=True, max_length=50)]] = Field(default=None, description="The affiliate ID.", alias="affiliateId")
-    campaign: Optional[Annotated[str, Field(strict=True, max_length=50)]] = Field(default=None, description="The tenant partner campaign.")
+    tenant_id: Optional[StrictInt] = Field(default=None, description="The tenant ID.", alias="tenantId", json_schema_extra={"examples": [1]})
+    partner_id: Optional[Annotated[str, Field(strict=True, max_length=36)]] = Field(default=None, description="The partner ID.", alias="partnerId", json_schema_extra={"examples": ["partner_123"]})
+    affiliate_id: Optional[Annotated[str, Field(strict=True, max_length=50)]] = Field(default=None, description="The affiliate ID.", alias="affiliateId", json_schema_extra={"examples": ["artifact_123"]})
+    campaign: Optional[Annotated[str, Field(strict=True, max_length=50)]] = Field(default=None, description="The tenant partner campaign.", json_schema_extra={"examples": ["campaigh"]})
     __properties: ClassVar[List[str]] = ["tenantId", "partnerId", "affiliateId", "campaign"]
 
     model_config = ConfigDict(

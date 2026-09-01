@@ -30,7 +30,7 @@ class HistoryData(BaseModel):
     """
     The history data.
     """ # noqa: E501
-    initiator_name: Optional[StrictStr] = Field(default=None, description="The name of the action initiator.", alias="initiatorName")
+    initiator_name: Optional[StrictStr] = Field(default=None, description="The name of the action initiator.", alias="initiatorName", json_schema_extra={"examples": ["John Doe"]})
     __properties: ClassVar[List[str]] = ["initiatorName"]
 
     model_config = ConfigDict(

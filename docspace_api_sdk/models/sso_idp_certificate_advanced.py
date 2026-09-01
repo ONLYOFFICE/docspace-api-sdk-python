@@ -30,12 +30,12 @@ class SsoIdpCertificateAdvanced(BaseModel):
     """
     The IdP advanced certificate parameters.
     """ # noqa: E501
-    verify_algorithm: Optional[StrictStr] = Field(default=None, description="The certificate verification algorithm.", alias="verifyAlgorithm")
-    verify_auth_responses_sign: Optional[StrictBool] = Field(default=None, description="Specifies if the signatures of the SAML authentication responses sent to SP will be verified or not.", alias="verifyAuthResponsesSign")
-    verify_logout_requests_sign: Optional[StrictBool] = Field(default=None, description="Specifies if the signatures of the SAML logout requests sent to SP will be verified or not.", alias="verifyLogoutRequestsSign")
-    verify_logout_responses_sign: Optional[StrictBool] = Field(default=None, description="Specifies if the signatures of the SAML logout responses sent to SP will be verified or not.", alias="verifyLogoutResponsesSign")
-    decrypt_algorithm: Optional[StrictStr] = Field(default=None, description="The certificate decryption algorithm.", alias="decryptAlgorithm")
-    decrypt_assertions: Optional[StrictBool] = Field(default=None, description="Specifies if the assertions will be decrypted or not.", alias="decryptAssertions")
+    verify_algorithm: Optional[StrictStr] = Field(default=None, description="The certificate verification algorithm.", alias="verifyAlgorithm", json_schema_extra={"examples": ["rsa-sha256"]})
+    verify_auth_responses_sign: Optional[StrictBool] = Field(default=None, description="Specifies if the signatures of the SAML authentication responses sent to SP will be verified or not.", alias="verifyAuthResponsesSign", json_schema_extra={"examples": [True]})
+    verify_logout_requests_sign: Optional[StrictBool] = Field(default=None, description="Specifies if the signatures of the SAML logout requests sent to SP will be verified or not.", alias="verifyLogoutRequestsSign", json_schema_extra={"examples": [True]})
+    verify_logout_responses_sign: Optional[StrictBool] = Field(default=None, description="Specifies if the signatures of the SAML logout responses sent to SP will be verified or not.", alias="verifyLogoutResponsesSign", json_schema_extra={"examples": [True]})
+    decrypt_algorithm: Optional[StrictStr] = Field(default=None, description="The certificate decryption algorithm.", alias="decryptAlgorithm", json_schema_extra={"examples": ["aes256-cbc"]})
+    decrypt_assertions: Optional[StrictBool] = Field(default=None, description="Specifies if the assertions will be decrypted or not.", alias="decryptAssertions", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["verifyAlgorithm", "verifyAuthResponsesSign", "verifyLogoutRequestsSign", "verifyLogoutResponsesSign", "decryptAlgorithm", "decryptAssertions"]
 
     model_config = ConfigDict(

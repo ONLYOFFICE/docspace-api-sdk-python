@@ -31,15 +31,15 @@ class CultureSpecificExternalResources(BaseModel):
     """
     The external resources settings.
     """ # noqa: E501
-    api: Optional[CultureSpecificExternalResource] = None
-    common: Optional[CultureSpecificExternalResource] = None
-    forum: Optional[CultureSpecificExternalResource] = None
-    helpcenter: Optional[CultureSpecificExternalResource] = None
-    integrations: Optional[CultureSpecificExternalResource] = None
-    site: Optional[CultureSpecificExternalResource] = None
-    social_networks: Optional[CultureSpecificExternalResource] = Field(default=None, alias="socialNetworks")
-    support: Optional[CultureSpecificExternalResource] = None
-    videoguides: Optional[CultureSpecificExternalResource] = None
+    api: Optional[CultureSpecificExternalResource] = Field(default=None, description="The link to the product API.")
+    common: Optional[CultureSpecificExternalResource] = Field(default=None, description="The link to the common product information.")
+    forum: Optional[CultureSpecificExternalResource] = Field(default=None, description="The link to the forum.")
+    helpcenter: Optional[CultureSpecificExternalResource] = Field(default=None, description="The link to the Help Center.")
+    integrations: Optional[CultureSpecificExternalResource] = Field(default=None, description="The link to the product integrations.")
+    site: Optional[CultureSpecificExternalResource] = Field(default=None, description="The link to the product website.")
+    social_networks: Optional[CultureSpecificExternalResource] = Field(default=None, description="The link to the product social nerworks.", alias="socialNetworks")
+    support: Optional[CultureSpecificExternalResource] = Field(default=None, description="The link to the product support.")
+    videoguides: Optional[CultureSpecificExternalResource] = Field(default=None, description="The link to the video guides.")
     __properties: ClassVar[List[str]] = ["api", "common", "forum", "helpcenter", "integrations", "site", "socialNetworks", "support", "videoguides"]
 
     model_config = ConfigDict(

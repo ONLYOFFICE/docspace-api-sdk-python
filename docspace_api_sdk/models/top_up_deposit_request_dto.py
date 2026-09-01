@@ -31,8 +31,8 @@ class TopUpDepositRequestDto(BaseModel):
     """
     The request parameters for putting money on deposit.
     """ # noqa: E501
-    amount: Optional[Annotated[int, Field(le=999999, strict=True, ge=1)]] = Field(default=None, description="The amount of money for the operation.")
-    currency: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=3)]] = Field(default=None, description="The three-character ISO 4217 currency symbol.")
+    amount: Optional[Annotated[int, Field(le=999999, strict=True, ge=1)]] = Field(default=None, description="The amount of money for the operation.", json_schema_extra={"examples": [1]})
+    currency: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=3)]] = Field(default=None, description="The three-character ISO 4217 currency symbol.", json_schema_extra={"examples": ["USD"]})
     __properties: ClassVar[List[str]] = ["amount", "currency"]
 
     model_config = ConfigDict(

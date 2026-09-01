@@ -30,7 +30,7 @@ class DefaultTemplateSettingsResetRequestDto(BaseModel):
     """
     Default templates settings reset request parameters.
     """ # noqa: E501
-    file_extension: Optional[StrictStr] = Field(description="File extension of a template to reset", alias="fileExtension")
+    file_extension: Optional[StrictStr] = Field(description="File extension of a template to reset", alias="fileExtension", json_schema_extra={"examples": [".docx"]})
     __properties: ClassVar[List[str]] = ["fileExtension"]
 
     model_config = ConfigDict(

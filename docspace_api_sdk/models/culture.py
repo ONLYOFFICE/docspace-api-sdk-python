@@ -31,7 +31,7 @@ class Culture(BaseModel):
     """
     The culture name parameters.
     """ # noqa: E501
-    culture_name: Annotated[str, Field(min_length=0, strict=True, max_length=85)] = Field(description="The user culture name (en-US, de, fr, es, ...).", alias="cultureName")
+    culture_name: Annotated[str, Field(min_length=0, strict=True, max_length=85)] = Field(description="The user culture name (en-US, de, fr, es, ...).", alias="cultureName", json_schema_extra={"examples": ["en-US"]})
     __properties: ClassVar[List[str]] = ["cultureName"]
 
     model_config = ConfigDict(

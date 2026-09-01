@@ -31,8 +31,8 @@ class ChangeWalletServiceStateRequestDto(BaseModel):
     """
     The request parameters for changing the tenant wallet service state.
     """ # noqa: E501
-    service: Optional[TenantWalletService] = None
-    enabled: Optional[StrictBool] = Field(default=None, description="Specifies whether the wallet service is enabled.")
+    service: Optional[TenantWalletService] = Field(default=None, description="The wallet service type.")
+    enabled: Optional[StrictBool] = Field(default=None, description="Specifies whether the wallet service is enabled.", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["service", "enabled"]
 
     model_config = ConfigDict(

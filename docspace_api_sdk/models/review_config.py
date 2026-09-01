@@ -30,7 +30,7 @@ class ReviewConfig(BaseModel):
     """
     Configuration for review display settings.
     """ # noqa: E501
-    review_display: Optional[StrictStr] = Field(default=None, description="The review display string representation.", alias="reviewDisplay")
+    review_display: Optional[StrictStr] = Field(default=None, description="The review display string representation.", alias="reviewDisplay", json_schema_extra={"examples": ["full"]})
     __properties: ClassVar[List[str]] = ["reviewDisplay"]
 
     model_config = ConfigDict(

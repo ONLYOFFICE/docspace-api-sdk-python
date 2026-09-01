@@ -5,16 +5,16 @@ The request parameters for generating a report on client operations.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**service_name** | **str** | The service name. | [optional] 
+**service_name** | **List[str]** | The service name list. A single string is also accepted for backward compatibility. | [optional] 
 **start_date** | **datetime** | The report start date. | [optional] 
 **end_date** | **datetime** | The report end date. | [optional] 
 **participant_name** | **str** | The participant name. | [optional] 
 **credit** | **bool** | Specifies whether to include credit operations in the report. | [optional] 
 **debit** | **bool** | Specifies whether to include debit operations in the report. | [optional] 
-**type** | [**OperationType**](OperationType.md) |  | [optional] 
-**status** | [**OperationStatus**](OperationStatus.md) |  | [optional] 
+**type** | [**OperationType**](OperationType.md) | The operation type to filter by. | [optional] 
+**status** | [**OperationStatus**](OperationStatus.md) | The operation status to filter by. | [optional] 
 **order_by** | **str** | The field to order by. | [optional] 
-**order_type** | [**OperationOrderType**](OperationOrderType.md) |  | [optional] 
+**order_type** | [**OperationOrderType**](OperationOrderType.md) | Order direction: Ascending or Descending. | [optional] 
 
 ## Example
 

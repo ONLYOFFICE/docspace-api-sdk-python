@@ -31,13 +31,13 @@ class TenantQuotaFeatureDto(BaseModel):
     """
     The tenant quota feature parameters.
     """ # noqa: E501
-    id: Optional[StrictStr] = Field(default=None, description="The ID of the tenant quota feature.")
-    title: Optional[StrictStr] = Field(default=None, description="The title of the tenant quota feature.")
-    image: Optional[StrictStr] = Field(default=None, description="The image URL of the tenant quota feature.")
-    value: Optional[Any] = Field(default=None, description="The value of the tenant quota feature.")
-    type: Optional[StrictStr] = Field(default=None, description="The type of the tenant quota feature.")
-    used: Optional[FeatureUsedDto] = None
-    price_title: Optional[StrictStr] = Field(default=None, description="The price title of the tenant quota feature.", alias="priceTitle")
+    id: Optional[StrictStr] = Field(default=None, description="The ID of the tenant quota feature.", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000001"]})
+    title: Optional[StrictStr] = Field(default=None, description="The title of the tenant quota feature.", json_schema_extra={"examples": ["Premium Storage"]})
+    image: Optional[StrictStr] = Field(default=None, description="The image URL of the tenant quota feature.", json_schema_extra={"examples": ["/images/premium-storage.png"]})
+    value: Optional[Any] = None
+    type: Optional[StrictStr] = Field(default=None, description="The type of the tenant quota feature.", json_schema_extra={"examples": ["Storage"]})
+    used: Optional[FeatureUsedDto] = Field(default=None, description="The used space parameters of the tenant quota feature.")
+    price_title: Optional[StrictStr] = Field(default=None, description="The price title of the tenant quota feature.", alias="priceTitle", json_schema_extra={"examples": ["$9.99/month"]})
     __properties: ClassVar[List[str]] = ["id", "title", "image", "value", "type", "used", "priceTitle"]
 
     model_config = ConfigDict(

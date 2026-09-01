@@ -30,7 +30,7 @@ class FinishDto(BaseModel):
     """
     The parameters for terminating a process or operation.
     """ # noqa: E501
-    is_send_welcome_email: StrictBool = Field(description="Specifies whether to send a welcome email or not.", alias="isSendWelcomeEmail")
+    is_send_welcome_email: StrictBool = Field(description="Specifies whether to send a welcome email or not.", alias="isSendWelcomeEmail", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["isSendWelcomeEmail"]
 
     model_config = ConfigDict(

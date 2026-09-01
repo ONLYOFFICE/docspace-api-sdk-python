@@ -25,6 +25,7 @@ from pydantic import Field, StrictBool, StrictBytes, StrictInt, StrictStr
 from typing import List, Optional, Tuple, Union
 from typing_extensions import Annotated
 from uuid import UUID
+from docspace_api_sdk.models.access_request_key_dto import AccessRequestKeyDto
 from docspace_api_sdk.models.api_date_time import ApiDateTime
 from docspace_api_sdk.models.base_batch_request_dto import BaseBatchRequestDto
 from docspace_api_sdk.models.boolean_wrapper import BooleanWrapper
@@ -41,6 +42,7 @@ from docspace_api_sdk.models.document_builder_task_wrapper import DocumentBuilde
 from docspace_api_sdk.models.edit_history_array_wrapper import EditHistoryArrayWrapper
 from docspace_api_sdk.models.edit_history_data_wrapper import EditHistoryDataWrapper
 from docspace_api_sdk.models.editor_type import EditorType
+from docspace_api_sdk.models.file_encryption_info_wrapper import FileEncryptionInfoWrapper
 from docspace_api_sdk.models.file_entry_base_wrapper import FileEntryBaseWrapper
 from docspace_api_sdk.models.file_entry_integer_array_wrapper import FileEntryIntegerArrayWrapper
 from docspace_api_sdk.models.file_integer_array_wrapper import FileIntegerArrayWrapper
@@ -153,6 +155,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -226,6 +229,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -299,6 +303,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -438,6 +443,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -509,6 +515,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -580,6 +587,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -737,6 +745,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -813,6 +822,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -889,6 +899,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1048,6 +1059,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1123,6 +1135,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1198,6 +1211,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1354,6 +1368,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1432,6 +1447,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1510,6 +1526,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1670,6 +1687,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1746,6 +1764,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1822,6 +1841,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1970,6 +1990,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2045,6 +2066,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2120,6 +2142,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2275,6 +2298,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2346,6 +2370,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2417,6 +2442,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2575,6 +2601,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2652,6 +2679,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2729,6 +2757,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2889,6 +2918,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2965,6 +2995,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3041,6 +3072,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3197,6 +3229,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3269,6 +3302,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3341,6 +3375,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3497,6 +3532,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3572,6 +3608,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3647,6 +3684,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3802,6 +3840,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3873,6 +3912,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3944,6 +3984,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4095,6 +4136,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4165,6 +4207,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4235,6 +4278,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4389,6 +4433,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4468,6 +4513,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4547,6 +4593,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4707,6 +4754,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4778,6 +4826,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4849,6 +4898,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5001,6 +5051,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5072,6 +5123,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5143,6 +5195,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5298,6 +5351,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5371,6 +5425,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5444,6 +5499,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5585,6 +5641,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5658,6 +5715,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5731,6 +5789,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5873,6 +5932,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5947,6 +6007,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -6021,6 +6082,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -6158,6 +6220,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -6228,6 +6291,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -6298,6 +6362,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -6352,6 +6417,299 @@ class FilesApi:
 
 
         resource_path = "/api/2.0/files/file/{fileId}/edit/history"
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path=resource_path,
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def get_encryption_info(
+        self,
+        file_id: StrictInt,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> FileEncryptionInfoWrapper:
+        """Get file encryption information
+
+        Returns the encryption information for a file with the specified identifier, including user encryption keys and file-specific encryption keys.
+
+        :param file_id: (required)
+        :type file_id: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_encryption_info_serialize(
+            file_id=file_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "FileEncryptionInfoWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def get_encryption_info_with_http_info(
+        self,
+        file_id: StrictInt,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[FileEncryptionInfoWrapper]:
+        """Get file encryption information
+
+        Returns the encryption information for a file with the specified identifier, including user encryption keys and file-specific encryption keys.
+
+        :param file_id: (required)
+        :type file_id: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_encryption_info_serialize(
+            file_id=file_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "FileEncryptionInfoWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def get_encryption_info_without_preload_content(
+        self,
+        file_id: StrictInt,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Get file encryption information
+
+        Returns the encryption information for a file with the specified identifier, including user encryption keys and file-specific encryption keys.
+
+        :param file_id: (required)
+        :type file_id: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_encryption_info_serialize(
+            file_id=file_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "FileEncryptionInfoWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _get_encryption_info_serialize(
+        self,
+        file_id,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if file_id is not None:
+            _path_params['fileId'] = file_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
+        ]
+
+
+        resource_path = "/api/2.0/files/{fileId}/access"
 
         return self.api_client.param_serialize(
             method='GET',
@@ -6449,6 +6807,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -6538,6 +6897,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -6627,6 +6987,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -6789,6 +7150,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -6863,6 +7225,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -6937,6 +7300,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -7083,6 +7447,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -7162,6 +7527,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -7241,6 +7607,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -7399,6 +7766,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -7479,6 +7847,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -7559,6 +7928,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -7701,6 +8071,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -7771,6 +8142,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -7841,6 +8213,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -7973,6 +8346,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -8043,6 +8417,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -8113,6 +8488,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -8249,6 +8625,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -8321,6 +8698,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -8393,6 +8771,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -8532,6 +8911,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -8603,6 +8983,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -8674,6 +9055,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -8813,6 +9195,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -8884,6 +9267,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -8955,6 +9339,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -9094,6 +9479,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -9165,6 +9551,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -9236,6 +9623,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -9375,6 +9763,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -9446,6 +9835,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -9517,6 +9907,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -9669,6 +10060,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -9740,6 +10132,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -9811,6 +10204,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -9950,6 +10344,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -10021,6 +10416,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -10092,6 +10488,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -10235,6 +10632,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -10310,6 +10708,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -10385,6 +10784,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -10545,6 +10945,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -10621,6 +11022,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -10697,6 +11099,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -10865,6 +11268,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -10956,6 +11360,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -11047,6 +11452,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -11214,6 +11620,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -11294,6 +11701,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -11374,6 +11782,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -11535,6 +11944,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -11624,6 +12034,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -11713,6 +12124,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -11884,6 +12296,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -11960,6 +12373,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -12036,6 +12450,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -12196,6 +12611,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -12272,6 +12688,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -12348,6 +12765,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -12500,6 +12918,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -12575,6 +12994,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -12650,6 +13070,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -12746,6 +13167,318 @@ class FilesApi:
 
 
     @validate_call
+    def set_encryption_info(
+        self,
+        file_id: Annotated[StrictInt, Field(description="File ID")],
+        access_request_key_dto: Annotated[Optional[List[AccessRequestKeyDto]], Field(description="Collection of encryption key data for users with access to the file")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> None:
+        """Set file encryption information
+
+        Sets or updates the encryption keys for a file with the specified identifier. This allows updating the file's encryption configuration.
+
+        :param file_id: File ID (required)
+        :type file_id: int
+        :param access_request_key_dto: Collection of encryption key data for users with access to the file
+        :type access_request_key_dto: List[AccessRequestKeyDto]
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._set_encryption_info_serialize(
+            file_id=file_id,
+            access_request_key_dto=access_request_key_dto,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': None,
+            '403': None,
+            '404': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def set_encryption_info_with_http_info(
+        self,
+        file_id: Annotated[StrictInt, Field(description="File ID")],
+        access_request_key_dto: Annotated[Optional[List[AccessRequestKeyDto]], Field(description="Collection of encryption key data for users with access to the file")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[None]:
+        """Set file encryption information
+
+        Sets or updates the encryption keys for a file with the specified identifier. This allows updating the file's encryption configuration.
+
+        :param file_id: File ID (required)
+        :type file_id: int
+        :param access_request_key_dto: Collection of encryption key data for users with access to the file
+        :type access_request_key_dto: List[AccessRequestKeyDto]
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._set_encryption_info_serialize(
+            file_id=file_id,
+            access_request_key_dto=access_request_key_dto,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': None,
+            '403': None,
+            '404': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def set_encryption_info_without_preload_content(
+        self,
+        file_id: Annotated[StrictInt, Field(description="File ID")],
+        access_request_key_dto: Annotated[Optional[List[AccessRequestKeyDto]], Field(description="Collection of encryption key data for users with access to the file")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Set file encryption information
+
+        Sets or updates the encryption keys for a file with the specified identifier. This allows updating the file's encryption configuration.
+
+        :param file_id: File ID (required)
+        :type file_id: int
+        :param access_request_key_dto: Collection of encryption key data for users with access to the file
+        :type access_request_key_dto: List[AccessRequestKeyDto]
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._set_encryption_info_serialize(
+            file_id=file_id,
+            access_request_key_dto=access_request_key_dto,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': None,
+            '403': None,
+            '404': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _set_encryption_info_serialize(
+        self,
+        file_id,
+        access_request_key_dto,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+            'AccessRequestKeyDto': '',
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if file_id is not None:
+            _path_params['fileId'] = file_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if access_request_key_dto is not None:
+            _body_params = access_request_key_dto
+
+
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
+        ]
+
+
+        resource_path = "/api/2.0/files/{fileId}/access"
+
+        return self.api_client.param_serialize(
+            method='PUT',
+            resource_path=resource_path,
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
     def set_file_external_link(
         self,
         id: Annotated[StrictInt, Field(description="The file ID.")],
@@ -12809,6 +13542,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -12884,6 +13618,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -12959,6 +13694,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -13120,6 +13856,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -13197,6 +13934,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -13274,6 +14012,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -13429,6 +14168,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -13500,6 +14240,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -13571,6 +14312,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -13727,6 +14469,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -13802,6 +14545,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -13877,6 +14621,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -14027,6 +14772,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -14099,6 +14845,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -14171,6 +14918,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -14315,6 +15063,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -14391,6 +15140,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -14467,6 +15217,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -14623,6 +15374,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -14706,6 +15458,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -14789,6 +15542,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -14941,6 +15695,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -15016,6 +15771,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -15091,6 +15847,7 @@ class FilesApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout

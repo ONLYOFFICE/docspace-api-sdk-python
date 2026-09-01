@@ -31,12 +31,12 @@ class ReportDto(BaseModel):
     """
     Represents a report containing a collection of operations.
     """ # noqa: E501
-    collection: Optional[List[OperationDto]] = Field(default=None, description="A collection of operations.")
-    offset: Optional[StrictInt] = Field(default=None, description="The report data offset.")
-    limit: Optional[StrictInt] = Field(default=None, description="The report data limit.")
-    total_quantity: Optional[StrictInt] = Field(default=None, description="The total quantity of operations in the report.", alias="totalQuantity")
-    total_page: Optional[StrictInt] = Field(default=None, description="The total number of pages in the report.", alias="totalPage")
-    current_page: Optional[StrictInt] = Field(default=None, description="The current page number of the report.", alias="currentPage")
+    collection: Optional[List[OperationDto]] = Field(default=None, description="A collection of operations.", json_schema_extra={"examples": [[{"id": "op1", "type": "payment"}]]})
+    offset: Optional[StrictInt] = Field(default=None, description="The report data offset.", json_schema_extra={"examples": [1]})
+    limit: Optional[StrictInt] = Field(default=None, description="The report data limit.", json_schema_extra={"examples": [1]})
+    total_quantity: Optional[StrictInt] = Field(default=None, description="The total quantity of operations in the report.", alias="totalQuantity", json_schema_extra={"examples": [1]})
+    total_page: Optional[StrictInt] = Field(default=None, description="The total number of pages in the report.", alias="totalPage", json_schema_extra={"examples": [1]})
+    current_page: Optional[StrictInt] = Field(default=None, description="The current page number of the report.", alias="currentPage", json_schema_extra={"examples": [1]})
     __properties: ClassVar[List[str]] = ["collection", "offset", "limit", "totalQuantity", "totalPage", "currentPage"]
 
     model_config = ConfigDict(

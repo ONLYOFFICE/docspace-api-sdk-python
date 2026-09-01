@@ -5,7 +5,7 @@ The theme settings request parameters.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**theme** | [**DarkThemeSettingsType**](DarkThemeSettingsType.md) |  | 
+**theme** | [**DarkThemeSettingsType**](DarkThemeSettingsType.md) | The theme type. | 
 
 ## Example
 

@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **password** | **str** | The user password. | [optional] 
 **password_hash** | **str** | The user password hash. | [optional] 
 **email** | **str** | The user email address. | [optional] 
-**type** | [**EmployeeType**](EmployeeType.md) |  | [optional] 
+**type** | [**EmployeeType**](EmployeeType.md) | The user type. | [optional] 
 **is_user** | **bool** | Specifies if this is a guest or a user. | [optional] 
 **first_name** | **str** | The user first name. | [optional] 
 **last_name** | **str** | The user last name. | [optional] 

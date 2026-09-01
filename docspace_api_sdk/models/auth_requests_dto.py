@@ -32,18 +32,18 @@ class AuthRequestsDto(BaseModel):
     """
     The parameters required for the user authentication requests.
     """ # noqa: E501
-    user_name: Optional[StrictStr] = Field(default=None, description="The username or email used for authentication.", alias="userName")
-    password: Optional[StrictStr] = Field(default=None, description="The password in plain text for user authentication.")
-    password_hash: Optional[StrictStr] = Field(default=None, description="The hashed password for secure verification.", alias="passwordHash")
-    provider: Optional[StrictStr] = Field(default=None, description="The type of authentication provider (e.g., internal, Google, Azure).")
-    access_token: Optional[StrictStr] = Field(default=None, description="The access token used for authentication with external providers.", alias="accessToken")
-    serialized_profile: Optional[StrictStr] = Field(default=None, description="The serialized user profile data, if applicable.", alias="serializedProfile")
-    code_o_auth: Optional[StrictStr] = Field(default=None, description="The authorization code used for obtaining OAuth tokens.", alias="codeOAuth")
-    session: Optional[StrictBool] = Field(default=None, description="Specifies whether the authentication is session-based.")
-    confirm_data: Optional[ConfirmData] = Field(default=None, alias="confirmData")
-    recaptcha_type: Optional[RecaptchaType] = Field(default=None, alias="recaptchaType")
-    recaptcha_response: Optional[StrictStr] = Field(default=None, description="The user's response to the CAPTCHA challenge.", alias="recaptchaResponse")
-    culture: Optional[StrictStr] = Field(default=None, description="The culture code for localization during authentication.")
+    user_name: Optional[StrictStr] = Field(default=None, description="The username or email used for authentication.", alias="userName", json_schema_extra={"examples": ["user@example.com"]})
+    password: Optional[StrictStr] = Field(default=None, description="The password in plain text for user authentication.", json_schema_extra={"examples": ["SecurePassword123!"]})
+    password_hash: Optional[StrictStr] = Field(default=None, description="The hashed password for secure verification.", alias="passwordHash", json_schema_extra={"examples": ["5f4dcc3b5aa765d61d8327deb882cf99"]})
+    provider: Optional[StrictStr] = Field(default=None, description="The type of authentication provider (e.g., internal, Google, Azure).", json_schema_extra={"examples": ["google"]})
+    access_token: Optional[StrictStr] = Field(default=None, description="The access token used for authentication with external providers.", alias="accessToken", json_schema_extra={"examples": ["ya29.a0AfH6SMBx..."]})
+    serialized_profile: Optional[StrictStr] = Field(default=None, description="The serialized user profile data, if applicable.", alias="serializedProfile", json_schema_extra={"examples": ["{\"name\":\"John Doe\",\"email\":\"john@example.com\"}"]})
+    code_o_auth: Optional[StrictStr] = Field(default=None, description="The authorization code used for obtaining OAuth tokens.", alias="codeOAuth", json_schema_extra={"examples": ["4/0AY0e-g7..."]})
+    session: Optional[StrictBool] = Field(default=None, description="Specifies whether the authentication is session-based.", json_schema_extra={"examples": [True]})
+    confirm_data: Optional[ConfirmData] = Field(default=None, description="The additional confirmation data required for authentication.", alias="confirmData")
+    recaptcha_type: Optional[RecaptchaType] = Field(default=None, description="The type of CAPTCHA validation used.", alias="recaptchaType")
+    recaptcha_response: Optional[StrictStr] = Field(default=None, description="The user's response to the CAPTCHA challenge.", alias="recaptchaResponse", json_schema_extra={"examples": ["03AGdBq25..."]})
+    culture: Optional[StrictStr] = Field(default=None, description="The culture code for localization during authentication.", json_schema_extra={"examples": ["en-US"]})
     __properties: ClassVar[List[str]] = ["userName", "password", "passwordHash", "provider", "accessToken", "serializedProfile", "codeOAuth", "session", "confirmData", "recaptchaType", "recaptchaResponse", "culture"]
 
     model_config = ConfigDict(

@@ -34,12 +34,12 @@ class HistoryDto(BaseModel):
     """
     The file history information.
     """ # noqa: E501
-    id: StrictInt = Field(description="The unique identifier for the file history entry.")
-    action: HistoryAction
-    initiator: EmployeeDto
-    var_date: ApiDateTime = Field(alias="date")
-    data: HistoryData
-    related: Optional[List[HistoryDto]] = Field(default=None, description="The list of related history.")
+    id: StrictInt = Field(description="The unique identifier for the file history entry.", json_schema_extra={"examples": [123]})
+    action: HistoryAction = Field(description="The action performed on the file.")
+    initiator: EmployeeDto = Field(description="The user parameters.")
+    var_date: ApiDateTime = Field(description="The API date and time parameters.", alias="date")
+    data: HistoryData = Field(description="The history data.")
+    related: Optional[List[HistoryDto]] = Field(default=None, description="The list of related history.", json_schema_extra={"examples": [[{"id": 124, "action": 0}]]})
     __properties: ClassVar[List[str]] = ["id", "action", "initiator", "date", "data", "related"]
 
     model_config = ConfigDict(

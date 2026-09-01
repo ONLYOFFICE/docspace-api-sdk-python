@@ -21,8 +21,8 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictBool, StrictBytes, StrictInt, StrictStr
-from typing import Any, Optional, Tuple, Union
+from pydantic import Field, StrictBool, StrictBytes, StrictInt, StrictStr, field_validator
+from typing import Any, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 from docspace_api_sdk.models.base_batch_request_dto import BaseBatchRequestDto
 from docspace_api_sdk.models.batch_request_dto import BatchRequestDto
@@ -128,6 +128,7 @@ class OperationsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -203,6 +204,7 @@ class OperationsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -278,6 +280,7 @@ class OperationsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -414,6 +417,7 @@ class OperationsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -486,6 +490,7 @@ class OperationsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -558,6 +563,7 @@ class OperationsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -710,6 +716,7 @@ class OperationsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -781,6 +788,7 @@ class OperationsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -852,6 +860,7 @@ class OperationsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1002,6 +1011,7 @@ class OperationsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1077,6 +1087,7 @@ class OperationsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1152,6 +1163,7 @@ class OperationsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1297,6 +1309,7 @@ class OperationsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1369,6 +1382,7 @@ class OperationsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1441,6 +1455,7 @@ class OperationsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1583,6 +1598,7 @@ class OperationsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1655,6 +1671,7 @@ class OperationsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1727,6 +1744,7 @@ class OperationsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1869,6 +1887,7 @@ class OperationsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1941,6 +1960,7 @@ class OperationsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2013,6 +2033,7 @@ class OperationsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2171,6 +2192,7 @@ class OperationsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2248,6 +2270,7 @@ class OperationsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2325,6 +2348,7 @@ class OperationsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2484,6 +2508,7 @@ class OperationsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2559,6 +2584,7 @@ class OperationsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2634,6 +2660,7 @@ class OperationsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2790,6 +2817,7 @@ class OperationsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2862,6 +2890,7 @@ class OperationsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2934,6 +2963,7 @@ class OperationsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3086,6 +3116,7 @@ class OperationsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3157,6 +3188,7 @@ class OperationsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3228,6 +3260,7 @@ class OperationsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3380,6 +3413,7 @@ class OperationsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3451,6 +3485,7 @@ class OperationsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3522,6 +3557,7 @@ class OperationsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3675,6 +3711,7 @@ class OperationsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3747,6 +3784,7 @@ class OperationsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3819,6 +3857,7 @@ class OperationsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3915,6 +3954,7 @@ class OperationsApi:
     def empty_trash(
         self,
         single: Annotated[Optional[StrictBool], Field(description="Specifies whether to return only the current operation")] = None,
+        folder_type: Annotated[Optional[List[StrictInt]], Field(description="The parent folder types used to empty the trash only from the items originally located in the sections of the specified types.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3930,10 +3970,12 @@ class OperationsApi:
     ) -> FileOperationArrayWrapper:
         """Empty the Trash folder
 
-        Deletes all the files and folders from the Trash folder.
+        Deletes all the files and folders from the Trash folder. If the folder types are specified, only the items originally located in the sections of these types are deleted.
 
         :param single: Specifies whether to return only the current operation
         :type single: bool
+        :param folder_type: The parent folder types used to empty the trash only from the items originally located in the sections of the specified types.
+        :type folder_type: List[int]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3958,6 +4000,7 @@ class OperationsApi:
 
         _param = self._empty_trash_serialize(
             single=single,
+            folder_type=folder_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3971,6 +4014,7 @@ class OperationsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3986,6 +4030,7 @@ class OperationsApi:
     def empty_trash_with_http_info(
         self,
         single: Annotated[Optional[StrictBool], Field(description="Specifies whether to return only the current operation")] = None,
+        folder_type: Annotated[Optional[List[StrictInt]], Field(description="The parent folder types used to empty the trash only from the items originally located in the sections of the specified types.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4001,10 +4046,12 @@ class OperationsApi:
     ) -> ApiResponse[FileOperationArrayWrapper]:
         """Empty the Trash folder
 
-        Deletes all the files and folders from the Trash folder.
+        Deletes all the files and folders from the Trash folder. If the folder types are specified, only the items originally located in the sections of these types are deleted.
 
         :param single: Specifies whether to return only the current operation
         :type single: bool
+        :param folder_type: The parent folder types used to empty the trash only from the items originally located in the sections of the specified types.
+        :type folder_type: List[int]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4029,6 +4076,7 @@ class OperationsApi:
 
         _param = self._empty_trash_serialize(
             single=single,
+            folder_type=folder_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -4042,6 +4090,7 @@ class OperationsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4057,6 +4106,7 @@ class OperationsApi:
     def empty_trash_without_preload_content(
         self,
         single: Annotated[Optional[StrictBool], Field(description="Specifies whether to return only the current operation")] = None,
+        folder_type: Annotated[Optional[List[StrictInt]], Field(description="The parent folder types used to empty the trash only from the items originally located in the sections of the specified types.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4072,10 +4122,12 @@ class OperationsApi:
     ) -> RESTResponseType:
         """Empty the Trash folder
 
-        Deletes all the files and folders from the Trash folder.
+        Deletes all the files and folders from the Trash folder. If the folder types are specified, only the items originally located in the sections of these types are deleted.
 
         :param single: Specifies whether to return only the current operation
         :type single: bool
+        :param folder_type: The parent folder types used to empty the trash only from the items originally located in the sections of the specified types.
+        :type folder_type: List[int]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4100,6 +4152,7 @@ class OperationsApi:
 
         _param = self._empty_trash_serialize(
             single=single,
+            folder_type=folder_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -4113,6 +4166,7 @@ class OperationsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4123,6 +4177,7 @@ class OperationsApi:
     def _empty_trash_serialize(
         self,
         single,
+        folder_type,
         _request_auth,
         _content_type,
         _headers,
@@ -4132,6 +4187,7 @@ class OperationsApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
+            'folderType': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -4148,6 +4204,10 @@ class OperationsApi:
         if single is not None:
             
             _query_params.append(('Single', single))
+            
+        if folder_type is not None:
+            
+            _query_params.append(('folderType', folder_type))
             
         # process the header parameters
         # process the form parameters
@@ -4258,6 +4318,7 @@ class OperationsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4333,6 +4394,7 @@ class OperationsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4408,6 +4470,7 @@ class OperationsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4549,6 +4612,7 @@ class OperationsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4619,6 +4683,7 @@ class OperationsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4689,6 +4754,7 @@ class OperationsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4827,6 +4893,7 @@ class OperationsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4901,6 +4968,7 @@ class OperationsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4975,6 +5043,7 @@ class OperationsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5113,6 +5182,7 @@ class OperationsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5184,6 +5254,7 @@ class OperationsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5255,6 +5326,7 @@ class OperationsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5408,6 +5480,7 @@ class OperationsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5480,6 +5553,7 @@ class OperationsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5552,6 +5626,7 @@ class OperationsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5708,6 +5783,7 @@ class OperationsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5783,6 +5859,7 @@ class OperationsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5858,6 +5935,7 @@ class OperationsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -6012,6 +6090,7 @@ class OperationsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -6082,6 +6161,7 @@ class OperationsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -6152,6 +6232,7 @@ class OperationsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -6289,6 +6370,7 @@ class OperationsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -6364,6 +6446,7 @@ class OperationsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -6439,6 +6522,7 @@ class OperationsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -6606,6 +6690,7 @@ class OperationsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -6689,6 +6774,7 @@ class OperationsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -6772,6 +6858,7 @@ class OperationsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -6943,6 +7030,7 @@ class OperationsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -7022,6 +7110,7 @@ class OperationsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -7101,6 +7190,7 @@ class OperationsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout

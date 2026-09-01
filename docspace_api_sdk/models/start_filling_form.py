@@ -30,7 +30,7 @@ class StartFillingForm(BaseModel):
     """
     The parameters of the button that starts filling out the form.
     """ # noqa: E501
-    text: Optional[StrictStr] = Field(default=None, description="The caption of the button that starts filling out the form.")
+    text: Optional[StrictStr] = Field(default=None, description="The caption of the button that starts filling out the form.", json_schema_extra={"examples": ["Start Filling"]})
     __properties: ClassVar[List[str]] = ["text"]
 
     model_config = ConfigDict(

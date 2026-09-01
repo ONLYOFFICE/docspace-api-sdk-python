@@ -5,7 +5,7 @@ Represents an operation.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**var_date** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] 
+**var_date** | [**ApiDateTime**](ApiDateTime.md) | The API date and time parameters. | [optional] 
 **service** | **str** | The service related to the operation. | [optional] 
 **description** | **str** | The brief operation description. | [optional] 
 **details** | **str** | The detailed information about the operation. | [optional] 
@@ -18,7 +18,7 @@ Name | Type | Description | Notes
 **participant_display_name** | **str** | The participant display name. | [optional] 
 **agent_id** | **str** | AI Agent id. | [optional] 
 **agent_title** | **str** | AI Agent name. | [optional] 
-**type** | [**OperationType**](OperationType.md) |  | [optional] 
+**type** | [**OperationType**](OperationType.md) | The operation type | [optional] 
 
 ## Example
 

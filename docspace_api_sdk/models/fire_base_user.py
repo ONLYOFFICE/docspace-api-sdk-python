@@ -33,13 +33,13 @@ class FireBaseUser(BaseModel):
     """
     The Firebase user parameters.
     """ # noqa: E501
-    id: Optional[StrictInt] = Field(default=None, description="The Firebase user ID.")
-    user_id: Optional[UUID] = Field(default=None, description="The user ID.", alias="userId")
-    tenant_id: Optional[StrictInt] = Field(default=None, description="The tenant ID.", alias="tenantId")
-    firebase_device_token: Optional[Annotated[str, Field(strict=True, max_length=255)]] = Field(default=None, description="The Firebase device token.", alias="firebaseDeviceToken")
-    application: Optional[Annotated[str, Field(strict=True, max_length=20)]] = Field(default=None, description="The Firebase application.")
-    is_subscribed: Optional[StrictBool] = Field(default=None, description="Specifies if the user is subscribed to the push notifications or not.", alias="isSubscribed")
-    tenant: Optional[DbTenant] = None
+    id: Optional[StrictInt] = Field(default=None, description="The Firebase user ID.", json_schema_extra={"examples": [1]})
+    user_id: Optional[UUID] = Field(default=None, description="The user ID.", alias="userId", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000000"]})
+    tenant_id: Optional[StrictInt] = Field(default=None, description="The tenant ID.", alias="tenantId", json_schema_extra={"examples": [1]})
+    firebase_device_token: Optional[Annotated[str, Field(strict=True, max_length=255)]] = Field(default=None, description="The Firebase device token.", alias="firebaseDeviceToken", json_schema_extra={"examples": ["token123"]})
+    application: Optional[Annotated[str, Field(strict=True, max_length=20)]] = Field(default=None, description="The Firebase application.", json_schema_extra={"examples": ["web"]})
+    is_subscribed: Optional[StrictBool] = Field(default=None, description="Specifies if the user is subscribed to the push notifications or not.", alias="isSubscribed", json_schema_extra={"examples": [True]})
+    tenant: Optional[DbTenant] = Field(default=None, description="The database tenant parameters.")
     __properties: ClassVar[List[str]] = ["id", "userId", "tenantId", "firebaseDeviceToken", "application", "isSubscribed", "tenant"]
 
     model_config = ConfigDict(

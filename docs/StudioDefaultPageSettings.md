@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**default_folder_type** | [**FolderType**](FolderType.md) |  | [optional] 
+**default_folder_type** | [**FolderType**](FolderType.md) | Specifies the type of the default folder associated with the settings. | [optional] 
 **last_modified** | **datetime** | The timestamp indicating when the settings were last modified. | [optional] 
 
 ## Example

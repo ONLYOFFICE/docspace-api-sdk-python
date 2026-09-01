@@ -21,7 +21,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List, Optional
 from docspace_api_sdk.models.tenant_audit_settings import TenantAuditSettings
 from typing import Optional, Set
@@ -31,7 +31,7 @@ class TenantAuditSettingsWrapper(BaseModel):
     """
     The tenant audit settings wrapper.
     """ # noqa: E501
-    settings: Optional[TenantAuditSettings] = None
+    settings: Optional[TenantAuditSettings] = Field(default=None, description="The tenant audit settings parameters.")
     __properties: ClassVar[List[str]] = ["settings"]
 
     model_config = ConfigDict(

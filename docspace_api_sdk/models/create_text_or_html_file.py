@@ -31,9 +31,9 @@ class CreateTextOrHtmlFile(BaseModel):
     """
     The parameters for creating an HTML or text file.
     """ # noqa: E501
-    title: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=165)]] = Field(description="The file title for text or HTML file.")
-    content: Optional[StrictStr] = Field(default=None, description="The text or HTML file contents.")
-    create_new_if_exist: Optional[StrictBool] = Field(default=None, description="Specifies whether to create a new text or HTML file if it exists or not.", alias="createNewIfExist")
+    title: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=165)]] = Field(description="The file title for text or HTML file.", json_schema_extra={"examples": ["Document.txt"]})
+    content: Optional[StrictStr] = Field(default=None, description="The text or HTML file contents.", json_schema_extra={"examples": ["This is the file content"]})
+    create_new_if_exist: Optional[StrictBool] = Field(default=None, description="Specifies whether to create a new text or HTML file if it exists or not.", alias="createNewIfExist", json_schema_extra={"examples": [False]})
     __properties: ClassVar[List[str]] = ["title", "content", "createNewIfExist"]
 
     model_config = ConfigDict(

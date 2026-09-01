@@ -29,12 +29,13 @@ from uuid import UUID
 from docspace_api_sdk.models.action_type import ActionType
 from docspace_api_sdk.models.api_date_time import ApiDateTime
 from docspace_api_sdk.models.audit_event_array_wrapper import AuditEventArrayWrapper
+from docspace_api_sdk.models.audit_report_format import AuditReportFormat
+from docspace_api_sdk.models.document_builder_task_wrapper import DocumentBuilderTaskWrapper
 from docspace_api_sdk.models.entry_type import EntryType
 from docspace_api_sdk.models.location_type import LocationType
 from docspace_api_sdk.models.message_action import MessageAction
 from docspace_api_sdk.models.object_wrapper import ObjectWrapper
 from docspace_api_sdk.models.product_type import ProductType
-from docspace_api_sdk.models.string_wrapper import StringWrapper
 from docspace_api_sdk.models.tenant_audit_settings_wrapper import TenantAuditSettingsWrapper
 
 from docspace_api_sdk.api_client import ApiClient, RequestSerialized
@@ -63,6 +64,7 @@ class AuditTrailDataApi:
     @validate_call
     def create_audit_trail_report(
         self,
+        format: Annotated[Optional[AuditReportFormat], Field(description="The output file format of the report. Defaults to XLSX.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -75,11 +77,13 @@ class AuditTrailDataApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> StringWrapper:
-        """Generate the audit trail report
+    ) -> DocumentBuilderTaskWrapper:
+        """Start the audit trail report generation
 
-        Generates the audit trail report.
+        Starts generating the audit trail report (XLSX by default, or CSV) and saves it to My documents.
 
+        :param format: The output file format of the report. Defaults to XLSX.
+        :type format: AuditReportFormat
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -103,6 +107,7 @@ class AuditTrailDataApi:
         """ # noqa: E501
 
         _param = self._create_audit_trail_report_serialize(
+            format=format,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -110,7 +115,7 @@ class AuditTrailDataApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "StringWrapper",
+            '200': "DocumentBuilderTaskWrapper",
             '402': None,
             '403': None,
             '401': None,
@@ -118,6 +123,7 @@ class AuditTrailDataApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -132,6 +138,7 @@ class AuditTrailDataApi:
     @validate_call
     def create_audit_trail_report_with_http_info(
         self,
+        format: Annotated[Optional[AuditReportFormat], Field(description="The output file format of the report. Defaults to XLSX.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -144,11 +151,13 @@ class AuditTrailDataApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[StringWrapper]:
-        """Generate the audit trail report
+    ) -> ApiResponse[DocumentBuilderTaskWrapper]:
+        """Start the audit trail report generation
 
-        Generates the audit trail report.
+        Starts generating the audit trail report (XLSX by default, or CSV) and saves it to My documents.
 
+        :param format: The output file format of the report. Defaults to XLSX.
+        :type format: AuditReportFormat
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -172,6 +181,7 @@ class AuditTrailDataApi:
         """ # noqa: E501
 
         _param = self._create_audit_trail_report_serialize(
+            format=format,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -179,7 +189,7 @@ class AuditTrailDataApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "StringWrapper",
+            '200': "DocumentBuilderTaskWrapper",
             '402': None,
             '403': None,
             '401': None,
@@ -187,6 +197,7 @@ class AuditTrailDataApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -201,6 +212,7 @@ class AuditTrailDataApi:
     @validate_call
     def create_audit_trail_report_without_preload_content(
         self,
+        format: Annotated[Optional[AuditReportFormat], Field(description="The output file format of the report. Defaults to XLSX.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -214,10 +226,12 @@ class AuditTrailDataApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Generate the audit trail report
+        """Start the audit trail report generation
 
-        Generates the audit trail report.
+        Starts generating the audit trail report (XLSX by default, or CSV) and saves it to My documents.
 
+        :param format: The output file format of the report. Defaults to XLSX.
+        :type format: AuditReportFormat
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -241,6 +255,7 @@ class AuditTrailDataApi:
         """ # noqa: E501
 
         _param = self._create_audit_trail_report_serialize(
+            format=format,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -248,7 +263,7 @@ class AuditTrailDataApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "StringWrapper",
+            '200': "DocumentBuilderTaskWrapper",
             '402': None,
             '403': None,
             '401': None,
@@ -256,6 +271,7 @@ class AuditTrailDataApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -265,6 +281,7 @@ class AuditTrailDataApi:
 
     def _create_audit_trail_report_serialize(
         self,
+        format,
         _request_auth,
         _content_type,
         _headers,
@@ -287,6 +304,10 @@ class AuditTrailDataApi:
 
         # process the path parameters
         # process the query parameters
+        if format is not None:
+            
+            _query_params.append(('format', format.value))
+            
         # process the header parameters
         # process the form parameters
         # process the body parameter
@@ -430,6 +451,7 @@ class AuditTrailDataApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -539,6 +561,7 @@ class AuditTrailDataApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -648,6 +671,7 @@ class AuditTrailDataApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -834,6 +858,7 @@ class AuditTrailDataApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -903,6 +928,7 @@ class AuditTrailDataApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -972,6 +998,7 @@ class AuditTrailDataApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1113,6 +1140,7 @@ class AuditTrailDataApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1189,6 +1217,7 @@ class AuditTrailDataApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1265,6 +1294,7 @@ class AuditTrailDataApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1352,6 +1382,281 @@ class AuditTrailDataApi:
 
 
     @validate_call
+    def get_audit_trail_report(
+        self,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> DocumentBuilderTaskWrapper:
+        """Get the audit trail report generation status
+
+        Returns the status of generating the audit trail report.
+
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_audit_trail_report_serialize(
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "DocumentBuilderTaskWrapper",
+            '402': None,
+            '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def get_audit_trail_report_with_http_info(
+        self,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[DocumentBuilderTaskWrapper]:
+        """Get the audit trail report generation status
+
+        Returns the status of generating the audit trail report.
+
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_audit_trail_report_serialize(
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "DocumentBuilderTaskWrapper",
+            '402': None,
+            '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def get_audit_trail_report_without_preload_content(
+        self,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Get the audit trail report generation status
+
+        Returns the status of generating the audit trail report.
+
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_audit_trail_report_serialize(
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "DocumentBuilderTaskWrapper",
+            '402': None,
+            '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _get_audit_trail_report_serialize(
+        self,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
+        ]
+
+
+        resource_path = "/api/2.0/security/audit/events/report"
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path=resource_path,
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
     def get_audit_trail_types(
         self,
         _request_timeout: Union[
@@ -1408,6 +1713,7 @@ class AuditTrailDataApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1476,6 +1782,7 @@ class AuditTrailDataApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1544,6 +1851,7 @@ class AuditTrailDataApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1678,6 +1986,7 @@ class AuditTrailDataApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1747,6 +2056,7 @@ class AuditTrailDataApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1816,6 +2126,7 @@ class AuditTrailDataApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1955,6 +2266,7 @@ class AuditTrailDataApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2029,6 +2341,7 @@ class AuditTrailDataApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2103,6 +2416,7 @@ class AuditTrailDataApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2179,6 +2493,274 @@ class AuditTrailDataApi:
 
         return self.api_client.param_serialize(
             method='POST',
+            resource_path=resource_path,
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def terminate_audit_trail_report(
+        self,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> None:
+        """Terminate the audit trail report generation
+
+        Terminates generating the audit trail report.
+
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._terminate_audit_trail_report_serialize(
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': None,
+            '402': None,
+            '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def terminate_audit_trail_report_with_http_info(
+        self,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[None]:
+        """Terminate the audit trail report generation
+
+        Terminates generating the audit trail report.
+
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._terminate_audit_trail_report_serialize(
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': None,
+            '402': None,
+            '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def terminate_audit_trail_report_without_preload_content(
+        self,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Terminate the audit trail report generation
+
+        Terminates generating the audit trail report.
+
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._terminate_audit_trail_report_serialize(
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': None,
+            '402': None,
+            '403': None,
+            '401': None,
+            '429': None,
+            '502': None,
+            '503': None,
+        }
+
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _terminate_audit_trail_report_serialize(
+        self,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
+        ]
+
+
+        resource_path = "/api/2.0/security/audit/events/report"
+
+        return self.api_client.param_serialize(
+            method='DELETE',
             resource_path=resource_path,
             path_params=_path_params,
             query_params=_query_params,

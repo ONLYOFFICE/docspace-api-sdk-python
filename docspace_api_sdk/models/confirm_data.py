@@ -30,9 +30,9 @@ class ConfirmData(BaseModel):
     """
     The additional confirmation data required for authentication.
     """ # noqa: E501
-    email: Optional[StrictStr] = Field(default=None, description="The email address to confirm the user's identity.")
-    first: Optional[StrictBool] = Field(default=None, description="Specifies whether this is the first access to the user's account.")
-    key: Optional[StrictStr] = Field(default=None, description="The unique confirmation key for validating user identity.")
+    email: Optional[StrictStr] = Field(default=None, description="The email address to confirm the user's identity.", json_schema_extra={"examples": ["user@example.com"]})
+    first: Optional[StrictBool] = Field(default=None, description="Specifies whether this is the first access to the user's account.", json_schema_extra={"examples": [True]})
+    key: Optional[StrictStr] = Field(default=None, description="The unique confirmation key for validating user identity.", json_schema_extra={"examples": ["abc123def456"]})
     __properties: ClassVar[List[str]] = ["email", "first", "key"]
 
     model_config = ConfigDict(

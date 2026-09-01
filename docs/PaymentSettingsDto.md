@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **feedback_and_support_url** | **str** | The URL for accessing the feedback and support resources. | [optional] 
 **buy_url** | **str** | The URL for purchasing or upgrading the product. | 
 **standalone** | **bool** | Indicates whether the system is running in standalone mode. | 
-**current_license** | [**CurrentLicenseInfo**](CurrentLicenseInfo.md) |  | 
+**current_license** | [**CurrentLicenseInfo**](CurrentLicenseInfo.md) | The current license information. | 
 **max** | **int** | The maximum quota quantity. | 
 
 ## Example

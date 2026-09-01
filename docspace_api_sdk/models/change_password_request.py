@@ -30,8 +30,8 @@ class ChangePasswordRequest(BaseModel):
     """
     The request parameters for updating a user password.
     """ # noqa: E501
-    password: Optional[StrictStr] = Field(default=None, description="The user password.")
-    password_hash: Optional[StrictStr] = Field(default=None, description="The user password hash.", alias="passwordHash")
+    password: Optional[StrictStr] = Field(default=None, description="The user password.", json_schema_extra={"examples": ["P@ssw0rd"]})
+    password_hash: Optional[StrictStr] = Field(default=None, description="The user password hash.", alias="passwordHash", json_schema_extra={"examples": ["5f4dcc3b5aa765d61d8327deb882cf99"]})
     __properties: ClassVar[List[str]] = ["password", "passwordHash"]
 
     model_config = ConfigDict(

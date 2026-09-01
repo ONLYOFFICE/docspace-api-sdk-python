@@ -6,7 +6,7 @@ The encryption settings.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **password** | **str** | The encryption password. | [optional] 
-**status** | [**EncryprtionStatus**](EncryprtionStatus.md) |  | [optional] 
+**status** | [**EncryprtionStatus**](EncryprtionStatus.md) | The encryption status. | [optional] 
 **notify_users** | **bool** | Specifies if the users will be notified about the encryption operation or not. | [optional] 
 
 ## Example

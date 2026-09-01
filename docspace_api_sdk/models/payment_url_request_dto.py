@@ -22,7 +22,7 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictInt
-from typing import Any, ClassVar, Dict, List, Optional
+from typing import Any, ClassVar, Dict, List
 from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
@@ -31,9 +31,9 @@ class PaymentUrlRequestDto(BaseModel):
     """
     The request parameters for the payment URL configuration with quantity information.
     """ # noqa: E501
-    back_url: Annotated[str, Field(min_length=0, strict=True, max_length=255)] = Field(description="The URL where the user will be redirected after payment cancellation.", alias="backUrl")
-    success_url: Annotated[str, Field(min_length=0, strict=True, max_length=255)] = Field(description="The URL where the user will be redirected after successful payment.", alias="successUrl")
-    quantity: Optional[Dict[str, StrictInt]] = Field(default=None, description="The payment quantity.")
+    back_url: Annotated[str, Field(min_length=0, strict=True, max_length=255)] = Field(description="The URL where the user will be redirected after payment cancellation.", alias="backUrl", json_schema_extra={"examples": ["https://example.com/payment/back"]})
+    success_url: Annotated[str, Field(min_length=0, strict=True, max_length=255)] = Field(description="The URL where the user will be redirected after successful payment.", alias="successUrl", json_schema_extra={"examples": ["https://example.com/payment/success"]})
+    quantity: Dict[str, StrictInt] = Field(description="The payment quantity.", json_schema_extra={"examples": [{"admin": 1}]})
     __properties: ClassVar[List[str]] = ["backUrl", "successUrl", "quantity"]
 
     model_config = ConfigDict(
@@ -75,11 +75,6 @@ class PaymentUrlRequestDto(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # set to None if quantity (nullable) is None
-        # and model_fields_set contains the field
-        if self.quantity is None and "quantity" in self.model_fields_set:
-            _dict['quantity'] = None
-
         return _dict
 
     @classmethod

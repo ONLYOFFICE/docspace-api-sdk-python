@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **email** | **str** | The email address. | [optional] 
 **id** | **UUID** | The ID of the user to share a room with. | [optional] 
-**access** | [**FileShare**](FileShare.md) |  | [optional] 
+**access** | [**FileShare**](FileShare.md) | The room sharing rights. | [optional] 
 
 ## Example
 

@@ -5,9 +5,9 @@ Represents information about the transaction applied to an account.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**currency** | **str** | The three-character ISO 4217 currency symbol. | [optional] 
+**amount** | **float** | The amount in the specified currency. | [optional] 
 **var_date** | **datetime** | The date and time when the credit transaction occurred. | [optional] 
-**currency** | **str** | The three-character ISO 4217 currency symbol of the transaction. | [optional] 
-**amount** | **float** | Amount of the transaction. | [optional] 
 
 ## Example
 

@@ -30,11 +30,11 @@ class UserConfig(BaseModel):
     """
     The configuration parameters of the user currently viewing or editing the document.
     """ # noqa: E501
-    id: Optional[StrictStr] = Field(default=None, description="The user ID.")
-    name: Optional[StrictStr] = Field(default=None, description="The full name of the user.")
-    image: Optional[StrictStr] = Field(default=None, description="The path to the user's avatar.")
-    roles: Optional[List[StrictStr]] = Field(default=None, description="Roles")
-    customer_id: Optional[StrictStr] = Field(default=None, description="Customer identifier associated with the user.", alias="customerId")
+    id: Optional[StrictStr] = Field(default=None, description="The user ID.", json_schema_extra={"examples": ["user_0001"]})
+    name: Optional[StrictStr] = Field(default=None, description="The full name of the user.", json_schema_extra={"examples": ["John Doe"]})
+    image: Optional[StrictStr] = Field(default=None, description="The path to the user's avatar.", json_schema_extra={"examples": ["https://portal.example.com/avatar/user_0001.png"]})
+    roles: Optional[List[StrictStr]] = Field(default=None, description="Roles", json_schema_extra={"examples": [["admin", "editor"]]})
+    customer_id: Optional[StrictStr] = Field(default=None, description="Customer identifier associated with the user.", alias="customerId", json_schema_extra={"examples": ["cust_001"]})
     __properties: ClassVar[List[str]] = ["id", "name", "image", "roles", "customerId"]
 
     model_config = ConfigDict(

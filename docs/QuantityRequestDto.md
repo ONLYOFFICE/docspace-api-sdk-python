@@ -5,7 +5,7 @@ The request parameters for specifying payment quantity.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**quantity** | **Dict[str, int]** | The mapping of item identifiers to their respective quantities in the payment. | [optional] 
+**quantity** | **Dict[str, int]** | The mapping of item identifiers to their respective quantities in the payment. | 
 
 ## Example
 

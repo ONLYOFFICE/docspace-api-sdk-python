@@ -30,10 +30,10 @@ class ExchangeToken200Response(BaseModel):
     """
     ExchangeToken200Response
     """ # noqa: E501
-    access_token: Optional[StrictStr] = Field(default=None, description="The access token issued by the authorization server.")
-    token_type: Optional[StrictStr] = Field(default=None, description="The type of token issued, typically 'Bearer'.")
-    expires_in: Optional[StrictInt] = Field(default=None, description="The number of seconds until the access token expires.")
-    refresh_token: Optional[StrictStr] = Field(default=None, description="The token used to obtain a new access token when the current one expires.")
+    access_token: Optional[StrictStr] = Field(default=None, description="The access token issued by the authorization server.", json_schema_extra={"examples": ["eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."]})
+    token_type: Optional[StrictStr] = Field(default=None, description="The type of token issued, typically 'Bearer'.", json_schema_extra={"examples": ["Bearer"]})
+    expires_in: Optional[StrictInt] = Field(default=None, description="The number of seconds until the access token expires.", json_schema_extra={"examples": [3600]})
+    refresh_token: Optional[StrictStr] = Field(default=None, description="The token used to obtain a new access token when the current one expires.", json_schema_extra={"examples": ["def502..."]})
     __properties: ClassVar[List[str]] = ["access_token", "token_type", "expires_in", "refresh_token"]
 
     model_config = ConfigDict(

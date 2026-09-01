@@ -32,7 +32,7 @@ class NewItemsDtoFileEntryBaseDto(BaseModel):
     """
     The new item parameters.
     """ # noqa: E501
-    var_date: ApiDateTime = Field(alias="date")
+    var_date: ApiDateTime = Field(description="The date and time when the new item was created.", alias="date")
     items: Optional[List[FileEntryBaseDto]] = Field(description="The list of items.")
     __properties: ClassVar[List[str]] = ["date", "items"]
 

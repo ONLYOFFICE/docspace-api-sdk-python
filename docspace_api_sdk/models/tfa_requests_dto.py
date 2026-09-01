@@ -32,11 +32,11 @@ class TfaRequestsDto(BaseModel):
     """
     The request parameters for configuring the Two-Factor Authentication (TFA) settings.
     """ # noqa: E501
-    type: Optional[TfaRequestsDtoType] = None
-    id: Optional[UUID] = Field(default=None, description="The ID of the user for whom the TFA settings are being configured.")
-    trusted_ips: Optional[List[StrictStr]] = Field(default=None, description="The list of IP addresses that bypass TFA verification.", alias="trustedIps")
-    mandatory_users: Optional[List[UUID]] = Field(default=None, description="The list of user IDs for whom TFA is mandatory.", alias="mandatoryUsers")
-    mandatory_groups: Optional[List[UUID]] = Field(default=None, description="The list group IDs whose members must use TFA.", alias="mandatoryGroups")
+    type: Optional[TfaRequestsDtoType] = Field(default=None, description="The two-factor authentication type.")
+    id: Optional[UUID] = Field(default=None, description="The ID of the user for whom the TFA settings are being configured.", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000000"]})
+    trusted_ips: Optional[List[StrictStr]] = Field(default=None, description="The list of IP addresses that bypass TFA verification. Each entry is a single address, an inclusive  from-to range or a CIDR block.", alias="trustedIps", json_schema_extra={"examples": [["192.0.2.1", "198.51.100.1-198.51.100.20", "203.0.113.0/24"]]})
+    mandatory_users: Optional[List[UUID]] = Field(default=None, description="The list of user IDs for whom TFA is mandatory.", alias="mandatoryUsers", json_schema_extra={"examples": [["00000000-0000-0000-0000-000000000000"]]})
+    mandatory_groups: Optional[List[UUID]] = Field(default=None, description="The list group IDs whose members must use TFA.", alias="mandatoryGroups", json_schema_extra={"examples": [["00000000-0000-0000-0000-000000000000"]]})
     __properties: ClassVar[List[str]] = ["type", "id", "trustedIps", "mandatoryUsers", "mandatoryGroups"]
 
     model_config = ConfigDict(

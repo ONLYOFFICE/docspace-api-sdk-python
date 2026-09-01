@@ -30,13 +30,13 @@ class CheckConversionRequestDtoInteger(BaseModel):
     """
     The parameters for checking file conversion.
     """ # noqa: E501
-    file_id: Optional[StrictInt] = Field(default=None, description="The file ID to check conversion proccess.", alias="fileId")
-    sync: Optional[StrictBool] = Field(default=None, description="Specifies if the conversion process is synchronous or not.")
-    start_convert: Optional[StrictBool] = Field(default=None, description="Specifies whether to start a conversion process or not.", alias="startConvert")
-    version: Optional[StrictInt] = Field(default=None, description="The file version that is converted.")
-    password: Optional[StrictStr] = Field(default=None, description="The password of the converted file.")
-    output_type: Optional[StrictStr] = Field(default=None, description="The conversion output type.", alias="outputType")
-    create_new_if_exist: Optional[StrictBool] = Field(default=None, description="Specifies whether to create a new file if it exists or not.", alias="createNewIfExist")
+    file_id: Optional[StrictInt] = Field(default=None, description="The file ID to check conversion proccess.", alias="fileId", json_schema_extra={"examples": [1]})
+    sync: Optional[StrictBool] = Field(default=None, description="Specifies if the conversion process is synchronous or not.", json_schema_extra={"examples": [False]})
+    start_convert: Optional[StrictBool] = Field(default=None, description="Specifies whether to start a conversion process or not.", alias="startConvert", json_schema_extra={"examples": [True]})
+    version: Optional[StrictInt] = Field(default=None, description="The file version that is converted.", json_schema_extra={"examples": [1]})
+    password: Optional[StrictStr] = Field(default=None, description="The password of the converted file.", json_schema_extra={"examples": ["password123"]})
+    output_type: Optional[StrictStr] = Field(default=None, description="The conversion output type.", alias="outputType", json_schema_extra={"examples": ["pdf"]})
+    create_new_if_exist: Optional[StrictBool] = Field(default=None, description="Specifies whether to create a new file if it exists or not.", alias="createNewIfExist", json_schema_extra={"examples": [False]})
     __properties: ClassVar[List[str]] = ["fileId", "sync", "startConvert", "version", "password", "outputType", "createNewIfExist"]
 
     model_config = ConfigDict(

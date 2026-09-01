@@ -30,11 +30,11 @@ class GetReferenceDataDtoInteger(BaseModel):
     """
     The request parameters for getting reference data.
     """ # noqa: E501
-    file_key: Optional[StrictStr] = Field(description="The unique document identifier used by the service to get a link to the file.", alias="fileKey")
-    instance_id: Optional[StrictStr] = Field(description="The unique system identifier.", alias="instanceId")
-    source_file_id: Optional[StrictInt] = Field(default=None, description="The source file ID.", alias="sourceFileId")
-    path: Optional[StrictStr] = Field(default=None, description="The file name or relative path for the formula editor.")
-    link: Optional[StrictStr] = Field(default=None, description="The file link.")
+    file_key: Optional[StrictStr] = Field(description="The unique document identifier used by the service to get a link to the file.", alias="fileKey", json_schema_extra={"examples": ["doc_key_123"]})
+    instance_id: Optional[StrictStr] = Field(description="The unique system identifier.", alias="instanceId", json_schema_extra={"examples": ["doc_key_123"]})
+    source_file_id: Optional[StrictInt] = Field(default=None, description="The source file ID.", alias="sourceFileId", json_schema_extra={"examples": [1]})
+    path: Optional[StrictStr] = Field(default=None, description="The file name or relative path for the formula editor.", json_schema_extra={"examples": ["My Document"]})
+    link: Optional[StrictStr] = Field(default=None, description="The file link.", json_schema_extra={"examples": ["https://example.com"]})
     __properties: ClassVar[List[str]] = ["fileKey", "instanceId", "sourceFileId", "path", "link"]
 
     model_config = ConfigDict(

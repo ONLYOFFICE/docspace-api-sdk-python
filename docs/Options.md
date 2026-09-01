@@ -5,7 +5,7 @@ The document options.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**watermark_on_draw** | [**WatermarkOnDraw**](WatermarkOnDraw.md) |  | [optional] 
+**watermark_on_draw** | [**WatermarkOnDraw**](WatermarkOnDraw.md) | The document watermark parameters. | [optional] 
 
 ## Example
 

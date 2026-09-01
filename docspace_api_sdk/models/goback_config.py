@@ -30,7 +30,7 @@ class GobackConfig(BaseModel):
     """
     The settings for the Open file location menu button and upper right corner button.
     """ # noqa: E501
-    url: Optional[StrictStr] = Field(default=None, description="The absolute URL to the website address which will be opened when clicking the Open file location menu button.")
+    url: Optional[StrictStr] = Field(default=None, description="The absolute URL to the website address which will be opened when clicking the Open file location menu button.", json_schema_extra={"examples": ["https://portal.example.com/files/location"]})
     __properties: ClassVar[List[str]] = ["url"]
 
     model_config = ConfigDict(

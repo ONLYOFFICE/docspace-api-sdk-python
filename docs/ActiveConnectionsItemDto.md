@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **city** | **str** | The active connection city. | [optional] 
 **browser** | **str** | The active connection browser. | [optional] 
 **platform** | **str** | The active connection platform. | [optional] 
-**var_date** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] 
+**var_date** | [**ApiDateTime**](ApiDateTime.md) | The API date and time parameters. | [optional] 
 **page** | **str** | The active connection page. | [optional] 
 
 ## Example

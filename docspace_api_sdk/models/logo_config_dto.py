@@ -30,12 +30,12 @@ class LogoConfigDto(BaseModel):
     """
     The logo config parameters.
     """ # noqa: E501
-    image: Optional[StrictStr] = Field(default=None, description="The image of the logo.")
-    image_dark: Optional[StrictStr] = Field(default=None, description="The dark image of the logo.", alias="imageDark")
-    image_light: Optional[StrictStr] = Field(default=None, description="The light image of the logo.", alias="imageLight")
-    image_embedded: Optional[StrictStr] = Field(default=None, description="The embedded image of the logo.", alias="imageEmbedded")
-    url: Optional[StrictStr] = Field(default=None, description="The url link of the logo.")
-    visible: Optional[StrictBool] = Field(default=None, description="Specifies if the logo is visible.")
+    image: Optional[StrictStr] = Field(default=None, description="The image of the logo.", json_schema_extra={"examples": ["http://localhost/logo.png"]})
+    image_dark: Optional[StrictStr] = Field(default=None, description="The dark image of the logo.", alias="imageDark", json_schema_extra={"examples": ["http://localhost/logo-dark.png"]})
+    image_light: Optional[StrictStr] = Field(default=None, description="The light image of the logo.", alias="imageLight", json_schema_extra={"examples": ["http://localhost/logo-light.png"]})
+    image_embedded: Optional[StrictStr] = Field(default=None, description="The embedded image of the logo.", alias="imageEmbedded", json_schema_extra={"examples": ["http://localhost/logo-embedded.png"]})
+    url: Optional[StrictStr] = Field(default=None, description="The url link of the logo.", json_schema_extra={"examples": ["http://localhost"]})
+    visible: Optional[StrictBool] = Field(default=None, description="Specifies if the logo is visible.", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["image", "imageDark", "imageLight", "imageEmbedded", "url", "visible"]
 
     model_config = ConfigDict(

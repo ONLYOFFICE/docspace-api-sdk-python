@@ -33,17 +33,17 @@ class RoomTemplateDto(BaseModel):
     """
     The room template parameters.
     """ # noqa: E501
-    room_id: StrictInt = Field(description="The room template ID.", alias="roomId")
-    title: Optional[StrictStr] = Field(default=None, description="The room template title.")
-    logo: Optional[LogoRequest] = None
-    copy_logo: Optional[StrictBool] = Field(default=None, description="Specifies whether to copy room logo or not.", alias="copyLogo")
-    share: Optional[List[StrictStr]] = Field(default=None, description="The collection of email addresses of users with whom to share a room.")
-    groups: Optional[List[UUID]] = Field(default=None, description="The collection of groups with whom to share a room.")
-    public: Optional[StrictBool] = Field(default=None, description="Specifies whether the room template is public or not.")
-    tags: Optional[List[StrictStr]] = Field(default=None, description="The collection of tags.")
-    color: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=6)]] = Field(default=None, description="The color of the room template.")
-    cover: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=50)]] = Field(default=None, description="The cover of the room template.")
-    quota: Optional[StrictInt] = Field(default=None, description="Room quota")
+    room_id: StrictInt = Field(description="The room template ID.", alias="roomId", json_schema_extra={"examples": [1]})
+    title: Annotated[str, Field(min_length=0, strict=True, max_length=400)] = Field(description="The room template title.", json_schema_extra={"examples": ["My Document"]})
+    logo: Optional[LogoRequest] = Field(default=None, description="The logo request parameters.")
+    copy_logo: Optional[StrictBool] = Field(default=None, description="Specifies whether to copy room logo or not.", alias="copyLogo", json_schema_extra={"examples": [True]})
+    share: Optional[List[StrictStr]] = Field(default=None, description="The collection of email addresses of users with whom to share a room.", json_schema_extra={"examples": [["user1@example.com", "user2@example.com"]]})
+    groups: Optional[List[UUID]] = Field(default=None, description="The collection of groups with whom to share a room.", json_schema_extra={"examples": [["00000000-0000-0000-0000-000000000000"]]})
+    public: Optional[StrictBool] = Field(default=None, description="Specifies whether the room template is public or not.", json_schema_extra={"examples": [True]})
+    tags: Optional[List[StrictStr]] = Field(default=None, description="The collection of tags.", json_schema_extra={"examples": [["tag1", "tag2"]]})
+    color: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=6)]] = Field(default=None, description="The color of the room template.", json_schema_extra={"examples": ["#FF0000"]})
+    cover: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=50)]] = Field(default=None, description="The cover of the room template.", json_schema_extra={"examples": ["cover1"]})
+    quota: Optional[StrictInt] = Field(default=None, description="Room quota", json_schema_extra={"examples": [10485760]})
     __properties: ClassVar[List[str]] = ["roomId", "title", "logo", "copyLogo", "share", "groups", "public", "tags", "color", "cover", "quota"]
 
     model_config = ConfigDict(
@@ -88,11 +88,6 @@ class RoomTemplateDto(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of logo
         if self.logo:
             _dict['logo'] = self.logo.to_dict()
-        # set to None if title (nullable) is None
-        # and model_fields_set contains the field
-        if self.title is None and "title" in self.model_fields_set:
-            _dict['title'] = None
-
         # set to None if share (nullable) is None
         # and model_fields_set contains the field
         if self.share is None and "share" in self.model_fields_set:

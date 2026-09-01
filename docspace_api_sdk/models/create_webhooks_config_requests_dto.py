@@ -32,13 +32,13 @@ class CreateWebhooksConfigRequestsDto(BaseModel):
     """
     The request parameters for creating the webhook configuration.
     """ # noqa: E501
-    name: Annotated[str, Field(min_length=0, strict=True, max_length=50)] = Field(description="The human-readable name of the webhook configuration.")
-    uri: Annotated[str, Field(min_length=1, strict=True)] = Field(description="The destination URL where the webhook events will be sent.")
-    secret_key: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=50)]] = Field(default=None, description="The webhook secret key used to sign the webhook payloads for the security verification.", alias="secretKey")
-    enabled: Optional[StrictBool] = Field(default=None, description="Specifies whether the webhook configuration is active or not.")
-    ssl: Optional[StrictBool] = Field(default=None, description="Specifies whether the SSL certificate verification is required or not.")
-    triggers: Optional[WebhookTrigger] = None
-    target_id: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="Target ID", alias="targetId")
+    name: Annotated[str, Field(min_length=0, strict=True, max_length=50)] = Field(description="The human-readable name of the webhook configuration.", json_schema_extra={"examples": ["Production Webhook"]})
+    uri: Annotated[str, Field(min_length=1, strict=True)] = Field(description="The destination URL where the webhook events will be sent.", json_schema_extra={"examples": ["https://example.com/webhook"]})
+    secret_key: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=50)]] = Field(default=None, description="The webhook secret key used to sign the webhook payloads for the security verification.", alias="secretKey", json_schema_extra={"examples": ["my-secret-key-123"]})
+    enabled: Optional[StrictBool] = Field(default=None, description="Specifies whether the webhook configuration is active or not.", json_schema_extra={"examples": [True]})
+    ssl: Optional[StrictBool] = Field(default=None, description="Specifies whether the SSL certificate verification is required or not.", json_schema_extra={"examples": [True]})
+    triggers: Optional[WebhookTrigger] = Field(default=None, description="The webhook trigger type.")
+    target_id: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="Target ID", alias="targetId", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000001"]})
     __properties: ClassVar[List[str]] = ["name", "uri", "secretKey", "enabled", "ssl", "triggers", "targetId"]
 
     model_config = ConfigDict(

@@ -31,12 +31,13 @@ class FilesStatisticsResultDto(BaseModel):
     """
     The file statistics result parameters.
     """ # noqa: E501
-    my_documents_used_space: Optional[FilesStatisticsFolder] = Field(default=None, alias="myDocumentsUsedSpace")
-    trash_used_space: Optional[FilesStatisticsFolder] = Field(default=None, alias="trashUsedSpace")
-    archive_used_space: Optional[FilesStatisticsFolder] = Field(default=None, alias="archiveUsedSpace")
-    rooms_used_space: Optional[FilesStatisticsFolder] = Field(default=None, alias="roomsUsedSpace")
-    ai_agents_used_space: Optional[FilesStatisticsFolder] = Field(default=None, alias="aiAgentsUsedSpace")
-    __properties: ClassVar[List[str]] = ["myDocumentsUsedSpace", "trashUsedSpace", "archiveUsedSpace", "roomsUsedSpace", "aiAgentsUsedSpace"]
+    my_documents_used_space: Optional[FilesStatisticsFolder] = Field(default=None, description="The used space of files in the \\My Documents\\ section.", alias="myDocumentsUsedSpace")
+    trash_used_space: Optional[FilesStatisticsFolder] = Field(default=None, description="The used space of files in the \\Trash\\ section.", alias="trashUsedSpace")
+    archive_used_space: Optional[FilesStatisticsFolder] = Field(default=None, description="The used space of files in the \\Archive\\ section.", alias="archiveUsedSpace")
+    rooms_used_space: Optional[FilesStatisticsFolder] = Field(default=None, description="The used space of files in the \\Rooms\\ section.", alias="roomsUsedSpace")
+    ai_agents_used_space: Optional[FilesStatisticsFolder] = Field(default=None, description="The used space of files in the \\AI agents\\ section.", alias="aiAgentsUsedSpace")
+    forms_used_space: Optional[FilesStatisticsFolder] = Field(default=None, description="The used space of files in the \\Forms\\ section.", alias="formsUsedSpace")
+    __properties: ClassVar[List[str]] = ["myDocumentsUsedSpace", "trashUsedSpace", "archiveUsedSpace", "roomsUsedSpace", "aiAgentsUsedSpace", "formsUsedSpace"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -92,6 +93,9 @@ class FilesStatisticsResultDto(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of ai_agents_used_space
         if self.ai_agents_used_space:
             _dict['aiAgentsUsedSpace'] = self.ai_agents_used_space.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of forms_used_space
+        if self.forms_used_space:
+            _dict['formsUsedSpace'] = self.forms_used_space.to_dict()
         return _dict
 
     @classmethod
@@ -109,7 +113,8 @@ class FilesStatisticsResultDto(BaseModel):
             "trashUsedSpace": FilesStatisticsFolder.from_dict(obj["trashUsedSpace"]) if obj.get("trashUsedSpace") is not None else None,
             "archiveUsedSpace": FilesStatisticsFolder.from_dict(obj["archiveUsedSpace"]) if obj.get("archiveUsedSpace") is not None else None,
             "roomsUsedSpace": FilesStatisticsFolder.from_dict(obj["roomsUsedSpace"]) if obj.get("roomsUsedSpace") is not None else None,
-            "aiAgentsUsedSpace": FilesStatisticsFolder.from_dict(obj["aiAgentsUsedSpace"]) if obj.get("aiAgentsUsedSpace") is not None else None
+            "aiAgentsUsedSpace": FilesStatisticsFolder.from_dict(obj["aiAgentsUsedSpace"]) if obj.get("aiAgentsUsedSpace") is not None else None,
+            "formsUsedSpace": FilesStatisticsFolder.from_dict(obj["formsUsedSpace"]) if obj.get("formsUsedSpace") is not None else None
         })
         return _obj
 

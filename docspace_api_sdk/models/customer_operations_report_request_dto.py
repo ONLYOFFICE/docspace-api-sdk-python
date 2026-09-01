@@ -34,16 +34,16 @@ class CustomerOperationsReportRequestDto(BaseModel):
     """
     The request parameters for generating a report on client operations.
     """ # noqa: E501
-    service_name: Optional[StrictStr] = Field(default=None, description="The service name.", alias="serviceName")
-    start_date: Optional[datetime] = Field(default=None, description="The report start date.", alias="startDate")
-    end_date: Optional[datetime] = Field(default=None, description="The report end date.", alias="endDate")
-    participant_name: Optional[StrictStr] = Field(default=None, description="The participant name.", alias="participantName")
-    credit: Optional[StrictBool] = Field(default=None, description="Specifies whether to include credit operations in the report.")
-    debit: Optional[StrictBool] = Field(default=None, description="Specifies whether to include debit operations in the report.")
-    type: Optional[OperationType] = None
-    status: Optional[OperationStatus] = None
-    order_by: Optional[StrictStr] = Field(default=None, description="The field to order by.", alias="orderBy")
-    order_type: Optional[OperationOrderType] = Field(default=None, alias="orderType")
+    service_name: Optional[List[StrictStr]] = Field(default=None, description="The service name list. A single string is also accepted for backward compatibility.", alias="serviceName", json_schema_extra={"examples": ["[backup]"]})
+    start_date: Optional[datetime] = Field(default=None, description="The report start date.", alias="startDate", json_schema_extra={"examples": ["2024-01-01T00:00:00Z"]})
+    end_date: Optional[datetime] = Field(default=None, description="The report end date.", alias="endDate", json_schema_extra={"examples": ["2024-01-31T23:59:59Z"]})
+    participant_name: Optional[StrictStr] = Field(default=None, description="The participant name.", alias="participantName", json_schema_extra={"examples": ["My Own Corporation"]})
+    credit: Optional[StrictBool] = Field(default=None, description="Specifies whether to include credit operations in the report.", json_schema_extra={"examples": [True]})
+    debit: Optional[StrictBool] = Field(default=None, description="Specifies whether to include debit operations in the report.", json_schema_extra={"examples": [False]})
+    type: Optional[OperationType] = Field(default=None, description="The operation type to filter by.")
+    status: Optional[OperationStatus] = Field(default=None, description="The operation status to filter by.")
+    order_by: Optional[StrictStr] = Field(default=None, description="The field to order by.", alias="orderBy", json_schema_extra={"examples": ["StartDate"]})
+    order_type: Optional[OperationOrderType] = Field(default=None, description="Order direction: Ascending or Descending.", alias="orderType")
     __properties: ClassVar[List[str]] = ["serviceName", "startDate", "endDate", "participantName", "credit", "debit", "type", "status", "orderBy", "orderType"]
 
     model_config = ConfigDict(

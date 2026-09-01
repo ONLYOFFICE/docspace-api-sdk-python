@@ -30,8 +30,8 @@ class TenantQuotaSettingsRequestsDto(BaseModel):
     """
     The request parameters for managing the tenant storage quota settings in a multi-tenant system.
     """ # noqa: E501
-    tenant_id: StrictInt = Field(description="The ID of the tenant whose quota is being configured.", alias="tenantId")
-    quota: Optional[StrictInt] = Field(default=None, description="The storage quota limit in bytes allocated to the tenant.")
+    tenant_id: StrictInt = Field(description="The ID of the tenant whose quota is being configured.", alias="tenantId", json_schema_extra={"examples": [1]})
+    quota: Optional[StrictInt] = Field(default=None, description="The storage quota limit in bytes allocated to the tenant.", json_schema_extra={"examples": [1048576]})
     __properties: ClassVar[List[str]] = ["tenantId", "quota"]
 
     model_config = ConfigDict(

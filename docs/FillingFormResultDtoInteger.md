@@ -6,9 +6,9 @@ The parameters of the form filling result.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **form_number** | **int** | The filling form number. | 
-**completed_form** | [**FileDtoInteger**](FileDtoInteger.md) |  | [optional] 
-**original_form** | [**FileDtoInteger**](FileDtoInteger.md) |  | [optional] 
-**manager** | [**EmployeeFullDto**](EmployeeFullDto.md) |  | [optional] 
+**completed_form** | [**FileDtoInteger**](FileDtoInteger.md) | The file parameters. | [optional] 
+**original_form** | [**FileDtoInteger**](FileDtoInteger.md) | The file parameters. | [optional] 
+**manager** | [**EmployeeFullDto**](EmployeeFullDto.md) | The full list of user parameters. | [optional] 
 **room_id** | **int** | The room ID where filling the form. | 
 **is_room_member** | **bool** | Specifies if the manager who fills the form is a room member or not. | [optional] 
 

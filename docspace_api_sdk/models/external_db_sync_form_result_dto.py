@@ -30,10 +30,10 @@ class ExternalDbSyncFormResultDto(BaseModel):
     """
     The result of an external DB synchronization for a single form.
     """ # noqa: E501
-    id: Optional[StrictInt] = Field(default=None, description="The form file ID.")
-    title: Optional[StrictStr] = Field(default=None, description="The form file title.")
-    success: Optional[StrictBool] = Field(default=None, description="Specifies whether the synchronization succeeded for this form.")
-    error: Optional[StrictStr] = Field(default=None, description="The error message if the synchronization failed for this form.")
+    id: Optional[StrictInt] = Field(default=None, description="The form file ID.", json_schema_extra={"examples": [42]})
+    title: Optional[StrictStr] = Field(default=None, description="The form file title.", json_schema_extra={"examples": ["Application.pdf"]})
+    success: Optional[StrictBool] = Field(default=None, description="Specifies whether the synchronization succeeded for this form.", json_schema_extra={"examples": [True]})
+    error: Optional[StrictStr] = Field(default=None, description="The error message if the synchronization failed for this form.", json_schema_extra={"examples": ["Connection refused"]})
     __properties: ClassVar[List[str]] = ["id", "title", "success", "error"]
 
     model_config = ConfigDict(

@@ -30,13 +30,13 @@ class AdditionalWhiteLabelSettingsDto(BaseModel):
     """
     The additional white label settings parameters.
     """ # noqa: E501
-    start_docs_enabled: StrictBool = Field(description="Specifies if the sample documents are displayed or hidden.", alias="startDocsEnabled")
-    help_center_enabled: StrictBool = Field(description="Specifies if the Help Center link is available or not.", alias="helpCenterEnabled")
-    feedback_and_support_enabled: StrictBool = Field(description="Specifies if the Feedback & Support link is available or not.", alias="feedbackAndSupportEnabled")
-    user_forum_enabled: StrictBool = Field(description="Specifies if the user forum is available or not.", alias="userForumEnabled")
-    video_guides_enabled: StrictBool = Field(description="Specifies if the Video Guides link is available or not.", alias="videoGuidesEnabled")
-    license_agreements_enabled: StrictBool = Field(description="Specifies if the License Agreements link is available or not.", alias="licenseAgreementsEnabled")
-    is_default: StrictBool = Field(description="Specifies if the additional white label settings are default or not.", alias="isDefault")
+    start_docs_enabled: StrictBool = Field(description="Specifies if the sample documents are displayed or hidden.", alias="startDocsEnabled", json_schema_extra={"examples": [True]})
+    help_center_enabled: StrictBool = Field(description="Specifies if the Help Center link is available or not.", alias="helpCenterEnabled", json_schema_extra={"examples": [True]})
+    feedback_and_support_enabled: StrictBool = Field(description="Specifies if the Feedback & Support link is available or not.", alias="feedbackAndSupportEnabled", json_schema_extra={"examples": [True]})
+    user_forum_enabled: StrictBool = Field(description="Specifies if the user forum is available or not.", alias="userForumEnabled", json_schema_extra={"examples": [True]})
+    video_guides_enabled: StrictBool = Field(description="Specifies if the Video Guides link is available or not.", alias="videoGuidesEnabled", json_schema_extra={"examples": [True]})
+    license_agreements_enabled: StrictBool = Field(description="Specifies if the License Agreements link is available or not.", alias="licenseAgreementsEnabled", json_schema_extra={"examples": [True]})
+    is_default: StrictBool = Field(description="Specifies if the additional white label settings are default or not.", alias="isDefault", json_schema_extra={"examples": [False]})
     __properties: ClassVar[List[str]] = ["startDocsEnabled", "helpCenterEnabled", "feedbackAndSupportEnabled", "userForumEnabled", "videoGuidesEnabled", "licenseAgreementsEnabled", "isDefault"]
 
     model_config = ConfigDict(

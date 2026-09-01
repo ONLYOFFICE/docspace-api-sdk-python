@@ -11,8 +11,8 @@ Name | Type | Description | Notes
 **warning** | **str** | The backup warning message. | [optional] 
 **link** | **str** | The backup link. | [optional] 
 **tenant_id** | **int** | The tenant ID. | [optional] 
-**backup_progress_enum** | [**BackupProgressEnum**](BackupProgressEnum.md) |  | [optional] 
-**status** | [**DistributedTaskStatus**](DistributedTaskStatus.md) |  | [optional] 
+**backup_progress_enum** | [**BackupProgressEnum**](BackupProgressEnum.md) | The backup progress type. | [optional] 
+**status** | [**DistributedTaskStatus**](DistributedTaskStatus.md) | The backup progress status. | [optional] 
 **task_id** | **str** | The task ID. | [optional] 
 
 ## Example

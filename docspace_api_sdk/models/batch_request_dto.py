@@ -37,13 +37,13 @@ class BatchRequestDto(FileOperationRequestBaseDto):
     The request parameters for copying/moving files.
     """
 
-    folder_ids: Optional[List[BatchRequestDtoAllOfFolderIds]] = Field(default=None, description="The list of folder IDs to be copied/moved.", alias="folderIds")
-    file_ids: Optional[List[BatchRequestDtoAllOfFileIds]] = Field(default=None, description="The list of file IDs to be copied/moved.", alias="fileIds")
+    folder_ids: Optional[List[BatchRequestDtoAllOfFolderIds]] = Field(default=None, description="The list of folder IDs to be copied/moved.", alias="folderIds", json_schema_extra={"examples": [[1, 2, 3]]})
+    file_ids: Optional[List[BatchRequestDtoAllOfFileIds]] = Field(default=None, description="The list of file IDs to be copied/moved.", alias="fileIds", json_schema_extra={"examples": [[1, 2, 3]]})
     dest_folder_id: Optional[BatchRequestDtoAllOfDestFolderId] = Field(default=None, alias="destFolderId")
-    conflict_resolve_type: Optional[FileConflictResolveType] = Field(default=None, alias="conflictResolveType")
-    delete_after: Optional[StrictBool] = Field(default=None, description="Specifies whether to delete the source files/folders after they are moved or copied to the destination folder.", alias="deleteAfter")
-    content: Optional[StrictBool] = Field(default=None, description="Specifies whether to copy or move the folder content or not.")
-    to_fill_out: Optional[StrictBool] = Field(default=None, description="Specifies whether the file is copied for filling out", alias="toFillOut")
+    conflict_resolve_type: Optional[FileConflictResolveType] = Field(default=None, description="The overwriting behavior of the file copying or moving.", alias="conflictResolveType")
+    delete_after: Optional[StrictBool] = Field(default=None, description="Specifies whether to delete the source files/folders after they are moved or copied to the destination folder.", alias="deleteAfter", json_schema_extra={"examples": [False]})
+    content: Optional[StrictBool] = Field(default=None, description="Specifies whether to copy or move the folder content or not.", json_schema_extra={"examples": [False]})
+    to_fill_out: Optional[StrictBool] = Field(default=None, description="Specifies whether the file is copied for filling out", alias="toFillOut", json_schema_extra={"examples": [False]})
 
     model_config = ConfigDict(
         populate_by_name=True,

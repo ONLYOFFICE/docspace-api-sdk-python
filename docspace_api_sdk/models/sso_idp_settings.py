@@ -30,12 +30,12 @@ class SsoIdpSettings(BaseModel):
     """
     The SSO IdP settings.
     """ # noqa: E501
-    entity_id: Optional[StrictStr] = Field(default=None, description="The entity ID.", alias="entityId")
-    sso_url: Optional[StrictStr] = Field(default=None, description="The SSO URL.", alias="ssoUrl")
-    sso_binding: Optional[StrictStr] = Field(default=None, description="The SSO binding.", alias="ssoBinding")
-    slo_url: Optional[StrictStr] = Field(default=None, description="The SLO URL.", alias="sloUrl")
-    slo_binding: Optional[StrictStr] = Field(default=None, description="The SLO binding.", alias="sloBinding")
-    name_id_format: Optional[StrictStr] = Field(default=None, description="The name ID format.", alias="nameIdFormat")
+    entity_id: Optional[StrictStr] = Field(default=None, description="The entity ID.", alias="entityId", json_schema_extra={"examples": ["https://idp.company.com/saml"]})
+    sso_url: Optional[StrictStr] = Field(default=None, description="The SSO URL.", alias="ssoUrl", json_schema_extra={"examples": ["https://idp.example.com/sso"]})
+    sso_binding: Optional[StrictStr] = Field(default=None, description="The SSO binding.", alias="ssoBinding", json_schema_extra={"examples": ["urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"]})
+    slo_url: Optional[StrictStr] = Field(default=None, description="The SLO URL.", alias="sloUrl", json_schema_extra={"examples": ["https://idp.example.com/slo"]})
+    slo_binding: Optional[StrictStr] = Field(default=None, description="The SLO binding.", alias="sloBinding", json_schema_extra={"examples": ["urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"]})
+    name_id_format: Optional[StrictStr] = Field(default=None, description="The name ID format.", alias="nameIdFormat", json_schema_extra={"examples": ["urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress"]})
     __properties: ClassVar[List[str]] = ["entityId", "ssoUrl", "ssoBinding", "sloUrl", "sloBinding", "nameIdFormat"]
 
     model_config = ConfigDict(

@@ -25,6 +25,7 @@ from typing_extensions import Annotated
 from pydantic import Field, StrictBool, StrictBytes, StrictInt, StrictStr
 from typing import List, Optional, Tuple, Union
 from typing_extensions import Annotated
+from uuid import UUID
 from docspace_api_sdk.models.archive_room_request import ArchiveRoomRequest
 from docspace_api_sdk.models.batch_tags_request_dto import BatchTagsRequestDto
 from docspace_api_sdk.models.boolean_wrapper import BooleanWrapper
@@ -53,6 +54,7 @@ from docspace_api_sdk.models.quota_filter import QuotaFilter
 from docspace_api_sdk.models.room_from_template_status_wrapper import RoomFromTemplateStatusWrapper
 from docspace_api_sdk.models.room_invitation_request import RoomInvitationRequest
 from docspace_api_sdk.models.room_link_request import RoomLinkRequest
+from docspace_api_sdk.models.room_privacy_filter import RoomPrivacyFilter
 from docspace_api_sdk.models.room_security_wrapper import RoomSecurityWrapper
 from docspace_api_sdk.models.room_template_dto import RoomTemplateDto
 from docspace_api_sdk.models.room_template_status_wrapper import RoomTemplateStatusWrapper
@@ -63,7 +65,6 @@ from docspace_api_sdk.models.share_filter_type import ShareFilterType
 from docspace_api_sdk.models.sort_order import SortOrder
 from docspace_api_sdk.models.storage_filter import StorageFilter
 from docspace_api_sdk.models.string_wrapper import StringWrapper
-from docspace_api_sdk.models.subject_filter import SubjectFilter
 from docspace_api_sdk.models.update_room_request import UpdateRoomRequest
 from docspace_api_sdk.models.update_tag_request_dto import UpdateTagRequestDto
 from docspace_api_sdk.models.upload_result_wrapper import UploadResultWrapper
@@ -157,6 +158,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -233,6 +235,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -309,6 +312,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -468,6 +472,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -543,6 +548,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -618,6 +624,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -779,6 +786,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -856,6 +864,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -933,6 +942,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1088,6 +1098,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1159,6 +1170,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1230,6 +1242,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1382,6 +1395,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1453,6 +1467,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1524,6 +1539,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1681,6 +1697,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1757,6 +1774,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1833,6 +1851,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1989,6 +2008,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2061,6 +2081,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2133,6 +2154,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2285,6 +2307,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2356,6 +2379,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2427,6 +2451,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2583,6 +2608,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2658,6 +2684,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2733,6 +2760,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2889,6 +2917,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2961,6 +2990,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3033,6 +3063,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3182,6 +3213,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3257,6 +3289,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3332,6 +3365,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3487,6 +3521,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3558,6 +3593,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3629,6 +3665,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3773,6 +3810,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3849,6 +3887,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3925,6 +3964,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4081,6 +4121,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4153,6 +4194,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4225,6 +4267,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4364,6 +4407,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4435,6 +4479,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4506,6 +4551,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4588,7 +4634,7 @@ class RoomsApi:
     @validate_call
     def get_public_settings(
         self,
-        id: Annotated[StrictInt, Field(description="The room template ID.")],
+        id: Annotated[int, Field(le=2147483647, strict=True, ge=1, description="The room template ID.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4645,6 +4691,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4659,7 +4706,7 @@ class RoomsApi:
     @validate_call
     def get_public_settings_with_http_info(
         self,
-        id: Annotated[StrictInt, Field(description="The room template ID.")],
+        id: Annotated[int, Field(le=2147483647, strict=True, ge=1, description="The room template ID.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4716,6 +4763,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4730,7 +4778,7 @@ class RoomsApi:
     @validate_call
     def get_public_settings_without_preload_content(
         self,
-        id: Annotated[StrictInt, Field(description="The room template ID.")],
+        id: Annotated[int, Field(le=2147483647, strict=True, ge=1, description="The room template ID.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4787,6 +4835,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4922,6 +4971,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4989,6 +5039,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5056,6 +5107,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5188,6 +5240,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5255,6 +5308,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5322,6 +5376,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5454,6 +5509,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5521,6 +5577,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5588,6 +5645,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5723,6 +5781,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5793,6 +5852,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5863,6 +5923,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -6000,6 +6061,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -6075,6 +6137,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -6150,6 +6213,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -6310,6 +6374,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -6397,6 +6462,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -6484,6 +6550,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -6587,7 +6654,7 @@ class RoomsApi:
     def get_room_tags_info(
         self,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="Gets or sets the number of tag results to retrieve.  This property specifies the maximum amount of tag data to be included in the result set.")] = None,
-        start_index: Annotated[Optional[StrictInt], Field(description="Represents the starting index from which the tags' information will be retrieved.  This property is used to define the offset for pagination when retrieving a list of tags. It determines  the point in the data set from which the retrieval begins.")] = None,
+        start_index: Annotated[Optional[Annotated[int, Field(le=2147483647, strict=True, ge=0)]], Field(description="Represents the starting index from which the tags' information will be retrieved.  This property is used to define the offset for pagination when retrieving a list of tags. It determines  the point in the data set from which the retrieval begins.")] = None,
         filter_value: Annotated[Optional[StrictStr], Field(description="Gets or sets the text value used for searching tags.  This property is typically used as a filter value when retrieving tag information.")] = None,
         _request_timeout: Union[
             None,
@@ -6651,6 +6718,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -6666,7 +6734,7 @@ class RoomsApi:
     def get_room_tags_info_with_http_info(
         self,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="Gets or sets the number of tag results to retrieve.  This property specifies the maximum amount of tag data to be included in the result set.")] = None,
-        start_index: Annotated[Optional[StrictInt], Field(description="Represents the starting index from which the tags' information will be retrieved.  This property is used to define the offset for pagination when retrieving a list of tags. It determines  the point in the data set from which the retrieval begins.")] = None,
+        start_index: Annotated[Optional[Annotated[int, Field(le=2147483647, strict=True, ge=0)]], Field(description="Represents the starting index from which the tags' information will be retrieved.  This property is used to define the offset for pagination when retrieving a list of tags. It determines  the point in the data set from which the retrieval begins.")] = None,
         filter_value: Annotated[Optional[StrictStr], Field(description="Gets or sets the text value used for searching tags.  This property is typically used as a filter value when retrieving tag information.")] = None,
         _request_timeout: Union[
             None,
@@ -6730,6 +6798,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -6745,7 +6814,7 @@ class RoomsApi:
     def get_room_tags_info_without_preload_content(
         self,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="Gets or sets the number of tag results to retrieve.  This property specifies the maximum amount of tag data to be included in the result set.")] = None,
-        start_index: Annotated[Optional[StrictInt], Field(description="Represents the starting index from which the tags' information will be retrieved.  This property is used to define the offset for pagination when retrieving a list of tags. It determines  the point in the data set from which the retrieval begins.")] = None,
+        start_index: Annotated[Optional[Annotated[int, Field(le=2147483647, strict=True, ge=0)]], Field(description="Represents the starting index from which the tags' information will be retrieved.  This property is used to define the offset for pagination when retrieving a list of tags. It determines  the point in the data set from which the retrieval begins.")] = None,
         filter_value: Annotated[Optional[StrictStr], Field(description="Gets or sets the text value used for searching tags.  This property is typically used as a filter value when retrieving tag information.")] = None,
         _request_timeout: Union[
             None,
@@ -6809,6 +6878,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -6958,6 +7028,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -7025,6 +7096,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -7092,6 +7164,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -7171,17 +7244,17 @@ class RoomsApi:
     @validate_call
     def get_rooms_folder(
         self,
-        type: Annotated[Optional[List[List[RoomType]]], Field(description="The filter by room type.")] = None,
-        subject_id: Annotated[Optional[StrictStr], Field(description="The filter by user ID.")] = None,
-        subject_owner_id: Annotated[Optional[StrictStr], Field(description="The filter by room owner ID.")] = None,
+        type: Annotated[Optional[List[RoomType]], Field(description="The filter by room type.")] = None,
+        subject_id: Annotated[Optional[UUID], Field(description="The filter by user ID.")] = None,
+        subject_owner_id: Annotated[Optional[UUID], Field(description="The filter by room owner ID.")] = None,
         search_area: Annotated[Optional[SearchArea], Field(description="The room search area (Active, Archive, Any, Recent by links).")] = None,
         without_tags: Annotated[Optional[StrictBool], Field(description="Specifies whether to search by tags or not.")] = None,
         tags: Annotated[Optional[StrictStr], Field(description="The tags in the serialized format.")] = None,
         exclude_subject: Annotated[Optional[StrictBool], Field(description="Specifies whether to exclude search by user or group ID.")] = None,
         provider: Annotated[Optional[ProviderFilter], Field(description="The filter by provider name (None, Box, DropBox, GoogleDrive, kDrive, OneDrive, SharePoint, WebDav, Yandex, Storage).")] = None,
-        subject_filter: Annotated[Optional[SubjectFilter], Field(description="The filter by user (Owner - 0, Member - 1).")] = None,
         quota_filter: Annotated[Optional[QuotaFilter], Field(description="The filter by quota (All - 0, Default - 1, Custom - 2).")] = None,
         storage_filter: Annotated[Optional[StorageFilter], Field(description="The filter by storage (None - 0, Internal - 1, ThirdParty - 2).")] = None,
+        privacy_filter: Annotated[Optional[RoomPrivacyFilter], Field(description="The filter by room privacy (None - 0, Private - 1, NotPrivate - 2). When omitted, all rooms are returned.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="Specifies the maximum number of items to retrieve.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The index from which to start retrieving the room content.")] = None,
         sort_by: Annotated[Optional[StrictStr], Field(description="Specifies the field by which the room content should be sorted.")] = None,
@@ -7208,9 +7281,9 @@ class RoomsApi:
         :param type: The filter by room type.
         :type type: List[RoomType]
         :param subject_id: The filter by user ID.
-        :type subject_id: str
+        :type subject_id: UUID
         :param subject_owner_id: The filter by room owner ID.
-        :type subject_owner_id: str
+        :type subject_owner_id: UUID
         :param search_area: The room search area (Active, Archive, Any, Recent by links).
         :type search_area: SearchArea
         :param without_tags: Specifies whether to search by tags or not.
@@ -7221,12 +7294,12 @@ class RoomsApi:
         :type exclude_subject: bool
         :param provider: The filter by provider name (None, Box, DropBox, GoogleDrive, kDrive, OneDrive, SharePoint, WebDav, Yandex, Storage).
         :type provider: ProviderFilter
-        :param subject_filter: The filter by user (Owner - 0, Member - 1).
-        :type subject_filter: SubjectFilter
         :param quota_filter: The filter by quota (All - 0, Default - 1, Custom - 2).
         :type quota_filter: QuotaFilter
         :param storage_filter: The filter by storage (None - 0, Internal - 1, ThirdParty - 2).
         :type storage_filter: StorageFilter
+        :param privacy_filter: The filter by room privacy (None - 0, Private - 1, NotPrivate - 2). When omitted, all rooms are returned.
+        :type privacy_filter: RoomPrivacyFilter
         :param count: Specifies the maximum number of items to retrieve.
         :type count: int
         :param start_index: The index from which to start retrieving the room content.
@@ -7270,9 +7343,9 @@ class RoomsApi:
             tags=tags,
             exclude_subject=exclude_subject,
             provider=provider,
-            subject_filter=subject_filter,
             quota_filter=quota_filter,
             storage_filter=storage_filter,
+            privacy_filter=privacy_filter,
             count=count,
             start_index=start_index,
             sort_by=sort_by,
@@ -7293,6 +7366,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -7307,17 +7381,17 @@ class RoomsApi:
     @validate_call
     def get_rooms_folder_with_http_info(
         self,
-        type: Annotated[Optional[List[List[RoomType]]], Field(description="The filter by room type.")] = None,
-        subject_id: Annotated[Optional[StrictStr], Field(description="The filter by user ID.")] = None,
-        subject_owner_id: Annotated[Optional[StrictStr], Field(description="The filter by room owner ID.")] = None,
+        type: Annotated[Optional[List[RoomType]], Field(description="The filter by room type.")] = None,
+        subject_id: Annotated[Optional[UUID], Field(description="The filter by user ID.")] = None,
+        subject_owner_id: Annotated[Optional[UUID], Field(description="The filter by room owner ID.")] = None,
         search_area: Annotated[Optional[SearchArea], Field(description="The room search area (Active, Archive, Any, Recent by links).")] = None,
         without_tags: Annotated[Optional[StrictBool], Field(description="Specifies whether to search by tags or not.")] = None,
         tags: Annotated[Optional[StrictStr], Field(description="The tags in the serialized format.")] = None,
         exclude_subject: Annotated[Optional[StrictBool], Field(description="Specifies whether to exclude search by user or group ID.")] = None,
         provider: Annotated[Optional[ProviderFilter], Field(description="The filter by provider name (None, Box, DropBox, GoogleDrive, kDrive, OneDrive, SharePoint, WebDav, Yandex, Storage).")] = None,
-        subject_filter: Annotated[Optional[SubjectFilter], Field(description="The filter by user (Owner - 0, Member - 1).")] = None,
         quota_filter: Annotated[Optional[QuotaFilter], Field(description="The filter by quota (All - 0, Default - 1, Custom - 2).")] = None,
         storage_filter: Annotated[Optional[StorageFilter], Field(description="The filter by storage (None - 0, Internal - 1, ThirdParty - 2).")] = None,
+        privacy_filter: Annotated[Optional[RoomPrivacyFilter], Field(description="The filter by room privacy (None - 0, Private - 1, NotPrivate - 2). When omitted, all rooms are returned.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="Specifies the maximum number of items to retrieve.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The index from which to start retrieving the room content.")] = None,
         sort_by: Annotated[Optional[StrictStr], Field(description="Specifies the field by which the room content should be sorted.")] = None,
@@ -7344,9 +7418,9 @@ class RoomsApi:
         :param type: The filter by room type.
         :type type: List[RoomType]
         :param subject_id: The filter by user ID.
-        :type subject_id: str
+        :type subject_id: UUID
         :param subject_owner_id: The filter by room owner ID.
-        :type subject_owner_id: str
+        :type subject_owner_id: UUID
         :param search_area: The room search area (Active, Archive, Any, Recent by links).
         :type search_area: SearchArea
         :param without_tags: Specifies whether to search by tags or not.
@@ -7357,12 +7431,12 @@ class RoomsApi:
         :type exclude_subject: bool
         :param provider: The filter by provider name (None, Box, DropBox, GoogleDrive, kDrive, OneDrive, SharePoint, WebDav, Yandex, Storage).
         :type provider: ProviderFilter
-        :param subject_filter: The filter by user (Owner - 0, Member - 1).
-        :type subject_filter: SubjectFilter
         :param quota_filter: The filter by quota (All - 0, Default - 1, Custom - 2).
         :type quota_filter: QuotaFilter
         :param storage_filter: The filter by storage (None - 0, Internal - 1, ThirdParty - 2).
         :type storage_filter: StorageFilter
+        :param privacy_filter: The filter by room privacy (None - 0, Private - 1, NotPrivate - 2). When omitted, all rooms are returned.
+        :type privacy_filter: RoomPrivacyFilter
         :param count: Specifies the maximum number of items to retrieve.
         :type count: int
         :param start_index: The index from which to start retrieving the room content.
@@ -7406,9 +7480,9 @@ class RoomsApi:
             tags=tags,
             exclude_subject=exclude_subject,
             provider=provider,
-            subject_filter=subject_filter,
             quota_filter=quota_filter,
             storage_filter=storage_filter,
+            privacy_filter=privacy_filter,
             count=count,
             start_index=start_index,
             sort_by=sort_by,
@@ -7429,6 +7503,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -7443,17 +7518,17 @@ class RoomsApi:
     @validate_call
     def get_rooms_folder_without_preload_content(
         self,
-        type: Annotated[Optional[List[List[RoomType]]], Field(description="The filter by room type.")] = None,
-        subject_id: Annotated[Optional[StrictStr], Field(description="The filter by user ID.")] = None,
-        subject_owner_id: Annotated[Optional[StrictStr], Field(description="The filter by room owner ID.")] = None,
+        type: Annotated[Optional[List[RoomType]], Field(description="The filter by room type.")] = None,
+        subject_id: Annotated[Optional[UUID], Field(description="The filter by user ID.")] = None,
+        subject_owner_id: Annotated[Optional[UUID], Field(description="The filter by room owner ID.")] = None,
         search_area: Annotated[Optional[SearchArea], Field(description="The room search area (Active, Archive, Any, Recent by links).")] = None,
         without_tags: Annotated[Optional[StrictBool], Field(description="Specifies whether to search by tags or not.")] = None,
         tags: Annotated[Optional[StrictStr], Field(description="The tags in the serialized format.")] = None,
         exclude_subject: Annotated[Optional[StrictBool], Field(description="Specifies whether to exclude search by user or group ID.")] = None,
         provider: Annotated[Optional[ProviderFilter], Field(description="The filter by provider name (None, Box, DropBox, GoogleDrive, kDrive, OneDrive, SharePoint, WebDav, Yandex, Storage).")] = None,
-        subject_filter: Annotated[Optional[SubjectFilter], Field(description="The filter by user (Owner - 0, Member - 1).")] = None,
         quota_filter: Annotated[Optional[QuotaFilter], Field(description="The filter by quota (All - 0, Default - 1, Custom - 2).")] = None,
         storage_filter: Annotated[Optional[StorageFilter], Field(description="The filter by storage (None - 0, Internal - 1, ThirdParty - 2).")] = None,
+        privacy_filter: Annotated[Optional[RoomPrivacyFilter], Field(description="The filter by room privacy (None - 0, Private - 1, NotPrivate - 2). When omitted, all rooms are returned.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="Specifies the maximum number of items to retrieve.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The index from which to start retrieving the room content.")] = None,
         sort_by: Annotated[Optional[StrictStr], Field(description="Specifies the field by which the room content should be sorted.")] = None,
@@ -7480,9 +7555,9 @@ class RoomsApi:
         :param type: The filter by room type.
         :type type: List[RoomType]
         :param subject_id: The filter by user ID.
-        :type subject_id: str
+        :type subject_id: UUID
         :param subject_owner_id: The filter by room owner ID.
-        :type subject_owner_id: str
+        :type subject_owner_id: UUID
         :param search_area: The room search area (Active, Archive, Any, Recent by links).
         :type search_area: SearchArea
         :param without_tags: Specifies whether to search by tags or not.
@@ -7493,12 +7568,12 @@ class RoomsApi:
         :type exclude_subject: bool
         :param provider: The filter by provider name (None, Box, DropBox, GoogleDrive, kDrive, OneDrive, SharePoint, WebDav, Yandex, Storage).
         :type provider: ProviderFilter
-        :param subject_filter: The filter by user (Owner - 0, Member - 1).
-        :type subject_filter: SubjectFilter
         :param quota_filter: The filter by quota (All - 0, Default - 1, Custom - 2).
         :type quota_filter: QuotaFilter
         :param storage_filter: The filter by storage (None - 0, Internal - 1, ThirdParty - 2).
         :type storage_filter: StorageFilter
+        :param privacy_filter: The filter by room privacy (None - 0, Private - 1, NotPrivate - 2). When omitted, all rooms are returned.
+        :type privacy_filter: RoomPrivacyFilter
         :param count: Specifies the maximum number of items to retrieve.
         :type count: int
         :param start_index: The index from which to start retrieving the room content.
@@ -7542,9 +7617,9 @@ class RoomsApi:
             tags=tags,
             exclude_subject=exclude_subject,
             provider=provider,
-            subject_filter=subject_filter,
             quota_filter=quota_filter,
             storage_filter=storage_filter,
+            privacy_filter=privacy_filter,
             count=count,
             start_index=start_index,
             sort_by=sort_by,
@@ -7565,6 +7640,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -7582,9 +7658,9 @@ class RoomsApi:
         tags,
         exclude_subject,
         provider,
-        subject_filter,
         quota_filter,
         storage_filter,
+        privacy_filter,
         count,
         start_index,
         sort_by,
@@ -7600,7 +7676,7 @@ class RoomsApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'type': 'csv',
+            'type': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -7646,10 +7722,6 @@ class RoomsApi:
             
             _query_params.append(('provider', provider.value))
             
-        if subject_filter is not None:
-            
-            _query_params.append(('subjectFilter', subject_filter.value))
-            
         if quota_filter is not None:
             
             _query_params.append(('quotaFilter', quota_filter.value))
@@ -7657,6 +7729,10 @@ class RoomsApi:
         if storage_filter is not None:
             
             _query_params.append(('storageFilter', storage_filter.value))
+            
+        if privacy_filter is not None:
+            
+            _query_params.append(('privacyFilter', privacy_filter.value))
             
         if count is not None:
             
@@ -7785,6 +7861,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -7852,6 +7929,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -7919,6 +7997,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -8057,6 +8136,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -8130,6 +8210,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -8203,6 +8284,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -8347,6 +8429,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -8423,6 +8506,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -8499,6 +8583,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -8643,6 +8728,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -8714,6 +8800,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -8785,6 +8872,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -8924,6 +9012,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -8995,6 +9084,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -9066,6 +9156,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -9209,6 +9300,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -9284,6 +9376,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -9359,6 +9452,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -9507,6 +9601,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -9578,6 +9673,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -9649,6 +9745,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -9798,6 +9895,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -9873,6 +9971,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -9948,6 +10047,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -10106,6 +10206,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -10180,6 +10281,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -10254,6 +10356,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -10412,6 +10515,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -10486,6 +10590,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -10560,6 +10665,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -10700,6 +10806,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -10772,6 +10879,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -10844,6 +10952,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -10979,6 +11088,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -11046,6 +11156,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -11113,6 +11224,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -11246,6 +11358,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -11321,6 +11434,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -11396,6 +11510,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -11551,6 +11666,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -11622,6 +11738,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -11693,6 +11810,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -11836,6 +11954,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -11911,6 +12030,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -11986,6 +12106,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -12142,6 +12263,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -12214,6 +12336,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -12286,6 +12409,7 @@ class RoomsApi:
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -12433,12 +12557,14 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "UploadResultWrapper",
+            '400': None,
             '403': None,
             '401': None,
             '429': None,
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -12505,12 +12631,14 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "UploadResultWrapper",
+            '400': None,
             '403': None,
             '401': None,
             '429': None,
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -12577,12 +12705,14 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "UploadResultWrapper",
+            '400': None,
             '403': None,
             '401': None,
             '429': None,
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout

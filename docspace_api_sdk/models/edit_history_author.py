@@ -30,8 +30,8 @@ class EditHistoryAuthor(BaseModel):
     """
     The information about the file editing history author.
     """ # noqa: E501
-    id: Optional[StrictStr] = Field(description="The author ID.")
-    name: Optional[StrictStr] = Field(default=None, description="The author name.")
+    id: Optional[StrictStr] = Field(description="The author ID.", json_schema_extra={"examples": ["author_123"]})
+    name: Optional[StrictStr] = Field(default=None, description="The author name.", json_schema_extra={"examples": ["John Doe"]})
     __properties: ClassVar[List[str]] = ["id", "name"]
 
     model_config = ConfigDict(

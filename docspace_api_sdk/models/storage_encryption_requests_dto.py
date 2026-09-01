@@ -30,7 +30,7 @@ class StorageEncryptionRequestsDto(BaseModel):
     """
     The request parameters for managing storage encryption operations and notifications.
     """ # noqa: E501
-    notify_users: Optional[StrictBool] = Field(default=None, description="Specifies whether the users receive notifications about the storage encryption operations.", alias="notifyUsers")
+    notify_users: Optional[StrictBool] = Field(default=None, description="Specifies whether the users receive notifications about the storage encryption operations.", alias="notifyUsers", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["notifyUsers"]
 
     model_config = ConfigDict(

@@ -30,12 +30,12 @@ class SsoFieldMapping(BaseModel):
     """
     The SSO field mapping.
     """ # noqa: E501
-    first_name: Optional[StrictStr] = Field(default=None, description="The first name.", alias="firstName")
-    last_name: Optional[StrictStr] = Field(default=None, description="The last name.", alias="lastName")
-    email: Optional[StrictStr] = Field(default=None, description="The email address.")
-    title: Optional[StrictStr] = Field(default=None, description="The title.")
-    location: Optional[StrictStr] = Field(default=None, description="The location.")
-    phone: Optional[StrictStr] = Field(default=None, description="The phone number.")
+    first_name: Optional[StrictStr] = Field(default=None, description="The first name.", alias="firstName", json_schema_extra={"examples": ["givenName"]})
+    last_name: Optional[StrictStr] = Field(default=None, description="The last name.", alias="lastName", json_schema_extra={"examples": ["sn"]})
+    email: Optional[StrictStr] = Field(default=None, description="The email address.", json_schema_extra={"examples": ["sn@example.com"]})
+    title: Optional[StrictStr] = Field(default=None, description="The title.", json_schema_extra={"examples": ["SN"]})
+    location: Optional[StrictStr] = Field(default=None, description="The location.", json_schema_extra={"examples": ["Location"]})
+    phone: Optional[StrictStr] = Field(default=None, description="The phone number.", json_schema_extra={"examples": ["+14155552671"]})
     __properties: ClassVar[List[str]] = ["firstName", "lastName", "email", "title", "location", "phone"]
 
     model_config = ConfigDict(

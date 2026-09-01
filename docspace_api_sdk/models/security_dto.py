@@ -32,11 +32,11 @@ class SecurityDto(BaseModel):
     """
     The security information.
     """ # noqa: E501
-    web_item_id: Optional[StrictStr] = Field(default=None, description="The module ID.", alias="webItemId")
-    users: Optional[List[EmployeeDto]] = Field(default=None, description="The list of users with the access to the module.")
-    groups: Optional[List[GroupSummaryDto]] = Field(default=None, description="The list of groups with the access to the module.")
-    enabled: Optional[StrictBool] = Field(default=None, description="Specifies if the security settings are enabled or not.")
-    is_sub_item: Optional[StrictBool] = Field(default=None, description="Specifies if the module is a subitem or not.", alias="isSubItem")
+    web_item_id: Optional[StrictStr] = Field(default=None, description="The module ID.", alias="webItemId", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000000"]})
+    users: Optional[List[EmployeeDto]] = Field(default=None, description="The list of users with the access to the module.", json_schema_extra={"examples": [[{"displayName": "John Doe"}]]})
+    groups: Optional[List[GroupSummaryDto]] = Field(default=None, description="The list of groups with the access to the module.", json_schema_extra={"examples": [[{"id": "00000000-0000-0000-0000-000000000000", "name": "Administrators"}]]})
+    enabled: Optional[StrictBool] = Field(default=None, description="Specifies if the security settings are enabled or not.", json_schema_extra={"examples": [True]})
+    is_sub_item: Optional[StrictBool] = Field(default=None, description="Specifies if the module is a subitem or not.", alias="isSubItem", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["webItemId", "users", "groups", "enabled", "isSubItem"]
 
     model_config = ConfigDict(

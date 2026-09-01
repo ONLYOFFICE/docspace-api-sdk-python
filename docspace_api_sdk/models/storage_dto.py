@@ -31,11 +31,11 @@ class StorageDto(BaseModel):
     """
     The storage information.
     """ # noqa: E501
-    id: Optional[StrictStr] = Field(description="The storage ID.")
-    title: Optional[StrictStr] = Field(description="The storage title.")
-    properties: Optional[List[AuthKey]] = Field(default=None, description="The list of storage authentication keys.")
-    current: StrictBool = Field(description="Specifies if this is the current portal storage or not.")
-    is_set: StrictBool = Field(description="Specifies if this storage can be set or not.", alias="isSet")
+    id: Optional[StrictStr] = Field(description="The storage ID.", json_schema_extra={"examples": ["storage_001"]})
+    title: Optional[StrictStr] = Field(description="The storage title.", json_schema_extra={"examples": ["Main Storage"]})
+    properties: Optional[List[AuthKey]] = Field(default=None, description="The list of storage authentication keys.", json_schema_extra={"examples": [[{"name": "ApiKey", "value": "12345"}]]})
+    current: StrictBool = Field(description="Specifies if this is the current portal storage or not.", json_schema_extra={"examples": [True]})
+    is_set: StrictBool = Field(description="Specifies if this storage can be set or not.", alias="isSet", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["id", "title", "properties", "current", "isSet"]
 
     model_config = ConfigDict(

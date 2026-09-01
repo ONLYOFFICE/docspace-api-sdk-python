@@ -30,9 +30,9 @@ class AccountInfoDto(BaseModel):
     """
     The account information parameters.
     """ # noqa: E501
-    provider: Optional[StrictStr] = Field(description="The account provider.")
-    url: Optional[StrictStr] = Field(description="The account URL.")
-    linked: StrictBool = Field(description="Specifies if an account is linked with other profiles or not.")
+    provider: Optional[StrictStr] = Field(description="The account provider.", json_schema_extra={"examples": ["Google"]})
+    url: Optional[StrictStr] = Field(description="The account URL.", json_schema_extra={"examples": ["https://example.com/account"]})
+    linked: StrictBool = Field(description="Specifies if an account is linked with other profiles or not.", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["provider", "url", "linked"]
 
     model_config = ConfigDict(

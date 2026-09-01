@@ -5,14 +5,7 @@ The chat settings parameters.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**provider_id** | **int** | The AI provider ID. | [optional] 
-**model_id** | **str** | The AI model ID used for chat completions. | [optional] 
-**model_alias** | **str** | The AI model display alias. | [optional] 
 **prompt** | **str** | The system prompt for the chat. | [optional] 
-**multimodal** | [**ChatMultimodalSettingsDto**](ChatMultimodalSettingsDto.md) |  | [optional] 
-**thinking** | **bool** | Indicates whether the model supports extended thinking mode. | [optional] 
-**capabilities** | [**AiModelCapabilities**](AiModelCapabilities.md) |  | [optional] 
-**internal** | **bool** | Indicates whether this is an internal AI gateway provider. | [optional] [readonly] 
 
 ## Example
 

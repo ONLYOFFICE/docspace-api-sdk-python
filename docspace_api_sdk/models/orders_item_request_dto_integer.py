@@ -32,9 +32,9 @@ class OrdersItemRequestDtoInteger(BaseModel):
     """
     An item in the ordering request with its entry type and ID.
     """ # noqa: E501
-    entry_id: StrictInt = Field(description="The entry unique identifier (file or folder).", alias="entryId")
-    entry_type: FileEntryType = Field(alias="entryType")
-    order: Annotated[int, Field(le=2147483647, strict=True, ge=1)] = Field(description="The order value.")
+    entry_id: StrictInt = Field(description="The entry unique identifier (file or folder).", alias="entryId", json_schema_extra={"examples": [1]})
+    entry_type: FileEntryType = Field(description="The entry type (file or folder).", alias="entryType")
+    order: Annotated[int, Field(le=2147483647, strict=True, ge=1)] = Field(description="The order value.", json_schema_extra={"examples": [1]})
     __properties: ClassVar[List[str]] = ["entryId", "entryType", "order"]
 
     model_config = ConfigDict(

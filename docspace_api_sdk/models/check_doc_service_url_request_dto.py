@@ -30,12 +30,12 @@ class CheckDocServiceUrlRequestDto(BaseModel):
     """
     The request parameters for checking the document service location.
     """ # noqa: E501
-    doc_service_url: Optional[StrictStr] = Field(description="The ONLYOFFICE Docs URL address.", alias="docServiceUrl")
-    doc_service_url_internal: Optional[StrictStr] = Field(default=None, description="The ONLYOFFICE Docs URL address in the local private network.", alias="docServiceUrlInternal")
-    doc_service_url_portal: Optional[StrictStr] = Field(default=None, description="The ONLYOFFICE Docs URL address.", alias="docServiceUrlPortal")
-    doc_service_signature_secret: Optional[StrictStr] = Field(default=None, description="The signature secret of the ONLYOFFICE Docs.", alias="docServiceSignatureSecret")
-    doc_service_signature_header: Optional[StrictStr] = Field(default=None, description="The signature header of the ONLYOFFICE Docs.", alias="docServiceSignatureHeader")
-    doc_service_ssl_verification: Optional[StrictBool] = Field(default=None, description="Specifies if the SSL verification of the ONLYOFFICE Docs is enabled or not.", alias="docServiceSslVerification")
+    doc_service_url: Optional[StrictStr] = Field(description="The ONLYOFFICE Docs URL address.", alias="docServiceUrl", json_schema_extra={"examples": ["https://documentserver.example.com"]})
+    doc_service_url_internal: Optional[StrictStr] = Field(default=None, description="The ONLYOFFICE Docs URL address in the local private network.", alias="docServiceUrlInternal", json_schema_extra={"examples": ["https://documentserver-internal.example.com"]})
+    doc_service_url_portal: Optional[StrictStr] = Field(default=None, description="The ONLYOFFICE Docs URL address.", alias="docServiceUrlPortal", json_schema_extra={"examples": ["https://documentserver-portal.example.com"]})
+    doc_service_signature_secret: Optional[StrictStr] = Field(default=None, description="The signature secret of the ONLYOFFICE Docs.", alias="docServiceSignatureSecret", json_schema_extra={"examples": ["secret-key-123"]})
+    doc_service_signature_header: Optional[StrictStr] = Field(default=None, description="The signature header of the ONLYOFFICE Docs.", alias="docServiceSignatureHeader", json_schema_extra={"examples": ["Authorization"]})
+    doc_service_ssl_verification: Optional[StrictBool] = Field(default=None, description="Specifies if the SSL verification of the ONLYOFFICE Docs is enabled or not.", alias="docServiceSslVerification", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["docServiceUrl", "docServiceUrlInternal", "docServiceUrlPortal", "docServiceSignatureSecret", "docServiceSignatureHeader", "docServiceSslVerification"]
 
     model_config = ConfigDict(

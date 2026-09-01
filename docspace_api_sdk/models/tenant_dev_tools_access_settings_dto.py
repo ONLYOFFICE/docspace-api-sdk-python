@@ -30,7 +30,7 @@ class TenantDevToolsAccessSettingsDto(BaseModel):
     """
     The request parameters for managing the Developer Tools access settings for the current tenant.
     """ # noqa: E501
-    limited_access_for_users: Optional[StrictBool] = Field(default=None, description="Determines if users have restricted access to the Developer Tools.", alias="limitedAccessForUsers")
+    limited_access_for_users: Optional[StrictBool] = Field(default=None, description="Determines if users have restricted access to the Developer Tools.", alias="limitedAccessForUsers", json_schema_extra={"examples": [False]})
     __properties: ClassVar[List[str]] = ["limitedAccessForUsers"]
 
     model_config = ConfigDict(

@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **error** | **str** | The task progress error message. | [optional] 
 **percentage** | **int** | The percentage of the task progress. | 
 **is_completed** | **bool** | Specifies if the task peogress is completed or not. | 
-**status** | [**DistributedTaskStatus**](DistributedTaskStatus.md) |  | 
+**status** | [**DistributedTaskStatus**](DistributedTaskStatus.md) | The status of the distributed task. | 
 
 ## Example
 

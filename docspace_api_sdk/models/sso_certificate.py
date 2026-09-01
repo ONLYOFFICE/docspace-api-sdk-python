@@ -31,13 +31,13 @@ class SsoCertificate(BaseModel):
     """
     The SSO certificate parameters.
     """ # noqa: E501
-    self_signed: Optional[StrictBool] = Field(default=None, description="Specifies if a certificate is self-signed or not.", alias="selfSigned")
-    crt: Optional[StrictStr] = Field(default=None, description="The CRT certificate file.")
-    key: Optional[StrictStr] = Field(default=None, description="The certificate key.")
-    action: Optional[StrictStr] = Field(default=None, description="The certificate action.")
-    domain_name: Optional[StrictStr] = Field(default=None, description="The certificate domain name.", alias="domainName")
-    start_date: Optional[datetime] = Field(default=None, description="The certificate start date.", alias="startDate")
-    expired_date: Optional[datetime] = Field(default=None, description="The certificate expiration date.", alias="expiredDate")
+    self_signed: Optional[StrictBool] = Field(default=None, description="Specifies if a certificate is self-signed or not.", alias="selfSigned", json_schema_extra={"examples": [False]})
+    crt: Optional[StrictStr] = Field(default=None, description="The CRT certificate file.", json_schema_extra={"examples": ["crt file"]})
+    key: Optional[StrictStr] = Field(default=None, description="The certificate key.", json_schema_extra={"examples": ["key"]})
+    action: Optional[StrictStr] = Field(default=None, description="The certificate action.", json_schema_extra={"examples": ["validate"]})
+    domain_name: Optional[StrictStr] = Field(default=None, description="The certificate domain name.", alias="domainName", json_schema_extra={"examples": ["example.com"]})
+    start_date: Optional[datetime] = Field(default=None, description="The certificate start date.", alias="startDate", json_schema_extra={"examples": ["2024-01-01T00:00:00Z"]})
+    expired_date: Optional[datetime] = Field(default=None, description="The certificate expiration date.", alias="expiredDate", json_schema_extra={"examples": ["2024-01-01T00:00:00Z"]})
     __properties: ClassVar[List[str]] = ["selfSigned", "crt", "key", "action", "domainName", "startDate", "expiredDate"]
 
     model_config = ConfigDict(

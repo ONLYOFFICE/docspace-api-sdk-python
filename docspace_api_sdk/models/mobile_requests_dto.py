@@ -30,7 +30,7 @@ class MobileRequestsDto(BaseModel):
     """
     The parameters required for the mobile phone verification.
     """ # noqa: E501
-    mobile_phone: Optional[StrictStr] = Field(default=None, description="The user's mobile phone number.", alias="mobilePhone")
+    mobile_phone: Optional[StrictStr] = Field(default=None, description="The user's mobile phone number.", alias="mobilePhone", json_schema_extra={"examples": ["+1234567890"]})
     __properties: ClassVar[List[str]] = ["mobilePhone"]
 
     model_config = ConfigDict(

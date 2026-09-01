@@ -34,19 +34,19 @@ class CreateRoomFromTemplateDto(BaseModel):
     """
     The parameters for creating a room from a template.
     """ # noqa: E501
-    template_id: StrictInt = Field(description="The template ID from which the room to be created.", alias="templateId")
-    title: Optional[StrictStr] = Field(description="The room title.")
-    logo: Optional[LogoRequest] = None
-    copy_logo: Optional[StrictBool] = Field(default=None, description="Specifies whether to copy a logo or not.", alias="copyLogo")
-    tags: Optional[List[StrictStr]] = Field(default=None, description="The collection of tags.")
-    color: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=6)]] = Field(default=None, description="The color of the room to be created.")
-    cover: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=50)]] = Field(default=None, description="The cover of the room to be created.")
-    quota: Optional[StrictInt] = Field(default=None, description="The room quota.")
-    indexing: Optional[StrictBool] = Field(default=None, description="Specifies whether to create a room with indexing.")
-    deny_download: Optional[StrictBool] = Field(default=None, description="Specifies whether to deny downloads from the room.", alias="denyDownload")
-    lifetime: Optional[RoomDataLifetimeDto] = None
-    watermark: Optional[WatermarkRequestDto] = None
-    private: Optional[StrictBool] = Field(default=None, description="Specifies whether the room to be created is private or not.")
+    template_id: StrictInt = Field(description="The template ID from which the room to be created.", alias="templateId", json_schema_extra={"examples": [1]})
+    title: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=170)]] = Field(description="The room title.", json_schema_extra={"examples": ["My Room From Template"]})
+    logo: Optional[LogoRequest] = Field(default=None, description="The logo request parameters.")
+    copy_logo: Optional[StrictBool] = Field(default=None, description="Specifies whether to copy a logo or not.", alias="copyLogo", json_schema_extra={"examples": [False]})
+    tags: Optional[List[StrictStr]] = Field(default=None, description="The collection of tags.", json_schema_extra={"examples": [["tag1", "tag2", "tag3"]]})
+    color: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=6)]] = Field(default=None, description="The color of the room to be created.", json_schema_extra={"examples": ["#FF0000"]})
+    cover: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=50)]] = Field(default=None, description="The cover of the room to be created.", json_schema_extra={"examples": ["cover1.jpg"]})
+    quota: Optional[StrictInt] = Field(default=None, description="The room quota.", json_schema_extra={"examples": [1073741824]})
+    indexing: Optional[StrictBool] = Field(default=None, description="Specifies whether to create a room with indexing.", json_schema_extra={"examples": [True]})
+    deny_download: Optional[StrictBool] = Field(default=None, description="Specifies whether to deny downloads from the room.", alias="denyDownload", json_schema_extra={"examples": [False]})
+    lifetime: Optional[RoomDataLifetimeDto] = Field(default=None, description="The room data lifetime information.")
+    watermark: Optional[WatermarkRequestDto] = Field(default=None, description="The request parameters for adding watermarks.")
+    private: Optional[StrictBool] = Field(default=None, description="Specifies whether the room to be created is private or not.", json_schema_extra={"examples": [False]})
     __properties: ClassVar[List[str]] = ["templateId", "title", "logo", "copyLogo", "tags", "color", "cover", "quota", "indexing", "denyDownload", "lifetime", "watermark", "private"]
 
     model_config = ConfigDict(

@@ -32,8 +32,8 @@ class FormSubmissionsDto(BaseModel):
     """
     FormSubmissionsDto
     """ # noqa: E501
-    metadata: Optional[List[FormMetadata]] = Field(default=None, description="The form field metadata.")
-    submissions: Optional[List[FormResultsDto]] = Field(default=None, description="All submissions.")
+    metadata: Optional[List[FormMetadata]] = Field(default=None, description="The form field metadata.", json_schema_extra={"examples": [[]]})
+    submissions: Optional[List[FormResultsDto]] = Field(default=None, description="All submissions.", json_schema_extra={"examples": [[]]})
     __properties: ClassVar[List[str]] = ["metadata", "submissions"]
 
     model_config = ConfigDict(

@@ -31,12 +31,12 @@ class AuthData(BaseModel):
     """
     The authentication data.
     """ # noqa: E501
-    login: Optional[StrictStr] = Field(default=None, description="The authentication login.")
-    password: Optional[StrictStr] = Field(default=None, description="The authentication password.")
-    raw_token: Optional[StrictStr] = Field(default=None, description="The authentication raw token.", alias="rawToken")
-    url: Optional[StrictStr] = Field(default=None, description="The authentication URL.")
-    provider: Optional[StrictStr] = Field(default=None, description="The authentication provider.")
-    token: Optional[OAuth20Token] = None
+    login: Optional[StrictStr] = Field(default=None, description="The authentication login.", json_schema_extra={"examples": ["user@example.com"]})
+    password: Optional[StrictStr] = Field(default=None, description="The authentication password.", json_schema_extra={"examples": ["p@ssw0rd!"]})
+    raw_token: Optional[StrictStr] = Field(default=None, description="The authentication raw token.", alias="rawToken", json_schema_extra={"examples": ["{\"access_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...\",\"expires_in\":3600}"]})
+    url: Optional[StrictStr] = Field(default=None, description="The authentication URL.", json_schema_extra={"examples": ["https://auth.example.com"]})
+    provider: Optional[StrictStr] = Field(default=None, description="The authentication provider.", json_schema_extra={"examples": ["OAuth2"]})
+    token: Optional[OAuth20Token] = Field(default=None, description="The authentication token.")
     __properties: ClassVar[List[str]] = ["login", "password", "rawToken", "url", "provider", "token"]
 
     model_config = ConfigDict(

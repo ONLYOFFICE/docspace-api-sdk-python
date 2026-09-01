@@ -31,13 +31,13 @@ class UpdateClientRequest(BaseModel):
     """
     Client update request containing modified client details
     """ # noqa: E501
-    name: Optional[Annotated[str, Field(min_length=1, strict=True)]] = Field(default=None, description="The name of the client")
-    description: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The description of the client")
-    logo: Optional[Annotated[str, Field(min_length=1, strict=True)]] = Field(default=None, description="The logo of the client in base64 format")
+    name: Optional[Annotated[str, Field(min_length=1, strict=True)]] = Field(default=None, description="The name of the client", json_schema_extra={"examples": ["Updated Client"]})
+    description: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The description of the client", json_schema_extra={"examples": ["Updated description of the client"]})
+    logo: Optional[Annotated[str, Field(min_length=1, strict=True)]] = Field(default=None, description="The logo of the client in base64 format", json_schema_extra={"examples": ["data:image/png;base64,..."]})
     public: Optional[StrictBool] = None
-    allow_pkce: Optional[StrictBool] = Field(default=None, description="Indicates whether PKCE is allowed for the client")
-    is_public: Optional[StrictBool] = Field(default=None, description="Indicates whether client is accessible by third-party tenants")
-    allowed_origins: Optional[Annotated[List[StrictStr], Field(min_length=1, max_length=12)]] = Field(default=None, description="The allowed origins for the client")
+    allow_pkce: Optional[StrictBool] = Field(default=None, description="Indicates whether PKCE is allowed for the client", json_schema_extra={"examples": [True]})
+    is_public: Optional[StrictBool] = Field(default=None, description="Indicates whether client is accessible by third-party tenants", json_schema_extra={"examples": [False]})
+    allowed_origins: Optional[Annotated[List[StrictStr], Field(min_length=1, max_length=12)]] = Field(default=None, description="The allowed origins for the client", json_schema_extra={"examples": [["http://allowed.origin"]]})
     __properties: ClassVar[List[str]] = ["name", "description", "logo", "public", "allow_pkce", "is_public", "allowed_origins"]
 
     @field_validator('logo')

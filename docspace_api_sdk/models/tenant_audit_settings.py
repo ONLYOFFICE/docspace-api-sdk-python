@@ -31,9 +31,9 @@ class TenantAuditSettings(BaseModel):
     """
     The tenant audit settings parameters.
     """ # noqa: E501
-    login_history_life_time: Optional[StrictInt] = Field(default=None, description="The login history lifetime.", alias="loginHistoryLifeTime")
-    audit_trail_life_time: Optional[StrictInt] = Field(default=None, description="The audit trail lifetime.", alias="auditTrailLifeTime")
-    last_modified: Optional[datetime] = Field(default=None, description="The timestamp indicating when the settings were last modified.", alias="lastModified")
+    login_history_life_time: Optional[StrictInt] = Field(default=None, description="The login history lifetime.", alias="loginHistoryLifeTime", json_schema_extra={"examples": [180]})
+    audit_trail_life_time: Optional[StrictInt] = Field(default=None, description="The audit trail lifetime.", alias="auditTrailLifeTime", json_schema_extra={"examples": [180]})
+    last_modified: Optional[datetime] = Field(default=None, description="The timestamp indicating when the settings were last modified.", alias="lastModified", json_schema_extra={"examples": ["1990-01-01T00:00:00Z"]})
     __properties: ClassVar[List[str]] = ["loginHistoryLifeTime", "auditTrailLifeTime", "lastModified"]
 
     model_config = ConfigDict(

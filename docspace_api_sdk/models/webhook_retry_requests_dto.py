@@ -30,7 +30,7 @@ class WebhookRetryRequestsDto(BaseModel):
     """
     The parameters for requesting the webhook delivery retries.
     """ # noqa: E501
-    ids: Optional[List[StrictInt]] = Field(default=None, description="The list of webhook delivery IDs to retry.")
+    ids: Optional[List[StrictInt]] = Field(default=None, description="The list of webhook delivery IDs to retry.", json_schema_extra={"examples": [[1, 2, 3]]})
     __properties: ClassVar[List[str]] = ["ids"]
 
     model_config = ConfigDict(

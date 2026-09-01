@@ -30,7 +30,7 @@ class TemplatesRequestDto(BaseModel):
     """
     The request parameters for adding files to the template list.
     """ # noqa: E501
-    file_ids: Optional[List[StrictInt]] = Field(default=None, description="The list of file IDs.", alias="fileIds")
+    file_ids: Optional[List[StrictInt]] = Field(default=None, description="The list of file IDs.", alias="fileIds", json_schema_extra={"examples": [[1, 2, 3]]})
     __properties: ClassVar[List[str]] = ["fileIds"]
 
     model_config = ConfigDict(

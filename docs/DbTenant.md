@@ -15,17 +15,17 @@ Name | Type | Description | Notes
 **language** | **str** | The tenant language. | [optional] 
 **time_zone** | **str** | The tenant time zone. | [optional] 
 **trusted_domains_raw** | **str** | The tenant trusted domains raw. | [optional] 
-**trusted_domains_enabled** | [**TenantTrustedDomainsType**](TenantTrustedDomainsType.md) |  | [optional] 
-**status** | [**TenantStatus**](TenantStatus.md) |  | [optional] 
+**trusted_domains_enabled** | [**TenantTrustedDomainsType**](TenantTrustedDomainsType.md) | The type of the tenant trusted domains. | [optional] 
+**status** | [**TenantStatus**](TenantStatus.md) | The tenant status. | [optional] 
 **status_changed** | **datetime** | The date and time when the tenant status was changed. | [optional] 
 **status_changed_hack** | **datetime** | The hacked date and time when the tenant status was changed. | [optional] 
 **creation_date_time** | **datetime** | The tenant creation date. | [optional] 
 **owner_id** | **UUID** | The tenant owner ID. | [optional] 
 **payment_id** | **str** | The tenant payment ID. | [optional] 
-**industry** | [**TenantIndustry**](TenantIndustry.md) |  | [optional] 
+**industry** | [**TenantIndustry**](TenantIndustry.md) | The tenant industry. | [optional] 
 **last_modified** | **datetime** | The date and time when the tenant was last modified. | [optional] 
 **calls** | **bool** | Specifies if the calls are available for the current tenant or not. | [optional] 
-**partner** | [**DbTenantPartner**](DbTenantPartner.md) |  | [optional] 
+**partner** | [**DbTenantPartner**](DbTenantPartner.md) | The database tenant partner parameters. | [optional] 
 
 ## Example
 

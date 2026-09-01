@@ -21,7 +21,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List, Optional
 from docspace_api_sdk.models.additional_white_label_settings import AdditionalWhiteLabelSettings
 from typing import Optional, Set
@@ -31,7 +31,7 @@ class AdditionalWhiteLabelSettingsWrapper(BaseModel):
     """
     The additional white label settings wrapper.
     """ # noqa: E501
-    settings: Optional[AdditionalWhiteLabelSettings] = None
+    settings: Optional[AdditionalWhiteLabelSettings] = Field(default=None, description="The additional white label settings.")
     __properties: ClassVar[List[str]] = ["settings"]
 
     model_config = ConfigDict(

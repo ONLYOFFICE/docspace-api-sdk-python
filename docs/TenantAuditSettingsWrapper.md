@@ -5,7 +5,7 @@ The tenant audit settings wrapper.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**settings** | [**TenantAuditSettings**](TenantAuditSettings.md) |  | [optional] 
+**settings** | [**TenantAuditSettings**](TenantAuditSettings.md) | The tenant audit settings parameters. | [optional] 
 
 ## Example
 

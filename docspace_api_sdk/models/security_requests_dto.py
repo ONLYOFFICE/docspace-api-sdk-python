@@ -31,9 +31,9 @@ class SecurityRequestsDto(BaseModel):
     """
     The request parameters for managing user security and access permissions.
     """ # noqa: E501
-    product_id: UUID = Field(description="The product ID for which permissions are being set.", alias="productId")
-    user_id: UUID = Field(description="The ID of the user whose permissions are being configured.", alias="userId")
-    administrator: Optional[StrictBool] = Field(default=None, description="Specifies whether the user has administrative privileges.")
+    product_id: UUID = Field(description="The product ID for which permissions are being set.", alias="productId", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000000"]})
+    user_id: UUID = Field(description="The ID of the user whose permissions are being configured.", alias="userId", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000000"]})
+    administrator: Optional[StrictBool] = Field(default=None, description="Specifies whether the user has administrative privileges.", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["productId", "userId", "administrator"]
 
     model_config = ConfigDict(

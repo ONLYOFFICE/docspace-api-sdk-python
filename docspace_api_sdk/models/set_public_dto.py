@@ -21,8 +21,9 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt
+from pydantic import BaseModel, ConfigDict, Field, StrictBool
 from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -30,8 +31,8 @@ class SetPublicDto(BaseModel):
     """
     The public settings of the room template to set.
     """ # noqa: E501
-    id: StrictInt = Field(description="The room template ID.")
-    public: Optional[StrictBool] = Field(default=None, description="Specifies whether the room template is public or not.")
+    id: Annotated[int, Field(le=2147483647, strict=True, ge=1)] = Field(description="The room template ID.", json_schema_extra={"examples": [1]})
+    public: Optional[StrictBool] = Field(default=None, description="Specifies whether the room template is public or not.", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["id", "public"]
 
     model_config = ConfigDict(

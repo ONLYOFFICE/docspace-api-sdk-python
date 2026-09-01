@@ -31,7 +31,7 @@ class TerminateRequestDto(BaseModel):
     """
     The request parameters for terminating the reassignment/deletion process.
     """ # noqa: E501
-    user_id: UUID = Field(description="The user ID whose data is reassigned/removed.", alias="userId")
+    user_id: UUID = Field(description="The user ID whose data is reassigned/removed.", alias="userId", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000000"]})
     __properties: ClassVar[List[str]] = ["userId"]
 
     model_config = ConfigDict(

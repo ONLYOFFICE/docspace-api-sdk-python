@@ -31,8 +31,8 @@ class Paragraph(BaseModel):
     """
     The paragraph parameters.
     """ # noqa: E501
-    align: Optional[StrictInt] = Field(default=None, description="The paragraph align.")
-    runs: Optional[List[Run]] = Field(default=None, description="The list of text runs from the paragraph.")
+    align: Optional[StrictInt] = Field(default=None, description="The paragraph align.", json_schema_extra={"examples": [2]})
+    runs: Optional[List[Run]] = Field(default=None, description="The list of text runs from the paragraph.", json_schema_extra={"examples": [[{"fill": [124, 124, 124], "text": "CONFIDENTIAL", "fontSize": 26}]]})
     __properties: ClassVar[List[str]] = ["align", "runs"]
 
     model_config = ConfigDict(

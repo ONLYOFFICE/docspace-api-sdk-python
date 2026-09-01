@@ -30,8 +30,8 @@ class SubAccount(BaseModel):
     """
     Represents a sub-account with a specific currency and balance.
     """ # noqa: E501
-    currency: Optional[StrictStr] = Field(default=None, description="The three-character ISO 4217 currency symbol of the sub-account.")
-    amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The balance of the sub-account in the specified currency.")
+    currency: Optional[StrictStr] = Field(default=None, description="The three-character ISO 4217 currency symbol.", json_schema_extra={"examples": ["\"USD\""]})
+    amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The amount in the specified currency.", json_schema_extra={"examples": [1500.75]})
     __properties: ClassVar[List[str]] = ["currency", "amount"]
 
     model_config = ConfigDict(

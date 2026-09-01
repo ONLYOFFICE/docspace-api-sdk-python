@@ -31,7 +31,7 @@ class InvitationLinkDeleteRequestDto(BaseModel):
     """
     The request parameters for deleting an invitation link.
     """ # noqa: E501
-    id: UUID = Field(description="The ID of the invitation link.")
+    id: UUID = Field(description="The ID of the invitation link.", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000000"]})
     __properties: ClassVar[List[str]] = ["id"]
 
     model_config = ConfigDict(

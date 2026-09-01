@@ -31,8 +31,8 @@ class TenantWalletServiceSettings(BaseModel):
     """
     The wallet services settings.
     """ # noqa: E501
-    enabled_services: Optional[List[StrictInt]] = Field(default=None, description="The list of the enabled wallet services.", alias="enabledServices")
-    last_modified: Optional[datetime] = Field(default=None, description="The date and time when the wallet services settings were last modified.", alias="lastModified")
+    enabled_services: Optional[List[StrictInt]] = Field(default=None, description="The list of the enabled wallet services.", alias="enabledServices", json_schema_extra={"examples": [[-11, -12]]})
+    last_modified: Optional[datetime] = Field(default=None, description="The date and time when the wallet services settings were last modified.", alias="lastModified", json_schema_extra={"examples": ["1990-01-01T00:00:00Z"]})
     __properties: ClassVar[List[str]] = ["enabledServices", "lastModified"]
 
     @field_validator('enabled_services')
@@ -42,8 +42,8 @@ class TenantWalletServiceSettings(BaseModel):
             return value
 
         for i in value:
-            if i not in set([-13, -12, -11]):
-                raise ValueError("each list item must be one of (-13, -12, -11)")
+            if i not in set([-18, -16, -15, -14, -13, -12, -11]):
+                raise ValueError("each list item must be one of (-18, -16, -15, -14, -13, -12, -11)")
         return value
 
     model_config = ConfigDict(

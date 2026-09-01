@@ -31,7 +31,7 @@ class CreateFolder(BaseModel):
     """
     The parameters for creating a folder.
     """ # noqa: E501
-    title: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=165)]] = Field(description="The folder title to create.")
+    title: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=165)]] = Field(description="The folder title to create.", json_schema_extra={"examples": ["New Folder"]})
     __properties: ClassVar[List[str]] = ["title"]
 
     model_config = ConfigDict(

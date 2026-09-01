@@ -386,13 +386,13 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.WebhooksApi(api_client)
-    delivery_from = '2024-01-15T10:30Z' # datetime | The delivery start time for filtering webhook logs. (optional)
-    delivery_to = '2024-01-15T10:30Z' # datetime | The delivery end time for filtering webhook logs. (optional)
+    delivery_from = '2024-01-15T10:30:00Z' # datetime | The delivery start time for filtering webhook logs. (optional)
+    delivery_to = '2024-01-15T10:30:00Z' # datetime | The delivery end time for filtering webhook logs. (optional)
     hook_uri = 'https://example.com/webhook' # str | The destination URL where webhooks are delivered. (optional)
     config_id = 1 # int | The webhook configuration identifier. (optional)
     event_id = 1 # int | The unique identifier of the event that triggered the webhook. (optional)
     group_status = docspace_api_sdk.WebhookGroupStatus() # WebhookGroupStatus | The status of the webhook delivery group. (optional)
-    user_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | The identifier of the user associated with the webhook event. (optional)
+    user_id = UUID('{}') # UUID | The identifier of the user associated with the webhook event. (optional)
     trigger = docspace_api_sdk.WebhookTrigger() # WebhookTrigger | The type of event that triggered the webhook. (optional)
     count = 1 # int | The maximum number of webhook log records to return in the query response. (optional)
     start_index = 1 # int | Specifies the starting index for retrieving webhook logs.  Used for pagination in the webhook delivery log queries. (optional)

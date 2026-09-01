@@ -31,8 +31,8 @@ class UserInvitation(BaseModel):
     """
     The user invitation parameters.
     """ # noqa: E501
-    users_ids: Optional[List[UUID]] = Field(default=None, description="The list of user IDs.", alias="usersIds")
-    resend_all: Optional[StrictBool] = Field(default=None, description="Specifies whether to resend all user invitations or not.", alias="resendAll")
+    users_ids: Optional[List[UUID]] = Field(default=None, description="The list of user IDs.", alias="usersIds", json_schema_extra={"examples": [["00000000-0000-0000-0000-000000000000"]]})
+    resend_all: Optional[StrictBool] = Field(default=None, description="Specifies whether to resend all user invitations or not.", alias="resendAll", json_schema_extra={"examples": [False]})
     __properties: ClassVar[List[str]] = ["usersIds", "resendAll"]
 
     model_config = ConfigDict(

@@ -30,7 +30,7 @@ class TurnOnAdminMessageSettingsRequestDto(BaseModel):
     """
     The request parameters for enabling or disabling administrator messaging system.
     """ # noqa: E501
-    turn_on: Optional[StrictBool] = Field(default=None, description="The global switch for the administrator messaging functionality.", alias="turnOn")
+    turn_on: Optional[StrictBool] = Field(default=None, description="The global switch for the administrator messaging functionality.", alias="turnOn", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["turnOn"]
 
     model_config = ConfigDict(

@@ -30,10 +30,10 @@ class FormsItemData(BaseModel):
     """
     The data of the separate form item.
     """ # noqa: E501
-    key: Optional[StrictStr] = Field(default=None, description="The form data key.")
-    tag: Optional[StrictStr] = Field(default=None, description="The form data tag.")
-    value: Optional[StrictStr] = Field(default=None, description="The form data value.")
-    type: Optional[StrictStr] = Field(default=None, description="The form data type.")
+    key: Optional[StrictStr] = Field(default=None, description="The form data key.", json_schema_extra={"examples": ["first_name"]})
+    tag: Optional[StrictStr] = Field(default=None, description="The form data tag.", json_schema_extra={"examples": ["personal_info"]})
+    value: Optional[StrictStr] = Field(default=None, description="The form data value.", json_schema_extra={"examples": ["John"]})
+    type: Optional[StrictStr] = Field(default=None, description="The form data type.", json_schema_extra={"examples": ["text"]})
     __properties: ClassVar[List[str]] = ["key", "tag", "value", "type"]
 
     model_config = ConfigDict(

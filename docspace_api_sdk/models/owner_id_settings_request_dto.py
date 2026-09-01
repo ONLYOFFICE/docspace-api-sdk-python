@@ -31,7 +31,7 @@ class OwnerIdSettingsRequestDto(BaseModel):
     """
     The request parameters for managing the owner-specific settings.
     """ # noqa: E501
-    owner_id: UUID = Field(description="The ID of the owner whose settings are being managed.", alias="ownerId")
+    owner_id: UUID = Field(description="The ID of the owner whose settings are being managed.", alias="ownerId", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000001"]})
     __properties: ClassVar[List[str]] = ["ownerId"]
 
     model_config = ConfigDict(

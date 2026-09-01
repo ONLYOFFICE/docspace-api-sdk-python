@@ -30,8 +30,8 @@ class CookieSettingsDto(BaseModel):
     """
     The cookie settings.
     """ # noqa: E501
-    life_time: StrictInt = Field(description="The cookie lifetime value in minutes.", alias="lifeTime")
-    enabled: StrictBool = Field(description="Specifies if the cookie settings are enabled or not.")
+    life_time: StrictInt = Field(description="The cookie lifetime value in minutes.", alias="lifeTime", json_schema_extra={"examples": [1440]})
+    enabled: StrictBool = Field(description="Specifies if the cookie settings are enabled or not.", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["lifeTime", "enabled"]
 
     model_config = ConfigDict(

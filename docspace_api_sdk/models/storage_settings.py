@@ -17,29 +17,31 @@
 
 
 from __future__ import annotations
-from inspect import getfullargspec
-import json
 import pprint
 import re  # noqa: F401
+import json
+
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from typing import Union, Any, List, Set, TYPE_CHECKING, Optional, Dict
-from typing_extensions import Literal, Self
-from pydantic import Field
-from docspace_api_sdk.models.base_storage_settings_storage_settings import BaseStorageSettingsStorageSettings
+from typing import Optional, Set
+from typing_extensions import Self
 
-class StorageSettings(BaseStorageSettingsStorageSettings):
+class StorageSettings(BaseModel):
     """
     StorageSettings
-    """
-
+    """ # noqa: E501
+    module: Optional[StrictStr] = None
+    props: Optional[Dict[str, Optional[StrictStr]]] = None
+    last_modified: Optional[datetime] = Field(default=None, alias="lastModified")
+    __properties: ClassVar[List[str]] = ["module", "props", "lastModified"]
 
     model_config = ConfigDict(
         populate_by_name=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
+
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -78,27 +80,23 @@ class StorageSettings(BaseStorageSettingsStorageSettings):
         if self.module is None and "module" in self.model_fields_set:
             _dict['module'] = None
 
-        # set to None if props (nullable) is None
-        # and model_fields_set contains the field
-        if self.props is None and "props" in self.model_fields_set:
-            _dict['props'] = None
-
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance from a dict"""
+        """Create an instance of StorageSettings from a dict"""
         if obj is None:
             return None
+
+
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        base_obj = super().from_dict(obj)
-        base_dict = base_obj.model_dump() if hasattr(base_obj, "model_dump") else dict(base_obj or {})
-
-        extra_fields = {
-        }
-        all_fields = {**base_dict, **extra_fields}
-        return cls.model_validate(all_fields)
+        _obj = cls.model_validate({
+            "module": obj.get("module"),
+            "props": obj.get("props"),
+            "lastModified": obj.get("lastModified")
+        })
+        return _obj
 
 
