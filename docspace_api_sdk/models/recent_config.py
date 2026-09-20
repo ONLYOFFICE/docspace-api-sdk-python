@@ -28,11 +28,11 @@ from typing_extensions import Self
 
 class RecentConfig(BaseModel):
     """
-    The presence or absence of the documents in the Open Recent... menu option.
+    One entry of the recent-documents list the editor offers.
     """ # noqa: E501
-    folder: Optional[StrictStr] = Field(default=None, description="The folder where the document is stored.", json_schema_extra={"examples": ["folder_123"]})
-    title: Optional[StrictStr] = Field(default=None, description="The document title that will be displayed in the Open Recent... menu option.", json_schema_extra={"examples": ["Report 2026"]})
-    url: Optional[StrictStr] = Field(default=None, description="The absolute URL to the document where it is stored.", json_schema_extra={"examples": ["https://portal.example.com/files/recent/report2026.docx"]})
+    folder: Optional[StrictStr] = Field(default=None, description="The folder shown next to the entry, as a readable name rather than an id.", json_schema_extra={"examples": ["My documents"]})
+    title: Optional[StrictStr] = Field(default=None, description="The name shown for the entry.", json_schema_extra={"examples": ["Report 2026.docx"]})
+    url: Optional[StrictStr] = Field(default=None, description="Where the entry opens.", json_schema_extra={"examples": ["https://portal.example.com/doceditor?fileid=512"]})
     __properties: ClassVar[List[str]] = ["folder", "title", "url"]
 
     model_config = ConfigDict(

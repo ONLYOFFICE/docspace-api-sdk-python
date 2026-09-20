@@ -30,17 +30,17 @@ from typing_extensions import Self
 
 class BackupProgress(BaseModel):
     """
-    The backup progress parameters.
+    The state of one backup or restoring job.
     """ # noqa: E501
-    is_completed: Optional[StrictBool] = Field(default=None, description="Specifies if the backup is completed or not.", alias="isCompleted", json_schema_extra={"examples": [False]})
-    progress: Optional[StrictInt] = Field(default=None, description="The backup progress in percentage.", json_schema_extra={"examples": [50]})
-    error: Optional[StrictStr] = Field(default=None, description="The backup error message.")
-    warning: Optional[StrictStr] = Field(default=None, description="The backup warning message.")
-    link: Optional[StrictStr] = Field(default=None, description="The backup link.", json_schema_extra={"examples": ["https://example.com/backup/task_123"]})
-    tenant_id: Optional[StrictInt] = Field(default=None, description="The tenant ID.", alias="tenantId", json_schema_extra={"examples": [1]})
-    backup_progress_enum: Optional[BackupProgressEnum] = Field(default=None, description="The backup progress type.", alias="backupProgressEnum")
-    status: Optional[DistributedTaskStatus] = Field(default=None, description="The backup progress status.")
-    task_id: Optional[StrictStr] = Field(default=None, description="The task ID.", alias="taskId", json_schema_extra={"examples": ["task_123"]})
+    is_completed: Optional[StrictBool] = Field(default=None, description="Specifies whether the job has stopped running. This is the field to poll: true means the job will not  change any more, whether it succeeded, failed or was cancelled, and `status` tells which of the three  it is.", alias="isCompleted", json_schema_extra={"examples": [False]})
+    progress: Optional[StrictInt] = Field(default=None, description="The share of the job that is already done, from 0 to 100. A job that has only been queued reports 0,  because the work starts when a separate worker service picks it up.", json_schema_extra={"examples": [50]})
+    error: Optional[StrictStr] = Field(default=None, description="The message of the error that stopped the job. It is an empty string, not null, while the job runs  and after a job that succeeded, so the sign of a failure is a non-empty value - and this is the only  place where the reason is reported.", json_schema_extra={"examples": ["An error occurred during processing"]})
+    warning: Optional[StrictStr] = Field(default=None, description="A message about a job that stopped without failing: it names the entry inside the archive that lists  the files which could not be read, when a backup finished without some of them, and it says so when  the job was cancelled. It is an empty string otherwise, and it is only ever filled in for a backup  job - a cancelled restoring job leaves it empty.", json_schema_extra={"examples": ["Some files were not included in the backup. For more details, please check storage/missing_info"]})
+    link: Optional[StrictStr] = Field(default=None, description="The link to download the stored archive. It is an empty string until the archive has been uploaded,  and it is only ever filled in for a backup job, never for a restoring one.", json_schema_extra={"examples": ["https://example.com/products/files/httphandlers/filehandler.ashx?action=download&fileid=1234"]})
+    tenant_id: Optional[StrictInt] = Field(default=None, description="The ID of the portal the job belongs to, or -1 for a job that covers the whole server.", alias="tenantId", json_schema_extra={"examples": [1]})
+    backup_progress_enum: Optional[BackupProgressEnum] = Field(default=None, description="Whether this is a backup or a restoring job, reported as a number rather than as a name.", alias="backupProgressEnum")
+    status: Optional[DistributedTaskStatus] = Field(default=None, description="The state of the job: `Created` while it waits for a worker to pick it up, `Running` while it works,  `Completed` once it has finished on its own, `Canceled` after it was cancelled, and `Failted` when it  stopped on an error, in which case `error` carries the reason. Reported as a number rather than as a  name.")
+    task_id: Optional[StrictStr] = Field(default=None, description="The ID of the job. It is the handle to poll this operation with, and for a backup job it also becomes  the `id` of the record in `GET api/2.0/backup/getbackuphistory`.", alias="taskId", json_schema_extra={"examples": ["11111111-1111-1111-1111-111111111111"]})
     __properties: ClassVar[List[str]] = ["isCompleted", "progress", "error", "warning", "link", "tenantId", "backupProgressEnum", "status", "taskId"]
 
     model_config = ConfigDict(

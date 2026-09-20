@@ -28,13 +28,13 @@ from typing_extensions import Self
 
 class UsageSpaceStatItemDto(BaseModel):
     """
-    The parameters of the usage space statistics item.
+    The storage one category of a portal module occupies, in the form a statistics page prints it.
     """ # noqa: E501
-    name: Optional[StrictStr] = Field(default=None, description="The item name.", json_schema_extra={"examples": ["Item name"]})
-    icon: Optional[StrictStr] = Field(default=None, description="The item icon path.", json_schema_extra={"examples": ["Item icon path"]})
-    disabled: Optional[StrictBool] = Field(default=None, description="Specifies if the item is disabled or not.", json_schema_extra={"examples": [True]})
-    size: Optional[StrictStr] = Field(default=None, description="The item used space.", json_schema_extra={"examples": ["0 Byte"]})
-    url: Optional[StrictStr] = Field(default=None, description="The item URL.", json_schema_extra={"examples": ["Item url"]})
+    name: Optional[StrictStr] = Field(default=None, description="The category name in the portal language, HTML-escaped and ready to be rendered as text. What a category  stands for depends on the module asked about - for the Documents module it is a room type.", json_schema_extra={"examples": ["Collaboration rooms"]})
+    icon: Optional[StrictStr] = Field(default=None, description="The path of the icon to render beside the name, relative to the portal address. It is empty for a category  that ships no icon.", json_schema_extra={"examples": ["/images/icons/rooms.svg"]})
+    disabled: Optional[StrictBool] = Field(default=None, description="Whether the category is switched off for this portal. A disabled category still reports the space it  occupies, so it is worth showing greyed out rather than dropping.", json_schema_extra={"examples": [True]})
+    size: Optional[StrictStr] = Field(default=None, description="The occupied space already formatted for display, with its unit and in the portal language - `0 Byte` for  an empty category. It is not a byte count and must not be parsed; the raw numbers live in the quota  reported by `GET api/2.0/portal/quota`.", json_schema_extra={"examples": ["1.5 GB"]})
+    url: Optional[StrictStr] = Field(default=None, description="The portal page that lists the contents of this category, relative to the portal address, so a statistics  page can link through to it. It is empty for a category with no page of its own.", json_schema_extra={"examples": ["/rooms/shared"]})
     __properties: ClassVar[List[str]] = ["name", "icon", "disabled", "size", "url"]
 
     model_config = ConfigDict(

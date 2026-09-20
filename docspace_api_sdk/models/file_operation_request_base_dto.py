@@ -28,9 +28,9 @@ from typing_extensions import Self
 
 class FileOperationRequestBaseDto(BaseModel):
     """
-    The base operation request parameters.
+    The parameter shared by every request that starts a background file operation.
     """ # noqa: E501
-    return_single_operation: Optional[StrictBool] = Field(default=None, description="Specifies whether to return only the current operation", alias="returnSingleOperation", json_schema_extra={"examples": [False]})
+    return_single_operation: Optional[StrictBool] = Field(default=None, description="Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list.", alias="returnSingleOperation", json_schema_extra={"examples": [False]})
     __properties: ClassVar[List[str]] = ["returnSingleOperation"]
 
     model_config = ConfigDict(

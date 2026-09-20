@@ -73,9 +73,9 @@ class PromptsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> AiPromptMutationResult:
-        """Create
+        """Save a prompt
 
-        Saves a new prompt. The name must be non-empty and unique inside its folder, and `folderId` must point at an existing folder - omit it for the root.
+        Saves a new prompt in the caller's own prompt library and returns it. The name has to be non-empty and unique inside its folder, and `folderId` has to name an existing folder - omit it to save the prompt at the root. Prompts are per-user: another user's library is never visible here, and no permission beyond having AI enabled is needed. The answer carries the stored prompt including the ID to use with the update, move and delete operations.
 
         :param ai_create_prompt_input: (required)
         :type ai_create_prompt_input: AiCreatePromptInput
@@ -112,6 +112,9 @@ class PromptsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiPromptMutationResult",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -142,9 +145,9 @@ class PromptsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[AiPromptMutationResult]:
-        """Create
+        """Save a prompt
 
-        Saves a new prompt. The name must be non-empty and unique inside its folder, and `folderId` must point at an existing folder - omit it for the root.
+        Saves a new prompt in the caller's own prompt library and returns it. The name has to be non-empty and unique inside its folder, and `folderId` has to name an existing folder - omit it to save the prompt at the root. Prompts are per-user: another user's library is never visible here, and no permission beyond having AI enabled is needed. The answer carries the stored prompt including the ID to use with the update, move and delete operations.
 
         :param ai_create_prompt_input: (required)
         :type ai_create_prompt_input: AiCreatePromptInput
@@ -181,6 +184,9 @@ class PromptsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiPromptMutationResult",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -211,9 +217,9 @@ class PromptsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Create
+        """Save a prompt
 
-        Saves a new prompt. The name must be non-empty and unique inside its folder, and `folderId` must point at an existing folder - omit it for the root.
+        Saves a new prompt in the caller's own prompt library and returns it. The name has to be non-empty and unique inside its folder, and `folderId` has to name an existing folder - omit it to save the prompt at the root. Prompts are per-user: another user's library is never visible here, and no permission beyond having AI enabled is needed. The answer carries the stored prompt including the ID to use with the update, move and delete operations.
 
         :param ai_create_prompt_input: (required)
         :type ai_create_prompt_input: AiCreatePromptInput
@@ -250,6 +256,9 @@ class PromptsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiPromptMutationResult",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -315,6 +324,8 @@ class PromptsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'cookieAuth', 
+            'bearerAuth'
         ]
 
 
@@ -341,7 +352,7 @@ class PromptsApi:
     @validate_call
     def ai_prompts_create_folder(
         self,
-        body: StrictStr,
+        body: Annotated[StrictStr, Field(description="The name of the folder to create, as a bare JSON string.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -357,9 +368,9 @@ class PromptsApi:
     ) -> AiFolderMutationResult:
         """Create folder
 
-        Creates a prompt folder. The name must be non-empty and unique across the portal - prompt folders do not nest.
+        Creates a folder in the caller's prompt library and returns it. The name has to be non-empty and unique across that library. Folders do not nest: there is one flat level, so a folder cannot be created inside another. The answer carries the folder ID to use as `folderId` when saving or moving prompts.
 
-        :param body: (required)
+        :param body: The name of the folder to create, as a bare JSON string. (required)
         :type body: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -394,6 +405,9 @@ class PromptsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiFolderMutationResult",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -410,7 +424,7 @@ class PromptsApi:
     @validate_call
     def ai_prompts_create_folder_with_http_info(
         self,
-        body: StrictStr,
+        body: Annotated[StrictStr, Field(description="The name of the folder to create, as a bare JSON string.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -426,9 +440,9 @@ class PromptsApi:
     ) -> ApiResponse[AiFolderMutationResult]:
         """Create folder
 
-        Creates a prompt folder. The name must be non-empty and unique across the portal - prompt folders do not nest.
+        Creates a folder in the caller's prompt library and returns it. The name has to be non-empty and unique across that library. Folders do not nest: there is one flat level, so a folder cannot be created inside another. The answer carries the folder ID to use as `folderId` when saving or moving prompts.
 
-        :param body: (required)
+        :param body: The name of the folder to create, as a bare JSON string. (required)
         :type body: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -463,6 +477,9 @@ class PromptsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiFolderMutationResult",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -479,7 +496,7 @@ class PromptsApi:
     @validate_call
     def ai_prompts_create_folder_without_preload_content(
         self,
-        body: StrictStr,
+        body: Annotated[StrictStr, Field(description="The name of the folder to create, as a bare JSON string.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -495,9 +512,9 @@ class PromptsApi:
     ) -> RESTResponseType:
         """Create folder
 
-        Creates a prompt folder. The name must be non-empty and unique across the portal - prompt folders do not nest.
+        Creates a folder in the caller's prompt library and returns it. The name has to be non-empty and unique across that library. Folders do not nest: there is one flat level, so a folder cannot be created inside another. The answer carries the folder ID to use as `folderId` when saving or moving prompts.
 
-        :param body: (required)
+        :param body: The name of the folder to create, as a bare JSON string. (required)
         :type body: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -532,6 +549,9 @@ class PromptsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiFolderMutationResult",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -597,6 +617,8 @@ class PromptsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'cookieAuth', 
+            'bearerAuth'
         ]
 
 
@@ -623,7 +645,7 @@ class PromptsApi:
     @validate_call
     def ai_prompts_delete(
         self,
-        body: StrictStr,
+        body: Annotated[StrictStr, Field(description="The ID of the prompt to delete, as a bare JSON string.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -637,11 +659,11 @@ class PromptsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> AiSuccessResponse:
-        """Delete
+        """Delete a saved prompt
 
-        Deletes a saved prompt. Does nothing when it no longer exists.
+        Deletes one saved prompt from the caller's library. The ID may be sent in the body or as a query parameter, and it is required. An ID that does not exist, or that belongs to another user, is not reported: the call answers success without deleting anything. The deletion is permanent.
 
-        :param body: (required)
+        :param body: The ID of the prompt to delete, as a bare JSON string. (required)
         :type body: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -675,7 +697,11 @@ class PromptsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiSuccessResponse",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -692,7 +718,7 @@ class PromptsApi:
     @validate_call
     def ai_prompts_delete_with_http_info(
         self,
-        body: StrictStr,
+        body: Annotated[StrictStr, Field(description="The ID of the prompt to delete, as a bare JSON string.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -706,11 +732,11 @@ class PromptsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[AiSuccessResponse]:
-        """Delete
+        """Delete a saved prompt
 
-        Deletes a saved prompt. Does nothing when it no longer exists.
+        Deletes one saved prompt from the caller's library. The ID may be sent in the body or as a query parameter, and it is required. An ID that does not exist, or that belongs to another user, is not reported: the call answers success without deleting anything. The deletion is permanent.
 
-        :param body: (required)
+        :param body: The ID of the prompt to delete, as a bare JSON string. (required)
         :type body: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -744,7 +770,11 @@ class PromptsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiSuccessResponse",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -761,7 +791,7 @@ class PromptsApi:
     @validate_call
     def ai_prompts_delete_without_preload_content(
         self,
-        body: StrictStr,
+        body: Annotated[StrictStr, Field(description="The ID of the prompt to delete, as a bare JSON string.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -775,11 +805,11 @@ class PromptsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Delete
+        """Delete a saved prompt
 
-        Deletes a saved prompt. Does nothing when it no longer exists.
+        Deletes one saved prompt from the caller's library. The ID may be sent in the body or as a query parameter, and it is required. An ID that does not exist, or that belongs to another user, is not reported: the call answers success without deleting anything. The deletion is permanent.
 
-        :param body: (required)
+        :param body: The ID of the prompt to delete, as a bare JSON string. (required)
         :type body: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -813,7 +843,11 @@ class PromptsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiSuccessResponse",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -879,6 +913,8 @@ class PromptsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'cookieAuth', 
+            'bearerAuth'
         ]
 
 
@@ -905,7 +941,7 @@ class PromptsApi:
     @validate_call
     def ai_prompts_delete_folder(
         self,
-        body: StrictStr,
+        body: Annotated[StrictStr, Field(description="The ID of the folder to delete, as a bare JSON string.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -921,9 +957,9 @@ class PromptsApi:
     ) -> AiSuccessResponse:
         """Delete folder
 
-        Deletes a prompt folder together with the prompts inside it.
+        Deletes a folder together with every prompt inside it, permanently. The ID is required and may be sent in the body or as a query parameter. Unlike deleting a prompt, this checks first: a folder that does not exist, and one that belongs to another user, both answer 404 - the two cases are deliberately indistinguishable, so a foreign folder cannot be probed. Move the prompts out with `PUT api/2.0/ai/prompts/move` first if they should survive.
 
-        :param body: (required)
+        :param body: The ID of the folder to delete, as a bare JSON string. (required)
         :type body: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -957,7 +993,12 @@ class PromptsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiSuccessResponse",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '404': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -974,7 +1015,7 @@ class PromptsApi:
     @validate_call
     def ai_prompts_delete_folder_with_http_info(
         self,
-        body: StrictStr,
+        body: Annotated[StrictStr, Field(description="The ID of the folder to delete, as a bare JSON string.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -990,9 +1031,9 @@ class PromptsApi:
     ) -> ApiResponse[AiSuccessResponse]:
         """Delete folder
 
-        Deletes a prompt folder together with the prompts inside it.
+        Deletes a folder together with every prompt inside it, permanently. The ID is required and may be sent in the body or as a query parameter. Unlike deleting a prompt, this checks first: a folder that does not exist, and one that belongs to another user, both answer 404 - the two cases are deliberately indistinguishable, so a foreign folder cannot be probed. Move the prompts out with `PUT api/2.0/ai/prompts/move` first if they should survive.
 
-        :param body: (required)
+        :param body: The ID of the folder to delete, as a bare JSON string. (required)
         :type body: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1026,7 +1067,12 @@ class PromptsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiSuccessResponse",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '404': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -1043,7 +1089,7 @@ class PromptsApi:
     @validate_call
     def ai_prompts_delete_folder_without_preload_content(
         self,
-        body: StrictStr,
+        body: Annotated[StrictStr, Field(description="The ID of the folder to delete, as a bare JSON string.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1059,9 +1105,9 @@ class PromptsApi:
     ) -> RESTResponseType:
         """Delete folder
 
-        Deletes a prompt folder together with the prompts inside it.
+        Deletes a folder together with every prompt inside it, permanently. The ID is required and may be sent in the body or as a query parameter. Unlike deleting a prompt, this checks first: a folder that does not exist, and one that belongs to another user, both answer 404 - the two cases are deliberately indistinguishable, so a foreign folder cannot be probed. Move the prompts out with `PUT api/2.0/ai/prompts/move` first if they should survive.
 
-        :param body: (required)
+        :param body: The ID of the folder to delete, as a bare JSON string. (required)
         :type body: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1095,7 +1141,12 @@ class PromptsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiSuccessResponse",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '404': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -1161,6 +1212,8 @@ class PromptsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'cookieAuth', 
+            'bearerAuth'
         ]
 
 
@@ -1200,9 +1253,9 @@ class PromptsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> AiPromptBundle:
-        """Export
+        """Export the prompt library
 
-        Builds a self-contained, versioned bundle of every saved prompt and folder, ready for `import-bundle`.
+        Builds a versioned bundle of every prompt and folder in the caller's library and returns it, with no parameters. The bundle is self-contained: it carries its own format version so an older export can still be read back, and it is the input `POST api/2.0/ai/prompts/import-bundle` expects. This is also the only way to read the whole library at once, since listing is folder-scoped. Nothing is changed by the call.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1236,6 +1289,8 @@ class PromptsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiPromptBundle",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -1265,9 +1320,9 @@ class PromptsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[AiPromptBundle]:
-        """Export
+        """Export the prompt library
 
-        Builds a self-contained, versioned bundle of every saved prompt and folder, ready for `import-bundle`.
+        Builds a versioned bundle of every prompt and folder in the caller's library and returns it, with no parameters. The bundle is self-contained: it carries its own format version so an older export can still be read back, and it is the input `POST api/2.0/ai/prompts/import-bundle` expects. This is also the only way to read the whole library at once, since listing is folder-scoped. Nothing is changed by the call.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1301,6 +1356,8 @@ class PromptsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiPromptBundle",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -1330,9 +1387,9 @@ class PromptsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Export
+        """Export the prompt library
 
-        Builds a self-contained, versioned bundle of every saved prompt and folder, ready for `import-bundle`.
+        Builds a versioned bundle of every prompt and folder in the caller's library and returns it, with no parameters. The bundle is self-contained: it carries its own format version so an older export can still be read back, and it is the input `POST api/2.0/ai/prompts/import-bundle` expects. This is also the only way to read the whole library at once, since listing is folder-scoped. Nothing is changed by the call.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1366,6 +1423,8 @@ class PromptsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiPromptBundle",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -1415,6 +1474,8 @@ class PromptsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'cookieAuth', 
+            'bearerAuth'
         ]
 
 
@@ -1455,9 +1516,9 @@ class PromptsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> AiPrompt:
-        """Get by id
+        """Get a saved prompt
 
-        Returns one saved prompt, or an empty result when the identifier is unknown.
+        Returns one saved prompt by its ID. The ID is required and is read from the query. An ID that is unknown, or that belongs to another user, is not reported as 404: the answer is an empty body with status 200, so treat a missing payload as no such prompt. Prompt IDs come from `GET api/2.0/ai/prompts/list` or from the answer of the create operation.
 
         :param id: The saved prompt identifier. (required)
         :type id: str
@@ -1493,7 +1554,10 @@ class PromptsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiPrompt",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -1524,9 +1588,9 @@ class PromptsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[AiPrompt]:
-        """Get by id
+        """Get a saved prompt
 
-        Returns one saved prompt, or an empty result when the identifier is unknown.
+        Returns one saved prompt by its ID. The ID is required and is read from the query. An ID that is unknown, or that belongs to another user, is not reported as 404: the answer is an empty body with status 200, so treat a missing payload as no such prompt. Prompt IDs come from `GET api/2.0/ai/prompts/list` or from the answer of the create operation.
 
         :param id: The saved prompt identifier. (required)
         :type id: str
@@ -1562,7 +1626,10 @@ class PromptsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiPrompt",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -1593,9 +1660,9 @@ class PromptsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get by id
+        """Get a saved prompt
 
-        Returns one saved prompt, or an empty result when the identifier is unknown.
+        Returns one saved prompt by its ID. The ID is required and is read from the query. An ID that is unknown, or that belongs to another user, is not reported as 404: the answer is an empty body with status 200, so treat a missing payload as no such prompt. Prompt IDs come from `GET api/2.0/ai/prompts/list` or from the answer of the create operation.
 
         :param id: The saved prompt identifier. (required)
         :type id: str
@@ -1631,7 +1698,10 @@ class PromptsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiPrompt",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -1686,6 +1756,8 @@ class PromptsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'cookieAuth', 
+            'bearerAuth'
         ]
 
 
@@ -1726,9 +1798,9 @@ class PromptsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> AiPromptFolder:
-        """Get folder by id
+        """Get a prompt folder
 
-        Returns one prompt folder, or an empty result when the identifier is unknown.
+        Returns one folder of the caller's prompt library by its ID, without the prompts inside it. The ID is required and is read from the query. An unknown or foreign ID is not reported as 404: the answer is an empty body with status 200. This differs from the delete operation on the same ID, which does answer 404.
 
         :param id: The prompt folder identifier. (required)
         :type id: str
@@ -1764,7 +1836,10 @@ class PromptsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiPromptFolder",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -1795,9 +1870,9 @@ class PromptsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[AiPromptFolder]:
-        """Get folder by id
+        """Get a prompt folder
 
-        Returns one prompt folder, or an empty result when the identifier is unknown.
+        Returns one folder of the caller's prompt library by its ID, without the prompts inside it. The ID is required and is read from the query. An unknown or foreign ID is not reported as 404: the answer is an empty body with status 200. This differs from the delete operation on the same ID, which does answer 404.
 
         :param id: The prompt folder identifier. (required)
         :type id: str
@@ -1833,7 +1908,10 @@ class PromptsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiPromptFolder",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -1864,9 +1942,9 @@ class PromptsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get folder by id
+        """Get a prompt folder
 
-        Returns one prompt folder, or an empty result when the identifier is unknown.
+        Returns one folder of the caller's prompt library by its ID, without the prompts inside it. The ID is required and is read from the query. An unknown or foreign ID is not reported as 404: the answer is an empty body with status 200. This differs from the delete operation on the same ID, which does answer 404.
 
         :param id: The prompt folder identifier. (required)
         :type id: str
@@ -1902,7 +1980,10 @@ class PromptsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiPromptFolder",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -1957,6 +2038,8 @@ class PromptsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'cookieAuth', 
+            'bearerAuth'
         ]
 
 
@@ -1999,7 +2082,7 @@ class PromptsApi:
     ) -> AiImportResult:
         """Import bundle
 
-        Restores a prompt bundle. `replace` wipes the current prompts and folders before writing the bundle, `merge` writes the bundle on top of what is already there; both validate the folder references inside the bundle before any write, so a corrupt bundle is rejected whole.
+        Writes a bundle produced by `GET api/2.0/ai/prompts/export` back into the caller's library. `mode` decides how: `replace` deletes the current prompts and folders before writing, and `merge` writes the bundle on top of what is already there. The folder references inside the bundle are validated before anything is written, so a corrupt bundle is rejected whole rather than applied halfway. `replace` is destructive and cannot be undone - export first if the current library matters.
 
         :param ai_prompts_import_bundle_request: (required)
         :type ai_prompts_import_bundle_request: AiPromptsImportBundleRequest
@@ -2036,6 +2119,9 @@ class PromptsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiImportResult",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -2068,7 +2154,7 @@ class PromptsApi:
     ) -> ApiResponse[AiImportResult]:
         """Import bundle
 
-        Restores a prompt bundle. `replace` wipes the current prompts and folders before writing the bundle, `merge` writes the bundle on top of what is already there; both validate the folder references inside the bundle before any write, so a corrupt bundle is rejected whole.
+        Writes a bundle produced by `GET api/2.0/ai/prompts/export` back into the caller's library. `mode` decides how: `replace` deletes the current prompts and folders before writing, and `merge` writes the bundle on top of what is already there. The folder references inside the bundle are validated before anything is written, so a corrupt bundle is rejected whole rather than applied halfway. `replace` is destructive and cannot be undone - export first if the current library matters.
 
         :param ai_prompts_import_bundle_request: (required)
         :type ai_prompts_import_bundle_request: AiPromptsImportBundleRequest
@@ -2105,6 +2191,9 @@ class PromptsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiImportResult",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -2137,7 +2226,7 @@ class PromptsApi:
     ) -> RESTResponseType:
         """Import bundle
 
-        Restores a prompt bundle. `replace` wipes the current prompts and folders before writing the bundle, `merge` writes the bundle on top of what is already there; both validate the folder references inside the bundle before any write, so a corrupt bundle is rejected whole.
+        Writes a bundle produced by `GET api/2.0/ai/prompts/export` back into the caller's library. `mode` decides how: `replace` deletes the current prompts and folders before writing, and `merge` writes the bundle on top of what is already there. The folder references inside the bundle are validated before anything is written, so a corrupt bundle is rejected whole rather than applied halfway. `replace` is destructive and cannot be undone - export first if the current library matters.
 
         :param ai_prompts_import_bundle_request: (required)
         :type ai_prompts_import_bundle_request: AiPromptsImportBundleRequest
@@ -2174,6 +2263,9 @@ class PromptsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiImportResult",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -2239,6 +2331,8 @@ class PromptsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'cookieAuth', 
+            'bearerAuth'
         ]
 
 
@@ -2279,9 +2373,9 @@ class PromptsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[AiPrompt]:
-        """List
+        """List saved prompts
 
-        Lists saved prompts. Scope the answer to one folder, ask for the root-level prompts only, or omit the folder to get every prompt newest first.
+        Lists the caller's saved prompts, newest first. `folderId` scopes the answer to one folder, and omitting it - or sending it empty - lists the prompts that sit at the root rather than every prompt, because the client fetcher cannot tell an absent value from a null one. There is therefore no way to ask for the whole library in one call: walk the folders from `GET api/2.0/ai/prompts/list-folders`, or take everything at once with `GET api/2.0/ai/prompts/export`. The prompts of other users are never included.
 
         :param folder_id: The prompt folder identifier. Omit to list the prompts that sit outside any folder.
         :type folder_id: str
@@ -2318,6 +2412,8 @@ class PromptsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "List[AiPrompt]",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -2348,9 +2444,9 @@ class PromptsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[List[AiPrompt]]:
-        """List
+        """List saved prompts
 
-        Lists saved prompts. Scope the answer to one folder, ask for the root-level prompts only, or omit the folder to get every prompt newest first.
+        Lists the caller's saved prompts, newest first. `folderId` scopes the answer to one folder, and omitting it - or sending it empty - lists the prompts that sit at the root rather than every prompt, because the client fetcher cannot tell an absent value from a null one. There is therefore no way to ask for the whole library in one call: walk the folders from `GET api/2.0/ai/prompts/list-folders`, or take everything at once with `GET api/2.0/ai/prompts/export`. The prompts of other users are never included.
 
         :param folder_id: The prompt folder identifier. Omit to list the prompts that sit outside any folder.
         :type folder_id: str
@@ -2387,6 +2483,8 @@ class PromptsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "List[AiPrompt]",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -2417,9 +2515,9 @@ class PromptsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """List
+        """List saved prompts
 
-        Lists saved prompts. Scope the answer to one folder, ask for the root-level prompts only, or omit the folder to get every prompt newest first.
+        Lists the caller's saved prompts, newest first. `folderId` scopes the answer to one folder, and omitting it - or sending it empty - lists the prompts that sit at the root rather than every prompt, because the client fetcher cannot tell an absent value from a null one. There is therefore no way to ask for the whole library in one call: walk the folders from `GET api/2.0/ai/prompts/list-folders`, or take everything at once with `GET api/2.0/ai/prompts/export`. The prompts of other users are never included.
 
         :param folder_id: The prompt folder identifier. Omit to list the prompts that sit outside any folder.
         :type folder_id: str
@@ -2456,6 +2554,8 @@ class PromptsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "List[AiPrompt]",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -2510,6 +2610,8 @@ class PromptsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'cookieAuth', 
+            'bearerAuth'
         ]
 
 
@@ -2551,7 +2653,7 @@ class PromptsApi:
     ) -> List[AiPromptFolder]:
         """List folders
 
-        Lists the prompt folders, newest first.
+        Lists every folder of the caller's prompt library, newest first, with no parameters and no pagination. Folders are flat, so the answer is a single list rather than a tree. The prompts inside them are not included - read those with `GET api/2.0/ai/prompts/list` per folder. Another user's folders are never listed.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2585,6 +2687,8 @@ class PromptsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "List[AiPromptFolder]",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -2616,7 +2720,7 @@ class PromptsApi:
     ) -> ApiResponse[List[AiPromptFolder]]:
         """List folders
 
-        Lists the prompt folders, newest first.
+        Lists every folder of the caller's prompt library, newest first, with no parameters and no pagination. Folders are flat, so the answer is a single list rather than a tree. The prompts inside them are not included - read those with `GET api/2.0/ai/prompts/list` per folder. Another user's folders are never listed.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2650,6 +2754,8 @@ class PromptsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "List[AiPromptFolder]",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -2681,7 +2787,7 @@ class PromptsApi:
     ) -> RESTResponseType:
         """List folders
 
-        Lists the prompt folders, newest first.
+        Lists every folder of the caller's prompt library, newest first, with no parameters and no pagination. Folders are flat, so the answer is a single list rather than a tree. The prompts inside them are not included - read those with `GET api/2.0/ai/prompts/list` per folder. Another user's folders are never listed.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2715,6 +2821,8 @@ class PromptsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "List[AiPromptFolder]",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -2764,6 +2872,8 @@ class PromptsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'cookieAuth', 
+            'bearerAuth'
         ]
 
 
@@ -2804,9 +2914,9 @@ class PromptsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> AiPromptMutationResult:
-        """Move
+        """Move a prompt to a folder
 
-        Moves a saved prompt into another folder, or to the root. The name is re-validated in the target folder, so the move fails when a prompt of that name is already there.
+        Moves a saved prompt into another folder, or to the root when `folderId` is omitted or null. The name is re-validated in the target folder, so the move fails when a prompt of that name already sits there - rename it first with `PUT api/2.0/ai/prompts/update`. Nothing about the prompt other than its folder changes. The answer carries the moved prompt.
 
         :param ai_prompts_move_request: (required)
         :type ai_prompts_move_request: AiPromptsMoveRequest
@@ -2843,6 +2953,9 @@ class PromptsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiPromptMutationResult",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -2873,9 +2986,9 @@ class PromptsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[AiPromptMutationResult]:
-        """Move
+        """Move a prompt to a folder
 
-        Moves a saved prompt into another folder, or to the root. The name is re-validated in the target folder, so the move fails when a prompt of that name is already there.
+        Moves a saved prompt into another folder, or to the root when `folderId` is omitted or null. The name is re-validated in the target folder, so the move fails when a prompt of that name already sits there - rename it first with `PUT api/2.0/ai/prompts/update`. Nothing about the prompt other than its folder changes. The answer carries the moved prompt.
 
         :param ai_prompts_move_request: (required)
         :type ai_prompts_move_request: AiPromptsMoveRequest
@@ -2912,6 +3025,9 @@ class PromptsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiPromptMutationResult",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -2942,9 +3058,9 @@ class PromptsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Move
+        """Move a prompt to a folder
 
-        Moves a saved prompt into another folder, or to the root. The name is re-validated in the target folder, so the move fails when a prompt of that name is already there.
+        Moves a saved prompt into another folder, or to the root when `folderId` is omitted or null. The name is re-validated in the target folder, so the move fails when a prompt of that name already sits there - rename it first with `PUT api/2.0/ai/prompts/update`. Nothing about the prompt other than its folder changes. The answer carries the moved prompt.
 
         :param ai_prompts_move_request: (required)
         :type ai_prompts_move_request: AiPromptsMoveRequest
@@ -2981,6 +3097,9 @@ class PromptsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiPromptMutationResult",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -3046,6 +3165,8 @@ class PromptsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'cookieAuth', 
+            'bearerAuth'
         ]
 
 
@@ -3088,7 +3209,7 @@ class PromptsApi:
     ) -> AiFolderMutationResult:
         """Rename folder
 
-        Renames a prompt folder, validating the new name against the existing folders.
+        Renames a folder in the caller's prompt library, validating the new name against the folders already there. The prompts inside it are untouched and keep their IDs. The answer carries the renamed folder. A name that another folder already uses is rejected.
 
         :param ai_prompts_rename_folder_request: (required)
         :type ai_prompts_rename_folder_request: AiPromptsRenameFolderRequest
@@ -3125,6 +3246,9 @@ class PromptsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiFolderMutationResult",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -3157,7 +3281,7 @@ class PromptsApi:
     ) -> ApiResponse[AiFolderMutationResult]:
         """Rename folder
 
-        Renames a prompt folder, validating the new name against the existing folders.
+        Renames a folder in the caller's prompt library, validating the new name against the folders already there. The prompts inside it are untouched and keep their IDs. The answer carries the renamed folder. A name that another folder already uses is rejected.
 
         :param ai_prompts_rename_folder_request: (required)
         :type ai_prompts_rename_folder_request: AiPromptsRenameFolderRequest
@@ -3194,6 +3318,9 @@ class PromptsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiFolderMutationResult",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -3226,7 +3353,7 @@ class PromptsApi:
     ) -> RESTResponseType:
         """Rename folder
 
-        Renames a prompt folder, validating the new name against the existing folders.
+        Renames a folder in the caller's prompt library, validating the new name against the folders already there. The prompts inside it are untouched and keep their IDs. The answer carries the renamed folder. A name that another folder already uses is rejected.
 
         :param ai_prompts_rename_folder_request: (required)
         :type ai_prompts_rename_folder_request: AiPromptsRenameFolderRequest
@@ -3263,6 +3390,9 @@ class PromptsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiFolderMutationResult",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -3328,6 +3458,8 @@ class PromptsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'cookieAuth', 
+            'bearerAuth'
         ]
 
 
@@ -3368,9 +3500,9 @@ class PromptsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> AiPromptMutationResult:
-        """Update
+        """Update a saved prompt
 
-        Updates a saved prompt. The name and the folder reference are re-validated whenever either of them changes.
+        Changes a saved prompt and returns the stored result. Only the fields present in `updates` are written, so a partial object leaves the rest of the prompt alone. The name and the folder reference are re-validated whenever either changes, which means an update can fail on a name another prompt in the same folder already uses. Use `PUT api/2.0/ai/prompts/move` to change only the folder.
 
         :param ai_prompts_update_request: (required)
         :type ai_prompts_update_request: AiPromptsUpdateRequest
@@ -3407,6 +3539,9 @@ class PromptsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiPromptMutationResult",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -3437,9 +3572,9 @@ class PromptsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[AiPromptMutationResult]:
-        """Update
+        """Update a saved prompt
 
-        Updates a saved prompt. The name and the folder reference are re-validated whenever either of them changes.
+        Changes a saved prompt and returns the stored result. Only the fields present in `updates` are written, so a partial object leaves the rest of the prompt alone. The name and the folder reference are re-validated whenever either changes, which means an update can fail on a name another prompt in the same folder already uses. Use `PUT api/2.0/ai/prompts/move` to change only the folder.
 
         :param ai_prompts_update_request: (required)
         :type ai_prompts_update_request: AiPromptsUpdateRequest
@@ -3476,6 +3611,9 @@ class PromptsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiPromptMutationResult",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -3506,9 +3644,9 @@ class PromptsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Update
+        """Update a saved prompt
 
-        Updates a saved prompt. The name and the folder reference are re-validated whenever either of them changes.
+        Changes a saved prompt and returns the stored result. Only the fields present in `updates` are written, so a partial object leaves the rest of the prompt alone. The name and the folder reference are re-validated whenever either changes, which means an update can fail on a name another prompt in the same folder already uses. Use `PUT api/2.0/ai/prompts/move` to change only the folder.
 
         :param ai_prompts_update_request: (required)
         :type ai_prompts_update_request: AiPromptsUpdateRequest
@@ -3545,6 +3683,9 @@ class PromptsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiPromptMutationResult",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -3610,6 +3751,8 @@ class PromptsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'cookieAuth', 
+            'bearerAuth'
         ]
 
 

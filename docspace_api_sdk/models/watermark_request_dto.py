@@ -30,16 +30,16 @@ from typing_extensions import Self
 
 class WatermarkRequestDto(BaseModel):
     """
-    The request parameters for adding watermarks.
+    The watermark drawn over the documents of a room.
     """ # noqa: E501
-    enabled: Optional[StrictBool] = Field(default=None, description="Specifies whether watermarks are on or off.", json_schema_extra={"examples": [True]})
-    additions: Optional[WatermarkAdditions] = Field(default=None, description="Specifies whether to display the following addditional information or not: username, user email, user IP address, current date and room name.")
-    text: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The watermark text.", json_schema_extra={"examples": ["Confidential"]})
-    rotate: Optional[StrictInt] = Field(default=None, description="The watermark text and image rotate angle.", json_schema_extra={"examples": [-45]})
-    image_scale: Optional[StrictInt] = Field(default=None, description="The watermark image scale.", alias="imageScale", json_schema_extra={"examples": [100]})
-    image_url: Optional[StrictStr] = Field(default=None, description="The path to the temporary image file.", alias="imageUrl", json_schema_extra={"examples": ["/tmp/watermark.png"]})
-    image_height: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The watermark image height.", alias="imageHeight", json_schema_extra={"examples": [100.0]})
-    image_width: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The watermark image width.", alias="imageWidth", json_schema_extra={"examples": [200.0]})
+    enabled: Optional[StrictBool] = Field(default=None, description="Whether the room draws a watermark at all. Sending the object with this turned off removes the watermark the  room has, and the rest of the fields are then irrelevant.", json_schema_extra={"examples": [True]})
+    additions: Optional[WatermarkAdditions] = Field(default=None, description="Which details of the reader and of the room are stamped into the watermark alongside the text. The values  combine, so several of them can be added together to stamp more than one.")
+    text: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The fixed line drawn over the document, shown before the details selected alongside it. It is the whole  watermark when no details are added.", json_schema_extra={"examples": ["Confidential"]})
+    rotate: Optional[StrictInt] = Field(default=None, description="How far the watermark is turned, in degrees, with negative values turning it anticlockwise. Zero draws it  horizontally across the page.", json_schema_extra={"examples": [-45]})
+    image_scale: Optional[StrictInt] = Field(default=None, description="How large the watermark image is drawn, as a percentage of its own size. It applies to the image form of the  watermark only.", alias="imageScale", json_schema_extra={"examples": [100]})
+    image_url: Optional[StrictStr] = Field(default=None, description="The picture to use instead of a text watermark, named by the path that `POST api/2.0/files/logos` returned for  an image uploaded beforehand. The portal copies it into the room when the setting is saved.", alias="imageUrl", json_schema_extra={"examples": ["/temp/watermark_a1b2c3.png"]})
+    image_height: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The height the watermark image is drawn with, in pixels, used together with the width to keep its proportions.", alias="imageHeight", json_schema_extra={"examples": [100.0]})
+    image_width: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The width the watermark image is drawn with, in pixels, used together with the height to keep its proportions.", alias="imageWidth", json_schema_extra={"examples": [200.0]})
     __properties: ClassVar[List[str]] = ["enabled", "additions", "text", "rotate", "imageScale", "imageUrl", "imageHeight", "imageWidth"]
 
     model_config = ConfigDict(

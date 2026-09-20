@@ -30,12 +30,12 @@ from docspace_api_sdk.models.file_operation_request_base_dto import FileOperatio
 
 class DeleteVersionBatchRequestDto(FileOperationRequestBaseDto):
     """
-    The request parameters for deleting file versions.
+    The file whose versions are deleted, and the versions to delete.
     """
 
-    delete_after: Optional[StrictBool] = Field(default=None, description="Specifies whether to delete a file after the editing session is finished or not.", alias="deleteAfter", json_schema_extra={"examples": [False]})
-    file_id: StrictInt = Field(description="The file ID to delete.", alias="fileId", json_schema_extra={"examples": [1]})
-    versions: Optional[List[StrictInt]] = Field(description="The collection of file versions to be deleted.", json_schema_extra={"examples": [[1, 2, 3]]})
+    delete_after: Optional[StrictBool] = Field(default=None, description="Whether the finished operation is still reported: `false` keeps its final record readable through  `GET api/2.0/files/fileops` until it has been read once, `true` drops the record as soon as the work is done.  It does not postpone the deletion and does not delete anything of its own.", alias="deleteAfter", json_schema_extra={"examples": [False]})
+    file_id: StrictInt = Field(description="The file whose history the versions are taken from; only files stored in the portal itself are addressed here.", alias="fileId", json_schema_extra={"examples": [1]})
+    versions: Optional[List[StrictInt]] = Field(description="The version numbers to remove, as reported by `GET api/2.0/files/file/{fileId}/history`. At least one number  has to be sent: an empty list removes the file itself instead of one of its versions. The number of the  current version is refused outright, while a number that no longer exists is passed over without a complaint.", json_schema_extra={"examples": [[1, 2, 3]]})
 
     model_config = ConfigDict(
         populate_by_name=True,

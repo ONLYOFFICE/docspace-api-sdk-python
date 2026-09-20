@@ -32,7 +32,7 @@ class AiProfileMutationResult(BaseModel):
     """
     Outcome of `create` / `update` — either a success carrying the persisted profile, or a failure with a field-level error description from the name check or the provider credential check.
     """ # noqa: E501
-    success: StrictBool = Field(description="True when the profile was persisted.")
+    success: StrictBool = Field(description="True when the profile was persisted.", json_schema_extra={"examples": [True]})
     profile: Optional[AiProfile] = Field(default=None, description="The persisted profile. Present on success.")
     error: Optional[AiTErrorData] = Field(default=None, description="Why the profile was rejected - the name check or the provider credential check. Present on failure.")
     __properties: ClassVar[List[str]] = ["success", "profile", "error"]

@@ -30,12 +30,12 @@ from typing_extensions import Self
 
 class AiRoomDataLifetimeDto(BaseModel):
     """
-    The room data lifetime information.
+    The rule by which the files of a room are removed once they have been lying in it for too long.
     """ # noqa: E501
-    delete_permanently: Optional[StrictBool] = Field(default=None, description="Specifies whether to permanently delete the room data or not.", alias="deletePermanently", json_schema_extra={"examples": [True]})
-    period: Optional[AiRoomDataLifetimePeriod] = Field(default=None, description="Specifies the time period type of the room data lifetime.")
-    value: Optional[Annotated[int, Field(le=999, strict=True, ge=1)]] = Field(default=None, description="Specifies the time period value of the room data lifetime.", json_schema_extra={"examples": [33]})
-    enabled: Optional[StrictBool] = Field(default=None, description="Specifies whether the room data lifetime setting is enabled or not.", json_schema_extra={"examples": [True]})
+    delete_permanently: Optional[StrictBool] = Field(default=None, description="Decides what happens to a file that has grown too old: it is erased outright, or it is moved to the trash of  the account that created the room, from where it can still be brought back.", alias="deletePermanently", json_schema_extra={"examples": [False]})
+    period: Optional[AiRoomDataLifetimePeriod] = Field(default=None, description="The unit the age is counted in. Months and years are counted as calendar ones, so the same number of them  covers a different number of days depending on when the clean-up runs.")
+    value: Optional[Annotated[int, Field(le=999, strict=True, ge=1)]] = Field(default=None, description="How many periods a file may stay in the room, counted from the moment it was last changed rather than from the  moment the rule was set. Files that are already older than this are removed by the next clean-up.", json_schema_extra={"examples": [12]})
+    enabled: Optional[StrictBool] = Field(default=None, description="Switches the rule on and off. Switching it off erases the rule instead of keeping it aside, so afterwards the  room reports no rule at all and the other three values have to be sent again to bring it back.", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["deletePermanently", "period", "value", "enabled"]
 
     model_config = ConfigDict(

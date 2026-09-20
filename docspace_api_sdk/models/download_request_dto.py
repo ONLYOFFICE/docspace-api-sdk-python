@@ -33,12 +33,12 @@ from docspace_api_sdk.models.file_operation_request_base_dto import FileOperatio
 
 class DownloadRequestDto(FileOperationRequestBaseDto):
     """
-    The request parameters for downloading files.
+    The files and folders to pack into one archive, together with the formats they are converted to.
     """
 
-    folder_ids: Optional[List[DownloadRequestDtoAllOfFolderIds]] = Field(default=None, description="The list of folder IDs to be downloaded.", alias="folderIds", json_schema_extra={"examples": [[1, 2, 3]]})
-    file_ids: Optional[List[DownloadRequestDtoAllOfFileIds]] = Field(default=None, description="The list of file IDs to be downloaded.", alias="fileIds", json_schema_extra={"examples": [[1, 2, 3]]})
-    file_convert_ids: Optional[List[DownloadRequestItemDto]] = Field(default=None, description="The list of file IDs which will be converted.", alias="fileConvertIds", json_schema_extra={"examples": [[{"key": "1", "value": "pdf", "password": "password123"}]]})
+    folder_ids: Optional[List[DownloadRequestDtoAllOfFolderIds]] = Field(default=None, description="The folders to pack, by id; everything inside them that the caller may read goes into the archive. A number  addresses a folder stored in the portal itself, a string addresses a folder on a connected third-party  account, and both kinds may be sent in one list.", alias="folderIds", json_schema_extra={"examples": [[1, 2, 3]]})
+    file_ids: Optional[List[DownloadRequestDtoAllOfFileIds]] = Field(default=None, description="The files to pack as they are, by id, without conversion. A number addresses a file stored in the portal  itself, a string addresses a file on a connected third-party account, and both kinds may be sent in one list.", alias="fileIds", json_schema_extra={"examples": [[1, 2, 3]]})
+    file_convert_ids: Optional[List[DownloadRequestItemDto]] = Field(default=None, description="The files to convert before they are packed, each named together with the format it is converted to. A file  listed here does not have to be repeated in `fileIds`.", alias="fileConvertIds", json_schema_extra={"examples": [[{"key": "1", "value": "pdf", "password": "password123"}]]})
 
     model_config = ConfigDict(
         populate_by_name=True,

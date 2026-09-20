@@ -28,10 +28,10 @@ from typing_extensions import Self
 
 class FilesStatisticsFolder(BaseModel):
     """
-    The file statictics folder parameters.
+    One section of the portal and the space its documents take.
     """ # noqa: E501
-    title: Optional[StrictStr] = Field(default=None, description="The folder title.", json_schema_extra={"examples": ["My Documents"]})
-    used_space: Optional[StrictInt] = Field(default=None, description="The used space in the folder.", alias="usedSpace", json_schema_extra={"examples": [1048576]})
+    title: Optional[StrictStr] = Field(default=None, description="The name of the section as the interface shows it, translated into the language used by the caller, so it  suits display but not matching - which section an entry describes is told by the field that carries it.", json_schema_extra={"examples": ["Files"]})
+    used_space: Optional[StrictInt] = Field(default=None, description="The size of the files kept in the section, in bytes, counting every folder and room inside it; 0 means the  section holds nothing. The counter is brought up to date as an operation finishes, so a reading taken right  after an upload or a delete can still show the previous value.", alias="usedSpace", json_schema_extra={"examples": [1048576]})
     __properties: ClassVar[List[str]] = ["title", "usedSpace"]
 
     model_config = ConfigDict(

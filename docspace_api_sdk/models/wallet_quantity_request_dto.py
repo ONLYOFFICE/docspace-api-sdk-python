@@ -29,10 +29,10 @@ from typing_extensions import Self
 
 class WalletQuantityRequestDto(BaseModel):
     """
-    The request parameters for specifying wallet payment quantity.
+    The wallet service being bought or scheduled, and the way its quantity is applied.
     """ # noqa: E501
-    quantity: Dict[str, Optional[StrictInt]] = Field(description="The mapping of item identifiers to their respective quantities in the payment.", json_schema_extra={"examples": [{"admin": 1}]})
-    product_quantity_type: Optional[ProductQuantityType] = Field(default=None, description="The type of action performed on a product's quantity.", alias="productQuantityType")
+    quantity: Dict[str, Optional[StrictInt]] = Field(description="The wallet service and the number of units of it, as a single pair. The key is the `serviceName` of a service  from `GET api/2.0/portal/payment/walletservices`, and the value is read according to  `productQuantityType`: the units to add, or the total the service is to have in the next period. Minimum  quantities apply per service - disk storage starts at 100 units, the DocsCloud developer pack at 10, and the  administrators may not be fewer than the portal already has. Exactly one pair is accepted, and a null or zero  value cancels a change scheduled earlier rather than buying nothing.", json_schema_extra={"examples": [{"admin": 1}]})
+    product_quantity_type: Optional[ProductQuantityType] = Field(default=None, description="How the number in `quantity` is applied. `Add` buys the units straight away and charges them to the portal  wallet, while `Set` charges nothing now and records the quantity the service is to have from the next period.  Only these two are accepted here; `Sub` and `Renew` are refused with 400.", alias="productQuantityType")
     __properties: ClassVar[List[str]] = ["quantity", "productQuantityType"]
 
     model_config = ConfigDict(

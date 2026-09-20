@@ -21,8 +21,9 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import StrictStr
+from pydantic import Field, StrictStr
 from typing import List, Optional
+from typing_extensions import Annotated
 from docspace_api_sdk.models.ai_attachment import AiAttachment
 from docspace_api_sdk.models.ai_attachments_link_to_message_request import AiAttachmentsLinkToMessageRequest
 from docspace_api_sdk.models.ai_attachments_save_file_request import AiAttachmentsSaveFileRequest
@@ -51,7 +52,7 @@ class AttachmentsApi:
     @validate_call
     def ai_attachments_delete(
         self,
-        body: StrictStr,
+        body: Annotated[StrictStr, Field(description="The ID of the attachment to delete, as a bare JSON string.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -65,11 +66,11 @@ class AttachmentsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> AiSuccessResponse:
-        """Delete
+        """Delete one attachment
 
-        Permanently deletes one attachment, whether it is still a draft or already linked to a message.
+        Permanently deletes one attachment, whether it is still a draft or already bound to a message. The ID is not validated here, so a malformed one surfaces as an error relayed from storage rather than as a 400, and an ID that does not exist answers success without deleting anything. Deleting a bound attachment leaves the message in place without it. The deletion cannot be undone.
 
-        :param body: (required)
+        :param body: The ID of the attachment to delete, as a bare JSON string. (required)
         :type body: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -104,6 +105,9 @@ class AttachmentsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiSuccessResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -120,7 +124,7 @@ class AttachmentsApi:
     @validate_call
     def ai_attachments_delete_with_http_info(
         self,
-        body: StrictStr,
+        body: Annotated[StrictStr, Field(description="The ID of the attachment to delete, as a bare JSON string.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -134,11 +138,11 @@ class AttachmentsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[AiSuccessResponse]:
-        """Delete
+        """Delete one attachment
 
-        Permanently deletes one attachment, whether it is still a draft or already linked to a message.
+        Permanently deletes one attachment, whether it is still a draft or already bound to a message. The ID is not validated here, so a malformed one surfaces as an error relayed from storage rather than as a 400, and an ID that does not exist answers success without deleting anything. Deleting a bound attachment leaves the message in place without it. The deletion cannot be undone.
 
-        :param body: (required)
+        :param body: The ID of the attachment to delete, as a bare JSON string. (required)
         :type body: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -173,6 +177,9 @@ class AttachmentsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiSuccessResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -189,7 +196,7 @@ class AttachmentsApi:
     @validate_call
     def ai_attachments_delete_without_preload_content(
         self,
-        body: StrictStr,
+        body: Annotated[StrictStr, Field(description="The ID of the attachment to delete, as a bare JSON string.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -203,11 +210,11 @@ class AttachmentsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Delete
+        """Delete one attachment
 
-        Permanently deletes one attachment, whether it is still a draft or already linked to a message.
+        Permanently deletes one attachment, whether it is still a draft or already bound to a message. The ID is not validated here, so a malformed one surfaces as an error relayed from storage rather than as a 400, and an ID that does not exist answers success without deleting anything. Deleting a bound attachment leaves the message in place without it. The deletion cannot be undone.
 
-        :param body: (required)
+        :param body: The ID of the attachment to delete, as a bare JSON string. (required)
         :type body: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -242,6 +249,9 @@ class AttachmentsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiSuccessResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -307,6 +317,8 @@ class AttachmentsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'cookieAuth', 
+            'bearerAuth'
         ]
 
 
@@ -333,7 +345,7 @@ class AttachmentsApi:
     @validate_call
     def ai_attachments_delete_many(
         self,
-        request_body: List[StrictStr],
+        request_body: Annotated[List[StrictStr], Field(description="The IDs of the attachments to delete, as a bare JSON array of strings.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -349,9 +361,9 @@ class AttachmentsApi:
     ) -> AiSuccessResponse:
         """Delete many
 
-        Permanently deletes a batch of attachments in a single round trip.
+        Permanently deletes several attachments in one round trip. `ids` is optional and an absent value is treated as an empty list, so a malformed request quietly deletes nothing instead of failing. IDs that do not exist are skipped without being reported, so the answer confirms only that the call was accepted. The deletions cannot be undone.
 
-        :param request_body: (required)
+        :param request_body: The IDs of the attachments to delete, as a bare JSON array of strings. (required)
         :type request_body: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -386,6 +398,9 @@ class AttachmentsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiSuccessResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -402,7 +417,7 @@ class AttachmentsApi:
     @validate_call
     def ai_attachments_delete_many_with_http_info(
         self,
-        request_body: List[StrictStr],
+        request_body: Annotated[List[StrictStr], Field(description="The IDs of the attachments to delete, as a bare JSON array of strings.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -418,9 +433,9 @@ class AttachmentsApi:
     ) -> ApiResponse[AiSuccessResponse]:
         """Delete many
 
-        Permanently deletes a batch of attachments in a single round trip.
+        Permanently deletes several attachments in one round trip. `ids` is optional and an absent value is treated as an empty list, so a malformed request quietly deletes nothing instead of failing. IDs that do not exist are skipped without being reported, so the answer confirms only that the call was accepted. The deletions cannot be undone.
 
-        :param request_body: (required)
+        :param request_body: The IDs of the attachments to delete, as a bare JSON array of strings. (required)
         :type request_body: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -455,6 +470,9 @@ class AttachmentsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiSuccessResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -471,7 +489,7 @@ class AttachmentsApi:
     @validate_call
     def ai_attachments_delete_many_without_preload_content(
         self,
-        request_body: List[StrictStr],
+        request_body: Annotated[List[StrictStr], Field(description="The IDs of the attachments to delete, as a bare JSON array of strings.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -487,9 +505,9 @@ class AttachmentsApi:
     ) -> RESTResponseType:
         """Delete many
 
-        Permanently deletes a batch of attachments in a single round trip.
+        Permanently deletes several attachments in one round trip. `ids` is optional and an absent value is treated as an empty list, so a malformed request quietly deletes nothing instead of failing. IDs that do not exist are skipped without being reported, so the answer confirms only that the call was accepted. The deletions cannot be undone.
 
-        :param request_body: (required)
+        :param request_body: The IDs of the attachments to delete, as a bare JSON array of strings. (required)
         :type request_body: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -524,6 +542,9 @@ class AttachmentsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiSuccessResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -590,6 +611,8 @@ class AttachmentsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'cookieAuth', 
+            'bearerAuth'
         ]
 
 
@@ -616,7 +639,7 @@ class AttachmentsApi:
     @validate_call
     def ai_attachments_get(
         self,
-        body: StrictStr,
+        body: Annotated[StrictStr, Field(description="The ID of the attachment to read, as a bare JSON string.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -630,11 +653,11 @@ class AttachmentsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> AiAttachment:
-        """Get
+        """Get one attachment
 
-        Returns one attachment by identifier.
+        Returns one attachment by its ID, whether it is still a draft or already bound to a message. The ID is required and has to be a non-empty string. An ID that no longer exists is not reported as 404: the answer is a null body with status 200, so treat a missing payload as no such attachment. Use `POST api/2.0/ai/attachments/get-many` to read several at once.
 
-        :param body: (required)
+        :param body: The ID of the attachment to read, as a bare JSON string. (required)
         :type body: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -668,7 +691,11 @@ class AttachmentsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiAttachment",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -685,7 +712,7 @@ class AttachmentsApi:
     @validate_call
     def ai_attachments_get_with_http_info(
         self,
-        body: StrictStr,
+        body: Annotated[StrictStr, Field(description="The ID of the attachment to read, as a bare JSON string.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -699,11 +726,11 @@ class AttachmentsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[AiAttachment]:
-        """Get
+        """Get one attachment
 
-        Returns one attachment by identifier.
+        Returns one attachment by its ID, whether it is still a draft or already bound to a message. The ID is required and has to be a non-empty string. An ID that no longer exists is not reported as 404: the answer is a null body with status 200, so treat a missing payload as no such attachment. Use `POST api/2.0/ai/attachments/get-many` to read several at once.
 
-        :param body: (required)
+        :param body: The ID of the attachment to read, as a bare JSON string. (required)
         :type body: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -737,7 +764,11 @@ class AttachmentsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiAttachment",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -754,7 +785,7 @@ class AttachmentsApi:
     @validate_call
     def ai_attachments_get_without_preload_content(
         self,
-        body: StrictStr,
+        body: Annotated[StrictStr, Field(description="The ID of the attachment to read, as a bare JSON string.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -768,11 +799,11 @@ class AttachmentsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get
+        """Get one attachment
 
-        Returns one attachment by identifier.
+        Returns one attachment by its ID, whether it is still a draft or already bound to a message. The ID is required and has to be a non-empty string. An ID that no longer exists is not reported as 404: the answer is a null body with status 200, so treat a missing payload as no such attachment. Use `POST api/2.0/ai/attachments/get-many` to read several at once.
 
-        :param body: (required)
+        :param body: The ID of the attachment to read, as a bare JSON string. (required)
         :type body: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -806,7 +837,11 @@ class AttachmentsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiAttachment",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -872,6 +907,8 @@ class AttachmentsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'cookieAuth', 
+            'bearerAuth'
         ]
 
 
@@ -898,7 +935,7 @@ class AttachmentsApi:
     @validate_call
     def ai_attachments_get_many(
         self,
-        request_body: List[StrictStr],
+        request_body: Annotated[List[StrictStr], Field(description="The IDs of the attachments to read, as a bare JSON array of strings. The answer is aligned with this array by position.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -914,9 +951,9 @@ class AttachmentsApi:
     ) -> List[Optional[AiAttachment]]:
         """Get many
 
-        Returns a batch of attachments, preserving the requested order; an identifier that no longer exists comes back empty.
+        Returns several attachments in one call, aligned by position with the `ids` that were sent, so the answer can be zipped straight onto the request. An ID that no longer exists leaves its slot empty rather than shortening the list, which is how a caller tells which of them are gone. `ids` has to be present and non-empty - an empty batch is rejected rather than answered with an empty list. Nothing is changed by the call.
 
-        :param request_body: (required)
+        :param request_body: The IDs of the attachments to read, as a bare JSON array of strings. The answer is aligned with this array by position. (required)
         :type request_body: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -950,7 +987,11 @@ class AttachmentsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "List[Optional[AiAttachment]]",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -967,7 +1008,7 @@ class AttachmentsApi:
     @validate_call
     def ai_attachments_get_many_with_http_info(
         self,
-        request_body: List[StrictStr],
+        request_body: Annotated[List[StrictStr], Field(description="The IDs of the attachments to read, as a bare JSON array of strings. The answer is aligned with this array by position.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -983,9 +1024,9 @@ class AttachmentsApi:
     ) -> ApiResponse[List[Optional[AiAttachment]]]:
         """Get many
 
-        Returns a batch of attachments, preserving the requested order; an identifier that no longer exists comes back empty.
+        Returns several attachments in one call, aligned by position with the `ids` that were sent, so the answer can be zipped straight onto the request. An ID that no longer exists leaves its slot empty rather than shortening the list, which is how a caller tells which of them are gone. `ids` has to be present and non-empty - an empty batch is rejected rather than answered with an empty list. Nothing is changed by the call.
 
-        :param request_body: (required)
+        :param request_body: The IDs of the attachments to read, as a bare JSON array of strings. The answer is aligned with this array by position. (required)
         :type request_body: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1019,7 +1060,11 @@ class AttachmentsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "List[Optional[AiAttachment]]",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -1036,7 +1081,7 @@ class AttachmentsApi:
     @validate_call
     def ai_attachments_get_many_without_preload_content(
         self,
-        request_body: List[StrictStr],
+        request_body: Annotated[List[StrictStr], Field(description="The IDs of the attachments to read, as a bare JSON array of strings. The answer is aligned with this array by position.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1052,9 +1097,9 @@ class AttachmentsApi:
     ) -> RESTResponseType:
         """Get many
 
-        Returns a batch of attachments, preserving the requested order; an identifier that no longer exists comes back empty.
+        Returns several attachments in one call, aligned by position with the `ids` that were sent, so the answer can be zipped straight onto the request. An ID that no longer exists leaves its slot empty rather than shortening the list, which is how a caller tells which of them are gone. `ids` has to be present and non-empty - an empty batch is rejected rather than answered with an empty list. Nothing is changed by the call.
 
-        :param request_body: (required)
+        :param request_body: The IDs of the attachments to read, as a bare JSON array of strings. The answer is aligned with this array by position. (required)
         :type request_body: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1088,7 +1133,11 @@ class AttachmentsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "List[Optional[AiAttachment]]",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -1155,6 +1204,8 @@ class AttachmentsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'cookieAuth', 
+            'bearerAuth'
         ]
 
 
@@ -1197,7 +1248,7 @@ class AttachmentsApi:
     ) -> AiSuccessResponse:
         """Link to message
 
-        Binds draft attachments to the chat message that owns them, once that message has been persisted, so deleting the message removes them too. Identifiers that no longer exist are skipped.
+        Binds draft attachments to the chat message that owns them, after that message has been persisted, so that deleting the message removes them too. All three of `ids`, `messageId` and `threadId` are required, and the references are verified rather than trusted: an unknown message answers 404, a message that belongs to a different thread answers 400, and attachments that no longer exist answer 404 naming each missing ID. That verification exists because the underlying binding call skips unknown IDs silently, which used to report success for a link that had not happened. Drafts stay unbound until this succeeds.
 
         :param ai_attachments_link_to_message_request: (required)
         :type ai_attachments_link_to_message_request: AiAttachmentsLinkToMessageRequest
@@ -1233,7 +1284,12 @@ class AttachmentsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiSuccessResponse",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '404': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -1266,7 +1322,7 @@ class AttachmentsApi:
     ) -> ApiResponse[AiSuccessResponse]:
         """Link to message
 
-        Binds draft attachments to the chat message that owns them, once that message has been persisted, so deleting the message removes them too. Identifiers that no longer exist are skipped.
+        Binds draft attachments to the chat message that owns them, after that message has been persisted, so that deleting the message removes them too. All three of `ids`, `messageId` and `threadId` are required, and the references are verified rather than trusted: an unknown message answers 404, a message that belongs to a different thread answers 400, and attachments that no longer exist answer 404 naming each missing ID. That verification exists because the underlying binding call skips unknown IDs silently, which used to report success for a link that had not happened. Drafts stay unbound until this succeeds.
 
         :param ai_attachments_link_to_message_request: (required)
         :type ai_attachments_link_to_message_request: AiAttachmentsLinkToMessageRequest
@@ -1302,7 +1358,12 @@ class AttachmentsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiSuccessResponse",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '404': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -1335,7 +1396,7 @@ class AttachmentsApi:
     ) -> RESTResponseType:
         """Link to message
 
-        Binds draft attachments to the chat message that owns them, once that message has been persisted, so deleting the message removes them too. Identifiers that no longer exist are skipped.
+        Binds draft attachments to the chat message that owns them, after that message has been persisted, so that deleting the message removes them too. All three of `ids`, `messageId` and `threadId` are required, and the references are verified rather than trusted: an unknown message answers 404, a message that belongs to a different thread answers 400, and attachments that no longer exist answer 404 naming each missing ID. That verification exists because the underlying binding call skips unknown IDs silently, which used to report success for a link that had not happened. Drafts stay unbound until this succeeds.
 
         :param ai_attachments_link_to_message_request: (required)
         :type ai_attachments_link_to_message_request: AiAttachmentsLinkToMessageRequest
@@ -1371,7 +1432,12 @@ class AttachmentsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiSuccessResponse",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '404': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -1437,6 +1503,8 @@ class AttachmentsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'cookieAuth', 
+            'bearerAuth'
         ]
 
 
@@ -1479,7 +1547,7 @@ class AttachmentsApi:
     ) -> AiAttachment:
         """Save file
 
-        Stores one file attachment as a draft, carrying the host-extracted text of the file. Prefer `save-files-many` when adding several files at once so they land as one round trip.
+        Stores one file attachment as a draft and returns it, so its ID can be attached to a message later. `input` carries the host `path` - the DocSpace entry ID the AI backend resolves server-side - the text `content` already extracted from that file, the ONLYOFFICE numeric file `type`, and optionally a `title`; the text is what the model reads, so this operation does not open the file itself. Archives are refused outright, whatever their declared name says. Drafts are not bound to a conversation until `POST api/2.0/ai/attachments/link-to-message` is called, so an unlinked draft outlives the round that created it.
 
         :param ai_attachments_save_file_request: (required)
         :type ai_attachments_save_file_request: AiAttachmentsSaveFileRequest
@@ -1515,7 +1583,11 @@ class AttachmentsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiAttachment",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -1548,7 +1620,7 @@ class AttachmentsApi:
     ) -> ApiResponse[AiAttachment]:
         """Save file
 
-        Stores one file attachment as a draft, carrying the host-extracted text of the file. Prefer `save-files-many` when adding several files at once so they land as one round trip.
+        Stores one file attachment as a draft and returns it, so its ID can be attached to a message later. `input` carries the host `path` - the DocSpace entry ID the AI backend resolves server-side - the text `content` already extracted from that file, the ONLYOFFICE numeric file `type`, and optionally a `title`; the text is what the model reads, so this operation does not open the file itself. Archives are refused outright, whatever their declared name says. Drafts are not bound to a conversation until `POST api/2.0/ai/attachments/link-to-message` is called, so an unlinked draft outlives the round that created it.
 
         :param ai_attachments_save_file_request: (required)
         :type ai_attachments_save_file_request: AiAttachmentsSaveFileRequest
@@ -1584,7 +1656,11 @@ class AttachmentsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiAttachment",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -1617,7 +1693,7 @@ class AttachmentsApi:
     ) -> RESTResponseType:
         """Save file
 
-        Stores one file attachment as a draft, carrying the host-extracted text of the file. Prefer `save-files-many` when adding several files at once so they land as one round trip.
+        Stores one file attachment as a draft and returns it, so its ID can be attached to a message later. `input` carries the host `path` - the DocSpace entry ID the AI backend resolves server-side - the text `content` already extracted from that file, the ONLYOFFICE numeric file `type`, and optionally a `title`; the text is what the model reads, so this operation does not open the file itself. Archives are refused outright, whatever their declared name says. Drafts are not bound to a conversation until `POST api/2.0/ai/attachments/link-to-message` is called, so an unlinked draft outlives the round that created it.
 
         :param ai_attachments_save_file_request: (required)
         :type ai_attachments_save_file_request: AiAttachmentsSaveFileRequest
@@ -1653,7 +1729,11 @@ class AttachmentsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiAttachment",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -1719,6 +1799,8 @@ class AttachmentsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'cookieAuth', 
+            'bearerAuth'
         ]
 
 
@@ -1761,7 +1843,7 @@ class AttachmentsApi:
     ) -> List[AiAttachment]:
         """Save files many
 
-        Stores a batch of file attachments as drafts in a single round trip. The returned records keep the order of the input.
+        Stores several file attachments as drafts in one round trip and returns them in the order they were sent. Each entry is validated exactly as the single-file operation validates its `input`, and the first bad one rejects the whole batch with its index named in the message - nothing is stored. `inputs` has to be present and an array: an absent or null value is a malformed request rather than an empty batch, and only an explicit empty array means no files. Follow up with `POST api/2.0/ai/attachments/link-to-message` to bind the drafts to a message.
 
         :param ai_attachments_save_files_many_request: (required)
         :type ai_attachments_save_files_many_request: AiAttachmentsSaveFilesManyRequest
@@ -1797,7 +1879,11 @@ class AttachmentsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "List[AiAttachment]",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -1830,7 +1916,7 @@ class AttachmentsApi:
     ) -> ApiResponse[List[AiAttachment]]:
         """Save files many
 
-        Stores a batch of file attachments as drafts in a single round trip. The returned records keep the order of the input.
+        Stores several file attachments as drafts in one round trip and returns them in the order they were sent. Each entry is validated exactly as the single-file operation validates its `input`, and the first bad one rejects the whole batch with its index named in the message - nothing is stored. `inputs` has to be present and an array: an absent or null value is a malformed request rather than an empty batch, and only an explicit empty array means no files. Follow up with `POST api/2.0/ai/attachments/link-to-message` to bind the drafts to a message.
 
         :param ai_attachments_save_files_many_request: (required)
         :type ai_attachments_save_files_many_request: AiAttachmentsSaveFilesManyRequest
@@ -1866,7 +1952,11 @@ class AttachmentsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "List[AiAttachment]",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -1899,7 +1989,7 @@ class AttachmentsApi:
     ) -> RESTResponseType:
         """Save files many
 
-        Stores a batch of file attachments as drafts in a single round trip. The returned records keep the order of the input.
+        Stores several file attachments as drafts in one round trip and returns them in the order they were sent. Each entry is validated exactly as the single-file operation validates its `input`, and the first bad one rejects the whole batch with its index named in the message - nothing is stored. `inputs` has to be present and an array: an absent or null value is a malformed request rather than an empty batch, and only an explicit empty array means no files. Follow up with `POST api/2.0/ai/attachments/link-to-message` to bind the drafts to a message.
 
         :param ai_attachments_save_files_many_request: (required)
         :type ai_attachments_save_files_many_request: AiAttachmentsSaveFilesManyRequest
@@ -1935,7 +2025,11 @@ class AttachmentsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "List[AiAttachment]",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -2001,6 +2095,8 @@ class AttachmentsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'cookieAuth', 
+            'bearerAuth'
         ]
 
 

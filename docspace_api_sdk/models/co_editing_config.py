@@ -29,11 +29,11 @@ from typing_extensions import Self
 
 class CoEditingConfig(BaseModel):
     """
-    The co-editing configuration parameters.
+    How co-editing is preset when the document opens, and whether the user may switch it afterwards.
     """ # noqa: E501
-    change: Optional[StrictBool] = Field(default=None, description="Specifies if the co-editing mode can be changed in the editor interface or not.", json_schema_extra={"examples": [True]})
-    fast: Optional[StrictBool] = Field(default=None, description="Specifies if the co-editing mode is fast.", json_schema_extra={"examples": [False]})
-    mode: Optional[CoEditingConfigMode] = Field(default=None, description="The co-editing mode (fast or strict).")
+    change: Optional[StrictBool] = Field(default=None, description="Whether the user may switch between the two co-editing modes from the editor interface, or is held to the one  the portal preset.", json_schema_extra={"examples": [True]})
+    fast: Optional[StrictBool] = Field(default=None, description="Whether other participants see each change as it is typed. Left off, changes are exchanged only when a  participant saves, and the paragraph being edited is locked for the others meanwhile.", json_schema_extra={"examples": [False]})
+    mode: Optional[CoEditingConfigMode] = Field(default=None, description="The mode the two settings above amount to, as the editors name it.")
     __properties: ClassVar[List[str]] = ["change", "fast", "mode"]
 
     model_config = ConfigDict(

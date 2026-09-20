@@ -28,10 +28,10 @@ from typing_extensions import Self
 
 class ChangeHistory(BaseModel):
     """
-    The parameters for changing version history.
+    The change to make to a revision group of a file.
     """ # noqa: E501
-    version: StrictInt = Field(description="The file version of the change history.", json_schema_extra={"examples": [1]})
-    continue_version: Optional[StrictBool] = Field(default=None, description="Specifies whether to start a new version or continue revision of the change history.", alias="continueVersion", json_schema_extra={"examples": [False]})
+    version: StrictInt = Field(description="The version the change applies to; 0 means the current version of the file.", json_schema_extra={"examples": [1]})
+    continue_version: Optional[StrictBool] = Field(default=None, description="What to do with the revision group: `false` completes the named version, storing its content again as a fresh  version that opens a new group, while `true` folds the last group back into the group before it, so the next  save continues that revision.", alias="continueVersion", json_schema_extra={"examples": [False]})
     __properties: ClassVar[List[str]] = ["version", "continueVersion"]
 
     model_config = ConfigDict(

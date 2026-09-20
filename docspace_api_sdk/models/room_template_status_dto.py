@@ -28,12 +28,12 @@ from typing_extensions import Self
 
 class RoomTemplateStatusDto(BaseModel):
     """
-    The room template status.
+    The progress of the job that builds a room template out of an existing room.
     """ # noqa: E501
-    template_id: StrictInt = Field(description="The room template ID.", alias="templateId", json_schema_extra={"examples": [123]})
-    progress: Union[StrictFloat, StrictInt] = Field(description="The progress of the room template creation process.", json_schema_extra={"examples": [75.5]})
-    error: Optional[StrictStr] = Field(default=None, description="The error message that is sent when the room template is not created successfully.", json_schema_extra={"examples": ["Template creation failed"]})
-    is_completed: StrictBool = Field(description="Specifies whether the process of creating the room template is completed.", alias="isCompleted", json_schema_extra={"examples": [False]})
+    template_id: StrictInt = Field(description="The template the job is building. It is meaningful once the job has created the template folder, and the  template can be opened with the room operations only after `isCompleted` turns true.", alias="templateId", json_schema_extra={"examples": [123]})
+    progress: Union[StrictFloat, StrictInt] = Field(description="How far the job has got. The value climbs while the contents of the room are being copied and reaches its  maximum at the very end, so it is an indication of life rather than a reliable estimate of the time left.", json_schema_extra={"examples": [75.5]})
+    error: Optional[StrictStr] = Field(default=None, description="Why the job stopped. It is empty while the job runs and after a successful one; when it is filled the  half-built template has already been removed, so nothing has to be cleaned up by the caller.", json_schema_extra={"examples": ["Template creation failed"]})
+    is_completed: StrictBool = Field(description="Whether the job has ended. It is set both after a successful build and after a failure, so `error` is what  tells the two apart, and the record keeps answering with the same values until another job is started.", alias="isCompleted", json_schema_extra={"examples": [False]})
     __properties: ClassVar[List[str]] = ["templateId", "progress", "error", "isCompleted"]
 
     model_config = ConfigDict(

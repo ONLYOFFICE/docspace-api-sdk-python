@@ -30,7 +30,7 @@ class RestrictedModelsResponse(BaseModel):
     """
     The AI models the portal is not allowed to use.
     """ # noqa: E501
-    models: Optional[List[StrictStr]] = Field(description="The identifiers of the models the portal is not allowed to use.")
+    models: Optional[List[StrictStr]] = Field(description="The identifiers of the models the portal is not allowed to use.", json_schema_extra={"examples": [["gpt-4o", "claude-3-opus"]]})
     __properties: ClassVar[List[str]] = ["models"]
 
     model_config = ConfigDict(

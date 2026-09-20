@@ -30,11 +30,12 @@ from uuid import UUID
 from docspace_api_sdk.models.action_type import ActionType
 from docspace_api_sdk.models.audit_event_array_wrapper import AuditEventArrayWrapper
 from docspace_api_sdk.models.audit_report_format import AuditReportFormat
+from docspace_api_sdk.models.audit_trail_product_mapper_array_wrapper import AuditTrailProductMapperArrayWrapper
+from docspace_api_sdk.models.audit_trail_types_wrapper import AuditTrailTypesWrapper
 from docspace_api_sdk.models.document_builder_task_wrapper import DocumentBuilderTaskWrapper
 from docspace_api_sdk.models.entry_type import EntryType
 from docspace_api_sdk.models.location_type import LocationType
 from docspace_api_sdk.models.message_action import MessageAction
-from docspace_api_sdk.models.object_wrapper import ObjectWrapper
 from docspace_api_sdk.models.product_type import ProductType
 from docspace_api_sdk.models.tenant_audit_settings_response_wrapper import TenantAuditSettingsResponseWrapper
 from docspace_api_sdk.models.tenant_audit_settings_wrapper import TenantAuditSettingsWrapper
@@ -65,7 +66,7 @@ class AuditTrailDataApi:
     @validate_call
     def create_audit_trail_report(
         self,
-        format: Annotated[Optional[AuditReportFormat], Field(description="The output file format of the report. Defaults to XLSX.")] = None,
+        format: Annotated[Optional[AuditReportFormat], Field(description="The format the report file is written in. The workbook format is the default and is the only one that leaves  the finished file addressable by ID: a report asked for as CSV comes back with an empty `resultFileId`, so it  can only be reached through `resultFileName` and `resultFileUrl`.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -79,11 +80,11 @@ class AuditTrailDataApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> DocumentBuilderTaskWrapper:
-        """Start the audit trail report generation
+        """Start audit trail report
 
-        Starts generating the audit trail report (XLSX by default, or CSV) and saves it to My documents.
+        Queues a report of the portal's audit trail and returns the state of the background job that builds it. The  report covers the period reaching from now back by the audit trail lifetime that  `GET api/2.0/security/audit/settings/lifetime` reports and is never filtered: the query parameters of  `GET api/2.0/security/audit/events/filter` do not apply here. The caller needs the portal-settings right of a  DocSpace administrator plus the audit option of the portal's pricing plan, otherwise the call is answered with  402. The file is not ready when the response arrives - poll `GET api/2.0/security/audit/events/report` until  `isCompleted` is true, then take `resultFileUrl`, and treat a non-empty `error` as a failed build. The  finished file is saved to the caller's My documents section, as an XLSX workbook by default or as CSV when  `format=Csv`, in which case `resultFileId` stays empty and only the name and the URL identify it. One job runs  per caller and kind: calling again while the previous one is still building returns that job instead of  starting a second, and `DELETE api/2.0/security/audit/events/report` cancels it.
 
-        :param format: The output file format of the report. Defaults to XLSX.
+        :param format: The format the report file is written in. The workbook format is the default and is the only one that leaves  the finished file addressable by ID: a report asked for as CSV comes back with an empty `resultFileId`, so it  can only be reached through `resultFileName` and `resultFileUrl`.
         :type format: AuditReportFormat
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -141,7 +142,7 @@ class AuditTrailDataApi:
     @validate_call
     def create_audit_trail_report_with_http_info(
         self,
-        format: Annotated[Optional[AuditReportFormat], Field(description="The output file format of the report. Defaults to XLSX.")] = None,
+        format: Annotated[Optional[AuditReportFormat], Field(description="The format the report file is written in. The workbook format is the default and is the only one that leaves  the finished file addressable by ID: a report asked for as CSV comes back with an empty `resultFileId`, so it  can only be reached through `resultFileName` and `resultFileUrl`.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -155,11 +156,11 @@ class AuditTrailDataApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[DocumentBuilderTaskWrapper]:
-        """Start the audit trail report generation
+        """Start audit trail report
 
-        Starts generating the audit trail report (XLSX by default, or CSV) and saves it to My documents.
+        Queues a report of the portal's audit trail and returns the state of the background job that builds it. The  report covers the period reaching from now back by the audit trail lifetime that  `GET api/2.0/security/audit/settings/lifetime` reports and is never filtered: the query parameters of  `GET api/2.0/security/audit/events/filter` do not apply here. The caller needs the portal-settings right of a  DocSpace administrator plus the audit option of the portal's pricing plan, otherwise the call is answered with  402. The file is not ready when the response arrives - poll `GET api/2.0/security/audit/events/report` until  `isCompleted` is true, then take `resultFileUrl`, and treat a non-empty `error` as a failed build. The  finished file is saved to the caller's My documents section, as an XLSX workbook by default or as CSV when  `format=Csv`, in which case `resultFileId` stays empty and only the name and the URL identify it. One job runs  per caller and kind: calling again while the previous one is still building returns that job instead of  starting a second, and `DELETE api/2.0/security/audit/events/report` cancels it.
 
-        :param format: The output file format of the report. Defaults to XLSX.
+        :param format: The format the report file is written in. The workbook format is the default and is the only one that leaves  the finished file addressable by ID: a report asked for as CSV comes back with an empty `resultFileId`, so it  can only be reached through `resultFileName` and `resultFileUrl`.
         :type format: AuditReportFormat
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -217,7 +218,7 @@ class AuditTrailDataApi:
     @validate_call
     def create_audit_trail_report_without_preload_content(
         self,
-        format: Annotated[Optional[AuditReportFormat], Field(description="The output file format of the report. Defaults to XLSX.")] = None,
+        format: Annotated[Optional[AuditReportFormat], Field(description="The format the report file is written in. The workbook format is the default and is the only one that leaves  the finished file addressable by ID: a report asked for as CSV comes back with an empty `resultFileId`, so it  can only be reached through `resultFileName` and `resultFileUrl`.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -231,11 +232,11 @@ class AuditTrailDataApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Start the audit trail report generation
+        """Start audit trail report
 
-        Starts generating the audit trail report (XLSX by default, or CSV) and saves it to My documents.
+        Queues a report of the portal's audit trail and returns the state of the background job that builds it. The  report covers the period reaching from now back by the audit trail lifetime that  `GET api/2.0/security/audit/settings/lifetime` reports and is never filtered: the query parameters of  `GET api/2.0/security/audit/events/filter` do not apply here. The caller needs the portal-settings right of a  DocSpace administrator plus the audit option of the portal's pricing plan, otherwise the call is answered with  402. The file is not ready when the response arrives - poll `GET api/2.0/security/audit/events/report` until  `isCompleted` is true, then take `resultFileUrl`, and treat a non-empty `error` as a failed build. The  finished file is saved to the caller's My documents section, as an XLSX workbook by default or as CSV when  `format=Csv`, in which case `resultFileId` stays empty and only the name and the URL identify it. One job runs  per caller and kind: calling again while the previous one is still building returns that job instead of  starting a second, and `DELETE api/2.0/security/audit/events/report` cancels it.
 
-        :param format: The output file format of the report. Defaults to XLSX.
+        :param format: The format the report file is written in. The workbook format is the default and is the only one that leaves  the finished file addressable by ID: a report asked for as CSV comes back with an empty `resultFileId`, so it  can only be reached through `resultFileName` and `resultFileUrl`.
         :type format: AuditReportFormat
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -363,16 +364,16 @@ class AuditTrailDataApi:
     @validate_call
     def get_audit_events_by_filter(
         self,
-        user_id: Annotated[Optional[UUID], Field(description="The ID of the user who triggered the audit event.")] = None,
-        module_type: Annotated[Optional[LocationType], Field(description="The location where the audit event occurred.")] = None,
-        action_type: Annotated[Optional[ActionType], Field(description="The type of action performed in the audit event (e.g., Create, Update, Delete).")] = None,
-        action: Annotated[Optional[MessageAction], Field(description="The specific action that occurred within the audit event.")] = None,
-        entry_type: Annotated[Optional[EntryType], Field(description="The type of audit entry (e.g., Folder, User, File).")] = None,
-        target: Annotated[Optional[StrictStr], Field(description="The target object affected by the audit event (e.g., document ID, user account).")] = None,
-        var_from: Annotated[Optional[datetime], Field(description="The starting date and time for filtering audit events.")] = None,
-        to: Annotated[Optional[datetime], Field(description="The ending date and time for filtering audit events.")] = None,
-        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of audit event records to retrieve.")] = None,
-        start_index: Annotated[Optional[StrictInt], Field(description="The index of the first audit event record to retrieve in a paged query.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="The user who performed the action, given by portal user ID. Leave it at the empty GUID to keep the events of  every user.")] = None,
+        module_type: Annotated[Optional[LocationType], Field(description="The module the recorded action belongs to, spelled as `GET api/2.0/security/audit/types` lists it under  `moduleTypes`. `GET api/2.0/security/audit/mappers` shows which module records which action. The default  value keeps every module.")] = None,
+        action_type: Annotated[Optional[ActionType], Field(description="The kind of change the action made, spelled as `GET api/2.0/security/audit/types` lists it under  `actionTypes`. The default value keeps every kind.")] = None,
+        action: Annotated[Optional[MessageAction], Field(description="The exact action recorded, spelled as the `messageAction` of `GET api/2.0/security/audit/mappers`. Naming  one narrows the answer to that single action and overrides `moduleType` and `actionType`, which stop  narrowing anything once it is set.")] = None,
+        entry_type: Annotated[Optional[EntryType], Field(description="The kind of object the action was performed on, spelled as `GET api/2.0/security/audit/types` lists it under  `entryTypes`. Pair it with `target` to filter by object without pinning a single action.")] = None,
+        target: Annotated[Optional[StrictStr], Field(description="The object the action was performed on, as the audit trail recorded it - a file name, a user account, a room  title. It is matched in full and exactly as stored, so it narrows the answer only when `action` or  `entryType` is set as well.")] = None,
+        var_from: Annotated[Optional[datetime], Field(description="The earliest moment an event may have been recorded at, read as a UTC instant. The `date` of the events that  come back is in the portal time zone instead, so the two do not line up on a portal that is not on UTC.")] = None,
+        to: Annotated[Optional[datetime], Field(description="The latest moment an event may have been recorded at, read as a UTC instant in the same way as `from`.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="How many events one page may hold. The maximum is also the default, so a client that wants shorter pages has  to ask for them; a full page means there may be further matches beyond it.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="How many matching events to skip before the page begins, counting from the newest. Advance it by `count` to  walk backwards through the trail.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -386,29 +387,29 @@ class AuditTrailDataApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> AuditEventArrayWrapper:
-        """Get filtered audit trail data
+        """Get filtered audit events
 
-        Returns a list of the audit events by the parameters specified in the request.
+        Returns the portal's audit events that match the filters in the query - by the user who acted, the module the  action belongs to, the action and its type, the entity type and target, and the period - and is the operation  behind the audit trail page. The caller needs the portal-settings right of a DocSpace administrator plus the  audit option of the portal's pricing plan; when that option is missing the filters are silently ignored and  the answer is the same twenty most recent events that `GET api/2.0/security/audit/events/last` returns, and  when the login history and audit trail section is disabled altogether the call is answered with 402. Take the  values accepted by `action`, `actionType`, `moduleType` and `entryType` from  `GET api/2.0/security/audit/types`, and the tree they belong to from `GET api/2.0/security/audit/mappers`. A  non-default `action` matches only that action and, combined with `target`, only its exact value; it also  stops `moduleType` and `actionType` from narrowing the result, so combine `target` with `entryType` instead of  `action` when filtering by target without pinning a single action. `from` and `to` are read as UTC instants  while `date` comes back in the portal time zone, `count` defaults to 100 and cannot exceed it, and the filters  are applied before the page window, so a full page means there may be more matching events beyond it. The  operation is read-only.
 
-        :param user_id: The ID of the user who triggered the audit event.
+        :param user_id: The user who performed the action, given by portal user ID. Leave it at the empty GUID to keep the events of  every user.
         :type user_id: UUID
-        :param module_type: The location where the audit event occurred.
+        :param module_type: The module the recorded action belongs to, spelled as `GET api/2.0/security/audit/types` lists it under  `moduleTypes`. `GET api/2.0/security/audit/mappers` shows which module records which action. The default  value keeps every module.
         :type module_type: LocationType
-        :param action_type: The type of action performed in the audit event (e.g., Create, Update, Delete).
+        :param action_type: The kind of change the action made, spelled as `GET api/2.0/security/audit/types` lists it under  `actionTypes`. The default value keeps every kind.
         :type action_type: ActionType
-        :param action: The specific action that occurred within the audit event.
+        :param action: The exact action recorded, spelled as the `messageAction` of `GET api/2.0/security/audit/mappers`. Naming  one narrows the answer to that single action and overrides `moduleType` and `actionType`, which stop  narrowing anything once it is set.
         :type action: MessageAction
-        :param entry_type: The type of audit entry (e.g., Folder, User, File).
+        :param entry_type: The kind of object the action was performed on, spelled as `GET api/2.0/security/audit/types` lists it under  `entryTypes`. Pair it with `target` to filter by object without pinning a single action.
         :type entry_type: EntryType
-        :param target: The target object affected by the audit event (e.g., document ID, user account).
+        :param target: The object the action was performed on, as the audit trail recorded it - a file name, a user account, a room  title. It is matched in full and exactly as stored, so it narrows the answer only when `action` or  `entryType` is set as well.
         :type target: str
-        :param var_from: The starting date and time for filtering audit events.
+        :param var_from: The earliest moment an event may have been recorded at, read as a UTC instant. The `date` of the events that  come back is in the portal time zone instead, so the two do not line up on a portal that is not on UTC.
         :type var_from: datetime
-        :param to: The ending date and time for filtering audit events.
+        :param to: The latest moment an event may have been recorded at, read as a UTC instant in the same way as `from`.
         :type to: datetime
-        :param count: The maximum number of audit event records to retrieve.
+        :param count: How many events one page may hold. The maximum is also the default, so a client that wants shorter pages has  to ask for them; a full page means there may be further matches beyond it.
         :type count: int
-        :param start_index: The index of the first audit event record to retrieve in a paged query.
+        :param start_index: How many matching events to skip before the page begins, counting from the newest. Advance it by `count` to  walk backwards through the trail.
         :type start_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -475,16 +476,16 @@ class AuditTrailDataApi:
     @validate_call
     def get_audit_events_by_filter_with_http_info(
         self,
-        user_id: Annotated[Optional[UUID], Field(description="The ID of the user who triggered the audit event.")] = None,
-        module_type: Annotated[Optional[LocationType], Field(description="The location where the audit event occurred.")] = None,
-        action_type: Annotated[Optional[ActionType], Field(description="The type of action performed in the audit event (e.g., Create, Update, Delete).")] = None,
-        action: Annotated[Optional[MessageAction], Field(description="The specific action that occurred within the audit event.")] = None,
-        entry_type: Annotated[Optional[EntryType], Field(description="The type of audit entry (e.g., Folder, User, File).")] = None,
-        target: Annotated[Optional[StrictStr], Field(description="The target object affected by the audit event (e.g., document ID, user account).")] = None,
-        var_from: Annotated[Optional[datetime], Field(description="The starting date and time for filtering audit events.")] = None,
-        to: Annotated[Optional[datetime], Field(description="The ending date and time for filtering audit events.")] = None,
-        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of audit event records to retrieve.")] = None,
-        start_index: Annotated[Optional[StrictInt], Field(description="The index of the first audit event record to retrieve in a paged query.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="The user who performed the action, given by portal user ID. Leave it at the empty GUID to keep the events of  every user.")] = None,
+        module_type: Annotated[Optional[LocationType], Field(description="The module the recorded action belongs to, spelled as `GET api/2.0/security/audit/types` lists it under  `moduleTypes`. `GET api/2.0/security/audit/mappers` shows which module records which action. The default  value keeps every module.")] = None,
+        action_type: Annotated[Optional[ActionType], Field(description="The kind of change the action made, spelled as `GET api/2.0/security/audit/types` lists it under  `actionTypes`. The default value keeps every kind.")] = None,
+        action: Annotated[Optional[MessageAction], Field(description="The exact action recorded, spelled as the `messageAction` of `GET api/2.0/security/audit/mappers`. Naming  one narrows the answer to that single action and overrides `moduleType` and `actionType`, which stop  narrowing anything once it is set.")] = None,
+        entry_type: Annotated[Optional[EntryType], Field(description="The kind of object the action was performed on, spelled as `GET api/2.0/security/audit/types` lists it under  `entryTypes`. Pair it with `target` to filter by object without pinning a single action.")] = None,
+        target: Annotated[Optional[StrictStr], Field(description="The object the action was performed on, as the audit trail recorded it - a file name, a user account, a room  title. It is matched in full and exactly as stored, so it narrows the answer only when `action` or  `entryType` is set as well.")] = None,
+        var_from: Annotated[Optional[datetime], Field(description="The earliest moment an event may have been recorded at, read as a UTC instant. The `date` of the events that  come back is in the portal time zone instead, so the two do not line up on a portal that is not on UTC.")] = None,
+        to: Annotated[Optional[datetime], Field(description="The latest moment an event may have been recorded at, read as a UTC instant in the same way as `from`.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="How many events one page may hold. The maximum is also the default, so a client that wants shorter pages has  to ask for them; a full page means there may be further matches beyond it.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="How many matching events to skip before the page begins, counting from the newest. Advance it by `count` to  walk backwards through the trail.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -498,29 +499,29 @@ class AuditTrailDataApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[AuditEventArrayWrapper]:
-        """Get filtered audit trail data
+        """Get filtered audit events
 
-        Returns a list of the audit events by the parameters specified in the request.
+        Returns the portal's audit events that match the filters in the query - by the user who acted, the module the  action belongs to, the action and its type, the entity type and target, and the period - and is the operation  behind the audit trail page. The caller needs the portal-settings right of a DocSpace administrator plus the  audit option of the portal's pricing plan; when that option is missing the filters are silently ignored and  the answer is the same twenty most recent events that `GET api/2.0/security/audit/events/last` returns, and  when the login history and audit trail section is disabled altogether the call is answered with 402. Take the  values accepted by `action`, `actionType`, `moduleType` and `entryType` from  `GET api/2.0/security/audit/types`, and the tree they belong to from `GET api/2.0/security/audit/mappers`. A  non-default `action` matches only that action and, combined with `target`, only its exact value; it also  stops `moduleType` and `actionType` from narrowing the result, so combine `target` with `entryType` instead of  `action` when filtering by target without pinning a single action. `from` and `to` are read as UTC instants  while `date` comes back in the portal time zone, `count` defaults to 100 and cannot exceed it, and the filters  are applied before the page window, so a full page means there may be more matching events beyond it. The  operation is read-only.
 
-        :param user_id: The ID of the user who triggered the audit event.
+        :param user_id: The user who performed the action, given by portal user ID. Leave it at the empty GUID to keep the events of  every user.
         :type user_id: UUID
-        :param module_type: The location where the audit event occurred.
+        :param module_type: The module the recorded action belongs to, spelled as `GET api/2.0/security/audit/types` lists it under  `moduleTypes`. `GET api/2.0/security/audit/mappers` shows which module records which action. The default  value keeps every module.
         :type module_type: LocationType
-        :param action_type: The type of action performed in the audit event (e.g., Create, Update, Delete).
+        :param action_type: The kind of change the action made, spelled as `GET api/2.0/security/audit/types` lists it under  `actionTypes`. The default value keeps every kind.
         :type action_type: ActionType
-        :param action: The specific action that occurred within the audit event.
+        :param action: The exact action recorded, spelled as the `messageAction` of `GET api/2.0/security/audit/mappers`. Naming  one narrows the answer to that single action and overrides `moduleType` and `actionType`, which stop  narrowing anything once it is set.
         :type action: MessageAction
-        :param entry_type: The type of audit entry (e.g., Folder, User, File).
+        :param entry_type: The kind of object the action was performed on, spelled as `GET api/2.0/security/audit/types` lists it under  `entryTypes`. Pair it with `target` to filter by object without pinning a single action.
         :type entry_type: EntryType
-        :param target: The target object affected by the audit event (e.g., document ID, user account).
+        :param target: The object the action was performed on, as the audit trail recorded it - a file name, a user account, a room  title. It is matched in full and exactly as stored, so it narrows the answer only when `action` or  `entryType` is set as well.
         :type target: str
-        :param var_from: The starting date and time for filtering audit events.
+        :param var_from: The earliest moment an event may have been recorded at, read as a UTC instant. The `date` of the events that  come back is in the portal time zone instead, so the two do not line up on a portal that is not on UTC.
         :type var_from: datetime
-        :param to: The ending date and time for filtering audit events.
+        :param to: The latest moment an event may have been recorded at, read as a UTC instant in the same way as `from`.
         :type to: datetime
-        :param count: The maximum number of audit event records to retrieve.
+        :param count: How many events one page may hold. The maximum is also the default, so a client that wants shorter pages has  to ask for them; a full page means there may be further matches beyond it.
         :type count: int
-        :param start_index: The index of the first audit event record to retrieve in a paged query.
+        :param start_index: How many matching events to skip before the page begins, counting from the newest. Advance it by `count` to  walk backwards through the trail.
         :type start_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -587,16 +588,16 @@ class AuditTrailDataApi:
     @validate_call
     def get_audit_events_by_filter_without_preload_content(
         self,
-        user_id: Annotated[Optional[UUID], Field(description="The ID of the user who triggered the audit event.")] = None,
-        module_type: Annotated[Optional[LocationType], Field(description="The location where the audit event occurred.")] = None,
-        action_type: Annotated[Optional[ActionType], Field(description="The type of action performed in the audit event (e.g., Create, Update, Delete).")] = None,
-        action: Annotated[Optional[MessageAction], Field(description="The specific action that occurred within the audit event.")] = None,
-        entry_type: Annotated[Optional[EntryType], Field(description="The type of audit entry (e.g., Folder, User, File).")] = None,
-        target: Annotated[Optional[StrictStr], Field(description="The target object affected by the audit event (e.g., document ID, user account).")] = None,
-        var_from: Annotated[Optional[datetime], Field(description="The starting date and time for filtering audit events.")] = None,
-        to: Annotated[Optional[datetime], Field(description="The ending date and time for filtering audit events.")] = None,
-        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of audit event records to retrieve.")] = None,
-        start_index: Annotated[Optional[StrictInt], Field(description="The index of the first audit event record to retrieve in a paged query.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="The user who performed the action, given by portal user ID. Leave it at the empty GUID to keep the events of  every user.")] = None,
+        module_type: Annotated[Optional[LocationType], Field(description="The module the recorded action belongs to, spelled as `GET api/2.0/security/audit/types` lists it under  `moduleTypes`. `GET api/2.0/security/audit/mappers` shows which module records which action. The default  value keeps every module.")] = None,
+        action_type: Annotated[Optional[ActionType], Field(description="The kind of change the action made, spelled as `GET api/2.0/security/audit/types` lists it under  `actionTypes`. The default value keeps every kind.")] = None,
+        action: Annotated[Optional[MessageAction], Field(description="The exact action recorded, spelled as the `messageAction` of `GET api/2.0/security/audit/mappers`. Naming  one narrows the answer to that single action and overrides `moduleType` and `actionType`, which stop  narrowing anything once it is set.")] = None,
+        entry_type: Annotated[Optional[EntryType], Field(description="The kind of object the action was performed on, spelled as `GET api/2.0/security/audit/types` lists it under  `entryTypes`. Pair it with `target` to filter by object without pinning a single action.")] = None,
+        target: Annotated[Optional[StrictStr], Field(description="The object the action was performed on, as the audit trail recorded it - a file name, a user account, a room  title. It is matched in full and exactly as stored, so it narrows the answer only when `action` or  `entryType` is set as well.")] = None,
+        var_from: Annotated[Optional[datetime], Field(description="The earliest moment an event may have been recorded at, read as a UTC instant. The `date` of the events that  come back is in the portal time zone instead, so the two do not line up on a portal that is not on UTC.")] = None,
+        to: Annotated[Optional[datetime], Field(description="The latest moment an event may have been recorded at, read as a UTC instant in the same way as `from`.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="How many events one page may hold. The maximum is also the default, so a client that wants shorter pages has  to ask for them; a full page means there may be further matches beyond it.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="How many matching events to skip before the page begins, counting from the newest. Advance it by `count` to  walk backwards through the trail.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -610,29 +611,29 @@ class AuditTrailDataApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get filtered audit trail data
+        """Get filtered audit events
 
-        Returns a list of the audit events by the parameters specified in the request.
+        Returns the portal's audit events that match the filters in the query - by the user who acted, the module the  action belongs to, the action and its type, the entity type and target, and the period - and is the operation  behind the audit trail page. The caller needs the portal-settings right of a DocSpace administrator plus the  audit option of the portal's pricing plan; when that option is missing the filters are silently ignored and  the answer is the same twenty most recent events that `GET api/2.0/security/audit/events/last` returns, and  when the login history and audit trail section is disabled altogether the call is answered with 402. Take the  values accepted by `action`, `actionType`, `moduleType` and `entryType` from  `GET api/2.0/security/audit/types`, and the tree they belong to from `GET api/2.0/security/audit/mappers`. A  non-default `action` matches only that action and, combined with `target`, only its exact value; it also  stops `moduleType` and `actionType` from narrowing the result, so combine `target` with `entryType` instead of  `action` when filtering by target without pinning a single action. `from` and `to` are read as UTC instants  while `date` comes back in the portal time zone, `count` defaults to 100 and cannot exceed it, and the filters  are applied before the page window, so a full page means there may be more matching events beyond it. The  operation is read-only.
 
-        :param user_id: The ID of the user who triggered the audit event.
+        :param user_id: The user who performed the action, given by portal user ID. Leave it at the empty GUID to keep the events of  every user.
         :type user_id: UUID
-        :param module_type: The location where the audit event occurred.
+        :param module_type: The module the recorded action belongs to, spelled as `GET api/2.0/security/audit/types` lists it under  `moduleTypes`. `GET api/2.0/security/audit/mappers` shows which module records which action. The default  value keeps every module.
         :type module_type: LocationType
-        :param action_type: The type of action performed in the audit event (e.g., Create, Update, Delete).
+        :param action_type: The kind of change the action made, spelled as `GET api/2.0/security/audit/types` lists it under  `actionTypes`. The default value keeps every kind.
         :type action_type: ActionType
-        :param action: The specific action that occurred within the audit event.
+        :param action: The exact action recorded, spelled as the `messageAction` of `GET api/2.0/security/audit/mappers`. Naming  one narrows the answer to that single action and overrides `moduleType` and `actionType`, which stop  narrowing anything once it is set.
         :type action: MessageAction
-        :param entry_type: The type of audit entry (e.g., Folder, User, File).
+        :param entry_type: The kind of object the action was performed on, spelled as `GET api/2.0/security/audit/types` lists it under  `entryTypes`. Pair it with `target` to filter by object without pinning a single action.
         :type entry_type: EntryType
-        :param target: The target object affected by the audit event (e.g., document ID, user account).
+        :param target: The object the action was performed on, as the audit trail recorded it - a file name, a user account, a room  title. It is matched in full and exactly as stored, so it narrows the answer only when `action` or  `entryType` is set as well.
         :type target: str
-        :param var_from: The starting date and time for filtering audit events.
+        :param var_from: The earliest moment an event may have been recorded at, read as a UTC instant. The `date` of the events that  come back is in the portal time zone instead, so the two do not line up on a portal that is not on UTC.
         :type var_from: datetime
-        :param to: The ending date and time for filtering audit events.
+        :param to: The latest moment an event may have been recorded at, read as a UTC instant in the same way as `from`.
         :type to: datetime
-        :param count: The maximum number of audit event records to retrieve.
+        :param count: How many events one page may hold. The maximum is also the default, so a client that wants shorter pages has  to ask for them; a full page means there may be further matches beyond it.
         :type count: int
-        :param start_index: The index of the first audit event record to retrieve in a paged query.
+        :param start_index: How many matching events to skip before the page begins, counting from the newest. Advance it by `count` to  walk backwards through the trail.
         :type start_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -847,9 +848,9 @@ class AuditTrailDataApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> TenantAuditSettingsResponseWrapper:
-        """Get the audit trail settings
+        """Get audit lifetime settings
 
-        Returns the audit trail settings.
+        Returns how long this portal keeps its two security logs: `loginHistoryLifeTime` for login events and  `auditTrailLifeTime` for audit events, both counted in days, together with `lastModified`, the moment the pair  was last saved. The caller needs the portal-settings right of a DocSpace administrator, and in a cloud  installation the login history and audit trail section must be enabled for the portal, otherwise the call is  answered with 402; the audit option of the pricing plan is not required to read the values. Both numbers lie  between 1 and 180 days, and a portal that never changed them reports the default of 180. They define the  window the rest of the audit operations work in: `GET api/2.0/security/audit/events/last` looks exactly this  far back, and the reports started by `POST api/2.0/security/audit/login/report` and  `POST api/2.0/security/audit/events/report` cover exactly this period. The operation is read-only; change the  values with `POST api/2.0/security/audit/settings/lifetime`.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -918,9 +919,9 @@ class AuditTrailDataApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[TenantAuditSettingsResponseWrapper]:
-        """Get the audit trail settings
+        """Get audit lifetime settings
 
-        Returns the audit trail settings.
+        Returns how long this portal keeps its two security logs: `loginHistoryLifeTime` for login events and  `auditTrailLifeTime` for audit events, both counted in days, together with `lastModified`, the moment the pair  was last saved. The caller needs the portal-settings right of a DocSpace administrator, and in a cloud  installation the login history and audit trail section must be enabled for the portal, otherwise the call is  answered with 402; the audit option of the pricing plan is not required to read the values. Both numbers lie  between 1 and 180 days, and a portal that never changed them reports the default of 180. They define the  window the rest of the audit operations work in: `GET api/2.0/security/audit/events/last` looks exactly this  far back, and the reports started by `POST api/2.0/security/audit/login/report` and  `POST api/2.0/security/audit/events/report` cover exactly this period. The operation is read-only; change the  values with `POST api/2.0/security/audit/settings/lifetime`.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -989,9 +990,9 @@ class AuditTrailDataApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get the audit trail settings
+        """Get audit lifetime settings
 
-        Returns the audit trail settings.
+        Returns how long this portal keeps its two security logs: `loginHistoryLifeTime` for login events and  `auditTrailLifeTime` for audit events, both counted in days, together with `lastModified`, the moment the pair  was last saved. The caller needs the portal-settings right of a DocSpace administrator, and in a cloud  installation the login history and audit trail section must be enabled for the portal, otherwise the call is  answered with 402; the audit option of the pricing plan is not required to read the values. Both numbers lie  between 1 and 180 days, and a portal that never changed them reports the default of 180. They define the  window the rest of the audit operations work in: `GET api/2.0/security/audit/events/last` looks exactly this  far back, and the reports started by `POST api/2.0/security/audit/login/report` and  `POST api/2.0/security/audit/events/report` cover exactly this period. The operation is read-only; change the  values with `POST api/2.0/security/audit/settings/lifetime`.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1112,8 +1113,8 @@ class AuditTrailDataApi:
     @validate_call
     def get_audit_trail_mappers(
         self,
-        product_type: Annotated[Optional[ProductType], Field(description="The type of product related to the audit trail.")] = None,
-        module_type: Annotated[Optional[LocationType], Field(description="The location associated with the audit trail.")] = None,
+        product_type: Annotated[Optional[ProductType], Field(description="The product to keep, spelled as `GET api/2.0/security/audit/types` lists it under `productTypes`. Omitting  it keeps every product; a value no product matches yields an empty list rather than an error.")] = None,
+        module_type: Annotated[Optional[LocationType], Field(description="The module to keep inside the products that survive `productType`, spelled as  `GET api/2.0/security/audit/types` lists it under `moduleTypes`. Omitting it keeps every module of those  products.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1126,14 +1127,14 @@ class AuditTrailDataApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ObjectWrapper:
+    ) -> AuditTrailProductMapperArrayWrapper:
         """Get audit trail mappers
 
-        Returns the mappers for the audit trail types.
+        Returns the audit vocabulary as the tree it really is: every product, the modules inside it, and for each  module the actions it can record together with the type of change and the entity each of them applies to. Pass  `productType` to keep a single product and `moduleType` to keep a single module inside the products that  remain; omit both to get the whole tree. The caller needs the portal-settings right of a DocSpace  administrator; the audit option of the pricing plan is not required, and the call is read-only and safe to  repeat. Each action carries `messageAction`, the name to send as the `action` filter of  `GET api/2.0/security/audit/events/filter`, next to `actionType` and `entity`, the values its `actionType` and  `entryType` filters accept - this is where a caller learns which action belongs to which module instead of  guessing. A filter that matches nothing yields an empty list rather than an error. Use  `GET api/2.0/security/audit/types` for the flat lists of the same names.
 
-        :param product_type: The type of product related to the audit trail.
+        :param product_type: The product to keep, spelled as `GET api/2.0/security/audit/types` lists it under `productTypes`. Omitting  it keeps every product; a value no product matches yields an empty list rather than an error.
         :type product_type: ProductType
-        :param module_type: The location associated with the audit trail.
+        :param module_type: The module to keep inside the products that survive `productType`, spelled as  `GET api/2.0/security/audit/types` lists it under `moduleTypes`. Omitting it keeps every module of those  products.
         :type module_type: LocationType
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1167,7 +1168,7 @@ class AuditTrailDataApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ObjectWrapper",
+            '200': "AuditTrailProductMapperArrayWrapper",
             '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
@@ -1191,8 +1192,8 @@ class AuditTrailDataApi:
     @validate_call
     def get_audit_trail_mappers_with_http_info(
         self,
-        product_type: Annotated[Optional[ProductType], Field(description="The type of product related to the audit trail.")] = None,
-        module_type: Annotated[Optional[LocationType], Field(description="The location associated with the audit trail.")] = None,
+        product_type: Annotated[Optional[ProductType], Field(description="The product to keep, spelled as `GET api/2.0/security/audit/types` lists it under `productTypes`. Omitting  it keeps every product; a value no product matches yields an empty list rather than an error.")] = None,
+        module_type: Annotated[Optional[LocationType], Field(description="The module to keep inside the products that survive `productType`, spelled as  `GET api/2.0/security/audit/types` lists it under `moduleTypes`. Omitting it keeps every module of those  products.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1205,14 +1206,14 @@ class AuditTrailDataApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[ObjectWrapper]:
+    ) -> ApiResponse[AuditTrailProductMapperArrayWrapper]:
         """Get audit trail mappers
 
-        Returns the mappers for the audit trail types.
+        Returns the audit vocabulary as the tree it really is: every product, the modules inside it, and for each  module the actions it can record together with the type of change and the entity each of them applies to. Pass  `productType` to keep a single product and `moduleType` to keep a single module inside the products that  remain; omit both to get the whole tree. The caller needs the portal-settings right of a DocSpace  administrator; the audit option of the pricing plan is not required, and the call is read-only and safe to  repeat. Each action carries `messageAction`, the name to send as the `action` filter of  `GET api/2.0/security/audit/events/filter`, next to `actionType` and `entity`, the values its `actionType` and  `entryType` filters accept - this is where a caller learns which action belongs to which module instead of  guessing. A filter that matches nothing yields an empty list rather than an error. Use  `GET api/2.0/security/audit/types` for the flat lists of the same names.
 
-        :param product_type: The type of product related to the audit trail.
+        :param product_type: The product to keep, spelled as `GET api/2.0/security/audit/types` lists it under `productTypes`. Omitting  it keeps every product; a value no product matches yields an empty list rather than an error.
         :type product_type: ProductType
-        :param module_type: The location associated with the audit trail.
+        :param module_type: The module to keep inside the products that survive `productType`, spelled as  `GET api/2.0/security/audit/types` lists it under `moduleTypes`. Omitting it keeps every module of those  products.
         :type module_type: LocationType
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1246,7 +1247,7 @@ class AuditTrailDataApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ObjectWrapper",
+            '200': "AuditTrailProductMapperArrayWrapper",
             '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
@@ -1270,8 +1271,8 @@ class AuditTrailDataApi:
     @validate_call
     def get_audit_trail_mappers_without_preload_content(
         self,
-        product_type: Annotated[Optional[ProductType], Field(description="The type of product related to the audit trail.")] = None,
-        module_type: Annotated[Optional[LocationType], Field(description="The location associated with the audit trail.")] = None,
+        product_type: Annotated[Optional[ProductType], Field(description="The product to keep, spelled as `GET api/2.0/security/audit/types` lists it under `productTypes`. Omitting  it keeps every product; a value no product matches yields an empty list rather than an error.")] = None,
+        module_type: Annotated[Optional[LocationType], Field(description="The module to keep inside the products that survive `productType`, spelled as  `GET api/2.0/security/audit/types` lists it under `moduleTypes`. Omitting it keeps every module of those  products.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1287,11 +1288,11 @@ class AuditTrailDataApi:
     ) -> RESTResponseType:
         """Get audit trail mappers
 
-        Returns the mappers for the audit trail types.
+        Returns the audit vocabulary as the tree it really is: every product, the modules inside it, and for each  module the actions it can record together with the type of change and the entity each of them applies to. Pass  `productType` to keep a single product and `moduleType` to keep a single module inside the products that  remain; omit both to get the whole tree. The caller needs the portal-settings right of a DocSpace  administrator; the audit option of the pricing plan is not required, and the call is read-only and safe to  repeat. Each action carries `messageAction`, the name to send as the `action` filter of  `GET api/2.0/security/audit/events/filter`, next to `actionType` and `entity`, the values its `actionType` and  `entryType` filters accept - this is where a caller learns which action belongs to which module instead of  guessing. A filter that matches nothing yields an empty list rather than an error. Use  `GET api/2.0/security/audit/types` for the flat lists of the same names.
 
-        :param product_type: The type of product related to the audit trail.
+        :param product_type: The product to keep, spelled as `GET api/2.0/security/audit/types` lists it under `productTypes`. Omitting  it keeps every product; a value no product matches yields an empty list rather than an error.
         :type product_type: ProductType
-        :param module_type: The location associated with the audit trail.
+        :param module_type: The module to keep inside the products that survive `productType`, spelled as  `GET api/2.0/security/audit/types` lists it under `moduleTypes`. Omitting it keeps every module of those  products.
         :type module_type: LocationType
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1325,7 +1326,7 @@ class AuditTrailDataApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ObjectWrapper",
+            '200': "AuditTrailProductMapperArrayWrapper",
             '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
@@ -1437,9 +1438,9 @@ class AuditTrailDataApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> DocumentBuilderTaskWrapper:
-        """Get the audit trail report generation status
+        """Get audit trail report status
 
-        Returns the status of generating the audit trail report.
+        Returns the state of the audit trail report the calling user has started, and is the operation to poll after  `POST api/2.0/security/audit/events/report`. The caller needs the portal-settings right of a DocSpace  administrator plus the audit option of the portal's pricing plan, otherwise the call is answered with 402.  Jobs are kept per user and per report kind: this operation never shows another administrator's report, nor the  login history report, which has its own status at `GET api/2.0/security/audit/login/report`. The answer is  empty when no report of this kind is known for the caller; otherwise `percentage` grows towards 100,  `isCompleted` turns true when the build has ended, `error` carries the failure message when it ended badly,  and `resultFileName` and `resultFileUrl` point at the file saved to the caller's My documents section, while  `resultFileId` is filled for an XLSX report only. The operation is read-only and safe to poll every few  seconds; a finished job is dropped as soon as the next report of this kind is started.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1508,9 +1509,9 @@ class AuditTrailDataApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[DocumentBuilderTaskWrapper]:
-        """Get the audit trail report generation status
+        """Get audit trail report status
 
-        Returns the status of generating the audit trail report.
+        Returns the state of the audit trail report the calling user has started, and is the operation to poll after  `POST api/2.0/security/audit/events/report`. The caller needs the portal-settings right of a DocSpace  administrator plus the audit option of the portal's pricing plan, otherwise the call is answered with 402.  Jobs are kept per user and per report kind: this operation never shows another administrator's report, nor the  login history report, which has its own status at `GET api/2.0/security/audit/login/report`. The answer is  empty when no report of this kind is known for the caller; otherwise `percentage` grows towards 100,  `isCompleted` turns true when the build has ended, `error` carries the failure message when it ended badly,  and `resultFileName` and `resultFileUrl` point at the file saved to the caller's My documents section, while  `resultFileId` is filled for an XLSX report only. The operation is read-only and safe to poll every few  seconds; a finished job is dropped as soon as the next report of this kind is started.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1579,9 +1580,9 @@ class AuditTrailDataApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get the audit trail report generation status
+        """Get audit trail report status
 
-        Returns the status of generating the audit trail report.
+        Returns the state of the audit trail report the calling user has started, and is the operation to poll after  `POST api/2.0/security/audit/events/report`. The caller needs the portal-settings right of a DocSpace  administrator plus the audit option of the portal's pricing plan, otherwise the call is answered with 402.  Jobs are kept per user and per report kind: this operation never shows another administrator's report, nor the  login history report, which has its own status at `GET api/2.0/security/audit/login/report`. The answer is  empty when no report of this kind is known for the caller; otherwise `percentage` grows towards 100,  `isCompleted` turns true when the build has ended, `error` carries the failure message when it ended badly,  and `resultFileName` and `resultFileUrl` point at the file saved to the caller's My documents section, while  `resultFileId` is filled for an XLSX report only. The operation is read-only and safe to poll every few  seconds; a finished job is dropped as soon as the next report of this kind is started.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1714,10 +1715,10 @@ class AuditTrailDataApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ObjectWrapper:
+    ) -> AuditTrailTypesWrapper:
         """Get audit trail types
 
-        Returns all the available audit trail types.
+        Returns the vocabularies the audit filters are built from: `actions` lists every action the portal can record,  `actionTypes` the kinds of change they stand for, `productTypes` the products they belong to, `moduleTypes`  the locations inside those products, and `entryTypes` the kinds of entity an action can be applied to. The  caller needs the portal-settings right of a DocSpace administrator; the audit option of the pricing plan is  not required, so the lists can be read on any portal. The operation is read-only, takes no parameters and  depends on nothing else. Every value is the name to send in the matching query parameter of  `GET api/2.0/security/audit/events/filter` or `GET api/2.0/security/audit/login/filter`, so read this  operation once and reuse the answer instead of guessing spellings. The response is an untyped object holding  those five arrays of names, and it changes only with the portal version. Use  `GET api/2.0/security/audit/mappers` when the relations between products, modules and actions are needed  rather than the flat lists.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1749,7 +1750,7 @@ class AuditTrailDataApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ObjectWrapper",
+            '200': "AuditTrailTypesWrapper",
             '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
@@ -1784,10 +1785,10 @@ class AuditTrailDataApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[ObjectWrapper]:
+    ) -> ApiResponse[AuditTrailTypesWrapper]:
         """Get audit trail types
 
-        Returns all the available audit trail types.
+        Returns the vocabularies the audit filters are built from: `actions` lists every action the portal can record,  `actionTypes` the kinds of change they stand for, `productTypes` the products they belong to, `moduleTypes`  the locations inside those products, and `entryTypes` the kinds of entity an action can be applied to. The  caller needs the portal-settings right of a DocSpace administrator; the audit option of the pricing plan is  not required, so the lists can be read on any portal. The operation is read-only, takes no parameters and  depends on nothing else. Every value is the name to send in the matching query parameter of  `GET api/2.0/security/audit/events/filter` or `GET api/2.0/security/audit/login/filter`, so read this  operation once and reuse the answer instead of guessing spellings. The response is an untyped object holding  those five arrays of names, and it changes only with the portal version. Use  `GET api/2.0/security/audit/mappers` when the relations between products, modules and actions are needed  rather than the flat lists.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1819,7 +1820,7 @@ class AuditTrailDataApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ObjectWrapper",
+            '200': "AuditTrailTypesWrapper",
             '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
@@ -1857,7 +1858,7 @@ class AuditTrailDataApi:
     ) -> RESTResponseType:
         """Get audit trail types
 
-        Returns all the available audit trail types.
+        Returns the vocabularies the audit filters are built from: `actions` lists every action the portal can record,  `actionTypes` the kinds of change they stand for, `productTypes` the products they belong to, `moduleTypes`  the locations inside those products, and `entryTypes` the kinds of entity an action can be applied to. The  caller needs the portal-settings right of a DocSpace administrator; the audit option of the pricing plan is  not required, so the lists can be read on any portal. The operation is read-only, takes no parameters and  depends on nothing else. Every value is the name to send in the matching query parameter of  `GET api/2.0/security/audit/events/filter` or `GET api/2.0/security/audit/login/filter`, so read this  operation once and reuse the answer instead of guessing spellings. The response is an untyped object holding  those five arrays of names, and it changes only with the portal version. Use  `GET api/2.0/security/audit/mappers` when the relations between products, modules and actions are needed  rather than the flat lists.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1889,7 +1890,7 @@ class AuditTrailDataApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ObjectWrapper",
+            '200': "AuditTrailTypesWrapper",
             '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
@@ -1990,9 +1991,9 @@ class AuditTrailDataApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> AuditEventArrayWrapper:
-        """Get audit trail data
+        """Get recent audit events
 
-        Returns a list of the latest changes (creation, modification, deletion, etc.) made by users to the entities on the portal.
+        Returns the twenty most recent audit events of the portal - the creations, changes, deletions, sharing and  settings updates its members made - as the short summary a settings page shows before anyone asks for the full  trail. The caller needs the portal-settings right of a DocSpace administrator, and in a cloud installation the  login history and audit trail section must be enabled for the portal, otherwise the call is answered with 402.  The operation is read-only and takes no parameters: it looks back exactly as far as the audit trail lifetime  that `GET api/2.0/security/audit/settings/lifetime` reports, returns at most twenty events ordered newest  first, and cannot be filtered. `date` is given in the portal time zone, `actionText` is the readable sentence  describing the event with every substituted value shortened to fifty characters here, and `target` names the  entity the action was applied to. An empty list means nothing was recorded inside that period. Use  `GET api/2.0/security/audit/events/filter` to filter by user, module, action or period.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2061,9 +2062,9 @@ class AuditTrailDataApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[AuditEventArrayWrapper]:
-        """Get audit trail data
+        """Get recent audit events
 
-        Returns a list of the latest changes (creation, modification, deletion, etc.) made by users to the entities on the portal.
+        Returns the twenty most recent audit events of the portal - the creations, changes, deletions, sharing and  settings updates its members made - as the short summary a settings page shows before anyone asks for the full  trail. The caller needs the portal-settings right of a DocSpace administrator, and in a cloud installation the  login history and audit trail section must be enabled for the portal, otherwise the call is answered with 402.  The operation is read-only and takes no parameters: it looks back exactly as far as the audit trail lifetime  that `GET api/2.0/security/audit/settings/lifetime` reports, returns at most twenty events ordered newest  first, and cannot be filtered. `date` is given in the portal time zone, `actionText` is the readable sentence  describing the event with every substituted value shortened to fifty characters here, and `target` names the  entity the action was applied to. An empty list means nothing was recorded inside that period. Use  `GET api/2.0/security/audit/events/filter` to filter by user, module, action or period.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2132,9 +2133,9 @@ class AuditTrailDataApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get audit trail data
+        """Get recent audit events
 
-        Returns a list of the latest changes (creation, modification, deletion, etc.) made by users to the entities on the portal.
+        Returns the twenty most recent audit events of the portal - the creations, changes, deletions, sharing and  settings updates its members made - as the short summary a settings page shows before anyone asks for the full  trail. The caller needs the portal-settings right of a DocSpace administrator, and in a cloud installation the  login history and audit trail section must be enabled for the portal, otherwise the call is answered with 402.  The operation is read-only and takes no parameters: it looks back exactly as far as the audit trail lifetime  that `GET api/2.0/security/audit/settings/lifetime` reports, returns at most twenty events ordered newest  first, and cannot be filtered. `date` is given in the portal time zone, `actionText` is the readable sentence  describing the event with every substituted value shortened to fifty characters here, and `target` names the  entity the action was applied to. An empty list means nothing was recorded inside that period. Use  `GET api/2.0/security/audit/events/filter` to filter by user, module, action or period.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2269,9 +2270,9 @@ class AuditTrailDataApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> TenantAuditSettingsResponseWrapper:
-        """Set the audit trail settings
+        """Set audit lifetime settings
 
-        Sets the audit trail settings for the current portal.
+        Sets how long this portal keeps its login history and its audit trail, in days, and returns the pair as it was  stored. The caller needs the portal-settings right of a DocSpace administrator plus the audit option of the  portal's pricing plan, otherwise the call is answered with 402. Send both numbers inside `settings`: each has  to be between 1 and 180 days, and a value outside that range is refused with 400 without either number being  saved, so read the current pair from `GET api/2.0/security/audit/settings/lifetime` and resend the one that  should stay as it is. The call replaces the stored settings rather than merging them, is idempotent, and takes  effect at once: the period covered by `GET api/2.0/security/audit/events/last` and by both audit reports  shrinks or grows with it, and events older than the new lifetime stop being reported. The change is itself  recorded in the audit trail.
 
         :param tenant_audit_settings_wrapper:
         :type tenant_audit_settings_wrapper: TenantAuditSettingsWrapper
@@ -2345,9 +2346,9 @@ class AuditTrailDataApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[TenantAuditSettingsResponseWrapper]:
-        """Set the audit trail settings
+        """Set audit lifetime settings
 
-        Sets the audit trail settings for the current portal.
+        Sets how long this portal keeps its login history and its audit trail, in days, and returns the pair as it was  stored. The caller needs the portal-settings right of a DocSpace administrator plus the audit option of the  portal's pricing plan, otherwise the call is answered with 402. Send both numbers inside `settings`: each has  to be between 1 and 180 days, and a value outside that range is refused with 400 without either number being  saved, so read the current pair from `GET api/2.0/security/audit/settings/lifetime` and resend the one that  should stay as it is. The call replaces the stored settings rather than merging them, is idempotent, and takes  effect at once: the period covered by `GET api/2.0/security/audit/events/last` and by both audit reports  shrinks or grows with it, and events older than the new lifetime stop being reported. The change is itself  recorded in the audit trail.
 
         :param tenant_audit_settings_wrapper:
         :type tenant_audit_settings_wrapper: TenantAuditSettingsWrapper
@@ -2421,9 +2422,9 @@ class AuditTrailDataApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Set the audit trail settings
+        """Set audit lifetime settings
 
-        Sets the audit trail settings for the current portal.
+        Sets how long this portal keeps its login history and its audit trail, in days, and returns the pair as it was  stored. The caller needs the portal-settings right of a DocSpace administrator plus the audit option of the  portal's pricing plan, otherwise the call is answered with 402. Send both numbers inside `settings`: each has  to be between 1 and 180 days, and a value outside that range is refused with 400 without either number being  saved, so read the current pair from `GET api/2.0/security/audit/settings/lifetime` and resend the one that  should stay as it is. The call replaces the stored settings rather than merging them, is idempotent, and takes  effect at once: the period covered by `GET api/2.0/security/audit/events/last` and by both audit reports  shrinks or grows with it, and events older than the new lifetime stop being reported. The change is itself  recorded in the audit trail.
 
         :param tenant_audit_settings_wrapper:
         :type tenant_audit_settings_wrapper: TenantAuditSettingsWrapper
@@ -2577,9 +2578,9 @@ class AuditTrailDataApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
-        """Terminate the audit trail report generation
+        """Terminate audit trail report
 
-        Terminates generating the audit trail report.
+        Cancels the audit trail report the calling user has running and drops it from the build queue. The caller  needs the portal-settings right of a DocSpace administrator plus the audit option of the portal's pricing  plan, otherwise the call is answered with 402. Cancellation is handed to the same background service that  builds the report, so a successful answer means the request was accepted rather than that the job has already  stopped: poll `GET api/2.0/security/audit/events/report` to watch it disappear. The operation returns no  content and touches only the caller's own audit trail report - the login history report is cancelled by  `DELETE api/2.0/security/audit/login/report`, and no report of another user can be reached from here. It is  idempotent: cancelling when nothing is running is not an error. A job stopped before it finished writing  leaves nothing in My documents, and a report cancelled by mistake has to be built again with  `POST api/2.0/security/audit/events/report`.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2648,9 +2649,9 @@ class AuditTrailDataApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[None]:
-        """Terminate the audit trail report generation
+        """Terminate audit trail report
 
-        Terminates generating the audit trail report.
+        Cancels the audit trail report the calling user has running and drops it from the build queue. The caller  needs the portal-settings right of a DocSpace administrator plus the audit option of the portal's pricing  plan, otherwise the call is answered with 402. Cancellation is handed to the same background service that  builds the report, so a successful answer means the request was accepted rather than that the job has already  stopped: poll `GET api/2.0/security/audit/events/report` to watch it disappear. The operation returns no  content and touches only the caller's own audit trail report - the login history report is cancelled by  `DELETE api/2.0/security/audit/login/report`, and no report of another user can be reached from here. It is  idempotent: cancelling when nothing is running is not an error. A job stopped before it finished writing  leaves nothing in My documents, and a report cancelled by mistake has to be built again with  `POST api/2.0/security/audit/events/report`.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2719,9 +2720,9 @@ class AuditTrailDataApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Terminate the audit trail report generation
+        """Terminate audit trail report
 
-        Terminates generating the audit trail report.
+        Cancels the audit trail report the calling user has running and drops it from the build queue. The caller  needs the portal-settings right of a DocSpace administrator plus the audit option of the portal's pricing  plan, otherwise the call is answered with 402. Cancellation is handed to the same background service that  builds the report, so a successful answer means the request was accepted rather than that the job has already  stopped: poll `GET api/2.0/security/audit/events/report` to watch it disappear. The operation returns no  content and touches only the caller's own audit trail report - the login history report is cancelled by  `DELETE api/2.0/security/audit/login/report`, and no report of another user can be reached from here. It is  idempotent: cancelling when nothing is running is not an error. A job stopped before it finished writing  leaves nothing in My documents, and a report cancelled by mistake has to be built again with  `POST api/2.0/security/audit/events/report`.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request

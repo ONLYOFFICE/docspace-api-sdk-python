@@ -28,9 +28,9 @@ from typing_extensions import Self
 
 class TurnOnAdminMessageSettingsRequestDto(BaseModel):
     """
-    The request parameters for enabling or disabling administrator messaging system.
+    Whether the sign-in page offers the form for writing to the portal administrators.
     """ # noqa: E501
-    turn_on: Optional[StrictBool] = Field(default=None, description="The global switch for the administrator messaging functionality.", alias="turnOn", json_schema_extra={"examples": [True]})
+    turn_on: Optional[StrictBool] = Field(default=None, description="Whether the form is offered. Switching it off hides the form for everybody and makes the operation that  submits it refuse new messages; letters already sent are untouched.", alias="turnOn", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["turnOn"]
 
     model_config = ConfigDict(

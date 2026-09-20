@@ -29,13 +29,13 @@ from typing_extensions import Self
 
 class StorageDto(BaseModel):
     """
-    The storage information.
+    One third-party storage provider the portal data can be kept in, with the keys it expects.
     """ # noqa: E501
-    id: Optional[StrictStr] = Field(description="The storage ID.", json_schema_extra={"examples": ["storage_001"]})
-    title: Optional[StrictStr] = Field(description="The storage title.", json_schema_extra={"examples": ["Main Storage"]})
-    properties: Optional[List[AuthKey]] = Field(default=None, description="The list of storage authentication keys.", json_schema_extra={"examples": [[{"name": "ApiKey", "value": "12345"}]]})
-    current: StrictBool = Field(description="Specifies if this is the current portal storage or not.", json_schema_extra={"examples": [True]})
-    is_set: StrictBool = Field(description="Specifies if this storage can be set or not.", alias="isSet", json_schema_extra={"examples": [True]})
+    id: Optional[StrictStr] = Field(description="The provider's key, which is what `PUT api/2.0/settings/storage` and its CDN and backup counterparts take  as the storage to switch to. The built-in local storage has no entry of its own: a listing in which  nothing is `current` means the data sits locally.", json_schema_extra={"examples": ["s3"]})
+    title: Optional[StrictStr] = Field(description="The provider name in the portal language, falling back to `id` when this build ships no wording for it.", json_schema_extra={"examples": ["Amazon AWS S3"]})
+    properties: Optional[List[AuthKey]] = Field(default=None, description="The settings the provider expects, each with its key, its localised label and the value the server  currently holds. For the entry marked `current` the values come from the portal's saved storage settings  and for the others from the installation configuration, so a setting nobody has configured comes back with  an empty value rather than being left out.", json_schema_extra={"examples": [[{"name": "acesskey", "value": "AKIAIOSFODNN7EXAMPLE", "title": "Access key"}]]})
+    current: StrictBool = Field(description="Whether the portal is using this provider right now. At most one entry of a listing has it set.", json_schema_extra={"examples": [True]})
+    is_set: StrictBool = Field(description="Whether the provider's keys are already filled in on the server, so it could be switched to without  sending credentials. It says nothing about whether the credentials still work.", alias="isSet", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["id", "title", "properties", "current", "isSet"]
 
     model_config = ConfigDict(

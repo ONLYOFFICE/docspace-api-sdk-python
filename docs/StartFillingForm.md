@@ -1,11 +1,11 @@
 # StartFillingForm
-The parameters of the button that starts filling out the form.
+The button the editor shows to begin filling out a form.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**text** | **str** | The caption of the button that starts filling out the form. | [optional] 
+**text** | **str** | The caption to put on the button, already translated into the language of the caller. | [optional] 
 
 ## Example
 

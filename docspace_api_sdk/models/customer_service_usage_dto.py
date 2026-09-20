@@ -28,17 +28,17 @@ from typing_extensions import Self
 
 class CustomerServiceUsageDto(BaseModel):
     """
-    Aggregated customer usage statistics for a service over a period.
+    What one wallet service was consumed and cost over the requested period, added up rather than listed.
     """ # noqa: E501
-    service: Optional[StrictStr] = Field(default=None, description="The name of the service.", json_schema_extra={"examples": ["disk-storage"]})
-    title: Optional[StrictStr] = Field(default=None, description="The title of the service.", json_schema_extra={"examples": ["Additional disk storage"]})
-    service_unit: Optional[StrictStr] = Field(default=None, description="The unit of measurement for the service.", alias="serviceUnit", json_schema_extra={"examples": ["GB"]})
-    currency: Optional[StrictStr] = Field(default=None, description="The three-character ISO 4217 currency symbol of the amounts.", json_schema_extra={"examples": ["USD"]})
-    total_quantity: Optional[StrictInt] = Field(default=None, description="The total number of units consumed.", alias="totalQuantity", json_schema_extra={"examples": [100]})
-    total_amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The total amount charged for the service.", alias="totalAmount", json_schema_extra={"examples": [14]})
-    operation_count: Optional[StrictInt] = Field(default=None, description="The number of individual purchase operations.", alias="operationCount", json_schema_extra={"examples": [1]})
-    price: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The price of the service.", json_schema_extra={"examples": [0.14]})
-    subscription: Optional[StrictBool] = Field(default=None, description="Indicates whether the service is subscription-based.", json_schema_extra={"examples": [True]})
+    service: Optional[StrictStr] = Field(default=None, description="The stable key of the service, which is what the `serviceName` filter of this operation matches on and  what `GET api/2.0/portal/payment/walletservice` looks a service up by.", json_schema_extra={"examples": ["disk-storage"]})
+    title: Optional[StrictStr] = Field(default=None, description="The service name in the portal language, for printing rather than matching.", json_schema_extra={"examples": ["Additional disk storage"]})
+    service_unit: Optional[StrictStr] = Field(default=None, description="What `totalQuantity` counts, in the portal language. AI consumption is reported in tokens here rather  than in the AI credits the service is sold in, so it does not line up with the price list.", alias="serviceUnit", json_schema_extra={"examples": ["GB"]})
+    currency: Optional[StrictStr] = Field(default=None, description="The currency `totalAmount` and `price` are expressed in, as a three-letter ISO 4217 code.", json_schema_extra={"examples": ["USD"]})
+    total_quantity: Optional[StrictInt] = Field(default=None, description="How many units of the service were consumed over the period, in the unit named by `serviceUnit`.", alias="totalQuantity", json_schema_extra={"examples": [100]})
+    total_amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="What that consumption cost over the period. It is what was actually charged, so it can differ from  `price` times `totalQuantity` when the price changed inside the period.", alias="totalAmount", json_schema_extra={"examples": [49.99]})
+    operation_count: Optional[StrictInt] = Field(default=None, description="How many separate charges the total was added up from. The charges themselves are in  `GET api/2.0/portal/payment/customer/operations`.", alias="operationCount", json_schema_extra={"examples": [2]})
+    price: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="What one unit of the service costs today, not what it cost during the period. It is `0` when the service  is no longer on the installation's price list.", json_schema_extra={"examples": [0.14]})
+    subscription: Optional[StrictBool] = Field(default=None, description="Whether the service is billed as a standing subscription rather than per unit consumed. It is derived  from today's price list, so it describes the service as it is sold now.", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["service", "title", "serviceUnit", "currency", "totalQuantity", "totalAmount", "operationCount", "price", "subscription"]
 
     model_config = ConfigDict(

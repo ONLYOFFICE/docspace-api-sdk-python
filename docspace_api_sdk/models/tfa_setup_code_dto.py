@@ -28,11 +28,11 @@ from typing_extensions import Self
 
 class TfaSetupCodeDto(BaseModel):
     """
-    The setup TFA code parameters.
+    The secret to enrol in an authenticator application, in both of the forms an application can take it.
     """ # noqa: E501
-    account: Optional[StrictStr] = Field(default=None, description="The account for which the setup code is generated.", json_schema_extra={"examples": ["john.doe@onlyoffice.com"]})
-    manual_entry_key: Optional[StrictStr] = Field(default=None, description="The manual entry key.", alias="manualEntryKey", json_schema_extra={"examples": ["JBSWY3DPEHPK3PXP"]})
-    qr_code_setup_image_url: Optional[StrictStr] = Field(default=None, description="The QR-code setup image URL (base64-encoded PNG image).", alias="qrCodeSetupImageUrl", json_schema_extra={"examples": ["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAAAAAA6fptVAAAACklEQVR4nGMAAgAABAABiCEmiQAAAABJRU5ErkJggg=="]})
+    account: Optional[StrictStr] = Field(default=None, description="The label the authenticator application will list the credential under, which is the caller's own email  address. It identifies the entry to a person, and no application checks it.", json_schema_extra={"examples": ["john.doe@onlyoffice.com"]})
+    manual_entry_key: Optional[StrictStr] = Field(default=None, description="The secret in the base32 form that is typed into an application by hand. It describes the very same  credential as `qrCodeSetupImageUrl`, and repeating the call hands back the same value for the account until  the credential is reset.", alias="manualEntryKey", json_schema_extra={"examples": ["JBSWY3DPEHPK3PXP"]})
+    qr_code_setup_image_url: Optional[StrictStr] = Field(default=None, description="The same secret as a scannable image, given as a `data:image/png;base64,` URL that can be rendered  directly - it is not a link to fetch.", alias="qrCodeSetupImageUrl", json_schema_extra={"examples": ["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAAAAAA6fptVAAAACklEQVR4nGMAAgAABAABiCEmiQAAAABJRU5ErkJggg=="]})
     __properties: ClassVar[List[str]] = ["account", "manualEntryKey", "qrCodeSetupImageUrl"]
 
     model_config = ConfigDict(

@@ -29,11 +29,11 @@ from typing_extensions import Self
 
 class CustomColorThemesSettingsDto(BaseModel):
     """
-    The custom color themes settings.
+    The colour themes the portal offers, which of them is applied, and how many the plan allows.
     """ # noqa: E501
-    themes: Optional[List[CustomColorThemesSettingsItem]] = Field(default=None, description="The list of the custom color themes.", json_schema_extra={"examples": [[{"id": 1, "name": "Custom Theme"}]]})
-    selected: Optional[StrictInt] = Field(default=None, description="Specifies whether the custom color theme is selected.", json_schema_extra={"examples": [1]})
-    limit: Optional[StrictInt] = Field(default=None, description="The maximum number of the custom color themes.", json_schema_extra={"examples": [1]})
+    themes: Optional[List[CustomColorThemesSettingsItem]] = Field(default=None, description="Every theme the portal can apply, ordered by ID, with the built-in ones first because they were created  first. It is never empty - the built-in themes cannot be deleted - and a custom theme is one whose ID is  higher than the built-in ones.", json_schema_extra={"examples": [[{"id": 1, "name": "Custom Theme"}]]})
+    selected: Optional[StrictInt] = Field(default=None, description="The ID of the theme in `themes` that is currently applied to the whole portal. Deleting the applied theme  moves it to the lowest remaining ID, so it can change without anyone having chosen a new one.", json_schema_extra={"examples": [1]})
+    limit: Optional[StrictInt] = Field(default=None, description="How many entries `themes` may hold in total, built-in ones included; `0` means the plan caps nothing. Once  the cap is reached `PUT api/2.0/settings/colortheme` drops a new theme silently instead of failing, so  compare this with the length of `themes` to tell whether a save took effect.", json_schema_extra={"examples": [1]})
     __properties: ClassVar[List[str]] = ["themes", "selected", "limit"]
 
     model_config = ConfigDict(

@@ -29,10 +29,10 @@ from typing_extensions import Self
 
 class DefaultTemplateSettingsRequestDto(BaseModel):
     """
-    Default templates settings request parameters.
+    The document to use as the blank the portal creates for one extension.
     """ # noqa: E501
     selected_file: DefaultTemplateSettingsRequestDtoSelectedFile = Field(alias="selectedFile")
-    file_extension: Optional[StrictStr] = Field(description="File extension of a template to replace", alias="fileExtension", json_schema_extra={"examples": [".docx"]})
+    file_extension: Optional[StrictStr] = Field(description="The extension the blank is set for, written in lower case with the leading dot. Only the extensions the  portal's built-in template set covers are accepted, and `GET api/2.0/files/settings/defaulttemplate` returns  exactly that list; an extension outside it leaves the settings unchanged instead of failing.", alias="fileExtension", json_schema_extra={"examples": [".docx"]})
     __properties: ClassVar[List[str]] = ["selectedFile", "fileExtension"]
 
     model_config = ConfigDict(

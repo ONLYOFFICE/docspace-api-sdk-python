@@ -28,13 +28,13 @@ from typing_extensions import Self
 
 class ExternalSharingSettingsDto(BaseModel):
     """
-    The Access Control external sharing settings.
+    The external sharing policy of the portal as it now stands.
     """ # noqa: E501
-    external_share: Optional[StrictBool] = Field(default=None, description="Specifies whether external (public) link creation is allowed.", alias="externalShare", json_schema_extra={"examples": [True]})
-    default_share_link_internal: Optional[StrictBool] = Field(default=None, description="Specifies the default sharing link type: true = DocSpace users only, false = Anyone with the link.", alias="defaultShareLinkInternal", json_schema_extra={"examples": [False]})
-    external_share_apply_to_documents: Optional[StrictBool] = Field(default=None, description="When external sharing is restricted, specifies whether the restriction applies to the My Documents section.", alias="externalShareApplyToDocuments", json_schema_extra={"examples": [True]})
-    external_share_apply_to_rooms: Optional[StrictBool] = Field(default=None, description="When external sharing is restricted, specifies whether the restriction applies to the Rooms section.", alias="externalShareApplyToRooms", json_schema_extra={"examples": [True]})
-    block_existing_links_on_restrict: Optional[StrictBool] = Field(default=None, description="When external sharing is restricted, specifies whether existing public links are blocked immediately.", alias="blockExistingLinksOnRestrict", json_schema_extra={"examples": [True]})
+    external_share: Optional[StrictBool] = Field(default=None, description="Whether links that open a file or a room without a portal account may be created. While it is false the portal  also reports sharing on social networks as off and the default link type as internal, whatever was asked for.", alias="externalShare", json_schema_extra={"examples": [True]})
+    default_share_link_internal: Optional[StrictBool] = Field(default=None, description="The kind of link the portal offers first: true means a link only accounts of this portal can open, false one  that anyone holding it can open.", alias="defaultShareLinkInternal", json_schema_extra={"examples": [False]})
+    external_share_apply_to_documents: Optional[StrictBool] = Field(default=None, description="Whether the restriction covers personal documents. It only has an effect while external sharing is off, so a  true here with sharing allowed restricts nothing.", alias="externalShareApplyToDocuments", json_schema_extra={"examples": [True]})
+    external_share_apply_to_rooms: Optional[StrictBool] = Field(default=None, description="Whether the restriction covers rooms, including the creation of new public ones. It only has an effect while  external sharing is off.", alias="externalShareApplyToRooms", json_schema_extra={"examples": [True]})
+    block_existing_links_on_restrict: Optional[StrictBool] = Field(default=None, description="Whether links created before the restriction stop opening as well. With false they keep working and only new  ones are refused.", alias="blockExistingLinksOnRestrict", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["externalShare", "defaultShareLinkInternal", "externalShareApplyToDocuments", "externalShareApplyToRooms", "blockExistingLinksOnRestrict"]
 
     model_config = ConfigDict(

@@ -28,10 +28,10 @@ from typing_extensions import Self
 
 class TenantQuotaSettingsRequestsDto(BaseModel):
     """
-    The request parameters for managing the tenant storage quota settings in a multi-tenant system.
+    The storage limit set on one tenant of a self-hosted installation.
     """ # noqa: E501
-    tenant_id: StrictInt = Field(description="The ID of the tenant whose quota is being configured.", alias="tenantId", json_schema_extra={"examples": [1]})
-    quota: Optional[StrictInt] = Field(default=None, description="The storage quota limit in bytes allocated to the tenant.", json_schema_extra={"examples": [1048576]})
+    tenant_id: StrictInt = Field(description="The tenant the limit applies to, by tenant ID. Only a self-hosted installation has more than one, which is  why the operation is refused on SaaS.", alias="tenantId", json_schema_extra={"examples": [1]})
+    quota: Optional[StrictInt] = Field(default=None, description="The limit in bytes. A negative value is not a smaller limit but the absence of one: it removes whatever limit  the tenant had. The value is a ceiling on stored data and says nothing about how much of it is already used.", json_schema_extra={"examples": [1048576]})
     __properties: ClassVar[List[str]] = ["tenantId", "quota"]
 
     model_config = ConfigDict(

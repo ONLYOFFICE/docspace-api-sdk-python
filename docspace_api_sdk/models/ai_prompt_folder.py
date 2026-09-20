@@ -30,10 +30,10 @@ class AiPromptFolder(BaseModel):
     """
     Folder for organizing saved prompts.
     """ # noqa: E501
-    id: StrictStr = Field(description="Unique folder identifier (UUID).")
-    name: StrictStr = Field(description="Folder display name.")
-    created_at: Union[StrictFloat, StrictInt] = Field(description="Timestamp (ms since epoch) when the folder was created.", alias="createdAt")
-    updated_at: Union[StrictFloat, StrictInt] = Field(description="Timestamp (ms since epoch) of the last folder modification.", alias="updatedAt")
+    id: StrictStr = Field(description="Unique folder identifier (UUID).", json_schema_extra={"examples": ["44444444-4444-4444-4444-444444444444"]})
+    name: StrictStr = Field(description="Folder display name.", json_schema_extra={"examples": ["Contract review"]})
+    created_at: Union[StrictFloat, StrictInt] = Field(description="Timestamp (ms since epoch) when the folder was created.", alias="createdAt", json_schema_extra={"examples": [1767225600000]})
+    updated_at: Union[StrictFloat, StrictInt] = Field(description="Timestamp (ms since epoch) of the last folder modification.", alias="updatedAt", json_schema_extra={"examples": [1767225600000]})
     __properties: ClassVar[List[str]] = ["id", "name", "createdAt", "updatedAt"]
 
     model_config = ConfigDict(

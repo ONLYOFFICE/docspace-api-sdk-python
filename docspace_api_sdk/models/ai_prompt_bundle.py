@@ -32,9 +32,9 @@ class AiPromptBundle(BaseModel):
     """
     Versioned, self-contained bundle of every saved prompt and folder. Stable wire format — `version` lets the import path migrate older shapes if the schema ever changes.
     """ # noqa: E501
-    version: Union[StrictFloat, StrictInt] = Field(description="The bundle format version, so an import can migrate an older export.")
-    folders: List[AiPromptFolder] = Field(description="Every exported prompt folder.")
-    prompts: List[AiPrompt] = Field(description="Every exported prompt.")
+    version: Union[StrictFloat, StrictInt] = Field(description="The bundle format version, so an import can migrate an older export.", json_schema_extra={"examples": [1]})
+    folders: List[AiPromptFolder] = Field(description="Every exported prompt folder.", json_schema_extra={"examples": [[]]})
+    prompts: List[AiPrompt] = Field(description="Every exported prompt.", json_schema_extra={"examples": [[]]})
     __properties: ClassVar[List[str]] = ["version", "folders", "prompts"]
 
     @field_validator('version')

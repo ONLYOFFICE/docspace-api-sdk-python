@@ -29,15 +29,15 @@ from typing_extensions import Self
 
 class AuthServiceRequestsDto(BaseModel):
     """
-    The request parameters for handling the authorization service.
+    One third-party authorization or storage provider and the keys the portal connects to it with.
     """ # noqa: E501
-    name: Optional[StrictStr] = Field(default=None, description="The name of the authorization service.", json_schema_extra={"examples": ["google"]})
-    title: Optional[StrictStr] = Field(default=None, description="The user-friendly display title of the authorization service.", json_schema_extra={"examples": ["Google"]})
-    description: Optional[StrictStr] = Field(default=None, description="The brief description of the authorization service.", json_schema_extra={"examples": ["Google OAuth authentication"]})
-    instruction: Optional[StrictStr] = Field(default=None, description="The detailed instructions for configuring or using the authorization service.", json_schema_extra={"examples": ["Configure your Google OAuth credentials"]})
-    can_set: Optional[StrictBool] = Field(default=None, description="Specifies whether the authorization service can be configured by the user.", alias="canSet", json_schema_extra={"examples": [True]})
-    paid: Optional[StrictBool] = Field(default=None, description="Specifies whether the authorization service is paid or not.", json_schema_extra={"examples": [False]})
-    props: Optional[List[AuthKey]] = Field(default=None, description="The collection of authorization keys associated with the authorization service.", json_schema_extra={"examples": [[{"name": "key", "value": "value"}]]})
+    name: Optional[StrictStr] = Field(default=None, description="The provider being configured, by its internal key such as `google` or `box`. Take it from the `name` of  `GET api/2.0/settings/authservice`; it is the only field that selects the provider, and a key this  installation does not know is refused the same way a provider that forbids changes is.", json_schema_extra={"examples": ["google"]})
+    title: Optional[StrictStr] = Field(default=None, description="The provider name as it is shown in the interface. It is filled in by the portal when the providers are  listed and is ignored when keys are saved.", json_schema_extra={"examples": ["Google"]})
+    description: Optional[StrictStr] = Field(default=None, description="A sentence about what connecting the provider gives the portal, shown next to it in the interface. It is  filled in by the portal and ignored when keys are saved.", json_schema_extra={"examples": ["Google OAuth authentication"]})
+    instruction: Optional[StrictStr] = Field(default=None, description="The steps an administrator has to take on the provider side to obtain the keys, shown in the interface. It is  filled in by the portal and ignored when keys are saved.", json_schema_extra={"examples": ["Configure your Google OAuth credentials"]})
+    can_set: Optional[StrictBool] = Field(default=None, description="Whether this provider accepts keys through the API at all. A provider whose keys are fixed by the  installation reports `false`, and saving keys for it is refused; the field is reported by the portal and  ignored on the way in.", alias="canSet", json_schema_extra={"examples": [True]})
+    paid: Optional[StrictBool] = Field(default=None, description="Whether the provider is a paid option. A paid one can only be connected while the portal plan includes  third-party storage or the installation is licensed as self-hosted; the field is reported by the portal and  ignored on the way in.", json_schema_extra={"examples": [False]})
+    props: Optional[List[AuthKey]] = Field(default=None, description="The credentials the portal authenticates to the provider with, as the name and value pairs the provider  defines. Send the whole set the provider expects: leaving every value empty disconnects it, and a set that  fails the provider validation is cleared rather than stored half-applied. The listing operation reports the  values last saved, and a provider that forbids changes reports none at all.", json_schema_extra={"examples": [[{"name": "key", "value": "value"}]]})
     __properties: ClassVar[List[str]] = ["name", "title", "description", "instruction", "canSet", "paid", "props"]
 
     model_config = ConfigDict(

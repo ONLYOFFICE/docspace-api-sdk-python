@@ -29,10 +29,10 @@ from typing_extensions import Self
 
 class TelegramStatusDto(BaseModel):
     """
-    The Telegram connection status parameters.
+    Whether the calling user's account is linked to the portal's Telegram bot.
     """ # noqa: E501
-    status: RegStatus = Field(description="The Telegram registration status.")
-    username: Optional[StrictStr] = Field(default=None, description="The Telegram username.", json_schema_extra={"examples": ["john_doe"]})
+    status: RegStatus = Field(description="Where the caller's own account stands: not linked, linked, or a registration link issued and the portal  still waiting for it to be opened in Telegram. The waiting state ends on its own when the link expires,  so it is worth polling rather than treating as final.")
+    username: Optional[StrictStr] = Field(default=None, description="The Telegram handle the account is linked to, without the leading `@`. It is filled in only while the  account is linked and comes back empty in the other two states.", json_schema_extra={"examples": ["john_doe"]})
     __properties: ClassVar[List[str]] = ["status", "username"]
 
     model_config = ConfigDict(

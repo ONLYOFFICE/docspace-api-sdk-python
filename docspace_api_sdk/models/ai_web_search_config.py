@@ -30,11 +30,11 @@ class AiWebSearchConfig(BaseModel):
     """
     Web-search provider configuration. Credentials and provider selection for the built-in web-search tool group.
     """ # noqa: E501
-    provider: StrictStr = Field(description="Provider identifier (e.g. `exa`).")
-    key: Optional[StrictStr] = Field(default=None, description="API key for the provider. Optional for self-hosted or keyless setups.")
-    base_url: Optional[StrictStr] = Field(default=None, description="Optional override for the provider's base URL.", alias="baseUrl")
-    is_cloud_provider: Optional[StrictBool] = Field(default=None, description="Whether this provider is cloud-hosted (vs. self-hosted).", alias="isCloudProvider")
-    headers: Optional[Dict[str, StrictStr]] = Field(default=None, description="Extra HTTP headers sent with each request to the ONLYOFFICE / cloud backend (e.g. `X-Tenant`). Merged after the derived `Authorization` header, so a custom header of the same name wins.")
+    provider: StrictStr = Field(description="Provider identifier (e.g. `exa`).", json_schema_extra={"examples": ["exa"]})
+    key: Optional[StrictStr] = Field(default=None, description="API key for the provider. Optional for self-hosted or keyless setups.", json_schema_extra={"examples": ["your-web-search-api-key"]})
+    base_url: Optional[StrictStr] = Field(default=None, description="Optional override for the provider's base URL.", alias="baseUrl", json_schema_extra={"examples": ["https://api.exa.ai"]})
+    is_cloud_provider: Optional[StrictBool] = Field(default=None, description="Whether this provider is cloud-hosted (vs. self-hosted).", alias="isCloudProvider", json_schema_extra={"examples": [True]})
+    headers: Optional[Dict[str, StrictStr]] = Field(default=None, description="Extra HTTP headers sent with each request to the ONLYOFFICE / cloud backend (e.g. `X-Tenant`). Merged after the derived `Authorization` header, so a custom header of the same name wins.", json_schema_extra={"examples": [{}]})
     __properties: ClassVar[List[str]] = ["provider", "key", "baseUrl", "isCloudProvider", "headers"]
 
     model_config = ConfigDict(

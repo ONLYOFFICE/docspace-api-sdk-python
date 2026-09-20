@@ -29,10 +29,10 @@ from typing_extensions import Self
 
 class ActionConfig(BaseModel):
     """
-    The information about the action in the document that will be scrolled to.
+    An anchor inside a document, as the editor writes it.
     """ # noqa: E501
-    data: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=256)]] = Field(default=None, description="The action data that will be scrolled to.", json_schema_extra={"examples": ["section"]})
-    type: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=128)]] = Field(default=None, description="The action type.", json_schema_extra={"examples": ["scroll"]})
+    data: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=256)]] = Field(default=None, description="The anchor value produced by the editor, opaque to the portal: it names the comment, the mention or the  place the document is scrolled to.", json_schema_extra={"examples": ["section-42"]})
+    type: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=128)]] = Field(default=None, description="What the anchor points at, as the editor names it - a comment thread, for instance.", json_schema_extra={"examples": ["comment"]})
     __properties: ClassVar[List[str]] = ["data", "type"]
 
     model_config = ConfigDict(

@@ -31,7 +31,7 @@ class AiAssignmentMutationResult(BaseModel):
     """
     Outcome of `AssignmentsEngine.assign` / `AssignmentsEngine.unassign`. Either a success or a field-scoped error suitable for displaying in the profile editor.
     """ # noqa: E501
-    success: StrictBool = Field(description="True when the assignment was persisted.")
+    success: StrictBool = Field(description="True when the assignment was persisted.", json_schema_extra={"examples": [True]})
     error: Optional[AiTErrorData] = Field(default=None, description="Why the assignment was rejected. Present on failure.")
     __properties: ClassVar[List[str]] = ["success", "error"]
 

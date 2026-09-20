@@ -32,10 +32,10 @@ from docspace_api_sdk.models.create_webhooks_config_requests_dto import CreateWe
 
 class UpdateWebhooksConfigRequestsDto(CreateWebhooksConfigRequestsDto):
     """
-    The request parameters for updating the webhook configuration.
+    The webhook subscription being changed, with the parameters it is to have afterwards.
     """
 
-    id: StrictInt = Field(description="The webhook configuration ID.", json_schema_extra={"examples": [1]})
+    id: StrictInt = Field(description="The subscription to act on, by the `id` that `GET api/2.0/settings/webhook` reports. It travels in the body  rather than in the path, and an id that exists in no portal subscription answers 404.", json_schema_extra={"examples": [1]})
 
     model_config = ConfigDict(
         populate_by_name=True,

@@ -22,7 +22,6 @@ from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
 from pydantic import Field
-from typing import Any, Dict
 from typing_extensions import Annotated
 from docspace_api_sdk.models.change_client_activation_request import ChangeClientActivationRequest
 from docspace_api_sdk.models.client_response import ClientResponse
@@ -66,10 +65,10 @@ class ClientManagementApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> None:
         """Change client activation status
 
-        Activates or deactivates an OAuth2 client. When deactivated, the client cannot request new access tokens, but existing tokens will remain valid until they expire.
+        Enables or disables an existing client and answers 200 with an empty body. A disabled client can no longer obtain new tokens, but the tokens and consents it already holds stay valid until they expire on their own: disable a client to stop new authorizations, delete it to end the existing ones. An administrator may change any client of the tenant, a plain user only the clients they created. The body carries the single activation flag, and a client the caller may not see is reported as not found rather than as forbidden.
 
         :param client_id: ID of the client to change activation for (required)
         :type client_id: str
@@ -107,13 +106,15 @@ class ClientManagementApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
+            '200': None,
             '400': "ProblemDetail",
             '403': "ProblemDetail",
             '404': "ProblemDetail",
             '415': "ProblemDetail",
             '429': "ProblemDetail",
             '500': "ProblemDetail",
+            '405': "ProblemDetail",
+            '406': "ProblemDetail",
         }
 
         response_data = self.api_client.call_api(
@@ -144,10 +145,10 @@ class ClientManagementApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[object]:
+    ) -> ApiResponse[None]:
         """Change client activation status
 
-        Activates or deactivates an OAuth2 client. When deactivated, the client cannot request new access tokens, but existing tokens will remain valid until they expire.
+        Enables or disables an existing client and answers 200 with an empty body. A disabled client can no longer obtain new tokens, but the tokens and consents it already holds stay valid until they expire on their own: disable a client to stop new authorizations, delete it to end the existing ones. An administrator may change any client of the tenant, a plain user only the clients they created. The body carries the single activation flag, and a client the caller may not see is reported as not found rather than as forbidden.
 
         :param client_id: ID of the client to change activation for (required)
         :type client_id: str
@@ -185,13 +186,15 @@ class ClientManagementApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
+            '200': None,
             '400': "ProblemDetail",
             '403': "ProblemDetail",
             '404': "ProblemDetail",
             '415': "ProblemDetail",
             '429': "ProblemDetail",
             '500': "ProblemDetail",
+            '405': "ProblemDetail",
+            '406': "ProblemDetail",
         }
 
         response_data = self.api_client.call_api(
@@ -225,7 +228,7 @@ class ClientManagementApi:
     ) -> RESTResponseType:
         """Change client activation status
 
-        Activates or deactivates an OAuth2 client. When deactivated, the client cannot request new access tokens, but existing tokens will remain valid until they expire.
+        Enables or disables an existing client and answers 200 with an empty body. A disabled client can no longer obtain new tokens, but the tokens and consents it already holds stay valid until they expire on their own: disable a client to stop new authorizations, delete it to end the existing ones. An administrator may change any client of the tenant, a plain user only the clients they created. The body carries the single activation flag, and a client the caller may not see is reported as not found rather than as forbidden.
 
         :param client_id: ID of the client to change activation for (required)
         :type client_id: str
@@ -263,13 +266,15 @@ class ClientManagementApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
+            '200': None,
             '400': "ProblemDetail",
             '403': "ProblemDetail",
             '404': "ProblemDetail",
             '415': "ProblemDetail",
             '429': "ProblemDetail",
             '500': "ProblemDetail",
+            '405': "ProblemDetail",
+            '406': "ProblemDetail",
         }
 
         response_data = self.api_client.call_api(
@@ -342,7 +347,7 @@ class ClientManagementApi:
         ]
 
 
-        resource_path = "/api/2.0/clients/{clientId}/activation"
+        resource_path = "/api/2.0/oauth2/clients/{clientId}/activation"
 
         return self.api_client.param_serialize(
             method='PATCH',
@@ -381,7 +386,7 @@ class ClientManagementApi:
     ) -> ClientResponse:
         """Create a new OAuth2 client
 
-        Creates a new OAuth2 client with the specified configuration. The client will be created with the provided scopes, redirect URIs, and other settings. Returns the created client details including the generated client ID.
+        Registers a new OAuth2 client in the caller's tenant and returns it. The body must carry a name, a description, a logo and at least one redirect URI, allowed origin and scope, and every scope named must already exist in the tenant's scope catalogue. Administrators and users may both register clients; the caller is recorded as the creator, which is what later restricts a plain user to the clients they created. The response is the stored client with its generated client ID and secret, and it is the first place either value can be read. Some deployments cap how many clients one tenant may hold, and reaching that cap is reported as 400 together with the validation failures.
 
         :param create_client_request: (required)
         :type create_client_request: CreateClientRequest
@@ -422,6 +427,8 @@ class ClientManagementApi:
             '415': "ProblemDetail",
             '429': "ProblemDetail",
             '500': "ProblemDetail",
+            '405': "ProblemDetail",
+            '406': "ProblemDetail",
         }
 
         response_data = self.api_client.call_api(
@@ -454,7 +461,7 @@ class ClientManagementApi:
     ) -> ApiResponse[ClientResponse]:
         """Create a new OAuth2 client
 
-        Creates a new OAuth2 client with the specified configuration. The client will be created with the provided scopes, redirect URIs, and other settings. Returns the created client details including the generated client ID.
+        Registers a new OAuth2 client in the caller's tenant and returns it. The body must carry a name, a description, a logo and at least one redirect URI, allowed origin and scope, and every scope named must already exist in the tenant's scope catalogue. Administrators and users may both register clients; the caller is recorded as the creator, which is what later restricts a plain user to the clients they created. The response is the stored client with its generated client ID and secret, and it is the first place either value can be read. Some deployments cap how many clients one tenant may hold, and reaching that cap is reported as 400 together with the validation failures.
 
         :param create_client_request: (required)
         :type create_client_request: CreateClientRequest
@@ -495,6 +502,8 @@ class ClientManagementApi:
             '415': "ProblemDetail",
             '429': "ProblemDetail",
             '500': "ProblemDetail",
+            '405': "ProblemDetail",
+            '406': "ProblemDetail",
         }
 
         response_data = self.api_client.call_api(
@@ -527,7 +536,7 @@ class ClientManagementApi:
     ) -> RESTResponseType:
         """Create a new OAuth2 client
 
-        Creates a new OAuth2 client with the specified configuration. The client will be created with the provided scopes, redirect URIs, and other settings. Returns the created client details including the generated client ID.
+        Registers a new OAuth2 client in the caller's tenant and returns it. The body must carry a name, a description, a logo and at least one redirect URI, allowed origin and scope, and every scope named must already exist in the tenant's scope catalogue. Administrators and users may both register clients; the caller is recorded as the creator, which is what later restricts a plain user to the clients they created. The response is the stored client with its generated client ID and secret, and it is the first place either value can be read. Some deployments cap how many clients one tenant may hold, and reaching that cap is reported as 400 together with the validation failures.
 
         :param create_client_request: (required)
         :type create_client_request: CreateClientRequest
@@ -568,6 +577,8 @@ class ClientManagementApi:
             '415': "ProblemDetail",
             '429': "ProblemDetail",
             '500': "ProblemDetail",
+            '405': "ProblemDetail",
+            '406': "ProblemDetail",
         }
 
         response_data = self.api_client.call_api(
@@ -637,7 +648,7 @@ class ClientManagementApi:
         ]
 
 
-        resource_path = "/api/2.0/clients"
+        resource_path = "/api/2.0/oauth2/clients"
 
         return self.api_client.param_serialize(
             method='POST',
@@ -673,10 +684,10 @@ class ClientManagementApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> None:
         """Delete an OAuth2 client
 
-        Permanently deletes an OAuth2 client and all associated data. This will invalidate all access tokens and refresh tokens issued to this client. This operation cannot be undone.
+        Deletes one client from the tenant permanently and answers 200 with an empty body. An administrator may delete any client of the tenant, a plain user only the clients they created, and a client the caller may not see is reported as not found rather than as forbidden. The authorizations and consents issued for the client are removed too, but that cleanup is driven by a message and completes on the authorization service after this call has already returned. A delete that removes no row answers 400. The operation cannot be undone.
 
         :param client_id: ID of the client to delete (required)
         :type client_id: str
@@ -711,12 +722,14 @@ class ClientManagementApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
+            '200': None,
             '400': "ProblemDetail",
             '403': "ProblemDetail",
             '404': "ProblemDetail",
             '429': "ProblemDetail",
             '500': "ProblemDetail",
+            '405': "ProblemDetail",
+            '406': "ProblemDetail",
         }
 
         response_data = self.api_client.call_api(
@@ -746,10 +759,10 @@ class ClientManagementApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[object]:
+    ) -> ApiResponse[None]:
         """Delete an OAuth2 client
 
-        Permanently deletes an OAuth2 client and all associated data. This will invalidate all access tokens and refresh tokens issued to this client. This operation cannot be undone.
+        Deletes one client from the tenant permanently and answers 200 with an empty body. An administrator may delete any client of the tenant, a plain user only the clients they created, and a client the caller may not see is reported as not found rather than as forbidden. The authorizations and consents issued for the client are removed too, but that cleanup is driven by a message and completes on the authorization service after this call has already returned. A delete that removes no row answers 400. The operation cannot be undone.
 
         :param client_id: ID of the client to delete (required)
         :type client_id: str
@@ -784,12 +797,14 @@ class ClientManagementApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
+            '200': None,
             '400': "ProblemDetail",
             '403': "ProblemDetail",
             '404': "ProblemDetail",
             '429': "ProblemDetail",
             '500': "ProblemDetail",
+            '405': "ProblemDetail",
+            '406': "ProblemDetail",
         }
 
         response_data = self.api_client.call_api(
@@ -822,7 +837,7 @@ class ClientManagementApi:
     ) -> RESTResponseType:
         """Delete an OAuth2 client
 
-        Permanently deletes an OAuth2 client and all associated data. This will invalidate all access tokens and refresh tokens issued to this client. This operation cannot be undone.
+        Deletes one client from the tenant permanently and answers 200 with an empty body. An administrator may delete any client of the tenant, a plain user only the clients they created, and a client the caller may not see is reported as not found rather than as forbidden. The authorizations and consents issued for the client are removed too, but that cleanup is driven by a message and completes on the authorization service after this call has already returned. A delete that removes no row answers 400. The operation cannot be undone.
 
         :param client_id: ID of the client to delete (required)
         :type client_id: str
@@ -857,12 +872,14 @@ class ClientManagementApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
+            '200': None,
             '400': "ProblemDetail",
             '403': "ProblemDetail",
             '404': "ProblemDetail",
             '429': "ProblemDetail",
             '500': "ProblemDetail",
+            '405': "ProblemDetail",
+            '406': "ProblemDetail",
         }
 
         response_data = self.api_client.call_api(
@@ -919,7 +936,7 @@ class ClientManagementApi:
         ]
 
 
-        resource_path = "/api/2.0/clients/{clientId}"
+        resource_path = "/api/2.0/oauth2/clients/{clientId}"
 
         return self.api_client.param_serialize(
             method='DELETE',
@@ -954,10 +971,10 @@ class ClientManagementApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> None:
         """Delete all tenant OAuth2 clients
 
-        Permanently deletes tenant OAuth2 clients and all associated data. This will invalidate all access tokens and refresh tokens issued to this client. This operation cannot be undone.
+        Deletes every client registered in the current tenant and answers 200 with an empty body. Only an administrator may call it - for a plain user or a guest it is refused with 403 - and it removes the clients of all users of the tenant, not only those of the caller. The authorizations and consents of the deleted clients are cleaned up asynchronously on the authorization service, and the tenant's client cache is dropped as part of the call. Concurrent modification that survives the retries is reported as 400. The operation cannot be undone, and the response does not say how many clients were removed.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -989,10 +1006,13 @@ class ClientManagementApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
+            '200': None,
+            '400': "ProblemDetail",
             '403': "ProblemDetail",
             '429': "ProblemDetail",
             '500': "ProblemDetail",
+            '405': "ProblemDetail",
+            '406': "ProblemDetail",
         }
 
         response_data = self.api_client.call_api(
@@ -1021,10 +1041,10 @@ class ClientManagementApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[object]:
+    ) -> ApiResponse[None]:
         """Delete all tenant OAuth2 clients
 
-        Permanently deletes tenant OAuth2 clients and all associated data. This will invalidate all access tokens and refresh tokens issued to this client. This operation cannot be undone.
+        Deletes every client registered in the current tenant and answers 200 with an empty body. Only an administrator may call it - for a plain user or a guest it is refused with 403 - and it removes the clients of all users of the tenant, not only those of the caller. The authorizations and consents of the deleted clients are cleaned up asynchronously on the authorization service, and the tenant's client cache is dropped as part of the call. Concurrent modification that survives the retries is reported as 400. The operation cannot be undone, and the response does not say how many clients were removed.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1056,10 +1076,13 @@ class ClientManagementApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
+            '200': None,
+            '400': "ProblemDetail",
             '403': "ProblemDetail",
             '429': "ProblemDetail",
             '500': "ProblemDetail",
+            '405': "ProblemDetail",
+            '406': "ProblemDetail",
         }
 
         response_data = self.api_client.call_api(
@@ -1091,7 +1114,7 @@ class ClientManagementApi:
     ) -> RESTResponseType:
         """Delete all tenant OAuth2 clients
 
-        Permanently deletes tenant OAuth2 clients and all associated data. This will invalidate all access tokens and refresh tokens issued to this client. This operation cannot be undone.
+        Deletes every client registered in the current tenant and answers 200 with an empty body. Only an administrator may call it - for a plain user or a guest it is refused with 403 - and it removes the clients of all users of the tenant, not only those of the caller. The authorizations and consents of the deleted clients are cleaned up asynchronously on the authorization service, and the tenant's client cache is dropped as part of the call. Concurrent modification that survives the retries is reported as 400. The operation cannot be undone, and the response does not say how many clients were removed.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1123,10 +1146,13 @@ class ClientManagementApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
+            '200': None,
+            '400': "ProblemDetail",
             '403': "ProblemDetail",
             '429': "ProblemDetail",
             '500': "ProblemDetail",
+            '405': "ProblemDetail",
+            '406': "ProblemDetail",
         }
 
         response_data = self.api_client.call_api(
@@ -1180,7 +1206,7 @@ class ClientManagementApi:
         ]
 
 
-        resource_path = "/api/2.0/clients/tenant"
+        resource_path = "/api/2.0/oauth2/clients/tenant"
 
         return self.api_client.param_serialize(
             method='DELETE',
@@ -1215,10 +1241,10 @@ class ClientManagementApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> None:
         """Delete all user OAuth2 clients
 
-        Permanently deletes user OAuth2 clients and all associated data. This will invalidate all access tokens and refresh tokens issued to this client. This operation cannot be undone.
+        Deletes every client the calling user created in the current tenant and answers 200 with an empty body. The caller's own identity always selects the set, so this never reaches clients created by somebody else, not even for an administrator. The authorizations and consents of the deleted clients are cleaned up asynchronously on the authorization service, and the tenant's client cache is dropped as part of the call. Concurrent modification that survives the retries is reported as 400. The operation cannot be undone, and the response does not say how many clients were removed.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1250,10 +1276,13 @@ class ClientManagementApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
+            '200': None,
+            '400': "ProblemDetail",
             '403': "ProblemDetail",
             '429': "ProblemDetail",
             '500': "ProblemDetail",
+            '405': "ProblemDetail",
+            '406': "ProblemDetail",
         }
 
         response_data = self.api_client.call_api(
@@ -1282,10 +1311,10 @@ class ClientManagementApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[object]:
+    ) -> ApiResponse[None]:
         """Delete all user OAuth2 clients
 
-        Permanently deletes user OAuth2 clients and all associated data. This will invalidate all access tokens and refresh tokens issued to this client. This operation cannot be undone.
+        Deletes every client the calling user created in the current tenant and answers 200 with an empty body. The caller's own identity always selects the set, so this never reaches clients created by somebody else, not even for an administrator. The authorizations and consents of the deleted clients are cleaned up asynchronously on the authorization service, and the tenant's client cache is dropped as part of the call. Concurrent modification that survives the retries is reported as 400. The operation cannot be undone, and the response does not say how many clients were removed.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1317,10 +1346,13 @@ class ClientManagementApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
+            '200': None,
+            '400': "ProblemDetail",
             '403': "ProblemDetail",
             '429': "ProblemDetail",
             '500': "ProblemDetail",
+            '405': "ProblemDetail",
+            '406': "ProblemDetail",
         }
 
         response_data = self.api_client.call_api(
@@ -1352,7 +1384,7 @@ class ClientManagementApi:
     ) -> RESTResponseType:
         """Delete all user OAuth2 clients
 
-        Permanently deletes user OAuth2 clients and all associated data. This will invalidate all access tokens and refresh tokens issued to this client. This operation cannot be undone.
+        Deletes every client the calling user created in the current tenant and answers 200 with an empty body. The caller's own identity always selects the set, so this never reaches clients created by somebody else, not even for an administrator. The authorizations and consents of the deleted clients are cleaned up asynchronously on the authorization service, and the tenant's client cache is dropped as part of the call. Concurrent modification that survives the retries is reported as 400. The operation cannot be undone, and the response does not say how many clients were removed.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1384,10 +1416,13 @@ class ClientManagementApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
+            '200': None,
+            '400': "ProblemDetail",
             '403': "ProblemDetail",
             '429': "ProblemDetail",
             '500': "ProblemDetail",
+            '405': "ProblemDetail",
+            '406': "ProblemDetail",
         }
 
         response_data = self.api_client.call_api(
@@ -1441,7 +1476,7 @@ class ClientManagementApi:
         ]
 
 
-        resource_path = "/api/2.0/clients"
+        resource_path = "/api/2.0/oauth2/clients"
 
         return self.api_client.param_serialize(
             method='DELETE',
@@ -1480,7 +1515,7 @@ class ClientManagementApi:
     ) -> ClientSecretResponse:
         """Regenerate client secret
 
-        Generates a new client secret for the specified OAuth2 client. The old secret will be immediately invalidated. This operation should be used with caution as it requires updating the secret in all client applications.
+        Issues a new secret for the client and returns it. The previous secret stops working as soon as this call succeeds, there is no grace period and no way to recover it, so every deployed copy of the client has to be updated with the value returned here. An administrator may do this for any client of the tenant, a plain user only for the clients they created. Tokens already issued to the client keep working; only future client authentication is affected. The response carries the new secret and nothing else.
 
         :param client_id: ID of the client to regenerate secret for (required)
         :type client_id: str
@@ -1521,6 +1556,8 @@ class ClientManagementApi:
             '404': "ProblemDetail",
             '429': "ProblemDetail",
             '500': "ProblemDetail",
+            '405': "ProblemDetail",
+            '406': "ProblemDetail",
         }
 
         response_data = self.api_client.call_api(
@@ -1553,7 +1590,7 @@ class ClientManagementApi:
     ) -> ApiResponse[ClientSecretResponse]:
         """Regenerate client secret
 
-        Generates a new client secret for the specified OAuth2 client. The old secret will be immediately invalidated. This operation should be used with caution as it requires updating the secret in all client applications.
+        Issues a new secret for the client and returns it. The previous secret stops working as soon as this call succeeds, there is no grace period and no way to recover it, so every deployed copy of the client has to be updated with the value returned here. An administrator may do this for any client of the tenant, a plain user only for the clients they created. Tokens already issued to the client keep working; only future client authentication is affected. The response carries the new secret and nothing else.
 
         :param client_id: ID of the client to regenerate secret for (required)
         :type client_id: str
@@ -1594,6 +1631,8 @@ class ClientManagementApi:
             '404': "ProblemDetail",
             '429': "ProblemDetail",
             '500': "ProblemDetail",
+            '405': "ProblemDetail",
+            '406': "ProblemDetail",
         }
 
         response_data = self.api_client.call_api(
@@ -1626,7 +1665,7 @@ class ClientManagementApi:
     ) -> RESTResponseType:
         """Regenerate client secret
 
-        Generates a new client secret for the specified OAuth2 client. The old secret will be immediately invalidated. This operation should be used with caution as it requires updating the secret in all client applications.
+        Issues a new secret for the client and returns it. The previous secret stops working as soon as this call succeeds, there is no grace period and no way to recover it, so every deployed copy of the client has to be updated with the value returned here. An administrator may do this for any client of the tenant, a plain user only for the clients they created. Tokens already issued to the client keep working; only future client authentication is affected. The response carries the new secret and nothing else.
 
         :param client_id: ID of the client to regenerate secret for (required)
         :type client_id: str
@@ -1667,6 +1706,8 @@ class ClientManagementApi:
             '404': "ProblemDetail",
             '429': "ProblemDetail",
             '500': "ProblemDetail",
+            '405': "ProblemDetail",
+            '406': "ProblemDetail",
         }
 
         response_data = self.api_client.call_api(
@@ -1723,7 +1764,7 @@ class ClientManagementApi:
         ]
 
 
-        resource_path = "/api/2.0/clients/{clientId}/regenerate"
+        resource_path = "/api/2.0/oauth2/clients/{clientId}/regenerate"
 
         return self.api_client.param_serialize(
             method='PATCH',
@@ -1759,10 +1800,10 @@ class ClientManagementApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> None:
         """Revoke client consent
 
-        Revokes all user consents for the specified OAuth2 client. This will invalidate all access tokens and refresh tokens issued to this client for the current user. The user will need to re-authorize the client to access their resources.
+        Revokes the calling user's own consent for one client and answers 200 with an empty body. It touches only the caller's grant: other users keep their consents and the client itself stays registered. Guests may call it as well as users and administrators, because it can never reach anyone else's data. The revocation is carried out by the authorization service over gRPC, so a service that reports nothing was revoked produces 400 and a service that cannot be reached produces 503. Once it succeeds the user has to authorize the client again before it can act on their behalf.
 
         :param client_id: ID of the client to revoke consent for (required)
         :type client_id: str
@@ -1797,13 +1838,14 @@ class ClientManagementApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
+            '200': None,
             '400': "ProblemDetail",
             '403': "ProblemDetail",
-            '404': "ProblemDetail",
             '429': "ProblemDetail",
-            '500': "ProblemDetail",
             '503': "ProblemDetail",
+            '500': "ProblemDetail",
+            '405': "ProblemDetail",
+            '406': "ProblemDetail",
         }
 
         response_data = self.api_client.call_api(
@@ -1833,10 +1875,10 @@ class ClientManagementApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[object]:
+    ) -> ApiResponse[None]:
         """Revoke client consent
 
-        Revokes all user consents for the specified OAuth2 client. This will invalidate all access tokens and refresh tokens issued to this client for the current user. The user will need to re-authorize the client to access their resources.
+        Revokes the calling user's own consent for one client and answers 200 with an empty body. It touches only the caller's grant: other users keep their consents and the client itself stays registered. Guests may call it as well as users and administrators, because it can never reach anyone else's data. The revocation is carried out by the authorization service over gRPC, so a service that reports nothing was revoked produces 400 and a service that cannot be reached produces 503. Once it succeeds the user has to authorize the client again before it can act on their behalf.
 
         :param client_id: ID of the client to revoke consent for (required)
         :type client_id: str
@@ -1871,13 +1913,14 @@ class ClientManagementApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
+            '200': None,
             '400': "ProblemDetail",
             '403': "ProblemDetail",
-            '404': "ProblemDetail",
             '429': "ProblemDetail",
-            '500': "ProblemDetail",
             '503': "ProblemDetail",
+            '500': "ProblemDetail",
+            '405': "ProblemDetail",
+            '406': "ProblemDetail",
         }
 
         response_data = self.api_client.call_api(
@@ -1910,7 +1953,7 @@ class ClientManagementApi:
     ) -> RESTResponseType:
         """Revoke client consent
 
-        Revokes all user consents for the specified OAuth2 client. This will invalidate all access tokens and refresh tokens issued to this client for the current user. The user will need to re-authorize the client to access their resources.
+        Revokes the calling user's own consent for one client and answers 200 with an empty body. It touches only the caller's grant: other users keep their consents and the client itself stays registered. Guests may call it as well as users and administrators, because it can never reach anyone else's data. The revocation is carried out by the authorization service over gRPC, so a service that reports nothing was revoked produces 400 and a service that cannot be reached produces 503. Once it succeeds the user has to authorize the client again before it can act on their behalf.
 
         :param client_id: ID of the client to revoke consent for (required)
         :type client_id: str
@@ -1945,13 +1988,14 @@ class ClientManagementApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
+            '200': None,
             '400': "ProblemDetail",
             '403': "ProblemDetail",
-            '404': "ProblemDetail",
             '429': "ProblemDetail",
-            '500': "ProblemDetail",
             '503': "ProblemDetail",
+            '500': "ProblemDetail",
+            '405': "ProblemDetail",
+            '406': "ProblemDetail",
         }
 
         response_data = self.api_client.call_api(
@@ -2008,7 +2052,7 @@ class ClientManagementApi:
         ]
 
 
-        resource_path = "/api/2.0/clients/{clientId}/revoke"
+        resource_path = "/api/2.0/oauth2/clients/{clientId}/revoke"
 
         return self.api_client.param_serialize(
             method='DELETE',
@@ -2045,10 +2089,10 @@ class ClientManagementApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> None:
         """Update an existing OAuth2 client
 
-        Updates the configuration of an existing OAuth2 client. Allows modification of client name, description, redirect URIs, and other settings. The client ID cannot be modified.
+        Updates the mutable settings of an existing client and answers 200 with an empty body. Only the fields carried in the request body change; the client ID, the secret, the tenant and the creator cannot be changed this way. An administrator may update any client of the tenant, a plain user only the clients they created, and a client the caller may not see is reported as not found rather than as forbidden. The write runs under optimistic locking and is retried a few times, so a request that still loses the race is rejected with 400 instead of silently overwriting a concurrent change. Nothing is returned in the body - read the client back to see the stored result.
 
         :param client_id: ID of the client to update (required)
         :type client_id: str
@@ -2086,13 +2130,15 @@ class ClientManagementApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
+            '200': None,
             '400': "ProblemDetail",
             '403': "ProblemDetail",
             '404': "ProblemDetail",
             '415': "ProblemDetail",
             '429': "ProblemDetail",
             '500': "ProblemDetail",
+            '405': "ProblemDetail",
+            '406': "ProblemDetail",
         }
 
         response_data = self.api_client.call_api(
@@ -2123,10 +2169,10 @@ class ClientManagementApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[object]:
+    ) -> ApiResponse[None]:
         """Update an existing OAuth2 client
 
-        Updates the configuration of an existing OAuth2 client. Allows modification of client name, description, redirect URIs, and other settings. The client ID cannot be modified.
+        Updates the mutable settings of an existing client and answers 200 with an empty body. Only the fields carried in the request body change; the client ID, the secret, the tenant and the creator cannot be changed this way. An administrator may update any client of the tenant, a plain user only the clients they created, and a client the caller may not see is reported as not found rather than as forbidden. The write runs under optimistic locking and is retried a few times, so a request that still loses the race is rejected with 400 instead of silently overwriting a concurrent change. Nothing is returned in the body - read the client back to see the stored result.
 
         :param client_id: ID of the client to update (required)
         :type client_id: str
@@ -2164,13 +2210,15 @@ class ClientManagementApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
+            '200': None,
             '400': "ProblemDetail",
             '403': "ProblemDetail",
             '404': "ProblemDetail",
             '415': "ProblemDetail",
             '429': "ProblemDetail",
             '500': "ProblemDetail",
+            '405': "ProblemDetail",
+            '406': "ProblemDetail",
         }
 
         response_data = self.api_client.call_api(
@@ -2204,7 +2252,7 @@ class ClientManagementApi:
     ) -> RESTResponseType:
         """Update an existing OAuth2 client
 
-        Updates the configuration of an existing OAuth2 client. Allows modification of client name, description, redirect URIs, and other settings. The client ID cannot be modified.
+        Updates the mutable settings of an existing client and answers 200 with an empty body. Only the fields carried in the request body change; the client ID, the secret, the tenant and the creator cannot be changed this way. An administrator may update any client of the tenant, a plain user only the clients they created, and a client the caller may not see is reported as not found rather than as forbidden. The write runs under optimistic locking and is retried a few times, so a request that still loses the race is rejected with 400 instead of silently overwriting a concurrent change. Nothing is returned in the body - read the client back to see the stored result.
 
         :param client_id: ID of the client to update (required)
         :type client_id: str
@@ -2242,13 +2290,15 @@ class ClientManagementApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
+            '200': None,
             '400': "ProblemDetail",
             '403': "ProblemDetail",
             '404': "ProblemDetail",
             '415': "ProblemDetail",
             '429': "ProblemDetail",
             '500': "ProblemDetail",
+            '405': "ProblemDetail",
+            '406': "ProblemDetail",
         }
 
         response_data = self.api_client.call_api(
@@ -2321,7 +2371,7 @@ class ClientManagementApi:
         ]
 
 
-        resource_path = "/api/2.0/clients/{clientId}"
+        resource_path = "/api/2.0/oauth2/clients/{clientId}"
 
         return self.api_client.param_serialize(
             method='PUT',

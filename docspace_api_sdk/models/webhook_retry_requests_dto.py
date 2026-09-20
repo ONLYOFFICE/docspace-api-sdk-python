@@ -28,9 +28,9 @@ from typing_extensions import Self
 
 class WebhookRetryRequestsDto(BaseModel):
     """
-    The parameters for requesting the webhook delivery retries.
+    Which past webhook deliveries are sent again.
     """ # noqa: E501
-    ids: Optional[List[StrictInt]] = Field(default=None, description="The list of webhook delivery IDs to retry.", json_schema_extra={"examples": [[1, 2, 3]]})
+    ids: Optional[List[StrictInt]] = Field(default=None, description="The delivery records to send again, by the identifiers `GET api/2.0/settings/webhooks/log` reports. An  identifier that exists nowhere, and one belonging to another member subscription when the caller is not a  DocSpace administrator, is skipped in silence rather than failing the call, so compare the number of records  that come back against the number sent. An empty list is accepted and queues nothing.", json_schema_extra={"examples": [[1, 2, 3]]})
     __properties: ClassVar[List[str]] = ["ids"]
 
     model_config = ConfigDict(

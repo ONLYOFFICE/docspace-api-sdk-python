@@ -31,18 +31,18 @@ from typing_extensions import Self
 
 class FileOperationDto(BaseModel):
     """
-    The file operation information.
+    One background file operation of the caller, as it stood when the answer was built.
     """ # noqa: E501
-    id: Optional[StrictStr] = Field(description="The file operation ID.", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000000"]})
-    operation: FileOperationType = Field(description="The file operation type.", alias="Operation")
-    progress: StrictInt = Field(description="The file operation progress in percentage.", json_schema_extra={"examples": [100]})
-    error: Optional[StrictStr] = Field(description="The file operation error message.", json_schema_extra={"examples": ["File not found."]})
-    processed: Optional[StrictStr] = Field(description="The file operation processing status.", json_schema_extra={"examples": ["1"]})
-    finished: StrictBool = Field(description="Specifies if the file operation is finished or not.", json_schema_extra={"examples": [True]})
-    url: Optional[StrictStr] = Field(default=None, description="The file operation URL.", json_schema_extra={"examples": ["http://localhost/download"]})
-    files: Optional[List[FileEntryBaseDto]] = Field(default=None, description="The list of files of the file operation.", json_schema_extra={"examples": [[{"id": 10, "title": "document.docx"}]]})
-    folders: Optional[List[FileEntryBaseDto]] = Field(default=None, description="The list of folders of the file operation.", json_schema_extra={"examples": [[{"id": 20, "title": "My Folder"}]]})
-    status: Optional[DistributedTaskStatus] = Field(default=None, description="The status of the distributed task related to the file operation.")
+    id: Optional[StrictStr] = Field(description="The identifier of the operation, the one to pass to `PUT api/2.0/files/fileops/terminate/{id}` to stop it.  Operations belong to the account that started them, so an identifier of somebody else is never listed here.", json_schema_extra={"examples": ["a1f4c9b2-3d8e-4f77-9b16-2c5de8f0a913"]})
+    operation: FileOperationType = Field(description="What the operation does with the entries, which also decides what else is reported: only a download fills  `url`, and a deletion leaves `files` and `folders` empty.", alias="Operation")
+    progress: StrictInt = Field(description="How far the operation has come, from 0 to 100. Reaching 100 only means it stopped; whether it did what it was  asked for is told by `error`.", json_schema_extra={"examples": [100]})
+    error: Optional[StrictStr] = Field(description="The reason the operation could not finish its work, in the language of the request. Empty when nothing went  wrong, which is the only way to tell a successful operation from a failed one.", json_schema_extra={"examples": ["Folder not found."]})
+    processed: Optional[StrictStr] = Field(description="How many entries the operation has handled so far, written as a decimal number in a string. It counts items,  not percent, and stays behind `progress` on operations that walk into subfolders.", json_schema_extra={"examples": ["12"]})
+    finished: StrictBool = Field(description="Whether the operation has stopped running. A finished operation is reported once and then dropped, so the next  read of the operation list no longer contains it.", json_schema_extra={"examples": [True]})
+    url: Optional[StrictStr] = Field(default=None, description="The address the packed archive can be downloaded from once a bulk download has finished. Empty for every other  kind of operation.", json_schema_extra={"examples": ["https://portal.example.com/filehandler.ashx?action=bulk"]})
+    files: Optional[List[FileEntryBaseDto]] = Field(default=None, description="The files the operation produced or moved, in the order it wrote them down. Empty while nothing has been  written yet and for a deletion, which reports no entries at all.", json_schema_extra={"examples": [[{"id": 10, "title": "document.docx"}]]})
+    folders: Optional[List[FileEntryBaseDto]] = Field(default=None, description="The folders the operation produced or moved, in the order it wrote them down. Empty while nothing has been  written yet and for a deletion.", json_schema_extra={"examples": [[{"id": 20, "title": "Reports"}]]})
+    status: Optional[DistributedTaskStatus] = Field(default=None, description="The state of the background task behind the operation, which tells a task that was cancelled or that crashed  from one that ran to its end.")
     __properties: ClassVar[List[str]] = ["id", "Operation", "progress", "error", "processed", "finished", "url", "files", "folders", "status"]
 
     model_config = ConfigDict(

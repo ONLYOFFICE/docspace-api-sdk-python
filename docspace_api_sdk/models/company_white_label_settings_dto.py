@@ -28,16 +28,16 @@ from typing_extensions import Self
 
 class CompanyWhiteLabelSettingsDto(BaseModel):
     """
-    The company white label settings.
+    The vendor details the About page and the notification letters print, shared by the whole installation.
     """ # noqa: E501
-    company_name: Optional[StrictStr] = Field(description="The company name.", alias="companyName", json_schema_extra={"examples": ["My Own Corporation"]})
-    site: Optional[StrictStr] = Field(description="The company site.", json_schema_extra={"examples": ["https://www.example.com"]})
-    email: Optional[StrictStr] = Field(description="The company email address.", json_schema_extra={"examples": ["contact@example.com"]})
-    address: Optional[StrictStr] = Field(description="The company address.", json_schema_extra={"examples": ["123 Business St, New York, NY 10001"]})
-    phone: Optional[StrictStr] = Field(description="The company phone number.", json_schema_extra={"examples": ["+1-800-555-0123"]})
-    is_licensor: StrictBool = Field(description="Specifies if a company is a licensor or not.", alias="isLicensor", json_schema_extra={"examples": [False]})
-    hide_about: StrictBool = Field(description="Specifies if the About page is visible or not.", alias="hideAbout", json_schema_extra={"examples": [False]})
-    is_default: StrictBool = Field(description="Specifies if these settings are default or not.", alias="isDefault", json_schema_extra={"examples": [True]})
+    company_name: Optional[StrictStr] = Field(description="The vendor name the About page shows and the letters sign off with. Until details are saved it holds  whatever the installation ships as its built-in vendor, and it is empty on an installation that ships none.", alias="companyName", json_schema_extra={"examples": ["My Own Corporation"]})
+    site: Optional[StrictStr] = Field(description="The address the vendor name links to, as an absolute URL with its scheme. Empty under the same conditions  as `companyName`.", json_schema_extra={"examples": ["https://www.example.com"]})
+    email: Optional[StrictStr] = Field(description="The mailbox the About page offers for reaching the vendor. It is not the portal's own support address, and  it is empty under the same conditions as `companyName`.", json_schema_extra={"examples": ["contact@example.com"]})
+    address: Optional[StrictStr] = Field(description="The postal address of the vendor as one free-form line, in the shape it was saved in - no structure is  imposed on it.", json_schema_extra={"examples": ["123 Business St, New York, NY 10001"]})
+    phone: Optional[StrictStr] = Field(description="The telephone number of the vendor in the shape it was saved in, with no dialling format enforced.", json_schema_extra={"examples": ["+1-800-555-0123"]})
+    is_licensor: StrictBool = Field(description="Whether these details are those of the licensor of the product itself rather than of a reseller. Saving  through `POST api/2.0/settings/rebranding/company` always clears it, so only details that came with the  installation can report `true`.", alias="isLicensor", json_schema_extra={"examples": [False]})
+    hide_about: StrictBool = Field(description="Whether the About page is hidden from the interface. A plan that does not include branding cannot switch it  on: the value is stored as `false` in that case, so it can come back different from what was saved.", alias="hideAbout", json_schema_extra={"examples": [False]})
+    is_default: StrictBool = Field(description="Whether every field above still matches the installation's built-in vendor details. It turns `false` as  soon as one of them is saved differently and `true` again after  `DELETE api/2.0/settings/rebranding/company`.", alias="isDefault", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["companyName", "site", "email", "address", "phone", "isLicensor", "hideAbout", "isDefault"]
 
     model_config = ConfigDict(

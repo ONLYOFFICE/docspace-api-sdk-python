@@ -31,20 +31,20 @@ class AiAttachment(BaseModel):
     """
     Persistent record for a single attachment (file or image) referenced from a user message. Files carry extracted text in `content`; images carry base64 data in `base64`. Metadata (`title`, `path`, `type`) is always present for display purposes regardless of whether the heavy payload is loaded.
     """ # noqa: E501
-    id: StrictStr = Field(description="Storage-assigned UUID.")
-    kind: StrictStr = Field(description="file | image.")
-    source: Optional[StrictStr] = Field(default=None, description="Origin of the attachment. `user` — uploaded by the user in the composer (the default when unset, for backward compatibility). `tool` — produced by a tool call (e.g. `generate_image`). Lets the integrator's adapter route or apply policies (separate bucket, quotas, TTL, CDN) per source.")
-    title: StrictStr = Field(description="Display label (filename or user-visible title).")
-    content: Optional[StrictStr] = Field(default=None, description="Extracted text for files.")
+    id: StrictStr = Field(description="Storage-assigned UUID.", json_schema_extra={"examples": ["55555555-5555-5555-5555-555555555555"]})
+    kind: StrictStr = Field(description="file | image.", json_schema_extra={"examples": ["file"]})
+    source: Optional[StrictStr] = Field(default=None, description="Origin of the attachment. `user` — uploaded by the user in the composer (the default when unset, for backward compatibility). `tool` — produced by a tool call (e.g. `generate_image`). Lets the integrator's adapter route or apply policies (separate bucket, quotas, TTL, CDN) per source.", json_schema_extra={"examples": ["user"]})
+    title: StrictStr = Field(description="Display label (filename or user-visible title).", json_schema_extra={"examples": ["contract.docx"]})
+    content: Optional[StrictStr] = Field(default=None, description="Extracted text for files.", json_schema_extra={"examples": ["This agreement is made on 1 January 2026 between …"]})
     var_base64: Optional[StrictStr] = Field(default=None, description="Base64 data URL for images.", alias="base64")
-    path: Optional[StrictStr] = Field(default=None, description="Original host file path (for files).")
-    type: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="ONLYOFFICE file type code (for files).")
-    message_id: Optional[StrictStr] = Field(default=None, description="Owning message id once linked. Unset while the attachment is a draft.", alias="messageId")
-    thread_id: Optional[StrictStr] = Field(default=None, description="Owning thread id once linked. Unset while the attachment is a draft.", alias="threadId")
-    entity_id: Optional[StrictStr] = Field(default=None, description="Opaque scope token (entity / room) the attachment was created in. Drafts carry it so an entity switch keeps in-flight composer state isolated; once linked to a message the field is redundant with the thread's own entity binding.", alias="entityId")
-    created_at: Union[StrictFloat, StrictInt] = Field(description="Storage-assigned creation timestamp.", alias="createdAt")
-    can_analyze: Optional[StrictBool] = Field(default=None, description="Whether the attached form can be analyzed.", alias="canAnalyze")
-    form_keys: Optional[List[AiAttachmentFormKeysInner]] = Field(default=None, description="Keys of the fields inside the form. `key` is the field identifier, `text` its human-readable label.", alias="formKeys")
+    path: Optional[StrictStr] = Field(default=None, description="Original host file path (for files).", json_schema_extra={"examples": ["file_1234"]})
+    type: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="ONLYOFFICE file type code (for files).", json_schema_extra={"examples": [7]})
+    message_id: Optional[StrictStr] = Field(default=None, description="Owning message id once linked. Unset while the attachment is a draft.", alias="messageId", json_schema_extra={"examples": ["22222222-2222-2222-2222-222222222222"]})
+    thread_id: Optional[StrictStr] = Field(default=None, description="Owning thread id once linked. Unset while the attachment is a draft.", alias="threadId", json_schema_extra={"examples": ["11111111-1111-1111-1111-111111111111"]})
+    entity_id: Optional[StrictStr] = Field(default=None, description="Opaque scope token (entity / room) the attachment was created in. Drafts carry it so an entity switch keeps in-flight composer state isolated; once linked to a message the field is redundant with the thread's own entity binding.", alias="entityId", json_schema_extra={"examples": ["1234"]})
+    created_at: Union[StrictFloat, StrictInt] = Field(description="Storage-assigned creation timestamp.", alias="createdAt", json_schema_extra={"examples": [1767225600000]})
+    can_analyze: Optional[StrictBool] = Field(default=None, description="Whether the attached form can be analyzed.", alias="canAnalyze", json_schema_extra={"examples": [False]})
+    form_keys: Optional[List[AiAttachmentFormKeysInner]] = Field(default=None, description="Keys of the fields inside the form. `key` is the field identifier, `text` its human-readable label.", alias="formKeys", json_schema_extra={"examples": [[]]})
     __properties: ClassVar[List[str]] = ["id", "kind", "source", "title", "content", "base64", "path", "type", "messageId", "threadId", "entityId", "createdAt", "canAnalyze", "formKeys"]
 
     @field_validator('kind')

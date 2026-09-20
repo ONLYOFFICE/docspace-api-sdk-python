@@ -28,10 +28,10 @@ from typing_extensions import Self
 
 class CspDto(BaseModel):
     """
-    The CSP (Content Security Policy) parameters.
+    The Content Security Policy of the portal: the domains an administrator allowed, and the header built from them.
     """ # noqa: E501
-    domains: Optional[List[StrictStr]] = Field(description="The list of CSP domains.", json_schema_extra={"examples": [["https://example.com", "https://cdn.example.com"]]})
-    header: Optional[StrictStr] = Field(description="The CSP header.", json_schema_extra={"examples": ["default-src 'self'; script-src 'self' https://example.com"]})
+    domains: Optional[List[StrictStr]] = Field(description="The external hosts an administrator has allowed, each in the form it was saved in - a bare host, a host  with a scheme, or a wildcard such as `*.example.com`. An empty list means nobody has added one, not that  the portal serves no policy.", json_schema_extra={"examples": [["https://example.com", "https://cdn.example.com"]]})
+    header: Optional[StrictStr] = Field(description="The complete policy value the portal sends to browsers, assembled from `domains` together with the  portal's own sources and the integrations it has switched on. It is therefore wider than `domains` alone,  and is filled in even while that list is empty.", json_schema_extra={"examples": ["default-src 'self'; script-src 'self' https://example.com"]})
     __properties: ClassVar[List[str]] = ["domains", "header"]
 
     model_config = ConfigDict(

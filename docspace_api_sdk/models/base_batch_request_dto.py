@@ -32,11 +32,11 @@ from docspace_api_sdk.models.file_operation_request_base_dto import FileOperatio
 
 class BaseBatchRequestDto(FileOperationRequestBaseDto):
     """
-    The base batch request parameters.
+    The files and folders a background operation is applied to.
     """
 
-    folder_ids: Optional[List[BaseBatchRequestDtoAllOfFolderIds]] = Field(default=None, description="The list of folder IDs of the base batch request.", alias="folderIds", json_schema_extra={"examples": [[1, 2, 3]]})
-    file_ids: Optional[List[BaseBatchRequestDtoAllOfFileIds]] = Field(default=None, description="The list of file IDs of the base batch request.", alias="fileIds", json_schema_extra={"examples": [[1, 2, 3]]})
+    folder_ids: Optional[List[BaseBatchRequestDtoAllOfFolderIds]] = Field(default=None, description="The folders to act on, by id, as reported by a folder listing such as `GET api/2.0/files/{folderId}`. A number  addresses a folder stored in the portal itself, a string addresses a folder on a connected third-party  account, and both kinds may be sent in one list.", alias="folderIds", json_schema_extra={"examples": [[1, 2, 3]]})
+    file_ids: Optional[List[BaseBatchRequestDtoAllOfFileIds]] = Field(default=None, description="The files to act on, by id, as reported by a folder listing such as `GET api/2.0/files/{folderId}`. A number  addresses a file stored in the portal itself, a string addresses a file on a connected third-party account,  and both kinds may be sent in one list.", alias="fileIds", json_schema_extra={"examples": [[1, 2, 3]]})
 
     model_config = ConfigDict(
         populate_by_name=True,

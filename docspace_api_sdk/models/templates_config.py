@@ -28,7 +28,7 @@ from typing_extensions import Self
 
 class TemplatesConfig(BaseModel):
     """
-    The presence or absence of the templates in the Create New... menu option.
+    One creation template offered in the editor. The portal no longer offers any, so this never appears in an editor  configuration.
     """ # noqa: E501
     image: Optional[StrictStr] = Field(default=None, description="The absolute URL to the image for template.", json_schema_extra={"examples": ["https://portal.example.com/templates/template1.png"]})
     title: Optional[StrictStr] = Field(default=None, description="The template title that will be displayed in the Create New... menu option.", json_schema_extra={"examples": ["Blank Document"]})

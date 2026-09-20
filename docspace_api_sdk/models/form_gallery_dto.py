@@ -28,15 +28,15 @@ from typing_extensions import Self
 
 class FormGalleryDto(BaseModel):
     """
-    The form gallery parameters.
+    Where the ready-made form templates are served from, for browsing them and for submitting new ones.
     """ # noqa: E501
-    path: Optional[StrictStr] = Field(description="The form gallery path.", json_schema_extra={"examples": ["/forms/templates"]})
-    domain: Optional[StrictStr] = Field(description="The form gallery domain.", json_schema_extra={"examples": ["https://forms.example.com"]})
-    ext: Optional[StrictStr] = Field(description="The form gallery extension.", json_schema_extra={"examples": [".docxf"]})
-    upload_path: Optional[StrictStr] = Field(description="The form gallery upload path.", alias="uploadPath", json_schema_extra={"examples": ["/forms/upload"]})
-    upload_domain: Optional[StrictStr] = Field(description="The form gallery upload domain.", alias="uploadDomain", json_schema_extra={"examples": ["https://upload.forms.example.com"]})
-    upload_ext: Optional[StrictStr] = Field(description="The form gallery upload extension.", alias="uploadExt", json_schema_extra={"examples": [".docxf"]})
-    upload_dashboard: Optional[StrictStr] = Field(description="The form gallery upload dashboard.", alias="uploadDashboard", json_schema_extra={"examples": ["/dashboard/forms"]})
+    path: Optional[StrictStr] = Field(description="The path under `domain` that the gallery's own listing API is reached at. It is joined to `domain` by the  client; the portal only relays the values from its configuration.", json_schema_extra={"examples": ["/forms/templates"]})
+    domain: Optional[StrictStr] = Field(description="The address of the gallery service, which is a service of the vendor rather than part of the portal. Every  field of this object is empty on an installation that configures no gallery, and a client should then not  offer the gallery at all.", json_schema_extra={"examples": ["https://forms.example.com"]})
+    ext: Optional[StrictStr] = Field(description="The file extension to ask the gallery for, which decides which rendition of a template is downloaded when  several are published.", json_schema_extra={"examples": [".docxf"]})
+    upload_path: Optional[StrictStr] = Field(description="The path used for submitting a form of one's own to the gallery, the counterpart of `path` for the upload  side. The four `upload` fields are empty when the installation allows browsing but not submitting.", alias="uploadPath", json_schema_extra={"examples": ["/forms/upload"]})
+    upload_domain: Optional[StrictStr] = Field(description="The address the submission is sent to, which may differ from `domain`.", alias="uploadDomain", json_schema_extra={"examples": ["https://upload.forms.example.com"]})
+    upload_ext: Optional[StrictStr] = Field(description="The file extension a submitted form has to carry.", alias="uploadExt", json_schema_extra={"examples": [".docxf"]})
+    upload_dashboard: Optional[StrictStr] = Field(description="The page a person is sent to in order to follow up on a submission, joined to `uploadDomain` the same way  as `uploadPath`.", alias="uploadDashboard", json_schema_extra={"examples": ["/dashboard/forms"]})
     __properties: ClassVar[List[str]] = ["path", "domain", "ext", "uploadPath", "uploadDomain", "uploadExt", "uploadDashboard"]
 
     model_config = ConfigDict(

@@ -31,9 +31,9 @@ class StartReassignRequestDto(BaseModel):
     """
     The request parameters for starting the reassignment process.
     """ # noqa: E501
-    from_user_id: UUID = Field(description="The user ID whose data will be reassigned to another user.", alias="fromUserId", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000000"]})
-    to_user_id: UUID = Field(description="The user ID to whom all the data will be reassigned.", alias="toUserId", json_schema_extra={"examples": ["11111111-1111-1111-1111-111111111111"]})
-    delete_profile: Optional[StrictBool] = Field(default=None, description="Specifies whether to delete a profile when the data reassignment will be finished or not.", alias="deleteProfile", json_schema_extra={"examples": [False]})
+    from_user_id: UUID = Field(description="The ID of the user whose rooms and shared files are transferred away. The account has to have the `Terminated`  status already, and it cannot be a system account, the portal owner or the caller.", alias="fromUserId", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000000"]})
+    to_user_id: UUID = Field(description="The ID of the user who receives the data. The account has to be an active room admin or DocSpace admin, so a  guest, a system account or a disabled account is rejected.", alias="toUserId", json_schema_extra={"examples": ["11111111-1111-1111-1111-111111111111"]})
+    delete_profile: Optional[StrictBool] = Field(default=None, description="Specifies whether to delete the source profile once the transfer succeeds. When false, which is the default,  the emptied profile is kept and can be deleted later through `DELETE api/2.0/people/{userid}`.", alias="deleteProfile", json_schema_extra={"examples": [False]})
     __properties: ClassVar[List[str]] = ["fromUserId", "toUserId", "deleteProfile"]
 
     model_config = ConfigDict(

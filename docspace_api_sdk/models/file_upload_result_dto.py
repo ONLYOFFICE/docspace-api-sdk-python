@@ -30,9 +30,9 @@ class FileUploadResultDto(BaseModel):
     """
     The file upload result.
     """ # noqa: E501
-    success: Optional[StrictBool] = Field(default=None, description="Specifies if the upload operation is successful or not.", json_schema_extra={"examples": [True]})
+    success: Optional[StrictBool] = Field(default=None, description="Whether the upload succeeded. This is the field to check: the operation answers 200 even when it fails, and  reports the reason in `message` instead of in the status code.", json_schema_extra={"examples": [True]})
     data: Optional[Any] = None
-    message: Optional[StrictStr] = Field(default=None, description="The file upload result message.", json_schema_extra={"examples": ["File uploaded successfully"]})
+    message: Optional[StrictStr] = Field(default=None, description="The reason the upload failed, ready to be shown to a person. It is empty for a successful upload, and it is  the only place where a failure is described, because the status code stays 200.", json_schema_extra={"examples": ["The image size is too large"]})
     __properties: ClassVar[List[str]] = ["success", "data", "message"]
 
     model_config = ConfigDict(

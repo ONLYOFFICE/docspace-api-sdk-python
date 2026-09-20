@@ -29,12 +29,12 @@ from typing_extensions import Self
 
 class MigrationStatusDto(BaseModel):
     """
-    The migration status parameters.
+    How far the parse or the import queued for this portal has got, and what it produced once it stopped.
     """ # noqa: E501
-    progress: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The migration progress.", json_schema_extra={"examples": [99.99]})
-    error: Optional[StrictStr] = Field(default=None, description="The migration error.", json_schema_extra={"examples": ["Connection failed"]})
-    parse_result: Optional[MigrationApiInfo] = Field(default=None, description="The migration API information.", alias="parseResult")
-    is_completed: Optional[StrictBool] = Field(default=None, description="Specifies whether the migration is completed or not.", alias="isCompleted", json_schema_extra={"examples": [True]})
+    progress: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The share of the job that is done, from 0 to 100. It advances unevenly, since the stages differ in  length, so poll `isCompleted` rather than waiting for this to reach 100.", json_schema_extra={"examples": [99.99]})
+    error: Optional[StrictStr] = Field(default=None, description="The message that ended the job, in the portal language. It stays empty while nothing has gone wrong, so  once `isCompleted` is `true` this field is what tells success from failure.", json_schema_extra={"examples": ["Connection failed"]})
+    parse_result: Optional[MigrationApiInfo] = Field(default=None, description="What the migrator has read so far. After a parse pass it holds the users, the groups and the archives it  could not read, which is the body to edit and post to `POST api/2.0/migration/migrate`; during an import it  also carries the accounts that were created and the ones that failed. Its own `operation` field, `parse`  or `migration`, is what tells the two stages apart.", alias="parseResult")
+    is_completed: Optional[StrictBool] = Field(default=None, description="Whether the job has stopped, successfully or not. It is the field to poll on; the whole body comes back  empty instead when the portal has no job at all, which is not an error.", alias="isCompleted", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["progress", "error", "parseResult", "isCompleted"]
 
     model_config = ConfigDict(

@@ -29,11 +29,11 @@ from typing_extensions import Self
 
 class SalesRequestsDto(BaseModel):
     """
-    The request parameters for handling sales and payment inquiries in the portal.
+    Who is writing to the ONLYOFFICE sales team, and what about.
     """ # noqa: E501
-    user_name: Annotated[str, Field(min_length=1, strict=True, max_length=255)] = Field(description="The name of the user submitting the sales request.", alias="userName", json_schema_extra={"examples": ["John Doe"]})
-    email: Annotated[str, Field(min_length=1, strict=True, max_length=64)] = Field(description="The contact email address for the sales inquiry.", json_schema_extra={"examples": ["user@example.com"]})
-    message: Annotated[str, Field(min_length=1, strict=True, max_length=255)] = Field(description="The details of the sales inquiry or payment request.", json_schema_extra={"examples": ["I would like to inquire about pricing"]})
+    user_name: Annotated[str, Field(min_length=1, strict=True, max_length=255)] = Field(description="The name the sales team should address the reply to. It is sent as written and is not matched against any  portal account; an empty value fails the request with 400.", alias="userName", json_schema_extra={"examples": ["John Doe"]})
+    email: Annotated[str, Field(min_length=1, strict=True, max_length=64)] = Field(description="The address the answer is sent to. It has to be a well-formed email address and need not be the caller portal  address; an empty or malformed value fails the request with 400.", json_schema_extra={"examples": ["user@example.com"]})
+    message: Annotated[str, Field(min_length=1, strict=True, max_length=255)] = Field(description="What is being asked of the sales team - a quote, an invoice, or a plan that cannot be bought online. An empty  value fails the request with 400.", json_schema_extra={"examples": ["I would like to inquire about pricing"]})
     __properties: ClassVar[List[str]] = ["userName", "email", "message"]
 
     model_config = ConfigDict(

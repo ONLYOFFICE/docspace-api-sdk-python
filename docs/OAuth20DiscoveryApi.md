@@ -4,13 +4,13 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**handle_options**](#handle_options) | **OPTIONS** /.well-known/oauth-authorization-server | 
+[**handle_options**](#handle_options) | **OPTIONS** /.well-known/oauth-authorization-server | Probe the discovery endpoint
 
 
 # **handle_options**
-> object handle_options()
+> handle_options()
 
-
+Answers the CORS preflight for the OAuth 2.0 Authorization Server metadata endpoint. The endpoint needs no authentication and reads nothing from the request: it always answers 200 with an empty body, and the CORS headers are added by the surrounding filter chain rather than by this handler. It changes no state, and it does not return the authorization server metadata document - issue a GET against the same path for that.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -20,11 +20,11 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-**object**
+void (empty response body)
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### Example
 
@@ -38,15 +38,23 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.DiscoveryApi(api_client)
 
     try:
-        api_response = api_instance.handle_options()
-        print("The response of DiscoveryApi->handle_options:\n")
-        pprint(api_response)
+        # Probe the discovery endpoint
+        api_instance.handle_options()
     except Exception as e:
         print("Exception when calling DiscoveryApi->handle_options: %s\n" % e)
 ```
@@ -55,14 +63,14 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: */*
+ - **Accept**: Not defined
 
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | OK |  -  |
+**200** | Preflight accepted; the response carries no body |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

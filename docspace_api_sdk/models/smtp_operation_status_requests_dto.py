@@ -28,13 +28,13 @@ from typing_extensions import Self
 
 class SmtpOperationStatusRequestsDto(BaseModel):
     """
-    The request parameters for tracking SMTP (Simple Mail Transfer Protocol) operation status.
+    The state of the background job that sends the portal SMTP test message.
     """ # noqa: E501
-    completed: Optional[StrictBool] = Field(default=None, description="Specifies whether the SMTP operation has finished processing.", json_schema_extra={"examples": [True]})
-    id: Optional[StrictStr] = Field(default=None, description="The unique identifier for tracking the SMTP operation.", json_schema_extra={"examples": ["smtp-op-123"]})
-    error: Optional[StrictStr] = Field(default=None, description="The error message if the SMTP operation encountered issues.", json_schema_extra={"examples": ["SMTP connection failed."]})
-    status: Optional[StrictStr] = Field(default=None, description="The current state of the SMTP operation.", json_schema_extra={"examples": ["Completed"]})
-    percents: Optional[StrictInt] = Field(default=None, description="The progress indicator showing completion percentage of the operation.", json_schema_extra={"examples": [1]})
+    completed: Optional[StrictBool] = Field(default=None, description="Whether the job has finished. This is the field to poll; the first answer that reports it true also discards  the job, so read `error` out of that same answer rather than calling again.", json_schema_extra={"examples": [True]})
+    id: Optional[StrictStr] = Field(default=None, description="The identifier of the queued job. A portal only ever has one test job at a time, so it names the run rather  than selecting among several.", json_schema_extra={"examples": ["smtp-op-123"]})
+    error: Optional[StrictStr] = Field(default=None, description="Why the test failed. It stays empty while the job runs and also once the relay has accepted the message, so  an empty value on a finished job is what success looks like; an unreachable relay is reported here after a  30-second connection timeout rather than as a failed request.", json_schema_extra={"examples": ["SMTP connection failed."]})
+    status: Optional[StrictStr] = Field(default=None, description="The step the job has reached, in words - `Connect to host` or `Send test message`, for instance. It is meant  to be shown to a person and is not a fixed set of values to branch on.", json_schema_extra={"examples": ["Completed"]})
+    percents: Optional[StrictInt] = Field(default=None, description="How far the job has got, as a percentage climbing to 100. Reaching 100 says the job ran to the end, not that  the message was accepted - that is what an empty `error` says.", json_schema_extra={"examples": [1]})
     __properties: ClassVar[List[str]] = ["completed", "id", "error", "status", "percents"]
 
     model_config = ConfigDict(

@@ -5,9 +5,9 @@ The request parameters for updating an existing API key.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **str** | The new name for the API key. | [optional] 
-**permissions** | **List[str]** | The new list of permissions for the API key. | [optional] 
-**is_active** | **bool** | Indicates whether the API key should be active or not. | [optional] 
+**name** | **str** | The new label of the key, up to 30 characters. Omit it to keep the current name. | [optional] 
+**permissions** | **List[str]** | The scopes that replace the current ones. Every value has to come from `GET api/2.0/keys/permissions`, an  unknown value or an empty array is rejected, and omitting the field keeps the current scopes. | [optional] 
+**is_active** | **bool** | Whether the key may authenticate requests. Set it to false to stop the key without deleting it and to true to  let it work again; omit it to keep the current state. | [optional] 
 
 ## Example
 

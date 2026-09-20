@@ -1,5 +1,5 @@
 # PluginsConfig
-The configuration settings to connect the special add-ons.
+Which editor add-ons the portal connects. It currently connects none.
 
 ## Properties
 

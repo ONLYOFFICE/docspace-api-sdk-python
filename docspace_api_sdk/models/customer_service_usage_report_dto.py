@@ -29,14 +29,14 @@ from typing_extensions import Self
 
 class CustomerServiceUsageReportDto(BaseModel):
     """
-    Represents a paged report of customer service usage statistics.
+    One page of the per-service consumption totals, with the paging figures needed to walk the rest.
     """ # noqa: E501
-    collection: Optional[List[CustomerServiceUsageDto]] = Field(default=None, description="A collection of service usage statistics.", json_schema_extra={"examples": [[{"service": "backup", "totalAmount": 49.99}]]})
-    offset: Optional[StrictInt] = Field(default=None, description="The report data offset.", json_schema_extra={"examples": [0]})
-    limit: Optional[StrictInt] = Field(default=None, description="The report data limit.", json_schema_extra={"examples": [25]})
-    total_quantity: Optional[StrictInt] = Field(default=None, description="The total quantity of records in the report.", alias="totalQuantity", json_schema_extra={"examples": [1]})
-    total_page: Optional[StrictInt] = Field(default=None, description="The total number of pages in the report.", alias="totalPage", json_schema_extra={"examples": [1]})
-    current_page: Optional[StrictInt] = Field(default=None, description="The current page number of the report.", alias="currentPage", json_schema_extra={"examples": [1]})
+    collection: Optional[List[CustomerServiceUsageDto]] = Field(default=None, description="The services on this page, one entry per service rather than per charge. It is empty for a period in  which nothing was consumed as well as for a page past the end of the report.", json_schema_extra={"examples": [[{"service": "backup", "totalAmount": 49.99}]]})
+    offset: Optional[StrictInt] = Field(default=None, description="How many entries were skipped before this page, echoed from the request.", json_schema_extra={"examples": [0]})
+    limit: Optional[StrictInt] = Field(default=None, description="How many entries one page may hold, echoed from the request; it is 25 unless another value was asked for.", json_schema_extra={"examples": [25]})
+    total_quantity: Optional[StrictInt] = Field(default=None, description="How many services match the filters in total, across every page - services, not charges.", alias="totalQuantity", json_schema_extra={"examples": [1]})
+    total_page: Optional[StrictInt] = Field(default=None, description="How many pages those entries come to at the current `limit`.", alias="totalPage", json_schema_extra={"examples": [1]})
+    current_page: Optional[StrictInt] = Field(default=None, description="Which of those pages this one is, as the billing service numbers them. Page through by advancing `offset`  rather than this value, which nothing accepts as an argument.", alias="currentPage", json_schema_extra={"examples": [1]})
     __properties: ClassVar[List[str]] = ["collection", "offset", "limit", "totalQuantity", "totalPage", "currentPage"]
 
     model_config = ConfigDict(

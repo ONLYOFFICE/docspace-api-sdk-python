@@ -30,10 +30,10 @@ class ExchangeToken200Response(BaseModel):
     """
     ExchangeToken200Response
     """ # noqa: E501
-    access_token: Optional[StrictStr] = Field(default=None, description="The access token issued by the authorization server.", json_schema_extra={"examples": ["eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."]})
-    token_type: Optional[StrictStr] = Field(default=None, description="The type of token issued, typically 'Bearer'.", json_schema_extra={"examples": ["Bearer"]})
-    expires_in: Optional[StrictInt] = Field(default=None, description="The number of seconds until the access token expires.", json_schema_extra={"examples": [3600]})
-    refresh_token: Optional[StrictStr] = Field(default=None, description="The token used to obtain a new access token when the current one expires.", json_schema_extra={"examples": ["def502..."]})
+    access_token: Optional[StrictStr] = Field(default=None, description="The token to send as a Bearer credential when calling the portal on the user behalf.", json_schema_extra={"examples": ["eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."]})
+    token_type: Optional[StrictStr] = Field(default=None, description="How the access token is to be presented. It is always Bearer.", json_schema_extra={"examples": ["Bearer"]})
+    expires_in: Optional[StrictInt] = Field(default=None, description="How many seconds the access token stays valid, counted from the moment it was issued.", json_schema_extra={"examples": [3600]})
+    refresh_token: Optional[StrictStr] = Field(default=None, description="The token that buys a new access token once the current one expires. It is present only when the client is registered for the refresh token grant.", json_schema_extra={"examples": ["def502..."]})
     __properties: ClassVar[List[str]] = ["access_token", "token_type", "expires_in", "refresh_token"]
 
     model_config = ConfigDict(

@@ -21,28 +21,28 @@ import pprint
 import re  # noqa: F401
 import json
 
-from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from uuid import UUID
+from docspace_api_sdk.models.api_date_time import ApiDateTime
 from typing import Optional, Set
 from typing_extensions import Self
 
 class ActiveConnectionsItemDto(BaseModel):
     """
-    The active connection item parameters.
+    One open connection of a user: where the sign-in behind it came from, and the ID it can be closed by.
     """ # noqa: E501
-    id: StrictInt = Field(description="The active connection ID.", json_schema_extra={"examples": [1]})
-    tenant_id: StrictInt = Field(description="The tenant ID.", alias="tenantId", json_schema_extra={"examples": [1]})
-    user_id: UUID = Field(description="The user ID.", alias="userId", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000000"]})
-    mobile: Optional[StrictBool] = Field(default=None, description="Specifies if the active connection has a mobile phone or not.", json_schema_extra={"examples": [True]})
-    ip: Optional[StrictStr] = Field(default=None, description="The IP address of the active connection.", json_schema_extra={"examples": ["192.0.2.1"]})
-    country: Optional[StrictStr] = Field(default=None, description="The active connection country.", json_schema_extra={"examples": ["United States"]})
-    city: Optional[StrictStr] = Field(default=None, description="The active connection city.", json_schema_extra={"examples": ["New York"]})
-    browser: Optional[StrictStr] = Field(default=None, description="The active connection browser.", json_schema_extra={"examples": ["Chrome 120.0"]})
-    platform: Optional[StrictStr] = Field(default=None, description="The active connection platform.", json_schema_extra={"examples": ["Windows"]})
-    var_date: Optional[datetime] = Field(default=None, description="The active connection date.", alias="date", json_schema_extra={"examples": ["2024-01-15T10:30:00Z"]})
-    page: Optional[StrictStr] = Field(default=None, description="The active connection page.", json_schema_extra={"examples": ["/rooms/shared"]})
+    id: StrictInt = Field(description="The ID of the sign-in this connection was opened by. Pass it as `loginEventId` to  `PUT api/2.0/security/activeconnections/logout/{loginEventId}` to end this one connection; the item whose  value equals `loginEvent` is the connection the current request uses.", json_schema_extra={"examples": [1]})
+    tenant_id: StrictInt = Field(description="The portal the sign-in was made on. The operation never crosses portals, so it is the current one on every  item.", alias="tenantId", json_schema_extra={"examples": [1]})
+    user_id: UUID = Field(description="The user the connection belongs to, which is the calling user on every item - the operation cannot report  anyone else's connections.", alias="userId", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000000"]})
+    mobile: Optional[StrictBool] = Field(default=None, description="Whether the sign-in came from a mobile client. No mobile marker is stored with a connection, so the value  is `false` on every item and tells a caller nothing about the device.", json_schema_extra={"examples": [True]})
+    ip: Optional[StrictStr] = Field(default=None, description="The IP address the sign-in came from, with the port stripped off. On the item that matches `loginEvent` it  is taken from the address the current request arrives from instead of the one stored at sign-in.", json_schema_extra={"examples": ["192.0.2.1"]})
+    country: Optional[StrictStr] = Field(default=None, description="The English name of the country the IP address is located in. It is empty when the address cannot be  located, which is the normal outcome for private and loopback addresses.", json_schema_extra={"examples": ["United States"]})
+    city: Optional[StrictStr] = Field(default=None, description="The city the IP address is located in, empty under the same conditions as `country`.", json_schema_extra={"examples": ["New York"]})
+    browser: Optional[StrictStr] = Field(default=None, description="The browser and its version as parsed from the user agent of the sign-in, empty when the client sent no  recognisable one. It is refreshed from the current request on the item that matches `loginEvent`.", json_schema_extra={"examples": ["Chrome 120.0"]})
+    platform: Optional[StrictStr] = Field(default=None, description="The operating system as parsed from the user agent of the sign-in, refreshed and left empty under the same  conditions as `browser`.", json_schema_extra={"examples": ["Windows"]})
+    var_date: Optional[ApiDateTime] = Field(default=None, description="When the sign-in happened, in the portal time zone rather than in UTC.", alias="date")
+    page: Optional[StrictStr] = Field(default=None, description="Where in the portal the sign-in was made from: the referrer of the request that created it, or that  request's own path when it carried no referrer. Long values are cut off at 512 characters.", json_schema_extra={"examples": ["/rooms/shared"]})
     __properties: ClassVar[List[str]] = ["id", "tenantId", "userId", "mobile", "ip", "country", "city", "browser", "platform", "date", "page"]
 
     model_config = ConfigDict(
@@ -84,6 +84,9 @@ class ActiveConnectionsItemDto(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of var_date
+        if self.var_date:
+            _dict['date'] = self.var_date.to_dict()
         # set to None if ip (nullable) is None
         # and model_fields_set contains the field
         if self.ip is None and "ip" in self.model_fields_set:
@@ -108,11 +111,6 @@ class ActiveConnectionsItemDto(BaseModel):
         # and model_fields_set contains the field
         if self.platform is None and "platform" in self.model_fields_set:
             _dict['platform'] = None
-
-        # set to None if var_date (nullable) is None
-        # and model_fields_set contains the field
-        if self.var_date is None and "var_date" in self.model_fields_set:
-            _dict['date'] = None
 
         # set to None if page (nullable) is None
         # and model_fields_set contains the field
@@ -141,7 +139,7 @@ class ActiveConnectionsItemDto(BaseModel):
             "city": obj.get("city"),
             "browser": obj.get("browser"),
             "platform": obj.get("platform"),
-            "date": obj.get("date"),
+            "date": ApiDateTime.from_dict(obj["date"]) if obj.get("date") is not None else None,
             "page": obj.get("page")
         })
         return _obj

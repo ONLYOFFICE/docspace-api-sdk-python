@@ -29,10 +29,10 @@ from typing_extensions import Self
 
 class UpdateTagRequestDto(BaseModel):
     """
-    The request parameters for creating a tag.
+    The parameters for renaming a custom room tag in the portal catalog.
     """ # noqa: E501
-    old_name: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(description="The old tag name.", alias="oldName", json_schema_extra={"examples": ["old-tag"]})
-    new_name: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(description="The new tag name.", alias="newName", json_schema_extra={"examples": ["new-tag"]})
+    old_name: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(description="The name of the tag to rename, matched against the catalog exactly as it is stored rather than searched for.  Read the stored spelling from `GET api/2.0/files/tags`.", alias="oldName", json_schema_extra={"examples": ["Confidential"]})
+    new_name: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(description="The name to store instead. It has to be free: names are unique across the portal, so a name another tag  already carries is refused, and merging two tags this way is not possible.", alias="newName", json_schema_extra={"examples": ["Restricted"]})
     __properties: ClassVar[List[str]] = ["oldName", "newName"]
 
     model_config = ConfigDict(

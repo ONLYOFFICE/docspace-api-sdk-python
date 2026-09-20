@@ -33,11 +33,11 @@ from docspace_api_sdk.models.email_invitation_dto import EmailInvitationDto
 
 class RoomInvitation(EmailInvitationDto):
     """
-    The room invitation parameters.
+    One membership change in a room: an account or an email address, and the access level it is given.
     """
 
-    id: Optional[UUID] = Field(default=None, description="The ID of the user to share a room with.", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000000"]})
-    access: Optional[FileShare] = Field(default=None, description="The room sharing rights.")
+    id: Optional[UUID] = Field(default=None, description="The account or the group the entry is about, taken from the portal people and group listings. Leave it out and  give an email address instead to invite somebody who has no account yet.", json_schema_extra={"examples": ["e9a7b4c1-2d3f-4a56-8b90-1c2d3e4f5a6b"]})
+    access: Optional[FileShare] = Field(default=None, description="What the subject may do in the room. The value 0 removes the subject from the room, and the levels on offer  depend on the kind of room.")
 
     model_config = ConfigDict(
         populate_by_name=True,

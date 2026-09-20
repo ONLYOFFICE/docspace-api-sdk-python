@@ -34,16 +34,16 @@ from docspace_api_sdk.models.file_operation_request_base_dto import FileOperatio
 
 class BatchRequestDto(FileOperationRequestBaseDto):
     """
-    The request parameters for copying/moving files.
+    The files and folders to move or copy, the folder they go to, and the way name clashes are settled.
     """
 
-    folder_ids: Optional[List[BatchRequestDtoAllOfFolderIds]] = Field(default=None, description="The list of folder IDs to be copied/moved.", alias="folderIds", json_schema_extra={"examples": [[1, 2, 3]]})
-    file_ids: Optional[List[BatchRequestDtoAllOfFileIds]] = Field(default=None, description="The list of file IDs to be copied/moved.", alias="fileIds", json_schema_extra={"examples": [[1, 2, 3]]})
+    folder_ids: Optional[List[BatchRequestDtoAllOfFolderIds]] = Field(default=None, description="The folders to move or copy, by id. A number addresses a folder stored in the portal itself, a string  addresses a folder on a connected third-party account, and both kinds may be sent in one list.", alias="folderIds", json_schema_extra={"examples": [[1, 2, 3]]})
+    file_ids: Optional[List[BatchRequestDtoAllOfFileIds]] = Field(default=None, description="The files to move or copy, by id. A number addresses a file stored in the portal itself, a string addresses a  file on a connected third-party account, and both kinds may be sent in one list.", alias="fileIds", json_schema_extra={"examples": [[1, 2, 3]]})
     dest_folder_id: Optional[BatchRequestDtoAllOfDestFolderId] = Field(default=None, alias="destFolderId")
-    conflict_resolve_type: Optional[FileConflictResolveType] = Field(default=None, description="The overwriting behavior of the file copying or moving.", alias="conflictResolveType")
-    delete_after: Optional[StrictBool] = Field(default=None, description="Specifies whether to delete the source files/folders after they are moved or copied to the destination folder.", alias="deleteAfter", json_schema_extra={"examples": [False]})
-    content: Optional[StrictBool] = Field(default=None, description="Specifies whether to copy or move the folder content or not.", json_schema_extra={"examples": [False]})
-    to_fill_out: Optional[StrictBool] = Field(default=None, description="Specifies whether the file is copied for filling out", alias="toFillOut", json_schema_extra={"examples": [False]})
+    conflict_resolve_type: Optional[FileConflictResolveType] = Field(default=None, description="What happens to an item whose name is already taken in the destination folder: `skip` leaves it where it is,  `overwrite` replaces the entry at the destination, and `duplicate` places it beside that entry under a name  with a numeric suffix. `GET api/2.0/files/fileops/move` reports which items would clash.", alias="conflictResolveType")
+    delete_after: Optional[StrictBool] = Field(default=None, description="Whether the finished operation is still reported: `false` keeps its final record readable through  `GET api/2.0/files/fileops` until it has been read once, `true` drops the record as soon as the work is done.  It deletes nothing: a move takes the sources away in any case, and a copy always leaves them.", alias="deleteAfter", json_schema_extra={"examples": [False]})
+    content: Optional[StrictBool] = Field(default=None, description="What is taken from a listed folder: `false` moves or copies the folder itself, `true` takes only what it  contains, so its files and subfolders land in the destination and the folder is not recreated there.", json_schema_extra={"examples": [False]})
+    to_fill_out: Optional[StrictBool] = Field(default=None, description="Marks every copied PDF form as a draft prepared for filling, which is how such a copy reports its filling  status in a virtual data room. Files that are not forms are left unaffected.", alias="toFillOut", json_schema_extra={"examples": [False]})
 
     model_config = ConfigDict(
         populate_by_name=True,

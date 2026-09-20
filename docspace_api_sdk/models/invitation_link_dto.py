@@ -21,25 +21,25 @@ import pprint
 import re  # noqa: F401
 import json
 
-from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from uuid import UUID
+from docspace_api_sdk.models.api_date_time import ApiDateTime
 from docspace_api_sdk.models.employee_type import EmployeeType
 from typing import Optional, Set
 from typing_extensions import Self
 
 class InvitationLinkDto(BaseModel):
     """
-    The invitation link parameters.
+    The portal's standing invitation link for one role: what it grants, how long it lasts, how often it was used.
     """ # noqa: E501
-    id: Optional[UUID] = Field(default=None, description="The ID of the invitation link.", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000000"]})
-    employee_type: EmployeeType = Field(description="The type of employee role for the invitation link.", alias="employeeType")
-    expiration: Optional[datetime] = Field(default=None, description="The expiration date of the invitation link.", json_schema_extra={"examples": ["2024-01-15T10:30:00Z"]})
-    is_expired: Optional[StrictBool] = Field(default=None, description="Indicates whether the invitation link has expired.", alias="isExpired", json_schema_extra={"examples": [True]})
-    max_use_count: Optional[StrictInt] = Field(default=None, description="The maximum number of times the invitation link can be used.", alias="maxUseCount", json_schema_extra={"examples": [1]})
-    current_use_count: Optional[StrictInt] = Field(default=None, description="The current number of times the invitation link has been used.", alias="currentUseCount", json_schema_extra={"examples": [1]})
-    url: Optional[StrictStr] = Field(default=None, description="The URL of the invitation link.", json_schema_extra={"examples": ["https://example.com"]})
+    id: Optional[UUID] = Field(default=None, description="The identifier to address the link by in `PUT api/2.0/portal/users/invitationlink` and  `DELETE api/2.0/portal/users/invitationlink`. It survives a change of deadline or use limit, so it is  worth storing rather than re-reading.", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000000"]})
+    employee_type: EmployeeType = Field(description="The role an account gets by joining through this link. A portal keeps at most one link per role, and the  role of an existing link cannot be changed - the link has to be deleted and created again.", alias="employeeType")
+    expiration: Optional[ApiDateTime] = Field(default=None, description="When the link stops working, in the portal time zone. It is empty for a link that never expires, which is  what omitting the deadline on create or update leaves behind.")
+    is_expired: Optional[StrictBool] = Field(default=None, description="Whether that deadline has already passed. A link without a deadline always reports `false`, and an expired  link is still returned rather than treated as gone - it can be revived by moving `expiration`.", alias="isExpired", json_schema_extra={"examples": [True]})
+    max_use_count: Optional[StrictInt] = Field(default=None, description="How many accounts may join through the link in total. It is empty for a link with no use limit, and an  update may not lower it below `currentUseCount`.", alias="maxUseCount", json_schema_extra={"examples": [1]})
+    current_use_count: Optional[StrictInt] = Field(default=None, description="How many accounts have already joined through the link. It only ever grows, and reaching `maxUseCount`  retires the link as surely as a passed deadline.", alias="currentUseCount", json_schema_extra={"examples": [1]})
+    url: Optional[StrictStr] = Field(default=None, description="The shortened address to hand to the people being invited. It is signed for the account that read it, so  two administrators are given two different URLs for one and the same link and both of them work; the `id`  above, not this string, is what identifies the link.", json_schema_extra={"examples": ["https://example.com"]})
     __properties: ClassVar[List[str]] = ["id", "employeeType", "expiration", "isExpired", "maxUseCount", "currentUseCount", "url"]
 
     model_config = ConfigDict(
@@ -81,11 +81,9 @@ class InvitationLinkDto(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # set to None if expiration (nullable) is None
-        # and model_fields_set contains the field
-        if self.expiration is None and "expiration" in self.model_fields_set:
-            _dict['expiration'] = None
-
+        # override the default output from pydantic by calling `to_dict()` of expiration
+        if self.expiration:
+            _dict['expiration'] = self.expiration.to_dict()
         # set to None if max_use_count (nullable) is None
         # and model_fields_set contains the field
         if self.max_use_count is None and "max_use_count" in self.model_fields_set:
@@ -111,7 +109,7 @@ class InvitationLinkDto(BaseModel):
         _obj = cls.model_validate({
             "id": obj.get("id"),
             "employeeType": obj.get("employeeType"),
-            "expiration": obj.get("expiration"),
+            "expiration": ApiDateTime.from_dict(obj["expiration"]) if obj.get("expiration") is not None else None,
             "isExpired": obj.get("isExpired"),
             "maxUseCount": obj.get("maxUseCount"),
             "currentUseCount": obj.get("currentUseCount"),

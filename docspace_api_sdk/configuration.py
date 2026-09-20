@@ -119,13 +119,13 @@ HTTPSignatureAuthSetting = TypedDict(
 AuthSettings = TypedDict(
     "AuthSettings",
     {
+        "cookieAuth": APIKeyAuthSetting,
+        "bearerAuth": BearerAuthSetting,
         "asc_auth_key": APIKeyAuthSetting,
         "Basic": BasicAuthSetting,
         "Bearer": BearerFormatAuthSetting,
         "ApiKeyBearer": APIKeyAuthSetting,
         "OAuth2": OAuth2AuthSetting,
-        "cookieAuth": APIKeyAuthSetting,
-        "bearerAuth": BearerAuthSetting,
         "x-signature": APIKeyAuthSetting,
     },
     total=False,
@@ -580,6 +580,22 @@ conf = docspace_api_sdk.Configuration(
         :return: The Auth Settings information dict.
         """
         auth: AuthSettings = {}
+        if 'cookieAuth' in self.api_key:
+            auth['cookieAuth'] = {
+                'type': 'api_key',
+                'in': 'cookie',
+                'key': 'asc_auth_key',
+                'value': self.get_api_key_with_prefix(
+                    'cookieAuth',
+                ),
+            }
+        if self.access_token is not None:
+            auth['bearerAuth'] = {
+                'type': 'bearer',
+                'in': 'header',
+                'key': 'Authorization',
+                'value': 'Bearer ' + self.access_token
+            }
         if 'asc_auth_key' in self.api_key:
             auth['asc_auth_key'] = {
                 'type': 'api_key',
@@ -620,22 +636,6 @@ conf = docspace_api_sdk.Configuration(
                 'key': 'Authorization',
                 'value': 'Bearer ' + self.access_token
             }
-        if 'cookieAuth' in self.api_key:
-            auth['cookieAuth'] = {
-                'type': 'api_key',
-                'in': 'cookie',
-                'key': 'asc_auth_key',
-                'value': self.get_api_key_with_prefix(
-                    'cookieAuth',
-                ),
-            }
-        if self.access_token is not None:
-            auth['bearerAuth'] = {
-                'type': 'bearer',
-                'in': 'header',
-                'key': 'Authorization',
-                'value': 'Bearer ' + self.access_token
-            }
         if 'x-signature' in self.api_key:
             auth['x-signature'] = {
                 'type': 'api_key',
@@ -655,7 +655,7 @@ conf = docspace_api_sdk.Configuration(
         return "Python SDK Debug Report:\n"\
                "OS: {env}\n"\
                "Python Version: {pyversion}\n"\
-               "Version of the API: 3.7.0\n"\
+               "Version of the API: 2.0\n"\
                "SDK Package Version: 4.0.0".\
                format(env=sys.platform, pyversion=sys.version)
 

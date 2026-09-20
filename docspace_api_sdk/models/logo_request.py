@@ -29,13 +29,13 @@ from typing_extensions import Self
 
 class LogoRequest(BaseModel):
     """
-    The logo request parameters.
+    The part of an uploaded picture to use as the logo.
     """ # noqa: E501
-    tmp_file: Annotated[str, Field(min_length=1, strict=True)] = Field(description="The path to the temporary image file.", alias="tmpFile", json_schema_extra={"examples": ["/tmp/logo.png"]})
-    x: Optional[Annotated[int, Field(le=1280, strict=True, ge=0)]] = Field(default=None, description="The X coordinate of the rectangle starting point.", json_schema_extra={"examples": [0]})
-    y: Optional[Annotated[int, Field(le=1280, strict=True, ge=0)]] = Field(default=None, description="The Y coordinate of the rectangle starting point.", json_schema_extra={"examples": [0]})
-    width: Optional[Annotated[int, Field(le=1280, strict=True, ge=1)]] = Field(default=None, description="The rectangle width.", json_schema_extra={"examples": [100]})
-    height: Optional[Annotated[int, Field(le=1280, strict=True, ge=1)]] = Field(default=None, description="The rectangle height.", json_schema_extra={"examples": [100]})
+    tmp_file: Annotated[str, Field(min_length=1, strict=True)] = Field(description="The picture to cut the logo out of, named by the path that `POST api/2.0/files/logos` returned for it. The  path may be used once and only by the account that uploaded it.", alias="tmpFile", json_schema_extra={"examples": ["/temp/logo_a1b2c3.png"]})
+    x: Optional[Annotated[int, Field(le=1280, strict=True, ge=0)]] = Field(default=None, description="The left edge of the rectangle cut out of the uploaded picture, counted in pixels from its left side. The  picture itself was already scaled down to fit 1280 by 1280 pixels when it was uploaded.", json_schema_extra={"examples": [0]})
+    y: Optional[Annotated[int, Field(le=1280, strict=True, ge=0)]] = Field(default=None, description="The top edge of the rectangle cut out of the uploaded picture, counted in pixels from its top.", json_schema_extra={"examples": [0]})
+    width: Optional[Annotated[int, Field(le=1280, strict=True, ge=1)]] = Field(default=None, description="How wide a piece of the uploaded picture to cut out, in pixels. It has to be sent together with the height,  and the portal builds the four logo sizes out of the piece.", json_schema_extra={"examples": [300]})
+    height: Optional[Annotated[int, Field(le=1280, strict=True, ge=1)]] = Field(default=None, description="How tall a piece of the uploaded picture to cut out, in pixels. It has to be sent together with the width.", json_schema_extra={"examples": [300]})
     __properties: ClassVar[List[str]] = ["tmpFile", "x", "y", "width", "height"]
 
     model_config = ConfigDict(

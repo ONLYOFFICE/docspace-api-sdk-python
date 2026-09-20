@@ -31,8 +31,8 @@ class AiBulkAssignmentResult(BaseModel):
     """
     Outcome of `AssignmentsEngine.bulkAssign`. Either every entry persisted, or no entries persisted and a per-key error report. The engine validates first and writes second so a single bad entry never leaves the assignment table in a half-written state.
     """ # noqa: E501
-    success: StrictBool = Field(description="True when every entry was persisted.")
-    errors: Optional[List[AiBulkAssignmentResultErrorsInner]] = Field(default=None, description="What was rejected, per action. Present on failure - and then no entry was persisted.")
+    success: StrictBool = Field(description="True when every entry was persisted.", json_schema_extra={"examples": [True]})
+    errors: Optional[List[AiBulkAssignmentResultErrorsInner]] = Field(default=None, description="What was rejected, per action. Present on failure - and then no entry was persisted.", json_schema_extra={"examples": [[]]})
     __properties: ClassVar[List[str]] = ["success", "errors"]
 
     model_config = ConfigDict(

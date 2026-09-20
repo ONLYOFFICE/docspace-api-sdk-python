@@ -31,16 +31,16 @@ from typing_extensions import Self
 
 class CustomerServiceUsageReportRequestDto(BaseModel):
     """
-    The request parameters for generating a customer service usage report.
+    The filters that select which wallet service consumption is reported: the services, the period, the participant,  the outcome, the usage metadata and the ordering.
     """ # noqa: E501
-    service_name: Optional[List[StrictStr]] = Field(default=None, description="The service name list. A single string is also accepted for backward compatibility.", alias="serviceName", json_schema_extra={"examples": ["[backup]"]})
-    start_date: Optional[datetime] = Field(default=None, description="The report start date.", alias="startDate", json_schema_extra={"examples": ["2024-01-01T00:00:00Z"]})
-    end_date: Optional[datetime] = Field(default=None, description="The report end date.", alias="endDate", json_schema_extra={"examples": ["2024-01-31T23:59:59Z"]})
-    participant_name: Optional[StrictStr] = Field(default=None, description="The participant name.", alias="participantName", json_schema_extra={"examples": ["My Own Corporation"]})
-    status: Optional[OperationStatus] = Field(default=None, description="The operation status to filter by.")
-    metadata: Optional[Dict[str, Optional[StrictStr]]] = Field(default=None, description="Metadata key-value pairs to filter by.", json_schema_extra={"examples": [{"key1": "value1", "key2": "value2"}]})
-    order_by: Optional[StrictStr] = Field(default=None, description="The field to order by.", alias="orderBy", json_schema_extra={"examples": ["ServiceName"]})
-    order_type: Optional[OperationOrderType] = Field(default=None, description="Order direction: Ascending or Descending.", alias="orderType")
+    service_name: Optional[List[StrictStr]] = Field(default=None, description="The wallet services whose consumption is reported, named the way the billing catalogue names them -  `backup`, `ai-tools`, `ai-search`, `disk-storage`, `docscloud`. Take the values from the `serviceName` field  of `GET api/2.0/portal/payment/walletservices`; the match ignores case, a name this installation does not  sell fails the call with 404, and an omitted list reports every service. A bare string is accepted in place  of an array for backward compatibility.", alias="serviceName", json_schema_extra={"examples": ["[backup]"]})
+    start_date: Optional[datetime] = Field(default=None, description="The beginning of the reported period, inclusive. Read in the portal time zone rather than in UTC, and  defaults to the portal creation date.", alias="startDate", json_schema_extra={"examples": ["2024-01-01T00:00:00Z"]})
+    end_date: Optional[datetime] = Field(default=None, description="The end of the reported period, inclusive. Read in the portal time zone rather than in UTC, and defaults to  the moment the call is made.", alias="endDate", json_schema_extra={"examples": ["2024-01-31T23:59:59Z"]})
+    participant_name: Optional[StrictStr] = Field(default=None, description="The participant whose consumption is reported - the account the accounting service records as the consumer.  Consumption caused by a portal user carries that user ID here; surrounding whitespace is trimmed, and an  omitted value reports every participant.", alias="participantName", json_schema_extra={"examples": ["My Own Corporation"]})
+    status: Optional[OperationStatus] = Field(default=None, description="The outcome to keep. Consumption that is still being settled is reported as pending and may change later,  while the other outcomes are final; every outcome is reported when this is omitted.")
+    metadata: Optional[Dict[str, Optional[StrictStr]]] = Field(default=None, description="The usage annotations a wallet service records alongside its consumption, as the key and value pairs that  must all match for a record to be reported. The keys are chosen by the service that writes them, so read  them off the `metadata` of the records returned by `GET api/2.0/portal/payment/customer/usage` rather than  guessing; an omitted map reports every record.", json_schema_extra={"examples": [{"key1": "value1", "key2": "value2"}]})
+    order_by: Optional[StrictStr] = Field(default=None, description="The name of the field the per-service totals are sorted by, spelled as the accounting service names it, such  as `ServiceName` or `StartDate`. Surrounding whitespace is trimmed, and the accounting service applies its  own ordering when this is omitted.", alias="orderBy", json_schema_extra={"examples": ["ServiceName"]})
+    order_type: Optional[OperationOrderType] = Field(default=None, description="The direction the field named in `orderBy` is sorted in. Newest or largest first is what the accounting  service does by default, so leaving this out sorts the same way as asking for descending explicitly.", alias="orderType")
     __properties: ClassVar[List[str]] = ["serviceName", "startDate", "endDate", "participantName", "status", "metadata", "orderBy", "orderType"]
 
     model_config = ConfigDict(

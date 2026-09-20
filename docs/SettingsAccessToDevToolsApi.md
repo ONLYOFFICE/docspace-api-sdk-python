@@ -10,7 +10,11 @@ Method | HTTP request | Description
 # **get_tenant_access_dev_tools_settings**
 > TenantDevToolsAccessSettingsWrapper get_tenant_access_dev_tools_settings()
 
-Returns the Developer Tools access settings for the portal.
+Returns whether the portal currently restricts the `User` role from using the developer tools (API keys, OAuth
+apps, webhooks). Requires an authenticated session; every role can read the restriction, even though it only
+limits what a `User` may do, not what a `RoomAdmin` or `DocSpaceAdmin` may do. This is a read-only, idempotent
+call. Change the restriction with `POST api/2.0/security/devtoolsaccess`, which requires the
+EditPortalSettings permission.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -73,7 +77,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Developer Tools access settings |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**200** | Whether the `User` role is currently restricted from using the developer tools |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |

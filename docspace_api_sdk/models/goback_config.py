@@ -30,7 +30,7 @@ class GobackConfig(BaseModel):
     """
     The settings for the Open file location menu button and upper right corner button.
     """ # noqa: E501
-    url: Optional[StrictStr] = Field(default=None, description="The absolute URL to the website address which will be opened when clicking the Open file location menu button.", json_schema_extra={"examples": ["https://portal.example.com/files/location"]})
+    url: Optional[StrictStr] = Field(default=None, description="Where the user is taken when they leave the document, normally the folder or the room it lies in. It is empty  when there is nowhere to return to, as in a framed opening.", json_schema_extra={"examples": ["https://portal.example.com/rooms/shared/42"]})
     __properties: ClassVar[List[str]] = ["url"]
 
     model_config = ConfigDict(

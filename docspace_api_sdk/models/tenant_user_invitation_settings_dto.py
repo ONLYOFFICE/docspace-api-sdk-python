@@ -28,10 +28,10 @@ from typing_extensions import Self
 
 class TenantUserInvitationSettingsDto(BaseModel):
     """
-    The user invitation settings.
+    Whether the portal currently lets anyone be invited into it, member and guest kept apart.
     """ # noqa: E501
-    allow_inviting_members: StrictBool = Field(description="Specifies whether to allow inviting new DocSpace members through the Contacts section.", alias="allowInvitingMembers", json_schema_extra={"examples": [True]})
-    allow_inviting_guests: StrictBool = Field(description="Specifies whether to allow all DocSpace members to invite external guests to the rooms.", alias="allowInvitingGuests", json_schema_extra={"examples": [False]})
+    allow_inviting_members: StrictBool = Field(description="Whether new members may be invited through the Contacts section. Switching it off stops new invitations  from being created; links already handed out keep working and members already invited stay.", alias="allowInvitingMembers", json_schema_extra={"examples": [True]})
+    allow_inviting_guests: StrictBool = Field(description="Whether every member, and not only an administrator, may invite an outside guest into a room. It is  independent of `allowInvitingMembers`, and switching it off has the same forward-only effect.", alias="allowInvitingGuests", json_schema_extra={"examples": [False]})
     __properties: ClassVar[List[str]] = ["allowInvitingMembers", "allowInvitingGuests"]
 
     model_config = ConfigDict(

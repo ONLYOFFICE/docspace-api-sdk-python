@@ -30,14 +30,14 @@ from typing_extensions import Self
 
 class ExternalDbSyncTaskDto(BaseModel):
     """
-    The external DB synchronization task parameters.
+    The state of the job that exports the collected form data of a form filling room into the external database of the  portal.
     """ # noqa: E501
-    id: Optional[StrictStr] = Field(description="The task ID.", json_schema_extra={"examples": ["ExternalDbSyncTask_1_42"]})
-    error: Optional[StrictStr] = Field(default=None, description="The error message if the synchronization failed.", json_schema_extra={"examples": ["Connection refused"]})
-    percentage: StrictInt = Field(description="The progress percentage of the synchronization.", json_schema_extra={"examples": [75]})
-    is_completed: StrictBool = Field(description="Specifies whether the synchronization is completed or not.", alias="isCompleted", json_schema_extra={"examples": [False]})
-    status: DistributedTaskStatus = Field(description="The status of the synchronization task.")
-    forms: Optional[List[ExternalDbSyncFormResultDto]] = Field(description="The synchronization results for all original forms in the room.", json_schema_extra={"examples": [[{"id": 42, "title": "Application.pdf", "success": True}]]})
+    id: Optional[StrictStr] = Field(description="The identifier of the job, which stays the same while a job for this room exists and is worth quoting when a  failure has to be traced in the portal logs. Polling is done by room, so the value is not needed to read the  state again.", json_schema_extra={"examples": ["ExternalDbSyncTask_1_42"]})
+    error: Optional[StrictStr] = Field(default=None, description="The message of a failure that stopped the whole job. It is empty while the job is running and after a job that  ended without such a failure; a job that finished with individual forms rejected reports those in `forms` and  leaves this field empty.", json_schema_extra={"examples": ["Connection refused"]})
+    percentage: StrictInt = Field(description="How much of the work is done, from 0 to 100. It advances as the forms of the room are processed one by one, so  it is a usable progress indicator for a room with many forms and jumps straight to the end for a room with  one.", json_schema_extra={"examples": [75]})
+    is_completed: StrictBool = Field(description="Whether the job has ended. It is set both for a job that finished its work and for one that stopped on an  error, so this is the flag to poll for, and `status` and `error` are what tell the two apart.", alias="isCompleted", json_schema_extra={"examples": [False]})
+    status: DistributedTaskStatus = Field(description="How the job ended, or how far it has got: queued, running, finished, cancelled or failed. It is the only field  that separates a successful end from a failed one once `isCompleted` is set.")
+    forms: Optional[List[ExternalDbSyncFormResultDto]] = Field(description="The outcome for every original form of the room, one entry each. The list is empty while the job is running  and is filled in only when the job ends, so it is what to read after `isCompleted` turns true; it stays empty  for a room that holds no forms at all.", json_schema_extra={"examples": [[{"id": 42, "title": "Application.pdf", "success": True}]]})
     __properties: ClassVar[List[str]] = ["id", "error", "percentage", "isCompleted", "status", "forms"]
 
     model_config = ConfigDict(

@@ -28,11 +28,11 @@ from typing_extensions import Self
 
 class FileLink(BaseModel):
     """
-    The file link properties.
+    The address the content of a file is fetched from, together with the signature that authorises the fetch, as  the document service is handed it.
     """ # noqa: E501
-    filetype: Optional[StrictStr] = Field(description="The type of the file for the source viewed or edited document.", json_schema_extra={"examples": ["docx"]})
-    token: Optional[StrictStr] = Field(default=None, description="The encrypted signature added to the config in the form of a token.", json_schema_extra={"examples": ["token"]})
-    url: Optional[StrictStr] = Field(description="The absolute URL where the source viewed or edited document is stored.", json_schema_extra={"examples": ["https://example.com/file.docx"]})
+    filetype: Optional[StrictStr] = Field(description="The format the stored content is in, lower-cased and with the leading dot, which is how the document  service learns how to read the bytes behind the address. It stays empty when the file title carries no  extension at all.", json_schema_extra={"examples": [".docx"]})
+    token: Optional[StrictStr] = Field(default=None, description="Signs the address and the format above so that the document service can trust them. It stays empty on a  portal that has no signature secret configured for the document service, and the address is then meant  to be fetched unsigned.", json_schema_extra={"examples": ["eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."]})
+    url: Optional[StrictStr] = Field(description="Where the content is fetched from: the portal download handler, pinned to the revision the file was at  when the address was issued and carrying an authorisation key of limited validity. It is addressed to  the host the document service can reach, which on a deployment with a private editor network is not the  address a browser should follow.", json_schema_extra={"examples": ["https://portal.example.com/filehandler.ashx?action=stream&fileid=512&version=3"]})
     __properties: ClassVar[List[str]] = ["filetype", "token", "url"]
 
     model_config = ConfigDict(

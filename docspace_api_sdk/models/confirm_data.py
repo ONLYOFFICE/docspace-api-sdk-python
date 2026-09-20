@@ -28,11 +28,11 @@ from typing_extensions import Self
 
 class ConfirmData(BaseModel):
     """
-    The additional confirmation data required for authentication.
+    The confirmation link a sign-in is authorised with, in place of a password.
     """ # noqa: E501
-    email: Optional[StrictStr] = Field(default=None, description="The email address to confirm the user's identity.", json_schema_extra={"examples": ["user@example.com"]})
-    first: Optional[StrictBool] = Field(default=None, description="Specifies whether this is the first access to the user's account.", json_schema_extra={"examples": [True]})
-    key: Optional[StrictStr] = Field(default=None, description="The unique confirmation key for validating user identity.", json_schema_extra={"examples": ["abc123def456"]})
+    email: Optional[StrictStr] = Field(default=None, description="The address the confirmation link was issued for. It has to be the same address the key was signed with, and  a value that is not an email address fails the request with 400.", json_schema_extra={"examples": ["user@example.com"]})
+    first: Optional[StrictBool] = Field(default=None, description="Whether the link is being followed for the first time, taken from the `first` parameter of the confirmation  URL. It is part of what the key was signed over, so passing a different value invalidates the key rather than  changing behaviour.", json_schema_extra={"examples": [True]})
+    key: Optional[StrictStr] = Field(default=None, description="The `key` parameter of the confirmation URL, copied verbatim. It is bound to the address and to the moment it  was issued, so it stops being accepted once the portal email key lifetime has passed.", json_schema_extra={"examples": ["abc123def456"]})
     __properties: ClassVar[List[str]] = ["email", "first", "key"]
 
     model_config = ConfigDict(

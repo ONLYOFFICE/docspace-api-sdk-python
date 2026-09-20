@@ -25,6 +25,7 @@ from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, Stri
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from docspace_api_sdk.models.ai_builtin_provider_type import AiBuiltinProviderType
 from docspace_api_sdk.models.ai_provider_type import AiProviderType
+from docspace_api_sdk.models.ai_reasoning_support import AiReasoningSupport
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -32,22 +33,23 @@ class AiProfile(BaseModel):
     """
     Complete AI provider + model configuration saved by the user. Profiles are the primary way users save and reuse provider configurations.
     """ # noqa: E501
-    id: StrictStr = Field(description="Unique profile identifier (UUID).")
-    name: StrictStr = Field(description="User-defined profile display name.")
+    id: StrictStr = Field(description="Unique profile identifier (UUID).", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000000"]})
+    name: StrictStr = Field(description="User-defined profile display name.", json_schema_extra={"examples": ["OpenAI GPT-4o"]})
     provider_type: AiProviderType = Field(description="Provider type for this profile. Use `external` to delegate all HTTP transport to `PlatformAdapter.externalFetch` while reusing an existing provider's response parser — see `Profile.basedOn` for the format selector.", alias="providerType")
     based_on: Optional[AiBuiltinProviderType] = Field(default=None, description="Selects the response-format parser used by the `external` provider. Ignored for any other `providerType`.  Supported values are `openai`, `anthropic`, `mistral` and `openrouter`. Remaining values (`genai`, `stabilityai`, …) are accepted by the type but not yet implemented; passing one raises an error at request time.", alias="basedOn")
-    base_url: StrictStr = Field(description="Base URL of the provider API.", alias="baseUrl")
-    key: Optional[StrictStr] = Field(default=None, description="API key or token. Optional for local providers.")
-    headers: Optional[Dict[str, StrictStr]] = Field(default=None, description="Extra HTTP headers sent with every request to this provider. Merged into the SDK client's default headers; an explicit `Authorization` here wins over the one derived from `key`. Honoured by the OpenAI-family providers.")
-    model_id: StrictStr = Field(description="Selected model ID within this provider.", alias="modelId")
-    reasoning: Optional[StrictBool] = Field(default=None, description="Whether extended thinking is enabled for this profile's model.")
-    capabilities: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Bitmask of capabilities supported by the selected model.")
-    can_use_tool: Optional[StrictBool] = Field(default=None, description="Result of the live tool-capability probe performed at create time and on changes to `modelId` / `providerType` / `baseUrl`. `undefined` means the probe has never run for this profile (legacy record).", alias="canUseTool")
-    use_responses_api: Optional[StrictBool] = Field(default=None, description="Result of the live Responses-API probe (parallel to `canUseTool`). `true` means the model speaks `/v1/responses` and the OpenAI provider must route through `client.responses.create` — required for gpt-5+ reasoning models that reject `reasoning_effort` together with `tools` on `/v1/chat/completions`. Probed at create time and whenever `modelId` / `providerType` / `baseUrl` change. `undefined` means the probe never ran (legacy record) — readers treat that as `false`.", alias="useResponsesApi")
-    is_cloud_provider: Optional[StrictBool] = Field(default=None, description="Whether this profile uses a cloud-hosted provider (e.g. ONLYOFFICE DocSpace).", alias="isCloudProvider")
-    use_proxy: Optional[StrictBool] = Field(default=None, description="Route every provider request through the host's `fetchProxy` instead of the global `fetch`. Useful when the host runs the widget in a sandbox without direct network access (CORS, custom auth, etc.). Has no effect when the `PlatformAdapter.fetchProxy` is not configured.", alias="useProxy")
-    created_at: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Creation timestamp (ms since epoch). Used to sort the AI models list newest-first.", alias="createdAt")
-    __properties: ClassVar[List[str]] = ["id", "name", "providerType", "basedOn", "baseUrl", "key", "headers", "modelId", "reasoning", "capabilities", "canUseTool", "useResponsesApi", "isCloudProvider", "useProxy", "createdAt"]
+    base_url: StrictStr = Field(description="Base URL of the provider API.", alias="baseUrl", json_schema_extra={"examples": ["https://api.openai.com/v1"]})
+    key: Optional[StrictStr] = Field(default=None, description="API key or token. Optional for local providers.", json_schema_extra={"examples": ["sk-your-provider-api-key"]})
+    headers: Optional[Dict[str, StrictStr]] = Field(default=None, description="Extra HTTP headers sent with every request to this provider. Merged into the SDK client's default headers; an explicit `Authorization` here wins over the one derived from `key`. Honoured by the OpenAI-family providers.", json_schema_extra={"examples": [{"X-Organization": "acme"}]})
+    model_id: StrictStr = Field(description="Selected model ID within this provider.", alias="modelId", json_schema_extra={"examples": ["gpt-4o"]})
+    reasoning: Optional[StrictBool] = Field(default=None, description="Whether extended thinking is enabled for this profile's model.", json_schema_extra={"examples": [False]})
+    reasoning_support: Optional[AiReasoningSupport] = Field(default=None, description="Extended-thinking capabilities of the selected model as reported by the provider's catalogue at save time (see `Model.reasoningSupport`). When present the composer's Effort row follows it exactly; when absent the provider's id-based table answers. Hosts persist it with the rest of the profile.", alias="reasoningSupport")
+    capabilities: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Bitmask of capabilities supported by the selected model.", json_schema_extra={"examples": [7]})
+    can_use_tool: Optional[StrictBool] = Field(default=None, description="Result of the live tool-capability probe performed at create time and on changes to `modelId` / `providerType` / `baseUrl`. `undefined` means the probe has never run for this profile (legacy record).", alias="canUseTool", json_schema_extra={"examples": [True]})
+    use_responses_api: Optional[StrictBool] = Field(default=None, description="Result of the live Responses-API probe (parallel to `canUseTool`). `true` means the model speaks `/v1/responses` and the OpenAI provider must route through `client.responses.create` — required for gpt-5+ reasoning models that reject `reasoning_effort` together with `tools` on `/v1/chat/completions`. Probed at create time and whenever `modelId` / `providerType` / `baseUrl` change. `undefined` means the probe never ran (legacy record) — readers treat that as `false`.", alias="useResponsesApi", json_schema_extra={"examples": [False]})
+    is_cloud_provider: Optional[StrictBool] = Field(default=None, description="Whether this profile uses a cloud-hosted provider (e.g. ONLYOFFICE DocSpace).", alias="isCloudProvider", json_schema_extra={"examples": [True]})
+    use_proxy: Optional[StrictBool] = Field(default=None, description="Route every provider request through the host's `fetchProxy` instead of the global `fetch`. Useful when the host runs the widget in a sandbox without direct network access (CORS, custom auth, etc.). Has no effect when the `PlatformAdapter.fetchProxy` is not configured.", alias="useProxy", json_schema_extra={"examples": [False]})
+    created_at: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Creation timestamp (ms since epoch). Used to sort the AI models list newest-first.", alias="createdAt", json_schema_extra={"examples": [1767225600000]})
+    __properties: ClassVar[List[str]] = ["id", "name", "providerType", "basedOn", "baseUrl", "key", "headers", "modelId", "reasoning", "reasoningSupport", "capabilities", "canUseTool", "useResponsesApi", "isCloudProvider", "useProxy", "createdAt"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -91,6 +93,9 @@ class AiProfile(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of provider_type
         if self.provider_type:
             _dict['providerType'] = self.provider_type.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of reasoning_support
+        if self.reasoning_support:
+            _dict['reasoningSupport'] = self.reasoning_support.to_dict()
         return _dict
 
     @classmethod
@@ -113,6 +118,7 @@ class AiProfile(BaseModel):
             "headers": obj.get("headers"),
             "modelId": obj.get("modelId"),
             "reasoning": obj.get("reasoning"),
+            "reasoningSupport": AiReasoningSupport.from_dict(obj["reasoningSupport"]) if obj.get("reasoningSupport") is not None else None,
             "capabilities": obj.get("capabilities"),
             "canUseTool": obj.get("canUseTool"),
             "useResponsesApi": obj.get("useResponsesApi"),

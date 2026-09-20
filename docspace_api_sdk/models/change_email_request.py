@@ -31,8 +31,8 @@ class ChangeEmailRequest(BaseModel):
     """
     The request parameters for updating a user email.
     """ # noqa: E501
-    email: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The user email address.", json_schema_extra={"examples": ["john.doe@example.com"]})
-    enc_email: Optional[StrictStr] = Field(default=None, description="The user encrypted email address.", alias="encEmail", json_schema_extra={"examples": ["encrypted_email_string"]})
+    email: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The new address in plain text, up to 255 characters. It is stored in lowercase, and one of this field and  `encEmail` is required.", json_schema_extra={"examples": ["john.doe@example.com"]})
+    enc_email: Optional[StrictStr] = Field(default=None, description="The new address in the encrypted form the confirmation link carries. Pass the value from the link unchanged;  it is used only when `email` is empty.", alias="encEmail", json_schema_extra={"examples": ["encrypted_email_string"]})
     __properties: ClassVar[List[str]] = ["email", "encEmail"]
 
     model_config = ConfigDict(

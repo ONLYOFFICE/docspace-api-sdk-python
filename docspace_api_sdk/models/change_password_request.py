@@ -30,8 +30,8 @@ class ChangePasswordRequest(BaseModel):
     """
     The request parameters for updating a user password.
     """ # noqa: E501
-    password: Optional[StrictStr] = Field(default=None, description="The user password.", json_schema_extra={"examples": ["P@ssw0rd"]})
-    password_hash: Optional[StrictStr] = Field(default=None, description="The user password hash.", alias="passwordHash", json_schema_extra={"examples": ["5f4dcc3b5aa765d61d8327deb882cf99"]})
+    password: Optional[StrictStr] = Field(default=None, description="The new password in plain text. It is checked against the portal password policy and rejected with 400 when  it is too weak, then hashed by the portal. Send it only over a secure connection, and prefer `passwordHash`  when the client can compute it.", json_schema_extra={"examples": ["P@ssw0rd"]})
+    password_hash: Optional[StrictStr] = Field(default=None, description="The new password already hashed by the client, which is what the portal stores. It is a PBKDF2-HMACSHA256  hash of the plain password, computed with the salt, the iteration count and the key size the portal settings  publish, and written as lowercase hexadecimal. When it is sent, `password` is ignored and the password policy  is not applied.", alias="passwordHash", json_schema_extra={"examples": ["c1ba1a0bcbe0f0f42b6c86e1b41a1b4a4a9b4b0e3f2b7d2c1a0e9f8d7c6b5a49"]})
     __properties: ClassVar[List[str]] = ["password", "passwordHash"]
 
     model_config = ConfigDict(

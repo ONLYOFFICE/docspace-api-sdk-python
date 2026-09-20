@@ -29,14 +29,14 @@ from typing_extensions import Self
 
 class MentionWrapper(BaseModel):
     """
-    The parameters of a user mentioned in a message.
+    A user the editor may offer: to be mentioned in a comment, or to be picked when protecting a document.
     """ # noqa: E501
-    user: Optional[UserInfo] = Field(default=None, description="The user information.")
-    email: Optional[StrictStr] = Field(default=None, description="The user email address.", json_schema_extra={"examples": ["user@example.com"]})
-    id: Optional[StrictStr] = Field(default=None, description="The user unique identification.", json_schema_extra={"examples": ["user_0001"]})
-    image: Optional[StrictStr] = Field(default=None, description="The path to the user's avatar.", json_schema_extra={"examples": ["https://portal.example.com/avatar/user_0001.png"]})
-    has_access: Optional[StrictBool] = Field(default=None, description="Specifies whether the user has the access to the file where they are mentioned.", alias="hasAccess", json_schema_extra={"examples": [True]})
-    name: Optional[StrictStr] = Field(default=None, description="The user full name.", json_schema_extra={"examples": ["John Doe"]})
+    user: Optional[UserInfo] = Field(default=None, description="The account itself, in the shape the people listings use.")
+    email: Optional[StrictStr] = Field(default=None, description="Where a mention notification for this user is delivered.", json_schema_extra={"examples": ["user@example.com"]})
+    id: Optional[StrictStr] = Field(default=None, description="The account id as text, the same value the account object carries; it is what identifies the user in a sharing  request built from this list.", json_schema_extra={"examples": ["user_0001"]})
+    image: Optional[StrictStr] = Field(default=None, description="An absolute address of the medium-sized avatar. A generated default avatar is reported when the user never  uploaded one, so the field is never empty.", json_schema_extra={"examples": ["https://portal.example.com/avatar/user_0001.png"]})
+    has_access: Optional[StrictBool] = Field(default=None, description="Not filled in by the operations that return this list: it always comes back false. Whether a user can already  open the document has to be read from the sharing settings of the file.", alias="hasAccess", json_schema_extra={"examples": [True]})
+    name: Optional[StrictStr] = Field(default=None, description="The name to display, assembled the way the portal is configured to show names.", json_schema_extra={"examples": ["John Doe"]})
     __properties: ClassVar[List[str]] = ["user", "email", "id", "image", "hasAccess", "name"]
 
     model_config = ConfigDict(

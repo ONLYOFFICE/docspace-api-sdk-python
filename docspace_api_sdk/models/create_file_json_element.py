@@ -30,12 +30,12 @@ from typing_extensions import Self
 
 class CreateFileJsonElement(BaseModel):
     """
-    The parameters for creating a file.
+    The parameters of a file that the portal creates from a template or a blank document.
     """ # noqa: E501
-    title: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=165)]] = Field(description="The file title for creation.", json_schema_extra={"examples": ["New Document.docx"]})
+    title: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=165)]] = Field(description="The title of the new file. The extension in it decides the format, and one of a known text, spreadsheet or  presentation format is rewritten to the DOCX, XLSX or PPTX of the portal unless `enableExternalExt` says  otherwise; a title with no extension gets DOCX added.", json_schema_extra={"examples": ["New Document.docx"]})
     template_id: Optional[CreateFileJsonElementTemplateId] = Field(default=None, alias="templateId")
-    enable_external_ext: Optional[StrictBool] = Field(default=None, description="Specifies whether to allow creating a file of an external extension or not.", alias="enableExternalExt", json_schema_extra={"examples": [False]})
-    form_id: Optional[StrictInt] = Field(default=None, description="The form ID for creation.", alias="formId", json_schema_extra={"examples": [0]})
+    enable_external_ext: Optional[StrictBool] = Field(default=None, description="Whether the extension of the title is kept as it is: `true` stores the title verbatim, `false` rewrites a  known foreign format to the format the portal edits itself.", alias="enableExternalExt", json_schema_extra={"examples": [False]})
+    form_id: Optional[StrictInt] = Field(default=None, description="A ready form from the form gallery of the portal to copy instead of a template, named by the identifier the  gallery reports for it. It takes precedence over `templateId`; 0 means no form.", alias="formId", json_schema_extra={"examples": [0]})
     __properties: ClassVar[List[str]] = ["title", "templateId", "enableExternalExt", "formId"]
 
     model_config = ConfigDict(

@@ -28,9 +28,9 @@ from typing_extensions import Self
 
 class DefaultTemplateSettingsResetRequestDto(BaseModel):
     """
-    Default templates settings reset request parameters.
+    The extension whose custom blank is dropped in favour of the built-in one.
     """ # noqa: E501
-    file_extension: Optional[StrictStr] = Field(description="File extension of a template to reset", alias="fileExtension", json_schema_extra={"examples": [".docx"]})
+    file_extension: Optional[StrictStr] = Field(description="The extension whose custom blank is dropped, written in lower case with the leading dot. Only the extensions  the portal's built-in template set covers are accepted, and `GET api/2.0/files/settings/defaulttemplate`  returns exactly that list; an extension outside it leaves the settings unchanged instead of failing.", alias="fileExtension", json_schema_extra={"examples": [".docx"]})
     __properties: ClassVar[List[str]] = ["fileExtension"]
 
     model_config = ConfigDict(

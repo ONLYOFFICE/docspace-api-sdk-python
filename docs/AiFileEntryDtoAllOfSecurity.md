@@ -1,0 +1,75 @@
+# AiFileEntryDtoAllOfSecurity
+What the calling account may do with this entry, one flag per action, and the cheapest way to decide which  operations to offer without trying them. The flags already take the room's settings and the account's role  into account.
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**read** | **bool** |  | [optional] 
+**comment** | **bool** |  | [optional] 
+**fill_forms** | **bool** |  | [optional] 
+**review** | **bool** |  | [optional] 
+**create** | **bool** |  | [optional] 
+**create_from** | **bool** |  | [optional] 
+**edit** | **bool** |  | [optional] 
+**delete** | **bool** |  | [optional] 
+**custom_filter** | **bool** |  | [optional] 
+**edit_room** | **bool** |  | [optional] 
+**rename** | **bool** |  | [optional] 
+**read_history** | **bool** |  | [optional] 
+**lock** | **bool** |  | [optional] 
+**edit_history** | **bool** |  | [optional] 
+**copy_to** | **bool** |  | [optional] 
+**copy** | **bool** |  | [optional] 
+**move_to** | **bool** |  | [optional] 
+**move** | **bool** |  | [optional] 
+**pin** | **bool** |  | [optional] 
+**mute** | **bool** |  | [optional] 
+**edit_access** | **bool** |  | [optional] 
+**duplicate** | **bool** |  | [optional] 
+**submit_to_form_gallery** | **bool** |  | [optional] 
+**download** | **bool** |  | [optional] 
+**convert** | **bool** |  | [optional] 
+**copy_shared_link** | **bool** |  | [optional] 
+**read_links** | **bool** |  | [optional] 
+**reconnect** | **bool** |  | [optional] 
+**create_room_from** | **bool** |  | [optional] 
+**copy_link** | **bool** |  | [optional] 
+**embed** | **bool** |  | [optional] 
+**change_owner** | **bool** |  | [optional] 
+**index_export** | **bool** |  | [optional] 
+**start_filling** | **bool** |  | [optional] 
+**filling_status** | **bool** |  | [optional] 
+**reset_filling** | **bool** |  | [optional] 
+**stop_filling** | **bool** |  | [optional] 
+**open_form** | **bool** |  | [optional] 
+**edit_internal** | **bool** |  | [optional] 
+**edit_expiration** | **bool** |  | [optional] 
+**vectorization** | **bool** |  | [optional] 
+**ask_ai** | **bool** |  | [optional] 
+**use_chat** | **bool** |  | [optional] 
+**update_xlsx** | **bool** |  | [optional] 
+**analyze_responses** | **bool** |  | [optional] 
+**can_use_ai** | **bool** |  | [optional] 
+**history_export** | **bool** |  | [optional] 
+
+## Example
+
+```python
+from docspace_api_sdk.models.ai_file_entry_dto_all_of_security import AiFileEntryDtoAllOfSecurity
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of AiFileEntryDtoAllOfSecurity from a JSON string
+ai_file_entry_dto_all_of_security_instance = AiFileEntryDtoAllOfSecurity.from_json(json)
+# print the JSON string representation of the object
+print(AiFileEntryDtoAllOfSecurity.to_json())
+
+# convert the object into a dict
+ai_file_entry_dto_all_of_security_dict = ai_file_entry_dto_all_of_security_instance.to_dict()
+# create an instance of AiFileEntryDtoAllOfSecurity from a dict
+ai_file_entry_dto_all_of_security_from_dict = AiFileEntryDtoAllOfSecurity.from_dict(ai_file_entry_dto_all_of_security_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

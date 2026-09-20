@@ -28,9 +28,9 @@ from typing_extensions import Self
 
 class SetAppEnabledBody(BaseModel):
     """
-    Request body for toggling an application enabled state.
+    Whether a portal application is switched on.
     """ # noqa: E501
-    enabled: Optional[StrictBool] = Field(default=None, description="Whether the application should be enabled.")
+    enabled: Optional[StrictBool] = Field(default=None, description="Whether the application is available in this portal. Switching it off leaves its settings document stored, so  switching it back on restores the configuration it had; connected clients are told of the new state without a  reload.", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["enabled"]
 
     model_config = ConfigDict(

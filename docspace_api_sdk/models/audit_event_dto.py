@@ -21,11 +21,11 @@ import pprint
 import re  # noqa: F401
 import json
 
-from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from uuid import UUID
 from docspace_api_sdk.models.action_type import ActionType
+from docspace_api_sdk.models.api_date_time import ApiDateTime
 from docspace_api_sdk.models.entry_type import EntryType
 from docspace_api_sdk.models.location_type import LocationType
 from docspace_api_sdk.models.message_action import MessageAction
@@ -35,26 +35,26 @@ from typing_extensions import Self
 
 class AuditEventDto(BaseModel):
     """
-    The audit event parameters.
+    One entry of the portal audit trail: who changed what, from where, and where it belongs in the product.
     """ # noqa: E501
-    id: Optional[StrictInt] = Field(default=None, description="The audit event ID.", json_schema_extra={"examples": [1]})
-    var_date: Optional[datetime] = Field(default=None, description="The audit event date.", alias="date", json_schema_extra={"examples": ["2024-01-15T10:30:00Z"]})
-    user: Optional[StrictStr] = Field(default=None, description="The name of the user who triggered the audit event.", json_schema_extra={"examples": ["John Doe"]})
-    user_id: Optional[UUID] = Field(default=None, description="The ID of the user who triggered the audit event.", alias="userId", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000001"]})
-    action: Optional[StrictStr] = Field(default=None, description="The audit event action.", json_schema_extra={"examples": ["User logged in"]})
-    action_id: Optional[MessageAction] = Field(default=None, description="The specific action that occurred within the audit event.", alias="actionId")
-    ip: Optional[StrictStr] = Field(default=None, description="The audit event IP.", json_schema_extra={"examples": ["192.0.2.1"]})
-    country: Optional[StrictStr] = Field(default=None, description="The audit event country.", json_schema_extra={"examples": ["United States"]})
-    city: Optional[StrictStr] = Field(default=None, description="The audit event city.", json_schema_extra={"examples": ["New York"]})
-    browser: Optional[StrictStr] = Field(default=None, description="The audit event browser.", json_schema_extra={"examples": ["Chrome 120.0"]})
-    platform: Optional[StrictStr] = Field(default=None, description="The audit event platform.", json_schema_extra={"examples": ["Windows"]})
-    page: Optional[StrictStr] = Field(default=None, description="The audit event page.", json_schema_extra={"examples": ["/rooms/shared"]})
-    action_type: Optional[ActionType] = Field(default=None, description="The type of action performed in the audit event (e.g., Create, Update, Delete).", alias="actionType")
-    product: Optional[ProductType] = Field(default=None, description="The type of product related to the audit event.")
-    location: Optional[LocationType] = Field(default=None, description="The location where the audit event occurred.")
-    target: Optional[List[StrictStr]] = Field(default=None, description="The list of target objects affected by the audit event (e.g., document ID, user account).", json_schema_extra={"examples": [["item1", "item2"]]})
-    entries: Optional[List[EntryType]] = Field(default=None, description="The list of audit entry types (e.g., Folder, User, File).", json_schema_extra={"examples": [["File", "Folder"]]})
-    context: Optional[StrictStr] = Field(default=None, description="The audit event context.", json_schema_extra={"examples": ["Security settings updated"]})
+    id: Optional[StrictInt] = Field(default=None, description="The ID of the recorded entry. Nothing accepts it as an argument - no operation fetches a single audit event  - so it serves only to tell two otherwise identical entries apart.", json_schema_extra={"examples": [1]})
+    var_date: Optional[ApiDateTime] = Field(default=None, description="When the action happened, in the portal time zone. The `from` and `to` filters are read as UTC instants, so  the two do not line up on a portal that is not on UTC.", alias="date")
+    user: Optional[StrictStr] = Field(default=None, description="The display name of the user who acted, taken from the account as it stands now rather than as it stood  when the entry was written. A localised placeholder stands in when there is no account to read: a portal  background job, an anonymous guest, or a user who has since been deleted.", json_schema_extra={"examples": ["John Doe"]})
+    user_id: Optional[UUID] = Field(default=None, description="The ID of the user who acted, which is what the `userId` filter of this operation matches on. It stays  readable after the account is deleted, which is when `user` falls back to a placeholder.", alias="userId", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000001"]})
+    action: Optional[StrictStr] = Field(default=None, description="The whole event as a readable sentence in the portal language, with the names of the objects involved  substituted into it. On the two `audit/.../last` operations each substituted value is cut to 50 characters;  the filtered operations substitute them in full. It is empty when the build has no wording for the action.", json_schema_extra={"examples": ["User logged in"]})
+    action_id: Optional[MessageAction] = Field(default=None, description="The action itself, as the `action` filter of this operation spells it and as  `GET api/2.0/security/audit/mappers` lists it under `messageAction`. Use this rather than parsing `action`,  which is prose and changes with the portal language.", alias="actionId")
+    ip: Optional[StrictStr] = Field(default=None, description="The IP address the request came from, with the port stripped off. It is empty for an action a portal  background job performed, which has no request behind it.", json_schema_extra={"examples": ["192.0.2.1"]})
+    country: Optional[StrictStr] = Field(default=None, description="The English name of the country the IP address is located in, empty when the address cannot be located -  the normal outcome for private and loopback addresses.", json_schema_extra={"examples": ["United States"]})
+    city: Optional[StrictStr] = Field(default=None, description="The city the IP address is located in, empty under the same conditions as `country`.", json_schema_extra={"examples": ["New York"]})
+    browser: Optional[StrictStr] = Field(default=None, description="The browser and its version as parsed from the user agent of the request, empty when the client sent none  that could be parsed or when no request was involved.", json_schema_extra={"examples": ["Chrome 120.0"]})
+    platform: Optional[StrictStr] = Field(default=None, description="The operating system as parsed from the same user agent, empty under the same conditions as `browser`.", json_schema_extra={"examples": ["Windows"]})
+    page: Optional[StrictStr] = Field(default=None, description="Where in the portal the action was made from: the referrer of the request, or that request's own path when  it carried no referrer. Long values are cut off at 512 characters.", json_schema_extra={"examples": ["/rooms/shared"]})
+    action_type: Optional[ActionType] = Field(default=None, description="The kind of change the action stands for, as the `actionType` filter of this operation spells it. It is  derived from `actionId`, not stored per entry, so it is the same on every entry of one action.", alias="actionType")
+    product: Optional[ProductType] = Field(default=None, description="The product the action belongs to. It cannot be filtered on here; the tree that groups actions by product  is `GET api/2.0/security/audit/mappers`.")
+    location: Optional[LocationType] = Field(default=None, description="The location inside that product, as the `moduleType` filter of this operation spells it. It is also  derived from `actionId` rather than stored per entry.")
+    target: Optional[List[StrictStr]] = Field(default=None, description="The objects the action was applied to, as the trail recorded them - a title, an account, an ID - one string  each. It is empty for an action that targets nothing, such as a settings change, and the `target` filter of  this operation matches one of these values in full.", json_schema_extra={"examples": [["item1", "item2"]]})
+    entries: Optional[List[EntryType]] = Field(default=None, description="The kinds of object the action applies to, holding at most two entries and none at all for an action that  targets nothing. Only the first of them can be filtered on, through `entryType`.", json_schema_extra={"examples": [["File", "Folder"]]})
+    context: Optional[StrictStr] = Field(default=None, description="Where the action took place, spelled out in the portal language rather than as a code: for a Documents  event the room or the root folder it happened in, and for anything else the name of the module. Nothing  filters on it.", json_schema_extra={"examples": ["Security settings updated"]})
     __properties: ClassVar[List[str]] = ["id", "date", "user", "userId", "action", "actionId", "ip", "country", "city", "browser", "platform", "page", "actionType", "product", "location", "target", "entries", "context"]
 
     model_config = ConfigDict(
@@ -96,11 +96,9 @@ class AuditEventDto(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # set to None if var_date (nullable) is None
-        # and model_fields_set contains the field
-        if self.var_date is None and "var_date" in self.model_fields_set:
-            _dict['date'] = None
-
+        # override the default output from pydantic by calling `to_dict()` of var_date
+        if self.var_date:
+            _dict['date'] = self.var_date.to_dict()
         # set to None if user (nullable) is None
         # and model_fields_set contains the field
         if self.user is None and "user" in self.model_fields_set:
@@ -170,7 +168,7 @@ class AuditEventDto(BaseModel):
 
         _obj = cls.model_validate({
             "id": obj.get("id"),
-            "date": obj.get("date"),
+            "date": ApiDateTime.from_dict(obj["date"]) if obj.get("date") is not None else None,
             "user": obj.get("user"),
             "userId": obj.get("userId"),
             "action": obj.get("action"),

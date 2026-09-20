@@ -32,7 +32,7 @@ class AiPromptMutationResult(BaseModel):
     """
     Outcome of `create` / `update` / `move` on a prompt — either the persisted prompt or a field-scoped error.
     """ # noqa: E501
-    success: StrictBool = Field(description="True when the prompt was persisted.")
+    success: StrictBool = Field(description="True when the prompt was persisted.", json_schema_extra={"examples": [True]})
     prompt: Optional[AiPrompt] = Field(default=None, description="The persisted prompt. Present on success.")
     error: Optional[AiTErrorData] = Field(default=None, description="Why the prompt was rejected. Present on failure.")
     __properties: ClassVar[List[str]] = ["success", "prompt", "error"]

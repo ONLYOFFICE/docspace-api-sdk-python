@@ -32,9 +32,9 @@ class GroupRequestDto(BaseModel):
     """
     The group request parameters.
     """ # noqa: E501
-    members: Optional[List[UUID]] = Field(default=None, description="The list of group member IDs.", json_schema_extra={"examples": [["00000000-0000-0000-0000-000000000000", "11111111-1111-1111-1111-111111111111"]]})
-    group_manager: Optional[UUID] = Field(default=None, description="The group manager ID.", alias="groupManager", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000000"]})
-    group_name: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=128)]] = Field(description="The group name.", alias="groupName", json_schema_extra={"examples": ["Marketing Team"]})
+    members: Optional[List[UUID]] = Field(default=None, description="The accounts to put into the new group. Every one of them has to be an active member that is not a guest,  otherwise the whole call is rejected. Omit it to create an empty group.", json_schema_extra={"examples": [["00000000-0000-0000-0000-000000000000", "11111111-1111-1111-1111-111111111111"]]})
+    group_manager: Optional[UUID] = Field(default=None, description="The account to make the manager of the new group. It is added to the group as well, so it does not have to be  repeated in `members`. Omit it to create a group without a manager.", alias="groupManager", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000000"]})
+    group_name: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=128)]] = Field(description="The name of the group, from 1 to 128 characters. It is required, it may not be blank, and it does not have to  be unique.", alias="groupName", json_schema_extra={"examples": ["Marketing Team"]})
     __properties: ClassVar[List[str]] = ["members", "groupManager", "groupName"]
 
     model_config = ConfigDict(

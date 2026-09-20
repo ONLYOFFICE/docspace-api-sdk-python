@@ -31,14 +31,14 @@ from typing_extensions import Self
 
 class RoomGroupDto(BaseModel):
     """
-    The room security parameters.
+    A personal collection of rooms: the name and icon it was given, the account that owns it, and the rooms it gathers  at the moment it was read.
     """ # noqa: E501
-    id: Optional[StrictInt] = Field(default=None, description="The group ID.", json_schema_extra={"examples": [1]})
-    name: Optional[StrictStr] = Field(default=None, description="Group name", json_schema_extra={"examples": ["My Group"]})
-    icon: Optional[MultiSizeLogoCover] = Field(default=None, description="Group icon")
-    user_id: Optional[UUID] = Field(default=None, description="The user ID.", alias="userId", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000000"]})
-    rooms: Optional[List[FileEntryBaseDto]] = Field(default=None, description="The list of rooms in the group.", json_schema_extra={"examples": [[{"id": 1, "title": "Room 1"}, {"id": 2, "title": "Room 2"}]]})
-    total_rooms: Optional[StrictInt] = Field(default=None, description="Total number of rooms in the group.", alias="totalRooms", json_schema_extra={"examples": [2]})
+    id: Optional[StrictInt] = Field(default=None, description="The identifier of the group, which addresses it in every other group operation and is kept for as long as the  group exists.", json_schema_extra={"examples": [42]})
+    name: Optional[StrictStr] = Field(default=None, description="The name its owner gave the group, stored trimmed of surrounding spaces. Names are not unique, so two groups  of the same account can be told apart only by their identifier.", json_schema_extra={"examples": ["Client projects"]})
+    icon: Optional[MultiSizeLogoCover] = Field(default=None, description="The built-in cover chosen for the group, carrying the cover identifier and its rendering in each available  size. Null when the group has no icon, either because it was never given one or because the icon was cleared  by setting it to an empty value.")
+    user_id: Optional[UUID] = Field(default=None, description="The account that created the group and the only one able to read, change or delete it; for any other member of  the portal the group does not exist.", alias="userId", json_schema_extra={"examples": ["9a1b2c3d-4e5f-6071-8293-a4b5c6d7e8f9"]})
+    rooms: Optional[List[FileEntryBaseDto]] = Field(default=None, description="The rooms the group gathers, those stored in the portal first and those on connected third-party accounts  after them. Null when the group was asked for without its members, and an empty array when the group holds no  room the caller can still see. A room moved to the archive is left out until it is taken out of the archive.", json_schema_extra={"examples": [[{"title": "Client onboarding", "fileEntryType": 1}]]})
+    total_rooms: Optional[StrictInt] = Field(default=None, description="How many rooms the group shows: the same rooms `rooms` lists, so archived ones are not counted either. It is  filled even when the rooms themselves were not asked for, which makes it the cheap way to tell an empty group  from a populated one.", alias="totalRooms", json_schema_extra={"examples": [2]})
     __properties: ClassVar[List[str]] = ["id", "name", "icon", "userId", "rooms", "totalRooms"]
 
     model_config = ConfigDict(

@@ -32,13 +32,13 @@ from docspace_api_sdk.models.file_operation_request_base_dto import FileOperatio
 
 class DeleteBatchRequestDto(FileOperationRequestBaseDto):
     """
-    The request parameters for deleting files.
+    The files and folders to delete, and how final the deletion is.
     """
 
-    folder_ids: Optional[List[DeleteBatchRequestDtoAllOfFolderIds]] = Field(default=None, description="The list of folder IDs to be deleted.", alias="folderIds", json_schema_extra={"examples": [[1, 2, 3]]})
-    file_ids: Optional[List[DeleteBatchRequestDtoAllOfFileIds]] = Field(default=None, description="The list of file IDs to be deleted.", alias="fileIds", json_schema_extra={"examples": [[1, 2, 3]]})
-    delete_after: Optional[StrictBool] = Field(default=None, description="Specifies whether to delete a file after the editing session is finished or not", alias="deleteAfter", json_schema_extra={"examples": [False]})
-    immediately: Optional[StrictBool] = Field(default=None, description="Specifies whether to move a file to the \\Trash\\ folder or delete it immediately.", json_schema_extra={"examples": [False]})
+    folder_ids: Optional[List[DeleteBatchRequestDtoAllOfFolderIds]] = Field(default=None, description="The folders to delete, by id, each with everything it contains. A number addresses a folder stored in the  portal itself, a string addresses a folder on a connected third-party account, and both kinds may be sent in  one list.", alias="folderIds", json_schema_extra={"examples": [[1, 2, 3]]})
+    file_ids: Optional[List[DeleteBatchRequestDtoAllOfFileIds]] = Field(default=None, description="The files to delete, by id. A number addresses a file stored in the portal itself, a string addresses a file  on a connected third-party account, and both kinds may be sent in one list.", alias="fileIds", json_schema_extra={"examples": [[1, 2, 3]]})
+    delete_after: Optional[StrictBool] = Field(default=None, description="Whether the finished operation is still reported: `false` keeps its final record readable through  `GET api/2.0/files/fileops` until it has been read once, `true` drops the record as soon as the work is done.  It does not postpone the deletion and does not delete anything of its own.", alias="deleteAfter", json_schema_extra={"examples": [False]})
+    immediately: Optional[StrictBool] = Field(default=None, description="Where the deleted items go: `false` moves them to the Trash of the caller, from which they can be restored,  `true` removes them at once and for good.", json_schema_extra={"examples": [False]})
 
     model_config = ConfigDict(
         populate_by_name=True,

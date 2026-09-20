@@ -28,10 +28,10 @@ from typing_extensions import Self
 
 class Delete(BaseModel):
     """
-    The parameters for deleting a file.
+    The parameters of a single file deletion.
     """ # noqa: E501
-    delete_after: Optional[StrictBool] = Field(default=None, description="Specifies whether to delete a file after the editing session is finished or not.", alias="deleteAfter", json_schema_extra={"examples": [False]})
-    immediately: Optional[StrictBool] = Field(default=None, description="Specifies whether to move a file to the \\Trash\\ folder or delete it immediately.", json_schema_extra={"examples": [False]})
+    delete_after: Optional[StrictBool] = Field(default=None, description="When to delete: `true` waits until the editing session on the file has ended, `false` deletes at once, pulling  the file away from whoever is working on it.", alias="deleteAfter", json_schema_extra={"examples": [False]})
+    immediately: Optional[StrictBool] = Field(default=None, description="Where the file goes: `false` moves it to Trash, from where it can be restored, `true` deletes it for good.  Inside a room, where there is no Trash, deletion is always final.", json_schema_extra={"examples": [False]})
     __properties: ClassVar[List[str]] = ["deleteAfter", "immediately"]
 
     model_config = ConfigDict(

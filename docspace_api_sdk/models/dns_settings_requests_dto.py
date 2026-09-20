@@ -28,10 +28,10 @@ from typing_extensions import Self
 
 class DnsSettingsRequestsDto(BaseModel):
     """
-    The request parameters for managing the DNS (Domain Name System) settings.
+    The custom domain the portal answers on, and whether that mapping is in force.
     """ # noqa: E501
-    dns_name: Optional[StrictStr] = Field(default=None, description="The DNS (Domain Name System) configuration name.", alias="dnsName", json_schema_extra={"examples": ["example.com"]})
-    enable: Optional[StrictBool] = Field(default=None, description="Specifies whether the DNS settings are enabled.", json_schema_extra={"examples": [True]})
+    dns_name: Optional[StrictStr] = Field(default=None, description="The domain the portal is to be reachable under, as a bare hostname without a scheme. It must not collide with  the reserved base domain of the installation, and a name that fails validation is refused without disturbing  the mapping in force. It is read only while `enable` is true.", alias="dnsName", json_schema_extra={"examples": ["example.com"]})
+    enable: Optional[StrictBool] = Field(default=None, description="Whether the custom domain is put in force. Setting it false clears the mapping and ignores `dnsName`; setting  it true also stops the previous domain from answering and rewrites any Content Security Policy entry that  named it.", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["dnsName", "enable"]
 
     model_config = ConfigDict(

@@ -31,11 +31,11 @@ from typing_extensions import Self
 
 class InvitationLinkCreateRequestDto(BaseModel):
     """
-    The request parameters for creating an invitation link.
+    The role a new invitation link grants, and the limits placed on it.
     """ # noqa: E501
-    employee_type: EmployeeType = Field(description="The type of employee role for the invitation link (DocSpaceAdmin, RoomAdmin or User).", alias="employeeType")
-    expiration: Optional[datetime] = Field(default=None, description="The expiration date of the invitation link.", json_schema_extra={"examples": ["2025-06-15T10:30:00.0000000Z"]})
-    max_use_count: Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]] = Field(default=None, description="The maximum number of times the invitation link can be used.", alias="maxUseCount", json_schema_extra={"examples": [1]})
+    employee_type: EmployeeType = Field(description="The role whoever follows the link joins with. Only `DocSpaceAdmin`, `RoomAdmin` and `User` are accepted, and  the role cannot be changed afterwards - delete the link and create one for the other role instead.", alias="employeeType")
+    expiration: Optional[datetime] = Field(default=None, description="When the link stops letting anyone in, read in the portal time zone. It has to lie in the future; leaving it  out creates a link with no deadline at all.", json_schema_extra={"examples": ["2025-06-15T10:30:00.0000000Z"]})
+    max_use_count: Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]] = Field(default=None, description="How many accounts may join through the link in total. Leaving it out creates a link with no use limit; the  uses spent so far are reported as `currentUseCount`.", alias="maxUseCount", json_schema_extra={"examples": [1]})
     __properties: ClassVar[List[str]] = ["employeeType", "expiration", "maxUseCount"]
 
     model_config = ConfigDict(

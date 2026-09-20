@@ -28,9 +28,9 @@ from typing_extensions import Self
 
 class AnonymousConfigDto(BaseModel):
     """
-    The anonymous config parameters.
+    How the editors treat a participant who opened the document without an account.
     """ # noqa: E501
-    request: StrictBool = Field(description="Specifies if the anonymous is a request.", json_schema_extra={"examples": [False]})
+    request: StrictBool = Field(description="Whether the editors ask an anonymous participant for a display name before letting them in. It follows the  chat permission of the document, since a nameless participant cannot take part in one.", json_schema_extra={"examples": [False]})
     __properties: ClassVar[List[str]] = ["request"]
 
     model_config = ConfigDict(

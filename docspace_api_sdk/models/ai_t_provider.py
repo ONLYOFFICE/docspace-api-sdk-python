@@ -32,9 +32,9 @@ class AiTProvider(BaseModel):
     Minimal provider connection configuration. Used to connect to a provider API.
     """ # noqa: E501
     type: AiProviderType = Field(description="Provider type identifier.")
-    name: StrictStr = Field(description="User-defined display name for this provider connection.")
-    key: Optional[StrictStr] = Field(default=None, description="API key or token. Optional for local providers (Ollama, LM Studio).")
-    base_url: StrictStr = Field(description="Base URL of the provider API.", alias="baseUrl")
+    name: StrictStr = Field(description="User-defined display name for this provider connection.", json_schema_extra={"examples": ["OpenAI GPT-4o"]})
+    key: Optional[StrictStr] = Field(default=None, description="API key or token. Optional for local providers (Ollama, LM Studio).", json_schema_extra={"examples": ["sk-your-provider-api-key"]})
+    base_url: StrictStr = Field(description="Base URL of the provider API.", alias="baseUrl", json_schema_extra={"examples": ["https://api.openai.com/v1"]})
     __properties: ClassVar[List[str]] = ["type", "name", "key", "baseUrl"]
 
     model_config = ConfigDict(

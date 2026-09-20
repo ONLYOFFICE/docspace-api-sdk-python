@@ -28,9 +28,9 @@ from typing_extensions import Self
 
 class StorageEncryptionRequestsDto(BaseModel):
     """
-    The request parameters for managing storage encryption operations and notifications.
+    Whether the users are warned before the portals go down for the storage encryption pass.
     """ # noqa: E501
-    notify_users: Optional[StrictBool] = Field(default=None, description="Specifies whether the users receive notifications about the storage encryption operations.", alias="notifyUsers", json_schema_extra={"examples": [True]})
+    notify_users: Optional[StrictBool] = Field(default=None, description="Whether every user of every portal on the server is mailed before the encryption or decryption pass starts.  The pass runs either way; the flag only decides whether people are told that their portal is about to become  unavailable.", alias="notifyUsers", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["notifyUsers"]
 
     model_config = ConfigDict(

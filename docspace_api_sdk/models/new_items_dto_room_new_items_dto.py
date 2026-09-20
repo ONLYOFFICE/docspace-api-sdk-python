@@ -21,19 +21,19 @@ import pprint
 import re  # noqa: F401
 import json
 
-from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List, Optional
+from docspace_api_sdk.models.api_date_time import ApiDateTime
 from docspace_api_sdk.models.room_new_items_dto import RoomNewItemsDto
 from typing import Optional, Set
 from typing_extensions import Self
 
 class NewItemsDtoRoomNewItemsDto(BaseModel):
     """
-    The new item parameters.
+    One day of the entries the caller has not opened yet, the groups running from the most recent day backwards.
     """ # noqa: E501
-    var_date: Optional[datetime] = Field(description="The date and time when the new item was created.", alias="date", json_schema_extra={"examples": ["2025-01-01T00:00:00Z"]})
-    items: Optional[List[RoomNewItemsDto]] = Field(description="The list of items.")
+    var_date: ApiDateTime = Field(description="The day the grouped entries were last changed, written with the offset of the portal time zone. The time part  is the moment of the newest entry of the group.", alias="date")
+    items: Optional[List[RoomNewItemsDto]] = Field(description="What changed on that day, the most recent first. Folders are left out of it, so an entry here is always a file  or a room that holds them.")
     __properties: ClassVar[List[str]] = ["date", "items"]
 
     model_config = ConfigDict(
@@ -75,6 +75,9 @@ class NewItemsDtoRoomNewItemsDto(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of var_date
+        if self.var_date:
+            _dict['date'] = self.var_date.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in items (list)
         _items = []
         if self.items:
@@ -82,11 +85,6 @@ class NewItemsDtoRoomNewItemsDto(BaseModel):
                 if _item_items:
                     _items.append(_item_items.to_dict())
             _dict['items'] = _items
-        # set to None if var_date (nullable) is None
-        # and model_fields_set contains the field
-        if self.var_date is None and "var_date" in self.model_fields_set:
-            _dict['date'] = None
-
         # set to None if items (nullable) is None
         # and model_fields_set contains the field
         if self.items is None and "items" in self.model_fields_set:
@@ -105,7 +103,7 @@ class NewItemsDtoRoomNewItemsDto(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "date": obj.get("date"),
+            "date": ApiDateTime.from_dict(obj["date"]) if obj.get("date") is not None else None,
             "items": [RoomNewItemsDto.from_dict(_item) for _item in obj["items"]] if obj.get("items") is not None else None
         })
         return _obj

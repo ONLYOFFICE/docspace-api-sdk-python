@@ -21,6 +21,7 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
+from typing import List
 from docspace_api_sdk.models.scope_response import ScopeResponse
 
 from docspace_api_sdk.api_client import ApiClient, RequestSerialized
@@ -57,10 +58,10 @@ class ScopeManagementApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ScopeResponse:
+    ) -> List[ScopeResponse]:
         """List available OAuth2 scopes
 
-        Retrieves a list of all available OAuth2 scopes for the specified tenant. The scopes define the permissions that can be requested by OAuth2 clients. The list is ordered alphabetically, with the 'openid' scope always appearing first.
+        Retrieves a list of all available OAuth2 scopes for the specified tenant. The scopes define the permissions that can be requested by OAuth2 clients. The list is ordered alphabetically, with the 'openid' scope always appearing first. It is a read-only catalogue that does not depend on which clients exist: a valid portal signature is the only requirement, with no role restriction, and every caller of the portal sees the same list.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -92,11 +93,12 @@ class ScopeManagementApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ScopeResponse",
-            '400': "ProblemDetail",
+            '200': "List[ScopeResponse]",
             '403': "ProblemDetail",
+            '406': "ProblemDetail",
             '429': "ProblemDetail",
             '500': "ProblemDetail",
+            '405': "ProblemDetail",
         }
 
         response_data = self.api_client.call_api(
@@ -125,10 +127,10 @@ class ScopeManagementApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[ScopeResponse]:
+    ) -> ApiResponse[List[ScopeResponse]]:
         """List available OAuth2 scopes
 
-        Retrieves a list of all available OAuth2 scopes for the specified tenant. The scopes define the permissions that can be requested by OAuth2 clients. The list is ordered alphabetically, with the 'openid' scope always appearing first.
+        Retrieves a list of all available OAuth2 scopes for the specified tenant. The scopes define the permissions that can be requested by OAuth2 clients. The list is ordered alphabetically, with the 'openid' scope always appearing first. It is a read-only catalogue that does not depend on which clients exist: a valid portal signature is the only requirement, with no role restriction, and every caller of the portal sees the same list.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -160,11 +162,12 @@ class ScopeManagementApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ScopeResponse",
-            '400': "ProblemDetail",
+            '200': "List[ScopeResponse]",
             '403': "ProblemDetail",
+            '406': "ProblemDetail",
             '429': "ProblemDetail",
             '500': "ProblemDetail",
+            '405': "ProblemDetail",
         }
 
         response_data = self.api_client.call_api(
@@ -196,7 +199,7 @@ class ScopeManagementApi:
     ) -> RESTResponseType:
         """List available OAuth2 scopes
 
-        Retrieves a list of all available OAuth2 scopes for the specified tenant. The scopes define the permissions that can be requested by OAuth2 clients. The list is ordered alphabetically, with the 'openid' scope always appearing first.
+        Retrieves a list of all available OAuth2 scopes for the specified tenant. The scopes define the permissions that can be requested by OAuth2 clients. The list is ordered alphabetically, with the 'openid' scope always appearing first. It is a read-only catalogue that does not depend on which clients exist: a valid portal signature is the only requirement, with no role restriction, and every caller of the portal sees the same list.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -228,11 +231,12 @@ class ScopeManagementApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ScopeResponse",
-            '400': "ProblemDetail",
+            '200': "List[ScopeResponse]",
             '403': "ProblemDetail",
+            '406': "ProblemDetail",
             '429': "ProblemDetail",
             '500': "ProblemDetail",
+            '405': "ProblemDetail",
         }
 
         response_data = self.api_client.call_api(
@@ -286,7 +290,7 @@ class ScopeManagementApi:
         ]
 
 
-        resource_path = "/api/2.0/scopes"
+        resource_path = "/api/2.0/oauth2/scopes"
 
         return self.api_client.param_serialize(
             method='GET',

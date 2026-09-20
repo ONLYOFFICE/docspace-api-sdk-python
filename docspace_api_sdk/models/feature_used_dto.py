@@ -28,10 +28,10 @@ from typing_extensions import Self
 
 class FeatureUsedDto(BaseModel):
     """
-    The used space parameters of the tenant quota feature.
+    How much of one quota feature the portal has already consumed.
     """ # noqa: E501
     value: Optional[Any]
-    title: Optional[StrictStr] = Field(default=None, description="The used space title.", json_schema_extra={"examples": ["50 GB used"]})
+    title: Optional[StrictStr] = Field(default=None, description="The same figure as a sentence in the portal language, ready to print. It is empty when this build ships no  wording for the feature.", json_schema_extra={"examples": ["50 GB used"]})
     __properties: ClassVar[List[str]] = ["value", "title"]
 
     model_config = ConfigDict(

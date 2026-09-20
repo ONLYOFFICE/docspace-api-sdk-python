@@ -30,10 +30,10 @@ from typing_extensions import Self
 
 class WhiteLabelRequestsDto(BaseModel):
     """
-    The request parameters for configuring the white label branding settings.
+    The branding a portal is given: the wordmark, the logo images, or both.
     """ # noqa: E501
-    logo_text: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=40)]] = Field(default=None, description="The text to display alongside or in place of the logo.", alias="logoText", json_schema_extra={"examples": ["Company Name"]})
-    logo: Optional[List[ItemKeyValuePairStringLogoRequestsDto]] = Field(default=None, description="The white label tenant IDs with their logos (light or dark).", json_schema_extra={"examples": [["item1", "item2"]]})
+    logo_text: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=40)]] = Field(default=None, description="The wordmark printed next to or instead of a logo image, on the login page, in the editors and in  notification letters. An empty or blank value, and the built-in `ONLYOFFICE` itself, clear the setting rather  than store it. The text is not rendered into the logo images, which carry their own wordmark.", alias="logoText", json_schema_extra={"examples": ["Company Name"]})
+    logo: Optional[List[ItemKeyValuePairStringLogoRequestsDto]] = Field(default=None, description="The logo images to store, each entry naming a logo slot in its `key` - the numeric `type` published by  `GET api/2.0/settings/whitelabel/logos` - and carrying the two theme images in its value. A slot left out of  the list keeps the image it has, so this is a partial update rather than a replacement of the whole branding.  Saving the login-page slot also rebuilds the notification logo from it.", json_schema_extra={"examples": [["item1", "item2"]]})
     __properties: ClassVar[List[str]] = ["logoText", "logo"]
 
     model_config = ConfigDict(

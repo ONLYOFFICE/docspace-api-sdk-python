@@ -29,10 +29,10 @@ from typing_extensions import Self
 
 class AutoCleanUpData(BaseModel):
     """
-    The auto-clearing setting parameters.
+    The trash auto-clearing setting of an account.
     """ # noqa: E501
-    is_auto_clean_up: Optional[StrictBool] = Field(default=None, description="Specifies whether to permanently delete files in the Trash folder.", alias="isAutoCleanUp", json_schema_extra={"examples": [False]})
-    gap: Optional[DateToAutoCleanUp] = Field(default=None, description="The period when the trash bin will be cleared.")
+    is_auto_clean_up: Optional[StrictBool] = Field(default=None, description="Whether the trash of the account is cleared automatically. While it is false nothing is removed by the portal  and the interval below is kept but unused.", alias="isAutoCleanUp", json_schema_extra={"examples": [False]})
+    gap: Optional[DateToAutoCleanUp] = Field(default=None, description="How long an item may stay in the trash before it is removed for good. It is reported even while clearing is  off, and it is what the moment in the `autoDelete` field of a trashed entry is computed from.")
     __properties: ClassVar[List[str]] = ["isAutoCleanUp", "gap"]
 
     model_config = ConfigDict(

@@ -21,7 +21,9 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
+from pydantic import Field
 from typing import Any, Dict
+from typing_extensions import Annotated
 from docspace_api_sdk.models.ai_ai_settings_wrapper import AiAiSettingsWrapper
 from docspace_api_sdk.models.ai_ai_user_settings_wrapper import AiAiUserSettingsWrapper
 from docspace_api_sdk.models.ai_vectorization_settings_wrapper import AiVectorizationSettingsWrapper
@@ -63,7 +65,7 @@ class SettingsApi:
     ) -> AiAiSettingsWrapper:
         """Get AI settings
 
-        Reports the portal's combined AI configuration and readiness.
+        Reports the portal's AI configuration and whether AI is usable at all, which is the first call a client makes before offering any AI feature. It takes no parameters and is proxied unchanged to the DocSpace AI service, so the answer is that service's settings payload. Among other things it says whether the portal runs on the central AI gateway, which decides whether provider profiles can be edited here at all. This is a read-only operation.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -97,6 +99,8 @@ class SettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiAiSettingsWrapper",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -128,7 +132,7 @@ class SettingsApi:
     ) -> ApiResponse[AiAiSettingsWrapper]:
         """Get AI settings
 
-        Reports the portal's combined AI configuration and readiness.
+        Reports the portal's AI configuration and whether AI is usable at all, which is the first call a client makes before offering any AI feature. It takes no parameters and is proxied unchanged to the DocSpace AI service, so the answer is that service's settings payload. Among other things it says whether the portal runs on the central AI gateway, which decides whether provider profiles can be edited here at all. This is a read-only operation.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -162,6 +166,8 @@ class SettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiAiSettingsWrapper",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -193,7 +199,7 @@ class SettingsApi:
     ) -> RESTResponseType:
         """Get AI settings
 
-        Reports the portal's combined AI configuration and readiness.
+        Reports the portal's AI configuration and whether AI is usable at all, which is the first call a client makes before offering any AI feature. It takes no parameters and is proxied unchanged to the DocSpace AI service, so the answer is that service's settings payload. Among other things it says whether the portal runs on the central AI gateway, which decides whether provider profiles can be edited here at all. This is a read-only operation.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -227,6 +233,8 @@ class SettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiAiSettingsWrapper",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -276,6 +284,8 @@ class SettingsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'cookieAuth', 
+            'bearerAuth'
         ]
 
 
@@ -317,7 +327,7 @@ class SettingsApi:
     ) -> AiAiUserSettingsWrapper:
         """Get user AI settings
 
-        Returns the current user's AI settings.
+        Returns the AI settings of the calling user, as opposed to the portal-wide ones. It takes no parameters - the user is the authenticated caller, and there is no way to read somebody else's settings - and is proxied unchanged to the DocSpace AI service. Use `GET api/2.0/ai/config` for the portal-wide configuration. This is a read-only operation.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -351,6 +361,8 @@ class SettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiAiUserSettingsWrapper",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -382,7 +394,7 @@ class SettingsApi:
     ) -> ApiResponse[AiAiUserSettingsWrapper]:
         """Get user AI settings
 
-        Returns the current user's AI settings.
+        Returns the AI settings of the calling user, as opposed to the portal-wide ones. It takes no parameters - the user is the authenticated caller, and there is no way to read somebody else's settings - and is proxied unchanged to the DocSpace AI service. Use `GET api/2.0/ai/config` for the portal-wide configuration. This is a read-only operation.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -416,6 +428,8 @@ class SettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiAiUserSettingsWrapper",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -447,7 +461,7 @@ class SettingsApi:
     ) -> RESTResponseType:
         """Get user AI settings
 
-        Returns the current user's AI settings.
+        Returns the AI settings of the calling user, as opposed to the portal-wide ones. It takes no parameters - the user is the authenticated caller, and there is no way to read somebody else's settings - and is proxied unchanged to the DocSpace AI service. Use `GET api/2.0/ai/config` for the portal-wide configuration. This is a read-only operation.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -481,6 +495,8 @@ class SettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiAiUserSettingsWrapper",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -530,6 +546,8 @@ class SettingsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'cookieAuth', 
+            'bearerAuth'
         ]
 
 
@@ -571,7 +589,7 @@ class SettingsApi:
     ) -> AiVectorizationSettingsWrapper:
         """Get vectorization settings
 
-        Returns the portal's vectorization settings.
+        Returns the portal's vectorization settings - the embedding provider and the options used when portal content is indexed for retrieval. It takes no parameters and is proxied unchanged to the DocSpace AI service. Vectorization is a portal-wide setting, so there is no room-scoped form of it. Change it with `PUT api/2.0/ai/config/vectorization`.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -605,6 +623,8 @@ class SettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiVectorizationSettingsWrapper",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -636,7 +656,7 @@ class SettingsApi:
     ) -> ApiResponse[AiVectorizationSettingsWrapper]:
         """Get vectorization settings
 
-        Returns the portal's vectorization settings.
+        Returns the portal's vectorization settings - the embedding provider and the options used when portal content is indexed for retrieval. It takes no parameters and is proxied unchanged to the DocSpace AI service. Vectorization is a portal-wide setting, so there is no room-scoped form of it. Change it with `PUT api/2.0/ai/config/vectorization`.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -670,6 +690,8 @@ class SettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiVectorizationSettingsWrapper",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -701,7 +723,7 @@ class SettingsApi:
     ) -> RESTResponseType:
         """Get vectorization settings
 
-        Returns the portal's vectorization settings.
+        Returns the portal's vectorization settings - the embedding provider and the options used when portal content is indexed for retrieval. It takes no parameters and is proxied unchanged to the DocSpace AI service. Vectorization is a portal-wide setting, so there is no room-scoped form of it. Change it with `PUT api/2.0/ai/config/vectorization`.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -735,6 +757,8 @@ class SettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiVectorizationSettingsWrapper",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -784,6 +808,8 @@ class SettingsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'cookieAuth', 
+            'bearerAuth'
         ]
 
 
@@ -810,7 +836,7 @@ class SettingsApi:
     @validate_call
     def ai_settings_set_user(
         self,
-        request_body: Dict[str, Any],
+        request_body: Annotated[Dict[str, Any], Field(description="The user's AI settings, proxied unchanged to the DocSpace AI service, which owns and validates the shape. Read the current one with `GET api/2.0/ai/config/user` and send it back changed.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -826,10 +852,10 @@ class SettingsApi:
     ) -> AiAiUserSettingsWrapper:
         """Update user AI settings
 
-        Updates the current user's AI settings.
+        Replaces the AI settings of the calling user and returns the stored result. The body is proxied unchanged to the DocSpace AI service, which validates it, so a rejected value comes back with that service's verdict. Only the caller's own settings can be written. Portal-wide configuration is not touched by this operation.
 
-        :param request_body: (required)
-        :type request_body: Dict[str, object]
+        :param request_body: The user's AI settings, proxied unchanged to the DocSpace AI service, which owns and validates the shape. Read the current one with `GET api/2.0/ai/config/user` and send it back changed. (required)
+        :type request_body: Dict[str, Optional[object]]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -863,6 +889,9 @@ class SettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiAiUserSettingsWrapper",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -879,7 +908,7 @@ class SettingsApi:
     @validate_call
     def ai_settings_set_user_with_http_info(
         self,
-        request_body: Dict[str, Any],
+        request_body: Annotated[Dict[str, Any], Field(description="The user's AI settings, proxied unchanged to the DocSpace AI service, which owns and validates the shape. Read the current one with `GET api/2.0/ai/config/user` and send it back changed.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -895,10 +924,10 @@ class SettingsApi:
     ) -> ApiResponse[AiAiUserSettingsWrapper]:
         """Update user AI settings
 
-        Updates the current user's AI settings.
+        Replaces the AI settings of the calling user and returns the stored result. The body is proxied unchanged to the DocSpace AI service, which validates it, so a rejected value comes back with that service's verdict. Only the caller's own settings can be written. Portal-wide configuration is not touched by this operation.
 
-        :param request_body: (required)
-        :type request_body: Dict[str, object]
+        :param request_body: The user's AI settings, proxied unchanged to the DocSpace AI service, which owns and validates the shape. Read the current one with `GET api/2.0/ai/config/user` and send it back changed. (required)
+        :type request_body: Dict[str, Optional[object]]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -932,6 +961,9 @@ class SettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiAiUserSettingsWrapper",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -948,7 +980,7 @@ class SettingsApi:
     @validate_call
     def ai_settings_set_user_without_preload_content(
         self,
-        request_body: Dict[str, Any],
+        request_body: Annotated[Dict[str, Any], Field(description="The user's AI settings, proxied unchanged to the DocSpace AI service, which owns and validates the shape. Read the current one with `GET api/2.0/ai/config/user` and send it back changed.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -964,10 +996,10 @@ class SettingsApi:
     ) -> RESTResponseType:
         """Update user AI settings
 
-        Updates the current user's AI settings.
+        Replaces the AI settings of the calling user and returns the stored result. The body is proxied unchanged to the DocSpace AI service, which validates it, so a rejected value comes back with that service's verdict. Only the caller's own settings can be written. Portal-wide configuration is not touched by this operation.
 
-        :param request_body: (required)
-        :type request_body: Dict[str, object]
+        :param request_body: The user's AI settings, proxied unchanged to the DocSpace AI service, which owns and validates the shape. Read the current one with `GET api/2.0/ai/config/user` and send it back changed. (required)
+        :type request_body: Dict[str, Optional[object]]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1001,6 +1033,9 @@ class SettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiAiUserSettingsWrapper",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -1066,6 +1101,8 @@ class SettingsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'cookieAuth', 
+            'bearerAuth'
         ]
 
 
@@ -1092,7 +1129,7 @@ class SettingsApi:
     @validate_call
     def ai_settings_set_vectorization(
         self,
-        request_body: Dict[str, Any],
+        request_body: Annotated[Dict[str, Any], Field(description="The portal's vectorization settings, proxied unchanged to the DocSpace AI service, which owns and validates the shape. Read the current one with `GET api/2.0/ai/config/vectorization` and send it back changed.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1108,9 +1145,9 @@ class SettingsApi:
     ) -> AiVectorizationSettingsWrapper:
         """Update vectorization settings
 
-        Updates the portal's vectorization settings.
+        Replaces the portal's vectorization settings and returns the stored result. The body is proxied unchanged to the DocSpace AI service, which validates it, so a rejected value is reported with that service's own verdict rather than being checked here. Changing the embedding provider does not re-index anything already indexed - start that separately with `POST api/2.0/ai/vectorization/tasks`. This is a portal-wide setting and requires the permissions the AI service demands for it.
 
-        :param request_body: (required)
+        :param request_body: The portal's vectorization settings, proxied unchanged to the DocSpace AI service, which owns and validates the shape. Read the current one with `GET api/2.0/ai/config/vectorization` and send it back changed. (required)
         :type request_body: Dict[str, Optional[object]]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1145,6 +1182,9 @@ class SettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiVectorizationSettingsWrapper",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -1161,7 +1201,7 @@ class SettingsApi:
     @validate_call
     def ai_settings_set_vectorization_with_http_info(
         self,
-        request_body: Dict[str, Any],
+        request_body: Annotated[Dict[str, Any], Field(description="The portal's vectorization settings, proxied unchanged to the DocSpace AI service, which owns and validates the shape. Read the current one with `GET api/2.0/ai/config/vectorization` and send it back changed.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1177,9 +1217,9 @@ class SettingsApi:
     ) -> ApiResponse[AiVectorizationSettingsWrapper]:
         """Update vectorization settings
 
-        Updates the portal's vectorization settings.
+        Replaces the portal's vectorization settings and returns the stored result. The body is proxied unchanged to the DocSpace AI service, which validates it, so a rejected value is reported with that service's own verdict rather than being checked here. Changing the embedding provider does not re-index anything already indexed - start that separately with `POST api/2.0/ai/vectorization/tasks`. This is a portal-wide setting and requires the permissions the AI service demands for it.
 
-        :param request_body: (required)
+        :param request_body: The portal's vectorization settings, proxied unchanged to the DocSpace AI service, which owns and validates the shape. Read the current one with `GET api/2.0/ai/config/vectorization` and send it back changed. (required)
         :type request_body: Dict[str, Optional[object]]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1214,6 +1254,9 @@ class SettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiVectorizationSettingsWrapper",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -1230,7 +1273,7 @@ class SettingsApi:
     @validate_call
     def ai_settings_set_vectorization_without_preload_content(
         self,
-        request_body: Dict[str, Any],
+        request_body: Annotated[Dict[str, Any], Field(description="The portal's vectorization settings, proxied unchanged to the DocSpace AI service, which owns and validates the shape. Read the current one with `GET api/2.0/ai/config/vectorization` and send it back changed.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1246,9 +1289,9 @@ class SettingsApi:
     ) -> RESTResponseType:
         """Update vectorization settings
 
-        Updates the portal's vectorization settings.
+        Replaces the portal's vectorization settings and returns the stored result. The body is proxied unchanged to the DocSpace AI service, which validates it, so a rejected value is reported with that service's own verdict rather than being checked here. Changing the embedding provider does not re-index anything already indexed - start that separately with `POST api/2.0/ai/vectorization/tasks`. This is a portal-wide setting and requires the permissions the AI service demands for it.
 
-        :param request_body: (required)
+        :param request_body: The portal's vectorization settings, proxied unchanged to the DocSpace AI service, which owns and validates the shape. Read the current one with `GET api/2.0/ai/config/vectorization` and send it back changed. (required)
         :type request_body: Dict[str, Optional[object]]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1283,6 +1326,9 @@ class SettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiVectorizationSettingsWrapper",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -1348,6 +1394,8 @@ class SettingsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'cookieAuth', 
+            'bearerAuth'
         ]
 
 

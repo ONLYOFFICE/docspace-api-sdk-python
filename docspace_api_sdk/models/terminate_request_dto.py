@@ -29,9 +29,9 @@ from typing_extensions import Self
 
 class TerminateRequestDto(BaseModel):
     """
-    The request parameters for terminating the reassignment/deletion process.
+    The request parameters that address the queued job of a single user - a data reassignment, a data deletion or a  user type change.
     """ # noqa: E501
-    user_id: UUID = Field(description="The user ID whose data is reassigned/removed.", alias="userId", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000000"]})
+    user_id: UUID = Field(description="The ID of the user whose job is addressed. For a terminate operation it has to be the same ID that was passed  when the job was started.", alias="userId", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000000"]})
     __properties: ClassVar[List[str]] = ["userId"]
 
     model_config = ConfigDict(

@@ -29,9 +29,9 @@ from typing_extensions import Self
 
 class CreateTagRequestDto(BaseModel):
     """
-    The request parameters for creating a tag.
+    The parameters for adding a custom tag to the portal catalog of room tags.
     """ # noqa: E501
-    name: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(description="The tag name.", json_schema_extra={"examples": ["Important"]})
+    name: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(description="The name of the tag to create, which is also its identity: tags are addressed by name everywhere, there is no  separate identifier. It is stored exactly as sent, spacing and case included, and a name that is already in  the catalog gives back that tag instead of a second one.", json_schema_extra={"examples": ["Important"]})
     __properties: ClassVar[List[str]] = ["name"]
 
     model_config = ConfigDict(

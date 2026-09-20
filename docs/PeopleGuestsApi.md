@@ -5,13 +5,21 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**approve_guest_share_link**](#approve_guest_share_link) | **POST** /api/2.0/people/guests/share/approve | Approve a guest sharing link
-[**delete_guests**](#delete_guests) | **DELETE** /api/2.0/people/guests | Delete guests
+[**delete_guests**](#delete_guests) | **DELETE** /api/2.0/people/guests | Remove guest relations
 
 
 # **approve_guest_share_link**
 > EmployeeFullWrapper approve_guest_share_link(email_member_request_dto=email_member_request_dto)
 
-Approves a guest sharing link and returns the detailed information about a guest.
+Accepts a guest that another member shared, which links that guest to the calling account and makes it
+visible in the caller's list of guests.
+Everything the operation needs comes from the confirmation token of the link produced by
+`GET api/2.0/people/guests/{userid}/share`: the request body is not read at all, so there is nothing to fill
+in, and an expired or already used token is answered with 401.
+The caller has to be a room admin or a DocSpace admin; a member or a guest gets 403.
+The account the token names has to exist and still be a guest, otherwise the operation answers 404 or 400.
+The call is idempotent: a guest that is already linked to the caller is simply returned again.
+The answer is the full profile of the guest.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -79,13 +87,13 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Detailed profile information |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**404** | User not found |  -  |
-**403** | No permissions to perform this action |  -  |
+**200** | The full profile of the guest now linked to the caller |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | The account named by the token is not a guest |  -  |
+**403** | The caller is a member or a guest |  -  |
+**404** | The account named by the token no longer exists |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -94,7 +102,15 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **delete_guests**
 > delete_guests(update_members_request_dto=update_members_request_dto)
 
-Deletes guests from the list and excludes them from rooms to which they were invited.
+Removes the listed guests from the caller's own list of guests and withdraws the access the caller had
+granted them.
+It does not delete the accounts: each guest keeps its profile and any access other members gave it, and only
+the link to the caller and the caller's own shares disappear.
+The caller has to be a room admin or a DocSpace admin, and every listed account has to exist, be an active
+guest and be one of the caller's own guests - a single entry that is not rejects the whole call with 403 and
+changes nothing.
+The call returns no body; read `GET api/2.0/people/filter` with `area` set to `Guests` to see what is left.
+To delete a guest account for good, disable it and then use `DELETE api/2.0/people/{userid}`.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -142,7 +158,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     update_members_request_dto = docspace_api_sdk.UpdateMembersRequestDto() # UpdateMembersRequestDto |  (optional)
 
     try:
-        # Delete guests
+        # Remove guest relations
         api_instance.delete_guests(update_members_request_dto=update_members_request_dto)
     except Exception as e:
         print("Exception when calling GuestsApi->delete_guests: %s\n" % e)
@@ -159,12 +175,12 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Request parameters for deleting guests |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**403** | No permissions to perform this action |  -  |
+**200** | The guests are no longer linked to the caller. No content is returned |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | The userIds field is missing |  -  |
+**403** | The caller is not an admin, or an entry is not an active guest of the caller |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 

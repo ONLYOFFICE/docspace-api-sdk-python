@@ -28,15 +28,15 @@ from typing_extensions import Self
 
 class ThirdPartyRequestDto(BaseModel):
     """
-    The third-party request parameters.
+    The credentials and the title of a third-party storage account to connect or to re-authenticate.
     """ # noqa: E501
-    url: Optional[StrictStr] = Field(default=None, description="The connection URL for the sharepoint.", json_schema_extra={"examples": ["https://example.com"]})
-    login: Optional[StrictStr] = Field(default=None, description="The third-party request login.", json_schema_extra={"examples": ["admin"]})
-    password: Optional[StrictStr] = Field(default=None, description="The third-party request password.", json_schema_extra={"examples": ["password123"]})
-    token: Optional[StrictStr] = Field(default=None, description="The authentication token.", json_schema_extra={"examples": ["abc123"]})
-    customer_title: Optional[StrictStr] = Field(description="The customer title.", alias="customerTitle", json_schema_extra={"examples": ["My Document"]})
-    provider_key: Optional[StrictStr] = Field(description="The provider key.", alias="providerKey", json_schema_extra={"examples": ["abc123"]})
-    provider_id: Optional[StrictInt] = Field(default=None, description="The provider ID.", alias="providerId", json_schema_extra={"examples": [1]})
+    url: Optional[StrictStr] = Field(default=None, description="The address of the storage server to connect to. It is needed by the WebDAV presets whose server is not known  in advance (`WebDav`, `Nextcloud`, `ownCloud`), where it points at the WebDAV endpoint of that server, and by  `SharePoint`; the presets with a fixed address and the OAuth services ignore it.", json_schema_extra={"examples": ["https://cloud.example.com/remote.php/dav/files/admin/"]})
+    login: Optional[StrictStr] = Field(default=None, description="The account name at the storage service, used by the services that authenticate by login and password. A login  sent without a password is rejected as an invalid request.", json_schema_extra={"examples": ["admin"]})
+    password: Optional[StrictStr] = Field(default=None, description="The password, or the application password, for `login` at the storage service. Either this or `token` has to  be sent, and the credentials are verified against the service before the account is saved.", json_schema_extra={"examples": ["p@ssw0rd!"]})
+    token: Optional[StrictStr] = Field(default=None, description="The OAuth 2.0 authorization code from the consent screen of `Box`, `DropboxV2`, `GoogleDrive` or `OneDrive` -  not an access token: the portal exchanges the code for its own token and keeps that. The client ID and  redirect URL the consent screen URL is built from come from `GET api/2.0/files/thirdparty/capabilities`.", json_schema_extra={"examples": ["4/0AY0e-g5Tn8vQrM2kZs7xB1pLd9"]})
+    customer_title: Optional[StrictStr] = Field(description="The name the connected account is shown under in the portal. Characters that a folder title cannot hold are  replaced and the value is truncated, and a title that comes out of that empty is refused.", alias="customerTitle", json_schema_extra={"examples": ["Nextcloud storage"]})
+    provider_key: Optional[StrictStr] = Field(description="The storage service to connect, as the `key` of `GET api/2.0/files/thirdparty/providers`; the value is matched  case-insensitively. `Nextcloud` and `ownCloud` are presets over WebDAV and are stored and reported back as  `WebDav`.", alias="providerKey", json_schema_extra={"examples": ["Nextcloud"]})
+    provider_id: Optional[StrictInt] = Field(default=None, description="The account to re-authenticate instead of connecting a new one, as `providerId` of  `GET api/2.0/files/thirdparty`; both a number and its decimal string form are accepted. For an account  attached to the Rooms section only the credentials are applied, and its title and server address are kept.", alias="providerId", json_schema_extra={"examples": [12]})
     __properties: ClassVar[List[str]] = ["url", "login", "password", "token", "customerTitle", "providerKey", "providerId"]
 
     model_config = ConfigDict(

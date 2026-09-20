@@ -27,6 +27,7 @@ from typing_extensions import Annotated
 from docspace_api_sdk.models.ai_action_type import AiActionType
 from docspace_api_sdk.models.ai_assignment_mutation_result import AiAssignmentMutationResult
 from docspace_api_sdk.models.ai_assignments_assign_request import AiAssignmentsAssignRequest
+from docspace_api_sdk.models.ai_assignments_cascade_profile_delete_request import AiAssignmentsCascadeProfileDeleteRequest
 from docspace_api_sdk.models.ai_bulk_assignment_result import AiBulkAssignmentResult
 from docspace_api_sdk.models.ai_resolved_assignment import AiResolvedAssignment
 from docspace_api_sdk.models.ai_success_response import AiSuccessResponse
@@ -67,9 +68,9 @@ class AssignmentsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> AiAssignmentMutationResult:
-        """Assign
+        """Bind a profile to an action
 
-        Binds a profile to an AI action, creating the assignment or updating it in place. The profile's declared capabilities are validated against the action, except for the `Default` slot.
+        Binds a profile to one AI action portal-wide, creating the assignment or replacing it in place, and returns the result. Both `actionType` and `profileId` are required. The profile's declared capabilities are checked against the action, so a model that cannot generate images cannot be bound to `ImageGeneration` - the `Default` slot is exempt, because it stands in for every action. There is no room-scoped form of this write: a room's own binding is created by the agent that owns it, while reads accept an `entityId`.
 
         :param ai_assignments_assign_request: (required)
         :type ai_assignments_assign_request: AiAssignmentsAssignRequest
@@ -105,7 +106,11 @@ class AssignmentsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiAssignmentMutationResult",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -136,9 +141,9 @@ class AssignmentsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[AiAssignmentMutationResult]:
-        """Assign
+        """Bind a profile to an action
 
-        Binds a profile to an AI action, creating the assignment or updating it in place. The profile's declared capabilities are validated against the action, except for the `Default` slot.
+        Binds a profile to one AI action portal-wide, creating the assignment or replacing it in place, and returns the result. Both `actionType` and `profileId` are required. The profile's declared capabilities are checked against the action, so a model that cannot generate images cannot be bound to `ImageGeneration` - the `Default` slot is exempt, because it stands in for every action. There is no room-scoped form of this write: a room's own binding is created by the agent that owns it, while reads accept an `entityId`.
 
         :param ai_assignments_assign_request: (required)
         :type ai_assignments_assign_request: AiAssignmentsAssignRequest
@@ -174,7 +179,11 @@ class AssignmentsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiAssignmentMutationResult",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -205,9 +214,9 @@ class AssignmentsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Assign
+        """Bind a profile to an action
 
-        Binds a profile to an AI action, creating the assignment or updating it in place. The profile's declared capabilities are validated against the action, except for the `Default` slot.
+        Binds a profile to one AI action portal-wide, creating the assignment or replacing it in place, and returns the result. Both `actionType` and `profileId` are required. The profile's declared capabilities are checked against the action, so a model that cannot generate images cannot be bound to `ImageGeneration` - the `Default` slot is exempt, because it stands in for every action. There is no room-scoped form of this write: a room's own binding is created by the agent that owns it, while reads accept an `entityId`.
 
         :param ai_assignments_assign_request: (required)
         :type ai_assignments_assign_request: AiAssignmentsAssignRequest
@@ -243,7 +252,11 @@ class AssignmentsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiAssignmentMutationResult",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -309,6 +322,8 @@ class AssignmentsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'cookieAuth', 
+            'bearerAuth'
         ]
 
 
@@ -335,7 +350,7 @@ class AssignmentsApi:
     @validate_call
     def ai_assignments_bulk_assign(
         self,
-        request_body: Dict[str, StrictStr],
+        request_body: Annotated[Dict[str, StrictStr], Field(description="A map of action type to profile ID. Every key has to be a known action type and every value a profile ID; one bad entry rejects the whole map.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -351,9 +366,9 @@ class AssignmentsApi:
     ) -> AiBulkAssignmentResult:
         """Bulk assign
 
-        Applies many action-to-profile bindings at once. Every entry is validated first and nothing is written if any of them fails, so the assignment set is never left half-written.
+        Applies many action-to-profile bindings in one write, which is how a settings screen saves the whole set. The body is a plain map of action type to profile ID, and every entry is validated before anything is written: one unknown action or one non-string profile ID rejects the request whole, so the set is never left half-applied. Each entry behaves as the single assign operation does, capability checks included. The answer carries the resulting assignment set.
 
-        :param request_body: (required)
+        :param request_body: A map of action type to profile ID. Every key has to be a known action type and every value a profile ID; one bad entry rejects the whole map. (required)
         :type request_body: Dict[str, str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -387,7 +402,11 @@ class AssignmentsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiBulkAssignmentResult",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -404,7 +423,7 @@ class AssignmentsApi:
     @validate_call
     def ai_assignments_bulk_assign_with_http_info(
         self,
-        request_body: Dict[str, StrictStr],
+        request_body: Annotated[Dict[str, StrictStr], Field(description="A map of action type to profile ID. Every key has to be a known action type and every value a profile ID; one bad entry rejects the whole map.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -420,9 +439,9 @@ class AssignmentsApi:
     ) -> ApiResponse[AiBulkAssignmentResult]:
         """Bulk assign
 
-        Applies many action-to-profile bindings at once. Every entry is validated first and nothing is written if any of them fails, so the assignment set is never left half-written.
+        Applies many action-to-profile bindings in one write, which is how a settings screen saves the whole set. The body is a plain map of action type to profile ID, and every entry is validated before anything is written: one unknown action or one non-string profile ID rejects the request whole, so the set is never left half-applied. Each entry behaves as the single assign operation does, capability checks included. The answer carries the resulting assignment set.
 
-        :param request_body: (required)
+        :param request_body: A map of action type to profile ID. Every key has to be a known action type and every value a profile ID; one bad entry rejects the whole map. (required)
         :type request_body: Dict[str, str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -456,7 +475,11 @@ class AssignmentsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiBulkAssignmentResult",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -473,7 +496,7 @@ class AssignmentsApi:
     @validate_call
     def ai_assignments_bulk_assign_without_preload_content(
         self,
-        request_body: Dict[str, StrictStr],
+        request_body: Annotated[Dict[str, StrictStr], Field(description="A map of action type to profile ID. Every key has to be a known action type and every value a profile ID; one bad entry rejects the whole map.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -489,9 +512,9 @@ class AssignmentsApi:
     ) -> RESTResponseType:
         """Bulk assign
 
-        Applies many action-to-profile bindings at once. Every entry is validated first and nothing is written if any of them fails, so the assignment set is never left half-written.
+        Applies many action-to-profile bindings in one write, which is how a settings screen saves the whole set. The body is a plain map of action type to profile ID, and every entry is validated before anything is written: one unknown action or one non-string profile ID rejects the request whole, so the set is never left half-applied. Each entry behaves as the single assign operation does, capability checks included. The answer carries the resulting assignment set.
 
-        :param request_body: (required)
+        :param request_body: A map of action type to profile ID. Every key has to be a known action type and every value a profile ID; one bad entry rejects the whole map. (required)
         :type request_body: Dict[str, str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -525,7 +548,11 @@ class AssignmentsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiBulkAssignmentResult",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -591,6 +618,8 @@ class AssignmentsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'cookieAuth', 
+            'bearerAuth'
         ]
 
 
@@ -617,7 +646,7 @@ class AssignmentsApi:
     @validate_call
     def ai_assignments_cascade_profile_delete(
         self,
-        body: StrictStr,
+        ai_assignments_cascade_profile_delete_request: Annotated[AiAssignmentsCascadeProfileDeleteRequest, Field(description="The profile to detach from every assignment. May be sent as the `profileId` query parameter instead of in the body.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -633,10 +662,10 @@ class AssignmentsApi:
     ) -> AiSuccessResponse:
         """Cascade profile delete
 
-        Cleans up the assignments pointing at a profile that is about to be deleted: the `Default` slot is promoted to the first remaining profile (or dropped when none is left), and every other slot holding that profile is unbound.
+        Detaches a profile from every assignment that points at it, which is the cleanup step before the profile itself is removed. The `Default` slot is promoted to the first remaining profile, or dropped when none is left, and every other slot holding the profile is cleared. `profileId` is required and may be sent in the body or as a query parameter. `DELETE api/2.0/ai/profiles/delete` already does this, so call it directly only when the profile is being removed by some other means.
 
-        :param body: (required)
-        :type body: str
+        :param ai_assignments_cascade_profile_delete_request: The profile to detach from every assignment. May be sent as the `profileId` query parameter instead of in the body. (required)
+        :type ai_assignments_cascade_profile_delete_request: AiAssignmentsCascadeProfileDeleteRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -660,7 +689,7 @@ class AssignmentsApi:
         """ # noqa: E501
 
         _param = self._ai_assignments_cascade_profile_delete_serialize(
-            body=body,
+            ai_assignments_cascade_profile_delete_request=ai_assignments_cascade_profile_delete_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -669,7 +698,11 @@ class AssignmentsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiSuccessResponse",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -686,7 +719,7 @@ class AssignmentsApi:
     @validate_call
     def ai_assignments_cascade_profile_delete_with_http_info(
         self,
-        body: StrictStr,
+        ai_assignments_cascade_profile_delete_request: Annotated[AiAssignmentsCascadeProfileDeleteRequest, Field(description="The profile to detach from every assignment. May be sent as the `profileId` query parameter instead of in the body.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -702,10 +735,10 @@ class AssignmentsApi:
     ) -> ApiResponse[AiSuccessResponse]:
         """Cascade profile delete
 
-        Cleans up the assignments pointing at a profile that is about to be deleted: the `Default` slot is promoted to the first remaining profile (or dropped when none is left), and every other slot holding that profile is unbound.
+        Detaches a profile from every assignment that points at it, which is the cleanup step before the profile itself is removed. The `Default` slot is promoted to the first remaining profile, or dropped when none is left, and every other slot holding the profile is cleared. `profileId` is required and may be sent in the body or as a query parameter. `DELETE api/2.0/ai/profiles/delete` already does this, so call it directly only when the profile is being removed by some other means.
 
-        :param body: (required)
-        :type body: str
+        :param ai_assignments_cascade_profile_delete_request: The profile to detach from every assignment. May be sent as the `profileId` query parameter instead of in the body. (required)
+        :type ai_assignments_cascade_profile_delete_request: AiAssignmentsCascadeProfileDeleteRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -729,7 +762,7 @@ class AssignmentsApi:
         """ # noqa: E501
 
         _param = self._ai_assignments_cascade_profile_delete_serialize(
-            body=body,
+            ai_assignments_cascade_profile_delete_request=ai_assignments_cascade_profile_delete_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -738,7 +771,11 @@ class AssignmentsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiSuccessResponse",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -755,7 +792,7 @@ class AssignmentsApi:
     @validate_call
     def ai_assignments_cascade_profile_delete_without_preload_content(
         self,
-        body: StrictStr,
+        ai_assignments_cascade_profile_delete_request: Annotated[AiAssignmentsCascadeProfileDeleteRequest, Field(description="The profile to detach from every assignment. May be sent as the `profileId` query parameter instead of in the body.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -771,10 +808,10 @@ class AssignmentsApi:
     ) -> RESTResponseType:
         """Cascade profile delete
 
-        Cleans up the assignments pointing at a profile that is about to be deleted: the `Default` slot is promoted to the first remaining profile (or dropped when none is left), and every other slot holding that profile is unbound.
+        Detaches a profile from every assignment that points at it, which is the cleanup step before the profile itself is removed. The `Default` slot is promoted to the first remaining profile, or dropped when none is left, and every other slot holding the profile is cleared. `profileId` is required and may be sent in the body or as a query parameter. `DELETE api/2.0/ai/profiles/delete` already does this, so call it directly only when the profile is being removed by some other means.
 
-        :param body: (required)
-        :type body: str
+        :param ai_assignments_cascade_profile_delete_request: The profile to detach from every assignment. May be sent as the `profileId` query parameter instead of in the body. (required)
+        :type ai_assignments_cascade_profile_delete_request: AiAssignmentsCascadeProfileDeleteRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -798,7 +835,7 @@ class AssignmentsApi:
         """ # noqa: E501
 
         _param = self._ai_assignments_cascade_profile_delete_serialize(
-            body=body,
+            ai_assignments_cascade_profile_delete_request=ai_assignments_cascade_profile_delete_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -807,7 +844,11 @@ class AssignmentsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiSuccessResponse",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -819,7 +860,7 @@ class AssignmentsApi:
 
     def _ai_assignments_cascade_profile_delete_serialize(
         self,
-        body,
+        ai_assignments_cascade_profile_delete_request,
         _request_auth,
         _content_type,
         _headers,
@@ -845,8 +886,8 @@ class AssignmentsApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if body is not None:
-            _body_params = body
+        if ai_assignments_cascade_profile_delete_request is not None:
+            _body_params = ai_assignments_cascade_profile_delete_request
 
 
         # set the HTTP header `Accept`
@@ -873,6 +914,8 @@ class AssignmentsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'cookieAuth', 
+            'bearerAuth'
         ]
 
 
@@ -915,7 +958,7 @@ class AssignmentsApi:
     ) -> Dict[str, str]:
         """Get all assignments
 
-        Returns the full action-to-profile assignment map of the scope.
+        Returns every action-to-profile binding of a scope as one map, which is what a settings screen loads. `entityId` narrows it to a room and has to name one the caller can open; a room that is not an agent room degrades to the portal-wide set rather than answering empty, and omitting the parameter reads the portal-wide set directly. Actions with no binding are simply absent from the map. The `Default` slot is reported as an entry of its own rather than being folded into the others.
 
         :param entity_id: The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
         :type entity_id: str
@@ -952,6 +995,9 @@ class AssignmentsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Dict[str, str]",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '404': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -984,7 +1030,7 @@ class AssignmentsApi:
     ) -> ApiResponse[Dict[str, str]]:
         """Get all assignments
 
-        Returns the full action-to-profile assignment map of the scope.
+        Returns every action-to-profile binding of a scope as one map, which is what a settings screen loads. `entityId` narrows it to a room and has to name one the caller can open; a room that is not an agent room degrades to the portal-wide set rather than answering empty, and omitting the parameter reads the portal-wide set directly. Actions with no binding are simply absent from the map. The `Default` slot is reported as an entry of its own rather than being folded into the others.
 
         :param entity_id: The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
         :type entity_id: str
@@ -1021,6 +1067,9 @@ class AssignmentsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Dict[str, str]",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '404': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -1053,7 +1102,7 @@ class AssignmentsApi:
     ) -> RESTResponseType:
         """Get all assignments
 
-        Returns the full action-to-profile assignment map of the scope.
+        Returns every action-to-profile binding of a scope as one map, which is what a settings screen loads. `entityId` narrows it to a room and has to name one the caller can open; a room that is not an agent room degrades to the portal-wide set rather than answering empty, and omitting the parameter reads the portal-wide set directly. Actions with no binding are simply absent from the map. The `Default` slot is reported as an entry of its own rather than being folded into the others.
 
         :param entity_id: The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
         :type entity_id: str
@@ -1090,6 +1139,9 @@ class AssignmentsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Dict[str, str]",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '404': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -1144,6 +1196,8 @@ class AssignmentsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'cookieAuth', 
+            'bearerAuth'
         ]
 
 
@@ -1186,7 +1240,7 @@ class AssignmentsApi:
     ) -> str:
         """Get assignment
 
-        Returns the profile bound to one AI action, without the `Default` fallback.
+        Returns the profile bound to one AI action, without applying the `Default` fallback - an empty answer means this action has no profile of its own, not that nothing is configured. `actionType` is required and is read from the query. Use `GET api/2.0/ai/assignments/resolve-for-action` to learn which profile would actually serve the action. This reads the portal-wide binding and accepts no `entityId`.
 
         :param action_type: The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision. (required)
         :type action_type: str
@@ -1222,7 +1276,10 @@ class AssignmentsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "str",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -1255,7 +1312,7 @@ class AssignmentsApi:
     ) -> ApiResponse[str]:
         """Get assignment
 
-        Returns the profile bound to one AI action, without the `Default` fallback.
+        Returns the profile bound to one AI action, without applying the `Default` fallback - an empty answer means this action has no profile of its own, not that nothing is configured. `actionType` is required and is read from the query. Use `GET api/2.0/ai/assignments/resolve-for-action` to learn which profile would actually serve the action. This reads the portal-wide binding and accepts no `entityId`.
 
         :param action_type: The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision. (required)
         :type action_type: str
@@ -1291,7 +1348,10 @@ class AssignmentsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "str",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -1324,7 +1384,7 @@ class AssignmentsApi:
     ) -> RESTResponseType:
         """Get assignment
 
-        Returns the profile bound to one AI action, without the `Default` fallback.
+        Returns the profile bound to one AI action, without applying the `Default` fallback - an empty answer means this action has no profile of its own, not that nothing is configured. `actionType` is required and is read from the query. Use `GET api/2.0/ai/assignments/resolve-for-action` to learn which profile would actually serve the action. This reads the portal-wide binding and accepts no `entityId`.
 
         :param action_type: The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision. (required)
         :type action_type: str
@@ -1360,7 +1420,10 @@ class AssignmentsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "str",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -1415,6 +1478,8 @@ class AssignmentsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'cookieAuth', 
+            'bearerAuth'
         ]
 
 
@@ -1458,7 +1523,7 @@ class AssignmentsApi:
     ) -> AiResolvedAssignment:
         """Resolve for action
 
-        Resolves the profile bound to an AI action, falling back to the `Default` slot when the action itself has none. Fails when neither slot is set or the bound profile no longer exists - use `try-resolve-for-action` for an empty answer instead.
+        Returns the profile that will serve one AI action, falling back to the `Default` slot when the action has no profile of its own. `actionType` is required and has to be one of the known actions - an unknown or misspelled value is rejected rather than resolved to the default. `entityId` narrows the lookup to a room, and a room with no assignment of its own degrades to the portal-wide one. This fails when neither slot is set or the bound profile is gone, so use `GET api/2.0/ai/assignments/try-resolve-for-action` when an unconfigured portal should answer empty instead.
 
         :param action_type: The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision. (required)
         :type action_type: str
@@ -1497,7 +1562,10 @@ class AssignmentsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiResolvedAssignment",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -1531,7 +1599,7 @@ class AssignmentsApi:
     ) -> ApiResponse[AiResolvedAssignment]:
         """Resolve for action
 
-        Resolves the profile bound to an AI action, falling back to the `Default` slot when the action itself has none. Fails when neither slot is set or the bound profile no longer exists - use `try-resolve-for-action` for an empty answer instead.
+        Returns the profile that will serve one AI action, falling back to the `Default` slot when the action has no profile of its own. `actionType` is required and has to be one of the known actions - an unknown or misspelled value is rejected rather than resolved to the default. `entityId` narrows the lookup to a room, and a room with no assignment of its own degrades to the portal-wide one. This fails when neither slot is set or the bound profile is gone, so use `GET api/2.0/ai/assignments/try-resolve-for-action` when an unconfigured portal should answer empty instead.
 
         :param action_type: The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision. (required)
         :type action_type: str
@@ -1570,7 +1638,10 @@ class AssignmentsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiResolvedAssignment",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -1604,7 +1675,7 @@ class AssignmentsApi:
     ) -> RESTResponseType:
         """Resolve for action
 
-        Resolves the profile bound to an AI action, falling back to the `Default` slot when the action itself has none. Fails when neither slot is set or the bound profile no longer exists - use `try-resolve-for-action` for an empty answer instead.
+        Returns the profile that will serve one AI action, falling back to the `Default` slot when the action has no profile of its own. `actionType` is required and has to be one of the known actions - an unknown or misspelled value is rejected rather than resolved to the default. `entityId` narrows the lookup to a room, and a room with no assignment of its own degrades to the portal-wide one. This fails when neither slot is set or the bound profile is gone, so use `GET api/2.0/ai/assignments/try-resolve-for-action` when an unconfigured portal should answer empty instead.
 
         :param action_type: The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision. (required)
         :type action_type: str
@@ -1643,7 +1714,10 @@ class AssignmentsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiResolvedAssignment",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -1703,6 +1777,8 @@ class AssignmentsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'cookieAuth', 
+            'bearerAuth'
         ]
 
 
@@ -1746,7 +1822,7 @@ class AssignmentsApi:
     ) -> AiResolvedAssignment:
         """Try resolve for action
 
-        Resolves the profile bound to an AI action exactly like `resolve-for-action`, but answers with an empty result instead of failing when nothing is configured.
+        Returns the profile that will serve one AI action, exactly as `GET api/2.0/ai/assignments/resolve-for-action` does, but answers with an empty result rather than failing when nothing is configured. `actionType` is required and is validated the same way, and `entityId` narrows the lookup to a room. This is the operation to call when the absence of a profile is a normal state to render - a settings screen, or a feature that hides itself. Both operations are read-only.
 
         :param action_type: The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision. (required)
         :type action_type: str
@@ -1785,7 +1861,10 @@ class AssignmentsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiResolvedAssignment",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -1819,7 +1898,7 @@ class AssignmentsApi:
     ) -> ApiResponse[AiResolvedAssignment]:
         """Try resolve for action
 
-        Resolves the profile bound to an AI action exactly like `resolve-for-action`, but answers with an empty result instead of failing when nothing is configured.
+        Returns the profile that will serve one AI action, exactly as `GET api/2.0/ai/assignments/resolve-for-action` does, but answers with an empty result rather than failing when nothing is configured. `actionType` is required and is validated the same way, and `entityId` narrows the lookup to a room. This is the operation to call when the absence of a profile is a normal state to render - a settings screen, or a feature that hides itself. Both operations are read-only.
 
         :param action_type: The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision. (required)
         :type action_type: str
@@ -1858,7 +1937,10 @@ class AssignmentsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiResolvedAssignment",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -1892,7 +1974,7 @@ class AssignmentsApi:
     ) -> RESTResponseType:
         """Try resolve for action
 
-        Resolves the profile bound to an AI action exactly like `resolve-for-action`, but answers with an empty result instead of failing when nothing is configured.
+        Returns the profile that will serve one AI action, exactly as `GET api/2.0/ai/assignments/resolve-for-action` does, but answers with an empty result rather than failing when nothing is configured. `actionType` is required and is validated the same way, and `entityId` narrows the lookup to a room. This is the operation to call when the absence of a profile is a normal state to render - a settings screen, or a feature that hides itself. Both operations are read-only.
 
         :param action_type: The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision. (required)
         :type action_type: str
@@ -1931,7 +2013,10 @@ class AssignmentsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiResolvedAssignment",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -1991,6 +2076,8 @@ class AssignmentsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'cookieAuth', 
+            'bearerAuth'
         ]
 
 
@@ -2031,9 +2118,9 @@ class AssignmentsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> AiSuccessResponse:
-        """Unassign
+        """Clear an action's profile
 
-        Removes the profile binding of an AI action. Does nothing when that slot is already empty.
+        Clears the portal-wide binding of one AI action, after which the action falls back to the `Default` slot. `actionType` is required and may be sent in the body or as a query parameter. An action whose slot is already empty is not reported as an error - the call answers success either way, so it is safe to repeat. Clearing `Default` itself leaves the actions that relied on it unresolvable.
 
         :param body: (required)
         :type body: str
@@ -2069,7 +2156,11 @@ class AssignmentsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiSuccessResponse",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -2100,9 +2191,9 @@ class AssignmentsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[AiSuccessResponse]:
-        """Unassign
+        """Clear an action's profile
 
-        Removes the profile binding of an AI action. Does nothing when that slot is already empty.
+        Clears the portal-wide binding of one AI action, after which the action falls back to the `Default` slot. `actionType` is required and may be sent in the body or as a query parameter. An action whose slot is already empty is not reported as an error - the call answers success either way, so it is safe to repeat. Clearing `Default` itself leaves the actions that relied on it unresolvable.
 
         :param body: (required)
         :type body: str
@@ -2138,7 +2229,11 @@ class AssignmentsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiSuccessResponse",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -2169,9 +2264,9 @@ class AssignmentsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Unassign
+        """Clear an action's profile
 
-        Removes the profile binding of an AI action. Does nothing when that slot is already empty.
+        Clears the portal-wide binding of one AI action, after which the action falls back to the `Default` slot. `actionType` is required and may be sent in the body or as a query parameter. An action whose slot is already empty is not reported as an error - the call answers success either way, so it is safe to repeat. Clearing `Default` itself leaves the actions that relied on it unresolvable.
 
         :param body: (required)
         :type body: str
@@ -2207,7 +2302,11 @@ class AssignmentsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiSuccessResponse",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -2273,6 +2372,8 @@ class AssignmentsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'cookieAuth', 
+            'bearerAuth'
         ]
 
 

@@ -29,10 +29,10 @@ from typing_extensions import Self
 
 class CurrentLicenseInfo(BaseModel):
     """
-    The current license information.
+    The two facts about the subscription in force that a payment page needs.
     """ # noqa: E501
-    trial: StrictBool = Field(description="Specifies whether the license is trial or not.", json_schema_extra={"examples": [False]})
-    due_date: datetime = Field(description="The date when the license expires.", alias="dueDate", json_schema_extra={"examples": ["2025-06-15T10:30:00.0000000Z"]})
+    trial: StrictBool = Field(description="Whether the portal is on a trial rather than a paid subscription. A trial expires at `dueDate` and is not  extended by paying - a plan has to be bought instead.", json_schema_extra={"examples": [False]})
+    due_date: datetime = Field(description="The day the subscription runs out, with the time of day cut off. The largest value a date can hold means  it never runs out, which is how a free or unlimited plan is expressed.", alias="dueDate", json_schema_extra={"examples": ["2025-06-15T10:30:00.0000000Z"]})
     __properties: ClassVar[List[str]] = ["trial", "dueDate"]
 
     model_config = ConfigDict(

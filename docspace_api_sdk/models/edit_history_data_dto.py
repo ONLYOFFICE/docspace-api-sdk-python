@@ -29,15 +29,15 @@ from typing_extensions import Self
 
 class EditHistoryDataDto(BaseModel):
     """
-    The file editing history data.
+    Everything an editor needs in order to show what one revision of a file changed.
     """ # noqa: E501
-    changes_url: Optional[StrictStr] = Field(default=None, description="The URL address of the file with the document changes data.", alias="changesUrl", json_schema_extra={"examples": ["https://example.com/changes"]})
-    key: Optional[StrictStr] = Field(description="The document identifier used to unambiguously identify the document file.", json_schema_extra={"examples": ["doc1"]})
-    previous: Optional[EditHistoryUrl] = Field(default=None, description="The object of the previous version of the document.")
-    token: Optional[StrictStr] = Field(default=None, description="The encrypted signature added to the parameter in the form of a token.", json_schema_extra={"examples": ["token"]})
-    url: Optional[StrictStr] = Field(description="The URL address of the current document version.", json_schema_extra={"examples": ["https://example.com/file.docx"]})
-    version: StrictInt = Field(description="The document version number.", json_schema_extra={"examples": [1]})
-    file_type: Optional[StrictStr] = Field(description="The document extension.", alias="fileType", json_schema_extra={"examples": ["docx"]})
+    changes_url: Optional[StrictStr] = Field(default=None, description="The address the editor downloads the recorded changes of this revision from. It is filled in only when the  portal has a change record for the revision; without it the revision can be shown as a whole document but not  as a set of changes.", alias="changesUrl", json_schema_extra={"examples": ["https://example.com/changes"]})
+    key: Optional[StrictStr] = Field(description="The document key of the revision being shown, which the editing service uses to identify it and to reuse the  copy it has cached.", json_schema_extra={"examples": ["doc1"]})
+    previous: Optional[EditHistoryUrl] = Field(default=None, description="The revision this one is compared against. It arrives together with `changesUrl`, and when the revision shown  is the first one the file ever had, it points at the blank template the file was created from instead of at an  earlier revision.")
+    token: Optional[StrictStr] = Field(default=None, description="The signature over the whole answer, as a JSON Web Token that the editing service verifies before it accepts  the addresses in it. Empty when the portal runs without a document-service secret.", json_schema_extra={"examples": ["eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ2ZXJzaW9uIjoxfQ.7HxQ0Zx1"]})
+    url: Optional[StrictStr] = Field(description="The address the content of this revision is served from. It is meant for the editing service and carries its  own key, which is valid for a limited time.", json_schema_extra={"examples": ["https://example.com/file.docx"]})
+    version: StrictInt = Field(description="Echoes the revision that was asked for, so it reports 0 when the request named no version and the current  revision was taken.", json_schema_extra={"examples": [1]})
+    file_type: Optional[StrictStr] = Field(description="The format of the revision being shown, as an extension without the leading dot.", alias="fileType", json_schema_extra={"examples": ["docx"]})
     __properties: ClassVar[List[str]] = ["changesUrl", "key", "previous", "token", "url", "version", "fileType"]
 
     model_config = ConfigDict(

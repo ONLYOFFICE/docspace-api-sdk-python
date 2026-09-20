@@ -22,7 +22,7 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List
+from typing import Any, ClassVar, Dict, List, Optional
 from docspace_api_sdk.models.ai_provider_type import AiProviderType
 from typing import Optional, Set
 from typing_extensions import Self
@@ -32,8 +32,8 @@ class AiProfilesListProviderModelsRequest(BaseModel):
     AiProfilesListProviderModelsRequest
     """ # noqa: E501
     provider_type: AiProviderType = Field(description="Provider whose catalog to list.", alias="providerType")
-    base_url: StrictStr = Field(description="Provider API base URL.", alias="baseUrl")
-    api_key: StrictStr = Field(description="Provider API key.", alias="apiKey")
+    base_url: StrictStr = Field(description="Provider API base URL.", alias="baseUrl", json_schema_extra={"examples": ["https://api.openai.com/v1"]})
+    api_key: Optional[StrictStr] = Field(default=None, description="Provider API key. Omit it for a provider that needs none; the request is then made without one.", alias="apiKey")
     __properties: ClassVar[List[str]] = ["providerType", "baseUrl", "apiKey"]
 
     model_config = ConfigDict(

@@ -28,15 +28,15 @@ from typing_extensions import Self
 
 class AdditionalWhiteLabelSettingsDto(BaseModel):
     """
-    The additional white label settings parameters.
+    Which of the ONLYOFFICE help and community entries the interface may offer, installation-wide.
     """ # noqa: E501
-    start_docs_enabled: StrictBool = Field(description="Specifies if the sample documents are displayed or hidden.", alias="startDocsEnabled", json_schema_extra={"examples": [True]})
-    help_center_enabled: StrictBool = Field(description="Specifies if the Help Center link is available or not.", alias="helpCenterEnabled", json_schema_extra={"examples": [True]})
-    feedback_and_support_enabled: StrictBool = Field(description="Specifies if the Feedback & Support link is available or not.", alias="feedbackAndSupportEnabled", json_schema_extra={"examples": [True]})
-    user_forum_enabled: StrictBool = Field(description="Specifies if the user forum is available or not.", alias="userForumEnabled", json_schema_extra={"examples": [True]})
-    video_guides_enabled: StrictBool = Field(description="Specifies if the Video Guides link is available or not.", alias="videoGuidesEnabled", json_schema_extra={"examples": [True]})
-    license_agreements_enabled: StrictBool = Field(description="Specifies if the License Agreements link is available or not.", alias="licenseAgreementsEnabled", json_schema_extra={"examples": [True]})
-    is_default: StrictBool = Field(description="Specifies if the additional white label settings are default or not.", alias="isDefault", json_schema_extra={"examples": [False]})
+    start_docs_enabled: StrictBool = Field(description="Whether the sample documents that ONLYOFFICE ships may be placed in a new user's Documents. Unlike the link  flags below it depends on nothing that has to be configured, so its built-in value is always `true`.", alias="startDocsEnabled", json_schema_extra={"examples": [True]})
+    help_center_enabled: StrictBool = Field(description="Whether the interface may offer the Help Center entry. It is `false` both when the entry was switched off  for the installation and when the installation configures no Help Center address at all; the addresses  themselves are not part of this answer and arrive in `externalResources` of `GET api/2.0/settings`.", alias="helpCenterEnabled", json_schema_extra={"examples": [True]})
+    feedback_and_support_enabled: StrictBool = Field(description="Whether the interface may offer the Feedback and Support entry, `false` for the same two reasons as  `helpCenterEnabled`.", alias="feedbackAndSupportEnabled", json_schema_extra={"examples": [True]})
+    user_forum_enabled: StrictBool = Field(description="Whether the interface may offer the user forum entry, `false` for the same two reasons as  `helpCenterEnabled`.", alias="userForumEnabled", json_schema_extra={"examples": [True]})
+    video_guides_enabled: StrictBool = Field(description="Whether the interface may offer the Video Guides entry, `false` for the same two reasons as  `helpCenterEnabled`.", alias="videoGuidesEnabled", json_schema_extra={"examples": [True]})
+    license_agreements_enabled: StrictBool = Field(description="Whether the interface may offer the License Agreements entry, `false` for the same two reasons as  `helpCenterEnabled`.", alias="licenseAgreementsEnabled", json_schema_extra={"examples": [True]})
+    is_default: StrictBool = Field(description="Whether all six flags still hold the values the installation starts out with. It turns `false` as soon as  one of them is saved differently and `true` again after `DELETE api/2.0/settings/rebranding/additional`.  Because a link flag starts out off when no address is configured for it, `true` does not mean every entry  is on.", alias="isDefault", json_schema_extra={"examples": [False]})
     __properties: ClassVar[List[str]] = ["startDocsEnabled", "helpCenterEnabled", "feedbackAndSupportEnabled", "userForumEnabled", "videoGuidesEnabled", "licenseAgreementsEnabled", "isDefault"]
 
     model_config = ConfigDict(

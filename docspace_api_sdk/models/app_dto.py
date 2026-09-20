@@ -29,10 +29,10 @@ from typing_extensions import Self
 
 class AppDto(BaseModel):
     """
-    The portal application information.
+    One feature module of the portal: whether it is switched on here, and the settings stored for it.
     """ # noqa: E501
-    id: Optional[StrictStr] = Field(default=None, description="The application identifier (stable slug). The client maps this to its title, description and icon.", json_schema_extra={"examples": ["ai-rooms"]})
-    enabled: Optional[StrictBool] = Field(default=None, description="Whether the application is enabled for the current tenant.", json_schema_extra={"examples": [True]})
+    id: Optional[StrictStr] = Field(default=None, description="The application's stable key, declared in the installation configuration - `ai-rooms`, `docs-cloud` and  the like. It is what every other operation of this group addresses an application by, and a client maps it  to a title and an icon of its own; the portal ships no display name for it.", json_schema_extra={"examples": ["ai-rooms"]})
+    enabled: Optional[StrictBool] = Field(default=None, description="Whether the application is switched on for this portal. It is the portal's own flag where one has been  saved, and the default the installation configuration gives the application otherwise.", json_schema_extra={"examples": [True]})
     settings: Optional[AppDtoSettings] = None
     __properties: ClassVar[List[str]] = ["id", "enabled", "settings"]
 

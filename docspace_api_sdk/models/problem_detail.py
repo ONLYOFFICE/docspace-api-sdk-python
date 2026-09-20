@@ -21,22 +21,24 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from docspace_api_sdk.models.field_error import FieldError
 from typing import Optional, Set
 from typing_extensions import Self
 
 class ProblemDetail(BaseModel):
     """
-    ProblemDetail
+    RFC 7807 problem details returned by the registration API for failed requests.
     """ # noqa: E501
-    type: Optional[StrictStr] = None
-    title: Optional[StrictStr] = None
-    status: Optional[StrictInt] = None
-    detail: Optional[StrictStr] = None
-    instance: Optional[StrictStr] = None
-    properties: Optional[Dict[str, Dict[str, Any]]] = None
-    __properties: ClassVar[List[str]] = ["type", "title", "status", "detail", "instance", "properties"]
+    type: Optional[StrictStr] = Field(default=None, description="A URI reference that identifies the problem type. This service sets it to the DocSpace API getting-started page.")
+    title: Optional[StrictStr] = Field(default=None, description="A short, human-readable summary of the problem type, typically the HTTP status reason phrase.")
+    status: Optional[StrictInt] = Field(default=None, description="The HTTP status code for this occurrence of the problem.")
+    detail: Optional[StrictStr] = Field(default=None, description="A human-readable explanation specific to this occurrence of the problem.")
+    instance: Optional[StrictStr] = Field(default=None, description="A URI reference that identifies the specific occurrence, set to the request path.")
+    properties: Optional[Dict[str, Any]] = Field(default=None, description="Extension members carried on the problem. Usually empty; validation failures also surface as the top-level errors array.")
+    errors: Optional[List[FieldError]] = Field(default=None, description="Field-specific validation errors. Present when the request body or parameters failed validation, or when a named scope is not in the tenant catalogue.")
+    __properties: ClassVar[List[str]] = ["type", "title", "status", "detail", "instance", "properties", "errors"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -77,6 +79,13 @@ class ProblemDetail(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each item in errors (list)
+        _items = []
+        if self.errors:
+            for _item_errors in self.errors:
+                if _item_errors:
+                    _items.append(_item_errors.to_dict())
+            _dict['errors'] = _items
         return _dict
 
     @classmethod
@@ -95,7 +104,8 @@ class ProblemDetail(BaseModel):
             "status": obj.get("status"),
             "detail": obj.get("detail"),
             "instance": obj.get("instance"),
-            "properties": obj.get("properties")
+            "properties": obj.get("properties"),
+            "errors": [FieldError.from_dict(_item) for _item in obj["errors"]] if obj.get("errors") is not None else None
         })
         return _obj
 

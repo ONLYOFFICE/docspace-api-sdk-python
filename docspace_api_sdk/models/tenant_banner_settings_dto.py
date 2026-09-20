@@ -28,9 +28,9 @@ from typing_extensions import Self
 
 class TenantBannerSettingsDto(BaseModel):
     """
-    The request parameters for managing the visibility settings of the promotional banners for the current tenant.
+    Whether the portal promotional banners are hidden.
     """ # noqa: E501
-    hidden: Optional[StrictBool] = Field(default=None, description="The banners visibility flag.", json_schema_extra={"examples": [True]})
+    hidden: Optional[StrictBool] = Field(default=None, description="Whether the promotional banners are hidden from every user of the portal. The flag is only honoured on a  self-hosted installation; a SaaS portal keeps showing the banners whatever is stored here.", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["hidden"]
 
     model_config = ConfigDict(

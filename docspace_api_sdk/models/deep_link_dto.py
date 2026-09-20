@@ -28,11 +28,11 @@ from typing_extensions import Self
 
 class DeepLinkDto(BaseModel):
     """
-    The deep link parameters.
+    What a mobile client needs to hand a portal link to the installed application instead of the browser.
     """ # noqa: E501
-    android_package_name: Optional[StrictStr] = Field(description="The Android package name.", alias="androidPackageName", json_schema_extra={"examples": ["com.example.docspace"]})
-    url: Optional[StrictStr] = Field(description="The deep link URL.", json_schema_extra={"examples": ["https://example.com/deeplink"]})
-    ios_package_id: Optional[StrictStr] = Field(description="The deep link IOS package ID.", alias="iosPackageId", json_schema_extra={"examples": ["com.example.docspace"]})
+    android_package_name: Optional[StrictStr] = Field(description="The package name to look for on Android, and to build a store link from when the application is missing.  All three fields are empty strings on an installation that ships no mobile application, which is the  signal to keep opening links in the browser.", alias="androidPackageName", json_schema_extra={"examples": ["com.example.docspace"]})
+    url: Optional[StrictStr] = Field(description="The address the client redirects a portal link through so that the application can claim it. It is the  installation's own deep-link host, not a link to any particular document.", json_schema_extra={"examples": ["https://example.com/deeplink"]})
+    ios_package_id: Optional[StrictStr] = Field(description="The bundle identifier to look for on iOS, used the same way as `androidPackageName`.", alias="iosPackageId", json_schema_extra={"examples": ["com.example.docspace"]})
     __properties: ClassVar[List[str]] = ["androidPackageName", "url", "iosPackageId"]
 
     model_config = ConfigDict(

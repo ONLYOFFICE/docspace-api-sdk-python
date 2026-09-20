@@ -30,11 +30,11 @@ from typing_extensions import Self
 
 class SecurityInfoSimpleRequestDto(BaseModel):
     """
-    The parameters of the security information request.
+    The rights to apply to a single file or folder, and how to announce them.
     """ # noqa: E501
-    share: Optional[List[FileShareParams]] = Field(default=None, description="The collection of sharing parameters.", json_schema_extra={"examples": [[{"access": 1, "shareTo": "00000000-0000-0000-0000-000000000000"}]]})
-    notify: Optional[StrictBool] = Field(default=None, description="Specifies whether to notify users about the shared file or not.", json_schema_extra={"examples": [True]})
-    sharing_message: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The message to send when notifying about the shared file.", alias="sharingMessage", json_schema_extra={"examples": ["You have been granted access to the file"]})
+    share: Optional[List[FileShareParams]] = Field(default=None, description="One record per account or group whose rights are being set, each naming the subject and the level it gets; a  level of `None` takes the access away. An empty collection makes the call change nothing.", json_schema_extra={"examples": [[{"access": 2, "shareTo": "9924256a-739c-462b-af15-e652a3b1b6eb"}]]})
+    notify: Optional[StrictBool] = Field(default=None, description="Set to true to have every account named in `share` emailed about the access it just received; false changes  the rights without telling anyone.", json_schema_extra={"examples": [True]})
+    sharing_message: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The text put into that email, ignored while `notify` is false. Markup is stripped before sending, so only the  plain text of the value survives.", alias="sharingMessage", json_schema_extra={"examples": ["You have been granted access to the file"]})
     __properties: ClassVar[List[str]] = ["share", "notify", "sharingMessage"]
 
     model_config = ConfigDict(

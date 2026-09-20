@@ -1,12 +1,12 @@
 # AiAiActionArgs
-Wire-serializable subset of the engine's `ActionArgs` — drops the engine-injected `signal`/`fetch`; `profile`/`messages` are owned by the engine and never sent by the caller.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **tools** | [**List[AiTMCPItem]**](AiTMCPItem.md) | Extra tools offered to the model for this request. | [optional] 
-**is_reasoning** | **bool** | Enable extended thinking / reasoning for this request. | [optional] 
+**is_reasoning** | **bool** | Legacy extended-thinking switch; stands for `medium`. `reasoningLevel` wins when both are set. | [optional] 
+**reasoning_level** | [**AiAiReasoningLevel**](AiAiReasoningLevel.md) | Depth of extended thinking for the round; providers clamp it to what the model accepts. | [optional] 
 **prompt** | [**AiAiActionArgsPrompt**](AiAiActionArgsPrompt.md) |  | [optional] 
 
 ## Example

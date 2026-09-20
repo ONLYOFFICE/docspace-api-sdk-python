@@ -28,15 +28,15 @@ from typing_extensions import Self
 
 class ProviderDto(BaseModel):
     """
-    The provider information.
+    One storage service this portal can connect, with the values a connection form needs.
     """ # noqa: E501
-    name: Optional[StrictStr] = Field(default=None, description="The provider name.", json_schema_extra={"examples": ["GoogleDrive"]})
-    key: Optional[StrictStr] = Field(default=None, description="The provider key.", json_schema_extra={"examples": ["google-drive"]})
-    connected: Optional[StrictBool] = Field(default=None, description="Specifies whether the provider is connected.", json_schema_extra={"examples": [True]})
-    oauth: Optional[StrictBool] = Field(default=None, description="Specifies if the provider is OAuth.", json_schema_extra={"examples": [True]})
-    redirect_url: Optional[StrictStr] = Field(default=None, description="The provider redirect URL.", alias="redirectUrl", json_schema_extra={"examples": ["http://localhost/redirect"]})
-    required_connection_url: Optional[StrictBool] = Field(default=None, description="The required connection URL flag.", alias="requiredConnectionUrl", json_schema_extra={"examples": [False]})
-    client_id: Optional[StrictStr] = Field(default=None, description="The provider OAuth client ID.", alias="clientId", json_schema_extra={"examples": ["client-id-123"]})
+    name: Optional[StrictStr] = Field(default=None, description="The display name of the service, and the only thing that tells the WebDAV presets apart: `kDrive`, `Yandex`,  `WebDav`, `Nextcloud` and `ownCloud` all report the same key.", json_schema_extra={"examples": ["Nextcloud"]})
+    key: Optional[StrictStr] = Field(default=None, description="The value to send as `providerKey` when an account of this service is connected.", json_schema_extra={"examples": ["WebDav"]})
+    connected: Optional[StrictBool] = Field(default=None, description="Whether the service can be used on this portal: it is enabled in the configuration and, for an OAuth service,  its application is registered. It says nothing about whether an account of it is connected.", json_schema_extra={"examples": [True]})
+    oauth: Optional[StrictBool] = Field(default=None, description="Whether an account of this service is connected with an OAuth 2.0 authorization code in `token`; when false,  it is connected with `login` and `password`.", json_schema_extra={"examples": [True]})
+    redirect_url: Optional[StrictStr] = Field(default=None, description="The redirect URL this portal is registered with at the service, to build the consent screen URL from. It comes  back as null for the services that do not use OAuth.", alias="redirectUrl", json_schema_extra={"examples": ["https://example.com/thirdparty"]})
+    required_connection_url: Optional[StrictBool] = Field(default=None, description="Whether an account of this service cannot be connected without `url`, which is the case for the WebDAV servers  whose address is not known in advance. The presets with a fixed address and the OAuth services do not need it.", alias="requiredConnectionUrl", json_schema_extra={"examples": [False]})
+    client_id: Optional[StrictStr] = Field(default=None, description="The OAuth 2.0 client ID this portal is registered with at the service, to build the consent screen URL from.  It comes back as null for the services that do not use OAuth.", alias="clientId", json_schema_extra={"examples": ["l1s2h3d4f5g6h7j8k9l0"]})
     __properties: ClassVar[List[str]] = ["name", "key", "connected", "oauth", "redirectUrl", "requiredConnectionUrl", "clientId"]
 
     model_config = ConfigDict(

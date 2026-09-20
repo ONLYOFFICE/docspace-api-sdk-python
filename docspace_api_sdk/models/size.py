@@ -28,10 +28,10 @@ from typing_extensions import Self
 
 class Size(BaseModel):
     """
-    Represents dimensions with width and height values.
+    A pixel size measured on the image itself.
     """ # noqa: E501
-    height: Optional[StrictInt] = Field(default=None, description="Gets or sets the height dimension of an object, typically measured in pixels or other unit.  It defines the vertical size of the object.", json_schema_extra={"examples": [10]})
-    width: Optional[StrictInt] = Field(default=None, description="Gets or sets the width dimension of an object, typically measured in pixels or other unit.", json_schema_extra={"examples": [10]})
+    height: Optional[StrictInt] = Field(default=None, description="The height of the image in pixels, read from the stored file rather than from any display setting.", json_schema_extra={"examples": [1080]})
+    width: Optional[StrictInt] = Field(default=None, description="The width of the image in pixels, read from the stored file rather than from any display setting.", json_schema_extra={"examples": [1920]})
     __properties: ClassVar[List[str]] = ["height", "width"]
 
     model_config = ConfigDict(

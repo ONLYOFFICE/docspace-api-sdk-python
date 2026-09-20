@@ -29,10 +29,10 @@ from typing_extensions import Self
 
 class UpdateFile(BaseModel):
     """
-    The parameters for updating a file.
+    The changes to make to a file: a new title, an earlier version to restore, or both.
     """ # noqa: E501
-    title: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=165)]] = Field(default=None, description="The file title to update.", json_schema_extra={"examples": ["My Document"]})
-    last_version: Optional[StrictInt] = Field(default=None, description="The number of the latest file version.", alias="lastVersion", json_schema_extra={"examples": [1]})
+    title: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=165)]] = Field(default=None, description="The new title of the file, without an extension - the stored extension is kept whatever the title says, so a  rename cannot change the format. Left empty, the file keeps its name.", json_schema_extra={"examples": ["My Document"]})
+    last_version: Optional[StrictInt] = Field(default=None, description="The version to restore on top of the history, as reported by `GET api/2.0/files/file/{fileId}/history`; 0 or  less leaves the versions untouched.", alias="lastVersion", json_schema_extra={"examples": [1]})
     __properties: ClassVar[List[str]] = ["title", "lastVersion"]
 
     model_config = ConfigDict(

@@ -29,14 +29,14 @@ from typing_extensions import Self
 
 class AuthData(BaseModel):
     """
-    The authentication data.
+    The credentials of a third-party storage account. The portal takes them when an account is connected and does not  give them back afterwards.
     """ # noqa: E501
-    login: Optional[StrictStr] = Field(default=None, description="The authentication login.", json_schema_extra={"examples": ["user@example.com"]})
-    password: Optional[StrictStr] = Field(default=None, description="The authentication password.", json_schema_extra={"examples": ["p@ssw0rd!"]})
-    raw_token: Optional[StrictStr] = Field(default=None, description="The authentication raw token.", alias="rawToken", json_schema_extra={"examples": ["{\"access_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...\",\"expires_in\":3600}"]})
-    url: Optional[StrictStr] = Field(default=None, description="The authentication URL.", json_schema_extra={"examples": ["https://auth.example.com"]})
-    provider: Optional[StrictStr] = Field(default=None, description="The authentication provider.", json_schema_extra={"examples": ["OAuth2"]})
-    token: Optional[OAuth20Token] = Field(default=None, description="The authentication token.")
+    login: Optional[StrictStr] = Field(default=None, description="The account name at the storage service.", json_schema_extra={"examples": ["user@example.com"]})
+    password: Optional[StrictStr] = Field(default=None, description="The password of the account at the storage service.", json_schema_extra={"examples": ["p@ssw0rd!"]})
+    raw_token: Optional[StrictStr] = Field(default=None, description="The token of the account, kept as the raw JSON document the storage service issued it in.", alias="rawToken", json_schema_extra={"examples": ["{\"access_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...\",\"expires_in\":3600}"]})
+    url: Optional[StrictStr] = Field(default=None, description="The address of the storage server the account lives on.", json_schema_extra={"examples": ["https://cloud.example.com/remote.php/dav/files/admin/"]})
+    provider: Optional[StrictStr] = Field(default=None, description="The storage service the credentials belong to, as the provider key the account was connected with.", json_schema_extra={"examples": ["WebDav"]})
+    token: Optional[OAuth20Token] = Field(default=None, description="The same token as in `rawToken`, parsed into its OAuth 2.0 fields.")
     __properties: ClassVar[List[str]] = ["login", "password", "rawToken", "url", "provider", "token"]
 
     model_config = ConfigDict(

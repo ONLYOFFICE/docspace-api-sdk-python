@@ -29,7 +29,7 @@ from typing_extensions import Self
 
 class SetAppSettingsBody(BaseModel):
     """
-    Request body for saving application-specific settings.
+    The configuration document a portal application keeps.
     """ # noqa: E501
     settings: Optional[SetAppSettingsBodySettings] = None
     __properties: ClassVar[List[str]] = ["settings"]

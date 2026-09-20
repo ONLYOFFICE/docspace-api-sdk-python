@@ -1,13 +1,13 @@
 # SalesRequestsDto
-The request parameters for handling sales and payment inquiries in the portal.
+Who is writing to the ONLYOFFICE sales team, and what about.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**user_name** | **str** | The name of the user submitting the sales request. | 
-**email** | **str** | The contact email address for the sales inquiry. | 
-**message** | **str** | The details of the sales inquiry or payment request. | 
+**user_name** | **str** | The name the sales team should address the reply to. It is sent as written and is not matched against any  portal account; an empty value fails the request with 400. | 
+**email** | **str** | The address the answer is sent to. It has to be a well-formed email address and need not be the caller portal  address; an empty or malformed value fails the request with 400. | 
+**message** | **str** | What is being asked of the sales team - a quote, an invoice, or a plan that cannot be bought online. An empty  value fails the request with 400. | 
 
 ## Example
 

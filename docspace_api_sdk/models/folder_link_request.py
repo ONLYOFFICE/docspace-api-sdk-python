@@ -21,27 +21,27 @@ import pprint
 import re  # noqa: F401
 import json
 
-from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
 from uuid import UUID
+from docspace_api_sdk.models.api_date_time import ApiDateTime
 from docspace_api_sdk.models.file_share import FileShare
 from typing import Optional, Set
 from typing_extensions import Self
 
 class FolderLinkRequest(BaseModel):
     """
-    The folder link parameters.
+    The external link of a folder, as it is to be created or rewritten.
     """ # noqa: E501
-    link_id: Optional[UUID] = Field(default=None, description="The folder link ID.", alias="linkId", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000000"]})
-    access: Optional[FileShare] = Field(default=None, description="The link sharing rights.")
-    expiration_date: Optional[datetime] = Field(default=None, description="The link expiration date.", alias="expirationDate", json_schema_extra={"examples": ["2021-01-01T00:00:00Z"]})
-    title: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The link name.", json_schema_extra={"examples": ["My Document"]})
-    password: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The link password.", json_schema_extra={"examples": ["p@ssw0rd"]})
-    deny_download: Optional[StrictBool] = Field(default=None, description="Specifies if downloading the file from the link is disabled or not.", alias="denyDownload", json_schema_extra={"examples": [False]})
-    internal: Optional[StrictBool] = Field(default=None, description="The link scope, whether it is internal or not.", json_schema_extra={"examples": [False]})
-    primary: Optional[StrictBool] = Field(default=None, description="Specifies whether the folder link is primary or not.", json_schema_extra={"examples": [True]})
+    link_id: Optional[UUID] = Field(default=None, description="Which link the request addresses: the identifier of an existing link rewrites that link, while an identifier  that is not in use, the empty one included, creates a new link. Take an existing identifier from  `GET api/2.0/files/folder/{id}/links`.", alias="linkId", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000000"]})
+    access: Optional[FileShare] = Field(default=None, description="The rights a visitor following the link is given. The value that grants nothing revokes the link instead of  setting it, and the answer is then empty.")
+    expiration_date: Optional[ApiDateTime] = Field(default=None, description="The moment the link stops working, sent as an ISO-8601 stamp. A moment that lies in the past is ignored,  and leaving the field out gives the link no expiry.", alias="expirationDate")
+    title: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The name the link is listed under for the people who manage the folder; a visitor following it never sees the  name.", json_schema_extra={"examples": ["Public link"]})
+    password: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The secret a visitor has to enter before the link opens. Leave it out for a link that opens without one; the  secret itself is never given back, only the fact that one is set.", json_schema_extra={"examples": ["p@ssw0rd"]})
+    deny_download: Optional[StrictBool] = Field(default=None, description="Whether visitors are left with viewing alone: with true downloading and copying through the link are blocked,  with false they are allowed.", alias="denyDownload", json_schema_extra={"examples": [False]})
+    internal: Optional[StrictBool] = Field(default=None, description="Whether the link admits signed-in portal members only: with true a visitor has to sign in before the link  opens, with false anyone holding the address may follow it.", json_schema_extra={"examples": [False]})
+    primary: Optional[StrictBool] = Field(default=None, description="Whether this link becomes the primary link of the folder, the one the Copy link action of a client hands  out; a folder has one primary link at a time.", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["linkId", "access", "expirationDate", "title", "password", "denyDownload", "internal", "primary"]
 
     model_config = ConfigDict(
@@ -83,11 +83,9 @@ class FolderLinkRequest(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # set to None if expiration_date (nullable) is None
-        # and model_fields_set contains the field
-        if self.expiration_date is None and "expiration_date" in self.model_fields_set:
-            _dict['expirationDate'] = None
-
+        # override the default output from pydantic by calling `to_dict()` of expiration_date
+        if self.expiration_date:
+            _dict['expirationDate'] = self.expiration_date.to_dict()
         # set to None if title (nullable) is None
         # and model_fields_set contains the field
         if self.title is None and "title" in self.model_fields_set:
@@ -113,7 +111,7 @@ class FolderLinkRequest(BaseModel):
         _obj = cls.model_validate({
             "linkId": obj.get("linkId"),
             "access": obj.get("access"),
-            "expirationDate": obj.get("expirationDate"),
+            "expirationDate": ApiDateTime.from_dict(obj["expirationDate"]) if obj.get("expirationDate") is not None else None,
             "title": obj.get("title"),
             "password": obj.get("password"),
             "denyDownload": obj.get("denyDownload"),

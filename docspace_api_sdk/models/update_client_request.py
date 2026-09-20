@@ -31,21 +31,19 @@ class UpdateClientRequest(BaseModel):
     """
     Client update request containing modified client details
     """ # noqa: E501
-    name: Optional[Annotated[str, Field(min_length=1, strict=True)]] = Field(default=None, description="The name of the client", json_schema_extra={"examples": ["Updated Client"]})
-    description: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The description of the client", json_schema_extra={"examples": ["Updated description of the client"]})
-    logo: Optional[Annotated[str, Field(min_length=1, strict=True)]] = Field(default=None, description="The logo of the client in base64 format", json_schema_extra={"examples": ["data:image/png;base64,..."]})
-    public: Optional[StrictBool] = None
-    allow_pkce: Optional[StrictBool] = Field(default=None, description="Indicates whether PKCE is allowed for the client", json_schema_extra={"examples": [True]})
-    is_public: Optional[StrictBool] = Field(default=None, description="Indicates whether client is accessible by third-party tenants", json_schema_extra={"examples": [False]})
-    allowed_origins: Optional[Annotated[List[StrictStr], Field(min_length=1, max_length=12)]] = Field(default=None, description="The allowed origins for the client", json_schema_extra={"examples": [["http://allowed.origin"]]})
-    __properties: ClassVar[List[str]] = ["name", "description", "logo", "public", "allow_pkce", "is_public", "allowed_origins"]
+    name: Annotated[str, Field(min_length=3, strict=True, max_length=256)] = Field(description="The display name shown to the user on the consent screen. It has to be between 3 and 256 characters long.", json_schema_extra={"examples": ["Updated Client"]})
+    description: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The free-text description shown next to the name on the consent screen, at most 255 characters.", json_schema_extra={"examples": ["Updated description of the client"]})
+    logo: Annotated[str, Field(min_length=1, strict=True)] = Field(description="The client logo as a data URI carrying base64 image data, shown on the consent screen. Only png, jpeg, jpg and svg+xml are accepted.", json_schema_extra={"examples": ["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg=="]})
+    scopes: Annotated[List[StrictStr], Field(min_length=1)] = Field(description="The permissions the client may ask for, named as they appear in the tenant scope catalogue - for example files:read, rooms:write or openid. A client cannot request a scope that is not listed here.")
+    allow_pkce: Optional[StrictBool] = Field(default=None, description="Whether the client may use PKCE. Turning it on lets the client authenticate with the none method and prove itself with a code verifier instead of sending a secret, which is what a client that cannot keep a secret needs.", json_schema_extra={"examples": [True]})
+    allowed_origins: Annotated[List[StrictStr], Field(min_length=1, max_length=12)] = Field(description="The web origins allowed to call the portal on behalf of this client, used for the CORS check. The set holds between 1 and 12 addresses.")
+    redirect_uris: Annotated[List[StrictStr], Field(min_length=1, max_length=12)] = Field(description="The URIs an authorization code may be delivered to. An authorization request naming any other URI is refused, and the set holds between 1 and 12 addresses.")
+    is_public: Optional[StrictBool] = Field(default=None, description="Whether the client is offered to third-party tenants rather than only to the tenant that registers it.", json_schema_extra={"examples": [False]})
+    __properties: ClassVar[List[str]] = ["name", "description", "logo", "scopes", "allow_pkce", "allowed_origins", "redirect_uris", "is_public"]
 
     @field_validator('logo')
     def logo_validate_regular_expression(cls, value):
         """Validates the regular expression"""
-        if value is None:
-            return value
-
         if not re.match(r"^data:image\/(?:png|jpeg|jpg|svg\+xml);base64,.*.{1,}", value):
             raise ValueError(r"must validate the regular expression /^data:image\/(?:png|jpeg|jpg|svg\+xml);base64,.*.{1,}/")
         return value
@@ -105,10 +103,11 @@ class UpdateClientRequest(BaseModel):
             "name": obj.get("name"),
             "description": obj.get("description"),
             "logo": obj.get("logo"),
-            "public": obj.get("public"),
+            "scopes": obj.get("scopes"),
             "allow_pkce": obj.get("allow_pkce"),
-            "is_public": obj.get("is_public"),
-            "allowed_origins": obj.get("allowed_origins")
+            "allowed_origins": obj.get("allowed_origins"),
+            "redirect_uris": obj.get("redirect_uris"),
+            "is_public": obj.get("is_public")
         })
         return _obj
 

@@ -28,12 +28,12 @@ from typing_extensions import Self
 
 class PasswordSettingsRequestsDto(BaseModel):
     """
-    The request parameters for configuring the password complexity requirements.
+    The four values that make up the portal password policy, replaced together.
     """ # noqa: E501
-    min_length: StrictInt = Field(description="The minimum number of characters required for valid passwords.", alias="minLength", json_schema_extra={"examples": [8]})
-    upper_case: Optional[StrictBool] = Field(default=None, description="Specifies whether the password should contain the uppercase letters or not.", alias="upperCase", json_schema_extra={"examples": [True]})
-    digits: Optional[StrictBool] = Field(default=None, description="Specifies whether the password should contain the digits or not.", json_schema_extra={"examples": [True]})
-    spec_symbols: Optional[StrictBool] = Field(default=None, description="Specifies whether the password should contain the special symbols or not.", alias="specSymbols", json_schema_extra={"examples": [True]})
+    min_length: StrictInt = Field(description="The shortest password the portal will accept. It has to sit between the floor the installation is configured  with, 8 characters unless it was changed, and the ceiling of 30; a value outside that is refused with 400.", alias="minLength", json_schema_extra={"examples": [8]})
+    upper_case: Optional[StrictBool] = Field(default=None, description="Whether a password must contain at least one uppercase letter. There is no partial update on this body, so  leaving the flag out stores it as `false` and drops the requirement.", alias="upperCase", json_schema_extra={"examples": [True]})
+    digits: Optional[StrictBool] = Field(default=None, description="Whether a password must contain at least one digit. Leaving the flag out stores it as `false` and drops the  requirement.", json_schema_extra={"examples": [True]})
+    spec_symbols: Optional[StrictBool] = Field(default=None, description="Whether a password must contain at least one special symbol. Leaving the flag out stores it as `false` and  drops the requirement.", alias="specSymbols", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["minLength", "upperCase", "digits", "specSymbols"]
 
     model_config = ConfigDict(

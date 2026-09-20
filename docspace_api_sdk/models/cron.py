@@ -29,11 +29,11 @@ from typing_extensions import Self
 
 class Cron(BaseModel):
     """
-    The backup cron parameters.
+    The request parameters for the time the scheduled backup runs.
     """ # noqa: E501
-    period: Optional[BackupPeriod] = Field(default=None, description="The backup period type.")
-    hour: Optional[StrictInt] = Field(default=None, description="The time of the day to start the backup process.", json_schema_extra={"examples": [0]})
-    day: Optional[StrictInt] = Field(default=None, description="The day of the week to start the backup process.", json_schema_extra={"examples": [0]})
+    period: Optional[BackupPeriod] = Field(default=None, description="How often the backup runs: `EveryDay`, `EveryWeek` or `EveryMonth`. It defaults to `EveryDay`.")
+    hour: Optional[StrictInt] = Field(default=None, description="The hour of the day the backup starts at, from 0 to 23. Minutes cannot be chosen - it always starts  on the hour.", json_schema_extra={"examples": [2]})
+    day: Optional[StrictInt] = Field(default=None, description="The day the backup runs on: the day of the week from 1 to 7, Sunday being 1, for `EveryWeek`, and the  day of the month from 1 to 31 for `EveryMonth`. Leave it out for `EveryDay` only - an omitted value is  stored as 0, which neither of the other two periods accepts, so a weekly or monthly schedule sent  without it fails.", json_schema_extra={"examples": [1]})
     __properties: ClassVar[List[str]] = ["period", "hour", "day"]
 
     model_config = ConfigDict(

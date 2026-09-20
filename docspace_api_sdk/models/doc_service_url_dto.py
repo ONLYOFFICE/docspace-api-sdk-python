@@ -28,17 +28,17 @@ from typing_extensions import Self
 
 class DocServiceUrlDto(BaseModel):
     """
-    The document service URL parameters.
+    The document service location as this portal has it configured, together with the editor entry points a client  needs in order to open a document.
     """ # noqa: E501
-    version: Optional[StrictStr] = Field(description="The version of the document service.", json_schema_extra={"examples": ["8.0.1"]})
-    doc_service_url_api: Optional[StrictStr] = Field(description="The document service URL API.", alias="docServiceUrlApi", json_schema_extra={"examples": ["http://localhost/api"]})
-    doc_service_url: Optional[StrictStr] = Field(description="The document service URL.", alias="docServiceUrl", json_schema_extra={"examples": ["http://localhost/docservice"]})
-    doc_service_preload_url: Optional[StrictStr] = Field(description="The URL used to preload the document service scripts.", alias="docServicePreloadUrl", json_schema_extra={"examples": ["http://localhost/preload"]})
-    doc_service_url_internal: Optional[StrictStr] = Field(description="The internal document service URL.", alias="docServiceUrlInternal", json_schema_extra={"examples": ["http://localhost/internal"]})
-    doc_service_portal_url: Optional[StrictStr] = Field(description="The document service portal URL.", alias="docServicePortalUrl", json_schema_extra={"examples": ["http://localhost/portal"]})
-    doc_service_signature_header: Optional[StrictStr] = Field(description="The document service signature header.", alias="docServiceSignatureHeader", json_schema_extra={"examples": ["Authorization"]})
-    doc_service_ssl_verification: StrictBool = Field(description="Specifies if the document service SSL verification is enabled.", alias="docServiceSslVerification", json_schema_extra={"examples": [True]})
-    is_default: StrictBool = Field(description="Specifies if the document service is default.", alias="isDefault", json_schema_extra={"examples": [True]})
+    version: Optional[StrictStr] = Field(description="The editor version the running Document Server reported. It is filled in only when the version was asked for,  and comes back empty otherwise. When the Document Server does not answer, a fallback version is reported  rather than an error, so a value here is no proof that the server is reachable.", json_schema_extra={"examples": ["8.0.1"]})
+    doc_service_url_api: Optional[StrictStr] = Field(description="The absolute URL of the editor api script that a client has to load before it can open a document. It is  derived from the public Document Server address unless the deployment overrides it separately.", alias="docServiceUrlApi", json_schema_extra={"examples": ["https://documentserver.example.com/web-apps/apps/api/documents/api.js"]})
+    doc_service_url: Optional[StrictStr] = Field(description="The public Document Server address a browser loads the editor from. Empty means no document server is  configured for this portal, and documents cannot be opened for editing or viewing.", alias="docServiceUrl", json_schema_extra={"examples": ["https://documentserver.example.com/"]})
+    doc_service_preload_url: Optional[StrictStr] = Field(description="The absolute URL of a page a client may load in advance to warm the editor scripts up. Loading it is optional  and changes nothing on the portal.", alias="docServicePreloadUrl", json_schema_extra={"examples": ["https://documentserver.example.com/web-apps/apps/api/documents/preload.html"]})
+    doc_service_url_internal: Optional[StrictStr] = Field(description="The address the portal uses for its own server-to-server calls to the Document Server. When no private-network  address is configured, it repeats the public one.", alias="docServiceUrlInternal", json_schema_extra={"examples": ["http://documentserver-internal.local/"]})
+    doc_service_portal_url: Optional[StrictStr] = Field(description="The address the Document Server is told to call this portal back on. Empty means nothing overrides it and the  portal's own resolved address is used.", alias="docServicePortalUrl", json_schema_extra={"examples": ["https://portal.example.com/"]})
+    doc_service_signature_header: Optional[StrictStr] = Field(description="The name of the HTTP header that carries the signature on requests between the portal and the Document Server.  The secret itself is not part of the answer, so this only tells a client whether request signing is set up and  under which header.", alias="docServiceSignatureHeader", json_schema_extra={"examples": ["Authorization"]})
+    doc_service_ssl_verification: StrictBool = Field(description="Whether the portal validates the TLS certificate of the Document Server. False means any certificate is  accepted, which is expected only in a test deployment.", alias="docServiceSslVerification", json_schema_extra={"examples": [True]})
+    is_default: StrictBool = Field(description="Whether every one of these settings is still the one the deployment ships with. False means at least one of  the addresses, the signature settings or SSL verification has been overridden for this portal.", alias="isDefault", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["version", "docServiceUrlApi", "docServiceUrl", "docServicePreloadUrl", "docServiceUrlInternal", "docServicePortalUrl", "docServiceSignatureHeader", "docServiceSslVerification", "isDefault"]
 
     model_config = ConfigDict(

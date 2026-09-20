@@ -29,14 +29,14 @@ from typing_extensions import Self
 
 class ReportDto(BaseModel):
     """
-    Represents a report containing a collection of operations.
+    One page of the portal wallet's money movements, with the paging figures needed to walk the rest.
     """ # noqa: E501
-    collection: Optional[List[OperationDto]] = Field(default=None, description="A collection of operations.", json_schema_extra={"examples": [[{"id": "op1", "type": "payment"}]]})
-    offset: Optional[StrictInt] = Field(default=None, description="The report data offset.", json_schema_extra={"examples": [1]})
-    limit: Optional[StrictInt] = Field(default=None, description="The report data limit.", json_schema_extra={"examples": [1]})
-    total_quantity: Optional[StrictInt] = Field(default=None, description="The total quantity of operations in the report.", alias="totalQuantity", json_schema_extra={"examples": [1]})
-    total_page: Optional[StrictInt] = Field(default=None, description="The total number of pages in the report.", alias="totalPage", json_schema_extra={"examples": [1]})
-    current_page: Optional[StrictInt] = Field(default=None, description="The current page number of the report.", alias="currentPage", json_schema_extra={"examples": [1]})
+    collection: Optional[List[OperationDto]] = Field(default=None, description="The movements on this page - top-ups, charges, refunds and corrections alike, newest first. It is empty  for a page past the end of the report as well as for a period in which nothing happened.", json_schema_extra={"examples": [[{"service": "disk-storage", "debit": 14.0}]]})
+    offset: Optional[StrictInt] = Field(default=None, description="How many movements were skipped before this page, echoed from the request so a client need not remember  what it asked for.", json_schema_extra={"examples": [0]})
+    limit: Optional[StrictInt] = Field(default=None, description="How many movements one page may hold, echoed from the request; it is 25 unless another value was asked  for. A full page is not proof that more exist - compare `currentPage` with `totalPage`.", json_schema_extra={"examples": [25]})
+    total_quantity: Optional[StrictInt] = Field(default=None, description="How many movements match the filters in total, across every page.", alias="totalQuantity", json_schema_extra={"examples": [137]})
+    total_page: Optional[StrictInt] = Field(default=None, description="How many pages those movements come to at the current `limit`.", alias="totalPage", json_schema_extra={"examples": [6]})
+    current_page: Optional[StrictInt] = Field(default=None, description="Which of those pages this one is, as the billing service numbers them. Page through by advancing `offset`  rather than this value, which nothing accepts as an argument.", alias="currentPage", json_schema_extra={"examples": [1]})
     __properties: ClassVar[List[str]] = ["collection", "offset", "limit", "totalQuantity", "totalPage", "currentPage"]
 
     model_config = ConfigDict(

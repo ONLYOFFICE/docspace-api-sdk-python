@@ -21,7 +21,7 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from docspace_api_sdk.models.ai_export_text_to_docx200_response import AiExportTextToDocx200Response
+from docspace_api_sdk.models.ai_export_text_to_docx202_response import AiExportTextToDocx202Response
 from docspace_api_sdk.models.ai_export_text_to_docx_request import AiExportTextToDocxRequest
 
 from docspace_api_sdk.api_client import ApiClient, RequestSerialized
@@ -59,10 +59,10 @@ class ExportApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> AiExportTextToDocx200Response:
+    ) -> AiExportTextToDocx202Response:
         """Start markdown → docx export
 
-        Starts an asynchronous markdown-to-docx export. The response only acknowledges the task: the AI Worker converts the content and saves the .docx into the target folder (an agent room resolves to its result-storage subfolder), and completion reaches the client as the usual folder-modified socket event.
+        Queues a markdown-to-docx export and answers 202 as soon as the job is accepted, without waiting for it. `title`, `content` and `folderId` are all required, and a `content` of only whitespace counts as missing even though it is not empty. The conversion runs in the AI worker, which saves the .docx into the target folder - an agent room resolves to its own result-storage subfolder - so there is nothing to poll here: completion arrives as the ordinary folder-modified socket event. This route accepts a body of up to 15 MB rather than the 100 KB the rest of the API allows, because a whole thread transcript is sent in one request.
 
         :param ai_export_text_to_docx_request: (required)
         :type ai_export_text_to_docx_request: AiExportTextToDocxRequest
@@ -97,8 +97,12 @@ class ExportApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "AiExportTextToDocx200Response",
+            '202': "AiExportTextToDocx202Response",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -128,10 +132,10 @@ class ExportApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[AiExportTextToDocx200Response]:
+    ) -> ApiResponse[AiExportTextToDocx202Response]:
         """Start markdown → docx export
 
-        Starts an asynchronous markdown-to-docx export. The response only acknowledges the task: the AI Worker converts the content and saves the .docx into the target folder (an agent room resolves to its result-storage subfolder), and completion reaches the client as the usual folder-modified socket event.
+        Queues a markdown-to-docx export and answers 202 as soon as the job is accepted, without waiting for it. `title`, `content` and `folderId` are all required, and a `content` of only whitespace counts as missing even though it is not empty. The conversion runs in the AI worker, which saves the .docx into the target folder - an agent room resolves to its own result-storage subfolder - so there is nothing to poll here: completion arrives as the ordinary folder-modified socket event. This route accepts a body of up to 15 MB rather than the 100 KB the rest of the API allows, because a whole thread transcript is sent in one request.
 
         :param ai_export_text_to_docx_request: (required)
         :type ai_export_text_to_docx_request: AiExportTextToDocxRequest
@@ -166,8 +170,12 @@ class ExportApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "AiExportTextToDocx200Response",
+            '202': "AiExportTextToDocx202Response",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -200,7 +208,7 @@ class ExportApi:
     ) -> RESTResponseType:
         """Start markdown → docx export
 
-        Starts an asynchronous markdown-to-docx export. The response only acknowledges the task: the AI Worker converts the content and saves the .docx into the target folder (an agent room resolves to its result-storage subfolder), and completion reaches the client as the usual folder-modified socket event.
+        Queues a markdown-to-docx export and answers 202 as soon as the job is accepted, without waiting for it. `title`, `content` and `folderId` are all required, and a `content` of only whitespace counts as missing even though it is not empty. The conversion runs in the AI worker, which saves the .docx into the target folder - an agent room resolves to its own result-storage subfolder - so there is nothing to poll here: completion arrives as the ordinary folder-modified socket event. This route accepts a body of up to 15 MB rather than the 100 KB the rest of the API allows, because a whole thread transcript is sent in one request.
 
         :param ai_export_text_to_docx_request: (required)
         :type ai_export_text_to_docx_request: AiExportTextToDocxRequest
@@ -235,8 +243,12 @@ class ExportApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "AiExportTextToDocx200Response",
+            '202': "AiExportTextToDocx202Response",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -302,6 +314,8 @@ class ExportApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'cookieAuth', 
+            'bearerAuth'
         ]
 
 

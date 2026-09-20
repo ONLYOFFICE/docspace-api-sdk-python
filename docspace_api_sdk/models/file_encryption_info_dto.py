@@ -30,10 +30,10 @@ from typing_extensions import Self
 
 class FileEncryptionInfoDto(BaseModel):
     """
-    The encryption information of a file: the user key pairs and the per-user file keys.
+    The keys the calling account needs in order to open one file of an end-to-end encrypted private room.
     """ # noqa: E501
-    user_keys: Optional[List[EncryptionKeyDto]] = Field(default=None, description="The key pairs of the users who have access to the file.", alias="userKeys")
-    file_keys: Optional[List[FileKeys]] = Field(default=None, description="The file keys issued to those users.", alias="fileKeys")
+    user_keys: Optional[List[EncryptionKeyDto]] = Field(default=None, description="The key pairs of the calling account, never those of the other people in the room. The private half of each  pair is stored encrypted with that person's own password and has to be decrypted on the client. An empty list  means the account has generated no key pair yet, and until it does no file key can be issued to it.", alias="userKeys", json_schema_extra={"examples": [[{"id": "9924256B-447C-4F19-9dbd-8ad8c39e8ff5", "userId": "9924256B-447C-4F19-9dbd-8ad8c39e8ff5", "date": "2025-01-01T00:00:00", "publicKey": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBg...", "privateKeyEnc": "U2FsdGVkX1+Lm3s...", "cryptoEngineId": "defaultCryptoEngine"}]]})
+    file_keys: Optional[List[FileKeys]] = Field(default=None, description="The keys of this file that were issued to the calling account, each naming the public key it was encrypted for  so that the client can pick the matching private half. An empty list means the file has not been shared with  this account rather than that the file is unencrypted.", alias="fileKeys", json_schema_extra={"examples": [[{"userId": "9924256B-447C-4F19-9dbd-8ad8c39e8ff5", "publicKeyId": "9924256B-447C-4F19-9dbd-8ad8c39e8ff5", "privateKeyEnc": "U2FsdGVkX1+Lm3s...", "tenantId": 1, "fileId": 9846, "createOn": "2025-01-01T00:00:00"}]]})
     __properties: ClassVar[List[str]] = ["userKeys", "fileKeys"]
 
     model_config = ConfigDict(

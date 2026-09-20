@@ -29,10 +29,10 @@ from typing_extensions import Self
 
 class UpdateComment(BaseModel):
     """
-    The parameters for updating a comment.
+    The comment to store on one version of a file.
     """ # noqa: E501
-    version: Annotated[int, Field(le=2147483647, strict=True, ge=1)] = Field(description="The comment version.", json_schema_extra={"examples": [1]})
-    comment: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The comment text.", json_schema_extra={"examples": ["This is a comment"]})
+    version: Annotated[int, Field(le=2147483647, strict=True, ge=1)] = Field(description="The version the comment belongs to, as reported by `GET api/2.0/files/file/{fileId}/edit/history`. A version  that does not exist is rejected as an invalid request.", json_schema_extra={"examples": [1]})
+    comment: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The note that explains what changed in that version, as the version history shows it. An empty text clears the  note, and a longer one is cut rather than refused, so read the stored text from the answer.", json_schema_extra={"examples": ["This is a comment"]})
     __properties: ClassVar[List[str]] = ["version", "comment"]
 
     model_config = ConfigDict(

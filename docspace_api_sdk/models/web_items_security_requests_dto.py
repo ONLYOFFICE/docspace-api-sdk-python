@@ -29,9 +29,9 @@ from typing_extensions import Self
 
 class WebItemsSecurityRequestsDto(BaseModel):
     """
-    The request parameters for configuring security settings across multiple web modules.
+    The modules switched on or off together, one entry per module.
     """ # noqa: E501
-    items: Optional[List[ItemKeyValuePairStringBoolean]] = Field(default=None, description="The list of module security configurations.", json_schema_extra={"examples": [["item1", "item2"]]})
+    items: Optional[List[ItemKeyValuePairStringBoolean]] = Field(default=None, description="The modules to switch, each entry pairing a module GUID as its `key` with the new enabled flag as its  `value`. A key that is not a GUID fails the whole request as invalid, and a module listed twice is applied  once, from its first entry. No allow-list travels here: switching a product module on restores the users and  groups it was last restricted to, and everything else is stored as a plain allow or deny for everyone.", json_schema_extra={"examples": [[{"key": "00000000-0000-0000-0000-000000000000", "value": True}]]})
     __properties: ClassVar[List[str]] = ["items"]
 
     model_config = ConfigDict(

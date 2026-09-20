@@ -30,13 +30,13 @@ from typing_extensions import Self
 
 class BackupRestoreDto(BaseModel):
     """
-    The backup restoring parameters.
+    The request parameters for restoring a portal from a backup.
     """ # noqa: E501
-    backup_id: Optional[StrictStr] = Field(description="The backup ID.", alias="backupId", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000000"]})
-    storage_type: Optional[BackupStorageType] = Field(default=None, description="The backup storage type.", alias="storageType")
-    storage_params: Optional[List[ItemKeyValuePairObjectObject]] = Field(default=None, description="The backup storage parameters.", alias="storageParams", json_schema_extra={"examples": [[{"key": "path", "value": "/backup"}]]})
-    notify: Optional[StrictBool] = Field(default=None, description="Notifies users about the portal restoring process or not.", json_schema_extra={"examples": [True]})
-    dump: Optional[StrictBool] = Field(default=None, description="Specifies if a dump will be created or not.", json_schema_extra={"examples": [False]})
+    backup_id: Optional[StrictStr] = Field(description="The ID of the backup to restore from, as listed by `GET api/2.0/backup/getbackuphistory`. Send  anything that is not a GUID to restore from a file given by `storageParams` instead; an all-zero GUID  selects neither, because it parses as a GUID and then matches no record.", alias="backupId", json_schema_extra={"examples": ["11111111-1111-1111-1111-111111111111"]})
+    storage_type: Optional[BackupStorageType] = Field(default=None, description="The storage the archive is read from. It defaults to `Documents` and is only used when `backupId` is  not a GUID, because a known backup carries the storage of its own record.", alias="storageType")
+    storage_params: Optional[List[ItemKeyValuePairObjectObject]] = Field(default=None, description="The location of the archive, as an array of key and value pairs. The key read here is `filePath` -  not the `folderId` a backup is started with - and it holds a file ID for `Documents`, a  provider-specific file ID for `ThridpartyDocuments` and a path on the server for `Local`. It is only  used when `backupId` is not a GUID.", alias="storageParams", json_schema_extra={"examples": [[{"key": "filePath", "value": "1234"}]]})
+    notify: Optional[StrictBool] = Field(default=None, description="Chooses who is emailed when the restoring starts and when it finishes: every active user of the  portal when true, and its owner alone when false. Mail goes only to accounts that have been  activated, so this decides the audience rather than whether anybody is notified at all.", json_schema_extra={"examples": [True]})
+    dump: Optional[StrictBool] = Field(default=None, description="Restores the whole server rather than this one portal. It requires the space access permission.", json_schema_extra={"examples": [False]})
     __properties: ClassVar[List[str]] = ["backupId", "storageType", "storageParams", "notify", "dump"]
 
     model_config = ConfigDict(

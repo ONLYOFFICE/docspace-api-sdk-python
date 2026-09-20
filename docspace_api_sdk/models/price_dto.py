@@ -28,11 +28,11 @@ from typing_extensions import Self
 
 class PriceDto(BaseModel):
     """
-    The price parameters.
+    What a quota costs, and the currency that amount is in.
     """ # noqa: E501
-    value: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The price value.", json_schema_extra={"examples": [99.99]})
-    currency_symbol: Optional[StrictStr] = Field(default=None, description="The currency symbol.", alias="currencySymbol", json_schema_extra={"examples": ["$"]})
-    iso_currency_symbol: Optional[StrictStr] = Field(default=None, description="The three-character ISO 4217 currency symbol.", alias="isoCurrencySymbol", json_schema_extra={"examples": ["USD"]})
+    value: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The amount for one billing period, per unit for a quota sold by the unit. It is empty for a quota that is  not sold for money - the free, trial and non-profit ones - and for a quota this installation has no price  list entry for.", json_schema_extra={"examples": [99.99]})
+    currency_symbol: Optional[StrictStr] = Field(default=None, description="The symbol to print in front of `value`, such as `$`. It is chosen for the currency, not for the portal  language, so it is not a localised format.", alias="currencySymbol", json_schema_extra={"examples": ["$"]})
+    iso_currency_symbol: Optional[StrictStr] = Field(default=None, description="The currency as a three-letter ISO 4217 code, which is the value to compare on when `currencySymbol` is  ambiguous between currencies that share a sign.", alias="isoCurrencySymbol", json_schema_extra={"examples": ["USD"]})
     __properties: ClassVar[List[str]] = ["value", "currencySymbol", "isoCurrencySymbol"]
 
     model_config = ConfigDict(

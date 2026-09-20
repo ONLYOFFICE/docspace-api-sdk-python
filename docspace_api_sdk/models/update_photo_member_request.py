@@ -30,7 +30,7 @@ class UpdatePhotoMemberRequest(BaseModel):
     """
     The request parameters for updating a photo.
     """ # noqa: E501
-    files: Optional[StrictStr] = Field(default=None, description="The avatar photo URL.", json_schema_extra={"examples": ["https://example.com/avatar.jpg"]})
+    files: Optional[StrictStr] = Field(default=None, description="The address the portal downloads the new avatar from. It has to be absolute or relative to the portal, and it  has to use HTTPS unless the request itself came over HTTP; an address the portal refuses to fetch is rejected.  It is required - an empty value is answered with 400 rather than clearing the avatar.", json_schema_extra={"examples": ["https://example.com/avatar.jpg"]})
     __properties: ClassVar[List[str]] = ["files"]
 
     model_config = ConfigDict(

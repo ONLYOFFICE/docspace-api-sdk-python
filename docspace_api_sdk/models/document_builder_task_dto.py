@@ -29,16 +29,16 @@ from typing_extensions import Self
 
 class DocumentBuilderTaskDto(BaseModel):
     """
-    The Document Builder task parameters.
+    The state of a background document building task: how far it has got, how it ended, and the file it produced.
     """ # noqa: E501
-    id: Optional[StrictStr] = Field(description="The Document Builder task ID.", json_schema_extra={"examples": ["task-123-456"]})
-    error: Optional[StrictStr] = Field(description="The error message occurred during the document building process.", json_schema_extra={"examples": ["Build failed"]})
-    percentage: StrictInt = Field(description="The progress percentage of the document building process.", json_schema_extra={"examples": [75]})
-    is_completed: StrictBool = Field(description="Specifies whether the document building process is completed or not.", alias="isCompleted", json_schema_extra={"examples": [False]})
-    status: DistributedTaskStatus = Field(description="The status of the document building process.")
+    id: Optional[StrictStr] = Field(description="The identifier of the task. It is derived from the portal, the account and the kind of report, so starting the  same report again while it runs returns this same value, which is how a resumed poll is told from a newly  queued build.", json_schema_extra={"examples": ["DocumentBuilderTask_1_c2b0e3a4-1f6c-4c2e-9c4f-3a5d8b7e1c22"]})
+    error: Optional[StrictStr] = Field(description="The message of the failure that stopped the build. It is filled in only for a task that ended in the failed  state, and stays empty while the task runs and after it succeeds.", json_schema_extra={"examples": ["The document service is unavailable"]})
+    percentage: StrictInt = Field(description="How far the build has got, from 0 to 100. It advances in a few coarse steps rather than smoothly, so it is a  progress hint and not a measure of the time left; wait on the completion flag instead.", json_schema_extra={"examples": [60]})
+    is_completed: StrictBool = Field(description="True once the task has stopped for any reason, a failure and a cancellation included. It is the field to poll  on, and the status tells those outcomes apart.", alias="isCompleted", json_schema_extra={"examples": [False]})
+    status: DistributedTaskStatus = Field(description="How the task ended, or that it has not started yet. Read it together with the completion flag: a stopped task  can be a finished build, a cancelled one or a failure, and only this field separates them.")
     result_file_id: Optional[Any] = Field(alias="resultFileId")
-    result_file_name: Optional[StrictStr] = Field(description="The result file name.", alias="resultFileName", json_schema_extra={"examples": ["result.docx"]})
-    result_file_url: Optional[StrictStr] = Field(description="The result file URL.", alias="resultFileUrl", json_schema_extra={"examples": ["http://localhost/files/result.docx"]})
+    result_file_name: Optional[StrictStr] = Field(description="The name the produced file was saved with, extension included. The name is built from the subject of the  report and is not unique: a second build adds another file instead of replacing the first.", alias="resultFileName", json_schema_extra={"examples": ["usage_report.xlsx"]})
+    result_file_url: Optional[StrictStr] = Field(description="The address of the produced file in the document editor, relative to the portal root, so prefix it with the  portal address to open it. It stays empty until the build succeeds.", alias="resultFileUrl", json_schema_extra={"examples": ["/doceditor?fileid=1234"]})
     __properties: ClassVar[List[str]] = ["id", "error", "percentage", "isCompleted", "status", "resultFileId", "resultFileName", "resultFileUrl"]
 
     model_config = ConfigDict(

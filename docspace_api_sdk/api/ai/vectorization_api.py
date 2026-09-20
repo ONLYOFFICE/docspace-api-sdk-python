@@ -21,8 +21,10 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from typing import Any, Dict
-from docspace_api_sdk.models.ai_success_response import AiSuccessResponse
+from pydantic import Field
+from typing_extensions import Annotated
+from docspace_api_sdk.models.ai_vectorization_start_task200_response import AiVectorizationStartTask200Response
+from docspace_api_sdk.models.ai_vectorization_start_task_request import AiVectorizationStartTaskRequest
 
 from docspace_api_sdk.api_client import ApiClient, RequestSerialized
 from docspace_api_sdk.api_response import ApiResponse
@@ -46,7 +48,7 @@ class VectorizationApi:
     @validate_call
     def ai_vectorization_start_task(
         self,
-        request_body: Dict[str, Any],
+        ai_vectorization_start_task_request: Annotated[AiVectorizationStartTaskRequest, Field(description="The files to index, proxied unchanged to the DocSpace AI service, which owns and validates the shape.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -59,13 +61,13 @@ class VectorizationApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> AiSuccessResponse:
+    ) -> AiVectorizationStartTask200Response:
         """Start a vectorization task
 
-        Starts a vectorization task over the supplied portal files. The indexing itself runs asynchronously on the .NET side.
+        Queues the indexing of the portal files named in the body so their contents can be retrieved during a chat round. The body is proxied unchanged to the DocSpace AI service, which validates it and owns the job. Indexing is asynchronous and fire-and-forget: the answer acknowledges the request without carrying a job handle, so there is nothing to poll and progress is not reported here. The embedding provider used is the one in `GET api/2.0/ai/config/vectorization`, and changing that setting does not re-index anything already indexed - queue it again for that.
 
-        :param request_body: (required)
-        :type request_body: Dict[str, object]
+        :param ai_vectorization_start_task_request: The files to index, proxied unchanged to the DocSpace AI service, which owns and validates the shape. (required)
+        :type ai_vectorization_start_task_request: AiVectorizationStartTaskRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -89,7 +91,7 @@ class VectorizationApi:
         """ # noqa: E501
 
         _param = self._ai_vectorization_start_task_serialize(
-            request_body=request_body,
+            ai_vectorization_start_task_request=ai_vectorization_start_task_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -97,8 +99,11 @@ class VectorizationApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "AiSuccessResponse",
+            '200': "AiVectorizationStartTask200Response",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -115,7 +120,7 @@ class VectorizationApi:
     @validate_call
     def ai_vectorization_start_task_with_http_info(
         self,
-        request_body: Dict[str, Any],
+        ai_vectorization_start_task_request: Annotated[AiVectorizationStartTaskRequest, Field(description="The files to index, proxied unchanged to the DocSpace AI service, which owns and validates the shape.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -128,13 +133,13 @@ class VectorizationApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[AiSuccessResponse]:
+    ) -> ApiResponse[AiVectorizationStartTask200Response]:
         """Start a vectorization task
 
-        Starts a vectorization task over the supplied portal files. The indexing itself runs asynchronously on the .NET side.
+        Queues the indexing of the portal files named in the body so their contents can be retrieved during a chat round. The body is proxied unchanged to the DocSpace AI service, which validates it and owns the job. Indexing is asynchronous and fire-and-forget: the answer acknowledges the request without carrying a job handle, so there is nothing to poll and progress is not reported here. The embedding provider used is the one in `GET api/2.0/ai/config/vectorization`, and changing that setting does not re-index anything already indexed - queue it again for that.
 
-        :param request_body: (required)
-        :type request_body: Dict[str, object]
+        :param ai_vectorization_start_task_request: The files to index, proxied unchanged to the DocSpace AI service, which owns and validates the shape. (required)
+        :type ai_vectorization_start_task_request: AiVectorizationStartTaskRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -158,7 +163,7 @@ class VectorizationApi:
         """ # noqa: E501
 
         _param = self._ai_vectorization_start_task_serialize(
-            request_body=request_body,
+            ai_vectorization_start_task_request=ai_vectorization_start_task_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -166,8 +171,11 @@ class VectorizationApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "AiSuccessResponse",
+            '200': "AiVectorizationStartTask200Response",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -184,7 +192,7 @@ class VectorizationApi:
     @validate_call
     def ai_vectorization_start_task_without_preload_content(
         self,
-        request_body: Dict[str, Any],
+        ai_vectorization_start_task_request: Annotated[AiVectorizationStartTaskRequest, Field(description="The files to index, proxied unchanged to the DocSpace AI service, which owns and validates the shape.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -200,10 +208,10 @@ class VectorizationApi:
     ) -> RESTResponseType:
         """Start a vectorization task
 
-        Starts a vectorization task over the supplied portal files. The indexing itself runs asynchronously on the .NET side.
+        Queues the indexing of the portal files named in the body so their contents can be retrieved during a chat round. The body is proxied unchanged to the DocSpace AI service, which validates it and owns the job. Indexing is asynchronous and fire-and-forget: the answer acknowledges the request without carrying a job handle, so there is nothing to poll and progress is not reported here. The embedding provider used is the one in `GET api/2.0/ai/config/vectorization`, and changing that setting does not re-index anything already indexed - queue it again for that.
 
-        :param request_body: (required)
-        :type request_body: Dict[str, object]
+        :param ai_vectorization_start_task_request: The files to index, proxied unchanged to the DocSpace AI service, which owns and validates the shape. (required)
+        :type ai_vectorization_start_task_request: AiVectorizationStartTaskRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -227,7 +235,7 @@ class VectorizationApi:
         """ # noqa: E501
 
         _param = self._ai_vectorization_start_task_serialize(
-            request_body=request_body,
+            ai_vectorization_start_task_request=ai_vectorization_start_task_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -235,8 +243,11 @@ class VectorizationApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "AiSuccessResponse",
+            '200': "AiVectorizationStartTask200Response",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -248,7 +259,7 @@ class VectorizationApi:
 
     def _ai_vectorization_start_task_serialize(
         self,
-        request_body,
+        ai_vectorization_start_task_request,
         _request_auth,
         _content_type,
         _headers,
@@ -274,8 +285,8 @@ class VectorizationApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if request_body is not None:
-            _body_params = request_body
+        if ai_vectorization_start_task_request is not None:
+            _body_params = ai_vectorization_start_task_request
 
 
         # set the HTTP header `Accept`
@@ -302,6 +313,8 @@ class VectorizationApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'cookieAuth', 
+            'bearerAuth'
         ]
 
 

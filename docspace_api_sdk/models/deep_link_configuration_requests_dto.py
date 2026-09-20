@@ -29,9 +29,9 @@ from typing_extensions import Self
 
 class DeepLinkConfigurationRequestsDto(BaseModel):
     """
-    The request parameters for managing the deep link configuration.
+    How the portal opens its links on a mobile device.
     """ # noqa: E501
-    deep_link_settings: Optional[TenantDeepLinkSettings] = Field(default=None, description="The deep link settings for the specified tenant.", alias="deepLinkSettings")
+    deep_link_settings: Optional[TenantDeepLinkSettings] = Field(default=None, description="The deep link configuration to store. Only its `handlingMode` is read - whether a link always opens in the  browser, always in the native application, or asks the user each time - and a mode outside the defined set is  refused with 400 before anything is stored.", alias="deepLinkSettings")
     __properties: ClassVar[List[str]] = ["deepLinkSettings"]
 
     model_config = ConfigDict(

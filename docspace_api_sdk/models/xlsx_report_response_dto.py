@@ -24,17 +24,17 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictBool
 from typing import Any, ClassVar, Dict, List, Optional
 from docspace_api_sdk.models.document_builder_task_dto import DocumentBuilderTaskDto
-from docspace_api_sdk.models.file_dto_integer import FileDtoInteger
+from docspace_api_sdk.models.file_dto import FileDto
 from typing import Optional, Set
 from typing_extensions import Self
 
 class XlsxReportResponseDto(BaseModel):
     """
-    The XLSX report task response parameters.
+    The answer to a report generation request: the queued task, the form whose answers are collected, and whether the  report file is being created or refreshed.
     """ # noqa: E501
-    form: Optional[FileDtoInteger] = Field(default=None, description="The original form file information.")
-    task: Optional[DocumentBuilderTaskDto] = Field(default=None, description="The Document Builder task information.")
-    is_new_file: Optional[StrictBool] = Field(default=None, description="Specifies whether the XLSX report file is newly created or an existing file will be updated.", alias="isNewFile", json_schema_extra={"examples": [True]})
+    form: Optional[FileDto] = Field(default=None, description="The original form the answers are collected from. It is not the produced spreadsheet - that one arrives with  the task, once the task reports completion.")
+    task: Optional[DocumentBuilderTaskDto] = Field(default=None, description="The queued generation. Poll it with `GET api/2.0/files/file/{fileId}/xlsx` until it reports completion, and  take the produced file from it then.")
+    is_new_file: Optional[StrictBool] = Field(default=None, description="True when this run creates the report file, false when an existing report is rewritten in place, which means  it keeps its id and the links already shared for it.", alias="isNewFile", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["form", "task", "isNewFile"]
 
     model_config = ConfigDict(
@@ -95,7 +95,7 @@ class XlsxReportResponseDto(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "form": FileDtoInteger.from_dict(obj["form"]) if obj.get("form") is not None else None,
+            "form": FileDto.from_dict(obj["form"]) if obj.get("form") is not None else None,
             "task": DocumentBuilderTaskDto.from_dict(obj["task"]) if obj.get("task") is not None else None,
             "isNewFile": obj.get("isNewFile")
         })

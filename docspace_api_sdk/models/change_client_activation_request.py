@@ -30,7 +30,7 @@ class ChangeClientActivationRequest(BaseModel):
     """
     Client activation change request
     """ # noqa: E501
-    status: StrictBool = Field(description="The activation status of the client", json_schema_extra={"examples": [True]})
+    status: StrictBool = Field(description="Whether the client may obtain tokens from now on. Sending false leaves the registration and the already issued tokens in place but refuses new authorization requests; sending true allows them again.", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["status"]
 
     model_config = ConfigDict(

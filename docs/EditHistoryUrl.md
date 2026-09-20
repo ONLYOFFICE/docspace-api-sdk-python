@@ -1,13 +1,13 @@
 # EditHistoryUrl
-The file editing history URL parameters.
+The address, document key and format of the revision a comparison is made against.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**key** | **str** | The document identifier of the previous version of the document. | [optional] 
-**url** | **str** | The url address of the previous version of the document. | [optional] 
-**file_type** | **str** | The document extension. | [optional] 
+**key** | **str** | The document key of that revision. When the file has no earlier revision the portal generates a fresh key for  the template it falls back to, so the value is not always one an earlier revision ever had. | [optional] 
+**url** | **str** | The address that revision's content is served from. It is meant for the editing service and carries its own  key, which is valid for a limited time. | [optional] 
+**file_type** | **str** | The format of that revision, as an extension without the leading dot. | [optional] 
 
 ## Example
 

@@ -1,16 +1,16 @@
 # InfoConfigDto
-The information config parameters.
+The facts the editor information panel shows about the open document.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**favorite** | **bool** | Specifies if the file is favorite or not. | [optional] 
-**folder** | **str** | The folder of the file. | [optional] 
-**owner** | **str** | The file owner. | [optional] 
-**sharing_settings** | [**List[AceShortWrapper]**](AceShortWrapper.md) | The sharing settings of the file. | [optional] 
-**type** | [**EditorType**](EditorType.md) | The editor type of the file. | [optional] 
-**uploaded** | **str** | The uploaded file. | [optional] 
+**favorite** | **bool** | Whether the caller has this document among their favorites. It is empty when favorites do not apply - for an  anonymous caller, for a guest, and for an encrypted document. | [optional] 
+**folder** | **str** | The place of the document as a readable path, its folders joined from the root downwards. It is empty in the  embedded layout, which shows no such panel. | [optional] 
+**owner** | **str** | The display name of the owner of the document. It is empty for an anonymous session. | [optional] 
+**sharing_settings** | [**List[AceShortWrapper]**](AceShortWrapper.md) | Who the document is shared with, as the information panel lists it. An empty list means it is shared with  nobody beyond its owner. | [optional] 
+**type** | [**EditorType**](EditorType.md) | The layout the information panel is rendered for. | [optional] 
+**uploaded** | **str** | When the document was created on the portal, already formatted for reading in the culture of the caller rather  than as a machine timestamp. | [optional] 
 
 ## Example
 

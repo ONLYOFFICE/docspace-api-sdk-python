@@ -1,15 +1,15 @@
 # BackupHistoryRecord
-The backup history parameters.
+One stored backup of a portal.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **UUID** | The backup ID. | 
-**file_name** | **str** | The backup file name. | 
-**storage_type** | [**BackupStorageType**](BackupStorageType.md) | The backup storage type. | 
-**created_on** | **datetime** | The backup creation date. | 
-**expires_on** | **datetime** | The backup expiration date. | 
+**id** | **UUID** | The ID of the backup, which is the same value as the `taskId` the backup was started with. Pass it to  `DELETE api/2.0/backup/deletebackup/{id}` or as the `backupId` of  `POST api/2.0/backup/startrestore`. | 
+**file_name** | **str** | The name of the stored archive. It is built from the portal alias and the moment the backup started,  or from `workspace` instead of the alias for a backup of the whole server. | 
+**storage_type** | [**BackupStorageType**](BackupStorageType.md) | The storage the archive was written to, reported as a number rather than as a name. | 
+**created_on** | **datetime** | The date and time the backup was stored at, in UTC. | 
+**expires_on** | **datetime** | The date and time a background cleaner removes this backup at. Only a backup written to `DataStore`  expires, one day after it was stored; for every other storage type this is `0001-01-01T00:00:00`,  which means the backup is kept until it is deleted by hand or pushed out by the stored-copies limit  of a schedule. | 
 
 ## Example
 

@@ -31,11 +31,11 @@ from typing_extensions import Self
 
 class InvitationLinkUpdateRequestDto(BaseModel):
     """
-    The request parameters for updating an invitation link.
+    The invitation link being changed, with the deadline and use limit it is to have afterwards.
     """ # noqa: E501
-    id: UUID = Field(description="The ID of the invitation link.", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000000"]})
-    expiration: Optional[datetime] = Field(default=None, description="The expiration date of the invitation link.", json_schema_extra={"examples": ["2024-01-15T10:30:00Z"]})
-    max_use_count: Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]] = Field(default=None, description="The maximum number of times the invitation link can be used.", alias="maxUseCount", json_schema_extra={"examples": [1]})
+    id: UUID = Field(description="The link to change, by the `id` that creating or reading it returned. The role behind that id cannot be  changed here.", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000000"]})
+    expiration: Optional[datetime] = Field(default=None, description="The new deadline, read in the portal time zone. The body is applied as a whole, so leaving it out clears the  deadline rather than keeping the current one; a moment in the past is refused.", json_schema_extra={"examples": ["2024-01-15T10:30:00Z"]})
+    max_use_count: Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]] = Field(default=None, description="The new total number of accounts that may join through the link. It may not be lower than the uses already  spent, which the link reports as `currentUseCount`, and leaving it out removes the limit rather than keeping  the current one.", alias="maxUseCount", json_schema_extra={"examples": [1]})
     __properties: ClassVar[List[str]] = ["id", "expiration", "maxUseCount"]
 
     model_config = ConfigDict(

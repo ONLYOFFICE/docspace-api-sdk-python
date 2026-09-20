@@ -30,12 +30,12 @@ class AiPrompt(BaseModel):
     """
     Saved prompt template that users can quickly insert into the chat.
     """ # noqa: E501
-    id: StrictStr = Field(description="Unique prompt identifier (UUID).")
-    name: StrictStr = Field(description="Prompt display name shown in the prompt picker.")
-    text: StrictStr = Field(description="Prompt template text. May contain placeholder tokens.")
-    folder_id: Optional[StrictStr] = Field(default=None, description="Optional parent folder ID. `undefined` means the prompt is at the root level.", alias="folderId")
-    created_at: Union[StrictFloat, StrictInt] = Field(description="Timestamp (ms since epoch) when the prompt was created.", alias="createdAt")
-    updated_at: Union[StrictFloat, StrictInt] = Field(description="Timestamp (ms since epoch) of the last prompt modification.", alias="updatedAt")
+    id: StrictStr = Field(description="Unique prompt identifier (UUID).", json_schema_extra={"examples": ["33333333-3333-3333-3333-333333333333"]})
+    name: StrictStr = Field(description="Prompt display name shown in the prompt picker.", json_schema_extra={"examples": ["Contract summary"]})
+    text: StrictStr = Field(description="Prompt template text. May contain placeholder tokens.", json_schema_extra={"examples": ["Summarise the key obligations and dates in the attached contract."]})
+    folder_id: Optional[StrictStr] = Field(default=None, description="Optional parent folder ID. `undefined` means the prompt is at the root level.", alias="folderId", json_schema_extra={"examples": ["44444444-4444-4444-4444-444444444444"]})
+    created_at: Union[StrictFloat, StrictInt] = Field(description="Timestamp (ms since epoch) when the prompt was created.", alias="createdAt", json_schema_extra={"examples": [1767225600000]})
+    updated_at: Union[StrictFloat, StrictInt] = Field(description="Timestamp (ms since epoch) of the last prompt modification.", alias="updatedAt", json_schema_extra={"examples": [1767225600000]})
     __properties: ClassVar[List[str]] = ["id", "name", "text", "folderId", "createdAt", "updatedAt"]
 
     model_config = ConfigDict(

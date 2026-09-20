@@ -21,9 +21,9 @@ import pprint
 import re  # noqa: F401
 import json
 
-from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from docspace_api_sdk.models.api_date_time import ApiDateTime
 from docspace_api_sdk.models.employee_dto import EmployeeDto
 from docspace_api_sdk.models.file_entry_type import FileEntryType
 from docspace_api_sdk.models.file_share import FileShare
@@ -33,30 +33,30 @@ from typing_extensions import Self
 
 class FileEntryBaseDto(BaseModel):
     """
-    The file entry information.
+    What every file and folder in an answer has in common; the concrete shape is a file or a folder, told apart by the  entry type.
     """ # noqa: E501
-    title: Optional[StrictStr] = Field(default=None, description="The file entry title.", json_schema_extra={"examples": ["Some title.txt"]})
-    access: Optional[FileShare] = Field(default=None, description="The access rights to the file entry.")
-    shared_by: Optional[EmployeeDto] = Field(default=None, description="Provides information about the employee who shared the file or folder.", alias="sharedBy")
-    owned_by: Optional[EmployeeDto] = Field(default=None, description="The information about the employee who owns the file entry.", alias="ownedBy")
-    shared: Optional[StrictBool] = Field(default=None, description="Specifies if the file entry is shared via link or not.", json_schema_extra={"examples": [False]})
-    shared_for_user: Optional[StrictBool] = Field(default=None, description="Specifies if the file entry is shared for user or not.", alias="sharedForUser", json_schema_extra={"examples": [False]})
-    shared_external: Optional[StrictBool] = Field(default=None, description="Specifies if the file entry is shared via a public (non-internal) external link.", alias="sharedExternal", json_schema_extra={"examples": [False]})
-    parent_shared: Optional[StrictBool] = Field(default=None, description="Indicates whether the parent entity is shared.", alias="parentShared", json_schema_extra={"examples": [False]})
-    short_web_url: Optional[StrictStr] = Field(default=None, description="The short Web URL.", alias="shortWebUrl", json_schema_extra={"examples": ["http://localhost/s/abc123"]})
-    created: Optional[datetime] = Field(default=None, description="The creation date and time of the file entry.", json_schema_extra={"examples": ["2021-01-01T00:00:00Z"]})
-    created_by: Optional[EmployeeDto] = Field(default=None, description="The file entry author.", alias="createdBy")
-    updated: Optional[datetime] = Field(default=None, description="The last date and time when the file entry was updated.", json_schema_extra={"examples": ["2021-01-01T00:00:00Z"]})
-    auto_delete: Optional[datetime] = Field(default=None, description="The date and time when the file entry will be automatically deleted.", alias="autoDelete", json_schema_extra={"examples": ["2021-01-01T00:00:00Z"]})
-    root_folder_type: Optional[FolderType] = Field(default=None, description="The root folder type of the file entry.", alias="rootFolderType")
-    parent_room_type: Optional[FolderType] = Field(default=None, description="The parent room type of the file entry.", alias="parentRoomType")
-    updated_by: Optional[EmployeeDto] = Field(default=None, description="The user who updated the file entry.", alias="updatedBy")
-    provider_item: Optional[StrictBool] = Field(default=None, description="Specifies if the file entry provider is specified or not.", alias="providerItem", json_schema_extra={"examples": [False]})
-    provider_key: Optional[StrictStr] = Field(default=None, description="The provider key of the file entry.", alias="providerKey", json_schema_extra={"examples": ["google-drive"]})
-    provider_id: Optional[StrictInt] = Field(default=None, description="The provider ID of the file entry.", alias="providerId", json_schema_extra={"examples": [1]})
-    order: Optional[StrictStr] = Field(default=None, description="The order of the file entry.", json_schema_extra={"examples": ["1"]})
-    is_favorite: Optional[StrictBool] = Field(default=None, description="Specifies if the file is a favorite or not.", alias="isFavorite", json_schema_extra={"examples": [False]})
-    file_entry_type: Optional[FileEntryType] = Field(default=None, description="The file entry type.", alias="fileEntryType")
+    title: Optional[StrictStr] = Field(default=None, description="The name shown for the entry. For a file it carries the extension, which is how the format is recognised, and  for a room it is the room name.", json_schema_extra={"examples": ["Some title.txt"]})
+    access: Optional[FileShare] = Field(default=None, description="The level the calling account holds on this entry, resolved from its own rights, the groups it belongs to and  any link it came in through. It is the level itself, not what the account may do with it - the action flags  below answer that.")
+    shared_by: Optional[EmployeeDto] = Field(default=None, description="Who gave the calling account the access it is using. It is filled in only while the entry is being read  through a share, and never for a caller without an account.", alias="sharedBy")
+    owned_by: Optional[EmployeeDto] = Field(default=None, description="Who owns the place the entry is shared from - the creator of the room it lies in, or of the personal section  that holds it. It is filled in only while the entry is being read through a share, and never for a caller  without an account.", alias="ownedBy")
+    shared: Optional[StrictBool] = Field(default=None, description="Whether at least one external link exists for the entry, whichever kind. It says nothing about accounts and  groups - those are counted by the flag for members below.", json_schema_extra={"examples": [False]})
+    shared_for_user: Optional[StrictBool] = Field(default=None, description="Whether at least one account or group has been given rights on the entry directly, as opposed to reaching it  through a link or through the room around it.", alias="sharedForUser", json_schema_extra={"examples": [False]})
+    shared_external: Optional[StrictBool] = Field(default=None, description="Whether one of the entry's links is open to people outside the portal, as opposed to a link that only its own  members can follow. This is the flag to watch when the concern is who can reach the content from outside.", alias="sharedExternal", json_schema_extra={"examples": [False]})
+    parent_shared: Optional[StrictBool] = Field(default=None, description="Whether the entry is reachable because the room or folder around it is shared, rather than through rights of  its own. A copy or a move takes the entry out of that scope.", alias="parentShared", json_schema_extra={"examples": [False]})
+    short_web_url: Optional[StrictStr] = Field(default=None, description="A shortened address that opens the entry through the link it is being read with. It is an empty string  whenever no link applies, which is the usual case for a member browsing their own rooms.", alias="shortWebUrl", json_schema_extra={"examples": ["http://localhost/s/abc123"]})
+    created: Optional[ApiDateTime] = Field(default=None, description="When the entry was created, written with the offset of the portal's time zone. For a file restored from an  older version this is still the moment the file first appeared.")
+    created_by: Optional[EmployeeDto] = Field(default=None, description="Who created the entry. It is null for a caller without an account, who is told nothing about the portal's  members.", alias="createdBy")
+    updated: Optional[ApiDateTime] = Field(default=None, description="When the entry last changed, written with the offset of the portal's time zone. It is never reported as  earlier than the creation moment, so the two can be compared safely.")
+    auto_delete: Optional[ApiDateTime] = Field(default=None, description="When the entry will disappear on its own, written with the offset of the portal's time zone. It is filled in  only where a removal is actually scheduled - something in the trash while the portal cleans it up  automatically, or a guest's own documents - so a null means nothing is scheduled rather than that the entry is  permanent.", alias="autoDelete")
+    root_folder_type: Optional[FolderType] = Field(default=None, description="The section the entry ultimately belongs to, which is what tells a personal document from one inside a room,  from a template and from something in the trash or the archive.", alias="rootFolderType")
+    parent_room_type: Optional[FolderType] = Field(default=None, description="The kind of room the entry lies in, which decides what the room allows - filling forms, public links,  indexing. It is null for an entry that is not inside a room at all.", alias="parentRoomType")
+    updated_by: Optional[EmployeeDto] = Field(default=None, description="Who changed the entry last. It is null for a caller without an account.", alias="updatedBy")
+    provider_item: Optional[StrictBool] = Field(default=None, description="Set when the entry is stored on a connected third-party account rather than on the portal, and null when it is  stored on the portal. Such an entry is identified by a string rather than a number, and some operations skip  it.", alias="providerItem", json_schema_extra={"examples": [True]})
+    provider_key: Optional[StrictStr] = Field(default=None, description="Which third-party service holds the entry, matching the keys accepted by the third-party operations. It is  null for an entry stored on the portal.", alias="providerKey", json_schema_extra={"examples": ["google-drive"]})
+    provider_id: Optional[StrictInt] = Field(default=None, description="The connected account the entry comes from, for telling apart two connections to the same service. It is null  for an entry stored on the portal.", alias="providerId", json_schema_extra={"examples": [1]})
+    order: Optional[StrictStr] = Field(default=None, description="The place of the entry in a room where the members arrange the content themselves, given as the position of  the entry preceded by the positions of the folders leading to it, separated by dots. It is empty when nothing  has been arranged.", json_schema_extra={"examples": ["1.3.2"]})
+    is_favorite: Optional[StrictBool] = Field(default=None, description="Set when the calling account has marked the entry as a favorite, which is what puts it into the favorites  listing. For a file that is not marked it is null rather than false.", alias="isFavorite", json_schema_extra={"examples": [True]})
+    file_entry_type: Optional[FileEntryType] = Field(default=None, description="Tells a folder from a file, and so which of the two shapes the rest of the object has. A room is reported as a  folder here.", alias="fileEntryType")
     __properties: ClassVar[List[str]] = ["title", "access", "sharedBy", "ownedBy", "shared", "sharedForUser", "sharedExternal", "parentShared", "shortWebUrl", "created", "createdBy", "updated", "autoDelete", "rootFolderType", "parentRoomType", "updatedBy", "providerItem", "providerKey", "providerId", "order", "isFavorite", "fileEntryType"]
 
     model_config = ConfigDict(
@@ -104,9 +104,18 @@ class FileEntryBaseDto(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of owned_by
         if self.owned_by:
             _dict['ownedBy'] = self.owned_by.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of created
+        if self.created:
+            _dict['created'] = self.created.to_dict()
         # override the default output from pydantic by calling `to_dict()` of created_by
         if self.created_by:
             _dict['createdBy'] = self.created_by.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of updated
+        if self.updated:
+            _dict['updated'] = self.updated.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of auto_delete
+        if self.auto_delete:
+            _dict['autoDelete'] = self.auto_delete.to_dict()
         # override the default output from pydantic by calling `to_dict()` of updated_by
         if self.updated_by:
             _dict['updatedBy'] = self.updated_by.to_dict()
@@ -119,21 +128,6 @@ class FileEntryBaseDto(BaseModel):
         # and model_fields_set contains the field
         if self.short_web_url is None and "short_web_url" in self.model_fields_set:
             _dict['shortWebUrl'] = None
-
-        # set to None if created (nullable) is None
-        # and model_fields_set contains the field
-        if self.created is None and "created" in self.model_fields_set:
-            _dict['created'] = None
-
-        # set to None if updated (nullable) is None
-        # and model_fields_set contains the field
-        if self.updated is None and "updated" in self.model_fields_set:
-            _dict['updated'] = None
-
-        # set to None if auto_delete (nullable) is None
-        # and model_fields_set contains the field
-        if self.auto_delete is None and "auto_delete" in self.model_fields_set:
-            _dict['autoDelete'] = None
 
         # set to None if provider_item (nullable) is None
         # and model_fields_set contains the field
@@ -182,10 +176,10 @@ class FileEntryBaseDto(BaseModel):
             "sharedExternal": obj.get("sharedExternal"),
             "parentShared": obj.get("parentShared"),
             "shortWebUrl": obj.get("shortWebUrl"),
-            "created": obj.get("created"),
+            "created": ApiDateTime.from_dict(obj["created"]) if obj.get("created") is not None else None,
             "createdBy": EmployeeDto.from_dict(obj["createdBy"]) if obj.get("createdBy") is not None else None,
-            "updated": obj.get("updated"),
-            "autoDelete": obj.get("autoDelete"),
+            "updated": ApiDateTime.from_dict(obj["updated"]) if obj.get("updated") is not None else None,
+            "autoDelete": ApiDateTime.from_dict(obj["autoDelete"]) if obj.get("autoDelete") is not None else None,
             "rootFolderType": obj.get("rootFolderType"),
             "parentRoomType": obj.get("parentRoomType"),
             "updatedBy": EmployeeDto.from_dict(obj["updatedBy"]) if obj.get("updatedBy") is not None else None,

@@ -1,11 +1,11 @@
 # CheckUploadRequest
-The request parameters for checking file uploads.
+The names to test against the files the folder already holds.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**files_title** | **List[str]** | The list of file titles. | [optional] 
+**files_title** | **List[str]** | The names to test, extensions included, spelled as they would be sent to the upload. Matching ignores case,  and a name repeated in the list is answered once. | [optional] 
 
 ## Example
 

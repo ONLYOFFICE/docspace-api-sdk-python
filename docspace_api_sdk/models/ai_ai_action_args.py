@@ -24,18 +24,20 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictBool
 from typing import Any, ClassVar, Dict, List, Optional
 from docspace_api_sdk.models.ai_ai_action_args_prompt import AiAiActionArgsPrompt
+from docspace_api_sdk.models.ai_ai_reasoning_level import AiAiReasoningLevel
 from docspace_api_sdk.models.ai_tmcp_item import AiTMCPItem
 from typing import Optional, Set
 from typing_extensions import Self
 
 class AiAiActionArgs(BaseModel):
     """
-    Wire-serializable subset of the engine's `ActionArgs` — drops the engine-injected `signal`/`fetch`; `profile`/`messages` are owned by the engine and never sent by the caller.
+    AiAiActionArgs
     """ # noqa: E501
-    tools: Optional[List[AiTMCPItem]] = Field(default=None, description="Extra tools offered to the model for this request.")
-    is_reasoning: Optional[StrictBool] = Field(default=None, description="Enable extended thinking / reasoning for this request.", alias="isReasoning")
+    tools: Optional[List[AiTMCPItem]] = Field(default=None, description="Extra tools offered to the model for this request.", json_schema_extra={"examples": [[]]})
+    is_reasoning: Optional[StrictBool] = Field(default=None, description="Legacy extended-thinking switch; stands for `medium`. `reasoningLevel` wins when both are set.", alias="isReasoning", json_schema_extra={"examples": [False]})
+    reasoning_level: Optional[AiAiReasoningLevel] = Field(default=None, description="Depth of extended thinking for the round; providers clamp it to what the model accepts.", alias="reasoningLevel")
     prompt: Optional[AiAiActionArgsPrompt] = None
-    __properties: ClassVar[List[str]] = ["tools", "isReasoning", "prompt"]
+    __properties: ClassVar[List[str]] = ["tools", "isReasoning", "reasoningLevel", "prompt"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -101,6 +103,7 @@ class AiAiActionArgs(BaseModel):
         _obj = cls.model_validate({
             "tools": [AiTMCPItem.from_dict(_item) for _item in obj["tools"]] if obj.get("tools") is not None else None,
             "isReasoning": obj.get("isReasoning"),
+            "reasoningLevel": obj.get("reasoningLevel"),
             "prompt": AiAiActionArgsPrompt.from_dict(obj["prompt"]) if obj.get("prompt") is not None else None
         })
         return _obj

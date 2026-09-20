@@ -29,18 +29,18 @@ from typing_extensions import Self
 
 class SmtpSettingsDto(BaseModel):
     """
-    The SMTP settings parameters.
+    The mail server the portal sends its letters through.
     """ # noqa: E501
-    host: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The SMTP host.", json_schema_extra={"examples": ["mail.example.com"]})
-    port: Optional[Annotated[int, Field(le=65535, strict=True, ge=1)]] = Field(default=None, description="The SMTP port.", json_schema_extra={"examples": [25]})
-    sender_address: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The sender address.", alias="senderAddress", json_schema_extra={"examples": ["notify@example.com"]})
-    sender_display_name: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The sender display name.", alias="senderDisplayName", json_schema_extra={"examples": ["Postman"]})
-    credentials_user_name: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The credentials username.", alias="credentialsUserName", json_schema_extra={"examples": ["notify@example.com"]})
-    credentials_user_password: Optional[StrictStr] = Field(default=None, description="The credentials user password.", alias="credentialsUserPassword", json_schema_extra={"examples": ["example value"]})
-    enable_ssl: Optional[StrictBool] = Field(default=None, description="Specifies whether the SSL is enabled or not.", alias="enableSSL", json_schema_extra={"examples": [True]})
-    enable_auth: Optional[StrictBool] = Field(default=None, description="Specifies whether the authentication is enabled or not.", alias="enableAuth", json_schema_extra={"examples": [True]})
-    use_ntlm: Optional[StrictBool] = Field(default=None, description="Specifies whether to use NTLM or not.", alias="useNtlm", json_schema_extra={"examples": [True]})
-    is_default_settings: Optional[StrictBool] = Field(default=None, description="Specifies if the current settings are default or not.", alias="isDefaultSettings", json_schema_extra={"examples": [True]})
+    host: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The host name or address of the mail server. On a cloud portal that has saved no relay of its own every  field of this object comes back empty, because the installation's own server is not disclosed - only  `isDefaultSettings` is set there.", json_schema_extra={"examples": ["mail.example.com"]})
+    port: Optional[Annotated[int, Field(le=65535, strict=True, ge=1)]] = Field(default=None, description="The port the mail server is reached on - conventionally 25 or 587 without encryption from the start, 465  with it. It is empty when no port was stored, in which case the portal falls back to its own default.", json_schema_extra={"examples": [25]})
+    sender_address: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The address the letters are sent from, which appears in the From header and is what a reply goes to.", alias="senderAddress", json_schema_extra={"examples": ["notify@example.com"]})
+    sender_display_name: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The name shown beside that address in a recipient's mailbox.", alias="senderDisplayName", json_schema_extra={"examples": ["Postman"]})
+    credentials_user_name: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The account the portal signs in to the mail server as, meaningful only while `enableAuth` is `true`.", alias="credentialsUserName", json_schema_extra={"examples": ["notify@example.com"]})
+    credentials_user_password: Optional[StrictStr] = Field(default=None, description="Always empty here: the stored password is never returned, so a client that sends these settings back has  to supply it again rather than echoing what it read.", alias="credentialsUserPassword", json_schema_extra={"examples": [""]})
+    enable_ssl: Optional[StrictBool] = Field(default=None, description="Whether the connection to the mail server is encrypted.", alias="enableSSL", json_schema_extra={"examples": [True]})
+    enable_auth: Optional[StrictBool] = Field(default=None, description="Whether the portal signs in to the mail server at all. While it is `false` the credentials above are  ignored and the server is expected to accept mail unauthenticated.", alias="enableAuth", json_schema_extra={"examples": [True]})
+    use_ntlm: Optional[StrictBool] = Field(default=None, description="Always `false` here: the flag is accepted when settings are saved but is not stored, so it never comes  back set and says nothing about how the portal authenticates.", alias="useNtlm", json_schema_extra={"examples": [False]})
+    is_default_settings: Optional[StrictBool] = Field(default=None, description="Whether the portal is still on the mail configuration of the installation rather than on a relay of its  own. `DELETE api/2.0/smtpsettings/smtp` puts it back to `true`, and while it is `true` on a cloud portal  the fields above are blank rather than showing the installation's server.", alias="isDefaultSettings", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["host", "port", "senderAddress", "senderDisplayName", "credentialsUserName", "credentialsUserPassword", "enableSSL", "enableAuth", "useNtlm", "isDefaultSettings"]
 
     model_config = ConfigDict(
